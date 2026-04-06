@@ -6,6 +6,7 @@
 <title>아는언니 세령 — 기획 포털</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 <style>
 :root {
   --bg: #ffffff;
@@ -107,15 +108,47 @@ body {
 
 .header-right { display: flex; align-items: center; gap: 12px; }
 
-.view-toggle {
+.tab-bar {
+  display: flex;
+  gap: 4px;
+  padding: 0 32px 0;
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.tab-bar::-webkit-scrollbar { display: none; }
+
+.tab-btn {
+  padding: 12px 18px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-dim);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+
+.tab-btn:hover { color: var(--text); }
+
+.tab-btn.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* Sub-toggle inside planning tab */
+.sub-toggle {
   display: flex;
   background: var(--bg);
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid var(--border);
+  margin-bottom: 20px;
 }
-
-.view-btn {
+.sub-btn {
   padding: 8px 16px;
   background: none;
   border: none;
@@ -124,8 +157,7 @@ body {
   cursor: pointer;
   transition: all 0.2s;
 }
-
-.view-btn.active {
+.sub-btn.active {
   background: var(--accent);
   color: white;
 }
@@ -658,6 +690,135 @@ body {
 .highlight-card .hl-desc { font-size: 13px; color: var(--text-dim); }
 .highlight-card .hl-num { font-size: 20px; font-weight: 800; color: var(--accent); }
 
+/* === NEW TABS STYLES === */
+.section-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+.section-card h3 {
+  font-size: 16px; font-weight: 700; margin-bottom: 16px;
+  padding-bottom: 10px; border-bottom: 1px solid var(--border);
+}
+
+.data-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.data-table th, .data-table td {
+  padding: 10px 12px; border: 1px solid var(--border); text-align: left;
+}
+.data-table th { background: rgba(99,102,241,0.06); font-weight: 600; font-size: 12px; }
+.data-table td { vertical-align: top; }
+
+.metric-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px;
+}
+.metric-card {
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 10px; padding: 16px; text-align: center;
+}
+.metric-card .m-num { font-size: 24px; font-weight: 800; color: var(--accent); }
+.metric-card .m-label { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
+
+.ep-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px;
+}
+.ep-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 20px; transition: all 0.2s;
+}
+.ep-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+.ep-card .ep-num { font-size: 13px; font-weight: 800; color: var(--accent); margin-bottom: 6px; }
+.ep-card .ep-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; line-height: 1.4; }
+.ep-card .ep-meta { font-size: 12px; color: var(--text-dim); display: flex; gap: 10px; flex-wrap: wrap; }
+.format-badge {
+  display: inline-block; padding: 3px 10px; border-radius: 12px;
+  font-size: 11px; font-weight: 600;
+}
+.format-badge.a { background: rgba(239,68,68,0.1); color: #dc2626; }
+.format-badge.b { background: rgba(34,197,94,0.1); color: #16a34a; }
+.format-badge.c { background: rgba(99,102,241,0.1); color: #6366f1; }
+.format-badge.d { background: rgba(234,179,8,0.1); color: #ca8a04; }
+
+.arc-bar {
+  display: flex; gap: 4px; margin-top: 20px; border-radius: 8px; overflow: hidden;
+}
+.arc-segment {
+  flex: 1; padding: 12px 8px; text-align: center; font-size: 11px; font-weight: 600; color: #fff;
+}
+.arc-segment .arc-eps { font-size: 10px; opacity: 0.8; margin-top: 2px; }
+
+.ban-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px;
+}
+.ban-card {
+  background: rgba(220,38,38,0.04); border: 1px solid rgba(220,38,38,0.2);
+  border-radius: 10px; padding: 14px; display: flex; gap: 10px; align-items: flex-start;
+}
+.ban-num {
+  background: var(--red); color: #fff; width: 24px; height: 24px;
+  border-radius: 6px; display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 800; flex-shrink: 0;
+}
+.ban-text { font-size: 13px; font-weight: 600; }
+.ban-reason { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
+
+.risk-table td:first-child { font-weight: 600; }
+.risk-high { color: var(--red); font-weight: 600; }
+.risk-mid { color: var(--orange); font-weight: 600; }
+
+.timeline-h {
+  display: flex; gap: 0; margin: 20px 0; position: relative;
+}
+.tl-phase {
+  flex: 1; padding: 20px 16px; border: 1px solid var(--border);
+  border-radius: 0; position: relative; background: var(--card);
+}
+.tl-phase:first-child { border-radius: 12px 0 0 12px; }
+.tl-phase:last-child { border-radius: 0 12px 12px 0; }
+.tl-phase h4 { font-size: 13px; color: var(--accent); margin-bottom: 4px; }
+.tl-phase .tl-period { font-size: 11px; color: var(--text-dim); margin-bottom: 8px; }
+.tl-phase ul { font-size: 12px; list-style: none; padding: 0; }
+.tl-phase li { padding: 3px 0; border-bottom: 1px solid var(--border); }
+.tl-phase li:last-child { border-bottom: none; }
+.tl-phase li::before { content: "→ "; color: var(--accent); }
+
+.funnel-row {
+  display: flex; align-items: center; gap: 0; margin-bottom: 2px;
+}
+.funnel-label {
+  width: 60px; font-size: 12px; font-weight: 600; text-align: right; padding-right: 10px;
+}
+.funnel-bar {
+  height: 36px; border-radius: 4px; display: flex; align-items: center;
+  padding: 0 12px; font-size: 11px; color: #fff; font-weight: 600;
+  transition: width 0.5s;
+}
+
+.chart-container { position: relative; max-width: 500px; margin: 0 auto; }
+
+.formula-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 20px; margin-bottom: 14px;
+}
+.formula-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+.formula-card .f-meta { font-size: 12px; color: var(--text-dim); margin-bottom: 10px; display: flex; gap: 12px; }
+.formula-card p { font-size: 13px; line-height: 1.6; }
+
+.script-block {
+  background: var(--bg); border: 1px solid var(--border);
+  border-radius: 8px; padding: 14px; margin-top: 10px; font-size: 13px;
+  font-family: 'Pretendard', monospace; line-height: 1.7;
+}
+.script-time { color: var(--accent); font-weight: 700; }
+
+.rule-card {
+  background: rgba(99,102,241,0.04); border: 1px solid rgba(99,102,241,0.15);
+  border-radius: 10px; padding: 14px; margin-bottom: 10px;
+}
+.rule-card .rule-num { font-size: 12px; font-weight: 800; color: var(--accent); }
+.rule-card .rule-text { font-size: 13px; font-weight: 600; margin-top: 2px; }
+
 /* Responsive */
 @media (max-width: 768px) {
   .header { padding: 16px; flex-direction: column; gap: 12px; }
@@ -673,6 +834,15 @@ body {
   .photo-gallery { grid-template-columns: repeat(2, 1fr); }
   .highlight-cards { grid-template-columns: 1fr; }
   .profile-tags, .profile-sns { justify-content: center; }
+  .tab-bar { padding: 0 16px; }
+  .tab-btn { padding: 10px 14px; font-size: 12px; }
+  .ep-grid { grid-template-columns: 1fr; }
+  .ban-grid { grid-template-columns: 1fr; }
+  .metric-grid { grid-template-columns: repeat(2, 1fr); }
+  .timeline-h { flex-direction: column; }
+  .tl-phase { border-radius: 0 !important; }
+  .tl-phase:first-child { border-radius: 12px 12px 0 0 !important; }
+  .tl-phase:last-child { border-radius: 0 0 12px 12px !important; }
 }
 </style>
 </head>
@@ -694,19 +864,27 @@ body {
   <div class="header">
     <div class="header-left">
       <h1>아는언니 세령</h1>
-      <span class="channel-badge">기획 포털</span>
+      <span class="channel-badge">채널 포털</span>
     </div>
-    <div class="header-right">
-      <div class="view-toggle">
-        <button class="view-btn active" onclick="switchView('calendar')" id="btnCal">달력</button>
-        <button class="view-btn" onclick="switchView('list')" id="btnList">목록</button>
-        <button class="view-btn" onclick="switchView('profile')" id="btnProfile">크리에이터</button>
-      </div>
-    </div>
+  </div>
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="planning" onclick="switchView('planning')">기획</button>
+    <button class="tab-btn" data-tab="episodes" onclick="switchView('episodes')">에피소드</button>
+    <button class="tab-btn" data-tab="creator" onclick="switchView('creator')">크리에이터</button>
+    <button class="tab-btn" data-tab="strategy" onclick="switchView('strategy')">전략</button>
+    <button class="tab-btn" data-tab="market" onclick="switchView('market')">시장 분석</button>
+    <button class="tab-btn" data-tab="formula" onclick="switchView('formula')">콘텐츠 공식</button>
+    <button class="tab-btn" data-tab="roadmap" onclick="switchView('roadmap')">로드맵 & KPI</button>
+    <button class="tab-btn" data-tab="risk" onclick="switchView('risk')">리스크 & 규칙</button>
   </div>
 
   <div class="main">
-    <!-- Calendar View -->
+    <!-- Planning View (Tab 1) -->
+    <div id="planningView">
+    <div class="sub-toggle">
+      <button class="sub-btn active" onclick="switchSub('cal')">달력</button>
+      <button class="sub-btn" onclick="switchSub('list')">목록</button>
+    </div>
     <div id="calendarView">
       <div class="cal-nav">
         <button class="cal-nav-btn" onclick="navMonth(-1)">&lt;</button>
@@ -721,13 +899,13 @@ body {
       <div class="calendar-grid" id="calGrid"></div>
     </div>
 
-    <!-- List View -->
     <div id="listView" style="display:none">
       <div class="proposal-list" id="proposalList"></div>
     </div>
+    </div><!-- /planningView -->
 
-    <!-- Profile View -->
-    <div id="profileView" style="display:none">
+    <!-- Creator View (Tab 3) -->
+    <div id="creatorView" style="display:none">
       <!-- Hero -->
       <div class="profile-hero">
         <div class="profile-photo-area">
@@ -927,11 +1105,458 @@ body {
           <div class="info-row"><span class="info-label">개명</span><span class="info-value">이지현 → 이세령 ("개성 있는 삶에 맞게")</span></div>
         </div>
       </div>
-    </div>
+    </div><!-- /creatorView -->
+
+    <!-- Episodes View (Tab 2) -->
+    <div id="episodesView" style="display:none">
+      <h2 style="font-size:22px;font-weight:800;margin-bottom:6px">시즌 1: 등급표의 세계</h2>
+      <p style="color:var(--text-dim);font-size:14px;margin-bottom:20px">EP.01~10 — "시장은 이렇게 잔혹하다"에서 "결국 사람이 사람을 선택하는 이유"까지</p>
+
+      <div class="arc-bar">
+        <div class="arc-segment" style="background:#dc2626"><div>등급표의 현실</div><div class="arc-eps">EP.01~03</div></div>
+        <div class="arc-segment" style="background:#ea580c"><div>등급의 한계</div><div class="arc-eps">EP.04~06</div></div>
+        <div class="arc-segment" style="background:#6366f1"><div>등급의 변수</div><div class="arc-eps">EP.07~08</div></div>
+        <div class="arc-segment" style="background:#16a34a"><div>등급 초월</div><div class="arc-eps">EP.09~10</div></div>
+      </div>
+
+      <div class="ep-grid" style="margin-top:20px">
+        <div class="ep-card">
+          <div class="ep-num">EP.01 <span class="format-badge a">팩폭형</span></div>
+          <div class="ep-title">결정사 등급표 처음 공개합니다 [당신은 몇 등급?]</div>
+          <div class="ep-meta"><span>10~14분</span><span>등급표의 현실</span></div>
+        </div>
+        <div class="ep-card">
+          <div class="ep-num">EP.02 <span class="format-badge c">매칭형</span></div>
+          <div class="ep-title">세후 350만 원 남자가 자산 10억 여성과 매칭된 실화 [등급 역전]</div>
+          <div class="ep-meta"><span>12~16분</span><span>등급 역전</span></div>
+        </div>
+        <div class="ep-card">
+          <div class="ep-num">EP.03 <span class="format-badge a">팩폭형</span></div>
+          <div class="ep-title">여자들이 3초 만에 넘기는 남자 프로필 [결정사 데이터]</div>
+          <div class="ep-meta"><span>10~14분</span><span>프로필의 진실</span></div>
+        </div>
+        <div class="ep-card">
+          <div class="ep-num">EP.04 <span class="format-badge b">리얼리티</span></div>
+          <div class="ep-title">아나운서 그만두고 결정사 차립니다 EP.1</div>
+          <div class="ep-meta"><span>14~18분</span><span>창업기 시작</span></div>
+        </div>
+        <div class="ep-card">
+          <div class="ep-num">EP.05 <span class="format-badge c">매칭형</span></div>
+          <div class="ep-title">결혼 포기한 35살 모태솔로가 결정사에 왔습니다 [압박면접]</div>
+          <div class="ep-meta"><span>12~16분</span><span>등급의 한계</span></div>
+        </div>
+        <div class="ep-card">
+          <div class="ep-num">EP.06 <span class="format-badge b">리얼리티</span></div>
+          <div class="ep-title">결혼중개업 신고하러 구청에 갔습니다</div>
+          <div class="ep-meta"><span>14~18분</span><span>창업기 2</span></div>
+        </div>
+        <div class="ep-card">
+          <div class="ep-num">EP.07 <span class="format-badge a">팩폭형</span></div>
+          <div class="ep-title">남자들이 여자 거르는 진짜 기준 TOP 5 [데이터 공개]</div>
+          <div class="ep-meta"><span>10~14분</span><span>등급의 변수</span></div>
+        </div>
+        <div class="ep-card">
+          <div class="ep-num">EP.08 <span class="format-badge a">팩폭형</span></div>
+          <div class="ep-title">세후 480만 원의 진짜 위치 [결정사 내부 데이터]</div>
+          <div class="ep-meta"><span>10~14분</span><span>등급의 변수</span></div>
+        </div>
+        <div class="ep-card">
+          <div class="ep-num">EP.09 <span class="format-badge c">매칭형</span></div>
+          <div class="ep-title">완벽했는데 파혼된 커플 — 결정사 대표의 가장 후회되는 매칭</div>
+          <div class="ep-meta"><span>12~16분</span><span>등급을 넘어서</span></div>
+        </div>
+        <div class="ep-card">
+          <div class="ep-num">EP.10 <span class="format-badge b">리얼리티</span></div>
+          <div class="ep-title">결정사 대표의 고백 — 이 일을 하면서 가장 많이 운 날</div>
+          <div class="ep-meta"><span>14~18분</span><span>등급표 초월 (완결)</span></div>
+        </div>
+      </div>
+
+      <div class="section-card" style="margin-top:20px">
+        <h3>시즌 2 예고</h3>
+        <p style="font-size:14px;line-height:1.7">
+          <strong>"매칭 다이어리" (EP.11~)</strong> — 시즌 1에서 쌓은 신뢰 + 팬덤으로 실제 매칭 과정을 리얼리티로 전환.<br>
+          회원 동의하에 상담 → 프로필 작성 → 매칭 → 만남 → 결과까지 촬영.
+        </p>
+      </div>
+    </div><!-- /episodesView -->
+
+    <!-- Strategy View (Tab 4) -->
+    <div id="strategyView" style="display:none">
+      <h2 style="font-size:22px;font-weight:800;margin-bottom:20px">채널 전략</h2>
+
+      <div class="section-card">
+        <h3>포지셔닝</h3>
+        <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:20px;text-align:center;font-size:18px;font-weight:700;color:var(--accent);margin-bottom:16px">
+          "겪어본 사람이 차린 결정사"
+        </div>
+        <p style="font-size:14px;color:var(--text-dim);text-align:center;margin-bottom:20px">한방언니의 팩폭 + 채부재의 성장형 리얼리티</p>
+        <div class="chart-container">
+          <canvas id="positionChart"></canvas>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h3>차별화 비교표</h3>
+        <table class="data-table">
+          <thead><tr><th>항목</th><th>한방언니</th><th>모두의지인</th><th>아는언니 세령</th></tr></thead>
+          <tbody>
+            <tr><td>구독자</td><td>30만+</td><td>10만+</td><td style="color:var(--accent);font-weight:700">목표 10만 (12개월)</td></tr>
+            <tr><td>평균 조회수</td><td>540K</td><td>254K</td><td style="color:var(--accent);font-weight:700">목표 150K</td></tr>
+            <tr><td>포지션</td><td>결혼 심판관 (도발형)</td><td>연애 코치 (교육형)</td><td style="color:var(--accent);font-weight:700">팩폭 + 성장형 리얼리티</td></tr>
+            <tr><td>강점</td><td>숫자+자극 제목, 압박면접</td><td>숏폼 리텐션 1위(0.33)</td><td>본인 서사 + 업계 인사이더 + 비주얼</td></tr>
+            <tr><td>약점</td><td>여성 비하 논란, CTA 약함</td><td>비정기 업로드, 차별화 부족</td><td>롱폼 콘텐츠 제작 경험 부족</td></tr>
+            <tr><td>CTA</td><td>약함</td><td>없음</td><td style="color:var(--green);font-weight:700">상담 폼 (핵심)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section-card">
+        <h3>투트랙 전략</h3>
+        <table class="data-table">
+          <thead><tr><th>트랙</th><th>겉 (콘텐츠)</th><th>속 (비즈니스)</th></tr></thead>
+          <tbody>
+            <tr><td>타겟</td><td>2030 여성</td><td>3040 고소득 남성</td></tr>
+            <tr><td>제공 가치</td><td>팩폭 + 대리 카타르시스</td><td>"내 등급이 뭔지" 자기 대입</td></tr>
+            <tr><td>감정</td><td>"맞아! 저런 남자/여자 있어!"</td><td>"나도 등급 확인하고 싶다..."</td></tr>
+            <tr><td>행동</td><td>구독 + 댓글 + 공유</td><td>상담 폼 작성 → VIP 매칭 가입</td></tr>
+            <tr><td>수익</td><td>광고 수익 (부수익)</td><td style="color:var(--green);font-weight:700">매칭 상담 → 가입비 (핵심 수익)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section-card">
+        <h3>채널 아이덴티티</h3>
+        <div class="info-grid">
+          <div class="info-row"><span class="info-label">채널명</span><span class="info-value">아는언니 세령</span></div>
+          <div class="info-row"><span class="info-label">페르소나</span><span class="info-value">단호하지만 무례하지 않은 언니</span></div>
+          <div class="info-row"><span class="info-label">시그니처</span><span class="info-value">등급표 세계관 (S/A/B/C)</span></div>
+          <div class="info-row"><span class="info-label">금지어</span><span class="info-value" style="color:var(--red)">"안녕하세요", "구독 좋아요"</span></div>
+          <div class="info-row"><span class="info-label">차별점</span><span class="info-value">"직접 차려서 보여주는 결정사 유튜버"</span></div>
+          <div class="info-row"><span class="info-label">핵심 감정</span><span class="info-value">팩폭하되 치유한다</span></div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h3>데이터 분석 규모</h3>
+        <div class="metric-grid">
+          <div class="metric-card"><div class="m-num">9</div><div class="m-label">레퍼런스 채널</div></div>
+          <div class="metric-card"><div class="m-num">709</div><div class="m-label">분석 영상</div></div>
+          <div class="metric-card"><div class="m-num">3,450</div><div class="m-label">분석 댓글</div></div>
+          <div class="metric-card"><div class="m-num">630</div><div class="m-label">분석 제목</div></div>
+          <div class="metric-card"><div class="m-num">36</div><div class="m-label">분석 리포트</div></div>
+        </div>
+      </div>
+    </div><!-- /strategyView -->
+
+    <!-- Market View (Tab 5) -->
+    <div id="marketView" style="display:none">
+      <h2 style="font-size:22px;font-weight:800;margin-bottom:20px">시장 분석</h2>
+
+      <div class="section-card">
+        <h3>결혼정보업 시장 현황</h3>
+        <div class="metric-grid">
+          <div class="metric-card"><div class="m-num">1,500~2,000억</div><div class="m-label">결혼정보 시장 규모 (추정)</div></div>
+          <div class="metric-card"><div class="m-num">454억</div><div class="m-label">듀오 매출 (2024)</div></div>
+          <div class="metric-card"><div class="m-num">1,974개</div><div class="m-label">등록 업체 수</div></div>
+          <div class="metric-card"><div class="m-num">33.9 / 31.5세</div><div class="m-label">평균 초혼 연령 (남/여)</div></div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h3>경쟁 채널 데이터 비교</h3>
+        <table class="data-table">
+          <thead><tr><th>지표</th><th>한방언니</th><th>모두의지인</th><th>아는언니 (목표)</th></tr></thead>
+          <tbody>
+            <tr><td>평균 리텐션</td><td>0.228</td><td>0.332</td><td style="color:var(--accent);font-weight:700">0.280+</td></tr>
+            <tr><td>초반 30초</td><td>0.260</td><td>0.184</td><td style="color:var(--accent);font-weight:700">0.300+</td></tr>
+            <tr><td>평균 길이</td><td>13.4분</td><td>6.7분</td><td>10~14분</td></tr>
+            <tr><td>CTR 점수</td><td>87.2</td><td>88.9</td><td style="color:var(--accent);font-weight:700">88+</td></tr>
+            <tr><td>댓글 특성</td><td>자체 광고 (부정적)</td><td>진심 상담 (긍정적)</td><td>팬덤 + 상담 전환</td></tr>
+            <tr><td>CTA</td><td>약함</td><td>없음</td><td style="color:var(--green);font-weight:700">상담 폼 (핵심)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section-card">
+        <h3>시장 공백 8개 — 아는언니만의 기회</h3>
+        <table class="data-table">
+          <thead><tr><th>#</th><th>미개척 영역</th><th>한방언니</th><th>모두의지인</th><th>아는언니</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>실제 매칭 과정 카메라 공개</td><td style="color:var(--red)">X</td><td style="color:var(--red)">X</td><td style="color:var(--green);font-weight:700">핵심 콘텐츠</td></tr>
+            <tr><td>2</td><td>결정사 창업 과정</td><td style="color:var(--red)">X</td><td style="color:var(--red)">X</td><td style="color:var(--green);font-weight:700">시리즈 1</td></tr>
+            <tr><td>3</td><td>부모님/시댁 관계 리얼</td><td style="color:var(--red)">X</td><td style="color:var(--red)">X</td><td style="color:var(--green)">에피소드 소재</td></tr>
+            <tr><td>4</td><td>데이트 코스/장소 추천</td><td style="color:var(--red)">X</td><td style="color:var(--red)">X</td><td style="color:var(--green)">협찬 연결</td></tr>
+            <tr><td>5</td><td>재혼/돌싱 매칭</td><td style="color:var(--red)">X</td><td style="color:var(--red)">X</td><td style="color:var(--green)">타겟 확장</td></tr>
+            <tr><td>6</td><td>매칭앱 vs 결정사 비교</td><td style="color:var(--red)">X</td><td style="color:var(--red)">X</td><td style="color:var(--green)">SEO 유입</td></tr>
+            <tr><td>7</td><td>자기 개발/매력 만들기</td><td>일부</td><td style="color:var(--red)">X</td><td style="color:var(--green)">프로필 개선</td></tr>
+            <tr><td>8</td><td>결혼 비용 현실 (숫자 공개)</td><td style="color:var(--red)">X</td><td style="color:var(--red)">X</td><td style="color:var(--green)">숫자 훅</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section-card">
+        <h3>등급별 가격대</h3>
+        <table class="data-table">
+          <thead><tr><th>등급</th><th>가격대</th><th>비고</th></tr></thead>
+          <tbody>
+            <tr><td>일반</td><td>200~400만 원</td><td>기본 매칭 서비스</td></tr>
+            <tr><td>프리미엄</td><td>400~700만 원</td><td>1:1 전담 매니저</td></tr>
+            <tr><td>노블</td><td>700~1,500만 원</td><td>VIP 전용 풀</td></tr>
+            <tr><td style="color:var(--accent);font-weight:700">VIP (Flowmus)</td><td style="color:var(--accent);font-weight:700">300~500만 원</td><td>프리미엄 포지션, 콘텐츠 연동</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div><!-- /marketView -->
+
+    <!-- Formula View (Tab 6) -->
+    <div id="formulaView" style="display:none">
+      <h2 style="font-size:22px;font-weight:800;margin-bottom:20px">콘텐츠 공식</h2>
+
+      <div class="section-card">
+        <h3>제목 CTR 공식 순위</h3>
+        <table class="data-table">
+          <thead><tr><th>순위</th><th>공식</th><th>CTR</th><th>조회수</th><th>아는언니 예시</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:800;color:var(--accent)">1</td><td>갭형: "A인데 B"</td><td style="font-weight:700">90.8</td><td>5/5</td><td>"결정사 대표인데 연애를 못합니다"</td></tr>
+            <tr><td style="font-weight:800;color:var(--accent)">2</td><td>의문형: "왜 ~일까"</td><td style="font-weight:700">90.0</td><td>4/5</td><td>"왜 세후 650 남자가 결혼을 못 할까"</td></tr>
+            <tr><td style="font-weight:800;color:var(--accent)">3</td><td>공포 + 대괄호</td><td style="font-weight:700">89.5</td><td>5/5</td><td>"이런 여자와 결혼하면 고생길 열립니다 [등급표 기준]"</td></tr>
+            <tr><td>4</td><td>숫자 + 단정</td><td>89.0</td><td>4/5</td><td>"결혼 성공하는 남자 3가지 특징"</td></tr>
+            <tr><td>5</td><td>상황 묘사형</td><td>88.0</td><td>4/5</td><td>"첫 매칭 성사... 결과가 이렇게 됩니다"</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section-card">
+        <h3>포맷 4종</h3>
+        <div class="formula-card">
+          <h4>Format A: 데이터/팩폭형 <span class="format-badge a">주력</span></h4>
+          <div class="f-meta"><span>월 3회</span><span>10~14분</span><span>목적: 조회수 + 상담 전환</span></div>
+          <p>하이라이트 훅 → 리스트형 본론 → PD 상호작용 → 공포 클로징 → 상담 폼 CTA</p>
+        </div>
+        <div class="formula-card">
+          <h4>Format B: 성장형 리얼리티 <span class="format-badge b">차별화</span></h4>
+          <div class="f-meta"><span>월 2회</span><span>14~18분</span><span>목적: 팬덤 형성 + 구독 전환</span></div>
+          <p>상황 도입 → 과정 촬영 → 결과/교훈 → 다음 편 예고</p>
+        </div>
+        <div class="formula-card">
+          <h4>Format C: 매칭 리얼리티 <span class="format-badge c">전환 무기</span></h4>
+          <div class="f-meta"><span>월 2회</span><span>12~16분</span><span>목적: "나도 매칭 받고 싶다" → 상담 폼</span></div>
+          <p>회원 프로필 소개 → 등급 판정 → 매칭 과정 → 결과 → 상담 CTA</p>
+        </div>
+        <div class="formula-card">
+          <h4>Format D: Shorts/클립 <span class="format-badge d">노출 극대화</span></h4>
+          <div class="f-meta"><span>주 3회</span><span>30~60초</span><span>목적: 알고리즘 노출 → 본편 유입</span></div>
+          <p>본편 핵심 장면 1개 + 자막 + "풀영상은 프로필에서"</p>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h3>최적 길이 가이드</h3>
+        <div class="metric-grid" style="margin-bottom:16px">
+          <div class="metric-card"><div class="m-num">9.6분</div><div class="m-label">고리텐션 TOP 10 평균</div></div>
+          <div class="metric-card"><div class="m-num" style="color:var(--red)">0.09</div><div class="m-label">15분+ 모놀로그 리텐션</div></div>
+          <div class="metric-card"><div class="m-num" style="color:var(--red)">0.07</div><div class="m-label">"모음집" 리텐션</div></div>
+        </div>
+        <p style="font-size:13px;color:var(--text-dim)">결론: 10분 이내 + 단정적 제목 = 리텐션 극대화. 조회수와 리텐션은 상관없음 (187만뷰인데 리텐션 0.07).</p>
+      </div>
+
+      <div class="section-card">
+        <h3>오프닝 공식 (0~30초)</h3>
+        <p style="font-size:13px;color:var(--text-dim);margin-bottom:16px">초반 30초 리텐션 목표: <strong style="color:var(--accent)">0.300+</strong> (예보링 0.319 벤치마크)</p>
+        <div style="margin-bottom:12px">
+          <strong style="font-size:14px">절대 규칙</strong>
+          <ul style="font-size:13px;margin-top:6px;padding-left:20px">
+            <li>인사 금지 (7개 중 5개가 인사 없음 = 검증된 패턴)</li>
+            <li>0~3초에 숫자 or 반전 멘트 직행</li>
+            <li>3~8초에 PD 반응 (시청자 대리)</li>
+            <li>8~15초에 자격 증명 ("저희 결정사에서...")</li>
+            <li>15~30초에 본론 시작 예고</li>
+          </ul>
+        </div>
+
+        <strong style="font-size:13px;color:var(--accent)">Format A (팩폭) 오프닝</strong>
+        <div class="script-block">
+          <span class="script-time">[0~3초]</span> 숫자 충격: "세후 350, 키 175, 서울 전세 2억. 이 남자 등급이 뭔지 아세요?"<br>
+          <span class="script-time">[3~8초]</span> PD 반응: "B등급...이요?" / 이세령: "C등급이요."<br>
+          <span class="script-time">[8~15초]</span> 자격 증명: "결정사 내부 등급표를 처음 공개할 건데요."<br>
+          <span class="script-time">[15~30초]</span> 본론 예고: "보고 나면 두 부류로 나뉠 거예요."
+        </div>
+
+        <strong style="font-size:13px;color:var(--accent);display:block;margin-top:14px">Format B (리얼리티) 오프닝</strong>
+        <div class="script-block">
+          <span class="script-time">[0~3초]</span> 상황 투하: "오늘 결혼중개업 신고하러 구청에 갑니다."<br>
+          <span class="script-time">[3~8초]</span> 감정: "근데 진짜 되는 건지... 떨려요."<br>
+          <span class="script-time">[8~15초]</span> 갈등: "직원들은 '대표님 진짜 하실 거예요?'라고..."<br>
+          <span class="script-time">[15~30초]</span> 본론: "일단 가봅니다."
+        </div>
+
+        <strong style="font-size:13px;color:var(--accent);display:block;margin-top:14px">Format C (매칭) 오프닝</strong>
+        <div class="script-block">
+          <span class="script-time">[0~3초]</span> 결과 선투하: "이 커플, 3번째 만남에서 성혼했어요."<br>
+          <span class="script-time">[3~8초]</span> 갭 충격: "남자 세후 350, 여자 자산 10억. 어떻게?"<br>
+          <span class="script-time">[8~15초]</span> 과정 예고: "이 남자가 한 건 딱 3가지였어요."<br>
+          <span class="script-time">[15~30초]</span> 본론: "첫 상담부터 보여드릴게요."
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h3>월간 콘텐츠 캘린더</h3>
+        <table class="data-table">
+          <thead><tr><th>주차</th><th>화요일</th><th>일요일</th><th>Shorts (수/금/일)</th></tr></thead>
+          <tbody>
+            <tr><td>1주</td><td><span class="format-badge a">팩폭형</span></td><td><span class="format-badge b">리얼리티</span></td><td>전주 본편 클립 3개</td></tr>
+            <tr><td>2주</td><td><span class="format-badge c">매칭형</span></td><td><span class="format-badge a">팩폭형</span></td><td>전주 본편 클립 3개</td></tr>
+            <tr><td>3주</td><td><span class="format-badge b">리얼리티</span></td><td><span class="format-badge c">매칭형</span></td><td>전주 본편 클립 3개</td></tr>
+            <tr><td>4주</td><td><span class="format-badge a">팩폭형</span></td><td><span class="format-badge b">교차</span></td><td>전주 본편 클립 3개</td></tr>
+          </tbody>
+        </table>
+        <p style="font-size:13px;color:var(--text-dim);margin-top:10px;text-align:center;font-weight:600">월간 산출물: 본편 7~8개 + Shorts 12개 = 총 20개 콘텐츠</p>
+      </div>
+    </div><!-- /formulaView -->
+
+    <!-- Roadmap View (Tab 7) -->
+    <div id="roadmapView" style="display:none">
+      <h2 style="font-size:22px;font-weight:800;margin-bottom:20px">로드맵 & KPI</h2>
+
+      <div class="section-card">
+        <h3>12개월 실행 로드맵</h3>
+        <div class="timeline-h">
+          <div class="tl-phase">
+            <h4>Phase 1</h4>
+            <div class="tl-period">Month 1: 기반 구축</div>
+            <ul>
+              <li>채널 개설 + 채널아트 세팅</li>
+              <li>상담실 세트 + 장비 세팅</li>
+              <li>상담 폼 제작</li>
+              <li>EP.01~04 촬영 + 편집</li>
+              <li>창업기 리얼리티 시작</li>
+            </ul>
+          </div>
+          <div class="tl-phase">
+            <h4>Phase 2</h4>
+            <div class="tl-period">Month 2~3: 루틴 정착</div>
+            <ul>
+              <li>주 2회 + Shorts 주 3회 루틴</li>
+              <li>첫 매칭 → 리얼리티 시작</li>
+              <li>인스타 85K → 유튜브 유입</li>
+              <li>상담 폼 20건/월 달성</li>
+            </ul>
+          </div>
+          <div class="tl-phase">
+            <h4>Phase 3</h4>
+            <div class="tl-period">Month 4~6: 성장 가속</div>
+            <ul>
+              <li>Shorts 알고리즘 안착</li>
+              <li>첫 성사 → 바이럴 기대</li>
+              <li>팩폭형 SEO 안착</li>
+              <li>상담 폼 80건/월 달성</li>
+            </ul>
+          </div>
+          <div class="tl-phase">
+            <h4>Phase 4</h4>
+            <div class="tl-period">Month 7~12: 스케일업</div>
+            <ul>
+              <li>"100건 상담" 마일스톤</li>
+              <li>타 채널 콜라보</li>
+              <li>브랜드 협찬 시작</li>
+              <li>커머스 검토</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h3>KPI 목표</h3>
+        <table class="data-table">
+          <thead><tr><th>지표</th><th>3개월</th><th>6개월</th><th>12개월</th></tr></thead>
+          <tbody>
+            <tr><td>구독자</td><td>5K</td><td>30K</td><td style="font-weight:700;color:var(--accent)">100K</td></tr>
+            <tr><td>영상 수</td><td>20개</td><td>45개</td><td>90개</td></tr>
+            <tr><td>평균 조회수</td><td>10K</td><td>50K</td><td style="font-weight:700;color:var(--accent)">150K</td></tr>
+            <tr><td>평균 리텐션</td><td>0.25</td><td>0.28</td><td>0.30</td></tr>
+            <tr><td>Flowmus 상담</td><td>20건</td><td>100건</td><td style="font-weight:700;color:var(--accent)">300건</td></tr>
+            <tr><td>매칭 성사</td><td>3건</td><td>15건</td><td style="font-weight:700;color:var(--accent)">50건</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section-card">
+        <h3>전환 퍼널 KPI</h3>
+        <div style="max-width:600px">
+          <div class="funnel-row"><div class="funnel-label">인지</div><div class="funnel-bar" style="width:100%;background:#6366f1">월 조회수 100K → 500K → 2M</div></div>
+          <div class="funnel-row"><div class="funnel-label">관심</div><div class="funnel-bar" style="width:85%;background:#8b5cf6">구독자 5K → 30K → 100K</div></div>
+          <div class="funnel-row"><div class="funnel-label">욕구</div><div class="funnel-bar" style="width:65%;background:#a855f7">"폼 어디?" 댓글 10 → 30 → 50</div></div>
+          <div class="funnel-row"><div class="funnel-label">행동</div><div class="funnel-bar" style="width:45%;background:#c084fc">폼 작성 20 → 80 → 200건/월</div></div>
+          <div class="funnel-row"><div class="funnel-label">전환</div><div class="funnel-bar" style="width:30%;background:#d946ef">상담 완료 10 → 40 → 100건/월</div></div>
+          <div class="funnel-row"><div class="funnel-label">매출</div><div class="funnel-bar" style="width:18%;background:#16a34a">VIP 가입 3 → 15 → 50건/월</div></div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h3>수익 구조</h3>
+        <table class="data-table">
+          <thead><tr><th>수익원</th><th>시기</th><th>중요도</th><th>비고</th></tr></thead>
+          <tbody>
+            <tr><td style="font-weight:700;color:var(--green)">VIP 매칭 가입비</td><td>Month 2+</td><td style="font-weight:700;color:var(--green)">핵심</td><td>콘텐츠 = 직접 영업</td></tr>
+            <tr><td>YouTube 광고</td><td>Month 3+</td><td>부수익</td><td>구독 1K + 시청 4000h 후</td></tr>
+            <tr><td>브랜드 협찬</td><td>Month 6+</td><td>부수익</td><td>웨딩/데이트/패션</td></tr>
+            <tr><td>커머스</td><td>Year 2+</td><td>확장</td><td>채부재 YOGO 모델 참고</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div><!-- /roadmapView -->
+
+    <!-- Risk View (Tab 8) -->
+    <div id="riskView" style="display:none">
+      <h2 style="font-size:22px;font-weight:800;margin-bottom:20px">리스크 & 규칙</h2>
+
+      <div class="section-card">
+        <h3>Ban 리스트 10개</h3>
+        <div class="ban-grid">
+          <div class="ban-card"><div class="ban-num">1</div><div><div class="ban-text">"안녕하세요" 오프닝 금지</div><div class="ban-reason">7개 채널 중 5개가 인사 생략 = 검증된 패턴</div></div></div>
+          <div class="ban-card"><div class="ban-num">2</div><div><div class="ban-text">"구독 좋아요 알림" CTA 금지</div><div class="ban-reason">7개 채널 모두 직접 CTA 없음</div></div></div>
+          <div class="ban-card"><div class="ban-num">3</div><div><div class="ban-text">38자 이상 제목 금지</div><div class="ban-reason">데이터 기반 Ban</div></div></div>
+          <div class="ban-card"><div class="ban-num">4</div><div><div class="ban-text">20분 이상 모놀로그 금지</div><div class="ban-reason">리텐션 0.09 (Ban 패턴)</div></div></div>
+          <div class="ban-card"><div class="ban-num">5</div><div><div class="ban-text">범주 넓은 리스트 ("~모음집") 금지</div><div class="ban-reason">조회수 높아도 리텐션 0.07 (어그로 함정)</div></div></div>
+          <div class="ban-card"><div class="ban-num">6</div><div><div class="ban-text">결론 없는 토론 금지</div><div class="ban-reason">시청자 이탈 극대화</div></div></div>
+          <div class="ban-card"><div class="ban-num">7</div><div><div class="ban-text">어두운 톤 썸네일 금지</div><div class="ban-reason">7/7 채널 밝은 톤 = 검증된 정답</div></div></div>
+          <div class="ban-card"><div class="ban-num">8</div><div><div class="ban-text">경쟁사 키워드 0개 금지</div><div class="ban-reason">기생 마케팅 미활용 = SEO 손해</div></div></div>
+          <div class="ban-card"><div class="ban-num">9</div><div><div class="ban-text">등급표 세계관 미연결 금지</div><div class="ban-reason">시리즈 일관성 훼손</div></div></div>
+          <div class="ban-card"><div class="ban-num">10</div><div><div class="ban-text">긍정적 제목만 사용 금지</div><div class="ban-reason">공포 마케팅 미적용 = 3대 강령 위반</div></div></div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <h3>리스크 매트릭스</h3>
+        <table class="data-table risk-table">
+          <thead><tr><th>리스크</th><th>확률</th><th>대응</th></tr></thead>
+          <tbody>
+            <tr><td>tvN 맞선 출연 이슈</td><td style="color:var(--green);font-weight:600">중→기회</td><td>천정명 "미인" 평가 + 애프터 신청 → "국민 배우도 인정한 매력의 결정사 대표" 역이용</td></tr>
+            <tr><td>워터밤 이미지 충돌</td><td class="risk-mid">중</td><td>채널 내 직접 언급 회피, 전문가 페르소나만 노출. 인스타에서만 활용</td></tr>
+            <tr><td>베스트클래스↔Flowmus 이해충돌</td><td class="risk-high">고</td><td>론칭 전 관계 정리 필수 (퇴임 or 협업 구조 확립)</td></tr>
+            <tr><td>한방언니 팬 반발 ("베낌")</td><td class="risk-mid">중</td><td>성장형 포지션 강조, 정면 비교 회피</td></tr>
+            <tr><td>회원 개인정보 노출</td><td class="risk-high">고</td><td>모자이크 + 가명 필수, 촬영 동의서</td></tr>
+            <tr><td>팩폭 수위 논란</td><td class="risk-mid">중</td><td>"단호하지만 무례하지 않은" 톤 유지</td></tr>
+            <tr><td>초기 조회수 부진</td><td class="risk-mid">중</td><td>인스타 85K + 워터밤 인지도 + Shorts 병행</td></tr>
+            <tr><td>상담 폼 스팸</td><td class="risk-mid">중</td><td>전화번호 인증 + 필수 항목 설정</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section-card">
+        <h3>세계관 유지 규칙</h3>
+        <div class="rule-card"><div class="rule-num">규칙 1</div><div class="rule-text">"완성형 대표" 이미지 금지 — 항상 "성장 중인 창업자"로 포지셔닝</div></div>
+        <div class="rule-card"><div class="rule-num">규칙 2</div><div class="rule-text">과거 비만 이미지 과잉 소비 금지 — 필요 시 1회 언급 후 성장 서사로 전환</div></div>
+        <div class="rule-card"><div class="rule-num">규칙 3</div><div class="rule-text">등급표는 "진단 도구"이지 "차별 도구"가 아님 — 항상 "변할 수 있다"로 마무리</div></div>
+        <div class="rule-card"><div class="rule-num">규칙 4</div><div class="rule-text">특정 성별 비하 절대 금지 — 팩폭은 "현실 직시"이지 "혐오"가 아님</div></div>
+        <div class="rule-card"><div class="rule-num">규칙 5</div><div class="rule-text">매 에피소드 등급표 세계관과 연결 — 시리즈 아크 일관성 유지</div></div>
+        <div class="rule-card"><div class="rule-num">규칙 6</div><div class="rule-text">상담 CTA는 자연스럽게 — "영상 설명란" 또는 "댓글 반응 시" 유도, 직접 멘트 금지</div></div>
+      </div>
+    </div><!-- /riskView -->
+
   </div>
 </div>
-
-<!-- Detail Panel -->
 <div class="detail-overlay" id="detailOverlay" onclick="if(event.target===this)closeDetail()">
   <div class="detail-panel" id="detailPanel"></div>
 </div>
@@ -989,7 +1614,6 @@ if (sessionStorage.getItem('portal_auth') === '1') {
 async function loadData() {
   const { data, error } = await sb.from('proposals')
     .select('*')
-    .eq('channel_name', '아는언니세령')
     .order('episode_number', { ascending: true });
 
   if (data) proposals = data;
@@ -998,13 +1622,23 @@ async function loadData() {
 }
 
 // === VIEWS ===
-function switchView(v) {
-  document.getElementById('calendarView').style.display = v === 'calendar' ? 'block' : 'none';
-  document.getElementById('listView').style.display = v === 'list' ? 'block' : 'none';
-  document.getElementById('profileView').style.display = v === 'profile' ? 'block' : 'none';
-  document.getElementById('btnCal').classList.toggle('active', v === 'calendar');
-  document.getElementById('btnList').classList.toggle('active', v === 'list');
-  document.getElementById('btnProfile').classList.toggle('active', v === 'profile');
+const TABS = ['planning','episodes','creator','strategy','market','formula','roadmap','risk'];
+
+function switchView(tab) {
+  TABS.forEach(t => {
+    const el = document.getElementById(t + 'View');
+    if (el) el.style.display = t === tab ? 'block' : 'none';
+    const btn = document.querySelector(`[data-tab="${t}"]`);
+    if (btn) btn.classList.toggle('active', t === tab);
+  });
+  if (tab === 'strategy' && !window._chartInit) initPositionChart();
+}
+
+function switchSub(mode) {
+  document.getElementById('calendarView').style.display = mode === 'cal' ? 'block' : 'none';
+  document.getElementById('listView').style.display = mode === 'list' ? 'block' : 'none';
+  document.querySelectorAll('.sub-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
 }
 
 // === CALENDAR ===
@@ -1276,6 +1910,56 @@ function showToast(msg) {
   t.textContent = msg;
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// === POSITION CHART ===
+function initPositionChart() {
+  window._chartInit = true;
+  const ctx = document.getElementById('positionChart');
+  if (!ctx) return;
+  new Chart(ctx, {
+    type: 'scatter',
+    data: {
+      datasets: [{
+        label: '채널 포지셔닝',
+        data: [
+          { x: 80, y: 30, label: '한방언니' },
+          { x: 30, y: 70, label: '모두의지인' },
+          { x: 65, y: 65, label: '아는언니 세령' }
+        ],
+        backgroundColor: ['#dc2626','#6366f1','#16a34a'],
+        pointRadius: [12, 12, 16],
+        pointHoverRadius: [14, 14, 18],
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        x: { min: 0, max: 100, title: { display: true, text: '공감 ← → 도발', font: { size: 13 } }, grid: { color: '#e2e2e5' } },
+        y: { min: 0, max: 100, title: { display: true, text: '정보형 ← → 리얼리티형', font: { size: 13 } }, grid: { color: '#e2e2e5' } }
+      },
+      plugins: {
+        tooltip: {
+          callbacks: {
+            label: function(c) { return c.raw.label; }
+          }
+        },
+        legend: { display: false }
+      }
+    },
+    plugins: [{
+      afterDraw: function(chart) {
+        const ctx2 = chart.ctx;
+        ctx2.font = '12px Pretendard, sans-serif';
+        ctx2.textAlign = 'center';
+        chart.data.datasets[0].data.forEach((d, i) => {
+          const meta = chart.getDatasetMeta(0).data[i];
+          ctx2.fillStyle = i === 2 ? '#16a34a' : '#1a1a1a';
+          ctx2.fillText(d.label, meta.x, meta.y - 18);
+        });
+      }
+    }]
+  });
 }
 
 // Keyboard
