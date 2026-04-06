@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>기획부 · 아는언니 세령</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #f5f6fa;
+  color: #2d3436;
+  line-height: 1.6;
+}
+
+/* Top MCN Nav (데이터 대시보드와 동일) */
+.mcn-topnav {
+  background: #0f0f18;
+  border-bottom: 1px solid #1f1f2e;
+  padding: 12px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.mcn-topnav .left { display: flex; align-items: center; gap: 20px; }
+.mcn-topnav a.home {
+  color: #8a8aa3;
+  text-decoration: none;
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+.mcn-topnav a.home:hover { background: #1a1a2a; color: #fff; }
+.mcn-topnav .crumb { color: #6a6a80; font-size: 13px; }
+.mcn-topnav .crumb strong { color: #e8e8ee; }
+.mcn-topnav .right { display: flex; gap: 10px; }
+.mcn-topnav .right a {
+  padding: 6px 14px;
+  background: #1a1a2a;
+  border: 1px solid #252535;
+  border-radius: 6px;
+  color: #c8c8d8;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+}
+.mcn-topnav .right a.primary {
+  background: #00b894;
+  border-color: #00b894;
+  color: #fff;
+}
+.mcn-topnav .right a:hover { background: #252540; color: #fff; }
+.mcn-topnav .right a.primary:hover { background: #00a383; }
+
+/* Header (데이터 대시보드와 동일한 다크 그라디언트) */
+.header {
+  background: linear-gradient(135deg, #1e272e 0%, #2d3436 100%);
+  color: #fff;
+  padding: 40px 24px;
+  text-align: center;
+}
+.header .tag {
+  display: inline-block;
+  padding: 5px 14px;
+  background: rgba(253, 203, 110, 0.2);
+  color: #fdcb6e;
+  border: 1px solid rgba(253, 203, 110, 0.4);
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.header h1 {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 6px;
+  letter-spacing: -0.8px;
+}
+.header .host {
+  font-size: 14px;
+  color: #b2bec3;
+  margin-bottom: 16px;
+}
+.header .positioning {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  background: rgba(255, 255, 255, 0.06);
+  border-left: 3px solid #00b894;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #dfe6e9;
+  text-align: left;
+}
+.header .positioning strong { color: #fff; font-weight: 700; }
+.header .positioning .tagline {
+  display: block;
+  font-size: 15px;
+  color: #fff;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+/* Container */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+
+/* Section Title */
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 32px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #2d3436;
+  color: #2d3436;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.section-title .sub {
+  font-size: 12px;
+  font-weight: 500;
+  color: #636e72;
+  border-bottom: none;
+}
+
+/* Scorecard Row */
+.scorecard-row {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 12px;
+  margin-bottom: 24px;
+}
+.scorecard {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 18px;
+  border: 1px solid #eee;
+  text-align: center;
+}
+.scorecard .label {
+  font-size: 11px;
+  color: #636e72;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+.scorecard .value {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+/* Card */
+.card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 24px;
+  border: 1px solid #eee;
+  margin-bottom: 20px;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid #eee;
+}
+.tab {
+  padding: 10px 18px;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #636e72;
+  cursor: pointer;
+  font-family: inherit;
+}
+.tab:hover { color: #2d3436; }
+.tab.active {
+  color: #2d3436;
+  border-bottom-color: #00b894;
+}
+
+/* EP Kanban */
+.ep-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+}
+.ep-card {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 10px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.ep-card:hover {
+  border-color: #00b894;
+  box-shadow: 0 4px 12px rgba(0, 184, 148, 0.15);
+  transform: translateY(-2px);
+}
+.ep-card .no {
+  font-size: 11px;
+  color: #00b894;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+.ep-card .title {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 4px;
+  color: #2d3436;
+}
+.ep-card .sub {
+  font-size: 11px;
+  color: #636e72;
+  margin-bottom: 10px;
+}
+.ep-status {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.ep-status.draft { background: #fff3cd; color: #856404; }
+.ep-status.verifying { background: #cce5ff; color: #004085; }
+.ep-status.passed { background: #d4edda; color: #155724; }
+.ep-status.pending { background: #e9ecef; color: #636e72; }
+.ep-card .meta {
+  font-size: 11px;
+  color: #636e72;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.ep-card .meta span::before { content: "· "; color: #b2bec3; }
+.ep-card .meta span:first-child::before { content: ""; }
+
+/* Rules Grid */
+.rules-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+.rule {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  transition: all 0.15s;
+}
+.rule:hover {
+  border-color: #00b894;
+  background: #fff;
+}
+.rule-no {
+  width: 28px;
+  height: 28px;
+  background: #2d3436;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+.rule:hover .rule-no { background: #00b894; }
+.rule-cat {
+  display: inline-block;
+  font-size: 10px;
+  color: #00b894;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+.rule-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #2d3436;
+  margin-bottom: 2px;
+}
+.rule-desc {
+  font-size: 12px;
+  color: #636e72;
+  line-height: 1.5;
+}
+
+/* Transplant Matrix */
+.matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.matrix-card {
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 10px;
+  padding: 16px;
+}
+.matrix-source {
+  font-size: 12px;
+  font-weight: 700;
+  color: #fdcb6e;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.matrix-source .genre {
+  font-size: 10px;
+  color: #636e72;
+  background: #fff;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+.matrix-dna {
+  font-size: 11px;
+  color: #636e72;
+  font-style: italic;
+  margin: 6px 0 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed #dee2e6;
+}
+.matrix-arrow {
+  text-align: center;
+  color: #00b894;
+  font-size: 14px;
+  margin: 6px 0;
+}
+.matrix-target-ep {
+  font-size: 10px;
+  color: #00b894;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+.matrix-target {
+  font-size: 13px;
+  font-weight: 700;
+  color: #2d3436;
+  margin: 4px 0 8px;
+  line-height: 1.4;
+}
+.matrix-translate {
+  font-size: 11px;
+  color: #636e72;
+  line-height: 1.5;
+  padding-top: 8px;
+  border-top: 1px dashed #dee2e6;
+}
+
+/* Ban / Must */
+.banmust {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.banmust-col h4 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid;
+  font-weight: 700;
+}
+.banmust-col.ban h4 { color: #d63031; border-bottom-color: #d63031; }
+.banmust-col.must h4 { color: #00b894; border-bottom-color: #00b894; }
+.banmust-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: #2d3436;
+  line-height: 1.5;
+}
+.banmust-item .icon {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+}
+.banmust-col.ban .icon { background: #d63031; }
+.banmust-col.must .icon { background: #00b894; }
+
+/* Quick Links */
+.links-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+.link-card {
+  display: block;
+  padding: 16px;
+  background: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 10px;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.15s;
+}
+.link-card:hover {
+  border-color: #00b894;
+  background: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 184, 148, 0.1);
+}
+.link-card .label {
+  font-size: 10px;
+  color: #00b894;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 800;
+}
+.link-card .title {
+  font-size: 14px;
+  font-weight: 700;
+  margin: 4px 0;
+  color: #2d3436;
+}
+.link-card .desc {
+  font-size: 11px;
+  color: #636e72;
+  line-height: 1.4;
+}
+
+/* Modal */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 2000;
+}
+.modal.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-content {
+  background: #fff;
+  width: 90%;
+  max-width: 760px;
+  max-height: 85vh;
+  overflow-y: auto;
+  border-radius: 12px;
+  padding: 32px;
+  position: relative;
+}
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: #f1f3f5;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  color: #636e72;
+}
+.modal-close:hover { background: #e9ecef; color: #2d3436; }
+.modal h2 {
+  font-size: 22px;
+  margin-bottom: 4px;
+  color: #2d3436;
+}
+.modal .modal-sub {
+  font-size: 13px;
+  color: #636e72;
+  margin-bottom: 20px;
+}
+.modal-detail-grid {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 10px 16px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 13px;
+}
+.modal-detail-grid dt {
+  font-weight: 700;
+  color: #636e72;
+}
+.modal-detail-grid dd { color: #2d3436; }
+.modal-section {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #eee;
+}
+.modal-section h3 {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #00b894;
+  margin-bottom: 8px;
+}
+.modal-section p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #2d3436;
+}
+.modal-cta {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #00b894;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.modal-cta:hover { background: #00a383; }
+.modal-cta.disabled {
+  background: #b2bec3;
+  pointer-events: none;
+}
+
+/* TRENDS — 시의성 섹션 */
+.trends-wrap { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 14px; }
+.trend-main { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 20px; border: 1px solid #eee; }
+.trend-side { background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 18px; border: 1px solid #eee; }
+.trend-side h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; color: #00b894; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid #eee; font-weight: 800; }
+.hot-item { padding: 14px 0; border-bottom: 1px dashed #eee; }
+.hot-item:last-child { border-bottom: none; }
+.hot-head { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.hot-rank { width: 26px; height: 26px; border-radius: 50%; background: #2d3436; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; flex-shrink: 0; }
+.hot-topic { font-size: 15px; font-weight: 800; color: #2d3436; flex-grow: 1; }
+.hot-urgency { font-size: 10px; padding: 3px 8px; border-radius: 10px; font-weight: 700; }
+.hot-urgency.HIGH { background: #ffe0db; color: #d63031; }
+.hot-urgency.MEDIUM { background: #fff3cd; color: #856404; }
+.hot-meta { display: grid; grid-template-columns: 1fr; gap: 4px; margin-left: 36px; font-size: 12px; color: #636e72; line-height: 1.6; }
+.hot-meta .label { display: inline-block; width: 56px; color: #00b894; font-weight: 700; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+.hot-match { display: inline-block; margin-top: 6px; font-size: 11px; padding: 3px 10px; background: #e8f8f4; color: #00a383; border-radius: 10px; font-weight: 700; cursor: pointer; }
+.side-item { padding: 10px 0; border-bottom: 1px dashed #eee; font-size: 12px; }
+.side-item:last-child { border-bottom: none; }
+.side-item .title { font-weight: 700; color: #2d3436; margin-bottom: 3px; line-height: 1.4; }
+.side-item .meta { color: #636e72; font-size: 10px; }
+.side-item .key { display: inline-block; margin-top: 4px; font-size: 10px; padding: 2px 7px; background: #f1f3f5; color: #636e72; border-radius: 8px; }
+
+/* USPS 그리드 */
+.usps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.usp-card { background: #fff; border: 1px solid #eee; border-radius: 10px; padding: 16px; box-shadow: 0 2px 6px rgba(0,0,0,0.06); transition: all 0.15s; }
+.usp-card:hover { border-color: #00b894; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0, 184, 148, 0.12); }
+.usp-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.usp-no { font-size: 11px; font-weight: 800; color: #fdcb6e; letter-spacing: 0.5px; }
+.usp-cat { font-size: 9px; padding: 3px 7px; background: #2d3436; color: #fff; border-radius: 8px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; }
+.usp-title { font-size: 13px; font-weight: 800; color: #2d3436; margin-bottom: 6px; line-height: 1.4; }
+.usp-evidence { font-size: 10px; color: #636e72; font-style: italic; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px dashed #eee; line-height: 1.5; }
+.usp-apply { font-size: 11px; color: #00a383; line-height: 1.5; }
+.usp-apply::before { content: "→ "; color: #00b894; font-weight: 800; }
+
+/* 드로어 (규칙/Ban-Must/이식매트릭스 숨김 보관) */
+.drawer-toggle { position: fixed; bottom: 24px; right: 24px; z-index: 1500; background: #2d3436; color: #fff; border: none; padding: 14px 20px; border-radius: 30px; font-size: 13px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.2); font-family: inherit; }
+.drawer-toggle:hover { background: #00b894; }
+.drawer { position: fixed; top: 0; right: -520px; width: 500px; max-width: 92vw; height: 100vh; background: #fff; box-shadow: -4px 0 24px rgba(0,0,0,0.2); z-index: 1800; overflow-y: auto; transition: right 0.3s ease; padding: 24px; }
+.drawer.active { right: 0; }
+.drawer-close { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; border: none; background: #f1f3f5; border-radius: 50%; cursor: pointer; font-size: 18px; color: #636e72; }
+.drawer h2 { font-size: 18px; margin-bottom: 4px; color: #2d3436; }
+.drawer .dsub { font-size: 12px; color: #636e72; margin-bottom: 20px; }
+.drawer h3 { font-size: 13px; text-transform: uppercase; letter-spacing: 0.8px; color: #00b894; margin: 20px 0 10px; padding-bottom: 6px; border-bottom: 2px solid #00b894; }
+.drawer-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 1700; }
+.drawer-backdrop.active { display: block; }
+
+/* 검증 패널 (모달 내) */
+.verify-summary { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 16px 0; }
+.verify-cell { background: #f8f9fa; border-radius: 8px; padding: 10px; text-align: center; border: 1px solid #eee; }
+.verify-cell .cat { font-size: 9px; color: #636e72; text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 4px; font-weight: 700; }
+.verify-cell .val { font-size: 16px; font-weight: 800; }
+.verify-cell .max { font-size: 10px; color: #b2bec3; font-weight: 500; }
+.verify-total { padding: 14px; border-radius: 8px; text-align: center; margin-top: 10px; font-weight: 800; }
+.verify-total.PASS { background: #d4edda; color: #155724; }
+.verify-total.CONDITIONAL { background: #fff3cd; color: #856404; }
+.verify-total.FAIL { background: #f8d7da; color: #721c24; }
+.verify-none { padding: 18px; background: #f8f9fa; border: 1px dashed #ccc; border-radius: 8px; text-align: center; color: #636e72; font-size: 12px; }
+.rubric-list { margin-top: 14px; }
+.rubric-cat { margin-bottom: 10px; padding: 10px; background: #f8f9fa; border-radius: 6px; }
+.rubric-cat .head { display: flex; justify-content: space-between; font-size: 12px; font-weight: 800; color: #2d3436; margin-bottom: 6px; }
+.rubric-cat .items { font-size: 11px; color: #636e72; line-height: 1.6; }
+.rubric-cat .items span { display: inline-block; margin-right: 8px; }
+.rubric-cat .items span::before { content: "◦ "; color: #00b894; }
+
+/* 기획서 템플릿 (모달 내) */
+.tpl-section { margin-bottom: 14px; padding: 14px; background: #f8f9fa; border-radius: 8px; border-left: 3px solid #00b894; }
+.tpl-section .label { font-size: 10px; font-weight: 800; color: #00b894; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; }
+.tpl-section .body { font-size: 13px; color: #2d3436; line-height: 1.6; }
+.tpl-section .body ul { margin-left: 16px; margin-top: 4px; }
+.tpl-section .body li { margin-bottom: 3px; }
+.tpl-usps { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.tpl-usp-chip { font-size: 10px; padding: 4px 9px; background: #fff; border: 1px solid #00b894; color: #00a383; border-radius: 12px; font-weight: 700; }
+
+/* Approval Banner */
+.approve-banner { padding: 16px; border-radius: 8px; text-align: center; margin-top: 20px; font-weight: 800; font-size: 14px; }
+.approve-banner.ok { background: #d4edda; color: #155724; border: 2px solid #00b894; }
+.approve-banner.no { background: #f8d7da; color: #721c24; border: 2px dashed #d63031; }
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .trends-wrap { grid-template-columns: 1fr 1fr; }
+  .usps-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 1024px) {
+  .scorecard-row { grid-template-columns: repeat(3, 1fr); }
+  .ep-grid { grid-template-columns: repeat(2, 1fr); }
+  .trends-wrap { grid-template-columns: 1fr; }
+  .usps-grid { grid-template-columns: repeat(2, 1fr); }
+  .matrix-grid { grid-template-columns: 1fr; }
+  .links-grid { grid-template-columns: repeat(2, 1fr); }
+  .verify-summary { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 768px) {
+  .scorecard-row { grid-template-columns: repeat(2, 1fr); }
+  .ep-grid { grid-template-columns: 1fr; }
+  .rules-grid { grid-template-columns: 1fr; }
+  .banmust { grid-template-columns: 1fr; }
+  .links-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- MCN 상단 네비 -->
+<div class="mcn-topnav">
+  <div class="left">
+    <a class="home" href="../../index.html">← MCN 포털</a>
+    <div class="crumb">채널 / 아는언니 세령 / <strong>기획부</strong></div>
+  </div>
+  <div class="right">
+    <a href="../dashboard/index.html">데이터 대시보드</a>
+    <a href="../analysis/기획부_핸드오프_최종.md">10개 규칙</a>
+    <a class="primary" href="../proposals/아는언니세령/">기획서 폴더</a>
+  </div>
+</div>
+
+<!-- Hero Header -->
+<div class="header">
+  <div class="tag">D-9 · 론칭 준비</div>
+  <h1>아는언니 세령 · 기획부</h1>
+  <div class="host">이세령 대표 · 30세 · 아나운서 출신 · tvN STORY '이젠 사랑할 수 있을까' 출연</div>
+  <div class="positioning">
+    <span class="tagline">"겪어본 사람이 차린 결정사" · 성장형 리얼리티</span>
+    한방언니(심판형) · 모두의지인(코치형) · <strong>아는언니(동반 탐색자)</strong> — 완전 신규 카테고리
+  </div>
+</div>
+
+<div class="container">
+
+<!-- Scorecard -->
+<h2 class="section-title">
+  진행 상황
+  <span class="sub">2026.04.05 기준 · 론칭 2026.04.14</span>
+</h2>
+<div class="scorecard-row" id="scorecardRow"></div>
+
+<!-- TRENDS — 시의성 인사이트 (1순위) -->
+<h2 class="section-title">
+  시의성 인사이트 · 지금 사람들이 떠들고 있는 것
+  <span class="sub">레퍼런스 채널 + 커뮤니티 + 검색 트렌드 · 최근 7일 · 2026.04.05 갱신</span>
+</h2>
+<div class="trends-wrap">
+  <div class="trend-main" id="trendMain"></div>
+  <div class="trend-side">
+    <h4>레퍼런스 최근 업로드</h4>
+    <div id="trendRefs"></div>
+  </div>
+  <div class="trend-side">
+    <h4>커뮤니티 버즈</h4>
+    <div id="trendBuzz"></div>
+  </div>
+</div>
+
+<!-- EP Kanban — 기획서 (채주부 템플릿 기반) -->
+<h2 class="section-title" style="margin-top:40px;">
+  EP 기획서 · 채주부 템플릿 기반
+  <span class="sub">클릭하면 상세 기획서 + 검증 점수 + 승인 여부</span>
+</h2>
+<div class="card">
+  <div class="tabs">
+    <button class="tab active" data-filter="all">전체 (5)</button>
+    <button class="tab" data-filter="draft">Draft (1)</button>
+    <button class="tab" data-filter="pending">대기 (4)</button>
+    <button class="tab" data-filter="passed">승인 (0)</button>
+  </div>
+  <div class="ep-grid" id="epGrid"></div>
+</div>
+
+<!-- CHAEBU USPS 12 -->
+<h2 class="section-title" style="margin-top:40px;">
+  채주부 USP 12개 · 630 영상 종합 분석
+  <span class="sub">7채널 공통 DNA → 결정사에 그대로 이식</span>
+</h2>
+<div class="usps-grid" id="uspsGrid"></div>
+
+<!-- Quick Links -->
+<h2 class="section-title" style="margin-top:40px;">
+  참고 리소스
+  <span class="sub">분석 리포트 · 레퍼런스 · 제작 가이드</span>
+</h2>
+<div class="card">
+  <div class="links-grid" id="linksGrid"></div>
+</div>
+
+</div>
+
+<!-- 드로어 토글 버튼 -->
+<button class="drawer-toggle" onclick="openDrawer()">규칙 · Ban/Must · 이식 매트릭스</button>
+
+<!-- 드로어 백드롭 -->
+<div class="drawer-backdrop" id="drawerBackdrop" onclick="closeDrawer()"></div>
+
+<!-- 드로어 (규칙 숨김 보관) -->
+<aside class="drawer" id="drawer">
+  <button class="drawer-close" onclick="closeDrawer()">×</button>
+  <h2>기획부 규칙 저장소</h2>
+  <div class="dsub">기획서 작성 시 이 규칙들이 자동 검증에 반영됩니다.</div>
+
+  <h3>10개 규칙</h3>
+  <div id="drawerRules"></div>
+
+  <h3>Ban List</h3>
+  <div id="drawerBan"></div>
+
+  <h3>Must List</h3>
+  <div id="drawerMust"></div>
+
+  <h3>채주부 DNA 이식 매트릭스</h3>
+  <div id="drawerMatrix"></div>
+</aside>
+
+<!-- Modal (EP 상세 + 검증) -->
+<div class="modal" id="epModal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════
+// 데이터 (JSON 상수 임베드 — 데이터부서 방식)
+// ═══════════════════════════════════════════════════
+const CHANNEL = {"name": "아는언니 세령", "host": "이세령 대표", "host_meta": "30세 · 아나운서 출신 · Flowmus 공동대표", "launch_date": "2026.04.14", "today": "2026.04.05", "d_day": 9, "tagline": "겪어본 사람이 차린 결정사", "positioning": "한방언니(심판형) · 모두의지인(코치형) · <strong>아는언니(동반 탐색자)</strong> — 완전 신규 카테고리", "story_hook": "tvN STORY '이젠 사랑할 수 있을까' (천정명 5번째 맞선녀) 출연"};
+const METRICS = [{"label": "론칭까지", "value": "D-9", "color": "#fdcb6e"}, {"label": "EP 기획", "value": "2 / 5", "color": "#2d3436"}, {"label": "검증 통과 (90+)", "value": "1 / 5", "color": "#00b894"}, {"label": "시의성 HOT", "value": "4", "color": "#e17055"}, {"label": "채주부 USP", "value": "12", "color": "#00b894"}, {"label": "레퍼런스", "value": "1,541", "color": "#0984e3"}];
+const TRENDS = {"updated": "2026.04.05", "updated_iso": "2026-04-05T07:52:13.276864", "window": "최근 7~14일", "source": "REAL · YouTube API + SerpAPI (Trends·Search·Community) + Gemini", "hot_topics": [{"rank": 1, "topic": "30대 결혼 현실", "signal": "[한방언니] 요즘 30대 여자들이 생각하는 '결혼'은? (242,244회)", "community": "30대 결혼 시기(남자 33살, 여자 31살 넘기면 힘들어짐), 혼자 사는 것의 한계(30대까지), 30대 후반 남녀의 결혼 조건 고민 및 결정사 이용 고려", "search": "'30대 결혼': 변화율 +190.1%, 피크 100", "sentiment": "부정 40 · 긍정 20 · 공감 40", "ep_match": 4, "urgency": "HIGH"}, {"rank": 2, "topic": "결정사 등급/스펙", "signal": "[한방언니] 세후 480만 원이 진짜 대단한 이유 (577,832회), [한방언니] 연봉 4억 스폰남 원하는 영포티한테 면전에 대고 팩폭 박았습니다[결혼압박면접] (500,815회), [한방언니] 결정사 현실 남편상에 여자들이 분노하는 이유 (253,251회), [한방언니] 연봉 3천이어도 결혼 잘하는 남자 (179,693회)", "community": "결정사에서 만날 수 있는 수준(35세 기준, 조건 좋은 남자 -> 20대 후반/30대 초반 여자), 상대 여자들이 선호하는 등급, 가입 거부 기준(얼굴, 연봉, 성격 등), 34세 대기업 직장인의 연봉(6000~8000) 언급", "search": "'결정사 등급': 변화율 +4.6%, 피크 100", "sentiment": "부정 30 · 긍정 30 · 공감 40", "ep_match": 1, "urgency": "HIGH"}, {"rank": 3, "topic": "결정사 이용 후기", "signal": "EP.05 첫 회원 3명 매칭 전 과정 (리얼리티, 회원 공개, 시리즈)", "community": "결정사 3~4년 이용 후기, 20대 후반 여 노블 결정사 후기, 결정사에서 20명 만난 후기, 30대 미혼녀/남자의 결혼정보회사 리얼 후기, 결정사 가입 후기", "search": "'결정사': 변화율 +2.1%, 피크 100", "sentiment": "부정 30 · 긍정 30 · 공감 40", "ep_match": 5, "urgency": "MEDIUM"}, {"rank": 4, "topic": "결정사 서비스 불만", "signal": "데이터 없음", "community": "결정사 회원 우롱하는 상담 매니저 시스템, 결정사 현실(8년 재직 후 퇴사자의 시각), 결정사 가입의 필요성 의문('결혼하면 뭐 집한채줌?'), 결혼정보업체 심사팀의 까다로운 서류 업무", "search": "'결정사': 변화율 +2.1%, 피크 100", "sentiment": "부정 60 · 긍정 10 · 공감 30", "ep_match": 1, "urgency": "MEDIUM"}], "reference_recent": [{"ch": "한방언니", "title": "세후 480만 원이 진짜 대단한 이유", "views": "57.8만", "date": "2026-03-24", "keyword": "결정사_경쟁", "url": "https://www.youtube.com/watch?v=ABhyyV_fS7I"}, {"ch": "한방언니", "title": "연봉 4억 스폰남 원하는 영포티한테 면전에 대고 팩폭 박았습니다[결혼압박면접]", "views": "50.1만", "date": "2026-03-28", "keyword": "결정사_경쟁", "url": "https://www.youtube.com/watch?v=1A9nLbn-OFo"}, {"ch": "모두의지인", "title": "남자친구와 여사친을 믿어줘야 할까요? #여사친 #노답상담소 #연애고민 #결정사 #모두의지인", "views": "46.8만", "date": "2026-04-01", "keyword": "결정사_경쟁", "url": "https://www.youtube.com/watch?v=ZRyprq6mEV8"}, {"ch": "예보링", "title": "최근에 이별한 친구 데리고 힐링하러 떠나기", "views": "38.5만", "date": "2026-03-29", "keyword": "채주부그룹", "url": "https://www.youtube.com/watch?v=nOCOtUegD04"}, {"ch": "채널주인부재중", "title": "미움받을 용기", "views": "37.5만", "date": "2026-04-03", "keyword": "채주부그룹", "url": "https://www.youtube.com/watch?v=S-tl-AHLjLs"}, {"ch": "모두의지인", "title": "내 남친의 여사친 #모두의지인 #결정사 #결혼정보회사 #연애고민 #노답상담소", "views": "33.6만", "date": "2026-03-27", "keyword": "결정사_경쟁", "url": "https://www.youtube.com/watch?v=BSm2bhzIFeQ"}, {"ch": "채널주인부재중", "title": "사내연애는 안 된다는 사장님의 실체 (feat. 핫도그 뉴스)", "views": "32.0만", "date": "2026-03-28", "keyword": "채주부그룹", "url": "https://www.youtube.com/watch?v=lXLMljenwUY"}, {"ch": "모두의지인", "title": "모텔비 5천원에 화내는 남친 #결혼정보회사 #노답상담소 #모두의지인 #모텔 #남친", "views": "30.1만", "date": "2026-03-25", "keyword": "결정사_경쟁", "url": "https://www.youtube.com/watch?v=Wdi8LxoeF-o"}], "community_buzz": [{"src": "디시인사이드 결혼준비", "title": "결정사 3~4년 해보면서 느낀점 - 결혼 갤러리", "react": "결정사", "tone": "HIGH", "key": "결정사", "link": "https://gall.dcinside.com/board/view/?id=wedding&no=12404"}, {"src": "디시인사이드 결혼준비", "title": "결정사를왜감 결혼하면 뭐 집한채줌? - 공기업 마이너 갤러리", "react": "결정사", "tone": "HIGH", "key": "결정사", "link": "https://gall.dcinside.com/mgallery/board/view/?id=rhdrldjq&no=1168247"}, {"src": "디시인사이드 결혼준비", "title": "결정사 가면 어느정도 수준 만날수있을까?(35) - 갤러리", "react": "결정사", "tone": "HIGH", "key": "결정사", "link": "https://gall.dcinside.com/board/view/?id=dcbest&no=410509&_dcbest=1&page=1"}, {"src": "디시인사이드 결혼준비", "title": "결혼정보업체 기공위치 .jpg - 노가다 마이너 갤러리", "react": "결혼정보회사", "tone": "HIGH", "key": "결혼정보회사", "link": "https://gall.dcinside.com/mgallery/board/view/?id=nogada&no=411073"}, {"src": "디시인사이드 결혼준비", "title": "결정사 3~4년 해보면서 느낀점 - 결혼 갤러리", "react": "결혼정보회사", "tone": "HIGH", "key": "결혼정보회사", "link": "https://gall.dcinside.com/board/view/?id=wedding&no=12404"}, {"src": "디시인사이드 결혼준비", "title": "훌쩍훌쩍 결혼정보회사 가입거부된 여자들 (최신 버전) - 갤러리", "react": "결혼정보회사", "tone": "HIGH", "key": "결혼정보회사", "link": "https://gall.dcinside.com/board/view/?id=dcbest&no=23266"}, {"src": "디시인사이드 결혼준비", "title": "결혼은 남자 33살 여자 31살 넘기면 급격히 힘들어짐 - 갤러리", "react": "30대 결혼", "tone": "HIGH", "key": "30대 결혼", "link": "https://gall.dcinside.com/board/view/?id=iamsolo&no=1761333"}, {"src": "디시인사이드 결혼준비", "title": "혼자사는게 괜찮은건 30대 까지다 - 실시간 베스트 갤러리", "react": "30대 결혼", "tone": "HIGH", "key": "30대 결혼", "link": "https://gall.dcinside.com/board/view/?id=dcbest&no=295063"}], "search_trends": [{"kw": "30대 결혼", "change_pct": 190.1, "peak": 100, "category": "연령"}, {"kw": "결정사 등급", "change_pct": 4.6, "peak": 100, "category": "등급표"}, {"kw": "결정사", "change_pct": 2.1, "peak": 100, "category": "메인"}], "_raw_counts": {"youtube": 34, "trends": 3, "community": 45, "hot_topics": 4}, "badge": "REAL · 자동 수집", "badge_color": "#00b894"};
+const EPISODES = [{"no": 1, "title": "등급표의 진실", "subtitle": "[당신은 몇 등급?]", "status": "ready", "version": "v10", "length": "12~14분", "format": "리스트형 2부 구조", "upload": "일요일 18시", "title_full": "결정사 등급표 처음 공개합니다 [당신은 몇 등급?]", "title_chars": 24, "hook": "세후 350, 서울 전세 2억, 키 175. 이 남자 몇 등급인지 아세요?", "arc": "시리즈 1막 — 등급표의 현실", "dna": "모두의지인 '등급표 최초 공개' + 한방언니 리스트형 2부", "who_what": "이세령 대표 / 결정사 내부 등급표(S/A/B/C)를 최초 공개하며 각 등급의 현실적 기준과 시청자 위치를 팩폭", "purpose": "상담 폼 전환 (내 등급 궁금증 → 무료 진단 신청)", "expected_comments": ["나 C등급인데 어쩌라고ㅋㅋ", "세후 500이 B등급이라고?", "등급 진단 폼 어디 있어요?", "한방언니보다 솔직하다"], "detail_plan": "Part1: 4등급 해부 (C 60%→B 25%→A 10%→S 5%) · Part2: 공포 클로징 + 상담 폼 CTA · PD 상호작용 45초 1회", "warnings": "등급표 숫자는 업계 실제 데이터 근거 확인 필수 · 경쟁사 실명 언급 금지 · 팩폭 레벨 5단계 에스컬레이션 준수", "chaebu_usps": [1, 2, 3, 4, 12], "file": "../proposals/아는언니세령/EP01_등급표의진실_v10.md", "thumb": null, "verification": {"structure": 25, "title": 15, "peer": 38, "trends": 20, "total": 98, "status": "PASS"}, "extra_docs": [{"label": "촬영질문지 웹앱 (체크박스)", "file": "./EP01_촬영질문지.html"}, {"label": "촬영질문지 원본 MD", "file": "../proposals/아는언니세령/EP01_촬영질문지_리텐션기반.md"}]}, {"no": 2, "title": "나는 왜 결정사를 차렸다", "subtitle": "[실화]", "status": "draft", "version": "v1", "length": "12~14분", "format": "성장형 리얼리티 (Format B)", "upload": "금요일 19시", "title_full": "90키로 여고생이 결정사 대표가 된 이유 [실화]", "title_chars": 23, "hook": "저 아나운서였어요. 7년 했어요. 근데 지금은 결정사 대표예요.", "arc": "시즌 1 — 팬덤 형성 (오리진 스토리)", "dna": "채부재(성장형 리얼리티) + 매일제히(개인사 공개) + 예보링(역전 서사)", "who_what": "이세령 대표 / 80kg 여고생→30kg 감량→아나운서→tvN 맞선→미스코리아→결정사 창업까지의 역전 서사를 최초 공개", "purpose": "팬덤 형성 + 이세령 개인 브랜딩 확립 + 구독 전환", "expected_comments": ["고딩 때 90키로였다고?? 지금 완전 다른 사람이네", "tvN에서 천정명한테 애프터 받은 분 아니에요?", "아나운서 그만두고 결정사 차린 용기가 대단하다", "워터밤 여신이 결정사 대표라니ㅋㅋ", "저도 30대인데... 결정사 상담 어떻게 받아요?"], "detail_plan": "Act1: 정체성 충격(아나운서→결정사) + 변신(90→56kg) + tvN · Act2: 실패 컬렉션 + ★피크 '사람을 연결하는 일' · Act3: 현장 + 성장 선언 + CTA", "warnings": "tvN 클립 사용권 확인 · 워터밤 관련 자료 사용 금지 · 베스트클래스 언급 수위 주의 · 체중 수치 본인 동의 필수", "chaebu_usps": [2, 3, 4, 8, 9, 10, 11, 12], "file": "../proposals/아는언니세령/EP02_나는왜결정사를차렸다_v1.md", "thumb": null, "verification": null}, {"no": 3, "title": "프로필 3초의 비밀", "subtitle": "[여자가 체크하는 5가지]", "status": "pending", "version": "—", "length": "7~9분", "format": "팁/정보", "upload": "수요일 18시", "title_full": "여자들이 프로필 3초 만에 체크하는 5가지", "title_chars": 22, "hook": "C등급 프로필은 평균 3초 만에 넘겨져요. 이유 5가지.", "arc": "시리즈 1막 — 실전 팁", "dna": "채널주인여깄음 질문형+성별타겟 + 모두의지인 리스트형", "who_what": "이세령 대표 / 결정사 여성 회원이 3초 만에 프로필을 넘기는 기준 5가지를 팩폭 공개", "purpose": "남성 시청자 자기 프로필 점검 욕구 자극 → 상담/진단 전환", "expected_comments": ["진짜 3초 만에 판단하나요?", "내 프로필도 진단받고 싶다", "1번이 진짜 치명적이네", "남자도 이러는데 ㅋㅋ"], "detail_plan": "0초 훅: '3초' 강조 → 5가지 리스트형 (연봉→사진→문구→키→취미) · 각 항목에 실제 여성 회원 멘트 삽입", "warnings": "개인 프로필 노출 금지 · 실명 금지 · 성별 편 가르기 조심 (자극은 OK, 혐오는 금지)", "chaebu_usps": [5, 6, 12], "file": null, "thumb": null, "verification": null}, {"no": 4, "title": "30살 여자가 결정사 차린 이유", "subtitle": "[대표 인터뷰]", "status": "pending", "version": "—", "length": "15~20분", "format": "리얼리티/다큐", "upload": "일요일 18시", "title_full": "30살 여자가 결정사를 차린 진짜 이유 [대표 리얼 스토리]", "title_chars": 27, "hook": "'이젠 사랑할 수 있을까' 나간 여자가 결정사를 차렸습니다.", "arc": "시리즈 2막 — 오리진 스토리", "dna": "예보링 1인칭 고백 + 심장에박현서 과거 몽타주 + 매일제히 감성 호흡", "who_what": "이세령 대표 / 아나운서 → tvN '이젠 사랑할 수 있을까' → 결정사 창업까지의 진짜 이야기를 1인칭 고백으로", "purpose": "브랜드 오리진 확립 · 캐릭터 페르소나 각인 · 신뢰/공감 구축", "expected_comments": ["천정명 나온 그분 맞죠?", "진짜 솔직하네", "나도 30살인데 공감돼요", "이 대표한테 상담받고 싶다"], "detail_plan": "Opening: tvN 방송 클립(저작권 확인) → 20대 아나운서 시절 사진 몽타주 → 맞선 현실 고백 → 결정사 창업 결심 → 회원 첫날", "warnings": "tvN 클립 사용권 확인 필수 · 감성 과잉 금지 · 오픈닝 60초 내 훅 도달", "chaebu_usps": [10, 11, 12], "file": null, "thumb": null, "verification": null}, {"no": 5, "title": "첫 회원 3명 매칭 전 과정", "subtitle": "[공개 프로젝트 EP.1]", "status": "pending", "version": "—", "length": "18~22분", "format": "다큐/리얼리티", "upload": "일요일 18시", "title_full": "첫 회원 3명 매칭 전 과정 전부 공개 [결정사 리얼 다큐]", "title_chars": 28, "hook": "결정사를 차린 첫 달, 3명의 회원. 6개월간의 기록이 시작됩니다.", "arc": "시리즈 2막 — 리얼 프로젝트", "dna": "채널주인부재중 진행형 기록 + 꼴통사장 투명성 + 매일제히 연속 드라마", "who_what": "이세령 대표 + 실제 첫 회원 3명(블러/음성 변조) / 매칭 전 과정을 6개월 프로젝트 EP로 연재", "purpose": "성장형 리얼리티 각인 · 장기 팬덤 구축 · '이 사람들 어떻게 될까?' 궁금증 유발", "expected_comments": ["이거 다음 편 언제 나와요?", "진짜 회원 맞죠?", "3명 다 성혼했으면 좋겠다", "이렇게 공개해도 되나요"], "detail_plan": "회원 3명 소개(블러) → 이세령 1:1 컨설팅 3회 → 첫 매칭 → 클리프행어 엔딩 (EP.2 예고) · 채주부 허브 방식", "warnings": "회원 서면 동의 + 법무 검토 필수 · 얼굴/이름/직장 식별 금지 · 연속 시리즈 기획 확정 후 촬영", "chaebu_usps": [7, 8, 9, 11], "file": null, "thumb": null, "verification": null}];
+const CHAEBU_USPS = [{"no": 1, "category": "썸네일", "title": "흰색 고딕 + 검정 외곽선 절대 공식", "evidence": "7/7 채널 100% 동일 사용", "apply": "이세령 클로즈업 70% + 흰색 굵은 고딕 + 빨강/노랑 포인트"}, {"no": 2, "category": "오프닝", "title": "인사 생략, 0초 훅 직행", "evidence": "7개 채널 중 5개가 인사 완전 생략", "apply": "\"세후 350, 몇 등급인지 아세요?\" 0초 숫자 폭격"}, {"no": 3, "category": "CTA", "title": "구독 유도 완전 제거", "evidence": "7/7 채널 구독 멘트 0회", "apply": "구독 대신 '무료 등급 진단 폼' 멱살 잡기 CTA"}, {"no": 4, "category": "톤", "title": "자학 개그 만능 유머 코드", "evidence": "7/7 채널 자학 개그 사용", "apply": "\"저도 30살에 결혼 못 했잖아요\" 1인칭 자학"}, {"no": 5, "category": "제목", "title": "상황 묘사형 > 숫자형", "evidence": "TOP 80%가 '~했더니' '~한 날' 스토리 압축", "apply": "\"결정사 차린 첫 달 생긴 일\" \"첫 회원이 남긴 말\""}, {"no": 6, "category": "제목", "title": "질문형 + 성별 타겟", "evidence": "여깄음 30만 조회 (질문 41% + 타겟 42%)", "apply": "\"30대 여자들이 절대 말 안 하는 것\" 질문+타겟"}, {"no": 7, "category": "업로드", "title": "주말 집중 (일요일 루틴)", "evidence": "박현서 일 75%, 매일제히 토 63%", "apply": "메인 EP 일요일 18시 고정 (타겟 주말 루틴)"}, {"no": 8, "category": "구조", "title": "열린 결말 + 다음 편 떡밥", "evidence": "7/7 채널 '다음에 계속' 클리프행어", "apply": "EP 마지막 30초에 다음 회원 예고 장면"}, {"no": 9, "category": "시리즈", "title": "삶의 이벤트 연속 드라마화", "evidence": "매일제히(결혼·임신·이사), 박현서(프로포즈)", "apply": "첫 회원 3명 매칭 → 6개월 연속 시리즈화"}, {"no": 10, "category": "캐릭터", "title": "시그니처 캐치프레이즈", "evidence": "예보링 '부링차들', 사는연 '빵상 지구인들'", "apply": "이세령만의 오프닝 시그니처 개발 (예: '언니야')"}, {"no": 11, "category": "포맷", "title": "관계 기반 리얼리티", "evidence": "출연진 실제 관계를 콘텐츠 축으로", "apply": "이세령 + PD + 실제 회원 간 실제 상호작용 기록"}, {"no": 12, "category": "톤", "title": "솔직함 = 브랜드", "evidence": "7/7 필터 없는 날것 (민감 주제 여과 없음)", "apply": "결정사 내부 등급/가격/성혼율 전부 공개"}];
+const VERIFICATION = {"threshold": {"pass": 90, "conditional": 80}, "rubric": [{"cat": "구조 완성도", "max": 25, "items": ["오프닝 0~30초 훅 명시", "킬러 타이밍 30~50% 배치", "엔딩 떡밥 + CTA", "길이 권장 범위 준수", "Part 구조 명확"]}, {"cat": "제목 품질", "max": 15, "items": ["25~35자 준수", "숫자 or 갭 포함", "상황 묘사 or 질문+타겟"]}, {"cat": "피어리뷰 (Claude)", "max": 40, "items": ["기획 논리성", "독창성", "CTA 명확성", "채주부 DNA 반영도"]}, {"cat": "시의성 (Trends)", "max": 20, "items": ["TRENDS 핫토픽 매칭", "커뮤니티 반응 반영", "레퍼런스 최근 흐름 반영"]}]};
+const RULES = [{"no": 1, "cat": "제목", "title": "제목 공식", "desc": "[타겟 연령/성별] + [숫자 or 갭] + [결과/행동]"}, {"no": 2, "cat": "제목", "title": "숫자형 우선", "desc": "숫자형(90.4) > 갭형(89.2) > 리스트 > 자극 > 의문"}, {"no": 3, "cat": "제목", "title": "의문형 단독 금지", "desc": "의문형은 반드시 숫자와 결합"}, {"no": 4, "cat": "제목", "title": "글자수 25~35자", "desc": "모바일 2줄 기준 · 잘림 방지"}, {"no": 5, "cat": "썸네일", "title": "Gemini CTR 90점+", "desc": "한방언니 숫자형 썸네일을 벤치마크"}, {"no": 6, "cat": "썸네일", "title": "얼굴 + 숫자 + 한 단어", "desc": "3요소 구성 · 제목과 텍스트 분리"}, {"no": 7, "cat": "구조", "title": "오프닝 0~30초 후킹", "desc": "자기소개 / 인사 / BGM 인트로 금지"}, {"no": 8, "cat": "구조", "title": "킬러 타이밍 30~50%", "desc": "가장 강한 한 방은 중반에 · Peak 분포 기반"}, {"no": 9, "cat": "구조", "title": "영상 길이", "desc": "스토리 15~20분 / 팁 5~10분 · 5분 미만 금지"}, {"no": 10, "cat": "구조", "title": "엔딩 차별화", "desc": "한 줄 결론 + 다음 편 떡밥 · 경쟁사 약점 공략"}];
+const TRANSPLANT = [{"source": "채널주인부재중", "source_genre": "사업 리얼리티", "dna": "성장형 리얼리티 · 진행형 기록", "target_ep": "EP.05", "target": "첫 회원 3명 매칭 전 과정 공개", "translate": "사업 Day 1부터의 기록 → 결정사 창업 6개월 실제 매칭 공개"}, {"source": "예보링", "source_genre": "1인 브이로그", "dna": "1인칭 고백 · Before/After · 구체 숫자", "target_ep": "EP.04", "target": "30살 여자가 결정사 차린 진짜 이유", "translate": "본인 연애사 1인칭 폭로 → 이세령 결혼시장 경험 솔직 고백"}, {"source": "꼴통사장 권기준", "source_genre": "직장/업계 폭로", "dna": "내부 폭로 · 투명성 · 팩폭", "target_ep": "EP.01", "target": "결정사 등급표 처음 공개", "translate": "업계 내부 룰 전부 공개 → 결정사 S/A/B/C 등급 내부 기준 공개"}, {"source": "채널주인여깄음", "source_genre": "1인 사업가", "dna": "적자 공개 · 수치 투명성", "target_ep": "EP.02", "target": "등급 역전의 실화 (비용/시간 공개)", "translate": "월 매출/지출 그래프 → 결정사 평균 가입비 420만원 + 성혼율 12%"}, {"source": "매일제히", "source_genre": "일상 감성", "dna": "섬세한 감정 포착 · 느린 호흡", "target_ep": "EP.04 엔딩부", "target": "대표 인터뷰 감성 클로징", "translate": "일상 감정 디테일 → 맞선자리의 침묵과 떨림을 섬세하게"}, {"source": "심장에박현서", "source_genre": "과거 회상 감성", "dna": "옛 사진/영상 활용 · 시간 압축", "target_ep": "EP.04 중반", "target": "이세령 20대 → 30대 변화 몽타주", "translate": "과거 사진 몽타주 → 아나운서 시절 → tvN → 결정사 창업"}];
+const BAN_MUST = {"ban": ["\"안녕하세요, OOO입니다\" 류 자기소개", "0~5초 인사 / 로고 / BGM 인트로", "\"오늘은 이 주제에 대해...\" 예고편", "의문형 단독 제목 (숫자 없음)", "5분 미만 영상", "\"구독해주세요\" CTA", "38자+ 긴 제목", "채널 소개 / 명함 멘트"], "must": ["0초부터 본론 충격 숫자", "PD 상호작용 45초에 1회", "킬러 타이밍 30~50% 구간에 배치", "엔딩 30초 = 결론 + 다음 편 떡밥", "썸네일 Gemini CTR 90점+", "상담 폼 CTA (멱살 잡기)", "경쟁사 키워드 3개 삽입", "5단계 팩폭 에스컬레이션"]};
+const QUICK_LINKS = [{"label": "HANDOFF", "title": "최종 핸드오프 문서", "desc": "1,541 영상 분석 + 10개 규칙", "url": "../analysis/기획부_핸드오프_최종.md"}, {"label": "RECIPE", "title": "제목 레시피", "desc": "179줄 · 제목 공식 심화", "url": "../analysis/기획부_제목_레시피.md"}, {"label": "RECIPE", "title": "썸네일 레시피", "desc": "231줄 · 썸네일 패턴 심화", "url": "../analysis/기획부_썸네일_레시피.md"}, {"label": "STRATEGY", "title": "FOMO 전략 7유형", "desc": "228줄 · 어그로 전략 보고서", "url": "../analysis/기획부_포모_전략_보고서.md"}, {"label": "HEATMAP", "title": "피크/드롭 패턴", "desc": "157줄 · 리텐션 분석", "url": "../analysis/기획부_히트맵_피크드롭_패턴.md"}, {"label": "BRIEFING", "title": "솔버 브리핑", "desc": "413줄 · 사업 방향성", "url": "../analysis/솔버_브리핑_데이터분석.md"}, {"label": "GUIDE", "title": "웹앱 제작 가이드", "desc": "505줄 · 데이터부서 전수", "url": "../analysis/기획부_웹앱_제작_가이드.md"}, {"label": "DASHBOARD", "title": "데이터 대시보드", "desc": "1,541 영상 인터랙티브", "url": "../dashboard/index.html"}];
+
+// ═══════════════════════════════════════════════════
+// 렌더링 함수들
+// ═══════════════════════════════════════════════════
+
+function renderScorecard() {
+  const html = METRICS.map(m => `
+    <div class="scorecard">
+      <div class="label">${m.label}</div>
+      <div class="value" style="color: ${m.color}">${m.value}</div>
+    </div>
+  `).join('');
+  document.getElementById('scorecardRow').innerHTML = html;
+}
+
+function renderEpisodes(filter) {
+  filter = filter || 'all';
+  const filtered = filter === 'all'
+    ? EPISODES
+    : EPISODES.filter(e => (filter === 'passed' ? (e.verification && e.verification.status === 'PASS') : e.status === filter));
+  const statusLabel = { draft: 'Draft', verifying: '검증중', passed: '승인', pending: '대기' };
+  const html = filtered.map(ep => {
+    const v = ep.verification;
+    const scoreTag = v ? `<span class="ep-status ${v.status === 'PASS' ? 'passed' : (v.status === 'CONDITIONAL' ? 'verifying' : 'draft')}">${v.total}/100 · ${v.status}</span>` : `<span class="ep-status pending">미검증</span>`;
+    return `
+      <div class="ep-card" onclick="openEpModal(${ep.no})">
+        <div class="no">EP.0${ep.no}</div>
+        <div class="title">${ep.title}</div>
+        <div class="sub">${ep.subtitle}</div>
+        ${scoreTag}
+        <div class="meta">
+          <span>${ep.length}</span>
+          <span>${ep.format}</span>
+        </div>
+      </div>
+    `;
+  }).join('');
+  document.getElementById('epGrid').innerHTML = html;
+}
+
+function renderTrends() {
+  // Main — 핫토픽 랭킹
+  const mainHtml = TRENDS.hot_topics.map(t => {
+    const matchHtml = (t.ep_match != null)
+      ? `<div class="hot-match" onclick="openEpModal(${t.ep_match})">→ EP.0${t.ep_match} 매칭</div>`
+      : `<div class="hot-match" style="background:#dfe6e9;color:#636e72;cursor:default;">EP 매칭 없음 (신규 EP 후보)</div>`;
+    return `
+    <div class="hot-item">
+      <div class="hot-head">
+        <div class="hot-rank">${t.rank}</div>
+        <div class="hot-topic">${t.topic}</div>
+        <div class="hot-urgency ${t.urgency}">${t.urgency}</div>
+      </div>
+      <div class="hot-meta">
+        <div><span class="label">SIGNAL</span>${t.signal}</div>
+        <div><span class="label">COMM</span>${t.community}</div>
+        <div><span class="label">SEARCH</span>${t.search}</div>
+        <div><span class="label">TONE</span>${t.sentiment}</div>
+      </div>
+      ${matchHtml}
+    </div>
+  `;
+  }).join('');
+  const badgeStyle = `display:inline-block;padding:3px 8px;border-radius:10px;background:${TRENDS.badge_color||'#00b894'};color:#fff;font-size:9px;font-weight:800;margin-left:8px;vertical-align:middle;letter-spacing:0.5px;`;
+  const badgeHtml = `<span style="${badgeStyle}">${TRENDS.badge||'REAL'}</span>`;
+  document.getElementById('trendMain').innerHTML = `<h4 style="font-size:12px;text-transform:uppercase;letter-spacing:0.8px;color:#e17055;margin-bottom:4px;font-weight:800;">HOT TOPICS · ${TRENDS.window}${badgeHtml}</h4><div style="font-size:11px;color:#636e72;margin-bottom:12px;">갱신 ${TRENDS.updated} · ${TRENDS.source||''}</div>${mainHtml}`;
+
+  // Side — 레퍼런스 최근
+  document.getElementById('trendRefs').innerHTML = TRENDS.reference_recent.map(r => {
+    const clickable = r.url ? `onclick="window.open('${r.url}','_blank')" style="cursor:pointer;"` : '';
+    return `
+    <div class="side-item" ${clickable}>
+      <div class="title">${r.title}</div>
+      <div class="meta">${r.ch} · ${r.views} · ${r.date}</div>
+      <div class="key">${r.keyword}</div>
+    </div>
+  `;
+  }).join('');
+
+  // Side — 커뮤니티
+  document.getElementById('trendBuzz').innerHTML = TRENDS.community_buzz.map(b => {
+    const clickable = b.link ? `onclick="window.open('${b.link}','_blank')" style="cursor:pointer;"` : '';
+    return `
+    <div class="side-item" ${clickable}>
+      <div class="title">${b.title}</div>
+      <div class="meta">${b.src} · ${b.react} · ${b.tone}</div>
+      <div class="key">${b.key}</div>
+    </div>
+  `;
+  }).join('');
+}
+
+function renderUsps() {
+  const html = CHAEBU_USPS.map(u => `
+    <div class="usp-card">
+      <div class="usp-head">
+        <div class="usp-no">USP ${String(u.no).padStart(2, '0')}</div>
+        <div class="usp-cat">${u.category}</div>
+      </div>
+      <div class="usp-title">${u.title}</div>
+      <div class="usp-evidence">근거: ${u.evidence}</div>
+      <div class="usp-apply">${u.apply}</div>
+    </div>
+  `).join('');
+  document.getElementById('uspsGrid').innerHTML = html;
+}
+
+function renderDrawer() {
+  document.getElementById('drawerRules').innerHTML = RULES.map(r => `
+    <div class="rule">
+      <div class="rule-no">${r.no}</div>
+      <div>
+        <div class="rule-cat">${r.cat}</div>
+        <div class="rule-title">${r.title}</div>
+        <div class="rule-desc">${r.desc}</div>
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('drawerBan').innerHTML = BAN_MUST.ban.map(b => `
+    <div class="banmust-item"><div class="icon" style="background:#d63031">N</div><div>${b}</div></div>
+  `).join('');
+  document.getElementById('drawerMust').innerHTML = BAN_MUST.must.map(m => `
+    <div class="banmust-item"><div class="icon" style="background:#00b894">Y</div><div>${m}</div></div>
+  `).join('');
+  document.getElementById('drawerMatrix').innerHTML = TRANSPLANT.map(t => `
+    <div class="matrix-card">
+      <div class="matrix-source">${t.source}<span class="genre">${t.source_genre}</span></div>
+      <div class="matrix-dna">${t.dna}</div>
+      <div class="matrix-arrow">↓</div>
+      <div class="matrix-target-ep">${t.target_ep}</div>
+      <div class="matrix-target">${t.target}</div>
+      <div class="matrix-translate">${t.translate}</div>
+    </div>
+  `).join('');
+}
+
+function openDrawer() {
+  document.getElementById('drawer').classList.add('active');
+  document.getElementById('drawerBackdrop').classList.add('active');
+}
+function closeDrawer() {
+  document.getElementById('drawer').classList.remove('active');
+  document.getElementById('drawerBackdrop').classList.remove('active');
+}
+
+function renderLinks() {
+  const html = QUICK_LINKS.map(l => `
+    <a class="link-card" href="${l.url}">
+      <div class="label">${l.label}</div>
+      <div class="title">${l.title}</div>
+      <div class="desc">${l.desc}</div>
+    </a>
+  `).join('');
+  document.getElementById('linksGrid').innerHTML = html;
+}
+
+// ═══════════════════════════════════════════════════
+// 모달
+// ═══════════════════════════════════════════════════
+
+function openEpModal(no) {
+  const ep = EPISODES.find(e => e.no === no);
+  if (!ep) return;
+
+  // 채주부 템플릿 섹션
+  const commentsHtml = (ep.expected_comments || []).map(c => `<li>"${c}"</li>`).join('');
+  const uspChips = (ep.chaebu_usps || []).map(n => {
+    const u = CHAEBU_USPS.find(x => x.no === n);
+    return u ? `<span class="tpl-usp-chip" title="${u.evidence}">USP${String(u.no).padStart(2, '0')} · ${u.title}</span>` : '';
+  }).join('');
+
+  // 검증 점수 패널
+  let verifyHtml = '';
+  let approveBanner = '';
+  if (ep.verification) {
+    const v = ep.verification;
+    verifyHtml = `
+      <div class="verify-summary">
+        <div class="verify-cell"><div class="cat">구조</div><div class="val">${v.structure}<span class="max">/25</span></div></div>
+        <div class="verify-cell"><div class="cat">제목</div><div class="val">${v.title}<span class="max">/15</span></div></div>
+        <div class="verify-cell"><div class="cat">피어리뷰</div><div class="val">${v.peer}<span class="max">/40</span></div></div>
+        <div class="verify-cell"><div class="cat">시의성</div><div class="val">${v.trends}<span class="max">/20</span></div></div>
+      </div>
+      <div class="verify-total ${v.status}">${v.total} / 100 · ${v.status}</div>
+    `;
+    if (v.status === 'PASS') {
+      approveBanner = `<div class="approve-banner ok">승인 완료 · 촬영 진행 가능</div>`;
+    } else {
+      approveBanner = `<div class="approve-banner no">미승인 (90점 이상 필요) · 재기획 필요</div>`;
+    }
+  } else {
+    verifyHtml = `<div class="verify-none">검증 미실행 · 기획서 작성 후 검증 라운드를 돌려주세요</div>`;
+    approveBanner = `<div class="approve-banner no">검증 대기 중</div>`;
+  }
+
+  // 루브릭
+  const rubricHtml = VERIFICATION.rubric.map(r => `
+    <div class="rubric-cat">
+      <div class="head"><span>${r.cat}</span><span>${r.max}점</span></div>
+      <div class="items">${r.items.map(i => `<span>${i}</span>`).join('')}</div>
+    </div>
+  `).join('');
+
+  const fileLink = ep.file
+    ? `<a class="modal-cta" href="${ep.file}">기획서 MD 전체 보기 →</a>`
+    : `<span class="modal-cta disabled">기획서 작성 대기</span>`;
+
+  const extraDocsHtml = (ep.extra_docs && ep.extra_docs.length > 0)
+    ? ep.extra_docs.map(d => `<a class="modal-cta" style="background:#e17055;" href="${d.file}">${d.label} →</a>`).join(' ')
+    : '';
+
+  const bodyHtml = `
+    <h2>EP.0${ep.no} · ${ep.title}</h2>
+    <div class="modal-sub">${ep.subtitle} · ${ep.arc}</div>
+
+    <dl class="modal-detail-grid">
+      <dt>제목 (${ep.title_chars}자)</dt><dd>"${ep.title_full}"</dd>
+      <dt>길이 / 포맷</dt><dd>${ep.length} · ${ep.format}</dd>
+      <dt>업로드</dt><dd>${ep.upload}</dd>
+      <dt>DNA 이식</dt><dd>${ep.dna}</dd>
+      <dt>오프닝 훅</dt><dd>"${ep.hook}"</dd>
+    </dl>
+
+    <h3 style="font-size:13px;text-transform:uppercase;letter-spacing:0.8px;color:#00b894;margin:20px 0 10px;">채주부 기획서 템플릿</h3>
+
+    <div class="tpl-section">
+      <div class="label">누가 / 어떤 콘텐츠 (필수)</div>
+      <div class="body">${ep.who_what || '—'}</div>
+    </div>
+
+    <div class="tpl-section">
+      <div class="label">영상의 목적</div>
+      <div class="body">${ep.purpose || '—'}</div>
+    </div>
+
+    <div class="tpl-section">
+      <div class="label">예상 댓글 반응</div>
+      <div class="body"><ul>${commentsHtml}</ul></div>
+    </div>
+
+    <div class="tpl-section">
+      <div class="label">세부 기획</div>
+      <div class="body">${ep.detail_plan || '—'}</div>
+    </div>
+
+    <div class="tpl-section">
+      <div class="label">주의 사항</div>
+      <div class="body">${ep.warnings || '—'}</div>
+    </div>
+
+    <div class="tpl-section">
+      <div class="label">적용 채주부 USP</div>
+      <div class="body"><div class="tpl-usps">${uspChips}</div></div>
+    </div>
+
+    <h3 style="font-size:13px;text-transform:uppercase;letter-spacing:0.8px;color:#00b894;margin:20px 0 10px;">검증 라운드 (제목 + 썸네일 + 기획서)</h3>
+    ${verifyHtml}
+    ${approveBanner}
+
+    <details style="margin-top:14px;">
+      <summary style="cursor:pointer;font-size:12px;color:#636e72;font-weight:700;">검증 루브릭 세부 기준 (100점 만점)</summary>
+      <div class="rubric-list">${rubricHtml}</div>
+    </details>
+
+    <div style="margin-top:20px;display:flex;gap:10px;flex-wrap:wrap;">${fileLink} ${extraDocsHtml}</div>
+  `;
+  document.getElementById('modalBody').innerHTML = bodyHtml;
+  document.getElementById('epModal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('epModal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') { closeModal(); closeDrawer(); }
+});
+
+document.getElementById('epModal').addEventListener('click', e => {
+  if (e.target.id === 'epModal') closeModal();
+});
+
+// ═══════════════════════════════════════════════════
+// 탭 필터
+// ═══════════════════════════════════════════════════
+
+document.querySelectorAll('.tab').forEach(t => {
+  t.onclick = () => {
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    renderEpisodes(t.dataset.filter);
+  };
+});
+
+// ═══════════════════════════════════════════════════
+// 초기 렌더
+// ═══════════════════════════════════════════════════
+
+renderScorecard();
+renderTrends();
+renderEpisodes('all');
+renderUsps();
+renderDrawer();
+renderLinks();
+</script>
+
+</body>
+</html>

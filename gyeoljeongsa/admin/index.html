@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neobridge Admin</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+:root {
+  --bg: #ffffff;
+  --sidebar: #fafafa;
+  --card: #f7f7f8;
+  --card-hover: #efefef;
+  --border: #e2e2e5;
+  --text: #1a1a1a;
+  --text-dim: #6b6b6b;
+  --accent: #6366f1;
+  --accent-light: #4f46e5;
+  --green: #16a34a;
+  --yellow: #ca8a04;
+  --red: #dc2626;
+  --orange: #ea580c;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+/* Auth */
+.auth-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.auth-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 48px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.auth-box h1 { font-size: 22px; margin-bottom: 8px; }
+.auth-box p { color: var(--text-dim); margin-bottom: 24px; font-size: 14px; }
+
+.auth-input {
+  width: 100%;
+  padding: 12px 16px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  font-size: 15px;
+  outline: none;
+  margin-bottom: 12px;
+}
+
+.auth-input:focus { border-color: var(--accent); }
+
+.auth-btn {
+  width: 100%;
+  padding: 12px;
+  background: var(--accent);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.auth-btn:hover { opacity: 0.9; }
+.auth-error { color: var(--red); font-size: 13px; margin-top: 10px; display: none; }
+
+/* Layout */
+.app { display: none; height: 100vh; }
+
+.layout {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  background: var(--sidebar);
+  border-right: 1px solid var(--border);
+  padding: 24px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-brand {
+  padding: 0 20px 20px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 8px;
+}
+
+.sidebar-brand h2 { font-size: 17px; font-weight: 700; }
+.sidebar-brand p { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
+
+.nav-section {
+  padding: 12px 12px 4px;
+  font-size: 11px;
+  color: var(--text-dim);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  font-size: 14px;
+  color: var(--text-dim);
+  cursor: pointer;
+  transition: all 0.15s;
+  border-radius: 0;
+  position: relative;
+}
+
+.nav-item:hover { background: var(--card-hover); color: var(--text); }
+.nav-item.active { color: var(--accent); font-weight: 600; background: rgba(99,102,241,0.06); }
+.nav-item.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 3px;
+  background: var(--accent);
+  border-radius: 0 3px 3px 0;
+}
+
+.nav-badge {
+  margin-left: auto;
+  background: var(--red);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 10px;
+  min-width: 20px;
+  text-align: center;
+}
+
+/* Content */
+.content {
+  overflow-y: auto;
+  padding: 32px;
+}
+
+.content-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.content-header h1 { font-size: 22px; font-weight: 700; }
+
+/* Stats */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.stat-label { font-size: 12px; color: var(--text-dim); margin-bottom: 6px; font-weight: 500; }
+.stat-value { font-size: 28px; font-weight: 700; }
+.stat-sub { font-size: 12px; color: var(--text-dim); margin-top: 4px; }
+
+/* Channel Cards */
+.channel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.channel-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.channel-card:hover { border-color: var(--accent); }
+
+.channel-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.channel-card-header h3 { font-size: 16px; font-weight: 700; }
+
+.channel-status {
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.channel-status.active { background: rgba(22,163,74,0.1); color: var(--green); }
+.channel-status.pre_launch { background: rgba(99,102,241,0.08); color: var(--accent); }
+
+.channel-meta { display: flex; gap: 16px; font-size: 13px; color: var(--text-dim); }
+
+.channel-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.channel-stat { text-align: center; }
+.channel-stat-value { font-size: 16px; font-weight: 700; }
+.channel-stat-label { font-size: 11px; color: var(--text-dim); }
+
+/* Inbox */
+.inbox-list { display: flex; flex-direction: column; gap: 8px; }
+
+.inbox-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.inbox-item:hover { border-color: var(--accent); }
+.inbox-item.unread { border-left: 3px solid var(--accent); }
+
+.inbox-type {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.inbox-type.comment { background: rgba(99,102,241,0.08); color: var(--accent); }
+.inbox-type.revision { background: rgba(202,138,4,0.1); color: var(--yellow); }
+
+.inbox-body { flex: 1; }
+.inbox-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+.inbox-preview { font-size: 13px; color: var(--text-dim); line-height: 1.4; }
+.inbox-meta { font-size: 12px; color: var(--text-dim); margin-top: 6px; }
+
+.inbox-actions { display: flex; gap: 6px; flex-shrink: 0; }
+
+.inbox-action-btn {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text-dim);
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.inbox-action-btn:hover { border-color: var(--accent); color: var(--accent); }
+.inbox-action-btn.resolve { border-color: var(--green); color: var(--green); }
+.inbox-action-btn.resolve:hover { background: rgba(22,163,74,0.06); }
+
+/* Proposals table */
+.proposals-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.proposals-table th {
+  text-align: left;
+  padding: 10px 16px;
+  font-size: 12px;
+  color: var(--text-dim);
+  font-weight: 600;
+  border-bottom: 1px solid var(--border);
+}
+
+.proposals-table td {
+  padding: 14px 16px;
+  font-size: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.proposals-table tr:hover { background: var(--card); }
+
+.proposals-table .ep-tag {
+  background: var(--accent);
+  color: white;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.proposals-table .status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.proposals-table .status-dot.draft { background: var(--text-dim); }
+.proposals-table .status-dot.review { background: var(--yellow); }
+.proposals-table .status-dot.approved { background: var(--green); }
+
+.score-badge {
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.score-badge.pass { color: var(--green); }
+.score-badge.fail { color: var(--red); }
+.score-badge.conditional { color: var(--yellow); }
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-dim);
+}
+
+.empty-state h3 { font-size: 16px; margin-bottom: 8px; color: var(--text); }
+.empty-state p { font-size: 14px; }
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  background: var(--green);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 300;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.toast.show { transform: translateY(0); opacity: 1; }
+
+/* Filter tabs */
+.filter-tabs {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 20px;
+  background: var(--card);
+  border-radius: 8px;
+  padding: 3px;
+  width: fit-content;
+  border: 1px solid var(--border);
+}
+
+.filter-tab {
+  padding: 7px 16px;
+  border-radius: 6px;
+  border: none;
+  background: none;
+  font-size: 13px;
+  color: var(--text-dim);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.filter-tab.active {
+  background: var(--accent);
+  color: white;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+  .content { padding: 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Auth -->
+<div class="auth-screen" id="authScreen">
+  <div class="auth-box">
+    <h1>Neobridge Admin</h1>
+    <p>관리자 대시보드</p>
+    <input type="password" class="auth-input" id="authPw" placeholder="관리자 코드" onkeyup="if(event.key==='Enter')doAuth()">
+    <button class="auth-btn" onclick="doAuth()">접속</button>
+    <p class="auth-error" id="authErr">코드가 올바르지 않습니다</p>
+  </div>
+</div>
+
+<!-- App -->
+<div class="app" id="app">
+  <div class="layout">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-brand">
+        <h2>Neobridge</h2>
+        <p>MCN Admin</p>
+      </div>
+
+      <div class="nav-section">Overview</div>
+      <div class="nav-item active" onclick="navigate('dashboard')" data-nav="dashboard">대시보드</div>
+      <div class="nav-item" onclick="navigate('inbox')" data-nav="inbox">
+        인박스
+        <span class="nav-badge" id="inboxBadge" style="display:none">0</span>
+      </div>
+
+      <div class="nav-section">채널 관리</div>
+      <div id="channelNav"></div>
+
+      <div class="nav-section">비즈니스</div>
+      <div class="nav-item" onclick="navigate('business')" data-nav="business">매출 / 퍼널</div>
+
+      <div class="nav-section">도구</div>
+      <div class="nav-item" onclick="navigate('proposals')" data-nav="proposals">기획서 관리</div>
+    </div>
+
+    <!-- Content -->
+    <div class="content" id="mainContent"></div>
+  </div>
+</div>
+
+<!-- Proposal Detail Overlay -->
+<div id="proposalOverlay" style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.3);z-index:100;display:none;justify-content:flex-end">
+  <div id="proposalPanel" style="width:760px;max-width:90vw;background:var(--bg);height:100vh;overflow-y:auto;border-left:1px solid var(--border);animation:slideIn 0.25s ease"></div>
+</div>
+
+<style>
+@keyframes slideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+.pd-header { padding:20px 28px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; background:var(--bg); z-index:10; }
+.pd-close { width:34px; height:34px; background:var(--card); border:1px solid var(--border); border-radius:8px; color:var(--text); font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+.pd-body { padding:28px; }
+.pd-meta-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:12px; margin-bottom:24px; }
+.pd-meta-item { background:var(--card); border-radius:10px; padding:14px; }
+.pd-meta-label { font-size:11px; color:var(--text-dim); margin-bottom:3px; }
+.pd-meta-value { font-size:14px; font-weight:600; }
+.pd-evidence { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:16px; margin-bottom:20px; }
+.pd-evidence h3 { font-size:13px; color:var(--accent); margin-bottom:10px; }
+.pd-ev-row { display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid var(--border); font-size:13px; }
+.pd-ev-row:last-child { border-bottom:none; }
+.pd-section { margin-bottom:20px; }
+.pd-section-title { font-size:15px; font-weight:700; margin-bottom:8px; padding-bottom:6px; border-bottom:1px solid var(--border); }
+.pd-content { background:var(--card); border:1px solid var(--border); border-radius:10px; padding:20px; font-size:13px; line-height:1.8; }
+.pd-content h1,.pd-content h2,.pd-content h3 { margin:14px 0 6px; }
+.pd-content table { width:100%; border-collapse:collapse; margin:10px 0; }
+.pd-content th,.pd-content td { padding:6px 10px; border:1px solid var(--border); text-align:left; font-size:12px; }
+.pd-content th { background:rgba(99,102,241,0.06); font-weight:600; }
+.pd-content code { background:rgba(99,102,241,0.08); padding:2px 5px; border-radius:3px; font-size:12px; }
+.pd-content pre { background:var(--card-hover); padding:12px; border-radius:6px; overflow-x:auto; margin:10px 0; }
+.pd-content blockquote { border-left:3px solid var(--accent); padding-left:14px; color:var(--text-dim); margin:10px 0; }
+.pd-status-actions { display:flex; gap:8px; margin-bottom:24px; }
+.pd-status-btn { padding:8px 16px; border-radius:8px; border:1px solid var(--border); background:var(--bg); color:var(--text-dim); font-size:13px; font-weight:600; cursor:pointer; }
+.pd-status-btn:hover { border-color:var(--accent); color:var(--accent); }
+.pd-status-btn.active-green { background:rgba(22,163,74,0.08); border-color:var(--green); color:var(--green); }
+.pd-status-btn.active-yellow { background:rgba(202,138,4,0.08); border-color:var(--yellow); color:var(--yellow); }
+</style>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const SUPABASE_URL = 'https://jiaezaanwjbbymeipkyt.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImppYWV6YWFud2piYnltZWlwa3l0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQzMzQyODksImV4cCI6MjA4OTkxMDI4OX0.w04i6VWoacf5Ok3NMCyCuk-TaPrYkYZHLAcKs_asxGc';
+const ADMIN_CODE = 'neobridge2026';
+
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let channels = [];
+let proposals = [];
+let comments = [];
+let revisions = [];
+let funnelStages = [];
+let funnelMetrics = [];
+let revenueRecords = [];
+let currentView = 'dashboard';
+
+// Auth
+function doAuth() {
+  if (document.getElementById('authPw').value === ADMIN_CODE) {
+    document.getElementById('authScreen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    sessionStorage.setItem('admin_auth', '1');
+    init();
+  } else {
+    document.getElementById('authErr').style.display = 'block';
+  }
+}
+
+if (sessionStorage.getItem('admin_auth') === '1') {
+  document.getElementById('authScreen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  init();
+}
+
+async function init() {
+  await Promise.all([loadChannels(), loadProposals(), loadInbox(), loadBusiness()]);
+  renderChannelNav();
+  renderDashboard();
+}
+
+// Data loading
+async function loadChannels() {
+  const { data } = await sb.from('managed_channels').select('*').order('created_at');
+  channels = data || [];
+}
+
+async function loadProposals() {
+  const { data } = await sb.from('proposals').select('*').order('channel_name,episode_number');
+  proposals = data || [];
+}
+
+async function loadInbox() {
+  const [cRes, rRes] = await Promise.all([
+    sb.from('proposal_comments').select('*, proposals(title, channel_name, episode_number)').order('created_at', { ascending: false }),
+    sb.from('revision_requests').select('*, proposals(title, channel_name, episode_number)').order('created_at', { ascending: false })
+  ]);
+  comments = cRes.data || [];
+  revisions = rRes.data || [];
+
+  const pendingCount = revisions.filter(r => r.status === 'pending').length + comments.filter(c => !c.is_resolved).length;
+  const badge = document.getElementById('inboxBadge');
+  if (pendingCount > 0) {
+    badge.textContent = pendingCount;
+    badge.style.display = 'inline';
+  } else {
+    badge.style.display = 'none';
+  }
+}
+
+// Nav
+function renderChannelNav() {
+  document.getElementById('channelNav').innerHTML = channels.map(ch =>
+    `<div class="nav-item" onclick="navigate('channel','${ch.id}')" data-nav="channel-${ch.id}">${ch.channel_display_name}</div>`
+  ).join('');
+}
+
+function navigate(view, param) {
+  currentView = view;
+  document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+
+  const navKey = param ? `channel-${param}` : view;
+  const activeNav = document.querySelector(`.nav-item[data-nav="${navKey}"]`);
+  if (activeNav) activeNav.classList.add('active');
+
+  if (view === 'dashboard') renderDashboard();
+  else if (view === 'inbox') renderInbox();
+  else if (view === 'proposals') renderProposals();
+  else if (view === 'business') renderBusiness();
+  else if (view === 'channel') renderChannel(param);
+}
+
+// Dashboard
+function renderDashboard() {
+  const pendingRevisions = revisions.filter(r => r.status === 'pending').length;
+  const unresolvedComments = comments.filter(c => !c.is_resolved).length;
+  const totalProposals = proposals.length;
+  const approvedProposals = proposals.filter(p => p.status === 'approved').length;
+
+  document.getElementById('mainContent').innerHTML = `
+    <div class="content-header"><h1>대시보드</h1></div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">관리 채널</div>
+        <div class="stat-value">${channels.length}</div>
+        <div class="stat-sub">${channels.filter(c => c.status === 'active').length}개 활성</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">기획서</div>
+        <div class="stat-value">${totalProposals}</div>
+        <div class="stat-sub">${approvedProposals}개 승인</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">수정 요청</div>
+        <div class="stat-value" style="color:${pendingRevisions > 0 ? 'var(--yellow)' : 'var(--text)'}">${pendingRevisions}</div>
+        <div class="stat-sub">대기중</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">코멘트</div>
+        <div class="stat-value" style="color:${unresolvedComments > 0 ? 'var(--accent)' : 'var(--text)'}">${unresolvedComments}</div>
+        <div class="stat-sub">미확인</div>
+      </div>
+    </div>
+
+    <h2 style="font-size:18px;font-weight:700;margin-bottom:16px">채널 현황</h2>
+    <div class="channel-grid">
+      ${channels.map(ch => {
+        const chProposals = proposals.filter(p => p.channel_name === ch.channel_name);
+        const statusLabels = { active: '운영중', pre_launch: '론칭 준비', paused: '일시정지' };
+        return `<div class="channel-card" onclick="navigate('channel','${ch.id}')">
+          <div class="channel-card-header">
+            <h3>${ch.channel_display_name}</h3>
+            <span class="channel-status ${ch.status}">${statusLabels[ch.status] || ch.status}</span>
+          </div>
+          <div class="channel-meta">
+            <span>${ch.category}</span>
+            <span>${ch.contact_name || ''}</span>
+          </div>
+          <div class="channel-stats">
+            <div class="channel-stat">
+              <div class="channel-stat-value">${chProposals.length}</div>
+              <div class="channel-stat-label">기획서</div>
+            </div>
+            <div class="channel-stat">
+              <div class="channel-stat-value">${chProposals.filter(p=>p.status==='approved').length}</div>
+              <div class="channel-stat-label">승인</div>
+            </div>
+            <div class="channel-stat">
+              <div class="channel-stat-value">${ch.youtube_channel_id ? 'Y' : '-'}</div>
+              <div class="channel-stat-label">YouTube</div>
+            </div>
+          </div>
+        </div>`;
+      }).join('')}
+    </div>
+
+    ${(pendingRevisions > 0 || unresolvedComments > 0) ? `
+      <h2 style="font-size:18px;font-weight:700;margin-bottom:16px">최근 알림</h2>
+      <div class="inbox-list">
+        ${revisions.filter(r => r.status === 'pending').slice(0, 3).map(r => `
+          <div class="inbox-item unread">
+            <span class="inbox-type revision">수정 요청</span>
+            <div class="inbox-body">
+              <div class="inbox-title">EP${String(r.proposals?.episode_number||'').padStart(2,'0')} ${r.proposals?.title || ''} - ${r.section || '전체'}</div>
+              <div class="inbox-preview">${r.request_content}</div>
+              <div class="inbox-meta">${timeAgo(r.created_at)}</div>
+            </div>
+          </div>
+        `).join('')}
+        ${comments.filter(c => !c.is_resolved).slice(0, 3).map(c => `
+          <div class="inbox-item unread">
+            <span class="inbox-type comment">코멘트</span>
+            <div class="inbox-body">
+              <div class="inbox-title">EP${String(c.proposals?.episode_number||'').padStart(2,'0')} ${c.proposals?.title || ''} - ${c.section || '전체'}</div>
+              <div class="inbox-preview">${c.content}</div>
+              <div class="inbox-meta">${c.author} / ${timeAgo(c.created_at)}</div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    ` : ''}
+  `;
+}
+
+// Inbox
+let inboxFilter = 'all';
+
+function renderInbox() {
+  const allItems = [
+    ...revisions.map(r => ({ ...r, type: 'revision', time: r.created_at, resolved: r.status === 'resolved' })),
+    ...comments.map(c => ({ ...c, type: 'comment', time: c.created_at, resolved: c.is_resolved }))
+  ].sort((a, b) => new Date(b.time) - new Date(a.time));
+
+  const filtered = inboxFilter === 'all' ? allItems
+    : inboxFilter === 'pending' ? allItems.filter(i => !i.resolved)
+    : allItems.filter(i => i.resolved);
+
+  document.getElementById('mainContent').innerHTML = `
+    <div class="content-header"><h1>인박스</h1></div>
+
+    <div class="filter-tabs">
+      <button class="filter-tab ${inboxFilter==='all'?'active':''}" onclick="inboxFilter='all';renderInbox()">전체 (${allItems.length})</button>
+      <button class="filter-tab ${inboxFilter==='pending'?'active':''}" onclick="inboxFilter='pending';renderInbox()">대기중 (${allItems.filter(i=>!i.resolved).length})</button>
+      <button class="filter-tab ${inboxFilter==='resolved'?'active':''}" onclick="inboxFilter='resolved';renderInbox()">완료 (${allItems.filter(i=>i.resolved).length})</button>
+    </div>
+
+    ${filtered.length === 0 ? `
+      <div class="empty-state">
+        <h3>알림 없음</h3>
+        <p>클라이언트의 코멘트와 수정 요청이 여기에 표시됩니다</p>
+      </div>
+    ` : `
+      <div class="inbox-list">
+        ${filtered.map(item => `
+          <div class="inbox-item ${!item.resolved ? 'unread' : ''}">
+            <span class="inbox-type ${item.type}">${item.type === 'revision' ? '수정 요청' : '코멘트'}</span>
+            <div class="inbox-body">
+              <div class="inbox-title">EP${String(item.proposals?.episode_number||'').padStart(2,'0')} ${item.proposals?.title || ''} - ${item.section || '전체'}</div>
+              <div class="inbox-preview">${item.type === 'revision' ? item.request_content : item.content}</div>
+              <div class="inbox-meta">${item.type === 'comment' ? item.author + ' / ' : ''}${timeAgo(item.time)} ${item.resolved ? '(완료)' : ''}</div>
+            </div>
+            <div class="inbox-actions">
+              ${!item.resolved ? `<button class="inbox-action-btn resolve" onclick="resolveItem('${item.type}','${item.id}')">완료 처리</button>` : ''}
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `}
+  `;
+}
+
+async function resolveItem(type, id) {
+  if (type === 'revision') {
+    await sb.from('revision_requests').update({ status: 'resolved', resolved_at: new Date().toISOString() }).eq('id', id);
+  } else {
+    await sb.from('proposal_comments').update({ is_resolved: true }).eq('id', id);
+  }
+  await loadInbox();
+  renderInbox();
+  showToast('완료 처리되었습니다');
+}
+
+// Proposals
+function renderProposals() {
+  document.getElementById('mainContent').innerHTML = `
+    <div class="content-header"><h1>기획서 관리</h1></div>
+
+    ${proposals.length === 0 ? `
+      <div class="empty-state">
+        <h3>기획서 없음</h3>
+        <p>등록된 기획서가 없습니다</p>
+      </div>
+    ` : `
+      <table class="proposals-table">
+        <thead>
+          <tr>
+            <th>EP</th>
+            <th>채널</th>
+            <th>제목</th>
+            <th>상태</th>
+            <th>버전</th>
+            <th>검증</th>
+            <th>촬영일</th>
+            <th>업로드일</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${proposals.map(p => {
+            const statusLabels = { draft: '초안', review: '검토중', approved: '승인', shooting: '촬영예정' };
+            const scoreClass = p.verification_score >= 90 ? 'pass' : p.verification_score >= 80 ? 'conditional' : 'fail';
+            return `<tr style="cursor:pointer" onclick="openProposalDetail('${p.id}')">
+              <td><span class="ep-tag">EP${String(p.episode_number).padStart(2,'0')}</span></td>
+              <td>${p.channel_name}</td>
+              <td style="font-weight:600">${p.title}</td>
+              <td><span class="status-dot ${p.status}"></span>${statusLabels[p.status] || p.status}</td>
+              <td>v${p.version}</td>
+              <td>${p.verification_score ? `<span class="score-badge ${scoreClass}">${p.verification_score}점 ${p.verification_status || ''}</span>` : '-'}</td>
+              <td>${p.shooting_date || '-'}</td>
+              <td>${p.upload_date || '-'}</td>
+            </tr>`;
+          }).join('')}
+        </tbody>
+      </table>
+    `}
+  `;
+}
+
+// Channel detail
+function renderChannel(channelId) {
+  const ch = channels.find(c => c.id === channelId);
+  if (!ch) return;
+
+  const chProposals = proposals.filter(p => p.channel_name === ch.channel_name);
+  const chComments = comments.filter(c => c.proposals?.channel_name === ch.channel_name);
+  const chRevisions = revisions.filter(r => r.proposals?.channel_name === ch.channel_name);
+
+  document.getElementById('mainContent').innerHTML = `
+    <div class="content-header">
+      <h1>${ch.channel_display_name}</h1>
+      <span class="channel-status ${ch.status}" style="font-size:13px;padding:6px 14px">${{active:'운영중',pre_launch:'론칭 준비',paused:'일시정지'}[ch.status] || ch.status}</span>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">카테고리</div>
+        <div class="stat-value" style="font-size:20px">${ch.category}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">담당자</div>
+        <div class="stat-value" style="font-size:20px">${ch.contact_name || '-'}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">기획서</div>
+        <div class="stat-value">${chProposals.length}</div>
+        <div class="stat-sub">${chProposals.filter(p=>p.status==='approved').length}개 승인</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">피드백</div>
+        <div class="stat-value">${chComments.length + chRevisions.length}</div>
+        <div class="stat-sub">코멘트 ${chComments.length} / 수정 ${chRevisions.length}</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px">
+      <div class="stat-card">
+        <div class="stat-label">YouTube</div>
+        <div class="stat-value" style="font-size:16px">${ch.youtube_channel_id || '미연결'}</div>
+        <div class="stat-sub">${ch.youtube_handle || ''}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">클라이언트 포털</div>
+        <div class="stat-value" style="font-size:16px">${ch.portal_url || 'portal-jade-six.vercel.app'}</div>
+        <div class="stat-sub">접속코드: ${ch.portal_password || '-'}</div>
+      </div>
+    </div>
+
+    <h2 style="font-size:18px;font-weight:700;margin-bottom:16px">기획서</h2>
+    ${chProposals.length === 0 ? '<p style="color:var(--text-dim)">등록된 기획서 없음</p>' : `
+      <table class="proposals-table">
+        <thead>
+          <tr><th>EP</th><th>제목</th><th>상태</th><th>버전</th><th>검증</th><th>촬영</th><th>업로드</th></tr>
+        </thead>
+        <tbody>
+          ${chProposals.map(p => {
+            const statusLabels = { draft: '초안', review: '검토중', approved: '승인', shooting: '촬영예정' };
+            const scoreClass = p.verification_score >= 90 ? 'pass' : p.verification_score >= 80 ? 'conditional' : 'fail';
+            return `<tr style="cursor:pointer" onclick="openProposalDetail('${p.id}')">
+              <td><span class="ep-tag">EP${String(p.episode_number).padStart(2,'0')}</span></td>
+              <td style="font-weight:600">${p.title}</td>
+              <td><span class="status-dot ${p.status}"></span>${statusLabels[p.status] || p.status}</td>
+              <td>v${p.version}</td>
+              <td>${p.verification_score ? `<span class="score-badge ${scoreClass}">${p.verification_score}점</span>` : '-'}</td>
+              <td>${p.shooting_date || '-'}</td>
+              <td>${p.upload_date || '-'}</td>
+            </tr>`;
+          }).join('')}
+        </tbody>
+      </table>
+    `}
+
+    ${(chComments.length > 0 || chRevisions.length > 0) ? `
+      <h2 style="font-size:18px;font-weight:700;margin:24px 0 16px">최근 피드백</h2>
+      <div class="inbox-list">
+        ${[...chRevisions.map(r => ({...r, type: 'revision', time: r.created_at})),
+           ...chComments.map(c => ({...c, type: 'comment', time: c.created_at}))
+        ].sort((a,b) => new Date(b.time) - new Date(a.time)).slice(0, 5).map(item => `
+          <div class="inbox-item">
+            <span class="inbox-type ${item.type}">${item.type === 'revision' ? '수정' : '코멘트'}</span>
+            <div class="inbox-body">
+              <div class="inbox-title">${item.section || '전체'}</div>
+              <div class="inbox-preview">${item.type === 'revision' ? item.request_content : item.content}</div>
+              <div class="inbox-meta">${timeAgo(item.time)}</div>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    ` : ''}
+  `;
+}
+
+// Business
+async function loadBusiness() {
+  const [stagesRes, metricsRes, revenueRes] = await Promise.all([
+    sb.from('funnel_stages').select('*, managed_channels(channel_name, channel_display_name)').order('channel_id,stage_order'),
+    sb.from('funnel_metrics').select('*, managed_channels(channel_display_name)').order('period_date', { ascending: false }),
+    sb.from('revenue_records').select('*, managed_channels(channel_display_name)').order('date', { ascending: false })
+  ]);
+  funnelStages = stagesRes.data || [];
+  funnelMetrics = metricsRes.data || [];
+  revenueRecords = revenueRes.data || [];
+}
+
+let bizChannel = 'all';
+let bizShowAddRevenue = false;
+
+function renderBusiness() {
+  const channelOptions = channels.map(ch =>
+    `<button class="filter-tab ${bizChannel===ch.id?'active':''}" onclick="bizChannel='${ch.id}';renderBusiness()">${ch.channel_display_name}</button>`
+  ).join('');
+
+  const filteredRevenue = bizChannel === 'all' ? revenueRecords : revenueRecords.filter(r => r.channel_id === bizChannel);
+  const filteredMetrics = bizChannel === 'all' ? funnelMetrics : funnelMetrics.filter(m => m.channel_id === bizChannel);
+  const filteredStages = bizChannel === 'all' ? funnelStages : funnelStages.filter(s => s.channel_id === bizChannel);
+
+  // 매출 집계
+  const totalRevenue = filteredRevenue.reduce((sum, r) => sum + Number(r.amount || 0), 0);
+  const totalCost = filteredRevenue.reduce((sum, r) => sum + Number(r.cost || 0), 0);
+  const profit = totalRevenue - totalCost;
+  const thisMonth = new Date().toISOString().slice(0, 7);
+  const monthRevenue = filteredRevenue.filter(r => r.date && r.date.startsWith(thisMonth)).reduce((sum, r) => sum + Number(r.amount || 0), 0);
+
+  // 퍼널별 그룹핑 (채널별)
+  const channelFunnels = {};
+  filteredStages.forEach(s => {
+    const chName = s.managed_channels?.channel_display_name || '미지정';
+    if (!channelFunnels[chName]) channelFunnels[chName] = [];
+    channelFunnels[chName].push(s);
+  });
+
+  document.getElementById('mainContent').innerHTML = `
+    <div class="content-header">
+      <h1>매출 / 퍼널</h1>
+      <button class="pd-status-btn" onclick="bizShowAddRevenue=!bizShowAddRevenue;renderBusiness()" style="background:var(--accent);color:white;border:none">+ 매출 기록</button>
+    </div>
+
+    <div class="filter-tabs">
+      <button class="filter-tab ${bizChannel==='all'?'active':''}" onclick="bizChannel='all';renderBusiness()">전체</button>
+      ${channelOptions}
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">총 매출</div>
+        <div class="stat-value">${formatMoney(totalRevenue)}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">총 비용</div>
+        <div class="stat-value" style="color:var(--text-dim)">${formatMoney(totalCost)}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">순이익</div>
+        <div class="stat-value" style="color:${profit >= 0 ? 'var(--green)' : 'var(--red)'}">${formatMoney(profit)}</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">이번 달 매출</div>
+        <div class="stat-value">${formatMoney(monthRevenue)}</div>
+      </div>
+    </div>
+
+    ${bizShowAddRevenue ? renderAddRevenueForm() : ''}
+
+    <h2 style="font-size:18px;font-weight:700;margin:24px 0 16px">퍼널</h2>
+    ${Object.keys(channelFunnels).map(chName => `
+      <div style="margin-bottom:24px">
+        <h3 style="font-size:15px;font-weight:600;margin-bottom:12px">${chName}</h3>
+        <div style="display:flex;gap:4px;align-items:flex-end;height:160px;padding:0 8px">
+          ${channelFunnels[chName].map((stage, i, arr) => {
+            const metric = filteredMetrics.find(m => m.stage_name === stage.stage_name && m.channel_id === stage.channel_id);
+            const value = metric ? metric.value : 0;
+            const maxVal = Math.max(...arr.map(s => {
+              const m = filteredMetrics.find(fm => fm.stage_name === s.stage_name && fm.channel_id === s.channel_id);
+              return m ? m.value : 0;
+            }), 1);
+            const height = maxVal > 0 ? Math.max((value / maxVal) * 120, 4) : 4;
+            return `<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px">
+              <span style="font-size:13px;font-weight:700">${value > 0 ? formatNumber(value) : '-'}</span>
+              <div style="width:100%;height:${height}px;background:${stage.color};border-radius:6px 6px 0 0;min-width:30px"></div>
+              <span style="font-size:10px;color:var(--text-dim);text-align:center;line-height:1.2">${stage.stage_label}</span>
+            </div>`;
+          }).join('')}
+        </div>
+        ${channelFunnels[chName].length > 1 ? `
+          <div style="display:flex;gap:4px;padding:8px 8px 0;border-top:1px solid var(--border);margin-top:8px">
+            ${channelFunnels[chName].slice(1).map((stage, i) => {
+              const prev = channelFunnels[chName][i];
+              const prevMetric = filteredMetrics.find(m => m.stage_name === prev.stage_name && m.channel_id === prev.channel_id);
+              const curMetric = filteredMetrics.find(m => m.stage_name === stage.stage_name && m.channel_id === stage.channel_id);
+              const prevVal = prevMetric ? prevMetric.value : 0;
+              const curVal = curMetric ? curMetric.value : 0;
+              const rate = prevVal > 0 ? ((curVal / prevVal) * 100).toFixed(1) : '-';
+              return `<div style="flex:1;text-align:center">
+                <span style="font-size:11px;color:var(--text-dim)">${rate}%</span>
+              </div>`;
+            }).join('')}
+          </div>
+        ` : ''}
+      </div>
+    `).join('')}
+
+    ${filteredRevenue.length === 0 && Object.keys(channelFunnels).length === 0 ? `
+      <div class="empty-state">
+        <h3>데이터 없음</h3>
+        <p>매출 기록이나 퍼널 수치를 입력하면 여기에 표시됩니다</p>
+      </div>
+    ` : ''}
+
+    <h2 style="font-size:18px;font-weight:700;margin:24px 0 16px">매출 기록</h2>
+    ${filteredRevenue.length === 0 ? '<p style="color:var(--text-dim);font-size:14px">아직 기록이 없습니다</p>' : `
+      <table class="proposals-table">
+        <thead>
+          <tr><th>날짜</th><th>채널</th><th>카테고리</th><th>내용</th><th>매출</th><th>비용</th><th>상태</th></tr>
+        </thead>
+        <tbody>
+          ${filteredRevenue.map(r => `
+            <tr>
+              <td>${r.date}</td>
+              <td>${r.managed_channels?.channel_display_name || '-'}</td>
+              <td>${r.category}</td>
+              <td>${r.description || '-'}</td>
+              <td style="font-weight:700;color:var(--green)">${formatMoney(r.amount)}</td>
+              <td style="color:var(--text-dim)">${r.cost > 0 ? formatMoney(r.cost) : '-'}</td>
+              <td>${r.status === 'confirmed' ? '확정' : r.status === 'pending' ? '대기' : r.status}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+    `}
+  `;
+}
+
+function renderAddRevenueForm() {
+  const channelOpts = channels.map(ch => `<option value="${ch.id}">${ch.channel_display_name}</option>`).join('');
+  return `
+    <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;margin-bottom:24px">
+      <h3 style="font-size:15px;font-weight:700;margin-bottom:16px">매출 기록 추가</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px">
+        <div>
+          <label style="font-size:12px;color:var(--text-dim);display:block;margin-bottom:4px">채널</label>
+          <select id="revChannel" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);font-size:14px">
+            ${channelOpts}
+          </select>
+        </div>
+        <div>
+          <label style="font-size:12px;color:var(--text-dim);display:block;margin-bottom:4px">날짜</label>
+          <input type="date" id="revDate" value="${new Date().toISOString().slice(0,10)}" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);font-size:14px">
+        </div>
+        <div>
+          <label style="font-size:12px;color:var(--text-dim);display:block;margin-bottom:4px">카테고리</label>
+          <select id="revCategory" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);font-size:14px">
+            <option value="가입비">가입비</option>
+            <option value="강의">강의</option>
+            <option value="광고">광고</option>
+            <option value="스폰서">스폰서</option>
+            <option value="기타">기타</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size:12px;color:var(--text-dim);display:block;margin-bottom:4px">매출 (원)</label>
+          <input type="number" id="revAmount" placeholder="0" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);font-size:14px">
+        </div>
+        <div>
+          <label style="font-size:12px;color:var(--text-dim);display:block;margin-bottom:4px">비용 (원)</label>
+          <input type="number" id="revCost" placeholder="0" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);font-size:14px">
+        </div>
+        <div>
+          <label style="font-size:12px;color:var(--text-dim);display:block;margin-bottom:4px">설명</label>
+          <input type="text" id="revDesc" placeholder="내용 입력" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);font-size:14px">
+        </div>
+      </div>
+      <div style="margin-top:16px;display:flex;gap:8px;justify-content:flex-end">
+        <button onclick="bizShowAddRevenue=false;renderBusiness()" style="padding:10px 20px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text-dim);font-size:14px;cursor:pointer">취소</button>
+        <button onclick="addRevenue()" style="padding:10px 20px;border:none;border-radius:8px;background:var(--accent);color:white;font-size:14px;font-weight:600;cursor:pointer">저장</button>
+      </div>
+    </div>
+  `;
+}
+
+async function addRevenue() {
+  const channel_id = document.getElementById('revChannel').value;
+  const date = document.getElementById('revDate').value;
+  const category = document.getElementById('revCategory').value;
+  const amount = parseInt(document.getElementById('revAmount').value) || 0;
+  const cost = parseInt(document.getElementById('revCost').value) || 0;
+  const description = document.getElementById('revDesc').value;
+
+  if (!amount) { showToast('매출 금액을 입력해주세요'); return; }
+
+  await sb.from('revenue_records').insert({ channel_id, date, category, amount, cost, description });
+  bizShowAddRevenue = false;
+  await loadBusiness();
+  renderBusiness();
+  showToast('매출 기록이 추가되었습니다');
+}
+
+function formatMoney(n) {
+  if (!n || n === 0) return '0';
+  if (n >= 100000000) return (n / 100000000).toFixed(1) + '억';
+  if (n >= 10000) return (n / 10000).toFixed(0) + '만';
+  return n.toLocaleString() + '원';
+}
+
+function formatNumber(n) {
+  if (n >= 10000) return (n / 10000).toFixed(1) + '만';
+  return n.toLocaleString();
+}
+
+// Proposal Detail
+async function openProposalDetail(id) {
+  const p = proposals.find(x => x.id === id);
+  if (!p) return;
+
+  const [cRes, rRes] = await Promise.all([
+    sb.from('proposal_comments').select('*').eq('proposal_id', id).order('created_at', { ascending: true }),
+    sb.from('revision_requests').select('*').eq('proposal_id', id).order('created_at', { ascending: true })
+  ]);
+  const pComments = cRes.data || [];
+  const pRevisions = rRes.data || [];
+
+  const sections = parseProposalSections(p.content_md);
+  const evidence = p.data_evidence || {};
+  const statusLabels = { draft: '초안', review: '검토중', approved: '승인완료', shooting: '촬영예정' };
+
+  let html = `
+    <div class="pd-header">
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="ep-tag">EP${String(p.episode_number).padStart(2,'0')}</span>
+        <span style="font-size:17px;font-weight:700">${p.title}</span>
+      </div>
+      <button class="pd-close" onclick="closeProposalDetail()">&times;</button>
+    </div>
+    <div class="pd-body">
+      <div class="pd-meta-grid">
+        <div class="pd-meta-item"><div class="pd-meta-label">상태</div><div class="pd-meta-value">${statusLabels[p.status] || p.status}</div></div>
+        <div class="pd-meta-item"><div class="pd-meta-label">버전</div><div class="pd-meta-value">v${p.version}</div></div>
+        <div class="pd-meta-item"><div class="pd-meta-label">촬영일</div><div class="pd-meta-value">${p.shooting_date || '미정'}</div></div>
+        <div class="pd-meta-item"><div class="pd-meta-label">업로드일</div><div class="pd-meta-value">${p.upload_date || '미정'}</div></div>
+        <div class="pd-meta-item"><div class="pd-meta-label">러닝타임</div><div class="pd-meta-value">${p.target_duration || '미정'}</div></div>
+        ${p.verification_score ? `<div class="pd-meta-item"><div class="pd-meta-label">검증</div><div class="pd-meta-value">${p.verification_score}/100 ${p.verification_status || ''}</div></div>` : ''}
+      </div>
+
+      <div class="pd-status-actions">
+        <button class="pd-status-btn ${p.status==='draft'?'active-yellow':''}" onclick="updateProposalStatus('${p.id}','draft',event)">초안</button>
+        <button class="pd-status-btn ${p.status==='review'?'active-yellow':''}" onclick="updateProposalStatus('${p.id}','review',event)">검토중</button>
+        <button class="pd-status-btn ${p.status==='approved'?'active-green':''}" onclick="updateProposalStatus('${p.id}','approved',event)">승인</button>
+        <button class="pd-status-btn ${p.status==='shooting'?'active-green':''}" onclick="updateProposalStatus('${p.id}','shooting',event)">촬영예정</button>
+      </div>`;
+
+  if (evidence.trends && evidence.trends.length > 0) {
+    html += `<div class="pd-evidence">
+      <h3>데이터 근거</h3>
+      ${evidence.trends.map(t => `<div class="pd-ev-row"><span style="color:var(--text-dim)">${t.signal}</span><span style="font-weight:600;color:var(--green)">${t.value}</span></div>`).join('')}
+    </div>`;
+  }
+
+  if (pRevisions.length > 0) {
+    html += `<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:20px">
+      <h3 style="font-size:13px;margin-bottom:10px">수정 요청 (${pRevisions.filter(r=>r.status==='pending').length}건 대기)</h3>
+      ${pRevisions.map(r => `<div style="padding:10px;background:var(--bg);border-radius:6px;margin-bottom:6px;border-left:3px solid ${r.status==='pending'?'var(--yellow)':'var(--green)'};${r.status==='resolved'?'opacity:0.5':''}">
+        <div style="font-size:11px;color:var(--accent);font-weight:600">${r.section || '전체'}</div>
+        <div style="font-size:13px;margin-top:3px">${r.request_content}</div>
+        <div style="font-size:11px;color:var(--text-dim);margin-top:3px">${r.status === 'pending' ? '대기중' : '반영완료'} / ${timeAgo(r.created_at)}</div>
+      </div>`).join('')}
+    </div>`;
+  }
+
+  if (pComments.length > 0) {
+    html += `<div style="background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:20px">
+      <h3 style="font-size:13px;margin-bottom:10px">코멘트 (${pComments.length})</h3>
+      ${pComments.map(c => `<div style="padding:10px;background:var(--bg);border-radius:6px;margin-bottom:6px;border:1px solid var(--border)">
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-dim);margin-bottom:4px"><span style="font-weight:600;color:var(--accent)">${c.author}</span><span>${c.section || '전체'} / ${timeAgo(c.created_at)}</span></div>
+        <div style="font-size:13px;line-height:1.5">${c.content}</div>
+      </div>`).join('')}
+    </div>`;
+  }
+
+  sections.forEach(sec => {
+    html += `<div class="pd-section">
+      <div class="pd-section-title">${sec.title}</div>
+      <div class="pd-content">${marked.parse(sec.content)}</div>
+    </div>`;
+  });
+
+  html += '</div>';
+  document.getElementById('proposalPanel').innerHTML = html;
+  const overlay = document.getElementById('proposalOverlay');
+  overlay.style.display = 'flex';
+  overlay.onclick = function(e) { if (e.target === overlay) closeProposalDetail(); };
+}
+
+function closeProposalDetail() {
+  document.getElementById('proposalOverlay').style.display = 'none';
+}
+
+async function updateProposalStatus(id, status, event) {
+  if (event) event.stopPropagation();
+
+  // 즉시 버튼 시각 피드백
+  const btns = document.querySelectorAll('.pd-status-btn');
+  btns.forEach(b => { b.classList.remove('active-green','active-yellow'); b.style.pointerEvents = 'none'; });
+  if (event && event.target) {
+    event.target.classList.add(status === 'approved' || status === 'shooting' ? 'active-green' : 'active-yellow');
+  }
+
+  const { error } = await sb.from('proposals').update({ status, updated_at: new Date().toISOString() }).eq('id', id);
+  if (error) { showToast('오류: ' + error.message); return; }
+
+  // 로컬 데이터도 즉시 반영
+  const p = proposals.find(x => x.id === id);
+  if (p) p.status = status;
+
+  // 스크롤 위치 보존하며 패널 갱신
+  const panel = document.getElementById('proposalPanel');
+  const scrollTop = panel ? panel.scrollTop : 0;
+  await openProposalDetail(id);
+  if (panel) panel.scrollTop = scrollTop;
+
+  // 뒤에 있는 테이블/대시보드도 갱신
+  if (currentView === 'proposals') renderProposals();
+  else if (currentView === 'dashboard') renderDashboard();
+  else if (currentView === 'channel') {
+    const ch = channels.find(c => c.channel_name === p?.channel_name);
+    if (ch) renderChannel(ch.id);
+  }
+
+  const labels = { draft: '초안', review: '검토중', approved: '승인', shooting: '촬영예정' };
+  showToast((labels[status] || status) + '으로 변경되었습니다');
+}
+
+function parseProposalSections(md) {
+  if (!md) return [{ title: '전체 내용', content: '(내용 없음)' }];
+  const lines = md.split('\n');
+  const sections = [];
+  let current = null;
+  lines.forEach(line => {
+    if (line.startsWith('## ')) {
+      if (current) sections.push(current);
+      current = { title: line.replace('## ', '').trim(), content: '' };
+    } else if (current) {
+      current.content += line + '\n';
+    }
+  });
+  if (current) sections.push(current);
+  if (sections.length === 0) sections.push({ title: '전체 내용', content: md });
+  return sections;
+}
+
+// Keyboard
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeProposalDetail();
+});
+
+// Utils
+function timeAgo(dateStr) {
+  const diff = Date.now() - new Date(dateStr).getTime();
+  const mins = Math.floor(diff / 60000);
+  if (mins < 60) return `${mins}분 전`;
+  const hours = Math.floor(mins / 60);
+  if (hours < 24) return `${hours}시간 전`;
+  return `${Math.floor(hours / 24)}일 전`;
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// Auto-refresh inbox every 30s
+setInterval(async () => {
+  await loadInbox();
+  if (currentView === 'inbox') renderInbox();
+  if (currentView === 'dashboard') renderDashboard();
+}, 30000);
+</script>
+</body>
+</html>

@@ -3,34 +3,289 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MCN Neobridge — 대시보드</title>
+<title>Neobridge MCN</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f0f0f; color: #fff; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-  h1 { font-size: 2rem; margin-bottom: 0.5rem; }
-  p { color: #888; margin-bottom: 2rem; }
-  .cards { display: flex; gap: 1.5rem; flex-wrap: wrap; justify-content: center; }
-  a.card { text-decoration: none; color: #fff; background: #1a1a1a; border: 1px solid #333; border-radius: 12px; padding: 2rem 2.5rem; transition: all 0.2s; min-width: 240px; text-align: center; }
-  a.card:hover { border-color: #666; transform: translateY(-2px); }
-  .card h2 { font-size: 1.3rem; margin-bottom: 0.5rem; }
-  .card .stats { color: #888; font-size: 0.9rem; }
-  .card .emoji { font-size: 2.5rem; margin-bottom: 0.8rem; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Apple SD Gothic Neo', sans-serif;
+    background: #0a0a0f;
+    color: #e8e8ee;
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+  .container { max-width: 1400px; margin: 0 auto; }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 30px;
+    border-bottom: 1px solid #1f1f2e;
+    margin-bottom: 40px;
+  }
+  .brand { display: flex; align-items: center; gap: 16px; }
+  .brand-logo {
+    width: 48px; height: 48px;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 22px;
+  }
+  .brand h1 { font-size: 26px; font-weight: 800; letter-spacing: -0.5px; }
+  .brand small { color: #8a8aa3; font-size: 13px; display: block; margin-top: 2px; }
+  .header-meta { text-align: right; color: #8a8aa3; font-size: 13px; }
+  .header-meta strong { color: #e8e8ee; font-size: 15px; display: block; margin-bottom: 4px; }
+
+  .section-title {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #8a8aa3;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+
+  .channels-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 20px;
+    margin-bottom: 60px;
+  }
+  .channel-card {
+    background: linear-gradient(180deg, #14141f, #0f0f18);
+    border: 1px solid #252535;
+    border-radius: 16px;
+    padding: 24px;
+    transition: all 0.2s;
+  }
+  .channel-card:hover {
+    border-color: #3f3f5a;
+    transform: translateY(-2px);
+  }
+  .channel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .channel-name { font-size: 20px; font-weight: 800; letter-spacing: -0.3px; }
+  .channel-status { font-size: 11px; padding: 4px 10px; border-radius: 12px; font-weight: 700; }
+  .status-launching { background: #fbbf2420; color: #fbbf24; border: 1px solid #fbbf2440; }
+  .status-active { background: #10b98120; color: #10b981; border: 1px solid #10b98140; }
+  .status-incubating { background: #6366f120; color: #818cf8; border: 1px solid #6366f140; }
+  .channel-host { color: #8a8aa3; font-size: 13px; margin-bottom: 16px; }
+  .channel-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 12px;
+    background: #0a0a0f;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    font-size: 12px;
+  }
+  .meta-item { display: flex; flex-direction: column; }
+  .meta-label { color: #6a6a80; font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .meta-value { color: #e8e8ee; font-weight: 700; margin-top: 2px; }
+
+  .channel-depts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .dept-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    background: #1a1a2a;
+    border: 1px solid #252535;
+    border-radius: 8px;
+    color: #c8c8d8;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.15s;
+  }
+  .dept-link:hover { background: #252540; border-color: #3f3f5a; color: #fff; }
+  .dept-link.disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+  .dept-icon { font-size: 11px; color: #6a6a80; }
+
+  .shared-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    margin-bottom: 60px;
+  }
+  .shared-card {
+    background: #14141f;
+    border: 1px solid #252535;
+    border-radius: 12px;
+    padding: 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s;
+  }
+  .shared-card:hover { border-color: #6366f1; background: #1a1a2e; }
+  .shared-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: #6366f1; font-weight: 700; margin-bottom: 8px; }
+  .shared-title { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+  .shared-desc { font-size: 12px; color: #8a8aa3; line-height: 1.5; }
+
+  .empty-card {
+    background: transparent;
+    border: 2px dashed #252535;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 280px; text-align: center; padding: 24px;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .empty-card:hover { border-color: #6366f1; background: #14141f; }
+  .empty-icon {
+    width: 48px; height: 48px; background: #252540; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; margin-bottom: 16px; color: #6366f1;
+  }
+  .empty-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .empty-desc { color: #8a8aa3; font-size: 12px; line-height: 1.5; }
+
+  footer {
+    margin-top: 60px; padding-top: 30px;
+    border-top: 1px solid #1f1f2e;
+    color: #6a6a80; font-size: 12px; text-align: center;
+  }
 </style>
 </head>
 <body>
-  <h1>MCN Neobridge</h1>
-  <p>채널 분석 대시보드</p>
-  <div class="cards">
-    <a class="card" href="sajjiknam/">
-      <div class="emoji">📊</div>
-      <h2>사찍남</h2>
-      <div class="stats">리텐션 · CTR · 히트맵 분석</div>
+<div class="container">
+  <header>
+    <div class="brand">
+      <div class="brand-logo">N</div>
+      <div>
+        <h1>Neobridge MCN</h1>
+        <small>Multi-channel Network Portal</small>
+      </div>
+    </div>
+    <div class="header-meta">
+      <strong>2026.04.06</strong>
+    </div>
+  </header>
+
+  <div class="section-title">Channels</div>
+  <div class="channels-grid">
+
+    <div class="channel-card">
+      <div class="channel-header">
+        <div class="channel-name">아는언니 세령</div>
+        <div class="channel-status status-launching">Launching</div>
+      </div>
+      <div class="channel-host">이세령 대표 / 결정사(결혼정보) 장르</div>
+      <div class="channel-meta">
+        <div class="meta-item">
+          <span class="meta-label">론칭</span>
+          <span class="meta-value">2026.04.14</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">레퍼런스</span>
+          <span class="meta-value">1,541 영상</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">포맷</span>
+          <span class="meta-value">리얼리티 성장</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">EP 준비</span>
+          <span class="meta-value">1/10</span>
+        </div>
+      </div>
+      <div class="channel-depts">
+        <a class="dept-link" href="./gyeoljeongsa/planning/">기획부 <span class="dept-icon">&rarr;</span></a>
+        <a class="dept-link" href="./gyeoljeongsa/">데이터 <span class="dept-icon">&rarr;</span></a>
+        <a class="dept-link disabled">제작 <span class="dept-icon">&mdash;</span></a>
+        <a class="dept-link" href="./gyeoljeongsa/admin/">관리자 <span class="dept-icon">&rarr;</span></a>
+      </div>
+    </div>
+
+    <div class="channel-card">
+      <div class="channel-header">
+        <div class="channel-name">사찍남</div>
+        <div class="channel-status status-active">Active</div>
+      </div>
+      <div class="channel-host">오맷돌 / 부업-재테크 장르</div>
+      <div class="channel-meta">
+        <div class="meta-item">
+          <span class="meta-label">평균 조회수</span>
+          <span class="meta-value">63만</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">평균 CTR</span>
+          <span class="meta-value">4.7%</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">평균 리텐션</span>
+          <span class="meta-value">26.5%</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">개선 필요</span>
+          <span class="meta-value">초반 훅</span>
+        </div>
+      </div>
+      <div class="channel-depts">
+        <a class="dept-link disabled">기획부 <span class="dept-icon">&mdash;</span></a>
+        <a class="dept-link" href="./sajjiknam/">데이터 <span class="dept-icon">&rarr;</span></a>
+        <a class="dept-link disabled">제작 <span class="dept-icon">&mdash;</span></a>
+        <a class="dept-link disabled">검증 <span class="dept-icon">&mdash;</span></a>
+      </div>
+    </div>
+
+    <div class="channel-card">
+      <div class="channel-header">
+        <div class="channel-name">부업소개하는남자</div>
+        <div class="channel-status status-incubating">Incubating</div>
+      </div>
+      <div class="channel-host">인큐베이션 단계</div>
+      <div class="channel-meta">
+        <div class="meta-item">
+          <span class="meta-label">상태</span>
+          <span class="meta-value">기획중</span>
+        </div>
+        <div class="meta-item">
+          <span class="meta-label">장르</span>
+          <span class="meta-value">부업 소개</span>
+        </div>
+      </div>
+      <div class="channel-depts">
+        <a class="dept-link disabled">리서치 <span class="dept-icon">&mdash;</span></a>
+        <a class="dept-link disabled">기획 <span class="dept-icon">&mdash;</span></a>
+      </div>
+    </div>
+
+    <div class="channel-card empty-card">
+      <div class="empty-icon">+</div>
+      <div class="empty-title">새 크리에이터 영입</div>
+      <div class="empty-desc">MCN에 새로운 채널을 추가합니다.<br>4단계 온보딩 프로세스로 자동 구성.</div>
+    </div>
+
+  </div>
+
+  <div class="section-title">Shared Resources</div>
+  <div class="shared-grid">
+    <a class="shared-card" href="./gyeoljeongsa/">
+      <div class="shared-label">Data</div>
+      <div class="shared-title">결정사 레퍼런스 영상 DB</div>
+      <div class="shared-desc">1,541개 영상 전수 필터 + 히트맵/CTR/리텐션 시각화</div>
     </a>
-    <a class="card" href="gyeoljeongsa/">
-      <div class="emoji">💍</div>
-      <h2>결정사</h2>
-      <div class="stats">경쟁채널 · 벤치마크 분석</div>
+    <a class="shared-card" href="./sajjiknam/">
+      <div class="shared-label">Data</div>
+      <div class="shared-title">사찍남 리텐션 분석</div>
+      <div class="shared-desc">9,893개 영상 / 사찍남 vs 휴먼스토리 vs 돈버는탐구생활</div>
+    </a>
+    <a class="shared-card" href="./gyeoljeongsa/planning/">
+      <div class="shared-label">Planning</div>
+      <div class="shared-title">기획 대시보드</div>
+      <div class="shared-desc">기획서 진행 상황 / 제목-썸네일 검증</div>
+    </a>
+    <a class="shared-card" href="./gyeoljeongsa/admin/">
+      <div class="shared-label">Admin</div>
+      <div class="shared-title">관리자 포털</div>
+      <div class="shared-desc">채널 관리 / 메트릭 모니터링 / Supabase 연동</div>
     </a>
   </div>
+
+  <footer>Neobridge MCN 2026 / 플로우머스</footer>
+</div>
 </body>
 </html>
