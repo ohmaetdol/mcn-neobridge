@@ -1614,6 +1614,7 @@ if (sessionStorage.getItem('portal_auth') === '1') {
 async function loadData() {
   const { data, error } = await sb.from('proposals')
     .select('*')
+    .in('format_type', ['A','B','C','D'])
     .order('episode_number', { ascending: true });
 
   if (data) proposals = data;
