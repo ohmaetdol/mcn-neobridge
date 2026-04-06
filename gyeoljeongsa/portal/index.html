@@ -1987,9 +1987,18 @@ async function loadData() {
   const { data, error } = await sb.from('proposals')
     .select('*')
     .in('format_type', ['A','B','C','D'])
-    .order('episode_number', { ascending: true });
+    .order('episode_number', { ascending: true })
+    .order('created_at', { ascending: false });
 
-  if (data) proposals = data;
+  if (data) {
+    // EP별 최신 1개만 유지 (중복 제거)
+    const seen = new Set();
+    proposals = data.filter(p => {
+      if (seen.has(p.episode_number)) return false;
+      seen.add(p.episode_number);
+      return true;
+    });
+  }
   renderCalendar();
   renderList();
 }
