@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>사찍남 성장 대시보드</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+:root {
+  --bg: #ffffff;
+  --card: #f7f7f8;
+  --card-hover: #efefef;
+  --border: #e2e2e5;
+  --text: #1a1a1a;
+  --text-dim: #6b6b6b;
+  --accent: #ea580c;
+  --accent-light: #c2410c;
+  --accent-bg: rgba(234,88,12,0.06);
+  --green: #16a34a;
+  --yellow: #ca8a04;
+  --red: #dc2626;
+  --blue: #2563eb;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:-apple-system,BlinkMacSystemFont,'Pretendard',sans-serif; background:var(--bg); color:var(--text); }
+.header { padding:20px 32px; border-bottom:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; }
+.header h1 { font-size:20px; font-weight:700; }
+.header h1 span { color:var(--accent); }
+.header-meta { font-size:12px; color:var(--text-dim); }
+.tab-bar { display:flex; gap:4px; padding:12px 32px 0; border-bottom:1px solid var(--border); overflow-x:auto; }
+.tab-btn { padding:10px 18px; border:none; background:none; cursor:pointer; font-size:13px; font-weight:500; color:var(--text-dim); border-bottom:2px solid transparent; white-space:nowrap; transition:all .2s; }
+.tab-btn:hover { color:var(--text); }
+.tab-btn.active { color:var(--accent); border-bottom-color:var(--accent); font-weight:600; }
+.main { padding:24px 32px 48px; max-width:1400px; margin:0 auto; }
+.section-card { background:var(--card); border-radius:14px; padding:24px; margin-bottom:20px; }
+.section-card h3 { font-size:15px; font-weight:600; margin-bottom:16px; }
+.stat-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:24px; }
+.stat-card { background:var(--card); border-radius:12px; padding:20px; text-align:center; }
+.stat-card.accent { background:linear-gradient(135deg,#ea580c,#f97316); color:#fff; }
+.stat-num { font-size:28px; font-weight:800; margin-bottom:4px; }
+.stat-label { font-size:12px; color:var(--text-dim); }
+.stat-card.accent .stat-label { color:rgba(255,255,255,.8); }
+.stat-sub { font-size:11px; color:var(--text-dim); margin-top:4px; }
+.stat-card.accent .stat-sub { color:rgba(255,255,255,.7); }
+.data-table { width:100%; border-collapse:collapse; font-size:13px; }
+.data-table thead { background:var(--accent-bg); }
+.data-table th { padding:10px 12px; text-align:left; font-weight:600; font-size:12px; color:var(--accent); border-bottom:1px solid var(--border); }
+.data-table td { padding:10px 12px; border-bottom:1px solid var(--border); }
+.data-table tbody tr:hover { background:var(--card-hover); cursor:pointer; }
+.data-table .num { text-align:right; font-variant-numeric:tabular-nums; }
+.badge { display:inline-block; padding:2px 8px; border-radius:20px; font-size:11px; font-weight:600; }
+.badge.high { background:rgba(22,163,74,.1); color:var(--green); }
+.badge.mid { background:rgba(202,138,4,.1); color:var(--yellow); }
+.badge.low { background:rgba(220,38,38,.1); color:var(--red); }
+.badge.accent { background:rgba(234,88,12,.1); color:var(--accent); }
+.compare-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:24px; }
+.compare-card { background:var(--card); border-radius:12px; padding:20px; border:2px solid transparent; }
+.compare-card.self { border-color:var(--accent); }
+.compare-card h4 { font-size:14px; font-weight:600; margin-bottom:12px; }
+.compare-card.self h4 { color:var(--accent); }
+.compare-row { display:flex; justify-content:space-between; padding:6px 0; font-size:13px; border-bottom:1px solid var(--border); }
+.compare-row:last-child { border:none; }
+.compare-val { font-weight:700; }
+.progress-bar-wrap { margin-bottom:20px; }
+.progress-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+.progress-title { font-size:14px; font-weight:600; }
+.progress-pct { font-size:13px; color:var(--accent); font-weight:700; }
+.progress-bar { height:8px; background:var(--border); border-radius:4px; overflow:hidden; }
+.progress-fill { height:100%; border-radius:4px; background:linear-gradient(90deg,#ea580c,#f97316); transition:width .5s; }
+.progress-meta { display:flex; justify-content:space-between; font-size:11px; color:var(--text-dim); margin-top:4px; }
+.chart-wrap { background:var(--card); border-radius:14px; padding:20px; margin-bottom:20px; }
+.chart-wrap h3 { font-size:15px; font-weight:600; margin-bottom:12px; }
+.gap-table { width:100%; border-collapse:collapse; font-size:13px; }
+.gap-table th { padding:10px 12px; text-align:left; font-weight:600; font-size:12px; background:var(--accent-bg); color:var(--accent); border-bottom:1px solid var(--border); }
+.gap-table td { padding:10px 12px; border-bottom:1px solid var(--border); }
+.gap-table .gap-neg { color:var(--red); font-weight:600; }
+.gap-table .gap-pos { color:var(--green); font-weight:600; }
+.monitor-live { background:linear-gradient(135deg,#1a1a1a,#333); border-radius:14px; padding:24px; color:#fff; margin-bottom:20px; }
+.monitor-live h3 { color:#fff; margin-bottom:16px; }
+.monitor-stat { display:flex; gap:24px; flex-wrap:wrap; }
+.monitor-stat .ms { text-align:center; }
+.monitor-stat .ms-num { font-size:24px; font-weight:800; color:#f97316; }
+.monitor-stat .ms-label { font-size:11px; color:rgba(255,255,255,.6); }
+.strategy-block { background:var(--card); border-radius:12px; padding:20px; margin-bottom:16px; }
+.strategy-block h4 { font-size:14px; font-weight:600; margin-bottom:8px; color:var(--accent); }
+.strategy-block p { font-size:13px; line-height:1.7; color:var(--text-dim); }
+.strategy-block ul { font-size:13px; line-height:1.8; color:var(--text-dim); padding-left:20px; }
+.checklist { list-style:none; padding:0; }
+.checklist li { padding:8px 12px; border-bottom:1px solid var(--border); font-size:13px; display:flex; align-items:center; gap:8px; }
+.checklist li::before { content:'☐'; font-size:14px; }
+.checklist li.done::before { content:'☑'; color:var(--green); }
+.ep-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:16px; }
+.ep-card { background:var(--card); border-radius:12px; padding:16px; cursor:pointer; transition:transform .15s; }
+.ep-card:hover { transform:translateY(-2px); box-shadow:0 4px 12px rgba(0,0,0,.08); }
+.ep-thumb { width:100%; aspect-ratio:16/9; border-radius:8px; object-fit:cover; margin-bottom:10px; background:#e5e5e5; }
+.ep-title { font-size:13px; font-weight:600; line-height:1.4; margin-bottom:6px; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.ep-meta { font-size:11px; color:var(--text-dim); display:flex; gap:12px; }
+.proposal-card { background:var(--card); border-radius:12px; padding:16px; display:flex; align-items:center; gap:16px; cursor:pointer; transition:all .15s; margin-bottom:8px; }
+.proposal-card:hover { background:var(--card-hover); }
+.ep-badge { background:var(--accent); color:#fff; padding:4px 10px; border-radius:20px; font-size:11px; font-weight:700; white-space:nowrap; }
+.proposal-info { flex:1; }
+.proposal-info h3 { font-size:14px; font-weight:600; margin-bottom:4px; }
+.proposal-meta { font-size:11px; color:var(--text-dim); }
+.status-badge { padding:4px 10px; border-radius:20px; font-size:11px; font-weight:600; }
+.status-badge.draft { background:rgba(107,107,107,.1); color:var(--text-dim); }
+.status-badge.review { background:rgba(202,138,4,.1); color:var(--yellow); }
+.status-badge.approved { background:rgba(22,163,74,.1); color:var(--green); }
+.status-badge.shooting { background:rgba(234,88,12,.1); color:var(--accent); }
+.detail-overlay { position:fixed; top:0; left:0; right:0; bottom:0; background:rgba(0,0,0,.4); z-index:100; display:none; }
+.detail-overlay.open { display:flex; justify-content:flex-end; }
+.detail-panel { width:560px; max-width:100%; background:#fff; height:100%; overflow-y:auto; padding:32px; animation:slideIn .25s ease; }
+@keyframes slideIn { from{transform:translateX(100%)} to{transform:translateX(0)} }
+.detail-header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:24px; }
+.detail-close { background:none; border:none; font-size:24px; cursor:pointer; color:var(--text-dim); }
+.detail-meta { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:24px; }
+.meta-item { }
+.meta-label { font-size:11px; color:var(--text-dim); margin-bottom:2px; }
+.meta-value { font-size:14px; font-weight:600; }
+.content-section { margin-bottom:20px; }
+.content-section h4 { font-size:13px; font-weight:600; margin-bottom:8px; color:var(--accent); }
+.content-section p, .content-section ul { font-size:13px; line-height:1.7; color:var(--text-dim); }
+.toast { position:fixed; bottom:20px; left:50%; transform:translateX(-50%) translateY(100px); background:#1a1a1a; color:#fff; padding:12px 24px; border-radius:8px; font-size:13px; transition:transform .3s; z-index:200; }
+.toast.show { transform:translateX(-50%) translateY(0); }
+.sub-toggle { display:flex; gap:4px; margin-bottom:16px; }
+.sub-btn { padding:6px 14px; border:1px solid var(--border); background:var(--bg); border-radius:8px; cursor:pointer; font-size:12px; }
+.sub-btn.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+.empty-state { text-align:center; padding:48px; color:var(--text-dim); font-size:14px; }
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+.action-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:12px; }
+.action-card { background:var(--accent-bg); border-radius:10px; padding:14px; border-left:3px solid var(--accent); }
+.action-card h5 { font-size:12px; font-weight:600; color:var(--accent); margin-bottom:4px; }
+.action-card p { font-size:12px; color:var(--text-dim); line-height:1.5; }
+.timeline-item { display:flex; gap:16px; padding:12px 0; border-bottom:1px solid var(--border); }
+.timeline-dot { width:10px; height:10px; border-radius:50%; background:var(--accent); margin-top:4px; flex-shrink:0; }
+.timeline-content { flex:1; }
+.timeline-time { font-size:11px; color:var(--text-dim); }
+.timeline-text { font-size:13px; font-weight:500; }
+@media (max-width:768px) {
+  .stat-grid { grid-template-columns:repeat(2,1fr); }
+  .compare-grid { grid-template-columns:1fr; }
+  .two-col { grid-template-columns:1fr; }
+  .main { padding:16px; }
+  .header { padding:16px; }
+  .tab-bar { padding:8px 16px 0; }
+  .detail-panel { width:100%; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1><span>사찍남</span> 성장 대시보드</h1>
+  <div class="header-meta">구독자 14.4만 · 영상 97개 · 마지막 업데이트 2026.04.06</div>
+</div>
+
+<div class="tab-bar">
+  <button class="tab-btn active" data-tab="overview" onclick="switchTab('overview')">채널 현황</button>
+  <button class="tab-btn" data-tab="reference" onclick="switchTab('reference')">레퍼런스 비교</button>
+  <button class="tab-btn" data-tab="roadmap" onclick="switchTab('roadmap')">개선 로드맵</button>
+  <button class="tab-btn" data-tab="proposals" onclick="switchTab('proposals')">기획서</button>
+  <button class="tab-btn" data-tab="episodes" onclick="switchTab('episodes')">에피소드</button>
+  <button class="tab-btn" data-tab="monitor" onclick="switchTab('monitor')">모니터링</button>
+  <button class="tab-btn" data-tab="strategy" onclick="switchTab('strategy')">전략 노트</button>
+</div>
+
+<div class="main">
+
+<!-- ============ TAB 1: 채널 현황 ============ -->
+<div id="overviewView">
+  <div class="stat-grid">
+    <div class="stat-card accent">
+      <div class="stat-num">144K</div>
+      <div class="stat-label">구독자</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">630,000</div>
+      <div class="stat-label">평균 조회수</div>
+      <div class="stat-sub">역대 전체 평균</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">4.7%</div>
+      <div class="stat-label">평균 CTR</div>
+      <div class="stat-sub">목표: 5.0%</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">26.5%</div>
+      <div class="stat-label">평균 리텐션</div>
+      <div class="stat-sub">목표: 30%+</div>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <h3>최근 영상 조회수 추이</h3>
+    <canvas id="viewsChart" height="80"></canvas>
+  </div>
+
+  <div class="section-card">
+    <h3>최근 영상 (19개)</h3>
+    <table class="data-table">
+      <thead><tr><th>제목</th><th class="num">조회수</th><th class="num">좋아요</th><th class="num">댓글</th><th class="num">길이</th><th>업로드</th></tr></thead>
+      <tbody id="recentVideos"></tbody>
+    </table>
+  </div>
+
+  <div class="two-col">
+    <div class="section-card">
+      <h3>CTR 점수 분포 (97개 영상)</h3>
+      <canvas id="ctrChart" height="120"></canvas>
+    </div>
+    <div class="section-card">
+      <h3>리텐션 TOP 5</h3>
+      <table class="data-table">
+        <thead><tr><th>영상</th><th class="num">리텐션</th><th class="num">초반30초</th></tr></thead>
+        <tbody>
+          <tr><td>양식 셰프→김치찌개 월3000만</td><td class="num" style="color:var(--green);font-weight:700">38.3%</td><td class="num">17.0%</td></tr>
+          <tr><td>꽃다발 팔아 하루 250만원</td><td class="num" style="color:var(--green);font-weight:700">36.6%</td><td class="num">17.0%</td></tr>
+          <tr><td>강아지 케이크 월급 2배</td><td class="num" style="color:var(--green);font-weight:700">36.4%</td><td class="num">16.7%</td></tr>
+          <tr><td>10초 영상→한달 1억 매장</td><td class="num" style="color:var(--green);font-weight:700">36.0%</td><td class="num">28.9%</td></tr>
+          <tr><td>낡은 집→60억 자산 93년생</td><td class="num" style="color:var(--green);font-weight:700">34.6%</td><td class="num">8.0%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ============ TAB 2: 레퍼런스 비교 ============ -->
+<div id="referenceView" style="display:none">
+  <div class="compare-grid">
+    <div class="compare-card self">
+      <h4>사찍남 (우리 채널)</h4>
+      <div class="compare-row"><span>평균 조회수</span><span class="compare-val">63만</span></div>
+      <div class="compare-row"><span>평균 CTR</span><span class="compare-val">4.7%</span></div>
+      <div class="compare-row"><span>썸네일 점수</span><span class="compare-val">80점</span></div>
+      <div class="compare-row"><span>평균 리텐션</span><span class="compare-val">26.5%</span></div>
+      <div class="compare-row"><span>초반 30초</span><span class="compare-val" style="color:var(--red)">12.9%</span></div>
+      <div class="compare-row"><span>평균 길이</span><span class="compare-val">25분</span></div>
+      <div class="compare-row"><span>포맷</span><span class="compare-val">인터뷰 다큐</span></div>
+    </div>
+    <div class="compare-card">
+      <h4>돈버는탐구생활</h4>
+      <div class="compare-row"><span>평균 조회수</span><span class="compare-val" style="color:var(--green)">304만</span></div>
+      <div class="compare-row"><span>평균 CTR</span><span class="compare-val" style="color:var(--green)">5.0%</span></div>
+      <div class="compare-row"><span>썸네일 점수</span><span class="compare-val" style="color:var(--green)">83점</span></div>
+      <div class="compare-row"><span>평균 리텐션</span><span class="compare-val" style="color:var(--green)">26.9%</span></div>
+      <div class="compare-row"><span>초반 30초</span><span class="compare-val" style="color:var(--green)">16.3%</span></div>
+      <div class="compare-row"><span>평균 길이</span><span class="compare-val" style="color:var(--green)">16분</span></div>
+      <div class="compare-row"><span>포맷</span><span class="compare-val">방법론 압축형</span></div>
+    </div>
+    <div class="compare-card">
+      <h4>휴먼스토리</h4>
+      <div class="compare-row"><span>평균 조회수</span><span class="compare-val" style="color:var(--green)">533만</span></div>
+      <div class="compare-row"><span>평균 CTR</span><span class="compare-val" style="color:var(--green)">5.1%</span></div>
+      <div class="compare-row"><span>썸네일 점수</span><span class="compare-val">82점</span></div>
+      <div class="compare-row"><span>평균 리텐션</span><span class="compare-val">21.3%</span></div>
+      <div class="compare-row"><span>초반 30초</span><span class="compare-val" style="color:var(--green)">22.5%</span></div>
+      <div class="compare-row"><span>평균 길이</span><span class="compare-val">29분</span></div>
+      <div class="compare-row"><span>포맷</span><span class="compare-val">감성 몰입 다큐</span></div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h3>핵심 갭 분석</h3>
+    <table class="gap-table">
+      <thead><tr><th>지표</th><th>사찍남</th><th>돈탐생</th><th>휴먼스토리</th><th>갭</th><th>개선 방향</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:600">초반 30초 리텐션</td>
+          <td style="color:var(--red);font-weight:600">0.129</td>
+          <td>0.163</td>
+          <td style="color:var(--green);font-weight:600">0.225</td>
+          <td class="gap-neg">-0.034 (돈탐생)</td>
+          <td>돈탐생식 숫자훅 + 첫 5초 충격 자극</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600">평균 길이</td>
+          <td>25분</td>
+          <td style="color:var(--green);font-weight:600">16분</td>
+          <td>29분</td>
+          <td class="gap-neg">+9분 (돈탐생 대비)</td>
+          <td>18분 목표, 불필요 구간 컷</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600">킬러 타이밍</td>
+          <td style="color:var(--red)">분산 (10/17/19/24분)</td>
+          <td style="color:var(--green);font-weight:600">7~10분 집중 (63%)</td>
+          <td>전반부</td>
+          <td class="gap-neg">핵심 구간 뒤로 밀림</td>
+          <td>수익/비밀 공개를 7~10분에 집중</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600">썸네일 CTR</td>
+          <td>80점</td>
+          <td style="color:var(--green);font-weight:600">83점</td>
+          <td>82점</td>
+          <td class="gap-neg">-3점</td>
+          <td>고대비 + 숫자 7자 이내</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600">스토리텔링</td>
+          <td style="color:var(--yellow)">정보성 위주</td>
+          <td>방법론 압축</td>
+          <td style="color:var(--green);font-weight:600">감정 몰입</td>
+          <td class="gap-neg">감동 파트 부족</td>
+          <td>7분 이후 휴먼스토리식 감성 전환</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="chart-wrap">
+    <h3>리텐션 비교 (3채널 평균)</h3>
+    <canvas id="retentionCompareChart" height="80"></canvas>
+  </div>
+
+  <div class="section-card">
+    <h3>레퍼런스 채널 전략 비교</h3>
+    <table class="data-table">
+      <thead><tr><th>채널</th><th>유형</th><th>핵심 무기</th><th>사찍남 적용 인사이트</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="font-weight:600">돈버는탐구생활</td>
+          <td><span class="badge accent">방법론 압축형</span></td>
+          <td>확실한 수익 결과 + 현실적 주인공</td>
+          <td>오프닝 1분에 숫자+자극으로 시작 (CTR/초반 리텐션)</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600">휴먼스토리</td>
+          <td><span class="badge mid">감성 몰입 다큐형</span></td>
+          <td>긴 호흡 + 감동 스토리텔링</td>
+          <td>중반 7~8분 이후 가족/실패 감동으로 톤 변주</td>
+        </tr>
+        <tr>
+          <td style="font-weight:600">현장속으로</td>
+          <td><span class="badge low">사건 현장형</span></td>
+          <td>르포 형식 + 미스터리</td>
+          <td>취재 형식 나레이션/자막으로 신뢰감 추가</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ============ TAB 3: 개선 로드맵 ============ -->
+<div id="roadmapView" style="display:none">
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--red)">12.9%</div>
+      <div class="stat-label">현재 초반 30초</div>
+      <div class="stat-sub">목표: 25%+</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--yellow)">25분</div>
+      <div class="stat-label">현재 평균 길이</div>
+      <div class="stat-sub">목표: 18분</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--yellow)">분산</div>
+      <div class="stat-label">킬러 타이밍</div>
+      <div class="stat-sub">목표: 7~10분 집중</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" style="color:var(--yellow)">80점</div>
+      <div class="stat-label">썸네일 점수</div>
+      <div class="stat-sub">목표: 85+</div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h3>4대 개선 우선순위</h3>
+
+    <div class="progress-bar-wrap">
+      <div class="progress-header">
+        <span class="progress-title">1. 초반 30초 훅 강화</span>
+        <span class="progress-pct">52%</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" style="width:52%"></div></div>
+      <div class="progress-meta"><span>현재: 0.129 → 목표: 0.25+</span><span>핵심: 첫 5초 숫자+반전 멘트</span></div>
+    </div>
+
+    <div class="progress-bar-wrap">
+      <div class="progress-header">
+        <span class="progress-title">2. 영상 길이 최적화</span>
+        <span class="progress-pct">72%</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" style="width:72%"></div></div>
+      <div class="progress-meta"><span>현재: 25분 → 목표: 18분</span><span>핵심: 불필요 구간 과감히 컷</span></div>
+    </div>
+
+    <div class="progress-bar-wrap">
+      <div class="progress-header">
+        <span class="progress-title">3. 킬러 타이밍 앞당기기</span>
+        <span class="progress-pct">30%</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" style="width:30%"></div></div>
+      <div class="progress-meta"><span>현재: 분산 → 목표: 7~10분 집중</span><span>핵심: 수익/비밀 공개를 앞으로</span></div>
+    </div>
+
+    <div class="progress-bar-wrap">
+      <div class="progress-header">
+        <span class="progress-title">4. 썸네일 CTR 향상</span>
+        <span class="progress-pct">94%</span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" style="width:94%"></div></div>
+      <div class="progress-meta"><span>현재: 80점 → 목표: 85+</span><span>핵심: 고대비 + 숫자 7자 이내</span></div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h3>22권 프레임워크 적용 체크리스트</h3>
+    <ul class="checklist">
+      <li class="done">StoryBrand SB7 — 영상 구조에 '가이드→문제→계획→성공' 패턴 적용</li>
+      <li class="done">Value Equation — 꿈 결과↑, 성공 확률↑, 시간↓, 노력↓ 진단</li>
+      <li class="done">LF8 심리 트리거 — 썸네일/제목에 8가지 욕구 중 최소 1개 적용</li>
+      <li class="done">Hook-Story-Offer — 제목=Hook, 영상=Story, 엔딩=Offer 구조화</li>
+      <li>Epiphany Bridge — 출연자 '깨달음의 순간' 7~10분에 배치</li>
+      <li>Ad Kaleidoscope — 같은 소재 2~3가지 앵글 제목 테스트</li>
+      <li>3 False Beliefs — 시청자의 잘못된 믿음 3개 → 영상으로 파괴</li>
+      <li>Grand Slam Offer — 콘텐츠 자체가 '거부 불가' 제안처럼 느껴지게</li>
+    </ul>
+  </div>
+
+  <div class="section-card">
+    <h3>돈탐생 성공 공식 벤치마크</h3>
+    <div class="action-grid">
+      <div class="action-card">
+        <h5>오프닝 (0~60초)</h5>
+        <p>돈탐생식 수익+자극적 숫자로 시작. CTR/초반 리텐션 확보. 인사 삭제, 1초 단위 컷.</p>
+      </div>
+      <div class="action-card">
+        <h5>킬러 구간 (7~10분)</h5>
+        <p>돈탐생은 63%를 7~10분에 집중. 수익 공개, 비밀 방법론을 이 구간에 배치.</p>
+      </div>
+      <div class="action-card">
+        <h5>감성 전환 (7분 이후)</h5>
+        <p>휴먼스토리식 가족/실패 감동 BGM + 여유 컷으로 톤 변주. 완주율 60% 목표.</p>
+      </div>
+      <div class="action-card">
+        <h5>러닝타임 (18분)</h5>
+        <p>돈탐생 평균 16분. 사찍남 25분 → 18분으로. 핵심만 남기고 과감히 컷.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ TAB 4: 기획서 ============ -->
+<div id="proposalsView" style="display:none">
+  <div class="sub-toggle">
+    <button class="sub-btn active" onclick="switchSub('list')">목록</button>
+    <button class="sub-btn" onclick="switchSub('cal')">달력</button>
+  </div>
+  <div id="listSubView">
+    <div id="proposalList"><div class="empty-state">기획서를 불러오는 중...</div></div>
+  </div>
+  <div id="calSubView" style="display:none">
+    <div class="empty-state">달력 뷰 (준비 중)</div>
+  </div>
+</div>
+
+<!-- ============ TAB 5: 에피소드 ============ -->
+<div id="episodesView" style="display:none">
+  <div class="stat-grid">
+    <div class="stat-card accent">
+      <div class="stat-num">97</div>
+      <div class="stat-label">전체 에피소드</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">66.1</div>
+      <div class="stat-label">평균 CTR 점수</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">28</div>
+      <div class="stat-label">CTR 75점 이상</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">25분</div>
+      <div class="stat-label">평균 길이</div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h3>최근 영상 (yt-dlp 실시간 데이터)</h3>
+    <div class="ep-grid" id="episodeGrid"></div>
+  </div>
+</div>
+
+<!-- ============ TAB 6: 모니터링 ============ -->
+<div id="monitorView" style="display:none">
+  <div class="monitor-live">
+    <h3>현재 모니터링 중</h3>
+    <div style="font-size:14px;margin-bottom:12px;opacity:.8">0원짜리 버린 책 당근에 팔아서 월 600만 원 버는 남자</div>
+    <div class="monitor-stat">
+      <div class="ms"><div class="ms-num" id="monViews">—</div><div class="ms-label">조회수</div></div>
+      <div class="ms"><div class="ms-num" id="monLikes">—</div><div class="ms-label">좋아요</div></div>
+      <div class="ms"><div class="ms-num" id="monComments">—</div><div class="ms-label">댓글</div></div>
+      <div class="ms"><div class="ms-num" id="monElapsed">—</div><div class="ms-label">경과 시간</div></div>
+    </div>
+  </div>
+
+  <div class="chart-wrap">
+    <h3>조회수 추이 (30분 간격)</h3>
+    <canvas id="monitorChart" height="80"></canvas>
+  </div>
+
+  <div class="section-card">
+    <h3>제목/썸네일 변경 이력</h3>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-content">
+        <div class="timeline-time">2026.04.06 — 업로드 직후</div>
+        <div class="timeline-text">원본: "0원짜리 버린 책 당근에 팔아서 월 600만 원 버는 남자"</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background:var(--yellow)"></div>
+      <div class="timeline-content">
+        <div class="timeline-time">기획부 추천 1순위</div>
+        <div class="timeline-text">변경안: "길에 버린 책 주워서 월 600만원 버는 남자" (21자, 충격 앞배치)</div>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot" style="background:var(--text-dim)"></div>
+      <div class="timeline-content">
+        <div class="timeline-time">썸네일 진단</div>
+        <div class="timeline-text">텍스트 15자→7자 필요 / 정면 표정 필요 / 고채도 배경 필요 (5항목 FAIL)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h3>24시간 최적화 타임라인</h3>
+    <table class="data-table">
+      <thead><tr><th>시점</th><th>액션</th><th>담당</th><th>상태</th></tr></thead>
+      <tbody>
+        <tr><td>즉시</td><td>제목 1순위로 변경 + 썸네일 텍스트 줄이기</td><td>오맷돌님</td><td><span class="badge mid">대기</span></td></tr>
+        <tr><td>+2시간</td><td>노출수/CTR 확인 → 정상이면 유지</td><td>데이터부</td><td><span class="badge low">예정</span></td></tr>
+        <tr><td>+6시간</td><td>추세 확인 → 정체면 2순위로 변경</td><td>기획부</td><td><span class="badge low">예정</span></td></tr>
+        <tr><td>+12시간</td><td>미세 조정 (이후 큰 변경 금지)</td><td>기획부</td><td><span class="badge low">예정</span></td></tr>
+        <tr><td>+24시간</td><td>최종 리포트 작성</td><td>데이터부</td><td><span class="badge low">예정</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ============ TAB 7: 전략 노트 ============ -->
+<div id="strategyView" style="display:none">
+  <div class="section-card">
+    <h3>22권 핵심 프레임워크 (에이전시 두뇌)</h3>
+    <div class="two-col">
+      <div>
+        <div class="strategy-block">
+          <h4>StoryBrand SB7 — 영상 구조</h4>
+          <p>모든 영상은 이 구조를 따른다:<br>
+          주인공(출연자) → 문제(돈/생존) → 가이드(사찍남) → 계획(방법론) → 행동촉구 → 성공 → 실패 회피</p>
+        </div>
+        <div class="strategy-block">
+          <h4>Hook-Story-Offer — 제목/영상/엔딩</h4>
+          <p>Hook = 제목+썸네일 (5초 내 어그로)<br>
+          Story = 영상 본편 (Epiphany Bridge)<br>
+          Offer = 엔딩 CTA (다음 영상/구독)</p>
+        </div>
+        <div class="strategy-block">
+          <h4>Value Equation — 콘텐츠 가치</h4>
+          <p>꿈 결과(Dream Outcome) × 성공 확률(Perceived Likelihood)<br>
+          ÷ 시간 지연(Time Delay) ÷ 노력과 희생(Effort & Sacrifice)<br>
+          → 분자↑ 분모↓ = 시청 가치 극대화</p>
+        </div>
+        <div class="strategy-block">
+          <h4>LF8 심리 트리거 — 썸네일/제목</h4>
+          <ul>
+            <li>#3 공포 회피 → 실패/빚 스토리</li>
+            <li>#5 편안한 생활 → 돈다발/수익 공개</li>
+            <li>#6 우월감 → 놀란 표정 + 큰 숫자</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="strategy-block">
+          <h4>Epiphany Bridge — 깨달음의 순간</h4>
+          <p>출연자가 인생을 바꾼 '깨달음의 순간'을 7~10분에 배치.<br>
+          "그때 깨달았어요" = 킬러 구간의 핵심.<br>
+          감정적 각성(backstory) → 외적 여정(방법) → 내적 깨달음(교훈)</p>
+        </div>
+        <div class="strategy-block">
+          <h4>3 False Beliefs — 믿음 파괴</h4>
+          <p>시청자의 잘못된 믿음 3개를 영상으로 파괴:<br>
+          1) 수단 (Vehicle) — "이 방법이 안 될 거야"<br>
+          2) 내적 (Internal) — "나는 못 할 거야"<br>
+          3) 외적 (External) — "환경이 안 돼"</p>
+        </div>
+        <div class="strategy-block">
+          <h4>Ad Kaleidoscope — 제목 테스트</h4>
+          <p>같은 소재를 2~3가지 앵글로 제목 변주.<br>
+          Who(누구) × What(무엇) × Why(왜) × How(어떻게)<br>
+          → 업로드 후 24시간 A/B 테스트</p>
+        </div>
+        <div class="strategy-block">
+          <h4>Grand Slam Offer — 제안의 힘</h4>
+          <p>콘텐츠 자체가 "거부할 수 없는 제안"이 되게.<br>
+          출연자의 무료 강의/전자책 → Dream 100 트래픽.<br>
+          영상 = 무료 가치, 댓글 = 사회적 증거</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h3>레퍼런스 벤치마크 인사이트</h3>
+    <div class="action-grid">
+      <div class="action-card">
+        <h5>돈탐생 공식</h5>
+        <p>오프닝 숫자자극 → 7~10분 수익공개(63% 집중) → 16분 마무리. 교차편집 속도감.</p>
+      </div>
+      <div class="action-card">
+        <h5>휴먼스토리 공식</h5>
+        <p>감정 몰입 오프닝 → 전반부 감동 → 29분 긴 호흡. BGM+여유컷으로 완주율.</p>
+      </div>
+      <div class="action-card">
+        <h5>사찍남 하이브리드 목표</h5>
+        <p>돈탐생 오프닝(숫자자극) + 사찍남 중반(인터뷰) + 휴먼스토리 후반(감성) = 18분.</p>
+      </div>
+      <div class="action-card">
+        <h5>킬러 구간 설계</h5>
+        <p>조회수와 리텐션 상관계수 ~0 → CTR/제목이 조회수 결정. 리텐션은 완주율에 영향.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-card">
+    <h3>채널 성장 전략 로드맵</h3>
+    <table class="data-table">
+      <thead><tr><th>단계</th><th>목표</th><th>핵심 액션</th><th>KPI</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><span class="badge accent">Phase 1</span></td>
+          <td>초반 30초 개선</td>
+          <td>돈탐생식 숫자훅 도입, 인사 삭제, 1초 컷</td>
+          <td>초반 리텐션 0.129→0.20</td>
+        </tr>
+        <tr>
+          <td><span class="badge accent">Phase 2</span></td>
+          <td>러닝타임 최적화</td>
+          <td>25분→18분, 불필요 구간 과감히 컷</td>
+          <td>평균 리텐션 26.5%→30%</td>
+        </tr>
+        <tr>
+          <td><span class="badge accent">Phase 3</span></td>
+          <td>킬러 구간 집중</td>
+          <td>수익/비밀 공개를 7~10분에 배치</td>
+          <td>피크 구간 7~10분에 50%+</td>
+        </tr>
+        <tr>
+          <td><span class="badge accent">Phase 4</span></td>
+          <td>썸네일/제목 CTR</td>
+          <td>고대비+7자+정면표정, A/B 테스트</td>
+          <td>CTR 4.7%→5.5%</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</div><!-- end .main -->
+
+<!-- Detail Overlay -->
+<div class="detail-overlay" id="detailOverlay" onclick="if(event.target===this)closeDetail()">
+  <div class="detail-panel" id="detailPanel"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ===== DATA =====
+const CHANNEL_STATS = {
+  subscribers: 144000,
+  totalVideos: 97,
+  avgViews: 630000,
+  avgCTR: 4.7,
+  avgRetention: 0.265,
+  earlyRetention: 0.129,
+  avgDuration: 25
+};
+
+const RECENT_VIDEOS = [
+  {id:"-Ph2gu4bp0A",title:"0원짜리 버린 책 당근에 팔아서 월 600만 원 버는 남자",views:143,likes:5,comments:1,duration:1730,date:"2026.04.06"},
+  {id:"MTtDV8WsvN4",title:"해외 가서 사진 6장 올리고 1천만원 받는 91만 인플루언서 [박정진]",views:4116,likes:49,comments:14,duration:2900,date:"2026.03.14"},
+  {id:"TTX4piP6zD8",title:"방구석 백수가 글쓰기 하나로 6년만에 통장에 53억 모으게 된 방법 [알파남]",views:6482,likes:158,comments:37,duration:3149,date:"2026.02.02"},
+  {id:"gNUKe8viJKc",title:"두쫀쿠 하루 1500개 방구석에서 팔아서 하루 200만원 버는 30살 판매왕",views:6418,likes:73,comments:17,duration:1248,date:"2026.01.25"},
+  {id:"3mb37QpbZgs",title:"9천원짜리 백반 팔아서 32억 건물주가된 27살 밥통령",views:55855,likes:684,comments:109,duration:1496,date:"2026.01.05"},
+  {id:"aNeRakZEWOg",title:"방구석에서 먹방 찍다가 1년 150억 버는 44살 남편 [애주가 참PD]",views:6679,likes:136,comments:7,duration:1541,date:"2025.12.30"},
+  {id:"f2AxyBUXe1w",title:"남들 다 공부하고 대학 갈 때, 비트코인 4억 모은 21살 시간여행자",views:42381,likes:760,comments:104,duration:2206,date:"2025.12.19"},
+  {id:"xsgEVjLjUcQ",title:"8년동안 유튜브에 영상 올려서 매달 7억씩 버는 93년생 [채널주인부재중]",views:18294,likes:370,comments:18,duration:1343,date:"2025.12.08"},
+  {id:"cBAqGA8SHmc",title:"코로나 때 매달 5억 적자 나다가, 5년만에 120억을 벌게 된 백수의 하루",views:10774,likes:204,comments:16,duration:1066,date:"2025.12.01"},
+  {id:"EyxqVqC2N4Q",title:"사업실패 빚 20억 생겼어요, 유튜브 올인 연봉 5억 89년생",views:8063,likes:138,comments:49,duration:1478,date:"2025.11.16"},
+  {id:"xj-_6jD_Bz0",title:"5년 다닌 대기업 퇴사 후, 백수처럼 살면서 직장인 월급 5배 버는 30대",views:8879,likes:137,comments:6,duration:2144,date:"2025.11.07"},
+  {id:"pmNIuwfBKxM",title:"월세 60만 원 원룸 살던 부부가 10년 만에 300억 강남 건물주된 과정",views:7606,likes:112,comments:17,duration:2028,date:"2025.10.23"},
+  {id:"k4_nYwzXWKQ",title:"중국어 하나도 모르고 중국 SNS에 20초 영상으로 월 700만원 버는 20대",views:22144,likes:368,comments:58,duration:2017,date:"2025.10.12"},
+  {id:"mHy34if5BYs",title:"29만원 옥탑방에서 시작해서 다이어트로 10억 번 29살 [다이어트주양]",views:20635,likes:308,comments:17,duration:1576,date:"2025.10.04"},
+  {id:"7O6WHMS1wZo",title:"버려진 500만원 비닐하우스에서 시작, 5년만에 연봉 5억 쓸어담는 29살",views:41571,likes:521,comments:165,duration:1417,date:"2025.09.25"},
+  {id:"KfvGLM1iCcQ",title:"취업 못하고 백수로 살다가 3년간 쿠팡에서 쇼핑하면서 400평 회사 차린 29살",views:85488,likes:999,comments:142,duration:1793,date:"2025.09.14"},
+  {id:"30cnYaTVQ0o",title:"올리브영 화장품 사서 2배로 외국인에게 팔아 월 1,400만원 버는 40대",views:17830,likes:348,comments:424,duration:1393,date:"2025.09.13"},
+  {id:"WqErY8Fdlgs",title:"가방만 들고 가출했어요, 옥탑방에서 4잡 뛰면서 월 2천만원 버는 22살",views:7592,likes:153,comments:7,duration:1513,date:"2025.09.08"},
+  {id:"-uOISbZD9yY",title:"콩나물 500원 살 돈도 없었어요, 글 한 줄 잘 써서 10억 넘게 번 52살",views:69040,likes:1543,comments:396,duration:1456,date:"2025.09.03"}
+];
+
+// ===== SUPABASE =====
+const SUPABASE_URL = 'https://jiaezaanwjbbymeipkyt.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImppYWV6YWFud2piYnltZWlwa3l0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM2NjMzNjIsImV4cCI6MjA1OTIzOTM2Mn0.CM4MrRiSuAMfiSsPiKvZblnMIP6JiCnbrnzPHqtCDn4';
+let sb;
+try { sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY); } catch(e) { console.log('Supabase init skipped'); }
+
+let proposals = [];
+
+// ===== TAB SWITCHING =====
+const TABS = ['overview','reference','roadmap','proposals','episodes','monitor','strategy'];
+
+function switchTab(tab) {
+  TABS.forEach(t => {
+    const el = document.getElementById(t + 'View');
+    if (el) el.style.display = t === tab ? 'block' : 'none';
+    const btn = document.querySelector(`[data-tab="${t}"]`);
+    if (btn) btn.classList.toggle('active', t === tab);
+  });
+  if (tab === 'overview' && !window._overviewInit) initOverviewCharts();
+  if (tab === 'reference' && !window._refInit) initReferenceCharts();
+  if (tab === 'proposals' && proposals.length === 0) loadProposals();
+  if (tab === 'episodes' && !window._epInit) initEpisodes();
+}
+
+function switchSub(mode) {
+  document.getElementById('listSubView').style.display = mode === 'list' ? 'block' : 'none';
+  document.getElementById('calSubView').style.display = mode === 'cal' ? 'block' : 'none';
+  document.querySelectorAll('.sub-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+// ===== FORMAT HELPERS =====
+function fmtNum(n) { return n ? n.toLocaleString() : '0'; }
+function fmtDur(s) { return Math.floor(s/60) + '분 ' + (s%60) + '초'; }
+function fmtDurShort(s) { return Math.floor(s/60) + '분'; }
+
+// ===== TAB 1: OVERVIEW =====
+function initOverviewCharts() {
+  window._overviewInit = true;
+
+  // Recent videos table
+  const tbody = document.getElementById('recentVideos');
+  tbody.innerHTML = RECENT_VIDEOS.map(v => `
+    <tr onclick="window.open('https://youtu.be/${v.id}','_blank')">
+      <td style="max-width:320px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${v.title}</td>
+      <td class="num" style="font-weight:600;color:${v.views>50000?'var(--green)':v.views>10000?'var(--accent)':'var(--text)'}">${fmtNum(v.views)}</td>
+      <td class="num">${fmtNum(v.likes)}</td>
+      <td class="num">${fmtNum(v.comments)}</td>
+      <td class="num">${fmtDurShort(v.duration)}</td>
+      <td style="white-space:nowrap">${v.date}</td>
+    </tr>
+  `).join('');
+
+  // Views chart
+  const reversed = [...RECENT_VIDEOS].reverse();
+  new Chart(document.getElementById('viewsChart'), {
+    type: 'bar',
+    data: {
+      labels: reversed.map(v => v.date),
+      datasets: [{
+        label: '조회수',
+        data: reversed.map(v => v.views),
+        backgroundColor: reversed.map(v => v.views > 50000 ? '#ea580c' : v.views > 10000 ? '#f97316' : '#fed7aa'),
+        borderRadius: 4
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: true, ticks: { callback: v => v >= 1000 ? (v/1000)+'K' : v } } }
+    }
+  });
+
+  // CTR distribution chart
+  new Chart(document.getElementById('ctrChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['75점 (28개)', '65점 (63개)', '55점 (5개)', '45점 (1개)'],
+      datasets: [{
+        data: [28, 63, 5, 1],
+        backgroundColor: ['#ea580c', '#f97316', '#fed7aa', '#e5e5e5']
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 11 } } } }
+    }
+  });
+}
+
+// ===== TAB 2: REFERENCE =====
+function initReferenceCharts() {
+  window._refInit = true;
+
+  new Chart(document.getElementById('retentionCompareChart'), {
+    type: 'bar',
+    data: {
+      labels: ['평균 리텐션', '초반 30초', 'CTR', '썸네일 점수'],
+      datasets: [
+        {
+          label: '사찍남',
+          data: [26.5, 12.9, 4.7, 80],
+          backgroundColor: '#ea580c'
+        },
+        {
+          label: '돈탐생',
+          data: [26.9, 16.3, 5.0, 83],
+          backgroundColor: '#2563eb'
+        },
+        {
+          label: '휴먼스토리',
+          data: [21.3, 22.5, 5.1, 82],
+          backgroundColor: '#16a34a'
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'bottom', labels: { font: { size: 11 } } } },
+      scales: { y: { beginAtZero: true } }
+    }
+  });
+}
+
+// ===== TAB 4: PROPOSALS =====
+async function loadProposals() {
+  if (!sb) {
+    document.getElementById('proposalList').innerHTML = '<div class="empty-state">Supabase 연결 대기 중...</div>';
+    return;
+  }
+  try {
+    const { data, error } = await sb.from('proposals')
+      .select('*')
+      .eq('channel_id', '9a6def96-b22b-4cbc-afc2-1e0a0b45c29c')
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+    proposals = data || [];
+
+    if (proposals.length === 0) {
+      document.getElementById('proposalList').innerHTML = '<div class="empty-state">등록된 기획서가 없습니다</div>';
+      return;
+    }
+
+    document.getElementById('proposalList').innerHTML = proposals.map((p, i) => {
+      const status = p.status || 'draft';
+      const statusLabel = {draft:'초안',review:'검토중',approved:'승인',shooting:'촬영'}[status] || status;
+      return `<div class="proposal-card" onclick="openProposalDetail(${i})">
+        <span class="ep-badge">EP${String(p.episode_number||i+1).padStart(2,'0')}</span>
+        <div class="proposal-info">
+          <h3>${p.title || '제목 없음'}</h3>
+          <div class="proposal-meta">v${p.version||1} · ${p.format_type||'-'} · ${(p.created_at||'').slice(0,10)}</div>
+        </div>
+        <span class="status-badge ${status}">${statusLabel}</span>
+      </div>`;
+    }).join('');
+  } catch(e) {
+    document.getElementById('proposalList').innerHTML = `<div class="empty-state">기획서 로드 실패: ${e.message}</div>`;
+  }
+}
+
+function openProposalDetail(idx) {
+  const p = proposals[idx];
+  if (!p) return;
+  const panel = document.getElementById('detailPanel');
+  const status = p.status || 'draft';
+  const statusLabel = {draft:'초안',review:'검토중',approved:'승인',shooting:'촬영'}[status] || status;
+
+  let contentHtml = '';
+  if (p.content) {
+    const sections = p.content.split(/\n## /).filter(Boolean);
+    contentHtml = sections.map(s => {
+      const lines = s.split('\n');
+      const title = lines[0].replace(/^#+\s*/, '');
+      const body = lines.slice(1).join('\n').trim();
+      return `<div class="content-section"><h4>${title}</h4><p>${body.replace(/\n/g,'<br>')}</p></div>`;
+    }).join('');
+  }
+
+  panel.innerHTML = `
+    <div class="detail-header">
+      <div>
+        <span class="ep-badge">EP${String(p.episode_number||'?').padStart(2,'0')}</span>
+        <span style="font-size:18px;font-weight:700;margin-left:12px">${p.title||'제목 없음'}</span>
+      </div>
+      <button class="detail-close" onclick="closeDetail()">&times;</button>
+    </div>
+    <div class="detail-meta">
+      <div class="meta-item"><div class="meta-label">상태</div><div class="meta-value"><span class="status-badge ${status}">${statusLabel}</span></div></div>
+      <div class="meta-item"><div class="meta-label">버전</div><div class="meta-value">v${p.version||1}</div></div>
+      <div class="meta-item"><div class="meta-label">포맷</div><div class="meta-value">${p.format_type||'-'}</div></div>
+      <div class="meta-item"><div class="meta-label">생성일</div><div class="meta-value">${(p.created_at||'').slice(0,10)}</div></div>
+      <div class="meta-item"><div class="meta-label">검증 점수</div><div class="meta-value">${p.verification_score||'-'}점</div></div>
+      <div class="meta-item"><div class="meta-label">타겟 길이</div><div class="meta-value">${p.target_duration||'-'}분</div></div>
+    </div>
+    ${contentHtml || '<div class="empty-state">기획서 본문이 없습니다</div>'}
+  `;
+  document.getElementById('detailOverlay').classList.add('open');
+}
+
+function closeDetail() {
+  document.getElementById('detailOverlay').classList.remove('open');
+}
+
+// ===== TAB 5: EPISODES =====
+function initEpisodes() {
+  window._epInit = true;
+  const grid = document.getElementById('episodeGrid');
+  grid.innerHTML = RECENT_VIDEOS.map(v => `
+    <div class="ep-card" onclick="window.open('https://youtu.be/${v.id}','_blank')">
+      <img class="ep-thumb" src="${'https://i.ytimg.com/vi/'+v.id+'/mqdefault.jpg'}" alt="" loading="lazy">
+      <div class="ep-title">${v.title}</div>
+      <div class="ep-meta">
+        <span>${fmtNum(v.views)} views</span>
+        <span>${fmtDurShort(v.duration)}</span>
+        <span>${v.date}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ===== TAB 6: MONITOR =====
+function initMonitor() {
+  // Update with latest video data
+  const latest = RECENT_VIDEOS[0];
+  if (latest) {
+    document.getElementById('monViews').textContent = fmtNum(latest.views);
+    document.getElementById('monLikes').textContent = fmtNum(latest.likes);
+    document.getElementById('monComments').textContent = fmtNum(latest.comments);
+
+    // Calculate elapsed time
+    const uploadDate = new Date('2026-04-06T00:00:00+09:00');
+    const now = new Date();
+    const hours = Math.round((now - uploadDate) / 3600000);
+    document.getElementById('monElapsed').textContent = hours + 'h';
+  }
+
+  // Placeholder chart
+  new Chart(document.getElementById('monitorChart'), {
+    type: 'line',
+    data: {
+      labels: ['0h','0.5h','1h','1.5h','2h'],
+      datasets: [{
+        label: '조회수',
+        data: [0, 35, 72, 108, 143],
+        borderColor: '#ea580c',
+        backgroundColor: 'rgba(234,88,12,0.1)',
+        fill: true,
+        tension: 0.3
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: true } }
+    }
+  });
+}
+
+// ===== KEYBOARD =====
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeDetail();
+});
+
+// ===== TOAST =====
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ===== INIT =====
+document.addEventListener('DOMContentLoaded', () => {
+  initOverviewCharts();
+  initMonitor();
+});
+</script>
+</body>
+</html>
