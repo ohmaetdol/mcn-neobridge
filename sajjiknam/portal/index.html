@@ -138,9 +138,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Pretendard',sans-serif;backgr
 
 /* Chart Row */
 .chart-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
-.chart-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px}
-.chart-box h4{font-size:12px;font-weight:600;margin-bottom:6px;color:var(--dim)}
-.chart-box canvas{width:100%;height:220px}
+.chart-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;height:280px;display:flex;flex-direction:column;overflow:hidden}
+.chart-box h4{font-size:12px;font-weight:600;margin-bottom:6px;color:var(--dim);flex-shrink:0}
+.chart-box canvas{flex:1;min-height:0;width:100%}
 
 /* Buttons */
 .btn{padding:7px 14px;border:none;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;transition:.15s}
