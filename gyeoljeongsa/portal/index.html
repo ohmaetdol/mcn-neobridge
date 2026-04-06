@@ -242,6 +242,24 @@ body {
 /* List View */
 .proposal-list { display: flex; flex-direction: column; gap: 12px; }
 
+.new-proposal-btn {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 16px;
+  background: rgba(78,205,196,0.1);
+  border: 2px dashed rgba(78,205,196,0.4);
+  border-radius: 12px;
+  color: #4ecdc4;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.new-proposal-btn:hover {
+  background: rgba(78,205,196,0.2);
+  border-color: #4ecdc4;
+}
+
 .proposal-card {
   background: var(--card);
   border: 1px solid var(--border);
@@ -900,6 +918,7 @@ body {
     </div>
 
     <div id="listView" style="display:none">
+      <button class="new-proposal-btn" onclick="openNewProposal()">+ 새 기획서 작성</button>
       <div class="proposal-list" id="proposalList"></div>
     </div>
     </div><!-- /planningView -->
@@ -1946,6 +1965,51 @@ body {
   </div>
 </div>
 
+<!-- New Proposal Modal -->
+<div class="modal-overlay" id="newProposalModal">
+  <div class="modal" style="max-width:600px;max-height:85vh;overflow-y:auto">
+    <h3 style="margin-bottom:16px">새 기획서 작성</h3>
+    <div style="display:grid;gap:12px">
+      <div>
+        <label style="font-size:13px;font-weight:600;color:var(--text-dim);display:block;margin-bottom:4px">에피소드 번호</label>
+        <input type="number" id="npEpisode" min="1" max="99" placeholder="예: 11" style="width:100%;padding:10px;border:1px solid rgba(0,0,0,0.15);border-radius:8px;font-size:14px;box-sizing:border-box">
+      </div>
+      <div>
+        <label style="font-size:13px;font-weight:600;color:var(--text-dim);display:block;margin-bottom:4px">제목</label>
+        <input type="text" id="npTitle" placeholder="영상 제목" style="width:100%;padding:10px;border:1px solid rgba(0,0,0,0.15);border-radius:8px;font-size:14px;box-sizing:border-box">
+      </div>
+      <div>
+        <label style="font-size:13px;font-weight:600;color:var(--text-dim);display:block;margin-bottom:4px">부제</label>
+        <input type="text" id="npSubtitle" placeholder="한 줄 설명 (선택)" style="width:100%;padding:10px;border:1px solid rgba(0,0,0,0.15);border-radius:8px;font-size:14px;box-sizing:border-box">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div>
+          <label style="font-size:13px;font-weight:600;color:var(--text-dim);display:block;margin-bottom:4px">포맷</label>
+          <select id="npFormat" style="width:100%;padding:10px;border:1px solid rgba(0,0,0,0.15);border-radius:8px;font-size:14px;box-sizing:border-box">
+            <option value="A">A. 팩폭/정보형</option>
+            <option value="B">B. 성장 리얼리티</option>
+            <option value="C">C. 매칭 리얼리티</option>
+            <option value="D">D. 시의성/이슈</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size:13px;font-weight:600;color:var(--text-dim);display:block;margin-bottom:4px">러닝타임</label>
+          <input type="text" id="npDuration" placeholder="예: 10~12분" style="width:100%;padding:10px;border:1px solid rgba(0,0,0,0.15);border-radius:8px;font-size:14px;box-sizing:border-box">
+        </div>
+      </div>
+      <div>
+        <label style="font-size:13px;font-weight:600;color:var(--text-dim);display:block;margin-bottom:4px">기획서 내용 (마크다운)</label>
+        <p style="font-size:11px;color:var(--text-dim);margin-bottom:6px">## 제목 형식으로 섹션을 나누면 자동 분리됩니다</p>
+        <textarea id="npContent" placeholder="## 킥오프&#10;이 영상의 핵심 메시지...&#10;&#10;## 오프닝 (0~15초)&#10;훅: ...&#10;&#10;## 본론&#10;...&#10;&#10;## 엔딩&#10;..." style="width:100%;min-height:250px;padding:12px;border:1px solid rgba(0,0,0,0.15);border-radius:8px;font-size:13px;line-height:1.6;font-family:inherit;resize:vertical;box-sizing:border-box"></textarea>
+      </div>
+    </div>
+    <div class="modal-actions" style="margin-top:16px">
+      <button class="modal-btn cancel" onclick="closeNewProposal()">취소</button>
+      <button class="modal-btn submit" onclick="submitNewProposal()">기획서 제출</button>
+    </div>
+  </div>
+</div>
+
 <!-- Toast -->
 <div class="toast" id="toast"></div>
 
@@ -2130,6 +2194,12 @@ async function openDetail(id) {
       <button class="detail-close" onclick="closeDetail()">&times;</button>
     </div>
     <div class="detail-body">
+      <div class="status-actions" style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+        <button class="status-action-btn ${p.status==='approved'?'active-status':''}" style="background:${p.status==='approved'?'#16a34a':'rgba(22,163,74,0.15)'};color:${p.status==='approved'?'#fff':'#16a34a'};border:none;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer" onclick="changeStatus('${p.id}','approved')">승인</button>
+        <button class="status-action-btn ${p.status==='review'?'active-status':''}" style="background:${p.status==='review'?'#d97706':'rgba(217,119,6,0.15)'};color:${p.status==='review'?'#fff':'#d97706'};border:none;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer" onclick="changeStatus('${p.id}','review')">검토중</button>
+        <button class="status-action-btn ${p.status==='shooting'?'active-status':''}" style="background:${p.status==='shooting'?'#2563eb':'rgba(37,99,235,0.15)'};color:${p.status==='shooting'?'#fff':'#2563eb'};border:none;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer" onclick="changeStatus('${p.id}','shooting')">촬영예정</button>
+        <button style="background:rgba(239,68,68,0.15);color:#ef4444;border:none;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer" onclick="changeStatus('${p.id}','draft')">초안으로</button>
+      </div>
       <div class="detail-meta">
         <div class="meta-item"><div class="meta-label">상태</div><div class="meta-value">${{draft:'초안',review:'검토중',approved:'승인완료',shooting:'촬영예정'}[p.status] || p.status}</div></div>
         <div class="meta-item"><div class="meta-label">버전</div><div class="meta-value">v${p.version}</div></div>
@@ -2276,6 +2346,69 @@ async function submitModal() {
   openDetail(currentProposal.id);
 }
 
+// === STATUS CHANGE ===
+async function changeStatus(id, newStatus) {
+  const { error } = await sb.from('proposals').update({ status: newStatus }).eq('id', id);
+  if (error) {
+    showToast('상태 변경 실패: ' + error.message);
+    return;
+  }
+  const labels = {draft:'초안',review:'검토중',approved:'승인완료',shooting:'촬영예정'};
+  showToast(`${labels[newStatus]}(으)로 변경되었습니다`);
+  // 로컬 데이터 업데이트
+  const p = proposals.find(x => x.id === id);
+  if (p) p.status = newStatus;
+  renderList();
+  openDetail(id);
+}
+
+// === NEW PROPOSAL ===
+function openNewProposal() {
+  document.getElementById('npEpisode').value = '';
+  document.getElementById('npTitle').value = '';
+  document.getElementById('npSubtitle').value = '';
+  document.getElementById('npFormat').value = 'A';
+  document.getElementById('npDuration').value = '';
+  document.getElementById('npContent').value = '';
+  document.getElementById('newProposalModal').classList.add('open');
+}
+
+function closeNewProposal() {
+  document.getElementById('newProposalModal').classList.remove('open');
+}
+
+async function submitNewProposal() {
+  const epNum = parseInt(document.getElementById('npEpisode').value);
+  const title = document.getElementById('npTitle').value.trim();
+  const content = document.getElementById('npContent').value.trim();
+
+  if (!epNum || !title) {
+    showToast('에피소드 번호와 제목은 필수입니다');
+    return;
+  }
+
+  const row = {
+    episode_number: epNum,
+    title: title,
+    subtitle: document.getElementById('npSubtitle').value.trim() || null,
+    format_type: document.getElementById('npFormat').value,
+    status: 'draft',
+    content_md: content || null,
+    target_duration: document.getElementById('npDuration').value.trim() || null,
+    version: 1
+  };
+
+  const { data, error } = await sb.from('proposals').insert(row).select();
+  if (error) {
+    showToast('저장 실패: ' + error.message);
+    return;
+  }
+
+  showToast('기획서가 등록되었습니다');
+  closeNewProposal();
+  await loadData();
+}
+
 // === UTILS ===
 function timeAgo(dateStr) {
   const diff = Date.now() - new Date(dateStr).getTime();
@@ -2347,7 +2480,8 @@ function initPositionChart() {
 // Keyboard
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
-    if (document.getElementById('commentModal').classList.contains('open')) closeModal();
+    if (document.getElementById('newProposalModal').classList.contains('open')) closeNewProposal();
+    else if (document.getElementById('commentModal').classList.contains('open')) closeModal();
     else closeDetail();
   }
 });
