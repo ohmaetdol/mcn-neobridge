@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>알파남 김지수 블로그 수익화 × 부업소개하는남자</title>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F2F4F6;color:#191F28;font-family:'Pretendard',system-ui,sans-serif;min-height:100vh;font-size:15px}
+.gnb{background:#fff;border-bottom:1px solid #E5E8EB;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.gnb-logo{font-size:16px;font-weight:800;color:#F08F00}
+.gnb-badge{background:#FFF7E6;color:#F08F00;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:800;border:1px solid #FFD700}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 80px}
+.hero{background:linear-gradient(135deg,#191F28 0%,#2E3745 100%);border-radius:20px;padding:36px 32px;margin-bottom:16px;position:relative;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.15)}
+.hero::before{content:'';position:absolute;top:-50%;right:-10%;width:300px;height:300px;background:radial-gradient(circle,rgba(255,215,0,.15),transparent);pointer-events:none}
+.hero-eyebrow{font-size:11px;font-weight:700;color:#FFD700;letter-spacing:2px;margin-bottom:10px}
+.hero-title{font-size:28px;font-weight:800;line-height:1.25;margin-bottom:10px;color:#fff}
+.hero-sub{color:#8B95A1;font-size:13px;line-height:1.7}
+.hero-data{display:inline-block;background:rgba(240,143,0,.15);border:1px solid rgba(240,143,0,.4);border-radius:8px;padding:4px 10px;font-size:11px;color:#FFD700;font-weight:700;margin-top:8px}
+.flow-row{display:flex;gap:8px;align-items:center;background:#fff;border-radius:12px;padding:14px 20px;margin-bottom:16px;flex-wrap:wrap;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+.flow-step{background:#F2F4F6;color:#6B7684;border-radius:8px;padding:8px 14px;font-size:12px;font-weight:700;text-align:center}
+.flow-step.active{background:#F08F00;color:#fff}
+.flow-arrow{color:#F08F00;font-size:18px;font-weight:700}
+.tabs{display:flex;gap:6px;margin-bottom:18px;flex-wrap:wrap}
+.tab-btn{padding:9px 16px;border-radius:10px;border:1.5px solid #E5E8EB;background:#fff;font-size:13px;font-weight:700;cursor:pointer;color:#6B7684;transition:.15s}
+.tab-btn.on{background:#F08F00;border-color:#F08F00;color:#fff}
+.panel{display:none}.panel.on{display:block}
+.card{background:#fff;border-radius:16px;padding:22px;margin-bottom:14px;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+.card.hot{border:2px solid #F04452;background:#FFF8F8}
+.card.gold{border:2px solid #F08F00;background:#FFFBF0}
+.card.data{border:2px solid #3182F6;background:#F0F6FF}
+.card-label{font-size:11px;font-weight:700;color:#F08F00;letter-spacing:1.5px;margin-bottom:14px;text-transform:uppercase}
+.card-label.red{color:#F04452}
+.card-label.blue{color:#3182F6}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.stat{background:#FFF7E6;border-radius:12px;padding:14px;text-align:center}
+.stat-v{font-size:22px;font-weight:800;color:#F08F00}
+.stat-l{font-size:11px;color:#6B7684;margin-top:3px}
+.stat.blue-bg{background:#EFF3FF}
+.stat.blue-bg .stat-v{color:#3182F6}
+.q-row{padding:12px 0;border-bottom:1px solid #F2F4F6;font-size:13px;line-height:1.6;display:flex;gap:10px}
+.q-row:last-child{border-bottom:none}
+.q-num{font-size:12px;font-weight:800;color:#F08F00;min-width:36px;padding-top:1px}
+.tag{display:inline-block;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:700;margin-right:5px;white-space:nowrap}
+.tag-y{background:#FFF7E6;color:#F08F00}
+.tag-r{background:#FFF0F0;color:#F04452}
+.tag-g{background:#F0FFF4;color:#05C072}
+.tag-b{background:#EFF3FF;color:#3182F6}
+.script-box{background:#F8F9FA;border:1px solid #E5E8EB;border-radius:10px;padding:18px;margin:12px 0;font-size:13px;color:#191F28;line-height:2.2}
+.timeline-box{background:#F8F9FA;border-radius:12px;padding:18px;margin-bottom:14px;border:1px solid #E5E8EB}
+.tl-row{display:flex;gap:14px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #E5E8EB}
+.tl-row:last-child{border-bottom:none}
+.tl-time{font-size:12px;font-weight:800;color:#F08F00;min-width:70px;padding-top:2px}
+.tl-text{font-size:13px;color:#3E4A5A;line-height:1.7}
+.tl-badge{display:inline-block;background:#F04452;color:#fff;border-radius:4px;padding:1px 6px;font-size:10px;font-weight:800;margin-left:6px}
+.tl-badge.blue{background:#3182F6}
+.insight-box{background:#FFF7E6;border-left:3px solid #F08F00;border-radius:0 8px 8px 0;padding:14px 16px;margin:10px 0;font-size:13px;line-height:1.7;color:#3E4A5A}
+.insight-box.blue{background:#EFF3FF;border-left-color:#3182F6}
+.comment-like{font-size:11px;color:#8B95A1;margin-left:6px}
+.usp-block{border:1.5px solid #E5E8EB;border-radius:12px;padding:16px 18px;margin-bottom:10px}
+.usp-step{font-size:11px;font-weight:700;color:#F08F00;margin-bottom:6px}
+.usp-title{font-size:15px;font-weight:800;margin-bottom:8px;color:#191F28}
+.usp-body{font-size:13px;color:#3E4A5A;line-height:1.7;border-left:3px solid #F08F00;padding-left:14px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{padding:10px;text-align:left;border-bottom:2px solid #E5E8EB;color:#F08F00;font-size:11px;text-transform:uppercase;background:#FFFBF0}
+td{padding:10px;border-bottom:1px solid #F2F4F6;color:#3E4A5A}
+.law-card{background:#F8F9FA;border-radius:12px;padding:16px;margin-bottom:10px;border:1px solid #E5E8EB}
+.law-num{display:inline-block;background:#F08F00;color:#fff;border-radius:6px;padding:2px 8px;font-size:11px;font-weight:800;margin-bottom:8px}
+.law-title{font-size:14px;font-weight:800;color:#191F28;margin-bottom:6px}
+.law-body{font-size:12px;color:#6B7684;line-height:1.7}
+.law-apply{font-size:12px;color:#F08F00;font-weight:700;margin-top:6px}
+.retention-bar{height:24px;border-radius:4px;margin-bottom:4px;position:relative;overflow:hidden}
+.retention-bar .fill{height:100%;border-radius:4px;transition:.3s}
+.retention-bar .label{position:absolute;right:6px;top:3px;font-size:10px;font-weight:700;color:#fff}
+.peak-marker{background:#F04452;color:#fff;border-radius:4px;padding:2px 6px;font-size:10px;font-weight:800;display:inline-block}
+@media(max-width:600px){.stat-row{grid-template-columns:1fr 1fr}.two{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav class="gnb">
+  <span class="gnb-logo">부업소개하는남자 x 알파남</span>
+  <span class="gnb-badge">20개 영상 리텐션 실측 기반</span>
+</nav>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-eyebrow">CONTENT PLANNING GUIDE v2.0 — DATA-DRIVEN</div>
+    <div class="hero-title">운전기사가 글만 써서<br>5년 만에 50억 번 방법</div>
+    <div class="hero-sub">알파남 김지수 (31세) | 블로그 수익화 | 애드센스팜 대표<br>절약왕정약용 10개 + 옆집CEO 10개 = 20개 영상 리텐션 실측 기반</div>
+    <div class="hero-data">retention_analyzer.py | 히트맵+자막 1초 매핑 | 2026.04.07</div>
+  </div>
+
+  <div class="flow-row">
+    <div class="flow-step">사찍남 25분<br><small style="font-weight:400">인생 서사</small></div>
+    <div class="flow-arrow">></div>
+    <div class="flow-step active">부업소개 10분<br><small style="font-weight:400">실전 방법</small></div>
+    <div class="flow-arrow">></div>
+    <div class="flow-step">강의/책 등록<br><small style="font-weight:400">전환</small></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn on" onclick="go('overview',this)">기획 개요</button>
+    <button class="tab-btn" onclick="go('timeline',this)">10분 타임라인</button>
+    <button class="tab-btn" onclick="go('questions',this)">질문지 30개</button>
+    <button class="tab-btn" onclick="go('psychology',this)">심리 레이어</button>
+    <button class="tab-btn" onclick="go('ref',this)">레퍼런스</button>
+    <button class="tab-btn" onclick="go('data',this)" style="border-color:#3182F6;color:#3182F6">데이터 근거</button>
+  </div>
+
+  <!-- ========== TAB 1: 기획 개요 ========== -->
+  <div class="panel on" id="tab-overview">
+
+    <div class="card gold">
+      <div class="card-label">핵심 수치</div>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-v">50억</div><div class="stat-l">5년 누적 매출</div></div>
+        <div class="stat"><div class="stat-v">23억</div><div class="stat-l">블로그 순수익</div></div>
+        <div class="stat"><div class="stat-v">59억</div><div class="stat-l">순자산 (자칭)</div></div>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-v">300만</div><div class="stat-l">첫 달 수익</div></div>
+        <div class="stat"><div class="stat-v">20명</div><div class="stat-l">직원 규모</div></div>
+        <div class="stat"><div class="stat-v">250만</div><div class="stat-l">전직 운전기사 월급</div></div>
+      </div>
+    </div>
+
+    <div class="card hot">
+      <div class="card-label red">Most Replayed 실측 — 20개 영상 분석 결과</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:14px">
+        <div style="background:#F8F9FA;border-radius:10px;padding:14px">
+          <div style="font-size:11px;color:#F04452;font-weight:700;margin-bottom:6px">절약왕 TOP1 (210만뷰)</div>
+          <div style="font-size:15px;font-weight:800;margin-bottom:4px">피크 04:16</div>
+          <div style="font-size:11px;color:#8B95A1">영상의 37% 지점<br>아이템스카우트 키워드 검색 화면</div>
+        </div>
+        <div style="background:#F8F9FA;border-radius:10px;padding:14px">
+          <div style="font-size:11px;color:#F04452;font-weight:700;margin-bottom:6px">옆집CEO TOP1 (103만뷰)</div>
+          <div style="font-size:15px;font-weight:800;margin-bottom:4px">피크 10:30</div>
+          <div style="font-size:11px;color:#8B95A1">영상의 68% 지점<br>카페 공급자 구하기 화면 공유</div>
+        </div>
+        <div style="background:#F8F9FA;border-radius:10px;padding:14px">
+          <div style="font-size:11px;color:#3182F6;font-weight:700;margin-bottom:6px">알파남 콜라보 (24만뷰)</div>
+          <div style="font-size:15px;font-weight:800;margin-bottom:4px">피크 09:11</div>
+          <div style="font-size:11px;color:#8B95A1">영상의 30% 지점<br>AI 블로그 승인 방법 설명</div>
+        </div>
+      </div>
+      <div class="insight-box">
+        <strong style="color:#F04452">데이터 결론:</strong> 두 채널 평균 피크 위치 = 영상의 <strong>51%</strong> 지점. 10분 완결 기준 <strong>5~7분에 화면 공유</strong>해야 한다.<br>
+        알파남 > <strong>5~7분에 애드센스 대시보드 + AI 블로그 시연</strong>, <strong>7~8분에 수강생 수익 인증</strong> 공개.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">호스트 인트로 스크립트</div>
+      <div style="font-size:12px;color:#8B95A1;margin-bottom:10px">패턴: 부정 선제 > 예외 공개 > 의심 대리 > 증거 > 오늘 공개</div>
+      <div class="script-box">
+저 솔직히 처음엔 안 믿었어요.
+
+블로그 글만 써서 5년에 50억을 벌었다고요?
+
+근데 이 분, 원래 운전기사였거든요. 월급 250만원.
+
+...살다 살다 이런 분은 처음 봤습니다.
+
+오늘 그 방법 전부 공개합니다.
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:10px">
+        <div style="background:#FFFBF0;border-radius:8px;padding:12px;text-align:center;border:1px solid #F08F00">
+          <div style="font-size:11px;color:#F08F00;font-weight:700;margin-bottom:4px">부정 선제</div>
+          <div style="font-size:12px;color:#8B95A1">"안 믿었다"<br>방어심 해제</div>
+        </div>
+        <div style="background:#FFFBF0;border-radius:8px;padding:12px;text-align:center;border:1px solid #F08F00">
+          <div style="font-size:11px;color:#F08F00;font-weight:700;margin-bottom:4px">갭 투하</div>
+          <div style="font-size:12px;color:#8B95A1">"운전기사 250만원"<br>반전 극대화</div>
+        </div>
+        <div style="background:#FFFBF0;border-radius:8px;padding:12px;text-align:center;border:1px solid #F08F00">
+          <div style="font-size:11px;color:#F08F00;font-weight:700;margin-bottom:4px">감탄 전환</div>
+          <div style="font-size:12px;color:#8B95A1">"살다살다 처음"<br>옆집CEO 패턴</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">제목 후보 — 데이터 기반 TOP 5</div>
+      <div class="usp-block">
+        <div class="usp-step">1순위 — 전직 갭 + 금액 (절약왕 210만뷰 공식)</div>
+        <div class="usp-title">월급 250만원 운전기사가 블로그 하나로 5년에 50억 벌었습니다</div>
+        <div class="usp-body">전직(갭) + 수단 + 기간 + 금액. 절약왕 "퇴근후 부업 월500만원 BEST5" (210만뷰) 패턴 적용.</div>
+      </div>
+      <div class="usp-block">
+        <div class="usp-step">2순위 — AI + 월수익 (옆집CEO 콜라보 24만뷰 키워드)</div>
+        <div class="usp-title">운전기사 출신이 AI 블로그로 월 1억 버는 진짜 방법</div>
+        <div class="usp-body">알파남 콜라보 피크 09:11 = "AI 블로그 승인" 키워드. 시청자 최대 관심사를 제목에 반영.</div>
+      </div>
+      <div class="usp-block">
+        <div class="usp-step">3순위 — 규모 반전 (옆집CEO 스토리형)</div>
+        <div class="usp-title">직원 20명 뽑은 블로그 사장님, 알고 보니 전직 운전기사</div>
+        <div class="usp-body">현재 규모 + 전직 반전. 옆집CEO "보통 사람의 성공 스토리" 포맷.</div>
+      </div>
+      <div class="usp-block">
+        <div class="usp-step">4순위 — 의심 검증형 (절약왕 '검증왕' 70만뷰 패턴)</div>
+        <div class="usp-title">블로그 글만 써서 5년에 50억? 직접 확인해봤습니다</div>
+        <div class="usp-body">"진짜인가?" 의심 + 검증. 댓글 공유 유도 효과.</div>
+      </div>
+      <div class="usp-block">
+        <div class="usp-step">5순위 — 논란 정면돌파 (댓글 폭발 기대)</div>
+        <div class="usp-title">성공팔이라고 욕먹는 블로거, 진짜 수익 확인해봤더니</div>
+        <div class="usp-body">나무위키 논란 활용. 정면 돌파 시 댓글/공유 폭발 기대.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">썸네일 전략</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div style="background:#F8F9FA;border-radius:10px;padding:14px;border:1px solid #FFD700">
+          <div style="font-size:11px;color:#F08F00;margin-bottom:8px;font-weight:700">이렇게 찍으세요</div>
+          <div style="font-size:12px;color:#3E4A5A;line-height:2">배경: 애드센스 수익 대시보드<br>텍스트: <strong style="color:#F08F00">5년 50억</strong> + 운전기사 출신<br>얼굴: 김지수 측면, 노트북 앞<br>포인트: 수익 그래프 빨간 화살표</div>
+        </div>
+        <div style="background:#F8F9FA;border-radius:10px;padding:14px;border:1px solid #F04452">
+          <div style="font-size:11px;color:#F04452;margin-bottom:8px;font-weight:700">절대 안 됩니다</div>
+          <div style="font-size:12px;color:#8B95A1;line-height:2">스튜디오 배경<br>정면 포즈 + 웃음<br>수치 없는 썸네일<br>흐릿한 텍스트</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== TAB 2: 10분 타임라인 ========== -->
+  <div class="panel" id="tab-timeline">
+    <div class="card hot">
+      <div class="card-label red">핵심 원칙 — 20개 영상 실측</div>
+      <div class="insight-box">
+        두 채널 평균 피크 = 영상의 <strong>51%</strong> 지점. 10분 완결 기준 <strong>5~7분에 화면 공유(AI 블로그 시연 + 애드센스)</strong>가 Most Replayed 피크.<br>
+        알파남 콜라보 피크 <strong>09:11</strong>("AI 블로그 승인 방법") = 시청자 최대 관심사. 이것을 <strong>5분대로 앞당겨</strong> 배치.
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">10분 완결 타임라인 (데이터 기반 피크 설계)</div>
+      <div class="timeline-box">
+        <div class="tl-row">
+          <div class="tl-time">0~5초</div>
+          <div class="tl-text"><strong>킬러 훅</strong> — 애드센스 수익 화면 풀샷 + "운전기사가 5년에 50억" <span class="tl-badge blue">초반 리텐션 0.05>0.25 목표</span><br><span style="font-size:11px;color:#8B95A1">근거: 옆집CEO 콜라보 초반 0.05 → 숫자 훅 없었기 때문</span></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">5초~1분</div>
+          <div class="tl-text"><strong>호스트 인트로 + 배경</strong> — "저 솔직히 처음엔 안 믿었어요" > 월급 250만원 운전기사 시절<br><span style="font-size:11px;color:#8B95A1">근거: 옆집CEO 패턴 — 의심 선제 > 공감 유도</span></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">1~3분</div>
+          <div class="tl-text"><strong>왜 블로그인가</strong> — 초기 자본 0원, 노트북만 있으면 가능. 티스토리/워드프레스 차이. AI가 바꾼 것.<br><span style="font-size:11px;color:#8B95A1">근거: 절약왕 6분 미만 영상 킬러 8.3% — 짧고 핵심만</span></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">3~5분</div>
+          <div class="tl-text"><strong>핵심 방법 1: AI 블로그 글쓰기</strong> — 실시간 시연 (화면 공유). 키워드 선정법 + 글 하나 쓰는 과정.<br><span style="font-size:11px;color:#8B95A1">근거: 20개 중 18개 영상에서 "화면 공유 순간" = 최고 피크</span></div>
+        </div>
+        <div class="tl-row" style="border:2px solid #F04452;border-radius:8px;margin:4px 0;background:#FFF0F0">
+          <div class="tl-time" style="color:#F04452">5~7분<br><small style="color:#F04452">피크 1</small></div>
+          <div class="tl-text"><strong style="color:#F04452">애드센스 승인 + 수익 구조 화면 공유</strong><span class="tl-badge">Most Replayed 설계</span><br>"AI 드릴테니까 이걸로 승인용 글 써주고, 4시간 간격 12개 발행" — 옆집CEO 콜라보 피크(09:11) 내용을 5분대로 전진 배치<br><span style="font-size:11px;color:#F04452">근거: 절약왕 피크 04:16(37%), 옆집CEO 피크 10:30(68%) → 평균 51%</span></div>
+        </div>
+        <div class="tl-row" style="border:2px solid #F08F00;border-radius:8px;margin:4px 0;background:#FFFBF0">
+          <div class="tl-time" style="color:#F08F00">7~8:30분<br><small style="color:#F08F00">피크 2</small></div>
+          <div class="tl-text"><strong style="color:#F08F00">수익 인증 날것 공개</strong><span class="tl-badge" style="background:#F08F00">신뢰 부스터</span><br>애드센스 대시보드 실시간 + 수강생 수익 인증 화면 + 직원 17명 사무실<br><span style="font-size:11px;color:#F08F00">근거: 절약왕 TOP1 피크 = 수익 인증 순간 / 옆집CEO 피크 = 단톡방 화면</span></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">8:30~9:30</div>
+          <div class="tl-text"><strong>논란 정면 돌파 + 장벽 해소</strong> — 성공팔이? 소득증명? HCU? AI 시대? 초보자 가능?<br><span style="font-size:11px;color:#8B95A1">근거: 옆집CEO 콜라보에서 안 다룬 부분 + 댓글 폭발 기대</span></div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">9:30~10분</div>
+          <div class="tl-text"><strong>CTA (짧게)</strong> — "책에서 기본기, 강의에서 실전 키워드 전부 열어드립니다. 설명란." + 사찍남 채널 예고<br><span style="font-size:11px;color:#8B95A1">근거: 마지막 10% 급격한 이탈 (법칙4) — CTA는 피크 직후, 엔딩 10초 이내</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-label">8:30~9:30 장벽 해소 구간 상세</div>
+      <div style="font-size:12px;color:#8B95A1;margin-bottom:12px">시청자 예상 의심을 정면 돌파해야 이탈 방지. 옆집CEO 콜라보(31분)에서 빠진 내용 위주.</div>
+      <div class="q-row"><div class="q-num">1</div><div><span class="tag tag-r">장벽1</span> <strong>구글 HCU 이후 신규 블로거 어렵지 않나?</strong> > "맞다. 근데 이렇게 하면 된다" 구체적 대응법</div></div>
+      <div class="q-row"><div class="q-num">2</div><div><span class="tag tag-r">장벽2</span> <strong>AI가 글 쓰는데 사람이 왜 써야 하나?</strong> > "AI로 쓰는 사람이 가장 빠르다. 내가 그걸 가르친다"</div></div>
+      <div class="q-row"><div class="q-num">3</div><div><span class="tag tag-r">장벽3</span> <strong>진짜 블로그만으로 그만큼 버나? 언론사 수익 아닌가?</strong> > "처음엔 블로그만으로 가능. 커지면 확장하는 것"</div></div>
+    </div>
+
+    <div class="card data">
+      <div class="card-label blue">반복 금지 — 옆집CEO 콜라보(VMlEck5Gtc4)에서 이미 다룬 것</div>
+      <div style="font-size:12px;color:#3E4A5A;line-height:2">
+        <span class="tag tag-r">금지</span> AI 블로그 4시간 간격 12개 발행 상세 (이미 공개됨)<br>
+        <span class="tag tag-r">금지</span> 56억 매출 숫자 단독 강조 (옆집CEO 제목에 사용됨)<br>
+        <span class="tag tag-r">금지</span> 블루오션 틈새시장 일반론 (옆집CEO에서 15분 다룸)<br>
+        <span class="tag tag-r">금지</span> 에스지출판사 회사 소개 (이미 공개됨)<br>
+        <br>
+        <span class="tag tag-g">새로 파기</span> 운전기사 시절 구체 에피소드 (월 250만원 생활)<br>
+        <span class="tag tag-g">새로 파기</span> 첫 수익 0원 > 100만원까지 과정 (옆집CEO에서 빠진 부분)<br>
+        <span class="tag tag-g">새로 파기</span> AI 도입 전 vs 후 수익 변화 구체 비교<br>
+        <span class="tag tag-g">새로 파기</span> 논란에 대한 본인 입장 (옆집CEO에서 안 다룸)<br>
+        <span class="tag tag-g">새로 파기</span> 수강생 실패 사례와 원인 분석 (날것)
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== TAB 3: 질문지 30개 ========== -->
+  <div class="panel" id="tab-questions">
+    <div class="card">
+      <div class="card-label">부업소개하는남자 전용 질문지 — 30개</div>
+      <div style="font-size:12px;color:#8B95A1;margin-bottom:14px">원칙: 시청자가 바로 따라할 수 있는 정보 직접 추출. "어렵다" 반응 선제 차단.</div>
+
+      <div style="font-size:11px;font-weight:700;color:#F08F00;margin-bottom:8px">수익 구조 (Q1~8)</div>
+      <div class="q-row"><div class="q-num">Q1</div><div><span class="tag tag-g">수익</span> 블로그로 5년에 50억 벌었다는데, 광고비나 직원 월급 빼고 실제로 남는 게 얼마예요?</div></div>
+      <div class="q-row"><div class="q-num">Q2</div><div><span class="tag tag-y">시작</span> 운전기사 하면서 블로그 시작했다고요? 첫 달에 진짜 300만원 벌었어요?</div></div>
+      <div class="q-row"><div class="q-num">Q3</div><div><span class="tag tag-g">수익</span> 블로그 수익이 어떻게 들어오는 건지, 진짜 쉽게 설명해주세요.</div></div>
+      <div class="q-row"><div class="q-num">Q4</div><div><span class="tag tag-y">실행</span> 지금 하루에 블로그에 쓰는 시간이 얼마나 돼요?</div></div>
+      <div class="q-row"><div class="q-num">Q5</div><div><span class="tag tag-r">실증</span> 지금 애드센스 대시보드 보여줄 수 있어요? 오늘 얼마 들어왔어요? <span class="peak-marker">5~7분 피크</span></div></div>
+      <div class="q-row"><div class="q-num">Q6</div><div><span class="tag tag-g">수익</span> 블로그 하나로 벌 수 있는 최대가 얼마예요? 한계가 있어요?</div></div>
+      <div class="q-row"><div class="q-num">Q7</div><div><span class="tag tag-y">실행</span> 티스토리, 워드프레스, 네이버 블로그 중 뭘로 시작해야 해요?</div></div>
+      <div class="q-row"><div class="q-num">Q8</div><div><span class="tag tag-r">장벽</span> 글을 잘 못 써도 돼요? 어머니가 60대인데 하고 계신다면서요?</div></div>
+
+      <div style="font-size:11px;font-weight:700;color:#F08F00;margin:12px 0 8px">키워드와 노하우 (Q9~14)</div>
+      <div class="q-row"><div class="q-num">Q9</div><div><span class="tag tag-r">핵심</span> 돈 되는 키워드를 어떻게 찾아요? 지금 하나만 보여주세요. <span class="peak-marker">3~5분 화면공유</span></div></div>
+      <div class="q-row"><div class="q-num">Q10</div><div><span class="tag tag-y">실행</span> 글 하나 쓰는 데 얼마나 걸려요? 몇 자 정도 써야 해요?</div></div>
+      <div class="q-row"><div class="q-num">Q11</div><div><span class="tag tag-r">실증</span> 지금 가장 돈 잘 버는 블로그 주제가 뭐예요?</div></div>
+      <div class="q-row"><div class="q-num">Q12</div><div><span class="tag tag-b">차별화</span> 다른 블로그 강사들이랑 뭐가 달라요? 왜 알파남한테 배워야 해요?</div></div>
+      <div class="q-row"><div class="q-num">Q13</div><div><span class="tag tag-y">실행</span> AI로 글 쓰면 안 돼요? ChatGPT로 쓰면 어떻게 돼요?</div></div>
+      <div class="q-row"><div class="q-num">Q14</div><div><span class="tag tag-r">장벽</span> 초기 비용이 얼마나 들어요? 진짜 0원으로 시작 가능해요?</div></div>
+
+      <div style="font-size:11px;font-weight:700;color:#F08F00;margin:12px 0 8px">실증 공개 (Q15~20) — 5~7분 피크 설계</div>
+      <div class="q-row"><div class="q-num">Q15</div><div><span class="tag tag-r">피크</span> 지금 애드센스 승인 과정을 처음부터 보여줄 수 있어요? <span class="peak-marker">5분 피크 트리거</span></div></div>
+      <div class="q-row"><div class="q-num">Q16</div><div><span class="tag tag-r">피크</span> 수강생 중에 첫 달 수익 낸 분 있어요? 진짜 결과 보여주세요.</div></div>
+      <div class="q-row"><div class="q-num">Q17</div><div>가장 빨리 첫 수익 낸 수강생은 며칠 만에 됐어요?</div></div>
+      <div class="q-row"><div class="q-num">Q18</div><div>수강생 중 실패한 사람도 있어요? 왜 실패했어요?</div></div>
+      <div class="q-row"><div class="q-num">Q19</div><div>블로그로 월 100만원 버는 데 현실적으로 얼마나 걸려요?</div></div>
+      <div class="q-row"><div class="q-num">Q20</div><div>이 방법이 안 맞는 사람이 있어요? 누구한테는 추천 안 해요?</div></div>
+
+      <div style="font-size:11px;font-weight:700;color:#F08F00;margin:12px 0 8px">리스크와 현실 (Q21~25) — 8:30 논란 구간</div>
+      <div class="q-row"><div class="q-num">Q21</div><div><span class="tag tag-r">신뢰</span> 솔직하게요. 이 사업의 리스크 3가지만 말해주세요.</div></div>
+      <div class="q-row"><div class="q-num">Q22</div><div>구글이 정책 바꾸면 수익이 갑자기 0이 될 수도 있잖아요?</div></div>
+      <div class="q-row"><div class="q-num">Q23</div><div>AI 시대에 블로그가 아직 살아남을 수 있어요?</div></div>
+      <div class="q-row"><div class="q-num">Q24</div><div>"팀원들이 경쟁사로 다 떠났다"는 영상 봤는데, 무슨 일이었어요?</div></div>
+      <div class="q-row"><div class="q-num">Q25</div><div>인터넷에 보면 "성공팔이"라는 비판도 있던데, 어떻게 생각해요?</div></div>
+
+      <div style="font-size:11px;font-weight:700;color:#F08F00;margin:12px 0 8px">CTA (Q26~30)</div>
+      <div class="q-row"><div class="q-num">Q26</div><div><span class="tag tag-g">CTA</span> 책에서는 뭘 배울 수 있어요? 강의랑 뭐가 달라요?</div></div>
+      <div class="q-row"><div class="q-num">Q27</div><div><span class="tag tag-g">CTA</span> 강의 끝나면 어디까지 할 수 있게 돼요? 결과물이 뭐예요?</div></div>
+      <div class="q-row"><div class="q-num">Q28</div><div>지금 당장 오늘부터 시작하려면 뭘 해야 해요?</div></div>
+      <div class="q-row"><div class="q-num">Q29</div><div><span class="tag tag-r">실행</span> 이 영상 보는 사람들, 딱 하나만 행동하라면 뭘 하라고요?</div></div>
+      <div class="q-row"><div class="q-num">Q30</div><div><span class="tag tag-g">CTA</span> 책이나 강의 신청은 어디서 해요?</div></div>
+    </div>
+  </div>
+
+  <!-- ========== TAB 4: 심리 레이어 ========== -->
+  <div class="panel" id="tab-psychology">
+    <div class="card">
+      <div class="card-label">타겟 시청자와 심리</div>
+      <table style="margin-bottom:14px">
+        <tr><th>항목</th><th>내용</th></tr>
+        <tr><td>타겟</td><td>부업 찾는 20~40대 직장인, 블로그/재택 부업에 관심 있는 사람</td></tr>
+        <tr><td>왜 보는지</td><td>"블로그로 진짜 돈 벌 수 있는지 확인" + "나도 할 수 있는지 판단"</td></tr>
+        <tr><td>건드리는 감정</td><td>의심("50억 진짜?") > 공감("나도 250만원인데") > 긴박감("AI 시대에 빨리 해야")</td></tr>
+        <tr><td>이 영상의 약속</td><td>"이 영상을 보면 블로그로 월 100만원 이상 버는 로드맵이 생긴다"</td></tr>
+      </table>
+    </div>
+
+    <div class="card hot">
+      <div class="card-label red">시청자 예상 의심 TOP 5</div>
+      <div class="q-row"><div class="q-num">1</div><div><strong>"50억이 진짜야?"</strong> — 소득금액증명 없이 애드센스 캡처만. 조작 가능성. > 촬영 현장에서 실시간 대시보드 보여주기로 해소.</div></div>
+      <div class="q-row"><div class="q-num">2</div><div><strong>"블로그만으로 그게 가능해?"</strong> — 실제로는 언론사 운영 수익이 큼. > "처음엔 블로그만으로 가능, 커지면 확장" 정직하게 말하기.</div></div>
+      <div class="q-row"><div class="q-num">3</div><div><strong>"강의 팔려고 과장하는 거 아니야?"</strong> — 나무위키 성공팔이 등재. > Q25에서 직접 물어보기. 회피하면 안 됨.</div></div>
+      <div class="q-row"><div class="q-num">4</div><div><strong>"HCU 이후에도 되나?"</strong> — 2024년 구글 정책 변경으로 신규 블로거 어려워짐. > 현실 인정 + 대응법 구체적으로.</div></div>
+      <div class="q-row"><div class="q-num">5</div><div><strong>"60대 어머니까지 시켜서 돈 버는 거냐?"</strong> — 어머니 마케팅 논란. > 어머니 본인 의지인지 직접 확인.</div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">감정 흐름 설계 (데이터 매핑)</div>
+      <div style="font-size:14px;line-height:2;color:#3E4A5A;text-align:center;padding:10px 0">
+        <strong style="color:#F04452">의심</strong>(0~1분) >
+        <strong style="color:#F08F00">호기심</strong>(1~3분) >
+        <strong style="color:#3182F6">이해</strong>(3~5분) >
+        <strong style="color:#F04452">증거1</strong>(5~7분 피크) >
+        <strong style="color:#7B61FF">놀라움</strong>(7~8:30 수익인증) >
+        <strong style="color:#05C072">확신</strong>(8:30~9:30) >
+        <strong style="color:#F08F00">행동</strong>(9:30~10분)
+      </div>
+      <div class="insight-box blue">
+        <strong style="color:#3182F6">데이터 매핑:</strong> 옆집CEO 콜라보 리텐션 커브에서 6~9분이 0.32~0.63으로 최고 구간. 이 감정 흐름을 그대로 10분에 압축 적용.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">이 영상만의 차별점 — 옆집CEO 콜라보와 뭐가 달라야 하나</div>
+      <div class="q-row"><div class="q-num">1</div><div><strong>운전기사 > 50억 갭</strong> — 다른 블로그 유튜버는 "IT 출신" 배경. 김지수는 "운전기사 250만원"이라 공감대 폭발.</div></div>
+      <div class="q-row"><div class="q-num">2</div><div><strong>논란 정면 돌파</strong> — 옆집CEO 콜라보에서는 비판 전혀 안 다룸. 이 영상은 "성공팔이 논란" "언론사 수익" 직접 물어봄.</div></div>
+      <div class="q-row"><div class="q-num">3</div><div><strong>10분 압축</strong> — 콜라보 31분은 28분 이후 이탈 0.04. 핵심만 10분에 담아 리텐션 효율 극대화.</div></div>
+      <div class="q-row"><div class="q-num">4</div><div><strong>첫 수익까지 과정 공개</strong> — 콜라보에서 빠진 부분. 0원 > 첫 100만원까지 구체적 스토리.</div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">논란 활용 전략 — 8:30~9:30 배치</div>
+      <table>
+        <tr><th>논란</th><th>활용법</th><th>기대효과</th></tr>
+        <tr><td>50억 소득증명 미공개</td><td>실시간 대시보드로 대체</td><td>신뢰도 확보</td></tr>
+        <tr><td>나무위키 '성공팔이'</td><td>Q25에서 직접 질문</td><td>댓글 폭발</td></tr>
+        <tr><td>핵심수익=언론사</td><td>"처음엔 블로그만" 솔직</td><td>정직한 이미지</td></tr>
+        <tr><td>커뮤니티 비판</td><td>정면 돌파</td><td>공유 유도</td></tr>
+      </table>
+      <div class="insight-box" style="margin-top:12px">
+        <strong>주의:</strong> 출연자가 논란 질문을 거부할 수 있음. 사전 동의 필수. 거부 시 수익 인증으로 대체.
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== TAB 5: 레퍼런스 ========== -->
+  <div class="panel" id="tab-ref">
+    <div class="card">
+      <div class="card-label">알파남 콜라보 (옆집CEO) — 리텐션 심층 분석</div>
+      <div style="font-size:12px;color:#8B95A1;margin-bottom:12px">"56억 번 MZ대표님" (VMlEck5Gtc4) | 240,060뷰 | 31분 10초</div>
+      <div style="background:#F8F9FA;border-radius:10px;padding:16px;margin-bottom:12px;font-family:monospace;font-size:12px;line-height:2">
+        00:00 <span style="color:#8B95A1">░░░░░░░░░░</span> 0.05 ← 초반 매우 약함<br>
+        03:07 <span style="color:#F08F00">█░░░░░░░░░</span> 0.19<br>
+        06:14 <span style="color:#F04452">██████░░░░</span> 0.63 ← 6분대부터 상승<br>
+        <strong>09:11 <span style="color:#F04452">████████░░</span> 1.00 ← 피크 (AI 블로그 승인)</strong><br>
+        12:28 <span style="color:#F08F00">██░░░░░░░░</span> 0.28<br>
+        15:35 <span style="color:#F08F00">██░░░░░░░░</span> 0.26<br>
+        18:42 <span style="color:#F08F00">███░░░░░░░</span> 0.38 ← 2차 반등<br>
+        24:56 <span style="color:#8B95A1">█░░░░░░░░░</span> 0.17<br>
+        28:03 <span style="color:#8B95A1">░░░░░░░░░░</span> 0.04 ← 완전 이탈
+      </div>
+      <div class="insight-box">
+        <strong>피크 대사 (09:11):</strong> "AI를 드릴테니까 그냥 이걸로 승인용 글 써줘. 그래서 글을 4시간 간격으로 12개 발행하시고 승인"<br>
+        → 부업소개하는남자에서 <strong>같은 내용을 5~7분에 배치</strong>하되, 옆집CEO에서 다루지 않은 <strong>승인 후 수익화 과정</strong>을 추가.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">절약왕정약용 — 실측 데이터 요약</div>
+      <div style="font-size:12px;color:#8B95A1;margin-bottom:12px">10개 영상 분석 | 구독 49.3만 | 평균 86만뷰 | 평균 13분 18초</div>
+      <table>
+        <tr><th>영상</th><th>조회수</th><th>피크</th><th>피크 위치(%)</th><th>킬러 내용</th></tr>
+        <tr><td>부업 BEST5</td><td style="font-weight:700">210만</td><td style="color:#F04452;font-weight:700">04:16</td><td>37%</td><td>아이템스카우트 키워드</td></tr>
+        <tr><td>정부지원금 100%</td><td>117만</td><td style="color:#F04452;font-weight:700">03:21</td><td>50%</td><td>사이트 메뉴 설명</td></tr>
+        <tr><td>재택 월80만</td><td>107만</td><td style="color:#F04452;font-weight:700">02:08</td><td>31%</td><td>회원가입 실전</td></tr>
+        <tr><td>정부 주거급여</td><td>81만</td><td style="color:#F04452;font-weight:700">07:09</td><td>79%</td><td>복지로 온라인 신청</td></tr>
+        <tr><td>월 60~270만 자동</td><td>80만</td><td style="color:#F04452;font-weight:700">09:19</td><td>81%</td><td>업로드 튜토리얼</td></tr>
+      </table>
+      <div class="insight-box" style="margin-top:12px">
+        <strong>패턴:</strong> 절약왕 초반30초 평균 0.08 (매우 낮음). 피크는 30~80% 구간 분산. <strong>"화면 공유 + 실전 방법"</strong> 순간이 항상 최고점.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">옆집CEO — 실측 데이터 요약</div>
+      <div style="font-size:12px;color:#8B95A1;margin-bottom:12px">10개 영상 분석 | 구독 17.4만 | 평균 36만뷰 | 평균 18분 26초</div>
+      <table>
+        <tr><th>영상</th><th>조회수</th><th>피크</th><th>피크 위치(%)</th><th>킬러 내용</th></tr>
+        <tr><td>공동구매중개</td><td style="font-weight:700">103만</td><td style="color:#F04452;font-weight:700">10:30</td><td>68%</td><td>카페 공급자 구하기</td></tr>
+        <tr><td>월100 더 벌기</td><td>54만</td><td style="color:#F04452;font-weight:700">03:58</td><td>60%</td><td>아이템 소싱 방법</td></tr>
+        <tr><td>재택부업 추천</td><td>44만</td><td style="color:#F04452;font-weight:700">09:06</td><td>49%</td><td>다운로드 실전</td></tr>
+        <tr><td>블루오션 부업</td><td>32만</td><td style="color:#F04452;font-weight:700">13:10</td><td>74%</td><td>학교장터 입점</td></tr>
+        <tr><td>알파남 콜라보</td><td>24만</td><td style="color:#3182F6;font-weight:700">09:11</td><td>30%</td><td>AI 블로그 승인</td></tr>
+      </table>
+      <div class="insight-box" style="margin-top:12px">
+        <strong>패턴:</strong> 옆집CEO 초반30초 평균 0.12 (절약왕보다 나음). 피크는 50~70% 구간에 집중. <strong>"실제 사이트/플랫폼 화면 공유"</strong> 순간이 최고점.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">촬영 당일 체크리스트</div>
+      <div class="q-row"><div class="q-num">1</div><div>알파남 노트북 화면 공유 가능한 환경 (HDMI 캡처 or 화면 녹화)</div></div>
+      <div class="q-row"><div class="q-num">2</div><div>구글 애드센스 대시보드 실시간 접속 상태 확인</div></div>
+      <div class="q-row"><div class="q-num">3</div><div>수강생 수익 인증 스크린샷 or 단톡방 화면 (개인정보 모자이크)</div></div>
+      <div class="q-row"><div class="q-num">4</div><div>키워드 검색 시연용 브라우저 준비 (아이템스카우트 등)</div></div>
+      <div class="q-row"><div class="q-num">5</div><div>책 실물 + 교보문고 베스트셀러 순위 화면</div></div>
+      <div class="q-row"><div class="q-num">6</div><div>썸네일 전용 촬영 (측면, 노트북 앞, 수익 화면 배경)</div></div>
+      <div class="q-row"><div class="q-num">7</div><div>논란 질문 사전 동의 여부 확인 (Q24, Q25)</div></div>
+    </div>
+  </div>
+
+  <!-- ========== TAB 6: 데이터 근거 ========== -->
+  <div class="panel" id="tab-data">
+    <div class="card data">
+      <div class="card-label blue">분석 개요</div>
+      <div class="stat-row">
+        <div class="stat blue-bg"><div class="stat-v">20개</div><div class="stat-l">분석 영상 수</div></div>
+        <div class="stat blue-bg"><div class="stat-v">51%</div><div class="stat-l">평균 피크 위치</div></div>
+        <div class="stat blue-bg"><div class="stat-v">5~7분</div><div class="stat-l">10분 기준 피크</div></div>
+      </div>
+      <div class="stat-row">
+        <div class="stat blue-bg"><div class="stat-v">0.08</div><div class="stat-l">절약왕 초반30초</div></div>
+        <div class="stat blue-bg"><div class="stat-v">0.12</div><div class="stat-l">옆집CEO 초반30초</div></div>
+        <div class="stat blue-bg"><div class="stat-v">0.05</div><div class="stat-l">알파남콜라보 초반30초</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">5대 법칙 — 20개 영상에서 추출</div>
+
+      <div class="law-card">
+        <div class="law-num">법칙 1</div>
+        <div class="law-title">킬러 구간 = "화면 공유" 순간</div>
+        <div class="law-body">20개 영상 중 18개에서 "사이트 접속 + 실제 클릭" 순간이 최고 피크. 절약왕 아이템스카우트 검색(210만뷰), 옆집CEO 카페 공급자 구하기(103만뷰), 알파남 AI 블로그 승인(24만뷰) 모두 화면 공유 순간.</div>
+        <div class="law-apply">적용: 애드센스 대시보드 실시간 공개 + AI 블로그 글쓰기 시연 필수</div>
+      </div>
+
+      <div class="law-card">
+        <div class="law-num">법칙 2</div>
+        <div class="law-title">피크 타이밍 = 영상 50~70% 지점</div>
+        <div class="law-body">절약왕 평균 피크 51%, 옆집CEO 평균 피크 51%. 10분 완결 포맷 기준 5~7분에 핵심 공개.</div>
+        <div class="law-apply">적용: 5~7분에 애드센스 승인 + 수익 구조 화면 공유 (기존 7~8분에서 앞당김)</div>
+      </div>
+
+      <div class="law-card">
+        <div class="law-num">법칙 3</div>
+        <div class="law-title">초반 30초 = 모두 약함 (0.02~0.19)</div>
+        <div class="law-body">부업 채널 장르 특성. 사연/소개로 시작하면 시청자 이탈. 옆집CEO "월100 더 벌기" 영상만 0.35 — 이유: 바로 방법론으로 진입.</div>
+        <div class="law-apply">적용: 첫 5초에 숫자 결과부터 ("월 250만원 운전기사 → 5년 50억")</div>
+      </div>
+
+      <div class="law-card">
+        <div class="law-num">법칙 4</div>
+        <div class="law-title">마지막 10% = 급격한 이탈</div>
+        <div class="law-body">모든 영상에서 마지막 1~2분 이탈 급증. 알파남 콜라보 28분 이후 0.04 (실질 이탈).</div>
+        <div class="law-apply">적용: CTA는 피크 직후(7~8분)에 삽입, 엔딩 10초 이내</div>
+      </div>
+
+      <div class="law-card">
+        <div class="law-num">법칙 5</div>
+        <div class="law-title">6~12분 영상이 리텐션 효율 최고</div>
+        <div class="law-body">절약왕 6~12분 영상: 평균 킬러 8.3%, 이탈 33%. 옆집CEO 15분+ 영상: 평균 킬러 4.2%, 이탈 36%. 킬러 비율 거의 2배 차이.</div>
+        <div class="law-apply">적용: 부업소개하는남자 10분 완결 포맷 유지 — 알파남 콜라보 31분의 교훈</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">채널 비교표 — 실측 수치</div>
+      <table>
+        <tr><th>지표</th><th>절약왕정약용</th><th>옆집CEO</th><th>알파남 (자체)</th></tr>
+        <tr><td>분석 영상 수</td><td>10개</td><td>10개</td><td>1개 (히트맵 확보분)</td></tr>
+        <tr><td>평균 조회수</td><td style="font-weight:700">860,637</td><td>363,036</td><td>53,418</td></tr>
+        <tr><td>평균 길이</td><td>13분 18초</td><td>18분 26초</td><td>5분 18초</td></tr>
+        <tr><td>평균 킬러 비율</td><td style="font-weight:700;color:#F04452">6.8%</td><td>4.7%</td><td>1.9%</td></tr>
+        <tr><td>초반 30초</td><td>0.08</td><td style="font-weight:700">0.12</td><td>-</td></tr>
+        <tr><td>포맷</td><td>1인 튜토리얼</td><td>게스트 인터뷰</td><td>1인 설명</td></tr>
+        <tr><td>전체 영상 수</td><td>348개</td><td>84개</td><td>359개</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-label">편집부 지시 — 데이터 기반</div>
+      <table>
+        <tr><th>구간</th><th>편집 지시</th><th>데이터 근거</th></tr>
+        <tr><td>오프닝 5초</td><td>애드센스 수익 화면 풀샷 > 숫자 줌인 > 출연자 얼굴 컷</td><td>초반30초 0.05 방지</td></tr>
+        <tr><td>3~7분 튜토리얼</td><td>2~3초 단위 빠른 컷, PIP(화면 속 화면) + 자막 강조</td><td>절약왕 킬러 8.3% 패턴</td></tr>
+        <tr><td>BGM</td><td>5분까지 긴장감(빠른 BPM) > 7분부터 감성(느린 BPM)</td><td>옆집CEO 감정 곡선</td></tr>
+        <tr><td>자막</td><td>핵심 숫자 = 노란색 크게, 논란 구간 = 빨간색</td><td>절약왕 형광 노란 패턴</td></tr>
+        <tr><td>엔딩</td><td>9:50에 CTA 끝, 10:00 마감. 이후 컷</td><td>마지막 10% 이탈 법칙</td></tr>
+      </table>
+    </div>
+
+    <div class="card" style="text-align:center;padding:30px">
+      <div style="font-size:12px;color:#8B95A1;margin-bottom:8px">전체 대시보드 보기</div>
+      <a href="https://ohmaetdol.github.io/mcn-neobridge/sajjiknam/bueop/" target="_blank" style="display:inline-block;background:#3182F6;color:#fff;border-radius:10px;padding:12px 24px;font-size:14px;font-weight:700;text-decoration:none">
+        부업소개하는남자 데이터 대시보드
+      </a>
+      <div style="font-size:11px;color:#8B95A1;margin-top:8px">리텐션 커브, 킬러 비교, 채널별 히트맵 상세</div>
+    </div>
+  </div>
+
+</div>
+<script>
+function go(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('on'));
+  document.getElementById('tab-'+id).classList.add('on');
+  btn.classList.add('on');
+}
+</script>
+</body>
+</html>
