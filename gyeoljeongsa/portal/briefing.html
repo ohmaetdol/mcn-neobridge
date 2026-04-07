@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>아는언니 세령 — MCN 전략 브리핑</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans KR',sans-serif;background:#0a0a0f;color:#e0e0e0;line-height:1.7;overflow-x:hidden}
+::selection{background:#7c5cff;color:#fff}
+
+/* Hero */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:40px 20px;position:relative;background:linear-gradient(135deg,#0a0a1a 0%,#1a1035 50%,#0a0a1a 100%)}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 30% 50%,rgba(124,92,255,.12) 0%,transparent 60%),radial-gradient(circle at 70% 30%,rgba(255,92,168,.08) 0%,transparent 50%)}
+.hero-badge{display:inline-block;padding:6px 20px;border:1px solid rgba(124,92,255,.4);border-radius:20px;font-size:13px;color:#a78bfa;margin-bottom:24px;letter-spacing:1px}
+.hero h1{font-size:clamp(32px,6vw,64px);font-weight:900;background:linear-gradient(135deg,#fff 0%,#a78bfa 50%,#f472b6 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.2;margin-bottom:16px}
+.hero .sub{font-size:clamp(16px,2.5vw,22px);color:#94a3b8;font-weight:300;margin-bottom:40px}
+.hero-stats{display:flex;gap:40px;flex-wrap:wrap;justify-content:center}
+.hero-stat{text-align:center}
+.hero-stat .num{font-size:clamp(36px,5vw,56px);font-weight:900;color:#fff}
+.hero-stat .num span{background:linear-gradient(135deg,#7c5cff,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-stat .label{font-size:13px;color:#64748b;margin-top:4px}
+.scroll-hint{position:absolute;bottom:30px;color:#475569;font-size:13px;animation:bounce 2s infinite}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+
+/* Sections */
+.section{padding:80px 20px;max-width:1100px;margin:0 auto}
+.section-label{display:inline-block;padding:4px 14px;border-radius:12px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px}
+.section h2{font-size:clamp(24px,4vw,40px);font-weight:900;color:#fff;margin-bottom:12px}
+.section .desc{color:#94a3b8;font-size:16px;margin-bottom:40px;max-width:700px}
+
+/* Cards */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.card{background:linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.01));border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:28px;transition:.3s}
+.card:hover{border-color:rgba(124,92,255,.3);transform:translateY(-2px)}
+.card-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:16px}
+.card h3{font-size:17px;font-weight:700;color:#fff;margin-bottom:8px}
+.card p{font-size:14px;color:#94a3b8;line-height:1.6}
+.card .big-num{font-size:32px;font-weight:900;margin-bottom:4px}
+
+/* Colors */
+.purple{background:rgba(124,92,255,.15);color:#a78bfa}
+.pink{background:rgba(244,114,182,.15);color:#f472b6}
+.blue{background:rgba(56,189,248,.15);color:#38bdf8}
+.green{background:rgba(52,211,153,.15);color:#34d399}
+.yellow{background:rgba(251,191,36,.15);color:#fbbf24}
+.red{background:rgba(248,113,113,.15);color:#f87171}
+
+/* Tables */
+.data-table{width:100%;border-collapse:collapse;margin:20px 0;font-size:14px}
+.data-table th{text-align:left;padding:12px 16px;background:rgba(124,92,255,.1);color:#a78bfa;font-weight:600;border-bottom:1px solid rgba(255,255,255,.06)}
+.data-table td{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.04);color:#cbd5e1}
+.data-table tr:hover td{background:rgba(255,255,255,.02)}
+
+/* Positioning Map */
+.pos-map{position:relative;width:100%;max-width:500px;height:400px;margin:30px auto;border:1px solid rgba(255,255,255,.08);border-radius:16px;background:rgba(255,255,255,.02)}
+.pos-axis-x,.pos-axis-y{position:absolute;background:rgba(255,255,255,.08)}
+.pos-axis-x{width:100%;height:1px;top:50%;left:0}
+.pos-axis-y{width:1px;height:100%;left:50%;top:0}
+.pos-label{position:absolute;font-size:11px;color:#64748b}
+.pos-dot{position:absolute;width:14px;height:14px;border-radius:50%;transform:translate(-50%,-50%);border:2px solid;z-index:2}
+.pos-dot-label{position:absolute;font-size:12px;font-weight:700;white-space:nowrap;transform:translateX(-50%)}
+
+/* Funnel */
+.funnel{display:flex;flex-direction:column;align-items:center;gap:4px;margin:30px 0}
+.funnel-step{display:flex;align-items:center;justify-content:center;height:52px;border-radius:8px;font-weight:600;font-size:14px;color:#fff;text-align:center;transition:.3s}
+.funnel-step:hover{transform:scale(1.02)}
+
+/* Episode List */
+.ep-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.ep-card{display:flex;align-items:center;gap:14px;padding:16px;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05)}
+.ep-num{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0}
+.ep-info{min-width:0}
+.ep-info .ep-title{font-size:13px;font-weight:600;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ep-info .ep-meta{font-size:11px;color:#64748b;margin-top:2px}
+
+/* Timeline */
+.timeline{position:relative;padding-left:30px;margin:30px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,#7c5cff,#f472b6,#34d399)}
+.tl-item{position:relative;margin-bottom:32px}
+.tl-item::before{content:'';position:absolute;left:-26px;top:6px;width:12px;height:12px;border-radius:50%;border:2px solid #7c5cff;background:#0a0a0f}
+.tl-item.active::before{background:#7c5cff;box-shadow:0 0 12px rgba(124,92,255,.5)}
+.tl-month{font-size:12px;font-weight:700;color:#a78bfa;margin-bottom:4px;letter-spacing:1px}
+.tl-content{font-size:14px;color:#cbd5e1}
+
+/* Tag */
+.tag{display:inline-block;padding:3px 10px;border-radius:6px;font-size:11px;font-weight:600;margin-right:4px;margin-bottom:4px}
+
+/* Divider */
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(124,92,255,.3),transparent);margin:60px 0}
+
+/* Footer */
+.footer{text-align:center;padding:40px 20px;color:#334155;font-size:13px}
+
+/* Ban List */
+.ban-item{display:flex;align-items:center;gap:10px;padding:10px 16px;border-radius:10px;background:rgba(248,113,113,.05);border:1px solid rgba(248,113,113,.1);margin-bottom:8px;font-size:14px;color:#fca5a5}
+.ban-item::before{content:'✕';color:#f87171;font-weight:900;font-size:16px}
+
+/* Responsive */
+@media(max-width:640px){
+.hero-stats{gap:24px}
+.hero-stat .num{font-size:32px}
+.pos-map{height:300px}
+.section{padding:60px 16px}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+<div class="hero-badge">MCN NEOBRIDGE &times; FLOWMUS</div>
+<h1>아는언니 세령<br>채널 전략 브리핑</h1>
+<p class="sub">709개 영상 &middot; 9개 채널 &middot; 3,450개 댓글 데이터 기반 전략</p>
+<div class="hero-stats">
+<div class="hero-stat"><div class="num"><span>709</span></div><div class="label">분석 영상</div></div>
+<div class="hero-stat"><div class="num"><span>9</span></div><div class="label">벤치마크 채널</div></div>
+<div class="hero-stat"><div class="num"><span>22</span></div><div class="label">참고 도서</div></div>
+<div class="hero-stat"><div class="num"><span>10</span></div><div class="label">기획서 완성</div></div>
+</div>
+<div class="scroll-hint">아래로 스크롤 &darr;</div>
+</section>
+
+<!-- 1. 시장 분석 -->
+<section class="section">
+<span class="section-label purple">SECTION 01</span>
+<h2>결혼정보 시장은 지금</h2>
+<p class="desc">연 19% 성장, 1,974개 업체가 경쟁하는 시장. 하지만 유튜브로 제대로 하는 곳은 2곳뿐.</p>
+<div class="card-grid">
+<div class="card"><div class="card-icon purple">&#128200;</div><div class="big-num" style="color:#a78bfa">1,500~2,000억</div><h3>시장 규모</h3><p>결혼정보 산업 전체 규모 (연간)</p></div>
+<div class="card"><div class="card-icon pink">&#128200;</div><div class="big-num" style="color:#f472b6">1,974개</div><h3>등록 업체</h3><p>결혼중개업 등록 사업자 수 (2024)</p></div>
+<div class="card"><div class="card-icon blue">&#128200;</div><div class="big-num" style="color:#38bdf8">+19%</div><h3>연평균 성장</h3><p>2022년 382억 &rarr; 2024년 454억 (추정)</p></div>
+<div class="card"><div class="card-icon green">&#128200;</div><div class="big-num" style="color:#34d399">2개</div><h3>유튜브 경쟁자</h3><p>한방언니(16만) + 모두의지인(10만) = 시장 전부</p></div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 2. 경쟁 분석 -->
+<section class="section">
+<span class="section-label pink">SECTION 02</span>
+<h2>경쟁 채널 분석</h2>
+<p class="desc">결정사 유튜브 시장의 양대 산맥을 완전 해부했습니다.</p>
+<table class="data-table">
+<thead><tr><th>채널</th><th>구독자</th><th>평균 조회</th><th>리텐션</th><th>포지션</th></tr></thead>
+<tbody>
+<tr><td style="color:#f87171;font-weight:700">한방언니</td><td>16만</td><td>540K</td><td>0.228</td><td>결혼 심판관 (도발형)</td></tr>
+<tr><td style="color:#fbbf24;font-weight:700">모두의지인</td><td>10만</td><td>254K</td><td>0.332</td><td>연애 코치 (교육형)</td></tr>
+<tr style="background:rgba(124,92,255,.08)"><td style="color:#a78bfa;font-weight:700">아는언니 세령</td><td>목표</td><td>목표</td><td>0.280+</td><td><strong>성장형 리얼리티</strong></td></tr>
+</tbody>
+</table>
+
+<h3 style="color:#fff;margin:40px 0 20px;font-size:20px">포지셔닝 맵</h3>
+<div class="pos-map">
+<div class="pos-axis-x"></div>
+<div class="pos-axis-y"></div>
+<div class="pos-label" style="top:8px;left:50%;transform:translateX(-50%)">도발 / 팩폭</div>
+<div class="pos-label" style="bottom:8px;left:50%;transform:translateX(-50%)">교육 / 공감</div>
+<div class="pos-label" style="left:8px;top:50%;transform:translateY(-50%)">정보형</div>
+<div class="pos-label" style="right:8px;top:50%;transform:translateY(-50%)">리얼리티형</div>
+<!-- 한방언니: 도발+정보 = 좌상 -->
+<div class="pos-dot" style="top:25%;left:35%;border-color:#f87171;background:rgba(248,113,113,.3)"></div>
+<div class="pos-dot-label" style="top:17%;left:35%;color:#f87171">한방언니</div>
+<!-- 모두의지인: 공감+정보 = 좌하 -->
+<div class="pos-dot" style="top:70%;left:35%;border-color:#fbbf24;background:rgba(251,191,36,.3)"></div>
+<div class="pos-dot-label" style="top:76%;left:35%;color:#fbbf24">모두의지인</div>
+<!-- 아는언니: 도발+리얼리티 = 우상 -->
+<div class="pos-dot" style="top:30%;left:68%;border-color:#a78bfa;background:rgba(124,92,255,.5);width:18px;height:18px;box-shadow:0 0 20px rgba(124,92,255,.4)"></div>
+<div class="pos-dot-label" style="top:22%;left:68%;color:#a78bfa;font-size:14px">아는언니 세령</div>
+</div>
+<p style="text-align:center;color:#64748b;font-size:13px;margin-top:12px">팩폭의 파괴력 + 리얼리티의 팬덤 = <strong style="color:#a78bfa">미개척 영역</strong></p>
+</section>
+
+<div class="divider"></div>
+
+<!-- 3. 채주부 벤치마크 -->
+<section class="section">
+<span class="section-label blue">SECTION 03</span>
+<h2>채주부 그룹 630개 영상 분석</h2>
+<p class="desc">구독자 117만 MCN의 성공 공식을 데이터로 역분석했습니다.</p>
+<table class="data-table">
+<thead><tr><th>채널</th><th>영상수</th><th>평균조회</th><th>30만+히트율</th><th>역할</th></tr></thead>
+<tbody>
+<tr><td>채널주인여깄음</td><td>100</td><td>30.4만</td><td>38%</td><td>에이스 (커플)</td></tr>
+<tr><td>예보링</td><td>100</td><td>29.0만</td><td>27%</td><td>에이스 (개인)</td></tr>
+<tr><td>생각없이사는연</td><td>100</td><td>28.4만</td><td>36%</td><td>주력 (커플)</td></tr>
+<tr><td>매일제히</td><td>100</td><td>28.2만</td><td>36%</td><td>주력 (부부)</td></tr>
+<tr><td>심장에박현서</td><td>100</td><td>27.8만</td><td>35%</td><td>주력 (커플)</td></tr>
+<tr><td>채널주인부재중</td><td>100</td><td>15.3만</td><td>14%</td><td>본채널 (허브)</td></tr>
+<tr><td>꼴통사장권기준</td><td>30</td><td>13.4만</td><td>10%</td><td>신규</td></tr>
+</tbody>
+</table>
+<div class="card-grid" style="margin-top:30px">
+<div class="card"><div class="card-icon green">&#127919;</div><h3>핵심 발견</h3><p>파생 채널이 본채널보다 <strong style="color:#34d399">2배</strong> 성과. MCN의 핵심은 "다음 채널을 만드는 시스템"</p></div>
+<div class="card"><div class="card-icon yellow">&#128293;</div><h3>히트 포맷</h3><p><strong style="color:#fbbf24">갈등/드라마</strong>(41.3만) &gt; <strong>인생이벤트</strong>(47.2만) &gt; <strong>실험/몰카</strong>(34.8만)</p></div>
+<div class="card"><div class="card-icon purple">&#9201;</div><h3>골든 타임</h3><p>최적 길이 <strong style="color:#a78bfa">10~15분</strong> (7개 중 5개 채널 최고 구간)</p></div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 4. 이세령 프로필 -->
+<section class="section">
+<span class="section-label green">SECTION 04</span>
+<h2>이세령 대표 크리에이터 진단</h2>
+<p class="desc">아나운서 7년 + 워터밤 660만뷰 + 인스타 85K. 결정사 유튜브 최적의 크리에이터.</p>
+<div class="card-grid">
+<div class="card"><div class="card-icon purple">&#127908;</div><h3>카메라 전달력</h3><p style="color:#a78bfa;font-weight:700;font-size:20px">&#9733;&#9733;&#9733;&#9733;&#9733;</p><p>아나운서 7년 &mdash; 채주부 그룹 전체와 비교해도 최상위</p></div>
+<div class="card"><div class="card-icon pink">&#128171;</div><h3>대중 인지도</h3><p style="color:#f472b6;font-weight:700;font-size:20px">&#9733;&#9733;&#9733;&#9733;&#9733;</p><p>워터밤 660만뷰 + tvN 출연 + 인스타 85K</p></div>
+<div class="card"><div class="card-icon green">&#128218;</div><h3>본인 서사</h3><p style="color:#34d399;font-weight:700;font-size:20px">&#9733;&#9733;&#9733;&#9733;&#9733;</p><p>80&rarr;56kg 감량 + tvN 탈락 + 30세 미혼 = 역전 콘텐츠 무한</p></div>
+<div class="card"><div class="card-icon yellow">&#128188;</div><h3>사업 감각</h3><p style="color:#fbbf24;font-weight:700;font-size:20px">&#9733;&#9733;&#9733;&#9733;&#9734;</p><p>법인 2개 운영 + 베스트클래스 재팬 매칭 서비스 대표</p></div>
+</div>
+
+<h3 style="color:#fff;margin:40px 0 16px;font-size:18px">핵심 이력</h3>
+<table class="data-table">
+<thead><tr><th>연도</th><th>경력</th><th>콘텐츠 가치</th></tr></thead>
+<tbody>
+<tr><td>2017</td><td>한국전력 아나운서</td><td>카메라 전달력의 원천</td></tr>
+<tr><td>2019</td><td>SPOTV 스포츠 리포터</td><td>현장 리포팅 능력</td></tr>
+<tr><td>2023</td><td>워터밤 바이럴 (660만뷰)</td><td>론칭 즉시 화제성</td></tr>
+<tr><td>2025</td><td>tvN '이젠 사랑할 수 있을까'</td><td>"결혼 못 한 아나운서" 내러티브</td></tr>
+<tr><td>2025</td><td>베스트클래스 재팬 대표</td><td>매칭 서비스 실무 경험</td></tr>
+</tbody>
+</table>
+</section>
+
+<div class="divider"></div>
+
+<!-- 5. 차별화 전략 -->
+<section class="section">
+<span class="section-label yellow">SECTION 05</span>
+<h2>차별화 전략</h2>
+<p class="desc">"말만 하는 결정사 유튜버" vs "직접 차려서 보여주는 결정사 유튜버"</p>
+<table class="data-table">
+<thead><tr><th></th><th style="color:#f87171">한방언니</th><th style="color:#fbbf24">모두의지인</th><th style="color:#a78bfa">아는언니 세령</th></tr></thead>
+<tbody>
+<tr><td style="color:#94a3b8">페르소나</td><td>결혼 심판관</td><td>연애 코치</td><td><strong>성장하는 대표</strong></td></tr>
+<tr><td style="color:#94a3b8">톤</td><td>도발 + 공포</td><td>교육 + 공감</td><td><strong>팩폭 + 리얼리티</strong></td></tr>
+<tr><td style="color:#94a3b8">콘텐츠</td><td>등급 판정</td><td>성혼 사례</td><td><strong>창업 과정 전체 공개</strong></td></tr>
+<tr><td style="color:#94a3b8">팬덤 구조</td><td>조회수 의존</td><td>교육 가치</td><td><strong>"함께 성장" 동반자</strong></td></tr>
+<tr><td style="color:#94a3b8">CTA</td><td>상담 전화</td><td>유료 상담</td><td><strong>무료 등급 진단 폼</strong></td></tr>
+</tbody>
+</table>
+<div class="card" style="margin-top:30px;border-color:rgba(124,92,255,.3);background:rgba(124,92,255,.05)">
+<h3 style="color:#a78bfa;font-size:20px;margin-bottom:12px">핵심 포지셔닝</h3>
+<p style="font-size:16px;color:#e0e0e0">"겪어본 사람이 차린 결정사"<br><br>한방언니에서 <strong>팩폭 + 숫자 + 공포 마케팅</strong>을 가져오고,<br>채주부에서 <strong>성장 과정 투명 공개 + 팬덤 형성</strong>을 가져온다.<br><br>이세령 대표의 "처음"이 약점이 아니라 <strong style="color:#a78bfa">최강의 콘텐츠 자산</strong>이다.</p>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 6. 콘텐츠 공식 -->
+<section class="section">
+<span class="section-label red">SECTION 06</span>
+<h2>콘텐츠 공식</h2>
+<p class="desc">630개 영상 데이터에서 추출한 검증된 공식들.</p>
+
+<h3 style="color:#fff;margin-bottom:16px;font-size:18px">제목 CTR 순위 (검증 완료)</h3>
+<table class="data-table">
+<thead><tr><th>순위</th><th>공식</th><th>CTR 점수</th><th>예시</th></tr></thead>
+<tbody>
+<tr><td style="color:#fbbf24;font-weight:900">1위</td><td>갭형 "A인데 B"</td><td><strong>90.8</strong></td><td>"세후 350 남자가 자산 10억 여성과..."</td></tr>
+<tr><td style="color:#cbd5e1;font-weight:700">2위</td><td>의문형 "왜 ~일까"</td><td>90.0</td><td>"남자들이 여자 거르는 진짜 기준"</td></tr>
+<tr><td style="color:#cd7f32;font-weight:700">3위</td><td>공포+대괄호</td><td>89.5</td><td>"[결정사 내부 데이터] 진짜 위치"</td></tr>
+<tr><td>4위</td><td>숫자+단정</td><td>89.0</td><td>"TOP 5 [데이터 공개]"</td></tr>
+</tbody>
+</table>
+
+<h3 style="color:#fff;margin:40px 0 16px;font-size:18px">4가지 포맷 (월 7~8편 + Shorts 12편)</h3>
+<div class="card-grid">
+<div class="card" style="border-color:rgba(248,113,113,.2)"><div class="tag red">Format A</div><h3>데이터/팩폭형</h3><p><strong>월 3회</strong> &middot; 10~14분<br>목표: 조회수 + 상담 전환<br>벤치마크: 한방언니</p></div>
+<div class="card" style="border-color:rgba(52,211,153,.2)"><div class="tag green">Format B</div><h3>성장형 리얼리티</h3><p><strong>월 2회</strong> &middot; 14~18분<br>목표: 팬덤 형성<br>벤치마크: 채주부</p></div>
+<div class="card" style="border-color:rgba(56,189,248,.2)"><div class="tag blue">Format C</div><h3>매칭 리얼리티</h3><p><strong>월 2회</strong> &middot; 12~16분<br>목표: 상담 전환<br>벤치마크: 한방언니+채주부</p></div>
+<div class="card" style="border-color:rgba(251,191,36,.2)"><div class="tag yellow">Format D</div><h3>Shorts / 클립</h3><p><strong>주 3회</strong> &middot; 30~60초<br>목표: 알고리즘 노출<br>본편 킬러 구간 발췌</p></div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 7. 전환 퍼널 -->
+<section class="section">
+<span class="section-label purple">SECTION 07</span>
+<h2>전환 퍼널</h2>
+<p class="desc">유튜브 시청 &rarr; 무료 진단 &rarr; VIP 가입까지의 설계.</p>
+<div class="funnel">
+<div class="funnel-step" style="width:100%;background:linear-gradient(90deg,#7c5cff,#6d4fe0)">YouTube 영상 시청 (무료)</div>
+<div class="funnel-step" style="width:85%;background:linear-gradient(90deg,#8b5cf6,#7c3aed)">Shorts + 인스타 반복 노출</div>
+<div class="funnel-step" style="width:70%;background:linear-gradient(90deg,#a855f7,#9333ea)">공포 클로징 &rarr; "내 등급은?"</div>
+<div class="funnel-step" style="width:55%;background:linear-gradient(90deg,#c084fc,#a855f7)">무료 등급 진단 폼 작성</div>
+<div class="funnel-step" style="width:40%;background:linear-gradient(90deg,#e879f9,#c026d3)">이세령 1:1 등급 피드백</div>
+<div class="funnel-step" style="width:28%;background:linear-gradient(90deg,#f472b6,#db2777)">VIP 매칭 가입 (300~500만원)</div>
+</div>
+<p style="text-align:center;color:#64748b;font-size:13px">투트랙: 겉(2030 여성 팩폭) &rarr; 속(3040 남성 전환)</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- 8. EP01-10 -->
+<section class="section">
+<span class="section-label blue">SECTION 08</span>
+<h2>시즌 1 기획서 (10화 완결)</h2>
+<p class="desc">EP01 표준 12섹션 포맷으로 전 에피소드 기획 완료.</p>
+<div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px">
+<span class="tag purple" style="font-size:13px">등급표의 현실 (1~3화)</span>
+<span class="tag pink" style="font-size:13px">등급의 한계 (4~6화)</span>
+<span class="tag blue" style="font-size:13px">등급의 변수 (7~8화)</span>
+<span class="tag green" style="font-size:13px">등급 초월 (9~10화)</span>
+</div>
+<div class="ep-grid">
+<div class="ep-card"><div class="ep-num purple">01</div><div class="ep-info"><div class="ep-title">결정사 등급표 처음 공개합니다</div><div class="ep-meta">Format A &middot; 12분 &middot; v10 FINAL 98점</div></div></div>
+<div class="ep-card"><div class="ep-num purple">02</div><div class="ep-info"><div class="ep-title">세후 350 남자가 자산 10억 여성과 매칭</div><div class="ep-meta">Format C &middot; 13분</div></div></div>
+<div class="ep-card"><div class="ep-num purple">03</div><div class="ep-info"><div class="ep-title">여자들이 3초 만에 넘기는 남자 프로필</div><div class="ep-meta">Format A &middot; 11분</div></div></div>
+<div class="ep-card"><div class="ep-num pink">04</div><div class="ep-info"><div class="ep-title">아나운서 그만두고 결정사 차립니다</div><div class="ep-meta">Format B &middot; 15분</div></div></div>
+<div class="ep-card"><div class="ep-num pink">05</div><div class="ep-info"><div class="ep-title">35살 모태솔로가 결정사에 왔습니다</div><div class="ep-meta">Format C &middot; 13분</div></div></div>
+<div class="ep-card"><div class="ep-num pink">06</div><div class="ep-info"><div class="ep-title">결혼중개업 신고하러 구청에 갔습니다</div><div class="ep-meta">Format B &middot; 14분</div></div></div>
+<div class="ep-card"><div class="ep-num blue">07</div><div class="ep-info"><div class="ep-title">남자들이 여자 거르는 진짜 기준 TOP 5</div><div class="ep-meta">Format A &middot; 11분</div></div></div>
+<div class="ep-card"><div class="ep-num blue">08</div><div class="ep-info"><div class="ep-title">세후 480만 원의 진짜 위치</div><div class="ep-meta">Format A &middot; 12분</div></div></div>
+<div class="ep-card"><div class="ep-num green">09</div><div class="ep-info"><div class="ep-title">완벽했는데 파혼된 커플</div><div class="ep-meta">Format C &middot; 14분</div></div></div>
+<div class="ep-card"><div class="ep-num green">10</div><div class="ep-info"><div class="ep-title">결정사 대표의 고백 — 가장 많이 운 날</div><div class="ep-meta">Format B &middot; 15분 &middot; 시즌 1 완결</div></div></div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 9. KPI -->
+<section class="section">
+<span class="section-label green">SECTION 09</span>
+<h2>KPI &amp; 수익 목표</h2>
+<p class="desc">12개월 로드맵과 수익 구조.</p>
+<table class="data-table">
+<thead><tr><th>지표</th><th>3개월</th><th>6개월</th><th>12개월</th></tr></thead>
+<tbody>
+<tr><td style="color:#94a3b8">월간 조회수</td><td>100K</td><td>500K</td><td style="color:#34d399;font-weight:700">2M</td></tr>
+<tr><td style="color:#94a3b8">구독자</td><td>5K</td><td>30K</td><td style="color:#34d399;font-weight:700">100K</td></tr>
+<tr><td style="color:#94a3b8">월간 상담 폼</td><td>20건</td><td>80건</td><td style="color:#34d399;font-weight:700">200건</td></tr>
+<tr><td style="color:#94a3b8">월간 상담 완료</td><td>10건</td><td>40건</td><td style="color:#34d399;font-weight:700">100건</td></tr>
+<tr><td style="color:#94a3b8">월간 VIP 가입</td><td>3건</td><td>15건</td><td style="color:#34d399;font-weight:700">50건</td></tr>
+</tbody>
+</table>
+<div class="card" style="margin-top:30px;border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.05)">
+<h3 style="color:#34d399;font-size:24px;margin-bottom:8px">12개월 목표 매출</h3>
+<div style="font-size:40px;font-weight:900;color:#fff;margin-bottom:8px">월 2,000만원 <span style="font-size:20px;color:#64748b">= 연 2.4억</span></div>
+<p>50건 &times; 400만원(평균 가입비) = 월 2,000만원</p>
+</div>
+
+<h3 style="color:#fff;margin:40px 0 16px;font-size:18px">수익 다각화</h3>
+<div class="card-grid">
+<div class="card"><div class="card-icon purple">&#128176;</div><h3>VIP 매칭 가입비</h3><p>Month 2+ &middot; <strong style="color:#a78bfa">1.8~2.4억/년</strong><br>핵심 수익원</p></div>
+<div class="card"><div class="card-icon blue">&#128250;</div><h3>YouTube 광고</h3><p>Month 3+ &middot; <strong style="color:#38bdf8">2,000~5,000만/년</strong><br>구독 1K 달성 후</p></div>
+<div class="card"><div class="card-icon pink">&#129309;</div><h3>브랜드 협찬</h3><p>Month 6+ &middot; <strong style="color:#f472b6">2,000~3,000만/년</strong><br>웨딩/데이트/패션</p></div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 10. 로드맵 -->
+<section class="section">
+<span class="section-label yellow">SECTION 10</span>
+<h2>실행 로드맵</h2>
+<p class="desc">4단계 12개월 성장 계획.</p>
+<div class="timeline">
+<div class="tl-item active">
+<div class="tl-month">MONTH 1 &mdash; 기반 구축</div>
+<div class="tl-content">채널 개설 + 세트 구축 + EP.01~04 촬영/편집<br>창업기 리얼리티 시작 + 인스타 85K 크로스 프로모션</div>
+</div>
+<div class="tl-item">
+<div class="tl-month">MONTH 2~3 &mdash; 루틴 정착</div>
+<div class="tl-content">주 2회 업로드 + Shorts 주 3회 루틴 확립<br>첫 매칭 시작 + 상담 폼 유입 20건/월 달성</div>
+</div>
+<div class="tl-item">
+<div class="tl-month">MONTH 4~6 &mdash; 성장 가속</div>
+<div class="tl-content">Shorts 알고리즘 안착 + 첫 성사 바이럴<br>상담 폼 80건/월 달성 + 수익화 시작</div>
+</div>
+<div class="tl-item">
+<div class="tl-month">MONTH 7~12 &mdash; 스케일업</div>
+<div class="tl-content">100건 상담 마일스톤 + 타 채널 콜라보<br>브랜드 협찬 + 커머스 검토 + 시즌 2 론칭</div>
+</div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 11. Ban List -->
+<section class="section">
+<span class="section-label red">SECTION 11</span>
+<h2>절대 금지 리스트</h2>
+<p class="desc">채널 브랜드를 지키기 위한 Ban 리스트.</p>
+<div style="max-width:600px">
+<div class="ban-item">"안녕하세요" 인사로 시작하는 오프닝</div>
+<div class="ban-item">"구독, 좋아요, 알림 설정" 유도 멘트</div>
+<div class="ban-item">38자 이상 긴 제목</div>
+<div class="ban-item">20분 초과 모놀로그</div>
+<div class="ban-item">경쟁사 실명 언급</div>
+<div class="ban-item">"성공한 대표" 자기 자랑 프레이밍</div>
+<div class="ban-item">비만/과거 이미지 과잉 소비</div>
+<div class="ban-item">워터밤 이미지 직접 활용</div>
+<div class="ban-item">회원 실제 개인정보 노출</div>
+<div class="ban-item">가격(300~500만원) 영상 내 직접 언급</div>
+</div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 12. 분석 범위 -->
+<section class="section">
+<span class="section-label purple">SECTION 12</span>
+<h2>우리가 조사한 것들</h2>
+<p class="desc">이 전략의 근거가 된 전체 분석 범위.</p>
+<div class="card-grid">
+<div class="card"><div class="card-icon purple">&#128202;</div><h3>경쟁 채널 분석</h3><p>한방언니 39개 + 모두의지인 40개<br><strong>= 79개 영상 전수 분석</strong></p></div>
+<div class="card"><div class="card-icon pink">&#128202;</div><h3>벤치마크 채널 분석</h3><p>채주부 그룹 7개 채널<br><strong>= 630개 영상 전수 분석</strong></p></div>
+<div class="card"><div class="card-icon blue">&#128172;</div><h3>댓글 분석</h3><p>감정 분류 + 키워드 추출<br><strong>= 3,450개 댓글</strong></p></div>
+<div class="card"><div class="card-icon green">&#128200;</div><h3>리텐션/히트맵</h3><p>초 단위 시청 유지율<br><strong>= 121개 영상 히트맵</strong></p></div>
+<div class="card"><div class="card-icon yellow">&#127912;</div><h3>썸네일 AI 분석</h3><p>Gemini Vision CTR 예측<br><strong>= 전 채널 썸네일</strong></p></div>
+<div class="card"><div class="card-icon red">&#128214;</div><h3>마케팅 프레임워크</h3><p>Hormozi + Brunson + Miller<br><strong>= 22권 도서 이식</strong></p></div>
+<div class="card"><div class="card-icon purple">&#128221;</div><h3>대본 구조 분석</h3><p>AI 대본 역분석<br><strong>= 7개 채널 구조 분석</strong></p></div>
+<div class="card"><div class="card-icon pink">&#128640;</div><h3>도메인 지식</h3><p>결혼정보업 시장/법률/가격<br><strong>= 업계 완전 리서치</strong></p></div>
+<div class="card"><div class="card-icon green">&#128196;</div><h3>기획서 완성</h3><p>EP01 표준 12섹션 포맷<br><strong>= 10개 에피소드 완성</strong></p></div>
+</div>
+</section>
+
+<!-- Footer -->
+<div class="footer">
+<p style="margin-bottom:8px;color:#64748b">MCN Neobridge &times; Flowmus &mdash; Confidential</p>
+<p>2026.04.07</p>
+</div>
+
+</body>
+</html>
