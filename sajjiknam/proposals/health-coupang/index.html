@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>촬영기획안 — 건기식 쿠팡셀러 (목요일 촬영)</title>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F2F4F6;color:#191F28;font-family:'Pretendard',system-ui,sans-serif;min-height:100vh;font-size:15px}
+.gnb{background:#fff;border-bottom:1px solid #E5E8EB;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.gnb-logo{font-size:16px;font-weight:800;color:#F08F00}
+.gnb-badge{background:#FFF7E6;color:#F08F00;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:800;border:1px solid #FFD700}
+.gnb-date{font-size:11px;color:#8B95A1;font-weight:600}
+.wrap{max-width:820px;margin:0 auto;padding:28px 20px 80px}
+.hero{background:linear-gradient(135deg,#0d1117 0%,#1a2332 50%,#2d1810 100%);border-radius:20px;padding:36px 32px;margin-bottom:20px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;right:-10%;width:300px;height:300px;background:radial-gradient(circle,rgba(240,143,0,.2),transparent);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-30%;left:-5%;width:250px;height:250px;background:radial-gradient(circle,rgba(240,68,82,.1),transparent);pointer-events:none}
+.hero-eyebrow{font-size:11px;font-weight:700;color:#FFD700;letter-spacing:2px;margin-bottom:10px}
+.hero-title{font-size:28px;font-weight:800;line-height:1.3;color:#fff;margin-bottom:8px}
+.hero-sub{color:#8B95A1;font-size:13px;line-height:1.7}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
+.hero-stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:12px;text-align:center}
+.hero-stat-v{font-size:20px;font-weight:800;color:#FFD700}
+.hero-stat-l{font-size:10px;color:#8B95A1;margin-top:3px}
+.tabs{display:flex;gap:6px;margin-bottom:18px;flex-wrap:wrap;position:sticky;top:56px;z-index:90;background:#F2F4F6;padding:10px 0}
+.tab-btn{padding:9px 16px;border-radius:10px;border:1.5px solid #E5E8EB;background:#fff;font-size:13px;font-weight:700;cursor:pointer;color:#6B7684;transition:.15s;font-family:inherit}
+.tab-btn.on{background:#F08F00;border-color:#F08F00;color:#fff}
+.tab-btn:hover:not(.on){background:#F8F9FA}
+.tab-btn.red{border-color:#F04452;color:#F04452}
+.tab-btn.red.on{background:#F04452;color:#fff}
+.panel{display:none}
+.panel.on{display:block}
+.card{background:#fff;border-radius:16px;padding:22px;margin-bottom:14px;box-shadow:0 1px 6px rgba(0,0,0,.06);position:relative}
+.card.hot{border:2px solid #F04452;background:#FFF8F8}
+.card.gold{border:2px solid #F08F00;background:#FFFBF0}
+.card.blue{border:2px solid #3182F6;background:#F0F6FF}
+.card.green{border:2px solid #05C072;background:#F0FFF4}
+.card.dark{background:#191F28;color:#fff}
+.card-label{font-size:11px;font-weight:700;color:#F08F00;letter-spacing:1.5px;margin-bottom:14px;text-transform:uppercase}
+.card-label.red{color:#F04452}
+.card-label.blue{color:#3182F6}
+.card-label.green{color:#05C072}
+.section{margin-bottom:28px}
+.section-title{font-size:18px;font-weight:800;color:#191F28;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.section-title .num{background:#F08F00;color:#fff;border-radius:8px;padding:4px 10px;font-size:13px}
+.section-title .num.red{background:#F04452}
+.section-title .num.blue{background:#3182F6}
+.tag{display:inline-block;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:700;margin-right:5px;white-space:nowrap}
+.tag-y{background:#FFF7E6;color:#F08F00}
+.tag-r{background:#FFF0F0;color:#F04452}
+.tag-g{background:#F0FFF4;color:#05C072}
+.tag-b{background:#EFF3FF;color:#3182F6}
+.tag-p{background:#F0EDFF;color:#7B61FF}
+.tag-d{background:#191F28;color:#FFD700}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.stat{background:#FFF7E6;border-radius:12px;padding:14px;text-align:center}
+.stat-v{font-size:22px;font-weight:800;color:#F08F00}
+.stat-l{font-size:11px;color:#6B7684;margin-top:3px}
+.stat.red{background:#FFF0F0}.stat.red .stat-v{color:#F04452}
+.stat.blue{background:#EFF3FF}.stat.blue .stat-v{color:#3182F6}
+.stat.green{background:#F0FFF4}.stat.green .stat-v{color:#05C072}
+.note{background:#FFF7E6;border-left:3px solid #F08F00;border-radius:0 8px 8px 0;padding:14px 16px;margin:10px 0;font-size:13px;line-height:1.7;color:#3E4A5A}
+.note.red{background:#FFF0F0;border-left-color:#F04452}
+.note.blue{background:#EFF3FF;border-left-color:#3182F6}
+.note.green{background:#F0FFF4;border-left-color:#05C072}
+.tl-row{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid #E5E8EB}
+.tl-row:last-child{border-bottom:none}
+.tl-time{font-size:12px;font-weight:800;color:#F08F00;min-width:75px;padding-top:2px}
+.tl-time.red{color:#F04452}
+.tl-time.blue{color:#3182F6}
+.tl-body{flex:1}
+.tl-title{font-size:14px;font-weight:700;color:#191F28;margin-bottom:4px}
+.tl-text{font-size:13px;color:#3E4A5A;line-height:1.7}
+.tl-badge{display:inline-block;background:#F04452;color:#fff;border-radius:4px;padding:1px 6px;font-size:10px;font-weight:800;margin-left:6px}
+.tl-badge.blue{background:#3182F6}
+.tl-badge.green{background:#05C072}
+.tl-badge.orange{background:#F08F00}
+.q-card{background:#fff;border-radius:12px;padding:16px 18px;margin-bottom:10px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;gap:14px;align-items:flex-start}
+.q-num{background:#F08F00;color:#fff;border-radius:8px;min-width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0}
+.q-num.red{background:#F04452}
+.q-num.blue{background:#3182F6}
+.q-body{flex:1}
+.q-text{font-size:14px;font-weight:700;color:#191F28;line-height:1.6;margin-bottom:4px}
+.q-sub{font-size:12px;color:#8B95A1;line-height:1.6}
+.q-tags{margin-top:6px;display:flex;flex-wrap:wrap;gap:4px}
+.location-card{background:#fff;border-radius:16px;overflow:hidden;margin-bottom:14px;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+.location-header{padding:18px 22px;border-bottom:1px solid #E5E8EB}
+.location-header h3{font-size:16px;font-weight:800;color:#191F28}
+.location-body{padding:18px 22px}
+.location-time{display:inline-block;background:#F04452;color:#fff;border-radius:6px;padding:4px 10px;font-size:12px;font-weight:800;margin-bottom:10px}
+.location-detail{font-size:13px;color:#3E4A5A;line-height:1.8}
+.check-item{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #F2F4F6}
+.check-item:last-child{border-bottom:none}
+.check-box{width:20px;height:20px;border:2px solid #E5E8EB;border-radius:4px;flex-shrink:0;margin-top:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+.check-box.checked{background:#05C072;border-color:#05C072}
+.check-box.checked::after{content:'✓';color:#fff;font-size:12px;font-weight:800}
+.check-text{font-size:13px;color:#3E4A5A;line-height:1.6}
+.divider{height:1px;background:#E5E8EB;margin:20px 0}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
+th{padding:10px;text-align:left;border-bottom:2px solid #E5E8EB;color:#F08F00;font-size:11px;background:#FFFBF0;font-weight:700}
+td{padding:10px;border-bottom:1px solid #F2F4F6;color:#3E4A5A;line-height:1.6}
+.copy-btn{background:#F08F00;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;transition:.15s;font-family:inherit}
+.copy-btn:hover{background:#D97A00}
+.copy-btn:active{transform:scale(.96)}
+.copied{background:#05C072!important}
+.thumb-card{background:#fff;border-radius:16px;overflow:hidden;margin-bottom:14px;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+.thumb-preview{aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.thumb-preview.a{background:linear-gradient(135deg,#1a1a2e,#16213e)}
+.thumb-preview.b{background:linear-gradient(135deg,#0f3460,#1a1a2e)}
+.thumb-preview.c{background:linear-gradient(135deg,#2d132c,#1a1a2e)}
+.thumb-text{color:#fff;text-align:center;padding:20px;z-index:1}
+.thumb-main{font-size:32px;font-weight:800;line-height:1.3;text-shadow:2px 2px 8px rgba(0,0,0,.5)}
+.thumb-sub{font-size:14px;color:rgba(255,255,255,.7);margin-top:8px}
+.thumb-body{padding:18px}
+.rank{position:absolute;top:-8px;left:16px;background:#F04452;color:#fff;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:800}
+.rank.b{background:#F08F00}
+.rank.c{background:#3182F6}
+.title-text{font-size:17px;font-weight:800;color:#191F28;line-height:1.5;margin-bottom:10px;padding-top:6px}
+.data-tag{display:inline-block;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:700;margin-right:6px;margin-bottom:4px}
+.data-tag.red{background:#FFF0F0;color:#F04452}
+.data-tag.orange{background:#FFF7E6;color:#F08F00}
+.data-tag.blue{background:#EFF3FF;color:#3182F6}
+.data-tag.green{background:#F0FFF4;color:#05C072}
+.desc-box{background:#F8F9FA;border:1px solid #E5E8EB;border-radius:10px;padding:18px;font-size:13px;color:#191F28;line-height:2;white-space:pre-wrap;font-family:'Pretendard',system-ui,sans-serif}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:600px){.hero-stats{grid-template-columns:repeat(2,1fr)}.stat-row{grid-template-columns:1fr 1fr}.two-col{grid-template-columns:1fr}.thumb-main{font-size:22px}.title-text{font-size:15px}}
+</style>
+</head>
+<body>
+<nav class="gnb">
+  <span class="gnb-logo">촬영기획안</span>
+  <span class="gnb-badge">사찍남 × 부업소개하는남자</span>
+  <span class="gnb-date">촬영일: 목요일 (4/10)</span>
+</nav>
+<div class="wrap">
+
+  <!-- ============ HERO ============ -->
+  <div class="hero">
+    <div class="hero-eyebrow">SHOOTING PLAN v1.0 — 건강기능식품 쿠팡 셀러</div>
+    <div class="hero-title">빚 7억에서 월 2억으로<br>건기식 쿠팡 역전 스토리</div>
+    <div class="hero-sub">79년생 · 48세 · 남성 · 안산/시흥 거주<br>헬스장 3개 → 코로나 파산 → 건기식 쿠팡 자연순위 1등 → 월 매출 2~2.5억</div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-v">2~2.5억</div><div class="hero-stat-l">월 매출</div></div>
+      <div class="hero-stat"><div class="hero-stat-v">8천~1억</div><div class="hero-stat-l">월 순수익</div></div>
+      <div class="hero-stat"><div class="hero-stat-v">0.7~1%</div><div class="hero-stat-l">광고비 비율</div></div>
+      <div class="hero-stat"><div class="hero-stat-v">7억→0</div><div class="hero-stat-l">빚 완제</div></div>
+    </div>
+  </div>
+
+  <!-- ============ TABS ============ -->
+  <div class="tabs">
+    <button class="tab-btn on" onclick="go('profile',this)">출연자 프로필</button>
+    <button class="tab-btn" onclick="go('sajjik',this)">사찍남 25분</button>
+    <button class="tab-btn" onclick="go('bueop',this)">부업소개 10분</button>
+    <button class="tab-btn" onclick="go('questions',this)">질문지</button>
+    <button class="tab-btn" onclick="go('location',this)">촬영 동선</button>
+    <button class="tab-btn" onclick="go('upload',this)">업로드 키트</button>
+    <button class="tab-btn red" onclick="go('checklist',this)">체크리스트</button>
+  </div>
+
+  <!-- ============ TAB 1: 출연자 프로필 ============ -->
+  <div class="panel on" id="tab-profile">
+
+    <div class="card hot">
+      <div class="card-label red">한 줄 로그라인</div>
+      <div style="font-size:17px;font-weight:800;line-height:1.6;color:#191F28">
+        "아버지 회사 1,500명 직원이 하루아침에 사라졌다.<br>
+        항공대 자퇴, 여자친구 사망, 헬스장 파산, 빚 7억.<br>
+        새벽 가락시장 지게차 위에서 다시 시작한 남자가<br>
+        지금은 광고비 0.7%로 월 2억을 찍는다."
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">1</span> 인생 연대기</div>
+
+      <div class="card">
+        <table>
+          <tr><th style="width:90px">시기</th><th>사건</th><th style="width:100px">감정선</th></tr>
+          <tr>
+            <td><strong>~97년</strong></td>
+            <td>아버지 섬유수출무역 · 직원 1,500명 · 유복한 유년기</td>
+            <td><span class="tag tag-g">안정</span></td>
+          </tr>
+          <tr>
+            <td><strong>97~98년</strong></td>
+            <td>IMF → 아버지 회사 부도 → 가정 파탄 · 항공조종학과 자퇴 (비행비 억대)</td>
+            <td><span class="tag tag-r">추락</span></td>
+          </tr>
+          <tr>
+            <td><strong>제대 후</strong></td>
+            <td>피자집 알바, 노가다, 쭈꾸미집 등 닥치는 대로</td>
+            <td><span class="tag tag-r">생존</span></td>
+          </tr>
+          <tr>
+            <td><strong>20대 후반</strong></td>
+            <td>여자친구(재일교포 모델) 위암 말기 사망 → 1.5년 은둔</td>
+            <td><span class="tag tag-r">절망</span></td>
+          </tr>
+          <tr>
+            <td><strong>32~33세</strong></td>
+            <td>헬스 트레이너 시작 · 기본급 60만원 · PT 시간당 7천원 · 하루 18시간</td>
+            <td><span class="tag tag-y">재기</span></td>
+          </tr>
+          <tr>
+            <td><strong>1호점</strong></td>
+            <td>자기 헬스장 오픈 → 연매출 10억 · 월 순수익 3,500~4,000만원</td>
+            <td><span class="tag tag-g">성공</span></td>
+          </tr>
+          <tr>
+            <td><strong>2호점</strong></td>
+            <td>6개월 만에 매출 4.8억 → 권리금 받고 매각</td>
+            <td><span class="tag tag-g">확장</span></td>
+          </tr>
+          <tr>
+            <td><strong>2020</strong></td>
+            <td>3호점 오픈 3~4개월 후 코로나 → 빚 7억 (와이프 대출 2.2억 포함)</td>
+            <td><span class="tag tag-r">파산</span></td>
+          </tr>
+          <tr>
+            <td><strong>파산 직후</strong></td>
+            <td>공황장애 · 시흥 나래휴게소 새벽 · 밥 못 먹고 잠 못 자는 날들</td>
+            <td><span class="tag tag-r">바닥</span></td>
+          </tr>
+          <tr>
+            <td><strong>야간 노동</strong></td>
+            <td>가락시장 지게차 + 청담순두부 배송 · 월 430~450만원 · 트럭 낙상 다리 골절</td>
+            <td><span class="tag tag-r">처절</span></td>
+          </tr>
+          <tr>
+            <td><strong>전환점</strong></td>
+            <td>4주 만에 깁스 풀고 마켓컬리 지게차 알바 → 유튜브 무료 강의 6개월 서칭</td>
+            <td><span class="tag tag-y">탐색</span></td>
+          </tr>
+          <tr>
+            <td><strong>온라인 시작</strong></td>
+            <td>건기식 위탁판매 첫 6개월 · 매출 4,500~5,000만 · 순익 1,200~1,300만</td>
+            <td><span class="tag tag-g">반등</span></td>
+          </tr>
+          <tr>
+            <td><strong>자체브랜드</strong></td>
+            <td>4개월 만에 매출 1.2~1.5억 → 현재 월 2~2.5억 · 순수익 8천~1억</td>
+            <td><span class="tag tag-g">폭발</span></td>
+          </tr>
+          <tr>
+            <td><strong>현재</strong></td>
+            <td>디지털노마드 · 주1회 펜션/풀빌라 · 포르쉐 카이엔 EV 계약 · 타이탄클래스 강의</td>
+            <td><span class="tag tag-g">자유</span></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">2</span> 핵심 사업 수치</div>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-v">2~2.5억</div><div class="stat-l">월 매출</div></div>
+        <div class="stat red"><div class="stat-v">8천~1억</div><div class="stat-l">월 순수익</div></div>
+        <div class="stat blue"><div class="stat-v">0.7~1%</div><div class="stat-l">광고비 비율</div></div>
+      </div>
+      <div class="stat-row">
+        <div class="stat green"><div class="stat-v">40~50%</div><div class="stat-l">마진율</div></div>
+        <div class="stat"><div class="stat-v">0건</div><div class="stat-l">1월 반품</div></div>
+        <div class="stat blue"><div class="stat-v">3억</div><div class="stat-l">타이탄클래스 1기 매출</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num red">3</span> 핵심 USP (다른 셀러와 차별점)</div>
+
+      <div class="card gold">
+        <div class="card-label">비밀 병기: 홈쇼핑 트래픽 흡수 전략</div>
+        <div style="font-size:14px;line-height:1.8;color:#3E4A5A">
+          <strong>① 대기업 홈쇼핑 원료 확인</strong> → 같은 원료로 건기식 제작<br>
+          <strong>② 쿠팡 자연순위 상단 등록</strong> → 광고 없이 오가닉 노출<br>
+          <strong>③ 홈쇼핑 방송 시작</strong> → 시청자가 쿠팡 검색<br>
+          <strong>④ 자연순위 1등이니 내 제품 클릭</strong> → 매출 자동 발생<br><br>
+          <span class="tag tag-r">업계 광고비 20~30%</span> <span class="tag tag-g">본인 0.7~1%</span>
+          <span class="tag tag-d">광고비 차이 = 순수익 차이</span>
+        </div>
+      </div>
+
+      <div class="note red">
+        <strong>촬영 포인트:</strong> 이 전략을 설명할 때 반드시 화면에 <strong>쿠팡 검색 → 자연순위 1등 → 주문 들어오는 실시간 장면</strong>을 B-Roll로 잡아야 함. 목요일 4시 35분 홈쇼핑 방송 예정 → 실시간 주문 유입 장면 촬영 가능!
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num blue">4</span> 감정 포인트 (눈물/소름 예상)</div>
+
+      <div class="two-col">
+        <div class="card hot">
+          <div class="card-label red">눈물 예상 ①</div>
+          <div style="font-size:14px;font-weight:700;margin-bottom:8px">여자친구 사망</div>
+          <div style="font-size:13px;color:#3E4A5A;line-height:1.7">재일교포 모델 여자친구가 위암 말기로 사망. 1.5년 은둔 생활. "아무것도 할 수 없었다"</div>
+        </div>
+        <div class="card hot">
+          <div class="card-label red">눈물 예상 ②</div>
+          <div style="font-size:14px;font-weight:700;margin-bottom:8px">공황장애 + 나래휴게소</div>
+          <div style="font-size:13px;color:#3E4A5A;line-height:1.7">빚 7억, 공황장애. 시흥 나래휴게소에서 새벽에 혼자. 밥도 잠도 안 됐다</div>
+        </div>
+        <div class="card hot">
+          <div class="card-label red">눈물 예상 ③</div>
+          <div style="font-size:14px;font-weight:700;margin-bottom:8px">와이프 2.2억</div>
+          <div style="font-size:13px;color:#3E4A5A;line-height:1.7">와이프가 대출 2.2억을 내주고, 빚 갚는 동안 싫은 소리 한 번 안 했다. 결혼 10주년</div>
+        </div>
+        <div class="card hot">
+          <div class="card-label red">눈물 예상 ④</div>
+          <div style="font-size:14px;font-weight:700;margin-bottom:8px">트럭 낙상 + 다리 골절</div>
+          <div style="font-size:13px;color:#3E4A5A;line-height:1.7">가락시장 트럭에서 떨어져 다리 골절. 4주 만에 깁스 풀고 마켓컬리 지게차 알바 복귀</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">5</span> 수강생 사례 (촬영 출연 가능)</div>
+      <div class="card green">
+        <div class="card-label green">출연 가능 수강생</div>
+        <div style="font-size:14px;line-height:1.8;color:#3E4A5A">
+          <strong>수강생 A:</strong> 1.7억 사기당한 후 천안 거주. 현재 하루 120개 판매 중. <span class="tag tag-g">촬영 동석 가능</span><br>
+          <strong>수강생 B:</strong> 청주에서 안산으로 이사한 수강생 (가까이서 배우기 위해)<br><br>
+          <strong>활용:</strong> 수강생 A 인터뷰 → "사기 1.7억 → 건기식 하루 120개" 서브 스토리로 활용
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TAB 2: 사찍남 25분 ============ -->
+  <div class="panel" id="tab-sajjik">
+
+    <div class="card dark">
+      <div style="font-size:11px;font-weight:700;color:#FFD700;letter-spacing:1.5px;margin-bottom:10px">사찍남 25분 — 핵심 컨셉</div>
+      <div style="font-size:20px;font-weight:800;color:#fff;line-height:1.4;margin-bottom:10px">
+        "직원 1,500명이 하루아침에 사라진 후,<br>48세가 된 아들의 역전 보고서"
+      </div>
+      <div style="font-size:13px;color:#8B95A1;line-height:1.7">
+        IMF → 항공대 자퇴 → 여자친구 사망 → 헬스장 성공 → 코로나 파산 → 빚 7억 → 공황장애 → 새벽 배송 → 건기식 쿠팡 → 월 2억<br>
+        <strong style="color:#FFD700">4번의 추락, 4번의 재기. 포기하지 않은 남자의 48년.</strong>
+      </div>
+    </div>
+
+    <div class="note red">
+      <strong>리텐션 핵심 전략:</strong> 사찍남 분석 결과, 초반 30초 리텐션 0.129 → 0.25+ 필요. 킬러 타이밍을 분산시키지 말고 7~10분에 집중 배치. 돈탐생식 "첫 5초 숫자 임팩트" 적용.
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num red">1</span> 25분 타임라인</div>
+
+      <div class="card">
+        <div class="tl-row">
+          <div class="tl-time red">0:00~0:15</div>
+          <div class="tl-body">
+            <div class="tl-title">오프닝 훅 — 숫자 임팩트 <span class="tl-badge">HOOK</span></div>
+            <div class="tl-text">
+              "아버지 회사 직원이 1,500명이었습니다. 하루아침에 전부 사라졌어요."<br>
+              또는: "빚이 7억이었습니다. 공황장애가 왔고, 새벽에 휴게소에서 혼자 앉아있었습니다."
+            </div>
+            <div class="q-tags">
+              <span class="tag tag-r">돈탐생식 숫자훅</span>
+              <span class="tag tag-b">초반30초 0.25+ 목표</span>
+            </div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time red">0:15~0:30</div>
+          <div class="tl-body">
+            <div class="tl-title">현재 갭 제시 <span class="tl-badge orange">GAP</span></div>
+            <div class="tl-text">
+              "지금은 광고비 0.7%로 월 2억을 찍습니다. 건강기능식품, 쿠팡 하나로요."<br>
+              <em>→ 과거(파산) vs 현재(월2억) 갭으로 시청 유도</em>
+            </div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">0:30~3:00</div>
+          <div class="tl-body">
+            <div class="tl-title">ACT 1 — 유복한 시절 + IMF 폭탄</div>
+            <div class="tl-text">
+              아버지 섬유수출무역 1,500명 → IMF 부도 → 항공대 자퇴 (비행비 억대)<br>
+              "파일럿이 꿈이었는데, 비행 한 시간에 몇 백만원이거든요. 포기했습니다."<br>
+              <em>→ 꿈의 좌절 = 공감 + 첫 번째 추락</em>
+            </div>
+            <div class="q-tags">
+              <span class="tag tag-p">에피파니브릿지 [배경]</span>
+            </div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">3:00~5:00</div>
+          <div class="tl-body">
+            <div class="tl-title">ACT 2 — 밑바닥 생활 + 여자친구 사망</div>
+            <div class="tl-text">
+              피자집 알바, 노가다, 쭈꾸미집 → 여자친구(재일교포 모델) 위암 사망<br>
+              1.5년 은둔 생활 — "아무것도 하고 싶지 않았습니다"<br>
+              <em>→ 두 번째 추락. 감정 바닥.</em>
+            </div>
+            <div class="q-tags">
+              <span class="tag tag-r">눈물 포인트 ①</span>
+              <span class="tag tag-p">에피파니브릿지 [내면갈등]</span>
+            </div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">5:00~8:00</div>
+          <div class="tl-body">
+            <div class="tl-title">ACT 3 — 트레이너로 재기 + 헬스장 성공</div>
+            <div class="tl-text">
+              32~33세 헬스 트레이너 시작. 기본급 60만원, PT 7천원/시간, 하루 18시간.<br>
+              1호점 → 연매출 10억, 월 순수익 3,500~4,000만원<br>
+              2호점 → 6개월 만에 매출 4.8억 → 권리금 받고 매각<br>
+              <em>→ 세 번째 상승. "노력하면 된다"는 희망 구간</em>
+            </div>
+            <div class="q-tags">
+              <span class="tag tag-g">성공 구간</span>
+              <span class="tag tag-p">에피파니브릿지 [욕구]</span>
+            </div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time red">8:00~12:00</div>
+          <div class="tl-body">
+            <div class="tl-title">ACT 4 — 코로나 + 빚 7억 + 공황장애 <span class="tl-badge">PEAK</span></div>
+            <div class="tl-text">
+              3호점 동시 오픈 → 3~4개월 만에 코로나 → 빚 7억<br>
+              와이프 대출 2.2억 → 공황장애 → 밥 못 먹고 잠 못 자고<br>
+              <strong>시흥 나래휴게소, 새벽에 혼자 앉아있던 장면</strong><br>
+              <em>→ 세 번째 추락. 여기서 시청자 감정 최고조.</em>
+            </div>
+            <div class="q-tags">
+              <span class="tag tag-r">눈물 포인트 ②③</span>
+              <span class="tag tag-r">킬러 타이밍 (7~10분)</span>
+              <span class="tag tag-p">에피파니브릿지 [위기]</span>
+            </div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">12:00~15:00</div>
+          <div class="tl-body">
+            <div class="tl-title">ACT 5 — 새벽 배송 + 트럭 낙상 + 전환점</div>
+            <div class="tl-text">
+              가락시장 지게차 + 청담순두부 야간배송 (월 430~450만원)<br>
+              트럭에서 떨어져 다리 골절 → 4주만에 깁스 풀고 마켓컬리 알바 복귀<br>
+              "깁스하고 지게차 탔어요. 선택의 여지가 없었으니까."<br>
+              유튜브 무료 강의 6개월 서칭 → 건기식 발견<br>
+              <em>→ 네 번째 추락 + 에피파니 순간</em>
+            </div>
+            <div class="q-tags">
+              <span class="tag tag-r">눈물 포인트 ④</span>
+              <span class="tag tag-y">에피파니 순간</span>
+            </div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time blue">15:00~19:00</div>
+          <div class="tl-body">
+            <div class="tl-title">ACT 6 — 건기식 시작 + 홈쇼핑 전략 공개 <span class="tl-badge blue">INFO</span></div>
+            <div class="tl-text">
+              위탁판매 첫 6개월: 매출 4,500~5,000만, 순익 1,200~1,300만<br>
+              자체 브랜드 전환 → 4개월 만에 1.2~1.5억<br>
+              <strong>핵심 전략 공개: 홈쇼핑 원료 → 쿠팡 자연순위 → 트래픽 흡수</strong><br>
+              광고비 0.7~1% vs 업계 20~30%<br>
+              <em>→ "이게 이 사람의 비밀이구나" = 정보 만족 구간</em>
+            </div>
+            <div class="q-tags">
+              <span class="tag tag-b">정보 만족</span>
+              <span class="tag tag-p">에피파니브릿지 [해결]</span>
+            </div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">19:00~22:00</div>
+          <div class="tl-body">
+            <div class="tl-title">ACT 7 — 현재 라이프스타일 + 와이프 이야기</div>
+            <div class="tl-text">
+              디지털노마드 생활 · 주1회 펜션/풀빌라 · 포르쉐 카이엔 EV 계약<br>
+              와이프 크리스마스 3천만원 선물 · 결혼 10주년<br>
+              "그때 싫은 소리 한 번 안 했어요. 그냥 기다려줬어요."<br>
+              <em>→ 감동 마무리. 와이프 이야기 = 따뜻한 엔딩</em>
+            </div>
+            <div class="q-tags">
+              <span class="tag tag-g">감동 마무리</span>
+              <span class="tag tag-p">LF8 [가족보호]</span>
+            </div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">22:00~25:00</div>
+          <div class="tl-body">
+            <div class="tl-title">ACT 8 — 수강생 + 메시지 + 엔딩</div>
+            <div class="tl-text">
+              수강생 사례: 1.7억 사기 → 현재 하루 120개 판매<br>
+              "전화번호 공개합니다. 새벽에 전화해도 받아요."<br>
+              마무리 메시지: "IMF, 사랑하는 사람의 죽음, 코로나. 다 겪었는데 여기 있습니다."<br>
+              <em>→ "포기하지 않으면 된다" 메시지 + 다음 영상 티저</em>
+            </div>
+            <div class="q-tags">
+              <span class="tag tag-g">희망 메시지</span>
+              <span class="tag tag-b">CTA: 부업소개 채널</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>편집 가이드:</strong><br>
+      - 0~60초: 돈탐생식 1초 단위 컷전환 + 숫자 자막 강조<br>
+      - 8~12분 (코로나/공황): 나래휴게소 B-Roll + 감성 BGM 전환<br>
+      - 15~19분 (전략공개): 쿠팡 화면 캡처 + 홈쇼핑 화면 PIP<br>
+      - 19~22분 (라이프): 자택 바다뷰 + 차량 + 여유로운 컷
+    </div>
+  </div>
+
+  <!-- ============ TAB 3: 부업소개 10분 ============ -->
+  <div class="panel" id="tab-bueop">
+
+    <div class="card dark">
+      <div style="font-size:11px;font-weight:700;color:#FFD700;letter-spacing:1.5px;margin-bottom:10px">부업소개하는남자 10분 — 핵심 컨셉</div>
+      <div style="font-size:20px;font-weight:800;color:#fff;line-height:1.4;margin-bottom:10px">
+        "건기식 쿠팡 판매, 초기 자본 30만원으로<br>월 100~200만원 버는 현실적 방법"
+      </div>
+      <div style="font-size:13px;color:#8B95A1;line-height:1.7">
+        사찍남은 인생 서사, 부업소개는 <strong style="color:#FFD700">"나도 할 수 있겠다"</strong> 실전 가이드
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num blue">1</span> 10분 타임라인</div>
+
+      <div class="card">
+        <div class="tl-row">
+          <div class="tl-time red">0:00~0:30</div>
+          <div class="tl-body">
+            <div class="tl-title">훅 — 수치 임팩트 <span class="tl-badge">HOOK</span></div>
+            <div class="tl-text">
+              "건강기능식품. 초기 자본 30만원. 광고비 0원. 월 수익 100~200만원."<br>
+              "재고 안 쌓이고, 반품 거의 0, CS 전화도 안 옵니다."
+            </div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">0:30~2:00</div>
+          <div class="tl-body">
+            <div class="tl-title">왜 건기식인가?</div>
+            <div class="tl-text">
+              마진 40~50% (일반 생활용품 5~10%)<br>
+              반품 거의 0 (1월 기준 0건) — 먹는 제품이라 반품 자체가 어려움<br>
+              CS 없음 — 전화 올 일이 없음<br>
+              재구매율 높음 — 건강 관련은 한 번 먹으면 계속 구매<br>
+              <em>→ "왜 하필 건기식이냐" 의문 해소</em>
+            </div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time blue">2:00~4:00</div>
+          <div class="tl-body">
+            <div class="tl-title">STEP 1: 위탁판매로 테스트 <span class="tl-badge blue">핵심</span></div>
+            <div class="tl-text">
+              소량 제조: 30~40만원이면 시작 가능<br>
+              위탁판매 방식: 주문 들어오면 제조사에서 직배송<br>
+              재고 리스크 0 — 주문 후 생산<br>
+              첫 6개월 현실 수치: 매출 4,500~5,000만, 순익 1,200~1,300만<br>
+              <em>→ "30만원이면 된다고?" = 진입장벽 파괴</em>
+            </div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time blue">4:00~6:00</div>
+          <div class="tl-body">
+            <div class="tl-title">STEP 2: 쿠팡 자연순위 전략 <span class="tl-badge blue">핵심</span></div>
+            <div class="tl-text">
+              <strong>홈쇼핑 원료 확인법</strong> → 같은 원료로 건기식 제작<br>
+              쿠팡 자연순위 = 광고비 0원으로 상단 노출<br>
+              홈쇼핑 방송 시작하면 → 시청자가 쿠팡 검색 → 내 제품 클릭<br>
+              <strong>실시간 시연:</strong> 4:35 홈쇼핑 방송 → 주문 들어오는 장면<br>
+              <em>→ 핵심 전략. 여기서 시청자 "와" 나와야 함</em>
+            </div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">6:00~8:00</div>
+          <div class="tl-body">
+            <div class="tl-title">STEP 3: 자체 브랜드 전환</div>
+            <div class="tl-text">
+              위탁으로 검증 → 잘 팔리는 제품만 자체 브랜드화<br>
+              마진 40~50%로 점프<br>
+              현재 월 매출 2~2.5억의 구조<br>
+              <em>→ 위탁(소액) → 자체브랜드(대박) 로드맵</em>
+            </div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">8:00~9:00</div>
+          <div class="tl-body">
+            <div class="tl-title">수강생 실제 사례</div>
+            <div class="tl-text">
+              1.7억 사기당한 수강생 → 현재 하루 120개 판매<br>
+              "이분은 밑바닥에서 시작한 거예요. 저처럼."<br>
+              <em>→ 시청자가 자신을 투영할 수 있는 사례</em>
+            </div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time green">9:00~10:00</div>
+          <div class="tl-body">
+            <div class="tl-title">정리 + CTA</div>
+            <div class="tl-text">
+              3단계 요약: ① 소량 제조 30만원 ② 쿠팡 자연순위 ③ 자체 브랜드<br>
+              "한 달에 100만원만이라도 시작해보세요"<br>
+              사찍남 본편 예고 + 구독 유도
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note blue">
+      <strong>부업소개 촬영 포인트:</strong><br>
+      - 쿠팡 셀러 대시보드 화면 촬영 (매출 수치 보이게)<br>
+      - 홈쇼핑 방송 화면 + 쿠팡 검색 화면 동시 촬영<br>
+      - 실제 제품 박스/포장 장면<br>
+      - 수강생 인터뷰 (동석 시)
+    </div>
+  </div>
+
+  <!-- ============ TAB 4: 질문지 ============ -->
+  <div class="panel" id="tab-questions">
+
+    <div class="note red">
+      <strong>질문 운영 가이드:</strong> 30개 전부 물어볼 필요 없음. 자연스러운 대화 흐름에서 핵심 포인트가 나오도록 유도. <span class="tag tag-r">필수</span> 표시된 질문은 반드시 커버.
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">A</span> 과거 — IMF + 유년기</div>
+
+      <div class="q-card">
+        <div class="q-num red">1</div>
+        <div class="q-body">
+          <div class="q-text">아버지 회사가 직원 1,500명이었다고요. 그때 집안 분위기가 어땠어요?</div>
+          <div class="q-sub">→ 유복했던 시절을 구체적으로. 후에 추락과의 대비를 위해.</div>
+          <div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-p">[배경]</span></div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-num">2</div>
+        <div class="q-body">
+          <div class="q-text">IMF 터졌을 때, 집에서 어떤 일이 벌어졌어요?</div>
+          <div class="q-sub">→ 부도 당일/직후의 구체적 장면. 아버지 표정, 집안 변화.</div>
+          <div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-p">[위기]</span></div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-num">3</div>
+        <div class="q-body">
+          <div class="q-text">항공대 자퇴할 때 심정이 어땠어요? 파일럿이 꿈이었잖아요.</div>
+          <div class="q-sub">→ 꿈 포기의 순간. "비행비가 억 단위"라는 구체적 금액 유도.</div>
+          <div class="q-tags"><span class="tag tag-y">[욕구]</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">B</span> 여자친구 사망 + 은둔</div>
+
+      <div class="q-card">
+        <div class="q-num red">4</div>
+        <div class="q-body">
+          <div class="q-text">여자친구분이 재일교포 모델이었다고요. 처음에 어떻게 만났어요?</div>
+          <div class="q-sub">→ 행복했던 기억부터 시작. 사망 소식과의 대비.</div>
+          <div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-p">[배경]</span></div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-num red">5</div>
+        <div class="q-body">
+          <div class="q-text">위암 말기라는 걸 알았을 때, 뭘 하셨어요?</div>
+          <div class="q-sub">→ 감정 최고조 유도. 너무 깊이 파지 말고 본인이 말하는 만큼만.</div>
+          <div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-r">눈물 포인트</span></div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-num">6</div>
+        <div class="q-body">
+          <div class="q-text">1년 반 동안 은둔하셨다고요. 그때 하루가 어땠어요?</div>
+          <div class="q-sub">→ 은둔 생활의 구체적 일상. 방에서 뭘 했는지.</div>
+          <div class="q-tags"><span class="tag tag-p">[내면갈등]</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">C</span> 트레이너 + 헬스장 성공</div>
+
+      <div class="q-card">
+        <div class="q-num">7</div>
+        <div class="q-body">
+          <div class="q-text">32살에 헬스 트레이너를 시작한 계기가 뭐예요?</div>
+          <div class="q-sub">→ 은둔에서 빠져나온 전환점. 뭐가 계기였는지.</div>
+          <div class="q-tags"><span class="tag tag-y">[에피파니]</span></div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-num">8</div>
+        <div class="q-body">
+          <div class="q-text">기본급 60만원에 PT 7천원이면... 하루 18시간을 어떻게 버텼어요?</div>
+          <div class="q-sub">→ 극한의 노력. 구체적 스케줄 유도.</div>
+          <div class="q-tags"><span class="tag tag-y">[노력]</span></div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-num red">9</div>
+        <div class="q-body">
+          <div class="q-text">1호점이 연매출 10억을 찍었을 때, 첫 반응이 뭐였어요?</div>
+          <div class="q-sub">→ 성공의 순간. 감정 + 구체적 숫자.</div>
+          <div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-g">[성공]</span></div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-num">10</div>
+        <div class="q-body">
+          <div class="q-text">2호점을 6개월 만에 매각했잖아요. 왜요? 잘 되고 있었는데.</div>
+          <div class="q-sub">→ 사업 판단력. 4.8억 매출인데 왜 팔았는지.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num red">D</span> 코로나 + 파산 + 공황장애</div>
+
+      <div class="q-card">
+        <div class="q-num red">11</div>
+        <div class="q-body">
+          <div class="q-text">3호점까지 열었는데 3~4개월 만에 코로나가 터졌다고요. 그 순간 기억나세요?</div>
+          <div class="q-sub">→ 정확한 타이밍과 충격. "3~4개월 만에"가 핵심.</div>
+          <div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-r">킬러 구간</span></div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-num red">12</div>
+        <div class="q-body">
+          <div class="q-text">빚이 7억이 됐을 때, 와이프분한테 뭐라고 말씀하셨어요?</div>
+          <div class="q-sub">→ 와이프 2.2억 대출 이야기 유도. 부부 관계.</div>
+          <div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-r">눈물 포인트</span></div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-num red">13</div>
+        <div class="q-body">
+          <div class="q-text">공황장애가 왔다고요. 어떤 증상이었어요?</div>
+          <div class="q-sub">→ 구체적 증상 (밥 못 먹고, 잠 못 자고). 시청자 공감.</div>
+          <div class="q-tags"><span class="tag tag-r">필수</span></div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-num red">14</div>
+        <div class="q-body">
+          <div class="q-text">나래휴게소에서 새벽에 혼자 앉아있었다고요. 그때 무슨 생각 하셨어요?</div>
+          <div class="q-sub">→ 영상의 핵심 장면. 촬영도 여기서 진행. 극적인 멘트 유도.</div>
+          <div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-r">눈물 포인트</span><span class="tag tag-b">현장촬영</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">E</span> 새벽 배송 + 전환점</div>
+
+      <div class="q-card">
+        <div class="q-num red">15</div>
+        <div class="q-body">
+          <div class="q-text">가락시장 지게차, 청담순두부 배송. 하루 일과가 어떻게 됐어요?</div>
+          <div class="q-sub">→ 구체적 스케줄. 월 430~450만원의 무게.</div>
+          <div class="q-tags"><span class="tag tag-r">필수</span></div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-num red">16</div>
+        <div class="q-body">
+          <div class="q-text">트럭에서 떨어져서 다리가 부러졌을 때, 4주 만에 깁스 풀고 다시 일하러 갔다고요?</div>
+          <div class="q-sub">→ "선택의 여지가 없었다" 멘트 유도. 처절함의 극대화.</div>
+          <div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-r">눈물 포인트</span></div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-num">17</div>
+        <div class="q-body">
+          <div class="q-text">온라인으로 전환해야겠다고 결심한 순간이 있었어요?</div>
+          <div class="q-sub">→ 유튜브 무료 강의 6개월 서칭. 에피파니 순간.</div>
+          <div class="q-tags"><span class="tag tag-y">[에피파니]</span></div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-num">18</div>
+        <div class="q-body">
+          <div class="q-text">왜 하필 건강기능식품이었어요? 다른 것도 많았을 텐데.</div>
+          <div class="q-sub">→ 헬스 트레이너 경험 + 건기식 연결. 자연스러운 전환.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num blue">F</span> 건기식 + 쿠팡 전략 (부업 파트)</div>
+
+      <div class="q-card">
+        <div class="q-num blue">19</div>
+        <div class="q-body">
+          <div class="q-text">처음 위탁판매 시작할 때 초기 비용이 얼마나 들었어요?</div>
+          <div class="q-sub">→ "30~40만원" 유도. 진입장벽이 낮다는 걸 강조.</div>
+          <div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-b">부업 파트</span></div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-num blue">20</div>
+        <div class="q-body">
+          <div class="q-text">쿠팡 자연순위 1등을 어떻게 만드세요? 광고 안 쓰고?</div>
+          <div class="q-sub">→ 핵심 USP. 홈쇼핑 원료 → 쿠팡 자연순위 전략 설명 유도.</div>
+          <div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-b">부업 파트</span></div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-num blue">21</div>
+        <div class="q-body">
+          <div class="q-text">광고비가 매출 대비 0.7~1%라고요? 업계가 20~30%인데, 어떻게 가능한 거예요?</div>
+          <div class="q-sub">→ 구체적 비교. 이 차이가 곧 순수익 차이라는 걸.</div>
+          <div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-b">부업 파트</span></div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-num blue">22</div>
+        <div class="q-body">
+          <div class="q-text">반품이 거의 없다고요? 1월에 0건이라고 하셨는데, 왜 그래요?</div>
+          <div class="q-sub">→ 건기식 특성 설명. "먹는 거라 반품이 안 된다."</div>
+          <div class="q-tags"><span class="tag tag-b">부업 파트</span></div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-num blue">23</div>
+        <div class="q-body">
+          <div class="q-text">지금 보는 사람이 내일 당장 시작한다면, 첫 번째로 뭘 하면 돼요?</div>
+          <div class="q-sub">→ 실전 가이드. 시청자 액션 아이템.</div>
+          <div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-b">부업 파트</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">G</span> 현재 + 와이프 + 마무리</div>
+
+      <div class="q-card">
+        <div class="q-num">24</div>
+        <div class="q-body">
+          <div class="q-text">지금 하루 일과가 어떻게 되세요?</div>
+          <div class="q-sub">→ 디지털노마드 생활. Before(새벽배송) vs After(자유) 대비.</div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-num">25</div>
+        <div class="q-body">
+          <div class="q-text">와이프분이 빚 갚을 때 싫은 소리 한 번 안 했다고요?</div>
+          <div class="q-sub">→ 와이프 이야기 = 따뜻한 감동. 크리스마스 3천만원 선물.</div>
+          <div class="q-tags"><span class="tag tag-r">눈물 포인트</span></div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-num">26</div>
+        <div class="q-body">
+          <div class="q-text">수강생분 중에 1.7억 사기당한 분이 있다고요. 그분 이야기 좀 해주세요.</div>
+          <div class="q-sub">→ 현재 하루 120개 판매. 시청자 투영용 사례.</div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-num">27</div>
+        <div class="q-body">
+          <div class="q-text">수강생들한테 새벽에도 전화 받아주신다고요. 왜요?</div>
+          <div class="q-sub">→ 인간적 면모. "제가 그 시절을 알으니까요."</div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-num">28</div>
+        <div class="q-body">
+          <div class="q-text">타이탄클래스 1기 매출이 3억이었다고요? 강의는 어떻게 시작하게 됐어요?</div>
+          <div class="q-sub">→ 보부상 대표 권유. 사업의 확장.</div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-num red">29</div>
+        <div class="q-body">
+          <div class="q-text">IMF, 사랑하는 사람의 죽음, 코로나. 다 겪으셨잖아요. 포기하고 싶었던 순간이 있었어요?</div>
+          <div class="q-sub">→ 엔딩용 질문. "그래도 여기 있습니다" 멘트 유도.</div>
+          <div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-g">엔딩 멘트</span></div>
+        </div>
+      </div>
+      <div class="q-card">
+        <div class="q-num">30</div>
+        <div class="q-body">
+          <div class="q-text">10년 뒤에는 뭐 하고 계실 것 같아요?</div>
+          <div class="q-sub">→ 미래 비전. 따뜻한 마무리.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TAB 5: 촬영 동선 ============ -->
+  <div class="panel" id="tab-location">
+
+    <div class="card hot">
+      <div class="card-label red">촬영일 — 목요일 (4/10)</div>
+      <div style="font-size:15px;font-weight:700;line-height:1.7;color:#191F28">
+        총 3개 장소 · 이벤트 촬영 1건 (홈쇼핑 라이브)<br>
+        <span class="tag tag-r">수강생 동석 가능</span> <span class="tag tag-b">안산/시흥 권역</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">1</span> 촬영 동선</div>
+
+      <div class="location-card">
+        <div class="location-header" style="background:#FFF0F0">
+          <div class="location-time">LOCATION 1 — 오전</div>
+          <h3>시흥 나래휴게소</h3>
+        </div>
+        <div class="location-body">
+          <div class="location-detail">
+            <strong>의미:</strong> 공황장애 시절 새벽에 혼자 앉아있던 장소<br>
+            <strong>촬영 내용:</strong><br>
+            - 출연자가 벤치에 앉아 과거 회상하는 인터뷰<br>
+            - "이 자리에서 새벽 3시에 혼자 앉아있었습니다" 멘트<br>
+            - 주변 풍경 + 출연자 뒷모습 B-Roll<br>
+            - 공황장애/파산 관련 질문 (Q11~Q16)<br><br>
+            <strong>분위기:</strong> 감성적, 조용한 톤. 아침 빛 활용.<br>
+            <span class="tag tag-r">핵심 장면</span> <span class="tag tag-p">사찍남 ACT 4~5</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="location-card">
+        <div class="location-header" style="background:#EFF3FF">
+          <div class="location-time" style="background:#3182F6">LOCATION 2 — 오후</div>
+          <h3>현재 주상복합 자택 (바다뷰)</h3>
+        </div>
+        <div class="location-body">
+          <div class="location-detail">
+            <strong>의미:</strong> 현재의 성공을 보여주는 공간<br>
+            <strong>촬영 내용:</strong><br>
+            - 메인 인터뷰 장소 (거실/서재)<br>
+            - 과거 이야기 (IMF, 여자친구, 트레이너) — Q1~Q10<br>
+            - 건기식 사업 설명 — Q19~Q23<br>
+            - 현재 라이프스타일/와이프 이야기 — Q24~Q30<br>
+            - 바다뷰 배경 B-Roll<br>
+            - 노트북으로 쿠팡 대시보드 보여주는 장면<br><br>
+            <strong>분위기:</strong> 밝고 안정적. 자연광 활용.<br>
+            <span class="tag tag-b">메인 촬영</span> <span class="tag tag-g">바다뷰 배경</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="location-card">
+        <div class="location-header" style="background:#FFF7E6">
+          <div class="location-time" style="background:#F08F00">EVENT — 16:35</div>
+          <h3>홈쇼핑 라이브 실시간 촬영</h3>
+        </div>
+        <div class="location-body">
+          <div class="location-detail">
+            <strong>이벤트:</strong> 16시 35분 홈쇼핑 방송 시작<br>
+            <strong>촬영 내용:</strong><br>
+            - TV/태블릿에 홈쇼핑 방송 화면 띄우기<br>
+            - 쿠팡 셀러 대시보드에서 실시간 주문 들어오는 장면<br>
+            - 출연자: "지금 보세요, 홈쇼핑 시작하니까 주문이 들어옵니다"<br>
+            - 주문 알림 소리 + 숫자 올라가는 화면<br><br>
+            <strong style="color:#F04452">이 장면이 영상의 킬러 B-Roll!</strong><br>
+            <span class="tag tag-r">킬러 장면</span> <span class="tag tag-y">실시간 증거</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num blue">2</span> 시간표</div>
+      <div class="card">
+        <table>
+          <tr><th style="width:100px">시간</th><th>장소</th><th>촬영 내용</th></tr>
+          <tr><td><strong>오전</strong></td><td>나래휴게소</td><td>공황장애 회상 인터뷰 + B-Roll</td></tr>
+          <tr><td><strong>점심</strong></td><td>이동</td><td>안산/시흥 자택으로 이동</td></tr>
+          <tr><td><strong>오후 초반</strong></td><td>자택</td><td>메인 인터뷰 (과거+사업+현재)</td></tr>
+          <tr><td><strong>16:30~</strong></td><td>자택</td><td><span class="tag tag-r">홈쇼핑 라이브</span> 실시간 주문 장면</td></tr>
+          <tr><td><strong>17:00~</strong></td><td>자택</td><td>마무리 인터뷰 + B-Roll 보충</td></tr>
+          <tr><td><strong>추가</strong></td><td>자택</td><td>수강생 인터뷰 (동석 시)</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="note green">
+      <strong>수강생 출연:</strong> 1.7억 사기당한 천안 수강생이 동석 가능. 별도 인터뷰 10~15분 잡으면 부업소개 파트에 서브 스토리로 활용 가능.
+    </div>
+  </div>
+
+  <!-- ============ TAB 6: 업로드 키트 ============ -->
+  <div class="panel" id="tab-upload">
+
+    <div class="section">
+      <div class="section-title"><span class="num">1</span> 사찍남 25분 — 제목 후보</div>
+
+      <div class="card" style="border:2px solid #F04452;background:#FFF8F8">
+        <div class="rank">1순위 추천</div>
+        <div class="title-text" id="st1">직원 1,500명이 하루아침에 사라졌습니다 (빚 7억에서 월 2억까지)</div>
+        <div style="font-size:12px;color:#8B95A1;margin-top:6px;line-height:1.8">
+          <strong>공식:</strong> 충격 팩트 + 괄호(역전 수치) — 돈탐생 132만뷰 패턴<br>
+          <strong>1,500명 → 빚 7억 → 월 2억</strong> = 3단 숫자 스토리
+        </div>
+        <div style="margin-top:10px"><button class="copy-btn" onclick="copyText('st1',this)">제목 복사</button></div>
+      </div>
+
+      <div class="card" style="border:2px solid #F08F00;background:#FFFBF0">
+        <div class="rank b">2순위</div>
+        <div class="title-text" id="st2">헬스장 3개 운영하다 빚 7억 졌습니다. 48세에 다시 시작했습니다.</div>
+        <div style="font-size:12px;color:#8B95A1;margin-top:6px;line-height:1.8">
+          <strong>공식:</strong> 파산 서사 + 나이 강조 — 휴먼스토리 평균 533만뷰 패턴
+        </div>
+        <div style="margin-top:10px"><button class="copy-btn" onclick="copyText('st2',this)">제목 복사</button></div>
+      </div>
+
+      <div class="card" style="border:2px solid #3182F6;background:#F0F6FF">
+        <div class="rank c">3순위</div>
+        <div class="title-text" id="st3">IMF에 아버지 회사가 망했습니다. 27년 뒤 아들이 빚 7억을 갚은 방법</div>
+        <div style="font-size:12px;color:#8B95A1;margin-top:6px;line-height:1.8">
+          <strong>공식:</strong> 세대 서사 + 시간 갭 — "27년"이라는 숫자가 클릭 유발
+        </div>
+        <div style="margin-top:10px"><button class="copy-btn" onclick="copyText('st3',this)">제목 복사</button></div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">2</span> 부업소개 10분 — 제목 후보</div>
+
+      <div class="card" style="border:2px solid #F04452;background:#FFF8F8">
+        <div class="rank">1순위 추천</div>
+        <div class="title-text" id="bt1">광고비 0원으로 쿠팡에서 월 2억 파는 방법 (건강기능식품)</div>
+        <div style="font-size:12px;color:#8B95A1;margin-top:6px;line-height:1.8">
+          <strong>공식:</strong> "광고비 0원" 반전 + 구체 금액 — 절약왕 평균 132만뷰 패턴
+        </div>
+        <div style="margin-top:10px"><button class="copy-btn" onclick="copyText('bt1',this)">제목 복사</button></div>
+      </div>
+
+      <div class="card" style="border:2px solid #F08F00;background:#FFFBF0">
+        <div class="rank b">2순위</div>
+        <div class="title-text" id="bt2">초기 자본 30만원으로 시작해서 월 수익 1억 찍은 부업 (쿠팡 건기식)</div>
+        <div style="font-size:12px;color:#8B95A1;margin-top:6px;line-height:1.8">
+          <strong>공식:</strong> 소액 시작 + 고수익 갭 — "30만원→1억" 극적 대비
+        </div>
+        <div style="margin-top:10px"><button class="copy-btn" onclick="copyText('bt2',this)">제목 복사</button></div>
+      </div>
+
+      <div class="card" style="border:2px solid #3182F6;background:#F0F6FF">
+        <div class="rank c">3순위</div>
+        <div class="title-text" id="bt3">[수익 인증] 건기식 쿠팡 판매, 반품 0건 · 광고비 1% · 마진 50%의 비밀</div>
+        <div style="font-size:12px;color:#8B95A1;margin-top:6px;line-height:1.8">
+          <strong>공식:</strong> [수익인증] 태그 + 3가지 수치 나열 — 정보형 CTR 패턴
+        </div>
+        <div style="margin-top:10px"><button class="copy-btn" onclick="copyText('bt3',this)">제목 복사</button></div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">3</span> 썸네일 컨셉</div>
+
+      <div class="thumb-card">
+        <div class="rank" style="position:relative;top:0;left:0;display:inline-block;margin:16px 0 0 16px">A안 — 나래휴게소 대비형</div>
+        <div class="thumb-preview a">
+          <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(20,20,40,.85),rgba(30,50,80,.6))"></div>
+          <div class="thumb-text" style="z-index:2">
+            <div class="thumb-main">빚 7억, 새벽 휴게소에서<br><span style="color:#FFD700">월 2억이 됐습니다</span></div>
+            <div class="thumb-sub">배경: 나래휴게소 벤치 + 출연자 뒷모습</div>
+          </div>
+        </div>
+        <div class="thumb-body">
+          <div style="font-size:13px;color:#3E4A5A;line-height:1.7">
+            <strong>컨셉:</strong> 나래휴게소 벤치에 앉은 뒷모습 (과거) + 텍스트로 현재 수치<br>
+            <strong>포인트:</strong> 어두운 휴게소 + 밝은 텍스트 = 과거↔현재 대비<br>
+            <span class="tag tag-r">사찍남용 추천</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="thumb-card">
+        <div class="rank b" style="position:relative;top:0;left:0;display:inline-block;margin:16px 0 0 16px">B안 — 쿠팡 대시보드형</div>
+        <div class="thumb-preview b">
+          <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(15,52,96,.85),rgba(26,26,46,.6))"></div>
+          <div class="thumb-text" style="z-index:2">
+            <div class="thumb-main">광고비 0원<br><span style="color:#05C072">월 매출 2억</span></div>
+            <div class="thumb-sub">배경: 쿠팡 대시보드 + 출연자 옆모습</div>
+          </div>
+        </div>
+        <div class="thumb-body">
+          <div style="font-size:13px;color:#3E4A5A;line-height:1.7">
+            <strong>컨셉:</strong> 노트북 앞 출연자 + 쿠팡 매출 화면 강조<br>
+            <strong>포인트:</strong> "광고비 0원" + 녹색 매출 수치 = 정보형 후킹<br>
+            <span class="tag tag-b">부업소개용 추천</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="thumb-card">
+        <div class="rank c" style="position:relative;top:0;left:0;display:inline-block;margin:16px 0 0 16px">C안 — 가족 역전형</div>
+        <div class="thumb-preview c">
+          <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(45,19,44,.85),rgba(26,26,46,.6))"></div>
+          <div class="thumb-text" style="z-index:2">
+            <div class="thumb-main">직원 1,500명 → 빚 7억<br><span style="color:#FFD700">48세, 다시 시작했습니다</span></div>
+            <div class="thumb-sub">배경: 바다뷰 자택 + 출연자 정면</div>
+          </div>
+        </div>
+        <div class="thumb-body">
+          <div style="font-size:13px;color:#3E4A5A;line-height:1.7">
+            <strong>컨셉:</strong> 바다뷰 배경 + 출연자 정면 + 3단 텍스트<br>
+            <strong>포인트:</strong> "48세"라는 나이 = 중장년층 시청자 후킹<br>
+            <span class="tag tag-y">범용</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">4</span> 설명란</div>
+
+      <div class="card gold">
+        <div class="card-label">사찍남 25분 설명란</div>
+        <div class="desc-box" id="desc1">아버지 회사 직원이 1,500명이었습니다.
+IMF가 터지고, 하루아침에 전부 사라졌습니다.
+
+항공대를 자퇴했습니다. 파일럿이 꿈이었는데, 비행비가 억 단위였으니까요.
+사랑하는 사람을 잃었습니다. 1년 반 동안 아무것도 하지 못했습니다.
+
+32살에 헬스 트레이너로 다시 시작했습니다.
+기본급 60만원, PT 시급 7천원, 하루 18시간.
+첫 헬스장은 연매출 10억을 찍었습니다.
+
+그리고 코로나가 터졌습니다.
+빚 7억. 공황장애. 새벽 휴게소에서 혼자 앉아있었습니다.
+
+가락시장 지게차를 몰았습니다. 트럭에서 떨어져 다리가 부러졌습니다.
+4주 만에 깁스를 풀고 다시 일하러 갔습니다.
+
+지금은 건강기능식품을 팝니다.
+광고비 0.7%. 월 매출 2~2.5억. 순수익 8천만~1억.
+
+빚 7억에서 여기까지 온 48세의 이야기입니다.
+
+---
+사찍남 — 사업을 찍는 남자
+부업소개하는남자 (실전 가이드): @부업소개하는남자
+
+#사찍남 #부업 #쿠팡셀러 #건강기능식품 #코로나파산 #역전스토리 #빚7억 #월2억 #공황장애 #재기</div>
+        <div style="margin-top:12px"><button class="copy-btn" onclick="copyText('desc1',this)">설명란 복사</button></div>
+      </div>
+
+      <div class="card blue">
+        <div class="card-label blue">부업소개하는남자 10분 설명란</div>
+        <div class="desc-box" id="desc2">건강기능식품. 초기 자본 30만원. 광고비 0원. 월 수익 100~200만원.
+
+쿠팡 자연순위 1등을 만드는 방법이 있습니다.
+광고를 안 쓰는데 매출이 나옵니다.
+
+비밀은 홈쇼핑입니다.
+대기업이 TV홈쇼핑에서 파는 원료를 확인하고,
+같은 원료로 건기식을 만들어 쿠팡에 올립니다.
+홈쇼핑 방송이 시작되면, 시청자가 쿠팡을 검색합니다.
+자연순위 1등이니까, 내 제품이 먼저 보입니다.
+
+광고비 매출 대비 0.7~1%. 업계 평균은 20~30%.
+마진 40~50%. 반품 거의 0건. CS 전화도 안 옵니다.
+
+30만원으로 시작할 수 있습니다.
+위탁판매로 테스트하고, 잘 되면 자체 브랜드로 전환.
+이분은 이 구조로 월 2~2.5억을 찍고 있습니다.
+
+---
+부업소개하는남자
+사찍남 본편 (인생 스토리): @사찍남
+
+#부업 #쿠팡 #건강기능식품 #건기식 #쿠팡셀러 #위탁판매 #자체브랜드 #광고비0원 #월수익 #부업추천</div>
+        <div style="margin-top:12px"><button class="copy-btn" onclick="copyText('desc2',this)">설명란 복사</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TAB 7: 체크리스트 ============ -->
+  <div class="panel" id="tab-checklist">
+
+    <div class="section">
+      <div class="section-title"><span class="num red">1</span> 촬영 전 준비</div>
+      <div class="card">
+        <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text"><strong>출연자 연락</strong> — 촬영 시간/장소 최종 확인</div></div>
+        <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text"><strong>나래휴게소 사전 답사</strong> — 촬영 가능 여부, 벤치 위치 확인</div></div>
+        <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text"><strong>수강생 출연 확인</strong> — 1.7억 사기 수강생 동석 여부 (천안→안산 이동)</div></div>
+        <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text"><strong>홈쇼핑 시간 재확인</strong> — 16:35 방송 시작 맞는지 (당일 변동 가능)</div></div>
+        <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text"><strong>촬영 동의서</strong> — 출연자 + 수강생 (출연 시) 동의서 준비</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">2</span> 촬영 장비</div>
+      <div class="card">
+        <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text">메인 카메라 + 보조 카메라 (2대 이상)</div></div>
+        <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text">삼각대/짐벌 — 나래휴게소 B-Roll용</div></div>
+        <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text">마이크 — 핀마이크 (야외 나래휴게소) + 실내용</div></div>
+        <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text">조명 — 자택 인터뷰용 (자연광 보조)</div></div>
+        <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text">보조 배터리/충전기 — 하루 종일 촬영</div></div>
+        <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text">메모리 카드 여유분</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">3</span> 반드시 찍어야 할 B-Roll</div>
+      <div class="card gold">
+        <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> 나래휴게소 벤치에 앉은 뒷모습 (썸네일 A안)</div></div>
+        <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> 쿠팡 셀러 대시보드 매출 화면 (숫자 보이게)</div></div>
+        <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> 홈쇼핑 방송 화면 + 실시간 주문 알림 (16:35)</div></div>
+        <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> 자택 바다뷰 전경 (드론 또는 와이드)</div></div>
+        <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text">노트북 앞에서 작업하는 출연자 (옆모습/뒷모습)</div></div>
+        <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text">건기식 제품 박스/포장 클로즈업</div></div>
+        <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text">출연자 일상 (커피 마시기, 산책 등)</div></div>
+        <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text">나래휴게소 주변 풍경 (새벽 느낌 연출)</div></div>
+        <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div class="check-text">수강생과 대화하는 장면 (동석 시)</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num red">4</span> 촬영 중 주의사항</div>
+      <div class="card hot">
+        <div style="font-size:14px;line-height:1.8;color:#3E4A5A">
+          <strong style="color:#F04452">① 감정 관리:</strong> 여자친구 사망/공황장애 이야기할 때 출연자 감정 존중. 무리하게 파지 않기.<br>
+          <strong style="color:#F04452">② 쿠팡 화면:</strong> 개인정보(고객명, 주소) 가리기. 매출 수치만 보이게.<br>
+          <strong style="color:#F04452">③ 홈쇼핑 타이밍:</strong> 16:35 전에 반드시 자택 도착. 카메라 세팅 완료 상태로 대기.<br>
+          <strong style="color:#F04452">④ 수강생 개인정보:</strong> 1.7억 사기 이야기 → 본인 동의 필수. 얼굴 모자이크 여부 확인.<br>
+          <strong style="color:#F04452">⑤ 출연자 스케줄:</strong> 디지털노마드라 시간 유연하지만, 홈쇼핑 시간은 고정.
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>편집팀 전달사항:</strong><br>
+      - 사찍남 25분: ACT 4(코로나 파산) 구간에 감성 BGM 전환 + 나래휴게소 B-Roll 삽입<br>
+      - 부업소개 10분: 쿠팡 전략 설명 시 화면분할 (출연자 + 쿠팡 대시보드)<br>
+      - 홈쇼핑 실시간 장면: PIP(Picture-in-Picture)로 TV화면 + 주문 알림 동시 표시<br>
+      - 첫 5초: "직원 1,500명" 또는 "빚 7억" 자막 크게 + 1초 단위 컷전환
+    </div>
+  </div>
+
+</div>
+
+<script>
+function go(id,el){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('on'));
+  el.classList.add('on');
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  document.getElementById('tab-'+id).classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function copyText(id,btn){
+  const t=document.getElementById(id).innerText;
+  navigator.clipboard.writeText(t).then(()=>{
+    btn.classList.add('copied');btn.textContent='복사 완료!';
+    setTimeout(()=>{btn.classList.remove('copied');btn.textContent=btn.textContent.includes('제목')?'제목 복사':btn.textContent.includes('설명')?'설명란 복사':'복사';},1500);
+  });
+}
+function toggleCheck(el){el.classList.toggle('checked')}
+</script>
+</body>
+</html>
