@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>사장찍어주는남자 — 최대표 촬영기획안</title>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F2F4F6;color:#191F28;font-family:'Pretendard',system-ui,sans-serif;min-height:100vh;font-size:15px}
+.gnb{background:#fff;border-bottom:1px solid #E5E8EB;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.gnb-logo{font-size:16px;font-weight:800;color:#F08F00}
+.gnb-badge{background:#FFF7E6;color:#F08F00;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:800;border:1px solid #FFD700}
+.gnb-date{font-size:11px;color:#8B95A1;font-weight:600}
+.wrap{max-width:820px;margin:0 auto;padding:28px 20px 80px}
+.hero{background:linear-gradient(135deg,#0d1117 0%,#1a2332 50%,#2d1810 100%);border-radius:20px;padding:36px 32px;margin-bottom:20px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;right:-10%;width:300px;height:300px;background:radial-gradient(circle,rgba(240,143,0,.2),transparent);pointer-events:none}
+.hero-eyebrow{font-size:11px;font-weight:700;color:#FFD700;letter-spacing:2px;margin-bottom:10px}
+.hero-title{font-size:28px;font-weight:800;line-height:1.3;color:#fff;margin-bottom:8px}
+.hero-sub{color:#8B95A1;font-size:13px;line-height:1.7}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
+.hero-stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:12px;text-align:center}
+.hero-stat-v{font-size:20px;font-weight:800;color:#FFD700}
+.hero-stat-l{font-size:10px;color:#8B95A1;margin-top:3px}
+.tabs{display:flex;gap:6px;margin-bottom:18px;flex-wrap:wrap;position:sticky;top:56px;z-index:90;background:#F2F4F6;padding:10px 0}
+.tab-btn{padding:9px 16px;border-radius:10px;border:1.5px solid #E5E8EB;background:#fff;font-size:13px;font-weight:700;cursor:pointer;color:#6B7684;transition:.15s;font-family:inherit}
+.tab-btn.on{background:#F08F00;border-color:#F08F00;color:#fff}
+.tab-btn:hover:not(.on){background:#F8F9FA}
+.tab-btn.red{border-color:#F04452;color:#F04452}
+.tab-btn.red.on{background:#F04452;color:#fff}
+.tab-btn.blue{border-color:#3182F6;color:#3182F6}
+.tab-btn.blue.on{background:#3182F6;color:#fff}
+.panel{display:none}
+.panel.on{display:block}
+.card{background:#fff;border-radius:16px;padding:22px;margin-bottom:14px;box-shadow:0 1px 6px rgba(0,0,0,.06);position:relative}
+.card.hot{border:2px solid #F04452;background:#FFF8F8}
+.card.gold{border:2px solid #F08F00;background:#FFFBF0}
+.card.blue{border:2px solid #3182F6;background:#F0F6FF}
+.card.green{border:2px solid #05C072;background:#F0FFF4}
+.card.dark{background:#191F28;color:#fff}
+.card-label{font-size:11px;font-weight:700;color:#F08F00;letter-spacing:1.5px;margin-bottom:14px;text-transform:uppercase}
+.card-label.red{color:#F04452}
+.card-label.blue{color:#3182F6}
+.card-label.green{color:#05C072}
+.section{margin-bottom:28px}
+.section-title{font-size:18px;font-weight:800;color:#191F28;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.section-title .num{background:#F08F00;color:#fff;border-radius:8px;padding:4px 10px;font-size:13px}
+.section-title .num.red{background:#F04452}
+.section-title .num.blue{background:#3182F6}
+.tag{display:inline-block;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:700;margin-right:5px;white-space:nowrap}
+.tag-y{background:#FFF7E6;color:#F08F00}
+.tag-r{background:#FFF0F0;color:#F04452}
+.tag-g{background:#F0FFF4;color:#05C072}
+.tag-b{background:#EFF3FF;color:#3182F6}
+.tag-p{background:#F0EDFF;color:#7B61FF}
+.tag-d{background:#191F28;color:#FFD700}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.stat{background:#FFF7E6;border-radius:12px;padding:14px;text-align:center}
+.stat-v{font-size:22px;font-weight:800;color:#F08F00}
+.stat-l{font-size:11px;color:#6B7684;margin-top:3px}
+.stat.red{background:#FFF0F0}.stat.red .stat-v{color:#F04452}
+.stat.blue{background:#EFF3FF}.stat.blue .stat-v{color:#3182F6}
+.stat.green{background:#F0FFF4}.stat.green .stat-v{color:#05C072}
+.note{background:#FFF7E6;border-left:3px solid #F08F00;border-radius:0 8px 8px 0;padding:14px 16px;margin:10px 0;font-size:13px;line-height:1.7;color:#3E4A5A}
+.note.red{background:#FFF0F0;border-left-color:#F04452}
+.note.blue{background:#EFF3FF;border-left-color:#3182F6}
+.note.green{background:#F0FFF4;border-left-color:#05C072}
+.tl-row{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid #E5E8EB}
+.tl-row:last-child{border-bottom:none}
+.tl-time{font-size:12px;font-weight:800;color:#F08F00;min-width:75px;padding-top:2px}
+.tl-time.red{color:#F04452}
+.tl-time.blue{color:#3182F6}
+.tl-body{flex:1}
+.tl-title{font-size:14px;font-weight:700;color:#191F28;margin-bottom:4px}
+.tl-text{font-size:13px;color:#3E4A5A;line-height:1.7}
+.tl-badge{display:inline-block;background:#F04452;color:#fff;border-radius:4px;padding:1px 6px;font-size:10px;font-weight:800;margin-left:6px}
+.tl-badge.blue{background:#3182F6}
+.tl-badge.green{background:#05C072}
+.tl-badge.orange{background:#F08F00}
+.q-card{background:#fff;border-radius:12px;padding:16px 18px;margin-bottom:10px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;gap:14px;align-items:flex-start}
+.q-num{background:#F08F00;color:#fff;border-radius:8px;min-width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0}
+.q-num.red{background:#F04452}
+.q-body{flex:1}
+.q-text{font-size:14px;font-weight:700;color:#191F28;line-height:1.6;margin-bottom:4px}
+.q-sub{font-size:12px;color:#8B95A1;line-height:1.6}
+.q-tags{margin-top:6px;display:flex;flex-wrap:wrap;gap:4px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.location-card{background:#fff;border-radius:16px;overflow:hidden;margin-bottom:14px;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+.location-header{padding:18px 22px;border-bottom:1px solid #E5E8EB}
+.location-header h3{font-size:16px;font-weight:800;color:#191F28}
+.location-body{padding:18px 22px}
+.location-time{display:inline-block;background:#F04452;color:#fff;border-radius:6px;padding:4px 10px;font-size:12px;font-weight:800;margin-bottom:10px}
+.location-detail{font-size:13px;color:#3E4A5A;line-height:1.8}
+.check-item{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #F2F4F6}
+.check-item:last-child{border-bottom:none}
+.check-box{width:20px;height:20px;border:2px solid #E5E8EB;border-radius:4px;flex-shrink:0;margin-top:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+.check-box.checked{background:#05C072;border-color:#05C072}
+.check-box.checked::after{content:'✓';color:#fff;font-size:12px;font-weight:800}
+.check-text{font-size:13px;color:#3E4A5A;line-height:1.6}
+.divider{height:1px;background:#E5E8EB;margin:20px 0}
+.rank{position:absolute;top:-8px;left:16px;background:#F04452;color:#fff;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:800}
+.rank.b{background:#F08F00}
+.rank.c{background:#3182F6}
+.title-text{font-size:17px;font-weight:800;color:#191F28;line-height:1.5;margin-bottom:10px;padding-top:6px}
+.copy-btn{background:#F08F00;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;transition:.15s;font-family:inherit}
+.copy-btn:hover{background:#D97A00}
+.copy-btn:active{transform:scale(.96)}
+.copied{background:#05C072!important}
+.thumb-card{background:#fff;border-radius:16px;overflow:hidden;margin-bottom:14px;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+.thumb-preview{aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.thumb-preview.a{background:linear-gradient(135deg,#1a1a2e,#16213e)}
+.thumb-preview.b{background:linear-gradient(135deg,#0f3460,#1a1a2e)}
+.thumb-preview.c{background:linear-gradient(135deg,#2d132c,#1a1a2e)}
+.thumb-text{color:#fff;text-align:center;padding:20px;z-index:1}
+.thumb-main{font-size:32px;font-weight:800;line-height:1.3;text-shadow:2px 2px 8px rgba(0,0,0,.5)}
+.thumb-sub{font-size:14px;color:rgba(255,255,255,.7);margin-top:8px}
+.thumb-body{padding:18px}
+.desc-box{background:#F8F9FA;border:1px solid #E5E8EB;border-radius:10px;padding:18px;font-size:13px;color:#191F28;line-height:2;white-space:pre-wrap;font-family:'Pretendard',system-ui,sans-serif}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
+th{padding:10px;text-align:left;border-bottom:2px solid #E5E8EB;color:#F08F00;font-size:11px;background:#FFFBF0;font-weight:700}
+td{padding:10px;border-bottom:1px solid #F2F4F6;color:#3E4A5A;line-height:1.6}
+.ref-bar{height:8px;border-radius:4px;margin-bottom:3px}
+@media(max-width:600px){.hero-stats{grid-template-columns:repeat(2,1fr)}.stat-row{grid-template-columns:1fr 1fr}.two-col{grid-template-columns:1fr}.thumb-main{font-size:22px}.title-text{font-size:15px}}
+</style>
+</head>
+<body>
+<nav class="gnb">
+  <span class="gnb-logo">사장찍어주는남자</span>
+  <span class="gnb-badge">최대표 촬영기획안</span>
+  <span class="gnb-date">촬영일: 목요일 (4/10) · 25분</span>
+</nav>
+<div class="wrap">
+
+  <!-- ============ HERO ============ -->
+  <div class="hero">
+    <div class="hero-eyebrow">사장찍어주는남자 — 25분 인생 서사</div>
+    <div class="hero-title">빚 7억에서 월 2억으로<br>최대표의 48년 역전 보고서</div>
+    <div class="hero-sub">79년생 · 48세 · 남성 · 안산/시흥<br>IMF → 항공대 자퇴 → 여자친구 사망 → 헬스장 성공 → 코로나 파산 → 빚 7억 → 건기식 월 2억</div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-v">2~2.5억</div><div class="hero-stat-l">월 매출</div></div>
+      <div class="hero-stat"><div class="hero-stat-v">8천~1억</div><div class="hero-stat-l">월 순수익</div></div>
+      <div class="hero-stat"><div class="hero-stat-v">4번</div><div class="hero-stat-l">추락 횟수</div></div>
+      <div class="hero-stat"><div class="hero-stat-v">4번</div><div class="hero-stat-l">재기 횟수</div></div>
+    </div>
+  </div>
+
+  <!-- ============ TABS ============ -->
+  <div class="tabs">
+    <button class="tab-btn on" onclick="go('ref',this)">채널 레퍼런스</button>
+    <button class="tab-btn" onclick="go('profile',this)">출연자 분석</button>
+    <button class="tab-btn" onclick="go('timeline',this)">25분 타임라인</button>
+    <button class="tab-btn" onclick="go('questions',this)">질문지</button>
+    <button class="tab-btn" onclick="go('location',this)">촬영 동선</button>
+    <button class="tab-btn" onclick="go('upload',this)">업로드 키트</button>
+    <button class="tab-btn red" onclick="go('checklist',this)">체크리스트</button>
+  </div>
+
+  <!-- ============ TAB 1: 채널 레퍼런스 ============ -->
+  <div class="panel on" id="tab-ref">
+
+    <div class="card dark">
+      <div style="font-size:11px;font-weight:700;color:#FFD700;letter-spacing:1.5px;margin-bottom:10px">사찍남 채널 레퍼런스 — 52개 영상 실측 데이터</div>
+      <div style="font-size:16px;font-weight:800;color:#fff;line-height:1.5">
+        사찍남 14개 + 휴먼스토리 19개 + 돈탐생 19개<br>
+        히트맵 52/52 · 자막매핑 41/52 · CTR예측 52/52
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num blue">1</span> 3채널 벤치마크 수치</div>
+      <div class="card">
+        <table>
+          <tr>
+            <th>지표</th>
+            <th>사찍남 (현재)</th>
+            <th>돈탐생 (목표)</th>
+            <th>휴먼스토리 (참고)</th>
+          </tr>
+          <tr>
+            <td><strong>평균 조회수</strong></td>
+            <td>63만</td>
+            <td style="color:#05C072;font-weight:700">304만</td>
+            <td>533만</td>
+          </tr>
+          <tr>
+            <td><strong>평균 CTR</strong></td>
+            <td>4.7%</td>
+            <td style="color:#05C072;font-weight:700">5.0%</td>
+            <td>5.1%</td>
+          </tr>
+          <tr>
+            <td><strong>썸네일 점수</strong></td>
+            <td>80점</td>
+            <td>83점</td>
+            <td>82점</td>
+          </tr>
+          <tr>
+            <td><strong>평균 리텐션</strong></td>
+            <td>0.265</td>
+            <td>0.269</td>
+            <td>0.213</td>
+          </tr>
+          <tr>
+            <td><strong>초반 30초</strong></td>
+            <td style="color:#F04452;font-weight:700">0.129 ❗</td>
+            <td>0.163</td>
+            <td style="color:#05C072;font-weight:700">0.225</td>
+          </tr>
+          <tr>
+            <td><strong>평균 길이</strong></td>
+            <td>25분</td>
+            <td style="color:#05C072;font-weight:700">16분</td>
+            <td>29분</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num red">2</span> 사찍남 핵심 개선 포인트 (이번 촬영 적용)</div>
+
+      <div class="card hot">
+        <div class="card-label red">문제 ① 초반 30초 리텐션 최악 (0.129)</div>
+        <div style="font-size:14px;line-height:1.8;color:#3E4A5A">
+          <strong>현황:</strong> 사찍남 0.129 vs 휴먼스토리 0.225 (거의 2배 차이)<br>
+          <strong>원인:</strong> 인사/소개로 시작, 숫자 훅 없음<br>
+          <strong style="color:#F04452">적용:</strong> 돈탐생식 "첫 5초 숫자 임팩트"<br>
+          → <strong>"아버지 회사 직원이 1,500명이었습니다. 하루아침에 전부 사라졌어요."</strong><br>
+          → 인사 삭제, 숫자 먼저, 1초 단위 컷전환
+        </div>
+      </div>
+
+      <div class="card hot">
+        <div class="card-label red">문제 ② 킬러 타이밍 분산 (10/17/19/24분)</div>
+        <div style="font-size:14px;line-height:1.8;color:#3E4A5A">
+          <strong>현황:</strong> 사찍남은 핵심이 뒤로 밀림 → 이탈 유발<br>
+          <strong>돈탐생:</strong> 7~10분에 피크 63% 집중 (수익 공개 공식)<br>
+          <strong style="color:#F04452">적용:</strong> 코로나 파산+공황장애+빚 7억을 8~12분에 집중 배치<br>
+          → 감정 최고조를 7~12분으로 당기기<br>
+          → 비밀 전략(홈쇼핑 흡수)은 15~19분에 배치
+        </div>
+      </div>
+
+      <div class="card gold">
+        <div class="card-label">문제 ③ 영상 길이 (25분 → 적정 유지)</div>
+        <div style="font-size:14px;line-height:1.8;color:#3E4A5A">
+          <strong>분석:</strong> 최대표는 서사가 4번 추락+4번 재기로 풍부함<br>
+          <strong>판단:</strong> 25분 유지하되, 불필요 구간 없이 밀도 높게<br>
+          <strong>참고:</strong> 휴먼스토리 29분에서도 533만뷰 → 서사 밀도가 핵심
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">3</span> 리텐션 킬러 구간 패턴 (이번 영상 적용)</div>
+
+      <div class="card blue">
+        <div class="card-label blue">돈탐생 피크 패턴 → 최대표 적용</div>
+        <div style="font-size:13px;line-height:1.8;color:#3E4A5A">
+          <strong>돈탐생 7~10분:</strong> 수익 공개 → "이 사람 진짜야?" 피크<br>
+          <strong>최대표 8~12분:</strong> 코로나 3~4개월 만에 파산 → 빚 7억 → 공황장애 → 나래휴게소<br>
+          → <strong>감정 폭발 + "이 사람 진짜 바닥을 찍었구나"</strong><br><br>
+
+          <strong>휴먼스토리 초반30초:</strong> 충격 사실 먼저 + 감정 질문<br>
+          <strong>최대표 0~30초:</strong> "직원 1,500명 → 사라졌다" + "빚 7억 → 월 2억"<br>
+          → <strong>숫자 갭으로 초반 잡고 → 어떻게? 궁금증 유발</strong>
+        </div>
+      </div>
+
+      <div class="note">
+        <strong>편집팀 리텐션 가이드:</strong><br>
+        - 0~60초: 돈탐생식 1초 컷전환 + 숫자 자막 크게 + 인사 삭제<br>
+        - 8~12분 (파산/공황): 나래휴게소 B-Roll + 감성 BGM 전환 (휴먼스토리식)<br>
+        - 15~19분 (전략공개): 화면분할 + 쿠팡 PIP (돈탐생식 정보 만족)<br>
+        - Drop 예상 구간(3~5분 유년기): B-Roll/효과음/화이트플래시로 템포 유지
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">4</span> 에피파니 브릿지 매핑 (22권 프레임워크)</div>
+      <div class="card">
+        <table>
+          <tr><th>단계</th><th>프레임워크</th><th>최대표 적용</th></tr>
+          <tr><td><span class="tag tag-p">[배경]</span></td><td>주인공의 일상</td><td>아버지 1,500명 회사, 유복한 유년기</td></tr>
+          <tr><td><span class="tag tag-p">[욕구]</span></td><td>원하는 것</td><td>파일럿 꿈, 안정적인 삶</td></tr>
+          <tr><td><span class="tag tag-p">[위기]</span></td><td>외부 사건</td><td>IMF 부도 → 코로나 → 빚 7억 (4번 반복)</td></tr>
+          <tr><td><span class="tag tag-p">[내면갈등]</span></td><td>심리적 고통</td><td>여자친구 사망 은둔 / 공황장애 나래휴게소</td></tr>
+          <tr><td><span class="tag tag-y">[에피파니]</span></td><td>깨달음의 순간</td><td>깁스 풀고 유튜브 6개월 서칭 → 건기식 발견</td></tr>
+          <tr><td><span class="tag tag-p">[해결]</span></td><td>새로운 방법</td><td>홈쇼핑 원료 → 쿠팡 자연순위 전략</td></tr>
+          <tr><td><span class="tag tag-g">[변신]</span></td><td>변화된 모습</td><td>디지털노마드, 와이프 3천만원 선물, 수강생 멘토</td></tr>
+        </table>
+      </div>
+
+      <div class="note blue">
+        <strong>SB7 매핑:</strong> 최대표 = 영웅 → 문제(IMF/코로나/빚) → 가이드(유튜브 무료 강의) → 계획(건기식 위탁) → 행동(자체브랜드) → 실패회피(공황장애/골절) → 성공(월 2억). 전형적인 영웅 서사 완성형.
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TAB 2: 출연자 분석 ============ -->
+  <div class="panel" id="tab-profile">
+
+    <div class="card hot">
+      <div class="card-label red">한 줄 로그라인</div>
+      <div style="font-size:17px;font-weight:800;line-height:1.6;color:#191F28">
+        "아버지 회사 1,500명 직원이 하루아침에 사라졌다.<br>
+        항공대 자퇴, 여자친구 사망, 헬스장 파산, 빚 7억.<br>
+        새벽 가락시장 지게차 위에서 다시 시작한 남자가<br>
+        지금은 광고비 0.7%로 월 2억을 찍는다."
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">1</span> 인생 연대기</div>
+      <div class="card">
+        <table>
+          <tr><th style="width:90px">시기</th><th>사건</th><th style="width:100px">감정선</th></tr>
+          <tr><td><strong>~97년</strong></td><td>아버지 섬유수출무역 · 직원 1,500명 · 유복한 유년기</td><td><span class="tag tag-g">안정</span></td></tr>
+          <tr><td><strong>97~98년</strong></td><td>IMF → 아버지 회사 부도 → 항공조종학과 자퇴 (비행비 억대)</td><td><span class="tag tag-r">1차 추락</span></td></tr>
+          <tr><td><strong>제대 후</strong></td><td>피자집 알바, 노가다, 쭈꾸미집 등 닥치는 대로</td><td><span class="tag tag-r">생존</span></td></tr>
+          <tr><td><strong>20대 후반</strong></td><td>여자친구(재일교포 모델) 위암 말기 사망 → 1.5년 은둔</td><td><span class="tag tag-r">2차 추락</span></td></tr>
+          <tr><td><strong>32~33세</strong></td><td>헬스 트레이너 시작 · 기본급 60만원 · PT 7천원 · 하루 18시간</td><td><span class="tag tag-y">1차 재기</span></td></tr>
+          <tr><td><strong>1호점</strong></td><td>연매출 10억 · 월 순수익 3,500~4,000만원</td><td><span class="tag tag-g">성공</span></td></tr>
+          <tr><td><strong>2호점</strong></td><td>6개월 만에 매출 4.8억 → 권리금 받고 매각</td><td><span class="tag tag-g">확장</span></td></tr>
+          <tr><td><strong>2020</strong></td><td>3호점 오픈 3~4개월 후 코로나 → 빚 7억 (와이프 대출 2.2억)</td><td><span class="tag tag-r">3차 추락</span></td></tr>
+          <tr><td><strong>파산 직후</strong></td><td>공황장애 · 나래휴게소 새벽 · 밥/잠 불가</td><td><span class="tag tag-r">바닥</span></td></tr>
+          <tr><td><strong>야간 노동</strong></td><td>가락시장 지게차 + 배송 · 월 430~450만원 · 트럭 낙상 다리 골절</td><td><span class="tag tag-r">4차 추락</span></td></tr>
+          <tr><td><strong>전환점</strong></td><td>4주 만에 깁스 풀고 복귀 → 유튜브 6개월 서칭 → 건기식 발견</td><td><span class="tag tag-y">에피파니</span></td></tr>
+          <tr><td><strong>위탁판매</strong></td><td>첫 6개월 매출 4,500~5,000만 · 순익 1,200~1,300만</td><td><span class="tag tag-g">반등</span></td></tr>
+          <tr><td><strong>자체브랜드</strong></td><td>4개월 만에 1.2~1.5억 → 현재 월 2~2.5억 · 순수익 8천~1억</td><td><span class="tag tag-g">폭발</span></td></tr>
+          <tr><td><strong>현재</strong></td><td>디지털노마드 · 포르쉐 카이엔 EV · 와이프 3천만원 선물 · 타이탄클래스 3억</td><td><span class="tag tag-g">자유</span></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num red">2</span> 감정 포인트 (눈물/소름 예상)</div>
+      <div class="two-col">
+        <div class="card hot">
+          <div class="card-label red">눈물 ① 여자친구 사망</div>
+          <div style="font-size:13px;color:#3E4A5A;line-height:1.7">재일교포 모델. 위암 말기. 1.5년 은둔. "아무것도 할 수 없었다"</div>
+          <div class="q-tags" style="margin-top:8px"><span class="tag tag-r">ACT 2 (3~5분)</span></div>
+        </div>
+        <div class="card hot">
+          <div class="card-label red">눈물 ② 공황장애 + 나래휴게소</div>
+          <div style="font-size:13px;color:#3E4A5A;line-height:1.7">빚 7억. 새벽 휴게소에서 혼자. 밥도 잠도 안 됐다</div>
+          <div class="q-tags" style="margin-top:8px"><span class="tag tag-r">ACT 4 (8~12분) 킬러</span></div>
+        </div>
+        <div class="card hot">
+          <div class="card-label red">눈물 ③ 와이프 2.2억</div>
+          <div style="font-size:13px;color:#3E4A5A;line-height:1.7">대출 2.2억 내주고 싫은 소리 한 번 안 했다. 결혼 10주년</div>
+          <div class="q-tags" style="margin-top:8px"><span class="tag tag-r">ACT 4 (8~12분)</span></div>
+        </div>
+        <div class="card hot">
+          <div class="card-label red">눈물 ④ 트럭 낙상 + 골절</div>
+          <div style="font-size:13px;color:#3E4A5A;line-height:1.7">가락시장 트럭 낙상. 다리 골절. 4주 만에 깁스 풀고 지게차 복귀</div>
+          <div class="q-tags" style="margin-top:8px"><span class="tag tag-r">ACT 5 (12~15분)</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">3</span> 사찍남 관점 — 왜 이 사람인가?</div>
+      <div class="card gold">
+        <div style="font-size:14px;line-height:1.8;color:#3E4A5A">
+          <strong>① 4번 추락 4번 재기:</strong> IMF/여자친구 사망/코로나/골절 — 매번 바닥에서 올라옴<br>
+          <strong>② 세대 서사:</strong> 아버지 회사 부도(97) → 아들이 27년 뒤 자수성가 — 시간적 스케일<br>
+          <strong>③ 극적 대비:</strong> 직원 1,500명 유복 → 지게차 야간 → 월 2억 — 3단 갭<br>
+          <strong>④ 와이프 서사:</strong> 빚 2.2억 + 싫은 소리 0 + 3천만원 선물 — 감동 엔딩 소재<br>
+          <strong>⑤ 비주얼 장소:</strong> 나래휴게소(과거) → 바다뷰 자택(현재) — 촬영 동선 자체가 서사
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TAB 3: 25분 타임라인 ============ -->
+  <div class="panel" id="tab-timeline">
+
+    <div class="card dark">
+      <div style="font-size:11px;font-weight:700;color:#FFD700;letter-spacing:1.5px;margin-bottom:10px">사장찍어주는남자 25분 타임라인</div>
+      <div style="font-size:20px;font-weight:800;color:#fff;line-height:1.4;margin-bottom:10px">
+        "직원 1,500명이 하루아침에 사라진 후,<br>48세가 된 아들의 역전 보고서"
+      </div>
+      <div style="font-size:13px;color:#8B95A1;line-height:1.7">
+        <strong style="color:#FFD700">4번의 추락, 4번의 재기. 포기하지 않은 남자의 48년.</strong>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="card">
+        <div class="tl-row">
+          <div class="tl-time red">0:00~0:15</div>
+          <div class="tl-body">
+            <div class="tl-title">오프닝 훅 — 숫자 임팩트 <span class="tl-badge">HOOK</span></div>
+            <div class="tl-text">
+              "아버지 회사 직원이 1,500명이었습니다. 하루아침에 전부 사라졌어요."<br>
+              또는: "빚이 7억이었습니다. 공황장애가 왔고, 새벽에 휴게소에서 혼자 앉아있었습니다."
+            </div>
+            <div class="q-tags"><span class="tag tag-r">돈탐생식 숫자훅</span><span class="tag tag-b">초반30초 0.25+ 목표</span></div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time red">0:15~0:30</div>
+          <div class="tl-body">
+            <div class="tl-title">현재 갭 제시 <span class="tl-badge orange">GAP</span></div>
+            <div class="tl-text">
+              "지금은 광고비 0.7%로 월 2억을 찍습니다. 건강기능식품, 쿠팡 하나로요."<br>
+              <em>→ 과거(파산) vs 현재(월2억) 갭으로 시청 유도</em>
+            </div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">0:30~3:00</div>
+          <div class="tl-body">
+            <div class="tl-title">ACT 1 — 유복한 시절 + IMF 폭탄</div>
+            <div class="tl-text">
+              아버지 섬유수출무역 1,500명 → IMF 부도 → 항공대 자퇴<br>
+              "파일럿이 꿈이었는데, 비행 한 시간에 몇 백만원이에요. 포기했습니다."<br>
+              <em>→ 꿈의 좌절 = 공감 + 첫 번째 추락</em>
+            </div>
+            <div class="q-tags"><span class="tag tag-p">[배경]→[위기]</span></div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">3:00~5:00</div>
+          <div class="tl-body">
+            <div class="tl-title">ACT 2 — 밑바닥 + 여자친구 사망 <span class="tl-badge">감정</span></div>
+            <div class="tl-text">
+              피자집 알바, 노가다 → 여자친구(재일교포 모델) 위암 사망 → 1.5년 은둔<br>
+              <em>→ 두 번째 추락. 감정 바닥. 너무 깊이 파지 말고 본인 호흡에 맞추기.</em>
+            </div>
+            <div class="q-tags"><span class="tag tag-r">눈물 포인트 ①</span><span class="tag tag-p">[내면갈등]</span></div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">5:00~8:00</div>
+          <div class="tl-body">
+            <div class="tl-title">ACT 3 — 트레이너로 재기 + 헬스장 성공</div>
+            <div class="tl-text">
+              32~33세 트레이너. 기본급 60만원, PT 7천원, 하루 18시간.<br>
+              1호점 연매출 10억 → 2호점 4.8억 매각<br>
+              <em>→ "노력하면 된다" 희망 구간. 여기서 올라가야 다음 추락이 더 아프다.</em>
+            </div>
+            <div class="q-tags"><span class="tag tag-g">성공 구간</span><span class="tag tag-p">[욕구]→[해결]</span></div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time red">8:00~12:00</div>
+          <div class="tl-body">
+            <div class="tl-title">ACT 4 — 코로나 + 빚 7억 + 공황장애 <span class="tl-badge">PEAK</span></div>
+            <div class="tl-text">
+              3호점 오픈 3~4개월 → 코로나 → 빚 7억<br>
+              와이프 대출 2.2억 → 공황장애 → 밥/잠 불가<br>
+              <strong>시흥 나래휴게소, 새벽에 혼자 앉아있던 장면</strong><br>
+              <em>→ 감정 최고조. 돈탐생 7~10분 피크 패턴 적용. 시청자 여기서 못 빠져나감.</em>
+            </div>
+            <div class="q-tags"><span class="tag tag-r">눈물 ②③</span><span class="tag tag-r">킬러 타이밍</span><span class="tag tag-b">나래휴게소 B-Roll</span></div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">12:00~15:00</div>
+          <div class="tl-body">
+            <div class="tl-title">ACT 5 — 새벽 배송 + 트럭 낙상 + 전환점</div>
+            <div class="tl-text">
+              가락시장 지게차 + 배송 월 430~450만원<br>
+              트럭 낙상 → 다리 골절 → 4주 깁스 풀고 마켓컬리 복귀<br>
+              유튜브 무료 강의 6개월 서칭 → 건기식 발견<br>
+              <em>→ 네 번째 추락 + 에피파니. "선택의 여지가 없었다"</em>
+            </div>
+            <div class="q-tags"><span class="tag tag-r">눈물 ④</span><span class="tag tag-y">에피파니 순간</span></div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time blue">15:00~19:00</div>
+          <div class="tl-body">
+            <div class="tl-title">ACT 6 — 건기식 시작 + 홈쇼핑 전략 <span class="tl-badge blue">INFO</span></div>
+            <div class="tl-text">
+              위탁판매 6개월: 매출 4,500~5,000만, 순익 1,200~1,300만<br>
+              자체 브랜드 → 4개월 만에 1.2~1.5억<br>
+              <strong>핵심 전략: 홈쇼핑 원료 → 쿠팡 자연순위 → 트래픽 흡수</strong><br>
+              광고비 0.7~1% vs 업계 20~30%<br>
+              <em>→ "이게 이 사람의 비밀이구나" = 정보 만족 (돈탐생식)</em>
+            </div>
+            <div class="q-tags"><span class="tag tag-b">정보 만족</span><span class="tag tag-p">[해결]</span></div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">19:00~22:00</div>
+          <div class="tl-body">
+            <div class="tl-title">ACT 7 — 현재 라이프 + 와이프</div>
+            <div class="tl-text">
+              디지털노마드 · 주1회 펜션 · 포르쉐 카이엔 EV<br>
+              와이프 크리스마스 3천만원 선물 · 결혼 10주년<br>
+              "그때 싫은 소리 한 번 안 했어요. 그냥 기다려줬어요."<br>
+              <em>→ 따뜻한 감동 마무리. 휴먼스토리식 감성 구간.</em>
+            </div>
+            <div class="q-tags"><span class="tag tag-g">감동</span><span class="tag tag-p">LF8 [가족보호]</span></div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">22:00~25:00</div>
+          <div class="tl-body">
+            <div class="tl-title">ACT 8 — 수강생 + 메시지 + 엔딩</div>
+            <div class="tl-text">
+              수강생 1.7억 사기 → 하루 120개 판매<br>
+              "전화번호 공개합니다. 새벽에 전화해도 받아요."<br>
+              "IMF, 사랑하는 사람의 죽음, 코로나. 다 겪었는데 여기 있습니다."<br>
+              <em>→ 희망 메시지 + 부업소개하는남자 채널 예고</em>
+            </div>
+            <div class="q-tags"><span class="tag tag-g">희망</span><span class="tag tag-b">CTA: 부업소개 채널</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TAB 4: 질문지 ============ -->
+  <div class="panel" id="tab-questions">
+
+    <div class="note red">
+      <strong>질문 운영:</strong> 사찍남은 인생 서사 중심. 감정을 끌어내는 질문 위주. <span class="tag tag-r">필수</span> 반드시 커버. 사업 디테일은 부업소개 기획서에서 다룸.
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">A</span> IMF + 유년기 (ACT 1)</div>
+      <div class="q-card"><div class="q-num red">1</div><div class="q-body"><div class="q-text">아버지 회사가 직원 1,500명이었다고요. 그때 집안 분위기가 어땠어요?</div><div class="q-sub">→ 유복했던 시절 구체적으로. 추락과 대비.</div><div class="q-tags"><span class="tag tag-r">필수</span></div></div></div>
+      <div class="q-card"><div class="q-num red">2</div><div class="q-body"><div class="q-text">IMF 터졌을 때, 집에서 어떤 일이 벌어졌어요?</div><div class="q-sub">→ 부도 당일/직후 장면. 아버지 표정.</div><div class="q-tags"><span class="tag tag-r">필수</span></div></div></div>
+      <div class="q-card"><div class="q-num">3</div><div class="q-body"><div class="q-text">항공대 자퇴할 때 심정이 어땠어요? 파일럿이 꿈이었잖아요.</div><div class="q-sub">→ "비행비가 억 단위" 구체적 금액 유도.</div></div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">B</span> 여자친구 + 은둔 (ACT 2)</div>
+      <div class="q-card"><div class="q-num red">4</div><div class="q-body"><div class="q-text">여자친구분이 재일교포 모델이었다고요. 처음에 어떻게 만났어요?</div><div class="q-sub">→ 행복한 기억부터. 사망과 대비.</div><div class="q-tags"><span class="tag tag-r">필수</span></div></div></div>
+      <div class="q-card"><div class="q-num red">5</div><div class="q-body"><div class="q-text">위암 말기라는 걸 알았을 때, 뭘 하셨어요?</div><div class="q-sub">→ 감정 최고조. 본인 호흡에 맞추기.</div><div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-r">눈물</span></div></div></div>
+      <div class="q-card"><div class="q-num">6</div><div class="q-body"><div class="q-text">1년 반 은둔 생활. 하루가 어땠어요?</div><div class="q-sub">→ 은둔의 구체적 일상.</div></div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">C</span> 트레이너 + 성공 (ACT 3)</div>
+      <div class="q-card"><div class="q-num">7</div><div class="q-body"><div class="q-text">32살에 헬스 트레이너를 시작한 계기가 뭐예요?</div><div class="q-sub">→ 은둔 탈출 전환점.</div></div></div>
+      <div class="q-card"><div class="q-num">8</div><div class="q-body"><div class="q-text">기본급 60만원에 PT 7천원이면... 하루 18시간을 어떻게 버텼어요?</div><div class="q-sub">→ 극한 노력의 스케줄.</div></div></div>
+      <div class="q-card"><div class="q-num red">9</div><div class="q-body"><div class="q-text">1호점이 연매출 10억을 찍었을 때, 첫 반응이 뭐였어요?</div><div class="q-sub">→ 성공의 감정 + 구체 숫자.</div><div class="q-tags"><span class="tag tag-r">필수</span></div></div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num red">D</span> 코로나 + 파산 + 공황 (ACT 4) — 킬러 구간</div>
+      <div class="q-card"><div class="q-num red">10</div><div class="q-body"><div class="q-text">3호점까지 열었는데 3~4개월 만에 코로나가 터졌다고요. 그 순간 기억나세요?</div><div class="q-sub">→ "3~4개월 만에"가 핵심.</div><div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-r">킬러</span></div></div></div>
+      <div class="q-card"><div class="q-num red">11</div><div class="q-body"><div class="q-text">빚이 7억이 됐을 때, 와이프분한테 뭐라고 말씀하셨어요?</div><div class="q-sub">→ 와이프 2.2억 대출 + 부부 관계.</div><div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-r">눈물</span></div></div></div>
+      <div class="q-card"><div class="q-num red">12</div><div class="q-body"><div class="q-text">공황장애가 왔다고요. 어떤 증상이었어요?</div><div class="q-sub">→ 밥 못 먹고 잠 못 자고. 구체적 증상.</div><div class="q-tags"><span class="tag tag-r">필수</span></div></div></div>
+      <div class="q-card"><div class="q-num red">13</div><div class="q-body"><div class="q-text">나래휴게소에서 새벽에 혼자 앉아있었다고요. 그때 무슨 생각 하셨어요?</div><div class="q-sub">→ 영상의 핵심 장면. 촬영도 여기서 진행.</div><div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-r">눈물</span><span class="tag tag-b">현장촬영</span></div></div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">E</span> 새벽 배송 + 전환 (ACT 5)</div>
+      <div class="q-card"><div class="q-num red">14</div><div class="q-body"><div class="q-text">가락시장 지게차, 청담순두부 배송. 하루 일과가 어떻게 됐어요?</div><div class="q-sub">→ 월 430~450만원의 무게.</div><div class="q-tags"><span class="tag tag-r">필수</span></div></div></div>
+      <div class="q-card"><div class="q-num red">15</div><div class="q-body"><div class="q-text">트럭에서 떨어져서 다리가 부러졌을 때, 4주 만에 깁스 풀고 다시 일하러 갔다고요?</div><div class="q-sub">→ "선택의 여지가 없었다" 멘트 유도.</div><div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-r">눈물</span></div></div></div>
+      <div class="q-card"><div class="q-num">16</div><div class="q-body"><div class="q-text">온라인으로 전환해야겠다고 결심한 순간이 있었어요?</div><div class="q-sub">→ 유튜브 6개월 서칭. 에피파니.</div></div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">F</span> 건기식 + 현재 (ACT 6~8)</div>
+      <div class="q-card"><div class="q-num">17</div><div class="q-body"><div class="q-text">왜 하필 건강기능식품이었어요?</div><div class="q-sub">→ 헬스 트레이너 경험 연결.</div></div></div>
+      <div class="q-card"><div class="q-num red">18</div><div class="q-body"><div class="q-text">광고비가 매출 대비 0.7~1%라고요? 어떻게요?</div><div class="q-sub">→ 홈쇼핑 전략 간단히만 (디테일은 부업소개에서).</div><div class="q-tags"><span class="tag tag-r">필수</span></div></div></div>
+      <div class="q-card"><div class="q-num">19</div><div class="q-body"><div class="q-text">와이프분이 빚 갚을 때 싫은 소리 한 번 안 했다고요?</div><div class="q-sub">→ 와이프 이야기 = 따뜻한 감동.</div><div class="q-tags"><span class="tag tag-r">눈물</span></div></div></div>
+      <div class="q-card"><div class="q-num red">20</div><div class="q-body"><div class="q-text">IMF, 여자친구, 코로나. 다 겪으셨잖아요. 포기하고 싶었던 순간이 있었어요?</div><div class="q-sub">→ 엔딩 멘트. "그래도 여기 있습니다"</div><div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-g">엔딩</span></div></div></div>
+    </div>
+  </div>
+
+  <!-- ============ TAB 5: 촬영 동선 ============ -->
+  <div class="panel" id="tab-location">
+
+    <div class="section">
+      <div class="section-title"><span class="num">1</span> 사찍남 촬영 동선</div>
+
+      <div class="location-card">
+        <div class="location-header" style="background:#FFF0F0">
+          <div class="location-time">LOCATION 1 — 오전</div>
+          <h3>시흥 나래휴게소</h3>
+        </div>
+        <div class="location-body">
+          <div class="location-detail">
+            <strong>의미:</strong> 공황장애 시절 새벽에 혼자 앉아있던 장소<br>
+            <strong>사찍남 촬영:</strong><br>
+            - 벤치에 앉아 회상 인터뷰 (과거 파트: Q10~Q15)<br>
+            - "이 자리에서 새벽 3시에 혼자 앉아있었습니다" 멘트<br>
+            - 뒷모습 + 주변 풍경 B-Roll (썸네일 A안 소스)<br>
+            - 조용하고 감성적 톤. 아침 빛 활용.<br>
+            <span class="tag tag-r">핵심 장면</span><span class="tag tag-p">ACT 4~5 커버</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="location-card">
+        <div class="location-header" style="background:#EFF3FF">
+          <div class="location-time" style="background:#3182F6">LOCATION 2 — 오후</div>
+          <h3>주상복합 자택 (바다뷰)</h3>
+        </div>
+        <div class="location-body">
+          <div class="location-detail">
+            <strong>의미:</strong> 현재의 성공을 보여주는 공간<br>
+            <strong>사찍남 촬영:</strong><br>
+            - 메인 인터뷰 (과거: Q1~Q9, 현재: Q17~Q20)<br>
+            - 바다뷰 배경 B-Roll (썸네일 C안 소스)<br>
+            - 감동 마무리 (와이프 이야기, 엔딩 멘트)<br>
+            <span class="tag tag-b">메인 촬영</span><span class="tag tag-g">바다뷰 배경</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num blue">2</span> 사찍남 시간표</div>
+      <div class="card">
+        <table>
+          <tr><th>시간</th><th>장소</th><th>촬영 내용</th></tr>
+          <tr><td><strong>오전</strong></td><td>나래휴게소</td><td>공황장애/파산 인터뷰 + B-Roll</td></tr>
+          <tr><td><strong>점심</strong></td><td>이동</td><td>자택으로 이동</td></tr>
+          <tr><td><strong>오후</strong></td><td>자택</td><td>메인 인터뷰 (과거+현재+엔딩)</td></tr>
+          <tr><td><strong>16:30~</strong></td><td>자택</td><td><span class="tag tag-r">홈쇼핑 실시간</span> 주문 장면 (사찍남+부업 공용)</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TAB 6: 업로드 키트 ============ -->
+  <div class="panel" id="tab-upload">
+
+    <div class="section">
+      <div class="section-title"><span class="num">1</span> 제목 후보 3개</div>
+
+      <div class="card" style="border:2px solid #F04452;background:#FFF8F8">
+        <div class="rank">1순위 추천</div>
+        <div class="title-text" id="st1">직원 1,500명이 하루아침에 사라졌습니다 (빚 7억에서 월 2억까지)</div>
+        <div style="font-size:12px;color:#8B95A1;margin-top:6px;line-height:1.8">
+          <strong>공식:</strong> 충격 팩트 + 괄호(역전 수치)<br>
+          <strong>레퍼런스:</strong> 돈탐생 "하루에 X만원" 132만뷰 / 휴먼스토리 충격서사 533만뷰<br>
+          <strong>1,500명 → 7억 → 2억</strong> = 3단 숫자 스토리
+        </div>
+        <div style="margin-top:10px"><button class="copy-btn" onclick="cp('st1',this)">제목 복사</button></div>
+      </div>
+
+      <div class="card" style="border:2px solid #F08F00;background:#FFFBF0">
+        <div class="rank b">2순위</div>
+        <div class="title-text" id="st2">헬스장 3개 운영하다 빚 7억 졌습니다. 48세에 다시 시작했습니다.</div>
+        <div style="font-size:12px;color:#8B95A1;margin-top:6px;line-height:1.8">
+          <strong>공식:</strong> 파산 서사 + 나이 강조<br>
+          <strong>레퍼런스:</strong> 휴먼스토리 "XX하다 망했습니다" 평균 533만뷰 패턴<br>
+          <strong>"48세"</strong> = 중장년 시청자 직격
+        </div>
+        <div style="margin-top:10px"><button class="copy-btn" onclick="cp('st2',this)">제목 복사</button></div>
+      </div>
+
+      <div class="card" style="border:2px solid #3182F6;background:#F0F6FF">
+        <div class="rank c">3순위</div>
+        <div class="title-text" id="st3">IMF에 아버지 회사가 망했습니다. 27년 뒤 아들이 빚 7억을 갚은 방법</div>
+        <div style="font-size:12px;color:#8B95A1;margin-top:6px;line-height:1.8">
+          <strong>공식:</strong> 세대 서사 + 시간 갭<br>
+          <strong>레퍼런스:</strong> 사찍남 "XX하다 결국" 63만뷰 + "27년"이라는 숫자 클릭 유발
+        </div>
+        <div style="margin-top:10px"><button class="copy-btn" onclick="cp('st3',this)">제목 복사</button></div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">2</span> 썸네일 컨셉 3개</div>
+
+      <div class="thumb-card">
+        <div class="rank" style="position:relative;top:0;left:0;display:inline-block;margin:16px 0 0 16px">A안 — 나래휴게소 대비형 (추천)</div>
+        <div class="thumb-preview a">
+          <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(20,20,40,.85),rgba(30,50,80,.6))"></div>
+          <div class="thumb-text" style="z-index:2">
+            <div class="thumb-main">빚 7억, 새벽 휴게소에서<br><span style="color:#FFD700">월 2억이 됐습니다</span></div>
+            <div class="thumb-sub">나래휴게소 벤치 + 최대표 뒷모습</div>
+          </div>
+        </div>
+        <div class="thumb-body">
+          <div style="font-size:13px;color:#3E4A5A;line-height:1.7">
+            <strong>레퍼런스:</strong> 휴먼스토리 실제 장소 + 인물 뒷모습 = 평균 533만뷰<br>
+            과거(어두운 휴게소) + 현재(밝은 텍스트) 대비
+          </div>
+        </div>
+      </div>
+
+      <div class="thumb-card">
+        <div class="rank b" style="position:relative;top:0;left:0;display:inline-block;margin:16px 0 0 16px">B안 — 세대 서사형</div>
+        <div class="thumb-preview b">
+          <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(15,52,96,.85),rgba(26,26,46,.6))"></div>
+          <div class="thumb-text" style="z-index:2">
+            <div class="thumb-main">직원 1,500명 → 빚 7억<br><span style="color:#FFD700">48세, 다시 시작했습니다</span></div>
+            <div class="thumb-sub">최대표 정면 + 바다뷰 자택 배경</div>
+          </div>
+        </div>
+        <div class="thumb-body">
+          <div style="font-size:13px;color:#3E4A5A;line-height:1.7">
+            <strong>레퍼런스:</strong> 사찍남 정면+배경 스타일, "48세" 나이 = 중장년 후킹<br>
+            3단 텍스트(1500명→7억→48세) 시선 흐름
+          </div>
+        </div>
+      </div>
+
+      <div class="thumb-card">
+        <div class="rank c" style="position:relative;top:0;left:0;display:inline-block;margin:16px 0 0 16px">C안 — 감정 대비형</div>
+        <div class="thumb-preview c">
+          <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(45,19,44,.85),rgba(26,26,46,.6))"></div>
+          <div class="thumb-text" style="z-index:2">
+            <div class="thumb-main">공황장애가 왔습니다<br><span style="color:#FFD700">그래도 여기 있습니다</span></div>
+            <div class="thumb-sub">분할: 왼쪽 어두운 최대표 / 오른쪽 밝은 최대표</div>
+          </div>
+        </div>
+        <div class="thumb-body">
+          <div style="font-size:13px;color:#3E4A5A;line-height:1.7">
+            <strong>레퍼런스:</strong> 휴먼스토리 감정 키워드 + before/after 분할<br>
+            "공황장애"라는 단어 자체가 클릭 트리거
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">3</span> 설명란</div>
+      <div class="card gold">
+        <div class="desc-box" id="desc1">아버지 회사 직원이 1,500명이었습니다.
+IMF가 터지고, 하루아침에 전부 사라졌습니다.
+
+항공대를 자퇴했습니다. 파일럿이 꿈이었는데, 비행비가 억 단위였으니까요.
+사랑하는 사람을 잃었습니다. 1년 반 동안 아무것도 하지 못했습니다.
+
+32살에 헬스 트레이너로 다시 시작했습니다.
+기본급 60만원, PT 시급 7천원, 하루 18시간.
+첫 헬스장은 연매출 10억을 찍었습니다.
+
+그리고 코로나가 터졌습니다.
+빚 7억. 공황장애. 새벽 휴게소에서 혼자 앉아있었습니다.
+
+가락시장 지게차를 몰았습니다. 트럭에서 떨어져 다리가 부러졌습니다.
+4주 만에 깁스를 풀고 다시 일하러 갔습니다.
+
+지금은 건강기능식품을 팝니다.
+광고비 0.7%. 월 매출 2~2.5억. 순수익 8천만~1억.
+
+빚 7억에서 여기까지 온 48세의 이야기입니다.
+
+---
+사장찍어주는남자
+실전 가이드 (부업소개하는남자): @부업소개하는남자
+
+#사찍남 #사장찍어주는남자 #코로나파산 #역전스토리 #빚7억 #월2억 #공황장애 #재기 #건기식 #쿠팡셀러</div>
+        <div style="margin-top:12px"><button class="copy-btn" onclick="cp('desc1',this)">설명란 복사</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TAB 7: 체크리스트 ============ -->
+  <div class="panel" id="tab-checklist">
+    <div class="section">
+      <div class="section-title"><span class="num red">1</span> 사찍남 필수 B-Roll</div>
+      <div class="card gold">
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> 나래휴게소 벤치에 앉은 뒷모습 (썸네일 A안)</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> 나래휴게소 주변 풍경 (새벽 느낌 연출)</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> 자택 바다뷰 전경 (와이드/드론)</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> 홈쇼핑 방송 + 실시간 주문 장면 (16:35)</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text">최대표 일상 (커피, 산책, 바다뷰 감상)</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text">정면 포즈 (썸네일 B안, C안)</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text">수강생 인터뷰 장면 (동석 시)</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">2</span> 사찍남 촬영 주의사항</div>
+      <div class="card hot">
+        <div style="font-size:14px;line-height:1.8;color:#3E4A5A">
+          <strong style="color:#F04452">① 감정 관리:</strong> 여자친구 사망/공황장애 — 출연자 감정 존중. 무리하게 파지 않기.<br>
+          <strong style="color:#F04452">② 나래휴게소:</strong> 오전에 먼저. 아침 빛 = 감성적 화면. 주변 소음 체크.<br>
+          <strong style="color:#F04452">③ 홈쇼핑 16:35:</strong> 전에 반드시 자택 도착. 카메라 세팅 완료 대기.<br>
+          <strong style="color:#F04452">④ 쿠팡 화면:</strong> 고객명/주소 가리기. 매출 수치만.<br>
+          <strong style="color:#F04452">⑤ 마이크:</strong> 나래휴게소(야외 핀마이크) + 자택(실내용) 2개 준비.
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>편집팀 가이드 (사찍남):</strong><br>
+      - 초반 5초: "직원 1,500명" 자막 크게 + 1초 컷전환 (돈탐생식)<br>
+      - 8~12분: 감성 BGM 전환 + 나래휴게소 B-Roll (휴먼스토리식)<br>
+      - 15~19분: 쿠팡 화면 PIP + 홈쇼핑 PIP<br>
+      - 19~22분: 와이프 이야기 → 여유로운 컷 + 부드러운 BGM
+    </div>
+  </div>
+
+</div>
+
+<script>
+function go(id,el){document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('on'));el.classList.add('on');document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));document.getElementById('tab-'+id).classList.add('on');window.scrollTo({top:0,behavior:'smooth'})}
+function cp(id,btn){navigator.clipboard.writeText(document.getElementById(id).innerText).then(()=>{btn.classList.add('copied');btn.textContent='복사 완료!';setTimeout(()=>{btn.classList.remove('copied');btn.textContent='복사';},1500)})}
+function tog(el){el.classList.toggle('checked')}
+</script>
+</body>
+</html>

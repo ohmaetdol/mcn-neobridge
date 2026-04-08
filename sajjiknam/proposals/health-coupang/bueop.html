@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>부업소개하는남자 — 최대표 촬영기획안</title>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F2F4F6;color:#191F28;font-family:'Pretendard',system-ui,sans-serif;min-height:100vh;font-size:15px}
+.gnb{background:#fff;border-bottom:1px solid #E5E8EB;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.gnb-logo{font-size:16px;font-weight:800;color:#3182F6}
+.gnb-badge{background:#EFF3FF;color:#3182F6;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:800;border:1px solid #3182F6}
+.gnb-date{font-size:11px;color:#8B95A1;font-weight:600}
+.wrap{max-width:820px;margin:0 auto;padding:28px 20px 80px}
+.hero{background:linear-gradient(135deg,#0a1628 0%,#132744 50%,#1a3a5c 100%);border-radius:20px;padding:36px 32px;margin-bottom:20px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;right:-10%;width:300px;height:300px;background:radial-gradient(circle,rgba(49,130,246,.2),transparent);pointer-events:none}
+.hero-eyebrow{font-size:11px;font-weight:700;color:#60A5FA;letter-spacing:2px;margin-bottom:10px}
+.hero-title{font-size:28px;font-weight:800;line-height:1.3;color:#fff;margin-bottom:8px}
+.hero-sub{color:#8B95A1;font-size:13px;line-height:1.7}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
+.hero-stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:12px;text-align:center}
+.hero-stat-v{font-size:20px;font-weight:800;color:#60A5FA}
+.hero-stat-l{font-size:10px;color:#8B95A1;margin-top:3px}
+.tabs{display:flex;gap:6px;margin-bottom:18px;flex-wrap:wrap;position:sticky;top:56px;z-index:90;background:#F2F4F6;padding:10px 0}
+.tab-btn{padding:9px 16px;border-radius:10px;border:1.5px solid #E5E8EB;background:#fff;font-size:13px;font-weight:700;cursor:pointer;color:#6B7684;transition:.15s;font-family:inherit}
+.tab-btn.on{background:#3182F6;border-color:#3182F6;color:#fff}
+.tab-btn:hover:not(.on){background:#F8F9FA}
+.tab-btn.red{border-color:#F04452;color:#F04452}
+.tab-btn.red.on{background:#F04452;color:#fff}
+.panel{display:none}
+.panel.on{display:block}
+.card{background:#fff;border-radius:16px;padding:22px;margin-bottom:14px;box-shadow:0 1px 6px rgba(0,0,0,.06);position:relative}
+.card.hot{border:2px solid #F04452;background:#FFF8F8}
+.card.gold{border:2px solid #F08F00;background:#FFFBF0}
+.card.blue{border:2px solid #3182F6;background:#F0F6FF}
+.card.green{border:2px solid #05C072;background:#F0FFF4}
+.card.dark{background:#0a1628;color:#fff}
+.card-label{font-size:11px;font-weight:700;color:#3182F6;letter-spacing:1.5px;margin-bottom:14px;text-transform:uppercase}
+.card-label.red{color:#F04452}
+.card-label.orange{color:#F08F00}
+.card-label.green{color:#05C072}
+.section{margin-bottom:28px}
+.section-title{font-size:18px;font-weight:800;color:#191F28;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.section-title .num{background:#3182F6;color:#fff;border-radius:8px;padding:4px 10px;font-size:13px}
+.section-title .num.red{background:#F04452}
+.section-title .num.orange{background:#F08F00}
+.tag{display:inline-block;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:700;margin-right:5px;white-space:nowrap}
+.tag-y{background:#FFF7E6;color:#F08F00}
+.tag-r{background:#FFF0F0;color:#F04452}
+.tag-g{background:#F0FFF4;color:#05C072}
+.tag-b{background:#EFF3FF;color:#3182F6}
+.tag-p{background:#F0EDFF;color:#7B61FF}
+.tag-d{background:#191F28;color:#60A5FA}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.stat{background:#EFF3FF;border-radius:12px;padding:14px;text-align:center}
+.stat-v{font-size:22px;font-weight:800;color:#3182F6}
+.stat-l{font-size:11px;color:#6B7684;margin-top:3px}
+.stat.red{background:#FFF0F0}.stat.red .stat-v{color:#F04452}
+.stat.orange{background:#FFF7E6}.stat.orange .stat-v{color:#F08F00}
+.stat.green{background:#F0FFF4}.stat.green .stat-v{color:#05C072}
+.note{background:#EFF3FF;border-left:3px solid #3182F6;border-radius:0 8px 8px 0;padding:14px 16px;margin:10px 0;font-size:13px;line-height:1.7;color:#3E4A5A}
+.note.red{background:#FFF0F0;border-left-color:#F04452}
+.note.orange{background:#FFF7E6;border-left-color:#F08F00}
+.note.green{background:#F0FFF4;border-left-color:#05C072}
+.tl-row{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid #E5E8EB}
+.tl-row:last-child{border-bottom:none}
+.tl-time{font-size:12px;font-weight:800;color:#3182F6;min-width:75px;padding-top:2px}
+.tl-time.red{color:#F04452}
+.tl-time.orange{color:#F08F00}
+.tl-body{flex:1}
+.tl-title{font-size:14px;font-weight:700;color:#191F28;margin-bottom:4px}
+.tl-text{font-size:13px;color:#3E4A5A;line-height:1.7}
+.tl-badge{display:inline-block;background:#3182F6;color:#fff;border-radius:4px;padding:1px 6px;font-size:10px;font-weight:800;margin-left:6px}
+.tl-badge.red{background:#F04452}
+.tl-badge.green{background:#05C072}
+.tl-badge.orange{background:#F08F00}
+.q-card{background:#fff;border-radius:12px;padding:16px 18px;margin-bottom:10px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;gap:14px;align-items:flex-start}
+.q-num{background:#3182F6;color:#fff;border-radius:8px;min-width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0}
+.q-num.red{background:#F04452}
+.q-num.orange{background:#F08F00}
+.q-body{flex:1}
+.q-text{font-size:14px;font-weight:700;color:#191F28;line-height:1.6;margin-bottom:4px}
+.q-sub{font-size:12px;color:#8B95A1;line-height:1.6}
+.q-tags{margin-top:6px;display:flex;flex-wrap:wrap;gap:4px}
+.check-item{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #F2F4F6}
+.check-item:last-child{border-bottom:none}
+.check-box{width:20px;height:20px;border:2px solid #E5E8EB;border-radius:4px;flex-shrink:0;margin-top:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+.check-box.checked{background:#05C072;border-color:#05C072}
+.check-box.checked::after{content:'✓';color:#fff;font-size:12px;font-weight:800}
+.check-text{font-size:13px;color:#3E4A5A;line-height:1.6}
+.divider{height:1px;background:#E5E8EB;margin:20px 0}
+.rank{position:absolute;top:-8px;left:16px;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:800;color:#fff}
+.rank.a{background:#3182F6}.rank.b{background:#F08F00}.rank.c{background:#05C072}
+.title-text{font-size:17px;font-weight:800;color:#191F28;line-height:1.5;margin-bottom:10px;padding-top:6px}
+.copy-btn{background:#3182F6;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;transition:.15s;font-family:inherit}
+.copy-btn:hover{background:#1B6AE0}
+.copy-btn:active{transform:scale(.96)}
+.copied{background:#05C072!important}
+.thumb-card{background:#fff;border-radius:16px;overflow:hidden;margin-bottom:14px;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+.thumb-preview{aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.thumb-preview.a{background:linear-gradient(135deg,#0a1628,#1a3a5c)}
+.thumb-preview.b{background:linear-gradient(135deg,#132744,#0a1628)}
+.thumb-preview.c{background:linear-gradient(135deg,#0f3460,#0a1628)}
+.thumb-text{color:#fff;text-align:center;padding:20px;z-index:1}
+.thumb-main{font-size:32px;font-weight:800;line-height:1.3;text-shadow:2px 2px 8px rgba(0,0,0,.5)}
+.thumb-sub{font-size:14px;color:rgba(255,255,255,.7);margin-top:8px}
+.thumb-body{padding:18px}
+.desc-box{background:#F8F9FA;border:1px solid #E5E8EB;border-radius:10px;padding:18px;font-size:13px;color:#191F28;line-height:2;white-space:pre-wrap;font-family:'Pretendard',system-ui,sans-serif}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
+th{padding:10px;text-align:left;border-bottom:2px solid #E5E8EB;color:#3182F6;font-size:11px;background:#EFF3FF;font-weight:700}
+td{padding:10px;border-bottom:1px solid #F2F4F6;color:#3E4A5A;line-height:1.6}
+@media(max-width:600px){.hero-stats{grid-template-columns:repeat(2,1fr)}.stat-row{grid-template-columns:1fr 1fr}.thumb-main{font-size:22px}.title-text{font-size:15px}}
+</style>
+</head>
+<body>
+<nav class="gnb">
+  <span class="gnb-logo">부업소개하는남자</span>
+  <span class="gnb-badge">최대표 촬영기획안</span>
+  <span class="gnb-date">촬영일: 목요일 (4/10) · 10분</span>
+</nav>
+<div class="wrap">
+
+  <!-- ============ HERO ============ -->
+  <div class="hero">
+    <div class="hero-eyebrow">부업소개하는남자 — 10분 실전 가이드</div>
+    <div class="hero-title">건기식 쿠팡 판매<br>초기 30만원 → 월 수익 1억 구조</div>
+    <div class="hero-sub">광고비 0.7% · 마진 50% · 반품 0건 · CS 0건<br>"나도 할 수 있겠다"를 느끼게 하는 실전 부업 가이드</div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-v">30만원</div><div class="hero-stat-l">초기 자본</div></div>
+      <div class="hero-stat"><div class="hero-stat-v">0.7%</div><div class="hero-stat-l">광고비 비율</div></div>
+      <div class="hero-stat"><div class="hero-stat-v">50%</div><div class="hero-stat-l">마진율</div></div>
+      <div class="hero-stat"><div class="hero-stat-v">0건</div><div class="hero-stat-l">1월 반품</div></div>
+    </div>
+  </div>
+
+  <!-- ============ TABS ============ -->
+  <div class="tabs">
+    <button class="tab-btn on" onclick="go('ref',this)">채널 레퍼런스</button>
+    <button class="tab-btn" onclick="go('usp',this)">핵심 USP</button>
+    <button class="tab-btn" onclick="go('timeline',this)">10분 타임라인</button>
+    <button class="tab-btn" onclick="go('questions',this)">질문지</button>
+    <button class="tab-btn" onclick="go('upload',this)">업로드 키트</button>
+    <button class="tab-btn red" onclick="go('checklist',this)">체크리스트</button>
+  </div>
+
+  <!-- ============ TAB 1: 채널 레퍼런스 ============ -->
+  <div class="panel on" id="tab-ref">
+
+    <div class="card dark">
+      <div style="font-size:11px;font-weight:700;color:#60A5FA;letter-spacing:1.5px;margin-bottom:10px">부업소개하는남자 — 부업/재테크 채널 레퍼런스</div>
+      <div style="font-size:16px;font-weight:800;color:#fff;line-height:1.5">
+        부업 채널 제목 공식: 432개 영상 분석 기반<br>
+        절약왕/옆집CEO/돈탐생 + 사찍남 부업 편성
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">1</span> 부업 채널 제목 공식 (432개 분석)</div>
+      <div class="card">
+        <table>
+          <tr><th>공식</th><th>패턴</th><th>평균 조회수</th><th>예시</th></tr>
+          <tr>
+            <td><span class="tag tag-r">A</span></td>
+            <td>"하루 X분 + 월 Y만원"</td>
+            <td style="color:#F04452;font-weight:700">79만뷰</td>
+            <td>절약왕 "하루 30분으로 월80만원" 107만뷰</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-r">B</span></td>
+            <td>"[수익인증] + 월금액"</td>
+            <td style="color:#F04452;font-weight:700">75만뷰</td>
+            <td>절약왕 "[부업수익 인증] 월60~270만원" 80만뷰</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-r">C</span></td>
+            <td>"퇴근후 + 월수익"</td>
+            <td style="color:#F04452;font-weight:700">132만뷰</td>
+            <td>절약왕 "퇴근 후 부업으로 월 500만원" 210만뷰</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-b">D</span></td>
+            <td>"초기비용 0원 + 수익"</td>
+            <td style="color:#3182F6;font-weight:700">65만뷰</td>
+            <td>옆집CEO "초기 자본 없이 월 300만원" 54만뷰</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="note">
+        <strong>최대표 적용:</strong> 공식 A+D 조합 최적 → "초기 30만원 + 광고비 0원 + 월 수익 1억"<br>
+        건기식의 USP(진입장벽 낮음+마진 높음)를 제목에서 먼저 전달
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">2</span> 부업 채널 리텐션 핵심</div>
+
+      <div class="card blue">
+        <div class="card-label">돈탐생 리텐션 패턴 → 10분 부업에 적용</div>
+        <div style="font-size:14px;line-height:1.8;color:#3E4A5A">
+          <strong>돈탐생 핵심:</strong> 16분이 최적 길이, 피크 7~10분에 63% 집중<br>
+          <strong>부업소개 10분 적용:</strong><br>
+          - 0~30초: 숫자 임팩트 (돈탐생식 "첫 5초에 수치 던지기")<br>
+          - 4~6분: 핵심 전략 공개 = 피크 타이밍 (10분의 40~60% 지점)<br>
+          - 10분 = 부업 채널 최적 길이 (집중도 유지 + 정보 밀도)<br><br>
+          <strong>절약왕 패턴:</strong> "현실적 수치" + "누구나 가능" = 높은 전환<br>
+          → 최대표의 "30만원 시작 + 위탁이라 재고 0" = 완벽 매칭
+        </div>
+      </div>
+
+      <div class="card gold">
+        <div class="card-label orange">부업 채널 vs 사찍남 — 톤 차이</div>
+        <div style="font-size:13px;line-height:1.8;color:#3E4A5A">
+          <table>
+            <tr><th>항목</th><th>사찍남 25분</th><th style="color:#3182F6">부업소개 10분</th></tr>
+            <tr><td>핵심</td><td>인생 서사 (감정)</td><td style="font-weight:700">실전 방법 (정보)</td></tr>
+            <tr><td>시청자 반응</td><td>"감동이다, 대단하다"</td><td style="font-weight:700">"나도 할 수 있겠다"</td></tr>
+            <tr><td>훅</td><td>충격 사실 (빚 7억)</td><td style="font-weight:700">구체 수치 (30만원→1억)</td></tr>
+            <tr><td>감정선</td><td>추락→재기→감동</td><td style="font-weight:700">문제→방법→증거→액션</td></tr>
+            <tr><td>CTA</td><td>구독 + 부업 채널 유도</td><td style="font-weight:700">구독 + 더 배우려면 사찍남</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num red">3</span> Value Equation 적용 (22권 프레임워크)</div>
+      <div class="card hot">
+        <div style="font-size:14px;line-height:1.8;color:#3E4A5A">
+          <strong>가치 = (Dream Outcome × Likelihood) / (Time × Effort)</strong><br><br>
+          <strong style="color:#3182F6">최대표 건기식의 Value Equation:</strong><br>
+          - <strong>Dream Outcome:</strong> 월 100~200만원 부수입 (시청자 목표)<br>
+          - <strong>Likelihood:</strong> 수강생 1.7억 사기→하루 120개 (실제 성공 사례)<br>
+          - <strong>Time:</strong> 위탁이라 하루 1~2시간 (최소 시간)<br>
+          - <strong>Effort:</strong> 초기 30만원 + 재고 0 + CS 0 (최소 노력)<br><br>
+          <span class="tag tag-g">시간↓</span> <span class="tag tag-g">노력↓</span> <span class="tag tag-r">성공확률↑</span> <span class="tag tag-r">수익↑</span><br>
+          → <strong>Value가 극대화되는 구조. 이걸 10분 안에 증명해야 함.</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TAB 2: 핵심 USP ============ -->
+  <div class="panel" id="tab-usp">
+
+    <div class="section">
+      <div class="section-title"><span class="num">1</span> 건기식 쿠팡 — 왜 이 부업인가?</div>
+
+      <div class="stat-row">
+        <div class="stat"><div class="stat-v">30만원</div><div class="stat-l">소량 제조 비용</div></div>
+        <div class="stat green"><div class="stat-v">40~50%</div><div class="stat-l">마진율</div></div>
+        <div class="stat red"><div class="stat-v">0건</div><div class="stat-l">1월 반품</div></div>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-v">0.7~1%</div><div class="stat-l">광고비 비율</div></div>
+        <div class="stat orange"><div class="stat-v">0건</div><div class="stat-l">CS 전화</div></div>
+        <div class="stat green"><div class="stat-v">높음</div><div class="stat-l">재구매율</div></div>
+      </div>
+
+      <div class="card blue">
+        <div class="card-label">다른 부업 vs 건기식 쿠팡</div>
+        <table>
+          <tr><th>항목</th><th>스마트스토어 잡화</th><th>쿠팡 가전</th><th style="color:#3182F6">건기식 쿠팡</th></tr>
+          <tr><td>마진</td><td>5~10%</td><td>10~15%</td><td style="font-weight:700;color:#05C072">40~50%</td></tr>
+          <tr><td>반품</td><td>많음</td><td>많음</td><td style="font-weight:700;color:#05C072">거의 0</td></tr>
+          <tr><td>CS</td><td>매일</td><td>자주</td><td style="font-weight:700;color:#05C072">거의 없음</td></tr>
+          <tr><td>광고비</td><td>20~30%</td><td>15~25%</td><td style="font-weight:700;color:#05C072">0.7~1%</td></tr>
+          <tr><td>재구매</td><td>낮음</td><td>낮음</td><td style="font-weight:700;color:#05C072">높음 (건강식품)</td></tr>
+          <tr><td>진입비용</td><td>100만+</td><td>200만+</td><td style="font-weight:700;color:#05C072">30~40만원</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num red">2</span> 비밀 병기: 홈쇼핑 트래픽 흡수</div>
+      <div class="card hot">
+        <div style="font-size:14px;line-height:2;color:#3E4A5A">
+          <strong>STEP ①</strong> 대기업이 TV홈쇼핑에서 파는 원료 확인<br>
+          <strong>STEP ②</strong> 같은 원료로 건기식 제작 (소량 30~40만원)<br>
+          <strong>STEP ③</strong> 쿠팡에 등록 → 자연순위 상단 확보 (광고 X)<br>
+          <strong>STEP ④</strong> 홈쇼핑 방송 시작 → 시청자가 쿠팡 검색<br>
+          <strong>STEP ⑤</strong> 자연순위 1등이니까 내 제품이 먼저 보임 → 주문!<br><br>
+          <span class="tag tag-r">업계 광고비 20~30%</span> <span class="tag tag-g">최대표 0.7~1%</span><br>
+          <strong style="color:#F04452">→ 이 차이가 월 1억 순수익의 비밀</strong>
+        </div>
+      </div>
+
+      <div class="note red">
+        <strong>촬영 핵심:</strong> 16:35 홈쇼핑 방송 → 실시간 쿠팡 주문 유입 장면을 반드시 촬영. 이 장면이 부업소개 영상의 <strong>"증거"</strong>가 됨. 말로만 하면 안 믿음 → 화면으로 보여줘야 함.
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">3</span> 시청자 실행 로드맵</div>
+      <div class="card green">
+        <div style="font-size:14px;line-height:1.8;color:#3E4A5A">
+          <strong style="color:#3182F6">1단계: 위탁판매 테스트 (0~6개월)</strong><br>
+          초기 30~40만원 → 소량 제조 → 주문 들어오면 제조사 직배송<br>
+          재고 리스크 0, 현실 수치: 월 매출 4,500~5,000만, 순익 1,200~1,300만<br><br>
+          <strong style="color:#3182F6">2단계: 자체 브랜드 전환 (6~10개월)</strong><br>
+          잘 팔리는 제품만 자체 브랜드화 → 마진 40~50%로 점프<br>
+          최대표: 4개월 만에 1.2~1.5억<br><br>
+          <strong style="color:#3182F6">3단계: 스케일업 (10개월~)</strong><br>
+          홈쇼핑 트래픽 흡수 전략 적용 → 광고비 최소 → 순수익 극대화<br>
+          최대표 현재: 월 2~2.5억, 순수익 8천~1억
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TAB 3: 10분 타임라인 ============ -->
+  <div class="panel" id="tab-timeline">
+
+    <div class="card dark">
+      <div style="font-size:11px;font-weight:700;color:#60A5FA;letter-spacing:1.5px;margin-bottom:10px">부업소개하는남자 10분 타임라인</div>
+      <div style="font-size:20px;font-weight:800;color:#fff;line-height:1.4;margin-bottom:10px">
+        "건기식 쿠팡 판매, 초기 30만원으로<br>월 100~200만원 버는 현실적 방법"
+      </div>
+      <div style="font-size:13px;color:#8B95A1">
+        <strong style="color:#60A5FA">구조: 숫자 훅 → 왜 건기식? → 핵심 전략 → 증거 → 수강생 → CTA</strong>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="card">
+        <div class="tl-row">
+          <div class="tl-time red">0:00~0:30</div>
+          <div class="tl-body">
+            <div class="tl-title">훅 — 수치 임팩트 <span class="tl-badge red">HOOK</span></div>
+            <div class="tl-text">
+              "건강기능식품. 초기 자본 30만원. 광고비 0원. 월 수익 100~200만원."<br>
+              "재고 안 쌓이고, 반품 거의 0, CS 전화도 안 옵니다."<br>
+              <em>→ 절약왕식 숫자 나열 훅. 30초 안에 "이게 뭐야?" 호기심.</em>
+            </div>
+            <div class="q-tags"><span class="tag tag-r">돈탐생 숫자훅</span><span class="tag tag-b">절약왕 패턴</span></div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">0:30~2:00</div>
+          <div class="tl-body">
+            <div class="tl-title">왜 건기식인가? <span class="tl-badge">근거</span></div>
+            <div class="tl-text">
+              마진 40~50% (일반 5~10%) / 반품 0건 / CS 없음 / 재구매 높음<br>
+              "다른 부업 다 해봤는데, 건기식만큼 편한 게 없어요"<br>
+              <em>→ 다른 부업과 비교해서 "왜 건기식"인지 3가지 근거</em>
+            </div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">2:00~4:00</div>
+          <div class="tl-body">
+            <div class="tl-title">STEP 1: 위탁판매로 테스트 <span class="tl-badge">핵심</span></div>
+            <div class="tl-text">
+              소량 제조 30~40만원 → 주문 후 제조사 직배송 → 재고 리스크 0<br>
+              최대표 첫 6개월: 매출 4,500~5,000만, 순익 1,200~1,300만<br>
+              <em>→ "30만원이면 된다고?" 진입장벽 파괴</em>
+            </div>
+            <div class="q-tags"><span class="tag tag-g">진입장벽↓</span></div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time red">4:00~6:00</div>
+          <div class="tl-body">
+            <div class="tl-title">STEP 2: 쿠팡 자연순위 + 홈쇼핑 전략 <span class="tl-badge red">PEAK</span></div>
+            <div class="tl-text">
+              홈쇼핑 원료 확인 → 같은 원료 건기식 → 쿠팡 자연순위 1등<br>
+              홈쇼핑 방송 시작 → 시청자 쿠팡 검색 → 내 제품 클릭<br>
+              <strong>실시간 시연: 16:35 홈쇼핑 → 주문 들어오는 화면</strong><br>
+              <em>→ 여기서 시청자 "와 진짜네" = 피크 타이밍 (돈탐생 7~10분 패턴)</em>
+            </div>
+            <div class="q-tags"><span class="tag tag-r">킬러 구간</span><span class="tag tag-r">실시간 증거</span></div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">6:00~8:00</div>
+          <div class="tl-body">
+            <div class="tl-title">STEP 3: 자체 브랜드 전환</div>
+            <div class="tl-text">
+              위탁 검증 → 자체 브랜드화 → 마진 40~50%<br>
+              최대표: 4개월 만에 1.2~1.5억 → 현재 월 2~2.5억<br>
+              <em>→ 위탁(테스트) → 자체(스케일업) 로드맵</em>
+            </div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">8:00~9:00</div>
+          <div class="tl-body">
+            <div class="tl-title">수강생 실제 사례 <span class="tl-badge green">증거</span></div>
+            <div class="tl-text">
+              1.7억 사기당한 수강생 → 현재 하루 120개 판매<br>
+              "이분도 밑바닥에서 시작했어요. 저처럼."<br>
+              <em>→ 시청자가 자신을 투영. "저 사람도 했으면 나도 가능"</em>
+            </div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">9:00~10:00</div>
+          <div class="tl-body">
+            <div class="tl-title">정리 + CTA</div>
+            <div class="tl-text">
+              3단계 요약: ① 소량 제조 30만원 ② 쿠팡 자연순위 ③ 자체 브랜드<br>
+              "한 달에 100만원만이라도 시작해보세요"<br>
+              사찍남 본편 예고 (인생 스토리가 궁금하면) + 구독 유도
+            </div>
+            <div class="q-tags"><span class="tag tag-b">CTA: 사찍남 본편</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note orange">
+      <strong>편집 가이드 (부업소개):</strong><br>
+      - 0~30초: 숫자 자막 크게 + 빠른 컷전환 (돈탐생식)<br>
+      - 4~6분 (전략공개): 화면분할 — 출연자 + 쿠팡 대시보드 + 홈쇼핑 PIP<br>
+      - 8~9분 (수강생): 인터뷰 컷 또는 사진+자막<br>
+      - 전체: 정보 밀도 높게, 감정 빼고, 팩트 중심
+    </div>
+  </div>
+
+  <!-- ============ TAB 4: 질문지 ============ -->
+  <div class="panel" id="tab-questions">
+
+    <div class="note red">
+      <strong>부업소개 질문 원칙:</strong> 감정 이야기 최소화. "어떻게 하는 건데?" "얼마 드는 건데?" "진짜야?" — 시청자가 궁금한 것만 물어보기. <span class="tag tag-r">필수</span> 표시 반드시 커버.
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">A</span> 도입 — 왜 건기식? (0~2분)</div>
+      <div class="q-card"><div class="q-num red">1</div><div class="q-body"><div class="q-text">건강기능식품을 고른 이유가 뭐예요? 다른 것도 많잖아요.</div><div class="q-sub">→ 헬스 트레이너 경험 + 마진/반품/CS 장점 유도.</div><div class="q-tags"><span class="tag tag-r">필수</span></div></div></div>
+      <div class="q-card"><div class="q-num red">2</div><div class="q-body"><div class="q-text">마진이 40~50%라고요? 일반 쿠팡 셀러는 5~10%인데, 왜 이렇게 높아요?</div><div class="q-sub">→ 구체적 비교. 시청자 "와" 유도.</div><div class="q-tags"><span class="tag tag-r">필수</span></div></div></div>
+      <div class="q-card"><div class="q-num">3</div><div class="q-body"><div class="q-text">반품이 1월에 0건이라고요? 진짜요?</div><div class="q-sub">→ "먹는 제품이라 반품 자체가 안 돼요" 설명 유도.</div></div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">B</span> STEP 1: 시작 방법 (2~4분)</div>
+      <div class="q-card"><div class="q-num red">4</div><div class="q-body"><div class="q-text">처음 시작할 때 초기 비용이 얼마나 들었어요?</div><div class="q-sub">→ "소량 제조 30~40만원" 유도. 진입장벽 파괴.</div><div class="q-tags"><span class="tag tag-r">필수</span></div></div></div>
+      <div class="q-card"><div class="q-num red">5</div><div class="q-body"><div class="q-text">위탁판매가 뭐예요? 재고를 안 쌓아도 되는 건가요?</div><div class="q-sub">→ 위탁 구조 설명. 주문 후 제조사 직배송.</div><div class="q-tags"><span class="tag tag-r">필수</span></div></div></div>
+      <div class="q-card"><div class="q-num">6</div><div class="q-body"><div class="q-text">첫 6개월 매출이 4,500만원이었다고요. 현실적으로 초보자는 얼마 벌 수 있어요?</div><div class="q-sub">→ 월 100~200만원이 현실 목표라는 메시지.</div></div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num red">C</span> STEP 2: 핵심 전략 (4~6분) — 킬러</div>
+      <div class="q-card"><div class="q-num red">7</div><div class="q-body"><div class="q-text">쿠팡 자연순위 1등을 어떻게 만드세요? 광고 안 쓰고?</div><div class="q-sub">→ 핵심 USP. 홈쇼핑 트래픽 흡수 전략.</div><div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-r">킬러</span></div></div></div>
+      <div class="q-card"><div class="q-num red">8</div><div class="q-body"><div class="q-text">광고비가 매출 대비 0.7~1%라고요? 업계는 20~30%인데요?</div><div class="q-sub">→ 구체적 비교. 이 차이 = 순수익 차이.</div><div class="q-tags"><span class="tag tag-r">필수</span></div></div></div>
+      <div class="q-card"><div class="q-num red">9</div><div class="q-body"><div class="q-text">지금 실시간으로 보여줄 수 있어요? 홈쇼핑 방송 시작하면 주문이 들어온다고요?</div><div class="q-sub">→ 16:35 홈쇼핑 실시간 시연. 카메라 반드시 작동 중이어야.</div><div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-r">실시간 증거</span></div></div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">D</span> 증거 + 마무리 (6~10분)</div>
+      <div class="q-card"><div class="q-num">10</div><div class="q-body"><div class="q-text">자체 브랜드로 전환하면 뭐가 달라져요?</div><div class="q-sub">→ 마진 점프 + 스케일업 설명.</div></div></div>
+      <div class="q-card"><div class="q-num">11</div><div class="q-body"><div class="q-text">수강생분 중에 1.7억 사기당한 분이 있다고요. 지금은 어떻게 됐어요?</div><div class="q-sub">→ 하루 120개 판매. 시청자 투영.</div></div></div>
+      <div class="q-card"><div class="q-num red">12</div><div class="q-body"><div class="q-text">지금 보는 사람이 내일 당장 시작한다면, 첫 번째로 뭘 하면 돼요?</div><div class="q-sub">→ 액션 아이템. "이것부터 하세요" 멘트.</div><div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-g">CTA</span></div></div></div>
+      <div class="q-card"><div class="q-num">13</div><div class="q-body"><div class="q-text">한 달에 얼마 정도 벌 수 있는 거예요, 현실적으로?</div><div class="q-sub">→ "100만~200만원은 충분히 가능" 현실 멘트.</div></div></div>
+    </div>
+  </div>
+
+  <!-- ============ TAB 5: 업로드 키트 ============ -->
+  <div class="panel" id="tab-upload">
+
+    <div class="section">
+      <div class="section-title"><span class="num">1</span> 제목 후보 3개</div>
+
+      <div class="card" style="border:2px solid #3182F6;background:#F0F6FF">
+        <div class="rank a">1순위 추천</div>
+        <div class="title-text" id="bt1">광고비 0원으로 쿠팡에서 월 2억 파는 방법 (건강기능식품)</div>
+        <div style="font-size:12px;color:#8B95A1;margin-top:6px;line-height:1.8">
+          <strong>공식 C:</strong> "광고비 0원" 반전 + 구체 금액<br>
+          <strong>레퍼런스:</strong> 절약왕 "퇴근 후 부업으로 월 500만원" 210만뷰<br>
+          "0원"이라는 반전 + "2억"이라는 스케일 = 클릭 최대화
+        </div>
+        <div style="margin-top:10px"><button class="copy-btn" onclick="cp('bt1',this)">제목 복사</button></div>
+      </div>
+
+      <div class="card" style="border:2px solid #F08F00;background:#FFFBF0">
+        <div class="rank b">2순위</div>
+        <div class="title-text" id="bt2">초기 자본 30만원으로 시작해서 월 수익 1억 찍은 부업 (쿠팡 건기식)</div>
+        <div style="font-size:12px;color:#8B95A1;margin-top:6px;line-height:1.8">
+          <strong>공식 A+D:</strong> 소액 시작 + 고수익 갭<br>
+          <strong>레퍼런스:</strong> 절약왕 "하루 30분으로 월80만원" 107만뷰<br>
+          "30만원→1억" 극적 대비
+        </div>
+        <div style="margin-top:10px"><button class="copy-btn" onclick="cp('bt2',this)">제목 복사</button></div>
+      </div>
+
+      <div class="card" style="border:2px solid #05C072;background:#F0FFF4">
+        <div class="rank c">3순위</div>
+        <div class="title-text" id="bt3">[수익 인증] 건기식 쿠팡 판매, 반품 0건 · 광고비 1% · 마진 50%의 비밀</div>
+        <div style="font-size:12px;color:#8B95A1;margin-top:6px;line-height:1.8">
+          <strong>공식 B:</strong> [수익인증] 태그 + 수치 나열<br>
+          <strong>레퍼런스:</strong> 절약왕 "[부업수익 인증] 월60~270만원" 80만뷰<br>
+          3가지 숫자 나열 = 정보 채널 CTR 패턴
+        </div>
+        <div style="margin-top:10px"><button class="copy-btn" onclick="cp('bt3',this)">제목 복사</button></div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">2</span> 썸네일 컨셉 3개</div>
+
+      <div class="thumb-card">
+        <div class="rank a" style="position:relative;top:0;left:0;display:inline-block;margin:16px 0 0 16px">A안 — 쿠팡 대시보드형 (추천)</div>
+        <div class="thumb-preview a">
+          <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(10,22,40,.85),rgba(26,58,92,.6))"></div>
+          <div class="thumb-text" style="z-index:2">
+            <div class="thumb-main">광고비 0원<br><span style="color:#05C072">월 매출 2억</span></div>
+            <div class="thumb-sub">쿠팡 대시보드 + 최대표 옆모습</div>
+          </div>
+        </div>
+        <div class="thumb-body">
+          <div style="font-size:13px;color:#3E4A5A;line-height:1.7">
+            <strong>레퍼런스:</strong> 돈탐생 "수익 대시보드 + 인물" 패턴 304만뷰<br>
+            노트북 화면 + "0원 vs 2억" 숫자 대비
+          </div>
+        </div>
+      </div>
+
+      <div class="thumb-card">
+        <div class="rank b" style="position:relative;top:0;left:0;display:inline-block;margin:16px 0 0 16px">B안 — 진입장벽 파괴형</div>
+        <div class="thumb-preview b">
+          <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(19,39,68,.85),rgba(10,22,40,.6))"></div>
+          <div class="thumb-text" style="z-index:2">
+            <div class="thumb-main">초기 자본 <span style="color:#FFD700">30만원</span><br>월 수익 <span style="color:#05C072">1억</span></div>
+            <div class="thumb-sub">건기식 박스 + 최대표 정면</div>
+          </div>
+        </div>
+        <div class="thumb-body">
+          <div style="font-size:13px;color:#3E4A5A;line-height:1.7">
+            <strong>레퍼런스:</strong> 절약왕 "소액→대박" 107만뷰 / 옆집CEO 54만뷰<br>
+            "30만원"은 금색, "1억"은 녹색 = 색상 대비
+          </div>
+        </div>
+      </div>
+
+      <div class="thumb-card">
+        <div class="rank c" style="position:relative;top:0;left:0;display:inline-block;margin:16px 0 0 16px">C안 — 숫자 나열형</div>
+        <div class="thumb-preview c">
+          <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(15,52,96,.85),rgba(10,22,40,.6))"></div>
+          <div class="thumb-text" style="z-index:2">
+            <div class="thumb-main">반품 0건 · 광고 1%<br><span style="color:#60A5FA">마진 50%</span></div>
+            <div class="thumb-sub">최대표 + 3개 수치 카드 오버레이</div>
+          </div>
+        </div>
+        <div class="thumb-body">
+          <div style="font-size:13px;color:#3E4A5A;line-height:1.7">
+            <strong>레퍼런스:</strong> 정보형 채널 "숫자 3개 카드" CTR 패턴<br>
+            깔끔한 정보 전달 = 정보 채널 신뢰도↑
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">3</span> 설명란</div>
+      <div class="card blue">
+        <div class="desc-box" id="desc1">건강기능식품. 초기 자본 30만원. 광고비 0원. 월 수익 100~200만원.
+
+쿠팡 자연순위 1등을 만드는 방법이 있습니다.
+광고를 안 쓰는데 매출이 나옵니다.
+
+비밀은 홈쇼핑입니다.
+대기업이 TV홈쇼핑에서 파는 원료를 확인하고,
+같은 원료로 건기식을 만들어 쿠팡에 올립니다.
+홈쇼핑 방송이 시작되면, 시청자가 쿠팡을 검색합니다.
+자연순위 1등이니까, 내 제품이 먼저 보입니다.
+
+광고비 매출 대비 0.7~1%. 업계 평균은 20~30%.
+마진 40~50%. 반품 거의 0건. CS 전화도 안 옵니다.
+
+30만원으로 시작할 수 있습니다.
+위탁판매로 테스트하고, 잘 되면 자체 브랜드로 전환.
+이분은 이 구조로 월 2~2.5억을 찍고 있습니다.
+
+---
+부업소개하는남자
+인생 스토리 (사장찍어주는남자): @사찍남
+
+#부업 #쿠팡 #건강기능식품 #건기식 #쿠팡셀러 #위탁판매 #자체브랜드 #광고비0원 #월수익 #부업추천</div>
+        <div style="margin-top:12px"><button class="copy-btn" onclick="cp('desc1',this)">설명란 복사</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TAB 6: 체크리스트 ============ -->
+  <div class="panel" id="tab-checklist">
+    <div class="section">
+      <div class="section-title"><span class="num red">1</span> 부업소개 필수 B-Roll</div>
+      <div class="card blue">
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> 쿠팡 셀러 대시보드 매출 화면 (숫자 보이게)</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> 홈쇼핑 방송 화면 (TV/태블릿)</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> 홈쇼핑 시작 → 실시간 쿠팡 주문 알림 (16:35)</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> 건기식 제품 박스/포장 클로즈업</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text">노트북 앞 최대표 (옆모습, 썸네일 A안)</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text">쿠팡 검색화면 → 자연순위 1등 확인 장면</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text">수강생 인터뷰 (동석 시)</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">2</span> 부업소개 촬영 주의사항</div>
+      <div class="card hot">
+        <div style="font-size:14px;line-height:1.8;color:#3E4A5A">
+          <strong style="color:#F04452">① 감정 최소화:</strong> 부업 채널은 정보 중심. "어떻게"에 집중. 눈물 유도 X.<br>
+          <strong style="color:#F04452">② 쿠팡 화면:</strong> 고객명/주소 가리기. 매출 수치+순위만 보이게.<br>
+          <strong style="color:#F04452">③ 홈쇼핑 16:35:</strong> 이게 부업 영상의 킬러 증거. 반드시 촬영.<br>
+          <strong style="color:#F04452">④ 제품 촬영:</strong> 건기식 실물 + 포장 박스 클로즈업 (신뢰도).<br>
+          <strong style="color:#F04452">⑤ 수강생:</strong> 1.7억 사기 수강생 인터뷰 가능하면 꼭. "증거" 강화.
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>편집팀 가이드 (부업소개):</strong><br>
+      - 전체 톤: 깔끔하고 빠르게. 감성 BGM X → 경쾌한 정보 BGM<br>
+      - 0~30초: 숫자 자막 크게 + 빠른 컷 (돈탐생식)<br>
+      - 4~6분: 화면분할 (출연자 + 쿠팡 + 홈쇼핑 PIP)<br>
+      - 쿠팡/홈쇼핑 화면 전환 시: 줌인 + 화살표 애니메이션<br>
+      - 수강생 파트: 사진+자막 or 인터뷰 컷
+    </div>
+  </div>
+
+</div>
+
+<script>
+function go(id,el){document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('on'));el.classList.add('on');document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));document.getElementById('tab-'+id).classList.add('on');window.scrollTo({top:0,behavior:'smooth'})}
+function cp(id,btn){navigator.clipboard.writeText(document.getElementById(id).innerText).then(()=>{btn.classList.add('copied');btn.textContent='복사 완료!';setTimeout(()=>{btn.classList.remove('copied');btn.textContent='복사';},1500)})}
+function tog(el){el.classList.toggle('checked')}
+</script>
+</body>
+</html>
