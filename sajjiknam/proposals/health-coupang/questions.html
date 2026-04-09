@@ -2,46 +2,66 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>질문지 120 — 최대표 사찍남</title>
+<title>질문지 — 최대표 장소별</title>
 <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{background:#F2F4F6;color:#191F28;font-family:'Pretendard',system-ui,sans-serif;min-height:100vh;font-size:15px}
 .gnb{background:#fff;border-bottom:1px solid #E5E8EB;padding:0 16px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
 .gnb-logo{font-size:14px;font-weight:800;color:#F08F00}
-.gnb-right{display:flex;align-items:center;gap:8px}
-.gnb-count{font-size:11px;font-weight:700;border-radius:12px;padding:3px 9px}
+.gnb-right{display:flex;align-items:center;gap:6px}
+.gnb-count{font-size:10px;font-weight:700;border-radius:12px;padding:3px 8px}
 .cnt-must{background:#FFF0F0;color:#F04452}
 .cnt-all{background:#EFF3FF;color:#3182F6}
-.wrap{max-width:540px;margin:0 auto;padding:12px 12px 100px}
-.header{background:linear-gradient(135deg,#191F28,#2E3745);border-radius:16px;padding:22px;margin-bottom:14px;color:#fff}
-.header-top{font-size:10px;font-weight:700;color:#FFD700;letter-spacing:1.5px;margin-bottom:6px}
-.header-title{font-size:20px;font-weight:800;line-height:1.3;margin-bottom:6px}
-.header-sub{font-size:11px;color:#8B95A1;line-height:1.6}
-.filter-bar{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;position:sticky;top:52px;z-index:90;background:#F2F4F6;padding:8px 0}
-.filter-btn{padding:6px 12px;border-radius:8px;border:1.5px solid #E5E8EB;background:#fff;font-size:11px;font-weight:700;cursor:pointer;color:#6B7684;transition:.15s;font-family:inherit}
+.wrap{max-width:540px;margin:0 auto;padding:12px 12px 120px}
+
+/* 장소 탭 */
+.loc-tabs{display:flex;gap:0;position:sticky;top:52px;z-index:95;background:#F2F4F6;padding:8px 0 0}
+.loc-tab{flex:1;padding:10px 4px;text-align:center;font-size:12px;font-weight:800;border:none;background:#fff;cursor:pointer;border-bottom:3px solid transparent;transition:.15s;font-family:inherit;color:#8B95A1}
+.loc-tab.on{color:#F08F00;border-bottom-color:#F08F00}
+.loc-tab .loc-icon{font-size:18px;display:block;margin-bottom:2px}
+.loc-tab .loc-time{font-size:9px;font-weight:600;color:#8B95A1;display:block;margin-top:1px}
+.loc-tab.on .loc-time{color:#F08F00}
+
+/* 필터 */
+.filter-bar{display:flex;gap:6px;margin:10px 0 8px;flex-wrap:wrap}
+.filter-btn{padding:5px 10px;border-radius:8px;border:1.5px solid #E5E8EB;background:#fff;font-size:10px;font-weight:700;cursor:pointer;color:#6B7684;transition:.15s;font-family:inherit}
 .filter-btn.on{background:#F08F00;border-color:#F08F00;color:#fff}
 .filter-btn.red-f.on{background:#F04452;border-color:#F04452;color:#fff}
-.sec{margin-bottom:6px}
-.sec-label{font-size:12px;font-weight:800;color:#fff;border-radius:8px;padding:7px 12px;margin:16px 0 4px;display:inline-block}
-.sec-label.a{background:#F08F00}.sec-label.b{background:#F04452}.sec-label.c{background:#05C072}
+
+/* 장소 헤더 */
+.loc-header{border-radius:14px;padding:18px;margin:8px 0 12px;color:#fff}
+.loc-header.home{background:linear-gradient(135deg,#7B61FF,#9B8AFF)}
+.loc-header.car{background:linear-gradient(135deg,#F08F00,#FFB340)}
+.loc-header.office{background:linear-gradient(135deg,#3182F6,#5BA0FF)}
+.loc-header-top{font-size:9px;font-weight:700;letter-spacing:1.5px;opacity:.8;margin-bottom:4px}
+.loc-header-title{font-size:18px;font-weight:800;line-height:1.3;margin-bottom:4px}
+.loc-header-sub{font-size:11px;opacity:.85;line-height:1.6}
+.loc-header-tip{background:rgba(255,255,255,.15);border-radius:8px;padding:8px 10px;margin-top:8px;font-size:10px;line-height:1.5}
+
+/* 섹션 */
+.sec{margin-bottom:4px}
+.sec-label{font-size:11px;font-weight:800;color:#fff;border-radius:8px;padding:6px 10px;margin:12px 0 4px;display:inline-block}
+.sec-label.a{background:#7B61FF}.sec-label.b{background:#F04452}.sec-label.c{background:#05C072}
 .sec-label.d{background:#F04452}.sec-label.e{background:#F08F00}.sec-label.f{background:#3182F6}
 .sec-label.g{background:#7B61FF}.sec-label.h{background:#05C072}
-.sec-hint{font-size:10px;color:#8B95A1;margin:2px 0 8px 4px;line-height:1.5}
-.q{background:#fff;border-radius:12px;padding:12px 14px;margin-bottom:6px;box-shadow:0 1px 3px rgba(0,0,0,.03);display:flex;gap:10px;align-items:flex-start;transition:.15s;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none}
-.q.done{opacity:.35}
+.sec-hint{font-size:10px;color:#8B95A1;margin:2px 0 6px 4px;line-height:1.5}
+
+/* 질문 카드 */
+.q{background:#fff;border-radius:12px;padding:11px 13px;margin-bottom:5px;box-shadow:0 1px 3px rgba(0,0,0,.03);display:flex;gap:10px;align-items:flex-start;transition:.15s;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none}
+.q.done{opacity:.3}
 .q.done .q-text{text-decoration:line-through}
 .q.hide{display:none}
 .q-check{width:22px;height:22px;border:2px solid #E5E8EB;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.15s;margin-top:1px}
 .q.done .q-check{background:#05C072;border-color:#05C072}
 .q.done .q-check::after{content:'✓';color:#fff;font-size:11px;font-weight:800}
 .q-body{flex:1;min-width:0}
-.q-top{display:flex;align-items:center;gap:6px;margin-bottom:2px;flex-wrap:wrap}
+.q-top{display:flex;align-items:center;gap:5px;margin-bottom:2px;flex-wrap:wrap}
 .q-num{font-size:10px;font-weight:800;color:#F08F00}
 .q-num.red{color:#F04452}
-.q-text{font-size:13px;font-weight:700;color:#191F28;line-height:1.5}
-.q-sub{font-size:10px;color:#8B95A1;line-height:1.4;margin-top:3px}
-.tag{display:inline-block;padding:1px 5px;border-radius:3px;font-size:9px;font-weight:700}
+.q-text{font-size:12.5px;font-weight:700;color:#191F28;line-height:1.5}
+.q-sub{font-size:9.5px;color:#8B95A1;line-height:1.4;margin-top:2px}
+.tag{display:inline-block;padding:1px 5px;border-radius:3px;font-size:8px;font-weight:700}
 .tag-r{background:#FFF0F0;color:#F04452}
 .tag-y{background:#FFF7E6;color:#F08F00}
 .tag-b{background:#EFF3FF;color:#3182F6}
@@ -49,14 +69,33 @@ body{background:#F2F4F6;color:#191F28;font-family:'Pretendard',system-ui,sans-se
 .tag-p{background:#F0EDFF;color:#7B61FF}
 .q.must{border-left:3px solid #F04452}
 .q.must .q-check{border-color:#F04452}
+
+/* 추천 배지 */
+.rec-badge{display:inline-block;background:#FFD700;color:#191F28;font-size:8px;font-weight:800;padding:1px 5px;border-radius:3px;margin-left:4px}
+
+/* 데이터 근거 */
+.data-ref{background:#191F28;border-radius:10px;padding:10px 12px;margin:6px 0;font-size:9.5px;color:#8B95A1;line-height:1.6}
+.data-ref strong{color:#FFD700}
+
+/* 하단 바 */
 .bottom-bar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #E5E8EB;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;z-index:100}
 .progress-wrap{flex:1;margin-right:12px}
 .progress-text{font-size:10px;font-weight:700;color:#6B7684;margin-bottom:3px}
 .progress-bar{height:5px;background:#E5E8EB;border-radius:3px;overflow:hidden}
 .progress-fill{height:100%;background:linear-gradient(90deg,#F08F00,#F04452);border-radius:3px;transition:.3s}
 .reset-btn{background:none;border:1.5px solid #E5E8EB;border-radius:8px;padding:6px 12px;font-size:11px;font-weight:700;color:#8B95A1;cursor:pointer;font-family:inherit}
-.data-ref{background:#191F28;border-radius:10px;padding:12px 14px;margin:8px 0;font-size:10px;color:#8B95A1;line-height:1.6}
-.data-ref strong{color:#FFD700}
+
+/* 타임라인 바 */
+.timeline{background:#fff;border-radius:12px;padding:12px;margin:8px 0;box-shadow:0 1px 3px rgba(0,0,0,.03)}
+.timeline-title{font-size:11px;font-weight:800;margin-bottom:8px;color:#191F28}
+.tl-row{display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid #F2F4F6}
+.tl-row:last-child{border:none}
+.tl-time{font-size:10px;font-weight:800;color:#F08F00;width:40px;flex-shrink:0}
+.tl-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.tl-dot.purple{background:#7B61FF}
+.tl-dot.orange{background:#F08F00}
+.tl-dot.blue{background:#3182F6}
+.tl-label{font-size:10px;color:#4E5968;font-weight:600}
 </style>
 </head>
 <body>
@@ -67,318 +106,390 @@ body{background:#F2F4F6;color:#191F28;font-family:'Pretendard',system-ui,sans-se
     <span class="gnb-count cnt-all" id="all-count">0/120</span>
   </div>
 </nav>
+
+<!-- 장소 탭 -->
+<div class="loc-tabs">
+  <button class="loc-tab on" onclick="switchLoc('home',this)">
+    <span class="loc-icon">🏠</span>집
+    <span class="loc-time">1시~ (45분)</span>
+  </button>
+  <button class="loc-tab" onclick="switchLoc('car',this)">
+    <span class="loc-icon">🚗</span>차 안
+    <span class="loc-time">이동 (30분)</span>
+  </button>
+  <button class="loc-tab" onclick="switchLoc('office',this)">
+    <span class="loc-icon">🏢</span>사무실
+    <span class="loc-time">~4시 (60분)</span>
+  </button>
+  <button class="loc-tab" onclick="switchLoc('all',this)">
+    <span class="loc-icon">📋</span>전체
+    <span class="loc-time">120개</span>
+  </button>
+</div>
+
 <div class="wrap">
 
-<div class="header">
-  <div class="header-top">사장찍어주는남자 25분 · 최대표 건기식 · 목요일 촬영</div>
-  <div class="header-title">질문지 120개</div>
-  <div class="header-sub">터치 = 체크 (새로고침해도 유지)<br>필수 30개 반드시 커버 · 나머지는 흐름 보면서</div>
+<!-- ==================== -->
+<!-- 🏠 집 (40문항) -->
+<!-- ==================== -->
+<div class="loc-section" data-loc="home">
+
+<div class="loc-header home">
+  <div class="loc-header-top">LOCATION 1</div>
+  <div class="loc-header-title">🏠 집 — 개인 스토리</div>
+  <div class="loc-header-sub">1시~ · 약 45분 · 40문항 (필수 12개)</div>
+  <div class="loc-header-tip">
+    💡 <b>코디 추천:</b> 편안한 소파/거실에서. 개인사(IMF·여친·은둔)는 집이 최적.<br>
+    감정이 깊은 구간이라 편안한 공간이 솔직한 답변을 끌어냄.<br>
+    와이프 관련 질문도 집에서 해야 감동↑
+  </div>
 </div>
 
-<div class="filter-bar">
-  <button class="filter-btn on" onclick="filterAll(this)">전체</button>
-  <button class="filter-btn red-f" onclick="filterMust(this)">필수만</button>
-  <button class="filter-btn" onclick="filterSec('a',this)">A.IMF</button>
-  <button class="filter-btn" onclick="filterSec('b',this)">B.여친</button>
-  <button class="filter-btn" onclick="filterSec('c',this)">C.헬스장</button>
-  <button class="filter-btn" onclick="filterSec('d',this)">D.코로나</button>
-  <button class="filter-btn" onclick="filterSec('e',this)">E.배송</button>
-  <button class="filter-btn" onclick="filterSec('f',this)">F.건기식</button>
-  <button class="filter-btn" onclick="filterSec('g',this)">G.현재</button>
-  <button class="filter-btn" onclick="filterSec('h',this)">H.엔딩</button>
-</div>
-
-<!-- ===== A. IMF + 유년기 (15) ===== -->
+<!-- A. IMF + 유년기 (15) -->
 <div class="sec" data-sec="a">
 <div class="sec-label a">A. IMF + 유년기 (15)</div>
-<div class="sec-hint">ACT 1 (0:30~3:00) · 유복→추락 대비<br>데이터: 사찍남 초반30초 리텐션 0.129 → 0.25+ 목표. 여기서 "1,500명" 숫자 셋업.</div>
+<div class="sec-hint">여기서 시작. "1,500명" 숫자로 시작 → 추락과 대비시키기<br>📊 사찍남 초반30초 리텐션 0.129 → 0.25+ 목표</div>
 
-<div class="q must" data-s="a" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">1 · 필수</span></div><div class="q-text">아버지 회사가 직원 1,500명이었다고요. 그때 집안 분위기가 어땠어요?</div><div class="q-sub">→ 유복 시절 셋업. 추락과 대비.</div></div></div>
+<div class="q must" data-s="a" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">1 · 필수</span></div><div class="q-text">아버지 회사가 직원 1,500명이었다고요. 그때 집안 분위기가 어땠어요?</div><div class="q-sub">→ 유복 시절 셋업. 추락과 대비.</div></div></div>
 
-<div class="q" data-s="a" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">2</span></div><div class="q-text">어렸을 때 아버지가 어떤 분이셨어요? 집에서요.</div><div class="q-sub">→ 아버지 캐릭터. 나중에 부도와 대비.</div></div></div>
+<div class="q" data-s="a" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">2</span></div><div class="q-text">어렸을 때 아버지가 어떤 분이셨어요? 집에서요.</div><div class="q-sub">→ 아버지 캐릭터. 나중에 부도와 대비.</div></div></div>
 
-<div class="q" data-s="a" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">3</span></div><div class="q-text">섬유수출무역이면 해외 출장도 많으셨을 텐데, 아버지랑 같이 간 적 있어요?</div><div class="q-sub">→ 유복한 기억 구체화.</div></div></div>
+<div class="q" data-s="a" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">3</span></div><div class="q-text">섬유수출무역이면 해외 출장도 많으셨을 텐데, 아버지랑 같이 간 적 있어요?</div><div class="q-sub">→ 유복한 기억 구체화.</div></div></div>
 
-<div class="q" data-s="a" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">4</span></div><div class="q-text">그때 용돈이 얼마였어요? 친구들이랑 비교하면?</div><div class="q-sub">→ 돈 감각. 나중에 60만원 기본급과 대비.</div></div></div>
+<div class="q" data-s="a" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">4</span></div><div class="q-text">그때 용돈이 얼마였어요? 친구들이랑 비교하면?</div><div class="q-sub">→ 돈 감각. 나중에 60만원 기본급과 대비.</div></div></div>
 
-<div class="q must" data-s="a" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">5 · 필수</span></div><div class="q-text">IMF 터졌을 때, 집에서 어떤 일이 벌어졌어요?</div><div class="q-sub">→ 부도 당일/직후 장면.</div></div></div>
+<div class="q must" data-s="a" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">5 · 필수</span></div><div class="q-text">IMF 터졌을 때, 집에서 어떤 일이 벌어졌어요?</div><div class="q-sub">→ 부도 당일/직후 장면.</div></div></div>
 
-<div class="q" data-s="a" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">6</span></div><div class="q-text">부도가 나고 아버지 표정이 기억나세요?</div><div class="q-sub">→ 아버지 감정. 시청자 공감.</div></div></div>
+<div class="q" data-s="a" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">6</span></div><div class="q-text">부도가 나고 아버지 표정이 기억나세요?</div><div class="q-sub">→ 아버지 감정. 시청자 공감.</div></div></div>
 
-<div class="q" data-s="a" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">7</span></div><div class="q-text">직원 1,500명이 하루아침에 직장을 잃은 거잖아요. 그분들이 찾아오기도 했어요?</div><div class="q-sub">→ 사회적 임팩트.</div></div></div>
+<div class="q" data-s="a" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">7</span></div><div class="q-text">직원 1,500명이 하루아침에 직장을 잃은 거잖아요. 그분들이 찾아오기도 했어요?</div><div class="q-sub">→ 사회적 임팩트.</div></div></div>
 
-<div class="q" data-s="a" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">8</span></div><div class="q-text">집이 어떻게 됐어요? 이사를 가야 했어요?</div><div class="q-sub">→ 물리적 변화.</div></div></div>
+<div class="q" data-s="a" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">8</span></div><div class="q-text">집이 어떻게 됐어요? 이사를 가야 했어요?</div><div class="q-sub">→ 물리적 변화.</div></div></div>
 
-<div class="q must" data-s="a" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">9 · 필수</span></div><div class="q-text">항공대 자퇴할 때 심정이 어땠어요? 파일럿이 꿈이었잖아요.</div><div class="q-sub">→ 꿈 포기. "비행비가 억 단위".</div></div></div>
+<div class="q must" data-s="a" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">9 · 필수</span></div><div class="q-text">항공대 자퇴할 때 심정이 어땠어요? 파일럿이 꿈이었잖아요.</div><div class="q-sub">→ 꿈 포기. "비행비가 억 단위".</div></div></div>
 
-<div class="q" data-s="a" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">10</span></div><div class="q-text">비행 실습은 해보셨어요? 하늘에서 내려다본 적 있어요?</div><div class="q-sub">→ 꿈이 구체적일수록 포기가 아프다.</div></div></div>
+<div class="q" data-s="a" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">10</span></div><div class="q-text">비행 실습은 해보셨어요? 하늘에서 내려다본 적 있어요?</div><div class="q-sub">→ 꿈이 구체적일수록 포기가 아프다.</div></div></div>
 
-<div class="q" data-s="a" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">11</span></div><div class="q-text">자퇴서 쓸 때 뭐가 제일 생각났어요?</div><div class="q-sub">→ 감정 디테일.</div></div></div>
+<div class="q" data-s="a" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">11</span></div><div class="q-text">자퇴서 쓸 때 뭐가 제일 생각났어요?</div><div class="q-sub">→ 감정 디테일.</div></div></div>
 
-<div class="q" data-s="a" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">12</span></div><div class="q-text">어머니는 그때 어떠셨어요?</div><div class="q-sub">→ 가족 반응.</div></div></div>
+<div class="q" data-s="a" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">12</span></div><div class="q-text">어머니는 그때 어떠셨어요?</div><div class="q-sub">→ 가족 반응.</div></div></div>
 
-<div class="q" data-s="a" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">13</span></div><div class="q-text">형제자매가 있어요? 가족들은 각자 어떻게 됐어요?</div><div class="q-sub">→ 가족 이산/변화.</div></div></div>
+<div class="q" data-s="a" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">13</span></div><div class="q-text">형제자매가 있어요? 가족들은 각자 어떻게 됐어요?</div><div class="q-sub">→ 가족 이산/변화.</div></div></div>
 
-<div class="q" data-s="a" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">14</span></div><div class="q-text">군대는 언제 갔어요? 군대에서 뭘 생각했어요?</div><div class="q-sub">→ 군 생활 중 미래 고민.</div></div></div>
+<div class="q" data-s="a" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">14</span></div><div class="q-text">군대는 언제 갔어요? 군대에서 뭘 생각했어요?</div><div class="q-sub">→ 군 생활 중 미래 고민.</div></div></div>
 
-<div class="q" data-s="a" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">15</span></div><div class="q-text">제대하고 나서 첫 번째로 한 일이 뭐예요?</div><div class="q-sub">→ 피자집 알바/노가다 전환.</div></div></div>
+<div class="q" data-s="a" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">15</span></div><div class="q-text">제대하고 나서 첫 번째로 한 일이 뭐예요?</div><div class="q-sub">→ 피자집 알바/노가다 전환.</div></div></div>
 </div>
 
-<!-- ===== B. 여자친구 + 은둔 (15) ===== -->
+<!-- B. 여자친구 + 은둔 (15) -->
 <div class="sec" data-sec="b">
 <div class="sec-label b">B. 여자친구 사망 + 은둔 (15)</div>
-<div class="sec-hint">ACT 2 (3:00~5:00) · 감정 바닥. 본인 호흡에 맞추기. 무리하게 파지 않기.</div>
+<div class="sec-hint">감정 깊은 구간. 집 분위기가 맞아야 솔직해짐. 무리하게 파지 않기.</div>
 
-<div class="q" data-s="b" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">16</span></div><div class="q-text">제대 후에 피자집 알바, 노가다, 쭈꾸미집... 뭘 제일 오래 했어요?</div><div class="q-sub">→ 밑바닥 생활 구체화.</div></div></div>
+<div class="q" data-s="b" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">16</span></div><div class="q-text">제대 후에 피자집 알바, 노가다, 쭈꾸미집... 뭘 제일 오래 했어요?</div><div class="q-sub">→ 밑바닥 생활 구체화.</div></div></div>
 
-<div class="q" data-s="b" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">17</span></div><div class="q-text">그 시절 하루 벌어서 하루 사는 느낌이었어요?</div><div class="q-sub">→ 생존 감각.</div></div></div>
+<div class="q" data-s="b" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">17</span></div><div class="q-text">그 시절 하루 벌어서 하루 사는 느낌이었어요?</div><div class="q-sub">→ 생존 감각.</div></div></div>
 
-<div class="q must" data-s="b" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">18 · 필수</span></div><div class="q-text">여자친구분이 재일교포 모델이었다고요. 처음에 어떻게 만났어요?</div><div class="q-sub">→ 행복한 기억부터. 사망과 대비.</div></div></div>
+<div class="q must" data-s="b" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">18 · 필수</span></div><div class="q-text">여자친구분이 재일교포 모델이었다고요. 처음에 어떻게 만났어요?</div><div class="q-sub">→ 행복한 기억부터. 사망과 대비.</div></div></div>
 
-<div class="q" data-s="b" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">19</span></div><div class="q-text">첫인상이 어땠어요?</div><div class="q-sub">→ 로맨스 디테일. 감정 이입.</div></div></div>
+<div class="q" data-s="b" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">19</span></div><div class="q-text">첫인상이 어땠어요?</div><div class="q-sub">→ 로맨스 디테일. 감정 이입.</div></div></div>
 
-<div class="q" data-s="b" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">20</span></div><div class="q-text">재일교포면 일본에서 오신 거잖아요. 어떤 사람이었어요?</div><div class="q-sub">→ 캐릭터 구체화.</div></div></div>
+<div class="q" data-s="b" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">20</span></div><div class="q-text">재일교포면 일본에서 오신 거잖아요. 어떤 사람이었어요?</div><div class="q-sub">→ 캐릭터 구체화.</div></div></div>
 
-<div class="q" data-s="b" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">21</span></div><div class="q-text">함께 있을 때 가장 행복했던 순간이 뭐예요?</div><div class="q-sub">→ 행복 기억 = 상실 극대화.</div></div></div>
+<div class="q" data-s="b" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">21</span></div><div class="q-text">함께 있을 때 가장 행복했던 순간이 뭐예요?</div><div class="q-sub">→ 행복 기억 = 상실 극대화.</div></div></div>
 
-<div class="q must" data-s="b" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">22 · 필수</span><span class="tag tag-r">눈물</span></div><div class="q-text">위암 말기라는 걸 알았을 때, 뭘 하셨어요?</div><div class="q-sub">→ 감정 최고조. 본인 호흡에 맞추기.</div></div></div>
+<div class="q must" data-s="b" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">22 · 필수</span><span class="tag tag-r">눈물</span></div><div class="q-text">위암 말기라는 걸 알았을 때, 뭘 하셨어요?</div><div class="q-sub">→ 감정 최고조. 본인 호흡에 맞추기.</div></div></div>
 
-<div class="q" data-s="b" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">23</span></div><div class="q-text">병원에 자주 가셨어요? 마지막에 뭐라고 하셨어요?</div><div class="q-sub">→ 너무 깊이 파지 않되, 흐름에 맞으면.</div></div></div>
+<div class="q" data-s="b" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">23</span></div><div class="q-text">병원에 자주 가셨어요? 마지막에 뭐라고 하셨어요?</div><div class="q-sub">→ 너무 깊이 파지 않되, 흐름에 맞으면.</div></div></div>
 
-<div class="q" data-s="b" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">24</span></div><div class="q-text">돌아가신 날 기억나세요?</div><div class="q-sub">→ 본인이 말하고 싶으면만. 강요 X.</div></div></div>
+<div class="q" data-s="b" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">24</span></div><div class="q-text">돌아가신 날 기억나세요?</div><div class="q-sub">→ 본인이 말하고 싶으면만. 강요 X.</div></div></div>
 
-<div class="q" data-s="b" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">25</span></div><div class="q-text">장례식 때 뭘 느꼈어요?</div><div class="q-sub">→ 상실 직후 감정.</div></div></div>
+<div class="q" data-s="b" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">25</span></div><div class="q-text">장례식 때 뭘 느꼈어요?</div><div class="q-sub">→ 상실 직후 감정.</div></div></div>
 
-<div class="q must" data-s="b" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">26 · 필수</span></div><div class="q-text">1년 반 은둔 생활. 하루가 어땠어요?</div><div class="q-sub">→ 은둔의 구체적 일상. 방에서 뭘 했는지.</div></div></div>
+<div class="q must" data-s="b" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">26 · 필수</span></div><div class="q-text">1년 반 은둔 생활. 하루가 어땠어요?</div><div class="q-sub">→ 은둔의 구체적 일상. 방에서 뭘 했는지.</div></div></div>
 
-<div class="q" data-s="b" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">27</span></div><div class="q-text">그때 밥은 누가 챙겨줬어요?</div><div class="q-sub">→ 주변 사람.</div></div></div>
+<div class="q" data-s="b" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">27</span></div><div class="q-text">그때 밥은 누가 챙겨줬어요?</div><div class="q-sub">→ 주변 사람.</div></div></div>
 
-<div class="q" data-s="b" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">28</span></div><div class="q-text">은둔하면서 연락하는 사람이 있었어요?</div><div class="q-sub">→ 사회적 단절 정도.</div></div></div>
+<div class="q" data-s="b" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">28</span></div><div class="q-text">은둔하면서 연락하는 사람이 있었어요?</div><div class="q-sub">→ 사회적 단절 정도.</div></div></div>
 
-<div class="q" data-s="b" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">29</span></div><div class="q-text">그 시절 가장 많이 한 생각이 뭐예요?</div><div class="q-sub">→ 내면 고백.</div></div></div>
+<div class="q" data-s="b" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">29</span></div><div class="q-text">그 시절 가장 많이 한 생각이 뭐예요?</div><div class="q-sub">→ 내면 고백.</div></div></div>
 
-<div class="q must" data-s="b" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">30 · 필수</span></div><div class="q-text">은둔에서 빠져나온 계기가 뭐예요? 뭐가 바뀌었어요?</div><div class="q-sub">→ 전환점. 트레이너로의 연결.</div></div></div>
+<div class="q must" data-s="b" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">30 · 필수</span></div><div class="q-text">은둔에서 빠져나온 계기가 뭐예요? 뭐가 바뀌었어요?</div><div class="q-sub">→ 전환점. 트레이너로의 연결.</div></div></div>
 </div>
 
-<!-- ===== C. 트레이너 + 헬스장 (15) ===== -->
+<!-- G-1. 와이프 + 현재 (집에서 할 질문 10개) -->
+<div class="sec" data-sec="g">
+<div class="sec-label g">G. 와이프 + 현재 라이프 (10)</div>
+<div class="sec-hint">집에서 마무리. 와이프 이야기는 집 분위기가 최적. 감동 극대화.</div>
+
+<div class="q must" data-s="g" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">101 · 필수</span></div><div class="q-text">지금 하루 일과가 어떻게 되세요?</div><div class="q-sub">→ Before(새벽배송) vs After(자유). 극적 대비.</div></div></div>
+
+<div class="q" data-s="g" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">102</span></div><div class="q-text">주 1회 펜션이나 풀빌라 간다고요? 와이프분이랑?</div><div class="q-sub">→ 라이프스타일.</div></div></div>
+
+<div class="q" data-s="g" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">105</span></div><div class="q-text">이 바다뷰 집은 언제 이사 왔어요?</div><div class="q-sub">→ 현재 공간 의미. 집에서 찍으니 현장감↑</div></div></div>
+
+<div class="q must" data-s="g" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">106 · 필수</span><span class="tag tag-r">눈물</span></div><div class="q-text">와이프분이 빚 갚을 때 싫은 소리 한 번 안 했다고요?</div><div class="q-sub">→ 와이프 감동 서사.</div></div></div>
+
+<div class="q" data-s="g" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">107</span></div><div class="q-text">결혼은 언제 하셨어요? 와이프분을 어떻게 만났어요?</div><div class="q-sub">→ 와이프 백스토리.</div></div></div>
+
+<div class="q" data-s="g" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">108</span></div><div class="q-text">와이프분은 대표님이 사업한다고 할 때 뭐라고 했어요?</div><div class="q-sub">→ 부부 대화.</div></div></div>
+
+<div class="q must" data-s="g" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">109 · 필수</span></div><div class="q-text">크리스마스에 3천만원 선물했다고요? 뭘 사드렸어요?</div><div class="q-sub">→ 보답. 감동.</div></div></div>
+
+<div class="q" data-s="g" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">110</span></div><div class="q-text">결혼 10주년이라고요. 와이프분한테 하고 싶은 말이 있어요?</div><div class="q-sub">→ 카메라 앞에서 고백. 집 배경이 맞음.</div></div></div>
+
+<div class="q" data-s="g" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">111</span></div><div class="q-text">아이가 있어요?</div><div class="q-sub">→ 가족 구성.</div></div></div>
+
+<div class="q" data-s="g" data-loc="home" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">112</span></div><div class="q-text">아버지한테 지금 하고 싶은 말이 있어요?</div><div class="q-sub">→ 세대 서사 마무리. IMF 아버지와 연결.</div></div></div>
+</div>
+
+</div><!-- /home -->
+
+
+<!-- ==================== -->
+<!-- 🚗 차 안 (35문항) -->
+<!-- ==================== -->
+<div class="loc-section" data-loc="car" style="display:none">
+
+<div class="loc-header car">
+  <div class="loc-header-top">LOCATION 2</div>
+  <div class="loc-header-title">🚗 차 안 — 커리어 회상</div>
+  <div class="loc-header-sub">집→가산 이동 · 약 30분 · 35문항 (필수 10개)</div>
+  <div class="loc-header-tip">
+    💡 <b>코디 추천:</b> 차 안 = 이동하면서 자연스러운 대화 톤.<br>
+    헬스장→코로나→배송 = 인생의 이동(전환) 서사와 물리적 이동이 싱크.<br>
+    창밖 풍경 + 드라이빙 B-Roll이 편집에 강력.<br>
+    📊 돈탐생 7~10분 피크 63% — 핵심 반전은 차에서 말하게 하기
+  </div>
+</div>
+
+<div class="data-ref"><strong>촬영 팁:</strong> 운전석 사이드 or 조수석에서 촬영. 핸드폰 거치대 or GoPro. 자연광 + 도로 소음이 오히려 리얼리티↑</div>
+
+<!-- C. 트레이너 + 헬스장 (15) -->
 <div class="sec" data-sec="c">
 <div class="sec-label c">C. 트레이너 + 헬스장 성공 (15)</div>
-<div class="sec-hint">ACT 3 (5:00~8:00) · 희망 구간. 여기서 올려놔야 다음 추락이 더 아프다.</div>
+<div class="sec-hint">은둔→트레이너→성공. 이동 중 회상 톤. 올려놓아야 다음 추락이 아프다.</div>
 
-<div class="q must" data-s="c" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">31 · 필수</span></div><div class="q-text">32살에 헬스 트레이너를 시작한 계기가 뭐예요?</div><div class="q-sub">→ 왜 헬스? 연결고리.</div></div></div>
+<div class="q must" data-s="c" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">31 · 필수</span></div><div class="q-text">32살에 헬스 트레이너를 시작한 계기가 뭐예요?</div><div class="q-sub">→ 왜 헬스? 연결고리.</div></div></div>
 
-<div class="q" data-s="c" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">32</span></div><div class="q-text">운동을 원래 좋아했어요? 아니면 먹고살려고?</div><div class="q-sub">→ 동기 확인.</div></div></div>
+<div class="q" data-s="c" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">32</span></div><div class="q-text">운동을 원래 좋아했어요? 아니면 먹고살려고?</div><div class="q-sub">→ 동기 확인.</div></div></div>
 
-<div class="q must" data-s="c" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">33 · 필수</span></div><div class="q-text">기본급 60만원에 PT 7천원이면... 하루 18시간을 어떻게 버텼어요?</div><div class="q-sub">→ 극한 스케줄. 새벽~밤 루틴.</div></div></div>
+<div class="q must" data-s="c" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">33 · 필수</span></div><div class="q-text">기본급 60만원에 PT 7천원이면... 하루 18시간을 어떻게 버텼어요?</div><div class="q-sub">→ 극한 스케줄. 새벽~밤 루틴.</div></div></div>
 
-<div class="q" data-s="c" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">34</span></div><div class="q-text">PT 7천원이면 시간당 최저시급도 안 되잖아요. 화가 안 났어요?</div><div class="q-sub">→ 감정 + 현실.</div></div></div>
+<div class="q" data-s="c" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">34</span></div><div class="q-text">PT 7천원이면 시간당 최저시급도 안 되잖아요. 화가 안 났어요?</div><div class="q-sub">→ 감정 + 현실.</div></div></div>
 
-<div class="q" data-s="c" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">35</span></div><div class="q-text">회원들이 왜 대표님한테 PT를 받으려고 했어요? 뭐가 달랐어요?</div><div class="q-sub">→ 차별화 포인트.</div></div></div>
+<div class="q" data-s="c" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">35</span></div><div class="q-text">회원들이 왜 대표님한테 PT를 받으려고 했어요? 뭐가 달랐어요?</div><div class="q-sub">→ 차별화 포인트.</div></div></div>
 
-<div class="q" data-s="c" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">36</span></div><div class="q-text">내 헬스장을 열어야겠다고 결심한 순간이 있어요?</div><div class="q-sub">→ 창업 에피파니.</div></div></div>
+<div class="q" data-s="c" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">36</span></div><div class="q-text">내 헬스장을 열어야겠다고 결심한 순간이 있어요?</div><div class="q-sub">→ 창업 에피파니.</div></div></div>
 
-<div class="q" data-s="c" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">37</span></div><div class="q-text">1호점 오픈할 때 자본금이 얼마였어요? 어떻게 모았어요?</div><div class="q-sub">→ 창업 자금.</div></div></div>
+<div class="q" data-s="c" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">37</span></div><div class="q-text">1호점 오픈할 때 자본금이 얼마였어요? 어떻게 모았어요?</div><div class="q-sub">→ 창업 자금.</div></div></div>
 
-<div class="q must" data-s="c" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">38 · 필수</span></div><div class="q-text">1호점이 연매출 10억을 찍었을 때, 첫 반응이 뭐였어요?</div><div class="q-sub">→ 성공의 감정 + 구체 숫자.</div></div></div>
+<div class="q must" data-s="c" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">38 · 필수</span></div><div class="q-text">1호점이 연매출 10억을 찍었을 때, 첫 반응이 뭐였어요?</div><div class="q-sub">→ 성공의 감정 + 구체 숫자.</div></div></div>
 
-<div class="q" data-s="c" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">39</span></div><div class="q-text">월 순수익 3,500~4,000만원이면 그때 뭘 제일 먼저 샀어요?</div><div class="q-sub">→ 성공 후 첫 소비. 시청자 대리만족.</div></div></div>
+<div class="q" data-s="c" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">39</span></div><div class="q-text">월 순수익 3,500~4,000만원이면 그때 뭘 제일 먼저 샀어요?</div><div class="q-sub">→ 성공 후 첫 소비. 시청자 대리만족.</div></div></div>
 
-<div class="q" data-s="c" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">40</span></div><div class="q-text">IMF 때 다 잃었던 기억이 있으니까, 돈 벌 때 느낌이 남달랐을 것 같아요.</div><div class="q-sub">→ 과거 연결.</div></div></div>
+<div class="q" data-s="c" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">40</span></div><div class="q-text">IMF 때 다 잃었던 기억이 있으니까, 돈 벌 때 느낌이 남달랐을 것 같아요.</div><div class="q-sub">→ 과거 연결.</div></div></div>
 
-<div class="q must" data-s="c" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">41 · 필수</span></div><div class="q-text">2호점을 6개월 만에 매각했잖아요. 4.8억 매출인데 왜 팔았어요?</div><div class="q-sub">→ 사업 판단력.</div></div></div>
+<div class="q must" data-s="c" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">41 · 필수</span></div><div class="q-text">2호점을 6개월 만에 매각했잖아요. 4.8억 매출인데 왜 팔았어요?</div><div class="q-sub">→ 사업 판단력.</div></div></div>
 
-<div class="q" data-s="c" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">42</span></div><div class="q-text">매각 권리금이 얼마였어요?</div><div class="q-sub">→ 구체 숫자.</div></div></div>
+<div class="q" data-s="c" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">42</span></div><div class="q-text">매각 권리금이 얼마였어요?</div><div class="q-sub">→ 구체 숫자.</div></div></div>
 
-<div class="q" data-s="c" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">43</span></div><div class="q-text">3호점까지 확장하기로 한 이유가 뭐예요?</div><div class="q-sub">→ 확장 동기 = 코로나 파산 전 셋업.</div></div></div>
+<div class="q" data-s="c" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">43</span></div><div class="q-text">3호점까지 확장하기로 한 이유가 뭐예요?</div><div class="q-sub">→ 확장 동기 = 코로나 파산 전 셋업.</div></div></div>
 
-<div class="q" data-s="c" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">44</span></div><div class="q-text">그때 주변에서 "왜 또 열어?" 이런 말 없었어요?</div><div class="q-sub">→ 주변 반응.</div></div></div>
+<div class="q" data-s="c" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">44</span></div><div class="q-text">그때 주변에서 "왜 또 열어?" 이런 말 없었어요?</div><div class="q-sub">→ 주변 반응.</div></div></div>
 
-<div class="q" data-s="c" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">45</span></div><div class="q-text">3호점 오픈하던 날 기분이 어땠어요?</div><div class="q-sub">→ 3~4개월 뒤 코로나와 대비.</div></div></div>
+<div class="q" data-s="c" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">45</span></div><div class="q-text">3호점 오픈하던 날 기분이 어땠어요?</div><div class="q-sub">→ 3~4개월 뒤 코로나와 대비.</div></div></div>
 </div>
 
-<!-- ===== D. 코로나 + 파산 + 공황 (20) ===== -->
+<!-- D. 코로나 + 파산 + 공황 (15 of 20) -->
 <div class="sec" data-sec="d">
-<div class="sec-label d">D. 코로나 + 파산 + 공황장애 (20)</div>
-<div class="sec-hint">ACT 4 (8:00~12:00) · 킬러 구간!<br>데이터: 돈탐생 피크 7~10분에 63% 집중. 여기서 시청자 감정 최고조.</div>
+<div class="sec-label d">D. 코로나 + 파산 + 공황장애 (15)</div>
+<div class="sec-hint">킬러 구간! 차 안에서 회상 = 나래휴게소 장면과 연결됨.<br>📊 돈탐생 7~10분 피크 63% — 핵심 반전 집중 구간</div>
 
-<div class="data-ref"><strong>리텐션 근거:</strong> 돈탐생 7~10분 피크 63% 집중 패턴 적용. 코로나 파산+공황+빚 7억을 이 구간에 몰아넣기. 사찍남 기존 문제: 킬러가 10/17/19/24분에 분산됨.</div>
+<div class="data-ref"><strong>리텐션 근거:</strong> 돈탐생 7~10분 피크 63% 집중 패턴. 코로나 파산+공황+빚7억을 이 구간에. 사찍남 기존 문제: 킬러가 10/17/19/24분에 분산됨.</div>
 
-<div class="q must" data-s="d" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">46 · 필수</span><span class="tag tag-r">킬러</span></div><div class="q-text">3호점까지 열었는데 3~4개월 만에 코로나가 터졌다고요. 그 순간 기억나세요?</div><div class="q-sub">→ "3~4개월 만에"가 핵심.</div></div></div>
+<div class="q must" data-s="d" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">46 · 필수</span><span class="tag tag-r">킬러</span></div><div class="q-text">3호점까지 열었는데 3~4개월 만에 코로나가 터졌다고요. 그 순간 기억나세요?</div><div class="q-sub">→ "3~4개월 만에"가 핵심.</div></div></div>
 
-<div class="q" data-s="d" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">47</span></div><div class="q-text">처음에 코로나가 얼마나 심각한 건지 알았어요?</div><div class="q-sub">→ 초기 반응.</div></div></div>
+<div class="q" data-s="d" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">47</span></div><div class="q-text">처음에 코로나가 얼마나 심각한 건지 알았어요?</div><div class="q-sub">→ 초기 반응.</div></div></div>
 
-<div class="q" data-s="d" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">48</span></div><div class="q-text">헬스장은 영업제한 1순위였잖아요. 문 닫으라고 했을 때 어땠어요?</div><div class="q-sub">→ 업종 직격탄.</div></div></div>
+<div class="q" data-s="d" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">48</span></div><div class="q-text">헬스장은 영업제한 1순위였잖아요. 문 닫으라고 했을 때 어땠어요?</div><div class="q-sub">→ 업종 직격탄.</div></div></div>
 
-<div class="q must" data-s="d" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">49 · 필수</span></div><div class="q-text">빚이 7억이 쌓이는 과정이 어떻게 됐어요? 한 번에 7억인 건 아니잖아요.</div><div class="q-sub">→ 빚이 불어나는 과정.</div></div></div>
+<div class="q must" data-s="d" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">49 · 필수</span></div><div class="q-text">빚이 7억이 쌓이는 과정이 어떻게 됐어요? 한 번에 7억인 건 아니잖아요.</div><div class="q-sub">→ 빚이 불어나는 과정.</div></div></div>
 
-<div class="q" data-s="d" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">50</span></div><div class="q-text">임대료가 계속 나가는데 매출은 0이었어요?</div><div class="q-sub">→ 고정비 압박.</div></div></div>
+<div class="q" data-s="d" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">50</span></div><div class="q-text">임대료가 계속 나가는데 매출은 0이었어요?</div><div class="q-sub">→ 고정비 압박.</div></div></div>
 
-<div class="q" data-s="d" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">51</span></div><div class="q-text">정부 지원금 같은 건 받았어요?</div><div class="q-sub">→ 현실적 대응.</div></div></div>
+<div class="q must" data-s="d" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">52 · 필수</span><span class="tag tag-r">눈물</span></div><div class="q-text">빚이 7억이 됐을 때, 와이프분한테 뭐라고 말씀하셨어요?</div><div class="q-sub">→ 와이프 2.2억 대출.</div></div></div>
 
-<div class="q must" data-s="d" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">52 · 필수</span><span class="tag tag-r">눈물</span></div><div class="q-text">빚이 7억이 됐을 때, 와이프분한테 뭐라고 말씀하셨어요?</div><div class="q-sub">→ 와이프 2.2억 대출.</div></div></div>
+<div class="q" data-s="d" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">53</span></div><div class="q-text">와이프분이 2.2억을 대출받아줬다고요. 어떻게 부탁하셨어요?</div><div class="q-sub">→ 부부 대화 디테일.</div></div></div>
 
-<div class="q" data-s="d" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">53</span></div><div class="q-text">와이프분이 2.2억을 대출받아줬다고요. 어떻게 부탁하셨어요?</div><div class="q-sub">→ 부부 대화 디테일.</div></div></div>
+<div class="q must" data-s="d" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">55 · 필수</span></div><div class="q-text">공황장애가 왔다고요. 어떤 증상이었어요?</div><div class="q-sub">→ 밥 못 먹고 잠 못 자고. 구체적.</div></div></div>
 
-<div class="q" data-s="d" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">54</span></div><div class="q-text">그때 이혼 얘기는 안 나왔어요?</div><div class="q-sub">→ 부부 관계 위기.</div></div></div>
+<div class="q" data-s="d" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">56</span></div><div class="q-text">공황장애가 처음 온 순간이 기억나세요? 어디서 뭘 하고 있었어요?</div><div class="q-sub">→ 첫 발작 장면.</div></div></div>
 
-<div class="q must" data-s="d" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">55 · 필수</span></div><div class="q-text">공황장애가 왔다고요. 어떤 증상이었어요?</div><div class="q-sub">→ 밥 못 먹고 잠 못 자고. 구체적.</div></div></div>
+<div class="q must" data-s="d" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">59 · 필수</span><span class="tag tag-r">눈물</span><span class="tag tag-y">현장</span></div><div class="q-text">나래휴게소에서 새벽에 혼자 앉아있었다고요. 그때 무슨 생각 하셨어요?</div><div class="q-sub">→ 차 타고 이동하면서 = 나래휴게소 장면과 싱크. 최고의 타이밍.</div></div></div>
 
-<div class="q" data-s="d" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">56</span></div><div class="q-text">공황장애가 처음 온 순간이 기억나세요? 어디서 뭘 하고 있었어요?</div><div class="q-sub">→ 첫 발작 장면.</div></div></div>
+<div class="q" data-s="d" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">60</span></div><div class="q-text">왜 하필 나래휴게소였어요? 집에서 가까워서?</div><div class="q-sub">→ 장소 선택 이유.</div></div></div>
 
-<div class="q" data-s="d" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">57</span></div><div class="q-text">병원에 갔어요? 약을 먹었어요?</div><div class="q-sub">→ 치료 여부.</div></div></div>
+<div class="q" data-s="d" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">62</span></div><div class="q-text">그때 극단적인 생각은 안 했어요?</div><div class="q-sub">→ 조심스럽게. 본인 의사 존중.</div></div></div>
 
-<div class="q" data-s="d" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">58</span></div><div class="q-text">밥을 못 먹으면 체중이 빠졌을 텐데, 몇 키로 빠졌어요?</div><div class="q-sub">→ 시각적 변화.</div></div></div>
+<div class="q" data-s="d" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">63</span></div><div class="q-text">와이프분은 대표님이 새벽에 나가는 거 알았어요?</div><div class="q-sub">→ 와이프 시점.</div></div></div>
 
-<div class="q must" data-s="d" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">59 · 필수</span><span class="tag tag-r">눈물</span><span class="tag tag-b">현장</span></div><div class="q-text">나래휴게소에서 새벽에 혼자 앉아있었다고요. 그때 무슨 생각 하셨어요?</div><div class="q-sub">→ 핵심 장면. 나래휴게소에서 촬영하면서 물어보기.</div></div></div>
-
-<div class="q" data-s="d" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">60</span></div><div class="q-text">왜 하필 나래휴게소였어요? 집에서 가까워서?</div><div class="q-sub">→ 장소 선택 이유.</div></div></div>
-
-<div class="q" data-s="d" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">61</span></div><div class="q-text">몇 시에 가셨어요? 매일 가셨어요?</div><div class="q-sub">→ 반복 횟수.</div></div></div>
-
-<div class="q" data-s="d" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">62</span></div><div class="q-text">그때 극단적인 생각은 안 했어요?</div><div class="q-sub">→ 조심스럽게. 본인 의사 존중.</div></div></div>
-
-<div class="q" data-s="d" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">63</span></div><div class="q-text">와이프분은 대표님이 새벽에 나가는 거 알았어요?</div><div class="q-sub">→ 와이프 시점.</div></div></div>
-
-<div class="q" data-s="d" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">64</span></div><div class="q-text">그 시절 나한테 전화한 사람이 있었어요? 채권자?</div><div class="q-sub">→ 빚 독촉 현실.</div></div></div>
-
-<div class="q" data-s="d" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">65</span></div><div class="q-text">IMF 때도 아버지가 이런 감정이었을 거 아니에요. 그때 아버지가 이해됐어요?</div><div class="q-sub">→ 세대 연결. 아버지-아들 서사.</div></div></div>
+<div class="q" data-s="d" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">65</span></div><div class="q-text">IMF 때도 아버지가 이런 감정이었을 거 아니에요. 그때 아버지가 이해됐어요?</div><div class="q-sub">→ 세대 연결. 아버지-아들 서사.</div></div></div>
 </div>
 
-<!-- ===== E. 새벽 배송 + 전환 (15) ===== -->
+<!-- E. 새벽 배송 + 전환 (5 of 15 — 나머지 사무실) -->
 <div class="sec" data-sec="e">
-<div class="sec-label e">E. 새벽 배송 + 전환점 (15)</div>
-<div class="sec-hint">ACT 5 (12:00~15:00) · 처절한 노동 + 에피파니 순간.</div>
+<div class="sec-label e">E. 새벽 배송 + 전환점 (5)</div>
+<div class="sec-hint">사무실 도착 전 마무리. 처절한 노동 이야기를 이동 중에.</div>
 
-<div class="q must" data-s="e" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">66 · 필수</span></div><div class="q-text">가락시장 지게차, 청담순두부 배송. 하루 일과가 어떻게 됐어요?</div><div class="q-sub">→ 월 430~450만원의 스케줄.</div></div></div>
+<div class="q must" data-s="e" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">66 · 필수</span></div><div class="q-text">가락시장 지게차, 청담순두부 배송. 하루 일과가 어떻게 됐어요?</div><div class="q-sub">→ 월 430~450만원의 스케줄.</div></div></div>
 
-<div class="q" data-s="e" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">67</span></div><div class="q-text">가락시장은 새벽 몇 시에 출근이에요?</div><div class="q-sub">→ 구체 시간.</div></div></div>
+<div class="q" data-s="e" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">69</span></div><div class="q-text">월 430~450만원이면 빚 7억 이자도 안 되잖아요.</div><div class="q-sub">→ 절망적 수치.</div></div></div>
 
-<div class="q" data-s="e" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">68</span></div><div class="q-text">지게차 모는 게 위험하잖아요. 무서웠어요?</div><div class="q-sub">→ 트럭 낙상 복선.</div></div></div>
+<div class="q" data-s="e" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">70</span></div><div class="q-text">연매출 10억 찍던 사람이 지게차 몰고 있으면 무슨 생각이 들어요?</div><div class="q-sub">→ 과거와 현재 갭. 차 안에서 회상하기 좋은 질문.</div></div></div>
 
-<div class="q" data-s="e" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">69</span></div><div class="q-text">월 430~450만원이면 빚 7억 이자도 안 되잖아요.</div><div class="q-sub">→ 절망적 수치.</div></div></div>
+<div class="q must" data-s="e" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">71 · 필수</span><span class="tag tag-r">눈물</span></div><div class="q-text">트럭에서 떨어져서 다리가 부러졌을 때, 상황이 어떻게 됐어요?</div><div class="q-sub">→ 낙상 순간 디테일.</div></div></div>
 
-<div class="q" data-s="e" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">70</span></div><div class="q-text">연매출 10억 찍던 사람이 지게차 몰고 있으면 무슨 생각이 들어요?</div><div class="q-sub">→ 과거와 현재 갭.</div></div></div>
-
-<div class="q must" data-s="e" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">71 · 필수</span><span class="tag tag-r">눈물</span></div><div class="q-text">트럭에서 떨어져서 다리가 부러졌을 때, 상황이 어떻게 됐어요?</div><div class="q-sub">→ 낙상 순간 디테일.</div></div></div>
-
-<div class="q" data-s="e" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">72</span></div><div class="q-text">병원비는 어떻게 했어요? 산재 처리?</div><div class="q-sub">→ 현실적 문제.</div></div></div>
-
-<div class="q must" data-s="e" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">73 · 필수</span></div><div class="q-text">4주 만에 깁스 풀고 다시 일하러 갔다고요?</div><div class="q-sub">→ "선택의 여지가 없었다" 멘트 유도.</div></div></div>
-
-<div class="q" data-s="e" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">74</span></div><div class="q-text">깁스하고 지게차 탔어요? 의사가 뭐래요?</div><div class="q-sub">→ 처절함 극대화.</div></div></div>
-
-<div class="q" data-s="e" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">75</span></div><div class="q-text">마켓컬리 지게차 알바는 어떻게 구했어요?</div><div class="q-sub">→ 구직 과정.</div></div></div>
-
-<div class="q must" data-s="e" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">76 · 필수</span><span class="tag tag-y">에피파니</span></div><div class="q-text">온라인으로 전환해야겠다고 결심한 순간이 있었어요?</div><div class="q-sub">→ 유튜브 6개월 서칭 시작.</div></div></div>
-
-<div class="q" data-s="e" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">77</span></div><div class="q-text">유튜브 무료 강의를 6개월 동안 봤다고요. 하루에 몇 시간?</div><div class="q-sub">→ 독학 노력.</div></div></div>
-
-<div class="q" data-s="e" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">78</span></div><div class="q-text">다른 아이템도 고려했어요? 왜 건기식이었어요?</div><div class="q-sub">→ 선택 과정.</div></div></div>
-
-<div class="q" data-s="e" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">79</span></div><div class="q-text">헬스 트레이너 경험이 건기식 선택에 영향을 줬어요?</div><div class="q-sub">→ 과거 경력 연결.</div></div></div>
-
-<div class="q" data-s="e" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">80</span></div><div class="q-text">첫 제품을 쿠팡에 올린 날 기억나세요?</div><div class="q-sub">→ 시작의 순간.</div></div></div>
+<div class="q must" data-s="e" data-loc="car" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">73 · 필수</span></div><div class="q-text">4주 만에 깁스 풀고 다시 일하러 갔다고요?</div><div class="q-sub">→ "선택의 여지가 없었다" 멘트 유도.</div></div></div>
 </div>
 
-<!-- ===== F. 건기식 + 쿠팡 전략 (20) ===== -->
+</div><!-- /car -->
+
+
+<!-- ==================== -->
+<!-- 🏢 사무실 (45문항) -->
+<!-- ==================== -->
+<div class="loc-section" data-loc="office" style="display:none">
+
+<div class="loc-header office">
+  <div class="loc-header-top">LOCATION 3</div>
+  <div class="loc-header-title">🏢 사무실 — 비즈니스 + 수강생</div>
+  <div class="loc-header-sub">가산디지털단지 · ~4시 · 45문항 (필수 8개)</div>
+  <div class="loc-header-tip">
+    💡 <b>코디 추천:</b> 사무실 = 비즈니스 이야기의 신뢰도↑<br>
+    건기식 전략/쿠팡 노하우를 사무실에서 하면 "진짜 사업가" 느낌.<br>
+    4시에 수강생 오면 → 수강생 인터뷰 라이브 가능!<br>
+    📊 돈탐생 정보 구간 리텐션 0.269 유지 — 비밀 공개 느낌으로
+  </div>
+</div>
+
+<div class="timeline">
+  <div class="timeline-title">사무실 타임라인</div>
+  <div class="tl-row"><div class="tl-time">도착~</div><div class="tl-dot blue"></div><div class="tl-label">사무실 투어 B-Roll + 배송 전환 이야기</div></div>
+  <div class="tl-row"><div class="tl-time">~3:30</div><div class="tl-dot blue"></div><div class="tl-label">건기식 + 쿠팡 전략 (핵심 노하우)</div></div>
+  <div class="tl-row"><div class="tl-time">3:30~</div><div class="tl-dot blue"></div><div class="tl-label">현재 + 포르쉐 + 가치관</div></div>
+  <div class="tl-row"><div class="tl-time">4:00</div><div class="tl-dot orange"></div><div class="tl-label">수강생 도착 → 리얼 인터뷰</div></div>
+</div>
+
+<!-- E-2. 새벽 배송 나머지 (10) -->
+<div class="sec" data-sec="e">
+<div class="sec-label e">E. 배송 → 온라인 전환 (10)</div>
+<div class="sec-hint">사무실 도착 직후. 전환점 이야기 = 이 사무실이 그 결과물.</div>
+
+<div class="q" data-s="e" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">67</span></div><div class="q-text">가락시장은 새벽 몇 시에 출근이에요?</div><div class="q-sub">→ 구체 시간.</div></div></div>
+
+<div class="q" data-s="e" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">68</span></div><div class="q-text">지게차 모는 게 위험하잖아요. 무서웠어요?</div><div class="q-sub">→ 트럭 낙상 복선.</div></div></div>
+
+<div class="q" data-s="e" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">72</span></div><div class="q-text">병원비는 어떻게 했어요? 산재 처리?</div><div class="q-sub">→ 현실적 문제.</div></div></div>
+
+<div class="q" data-s="e" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">74</span></div><div class="q-text">깁스하고 지게차 탔어요? 의사가 뭐래요?</div><div class="q-sub">→ 처절함 극대화.</div></div></div>
+
+<div class="q" data-s="e" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">75</span></div><div class="q-text">마켓컬리 지게차 알바는 어떻게 구했어요?</div><div class="q-sub">→ 구직 과정.</div></div></div>
+
+<div class="q must" data-s="e" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">76 · 필수</span><span class="tag tag-y">에피파니</span></div><div class="q-text">온라인으로 전환해야겠다고 결심한 순간이 있었어요?</div><div class="q-sub">→ 이 사무실이 그 결심의 결과물. 현장감↑</div></div></div>
+
+<div class="q" data-s="e" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">77</span></div><div class="q-text">유튜브 무료 강의를 6개월 동안 봤다고요. 하루에 몇 시간?</div><div class="q-sub">→ 독학 노력.</div></div></div>
+
+<div class="q" data-s="e" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">78</span></div><div class="q-text">다른 아이템도 고려했어요? 왜 건기식이었어요?</div><div class="q-sub">→ 선택 과정.</div></div></div>
+
+<div class="q" data-s="e" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">79</span></div><div class="q-text">헬스 트레이너 경험이 건기식 선택에 영향을 줬어요?</div><div class="q-sub">→ 과거 경력 연결.</div></div></div>
+
+<div class="q" data-s="e" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">80</span></div><div class="q-text">첫 제품을 쿠팡에 올린 날 기억나세요?</div><div class="q-sub">→ 시작의 순간.</div></div></div>
+</div>
+
+<!-- F. 건기식 + 쿠팡 전략 (20) -->
 <div class="sec" data-sec="f">
 <div class="sec-label f">F. 건기식 + 쿠팡 전략 (20)</div>
-<div class="sec-hint">ACT 6 (15:00~19:00) · 정보 만족 구간. 비밀 공개.<br>데이터: 돈탐생 정보 구간 리텐션 유지율 0.269. "이게 비밀이구나" 느끼게.</div>
+<div class="sec-hint">사무실 메인 구간. 비밀 공개 느낌으로.<br>📊 돈탐생 정보 구간 리텐션 0.269 — "이게 비밀이구나" 느끼게</div>
 
-<div class="q must" data-s="f" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">81 · 필수</span></div><div class="q-text">처음 위탁판매 시작할 때 초기 비용이 얼마나 들었어요?</div><div class="q-sub">→ "30~40만원" 유도.</div></div></div>
+<div class="q must" data-s="f" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">81 · 필수</span></div><div class="q-text">처음 위탁판매 시작할 때 초기 비용이 얼마나 들었어요?</div><div class="q-sub">→ "30~40만원" 유도.</div></div></div>
 
-<div class="q" data-s="f" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">82</span></div><div class="q-text">위탁판매가 뭔지 쉽게 설명해주세요.</div><div class="q-sub">→ 시청자용 쉬운 설명.</div></div></div>
+<div class="q" data-s="f" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">82</span></div><div class="q-text">위탁판매가 뭔지 쉽게 설명해주세요.</div><div class="q-sub">→ 시청자용 쉬운 설명.</div></div></div>
 
-<div class="q" data-s="f" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">83</span></div><div class="q-text">첫 주문이 들어왔을 때 기억나세요?</div><div class="q-sub">→ 성공 첫 순간.</div></div></div>
+<div class="q" data-s="f" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">83</span></div><div class="q-text">첫 주문이 들어왔을 때 기억나세요?</div><div class="q-sub">→ 성공 첫 순간.</div></div></div>
 
-<div class="q must" data-s="f" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">84 · 필수</span></div><div class="q-text">첫 6개월 매출이 4,500~5,000만원이었다고요. 현실적으로 이게 가능해요?</div><div class="q-sub">→ 수치 검증.</div></div></div>
+<div class="q must" data-s="f" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">84 · 필수</span></div><div class="q-text">첫 6개월 매출이 4,500~5,000만원이었다고요. 현실적으로 이게 가능해요?</div><div class="q-sub">→ 수치 검증. 사무실에서 = 신뢰↑</div></div></div>
 
-<div class="q" data-s="f" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">85</span></div><div class="q-text">그때 순이익이 1,200~1,300만원이면 헬스장 빚은 갚아지고 있었어요?</div><div class="q-sub">→ 빚 상환 과정.</div></div></div>
+<div class="q" data-s="f" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">85</span></div><div class="q-text">그때 순이익이 1,200~1,300만원이면 헬스장 빚은 갚아지고 있었어요?</div><div class="q-sub">→ 빚 상환 과정.</div></div></div>
 
-<div class="q must" data-s="f" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">86 · 필수</span></div><div class="q-text">쿠팡 자연순위 1등을 어떻게 만드세요? 광고 안 쓰고?</div><div class="q-sub">→ 핵심 USP. 홈쇼핑 전략.</div></div></div>
+<div class="q must" data-s="f" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">86 · 필수</span></div><div class="q-text">쿠팡 자연순위 1등을 어떻게 만드세요? 광고 안 쓰고?</div><div class="q-sub">→ 핵심 USP. 홈쇼핑 전략. 사무실 모니터로 보여주기.</div></div></div>
 
-<div class="q" data-s="f" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">87</span></div><div class="q-text">홈쇼핑 원료를 어떻게 확인해요? 구체적으로요.</div><div class="q-sub">→ 실전 방법.</div></div></div>
+<div class="q" data-s="f" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">87</span></div><div class="q-text">홈쇼핑 원료를 어떻게 확인해요? 구체적으로요.</div><div class="q-sub">→ 실전 방법. 사무실에서 실제 화면 보여주기 가능.</div></div></div>
 
-<div class="q" data-s="f" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">88</span></div><div class="q-text">같은 원료인데 가격 차이가 얼마나 나요? 홈쇼핑 vs 쿠팡?</div><div class="q-sub">→ 가격 갭.</div></div></div>
+<div class="q" data-s="f" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">88</span></div><div class="q-text">같은 원료인데 가격 차이가 얼마나 나요? 홈쇼핑 vs 쿠팡?</div><div class="q-sub">→ 가격 갭.</div></div></div>
 
-<div class="q must" data-s="f" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">89 · 필수</span></div><div class="q-text">광고비가 매출 대비 0.7~1%라고요? 업계가 20~30%인데, 어떻게?</div><div class="q-sub">→ 핵심 차별점.</div></div></div>
+<div class="q must" data-s="f" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">89 · 필수</span></div><div class="q-text">광고비가 매출 대비 0.7~1%라고요? 업계가 20~30%인데, 어떻게?</div><div class="q-sub">→ 핵심 차별점.</div></div></div>
 
-<div class="q" data-s="f" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">90</span></div><div class="q-text">자체 브랜드로 전환한 계기가 뭐예요?</div><div class="q-sub">→ 위탁→자체 전환점.</div></div></div>
+<div class="q" data-s="f" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">90</span></div><div class="q-text">자체 브랜드로 전환한 계기가 뭐예요?</div><div class="q-sub">→ 위탁→자체 전환점.</div></div></div>
 
-<div class="q" data-s="f" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">91</span></div><div class="q-text">자체 브랜드 만들 때 비용이 얼마나 들었어요?</div><div class="q-sub">→ 스케일업 비용.</div></div></div>
+<div class="q" data-s="f" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">91</span></div><div class="q-text">자체 브랜드 만들 때 비용이 얼마나 들었어요?</div><div class="q-sub">→ 스케일업 비용.</div></div></div>
 
-<div class="q" data-s="f" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">92</span></div><div class="q-text">4개월 만에 1.2~1.5억이면 성장 속도가 미쳤잖아요. 비결이 뭐예요?</div><div class="q-sub">→ 급성장 요인.</div></div></div>
+<div class="q" data-s="f" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">92</span></div><div class="q-text">4개월 만에 1.2~1.5억이면 성장 속도가 미쳤잖아요. 비결이 뭐예요?</div><div class="q-sub">→ 급성장 요인.</div></div></div>
 
-<div class="q" data-s="f" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">93</span></div><div class="q-text">반품이 거의 없다고요? 1월에 0건?</div><div class="q-sub">→ 건기식 특성.</div></div></div>
+<div class="q" data-s="f" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">93</span></div><div class="q-text">반품이 거의 없다고요? 1월에 0건?</div><div class="q-sub">→ 건기식 특성.</div></div></div>
 
-<div class="q" data-s="f" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">94</span></div><div class="q-text">CS 전화가 안 온다고요? 진짜요?</div><div class="q-sub">→ 시청자 의심 해소.</div></div></div>
+<div class="q" data-s="f" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">94</span></div><div class="q-text">CS 전화가 안 온다고요? 진짜요?</div><div class="q-sub">→ 시청자 의심 해소.</div></div></div>
 
-<div class="q" data-s="f" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">95</span></div><div class="q-text">마진이 40~50%면 일반 쿠팡 셀러 5~10%랑 비교가 안 되잖아요.</div><div class="q-sub">→ 마진 비교.</div></div></div>
+<div class="q" data-s="f" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">95</span></div><div class="q-text">마진이 40~50%면 일반 쿠팡 셀러 5~10%랑 비교가 안 되잖아요.</div><div class="q-sub">→ 마진 비교.</div></div></div>
 
-<div class="q" data-s="f" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">96</span></div><div class="q-text">지금 제품이 몇 개나 돼요?</div><div class="q-sub">→ 포트폴리오 규모.</div></div></div>
+<div class="q" data-s="f" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">96</span></div><div class="q-text">지금 제품이 몇 개나 돼요?</div><div class="q-sub">→ 포트폴리오 규모. 사무실에서 제품 보여주기.</div></div></div>
 
-<div class="q" data-s="f" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">97</span></div><div class="q-text">직원이 몇 명이에요? 혼자 하는 건 아니잖아요?</div><div class="q-sub">→ 조직 규모.</div></div></div>
+<div class="q" data-s="f" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">97</span></div><div class="q-text">직원이 몇 명이에요? 혼자 하는 건 아니잖아요?</div><div class="q-sub">→ 조직 규모.</div></div></div>
 
-<div class="q" data-s="f" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">98</span></div><div class="q-text">쿠팡 말고 다른 플랫폼도 하세요?</div><div class="q-sub">→ 채널 다각화.</div></div></div>
+<div class="q" data-s="f" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">98</span></div><div class="q-text">쿠팡 말고 다른 플랫폼도 하세요?</div><div class="q-sub">→ 채널 다각화.</div></div></div>
 
-<div class="q" data-s="f" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">99</span></div><div class="q-text">이 사업의 리스크가 뭐예요? 단점은?</div><div class="q-sub">→ 균형 잡힌 시각. 신뢰도↑</div></div></div>
+<div class="q" data-s="f" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">99</span></div><div class="q-text">이 사업의 리스크가 뭐예요? 단점은?</div><div class="q-sub">→ 균형 잡힌 시각. 신뢰도↑</div></div></div>
 
-<div class="q" data-s="f" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">100</span></div><div class="q-text">빚 7억은 언제 다 갚았어요?</div><div class="q-sub">→ 빚 청산 시점. 해방의 순간.</div></div></div>
+<div class="q" data-s="f" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">100</span></div><div class="q-text">빚 7억은 언제 다 갚았어요?</div><div class="q-sub">→ 빚 청산 시점. 해방의 순간.</div></div></div>
 </div>
 
-<!-- ===== G. 현재 라이프 + 와이프 (15) ===== -->
-<div class="sec" data-sec="g">
-<div class="sec-label g">G. 현재 라이프 + 와이프 (15)</div>
-<div class="sec-hint">ACT 7 (19:00~22:00) · 감동 마무리. 휴먼스토리식 감성 구간.<br>데이터: 휴먼스토리 후반부 감성BGM+여유컷 = 리텐션 0.213 유지.</div>
+<!-- G-2. 현재 (사무실에서 할 질문 5개) -->
+<div class="sec" data-sec="g2">
+<div class="sec-label g" style="background:#3182F6">G. 현재 + 가치관 (5)</div>
+<div class="sec-hint">포르쉐, 여자친구 추억, 가치관 = 사무실에서 여유있게</div>
 
-<div class="q must" data-s="g" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">101 · 필수</span></div><div class="q-text">지금 하루 일과가 어떻게 되세요?</div><div class="q-sub">→ Before(새벽배송) vs After(자유). 극적 대비.</div></div></div>
+<div class="q" data-s="g2" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">103</span></div><div class="q-text">포르쉐 카이엔 EV 계약했다고요? 차 고를 때 기분이 어땠어요?</div><div class="q-sub">→ 성공 상징. 지게차→포르쉐 대비.</div></div></div>
 
-<div class="q" data-s="g" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">102</span></div><div class="q-text">주 1회 펜션이나 풀빌라 간다고요? 와이프분이랑?</div><div class="q-sub">→ 라이프스타일.</div></div></div>
+<div class="q" data-s="g2" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">104</span></div><div class="q-text">지게차 몰던 사람이 포르쉐 타잖아요. 뭔 생각이 들어요?</div><div class="q-sub">→ 극적 갭 코멘트.</div></div></div>
 
-<div class="q" data-s="g" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">103</span></div><div class="q-text">포르쉐 카이엔 EV 계약했다고요? 차 고를 때 기분이 어땠어요?</div><div class="q-sub">→ 성공 상징. 지게차→포르쉐 대비.</div></div></div>
+<div class="q" data-s="g2" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">113</span></div><div class="q-text">돌아가신 여자친구한테 지금 뭐라고 하고 싶어요?</div><div class="q-sub">→ 조심스럽게. 본인이 말하고 싶으면만.</div></div></div>
 
-<div class="q" data-s="g" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">104</span></div><div class="q-text">지게차 몰던 사람이 포르쉐 타잖아요. 뭔 생각이 들어요?</div><div class="q-sub">→ 극적 갭 코멘트.</div></div></div>
+<div class="q" data-s="g2" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">114</span></div><div class="q-text">지금이 인생에서 제일 행복한 시기예요?</div><div class="q-sub">→ 현재 행복 확인.</div></div></div>
 
-<div class="q" data-s="g" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">105</span></div><div class="q-text">이 바다뷰 집은 언제 이사 왔어요?</div><div class="q-sub">→ 현재 공간 의미.</div></div></div>
-
-<div class="q must" data-s="g" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">106 · 필수</span><span class="tag tag-r">눈물</span></div><div class="q-text">와이프분이 빚 갚을 때 싫은 소리 한 번 안 했다고요?</div><div class="q-sub">→ 와이프 감동 서사.</div></div></div>
-
-<div class="q" data-s="g" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">107</span></div><div class="q-text">결혼은 언제 하셨어요? 와이프분을 어떻게 만났어요?</div><div class="q-sub">→ 와이프 백스토리.</div></div></div>
-
-<div class="q" data-s="g" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">108</span></div><div class="q-text">와이프분은 대표님이 사업한다고 할 때 뭐라고 했어요?</div><div class="q-sub">→ 부부 대화.</div></div></div>
-
-<div class="q must" data-s="g" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">109 · 필수</span></div><div class="q-text">크리스마스에 3천만원 선물했다고요? 뭘 사드렸어요?</div><div class="q-sub">→ 보답. 감동.</div></div></div>
-
-<div class="q" data-s="g" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">110</span></div><div class="q-text">결혼 10주년이라고요. 와이프분한테 하고 싶은 말이 있어요?</div><div class="q-sub">→ 카메라 앞에서 고백.</div></div></div>
-
-<div class="q" data-s="g" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">111</span></div><div class="q-text">아이가 있어요?</div><div class="q-sub">→ 가족 구성.</div></div></div>
-
-<div class="q" data-s="g" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">112</span></div><div class="q-text">아버지한테 지금 하고 싶은 말이 있어요?</div><div class="q-sub">→ 세대 서사 마무리. IMF 아버지와 연결.</div></div></div>
-
-<div class="q" data-s="g" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">113</span></div><div class="q-text">돌아가신 여자친구한테 지금 뭐라고 하고 싶어요?</div><div class="q-sub">→ 조심스럽게. 본인이 말하고 싶으면만.</div></div></div>
-
-<div class="q" data-s="g" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">114</span></div><div class="q-text">지금이 인생에서 제일 행복한 시기예요?</div><div class="q-sub">→ 현재 행복 확인.</div></div></div>
-
-<div class="q" data-s="g" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">115</span></div><div class="q-text">돈이 행복을 주나요?</div><div class="q-sub">→ 가치관 질문.</div></div></div>
+<div class="q" data-s="g2" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">115</span></div><div class="q-text">돈이 행복을 주나요?</div><div class="q-sub">→ 가치관 질문.</div></div></div>
 </div>
 
-<!-- ===== H. 수강생 + 강의 + 엔딩 (5) ===== -->
+<!-- H. 수강생 + 엔딩 (5) -->
 <div class="sec" data-sec="h">
-<div class="sec-label h">H. 수강생 + 엔딩 (5)</div>
-<div class="sec-hint">ACT 8 (22:00~25:00) · 희망 + CTA. 마무리 멘트.</div>
+<div class="sec-label h">H. 수강생 도착 + 엔딩 (5)</div>
+<div class="sec-hint">4시 수강생 도착! 실제 수강생과 대화 → 리얼리티 극대화.<br>📊 라이브 인터뷰 = 조회수 부스터 (시청자 투영)</div>
 
-<div class="q must" data-s="h" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">116 · 필수</span></div><div class="q-text">수강생분 중에 1.7억 사기당한 분이 있다고요. 그분 이야기 좀 해주세요.</div><div class="q-sub">→ 하루 120개 판매. 시청자 투영.</div></div></div>
+<div class="data-ref"><strong>촬영 팁:</strong> 수강생 도착 → 자연스럽게 소개 → 최대표가 수강생 이야기 끌어내기. "1.7억 사기" 수강생이면 대박.</div>
 
-<div class="q" data-s="h" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">117</span></div><div class="q-text">수강생들한테 새벽에도 전화 받아주신다고요. 왜요?</div><div class="q-sub">→ "제가 그 시절을 알으니까요."</div></div></div>
+<div class="q must" data-s="h" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">116 · 필수</span></div><div class="q-text">수강생분 중에 1.7억 사기당한 분이 있다고요. 그분 이야기 좀 해주세요.</div><div class="q-sub">→ 하루 120개 판매. 수강생 오기 전에 먼저 셋업.</div></div></div>
 
-<div class="q" data-s="h" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">118</span></div><div class="q-text">타이탄클래스 1기 매출이 3억이었다고요? 강의는 어떻게 시작했어요?</div><div class="q-sub">→ 보부상 대표 권유.</div></div></div>
+<div class="q" data-s="h" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">117</span></div><div class="q-text">수강생들한테 새벽에도 전화 받아주신다고요. 왜요?</div><div class="q-sub">→ "제가 그 시절을 알으니까요."</div></div></div>
 
-<div class="q" data-s="h" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">119</span></div><div class="q-text">10년 뒤에는 뭐 하고 계실 것 같아요?</div><div class="q-sub">→ 미래 비전.</div></div></div>
+<div class="q" data-s="h" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">118</span></div><div class="q-text">타이탄클래스 1기 매출이 3억이었다고요? 강의는 어떻게 시작했어요?</div><div class="q-sub">→ 보부상 대표 권유.</div></div></div>
 
-<div class="q must" data-s="h" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">120 · 필수</span><span class="tag tag-g">엔딩</span></div><div class="q-text">IMF, 여자친구, 코로나. 다 겪으셨잖아요. 포기하고 싶었던 순간이 있었어요?</div><div class="q-sub">→ "그래도 여기 있습니다" 엔딩 멘트.</div></div></div>
+<div class="q" data-s="h" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">119</span></div><div class="q-text">10년 뒤에는 뭐 하고 계실 것 같아요?</div><div class="q-sub">→ 미래 비전.</div></div></div>
+
+<div class="q must" data-s="h" data-loc="office" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">120 · 필수</span><span class="tag tag-g">엔딩</span></div><div class="q-text">IMF, 여자친구, 코로나. 다 겪으셨잖아요. 포기하고 싶었던 순간이 있었어요?</div><div class="q-sub">→ "그래도 여기 있습니다" 엔딩 멘트.</div></div></div>
 </div>
 
-</div>
+</div><!-- /office -->
+
+</div><!-- /wrap -->
 
 <div class="bottom-bar">
   <div class="progress-wrap">
@@ -389,30 +500,52 @@ body{background:#F2F4F6;color:#191F28;font-family:'Pretendard',system-ui,sans-se
 </div>
 
 <script>
-const KEY='sq120_choi';
-function save(){const s=[];document.querySelectorAll('.q').forEach(q=>s.push(q.classList.contains('done')));localStorage.setItem(KEY,JSON.stringify(s))}
-function load(){const d=localStorage.getItem(KEY);if(!d)return;const s=JSON.parse(d);document.querySelectorAll('.q').forEach((q,i)=>{if(s[i])q.classList.add('done')})}
+const KEY='sq120_choi_loc';
+let currentLoc='home';
+
+function save(){
+  const s={};
+  document.querySelectorAll('.q').forEach((q,i)=>{s[i]=q.classList.contains('done')});
+  localStorage.setItem(KEY,JSON.stringify(s));
+}
+function load(){
+  const d=localStorage.getItem(KEY);if(!d)return;
+  const s=JSON.parse(d);
+  document.querySelectorAll('.q').forEach((q,i)=>{if(s[i])q.classList.add('done')});
+}
 function toggle(el){el.classList.toggle('done');save();update()}
+
 function update(){
-  const all=document.querySelectorAll('.q:not(.hide)');
-  const allTotal=document.querySelectorAll('.q');
+  const allQ=document.querySelectorAll('.q');
   const done=document.querySelectorAll('.q.done');
   const mustAll=document.querySelectorAll('.q.must');
   const mustDone=document.querySelectorAll('.q.must.done');
-  const pct=Math.round(done.length/allTotal.length*100);
+  const pct=Math.round(done.length/allQ.length*100);
   document.getElementById('progress-fill').style.width=pct+'%';
-  document.getElementById('progress-text').textContent=done.length+' / '+allTotal.length;
+  document.getElementById('progress-text').textContent=done.length+' / '+allQ.length;
   document.getElementById('must-count').textContent='필수 '+mustDone.length+'/'+mustAll.length;
+  document.getElementById('all-count').textContent=done.length+'/'+allQ.length;
   const mc=document.getElementById('must-count');
   if(mustDone.length===mustAll.length){mc.style.background='#F0FFF4';mc.style.color='#05C072'}
   else{mc.style.background='#FFF0F0';mc.style.color='#F04452'}
 }
-function clearFilter(){document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('on'))}
-function showAll(){document.querySelectorAll('.q').forEach(q=>q.classList.remove('hide'));document.querySelectorAll('.sec').forEach(s=>s.style.display='')}
-function filterAll(btn){clearFilter();btn.classList.add('on');showAll();update()}
-function filterMust(btn){clearFilter();btn.classList.add('on');document.querySelectorAll('.sec').forEach(s=>s.style.display='');document.querySelectorAll('.q').forEach(q=>{q.classList.contains('must')?q.classList.remove('hide'):q.classList.add('hide')});update()}
-function filterSec(sec,btn){clearFilter();btn.classList.add('on');document.querySelectorAll('.sec').forEach(s=>{s.dataset.sec===sec?s.style.display='':s.style.display='none'});document.querySelectorAll('.q').forEach(q=>{q.dataset.s===sec?q.classList.remove('hide'):q.classList.add('hide')});update()}
+
+function switchLoc(loc,btn){
+  currentLoc=loc;
+  document.querySelectorAll('.loc-tab').forEach(t=>t.classList.remove('on'));
+  btn.classList.add('on');
+  if(loc==='all'){
+    document.querySelectorAll('.loc-section').forEach(s=>s.style.display='');
+  } else {
+    document.querySelectorAll('.loc-section').forEach(s=>{
+      s.dataset.loc===loc?s.style.display='':s.style.display='none';
+    });
+  }
+  update();
+}
+
 function resetAll(){if(!confirm('전부 초기화?'))return;document.querySelectorAll('.q').forEach(q=>q.classList.remove('done'));save();update()}
+
 load();update();
 </script>
 </body>
