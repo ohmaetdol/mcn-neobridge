@@ -383,12 +383,120 @@ table.sat-table tr:last-child td { border-bottom: none; }
   opacity: 1;
 }
 
+/* 코디 추천 */
+.rec-section {
+  border: 2px solid var(--text);
+  border-radius: 8px;
+  margin-bottom: 28px;
+  overflow: hidden;
+}
+.rec-header {
+  background: var(--text);
+  color: #fff;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.rec-header h2 {
+  font-size: 16px;
+  font-weight: 800;
+}
+.rec-header .rec-sub {
+  font-size: 12px;
+  opacity: 0.7;
+}
+.rec-body {
+  padding: 0;
+}
+.rec-group {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+}
+.rec-group:last-child { border-bottom: none; }
+.rec-group h3 {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: var(--text);
+}
+.rec-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+.rec-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all .15s;
+}
+.rec-card:hover {
+  border-color: var(--text);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.rec-card .rc-rank {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--text2);
+  margin-bottom: 4px;
+}
+.rec-card .rc-name {
+  font-size: 15px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+.rec-card .rc-views {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+.rec-card .rc-reason {
+  font-size: 11px;
+  color: var(--text2);
+  line-height: 1.5;
+}
+.rec-card .rc-concept {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.5;
+  font-weight: 500;
+}
+.hidden-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+.hidden-row:last-child { border-bottom: none; }
+.hidden-row .hr-name {
+  font-weight: 700;
+  min-width: 100px;
+}
+.hidden-row .hr-detail {
+  color: var(--text2);
+  flex: 1;
+}
+.hidden-row .hr-top {
+  font-size: 12px;
+  color: var(--accent);
+  max-width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 /* 반응형 */
 @media (max-width: 768px) {
   .stats-bar { grid-template-columns: repeat(3, 1fr); }
   .ind-content { grid-template-columns: 1fr; }
   .ind-data { border-right: none; border-bottom: 1px solid var(--border); }
   .header-sub { flex-wrap: wrap; gap: 8px; }
+  .rec-cards { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -419,6 +527,108 @@ table.sat-table tr:last-child td { border-bottom: none; }
   <div class="priority-row p2"><span class="tag">2순위</span><span>블루오션 + 섭외 보통: 해외/이민, 무인사업/렌탈, 건설/시공, 편의점/소매, 무역/수출입, 음악/예술</span></div>
   <div class="priority-row p3"><span class="tag">3순위</span><span>블루오션 + 섭외 어려움: 항공/운송, 틈새직업, 연예/엔터테인먼트, 물류/배달, 중고/리사이클, 공무원/전문직</span></div>
   <div class="priority-row p4"><span class="tag">비추천</span><span>포화: 부동산/임대, 일반음식점/장사, 고기/수산물, 유튜브/크리에이터</span></div>
+</div>
+
+<div class="rec-section">
+  <div class="rec-header">
+    <h2>코디 추천</h2>
+    <span class="rec-sub">685개 영상 데이터 + 포화도 + 섭외 난이도 종합 분석</span>
+  </div>
+  <div class="rec-body">
+    <div class="rec-group">
+      <h3>이달의 TOP PICK -- 지금 섭외하면 좋은 업종</h3>
+      <div class="rec-cards">
+        <div class="rec-card" onclick="scrollToIndustry('반려동물')">
+          <div class="rc-rank">TOP 1</div>
+          <div class="rc-name">반려동물</div>
+          <div class="rc-views">평균 2,153,720회</div>
+          <span class="sat-badge sat-BLUE">블루오션</span>
+          <div class="rc-reason">사찍남 1개만 다룸 / 경쟁채널 평균 2,153,720회 / 인스타 섭외 쉬움</div>
+        </div>
+        <div class="rec-card" onclick="scrollToIndustry('사진/영상')">
+          <div class="rc-rank">TOP 2</div>
+          <div class="rc-name">사진/영상</div>
+          <div class="rc-views">평균 572,640회</div>
+          <span class="sat-badge sat-VIRGIN">미개척</span>
+          <div class="rc-reason">사찍남 미진출 / 경쟁채널 평균 572,640회 / 인스타 섭외 쉬움</div>
+        </div>
+        <div class="rec-card" onclick="scrollToIndustry('자동차')">
+          <div class="rc-rank">TOP 3</div>
+          <div class="rc-name">자동차</div>
+          <div class="rc-views">평균 825,390회</div>
+          <span class="sat-badge sat-VIRGIN">미개척</span>
+          <div class="rc-reason">사찍남 미진출 / 경쟁채널 평균 825,390회 / 인스타 섭외 쉬움</div>
+        </div>
+        <div class="rec-card" onclick="scrollToIndustry('주류/바')">
+          <div class="rc-rank">TOP 4</div>
+          <div class="rc-name">주류/바</div>
+          <div class="rc-views">평균 764,882회</div>
+          <span class="sat-badge sat-VIRGIN">미개척</span>
+          <div class="rc-reason">사찍남 미진출 / 경쟁채널 평균 764,882회 / 인스타 섭외 쉬움</div>
+        </div>
+        <div class="rec-card" onclick="scrollToIndustry('항공/운송')">
+          <div class="rc-rank">TOP 5</div>
+          <div class="rc-name">항공/운송</div>
+          <div class="rc-views">평균 1,400,151회</div>
+          <span class="sat-badge sat-VIRGIN">미개척</span>
+          <div class="rc-reason">사찍남 미진출 / 경쟁채널 평균 1,400,151회</div>
+        </div>
+      </div>
+    </div>
+    <div class="rec-group">
+      <h3>숨은 기회 -- 경쟁채널은 대박인데 사찍남은 0개인 업종</h3>
+      <div class="hidden-row">
+        <span class="hr-name" style="cursor:pointer" onclick="scrollToIndustry('항공/운송')">항공/운송</span>
+        <span class="hr-detail">경쟁채널 3개 영상, 평균 1,400,151회 -- 사찍남 0개</span>
+        <span class="hr-top"></span>
+      </div>
+      <div class="hidden-row">
+        <span class="hr-name" style="cursor:pointer" onclick="scrollToIndustry('자동차')">자동차</span>
+        <span class="hr-detail">경쟁채널 20개 영상, 평균 825,390회 -- 사찍남 0개</span>
+        <span class="hr-top">집 사려고 모은 1억 3천으로 개인 택시 산 28살</span>
+      </div>
+      <div class="hidden-row">
+        <span class="hr-name" style="cursor:pointer" onclick="scrollToIndustry('주류/바')">주류/바</span>
+        <span class="hr-detail">경쟁채널 21개 영상, 평균 764,882회 -- 사찍남 0개</span>
+        <span class="hr-top">야간 포장마차로 한달에 3000만원 넘게 파는 34살 여사장님</span>
+      </div>
+    </div>
+    <div class="rec-group">
+      <h3>에피소드 컨셉 추천 -- 블루오션 업종별 촬영 아이디어</h3>
+      <div class="rec-cards">
+        <div class="rec-card" onclick="scrollToIndustry('반려동물')">
+          <div class="rc-rank">반려동물</div>
+          <div class="rc-concept">반려동물 사업으로 월 X천만원 -- 강아지/고양이 관련 틈새 사업가</div>
+          <div class="rc-reason" style="margin-top:6px">평균 2,153,720회</div>
+        </div>
+        <div class="rec-card" onclick="scrollToIndustry('항공/운송')">
+          <div class="rc-rank">항공/운송</div>
+          <div class="rc-concept">파일럿의 연봉과 진짜 일상 -- 하늘 위의 직업인</div>
+          <div class="rc-reason" style="margin-top:6px">평균 1,400,151회</div>
+        </div>
+        <div class="rec-card" onclick="scrollToIndustry('스포츠/레저')">
+          <div class="rc-rank">스포츠/레저</div>
+          <div class="rc-concept">프로 은퇴 후 사업 전환 -- 전직 운동선수의 제2의 인생</div>
+          <div class="rc-reason" style="margin-top:6px">평균 1,260,773회</div>
+        </div>
+        <div class="rec-card" onclick="scrollToIndustry('자동차')">
+          <div class="rc-rank">자동차</div>
+          <div class="rc-concept">자동차 관련 틈새 사업 (랩핑/튜닝/세차) -- 차 좋아해서 시작한 사업</div>
+          <div class="rc-reason" style="margin-top:6px">평균 825,390회</div>
+        </div>
+        <div class="rec-card" onclick="scrollToIndustry('주류/바')">
+          <div class="rc-rank">주류/바</div>
+          <div class="rc-concept">퇴사 후 술집으로 인생역전 -- 직장인에서 사장님으로</div>
+          <div class="rc-reason" style="margin-top:6px">평균 764,882회</div>
+        </div>
+        <div class="rec-card" onclick="scrollToIndustry('미용/뷰티')">
+          <div class="rc-rank">미용/뷰티</div>
+          <div class="rc-concept">SNS 없이 입소문만으로 월 X천만원 -- 동네 미용/뷰티 사장님</div>
+          <div class="rc-reason" style="margin-top:6px">평균 739,016회</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="sat-table-wrap">
