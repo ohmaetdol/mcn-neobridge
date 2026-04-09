@@ -591,6 +591,7 @@ table.sat-table tr:last-child td { border-bottom: none; }
 .cc-price { background: #c6f6d5; color: #276749; }
 .cc-target { background: #e9d8fd; color: #553c9a; }
 .cc-why { font-size: 11px; color: var(--text2); margin-top: 6px; line-height: 1.5; }
+.cc-proof { font-size: 10px; color: var(--green); margin-top: 8px; padding: 6px 8px; background: rgba(34,197,94,0.06); border-radius: 4px; border-left: 2px solid var(--green); line-height: 1.5; }
 
 /* 섭외 후보 리스트 */
 .prospect-section {
@@ -980,11 +981,11 @@ table.sat-table tr:last-child td { border-bottom: none; }
       </div>
     </div>
     <div class="rec-group">
-      <h3 style="color:var(--green)">강의로 팔리는 주제 -- 유튜브 데이터 + 시장 수요 기반</h3>
+      <h3 style="color:var(--green)">강의로 팔리는 주제 -- 실제 플랫폼 검증 데이터 기반</h3>
       <div style="font-size:11px;color:var(--text2);margin-bottom:14px">
-        근거: 마이프차 874명 설문, 폐업/생존율 통계, 유튜브 조회수, 트렌드 키워드 매칭. 정보 갭(관심은 높은데 노하우 부족)이 큰 주제 = 강의 수요
+        근거: 클래스101/탈잉/와디즈/타이탄클래스/크몽/스마트스토어 실제 수강생·매출·리뷰 + 마이프차 874명 설문 + 유튜브 조회수 매칭
       </div>
-      <div class="rec-cards" style="grid-template-columns:repeat(auto-fill, minmax(280px, 1fr))">
+      <div class="rec-cards" style="grid-template-columns:repeat(auto-fill, minmax(300px, 1fr))">
         <div class="course-card" onclick="scrollToIndustry('무인사업/렌탈')">
           <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
             <span class="cc-tag" style="background:var(--green);color:#fff">원맨테크</span>
@@ -997,6 +998,7 @@ table.sat-table tr:last-child td { border-bottom: none; }
             <span style="color:var(--text2)">유튜브 평균 532,319회</span>
           </div>
           <div class="cc-why">관심은 19.3%로 2위인데 실제 운영 노하우가 부족 → 정보 갭이 큼</div>
+          <div class="cc-proof">타이탄클래스 22.6만 회원 중 '수익화' 키워드 강의 4만 유료수강, 코주부클래스에서 N잡 교육 인기</div>
         </div>
         <div class="course-card" onclick="scrollToIndustry('AI/IT/디지털')">
           <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
@@ -1010,6 +1012,7 @@ table.sat-table tr:last-child td { border-bottom: none; }
             <span style="color:var(--text2)">유튜브 평균 731,265회</span>
           </div>
           <div class="cc-why">AI 쇼핑 이용률 60%, 에이블리 AI 매출 +134% -- MZ가 가장 배우고 싶어하는 주제</div>
+          <div class="cc-proof">패스트캠퍼스 마케팅 초격차 435,000원 | 크몽 Top10% IT 연 3.4억 | 타이탄 '아임웹 외주 수익화' 30만원</div>
         </div>
         <div class="course-card" onclick="scrollToIndustry('일반음식점/장사')">
           <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
@@ -1023,6 +1026,7 @@ table.sat-table tr:last-child td { border-bottom: none; }
             <span style="color:var(--text2)">유튜브 평균 799,162회</span>
           </div>
           <div class="cc-why">폐업률 9.04%로 빈 매장 폭증 → 소자본 창업의 새 공식으로 수요 급등</div>
+          <div class="cc-proof">클래스101 '망하지 않는 창업' 4.9점 174리뷰 199,000원 -- 창업 실패 방지 콘텐츠 수요 검증됨</div>
         </div>
         <div class="course-card" onclick="scrollToIndustry('온라인판매')">
           <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
@@ -1035,7 +1039,8 @@ table.sat-table tr:last-child td { border-bottom: none; }
             <span class="cc-tag cc-target">부업/재택 희망자, 주부, 직장인</span>
             <span style="color:var(--text2)">유튜브 평균 634,008회</span>
           </div>
-          <div class="cc-why">온라인판매 업종 유튜브 평균 63만회 -- 관심은 높은데 '어떻게 시작하나' 진입장벽</div>
+          <div class="cc-why">직장인 48.4%가 부업 중, 희망 부업 1위 = 온라인판매/스마트스토어</div>
+          <div class="cc-proof">이커머스의정석 50,000+ 수강생 107,500원/월 | 스마트스토어 57만 셀러, 1억 클럽 4.5만명 | 쿠팡파트너스 3% 커미션</div>
         </div>
         <div class="course-card" onclick="scrollToIndustry('카페/베이커리')">
           <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
@@ -1049,6 +1054,7 @@ table.sat-table tr:last-child td { border-bottom: none; }
             <span style="color:var(--text2)">유튜브 평균 687,763회</span>
           </div>
           <div class="cc-why">메가커피 4천 호점 시대, 개인 카페 생존법을 가르쳐야 돈이 됨</div>
+          <div class="cc-proof">와디즈 클래스 펀딩 +49% YoY 성장 | 클래스101 '0원 마케팅' 4.8점 4,714리뷰 -- 자영업 마케팅 교육 수요 폭발</div>
         </div>
         <div class="course-card" onclick="scrollToIndustry('미용/뷰티')">
           <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
@@ -1062,6 +1068,7 @@ table.sat-table tr:last-child td { border-bottom: none; }
             <span style="color:var(--text2)">유튜브 평균 739,016회</span>
           </div>
           <div class="cc-why">섭외 난이도 1~2인 업종이 인스타 활발 = 사장님들이 이미 하고 있지만 체계 없음</div>
+          <div class="cc-proof">클래스101 '0원 마케팅' 4,714리뷰 역대급 | 타이탄 '쇼츠아재' 유튜브 수익화 22.6만 회원 -- SNS 수익화 교육 폭발</div>
         </div>
         <div class="course-card" onclick="scrollToIndustry('의료/건강')">
           <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
@@ -1075,6 +1082,7 @@ table.sat-table tr:last-child td { border-bottom: none; }
             <span style="color:var(--text2)">유튜브 평균 560,561회</span>
           </div>
           <div class="cc-why">초고령사회 진입 + 정부지원 5.8조 역대 최대 → 시장은 커지는데 교육은 부족</div>
+          <div class="cc-proof">숨고 70만 고수 등록 (생활서비스 매칭) | 크몽 449만 회원 -- 돌봄/케어 서비스 프리랜서 수요 급증</div>
         </div>
         <div class="course-card" onclick="scrollToIndustry('일반음식점/장사')">
           <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
@@ -1088,6 +1096,35 @@ table.sat-table tr:last-child td { border-bottom: none; }
             <span style="color:var(--text2)">유튜브 평균 799,162회</span>
           </div>
           <div class="cc-why">100만 명 폐업 시대, '살아남는 법'이 가장 절실한 콘텐츠</div>
+          <div class="cc-proof">클래스101 창업 카테고리 급성장 | 탈잉 '1% 사업가' 10,000+ 수강생 -- 경영 노하우 유료 수요 검증</div>
+        </div>
+        <div class="course-card" onclick="scrollToIndustry('유튜브/크리에이터')">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
+            <span class="cc-tag" style="background:var(--green);color:#fff">N잡 수익화</span>
+            <span class="cc-tag cc-price">무료~260만원</span>
+          </div>
+          <div class="cc-title">유튜브/숏폼 수익화 로드맵</div>
+          <div class="cc-desc">얼굴 없이 쇼츠/롱폼으로 월급 이상 수입. 채널 기획→촬영→편집→수익화까지</div>
+          <div class="cc-meta">
+            <span class="cc-tag cc-target">부업러, N잡러, 퇴사 준비자</span>
+            <span style="color:var(--text2)">유튜브 평균 370,694회</span>
+          </div>
+          <div class="cc-why">타이탄클래스 2년 매출 100배 성장이 증명 -- 유튜브 수익화 교육 시장 자체가 폭발</div>
+          <div class="cc-proof">타이탄클래스 22.6만 회원 4만 유료수강 | '쇼츠아재' 얼굴 없이 수익화 | 아이비클래스 '숏폼 수익화' 무료 강의</div>
+        </div>
+        <div class="course-card" onclick="scrollToIndustry('프리랜서')">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
+            <span class="cc-tag" style="background:var(--green);color:#fff">긱 이코노미</span>
+            <span class="cc-tag cc-price">20~50만원</span>
+          </div>
+          <div class="cc-title">크몽/숨고로 프리랜서 월 300</div>
+          <div class="cc-desc">사업계획서, 디자인, 영상편집, 마케팅 대행 -- 플랫폼에서 의뢰 받아 수익화하는 법</div>
+          <div class="cc-meta">
+            <span class="cc-tag cc-target">프리랜서 전환 희망자, 직장인 부업</span>
+            <span style="color:var(--text2)">유튜브 평균 372,633회</span>
+          </div>
+          <div class="cc-why">크몽 449만 회원, 사업계획서만 1,885건 -- 플랫폼 프리랜서 시장이 검증됨</div>
+          <div class="cc-proof">크몽 Top10% IT 연 3.4억 | 숨고 70만 고수 | 직장인 48.4% 부업 중 -- 프리랜서 플랫폼 교육 니즈 급증</div>
         </div>
       </div>
     </div>
@@ -1176,6 +1213,66 @@ table.sat-table tr:last-child td { border-bottom: none; }
           <div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:8px">유망 업종</div><div style="padding:6px 0;border-bottom:1px solid var(--border);font-size:12px"><strong>무인 점포</strong><br><span style="color:var(--text2)">24시간, 인건비 절감, 소자본</span></div><div style="padding:6px 0;border-bottom:1px solid var(--border);font-size:12px"><strong>로코노미(지역특화)</strong><br><span style="color:var(--text2)">로컬 베이커리, 산지직송, 원데이클래스</span></div><div style="padding:6px 0;border-bottom:1px solid var(--border);font-size:12px"><strong>시니어 돌봄</strong><br><span style="color:var(--text2)">65세+ 인구 20% 돌파, 초고령사회</span></div><div style="padding:6px 0;border-bottom:1px solid var(--border);font-size:12px"><strong>AI 1인 온라인 비즈</strong><br><span style="color:var(--text2)">AI 시장 6조 원, 초소자본</span></div><div style="padding:6px 0;border-bottom:1px solid var(--border);font-size:12px"><strong>건강식/다이어트</strong><br><span style="color:var(--text2)">웰빙 트렌드 지속</span></div><div style="padding:6px 0;border-bottom:1px solid var(--border);font-size:12px"><strong>1인 메뉴 전문점</strong><br><span style="color:var(--text2)">1인가구 40% 돌파</span></div></div>
         <div>
           <div style="font-size:13px;font-weight:700;color:var(--red);margin-bottom:8px">폐업 위기 업종</div><div style="padding:6px 0;border-bottom:1px solid var(--border);font-size:12px"><strong>동네 카센터</strong><br><span style="color:var(--text2)">전기차 전환</span></div><div style="padding:6px 0;border-bottom:1px solid var(--border);font-size:12px"><strong>PC방</strong><br><span style="color:var(--text2)">모바일게임</span></div><div style="padding:6px 0;border-bottom:1px solid var(--border);font-size:12px"><strong>김밥집</strong><br><span style="color:var(--text2)">최저임금+원자재 폭등</span></div><div style="padding:6px 0;border-bottom:1px solid var(--border);font-size:12px"><strong>영화관</strong><br><span style="color:var(--text2)">OTT 대체</span></div><div style="padding:6px 0;border-bottom:1px solid var(--border);font-size:12px"><strong>골프장</strong><br><span style="color:var(--text2)">실내골프</span></div><div style="padding:6px 0;border-bottom:1px solid var(--border);font-size:12px"><strong>동대문 의류</strong><br><span style="color:var(--text2)">온라인 전환</span></div></div>
+      </div>
+    </div>
+    <div class="market-group">
+      <h3 style="color:var(--green)">강의/부업 플랫폼 현황 (실제 데이터)</h3>
+      <div style="margin-bottom:16px">
+        <div style="font-size:13px;font-weight:700;margin-bottom:10px">강의 플랫폼 인기 강좌</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(250px, 1fr));gap:10px"><div style="border:1px solid var(--border);border-radius:8px;padding:12px">
+            <div style="font-size:13px;font-weight:700;color:var(--accent)">클래스101</div>
+            <div style="font-size:11px;color:var(--text2);margin:4px 0 8px">창업/마케팅 카테고리 수강생 폭증</div><div style="font-size:11px;padding:4px 0;border-top:1px solid var(--border)"><strong>망하지 않는 창업</strong> <span style="color:var(--green)">4.9점 174리뷰</span> <span style="color:var(--text2)">199,000원</span></div><div style="font-size:11px;padding:4px 0;border-top:1px solid var(--border)"><strong>0원 마케팅</strong> <span style="color:var(--green)">4.8점 4,714리뷰</span> <span style="color:var(--text2)">249,000원</span></div></div><div style="border:1px solid var(--border);border-radius:8px;padding:12px">
+            <div style="font-size:13px;font-weight:700;color:var(--accent)">탈잉</div>
+            <div style="font-size:11px;color:var(--text2);margin:4px 0 8px">매출 212억, 실전형 부업 강의 성장</div><div style="font-size:11px;padding:4px 0;border-top:1px solid var(--border)"><strong>1% 사업가 마인드셋</strong> <span style="color:var(--green)">10,000+ 수강생</span> <span style="color:var(--text2)">24,500원/월</span></div></div><div style="border:1px solid var(--border);border-radius:8px;padding:12px">
+            <div style="font-size:13px;font-weight:700;color:var(--accent)">와디즈</div>
+            <div style="font-size:11px;color:var(--text2);margin:4px 0 8px">클래스 펀딩 전년대비 +49% 성장</div><div style="font-size:11px;padding:4px 0;border-top:1px solid var(--border)"><strong>미꽃체 캘리그래피</strong> <span style="color:var(--green)">74억 펀딩 149,637% 달성</span> <span style="color:var(--text2)">리워드</span></div><div style="font-size:11px;padding:4px 0;border-top:1px solid var(--border)"><strong>발레핏</strong> <span style="color:var(--green)">23억 펀딩</span> <span style="color:var(--text2)">리워드</span></div></div><div style="border:1px solid var(--border);border-radius:8px;padding:12px">
+            <div style="font-size:13px;font-weight:700;color:var(--accent)">타이탄클래스</div>
+            <div style="font-size:11px;color:var(--text2);margin:4px 0 8px">2년 만에 매출 100배 (1.5억→175억), 150+ 강사</div><div style="font-size:11px;padding:4px 0;border-top:1px solid var(--border)"><strong>유튜브 수익화 올인원</strong> <span style="color:var(--green)">22.6만 회원 / 4만 유료수강생</span> <span style="color:var(--text2)">무료~260만원</span></div><div style="font-size:11px;padding:4px 0;border-top:1px solid var(--border)"><strong>농축수산물 이커머스</strong> <span style="color:var(--green)">실전형 코칭</span> <span style="color:var(--text2)">비공개</span></div></div><div style="border:1px solid var(--border);border-radius:8px;padding:12px">
+            <div style="font-size:13px;font-weight:700;color:var(--accent)">패스트캠퍼스</div>
+            <div style="font-size:11px;color:var(--text2);margin:4px 0 8px">직장인 업스킬링 수요</div><div style="font-size:11px;padding:4px 0;border-top:1px solid var(--border)"><strong>마케팅 초격차 패키지</strong> <span style="color:var(--green)">올인원</span> <span style="color:var(--text2)">435,000원</span></div></div><div style="border:1px solid var(--border);border-radius:8px;padding:12px">
+            <div style="font-size:13px;font-weight:700;color:var(--accent)">이커머스의정석</div>
+            <div style="font-size:11px;color:var(--text2);margin:4px 0 8px">스마트스토어/쿠팡 특화</div><div style="font-size:11px;padding:4px 0;border-top:1px solid var(--border)"><strong>셀러 마스터</strong> <span style="color:var(--green)">50,000+ 수강생</span> <span style="color:var(--text2)">107,500원/월</span></div></div><div style="border:1px solid var(--border);border-radius:8px;padding:12px">
+            <div style="font-size:13px;font-weight:700;color:var(--accent)">크몽</div>
+            <div style="font-size:11px;color:var(--text2);margin:4px 0 8px">449만 회원, Top10% IT 프리랜서 연 3.4억</div><div style="font-size:11px;padding:4px 0;border-top:1px solid var(--border)"><strong>사업계획서 대행</strong> <span style="color:var(--green)">1,885건 누적</span> <span style="color:var(--text2)">65~110만원</span></div></div>
+        </div>
+      </div>
+      <div style="margin-bottom:16px">
+        <div style="font-size:13px;font-weight:700;margin-bottom:10px">부업 플랫폼 현황</div>
+        <div class="mdata-grid"><div class="mdata-card">
+            <div class="mc-num" style="font-size:15px">449만 회원</div>
+            <div class="mc-label" style="font-size:12px;font-weight:700">크몽</div>
+            <div class="mc-source">Top10% IT 연 3.4억 | 프리랜서 마켓 1위</div>
+          </div><div class="mdata-card">
+            <div class="mc-num" style="font-size:15px">70만 고수</div>
+            <div class="mc-label" style="font-size:12px;font-weight:700">숨고</div>
+            <div class="mc-source">생활서비스 매칭 | 지역기반 강점</div>
+          </div><div class="mdata-card">
+            <div class="mc-num" style="font-size:15px">57만 셀러</div>
+            <div class="mc-label" style="font-size:12px;font-weight:700">스마트스토어</div>
+            <div class="mc-source">1억 클럽 4.5만명 | 진입장벽 최저</div>
+          </div><div class="mdata-card">
+            <div class="mc-num" style="font-size:15px">3% 커미션</div>
+            <div class="mc-label" style="font-size:12px;font-weight:700">쿠팡파트너스</div>
+            <div class="mc-source">블로그/SNS 연계 | 무자본 시작 가능</div>
+          </div><div class="mdata-card">
+            <div class="mc-num" style="font-size:15px">매출 212억</div>
+            <div class="mc-label" style="font-size:12px;font-weight:700">탈잉</div>
+            <div class="mc-source">실전 부업 강의 | MZ 부업러 허브</div>
+          </div><div class="mdata-card">
+            <div class="mc-num" style="font-size:15px">시급 1.2~2만원</div>
+            <div class="mc-label" style="font-size:12px;font-weight:700">배민커넥트/쿠팡플렉스</div>
+            <div class="mc-source">배달/물류 부업 | 즉시 수입</div>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div>
+          <div style="font-size:13px;font-weight:700;margin-bottom:8px">부업 통계</div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px"><span>직장인_부업률</span><strong>48.4%</strong></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px"><span>희망_부업_1위</span><strong>온라인판매/스마트스토어</strong></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px"><span>평균_부수입</span><strong>월 50~150만원</strong></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px"><span>데이터라벨링</span><strong>AI 시대 신규 부업, 시간당 1~2만원</strong></div>
+        </div>
+        <div>
+          <div style="font-size:13px;font-weight:700;margin-bottom:8px">타이탄 교육 그룹 (급성장 사례)</div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px"><span>총매출</span><strong>259억 (2025.08 누적)</strong></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px"><span>회원수</span><strong>22.6만명</strong></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px"><span>유료수강생</span><strong>4만명</strong></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px"><span>강사수</span><strong>150+명</strong></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px"><span>성장률</span><strong>2년 매출 100배</strong></div><div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:12px"><span>모델</span><strong>한석준 아나운서</strong></div>
+          <div style="font-size:11px;color:var(--text2);margin-top:6px">산하: 타이탄클래스 / 코주부클래스 / 아이비클래스 / 엔잡연구소</div>
+        </div>
       </div>
     </div>
   </div>
