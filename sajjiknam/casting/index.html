@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>사찍남 캐스팅 보드</title>
+<style>
+:root {
+  --bg: #0f0f0f;
+  --surface: #1a1a2e;
+  --surface2: #16213e;
+  --card: #1e2a4a;
+  --border: #2a3a5c;
+  --text: #e4e4e4;
+  --text2: #8892a8;
+  --accent: #4fc3f7;
+  --accent2: #81d4fa;
+  --red: #ef5350;
+  --orange: #ffa726;
+  --green: #66bb6a;
+  --yellow: #ffee58;
+  --purple: #ab47bc;
+  --pink: #ec407a;
+  --grade-sp: linear-gradient(135deg, #ff6fd8, #3813c2);
+  --grade-s: linear-gradient(135deg, #4fc3f7, #0277bd);
+  --grade-a: linear-gradient(135deg, #66bb6a, #2e7d32);
+  --grade-b: linear-gradient(135deg, #ffa726, #e65100);
+  --grade-c: linear-gradient(135deg, #ef5350, #b71c1c);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ── 헤더 ── */
+.header {
+  text-align: center;
+  padding: 40px 20px 30px;
+  background: linear-gradient(135deg, var(--surface), var(--surface2));
+  border-radius: 16px;
+  margin-bottom: 24px;
+  border: 1px solid var(--border);
+}
+.header h1 {
+  font-size: 28px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent), var(--purple));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+}
+.header p {
+  color: var(--text2);
+  font-size: 14px;
+}
+
+/* ── 통계 카드 ── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+}
+.stat-card .number {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--accent);
+}
+.stat-card .label {
+  color: var(--text2);
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+/* ── 필터 바 ── */
+.filter-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.filter-btn {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text2);
+  cursor: pointer;
+  font-size: 13px;
+  transition: all .2s;
+}
+.filter-btn:hover { border-color: var(--accent); color: var(--text); }
+.filter-btn.active {
+  background: var(--accent);
+  color: #000;
+  border-color: var(--accent);
+  font-weight: 600;
+}
+.filter-section-label {
+  color: var(--text2);
+  font-size: 12px;
+  font-weight: 600;
+  margin-right: 4px;
+}
+
+/* ── 포화도 맵 ── */
+.saturation-map {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.saturation-map h2 {
+  font-size: 18px;
+  margin-bottom: 16px;
+  color: var(--accent);
+}
+.sat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 12px;
+}
+.sat-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--card);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all .2s;
+  border: 2px solid transparent;
+}
+.sat-row:hover { border-color: var(--accent); transform: translateY(-2px); }
+.sat-row .icon { font-size: 24px; }
+.sat-row .name { font-weight: 600; flex: 1; }
+.sat-row .counts {
+  display: flex;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text2);
+}
+.sat-badge {
+  padding: 3px 10px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 700;
+}
+.sat-VIRGIN { background: rgba(255,238,88,.15); color: #ffee58; }
+.sat-BLUE { background: rgba(79,195,247,.15); color: #4fc3f7; }
+.sat-OK { background: rgba(102,187,106,.15); color: #66bb6a; }
+.sat-SATURATED { background: rgba(239,83,80,.15); color: #ef5350; }
+.diff-stars { color: var(--orange); font-size: 12px; letter-spacing: 1px; }
+
+/* ── 섭외 카드 ── */
+.cards-section {
+  margin-bottom: 24px;
+}
+.cards-section h2 {
+  font-size: 18px;
+  margin-bottom: 16px;
+  color: var(--accent);
+}
+.casting-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 16px;
+}
+.casting-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: all .3s;
+}
+.casting-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(79,195,247,.1);
+}
+.card-header {
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.grade-badge {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 18px;
+  color: #fff;
+  flex-shrink: 0;
+}
+.grade-SP { background: var(--grade-sp); }
+.grade-S { background: var(--grade-s); }
+.grade-A { background: var(--grade-a); }
+.grade-B { background: var(--grade-b); }
+.grade-C { background: var(--grade-c); }
+.card-header-info { flex: 1; }
+.card-header-info .views {
+  font-size: 20px;
+  font-weight: 800;
+}
+.card-header-info .combo {
+  font-size: 12px;
+  color: var(--text2);
+}
+.industry-tag {
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.card-body { padding: 16px 20px; }
+.card-title {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  line-height: 1.4;
+  color: var(--text);
+}
+.card-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.meta-item {
+  font-size: 12px;
+  color: var(--text2);
+}
+.meta-item strong {
+  color: var(--text);
+}
+
+.card-insta {
+  background: var(--card);
+  border-radius: 10px;
+  padding: 12px;
+  margin-top: 12px;
+}
+.card-insta-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--pink);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+.tag {
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  background: rgba(236,64,122,.1);
+  color: var(--pink);
+}
+.kw-tag {
+  background: rgba(79,195,247,.1);
+  color: var(--accent);
+}
+.follower-info {
+  font-size: 12px;
+  color: var(--text2);
+  margin-top: 6px;
+}
+
+.dm-template {
+  background: var(--card);
+  border-radius: 10px;
+  padding: 12px;
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.8;
+  position: relative;
+}
+.dm-template .copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 11px;
+}
+.dm-template .copy-btn:hover { background: var(--accent); color: #000; }
+
+/* ── 우선순위 요약 ── */
+.priority-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.priority-section h2 {
+  font-size: 18px;
+  margin-bottom: 16px;
+  color: var(--accent);
+}
+.priority-list { list-style: none; }
+.priority-list li {
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.priority-list .p1 { background: rgba(79,195,247,.1); }
+.priority-list .p2 { background: rgba(171,71,188,.1); }
+.priority-list .p3 { background: rgba(255,167,38,.1); }
+.priority-list .p4 { background: rgba(239,83,80,.1); }
+.priority-label {
+  font-weight: 700;
+  font-size: 13px;
+  min-width: 80px;
+}
+.p1 .priority-label { color: var(--accent); }
+.p2 .priority-label { color: var(--purple); }
+.p3 .priority-label { color: var(--orange); }
+.p4 .priority-label { color: var(--red); }
+
+/* ── 반응형 ── */
+@media (max-width: 768px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .casting-grid { grid-template-columns: 1fr; }
+  .sat-grid { grid-template-columns: 1fr; }
+  .header h1 { font-size: 22px; }
+  .filter-bar { gap: 6px; }
+}
+
+/* ── 스크롤바 ── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* ── 토스트 ── */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--accent);
+  color: #000;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0;
+  transition: all .3s;
+  z-index: 9999;
+}
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- 헤더 -->
+  <div class="header">
+    <h1>사찍남 캐스팅 보드</h1>
+    <p>685개 영상 전수분석 | 업종x나이x수익x스토리 시뮬레이션 | 현실 수익 필터</p>
+    <p style="color:var(--text2);font-size:12px;margin-top:8px">마지막 업데이트: 2026.04.09</p>
+  </div>
+
+  <!-- 통계 -->
+  <div class="stats-grid" id="statsGrid"></div>
+
+  <!-- 우선순위 요약 -->
+  <div class="priority-section" id="prioritySection"></div>
+
+  <!-- 포화도 맵 -->
+  <div class="saturation-map">
+    <h2>업종 포화도 맵</h2>
+    <div class="sat-grid" id="satGrid"></div>
+  </div>
+
+  <!-- 필터 -->
+  <div class="filter-bar" id="filterBar"></div>
+
+  <!-- 섭외 카드 -->
+  <div class="cards-section">
+    <h2 id="cardsTitle">전체 섭외 카드</h2>
+    <div class="casting-grid" id="castingGrid"></div>
+  </div>
+</div>
+
+<!-- 토스트 -->
+<div class="toast" id="toast"></div>
+
+<script>
+const INDUSTRIES = {"교육/자격": {"color": "#e74c3c", "icon": "🎓", "sajjiknam": 0, "competitor": 1, "difficulty": 2}, "반려동물": {"color": "#e67e22", "icon": "🐕", "sajjiknam": 1, "competitor": 7, "difficulty": 2}, "자동차": {"color": "#3498db", "icon": "🚗", "sajjiknam": 1, "competitor": 14, "difficulty": 2}, "틈새직업": {"color": "#9b59b6", "icon": "💎", "sajjiknam": 1, "competitor": 8, "difficulty": 4}, "물류/배달": {"color": "#1abc9c", "icon": "📦", "sajjiknam": 1, "competitor": 5, "difficulty": 4}, "의료/건강": {"color": "#2ecc71", "icon": "🏥", "sajjiknam": 1, "competitor": 3, "difficulty": 3}, "프리랜서": {"color": "#f39c12", "icon": "💻", "sajjiknam": 1, "competitor": 2, "difficulty": 2}, "무역/수출입": {"color": "#e84393", "icon": "🌏", "sajjiknam": 2, "competitor": 6, "difficulty": 3}, "제조/수공예": {"color": "#00b894", "icon": "🔨", "sajjiknam": 2, "competitor": 10, "difficulty": 2}, "미용/뷰티": {"color": "#fd79a8", "icon": "💄", "sajjiknam": 2, "competitor": 2, "difficulty": 1}, "농수산/귀농": {"color": "#6c5ce7", "icon": "🌾", "sajjiknam": 3, "competitor": 4, "difficulty": 3}, "온라인판매": {"color": "#0984e3", "icon": "🛒", "sajjiknam": 4, "competitor": 12, "difficulty": 1}, "부동산/임대": {"color": "#636e72", "icon": "🏢", "sajjiknam": 5, "competitor": 25, "difficulty": 4}, "식당/카페": {"color": "#d63031", "icon": "☕", "sajjiknam": 8, "competitor": 14, "difficulty": 1}};
+const RAW_DATA = [{"grade": "S+", "estimated_views": 4086678, "industry": "교육/자격", "age": "20대", "story": "반전/비밀", "revenue": "월 3천만+", "title": "\"이 일은 아무도 안 해요\" 교육/자격로 월 3천만원 버는 20대", "saturation": "미개척", "saturation_code": "VIRGIN", "sajjiknam_count": 0, "competitor_count": 1, "recruit_difficulty": 2, "recruit_note": "본인 홍보 목적으로 출연 의향 높은 편", "sub_jobs": ["학원 원장", "온라인 강사", "코딩학원", "영어학원", "입시컨설턴트"], "hashtags": ["#학원창업", "#강사", "#교육사업", "#과외사업", "#자격증사업"], "insta_keywords": ["학원 원장", "강사 창업", "교육 사업", "과외 사장", "숨겨진 사업", "아무도 모르는", "20대 사장", "20대 창업"], "follower_range": "2K~30K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 4, "rank": 1}, {"grade": "S+", "estimated_views": 4086678, "industry": "교육/자격", "age": "20대", "story": "퇴사→창업", "revenue": "월 3천만+", "title": "퇴사하고 교육/자격 시작해서 월 3천만원 버는 20대", "saturation": "미개척", "saturation_code": "VIRGIN", "sajjiknam_count": 0, "competitor_count": 1, "recruit_difficulty": 2, "recruit_note": "본인 홍보 목적으로 출연 의향 높은 편", "sub_jobs": ["학원 원장", "온라인 강사", "코딩학원", "영어학원", "입시컨설턴트"], "hashtags": ["#학원창업", "#강사", "#교육사업", "#과외사업", "#자격증사업"], "insta_keywords": ["학원 원장", "강사 창업", "교육 사업", "과외 사장", "퇴사 후 창업", "탈직장", "퇴사스타그램", "20대 사장", "20대 창업"], "follower_range": "2K~30K", "story_hook": "대기업/직장 그만두고 시작", "condition_count": 4, "rank": 2}, {"grade": "S+", "estimated_views": 3772318, "industry": "교육/자격", "age": "30대", "story": "반전/비밀", "revenue": "월 3천만+", "title": "\"이 일은 아무도 안 해요\" 교육/자격로 월 3천만원 버는 30대", "saturation": "미개척", "saturation_code": "VIRGIN", "sajjiknam_count": 0, "competitor_count": 1, "recruit_difficulty": 2, "recruit_note": "본인 홍보 목적으로 출연 의향 높은 편", "sub_jobs": ["학원 원장", "온라인 강사", "코딩학원", "영어학원", "입시컨설턴트"], "hashtags": ["#학원창업", "#강사", "#교육사업", "#과외사업", "#자격증사업"], "insta_keywords": ["학원 원장", "강사 창업", "교육 사업", "과외 사장", "숨겨진 사업", "아무도 모르는", "30대 사장", "30대 창업"], "follower_range": "2K~30K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 4, "rank": 3}, {"grade": "S+", "estimated_views": 3772318, "industry": "교육/자격", "age": "30대", "story": "퇴사→창업", "revenue": "월 3천만+", "title": "퇴사하고 교육/자격 시작해서 월 3천만원 버는 30대", "saturation": "미개척", "saturation_code": "VIRGIN", "sajjiknam_count": 0, "competitor_count": 1, "recruit_difficulty": 2, "recruit_note": "본인 홍보 목적으로 출연 의향 높은 편", "sub_jobs": ["학원 원장", "온라인 강사", "코딩학원", "영어학원", "입시컨설턴트"], "hashtags": ["#학원창업", "#강사", "#교육사업", "#과외사업", "#자격증사업"], "insta_keywords": ["학원 원장", "강사 창업", "교육 사업", "과외 사장", "퇴사 후 창업", "탈직장", "퇴사스타그램", "30대 사장", "30대 창업"], "follower_range": "2K~30K", "story_hook": "대기업/직장 그만두고 시작", "condition_count": 4, "rank": 4}, {"grade": "S+", "estimated_views": 3731315, "industry": "교육/자격", "age": "20대", "story": "반전/비밀", "revenue": "월 1천만+", "title": "\"이 일은 아무도 안 해요\" 교육/자격로 월 1천만원 버는 20대", "saturation": "미개척", "saturation_code": "VIRGIN", "sajjiknam_count": 0, "competitor_count": 1, "recruit_difficulty": 2, "recruit_note": "본인 홍보 목적으로 출연 의향 높은 편", "sub_jobs": ["학원 원장", "온라인 강사", "코딩학원", "영어학원", "입시컨설턴트"], "hashtags": ["#학원창업", "#강사", "#교육사업", "#과외사업", "#자격증사업"], "insta_keywords": ["학원 원장", "강사 창업", "교육 사업", "과외 사장", "숨겨진 사업", "아무도 모르는", "20대 사장", "20대 창업"], "follower_range": "2K~30K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 4, "rank": 5}, {"grade": "S+", "estimated_views": 20160940, "industry": "자동차", "age": "20대", "story": "반전/비밀", "revenue": "월 5천만+", "title": "\"이 일은 아무도 안 해요\" 자동차로 월 5천만원 버는 20대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 1, "competitor_count": 14, "recruit_difficulty": 2, "recruit_note": "세차/중고차 업계 인스타 활발, 릴스로 작업 과정 공유하는 사람 많음", "sub_jobs": ["세차장 사장", "중고차 딜러", "카센터 대표", "랩핑 전문점", "출장세차"], "hashtags": ["#세차창업", "#자동차사업", "#중고차딜러", "#카센터", "#세차업", "#랩핑"], "insta_keywords": ["세차장 사장", "중고차 딜러", "카센터 대표", "랩핑 사업", "숨겨진 사업", "아무도 모르는", "20대 사장", "20대 창업"], "follower_range": "2K~30K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 4, "rank": 6}, {"grade": "S+", "estimated_views": 20160940, "industry": "자동차", "age": "20대", "story": "퇴사→창업", "revenue": "월 5천만+", "title": "퇴사하고 자동차 시작해서 월 5천만원 버는 20대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 1, "competitor_count": 14, "recruit_difficulty": 2, "recruit_note": "세차/중고차 업계 인스타 활발, 릴스로 작업 과정 공유하는 사람 많음", "sub_jobs": ["세차장 사장", "중고차 딜러", "카센터 대표", "랩핑 전문점", "출장세차"], "hashtags": ["#세차창업", "#자동차사업", "#중고차딜러", "#카센터", "#세차업", "#랩핑"], "insta_keywords": ["세차장 사장", "중고차 딜러", "카센터 대표", "랩핑 사업", "퇴사 후 창업", "탈직장", "퇴사스타그램", "20대 사장", "20대 창업"], "follower_range": "2K~30K", "story_hook": "대기업/직장 그만두고 시작", "condition_count": 4, "rank": 7}, {"grade": "S+", "estimated_views": 18610098, "industry": "자동차", "age": "30대", "story": "반전/비밀", "revenue": "월 5천만+", "title": "\"이 일은 아무도 안 해요\" 자동차로 월 5천만원 버는 30대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 1, "competitor_count": 14, "recruit_difficulty": 2, "recruit_note": "세차/중고차 업계 인스타 활발, 릴스로 작업 과정 공유하는 사람 많음", "sub_jobs": ["세차장 사장", "중고차 딜러", "카센터 대표", "랩핑 전문점", "출장세차"], "hashtags": ["#세차창업", "#자동차사업", "#중고차딜러", "#카센터", "#세차업", "#랩핑"], "insta_keywords": ["세차장 사장", "중고차 딜러", "카센터 대표", "랩핑 사업", "숨겨진 사업", "아무도 모르는", "30대 사장", "30대 창업"], "follower_range": "2K~30K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 4, "rank": 8}, {"grade": "S+", "estimated_views": 18610098, "industry": "자동차", "age": "30대", "story": "퇴사→창업", "revenue": "월 5천만+", "title": "퇴사하고 자동차 시작해서 월 5천만원 버는 30대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 1, "competitor_count": 14, "recruit_difficulty": 2, "recruit_note": "세차/중고차 업계 인스타 활발, 릴스로 작업 과정 공유하는 사람 많음", "sub_jobs": ["세차장 사장", "중고차 딜러", "카센터 대표", "랩핑 전문점", "출장세차"], "hashtags": ["#세차창업", "#자동차사업", "#중고차딜러", "#카센터", "#세차업", "#랩핑"], "insta_keywords": ["세차장 사장", "중고차 딜러", "카센터 대표", "랩핑 사업", "퇴사 후 창업", "탈직장", "퇴사스타그램", "30대 사장", "30대 창업"], "follower_range": "2K~30K", "story_hook": "대기업/직장 그만두고 시작", "condition_count": 4, "rank": 9}, {"grade": "S+", "estimated_views": 18179926, "industry": "자동차", "age": "20대", "story": "밀착/하루", "revenue": "월 5천만+", "title": "월 5천만원 버는 20대 자동차 사장님의 하루", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 1, "competitor_count": 14, "recruit_difficulty": 2, "recruit_note": "세차/중고차 업계 인스타 활발, 릴스로 작업 과정 공유하는 사람 많음", "sub_jobs": ["세차장 사장", "중고차 딜러", "카센터 대표", "랩핑 전문점", "출장세차"], "hashtags": ["#세차창업", "#자동차사업", "#중고차딜러", "#카센터", "#세차업", "#랩핑"], "insta_keywords": ["세차장 사장", "중고차 딜러", "카센터 대표", "랩핑 사업", "사장 일상", "하루 루틴", "브이로그", "20대 사장", "20대 창업"], "follower_range": "2K~30K", "story_hook": "사장님의 리얼 하루", "condition_count": 4, "rank": 10}, {"grade": "S+", "estimated_views": 9538538, "industry": "반려동물", "age": "20대", "story": "반전/비밀", "revenue": "월 3천만+", "title": "\"이 일은 아무도 안 해요\" 반려동물로 월 3천만원 버는 20대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 1, "competitor_count": 7, "recruit_difficulty": 2, "recruit_note": "인스타에 펫 계정 많음, DM 반응 좋은 편", "sub_jobs": ["애견미용실 원장", "펫시터", "펫샵 사장", "반려동물 용품 제조", "동물병원 원장"], "hashtags": ["#반려동물사업", "#펫비즈니스", "#애견미용", "#펫샵창업", "#강아지사업", "#펫시터"], "insta_keywords": ["반려동물 사업", "펫 창업", "애견미용 원장", "펫시터 사장", "동물병원", "숨겨진 사업", "아무도 모르는", "20대 사장", "20대 창업"], "follower_range": "3K~50K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 4, "rank": 11}, {"grade": "S+", "estimated_views": 9538538, "industry": "반려동물", "age": "20대", "story": "퇴사→창업", "revenue": "월 3천만+", "title": "퇴사하고 반려동물 시작해서 월 3천만원 버는 20대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 1, "competitor_count": 7, "recruit_difficulty": 2, "recruit_note": "인스타에 펫 계정 많음, DM 반응 좋은 편", "sub_jobs": ["애견미용실 원장", "펫시터", "펫샵 사장", "반려동물 용품 제조", "동물병원 원장"], "hashtags": ["#반려동물사업", "#펫비즈니스", "#애견미용", "#펫샵창업", "#강아지사업", "#펫시터"], "insta_keywords": ["반려동물 사업", "펫 창업", "애견미용 원장", "펫시터 사장", "동물병원", "퇴사 후 창업", "탈직장", "퇴사스타그램", "20대 사장", "20대 창업"], "follower_range": "3K~50K", "story_hook": "대기업/직장 그만두고 시작", "condition_count": 4, "rank": 12}, {"grade": "S+", "estimated_views": 8804804, "industry": "반려동물", "age": "30대", "story": "반전/비밀", "revenue": "월 3천만+", "title": "\"이 일은 아무도 안 해요\" 반려동물로 월 3천만원 버는 30대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 1, "competitor_count": 7, "recruit_difficulty": 2, "recruit_note": "인스타에 펫 계정 많음, DM 반응 좋은 편", "sub_jobs": ["애견미용실 원장", "펫시터", "펫샵 사장", "반려동물 용품 제조", "동물병원 원장"], "hashtags": ["#반려동물사업", "#펫비즈니스", "#애견미용", "#펫샵창업", "#강아지사업", "#펫시터"], "insta_keywords": ["반려동물 사업", "펫 창업", "애견미용 원장", "펫시터 사장", "동물병원", "숨겨진 사업", "아무도 모르는", "30대 사장", "30대 창업"], "follower_range": "3K~50K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 4, "rank": 13}, {"grade": "S+", "estimated_views": 8804804, "industry": "반려동물", "age": "30대", "story": "퇴사→창업", "revenue": "월 3천만+", "title": "퇴사하고 반려동물 시작해서 월 3천만원 버는 30대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 1, "competitor_count": 7, "recruit_difficulty": 2, "recruit_note": "인스타에 펫 계정 많음, DM 반응 좋은 편", "sub_jobs": ["애견미용실 원장", "펫시터", "펫샵 사장", "반려동물 용품 제조", "동물병원 원장"], "hashtags": ["#반려동물사업", "#펫비즈니스", "#애견미용", "#펫샵창업", "#강아지사업", "#펫시터"], "insta_keywords": ["반려동물 사업", "펫 창업", "애견미용 원장", "펫시터 사장", "동물병원", "퇴사 후 창업", "탈직장", "퇴사스타그램", "30대 사장", "30대 창업"], "follower_range": "3K~50K", "story_hook": "대기업/직장 그만두고 시작", "condition_count": 4, "rank": 14}, {"grade": "S+", "estimated_views": 8709100, "industry": "반려동물", "age": "20대", "story": "반전/비밀", "revenue": "월 1천만+", "title": "\"이 일은 아무도 안 해요\" 반려동물로 월 1천만원 버는 20대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 1, "competitor_count": 7, "recruit_difficulty": 2, "recruit_note": "인스타에 펫 계정 많음, DM 반응 좋은 편", "sub_jobs": ["애견미용실 원장", "펫시터", "펫샵 사장", "반려동물 용품 제조", "동물병원 원장"], "hashtags": ["#반려동물사업", "#펫비즈니스", "#애견미용", "#펫샵창업", "#강아지사업", "#펫시터"], "insta_keywords": ["반려동물 사업", "펫 창업", "애견미용 원장", "펫시터 사장", "동물병원", "숨겨진 사업", "아무도 모르는", "20대 사장", "20대 창업"], "follower_range": "3K~50K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 4, "rank": 15}, {"grade": "S+", "estimated_views": 8243666, "industry": "틈새직업", "age": "20대", "story": "반전/비밀", "revenue": "월 3천만+", "title": "\"이 일은 아무도 안 해요\" 틈새직업로 월 3천만원 버는 20대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 1, "competitor_count": 8, "recruit_difficulty": 4, "recruit_note": "인스타 거의 없음, 네이버 블로그/카페에서 찾아야 함", "sub_jobs": ["폐기물 수거", "재활용 사업", "자판기 사업", "코인세탁", "도시광산", "골프공 수거"], "hashtags": ["#틈새창업", "#특이한직업", "#폐기물사업", "#재활용사업", "#코인세탁", "#자판기사업"], "insta_keywords": ["특이한 직업", "틈새 사업", "재활용 사업", "폐기물 사업", "숨겨진 사업", "아무도 모르는", "20대 사장", "20대 창업"], "follower_range": "1K~20K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 4, "rank": 16}, {"grade": "S+", "estimated_views": 8243666, "industry": "틈새직업", "age": "20대", "story": "퇴사→창업", "revenue": "월 3천만+", "title": "퇴사하고 틈새직업 시작해서 월 3천만원 버는 20대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 1, "competitor_count": 8, "recruit_difficulty": 4, "recruit_note": "인스타 거의 없음, 네이버 블로그/카페에서 찾아야 함", "sub_jobs": ["폐기물 수거", "재활용 사업", "자판기 사업", "코인세탁", "도시광산", "골프공 수거"], "hashtags": ["#틈새창업", "#특이한직업", "#폐기물사업", "#재활용사업", "#코인세탁", "#자판기사업"], "insta_keywords": ["특이한 직업", "틈새 사업", "재활용 사업", "폐기물 사업", "퇴사 후 창업", "탈직장", "퇴사스타그램", "20대 사장", "20대 창업"], "follower_range": "1K~20K", "story_hook": "대기업/직장 그만두고 시작", "condition_count": 4, "rank": 17}, {"grade": "S+", "estimated_views": 7609538, "industry": "틈새직업", "age": "30대", "story": "반전/비밀", "revenue": "월 3천만+", "title": "\"이 일은 아무도 안 해요\" 틈새직업로 월 3천만원 버는 30대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 1, "competitor_count": 8, "recruit_difficulty": 4, "recruit_note": "인스타 거의 없음, 네이버 블로그/카페에서 찾아야 함", "sub_jobs": ["폐기물 수거", "재활용 사업", "자판기 사업", "코인세탁", "도시광산", "골프공 수거"], "hashtags": ["#틈새창업", "#특이한직업", "#폐기물사업", "#재활용사업", "#코인세탁", "#자판기사업"], "insta_keywords": ["특이한 직업", "틈새 사업", "재활용 사업", "폐기물 사업", "숨겨진 사업", "아무도 모르는", "30대 사장", "30대 창업"], "follower_range": "1K~20K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 4, "rank": 18}, {"grade": "S+", "estimated_views": 7609538, "industry": "틈새직업", "age": "30대", "story": "퇴사→창업", "revenue": "월 3천만+", "title": "퇴사하고 틈새직업 시작해서 월 3천만원 버는 30대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 1, "competitor_count": 8, "recruit_difficulty": 4, "recruit_note": "인스타 거의 없음, 네이버 블로그/카페에서 찾아야 함", "sub_jobs": ["폐기물 수거", "재활용 사업", "자판기 사업", "코인세탁", "도시광산", "골프공 수거"], "hashtags": ["#틈새창업", "#특이한직업", "#폐기물사업", "#재활용사업", "#코인세탁", "#자판기사업"], "insta_keywords": ["특이한 직업", "틈새 사업", "재활용 사업", "폐기물 사업", "퇴사 후 창업", "탈직장", "퇴사스타그램", "30대 사장", "30대 창업"], "follower_range": "1K~20K", "story_hook": "대기업/직장 그만두고 시작", "condition_count": 4, "rank": 19}, {"grade": "S+", "estimated_views": 7526826, "industry": "틈새직업", "age": "20대", "story": "반전/비밀", "revenue": "월 1천만+", "title": "\"이 일은 아무도 안 해요\" 틈새직업로 월 1천만원 버는 20대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 1, "competitor_count": 8, "recruit_difficulty": 4, "recruit_note": "인스타 거의 없음, 네이버 블로그/카페에서 찾아야 함", "sub_jobs": ["폐기물 수거", "재활용 사업", "자판기 사업", "코인세탁", "도시광산", "골프공 수거"], "hashtags": ["#틈새창업", "#특이한직업", "#폐기물사업", "#재활용사업", "#코인세탁", "#자판기사업"], "insta_keywords": ["특이한 직업", "틈새 사업", "재활용 사업", "폐기물 사업", "숨겨진 사업", "아무도 모르는", "20대 사장", "20대 창업"], "follower_range": "1K~20K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 4, "rank": 20}, {"grade": "S+", "estimated_views": 5121576, "industry": "무역/수출입", "age": "20대", "story": "반전/비밀", "revenue": "월 1억+", "title": "\"이 일은 아무도 안 해요\" 무역/수출입로 월 1억 버는 20대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 2, "competitor_count": 6, "recruit_difficulty": 3, "recruit_note": "수익 규모 큰 편이라 제목 임팩트 강함, 찾기는 중간", "sub_jobs": ["중국 무역", "해외 수출", "명품 바이어", "구매대행 대표"], "hashtags": ["#무역사업", "#수출입", "#해외무역", "#중국무역", "#명품사업"], "insta_keywords": ["무역 사업", "수출입 대표", "해외 무역", "명품 셀러", "숨겨진 사업", "아무도 모르는", "20대 사장", "20대 창업"], "follower_range": "2K~30K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 4, "rank": 21}, {"grade": "S+", "estimated_views": 5121576, "industry": "무역/수출입", "age": "20대", "story": "퇴사→창업", "revenue": "월 1억+", "title": "퇴사하고 무역/수출입 시작해서 월 1억 버는 20대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 2, "competitor_count": 6, "recruit_difficulty": 3, "recruit_note": "수익 규모 큰 편이라 제목 임팩트 강함, 찾기는 중간", "sub_jobs": ["중국 무역", "해외 수출", "명품 바이어", "구매대행 대표"], "hashtags": ["#무역사업", "#수출입", "#해외무역", "#중국무역", "#명품사업"], "insta_keywords": ["무역 사업", "수출입 대표", "해외 무역", "명품 셀러", "퇴사 후 창업", "탈직장", "퇴사스타그램", "20대 사장", "20대 창업"], "follower_range": "2K~30K", "story_hook": "대기업/직장 그만두고 시작", "condition_count": 4, "rank": 22}, {"grade": "S+", "estimated_views": 4727608, "industry": "무역/수출입", "age": "30대", "story": "반전/비밀", "revenue": "월 1억+", "title": "\"이 일은 아무도 안 해요\" 무역/수출입로 월 1억 버는 30대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 2, "competitor_count": 6, "recruit_difficulty": 3, "recruit_note": "수익 규모 큰 편이라 제목 임팩트 강함, 찾기는 중간", "sub_jobs": ["중국 무역", "해외 수출", "명품 바이어", "구매대행 대표"], "hashtags": ["#무역사업", "#수출입", "#해외무역", "#중국무역", "#명품사업"], "insta_keywords": ["무역 사업", "수출입 대표", "해외 무역", "명품 셀러", "숨겨진 사업", "아무도 모르는", "30대 사장", "30대 창업"], "follower_range": "2K~30K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 4, "rank": 23}, {"grade": "S+", "estimated_views": 4727608, "industry": "무역/수출입", "age": "30대", "story": "퇴사→창업", "revenue": "월 1억+", "title": "퇴사하고 무역/수출입 시작해서 월 1억 버는 30대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 2, "competitor_count": 6, "recruit_difficulty": 3, "recruit_note": "수익 규모 큰 편이라 제목 임팩트 강함, 찾기는 중간", "sub_jobs": ["중국 무역", "해외 수출", "명품 바이어", "구매대행 대표"], "hashtags": ["#무역사업", "#수출입", "#해외무역", "#중국무역", "#명품사업"], "insta_keywords": ["무역 사업", "수출입 대표", "해외 무역", "명품 셀러", "퇴사 후 창업", "탈직장", "퇴사스타그램", "30대 사장", "30대 창업"], "follower_range": "2K~30K", "story_hook": "대기업/직장 그만두고 시작", "condition_count": 4, "rank": 24}, {"grade": "S+", "estimated_views": 4618330, "industry": "무역/수출입", "age": "20대", "story": "밀착/하루", "revenue": "월 1억+", "title": "월 1억 버는 20대 무역/수출입 사장님의 하루", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 2, "competitor_count": 6, "recruit_difficulty": 3, "recruit_note": "수익 규모 큰 편이라 제목 임팩트 강함, 찾기는 중간", "sub_jobs": ["중국 무역", "해외 수출", "명품 바이어", "구매대행 대표"], "hashtags": ["#무역사업", "#수출입", "#해외무역", "#중국무역", "#명품사업"], "insta_keywords": ["무역 사업", "수출입 대표", "해외 무역", "명품 셀러", "사장 일상", "하루 루틴", "브이로그", "20대 사장", "20대 창업"], "follower_range": "2K~30K", "story_hook": "사장님의 리얼 하루", "condition_count": 4, "rank": 25}, {"grade": "S", "estimated_views": 1629481, "industry": "프리랜서", "age": "20대", "story": "반전/비밀", "revenue": "월 3천만+", "title": "\"이 일은 아무도 안 해요\" 프리랜서로 월 3천만원 버는 20대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 1, "competitor_count": 2, "recruit_difficulty": 2, "recruit_note": "본인 브랜딩에 적극적, 출연 의향 높음", "sub_jobs": ["프리랜서 디자이너", "개발자", "디지털노마드", "1인 에이전시"], "hashtags": ["#프리랜서", "#디지털노마드", "#재택근무", "#원격근무"], "insta_keywords": ["프리랜서", "디지털노마드", "재택 사업", "숨겨진 사업", "아무도 모르는", "20대 사장", "20대 창업"], "follower_range": "5K~100K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 4, "rank": 26}, {"grade": "S", "estimated_views": 1629481, "industry": "프리랜서", "age": "20대", "story": "퇴사→창업", "revenue": "월 3천만+", "title": "퇴사하고 프리랜서 시작해서 월 3천만원 버는 20대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 1, "competitor_count": 2, "recruit_difficulty": 2, "recruit_note": "본인 브랜딩에 적극적, 출연 의향 높음", "sub_jobs": ["프리랜서 디자이너", "개발자", "디지털노마드", "1인 에이전시"], "hashtags": ["#프리랜서", "#디지털노마드", "#재택근무", "#원격근무"], "insta_keywords": ["프리랜서", "디지털노마드", "재택 사업", "퇴사 후 창업", "탈직장", "퇴사스타그램", "20대 사장", "20대 창업"], "follower_range": "5K~100K", "story_hook": "대기업/직장 그만두고 시작", "condition_count": 4, "rank": 27}, {"grade": "S", "estimated_views": 1504137, "industry": "프리랜서", "age": "30대", "story": "반전/비밀", "revenue": "월 3천만+", "title": "\"이 일은 아무도 안 해요\" 프리랜서로 월 3천만원 버는 30대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 1, "competitor_count": 2, "recruit_difficulty": 2, "recruit_note": "본인 브랜딩에 적극적, 출연 의향 높음", "sub_jobs": ["프리랜서 디자이너", "개발자", "디지털노마드", "1인 에이전시"], "hashtags": ["#프리랜서", "#디지털노마드", "#재택근무", "#원격근무"], "insta_keywords": ["프리랜서", "디지털노마드", "재택 사업", "숨겨진 사업", "아무도 모르는", "30대 사장", "30대 창업"], "follower_range": "5K~100K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 4, "rank": 28}, {"grade": "S", "estimated_views": 1504137, "industry": "프리랜서", "age": "30대", "story": "퇴사→창업", "revenue": "월 3천만+", "title": "퇴사하고 프리랜서 시작해서 월 3천만원 버는 30대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 1, "competitor_count": 2, "recruit_difficulty": 2, "recruit_note": "본인 브랜딩에 적극적, 출연 의향 높음", "sub_jobs": ["프리랜서 디자이너", "개발자", "디지털노마드", "1인 에이전시"], "hashtags": ["#프리랜서", "#디지털노마드", "#재택근무", "#원격근무"], "insta_keywords": ["프리랜서", "디지털노마드", "재택 사업", "퇴사 후 창업", "탈직장", "퇴사스타그램", "30대 사장", "30대 창업"], "follower_range": "5K~100K", "story_hook": "대기업/직장 그만두고 시작", "condition_count": 4, "rank": 29}, {"grade": "S", "estimated_views": 1487787, "industry": "프리랜서", "age": "20대", "story": "반전/비밀", "revenue": "월 1천만+", "title": "\"이 일은 아무도 안 해요\" 프리랜서로 월 1천만원 버는 20대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 1, "competitor_count": 2, "recruit_difficulty": 2, "recruit_note": "본인 브랜딩에 적극적, 출연 의향 높음", "sub_jobs": ["프리랜서 디자이너", "개발자", "디지털노마드", "1인 에이전시"], "hashtags": ["#프리랜서", "#디지털노마드", "#재택근무", "#원격근무"], "insta_keywords": ["프리랜서", "디지털노마드", "재택 사업", "숨겨진 사업", "아무도 모르는", "20대 사장", "20대 창업"], "follower_range": "5K~100K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 4, "rank": 30}, {"grade": "S", "estimated_views": 1471303, "industry": "제조/수공예", "age": "20대", "story": "반전/비밀", "revenue": "월 1천만+", "title": "\"이 일은 아무도 안 해요\" 제조/수공예로 월 1천만원 버는 20대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 2, "competitor_count": 10, "recruit_difficulty": 2, "recruit_note": "공방/핸드메이드 인스타 활발, 작업 과정 공유하는 사람 많음", "sub_jobs": ["공방 대표", "수공예 작가", "소규모 공장", "핸드메이드 셀러"], "hashtags": ["#공방창업", "#수공예사업", "#제조업", "#핸드메이드", "#공장사장"], "insta_keywords": ["공방 대표", "수공예 작가", "제조업 사장", "핸드메이드", "숨겨진 사업", "아무도 모르는", "20대 사장", "20대 창업"], "follower_range": "2K~30K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 4, "rank": 31}, {"grade": "S", "estimated_views": 1471303, "industry": "제조/수공예", "age": "20대", "story": "퇴사→창업", "revenue": "월 1천만+", "title": "퇴사하고 제조/수공예 시작해서 월 1천만원 버는 20대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 2, "competitor_count": 10, "recruit_difficulty": 2, "recruit_note": "공방/핸드메이드 인스타 활발, 작업 과정 공유하는 사람 많음", "sub_jobs": ["공방 대표", "수공예 작가", "소규모 공장", "핸드메이드 셀러"], "hashtags": ["#공방창업", "#수공예사업", "#제조업", "#핸드메이드", "#공장사장"], "insta_keywords": ["공방 대표", "수공예 작가", "제조업 사장", "핸드메이드", "퇴사 후 창업", "탈직장", "퇴사스타그램", "20대 사장", "20대 창업"], "follower_range": "2K~30K", "story_hook": "대기업/직장 그만두고 시작", "condition_count": 4, "rank": 32}, {"grade": "S", "estimated_views": 1401241, "industry": "제조/수공예", "age": "20대", "story": "반전/비밀", "revenue": "월 300만+", "title": "\"이 일은 아무도 안 해요\" 제조/수공예로 월 300만원 버는 20대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 2, "competitor_count": 10, "recruit_difficulty": 2, "recruit_note": "공방/핸드메이드 인스타 활발, 작업 과정 공유하는 사람 많음", "sub_jobs": ["공방 대표", "수공예 작가", "소규모 공장", "핸드메이드 셀러"], "hashtags": ["#공방창업", "#수공예사업", "#제조업", "#핸드메이드", "#공장사장"], "insta_keywords": ["공방 대표", "수공예 작가", "제조업 사장", "핸드메이드", "숨겨진 사업", "아무도 모르는", "20대 사장", "20대 창업"], "follower_range": "2K~30K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 4, "rank": 33}, {"grade": "S", "estimated_views": 1401241, "industry": "제조/수공예", "age": "20대", "story": "퇴사→창업", "revenue": "월 300만+", "title": "퇴사하고 제조/수공예 시작해서 월 300만원 버는 20대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 2, "competitor_count": 10, "recruit_difficulty": 2, "recruit_note": "공방/핸드메이드 인스타 활발, 작업 과정 공유하는 사람 많음", "sub_jobs": ["공방 대표", "수공예 작가", "소규모 공장", "핸드메이드 셀러"], "hashtags": ["#공방창업", "#수공예사업", "#제조업", "#핸드메이드", "#공장사장"], "insta_keywords": ["공방 대표", "수공예 작가", "제조업 사장", "핸드메이드", "퇴사 후 창업", "탈직장", "퇴사스타그램", "20대 사장", "20대 창업"], "follower_range": "2K~30K", "story_hook": "대기업/직장 그만두고 시작", "condition_count": 4, "rank": 34}, {"grade": "S", "estimated_views": 1401241, "industry": "제조/수공예", "age": "20대", "story": "반전/비밀", "revenue": "월 500만+", "title": "\"이 일은 아무도 안 해요\" 제조/수공예로 월 500만원 버는 20대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 2, "competitor_count": 10, "recruit_difficulty": 2, "recruit_note": "공방/핸드메이드 인스타 활발, 작업 과정 공유하는 사람 많음", "sub_jobs": ["공방 대표", "수공예 작가", "소규모 공장", "핸드메이드 셀러"], "hashtags": ["#공방창업", "#수공예사업", "#제조업", "#핸드메이드", "#공장사장"], "insta_keywords": ["공방 대표", "수공예 작가", "제조업 사장", "핸드메이드", "숨겨진 사업", "아무도 모르는", "20대 사장", "20대 창업"], "follower_range": "2K~30K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 4, "rank": 35}, {"grade": "A", "estimated_views": 806021, "industry": "미용/뷰티", "age": "20대", "story": "반전/비밀", "revenue": "월 3천만+", "title": "\"이 일은 아무도 안 해요\" 미용/뷰티로 월 3천만원 버는 20대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 2, "competitor_count": 2, "recruit_difficulty": 1, "recruit_note": "인스타 가장 활발한 업종 중 하나, 비포/애프터 릴스 많음", "sub_jobs": ["미용실 원장", "네일 아티스트", "속눈썹 전문점", "피부관리실 원장"], "hashtags": ["#미용실창업", "#네일아트사업", "#뷰티사업", "#속눈썹", "#피부관리"], "insta_keywords": ["미용실 원장", "네일 아티스트", "뷰티 사업", "피부관리실", "숨겨진 사업", "아무도 모르는", "20대 사장", "20대 창업"], "follower_range": "3K~50K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 4, "rank": 36}, {"grade": "A", "estimated_views": 806021, "industry": "미용/뷰티", "age": "20대", "story": "퇴사→창업", "revenue": "월 3천만+", "title": "퇴사하고 미용/뷰티 시작해서 월 3천만원 버는 20대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 2, "competitor_count": 2, "recruit_difficulty": 1, "recruit_note": "인스타 가장 활발한 업종 중 하나, 비포/애프터 릴스 많음", "sub_jobs": ["미용실 원장", "네일 아티스트", "속눈썹 전문점", "피부관리실 원장"], "hashtags": ["#미용실창업", "#네일아트사업", "#뷰티사업", "#속눈썹", "#피부관리"], "insta_keywords": ["미용실 원장", "네일 아티스트", "뷰티 사업", "피부관리실", "퇴사 후 창업", "탈직장", "퇴사스타그램", "20대 사장", "20대 창업"], "follower_range": "3K~50K", "story_hook": "대기업/직장 그만두고 시작", "condition_count": 4, "rank": 37}, {"grade": "A", "estimated_views": 744020, "industry": "미용/뷰티", "age": "30대", "story": "반전/비밀", "revenue": "월 3천만+", "title": "\"이 일은 아무도 안 해요\" 미용/뷰티로 월 3천만원 버는 30대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 2, "competitor_count": 2, "recruit_difficulty": 1, "recruit_note": "인스타 가장 활발한 업종 중 하나, 비포/애프터 릴스 많음", "sub_jobs": ["미용실 원장", "네일 아티스트", "속눈썹 전문점", "피부관리실 원장"], "hashtags": ["#미용실창업", "#네일아트사업", "#뷰티사업", "#속눈썹", "#피부관리"], "insta_keywords": ["미용실 원장", "네일 아티스트", "뷰티 사업", "피부관리실", "숨겨진 사업", "아무도 모르는", "30대 사장", "30대 창업"], "follower_range": "3K~50K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 4, "rank": 38}, {"grade": "A", "estimated_views": 744020, "industry": "미용/뷰티", "age": "30대", "story": "퇴사→창업", "revenue": "월 3천만+", "title": "퇴사하고 미용/뷰티 시작해서 월 3천만원 버는 30대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 2, "competitor_count": 2, "recruit_difficulty": 1, "recruit_note": "인스타 가장 활발한 업종 중 하나, 비포/애프터 릴스 많음", "sub_jobs": ["미용실 원장", "네일 아티스트", "속눈썹 전문점", "피부관리실 원장"], "hashtags": ["#미용실창업", "#네일아트사업", "#뷰티사업", "#속눈썹", "#피부관리"], "insta_keywords": ["미용실 원장", "네일 아티스트", "뷰티 사업", "피부관리실", "퇴사 후 창업", "탈직장", "퇴사스타그램", "30대 사장", "30대 창업"], "follower_range": "3K~50K", "story_hook": "대기업/직장 그만두고 시작", "condition_count": 4, "rank": 39}, {"grade": "A", "estimated_views": 735932, "industry": "미용/뷰티", "age": "20대", "story": "반전/비밀", "revenue": "월 1천만+", "title": "\"이 일은 아무도 안 해요\" 미용/뷰티로 월 1천만원 버는 20대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 2, "competitor_count": 2, "recruit_difficulty": 1, "recruit_note": "인스타 가장 활발한 업종 중 하나, 비포/애프터 릴스 많음", "sub_jobs": ["미용실 원장", "네일 아티스트", "속눈썹 전문점", "피부관리실 원장"], "hashtags": ["#미용실창업", "#네일아트사업", "#뷰티사업", "#속눈썹", "#피부관리"], "insta_keywords": ["미용실 원장", "네일 아티스트", "뷰티 사업", "피부관리실", "숨겨진 사업", "아무도 모르는", "20대 사장", "20대 창업"], "follower_range": "3K~50K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 4, "rank": 40}, {"grade": "A", "estimated_views": 684450, "industry": "의료/건강", "age": "20대", "story": "반전/비밀", "revenue": "월 5천만+", "title": "\"이 일은 아무도 안 해요\" 의료/건강로 월 5천만원 버는 20대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 1, "competitor_count": 3, "recruit_difficulty": 3, "recruit_note": "의사는 섭외 어려움, PT/헬스장 대표는 비교적 쉬움", "sub_jobs": ["PT 트레이너", "헬스장 대표", "필라테스 원장", "재활센터"], "hashtags": ["#병원창업", "#헬스사업", "#PT사업", "#트레이너창업"], "insta_keywords": ["PT 트레이너", "헬스장 대표", "병원 원장", "숨겨진 사업", "아무도 모르는", "20대 사장", "20대 창업"], "follower_range": "5K~100K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 4, "rank": 41}, {"grade": "A", "estimated_views": 684450, "industry": "의료/건강", "age": "20대", "story": "퇴사→창업", "revenue": "월 5천만+", "title": "퇴사하고 의료/건강 시작해서 월 5천만원 버는 20대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 1, "competitor_count": 3, "recruit_difficulty": 3, "recruit_note": "의사는 섭외 어려움, PT/헬스장 대표는 비교적 쉬움", "sub_jobs": ["PT 트레이너", "헬스장 대표", "필라테스 원장", "재활센터"], "hashtags": ["#병원창업", "#헬스사업", "#PT사업", "#트레이너창업"], "insta_keywords": ["PT 트레이너", "헬스장 대표", "병원 원장", "퇴사 후 창업", "탈직장", "퇴사스타그램", "20대 사장", "20대 창업"], "follower_range": "5K~100K", "story_hook": "대기업/직장 그만두고 시작", "condition_count": 4, "rank": 42}, {"grade": "A", "estimated_views": 631800, "industry": "의료/건강", "age": "30대", "story": "반전/비밀", "revenue": "월 5천만+", "title": "\"이 일은 아무도 안 해요\" 의료/건강로 월 5천만원 버는 30대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 1, "competitor_count": 3, "recruit_difficulty": 3, "recruit_note": "의사는 섭외 어려움, PT/헬스장 대표는 비교적 쉬움", "sub_jobs": ["PT 트레이너", "헬스장 대표", "필라테스 원장", "재활센터"], "hashtags": ["#병원창업", "#헬스사업", "#PT사업", "#트레이너창업"], "insta_keywords": ["PT 트레이너", "헬스장 대표", "병원 원장", "숨겨진 사업", "아무도 모르는", "30대 사장", "30대 창업"], "follower_range": "5K~100K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 4, "rank": 43}, {"grade": "A", "estimated_views": 631800, "industry": "의료/건강", "age": "30대", "story": "퇴사→창업", "revenue": "월 5천만+", "title": "퇴사하고 의료/건강 시작해서 월 5천만원 버는 30대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 1, "competitor_count": 3, "recruit_difficulty": 3, "recruit_note": "의사는 섭외 어려움, PT/헬스장 대표는 비교적 쉬움", "sub_jobs": ["PT 트레이너", "헬스장 대표", "필라테스 원장", "재활센터"], "hashtags": ["#병원창업", "#헬스사업", "#PT사업", "#트레이너창업"], "insta_keywords": ["PT 트레이너", "헬스장 대표", "병원 원장", "퇴사 후 창업", "탈직장", "퇴사스타그램", "30대 사장", "30대 창업"], "follower_range": "5K~100K", "story_hook": "대기업/직장 그만두고 시작", "condition_count": 4, "rank": 44}, {"grade": "A", "estimated_views": 617195, "industry": "의료/건강", "age": "20대", "story": "밀착/하루", "revenue": "월 5천만+", "title": "월 5천만원 버는 20대 의료/건강 사장님의 하루", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 1, "competitor_count": 3, "recruit_difficulty": 3, "recruit_note": "의사는 섭외 어려움, PT/헬스장 대표는 비교적 쉬움", "sub_jobs": ["PT 트레이너", "헬스장 대표", "필라테스 원장", "재활센터"], "hashtags": ["#병원창업", "#헬스사업", "#PT사업", "#트레이너창업"], "insta_keywords": ["PT 트레이너", "헬스장 대표", "병원 원장", "사장 일상", "하루 루틴", "브이로그", "20대 사장", "20대 창업"], "follower_range": "5K~100K", "story_hook": "사장님의 리얼 하루", "condition_count": 4, "rank": 45}, {"grade": "B", "estimated_views": 254673, "industry": "물류/배달", "age": "20대", "story": "반전/비밀", "revenue": "월 1천만+", "title": "\"이 일은 아무도 안 해요\" 물류/배달로 월 1천만원 버는 20대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 1, "competitor_count": 5, "recruit_difficulty": 4, "recruit_note": "인스타 활동 거의 없음, 유튜브 브이로그 채널에서 찾기", "sub_jobs": ["택배 사업", "화물 기사", "배달대행 사장", "물류센터 운영"], "hashtags": ["#택배사업", "#물류창업", "#화물기사", "#배달사업"], "insta_keywords": ["택배 사업", "물류 대표", "화물 기사", "배달 사장", "숨겨진 사업", "아무도 모르는", "20대 사장", "20대 창업"], "follower_range": "1K~10K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 4, "rank": 46}, {"grade": "B", "estimated_views": 254673, "industry": "물류/배달", "age": "20대", "story": "퇴사→창업", "revenue": "월 1천만+", "title": "퇴사하고 물류/배달 시작해서 월 1천만원 버는 20대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 1, "competitor_count": 5, "recruit_difficulty": 4, "recruit_note": "인스타 활동 거의 없음, 유튜브 브이로그 채널에서 찾기", "sub_jobs": ["택배 사업", "화물 기사", "배달대행 사장", "물류센터 운영"], "hashtags": ["#택배사업", "#물류창업", "#화물기사", "#배달사업"], "insta_keywords": ["택배 사업", "물류 대표", "화물 기사", "배달 사장", "퇴사 후 창업", "탈직장", "퇴사스타그램", "20대 사장", "20대 창업"], "follower_range": "1K~10K", "story_hook": "대기업/직장 그만두고 시작", "condition_count": 4, "rank": 47}, {"grade": "B", "estimated_views": 242546, "industry": "물류/배달", "age": "20대", "story": "반전/비밀", "revenue": "월 300만+", "title": "\"이 일은 아무도 안 해요\" 물류/배달로 월 300만원 버는 20대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 1, "competitor_count": 5, "recruit_difficulty": 4, "recruit_note": "인스타 활동 거의 없음, 유튜브 브이로그 채널에서 찾기", "sub_jobs": ["택배 사업", "화물 기사", "배달대행 사장", "물류센터 운영"], "hashtags": ["#택배사업", "#물류창업", "#화물기사", "#배달사업"], "insta_keywords": ["택배 사업", "물류 대표", "화물 기사", "배달 사장", "숨겨진 사업", "아무도 모르는", "20대 사장", "20대 창업"], "follower_range": "1K~10K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 4, "rank": 48}, {"grade": "B", "estimated_views": 242546, "industry": "물류/배달", "age": "20대", "story": "퇴사→창업", "revenue": "월 300만+", "title": "퇴사하고 물류/배달 시작해서 월 300만원 버는 20대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 1, "competitor_count": 5, "recruit_difficulty": 4, "recruit_note": "인스타 활동 거의 없음, 유튜브 브이로그 채널에서 찾기", "sub_jobs": ["택배 사업", "화물 기사", "배달대행 사장", "물류센터 운영"], "hashtags": ["#택배사업", "#물류창업", "#화물기사", "#배달사업"], "insta_keywords": ["택배 사업", "물류 대표", "화물 기사", "배달 사장", "퇴사 후 창업", "탈직장", "퇴사스타그램", "20대 사장", "20대 창업"], "follower_range": "1K~10K", "story_hook": "대기업/직장 그만두고 시작", "condition_count": 4, "rank": 49}, {"grade": "B", "estimated_views": 242546, "industry": "물류/배달", "age": "20대", "story": "반전/비밀", "revenue": "월 500만+", "title": "\"이 일은 아무도 안 해요\" 물류/배달로 월 500만원 버는 20대", "saturation": "블루오션", "saturation_code": "BLUE", "sajjiknam_count": 1, "competitor_count": 5, "recruit_difficulty": 4, "recruit_note": "인스타 활동 거의 없음, 유튜브 브이로그 채널에서 찾기", "sub_jobs": ["택배 사업", "화물 기사", "배달대행 사장", "물류센터 운영"], "hashtags": ["#택배사업", "#물류창업", "#화물기사", "#배달사업"], "insta_keywords": ["택배 사업", "물류 대표", "화물 기사", "배달 사장", "숨겨진 사업", "아무도 모르는", "20대 사장", "20대 창업"], "follower_range": "1K~10K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 4, "rank": 50}, {"grade": "S+", "estimated_views": 5618773, "industry": "농수산/귀농", "age": "20대", "story": "반전/비밀", "revenue": "월 3천만+", "title": "\"이 일은 아무도 안 해요\" 농수산/귀농로 월 3천만원 버는 20대", "saturation": "적정", "saturation_code": "OK", "sajjiknam_count": 3, "competitor_count": 4, "recruit_difficulty": 3, "recruit_note": "인스타 활동 적은 편, 유튜브/블로그 병행자 노리기", "sub_jobs": ["스마트팜 운영", "과수원 사장", "축산업", "수산양식", "농산물 직거래"], "hashtags": ["#귀농일기", "#귀농생활", "#스마트팜", "#농사일기", "#청년농부", "#귀촌"], "insta_keywords": ["귀농 생활", "청년 농부", "스마트팜", "귀농 부부", "농장 운영", "숨겨진 사업", "아무도 모르는", "20대 사장", "20대 창업"], "follower_range": "1K~30K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 3, "rank": 51}, {"grade": "S+", "estimated_views": 5618773, "industry": "농수산/귀농", "age": "20대", "story": "퇴사→창업", "revenue": "월 3천만+", "title": "퇴사하고 농수산/귀농 시작해서 월 3천만원 버는 20대", "saturation": "적정", "saturation_code": "OK", "sajjiknam_count": 3, "competitor_count": 4, "recruit_difficulty": 3, "recruit_note": "인스타 활동 적은 편, 유튜브/블로그 병행자 노리기", "sub_jobs": ["스마트팜 운영", "과수원 사장", "축산업", "수산양식", "농산물 직거래"], "hashtags": ["#귀농일기", "#귀농생활", "#스마트팜", "#농사일기", "#청년농부", "#귀촌"], "insta_keywords": ["귀농 생활", "청년 농부", "스마트팜", "귀농 부부", "농장 운영", "퇴사 후 창업", "탈직장", "퇴사스타그램", "20대 사장", "20대 창업"], "follower_range": "1K~30K", "story_hook": "대기업/직장 그만두고 시작", "condition_count": 3, "rank": 52}, {"grade": "S+", "estimated_views": 5186560, "industry": "농수산/귀농", "age": "30대", "story": "반전/비밀", "revenue": "월 3천만+", "title": "\"이 일은 아무도 안 해요\" 농수산/귀농로 월 3천만원 버는 30대", "saturation": "적정", "saturation_code": "OK", "sajjiknam_count": 3, "competitor_count": 4, "recruit_difficulty": 3, "recruit_note": "인스타 활동 적은 편, 유튜브/블로그 병행자 노리기", "sub_jobs": ["스마트팜 운영", "과수원 사장", "축산업", "수산양식", "농산물 직거래"], "hashtags": ["#귀농일기", "#귀농생활", "#스마트팜", "#농사일기", "#청년농부", "#귀촌"], "insta_keywords": ["귀농 생활", "청년 농부", "스마트팜", "귀농 부부", "농장 운영", "숨겨진 사업", "아무도 모르는", "30대 사장", "30대 창업"], "follower_range": "1K~30K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 3, "rank": 53}, {"grade": "S+", "estimated_views": 5186560, "industry": "농수산/귀농", "age": "30대", "story": "퇴사→창업", "revenue": "월 3천만+", "title": "퇴사하고 농수산/귀농 시작해서 월 3천만원 버는 30대", "saturation": "적정", "saturation_code": "OK", "sajjiknam_count": 3, "competitor_count": 4, "recruit_difficulty": 3, "recruit_note": "인스타 활동 적은 편, 유튜브/블로그 병행자 노리기", "sub_jobs": ["스마트팜 운영", "과수원 사장", "축산업", "수산양식", "농산물 직거래"], "hashtags": ["#귀농일기", "#귀농생활", "#스마트팜", "#농사일기", "#청년농부", "#귀촌"], "insta_keywords": ["귀농 생활", "청년 농부", "스마트팜", "귀농 부부", "농장 운영", "퇴사 후 창업", "탈직장", "퇴사스타그램", "30대 사장", "30대 창업"], "follower_range": "1K~30K", "story_hook": "대기업/직장 그만두고 시작", "condition_count": 3, "rank": 54}, {"grade": "S+", "estimated_views": 5130184, "industry": "농수산/귀농", "age": "20대", "story": "반전/비밀", "revenue": "월 1천만+", "title": "\"이 일은 아무도 안 해요\" 농수산/귀농로 월 1천만원 버는 20대", "saturation": "적정", "saturation_code": "OK", "sajjiknam_count": 3, "competitor_count": 4, "recruit_difficulty": 3, "recruit_note": "인스타 활동 적은 편, 유튜브/블로그 병행자 노리기", "sub_jobs": ["스마트팜 운영", "과수원 사장", "축산업", "수산양식", "농산물 직거래"], "hashtags": ["#귀농일기", "#귀농생활", "#스마트팜", "#농사일기", "#청년농부", "#귀촌"], "insta_keywords": ["귀농 생활", "청년 농부", "스마트팜", "귀농 부부", "농장 운영", "숨겨진 사업", "아무도 모르는", "20대 사장", "20대 창업"], "follower_range": "1K~30K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 3, "rank": 55}, {"grade": "S", "estimated_views": 1923419, "industry": "온라인판매", "age": "20대", "story": "반전/비밀", "revenue": "월 5천만+", "title": "\"이 일은 아무도 안 해요\" 온라인판매로 월 5천만원 버는 20대", "saturation": "적정", "saturation_code": "OK", "sajjiknam_count": 4, "competitor_count": 12, "recruit_difficulty": 1, "recruit_note": "인스타 마케팅 활발, DM 섭외 가장 쉬운 업종", "sub_jobs": ["스마트스토어 셀러", "쿠팡 셀러", "쇼핑몰 대표", "위탁판매", "해외구매대행"], "hashtags": ["#스마트스토어", "#온라인셀러", "#쇼핑몰창업", "#위탁판매", "#쿠팡셀러"], "insta_keywords": ["스마트스토어 셀러", "온라인 판매", "쇼핑몰 대표", "쿠팡 셀러", "숨겨진 사업", "아무도 모르는", "20대 사장", "20대 창업"], "follower_range": "3K~50K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 3, "rank": 56}, {"grade": "S", "estimated_views": 1923419, "industry": "온라인판매", "age": "20대", "story": "퇴사→창업", "revenue": "월 5천만+", "title": "퇴사하고 온라인판매 시작해서 월 5천만원 버는 20대", "saturation": "적정", "saturation_code": "OK", "sajjiknam_count": 4, "competitor_count": 12, "recruit_difficulty": 1, "recruit_note": "인스타 마케팅 활발, DM 섭외 가장 쉬운 업종", "sub_jobs": ["스마트스토어 셀러", "쿠팡 셀러", "쇼핑몰 대표", "위탁판매", "해외구매대행"], "hashtags": ["#스마트스토어", "#온라인셀러", "#쇼핑몰창업", "#위탁판매", "#쿠팡셀러"], "insta_keywords": ["스마트스토어 셀러", "온라인 판매", "쇼핑몰 대표", "쿠팡 셀러", "퇴사 후 창업", "탈직장", "퇴사스타그램", "20대 사장", "20대 창업"], "follower_range": "3K~50K", "story_hook": "대기업/직장 그만두고 시작", "condition_count": 3, "rank": 57}, {"grade": "S", "estimated_views": 1775463, "industry": "온라인판매", "age": "30대", "story": "반전/비밀", "revenue": "월 5천만+", "title": "\"이 일은 아무도 안 해요\" 온라인판매로 월 5천만원 버는 30대", "saturation": "적정", "saturation_code": "OK", "sajjiknam_count": 4, "competitor_count": 12, "recruit_difficulty": 1, "recruit_note": "인스타 마케팅 활발, DM 섭외 가장 쉬운 업종", "sub_jobs": ["스마트스토어 셀러", "쿠팡 셀러", "쇼핑몰 대표", "위탁판매", "해외구매대행"], "hashtags": ["#스마트스토어", "#온라인셀러", "#쇼핑몰창업", "#위탁판매", "#쿠팡셀러"], "insta_keywords": ["스마트스토어 셀러", "온라인 판매", "쇼핑몰 대표", "쿠팡 셀러", "숨겨진 사업", "아무도 모르는", "30대 사장", "30대 창업"], "follower_range": "3K~50K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 3, "rank": 58}, {"grade": "S", "estimated_views": 1775463, "industry": "온라인판매", "age": "30대", "story": "퇴사→창업", "revenue": "월 5천만+", "title": "퇴사하고 온라인판매 시작해서 월 5천만원 버는 30대", "saturation": "적정", "saturation_code": "OK", "sajjiknam_count": 4, "competitor_count": 12, "recruit_difficulty": 1, "recruit_note": "인스타 마케팅 활발, DM 섭외 가장 쉬운 업종", "sub_jobs": ["스마트스토어 셀러", "쿠팡 셀러", "쇼핑몰 대표", "위탁판매", "해외구매대행"], "hashtags": ["#스마트스토어", "#온라인셀러", "#쇼핑몰창업", "#위탁판매", "#쿠팡셀러"], "insta_keywords": ["스마트스토어 셀러", "온라인 판매", "쇼핑몰 대표", "쿠팡 셀러", "퇴사 후 창업", "탈직장", "퇴사스타그램", "30대 사장", "30대 창업"], "follower_range": "3K~50K", "story_hook": "대기업/직장 그만두고 시작", "condition_count": 3, "rank": 59}, {"grade": "S", "estimated_views": 1734424, "industry": "온라인판매", "age": "20대", "story": "밀착/하루", "revenue": "월 5천만+", "title": "월 5천만원 버는 20대 온라인판매 사장님의 하루", "saturation": "적정", "saturation_code": "OK", "sajjiknam_count": 4, "competitor_count": 12, "recruit_difficulty": 1, "recruit_note": "인스타 마케팅 활발, DM 섭외 가장 쉬운 업종", "sub_jobs": ["스마트스토어 셀러", "쿠팡 셀러", "쇼핑몰 대표", "위탁판매", "해외구매대행"], "hashtags": ["#스마트스토어", "#온라인셀러", "#쇼핑몰창업", "#위탁판매", "#쿠팡셀러"], "insta_keywords": ["스마트스토어 셀러", "온라인 판매", "쇼핑몰 대표", "쿠팡 셀러", "사장 일상", "하루 루틴", "브이로그", "20대 사장", "20대 창업"], "follower_range": "3K~50K", "story_hook": "사장님의 리얼 하루", "condition_count": 3, "rank": 60}, {"grade": "A", "estimated_views": 906626, "industry": "부동산/임대", "age": "20대", "story": "반전/비밀", "revenue": "월 3천만+", "title": "\"이 일은 아무도 안 해요\" 부동산/임대로 월 3천만원 버는 20대", "saturation": "적정", "saturation_code": "OK", "sajjiknam_count": 5, "competitor_count": 25, "recruit_difficulty": 4, "recruit_note": "프라이버시 중시, 수익 공개 꺼리는 경우 많음", "sub_jobs": ["고시원 사장", "모텔/숙박 운영", "건물 임대", "에어비앤비 호스트", "공유오피스"], "hashtags": ["#부동산투자", "#건물주", "#임대사업", "#고시원사장", "#모텔운영"], "insta_keywords": ["건물주", "임대사업", "부동산 투자", "숙박 운영", "숨겨진 사업", "아무도 모르는", "20대 사장", "20대 창업"], "follower_range": "1K~20K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 3, "rank": 61}, {"grade": "A", "estimated_views": 906626, "industry": "부동산/임대", "age": "20대", "story": "퇴사→창업", "revenue": "월 3천만+", "title": "퇴사하고 부동산/임대 시작해서 월 3천만원 버는 20대", "saturation": "적정", "saturation_code": "OK", "sajjiknam_count": 5, "competitor_count": 25, "recruit_difficulty": 4, "recruit_note": "프라이버시 중시, 수익 공개 꺼리는 경우 많음", "sub_jobs": ["고시원 사장", "모텔/숙박 운영", "건물 임대", "에어비앤비 호스트", "공유오피스"], "hashtags": ["#부동산투자", "#건물주", "#임대사업", "#고시원사장", "#모텔운영"], "insta_keywords": ["건물주", "임대사업", "부동산 투자", "숙박 운영", "퇴사 후 창업", "탈직장", "퇴사스타그램", "20대 사장", "20대 창업"], "follower_range": "1K~20K", "story_hook": "대기업/직장 그만두고 시작", "condition_count": 3, "rank": 62}, {"grade": "A", "estimated_views": 836885, "industry": "부동산/임대", "age": "30대", "story": "반전/비밀", "revenue": "월 3천만+", "title": "\"이 일은 아무도 안 해요\" 부동산/임대로 월 3천만원 버는 30대", "saturation": "적정", "saturation_code": "OK", "sajjiknam_count": 5, "competitor_count": 25, "recruit_difficulty": 4, "recruit_note": "프라이버시 중시, 수익 공개 꺼리는 경우 많음", "sub_jobs": ["고시원 사장", "모텔/숙박 운영", "건물 임대", "에어비앤비 호스트", "공유오피스"], "hashtags": ["#부동산투자", "#건물주", "#임대사업", "#고시원사장", "#모텔운영"], "insta_keywords": ["건물주", "임대사업", "부동산 투자", "숙박 운영", "숨겨진 사업", "아무도 모르는", "30대 사장", "30대 창업"], "follower_range": "1K~20K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 3, "rank": 63}, {"grade": "A", "estimated_views": 836885, "industry": "부동산/임대", "age": "30대", "story": "퇴사→창업", "revenue": "월 3천만+", "title": "퇴사하고 부동산/임대 시작해서 월 3천만원 버는 30대", "saturation": "적정", "saturation_code": "OK", "sajjiknam_count": 5, "competitor_count": 25, "recruit_difficulty": 4, "recruit_note": "프라이버시 중시, 수익 공개 꺼리는 경우 많음", "sub_jobs": ["고시원 사장", "모텔/숙박 운영", "건물 임대", "에어비앤비 호스트", "공유오피스"], "hashtags": ["#부동산투자", "#건물주", "#임대사업", "#고시원사장", "#모텔운영"], "insta_keywords": ["건물주", "임대사업", "부동산 투자", "숙박 운영", "퇴사 후 창업", "탈직장", "퇴사스타그램", "30대 사장", "30대 창업"], "follower_range": "1K~20K", "story_hook": "대기업/직장 그만두고 시작", "condition_count": 3, "rank": 64}, {"grade": "A", "estimated_views": 827789, "industry": "부동산/임대", "age": "20대", "story": "반전/비밀", "revenue": "월 1천만+", "title": "\"이 일은 아무도 안 해요\" 부동산/임대로 월 1천만원 버는 20대", "saturation": "적정", "saturation_code": "OK", "sajjiknam_count": 5, "competitor_count": 25, "recruit_difficulty": 4, "recruit_note": "프라이버시 중시, 수익 공개 꺼리는 경우 많음", "sub_jobs": ["고시원 사장", "모텔/숙박 운영", "건물 임대", "에어비앤비 호스트", "공유오피스"], "hashtags": ["#부동산투자", "#건물주", "#임대사업", "#고시원사장", "#모텔운영"], "insta_keywords": ["건물주", "임대사업", "부동산 투자", "숙박 운영", "숨겨진 사업", "아무도 모르는", "20대 사장", "20대 창업"], "follower_range": "1K~20K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 3, "rank": 65}, {"grade": "B", "estimated_views": 185406, "industry": "식당/카페", "age": "20대", "story": "반전/비밀", "revenue": "월 3천만+", "title": "\"이 일은 아무도 안 해요\" 식당/카페로 월 3천만원 버는 20대", "saturation": "포화 주의", "saturation_code": "SATURATED", "sajjiknam_count": 8, "competitor_count": 14, "recruit_difficulty": 1, "recruit_note": "인스타 계정 가장 많은 업종, 홍보 목적 출연 의향 높음", "sub_jobs": ["카페 사장", "식당 대표", "셰프", "프랜차이즈 점주", "푸드트럭"], "hashtags": ["#카페창업", "#식당창업", "#요리사", "#자영업자", "#치킨집"], "insta_keywords": ["카페 사장", "식당 대표", "셰프 창업", "치킨집 사장", "숨겨진 사업", "아무도 모르는", "20대 사장", "20대 창업"], "follower_range": "1K~20K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 3, "rank": 66}, {"grade": "B", "estimated_views": 185406, "industry": "식당/카페", "age": "20대", "story": "퇴사→창업", "revenue": "월 3천만+", "title": "퇴사하고 식당/카페 시작해서 월 3천만원 버는 20대", "saturation": "포화 주의", "saturation_code": "SATURATED", "sajjiknam_count": 8, "competitor_count": 14, "recruit_difficulty": 1, "recruit_note": "인스타 계정 가장 많은 업종, 홍보 목적 출연 의향 높음", "sub_jobs": ["카페 사장", "식당 대표", "셰프", "프랜차이즈 점주", "푸드트럭"], "hashtags": ["#카페창업", "#식당창업", "#요리사", "#자영업자", "#치킨집"], "insta_keywords": ["카페 사장", "식당 대표", "셰프 창업", "치킨집 사장", "퇴사 후 창업", "탈직장", "퇴사스타그램", "20대 사장", "20대 창업"], "follower_range": "1K~20K", "story_hook": "대기업/직장 그만두고 시작", "condition_count": 3, "rank": 67}, {"grade": "B", "estimated_views": 171144, "industry": "식당/카페", "age": "30대", "story": "반전/비밀", "revenue": "월 3천만+", "title": "\"이 일은 아무도 안 해요\" 식당/카페로 월 3천만원 버는 30대", "saturation": "포화 주의", "saturation_code": "SATURATED", "sajjiknam_count": 8, "competitor_count": 14, "recruit_difficulty": 1, "recruit_note": "인스타 계정 가장 많은 업종, 홍보 목적 출연 의향 높음", "sub_jobs": ["카페 사장", "식당 대표", "셰프", "프랜차이즈 점주", "푸드트럭"], "hashtags": ["#카페창업", "#식당창업", "#요리사", "#자영업자", "#치킨집"], "insta_keywords": ["카페 사장", "식당 대표", "셰프 창업", "치킨집 사장", "숨겨진 사업", "아무도 모르는", "30대 사장", "30대 창업"], "follower_range": "1K~20K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 3, "rank": 68}, {"grade": "B", "estimated_views": 171144, "industry": "식당/카페", "age": "30대", "story": "퇴사→창업", "revenue": "월 3천만+", "title": "퇴사하고 식당/카페 시작해서 월 3천만원 버는 30대", "saturation": "포화 주의", "saturation_code": "SATURATED", "sajjiknam_count": 8, "competitor_count": 14, "recruit_difficulty": 1, "recruit_note": "인스타 계정 가장 많은 업종, 홍보 목적 출연 의향 높음", "sub_jobs": ["카페 사장", "식당 대표", "셰프", "프랜차이즈 점주", "푸드트럭"], "hashtags": ["#카페창업", "#식당창업", "#요리사", "#자영업자", "#치킨집"], "insta_keywords": ["카페 사장", "식당 대표", "셰프 창업", "치킨집 사장", "퇴사 후 창업", "탈직장", "퇴사스타그램", "30대 사장", "30대 창업"], "follower_range": "1K~20K", "story_hook": "대기업/직장 그만두고 시작", "condition_count": 3, "rank": 69}, {"grade": "B", "estimated_views": 169284, "industry": "식당/카페", "age": "20대", "story": "반전/비밀", "revenue": "월 1천만+", "title": "\"이 일은 아무도 안 해요\" 식당/카페로 월 1천만원 버는 20대", "saturation": "포화 주의", "saturation_code": "SATURATED", "sajjiknam_count": 8, "competitor_count": 14, "recruit_difficulty": 1, "recruit_note": "인스타 계정 가장 많은 업종, 홍보 목적 출연 의향 높음", "sub_jobs": ["카페 사장", "식당 대표", "셰프", "프랜차이즈 점주", "푸드트럭"], "hashtags": ["#카페창업", "#식당창업", "#요리사", "#자영업자", "#치킨집"], "insta_keywords": ["카페 사장", "식당 대표", "셰프 창업", "치킨집 사장", "숨겨진 사업", "아무도 모르는", "20대 사장", "20대 창업"], "follower_range": "1K~20K", "story_hook": "남들 모르는 숨겨진 수익", "condition_count": 3, "rank": 70}];
+
+// ── 상태 ──
+let activeFilters = {
+  saturation: 'all',
+  grade: 'all',
+  industry: 'all',
+};
+
+// ── 유틸 ──
+function formatViews(n) {
+  if (n >= 10000000) return (n/10000000).toFixed(1) + '천만';
+  if (n >= 10000) return (n/10000).toFixed(0) + '만';
+  return n.toLocaleString();
+}
+
+function diffStars(level) {
+  return '★'.repeat(level) + '☆'.repeat(5 - level);
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+function copyText(text) {
+  navigator.clipboard.writeText(text).then(() => showToast('DM 문구 복사됨!'));
+}
+
+// ── 통계 ──
+function renderStats() {
+  const total = RAW_DATA.length;
+  const grades = {};
+  RAW_DATA.forEach(d => { grades[d.grade] = (grades[d.grade]||0) + 1; });
+  const blueOcean = new Set(RAW_DATA.filter(d => ['VIRGIN','BLUE'].includes(d.saturation_code)).map(d => d.industry)).size;
+  const avgViews = Math.round(RAW_DATA.reduce((s,d) => s + d.estimated_views, 0) / total);
+
+  document.getElementById('statsGrid').innerHTML = `
+    <div class="stat-card"><div class="number">${total}</div><div class="label">전체 조합 수</div></div>
+    <div class="stat-card"><div class="number" style="color:var(--purple)">${grades['S+']||0}</div><div class="label">S+ 등급</div></div>
+    <div class="stat-card"><div class="number" style="color:var(--green)">${blueOcean}</div><div class="label">블루오션 업종</div></div>
+    <div class="stat-card"><div class="number" style="color:var(--orange)">${formatViews(avgViews)}</div><div class="label">평균 예상 조회수</div></div>
+  `;
+}
+
+// ── 우선순위 ──
+function renderPriority() {
+  const p1 = [], p2 = [], p3 = [], p4 = [];
+  Object.entries(INDUSTRIES).forEach(([name, meta]) => {
+    const sat = meta.sajjiknam <= 2;
+    if (sat && meta.difficulty <= 2) p1.push(name);
+    else if (sat && meta.difficulty === 3) p2.push(name);
+    else if (sat && meta.difficulty >= 4) p3.push(name);
+    else if (meta.sajjiknam >= 6) p4.push(name);
+  });
+
+  document.getElementById('prioritySection').innerHTML = `
+    <h2>섭외 우선순위</h2>
+    <ul class="priority-list">
+      <li class="p1"><span class="priority-label">1순위</span><span>블루오션 + 섭외 쉬움: ${p1.join(', ')}</span></li>
+      <li class="p2"><span class="priority-label">2순위</span><span>블루오션 + 섭외 보통: ${p2.join(', ')}</span></li>
+      <li class="p3"><span class="priority-label">3순위</span><span>블루오션 + 섭외 어려움: ${p3.join(', ')}</span></li>
+      <li class="p4"><span class="priority-label">비추천</span><span>포화: ${p4.join(', ') || '없음'}</span></li>
+    </ul>
+  `;
+}
+
+// ── 포화도 맵 ──
+function renderSatMap() {
+  const grid = document.getElementById('satGrid');
+  const sorted = Object.entries(INDUSTRIES).sort((a,b) => a[1].sajjiknam - b[1].sajjiknam);
+
+  grid.innerHTML = sorted.map(([name, meta]) => {
+    let satCode, satLabel;
+    if (meta.sajjiknam === 0) { satCode = 'VIRGIN'; satLabel = '미개척'; }
+    else if (meta.sajjiknam <= 2) { satCode = 'BLUE'; satLabel = '블루오션'; }
+    else if (meta.sajjiknam <= 5) { satCode = 'OK'; satLabel = '적정'; }
+    else { satCode = 'SATURATED'; satLabel = '포화'; }
+
+    return `
+      <div class="sat-row" onclick="filterByIndustry('${name}')">
+        <span class="icon">${meta.icon}</span>
+        <span class="name">${name}</span>
+        <span class="counts">
+          <span>사찍남 ${meta.sajjiknam}</span>
+          <span>경쟁 ${meta.competitor}</span>
+        </span>
+        <span class="sat-badge sat-${satCode}">${satLabel}</span>
+        <span class="diff-stars">${diffStars(meta.difficulty)}</span>
+      </div>
+    `;
+  }).join('');
+}
+
+// ── 필터 바 ──
+function renderFilters() {
+  const bar = document.getElementById('filterBar');
+
+  const satOptions = [
+    ['all', '전체'],
+    ['VIRGIN', '미개척'],
+    ['BLUE', '블루오션'],
+    ['OK', '적정'],
+    ['SATURATED', '포화'],
+  ];
+  const gradeOptions = [
+    ['all', '전체'],
+    ['S+', 'S+'],
+    ['S', 'S'],
+    ['A', 'A'],
+    ['B', 'B+이하'],
+  ];
+
+  bar.innerHTML = `
+    <span class="filter-section-label">포화도:</span>
+    ${satOptions.map(([v,l]) => `<button class="filter-btn ${activeFilters.saturation===v?'active':''}" onclick="setSatFilter('${v}')">${l}</button>`).join('')}
+    <span class="filter-section-label" style="margin-left:12px">등급:</span>
+    ${gradeOptions.map(([v,l]) => `<button class="filter-btn ${activeFilters.grade===v?'active':''}" onclick="setGradeFilter('${v}')">${l}</button>`).join('')}
+    ${activeFilters.industry !== 'all' ? `<button class="filter-btn active" onclick="filterByIndustry('all')" style="margin-left:12px">✕ ${activeFilters.industry}</button>` : ''}
+  `;
+}
+
+function setSatFilter(v) {
+  activeFilters.saturation = v;
+  renderFilters();
+  renderCards();
+}
+
+function setGradeFilter(v) {
+  activeFilters.grade = v;
+  renderFilters();
+  renderCards();
+}
+
+function filterByIndustry(name) {
+  activeFilters.industry = name === activeFilters.industry ? 'all' : name;
+  renderFilters();
+  renderCards();
+}
+
+// ── 필터 적용 ──
+function getFilteredData() {
+  return RAW_DATA.filter(d => {
+    if (activeFilters.saturation !== 'all' && d.saturation_code !== activeFilters.saturation) return false;
+    if (activeFilters.grade !== 'all') {
+      if (activeFilters.grade === 'B') {
+        if (!['B','C'].includes(d.grade)) return false;
+      } else {
+        if (d.grade !== activeFilters.grade) return false;
+      }
+    }
+    if (activeFilters.industry !== 'all' && d.industry !== activeFilters.industry) return false;
+    return true;
+  });
+}
+
+// ── 섭외 카드 ──
+function renderCards() {
+  const filtered = getFilteredData();
+  const grid = document.getElementById('castingGrid');
+  const title = document.getElementById('cardsTitle');
+
+  title.textContent = activeFilters.industry !== 'all'
+    ? `${activeFilters.industry} 섭외 카드 (${filtered.length}개)`
+    : `전체 섭외 카드 (${filtered.length}개)`;
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '<p style="color:var(--text2);padding:40px;text-align:center">해당 조건에 맞는 조합이 없습니다.</p>';
+    return;
+  }
+
+  grid.innerHTML = filtered.map((d, i) => {
+    const meta = INDUSTRIES[d.industry] || {};
+    const gradeClass = d.grade === 'S+' ? 'SP' : d.grade;
+    const gradeText = d.grade;
+    const dmText = `안녕하세요, 유튜브 사찍남 제작팀입니다.\n${d.industry} 사장님의 이야기를 영상으로 만들고 싶어 연락드립니다.\n예상 조회수 ${d.estimated_views.toLocaleString()}회 규모의 콘텐츠입니다.\n간단한 통화 가능하실까요?`;
+
+    return `
+      <div class="casting-card">
+        <div class="card-header">
+          <div class="grade-badge grade-${gradeClass}">${gradeText}</div>
+          <div class="card-header-info">
+            <div class="views">${formatViews(d.estimated_views)}회</div>
+            <div class="combo">${d.age} · ${d.story} · ${d.revenue}</div>
+          </div>
+          <span class="industry-tag" style="background:${meta.color||'#666'}">${meta.icon||''} ${d.industry}</span>
+        </div>
+        <div class="card-body">
+          <div class="card-title">${d.title}</div>
+          <div class="card-meta">
+            <div class="meta-item"><strong>훅:</strong> ${d.story_hook}</div>
+            <div class="meta-item"><strong>포화도:</strong> <span class="sat-badge sat-${d.saturation_code}" style="font-size:10px">${d.saturation}</span></div>
+            <div class="meta-item"><strong>갭:</strong> 사찍남 ${d.sajjiknam_count} vs 경쟁 ${d.competitor_count}</div>
+            <div class="meta-item"><strong>섭외:</strong> <span class="diff-stars">${diffStars(d.recruit_difficulty)}</span></div>
+          </div>
+
+          <div class="card-insta">
+            <div class="card-insta-title">Instagram 섭외 가이드</div>
+            <div class="tag-list">
+              ${(d.hashtags||[]).slice(0,5).map(h => `<span class="tag">${h}</span>`).join('')}
+            </div>
+            <div class="tag-list">
+              ${(d.insta_keywords||[]).slice(0,5).map(k => `<span class="tag kw-tag">${k}</span>`).join('')}
+            </div>
+            <div class="follower-info">타겟 팔로워: ${d.follower_range} · ${d.recruit_note}</div>
+            ${(d.sub_jobs||[]).length ? `<div class="follower-info" style="margin-top:4px">찾을 직종: ${d.sub_jobs.join(' / ')}</div>` : ''}
+          </div>
+
+          <div class="dm-template">
+            <button class="copy-btn" onclick="copyText(\`${dmText.replace(/`/g,"'")}\`)">복사</button>
+            <div style="white-space:pre-line">${dmText}</div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// ── 초기화 ──
+renderStats();
+renderPriority();
+renderSatMap();
+renderFilters();
+renderCards();
+</script>
+</body>
+</html>
