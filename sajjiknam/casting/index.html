@@ -552,6 +552,117 @@ table.sat-table tr:last-child td { border-bottom: none; }
 .kw-warm { background: #fefcbf; color: #975a16; }
 .kw-cool { background: #bee3f8; color: #2a4365; }
 
+/* 섭외 후보 리스트 */
+.prospect-section {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+.prospect-section h3 {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--purple);
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.prospect-list { margin-bottom: 10px; }
+.prospect-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  margin-bottom: 6px;
+  font-size: 12px;
+  transition: all .15s;
+}
+.prospect-item:hover { border-color: var(--purple); }
+.prospect-item .pi-handle {
+  font-weight: 700;
+  color: var(--purple);
+  text-decoration: none;
+  min-width: 100px;
+}
+.prospect-item .pi-handle:hover { text-decoration: underline; }
+.prospect-item .pi-name { color: var(--text); min-width: 60px; }
+.prospect-item .pi-followers { color: var(--text2); min-width: 60px; }
+.prospect-item .pi-note { color: var(--text2); flex: 1; }
+.prospect-item .pi-status {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.ps-대기 { background: #fefcbf; color: #975a16; }
+.ps-연락함 { background: #bee3f8; color: #2a4365; }
+.ps-확정 { background: #c6f6d5; color: #276749; }
+.ps-거절 { background: #fed7d7; color: #9b2c2c; }
+.prospect-item .pi-del {
+  color: var(--text2);
+  cursor: pointer;
+  font-size: 14px;
+  opacity: 0.5;
+  padding: 0 4px;
+}
+.prospect-item .pi-del:hover { opacity: 1; color: var(--red); }
+.add-prospect-form {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.add-prospect-form input, .add-prospect-form select {
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 12px;
+  font-family: inherit;
+}
+.add-prospect-form input:focus, .add-prospect-form select:focus {
+  outline: none;
+  border-color: var(--purple);
+}
+.add-prospect-form button {
+  padding: 6px 14px;
+  background: var(--purple);
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.add-prospect-form button:hover { opacity: 0.85; }
+
+/* 전체 섭외 리스트 버튼 */
+.export-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+.export-btn {
+  padding: 8px 18px;
+  background: var(--purple);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+}
+.export-btn:hover { opacity: 0.85; }
+.export-count {
+  font-size: 13px;
+  color: var(--text2);
+}
+
 /* 딥 분석 */
 .deep-row {
   display: flex;
@@ -610,6 +721,11 @@ table.sat-table tr:last-child td { border-bottom: none; }
     <span>3개 채널: 사찍남 / 돈버는탐구생활 / 휴먼스토리</span>
     <span>2026.04.09 업데이트</span>
   </div>
+</div>
+
+<div class="export-bar">
+  <button class="export-btn" onclick="exportAllProspects()">전체 섭외 리스트 내보내기 (CSV)</button>
+  <span class="export-count" id="totalProspectCount"></span>
 </div>
 
 <div class="stats-bar">
@@ -1435,6 +1551,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           해당 업종 영상 평균 조회수 2,153,720회 규모입니다.<br>
           간단한 통화 가능하실까요?
         </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-반려동물"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-반려동물" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-반려동물" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-반려동물" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-반려동물" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('반려동물')">추가</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1565,6 +1692,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           농수산/귀농 사장님의 이야기를 영상으로 만들고 싶어 연락드립니다.<br>
           해당 업종 영상 평균 조회수 1,910,889회 규모입니다.<br>
           간단한 통화 가능하실까요?
+        </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-농수산/귀농"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-농수산/귀농" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-농수산/귀농" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-농수산/귀농" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-농수산/귀농" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('농수산/귀농')">추가</button>
+          </div>
         </div>
       </div>
     </div>
@@ -1706,6 +1844,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           해당 업종 영상 평균 조회수 1,559,229회 규모입니다.<br>
           간단한 통화 가능하실까요?
         </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-제조/수공예"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-제조/수공예" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-제조/수공예" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-제조/수공예" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-제조/수공예" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('제조/수공예')">추가</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1778,6 +1927,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           항공/운송 사장님의 이야기를 영상으로 만들고 싶어 연락드립니다.<br>
           해당 업종 영상 평균 조회수 1,400,151회 규모입니다.<br>
           간단한 통화 가능하실까요?
+        </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-항공/운송"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-항공/운송" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-항공/운송" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-항공/운송" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-항공/운송" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('항공/운송')">추가</button>
+          </div>
         </div>
       </div>
     </div>
@@ -1878,6 +2038,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           스포츠/레저 사장님의 이야기를 영상으로 만들고 싶어 연락드립니다.<br>
           해당 업종 영상 평균 조회수 1,260,773회 규모입니다.<br>
           간단한 통화 가능하실까요?
+        </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-스포츠/레저"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-스포츠/레저" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-스포츠/레저" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-스포츠/레저" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-스포츠/레저" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('스포츠/레저')">추가</button>
+          </div>
         </div>
       </div>
     </div>
@@ -2013,6 +2184,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           틈새직업 사장님의 이야기를 영상으로 만들고 싶어 연락드립니다.<br>
           해당 업종 영상 평균 조회수 952,796회 규모입니다.<br>
           간단한 통화 가능하실까요?
+        </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-틈새직업"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-틈새직업" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-틈새직업" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-틈새직업" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-틈새직업" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('틈새직업')">추가</button>
+          </div>
         </div>
       </div>
     </div>
@@ -2179,6 +2361,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           해당 업종 영상 평균 조회수 878,124회 규모입니다.<br>
           간단한 통화 가능하실까요?
         </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-부동산/임대"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-부동산/임대" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-부동산/임대" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-부동산/임대" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-부동산/임대" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('부동산/임대')">추가</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -2299,6 +2492,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           글쓰기/콘텐츠 사장님의 이야기를 영상으로 만들고 싶어 연락드립니다.<br>
           해당 업종 영상 평균 조회수 875,762회 규모입니다.<br>
           간단한 통화 가능하실까요?
+        </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-글쓰기/콘텐츠"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-글쓰기/콘텐츠" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-글쓰기/콘텐츠" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-글쓰기/콘텐츠" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-글쓰기/콘텐츠" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('글쓰기/콘텐츠')">추가</button>
+          </div>
         </div>
       </div>
     </div>
@@ -2429,6 +2633,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           자동차 사장님의 이야기를 영상으로 만들고 싶어 연락드립니다.<br>
           해당 업종 영상 평균 조회수 825,390회 규모입니다.<br>
           간단한 통화 가능하실까요?
+        </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-자동차"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-자동차" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-자동차" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-자동차" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-자동차" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('자동차')">추가</button>
+          </div>
         </div>
       </div>
     </div>
@@ -2590,6 +2805,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           해당 업종 영상 평균 조회수 799,162회 규모입니다.<br>
           간단한 통화 가능하실까요?
         </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-일반음식점/장사"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-일반음식점/장사" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-일반음식점/장사" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-일반음식점/장사" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-일반음식점/장사" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('일반음식점/장사')">추가</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -2730,6 +2956,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           해당 업종 영상 평균 조회수 764,882회 규모입니다.<br>
           간단한 통화 가능하실까요?
         </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-주류/바"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-주류/바" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-주류/바" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-주류/바" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-주류/바" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('주류/바')">추가</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -2856,6 +3093,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           해당 업종 영상 평균 조회수 739,016회 규모입니다.<br>
           간단한 통화 가능하실까요?
         </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-미용/뷰티"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-미용/뷰티" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-미용/뷰티" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-미용/뷰티" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-미용/뷰티" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('미용/뷰티')">추가</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -2975,6 +3223,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           해외/이민 사장님의 이야기를 영상으로 만들고 싶어 연락드립니다.<br>
           해당 업종 영상 평균 조회수 734,736회 규모입니다.<br>
           간단한 통화 가능하실까요?
+        </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-해외/이민"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-해외/이민" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-해외/이민" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-해외/이민" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-해외/이민" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('해외/이민')">추가</button>
+          </div>
         </div>
       </div>
     </div>
@@ -3121,6 +3380,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           해당 업종 영상 평균 조회수 731,265회 규모입니다.<br>
           간단한 통화 가능하실까요?
         </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-AI/IT/디지털"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-AI/IT/디지털" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-AI/IT/디지털" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-AI/IT/디지털" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-AI/IT/디지털" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('AI/IT/디지털')">추가</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -3256,6 +3526,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           해당 업종 영상 평균 조회수 687,763회 규모입니다.<br>
           간단한 통화 가능하실까요?
         </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-카페/베이커리"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-카페/베이커리" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-카페/베이커리" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-카페/베이커리" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-카페/베이커리" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('카페/베이커리')">추가</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -3379,6 +3660,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           해당 업종 영상 평균 조회수 684,342회 규모입니다.<br>
           간단한 통화 가능하실까요?
         </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-연예/엔터테인먼트"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-연예/엔터테인먼트" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-연예/엔터테인먼트" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-연예/엔터테인먼트" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-연예/엔터테인먼트" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('연예/엔터테인먼트')">추가</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -3499,6 +3791,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           패션/의류 사장님의 이야기를 영상으로 만들고 싶어 연락드립니다.<br>
           해당 업종 영상 평균 조회수 677,953회 규모입니다.<br>
           간단한 통화 가능하실까요?
+        </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-패션/의류"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-패션/의류" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-패션/의류" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-패션/의류" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-패션/의류" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('패션/의류')">추가</button>
+          </div>
         </div>
       </div>
     </div>
@@ -3630,6 +3933,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           온라인판매 사장님의 이야기를 영상으로 만들고 싶어 연락드립니다.<br>
           해당 업종 영상 평균 조회수 634,008회 규모입니다.<br>
           간단한 통화 가능하실까요?
+        </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-온라인판매"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-온라인판매" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-온라인판매" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-온라인판매" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-온라인판매" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('온라인판매')">추가</button>
+          </div>
         </div>
       </div>
     </div>
@@ -3781,6 +4095,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           해당 업종 영상 평균 조회수 619,205회 규모입니다.<br>
           간단한 통화 가능하실까요?
         </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-한식/분식"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-한식/분식" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-한식/분식" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-한식/분식" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-한식/분식" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('한식/분식')">추가</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -3880,6 +4205,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           사진/영상 사장님의 이야기를 영상으로 만들고 싶어 연락드립니다.<br>
           해당 업종 영상 평균 조회수 572,640회 규모입니다.<br>
           간단한 통화 가능하실까요?
+        </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-사진/영상"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-사진/영상" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-사진/영상" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-사진/영상" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-사진/영상" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('사진/영상')">추가</button>
+          </div>
         </div>
       </div>
     </div>
@@ -4016,6 +4352,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           해당 업종 영상 평균 조회수 560,561회 규모입니다.<br>
           간단한 통화 가능하실까요?
         </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-의료/건강"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-의료/건강" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-의료/건강" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-의료/건강" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-의료/건강" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('의료/건강')">추가</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -4150,6 +4497,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           물류/배달 사장님의 이야기를 영상으로 만들고 싶어 연락드립니다.<br>
           해당 업종 영상 평균 조회수 554,090회 규모입니다.<br>
           간단한 통화 가능하실까요?
+        </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-물류/배달"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-물류/배달" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-물류/배달" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-물류/배달" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-물류/배달" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('물류/배달')">추가</button>
+          </div>
         </div>
       </div>
     </div>
@@ -4291,6 +4649,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           해당 업종 영상 평균 조회수 540,152회 규모입니다.<br>
           간단한 통화 가능하실까요?
         </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-고기/수산물"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-고기/수산물" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-고기/수산물" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-고기/수산물" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-고기/수산물" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('고기/수산물')">추가</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -4401,6 +4770,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           무인사업/렌탈 사장님의 이야기를 영상으로 만들고 싶어 연락드립니다.<br>
           해당 업종 영상 평균 조회수 532,319회 규모입니다.<br>
           간단한 통화 가능하실까요?
+        </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-무인사업/렌탈"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-무인사업/렌탈" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-무인사업/렌탈" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-무인사업/렌탈" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-무인사업/렌탈" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('무인사업/렌탈')">추가</button>
+          </div>
         </div>
       </div>
     </div>
@@ -4513,6 +4893,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           중고/리사이클 사장님의 이야기를 영상으로 만들고 싶어 연락드립니다.<br>
           해당 업종 영상 평균 조회수 492,894회 규모입니다.<br>
           간단한 통화 가능하실까요?
+        </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-중고/리사이클"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-중고/리사이클" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-중고/리사이클" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-중고/리사이클" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-중고/리사이클" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('중고/리사이클')">추가</button>
+          </div>
         </div>
       </div>
     </div>
@@ -4649,6 +5040,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           해당 업종 영상 평균 조회수 448,145회 규모입니다.<br>
           간단한 통화 가능하실까요?
         </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-치킨/패스트푸드"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-치킨/패스트푸드" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-치킨/패스트푸드" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-치킨/패스트푸드" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-치킨/패스트푸드" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('치킨/패스트푸드')">추가</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -4784,6 +5186,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           해당 업종 영상 평균 조회수 443,787회 규모입니다.<br>
           간단한 통화 가능하실까요?
         </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-건설/시공"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-건설/시공" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-건설/시공" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-건설/시공" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-건설/시공" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('건설/시공')">추가</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -4915,6 +5328,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           해당 업종 영상 평균 조회수 428,232회 규모입니다.<br>
           간단한 통화 가능하실까요?
         </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-공무원/전문직"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-공무원/전문직" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-공무원/전문직" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-공무원/전문직" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-공무원/전문직" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('공무원/전문직')">추가</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -5013,6 +5437,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           해당 업종 영상 평균 조회수 403,549회 규모입니다.<br>
           간단한 통화 가능하실까요?
         </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-교육/자격"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-교육/자격" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-교육/자격" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-교육/자격" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-교육/자격" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('교육/자격')">추가</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -5079,6 +5514,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           프리랜서 사장님의 이야기를 영상으로 만들고 싶어 연락드립니다.<br>
           해당 업종 영상 평균 조회수 372,633회 규모입니다.<br>
           간단한 통화 가능하실까요?
+        </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-프리랜서"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-프리랜서" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-프리랜서" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-프리랜서" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-프리랜서" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('프리랜서')">추가</button>
+          </div>
         </div>
       </div>
     </div>
@@ -5226,6 +5672,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           해당 업종 영상 평균 조회수 370,694회 규모입니다.<br>
           간단한 통화 가능하실까요?
         </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-유튜브/크리에이터"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-유튜브/크리에이터" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-유튜브/크리에이터" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-유튜브/크리에이터" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-유튜브/크리에이터" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('유튜브/크리에이터')">추가</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -5323,6 +5780,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           편의점/소매 사장님의 이야기를 영상으로 만들고 싶어 연락드립니다.<br>
           해당 업종 영상 평균 조회수 330,570회 규모입니다.<br>
           간단한 통화 가능하실까요?
+        </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-편의점/소매"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-편의점/소매" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-편의점/소매" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-편의점/소매" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-편의점/소매" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('편의점/소매')">추가</button>
+          </div>
         </div>
       </div>
     </div>
@@ -5439,6 +5907,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           무역/수출입 사장님의 이야기를 영상으로 만들고 싶어 연락드립니다.<br>
           해당 업종 영상 평균 조회수 293,432회 규모입니다.<br>
           간단한 통화 가능하실까요?
+        </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-무역/수출입"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-무역/수출입" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-무역/수출입" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-무역/수출입" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-무역/수출입" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('무역/수출입')">추가</button>
+          </div>
         </div>
       </div>
     </div>
@@ -5586,6 +6065,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           해당 업종 영상 평균 조회수 282,710회 규모입니다.<br>
           간단한 통화 가능하실까요?
         </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-투자/재테크"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-투자/재테크" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-투자/재테크" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-투자/재테크" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-투자/재테크" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('투자/재테크')">추가</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -5639,6 +6129,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           웨딩/이벤트 사장님의 이야기를 영상으로 만들고 싶어 연락드립니다.<br>
           해당 업종 영상 평균 조회수 109,833회 규모입니다.<br>
           간단한 통화 가능하실까요?
+        </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-웨딩/이벤트"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-웨딩/이벤트" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-웨딩/이벤트" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-웨딩/이벤트" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-웨딩/이벤트" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('웨딩/이벤트')">추가</button>
+          </div>
         </div>
       </div>
     </div>
@@ -5755,6 +6256,17 @@ table.sat-table tr:last-child td { border-bottom: none; }
           해당 업종 영상 평균 조회수 26,115회 규모입니다.<br>
           간단한 통화 가능하실까요?
         </div>
+        <div class="prospect-section">
+          <h3>섭외 후보 리스트 <span style="font-size:11px;font-weight:400;color:var(--text2)">(브라우저에 자동 저장)</span></h3>
+          <div class="prospect-list" id="plist-음악/예술"></div>
+          <div class="add-prospect-form">
+            <input type="text" placeholder="@인스타계정" id="phandle-음악/예술" style="width:110px" />
+            <input type="text" placeholder="이름/별명" id="pname-음악/예술" style="width:80px" />
+            <input type="text" placeholder="팔로워" id="pfollower-음악/예술" style="width:70px" />
+            <input type="text" placeholder="메모" id="pnote-음악/예술" style="width:120px" />
+            <button onclick="event.stopPropagation();addProspect('음악/예술')">추가</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -5817,17 +6329,140 @@ function sortTable(col) {
   rows.forEach(r => tbody.appendChild(r));
 }
 
+// ── 섭외 후보 리스트 (localStorage) ──
+const STORAGE_KEY = 'sajjiknam_prospects';
+
+function getProspects() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+  catch(e) { return {}; }
+}
+
+function saveProspects(data) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  updateTotalCount();
+}
+
+function addProspect(industry) {
+  const h = document.getElementById('phandle-' + industry);
+  const n = document.getElementById('pname-' + industry);
+  const f = document.getElementById('pfollower-' + industry);
+  const nt = document.getElementById('pnote-' + industry);
+  if (!h || !h.value.trim()) { h && h.focus(); return; }
+
+  const handle = h.value.trim().replace(/^@/, '');
+  const data = getProspects();
+  if (!data[industry]) data[industry] = [];
+
+  // 중복 체크
+  if (data[industry].some(p => p.handle === handle)) {
+    showToast('이미 추가된 계정입니다');
+    return;
+  }
+
+  data[industry].push({
+    handle: handle,
+    name: n ? n.value.trim() : '',
+    followers: f ? f.value.trim() : '',
+    note: nt ? nt.value.trim() : '',
+    status: '대기',
+    added: new Date().toISOString().slice(0,10),
+  });
+
+  saveProspects(data);
+  renderProspects(industry);
+  h.value = ''; if(n) n.value = ''; if(f) f.value = ''; if(nt) nt.value = '';
+  showToast(handle + ' 추가됨');
+}
+
+function removeProspect(industry, handle) {
+  const data = getProspects();
+  if (!data[industry]) return;
+  data[industry] = data[industry].filter(p => p.handle !== handle);
+  if (data[industry].length === 0) delete data[industry];
+  saveProspects(data);
+  renderProspects(industry);
+}
+
+function cycleStatus(industry, handle) {
+  const data = getProspects();
+  if (!data[industry]) return;
+  const p = data[industry].find(x => x.handle === handle);
+  if (!p) return;
+  const order = ['대기', '연락함', '확정', '거절'];
+  const idx = order.indexOf(p.status);
+  p.status = order[(idx + 1) % order.length];
+  saveProspects(data);
+  renderProspects(industry);
+}
+
+function renderProspects(industry) {
+  const el = document.getElementById('plist-' + industry);
+  if (!el) return;
+  const data = getProspects();
+  const list = data[industry] || [];
+  if (list.length === 0) { el.innerHTML = '<div style="font-size:11px;color:var(--text2);padding:4px 0">아직 추가된 후보가 없습니다</div>'; return; }
+
+  el.innerHTML = list.map(p => `
+    <div class="prospect-item">
+      <a class="pi-handle" href="https://www.instagram.com/${p.handle}/" target="_blank">@${p.handle}</a>
+      <span class="pi-name">${p.name || ''}</span>
+      <span class="pi-followers">${p.followers || ''}</span>
+      <span class="pi-note">${p.note || ''}</span>
+      <span class="pi-status ps-${p.status}" onclick="event.stopPropagation();cycleStatus('${industry}','${p.handle}')" title="클릭하면 상태 변경">${p.status}</span>
+      <span class="pi-del" onclick="event.stopPropagation();removeProspect('${industry}','${p.handle}')" title="삭제">&times;</span>
+    </div>
+  `).join('');
+}
+
+function updateTotalCount() {
+  const data = getProspects();
+  let total = 0;
+  for (const k in data) total += data[k].length;
+  const el = document.getElementById('totalProspectCount');
+  if (el) el.textContent = total > 0 ? '저장된 후보: ' + total + '명' : '';
+}
+
+function exportAllProspects() {
+  const data = getProspects();
+  let rows = [['업종','인스타계정','이름','팔로워','메모','상태','추가일']];
+  for (const ind in data) {
+    for (const p of data[ind]) {
+      rows.push([ind, '@'+p.handle, p.name||'', p.followers||'', p.note||'', p.status, p.added||'']);
+    }
+  }
+  if (rows.length <= 1) { showToast('저장된 후보가 없습니다'); return; }
+  const bom = '\uFEFF';
+  const csv = bom + rows.map(r => r.map(c => '"' + (c||'').replace(/"/g,'""') + '"').join(',')).join('\n');
+  const blob = new Blob([csv], {type: 'text/csv;charset=utf-8;'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = '사찍남_섭외후보_' + new Date().toISOString().slice(0,10) + '.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast('CSV 다운로드 완료');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+// 페이지 로드 시 모든 업종 렌더링
+document.addEventListener('DOMContentLoaded', function() {
+  const industries = Object.keys(DATA);
+  industries.forEach(ind => renderProspects(ind));
+  updateTotalCount();
+});
+
 // 복사
 function copyDM(industry) {
   const d = DATA[industry];
   if (!d) return;
   const text = '안녕하세요, 유튜브 사찍남 제작팀입니다.\n' + industry + ' 사장님의 이야기를 영상으로 만들고 싶어 연락드립니다.\n해당 업종 영상 평균 조회수 ' + d.avg_views.toLocaleString() + '회 규모입니다.\n간단한 통화 가능하실까요?';
-  navigator.clipboard.writeText(text).then(() => {
-    const t = document.getElementById('toast');
-    t.textContent = 'DM 문구 복사됨';
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 2000);
-  });
+  navigator.clipboard.writeText(text).then(() => showToast('DM 문구 복사됨'));
 }
 </script>
 </body>
