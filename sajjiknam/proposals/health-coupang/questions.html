@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>질문지 — 최대표 사찍남</title>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F2F4F6;color:#191F28;font-family:'Pretendard',system-ui,sans-serif;min-height:100vh;font-size:15px}
+.gnb{background:#fff;border-bottom:1px solid #E5E8EB;padding:0 20px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.gnb-logo{font-size:15px;font-weight:800;color:#F08F00}
+.gnb-right{display:flex;align-items:center;gap:10px}
+.gnb-count{font-size:12px;font-weight:700;color:#F04452;background:#FFF0F0;border-radius:12px;padding:3px 10px}
+.wrap{max-width:540px;margin:0 auto;padding:16px 16px 100px}
+.header{background:linear-gradient(135deg,#191F28,#2E3745);border-radius:16px;padding:24px;margin-bottom:16px;color:#fff}
+.header-top{font-size:11px;font-weight:700;color:#FFD700;letter-spacing:1.5px;margin-bottom:8px}
+.header-title{font-size:22px;font-weight:800;line-height:1.3;margin-bottom:6px}
+.header-sub{font-size:12px;color:#8B95A1;line-height:1.6}
+.section-label{font-size:13px;font-weight:800;color:#fff;background:#F08F00;border-radius:8px;padding:8px 14px;margin:20px 0 10px;display:inline-block}
+.section-label.red{background:#F04452}
+.section-label.blue{background:#3182F6}
+.section-hint{font-size:11px;color:#8B95A1;margin:0 0 10px 4px}
+.q{background:#fff;border-radius:14px;padding:16px;margin-bottom:8px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;gap:12px;align-items:flex-start;transition:.15s;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none}
+.q.done{opacity:.4;text-decoration:line-through}
+.q-check{width:26px;height:26px;border:2.5px solid #E5E8EB;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.15s;margin-top:1px}
+.q.done .q-check{background:#05C072;border-color:#05C072}
+.q.done .q-check::after{content:'✓';color:#fff;font-size:13px;font-weight:800}
+.q-body{flex:1}
+.q-num{font-size:11px;font-weight:800;color:#F08F00;margin-bottom:3px}
+.q-num.red{color:#F04452}
+.q-text{font-size:14px;font-weight:700;color:#191F28;line-height:1.5}
+.q-sub{font-size:11px;color:#8B95A1;line-height:1.5;margin-top:4px}
+.q-tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.tag{display:inline-block;padding:2px 6px;border-radius:4px;font-size:10px;font-weight:700}
+.tag-r{background:#FFF0F0;color:#F04452}
+.tag-y{background:#FFF7E6;color:#F08F00}
+.tag-b{background:#EFF3FF;color:#3182F6}
+.tag-g{background:#F0FFF4;color:#05C072}
+.tag-p{background:#F0EDFF;color:#7B61FF}
+.q.must{border-left:3px solid #F04452}
+.q.must .q-check{border-color:#F04452}
+.bottom-bar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #E5E8EB;padding:12px 20px;display:flex;align-items:center;justify-content:space-between;z-index:100}
+.progress-wrap{flex:1;margin-right:16px}
+.progress-text{font-size:11px;font-weight:700;color:#6B7684;margin-bottom:4px}
+.progress-bar{height:6px;background:#E5E8EB;border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#F08F00,#F04452);border-radius:3px;transition:.3s}
+.reset-btn{background:none;border:1.5px solid #E5E8EB;border-radius:8px;padding:8px 14px;font-size:12px;font-weight:700;color:#8B95A1;cursor:pointer;font-family:inherit}
+</style>
+</head>
+<body>
+<nav class="gnb">
+  <span class="gnb-logo">사찍남 질문지</span>
+  <div class="gnb-right">
+    <span class="gnb-count" id="must-count">필수 0/11</span>
+  </div>
+</nav>
+<div class="wrap">
+
+  <div class="header">
+    <div class="header-top">최대표 · 건기식 쿠팡셀러 · 목요일 촬영</div>
+    <div class="header-title">사장찍어주는남자 25분<br>질문지 20개</div>
+    <div class="header-sub">질문 터치하면 체크. 필수 11개 커버하면 25분 충분.<br>나머지는 대화 흐름 보면서 자연스럽게.</div>
+  </div>
+
+  <!-- A -->
+  <div class="section-label">A. IMF + 유년기</div>
+  <div class="section-hint">ACT 1 (0:30~3:00) · 유복→추락 대비</div>
+
+  <div class="q must" onclick="toggle(this)">
+    <div class="q-check"></div>
+    <div class="q-body">
+      <div class="q-num red">Q1 · 필수</div>
+      <div class="q-text">아버지 회사가 직원 1,500명이었다고요. 그때 집안 분위기가 어땠어요?</div>
+      <div class="q-sub">→ 유복했던 시절 구체적으로. 추락과 대비.</div>
+    </div>
+  </div>
+
+  <div class="q must" onclick="toggle(this)">
+    <div class="q-check"></div>
+    <div class="q-body">
+      <div class="q-num red">Q2 · 필수</div>
+      <div class="q-text">IMF 터졌을 때, 집에서 어떤 일이 벌어졌어요?</div>
+      <div class="q-sub">→ 부도 당일/직후 장면. 아버지 표정.</div>
+    </div>
+  </div>
+
+  <div class="q" onclick="toggle(this)">
+    <div class="q-check"></div>
+    <div class="q-body">
+      <div class="q-num">Q3</div>
+      <div class="q-text">항공대 자퇴할 때 심정이 어땠어요? 파일럿이 꿈이었잖아요.</div>
+      <div class="q-sub">→ "비행비가 억 단위" 금액 유도.</div>
+    </div>
+  </div>
+
+  <!-- B -->
+  <div class="section-label red">B. 여자친구 + 은둔</div>
+  <div class="section-hint">ACT 2 (3:00~5:00) · 감정 바닥. 본인 호흡에 맞추기.</div>
+
+  <div class="q must" onclick="toggle(this)">
+    <div class="q-check"></div>
+    <div class="q-body">
+      <div class="q-num red">Q4 · 필수</div>
+      <div class="q-text">여자친구분이 재일교포 모델이었다고요. 처음에 어떻게 만났어요?</div>
+      <div class="q-sub">→ 행복한 기억부터. 사망과 대비.</div>
+    </div>
+  </div>
+
+  <div class="q must" onclick="toggle(this)">
+    <div class="q-check"></div>
+    <div class="q-body">
+      <div class="q-num red">Q5 · 필수</div>
+      <div class="q-text">위암 말기라는 걸 알았을 때, 뭘 하셨어요?</div>
+      <div class="q-sub">→ 감정 최고조. 무리하게 파지 않기.</div>
+      <div class="q-tags"><span class="tag tag-r">눈물 포인트</span></div>
+    </div>
+  </div>
+
+  <div class="q" onclick="toggle(this)">
+    <div class="q-check"></div>
+    <div class="q-body">
+      <div class="q-num">Q6</div>
+      <div class="q-text">1년 반 은둔 생활. 하루가 어땠어요?</div>
+      <div class="q-sub">→ 은둔의 구체적 일상.</div>
+    </div>
+  </div>
+
+  <!-- C -->
+  <div class="section-label">C. 트레이너 + 성공</div>
+  <div class="section-hint">ACT 3 (5:00~8:00) · 희망 구간. 다음 추락 위해 올려놓기.</div>
+
+  <div class="q" onclick="toggle(this)">
+    <div class="q-check"></div>
+    <div class="q-body">
+      <div class="q-num">Q7</div>
+      <div class="q-text">32살에 헬스 트레이너를 시작한 계기가 뭐예요?</div>
+      <div class="q-sub">→ 은둔 탈출 전환점.</div>
+    </div>
+  </div>
+
+  <div class="q" onclick="toggle(this)">
+    <div class="q-check"></div>
+    <div class="q-body">
+      <div class="q-num">Q8</div>
+      <div class="q-text">기본급 60만원에 PT 7천원이면... 하루 18시간을 어떻게 버텼어요?</div>
+      <div class="q-sub">→ 극한 노력의 스케줄.</div>
+    </div>
+  </div>
+
+  <div class="q must" onclick="toggle(this)">
+    <div class="q-check"></div>
+    <div class="q-body">
+      <div class="q-num red">Q9 · 필수</div>
+      <div class="q-text">1호점이 연매출 10억을 찍었을 때, 첫 반응이 뭐였어요?</div>
+      <div class="q-sub">→ 성공의 감정 + 구체 숫자.</div>
+    </div>
+  </div>
+
+  <!-- D -->
+  <div class="section-label red">D. 코로나 + 파산 + 공황</div>
+  <div class="section-hint">ACT 4 (8:00~12:00) · 킬러 구간. 여기서 시청자 못 빠져나감.</div>
+
+  <div class="q must" onclick="toggle(this)">
+    <div class="q-check"></div>
+    <div class="q-body">
+      <div class="q-num red">Q10 · 필수</div>
+      <div class="q-text">3호점까지 열었는데 3~4개월 만에 코로나가 터졌다고요. 그 순간 기억나세요?</div>
+      <div class="q-sub">→ "3~4개월 만에"가 핵심.</div>
+      <div class="q-tags"><span class="tag tag-r">킬러</span></div>
+    </div>
+  </div>
+
+  <div class="q must" onclick="toggle(this)">
+    <div class="q-check"></div>
+    <div class="q-body">
+      <div class="q-num red">Q11 · 필수</div>
+      <div class="q-text">빚이 7억이 됐을 때, 와이프분한테 뭐라고 말씀하셨어요?</div>
+      <div class="q-sub">→ 와이프 2.2억 대출 + 부부 관계.</div>
+      <div class="q-tags"><span class="tag tag-r">눈물 포인트</span></div>
+    </div>
+  </div>
+
+  <div class="q must" onclick="toggle(this)">
+    <div class="q-check"></div>
+    <div class="q-body">
+      <div class="q-num red">Q12 · 필수</div>
+      <div class="q-text">공황장애가 왔다고요. 어떤 증상이었어요?</div>
+      <div class="q-sub">→ 밥 못 먹고 잠 못 자고. 구체적 증상.</div>
+    </div>
+  </div>
+
+  <div class="q must" onclick="toggle(this)">
+    <div class="q-check"></div>
+    <div class="q-body">
+      <div class="q-num red">Q13 · 필수</div>
+      <div class="q-text">나래휴게소에서 새벽에 혼자 앉아있었다고요. 그때 무슨 생각 하셨어요?</div>
+      <div class="q-sub">→ 핵심 장면. 나래휴게소에서 촬영 중이면 더 좋음.</div>
+      <div class="q-tags"><span class="tag tag-r">눈물 포인트</span><span class="tag tag-b">현장촬영</span></div>
+    </div>
+  </div>
+
+  <!-- E -->
+  <div class="section-label">E. 새벽 배송 + 전환</div>
+  <div class="section-hint">ACT 5 (12:00~15:00) · 처절함 + 에피파니 순간.</div>
+
+  <div class="q must" onclick="toggle(this)">
+    <div class="q-check"></div>
+    <div class="q-body">
+      <div class="q-num red">Q14 · 필수</div>
+      <div class="q-text">가락시장 지게차, 청담순두부 배송. 하루 일과가 어떻게 됐어요?</div>
+      <div class="q-sub">→ 월 430~450만원의 무게.</div>
+    </div>
+  </div>
+
+  <div class="q must" onclick="toggle(this)">
+    <div class="q-check"></div>
+    <div class="q-body">
+      <div class="q-num red">Q15 · 필수</div>
+      <div class="q-text">트럭에서 떨어져서 다리가 부러졌을 때, 4주 만에 깁스 풀고 다시 일하러 갔다고요?</div>
+      <div class="q-sub">→ "선택의 여지가 없었다" 멘트 유도.</div>
+      <div class="q-tags"><span class="tag tag-r">눈물 포인트</span></div>
+    </div>
+  </div>
+
+  <div class="q" onclick="toggle(this)">
+    <div class="q-check"></div>
+    <div class="q-body">
+      <div class="q-num">Q16</div>
+      <div class="q-text">온라인으로 전환해야겠다고 결심한 순간이 있었어요?</div>
+      <div class="q-sub">→ 유튜브 6개월 서칭. 에피파니.</div>
+    </div>
+  </div>
+
+  <!-- F -->
+  <div class="section-label blue">F. 건기식 + 현재</div>
+  <div class="section-hint">ACT 6~8 (15:00~25:00) · 정보 만족 + 감동 마무리.</div>
+
+  <div class="q" onclick="toggle(this)">
+    <div class="q-check"></div>
+    <div class="q-body">
+      <div class="q-num">Q17</div>
+      <div class="q-text">왜 하필 건강기능식품이었어요?</div>
+      <div class="q-sub">→ 헬스 트레이너 경험 연결.</div>
+    </div>
+  </div>
+
+  <div class="q must" onclick="toggle(this)">
+    <div class="q-check"></div>
+    <div class="q-body">
+      <div class="q-num red">Q18 · 필수</div>
+      <div class="q-text">광고비가 매출 대비 0.7~1%라고요? 어떻게요?</div>
+      <div class="q-sub">→ 홈쇼핑 전략 간단히만. 디테일은 부업소개에서.</div>
+    </div>
+  </div>
+
+  <div class="q" onclick="toggle(this)">
+    <div class="q-check"></div>
+    <div class="q-body">
+      <div class="q-num">Q19</div>
+      <div class="q-text">와이프분이 빚 갚을 때 싫은 소리 한 번 안 했다고요?</div>
+      <div class="q-sub">→ 크리스마스 3천만원 선물. 따뜻한 감동.</div>
+      <div class="q-tags"><span class="tag tag-r">눈물 포인트</span></div>
+    </div>
+  </div>
+
+  <div class="q must" onclick="toggle(this)">
+    <div class="q-check"></div>
+    <div class="q-body">
+      <div class="q-num red">Q20 · 필수 · 엔딩</div>
+      <div class="q-text">IMF, 여자친구, 코로나. 다 겪으셨잖아요. 포기하고 싶었던 순간이 있었어요?</div>
+      <div class="q-sub">→ "그래도 여기 있습니다" 엔딩 멘트 유도.</div>
+      <div class="q-tags"><span class="tag tag-g">엔딩 멘트</span></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="bottom-bar">
+  <div class="progress-wrap">
+    <div class="progress-text" id="progress-text">0 / 20 완료</div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+  </div>
+  <button class="reset-btn" onclick="resetAll()">초기화</button>
+</div>
+
+<script>
+const KEY='sq_choi';
+function save(){
+  const states=[];
+  document.querySelectorAll('.q').forEach(q=>states.push(q.classList.contains('done')));
+  localStorage.setItem(KEY,JSON.stringify(states));
+}
+function load(){
+  const d=localStorage.getItem(KEY);
+  if(!d)return;
+  const states=JSON.parse(d);
+  document.querySelectorAll('.q').forEach((q,i)=>{if(states[i])q.classList.add('done')});
+}
+function toggle(el){
+  el.classList.toggle('done');
+  save();update();
+}
+function update(){
+  const all=document.querySelectorAll('.q');
+  const done=document.querySelectorAll('.q.done');
+  const mustAll=document.querySelectorAll('.q.must');
+  const mustDone=document.querySelectorAll('.q.must.done');
+  const pct=Math.round(done.length/all.length*100);
+  document.getElementById('progress-fill').style.width=pct+'%';
+  document.getElementById('progress-text').textContent=done.length+' / '+all.length+' 완료';
+  document.getElementById('must-count').textContent='필수 '+mustDone.length+'/'+mustAll.length;
+  if(mustDone.length===mustAll.length){
+    document.getElementById('must-count').style.background='#F0FFF4';
+    document.getElementById('must-count').style.color='#05C072';
+  }else{
+    document.getElementById('must-count').style.background='#FFF0F0';
+    document.getElementById('must-count').style.color='#F04452';
+  }
+}
+function resetAll(){
+  if(!confirm('전부 초기화할까요?'))return;
+  document.querySelectorAll('.q').forEach(q=>q.classList.remove('done'));
+  save();update();
+}
+load();update();
+</script>
+</body>
+</html>
