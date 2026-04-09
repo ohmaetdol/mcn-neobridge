@@ -552,6 +552,46 @@ table.sat-table tr:last-child td { border-bottom: none; }
 .kw-warm { background: #fefcbf; color: #975a16; }
 .kw-cool { background: #bee3f8; color: #2a4365; }
 
+/* 강의 추천 카드 */
+.course-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all .15s;
+  position: relative;
+}
+.course-card:hover {
+  border-color: var(--green);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.course-card .cc-title {
+  font-size: 15px;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+.course-card .cc-desc {
+  font-size: 12px;
+  color: var(--text);
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+.course-card .cc-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  font-size: 11px;
+}
+.cc-tag {
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 10px;
+}
+.cc-price { background: #c6f6d5; color: #276749; }
+.cc-target { background: #e9d8fd; color: #553c9a; }
+.cc-why { font-size: 11px; color: var(--text2); margin-top: 6px; line-height: 1.5; }
+
 /* 섭외 후보 리스트 */
 .prospect-section {
   margin-top: 16px;
@@ -936,6 +976,118 @@ table.sat-table tr:last-child td { border-bottom: none; }
           <div class="rc-rank">미용/뷰티</div>
           <div class="rc-concept">SNS 없이 입소문만으로 월 X천만원 -- 동네 미용/뷰티 사장님</div>
           <div class="rc-reason" style="margin-top:6px">평균 739,016회</div>
+        </div>
+      </div>
+    </div>
+    <div class="rec-group">
+      <h3 style="color:var(--green)">강의로 팔리는 주제 -- 유튜브 데이터 + 시장 수요 기반</h3>
+      <div style="font-size:11px;color:var(--text2);margin-bottom:14px">
+        근거: 마이프차 874명 설문, 폐업/생존율 통계, 유튜브 조회수, 트렌드 키워드 매칭. 정보 갭(관심은 높은데 노하우 부족)이 큰 주제 = 강의 수요
+      </div>
+      <div class="rec-cards" style="grid-template-columns:repeat(auto-fill, minmax(280px, 1fr))">
+        <div class="course-card" onclick="scrollToIndustry('무인사업/렌탈')">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
+            <span class="cc-tag" style="background:var(--green);color:#fff">원맨테크</span>
+            <span class="cc-tag cc-price">30~50만원</span>
+          </div>
+          <div class="cc-title">무인매장 창업 A to Z</div>
+          <div class="cc-desc">예비 창업자 32.6%가 성장성 1위로 선택. 입지 선정→기기 설치→무인 운영 시스템→매출 관리까지 단계별 노하우</div>
+          <div class="cc-meta">
+            <span class="cc-tag cc-target">소자본 창업 희망자 (1억 미만 64.3%)</span>
+            <span style="color:var(--text2)">유튜브 평균 532,319회</span>
+          </div>
+          <div class="cc-why">관심은 19.3%로 2위인데 실제 운영 노하우가 부족 → 정보 갭이 큼</div>
+        </div>
+        <div class="course-card" onclick="scrollToIndustry('AI/IT/디지털')">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
+            <span class="cc-tag" style="background:var(--green);color:#fff">제로클릭</span>
+            <span class="cc-tag cc-price">50~100만원</span>
+          </div>
+          <div class="cc-title">AI 활용 1인 사업 실전반</div>
+          <div class="cc-desc">AI 시장 6조 원. ChatGPT/자동화 도구로 직원 없이 사업 운영하는 법. 마케팅·CS·재고관리까지 AI로 해결</div>
+          <div class="cc-meta">
+            <span class="cc-tag cc-target">프리랜서, 온라인 셀러, 1인 사업자</span>
+            <span style="color:var(--text2)">유튜브 평균 731,265회</span>
+          </div>
+          <div class="cc-why">AI 쇼핑 이용률 60%, 에이블리 AI 매출 +134% -- MZ가 가장 배우고 싶어하는 주제</div>
+        </div>
+        <div class="course-card" onclick="scrollToIndustry('일반음식점/장사')">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
+            <span class="cc-tag" style="background:var(--green);color:#fff">점포 재생</span>
+            <span class="cc-tag cc-price">30~50만원</span>
+          </div>
+          <div class="cc-title">점포 재생 -- 망한 가게 살리는 법</div>
+          <div class="cc-desc">연간 폐업 100만 명 시대, 빈 가게가 넘침. 저렴하게 인수→리브랜딩→재오픈까지 실전 케이스 스터디</div>
+          <div class="cc-meta">
+            <span class="cc-tag cc-target">소자본 창업자, 업종 전환 고민 사장님</span>
+            <span style="color:var(--text2)">유튜브 평균 799,162회</span>
+          </div>
+          <div class="cc-why">폐업률 9.04%로 빈 매장 폭증 → 소자본 창업의 새 공식으로 수요 급등</div>
+        </div>
+        <div class="course-card" onclick="scrollToIndustry('온라인판매')">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
+            <span class="cc-tag" style="background:var(--green);color:#fff">필코노미</span>
+            <span class="cc-tag cc-price">30~80만원</span>
+          </div>
+          <div class="cc-title">스마트스토어/쿠팡 셀러 마스터</div>
+          <div class="cc-desc">네이버플러스스토어 MAU 770만, AI 추천 쇼핑 시대. 상품 소싱→등록→광고→CS까지 온라인 판매 전 과정</div>
+          <div class="cc-meta">
+            <span class="cc-tag cc-target">부업/재택 희망자, 주부, 직장인</span>
+            <span style="color:var(--text2)">유튜브 평균 634,008회</span>
+          </div>
+          <div class="cc-why">온라인판매 업종 유튜브 평균 63만회 -- 관심은 높은데 '어떻게 시작하나' 진입장벽</div>
+        </div>
+        <div class="course-card" onclick="scrollToIndustry('카페/베이커리')">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
+            <span class="cc-tag" style="background:var(--green);color:#fff">가성비 신기루</span>
+            <span class="cc-tag cc-price">30~50만원</span>
+          </div>
+          <div class="cc-title">카페 창업 생존 전략</div>
+          <div class="cc-desc">예비 창업자 관심 1위(28.6%)이지만 커피점 -743개 감소 전환. 살아남는 카페의 차별화 전략·원가관리·SNS 마케팅</div>
+          <div class="cc-meta">
+            <span class="cc-tag cc-target">카페 창업 예정자, 기존 카페 사장님</span>
+            <span style="color:var(--text2)">유튜브 평균 687,763회</span>
+          </div>
+          <div class="cc-why">메가커피 4천 호점 시대, 개인 카페 생존법을 가르쳐야 돈이 됨</div>
+        </div>
+        <div class="course-card" onclick="scrollToIndustry('미용/뷰티')">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
+            <span class="cc-tag" style="background:var(--green);color:#fff">대확행</span>
+            <span class="cc-tag cc-price">20~40만원</span>
+          </div>
+          <div class="cc-title">인스타 마케팅으로 매출 2배</div>
+          <div class="cc-desc">자영업 사장님을 위한 인스타그램 실전. 릴스 촬영→해시태그 전략→DM 영업→단골 만들기</div>
+          <div class="cc-meta">
+            <span class="cc-tag cc-target">오프라인 매장 사장님 전체</span>
+            <span style="color:var(--text2)">유튜브 평균 739,016회</span>
+          </div>
+          <div class="cc-why">섭외 난이도 1~2인 업종이 인스타 활발 = 사장님들이 이미 하고 있지만 체계 없음</div>
+        </div>
+        <div class="course-card" onclick="scrollToIndustry('의료/건강')">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
+            <span class="cc-tag" style="background:var(--green);color:#fff">초고령사회</span>
+            <span class="cc-tag cc-price">30~50만원</span>
+          </div>
+          <div class="cc-title">시니어 돌봄 사업 시작하기</div>
+          <div class="cc-desc">65세+ 인구 20% 돌파. 요양보호사 자격→돌봄 서비스 창업→정부 지원금 활용까지</div>
+          <div class="cc-meta">
+            <span class="cc-tag cc-target">40~50대 전직 희망자, 사회적 기업 관심자</span>
+            <span style="color:var(--text2)">유튜브 평균 560,561회</span>
+          </div>
+          <div class="cc-why">초고령사회 진입 + 정부지원 5.8조 역대 최대 → 시장은 커지는데 교육은 부족</div>
+        </div>
+        <div class="course-card" onclick="scrollToIndustry('일반음식점/장사')">
+          <div style="display:flex;align-items:center;gap:6px;margin-bottom:8px">
+            <span class="cc-tag" style="background:var(--green);color:#fff">전문화 +23%p</span>
+            <span class="cc-tag cc-price">30~50만원</span>
+          </div>
+          <div class="cc-title">자영업 생존율 높이는 데이터 경영</div>
+          <div class="cc-desc">5년 생존율 26.9%, 전문화하면 +23%p. 매출 데이터 분석→원가 관리→메뉴 엔지니어링→객단가 올리기</div>
+          <div class="cc-meta">
+            <span class="cc-tag cc-target">현직 자영업 사장님</span>
+            <span style="color:var(--text2)">유튜브 평균 799,162회</span>
+          </div>
+          <div class="cc-why">100만 명 폐업 시대, '살아남는 법'이 가장 절실한 콘텐츠</div>
         </div>
       </div>
     </div>
