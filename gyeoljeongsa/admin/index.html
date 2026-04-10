@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>결정사 총합 관리자 · Neobridge</title>
+<title>Neobridge Admin · 크리에이터 관리 대시보드</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 <style>
@@ -512,9 +512,9 @@ body {
 <!-- Auth -->
 <div class="auth-screen" id="authScreen">
   <div class="auth-box">
-    <div class="brand-chip">결정사 · 아는언니 세령</div>
-    <h1>총합 관리자</h1>
-    <p>MCN 운영 대시보드</p>
+    <div class="brand-chip">Neobridge MCN</div>
+    <h1>크리에이터 관리 대시보드</h1>
+    <p>어드민 접속</p>
     <input type="password" class="auth-input" id="authPw" placeholder="관리자 코드" onkeyup="if(event.key==='Enter')doAuth()">
     <button class="auth-btn" onclick="doAuth()">접속</button>
     <p class="auth-error" id="authErr">코드가 올바르지 않습니다</p>
@@ -527,37 +527,32 @@ body {
     <!-- Sidebar -->
     <div class="sidebar">
       <div class="sidebar-brand">
-        <h2>결정사 어드민</h2>
-        <p>아는언니 세령 · MCN</p>
+        <h2>Neobridge Admin</h2>
+        <p>크리에이터 관리</p>
       </div>
 
       <div class="nav-section">Overview</div>
-      <div class="nav-item active" onclick="navigate('dashboard')" data-nav="dashboard">총합 대시보드</div>
-      <div class="nav-item" onclick="navigate('launch')" data-nav="launch">
-        론칭 체크리스트
-        <span class="nav-badge" id="launchBadge" style="background:var(--accent)">D-4</span>
-      </div>
+      <div class="nav-item active" onclick="navigate('dashboard')" data-nav="dashboard">대시보드</div>
       <div class="nav-item" onclick="navigate('inbox')" data-nav="inbox">
         인박스
         <span class="nav-badge" id="inboxBadge" style="display:none">0</span>
       </div>
+      <div class="nav-item" onclick="navigate('launch')" data-nav="launch">
+        론칭 체크리스트
+        <span class="nav-badge" id="launchBadge" style="background:var(--accent)">D-4</span>
+      </div>
 
-      <div class="nav-section">채널 관리</div>
-      <div id="channelNav"></div>
+      <div class="nav-section">크리에이터</div>
+      <div id="creatorNav"></div>
 
       <div class="nav-section">비즈니스</div>
       <div class="nav-item" onclick="navigate('business')" data-nav="business">매출 / 퍼널</div>
-
-      <div class="nav-section">콘텐츠 도구</div>
       <div class="nav-item" onclick="navigate('proposals')" data-nav="proposals">기획서 관리</div>
-      <a class="nav-item" href="../planning/" target="_blank" style="text-decoration:none">기획부 대시보드 <span class="nav-ext">&#x2197;</span></a>
-      <a class="nav-item" href="../episode/" target="_blank" style="text-decoration:none">에피소드 보드 <span class="nav-ext">&#x2197;</span></a>
-      <a class="nav-item" href="../dashboard/" target="_blank" style="text-decoration:none">레퍼런스 데이터 <span class="nav-ext">&#x2197;</span></a>
 
       <div class="nav-section">외부 링크</div>
-      <a class="nav-item" href="../portal/" target="_blank" style="text-decoration:none">클라이언트 포털 <span class="nav-ext">&#x2197;</span></a>
       <a class="nav-item" href="../../" target="_blank" style="text-decoration:none">MCN 허브 <span class="nav-ext">&#x2197;</span></a>
       <a class="nav-item" href="../../sajjiknam/" target="_blank" style="text-decoration:none">사찍남 채널 <span class="nav-ext">&#x2197;</span></a>
+      <a class="nav-item" href="../" target="_blank" style="text-decoration:none">결정사 허브 <span class="nav-ext">&#x2197;</span></a>
     </div>
 
     <!-- Content -->
@@ -638,7 +633,7 @@ if (sessionStorage.getItem('admin_auth') === '1') {
 
 async function init() {
   await Promise.all([loadChannels(), loadProposals(), loadInbox(), loadBusiness()]);
-  renderChannelNav();
+  renderCreatorNav();
   renderDashboard();
 }
 
@@ -672,10 +667,17 @@ async function loadInbox() {
 }
 
 // Nav
-function renderChannelNav() {
-  document.getElementById('channelNav').innerHTML = channels.map(ch =>
-    `<div class="nav-item" onclick="navigate('channel','${ch.id}')" data-nav="channel-${ch.id}">${ch.channel_display_name}</div>`
-  ).join('');
+function renderCreatorNav() {
+  // 하드코딩된 CREATORS를 기본으로 하고, Supabase managed_channels가 있으면 매칭해서 보강
+  document.getElementById('creatorNav').innerHTML = CREATORS.map(cr => {
+    const supa = channels.find(ch => ch.channel_name === cr.channelName || ch.channel_display_name === cr.name);
+    const navId = supa ? supa.id : cr.id;
+    const clickExpr = supa ? `navigate('channel','${supa.id}')` : `navigate('creator','${cr.id}')`;
+    return `<div class="nav-item" onclick="${clickExpr}" data-nav="creator-${cr.id}">
+      <span style="width:8px;height:8px;border-radius:50%;background:${cr.color};flex-shrink:0"></span>
+      ${cr.name}
+    </div>`;
+  }).join('');
 }
 
 function navigate(view, param) {
@@ -692,6 +694,7 @@ function navigate(view, param) {
   else if (view === 'proposals') renderProposals();
   else if (view === 'business') renderBusiness();
   else if (view === 'channel') renderChannel(param);
+  else if (view === 'creator') renderCreator(param);
 }
 
 // 결정사 고정 메타
@@ -703,7 +706,91 @@ function ddayTo(dateStr) {
   return Math.ceil((target - today) / 86400000);
 }
 
-// Dashboard
+// Neobridge MCN 크리에이터 카탈로그 (하드코딩 + Supabase 보조)
+const CREATORS = [
+  {
+    id: 'gyeoljeongsa',
+    slug: 'gyeoljeongsa',
+    channelName: '아는언니세령',
+    name: '아는언니 세령',
+    host: '이세령',
+    category: '결정사 · 결혼정보',
+    genre: '성장형 리얼리티',
+    status: 'pre_launch',
+    statusLabel: '론칭 준비',
+    launchDate: '2026-04-14',
+    color: '#8b5cf6',
+    accent: 'rgba(139,92,246,0.08)',
+    metrics: [
+      { label: '레퍼런스', value: '1,541 영상' },
+      { label: '포맷', value: '리얼리티 성장' },
+      { label: 'EP 준비', value: '1/10' },
+    ],
+    tools: [
+      { label: '기획부', path: '../planning/', role: 'Planning' },
+      { label: '에피소드', path: '../episode/', role: 'Episodes' },
+      { label: '데이터', path: '../dashboard/', role: 'Data' },
+      { label: '포털', path: '../portal/', role: 'Client' },
+    ],
+  },
+  {
+    id: 'sajjiknam',
+    slug: 'sajjiknam',
+    channelName: '사찍남',
+    name: '사찍남',
+    host: '오맷돌',
+    category: '부업 · 재테크',
+    genre: '휴먼 인터뷰',
+    status: 'active',
+    statusLabel: '운영중',
+    launchDate: null,
+    color: '#ea580c',
+    accent: 'rgba(234,88,12,0.08)',
+    metrics: [
+      { label: '평균 조회', value: '63만' },
+      { label: '평균 CTR', value: '4.7%' },
+      { label: '리텐션', value: '26.5%' },
+    ],
+    tools: [
+      { label: '성장', path: '../../sajjiknam/growth/', role: 'Growth' },
+      { label: '캐스팅', path: '../../sajjiknam/casting/', role: 'Casting' },
+      { label: '부업', path: '../../sajjiknam/bueop/', role: 'Topic DB' },
+      { label: '포털', path: '../../sajjiknam/portal/', role: 'Client' },
+    ],
+  },
+  {
+    id: 'bueop',
+    slug: 'bueop',
+    channelName: '부업소개하는남자',
+    name: '부업소개하는남자',
+    host: '미정',
+    category: '부업 소개',
+    genre: '인큐베이션',
+    status: 'incubating',
+    statusLabel: '인큐베이션',
+    launchDate: null,
+    color: '#6366f1',
+    accent: 'rgba(99,102,241,0.08)',
+    metrics: [
+      { label: '상태', value: '기획중' },
+      { label: '단계', value: '리서치' },
+    ],
+    tools: [],
+  },
+];
+
+function statusTagStyle(status) {
+  const map = {
+    pre_launch: { bg: 'rgba(139,92,246,0.1)', color: '#8b5cf6' },
+    active: { bg: 'rgba(22,163,74,0.1)', color: 'var(--green)' },
+    incubating: { bg: 'rgba(99,102,241,0.08)', color: 'var(--accent)' },
+    paused: { bg: 'rgba(107,107,107,0.08)', color: 'var(--text-dim)' },
+  };
+  const s = map[status] || map.incubating;
+  return `background:${s.bg};color:${s.color}`;
+}
+
+// Dashboard (MCN-wide creator management)
 function renderDashboard() {
   const pendingRevisions = revisions.filter(r => r.status === 'pending').length;
   const unresolvedComments = comments.filter(c => !c.is_resolved).length;
@@ -718,14 +805,20 @@ function renderDashboard() {
   const avgScore = verified.length ? Math.round(verified.reduce((s,p) => s + p.verification_score, 0) / verified.length) : 0;
   const passCount = verified.filter(p => p.verification_score >= 90).length;
 
-  const dday = ddayTo(GYE_LAUNCH_DATE);
-  const ddayLabel = dday > 0 ? `D-${dday}` : dday === 0 ? 'D-DAY' : `D+${-dday}`;
+  // 론칭 임박 크리에이터
+  const launchingCreator = CREATORS.find(c => c.launchDate && ddayTo(c.launchDate) >= 0);
+  const dday = launchingCreator ? ddayTo(launchingCreator.launchDate) : null;
+  const ddayLabel = dday == null ? '-' : dday > 0 ? `D-${dday}` : dday === 0 ? 'D-DAY' : `D+${-dday}`;
 
-  // D-Day 배지 업데이트
   const launchBadge = document.getElementById('launchBadge');
   if (launchBadge) launchBadge.textContent = ddayLabel;
 
-  // 오늘 이후 업로드 예정 에피소드
+  // 상태별 크리에이터 카운트
+  const activeCount = CREATORS.filter(c => c.status === 'active').length;
+  const preLaunchCount = CREATORS.filter(c => c.status === 'pre_launch').length;
+  const incubatingCount = CREATORS.filter(c => c.status === 'incubating').length;
+
+  // 오늘 이후 업로드 예정
   const today = new Date().toISOString().slice(0,10);
   const upcomingEpisodes = proposals
     .filter(p => p.upload_date && p.upload_date >= today)
@@ -734,33 +827,25 @@ function renderDashboard() {
 
   document.getElementById('mainContent').innerHTML = `
     <div class="content-header">
-      <h1>총합 대시보드</h1>
+      <h1>크리에이터 관리 대시보드</h1>
       <div style="font-size:12px;color:var(--text-dim)">${new Date().toLocaleDateString('ko-KR', {year:'numeric', month:'long', day:'numeric', weekday:'long'})}</div>
     </div>
 
-    <!-- D-Day 배너 -->
-    <div class="dday-banner">
-      <div class="dday-left">
-        <strong>아는언니 세령 · 채널 론칭</strong>
-        <div class="dday-title">2026.04.14 월요일</div>
-        <div class="dday-sub">이세령 대표 · 결정사(결혼정보) 프리미엄 · 성장형 리얼리티</div>
-      </div>
-      <div class="dday-right">
-        <div class="dday-count">${ddayLabel}</div>
-        <div class="dday-count-sub">${dday > 0 ? '남은 일수' : dday === 0 ? '론칭일' : '경과'}</div>
-      </div>
-    </div>
-
-    <!-- KPI -->
+    <!-- MCN 전체 KPI -->
     <div class="kpi-grid">
       <div class="kpi">
-        <div class="kpi-label">기획서</div>
-        <div class="kpi-value accent">${totalProposals}<span style="font-size:13px;color:var(--text-dim);margin-left:4px">건</span></div>
+        <div class="kpi-label">관리 크리에이터</div>
+        <div class="kpi-value accent">${CREATORS.length}<span style="font-size:13px;color:var(--text-dim);margin-left:4px">팀</span></div>
+        <div class="kpi-sub">운영 ${activeCount} · 론칭준비 ${preLaunchCount} · 인큐 ${incubatingCount}</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">기획서 파이프라인</div>
+        <div class="kpi-value">${totalProposals}<span style="font-size:13px;color:var(--text-dim);margin-left:4px">건</span></div>
         <div class="kpi-sub">초안 ${draftProposals} · 검토 ${reviewProposals} · 승인 ${approvedProposals} · 촬영 ${shootingProposals}</div>
       </div>
       <div class="kpi">
         <div class="kpi-label">검증 평균</div>
-        <div class="kpi-value ${avgScore >= 80 ? 'green' : avgScore >= 60 ? 'yellow' : ''}">${avgScore}<span style="font-size:13px;color:var(--text-dim);margin-left:4px">/100</span></div>
+        <div class="kpi-value ${avgScore >= 80 ? 'green' : avgScore >= 60 ? 'yellow' : ''}">${avgScore || '-'}<span style="font-size:13px;color:var(--text-dim);margin-left:4px">/100</span></div>
         <div class="kpi-sub">PASS ${passCount}/${verified.length}건</div>
       </div>
       <div class="kpi">
@@ -768,53 +853,91 @@ function renderDashboard() {
         <div class="kpi-value ${(pendingRevisions+unresolvedComments) > 0 ? 'yellow' : ''}">${pendingRevisions + unresolvedComments}</div>
         <div class="kpi-sub">수정 ${pendingRevisions} · 코멘트 ${unresolvedComments}</div>
       </div>
+      ${launchingCreator ? `
       <div class="kpi">
-        <div class="kpi-label">레퍼런스 영상</div>
-        <div class="kpi-value">1,541<span style="font-size:13px;color:var(--text-dim);margin-left:4px">건</span></div>
-        <div class="kpi-sub">9개 채널 분석 완료</div>
+        <div class="kpi-label">다음 론칭</div>
+        <div class="kpi-value accent">${ddayLabel}</div>
+        <div class="kpi-sub">${launchingCreator.name} · ${launchingCreator.launchDate}</div>
       </div>
-      <div class="kpi">
-        <div class="kpi-label">경쟁 채널</div>
-        <div class="kpi-value">2<span style="font-size:13px;color:var(--text-dim);margin-left:4px">개</span></div>
-        <div class="kpi-sub">한방언니 · 모두의지인</div>
+      ` : ''}
+    </div>
+
+    <!-- 크리에이터 카드 -->
+    <h2 style="font-size:16px;font-weight:700;margin-bottom:12px">관리 크리에이터</h2>
+    <div class="channel-grid" style="margin-bottom:32px">
+      ${CREATORS.map(cr => {
+        const crProposals = proposals.filter(p =>
+          p.channel_name === cr.channelName ||
+          p.channel_name === cr.name ||
+          p.channel_name === cr.slug
+        );
+        const approvedN = crProposals.filter(p => p.status === 'approved').length;
+        const pendingN = crProposals.filter(p => p.status === 'draft' || p.status === 'review').length;
+        const crDday = cr.launchDate ? ddayTo(cr.launchDate) : null;
+        const crDdayLabel = crDday == null ? null : crDday > 0 ? `D-${crDday}` : crDday === 0 ? 'D-DAY' : '운영중';
+
+        return `<div class="channel-card" style="border-top:3px solid ${cr.color}" onclick="navigate('creator','${cr.id}')">
+          <div class="channel-card-header">
+            <h3>${cr.name}</h3>
+            <span class="channel-status" style="${statusTagStyle(cr.status)}">${cr.statusLabel}</span>
+          </div>
+          <div class="channel-meta">
+            <span>${cr.host}</span>
+            <span>·</span>
+            <span>${cr.category}</span>
+          </div>
+          ${cr.metrics.length > 0 ? `
+            <div class="channel-stats" style="grid-template-columns:repeat(${cr.metrics.length},1fr);background:${cr.accent};border-radius:8px;padding:10px;margin-top:12px">
+              ${cr.metrics.map(m => `
+                <div class="channel-stat">
+                  <div class="channel-stat-value" style="font-size:14px">${m.value}</div>
+                  <div class="channel-stat-label">${m.label}</div>
+                </div>
+              `).join('')}
+            </div>
+          ` : ''}
+          <div style="display:flex;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:12px;color:var(--text-dim)">
+            <span>기획서 <strong style="color:var(--text)">${crProposals.length}</strong> · 승인 ${approvedN} · 대기 ${pendingN}</span>
+            ${crDdayLabel ? `<span style="color:${cr.color};font-weight:700">${crDdayLabel}</span>` : ''}
+          </div>
+        </div>`;
+      }).join('')}
+
+      <!-- 신규 영입 카드 -->
+      <div class="channel-card" style="border:2px dashed var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:200px;cursor:pointer" onclick="showToast('신규 크리에이터 영입 플로우는 곧 추가됩니다')">
+        <div style="width:48px;height:48px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--accent);margin-bottom:12px">+</div>
+        <div style="font-size:14px;font-weight:700">신규 크리에이터 영입</div>
+        <div style="font-size:12px;color:var(--text-dim);margin-top:4px">4단계 온보딩 프로세스</div>
       </div>
     </div>
 
-    <!-- 콘텐츠 도구 바로가기 -->
-    <h2 style="font-size:16px;font-weight:700;margin-bottom:12px">콘텐츠 운영 도구</h2>
-    <div class="tool-grid">
-      <a class="tool-card" href="../planning/" target="_blank">
-        <span class="tool-label">Planning</span>
-        <div class="tool-title">기획부 대시보드</div>
-        <div class="tool-desc">에피소드 기획서 · 제목/썸네일 10라운드 검증 · 채주부 벤치마크</div>
-        <div class="tool-meta"><span>기획부</span><span>바로가기 &rarr;</span></div>
-      </a>
-      <a class="tool-card" href="../episode/" target="_blank">
-        <span class="tool-label">Episodes</span>
-        <div class="tool-title">에피소드 보드</div>
-        <div class="tool-desc">EP01~EP10 포맷/러닝타임/촬영일 · 진행률 트래킹</div>
-        <div class="tool-meta"><span>제작부</span><span>바로가기 &rarr;</span></div>
-      </a>
-      <a class="tool-card" href="../dashboard/" target="_blank">
-        <span class="tool-label">Data</span>
-        <div class="tool-title">레퍼런스 데이터</div>
-        <div class="tool-desc">1,541 영상 전수 필터 · 히트맵/CTR/리텐션 시각화</div>
-        <div class="tool-meta"><span>분석부</span><span>바로가기 &rarr;</span></div>
-      </a>
-      <a class="tool-card" href="../portal/" target="_blank">
-        <span class="tool-label">Client Portal</span>
-        <div class="tool-title">이세령 클라이언트 포털</div>
-        <div class="tool-desc">8탭 · 기획/에피소드/전략/시장분석/콘텐츠공식/로드맵/리스크</div>
-        <div class="tool-meta"><span>외부 공유</span><span>바로가기 &rarr;</span></div>
-      </a>
-    </div>
+    <!-- 크리에이터별 도구 바로가기 -->
+    <h2 style="font-size:16px;font-weight:700;margin-bottom:12px">크리에이터별 도구</h2>
+    ${CREATORS.filter(c => c.tools.length > 0).map(cr => `
+      <div style="margin-bottom:20px">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+          <span style="width:10px;height:10px;border-radius:50%;background:${cr.color}"></span>
+          <strong style="font-size:13px">${cr.name}</strong>
+          <span style="font-size:11px;color:var(--text-dim)">· ${cr.host}</span>
+        </div>
+        <div class="tool-grid" style="margin-bottom:0">
+          ${cr.tools.map(t => `
+            <a class="tool-card" href="${t.path}" target="_blank" style="border-left:3px solid ${cr.color}">
+              <span class="tool-label" style="color:${cr.color}">${t.role}</span>
+              <div class="tool-title">${t.label}</div>
+              <div class="tool-meta"><span>${cr.name}</span><span>바로가기 &rarr;</span></div>
+            </a>
+          `).join('')}
+        </div>
+      </div>
+    `).join('')}
 
     <!-- 업로드 예정 -->
     ${upcomingEpisodes.length > 0 ? `
-      <h2 style="font-size:16px;font-weight:700;margin-bottom:12px">업로드 예정 (다가오는 순)</h2>
+      <h2 style="font-size:16px;font-weight:700;margin:32px 0 12px">업로드 예정 (전 채널)</h2>
       <table class="proposals-table" style="margin-bottom:32px">
         <thead>
-          <tr><th>업로드일</th><th>EP</th><th>제목</th><th>상태</th><th>검증</th></tr>
+          <tr><th>업로드일</th><th>채널</th><th>EP</th><th>제목</th><th>상태</th><th>검증</th></tr>
         </thead>
         <tbody>
           ${upcomingEpisodes.map(p => {
@@ -823,6 +946,7 @@ function renderDashboard() {
             const uploadDday = ddayTo(p.upload_date);
             return `<tr style="cursor:pointer" onclick="openProposalDetail('${p.id}')">
               <td><strong>${p.upload_date}</strong><br><small style="color:var(--text-dim)">D-${uploadDday}</small></td>
+              <td>${p.channel_name}</td>
               <td><span class="ep-tag">EP${String(p.episode_number).padStart(2,'0')}</span></td>
               <td style="font-weight:600">${p.title}</td>
               <td><span class="status-dot ${p.status}"></span>${statusLabels[p.status] || p.status}</td>
@@ -831,41 +955,6 @@ function renderDashboard() {
           }).join('')}
         </tbody>
       </table>
-    ` : ''}
-
-    <!-- 채널 현황 -->
-    ${channels.length > 0 ? `
-      <h2 style="font-size:16px;font-weight:700;margin-bottom:12px">관리 채널</h2>
-      <div class="channel-grid">
-        ${channels.map(ch => {
-          const chProposals = proposals.filter(p => p.channel_name === ch.channel_name);
-          const statusLabels = { active: '운영중', pre_launch: '론칭 준비', paused: '일시정지' };
-          return `<div class="channel-card" onclick="navigate('channel','${ch.id}')">
-            <div class="channel-card-header">
-              <h3>${ch.channel_display_name}</h3>
-              <span class="channel-status ${ch.status}">${statusLabels[ch.status] || ch.status}</span>
-            </div>
-            <div class="channel-meta">
-              <span>${ch.category}</span>
-              <span>${ch.contact_name || ''}</span>
-            </div>
-            <div class="channel-stats">
-              <div class="channel-stat">
-                <div class="channel-stat-value">${chProposals.length}</div>
-                <div class="channel-stat-label">기획서</div>
-              </div>
-              <div class="channel-stat">
-                <div class="channel-stat-value">${chProposals.filter(p=>p.status==='approved').length}</div>
-                <div class="channel-stat-label">승인</div>
-              </div>
-              <div class="channel-stat">
-                <div class="channel-stat-value">${ch.youtube_channel_id ? 'Y' : '-'}</div>
-                <div class="channel-stat-label">YouTube</div>
-              </div>
-            </div>
-          </div>`;
-        }).join('')}
-      </div>
     ` : ''}
 
     <!-- 최근 알림 -->
@@ -893,6 +982,102 @@ function renderDashboard() {
           </div>
         `).join('')}
       </div>
+    ` : ''}
+  `;
+}
+
+// 크리에이터 상세 (하드코딩 CREATORS 기반)
+function renderCreator(creatorId) {
+  const cr = CREATORS.find(c => c.id === creatorId);
+  if (!cr) return;
+
+  const crProposals = proposals.filter(p =>
+    p.channel_name === cr.channelName ||
+    p.channel_name === cr.name ||
+    p.channel_name === cr.slug
+  );
+  const approvedN = crProposals.filter(p => p.status === 'approved').length;
+  const draftN = crProposals.filter(p => p.status === 'draft').length;
+  const reviewN = crProposals.filter(p => p.status === 'review').length;
+
+  const crDday = cr.launchDate ? ddayTo(cr.launchDate) : null;
+  const crDdayLabel = crDday == null ? null : crDday > 0 ? `D-${crDday}` : crDday === 0 ? 'D-DAY' : `D+${-crDday}`;
+
+  document.getElementById('mainContent').innerHTML = `
+    <div class="content-header">
+      <div>
+        <h1 style="display:flex;align-items:center;gap:10px">
+          <span style="width:12px;height:12px;border-radius:50%;background:${cr.color}"></span>
+          ${cr.name}
+        </h1>
+        <div style="font-size:13px;color:var(--text-dim);margin-top:4px">${cr.host} · ${cr.category} · ${cr.genre}</div>
+      </div>
+      <span class="channel-status" style="${statusTagStyle(cr.status)};font-size:12px;padding:6px 14px">${cr.statusLabel}</span>
+    </div>
+
+    ${cr.launchDate ? `
+    <div class="dday-banner" style="border-color:${cr.color}33">
+      <div class="dday-left">
+        <strong style="color:${cr.color}">채널 론칭</strong>
+        <div class="dday-title">${cr.launchDate}</div>
+        <div class="dday-sub">${cr.genre} · ${cr.category}</div>
+      </div>
+      <div class="dday-right">
+        <div class="dday-count" style="color:${cr.color}">${crDdayLabel}</div>
+        <div class="dday-count-sub">${crDday > 0 ? '남은 일수' : '론칭 완료'}</div>
+      </div>
+    </div>
+    ` : ''}
+
+    <div class="stats-grid">
+      ${cr.metrics.map(m => `
+        <div class="stat-card">
+          <div class="stat-label">${m.label}</div>
+          <div class="stat-value" style="font-size:22px">${m.value}</div>
+        </div>
+      `).join('')}
+      <div class="stat-card">
+        <div class="stat-label">기획서</div>
+        <div class="stat-value">${crProposals.length}</div>
+        <div class="stat-sub">승인 ${approvedN} · 검토 ${reviewN} · 초안 ${draftN}</div>
+      </div>
+    </div>
+
+    ${cr.tools.length > 0 ? `
+      <h2 style="font-size:16px;font-weight:700;margin:8px 0 12px">운영 도구</h2>
+      <div class="tool-grid">
+        ${cr.tools.map(t => `
+          <a class="tool-card" href="${t.path}" target="_blank" style="border-left:3px solid ${cr.color}">
+            <span class="tool-label" style="color:${cr.color}">${t.role}</span>
+            <div class="tool-title">${t.label}</div>
+            <div class="tool-meta"><span>${cr.name}</span><span>바로가기 &rarr;</span></div>
+          </a>
+        `).join('')}
+      </div>
+    ` : '<p style="color:var(--text-dim);font-size:14px;padding:16px 0">운영 도구 대기중 (인큐베이션 단계)</p>'}
+
+    ${crProposals.length > 0 ? `
+      <h2 style="font-size:16px;font-weight:700;margin:24px 0 12px">기획서</h2>
+      <table class="proposals-table">
+        <thead>
+          <tr><th>EP</th><th>제목</th><th>상태</th><th>버전</th><th>검증</th><th>촬영</th><th>업로드</th></tr>
+        </thead>
+        <tbody>
+          ${crProposals.map(p => {
+            const statusLabels = { draft: '초안', review: '검토중', approved: '승인', shooting: '촬영예정' };
+            const scoreClass = p.verification_score >= 90 ? 'pass' : p.verification_score >= 80 ? 'conditional' : 'fail';
+            return `<tr style="cursor:pointer" onclick="openProposalDetail('${p.id}')">
+              <td><span class="ep-tag">EP${String(p.episode_number).padStart(2,'0')}</span></td>
+              <td style="font-weight:600">${p.title}</td>
+              <td><span class="status-dot ${p.status}"></span>${statusLabels[p.status] || p.status}</td>
+              <td>v${p.version}</td>
+              <td>${p.verification_score ? `<span class="score-badge ${scoreClass}">${p.verification_score}</span>` : '-'}</td>
+              <td>${p.shooting_date || '-'}</td>
+              <td>${p.upload_date || '-'}</td>
+            </tr>`;
+          }).join('')}
+        </tbody>
+      </table>
     ` : ''}
   `;
 }
@@ -1055,7 +1240,7 @@ async function resolveItem(type, id) {
 // Proposals
 function renderProposals() {
   document.getElementById('mainContent').innerHTML = `
-    <div class="content-header"><h1>기획서 관리</h1></div>
+    <div class="content-header"><h1>기획서 관리 <span style="font-size:13px;color:var(--text-dim);font-weight:500">전 채널 통합</span></h1></div>
 
     ${proposals.length === 0 ? `
       <div class="empty-state">
