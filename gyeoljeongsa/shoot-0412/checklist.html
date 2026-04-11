@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0064ff">
+<title>0412 촬영 체크리스트 · 아는언니 세령</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  :root {
+    --bg: #0b0d12;
+    --card: #141820;
+    --card2: #1b2029;
+    --border: #252b36;
+    --text: #e5e7eb;
+    --mute: #8b95a7;
+    --dim: #5a6578;
+    --blue: #0064ff;
+    --red: #dc2626;
+    --org: #d97706;
+    --purple: #7c3aed;
+    --grn: #16a34a;
+    --dark: #1f2937;
+    --done: #10b981;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-size: 15px; line-height: 1.55;
+    overscroll-behavior-y: none;
+  }
+  body { padding-bottom: 80px; }
+
+  /* Sticky Header */
+  .header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(11,13,18,0.92);
+    backdrop-filter: saturate(140%) blur(14px);
+    -webkit-backdrop-filter: saturate(140%) blur(14px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 16px 10px;
+  }
+  .header h1 {
+    font-size: 15px; font-weight: 800; margin: 0 0 4px;
+    letter-spacing: -0.02em;
+  }
+  .header .sub {
+    color: var(--mute); font-size: 12px; margin-bottom: 10px;
+  }
+  .progress-wrap {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+  }
+  .progress-bar {
+    flex: 1; height: 8px; background: var(--card2);
+    border-radius: 999px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%; background: linear-gradient(90deg, var(--blue), var(--done));
+    width: 0%; transition: width 0.3s ease;
+    border-radius: 999px;
+  }
+  .progress-text {
+    font-size: 13px; font-weight: 700; color: var(--text);
+    min-width: 72px; text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .filter-row {
+    display: flex; gap: 6px; flex-wrap: wrap;
+  }
+  .filter-btn {
+    flex: 1; min-width: 0;
+    background: var(--card); border: 1px solid var(--border);
+    color: var(--mute); padding: 8px 10px;
+    border-radius: 8px; font-size: 12px; font-weight: 700;
+    cursor: pointer; transition: all 0.15s;
+    font-family: inherit;
+  }
+  .filter-btn.active {
+    background: var(--blue); border-color: var(--blue); color: #fff;
+  }
+  .filter-btn.reset {
+    flex: 0 0 auto; color: var(--dim);
+  }
+  .filter-btn.reset:hover { color: var(--red); border-color: var(--red); }
+
+  /* Main */
+  main { padding: 12px 14px 40px; }
+
+  /* Location Group */
+  .loc-group { margin-bottom: 18px; }
+  .loc-header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 14px; border-radius: 10px;
+    font-weight: 800; font-size: 14px;
+    margin-bottom: 10px; color: #fff;
+    letter-spacing: -0.01em;
+  }
+  .loc-header .loc-title { flex: 1; min-width: 0; }
+  .loc-header .loc-time {
+    font-size: 11px; font-weight: 600; opacity: 0.85;
+    margin-left: 6px;
+  }
+  .loc-header .loc-count {
+    font-size: 12px; font-weight: 700;
+    background: rgba(255,255,255,0.2); padding: 3px 9px;
+    border-radius: 999px; font-variant-numeric: tabular-nums;
+  }
+  .loc-header.L1 { background: var(--blue); }
+  .loc-header.L2 { background: var(--red); }
+  .loc-header.L3 { background: var(--org); }
+  .loc-header.L4 { background: var(--purple); }
+  .loc-header.L5 { background: var(--grn); }
+  .loc-header.L6 { background: var(--red); }
+  .loc-header.L7 { background: var(--dark); }
+
+  /* Question Card */
+  .q {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; margin-bottom: 8px;
+    overflow: hidden; transition: all 0.15s;
+  }
+  .q.done {
+    background: var(--card2); opacity: 0.55;
+  }
+  .q-row {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 14px 14px 14px 14px;
+    cursor: pointer; user-select: none;
+    min-height: 52px;
+  }
+  .q-check {
+    flex-shrink: 0;
+    width: 24px; height: 24px;
+    border: 2px solid var(--dim);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+    margin-top: 1px;
+  }
+  .q.done .q-check {
+    background: var(--done); border-color: var(--done);
+  }
+  .q-check::after {
+    content: ""; width: 6px; height: 11px;
+    border: solid #fff; border-width: 0 2px 2px 0;
+    transform: rotate(45deg) translate(-1px, -1px);
+    opacity: 0;
+  }
+  .q.done .q-check::after { opacity: 1; }
+
+  .q-body { flex: 1; min-width: 0; }
+  .q-meta {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 5px; flex-wrap: wrap;
+  }
+  .q-num {
+    background: var(--blue); color: #fff;
+    font-size: 11px; font-weight: 800;
+    padding: 2px 7px; border-radius: 5px;
+    font-variant-numeric: tabular-nums;
+  }
+  .q.done .q-num { background: var(--done); }
+  .q-tag {
+    color: var(--mute); font-size: 12px; font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .q-text {
+    font-size: 14px; line-height: 1.6;
+    color: var(--text); word-break: keep-all;
+    white-space: pre-wrap;
+  }
+  .q.done .q-text { text-decoration: line-through; text-decoration-color: var(--dim); }
+
+  /* 다단계 MC 질문 강조 */
+  .q-text strong { color: #fef3c7; font-weight: 700; }
+
+  /* Hide when filtered */
+  .q.hidden { display: none; }
+  .loc-group.empty { display: none; }
+
+  /* Footer / Reset confirmation */
+  .toast {
+    position: fixed; left: 50%; bottom: 24px;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--card); color: var(--text);
+    padding: 10px 18px; border-radius: 999px;
+    border: 1px solid var(--border);
+    font-size: 13px; font-weight: 600;
+    opacity: 0; transition: all 0.3s;
+    pointer-events: none;
+  }
+  .toast.show {
+    opacity: 1; transform: translateX(-50%) translateY(0);
+  }
+
+  /* Desktop */
+  @media (min-width: 768px) {
+    body { font-size: 16px; }
+    main { max-width: 720px; margin: 0 auto; padding: 16px 20px 60px; }
+    .header { padding: 16px 20px 12px; }
+    .header > div { max-width: 720px; margin: 0 auto; }
+    .header h1 { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>아는언니 세령 · 0412 촬영 체크리스트</h1>
+    <div class="sub">7곳 · 41질문 · 체크는 자동 저장됩니다</div>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-text" id="progressText">0/41 (0%)</div>
+    </div>
+    <div class="filter-row">
+      <button class="filter-btn active" data-filter="all">전체</button>
+      <button class="filter-btn" data-filter="todo">미완료</button>
+      <button class="filter-btn" data-filter="done">완료</button>
+      <button class="filter-btn reset" id="resetBtn">초기화</button>
+    </div>
+  </div>
+</div>
+
+<main id="main"></main>
+
+<div class="toast" id="toast">저장됨</div>
+
+<script>
+const STORAGE_KEY = 'shoot-0412-checklist-v1';
+
+const LOCATIONS = [
+  {
+    id: 'L1', color: 'L1',
+    title: 'L1 자택',
+    time: '09:00~10:00 · 바닥 서사 시작',
+    questions: [
+      { n: 1, tag: '옛날 사진', q: '"이 사진 몇 살 때예요? 지금이랑 너무 다른데, 그때가 본인이라고요?"' },
+      { n: 2, tag: '어린 시절 꿈', q: '"어릴 때 꿈이 뭐였어요? 대구 출신이시라고요?"' },
+      { n: 3, tag: '아나운서 연습 리인액트', q: '"지금 이 화장실에서 진짜로 아나운서 연습 하셨어요? 어떻게 했어요? 한 번 보여주실 수 있어요?"' },
+      { n: 4, tag: '폭식 / 반지하', q: '"90kg까지 어떻게 찌셨어요? 그때 집은 어떤 집이었어요?"' },
+      { n: 5, tag: '오늘 출발 멘트', q: '"그런 집에서 시작한 사람이 오늘 어디 가시는 거예요? 오늘 스케줄 간단히 설명해주세요."' },
+    ]
+  },
+  {
+    id: 'L2', color: 'L2',
+    title: 'L2 헬스장 PT',
+    time: '10:30~12:00 · 다이어트 + PPL 빌드업',
+    questions: [
+      { n: 1, tag: '다이어트 시작', q: '"언제부터 살을 빼기 시작했어요? 90kg에서 지금까지 어떻게 빼신 거예요?"' },
+      { n: 2, tag: '다이어트 식품 자연 노출', q: '"PT 끝나고 뭐 드세요? 요즘 챙겨 드시는 거 있어요?"' },
+      { n: 3, tag: '양극단 체감 — 투명인간 vs 지금 (공감)', q: '**단계 1**\n"뚱뚱했을 때는 남자들이 진짜 투명인간 취급했어요? 한 명도 말을 안 걸었어요?"\n\n**단계 2**\n"그럼 지금은 진짜 달라요? 같은 사람인데요?"\n\n**단계 3 (공감 포인트)**\n"지금 영상 보시는 분 중에 다이어트 중이신 분들 많을 텐데 — 살 빼면 진짜 인생 바뀐다고 말씀드려도 돼요?"' },
+      { n: 4, tag: '대학생 시절', q: '"대학 때는 어땠어요? 캠퍼스 다니면서 어떤 생각 하셨어요?"' },
+      { n: 5, tag: '아나운서 되기 전', q: '"아나운서 되기 전에 얼마나 준비하셨어요? 어디서 어떻게?"' },
+    ]
+  },
+  {
+    id: 'L3', color: 'L3',
+    title: 'L3 메이크업샵',
+    time: '12:30~13:30 · 반전 캐릭터 각인',
+    questions: [
+      { n: 1, tag: '반전 첫 마디', q: '"(풀세팅 시작 직전 거울 보며) 이 모습을 뚱뚱했을 때의 본인이 보면 뭐라고 할 것 같아요?"' },
+      { n: 2, tag: '메이크업 똥손', q: '"결정사 대표가 본인이 메이크업 못 해서 받는 거라고요?"' },
+      { n: 3, tag: '외모 투자 이유', q: '"결정사 대표니까 외모에 더 신경 쓰시는 건가요? 왜요?"' },
+      { n: 4, tag: '뚱뚱했던 시절 대비', q: '"90kg 시절 본인이랑 지금 본인, 남자 만나는 게 얼마나 달라졌어요?"' },
+      { n: 5, tag: '풀세팅 완성 후', q: '"(메이크업 끝나고) 지금 거울에 보이는 본인한테 한 마디 해준다면?"' },
+    ]
+  },
+  {
+    id: 'L4', color: 'L4',
+    title: 'L4 릴스 촬영장',
+    time: '14:00~14:30 · 편입 서사 PEAK',
+    questions: [
+      { n: 1, tag: '편입 결심', q: '"영남대에서 왜 편입 결심하셨어요?"' },
+      { n: 2, tag: '7번 편입 실패', q: '"편입 7번 떨어졌다고요? 그때 어떻게 버텼어요?"' },
+      { n: 3, tag: '8번째 합격', q: '"8번째 도전에서 연세대 붙으신 거예요? 그 순간 어땠어요?"' },
+      { n: 4, tag: '스포티비 아나운서', q: '"결국 아나운서 되셨잖아요. 어떤 방송 하셨어요?"' },
+      { n: 5, tag: '직접 릴스 찍는 이유', q: '"(릴스 찍으면서) 결정사 대표가 직접 릴스도 찍으시는 거예요? 왜요?"' },
+      { n: 6, tag: '릴스 라이브 FAQ — 요즘 여자들 고민 (공감)', q: '릴스 세팅 상태에서 "팔로워 DM 자주 오는 질문 3개" 컨셉.\n\n**질문 1**\n"\'30살 넘었어요. 너무 늦은 거 아니에요?\' — 어떻게 답하세요?"\n\n**질문 2**\n"\'예쁘고 잘난 여자만 결혼하는 거 아니에요?\' — 진짜 그래요?"\n\n**질문 3**\n"\'저 스펙 낮은데 결정사 가도 돼요?\' — 이런 분한테 뭐라고 하세요?"' },
+    ]
+  },
+  {
+    id: 'L5', color: 'L5',
+    title: 'L5 사무실',
+    time: '15:00~16:30 · 본 촬영 앵커',
+    questions: [
+      { n: 0, tag: '[별도 컷] 영상 오프닝 앵커 샷', q: '본 Q-카드와 **분리**. 책상 정면 삼각대, 카메라 2대 중 메인 4K.\n대본 없이 직접 발화:\n\n**"결정사 대표인데, 30살에 아직 결혼 못 한 노처녀예요"**\n\n→ 인사 X · 웃음 X · 무표정 직설 · 5초 이내 · 리테이크 2~3회 가능' },
+      { n: 1, tag: '아나운서 슬럼프', q: '"꿈꾸던 아나운서 됐는데 왜 또 힘들어지신 거예요?"' },
+      { n: 2, tag: '서울 상경', q: '"서울 상경은 어떻게 하셨어요? 올라올 때 뭐 가지고 오셨어요?"' },
+      { n: 3, tag: '상경 후 → 결정사까지', q: '"서울 올라와서는 뭐 하고 지내셨어요? 어떻게 결정사까지 오신 거예요?"' },
+      { n: 4, tag: '결정사 시작 이유', q: '"왜 결정사 시작하셨어요? 본인 경험이 이 일에 어떻게 연결돼요?"' },
+      { n: 5, tag: '회원 프로필 — 단계적 숫자 추궁 (CTA)', q: '**단계 1 (한방언니식)**\n"지금 회원이 몇 명이에요? 진짜 숫자로요"\n\n**단계 2**\n"그중 한 달 안에 매칭되는 비율은요? 30%? 50%?"\n\n**단계 3**\n"평균 몇 번 만나야 결혼까지 가요? 한 사람당요"\n\n**단계 4 (모두의지인식)**\n"제발 솔직히 말해주세요. 그럼 진짜로 어떤 분들이 오세요? 연봉 기준? 직업 제한?"' },
+      { n: 6, tag: '회원 메시지 리액션 + 독백', q: '"(PD가 뒤에서 조용히) 지금 온 문자 누구예요? 기억에 남는 회원 한 명만 떠올려 보세요."\n\n씬: 핸드폰 진동 → 확인 → 미소/한숨 → 내려놓음 → **카메라 정면 응시 3초 침묵** → 혼잣말 독백' },
+      { n: 7, tag: '현장 인사이트 — 요즘 남자들이 원하는 여자 (공감)', q: '**단계 1**\n"현장에서 매일 남자 회원들 만나시잖아요. 요즘 남자들이 진짜로 원하는 여자가 어떤 타입이에요? 예쁜 거? 어린 거?"\n\n**단계 2 (반전)**\n"근데 의외로 인기 없는 타입도 있죠? 어떤 분이세요?"\n\n**단계 3 (공감)**\n"지금 30대 여자분들이 제일 오해하는 게 뭐예요? 본인이 뭘 어필해야 하는지 모르는?"' },
+    ]
+  },
+  {
+    id: 'L6', color: 'L6',
+    title: 'L6 베스트클래스',
+    time: '17:00~18:30 · 감정 PEAK',
+    questions: [
+      { n: 1, tag: '가격 카드 폭로', q: '"(가격 카드 보여주며) 이 카드 한 장이 얼마예요? 진짜요?? 한 명 만날 때마다 30만 원씩 차감된다고요?"' },
+      { n: 2, tag: '시스템 설명', q: '"그럼 이 돈 내면 뭘 해주는 거예요? 몇 명 만나게 해주세요?"' },
+      { n: 3, tag: '매출 폭로 — 150만 원 (감정 핵심)', q: '"그럼 대표님 한 달 매출은 어떻게 되세요? 최악의 달엔 얼마였어요?"\n\n**리테이크 절대 금지. 첫 테이크 그대로.**' },
+      { n: 4, tag: '그런데도 하는 이유', q: '"그런데도 왜 계속해요? 솔직히 무서운 적 없어요?"' },
+      { n: 5, tag: '다른 결정사와 차이', q: '"다른 결정사들은 가격 공개 안 하는데, 왜 대표님은 공개하세요?"' },
+      { n: 6, tag: '거르는 기준 — 역설적 추궁 (CTA)', q: '**단계 1 (불신)**\n"근데 솔직히... 대표님 돈 내면 다 받아주시는 거 아니에요? 1000만 원이니까요"\n\n**단계 2 (추궁)**\n"제발 솔직히 말해주세요. 진짜 안 받는 분도 있어요? 거르는 기준 있어요?"\n\n**단계 3**\n"구체적으로 어떤 분들을 거절하세요? 한 번만 진짜로요"\n\n**단계 4 (반전)**\n"그럼 반대로, 어떤 분이 오셔야 이 돈이 안 아까워요?"' },
+      { n: 7, tag: '부잣집 남자 vs 멘탈 강한 남자 (공감)', q: '**단계 1 (통념 찌르기)**\n"여자들 다 부잣집 남자 만나고 싶어 하잖아요. 결정사에서 제일 인기 많은 타입도 그래요?"\n\n**단계 2 (반전)**\n"근데 부잣집 남자랑 결혼한 여자들 진짜 행복해요? 실제로요?"\n\n**단계 3 (인사이트)**\n"\'부잣집 남자는 의외로 멘탈이 약하다\'는 말 한 번 해주셨잖아요. 왜 그래요?"\n\n**단계 4 (시청자 대입)**\n"지금 30대 여자분들한테 — 어떤 남자를 만나야 진짜 행복해지는 건지 한 번만 정리해주세요"' },
+    ]
+  },
+  {
+    id: 'L7', color: 'L7',
+    title: 'L7 식당 외부',
+    time: '19:30~20:00 · 해질녘 클로징',
+    questions: [
+      { n: 1, tag: '오늘 하루', q: '"오늘 하루 어땠어요? 피곤하세요?"' },
+      { n: 2, tag: '남의 인연 만들기', q: '"오늘도 남의 인연 만들어주고 혼자 집에 가시는 거잖아요. 그거 어때요?"' },
+      { n: 3, tag: '본인한테 오는 문자', q: '"(혼잣말처럼) 본인한테는 언제 그런 문자가 올까요?"' },
+      { n: 4, tag: '망설이는 시청자에게 직접 (CTA)', q: '**MC 프롬프트**\n"대표님, 지금 이 영상 보시면서 \'상담 한 번 받아볼까\' 망설이고 계신 분들이 분명히 있을 거예요. 그분들 카메라 보고 직접 한 마디 해주실 수 있어요?"\n\n→ 이세령 카메라 정면. 직설·진심 톤. 세일즈 X. "부담 없이 / 한 번만" 류 저장벽 단어. 3~8초.' },
+      { n: 5, tag: '안 긁은 복권 — 채널 시그니처', q: '"본인 스스로 어떤 사람이라고 생각하세요?"' },
+      { n: 6, tag: '클로징 한 마디', q: '"근데 괜찮아요? 이 일 계속할 수 있겠어요?"\n\n**추가 질문 절대 금지. 10초+ 침묵 그대로. 마지막 5초 카메라 정면 → 페이드아웃.**' },
+    ]
+  },
+];
+
+// ---- State ----
+let state = { checks: {}, filter: 'all' };
+function load() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) state.checks = JSON.parse(raw) || {};
+  } catch (e) {}
+}
+function save() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state.checks)); } catch (e) {}
+}
+
+// ---- Total count (exclude # = 0 separate production cuts) ----
+const TOTAL = LOCATIONS.reduce((acc, l) => acc + l.questions.filter(q => q.n > 0).length, 0);
+
+// ---- Render ----
+function escapeHTML(s) {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+function renderQuestionText(s) {
+  // preserve line breaks, apply **bold** → <strong>
+  return escapeHTML(s)
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n/g, '<br>');
+}
+
+function render() {
+  const main = document.getElementById('main');
+  main.innerHTML = '';
+  let done = 0;
+
+  for (const loc of LOCATIONS) {
+    const group = document.createElement('section');
+    group.className = 'loc-group';
+
+    const locDone = loc.questions.filter(q => q.n > 0 && state.checks[loc.id + ':' + q.n]).length;
+    const locTotal = loc.questions.filter(q => q.n > 0).length;
+    done += locDone;
+
+    const header = document.createElement('div');
+    header.className = 'loc-header ' + loc.color;
+    header.innerHTML = `
+      <div class="loc-title">${escapeHTML(loc.title)}<span class="loc-time"> · ${escapeHTML(loc.time)}</span></div>
+      <div class="loc-count">${locDone}/${locTotal}</div>
+    `;
+    group.appendChild(header);
+
+    let visibleInGroup = 0;
+    for (const q of loc.questions) {
+      const key = loc.id + ':' + q.n;
+      const isDone = !!state.checks[key];
+      const isProdCut = q.n === 0;
+
+      if (state.filter === 'todo' && isDone) continue;
+      if (state.filter === 'done' && !isDone && !isProdCut) continue;
+      if (state.filter === 'done' && isProdCut) continue;
+
+      visibleInGroup++;
+
+      const card = document.createElement('div');
+      card.className = 'q' + (isDone ? ' done' : '');
+      if (isProdCut) card.style.borderStyle = 'dashed';
+
+      const numLabel = isProdCut ? '別' : String(q.n);
+
+      card.innerHTML = `
+        <div class="q-row" data-key="${key}">
+          <div class="q-check"></div>
+          <div class="q-body">
+            <div class="q-meta">
+              <span class="q-num">${numLabel}</span>
+              <span class="q-tag">${escapeHTML(q.tag)}</span>
+            </div>
+            <div class="q-text">${renderQuestionText(q.q)}</div>
+          </div>
+        </div>
+      `;
+
+      card.querySelector('.q-row').addEventListener('click', () => {
+        state.checks[key] = !state.checks[key];
+        save();
+        render();
+      });
+
+      group.appendChild(card);
+    }
+
+    if (visibleInGroup === 0) group.classList.add('empty');
+    main.appendChild(group);
+  }
+
+  // Progress
+  const pct = TOTAL > 0 ? Math.round((done / TOTAL) * 100) : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = `${done}/${TOTAL} (${pct}%)`;
+}
+
+// ---- Filters ----
+document.querySelectorAll('.filter-btn[data-filter]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn[data-filter]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    state.filter = btn.dataset.filter;
+    render();
+  });
+});
+
+// ---- Reset ----
+document.getElementById('resetBtn').addEventListener('click', () => {
+  if (confirm('모든 체크를 초기화할까요?')) {
+    state.checks = {};
+    save();
+    render();
+    showToast('초기화 완료');
+  }
+});
+
+// ---- Toast ----
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1500);
+}
+
+// ---- Init ----
+load();
+render();
+</script>
+
+</body>
+</html>
