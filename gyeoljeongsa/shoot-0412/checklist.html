@@ -65,7 +65,7 @@
     border: 1px solid var(--border2);
   }
   .progress-fill {
-    height: 100%; background: linear-gradient(90deg, var(--blue), var(--done));
+    height: 100%; background: var(--done);
     width: 0%; transition: width 0.3s ease;
     border-radius: 999px;
   }
@@ -87,42 +87,36 @@
   }
   .filter-btn:active { transform: scale(0.97); }
   .filter-btn.active {
-    background: var(--blue); border-color: var(--blue); color: #fff;
+    background: var(--text); border-color: var(--text); color: #fff;
   }
   .filter-btn.reset {
     flex: 0 0 auto; color: var(--dim);
   }
   .filter-btn.reset:hover,
-  .filter-btn.reset:active { color: var(--red); border-color: var(--red); }
+  .filter-btn.reset:active { color: var(--text); border-color: var(--text); }
 
   main { padding: 14px 14px 40px; }
 
   .loc-group { margin-bottom: 20px; }
   .loc-header {
     display: flex; align-items: center; gap: 10px;
-    padding: 11px 14px; border-radius: 10px;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
     font-weight: 800; font-size: 14px;
-    margin-bottom: 10px; color: #fff;
+    margin-bottom: 10px; color: var(--text);
     letter-spacing: -0.01em;
-    box-shadow: var(--shadow-sm);
   }
   .loc-header .loc-title { flex: 1; min-width: 0; }
   .loc-header .loc-time {
-    font-size: 11px; font-weight: 600; opacity: 0.85;
+    font-size: 11px; font-weight: 600; color: var(--mute);
     margin-left: 6px;
   }
   .loc-header .loc-count {
-    font-size: 12px; font-weight: 700;
-    background: rgba(255,255,255,0.22); padding: 3px 9px;
+    font-size: 12px; font-weight: 700; color: var(--mute);
+    background: var(--card2); padding: 3px 9px;
     border-radius: 999px; font-variant-numeric: tabular-nums;
+    border: 1px solid var(--border);
   }
-  .loc-header.L1 { background: var(--blue); }
-  .loc-header.L2 { background: var(--red); }
-  .loc-header.L3 { background: var(--org); }
-  .loc-header.L4 { background: var(--purple); }
-  .loc-header.L5 { background: var(--grn); }
-  .loc-header.L6 { background: var(--red); }
-  .loc-header.L7 { background: var(--dark); }
 
   .q {
     background: var(--card); border: 1px solid var(--border);
@@ -167,12 +161,13 @@
     margin-bottom: 6px; flex-wrap: wrap;
   }
   .q-num {
-    background: var(--blue); color: #fff;
+    background: var(--card2); color: var(--text);
     font-size: 11px; font-weight: 800;
     padding: 2px 8px; border-radius: 5px;
     font-variant-numeric: tabular-nums;
+    border: 1px solid var(--border);
   }
-  .q.done .q-num { background: var(--done); }
+  .q.done .q-num { background: var(--done); color: #fff; border-color: var(--done); }
   .q-tag {
     color: var(--mute); font-size: 12px; font-weight: 700;
     letter-spacing: -0.01em;
