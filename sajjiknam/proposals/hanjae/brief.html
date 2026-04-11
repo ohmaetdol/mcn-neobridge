@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>사찍남 — 한희재 촬영 브리핑</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F2F4F6;color:#191F28;font-family:'Pretendard',system-ui,sans-serif;min-height:100vh;font-size:15px;line-height:1.6}
+.gnb{background:#fff;border-bottom:1px solid #E5E8EB;padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.gnb-logo{font-size:16px;font-weight:800;color:#D4A017}
+.gnb-badge{background:#FFFBEA;color:#8B6914;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:800;border:1px solid #D4A017}
+.wrap{max-width:720px;margin:0 auto;padding:24px 18px 80px}
+.hero{background:linear-gradient(135deg,#0A1628 0%,#132B4D 50%,#1F4680 100%);border-radius:20px;padding:32px 28px;margin-bottom:24px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;right:-10%;width:260px;height:260px;background:radial-gradient(circle,rgba(255,184,0,.18),transparent);pointer-events:none}
+.hero-eyebrow{font-size:11px;font-weight:700;color:#FFB800;letter-spacing:2px;margin-bottom:10px}
+.hero-title{font-size:24px;font-weight:800;line-height:1.35;color:#fff;margin-bottom:10px}
+.hero-sub{color:#8B95A1;font-size:13px;line-height:1.7}
+.hero-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:18px}
+.hero-m{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:10px;text-align:center}
+.hero-m-v{font-size:15px;font-weight:800;color:#FFB800}
+.hero-m-l{font-size:10px;color:#8B95A1;margin-top:2px}
+
+h2{font-size:20px;font-weight:800;color:#191F28;margin:36px 0 14px;display:flex;align-items:center;gap:10px}
+h2 .n{background:#0A1628;color:#FFB800;border-radius:8px;padding:4px 12px;font-size:14px}
+h2 .n.r{background:#F04452;color:#fff}
+h2 .n.g{background:#05C072;color:#fff}
+h2 .n.gold{background:#D4A017;color:#fff}
+h3{font-size:16px;font-weight:800;color:#191F28;margin:16px 0 8px}
+p{color:#3E4A5A;margin-bottom:10px;font-size:14px;line-height:1.75}
+.card{background:#fff;border-radius:16px;padding:22px;margin-bottom:14px;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+.card.hot{border:2px solid #F04452;background:#FFF8F8}
+.card.gold{border:2px solid #D4A017;background:#FFFBEA}
+.card.blue{border:2px solid #3182F6;background:#F0F6FF}
+.card.green{border:2px solid #05C072;background:#F0FFF4}
+.card.dark{background:#0A1628;color:#fff;border:none}
+.card.dark p{color:#8B95A1}
+
+.flow-row{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid #E5E8EB}
+.flow-row:last-child{border-bottom:none}
+.flow-time{font-size:13px;font-weight:800;color:#D4A017;min-width:68px;padding-top:2px}
+.flow-time.r{color:#F04452}
+.flow-time.b{color:#3182F6}
+.flow-time.g{color:#05C072}
+.flow-body{flex:1}
+.flow-ttl{font-size:15px;font-weight:700;color:#191F28;margin-bottom:4px}
+.flow-desc{font-size:13px;color:#6B7684;line-height:1.7}
+
+.peak-card{background:#fff;border-radius:16px;padding:22px;margin-bottom:14px;border:2px solid #D4A017;position:relative}
+.peak-label{position:absolute;top:-10px;left:18px;background:#D4A017;color:#fff;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:800}
+.peak-label.r{background:#F04452}
+.peak-label.b{background:#3182F6}
+.peak-card h3{margin-top:6px}
+.peak-quote{background:#FFFBEA;border-left:3px solid #D4A017;border-radius:0 8px 8px 0;padding:12px 14px;margin:10px 0;font-size:14px;color:#3E4A5A;font-style:italic;line-height:1.7}
+.peak-quote.r{background:#FFF0F0;border-left-color:#F04452}
+.peak-quote.b{background:#EFF3FF;border-left-color:#3182F6}
+
+.tone-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+.tone-box{border-radius:12px;padding:16px}
+.tone-box.good{background:#F0FFF4;border:1.5px solid #05C072}
+.tone-box.bad{background:#FFF0F0;border:1.5px solid #F04452}
+.tone-box h4{font-size:13px;font-weight:800;margin-bottom:8px}
+.tone-box.good h4{color:#05C072}
+.tone-box.bad h4{color:#F04452}
+.tone-box p{font-size:12px;color:#3E4A5A;line-height:1.7;margin:0}
+
+.qa{background:#fff;border-radius:12px;padding:16px 18px;margin-bottom:10px;border:1px solid #E5E8EB}
+.qa-q{font-size:14px;font-weight:800;color:#D4A017;margin-bottom:6px}
+.qa-a{font-size:13px;color:#3E4A5A;line-height:1.7}
+
+.prep-item{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #F2F4F6}
+.prep-item:last-child{border-bottom:none}
+.prep-num{background:#0A1628;color:#FFB800;border-radius:6px;min-width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;margin-top:1px}
+.prep-text{font-size:13px;color:#3E4A5A;line-height:1.6}
+.prep-text strong{color:#191F28}
+
+.note{background:#FFFBEA;border-left:3px solid #D4A017;border-radius:0 8px 8px 0;padding:14px 16px;margin:14px 0;font-size:13px;line-height:1.7;color:#3E4A5A}
+.note.r{background:#FFF0F0;border-left-color:#F04452}
+.note.g{background:#F0FFF4;border-left-color:#05C072}
+.note.b{background:#EFF3FF;border-left-color:#3182F6}
+.note strong{color:#191F28}
+
+.divider{height:1px;background:#E5E8EB;margin:28px 0}
+
+.tag{display:inline-block;padding:3px 9px;border-radius:5px;font-size:11px;font-weight:700;margin-right:5px}
+.tag-y{background:#FFFBEA;color:#8B6914}
+.tag-r{background:#FFF0F0;color:#F04452}
+.tag-g{background:#F0FFF4;color:#05C072}
+.tag-b{background:#EFF3FF;color:#3182F6}
+
+@media(max-width:560px){.tone-grid{grid-template-columns:1fr}.hero-title{font-size:20px}.hero-meta{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<nav class="gnb">
+  <span class="gnb-logo">사찍남</span>
+  <span class="gnb-badge">한희재님 촬영 브리핑</span>
+</nav>
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">사찍남 — 촬영 전 꼭 한번 읽어주세요</div>
+    <div class="hero-title">한희재님,<br>다음 주 화요일 촬영 안내드립니다</div>
+    <div class="hero-sub">이 문서는 당일 흐름과 핵심 포인트만 정리한 거예요.<br>2~3번 편하게 읽어보시면 충분합니다. 대본 외우실 필요 전혀 없습니다.</div>
+    <div class="hero-meta">
+      <div class="hero-m"><div class="hero-m-v">22분</div><div class="hero-m-l">영상 길이</div></div>
+      <div class="hero-m"><div class="hero-m-v">5곳</div><div class="hero-m-l">촬영 장소</div></div>
+      <div class="hero-m"><div class="hero-m-v">25개</div><div class="hero-m-l">질문 (참고용)</div></div>
+    </div>
+  </div>
+
+  <!-- 인사말 -->
+  <div class="card dark">
+    <p style="color:#FFB800;font-size:13px;font-weight:700;margin-bottom:8px">먼저 드리고 싶은 말씀</p>
+    <p style="color:#fff;font-size:14px;line-height:1.8;margin:0">
+      대본처럼 외우실 필요 없습니다. 그동안 해오신 얘기를 편하게 해주시면 됩니다.<br><br>
+      다만 <strong style="color:#FFB800">"이 3장면만큼은 꼭 자연스럽게 나와야 영상이 산다"</strong>는 구간이 있어서, 그것만 미리 알고 계시면 촬영이 훨씬 수월할 거예요.
+    </p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 촬영 흐름 -->
+  <h2><span class="n">1</span> 촬영 흐름 (22분 영상)</h2>
+  <div class="card">
+    <div class="flow-row">
+      <div class="flow-time r">0~3분</div>
+      <div class="flow-body">
+        <div class="flow-ttl">거실 — 오프닝</div>
+        <div class="flow-desc">N페이 화면부터 열기 + 충북 시골 고깃집 알바 시절 얘기</div>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-time">3~7분</div>
+      <div class="flow-body">
+        <div class="flow-ttl">책상 — 힘들었던 시기</div>
+        <div class="flow-desc">대외활동 14개 + 대기업 + 리딩방 사기 (1차 언급만, 자세한 감정은 뒤에)</div>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-time r">7~9분</div>
+      <div class="flow-body">
+        <div class="flow-ttl">노트북 — 수익차트 공개 ⭐</div>
+        <div class="flow-desc">작년 수익 122,865,049원 차트 라이브 공개 (핵심 장면 1)</div>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-time b">9~12분</div>
+      <div class="flow-body">
+        <div class="flow-ttl">노트북 — ETF vs 주도주 비교</div>
+        <div class="flow-desc">"저점 못 사고 고점 못 판다" 깨달은 순간 자연스럽게 말씀해주세요</div>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-time">12~14분</div>
+      <div class="flow-body">
+        <div class="flow-ttl">서재 — 책 공개 + 회계사 자문 얘기</div>
+        <div class="flow-desc">교보문고 베스트셀러 실물 + "회계사가 저한테 물어봐요" 디테일</div>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-time r">14~17분</div>
+      <div class="flow-body">
+        <div class="flow-ttl">서재 — 리딩방 사기 감정 회상 ⭐</div>
+        <div class="flow-desc">담담하게, 그때 실제 기분 한번 떠올려주세요 (핵심 장면 2)</div>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-time g">17~19분</div>
+      <div class="flow-body">
+        <div class="flow-ttl">야외 산책 — 강아지 + 폰 알림</div>
+        <div class="flow-desc">"지금 산책 중인데 돈이 들어와요" 자동화 라이프 장면</div>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-time">19~22분</div>
+      <div class="flow-body">
+        <div class="flow-ttl">야외 — 재테크 모임 안내 (마무리)</div>
+        <div class="flow-desc">"강의 아니라 모임입니다. 한번 와보세요." 자연스럽게 CTA</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 핵심 3장면 -->
+  <h2><span class="n r">2</span> 꼭 나와야 할 핵심 3장면</h2>
+  <p style="margin-bottom:14px;color:#6B7684">이 3장면은 영상의 기둥입니다. 다른 건 편하게 하셔도 됩니다.</p>
+
+  <div class="peak-card">
+    <div class="peak-label r">핵심 1 · 0분 · 오프닝</div>
+    <h3>N페이 화면부터 엽니다</h3>
+    <p>인사말 없이 바로 시작합니다. "폰 한번 열어봐도 될까요?" 제가 여쭤볼 테니, <strong>실제 N페이 앱을 그 자리에서 여시고 총자산 화면을 카메라 쪽으로 자연스럽게 보여주시면</strong> 됩니다.</p>
+    <div class="peak-quote">
+      "아, 오늘 1,005,850,436원이네요. 며칠 전보다 ○○○만원 늘었어요."<br>
+      (이런 식으로 당일 기준 숫자를 자연스럽게 말씀해주시면 최고입니다)
+    </div>
+    <p style="font-size:13px;color:#8B95A1;margin:0">👉 이 한 장면으로 시청자 이탈을 막을 수 있습니다. 합성이 아닌 실물이라는 게 핵심이에요.</p>
+  </div>
+
+  <div class="peak-card">
+    <div class="peak-label r">핵심 2 · 7~9분 · 노트북</div>
+    <h3>수익차트 122,865,049원 공개</h3>
+    <p>인스타에 올리셨던 수익인증 게시물 또는 증권사 앱 수익 화면을 <strong>미리 즐겨찾기에 넣어두시고</strong>, 노트북 화면을 카메라 방향으로 돌려서 보여주시면 됩니다.</p>
+    <div class="peak-quote">
+      "이게 작년 한 해 수익인증이에요. 122,865,049원이요."
+    </div>
+    <p style="font-size:13px;color:#6B7684">제가 "이거 한 종목 운빨 아니에요? 매매내역 보여주실 수 있어요?"라고 여쭤볼 거예요. 그때 매매내역까지 한번 열어주시면 완벽합니다.</p>
+    <p style="font-size:13px;color:#8B95A1;margin:0">👉 "운빨"이라는 의심을 선제 차단하는 게 목적입니다. 부담 없이, 이미 인스타에 공개하신 자료면 충분해요.</p>
+  </div>
+
+  <div class="peak-card">
+    <div class="peak-label r">핵심 3 · 14~17분 · 서재</div>
+    <h3>리딩방 사기 당했을 때 감정</h3>
+    <p>영상 중반에 한 번 언급하신 후, 서재로 옮겨와서 <strong>그때 실제 기분을 조금 더 깊게 꺼내주시는 구간</strong>입니다. 억지로 슬프게 하실 필요 전혀 없습니다. 그냥 담담하게, 그때 무슨 생각했는지 말씀해주시면 돼요.</p>
+    <div class="peak-quote r">
+      (예시 톤) "그때 사실 죽고 싶다는 생각도 했어요. 시급 5천원 모은 돈이었거든요..."<br>
+      — 말씀이 이어지다가 잠깐 멈추셔도 괜찮습니다. 그 침묵이 오히려 전달력이 큽니다.
+    </div>
+    <p style="font-size:13px;color:#8B95A1;margin:0">👉 시청자가 가장 몰입하는 구간입니다. 꾸며내지 않은 솔직한 감정 한 줄이 제일 셉니다.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 톤 가이드 -->
+  <h2><span class="n gold">3</span> 말하는 톤 가이드</h2>
+
+  <div class="tone-grid">
+    <div class="tone-box good">
+      <h4>✓ 이렇게 해주세요</h4>
+      <p>
+        • 평소 유튜브/인스타 라이브 톤<br>
+        • 담담하고 솔직한 디테일<br>
+        • 구체적 숫자 (애매한 표현 피하기)<br>
+        • "그때 이랬어요" 회상형<br>
+        • 강아지 얘기 자연스럽게 섞기
+      </p>
+    </div>
+    <div class="tone-box bad">
+      <h4>✗ 이건 피해주세요</h4>
+      <p>
+        • 강의하듯 설명하는 톤<br>
+        • "저 정말 힘들었어요" 과장<br>
+        • 카메라 정면 응시<br>
+        • "많은 돈" 같은 추상 표현<br>
+        • 전문용어 나열 (초등학생이 알게)
+      </p>
+    </div>
+  </div>
+
+  <div class="note r">
+    <strong>딱 하나만 지켜주세요:</strong> <strong style="color:#F04452">"강의"</strong>라는 단어는 쓰지 마시고 <strong style="color:#05C072">"모임"</strong>이라고만 해주세요.<br>
+    이유: 시청자가 "강의 파는 거 아냐?" 의심하는 순간 이탈하기 때문입니다. "모임" = 진입장벽이 낮아 보여서 전환이 훨씬 잘 됩니다.
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 의상/환경 -->
+  <h2><span class="n">4</span> 의상 & 환경</h2>
+  <div class="card gold">
+    <p style="margin:0"><strong>의상:</strong> 평소 인스타 프로필 톤 그대로 — 어두운 무채색 편하신 옷. 수트·정장은 피해주세요.</p>
+    <p style="margin:10px 0 0"><strong>공간:</strong> 거실·서재는 자연광 들어오는 시간대에 촬영합니다. 커튼 살짝 열어두시면 좋아요.</p>
+    <p style="margin:10px 0 0"><strong>강아지:</strong> 마지막 산책 씬에 꼭 함께해주세요. 알림 장면이 영상 엔딩의 포인트입니다.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 준비물 -->
+  <h2><span class="n">5</span> 당일 준비물 (D-2까지)</h2>
+  <div class="card">
+    <div class="prep-item">
+      <div class="prep-num">1</div>
+      <div class="prep-text"><strong>N페이 앱</strong> — 총자산 화면 로그인 상태로 준비 (당일 숫자로)</div>
+    </div>
+    <div class="prep-item">
+      <div class="prep-num">2</div>
+      <div class="prep-text"><strong>인스타 수익인증 게시물</strong> — 122,865,049원 차트. 즐겨찾기에 넣어두시면 바로 찾기 편합니다</div>
+    </div>
+    <div class="prep-item">
+      <div class="prep-num">3</div>
+      <div class="prep-text"><strong>매매내역</strong> — 증권사 앱에서 바로 열 수 있게 (운빨 의심 차단용)</div>
+    </div>
+    <div class="prep-item">
+      <div class="prep-num">4</div>
+      <div class="prep-text"><strong>교보문고 책 실물</strong> — 『월급으로 1억만들기』 1권</div>
+    </div>
+    <div class="prep-item">
+      <div class="prep-num">5</div>
+      <div class="prep-text"><strong>ETF vs 주도주 비교 자료</strong> — 증권사 앱 또는 간단 정리 PDF</div>
+    </div>
+    <div class="prep-item">
+      <div class="prep-num">6</div>
+      <div class="prep-text"><strong>삼성전기 추천 게시물</strong> — 과거 올리신 콘텐츠 + 이후 주가 비교 (있으면 금상첨화, 없어도 괜찮음)</div>
+    </div>
+    <div class="prep-item">
+      <div class="prep-num">7</div>
+      <div class="prep-text"><strong>강아지</strong> — 마지막 산책 씬에 동반</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 주요 질문 미리보기 -->
+  <h2><span class="n b">6</span> 주요 질문 미리보기</h2>
+  <p style="margin-bottom:14px;color:#6B7684">총 25개 중 특히 중요한 것만 추렸습니다. 답변은 전혀 준비 안 하셔도 됩니다. 현장에서 자연스럽게 나오는 게 훨씬 좋아요.</p>
+
+  <div class="qa">
+    <div class="qa-q">Q. 고깃집 알바 시급 5천원이 언제예요?</div>
+    <div class="qa-a">→ 구체적인 시기와 지금의 월 5천만원 대조가 핵심입니다. "시급 5천원 → 월 5천만원" 숫자 갭이 영상 전체를 관통합니다.</div>
+  </div>
+
+  <div class="qa">
+    <div class="qa-q">Q. 소개팅 연상女 오피스텔 갔을 때, 뭘 결심했어요?</div>
+    <div class="qa-a">→ 변화의 시작점 장면입니다. 그때 느낀 솔직한 감정(부러움·박탈감) 그대로 말씀해주시면 됩니다.</div>
+  </div>
+
+  <div class="qa">
+    <div class="qa-q">Q. 정기적금 복리 믿었다가 코로나 폭락 맞으셨잖아요. 그때 주식 완전 포기 안 했어요?</div>
+    <div class="qa-a">→ 리딩방 사기와 함께 "실패 → 깨달음"의 첫 단계입니다. 왜 그때 포기하지 않았는지가 중요합니다.</div>
+  </div>
+
+  <div class="qa">
+    <div class="qa-q">Q. "저점 못 사고 고점 못 판다" — 이거 인정한 게 언제예요?</div>
+    <div class="qa-a">→ <strong>이 질문이 가장 중요합니다.</strong> 마인드셋 전환의 순간이에요. 언제, 어떤 계기로 그 생각을 받아들였는지가 영상의 전환점입니다.</div>
+  </div>
+
+  <div class="qa">
+    <div class="qa-q">Q. 회계사·세무사가 대표님한테 투자 물어본다고요? 실제로 어떤 분들이?</div>
+    <div class="qa-a">→ B2B 신뢰 역전 장면입니다. 실제 사례 하나만 구체적으로 말씀해주셔도 큰 임팩트입니다.</div>
+  </div>
+
+  <div class="qa">
+    <div class="qa-q">Q. 3년 안에 결판낸다고 하셨잖아요. 왜 ETF가 아니라 주도주예요?</div>
+    <div class="qa-a">→ ETF 먼저 인정하시고("ETF도 맞습니다") 그다음 주도주 차별점 3개(속도·타이밍·레버리지)를 말씀해주시면 설득력이 제일 높습니다.</div>
+  </div>
+
+  <div class="qa">
+    <div class="qa-q">Q. 왜 강의가 아니라 모임이에요? 차이가 뭐예요?</div>
+    <div class="qa-a">→ 마지막 CTA 직전 질문입니다. "진입장벽 낮음, 함께 고민하는 자리"라는 뉘앙스로 답해주시면 모임 전환이 자연스럽게 이어집니다.</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- FAQ -->
+  <h2><span class="n g">7</span> 미리 궁금해하실 것들</h2>
+
+  <div class="qa">
+    <div class="qa-q">Q. 대본 외워야 하나요?</div>
+    <div class="qa-a">전혀요. 평소 얘기하시는 대로 하시면 됩니다. 이 문서는 "이런 흐름으로 갈 거다" 정도만 미리 아시라고 드리는 겁니다.</div>
+  </div>
+
+  <div class="qa">
+    <div class="qa-q">Q. 질문이 예상과 다르게 와도 되나요?</div>
+    <div class="qa-a">네. 25개 질문은 참고용이고, 촬영 중 흐름에 따라 질문 순서·내용은 바뀝니다. 편하게 답변해주시면 됩니다.</div>
+  </div>
+
+  <div class="qa">
+    <div class="qa-q">Q. 말 실수하거나 끊기면요?</div>
+    <div class="qa-a">괜찮습니다. 편집으로 다 정리됩니다. 오히려 "잠깐만요, 다시 말할게요" 하셔도 자연스러우니 부담 가지실 필요 없어요.</div>
+  </div>
+
+  <div class="qa">
+    <div class="qa-q">Q. N페이 금액이 당일 다르게 나오면요?</div>
+    <div class="qa-a">전혀 상관없습니다. 오히려 당일 실제 숫자가 더 좋습니다. "오늘은 ○○○원이네요" 그대로 자연스럽게 말씀해주세요.</div>
+  </div>
+
+  <div class="qa">
+    <div class="qa-q">Q. 리딩방 사기 얘기, 실제 금액 말해야 하나요?</div>
+    <div class="qa-a">가능하시면 구체적 금액이 신뢰도에 가장 큽니다. 부담되시면 범위로만 말씀하셔도 괜찮아요. ("몇 천만원대" 정도)</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 마무리 -->
+  <div class="card dark">
+    <p style="color:#FFB800;font-size:13px;font-weight:700;margin-bottom:10px">마지막 한 마디</p>
+    <p style="color:#fff;font-size:14px;line-height:1.8;margin:0">
+      한희재님 이야기는 이미 <strong style="color:#FFB800">"시급 5천원 → 10억"</strong>이라는 사실 하나만으로 충분히 강력합니다.<br><br>
+      저희가 할 일은 그 이야기가 시청자한테 가장 자연스럽게 닿도록 <strong style="color:#FFB800">흐름과 타이밍을 잡아드리는 것</strong>이에요.<br><br>
+      궁금하신 점이나 당일 추가 요청사항 있으시면 촬영 전날까지 편하게 말씀주세요.<br><br>
+      <strong style="color:#FFB800">화요일에 뵙겠습니다.</strong>
+    </p>
+  </div>
+
+</div>
+</body>
+</html>
