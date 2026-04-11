@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
+<meta name="theme-color" content="#ec4899">
+<title>[출연자용] 4/12 촬영 브리프 — 이세령 대표</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+:root{--bg:#fdf5f8;--card:#fff;--border:#f3e0e8;--border2:#fbeef3;--text:#111827;--text2:#6b7280;--accent:#ec4899;--accent-l:#fdf2f8;--accent-d:#be185d;--green:#16a34a;--green-bg:#f0fdf4;--amber:#f59e0b;--red:#dc2626;--hh:58px;--th:50px}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR','Apple SD Gothic Neo',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:15px}
+.header{position:fixed;top:0;left:0;right:0;height:var(--hh);background:var(--card);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 18px;gap:10px;z-index:100;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.header-ep{font-size:11px;font-weight:700;color:var(--accent);background:var(--accent-l);padding:4px 10px;border-radius:6px;flex-shrink:0}
+.header-title{font-size:14px;font-weight:700;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.header-ver{font-size:10px;font-weight:700;color:#fff;background:var(--accent);padding:3px 8px;border-radius:4px;flex-shrink:0}
+.header-ch{font-size:12px;color:var(--text2);flex-shrink:0}
+.tab-bar{position:fixed;top:var(--hh);left:0;right:0;height:var(--th);background:var(--card);border-bottom:1px solid var(--border);display:flex;overflow-x:auto;z-index:99;scrollbar-width:none;padding:0 10px;gap:2px}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab{display:flex;align-items:center;padding:0 14px;text-decoration:none;color:var(--text2);font-size:12px;font-weight:600;white-space:nowrap;border-bottom:3px solid transparent;transition:.15s;flex-shrink:0}
+.tab:hover{color:var(--text);background:#fafbff}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.prog{position:fixed;top:calc(var(--hh) + var(--th));left:0;right:0;height:3px;background:var(--border);z-index:98}
+.prog-bar{height:100%;background:var(--accent);width:0%;transition:width .1s}
+.hero{background:linear-gradient(135deg,#fdf2f8,#fef3c7);border:1px solid var(--border);border-radius:16px;padding:24px 24px;margin-bottom:28px}
+.hero-top{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.hero-ep{font-size:12px;font-weight:700;color:var(--accent);background:#fff;padding:4px 12px;border-radius:6px}
+.hero-badge{font-size:11px;font-weight:600;color:#fff;padding:4px 10px;border-radius:6px}
+.hero-title{font-size:24px;font-weight:800;line-height:1.3;margin-bottom:8px;word-break:keep-all}
+.hero-sub{font-size:15px;color:var(--text2);margin-bottom:16px;font-weight:600;word-break:keep-all}
+.hero-meta{font-size:12px;color:var(--text2);margin-bottom:16px;display:flex;gap:8px;flex-wrap:wrap}
+.hero-meta span{background:#fff;padding:4px 10px;border-radius:6px}
+.hero-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px}
+.stat{background:#fff;border-radius:10px;padding:12px 10px;text-align:center}
+.stat-v{font-size:19px;font-weight:800;color:var(--accent)}
+.stat-l{font-size:11px;color:var(--text2);margin-top:2px;word-break:keep-all}
+.main{margin-top:calc(var(--hh) + var(--th) + 3px);padding:24px 18px 64px;max-width:860px;margin-left:auto;margin-right:auto}
+.md h2{font-size:20px;font-weight:700;margin:40px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--accent);scroll-margin-top:calc(var(--hh) + var(--th) + 20px);word-break:keep-all}
+.md h3{font-size:16px;font-weight:700;margin:26px 0 10px;color:var(--accent);word-break:keep-all}
+.md h4{font-size:14px;font-weight:700;margin:20px 0 8px;word-break:keep-all}
+.md p{margin:10px 0;font-size:14px;word-break:keep-all}
+.md strong{color:var(--text)}
+.md blockquote{border-left:4px solid var(--accent);padding:12px 18px;margin:14px 0;background:var(--accent-l);border-radius:0 8px 8px 0;font-size:14px;word-break:keep-all;color:#831843}
+.tw{overflow-x:auto;margin:14px 0;-webkit-overflow-scrolling:touch;border:1px solid var(--border);border-radius:10px;background:#fff}
+.tw table{margin:0;border-collapse:collapse;width:100%;font-size:13px;min-width:100%}
+.tw th{background:var(--accent);color:#fff;padding:9px 12px;text-align:left;font-weight:600;font-size:12px;white-space:nowrap}
+.tw td{padding:9px 12px;border-bottom:1px solid var(--border);word-break:keep-all;vertical-align:top}
+.tw tr:last-child td{border-bottom:none}
+.tw tr:nth-child(even){background:#fff9fc}
+.md ul,.md ol{padding-left:22px;margin:10px 0}
+.md li{margin:5px 0;font-size:14px;word-break:keep-all}
+.md hr{border:none;border-top:1px solid var(--border);margin:28px 0}
+@media(min-width:640px){body{font-size:16px}.hero{padding:28px 32px}.hero-title{font-size:28px}.main{padding:28px 24px 64px}.md h2{font-size:22px}.md p,.md li{font-size:15px}.tw table{font-size:14px}}
+@media(max-width:480px){.header{padding:0 12px;gap:8px}.header-title{font-size:13px}.header-ch{display:none}.tab{padding:0 10px;font-size:11px}.main{padding:18px 12px 48px}.hero{padding:18px 16px}.hero-title{font-size:19px}.hero-stats{grid-template-columns:repeat(2,1fr)}.md h2{font-size:17px;margin:30px 0 12px}.md h3{font-size:14px}.tw table{font-size:12px}.tw td,.tw th{padding:7px 9px}}
+@media print{.header,.tab-bar,.prog{display:none!important}.main{margin:0;padding:20px;max-width:100%}.tw{overflow:visible;border:none}.tw table{font-size:11px}}
+</style>
+</head>
+<body>
+<header class="header">
+<span class="header-ep">출연자용</span>
+<span class="header-title">4/12 촬영 브리프 — 이세령 대표</span>
+<span class="header-ver">v1</span>
+<span class="header-ch">아는언니 세령</span>
+</header>
+<nav class="tab-bar" id="tabBar">
+<a class="tab" href="#s-0" data-i="0">컨셉</a>
+<a class="tab" href="#s-1" data-i="1">시간표</a>
+<a class="tab" href="#s-2" data-i="2">후크멘트</a>
+<a class="tab" href="#s-3" data-i="3">인생스토리</a>
+<a class="tab" href="#s-4" data-i="4">키메시지</a>
+<a class="tab" href="#s-5" data-i="5">금지</a>
+<a class="tab" href="#s-6" data-i="6">할수있으면</a>
+<a class="tab" href="#s-7" data-i="7">의상</a>
+<a class="tab" href="#s-8" data-i="8">PD질문</a>
+<a class="tab" href="#s-9" data-i="9">마지막</a>
+</nav>
+<div class="prog"><div class="prog-bar" id="pBar"></div></div>
+<main class="main">
+<div class="hero">
+<div class="hero-top">
+<span class="hero-ep">출연자용 브리프</span>
+<span class="hero-badge" style="background:var(--accent)">v1</span>
+<span class="hero-badge" style="background:#64748b">2026.04.12 토</span>
+<span class="hero-badge" style="background:var(--green)">총 7시간</span>
+</div>
+<h1 class="hero-title">30살 노처녀 결정사 대표의 하루</h1>
+<div class="hero-sub">남의 인연 만들어주고 혼자 집에 돌아가는 하루</div>
+<div class="hero-meta">
+<span>이세령 대표</span>
+<span>작성 2026.04.10</span>
+<span>기반: 4/10 미팅 녹음</span>
+</div>
+<div class="hero-stats">
+<div class="stat"><div class="stat-v">4곳</div><div class="stat-l">로케이션</div></div>
+<div class="stat"><div class="stat-v">5개</div><div class="stat-l">핵심 키워드</div></div>
+<div class="stat"><div class="stat-v">10개</div><div class="stat-l">금지 리스트</div></div>
+<div class="stat"><div class="stat-v">13~15분</div><div class="stat-l">편집 후 길이</div></div>
+</div>
+</div>
+<div class="md" id="ct"></div>
+</main>
+<script>
+const md=String.raw`## 한 줄 컨셉
+
+> **"남의 인연 만들어주고 혼자 집에 돌아가는 30살 결정사 대표의 진짜 하루"**
+
+오늘 촬영의 단 하나의 미션:
+**시청자가 "이 사람한테 맡기고 싶다"고 느끼게 만드는 것.**
+
+가격, 시스템, 매출, 인생 스토리, 다 솔직하게 까는 게 포인트.
+숨기는 거 없는 결정사 대표 캐릭터 = 우리의 무기.
+
+---
+
+## 촬영 D-DAY 시간표 (4/12 토)
+
+| 시간 | 장소 | 대표님이 하실 일 |
+|------|------|----------------|
+| 09:00 | 자택 | 평소처럼 일어나기 (촬영 시작 전) |
+| 10:00 | 메이크업 | 평소 촬영일처럼 풀세팅 (메이크업 받는 모습 B-roll로 잠깐 촬영) |
+| 11:30 | 사무실 | **본 촬영 시작** — 책상에서 후크 멘트 |
+| 12:30 | 사무실 | 인생 스토리 풀기 (PD 질문에 답) |
+| 14:00 | 점심 | 평소처럼 (B-roll 인서트) |
+| 15:00 | 베스트클래스 미팅룸 | 가격 카드 보여주며 시스템 설명 |
+| 16:30 | 사무실 복귀 | 자청 1인극 (자청한테 말하는 듯한 컨셉) |
+| 17:30 | 식당 외부 | 클로징 — "오늘도 남의 인연 만들었네" |
+| 18:00 | 종료 | 정리 |
+
+**총 7시간** (편집 후 13~15분 영상)
+
+> ⚠️ **자청 게스트 불가** → **자청 1인극 컨셉**으로 진행
+> (자청을 직접 가리키지 않고, 마치 옆에 있는 것처럼 카메라 보고 말하는 형식)
+
+---
+
+## 핵심 후크 멘트 (외울 필요 없음, 톤만 기억)
+
+### 0초 후크 (사무실 책상, 풀세팅 정면)
+
+> *"안녕하세요 안 합니다. 저요?
+> 결정사 대표인데, 30살에 아직 결혼 못 한 노처녀예요.
+> 그래서 오늘 저의 진짜 하루를 보여드릴게요."*
+
+→ **"안녕하세요"는 0회**. 자기소개도 안 함.
+→ 첫 5초에 "결정사 대표" + "30살" + "노처녀" 3 키워드 박힘.
+
+### 가격 폭로 멘트 (15:00 베스트클래스 미팅룸)
+
+> *"이 카드 한 장이 1000만 원이에요.
+> 저희 회원분들이 결제하시는 거고요.
+> 한 명이랑 만나실 때마다 30만 원이 차감되고,
+> 데이트 수락하시면 150에서 200만 원 더 차감돼요."*
+
+(다음 멘트가 진짜 핵심)
+
+> *"근데 제가 솔직히 말씀드릴게요.
+> 한 달에 4:4 미팅을 1번밖에 못 했을 때는,
+> 정산하니까 진짜 150만 원 벌고 그랬어요."*
+
+→ **이 한 마디가 영상 전체의 진정성을 잡음.** 빼지 말 것.
+
+### 자청 1인극 멘트 (16:30 사무실 복귀 후)
+
+> *"자청 씨, 결혼 안 하시죠?
+> 제가 한 번 결혼상담 해드릴게요.
+> ...라고 말하고 싶지만, 사실 자청 씨는 본인이 결정사 시장의 1등이잖아요.
+> 그래서 제가 진짜 말씀드리고 싶은 건..."*
+
+(여기서 본인이 자연스럽게 풀어주세요)
+
+### 클로징 멘트 (17:30 식당 외부, 살짝 미소)
+
+> *"오늘도 남의 인연 만들어주고
+> 혼자 집에 가요.
+> 근데 괜찮아요. 저는 안 긁은 복권이니까."*
+
+---
+
+## 인생 스토리 — 5분 압축 가이드
+
+PD가 "본인은 왜 결혼 못 했어요?" 또는 "이 일 어떻게 시작하게 됐어요?" 물어보면 **이 순서로** 풀어주세요.
+
+### 1. 어린 시절 (대구, 초3, 노현정)
+
+> *"저 대구 출신이에요. 초등학교 3학년 때 노현정 아나운서를 봤는데,
+> 와, 세상에 완벽한 여자가 있구나. 저거 돼야지 했어요.
+> 그때부터 한 번도 흔들린 적 없어요."*
+
+### 2. 90kg 반지하 (자학 톤)
+
+> *"고등학교 때 집안이 기울면서 반지하로 갔거든요.
+> 스트레스로 폭식해서, 몸무게 앞자리에 9까지 봤어요.
+> 진짜요. 90kg."*
+
+### 3. 7번 편입 (간절함)
+
+> *"수능 망해서 영남대 갔어요.
+> 거기서 편입학원 다니면서 7번을 떨어졌어요.
+> 그 시절은 지금도 신촌만 가면 눈물 나요."*
+
+### 4. 연세대 합격 (연금술사)
+
+> *"그러다가 8번째에 연세대, 이대, 경희대 다 붙었어요.
+> 저 인생책이 파울로 코엘료 연금술사거든요.
+> 꿈을 닮아간다고 하잖아요. 10년 동안 보름달에 빌었더니
+> 우주가 감동해서 한 번에 문을 열어줬어요."*
+
+### 5. 아나운서 추락 → 사업가 부활
+
+> *"연세대 가서 아나운서 학원 가니까 바로 합격했어요.
+> 스포티비 아나운서로 잡지에도 실리고.
+> 근데 코로나 터지면서 다 무너졌어요.
+> 그때 제가 깨달은 게,
+> '아나운서로 성공 못 하면, 아나운서보다 더 멋진 여자가 되자'였어요."*
+
+### 6. 지금 (회복탄력성 = 본인의 무기)
+
+> *"제가 한 가지 잘하는 게 있다면,
+> 진짜 좌절을 많이 겪었는데 그걸 밟고 일어나는 힘이 세요.
+> 그래서 지금 결정사 대표로 앉아 있어요."*
+
+---
+
+## 오늘 꼭 풀어야 할 키 메시지 5개
+
+### 1. "겪어본 사람이 차린 결정사"
+- 이세령 = 90kg → 60kg / 7번 떨어짐 → 연대 / 추락 → 부활
+- "그래서 저는 회원분들 마음 누구보다 잘 알아요"
+
+### 2. "솔직한 결정사" — 가격/매출 공개
+- 1000만 원 / 165만 원 / 600만 원 / 한 달 매출 150만 원
+- "다른 결정사는 외모 안 본다고 거짓말해요. 저희는 봐요. 솔직하게."
+
+### 3. "내가 커져야 세일즈를 안 뛴다" — 사업가 철학
+- "사실 저 술 진짜 안 좋아해요. 근데 금토일 다 술자리 가요. 회원 따려고."
+- "그래서 유튜브를 키우는 거예요. 영업 시간을 줄이고 싶어서."
+
+### 4. "AI가 못 하는 3가지" — 시대 키워드
+- "지금 사업 운영하면서 제가 직접 하는 건 딱 3가지예요.
+- 콘텐츠 만들고, 사람 만나고, 촬영하고.
+- 이건 AI가 못 하는 거잖아요."
+
+### 5. "회복탄력성" (이 한 단어가 채널 정체성)
+- "부잣집 애들은 멘탈이 약해요. 무너져본 적이 없어서."
+- "저는 무너져봐서 다시 일어날 줄 알아요."
+
+---
+
+## 절대 하지 말 것 (Ban 리스트)
+
+| # | 금지 | 이유 |
+|---|------|------|
+| 1 | "안녕하세요" 인사 | 첫 0.5초 이탈 방지 |
+| 2 | "구독 좋아요" 멘트 | 채주부 룰 |
+| 3 | 대본 읽는 느낌 | 키워드만 기억하고 자연스럽게 |
+| 4 | **연세대 재적/퇴학/재입학 언급** | 이미지 리스크 (대표님 본인 의견 따름) |
+| 5 | **1년 술/클럽 방황 시기** | 수위 조절 |
+| 6 | **황정우/이나영 사건** | 절대 금지 (별도 동의 필요) |
+| 7 | 천정명 실명 | "유명 배우분"으로만 |
+| 8 | 경쟁사 실명 (한방언니/모두의지인/듀오) | "다른 결정사"로만 |
+| 9 | 회원 개인정보 | 가림 처리 |
+| 10 | "안 긁은 복권"을 가볍게 던지기 | 마지막에만, 진심으로 |
+
+---
+
+## 할 수 있으면 좋은 것
+
+- 가격 카드 직접 손에 들고 보여주기
+- 베스트클래스 미팅룸에서 4:4 로테이션 시스템 설명할 때 손짓 적극
+- 메이크업 받는 모습 자연스럽게 (똥손이라 받는다는 자학 1마디 ok)
+- 사무실 책상에서 회원 프로필 검토하는 모습 (가림 처리 전제)
+- 9분대 "사실 저 무서워요" 멘트 — 감정 올라오면 그대로 유지 (리테이크 X)
+
+---
+
+## 의상/메이크업
+
+- **의상**: 평소 촬영 풀세팅 (네이비/베이지 톤 추천, 너무 화려하지 X)
+- **메이크업**: 평소처럼 받음 (메이크업 받는 모습이 곧 콘텐츠임)
+- **머리**: 묶지 말고 풀고 (자연스러운 결정사 대표 이미지)
+
+---
+
+## PD가 던질 핵심 질문 5개 (미리 보기)
+
+대표님 답변할 때 너무 정리된 답변 X. **자연스럽게 길게** 풀어주세요.
+
+1. *"본인은 왜 결혼 못 했어요?"* → 인생 스토리 5분 풀기
+2. *"이 카드 한 장이 진짜 1000만 원이에요?"* → 가격/매출 솔직하게
+3. *"결정사 대표가 술자리 매일 간다고요?"* → 사업가 철학
+4. *"AI 시대에 본인이 직접 하는 일은?"* → 콘텐츠/미팅/촬영
+5. *"오늘 같은 하루가 매일 반복되는 거예요?"* → 클로징 ("괜찮아요")
+
+---
+
+## 대표님께 마지막 한마디
+
+녹음 들으면서 정말 좋았던 멘트들이 많았습니다.
+**대본대로 안 가도 됩니다.** 키워드만 머릿속에 두고,
+PD가 던지는 질문에 평소 말씀하시는 톤 그대로 가시면 돼요.
+
+특히 이 5가지 단어만 기억해주세요:
+
+> **회복탄력성 / 솔직함 / 자기확신 / 언더독 / 사업가**
+
+오늘 촬영, 채널 첫 정체성을 잡는 가장 중요한 날입니다.
+긴장하지 마시고, 평소처럼만 가시면 됩니다.
+
+— 코디 (기획부)
+`;
+
+marked.setOptions({breaks:true,gfm:true,headerIds:false});
+const el=document.getElementById('ct');
+let r=marked.parse(md);
+let si=0;
+r=r.replace(/<h2/g,()=>'<h2 id="s-'+si+++'"');
+r=r.replace(/<table>/g,'<div class="tw"><table>');
+r=r.replace(/<\/table>/g,'</table></div>');
+el.innerHTML=r;
+const tabs=document.querySelectorAll('.tab'),secs=document.querySelectorAll('.md h2');
+function upd(){
+ const o=130;let c=0;
+ secs.forEach((s,i)=>{if(s.getBoundingClientRect().top<=o)c=i});
+ tabs.forEach((t,i)=>t.classList.toggle('active',i===c));
+ const a=document.querySelector('.tab.active');
+ if(a){const b=document.getElementById('tabBar'),l=a.offsetLeft,w=a.offsetWidth,bw=b.offsetWidth;b.scrollTo({left:l-bw/2+w/2,behavior:'smooth'})}
+}
+window.addEventListener('scroll',()=>{
+ upd();
+ const h=document.documentElement.scrollHeight-window.innerHeight;
+ document.getElementById('pBar').style.width=(h>0?window.scrollY/h*100:0)+'%';
+},{passive:true});
+tabs.forEach(t=>t.addEventListener('click',e=>{
+ e.preventDefault();
+ const s=document.getElementById('s-'+t.dataset.i);
+ if(s)s.scrollIntoView({behavior:'smooth'});
+}));
+upd();
+</script>
+</body>
+</html>

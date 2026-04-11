@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
+<meta name="theme-color" content="#6366f1">
+<title>[PD용] 4/12 촬영 풀 브리프 — 아는언니 세령</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+:root{--bg:#f5f6f9;--card:#fff;--border:#e4e6ec;--border2:#eef0f5;--text:#111827;--text2:#6b7280;--accent:#6366f1;--accent-l:#eef2ff;--accent-d:#4f46e5;--green:#16a34a;--green-bg:#f0fdf4;--amber:#f59e0b;--red:#dc2626;--hh:58px;--th:50px}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR','Apple SD Gothic Neo',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:15px}
+.header{position:fixed;top:0;left:0;right:0;height:var(--hh);background:var(--card);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 18px;gap:10px;z-index:100;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.header-ep{font-size:11px;font-weight:700;color:var(--accent);background:var(--accent-l);padding:4px 10px;border-radius:6px;flex-shrink:0}
+.header-title{font-size:14px;font-weight:700;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.header-ver{font-size:10px;font-weight:700;color:#fff;background:var(--accent);padding:3px 8px;border-radius:4px;flex-shrink:0}
+.header-ch{font-size:12px;color:var(--text2);flex-shrink:0}
+.tab-bar{position:fixed;top:var(--hh);left:0;right:0;height:var(--th);background:var(--card);border-bottom:1px solid var(--border);display:flex;overflow-x:auto;z-index:99;scrollbar-width:none;padding:0 10px;gap:2px}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab{display:flex;align-items:center;padding:0 14px;text-decoration:none;color:var(--text2);font-size:12px;font-weight:600;white-space:nowrap;border-bottom:3px solid transparent;transition:.15s;flex-shrink:0}
+.tab:hover{color:var(--text);background:#fafbff}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.prog{position:fixed;top:calc(var(--hh) + var(--th));left:0;right:0;height:3px;background:var(--border);z-index:98}
+.prog-bar{height:100%;background:var(--accent);width:0%;transition:width .1s}
+.hero{background:linear-gradient(135deg,#eef2ff,#fdf4ff);border:1px solid var(--border);border-radius:16px;padding:24px 24px;margin-bottom:28px}
+.hero-top{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.hero-ep{font-size:12px;font-weight:700;color:var(--accent);background:#fff;padding:4px 12px;border-radius:6px}
+.hero-badge{font-size:11px;font-weight:600;color:#fff;padding:4px 10px;border-radius:6px}
+.hero-title{font-size:24px;font-weight:800;line-height:1.3;margin-bottom:8px;word-break:keep-all}
+.hero-sub{font-size:15px;color:var(--text2);margin-bottom:16px;font-weight:600;word-break:keep-all}
+.hero-meta{font-size:12px;color:var(--text2);margin-bottom:16px;display:flex;gap:8px;flex-wrap:wrap}
+.hero-meta span{background:#fff;padding:4px 10px;border-radius:6px}
+.hero-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-bottom:16px}
+.stat{background:#fff;border-radius:10px;padding:12px 10px;text-align:center}
+.stat-v{font-size:19px;font-weight:800;color:var(--accent)}
+.stat-l{font-size:11px;color:var(--text2);margin-top:2px;word-break:keep-all}
+.main{margin-top:calc(var(--hh) + var(--th) + 3px);padding:24px 18px 64px;max-width:860px;margin-left:auto;margin-right:auto}
+.md h2{font-size:20px;font-weight:700;margin:40px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--accent);scroll-margin-top:calc(var(--hh) + var(--th) + 20px);word-break:keep-all}
+.md h3{font-size:16px;font-weight:700;margin:26px 0 10px;color:var(--accent);word-break:keep-all}
+.md h4{font-size:14px;font-weight:700;margin:20px 0 8px;word-break:keep-all}
+.md p{margin:10px 0;font-size:14px;word-break:keep-all}
+.md strong{color:var(--text)}
+.md blockquote{border-left:4px solid var(--accent);padding:10px 16px;margin:14px 0;background:var(--accent-l);border-radius:0 8px 8px 0;font-size:13px;word-break:keep-all}
+.tw{overflow-x:auto;margin:14px 0;-webkit-overflow-scrolling:touch;border:1px solid var(--border);border-radius:10px;background:#fff}
+.tw table{margin:0;border-collapse:collapse;width:100%;font-size:13px;min-width:100%}
+.tw th{background:var(--accent);color:#fff;padding:9px 12px;text-align:left;font-weight:600;font-size:12px;white-space:nowrap}
+.tw td{padding:9px 12px;border-bottom:1px solid var(--border);word-break:keep-all;vertical-align:top}
+.tw tr:last-child td{border-bottom:none}
+.tw tr:nth-child(even){background:#f9fafb}
+.md code{font-family:'SF Mono','Menlo',monospace;font-size:12px;background:#f3f4f6;padding:2px 5px;border-radius:4px}
+.md ul,.md ol{padding-left:22px;margin:10px 0}
+.md li{margin:5px 0;font-size:14px;word-break:keep-all}
+.md hr{border:none;border-top:1px solid var(--border);margin:28px 0}
+.t-hook{color:#ef4444;font-weight:700}
+.t-crisis{color:#f59e0b;font-weight:700}
+.t-emp{color:#6366f1;font-weight:700}
+.t-view{color:#06b6d4;font-weight:700}
+.t-counter{color:#ec4899;font-weight:700}
+.t-rehook{color:#f97316;font-weight:700}
+.t-close{color:#16a34a;font-weight:700}
+@media(min-width:640px){body{font-size:16px}.hero{padding:28px 32px}.hero-title{font-size:26px}.main{padding:28px 24px 64px}.md h2{font-size:22px}.md p,.md li{font-size:15px}.tw table{font-size:14px}}
+@media(max-width:480px){.header{padding:0 12px;gap:8px}.header-title{font-size:13px}.header-ch{display:none}.tab{padding:0 10px;font-size:11px}.main{padding:18px 12px 48px}.hero{padding:18px 16px}.hero-title{font-size:19px}.hero-stats{grid-template-columns:repeat(2,1fr)}.md h2{font-size:17px;margin:30px 0 12px}.md h3{font-size:14px}.tw table{font-size:12px}.tw td,.tw th{padding:7px 9px}}
+@media print{.header,.tab-bar,.prog{display:none!important}.main{margin:0;padding:20px;max-width:100%}.tw{overflow:visible;border:none}.tw table{font-size:11px}}
+</style>
+</head>
+<body>
+<header class="header">
+<span class="header-ep">PD용</span>
+<span class="header-title">4/12 촬영 풀 브리프</span>
+<span class="header-ver">v1</span>
+<span class="header-ch">아는언니 세령</span>
+</header>
+<nav class="tab-bar" id="tabBar">
+<a class="tab" href="#s-0" data-i="0">킥오프</a>
+<a class="tab" href="#s-1" data-i="1">제목</a>
+<a class="tab" href="#s-2" data-i="2">개요</a>
+<a class="tab" href="#s-3" data-i="3">타겟</a>
+<a class="tab" href="#s-4" data-i="4">하몬서클</a>
+<a class="tab" href="#s-5" data-i="5">AVD</a>
+<a class="tab" href="#s-6" data-i="6">동선</a>
+<a class="tab" href="#s-7" data-i="7">질문지</a>
+<a class="tab" href="#s-8" data-i="8">엔딩</a>
+<a class="tab" href="#s-9" data-i="9">노림수</a>
+<a class="tab" href="#s-10" data-i="10">USP</a>
+<a class="tab" href="#s-11" data-i="11">촬영</a>
+<a class="tab" href="#s-12" data-i="12">편집</a>
+<a class="tab" href="#s-13" data-i="13">Ban</a>
+<a class="tab" href="#s-14" data-i="14">승인</a>
+<a class="tab" href="#s-15" data-i="15">최종</a>
+<a class="tab" href="#s-16" data-i="16">향후</a>
+</nav>
+<div class="prog"><div class="prog-bar" id="pBar"></div></div>
+<main class="main">
+<div class="hero">
+<div class="hero-top">
+<span class="hero-ep">PD용 브리프</span>
+<span class="hero-badge" style="background:var(--accent)">v1</span>
+<span class="hero-badge" style="background:#ec4899">하이브리드</span>
+<span class="hero-badge" style="background:#64748b">13~15분</span>
+<span class="hero-badge" style="background:var(--green)">9-STEP</span>
+</div>
+<h1 class="hero-title">30살 노처녀 결정사 대표의 하루</h1>
+<div class="hero-sub">4/12 촬영 — 촬영팀/편집팀 풀 브리프</div>
+<div class="hero-meta">
+<span>아는언니 세령</span>
+<span>촬영 2026.04.12 (토)</span>
+<span>업로드 2026.04.19 (일) 18:00</span>
+</div>
+<div class="hero-stats">
+<div class="stat"><div class="stat-v">63개</div><div class="stat-l">질문지 (태그)</div></div>
+<div class="stat"><div class="stat-v">8단계</div><div class="stat-l">하몬서클</div></div>
+<div class="stat"><div class="stat-v">7개</div><div class="stat-l">위기장치</div></div>
+<div class="stat"><div class="stat-v">4곳</div><div class="stat-l">로케이션</div></div>
+<div class="stat"><div class="stat-v">12컷</div><div class="stat-l">인서트 리스트</div></div>
+<div class="stat"><div class="stat-v">14개</div><div class="stat-l">Ban 리스트</div></div>
+</div>
+</div>
+<div class="md" id="ct"></div>
+</main>
+<script>
+const md=String.raw`## [킥오프 시트] 콘텐츠 기획 필수 체크리스트
+
+| 항목 | 내용 |
+|------|------|
+| 촬영일 | 2026.04.12 (토) |
+| 업로드일 | 2026.04.19 (일) 18:00 |
+| 메인 기획자 | 기획부 (코디) |
+| 편집자 | TBD |
+| 콘텐츠명 | 30살 노처녀가 된 결정사 대표의 하루 (4/12 촬영본) |
+| 주제 | 결정사 대표 리얼 하루 + 가격/매출 솔직 공개 + 인생 스토리 |
+| 누가 / 어떤 콘텐츠를 (★★★★★) | 30살 미혼 결정사 대표가 / 베스트클래스 운영 하루를 / 가격(1000만/165만/600만/매출150만)까지 솔직 공개하면서 / 본인의 회복탄력성 인생 스토리(90kg→연대→추락→부활)를 중간중간 푸는 브이로그 |
+| 영상의 목적 | 1차: 무료 등급 진단 폼 클릭 / 2차: 캐릭터 각인 ("겪어본 사람이 차린 결정사") |
+| 썸네일 컨셉 | 사무실 혼자 앉은 이세령 + "30살 노처녀" + "한 달 매출 150만 원" |
+| 콘셉트 강도 | ★★★★★ (가격 폭로 + 인생 서사 + 자청 1인극) |
+| 예상 CTR | 목표 5% 이상 |
+| 목표 영상 길이 | **13~15분** |
+| 포맷 | 하이브리드 브이로그 (브이로그 60% + 스튜디오 인서트 40%) |
+| 시리즈 위치 | 채널 정체성 형성 EP (이세령이 누구인지 처음 보여주는 영상) |
+
+> **자청 게스트**: ❌ **불가** (확인 완료) → **자청 1인극 컨셉**으로 전환
+
+---
+
+## STEP 0. 제목 & 썸네일 설계
+
+### 제목 공식 (3안)
+
+| 안 | 제목 | 글자수 | 공식 | 추천 |
+|---|------|-------|------|------|
+| **A (메인)** | **30살 노처녀가 된 결정사 대표의 하루 [한 달 매출 150만 원]** | 28자 | 상황묘사 + 숫자 + 갭 + 솔직성 | ✅ |
+| B | 결정사 대표인데 한 달 매출 150만 원이었습니다 [1000만 회원 솔직 공개] | 34자 | 갭 + 숫자 폭로 + 호기심 | |
+| C | 90kg 반지하에서 연세대까지 [편입 7번 떨어진 30살 결정사 대표의 진짜 하루] | 36자 | 인생 서사 + 숫자 갭 | |
+
+**제목 체크리스트:**
+- [x] 38자 이내 (28자)
+- [x] 숫자 포함 (30살 / 150만 원)
+- [x] 믿기 어렵지만 사실 (결정사 대표가 매출 150만)
+- [x] 제목과 썸네일이 같은 말 안 함
+- [x] 클릭 안 할 수가 없음
+
+### 썸네일 설계
+
+| 요소 | 내용 | 체크 |
+|------|------|------|
+| 주인공 표정 | 곤란한 미소 + 눈은 카메라 정면 | [x] |
+| 배경 | 사무실 혼자 + 1000만 원 카드 손에 | [x] |
+| 텍스트 (좌) | "결정사 대표인데" (흰 굵은 고딕 60pt) | [x] |
+| 텍스트 (우) | "[한 달 매출 150만 원]" (노란색 80pt + 검정 외곽선) | [x] |
+| 색상 대비 | 밝은 자연광 톤 | [x] |
+| 모바일 | 이세령 60% + 텍스트 40% | [x] |
+
+---
+
+## STEP 1. 영상 개요
+
+| 항목 | 내용 |
+|------|------|
+| 출연자 | 이세령 (30세, 연세대 아나운서 출신, 결정사 공동대표, 인스타 85K @lizzyconnect) |
+| 핵심 와우 포인트 | ① 가격 솔직 공개 (1000/165/600/매출 150만) ② 회복탄력성 인생 서사 (90kg→연대) ③ 자청 1인극 ④ 사업가 철학 (술자리/AI/유튜브 활용) |
+| 예상 러닝타임 | 13~15분 |
+| 한 줄 촬영 요약 | 이세령의 풀 메이크업 → 사무실 → 베스트클래스 → 식당 외부까지의 하루 동선을 따라가며 가격/시스템/인생/철학을 솔직하게 푸는 브이로그 |
+| 포맷 | 하이브리드 브이로그 (이동 60% + 카메라 정면 인서트 40%) |
+| 촬영 인력 | 촬영감독 1명 (카메라+질문 겸임) + 보조 1명 (B-roll/짐벌) + 이세령 |
+| 촬영 장비 | 카메라 1대 (4K) + 무선 핀마이크 × 2 + 짐벌 + 삼각대 + LED 조명 |
+| 촬영 시간 | **약 7시간** (10:00~18:00 예정) |
+
+---
+
+## STEP 2. 타겟 시청자 & 알고리즘 설계
+
+### 투트랙 타겟 (가이드라인 적용)
+
+| 트랙 | 타겟 | 작동 방식 |
+|------|------|---------|
+| **겉 (1차)** | 28~35세 미혼 여성 | "나도 30인데 아직 혼자야" 자기 대입 + 사업가 라이프 모델 동경 → **댓글/공유 폭발** |
+| **속 (2차, 진짜 컨버전)** | 30~45세 미혼 사업가 남성 | "이 솔직한 사람한테 가입하면 진짜 매칭해주겠다" + "1000만 원 ROI 있겠다" → **무료 진단 폼 클릭** |
+
+### 예상 댓글 반응 (캡처/공유될 문장)
+
+- "결정사 대표가 매출 150만 원이라고 솔직하게 말하는 거 처음 봄"
+- "이 사람 진짜 인생 드라마네 ㄷㄷ"
+- "90kg에서 연대 갔다고? 미친 멘탈"
+- "술 안 좋아하는데 술자리 가는 거 너무 공감"
+- "1000만 원 회원이 진짜 있다고??"
+- "이 언니 진짜 응원함"
+- "한 달 150만 원 벌고도 계속하는 게 진심이네"
+- "긁지 않은 복권 콜백 하 ㅠㅠ"
+- "다음 편 빨리 ㅋㅋ"
+- "무료 진단 폼 어디서 받아요?"
+
+### 알고리즘 키워드
+
+**제목용:** 30살, 결정사, 결정사 대표, 노처녀, 결혼 못 한, 결정사 가격, 1000만 원
+
+**설명란용:** 결정사 대표 일상, 30대 미혼, 결정사 후기, 결혼정보회사 가격, 매칭 서비스, 아나운서 출신
+
+**해시태그:** #결정사 #30대결혼 #결정사대표 #노처녀 #결혼정보회사 #브이로그 #회복탄력성
+
+---
+
+## STEP 3. 하몬서클 스토리 구조
+
+> 브이로그 = 동선이 곧 스토리 구조.
+> **메이크업룸에서 시작 → 식당 외부에서 끝**. 변신과 일상의 완결.
+
+| 단계 | 내용 | 장소 | 시간 (영상) | 감정 |
+|------|------|------|------------|------|
+| 1. 안정된 일상 | 메이크업 받는 모습, 평소 풀세팅 루틴 | **L1 메이크업룸** | 0:00~1:30 | 호기심 — "결정사 대표는 이렇게 준비하는구나" |
+| 2. 무언가를 원한다 | 사무실 책상, 후크 멘트, 인생 스토리 진입 | **L2 사무실** | 1:30~5:00 | 이입 — "근데 본인도 결혼 못 했다고?" |
+| 3. 낯선 환경 진입 | 베스트클래스 미팅룸, 가격 카드 공개 | **L3 베스트클래스** | 5:00~9:00 | 충격 — "1000만 원이 진짜야?" |
+| 4. 시련과 적응 | "한 달 매출 150만 원" 솔직 폭로 + 술자리 갈등 | L3 베스트클래스 | 9:00~11:00 | 진정성 피크 |
+| 5. 원하던 것을 얻다 | 사무실 복귀, 자청 1인극 (자청에게 결혼상담) | L2 사무실 | 11:00~13:00 | 카타르시스 |
+| 6. 대가를 치른다 | 식당 외부, 혼자 서서 멘트 | **L4 식당 외부** | 13:00~14:00 | 쓸쓸 — "오늘도 남의 인연" |
+| 7. 일상 복귀 | "근데 괜찮아요" | L4 식당 외부 | 14:00~14:30 | 안도 |
+| 8. 변화된 자신 | "안 긁은 복권" 클로징 + 시그니처 캐치프레이즈 | L4 식당 외부 | 14:30~15:00 | 동기부여 |
+
+---
+
+## STEP 4. 시청 지속률 설계 (AVD 최적화)
+
+> 13~15분 기준. 3분마다 위기장치. 첫 30초 유지율 70%+.
+
+### 후킹 타임라인
+
+| 시간대 | 장치 유형 | 내용 | 기대 효과 |
+|--------|---------|------|---------|
+| **0~5초** | 패턴 인터럽트 | 풀세팅 정면 "결정사 대표인데, 30살에 아직 결혼 못 한 노처녀예요." (인사 0회) | "뭐??" 클릭 즉시 인지 일치 |
+| **5~30초** | 썸네일 이행 | "그래서 오늘 저의 진짜 하루를 보여드릴게요" + 메이크업 받는 인서트 | 약속 이행 |
+| **30~60초** | 오픈 루프 | "오늘 베스트클래스 4:4 매칭이 있어요. 가격이... 한 명당 165만 원이에요" | 끝까지 봐야 하는 이유 (가격 미스터리) |
+| **3분** | 위기장치 ① | "사실 저 90kg였어요. 진짜로요." (반지하/폭식) | 재후킹 — 충격 |
+| **5분** | 위기장치 ② | "편입 7번 떨어졌어요. 그 시절은 지금도 신촌 가면 눈물 나요" | 재후킹 — 간절함 |
+| **7분** | 위기장치 ③ | "이 카드 한 장이 1000만 원이에요" (가격 폭로) | 재후킹 — 숫자 |
+| **9분** | 위기장치 ④ | "한 달에 4:4 1번밖에 못 했을 때는 매출 150만 원이었어요" (감정 피크) | 진정성 절정 |
+| **11분** | 위기장치 ⑤ | "사실 저 술 안 좋아해요. 근데 금토일 다 술자리 가요. 회원 따려고" | 사업가 갈등 |
+| **13분** | 클라이맥스 | "자청 씨, 결혼 안 하시죠?" 1인극 → 본인 깨달음으로 전환 | 카타르시스 |
+| **14:30** | 엔딩 | "오늘도 남의 인연 만들어주고 혼자 가요. 근데 괜찮아요. 안 긁은 복권이니까" | 여운 |
+
+**첫 30초 목표 유지율: 70% 이상**
+
+### 위기장치 목록
+
+| # | 유형 | 위치 | 내용 | 비고 |
+|---|------|------|------|------|
+| 1 | 충격형 | 3분 (사무실) | 90kg 자기 폭로 | 사진 인서트 (대표님 동의 시) |
+| 2 | 간절형 | 5분 (사무실) | 편입 7번 실패 + 신촌 눈물 | 인서트: 편입학원 거리 스틸 |
+| 3 | 가격 폭로형 | 7분 (베스트클래스) | 1000만 원 카드 | 카드 손에 들고 클로즈업 |
+| 4 | 진정성형 | 9분 (베스트클래스) | 매출 150만 원 멘트 | 표정 잡기 — 리테이크 X |
+| 5 | 사업가 갈등형 | 11분 (사무실) | 술자리/AI 철학 | 인서트: 술잔 OR 노트북 |
+| 6 | 카타르시스형 | 13분 (사무실) | 자청 1인극 | 카메라 정면 응시 |
+| 7 | 아이러니형 | 14분 (식당 외부) | "남의 인연" 콜백 | 와이드샷 |
+
+---
+
+## STEP 5. 촬영 스케줄 (동선 설계)
+
+### 촬영 D-DAY 타임라인 (4/12 토)
+
+| 시간 | 장소 | 핵심 내용 | 하몬서클 | 카메라 | 인력 |
+|------|------|----------|---------|--------|------|
+| 09:00 | 자택 | (촬영 X) 대표 기상 | — | — | — |
+| 10:00~11:00 | **L1 메이크업룸** | 메이크업 받는 모습, 평소 루틴 인서트 | ① | 짐벌 + 4K | 보조 |
+| 11:00~11:30 | 이동 | 사무실 도착 | — | 짐벌 워킹 | 보조 |
+| 11:30~13:00 | **L2 사무실 (책상)** | **본 촬영 시작** — 후크 + 인생 스토리 | ② | 삼각대 + 정면샷 | 메인 |
+| 13:00~14:00 | 점심 (B-roll) | 평소 점심 | — | 짐벌 자유 | 보조 |
+| 14:00~15:00 | **L2 사무실 (오피스)** | 회원 프로필 검토 (가림 처리), 곽 대표 미팅 | ②③ 전환 | 삼각대 | 메인 |
+| 15:00~16:30 | **L3 베스트클래스 미팅룸** | 가격 카드 공개, 시스템 설명, 매출 폭로 | ③④ | 삼각대 + 클로즈업 | 메인+보조 |
+| 16:30~17:30 | **L2 사무실 복귀** | 자청 1인극, 사업가 철학 | ⑤ | 삼각대 + 정면 | 메인 |
+| 17:30~18:00 | **L4 식당 외부** | 클로징, "안 긁은 복권" | ⑥⑦⑧ | 짐벌 와이드 | 메인 |
+
+### 4 로케이션 정리
+
+**L1 메이크업룸** (10:00~11:00)
+- 목적: 캐릭터 진입 + 풀세팅 루틴 인서트
+- 촬영 분량: 영상 1~2분
+- 컷: 메이크업 받는 손, 거울 속 이세령, 자학 멘트 ("저 진짜 똥손이에요")
+
+**L2 사무실** (11:30~13:00 + 14:00~15:00 + 16:30~17:30)
+- 목적: 후크 + 인생 스토리 + 자청 1인극
+- 촬영 분량: 영상 7~8분 (메인 로케)
+- 컷: 책상 정면, 의자에 앉은 풀샷, 노트북 화면 인서트
+
+**L3 베스트클래스 미팅룸** (15:00~16:30)
+- 목적: 가격 폭로 + 시스템 설명
+- 촬영 분량: 영상 4분
+- 컷: 가격 카드 클로즈업, QR코드 시스템 설명, 곽 대표 카메오 (가능 시)
+
+**L4 식당 외부** (17:30~18:00)
+- 목적: 클로징 + 시그니처 캐치프레이즈
+- 촬영 분량: 영상 1~2분
+- 컷: 와이드 + 백라이트 (석양 효과)
+
+### 증빙 자료/소품 체크리스트
+
+- [ ] 1000만 원 회원 카드 (실물 OR 더미)
+- [ ] 165만 원 4:4 로테이션 가격표 (A4)
+- [ ] 회원 프로필 샘플 3장 (가림 처리)
+- [ ] QR코드 호감 투표 시스템 시연용 패드
+- [ ] 이세령 과거 사진 3장 (대구 시절, 90kg 시절, 아나운서 시절) — **대표님 동의 시**
+- [ ] 무료 등급 진단 폼 QR코드 출력본
+- [ ] 메이크업 도구 (인서트용)
+
+---
+
+## STEP 6. 질문지 (촬영감독용)
+
+> **원칙 1**: 브이로그 = 상황 속에서 질문. 인터뷰 X.
+> **원칙 2**: 촬영감독 = 시청자 대변자.
+> **원칙 3**: 이세령이 자연스럽게 길게 말하도록. 단답 압박 금지.
+> **태그**: [후킹] [위기장치] [감정이입] [반론] [시청자대리] [재후킹] [마무리]
+> **전체**: 63개. 상황에 맞게 선택.
+
+---
+
+### 장소 1. 메이크업룸 (0:00~1:30) — ① 안정된 일상
+
+**첫 장면 (인사 금지):**
+> 메이크업 도구 클로즈업 → 거울 속 이세령 → 카메라 보는 순간
+
+| # | 태그 | 질문 |
+|---|------|------|
+| 1 | [후킹] | (메이크업 시작 직전) 오늘 촬영 있는 날이에요? |
+| 2 | [시청자대리] | 메이크업은 매번 받아요? 직접 못 해요? |
+| 3 | [감정이입] | 본인이 똥손이라고 하셨다면서요? |
+| 4 | [시청자대리] | 보통 아침 몇 시에 일어나요? |
+| 5 | | 오늘 일정 어떻게 돼요? |
+| 6 | [위기장치] | 9시에 일어나서 12시 출근이라고요? 야행성? |
+| 7 | [후킹] | 결정사 대표는 이렇게 풀세팅 받고 출근해야 돼요? |
+
+**이세령 키워드:** 9~10시 기상, PT/테니스, 메이크업 똥손, "촬영일은 풀세팅"
+**감정 톤:** 편안, 살짝 자학 개그
+**촬영:** 짐벌 + 자연광, 거울 인서트 활용, 메이크업 손 클로즈업
+
+---
+
+### 장소 2. 사무실 (1:30~5:00 + 14:00~15:00 + 16:30~17:30) — ②⑤
+
+**[Part A — 후크 진입 (1:30~2:30)]**
+
+| # | 태그 | 질문 (이건 실제로 안 물어봄, 이세령이 직접 카메라 보고 멘트) |
+|---|------|------|
+| 8 | [후킹] | (이세령 풀세팅 정면 멘트) "결정사 대표인데, 30살에 결혼 못 한 노처녀예요" |
+
+**[Part B — 인생 스토리 (2:30~5:00)]**
+
+| # | 태그 | 질문 |
+|---|------|------|
+| 9 | [시청자대리] | 본인은 왜 결혼 못 했어요? |
+| 10 | [감정이입] | 어디 출신이에요? |
+| 11 | [위기장치] | 초3 때 노현정 아나운서 보고 꽂혔다고요? |
+| 12 | [감정이입] | 그때부터 한 번도 안 흔들렸어요? |
+| 13 | [위기장치] | 근데 고등학교 때 90kg였다고요? 진짜요? |
+| 14 | [시청자대리] | 반지하에 살았다는 게 무슨 뜻이에요? |
+| 15 | [감정이입] | 수능 때 공황장애 왔다고요? |
+| 16 | [위기장치] | 편입을 7번 떨어졌다고요? |
+| 17 | [시청자대리] | 그때 어떻게 버텼어요? |
+| 18 | [감정이입] | 8번째에 연세대 합격했을 때 기분이 어땠어요? |
+| 19 | [재후킹] | 인생책이 연금술사라고요? |
+| 20 | | 그때 우주가 문 열어줬다는 말이 무슨 뜻이에요? |
+
+**이세령 키워드:** 대구, 노현정, 90kg, 반지하, 편입 7번, 연세대, 연금술사, "보름달에 10년"
+
+**[Part C — 회원 프로필 검토 (14:00~15:00)]**
+
+| # | 태그 | 질문 |
+|---|------|------|
+| 21 | [시청자대리] | 오늘 회원분 프로필 어떤 거 보고 있어요? |
+| 22 | [위기장치] | 다른 결정사는 외모 안 본다는데, 진짜예요? |
+| 23 | [시청자대리] | 본인 결정사는 외모 봐요? |
+| 24 | [반론] | 외모 본다는 게 차별 아니에요? |
+| 25 | [감정이입] | 매일 남의 프로필 보면서 본인 등급은 어디라고 생각해요? |
+
+**[Part D — 자청 1인극 (16:30~17:30)]**
+
+| # | 태그 | 질문 |
+|---|------|------|
+| 26 | [후킹] | (이세령이 직접 카메라 보고) "자청 씨, 결혼 안 하시죠?" |
+| 27 | [재후킹] | (PD가) 자청한테 진짜 결혼상담 한다고요? |
+| 28 | [감정이입] | 자청 같은 사람도 결정사 가야 해요? |
+| 29 | [시청자대리] | 결정사 대표 입장에서 자청을 본다면? |
+| 30 | [재후킹] | 아니, 본인은 자청한테 뭐라고 말하고 싶어요? |
+| 31 | [감정이입] | (1인극 흐름 풀고) 사실 자청 씨 말고 우리한테 더 필요한 사람이 있죠? |
+
+**촬영:** 자청 1인극 시 카메라 정면 응시 비율 90% 이상. PD는 컷 뒤에서 질문만.
+
+---
+
+### 장소 3. 베스트클래스 미팅룸 (5:00~11:00) — ③④
+
+**장면 전환:** 사무실 → 베스트클래스 이동 (짧게 컷, 30초)
+
+**[Part A — 시스템 설명 (5:00~7:00)]**
+
+| # | 태그 | 질문 |
+|---|------|------|
+| 32 | [시청자대리] | 여기가 베스트클래스 미팅룸이에요? |
+| 33 | [후킹] | 4:4 로테이션 미팅이라는 게 뭐예요? |
+| 34 | [시청자대리] | 일본 버전이라고요? |
+| 35 | | 한 번에 몇 명이 참여해요? |
+| 36 | [재후킹] | 15분씩 룸 이동한다고요? |
+| 37 | | QR코드로 호감 투표한다고요? |
+
+**[Part B — 가격 폭로 (7:00~9:00)]**
+
+| # | 태그 | 질문 |
+|---|------|------|
+| 38 | [후킹] | (가격 카드 보여주며) 이 카드 한 장이 얼마예요? |
+| 39 | [위기장치] | 1000만 원이라고요?? |
+| 40 | [시청자대리] | 마일리지 시스템이 뭐예요? |
+| 41 | [위기장치] | 한 번 프로필 보는 데 30만 원이 차감된다고요? |
+| 42 | | 데이트 수락하면 또 차감?? |
+| 43 | [재후킹] | 4:4 로테이션은 1회 165만 원이라고요? |
+| 44 | [후킹] | 매칭 1번 일어나면 매출이 얼마 나와요? |
+
+**[Part C — 매출 폭로 (9:00~11:00) — 진정성 피크]**
+
+| # | 태그 | 질문 |
+|---|------|------|
+| 45 | [감정이입] | 6개월 운영하셨는데 진짜 잘 되고 있어요? |
+| 46 | [반론] | 그거 진짜예요? 빈말 아니고요? |
+| 47 | [위기장치] | 최악의 달엔 매출이 얼마였어요? |
+| 48 | [감정이입] | (이세령이 "150만 원" 멘트하면) 진짜요? 정산하니까 그것밖에 안 남아요? |
+| 49 | [시청자대리] | 그런데도 왜 계속해요? |
+| 50 | [감정이입] | 솔직히 무서울 때 없어요? |
+
+**촬영:** 가격 카드 클로즈업 필수. 이세령 표정 4K 크롭. **45~50번 구간 리테이크 절대 금지.**
+
+---
+
+### 장소 4. 식당 외부 (11:00~14:00) — ④⑤⑥
+
+**Part D — 사업가 철학 (11:00~13:00)**
+
+| # | 태그 | 질문 |
+|---|------|------|
+| 51 | [후킹] | 사실 술 안 좋아한다면서요? |
+| 52 | [위기장치] | 근데 금토일 다 술자리 간다고요? 왜요? |
+| 53 | [감정이입] | 결정사 회원 따려고 술 마시는 기분이 어때요? |
+| 54 | [재후킹] | 그래서 유튜브를 키우고 싶어한다고요? |
+| 55 | [시청자대리] | 유튜브가 본인한테 어떤 의미예요? |
+| 56 | [후킹] | AI가 못 하는 일만 한다고요? |
+| 57 | | 콘텐츠/미팅/촬영 — 이 3가지요? |
+
+**Part E — 클로징 (13:00~15:00)**
+
+| # | 태그 | 질문 |
+|---|------|------|
+| 58 | [마무리] | 오늘 하루 어땠어요? |
+| 59 | [감정이입] | 오늘도 남의 인연 만들어주고 혼자 집 가는 거잖아요. |
+| 60 | [마무리] | 근데 괜찮아요? |
+| 61 | [마무리] | (이세령이 "안 긁은 복권" 멘트하면) 그거 진심이에요? |
+| 62 | [마무리] | 5년 뒤에 이세령 대표는 어떻게 되어 있을까요? |
+| 63 | [마무리] | (카메라 보며) ... |
+
+**촬영:** 와이드샷 + 백라이트 (가능하면 석양). 마지막 멘트 후 페이드아웃.
+
+---
+
+## STEP 7. 엔딩 설계
+
+### 이세령이 자연스럽게 마무리
+
+> 엔딩 = CTA가 아니라 이세령의 진짜 이야기.
+> 식당 외부에서 와이드샷, 마지막 질문만 던지고 길게 말하게 놔둠.
+
+**마지막 질문:** *"근데 괜찮아요?"*
+
+**이세령 마무리 (예상 멘트, 그대로 안 가도 됨):**
+> *"오늘도 남의 인연 만들어주고 혼자 가요.
+> 근데 괜찮아요. 저는 안 긁은 복권이니까.
+> 그리고 사실, 결혼 못 한 사람이
+> 결혼하고 싶은 사람의 마음을 가장 잘 알아요.
+> 그래서 오늘 하루도 의미 있었어요."*
+
+### 화면 마무리
+
+- 이세령 마지막 멘트 → 정적 + 미소 (3초)
+- 식당 외부 와이드샷 → 페이드아웃 (5초)
+- 엔딩 자막: **"겪어본 사람이 차린 결정사 · 아는언니 세령"**
+- (BGM 잔잔한 피아노 페이드아웃)
+
+### CTA — 영상 내 0회
+
+- 무료 등급 진단 폼 → **더보기란 + 고정 댓글만**
+- 영상 내 "구독", "좋아요", "알림 설정" 0회
+- 댓글 유도: "결정사 대표한테 물어보고 싶은 거 있으면 댓글 남겨주세요" 카드만 (영상 마지막)
+
+---
+
+## STEP 8. 노림수 (자연스러운 사업 연결)
+
+> 직접 광고 0%. 상황 자체가 노림수.
+
+| 시간 | 장면 | 노림수 | 멘트 (있는 것만) |
+|------|------|-------|------|
+| 0~2분 | 메이크업 + 후크 | 캐릭터 진입 | (인사 없음) |
+| 5~7분 | 베스트클래스 시스템 설명 | 결정사 서비스 인지 | "이게 4:4 로테이션인데요" |
+| 7~9분 | **가격 카드 공개** | 가치 전달 | "1000만 원" |
+| 9~11분 | **매출 150만 원 폭로** | 진정성 = 신뢰 | "진짜로 그랬어요" |
+| 13분 | 자청 1인극 | 사회적 증거 | "자청 같은 사람한테도..." |
+| 14분 | 클로징 | 캐릭터 각인 | "겪어본 사람" |
+
+**노림수 원칙:**
+- 가격 직접 언급은 OK (이세령이 자발적으로 공개)
+- "가입하세요" 멘트는 절대 금지
+- **가격 + 매출 = 가장 강력한 노림수** (한방언니/모두의지인은 절대 못 함)
+
+---
+
+## STEP 9. USP — 상품 USP 매핑
+
+> 본 EP는 **캐릭터 각인 + 가격 첫 노출** 단계.
+> USP 12가지 중 **1, 2, 3, 4, 7, 8, 11, 12** 작동.
+> FOMO(9), 한정(10)은 0회.
+
+| USP # | 항목 | 본 EP 장면 | 작동 방식 |
+|-------|------|----------|---------|
+| 1 | 타겟 | 썸네일 "30살 노처녀" + 후크 5초 | 자기 대입 (28~35 미혼 여성) |
+| 2 | 판매 목적 | 인생 스토리 + 회원 프로필 검토 | "겪어본 사람이 운영" |
+| 3 | 해결 (최소 노력) | 베스트클래스 시스템 설명 (4:4 매칭) | "혼자 못 하는 일을 시각화" |
+| 4 | 대의명분 | "한 달 매출 150만 원에도 계속하는 이유" | 진심 선언 |
+| 7 | 경쟁 대비 강점 | "다른 결정사는 외모 안 본다고 거짓말" | 솔직성 차별화 |
+| **8** | **가격 명시** | **1000만 / 165만 / 30만 / 200만** | **첫 가격 공개** |
+| 11 | B&A | 90kg → 60kg / 영남대 → 연세대 / 추락 → 부활 | 회복탄력성 증명 |
+| 12 | 리스크 방어 | "솔직히 무서워요" + 매출 150만 폭로 | "미혼 대표 사기?" 정면 돌파 |
+
+**FLOW 검증:**
+- **FLOW 1** (문제→해결→변화): 1 → 3 → 11 ✓
+- **FLOW 2** (손해→FOMO): 8 (가격) 첫 등장, 9·10은 의도적 생략
+- **FLOW 3** (B&A 근거): 11 + 7 + 12 ✓
+
+---
+
+## 촬영 체크리스트
+
+### 장비
+
+| 항목 | 장비 | 용도 |
+|------|------|------|
+| 카메라 | 1대 (4K → 1080p 크롭) | 메인 |
+| 마이크 | 무선 핀마이크 × 2 | 이세령 + PD |
+| 짐벌 | 1개 | 이동/B-roll |
+| 삼각대 | 1개 | 사무실/베스트클래스 고정 |
+| 조명 | LED 1개 + 자연광 | 사무실/메이크업룸 |
+| 보조 | 모니터 1대 | 컷 확인 |
+
+### 소품
+
+- [ ] 1000만 원 회원 카드 (실물 또는 더미)
+- [ ] 165만 원 가격표 A4 출력
+- [ ] 회원 프로필 샘플 3장 (가림 처리 완료)
+- [ ] QR코드 시스템 시연용 패드
+- [ ] 이세령 과거 사진 3장 (대표님 동의 시)
+- [ ] 무료 진단 폼 QR코드
+- [ ] 다이닝 레스토랑 메뉴판 (B-roll)
+
+### 특별 준비
+
+- [ ] L1~L4 4개 로케이션 사전 답사 (D-1)
+- [ ] 베스트클래스 미팅룸 사용 허가 (곽 대표)
+- [ ] 식당 외부 촬영 허가 (D-1)
+- [ ] 회원 정보 가림 처리 완료
+- [ ] 자청 1인극 톤 사전 협의 (D-1, 이세령 본인과)
+
+---
+
+## 편집 가이드
+
+### 컷 리듬
+
+| 장면 유형 | 컷 길이 | 참고 |
+|---------|--------|------|
+| 메이크업룸 | 3~5초 | 디테일 컷 |
+| 이동/전환 | 2~3초 | 짧게 |
+| 사무실 후크 | 5~8초 | 정면 응시 |
+| 인생 스토리 | 7~10초 | 표정 잡기 |
+| 베스트클래스 가격 | 5~10초 | 카드 클로즈업 |
+| **매출 폭로 (9분)** | **10초+** | **자르지 말 것** |
+| 자청 1인극 | 8~12초 | 정면 응시 유지 |
+| 식당 클로징 | **10초+** | 와이드 + 정적 |
+
+### 자막
+
+- **핵심 숫자**: 큰 사이즈 80pt (**1000만**, **165만**, **150만**, **90kg**, **7번**)
+- **감정 키워드**: 노란색 (반지하, 편입, 추락, 무서워요, 안 긁은 복권)
+- **PD 질문**: 상단 작은 텍스트
+- **자학 개그**: 만화적 강조 (별표, 손가락 화살표 등)
+
+### BGM
+
+| 구간 | BGM |
+|------|-----|
+| 메이크업룸 (0~2분) | 잔잔한 로파이 |
+| 사무실 후크 (1.5~5분) | 미니멀 비트 |
+| **인생 스토리 (3~5분)** | **피아노 감정선** |
+| 베스트클래스 시스템 (5~7분) | 가벼운 비트 |
+| **가격 폭로 (7~9분)** | **드럼 임팩트 (놀람 효과)** |
+| **매출 폭로 (9~11분)** | **무음 또는 피아노만** |
+| 사업가 철학 (11~13분) | 잔잔한 어쿠스틱 |
+| 자청 1인극 (13분) | 미니멀 |
+| **클로징 (14~15분)** | **피아노 페이드아웃** |
+
+### 인서트 컷 리스트
+
+| 순서 | 컷 | 시점 | 길이 |
+|------|---|------|------|
+| 1 | 메이크업 도구 클로즈업 | 0:30 | 3초 |
+| 2 | 거울 속 이세령 (반사) | 1:00 | 5초 |
+| 3 | 이세령 과거 사진 (90kg) | 3:00 | 4초 (대표님 동의 시) |
+| 4 | 신촌 편입학원 거리 스틸 | 5:00 | 3초 |
+| 5 | 보름달 (과거 회상 컷) | 5:30 | 3초 |
+| 6 | 1000만 원 카드 클로즈업 | 7:30 | 5초 |
+| 7 | 가격표 A4 클로즈업 | 8:00 | 4초 |
+| 8 | QR코드 시스템 시연 | 8:30 | 6초 |
+| 9 | 매출 노트북 화면 (모자이크) | 9:30 | 5초 |
+| 10 | 술잔 인서트 | 11:30 | 3초 |
+| 11 | 노트북 + AI 화면 | 12:00 | 4초 |
+| 12 | 식당 외부 와이드 (석양) | 14:00 | 8초 |
+
+---
+
+## 주의사항 (Ban 리스트)
+
+| # | 금지 | 이유 |
+|---|------|------|
+| 1 | "안녕하세요" 인사 | 0초 후크 룰 |
+| 2 | "구독 좋아요 알림설정" 멘트 | 채주부 룰, 0회 |
+| 3 | 대본 읽는 느낌 | 키워드만 숙지, 즉흥 |
+| 4 | **9분 매출 폭로 리테이크** | 첫 테이크가 진짜 |
+| 5 | **연세대 재적/퇴학/재입학 언급** | 이미지 리스크 |
+| 6 | **1년 술/클럽 방황** | 수위 조절 |
+| 7 | **황정우/이나영 사건** | 절대 금지 (별도 동의) |
+| 8 | 천정명 실명 | "유명 배우분"으로만 |
+| 9 | 경쟁사 실명 (한방언니/모두의지인/듀오/가연) | "다른 결정사"로 통일 |
+| 10 | 회원 개인정보 | 가림 필수 |
+| 11 | 가격을 부끄럽게 말하기 | 당당하게 |
+| 12 | 엔딩에서 CTA | 이세령 멘트로 끝 |
+| 13 | "자청 씨" 외 자청 본명/별칭 | 1회만 |
+| 14 | 우리 결정사 이름 직접 언급 | "저희 결정사"로 통일 |
+
+---
+
+## 대표 승인 체크리스트
+
+| # | 항목 | 확인 |
+|---|------|------|
+| 1 | 이세령 — 4/12 풀데이 일정 확정 | ☐ |
+| 2 | 이세령 — 메이크업 일정 + 사무실 + 베스트클래스 + 식당 동선 OK | ☐ |
+| 3 | 이세령 — 가격 공개 (1000만/165만/매출 150만) 동의 | ☐ |
+| 4 | 이세령 — 인생 스토리 풀 공개 동의 (90kg/편입 7번/연금술사) | ☐ |
+| 5 | 이세령 — 과거 사진 사용 동의 (90kg 시절 사진 있는지?) | ☐ |
+| 6 | 이세령 — 자청 1인극 톤 협의 완료 | ☐ |
+| 7 | 곽 대표 — 베스트클래스 미팅룸 사용 허가 | ☐ |
+| 8 | 곽 대표 — 카메오 등장 가능 여부 | ☐ |
+| 9 | 회원 정보 가림 처리 자료 준비 | ☐ |
+| 10 | 무료 등급 진단 폼 URL 확정 | ☐ |
+| 11 | 1000만 원 카드 더미 제작 | ☐ |
+| 12 | 오맷돌 대표 최종 승인 | ☐ |
+
+---
+
+## 기획서 완성 최종 체크리스트
+
+**제목/썸네일**
+- [x] 38자 이내 (28자)
+- [x] 썸네일과 제목 다른 정보
+- [x] 클릭하고 싶은가? 통과
+
+**스토리**
+- [x] 하몬서클 8단계 (메이크업→사무실→베스트클래스→식당)
+- [x] 감정 곡선 자연스러움
+- [x] 변신 + 일상 + 클로징 완결
+
+**시청 지속률**
+- [x] 0~5초 패턴 인터럽트 (인사 X)
+- [x] 위기장치 7개 (3/5/7/9/11/13/14분)
+- [x] 감정 피크 = 9분 매출 폭로 + 14분 클로징
+
+**촬영**
+- [x] 4 로케이션 동선 명확
+- [x] 가격 카드/소품 준비 리스트
+- [ ] 곽 대표 카메오 가능 여부 확인 (D-1)
+
+**질문지**
+- [x] 63개 + 태그
+- [x] 5개 장소별 정리
+- [x] 엔딩 = 이세령 멘트 (CTA 아닌)
+
+---
+
+## 향후 에피소드 아이디어 (보류)
+
+### 자청 결혼상담 단독편
+- 자청 게스트 어레인지 성공 시 별도 EP로 단독 기획
+- 본 EP에서는 1인극으로 후크만 활용
+
+### 학교 방문 — 대구 모교
+- 90kg 시절 다녔던 모교 방문
+- 별도 감정 EP로 분리
+
+### 일본 여자 DB 비하인드
+- "한국 남자가 일본 여자 만나고 싶어하는 이유"
+- 베스트클래스 일본 인프라 활용 단독편
+
+---
+
+> **서명란**
+> - 오맷돌 대표: ________________ (날짜: )
+> - 이세령 대표: ________________ (날짜: )
+> - 촬영감독: ________________ (날짜: )
+
+**기획부 코디 / 2026.04.10**
+**다음 단계**: D-1 (4/11)까지 대표 승인 → D-DAY (4/12) 촬영
+`;
+
+marked.setOptions({breaks:true,gfm:true,headerIds:false});
+const el=document.getElementById('ct');
+let r=marked.parse(md);
+let si=0;
+r=r.replace(/<h2/g,()=>'<h2 id="s-'+si+++'"');
+r=r.replace(/<table>/g,'<div class="tw"><table>');
+r=r.replace(/<\/table>/g,'</table></div>');
+r=r.replace(/\[후킹\]/g,'<span class="t-hook">[후킹]</span>');
+r=r.replace(/\[위기장치\]/g,'<span class="t-crisis">[위기장치]</span>');
+r=r.replace(/\[감정이입\]/g,'<span class="t-emp">[감정이입]</span>');
+r=r.replace(/\[시청자대리\]/g,'<span class="t-view">[시청자대리]</span>');
+r=r.replace(/\[반론\]/g,'<span class="t-counter">[반론]</span>');
+r=r.replace(/\[재후킹\]/g,'<span class="t-rehook">[재후킹]</span>');
+r=r.replace(/\[마무리\]/g,'<span class="t-close">[마무리]</span>');
+el.innerHTML=r;
+const tabs=document.querySelectorAll('.tab'),secs=document.querySelectorAll('.md h2');
+function upd(){
+ const o=130;let c=0;
+ secs.forEach((s,i)=>{if(s.getBoundingClientRect().top<=o)c=i});
+ tabs.forEach((t,i)=>t.classList.toggle('active',i===c));
+ const a=document.querySelector('.tab.active');
+ if(a){const b=document.getElementById('tabBar'),l=a.offsetLeft,w=a.offsetWidth,bw=b.offsetWidth;b.scrollTo({left:l-bw/2+w/2,behavior:'smooth'})}
+}
+window.addEventListener('scroll',()=>{
+ upd();
+ const h=document.documentElement.scrollHeight-window.innerHeight;
+ document.getElementById('pBar').style.width=(h>0?window.scrollY/h*100:0)+'%';
+},{passive:true});
+tabs.forEach(t=>t.addEventListener('click',e=>{
+ e.preventDefault();
+ const s=document.getElementById('s-'+t.dataset.i);
+ if(s)s.scrollIntoView({behavior:'smooth'});
+}));
+upd();
+</script>
+</body>
+</html>
