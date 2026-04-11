@@ -56,6 +56,33 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR','App
 @media(min-width:640px){body{font-size:16px}.hero{padding:28px 32px}.hero-title{font-size:28px}.main{padding:28px 24px 64px}.md h2{font-size:22px}.md p,.md li{font-size:15px}.tw table{font-size:14px}}
 @media(max-width:480px){.header{padding:0 12px;gap:8px}.header-title{font-size:13px}.header-ch{display:none}.tab{padding:0 10px;font-size:11px}.main{padding:18px 12px 48px}.hero{padding:18px 16px}.hero-title{font-size:19px}.hero-stats{grid-template-columns:repeat(2,1fr)}.md h2{font-size:17px;margin:30px 0 12px}.md h3{font-size:14px}.tw table{font-size:12px}.tw td,.tw th{padding:7px 9px}}
 @media print{.header,.tab-bar,.prog{display:none!important}.main{margin:0;padding:20px;max-width:100%}.tw{overflow:visible;border:none}.tw table{font-size:11px}}
+.md .q-card{background:#fff;border-radius:14px;padding:20px;margin:14px 0;border-left:4px solid #0064ff;box-shadow:0 1px 6px rgba(0,0,0,.06);border:1px solid var(--border);border-left:4px solid #0064ff}
+.md .q-card.emotion{border-left-color:#dc2626}
+.md .q-card.system{border-left-color:#15803d}
+.md .q-card.cta{border-left-color:#b45309}
+.md .q-card.peak{border-left-color:#6d28d9}
+.md .q-card-header{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.md .q-card-num{width:30px;height:30px;background:#0064ff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;flex-shrink:0}
+.md .q-card.emotion .q-card-num{background:#dc2626}
+.md .q-card.system .q-card-num{background:#15803d}
+.md .q-card.cta .q-card-num{background:#b45309}
+.md .q-card.peak .q-card-num{background:#6d28d9}
+.md .q-card-tc{font-size:11px;font-weight:700;color:#8b95a1}
+.md .q-card-tag{font-size:11px;font-weight:700;padding:3px 9px;border-radius:5px;background:#e8f1ff;color:#0064ff}
+.md .q-card.emotion .q-card-tag{background:#fef2f2;color:#dc2626}
+.md .q-card.system .q-card-tag{background:#f0fdf4;color:#15803d}
+.md .q-card.cta .q-card-tag{background:#fef3c7;color:#b45309}
+.md .q-card.peak .q-card-tag{background:#f3e8ff;color:#6d28d9}
+.md .q-card-question{font-size:15px;font-weight:800;line-height:1.6;margin:8px 0 12px;color:#191f28;word-break:keep-all}
+.md .q-card-pd{font-size:13px;color:#4e5968;line-height:1.75;padding:12px 14px;background:#f8f9fa;border-radius:8px;margin-bottom:8px;word-break:keep-all}
+.md .q-card-ok{font-size:12px;font-weight:700;color:#15803d;padding:8px 12px;background:#f0fdf4;border-radius:6px;margin-top:6px;word-break:keep-all}
+.md .q-card-doubt{font-size:12px;font-weight:700;color:#6d28d9;margin-top:6px;padding:8px 12px;background:#f3e8ff;border-radius:6px;word-break:keep-all}
+.md .sec-hdr{color:#fff;padding:14px 18px;border-radius:10px;margin:28px 0 14px;font-weight:800;font-size:15px;background:#0064ff;word-break:keep-all}
+.md .sec-hdr.red{background:#dc2626}
+.md .sec-hdr.grn{background:#15803d}
+.md .sec-hdr.org{background:#b45309}
+.md .sec-hdr.purple{background:#6d28d9}
+.md .sec-hdr.dark{background:#191f28}
 </style>
 </head>
 <body>
@@ -68,7 +95,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR','App
 <nav class="tab-bar" id="tabBar">
 <a class="tab" href="#s-0" data-i="0">컨셉</a>
 <a class="tab" href="#s-1" data-i="1">시간표</a>
-<a class="tab" href="#s-2" data-i="2">후크멘트</a>
+<a class="tab" href="#s-2" data-i="2">핵심 씬 10선</a>
 <a class="tab" href="#s-3" data-i="3">인생스토리</a>
 <a class="tab" href="#s-4" data-i="4">키메시지</a>
 <a class="tab" href="#s-5" data-i="5">금지</a>
@@ -95,7 +122,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR','App
 </div>
 <div class="hero-stats">
 <div class="stat"><div class="stat-v">5곳+1</div><div class="stat-l">로케이션(+경유)</div></div>
-<div class="stat"><div class="stat-v">5개</div><div class="stat-l">핵심 키워드</div></div>
+<div class="stat"><div class="stat-v">10 씬</div><div class="stat-l">Q-Card</div></div>
 <div class="stat"><div class="stat-v">10개</div><div class="stat-l">금지 리스트</div></div>
 <div class="stat"><div class="stat-v">13~15분</div><div class="stat-l">편집 후 길이</div></div>
 </div>
@@ -162,56 +189,94 @@ const md=String.raw`## 한 줄 컨셉
 
 ---
 
-## 핵심 후크 포인트 — PD 질문 가이드
+## 핵심 씬 10선 — PD 질문 카드
 
-> **⚠️ 대본 없음.** 아래는 PD가 물어볼 질문과 "꼭 건드릴 키워드"만.
+> **⚠️ 대본 없음.** 각 씬별 PD 질문 + 꼭 건드릴 키워드 + 톤 가이드만.
 > 답변은 본인 말로, 본인 속도로. 외울 것 없음.
 
-### 씬 1. 0초 후크 (13:30 사무실 책상, 풀세팅 정면)
+<div class="sec-hdr">ACT 1 — 메이크업 / 카페 (0~3분 · 캐릭터 진입)</div>
 
-| | 내용 |
-|---|------|
-| **PD 질문** | "본인 소개 한 마디 부탁드려요. 인사 없이, 다짜고짜." |
-| **필수 키워드** | <code>결정사 대표</code> / <code>30살</code> / <code>노처녀</code> 3개 → 5초 안에 자연스럽게 박기 |
-| **금지** | "안녕하세요" / 자기소개 정형문 / 웃음 |
-| **톤** | 무표정 직설, 약간 자학 섞어서 |
+<div class="q-card">
+<div class="q-card-header"><div class="q-card-num">01</div><div class="q-card-tc">12:00 메이크업룸</div><div class="q-card-tag">풀세팅 루틴</div></div>
+<div class="q-card-question">"결정사 대표는 이렇게 풀세팅 받고 출근해야 돼요? 본인이 똥손이라서 받는다고요?"</div>
+<div class="q-card-pd"><strong>톤:</strong> 편안, 살짝 자학 개그. 메이크업 받는 손 / 거울 속 본인 모습 자연스럽게. "저 진짜 똥손이에요" 한 마디면 OK.</div>
+<div class="q-card-ok">✓ 건드릴 키워드: 9~10시 기상 / PT·테니스 / 메이크업 똥손 / "촬영일은 풀세팅"</div>
+</div>
 
-### 씬 2. 가격 폭로 (17:00 베스트클래스 미팅룸)
+<div class="q-card">
+<div class="q-card-header"><div class="q-card-num">02</div><div class="q-card-tc">13:00 단골 카페</div><div class="q-card-tag">일 중독 브이로그</div></div>
+<div class="q-card-question">"(혼잣말처럼) 지금 보고 있는 분 어떤 분이세요? 오늘 누구 매칭 생각하세요?"</div>
+<div class="q-card-pd"><strong>톤:</strong> 창가 자리에서 종이 회원 프로필 훑어보면서 혼잣말 독백. 카메라 의식 X. 한숨 한 번 나와도 OK.</div>
+<div class="q-card-ok">✓ 건드릴 키워드: 일 중독 / 매일 머릿속 회원 생각</div>
+</div>
 
-| | 내용 |
-|---|------|
-| **PD 질문 ①** | "이 카드 한 장 얼마예요?" |
-| **PD 질문 ②** | "한 명 만날 때마다 얼마씩 빠지는 거예요?" |
-| **PD 질문 ③** | "그럼 대표님 한 달 매출은 어떻게 되세요?" |
-| **진정성 포인트** | 3번 질문에 **숫자 솔직 공개** 여부는 본인 판단. 공개하면 영상 전체의 진정성 앵커 |
-| **톤** | 담담, 숫자 빼고 꾸미지 않기 |
+<div class="sec-hdr red">ACT 2 — 사무실 후크 (3~5분 · 캐릭터 공개)</div>
 
-### 씬 3. 솔로 독백 (18:30 사무실 복귀 후, 책상)
+<div class="q-card emotion">
+<div class="q-card-header"><div class="q-card-num">03</div><div class="q-card-tc">13:30 사무실 책상</div><div class="q-card-tag">0초 후크 — 영상의 심장</div></div>
+<div class="q-card-question">"본인 소개 한 마디 부탁드려요. 인사 없이, 다짜고짜."</div>
+<div class="q-card-pd"><strong>대표님:</strong> 풀세팅 정면. <strong style="color:#dc2626">"결정사 대표인데, 30살에 아직 결혼 못 한 노처녀예요"</strong> — 이 한 문장을 5초 안에 자연스럽게. 인사 0회. 무표정 직설, 살짝 자학.</div>
+<div class="q-card-ok">✓ 필수 키워드: <code>결정사 대표</code> · <code>30살</code> · <code>노처녀</code></div>
+<div class="q-card-doubt">⚠️ 금지: "안녕하세요" / 정형문 소개 / 웃음 / 카메라 의식</div>
+</div>
 
-**씬 구성 (사찍남 리얼리티 패턴)**:
-1. 사무실 복귀 → 책상 앉음 → 핸드폰 진동
-2. 실제 회원 문자/청첩장/감사카드 확인 (화면 가림)
-3. 잠깐 미소 또는 한숨 → 핸드폰 내려놓음
-4. **카메라 정면 응시 3초 침묵**
-5. 혼잣말처럼 독백
+<div class="sec-hdr purple">ACT 3 — 인생 스토리 (3~5분 · 바닥 서사)</div>
 
-| | 내용 |
-|---|------|
-| **PD 질문 ①** | "지금 온 문자 누구예요?" |
-| **PD 질문 ②** | "기억에 남는 회원 한 명만 떠올려 보세요." |
-| **PD 질문 ③** | "그 사람 지금 어떻게 살고 있어요?" |
-| **PD 질문 ④** | (본인한테 물어보듯) "본인한테는 언제 그런 문자가 올까요?" |
-| **톤** | 혼잣말 톤, 소리 낮춤, 3초 호흡 |
-| **핵심** | 실제 기억나는 회원 한 명 떠올리며 본인 속도로 |
+<div class="q-card peak">
+<div class="q-card-header"><div class="q-card-num">04</div><div class="q-card-tc">14:30 사무실</div><div class="q-card-tag">90kg 반지하</div></div>
+<div class="q-card-question">"본인은 왜 결혼 못 했어요? 어디 출신이에요? 고등학교 때 90kg였다고요? 진짜요?"</div>
+<div class="q-card-pd"><strong>톤:</strong> 담담한 회상. 자학 섞어서 숨기지 않고. 감정 올라오면 그대로 유지.</div>
+<div class="q-card-ok">✓ 키워드: <code>대구</code> · <code>초3 노현정</code> · <code>고등학교 집안 기울음</code> · <code>반지하·폭식·90kg</code></div>
+</div>
 
-### 씬 4. 클로징 (19:30 식당 외부, 해질녘)
+<div class="q-card peak">
+<div class="q-card-header"><div class="q-card-num">05</div><div class="q-card-tc">15:00 사무실</div><div class="q-card-tag">편입 7번 → 연대</div></div>
+<div class="q-card-question">"편입을 7번 떨어졌다고요? 그때 어떻게 버텼어요? 근데 결국 연세대 가셨잖아요. 어떻게 되신 거예요?"</div>
+<div class="q-card-pd"><strong>톤:</strong> 진지 톤. 눈물 살짝 올라와도 OK. 보름달/연금술사 이야기가 자연스럽게 나오면 벅차오름으로 전환.</div>
+<div class="q-card-ok">✓ 키워드: <code>수능 망함</code> · <code>영남대</code> · <code>편입학원·7번·신촌 눈물</code> · <code>8번째 합격</code> · <code>연금술사·보름달 10년</code></div>
+</div>
 
-| | 내용 |
-|---|------|
-| **PD 질문 ①** | "오늘 촬영 어떠셨어요?" |
-| **PD 질문 ②** | "이제 집에 가는 기분이 어때요?" |
-| **꼭 건드릴 키워드** | <code>남의 인연</code> / <code>혼자 집</code> / <code>안 긁은 복권</code> (콜백) |
-| **톤** | 살짝 미소, 쓸쓸하지만 긍정 |
+<div class="sec-hdr org">ACT 4 — 가격 / 매출 폭로 (7~11분 · 진정성 피크)</div>
+
+<div class="q-card emotion">
+<div class="q-card-header"><div class="q-card-num">06</div><div class="q-card-tc">17:00 베스트클래스</div><div class="q-card-tag">가격 카드 폭로</div></div>
+<div class="q-card-question">"이 카드 한 장 얼마예요? 한 명 만날 때마다 얼마씩 빠지는 거예요?"</div>
+<div class="q-card-pd"><strong>대표님:</strong> 가격 카드 직접 손에 들기. "1000만 원"이라는 숫자를 <strong>당당하게</strong>. 부끄럽게 말하지 않기. 손짓 적극.</div>
+<div class="q-card-ok">✓ 숫자: <code>1000만</code> · <code>30만(차감)</code> · <code>165만(4:4)</code></div>
+</div>
+
+<div class="q-card emotion">
+<div class="q-card-header"><div class="q-card-num">07</div><div class="q-card-tc">18:00 베스트클래스</div><div class="q-card-tag">한 달 매출 150만 원</div></div>
+<div class="q-card-question">"그럼 대표님 한 달 매출은 어떻게 되세요? 최악의 달엔 얼마였어요? 그런데도 왜 계속해요?"</div>
+<div class="q-card-pd"><strong>대표님:</strong> 이 답변이 <strong style="color:#dc2626">영상의 감정 핵심</strong>입니다. "150만 원"이라는 숫자를 담담하게. 꾸미지 않기. 9분대 "사실 저 무서워요" 멘트 — 감정 올라오면 그대로 유지.<br><strong style="color:#dc2626">⚠️ 리테이크 절대 없습니다. 첫 테이크 그대로.</strong></div>
+<div class="q-card-ok">✓ 포인트: 매출 150만 원 솔직 공개 / "솔직히 무서워요" / 그럼에도 계속하는 이유</div>
+</div>
+
+<div class="sec-hdr grn">ACT 5 — 솔로 독백 (13분 · 카타르시스)</div>
+
+<div class="q-card peak">
+<div class="q-card-header"><div class="q-card-num">08</div><div class="q-card-tc">18:30 사무실 복귀</div><div class="q-card-tag">회원 메시지 리액션 + 독백</div></div>
+<div class="q-card-question">"지금 온 문자 누구예요? 기억에 남는 회원 한 명만 떠올려 보세요. 그 사람 지금 어떻게 살고 있어요?"</div>
+<div class="q-card-pd"><strong>씬 구조 (사찍남 리얼리티 패턴):</strong><br>① 사무실 복귀 → 책상 앉음 → 핸드폰 진동<br>② 실제 회원 문자/청첩장/감사카드 확인 (화면 가림)<br>③ 잠깐 미소 또는 한숨 → 핸드폰 내려놓음<br>④ <strong style="color:#6d28d9">카메라 정면 응시 3초 침묵</strong><br>⑤ 혼잣말처럼 독백 (톤 낮춤, 진심)<br><br><strong>대표님:</strong> 실제 기억나는 회원 한 명 떠올리며 본인 속도로. PD 재질문 없습니다. 숨 고르기 OK.</div>
+<div class="q-card-doubt">⚠️ 실제 회원 메시지/청첩장은 D-1까지 대표님이 1~2개 선별 (개인정보 가림 처리 협의)</div>
+</div>
+
+<div class="q-card cta">
+<div class="q-card-header"><div class="q-card-num">09</div><div class="q-card-tc">18:45 사무실</div><div class="q-card-tag">본인한테 오는 문자</div></div>
+<div class="q-card-question">"(혼잣말처럼) 본인한테는 언제 그런 문자가 올까요?"</div>
+<div class="q-card-pd"><strong>톤:</strong> 혼잣말, 소리 낮춤. 울어도, 웃어도, 침묵해도 OK. 10초 침묵 나와도 카메라 그대로.</div>
+</div>
+
+<div class="sec-hdr dark">ENDING — 식당 외부 (14~15분 · 클로징)</div>
+
+<div class="q-card cta">
+<div class="q-card-header"><div class="q-card-num">10</div><div class="q-card-tc">19:30 식당 외부 · 해질녘</div><div class="q-card-tag">안 긁은 복권 — 채널 시그니처</div></div>
+<div class="q-card-question">"오늘 하루 어땠어요? 오늘도 남의 인연 만들어주고 혼자 집 가는 거잖아요. 근데 괜찮아요?"</div>
+<div class="q-card-pd"><strong>대표님:</strong> 살짝 미소, 쓸쓸하지만 긍정. 마지막 질문만 받고 <strong style="color:#15803d">길게 말하게 놔둡니다</strong>. 답변 구성 X, 대본 X.<br><strong style="color:#dc2626">PD는 추가 질문 금지. 10초+ 침묵 그대로 버팁니다.</strong></div>
+<div class="q-card-ok">✓ 키워드: <code>남의 인연</code> · <code>혼자 집</code> · <code>안 긁은 복권</code> (콜백)</div>
+<div class="q-card-doubt">⚠️ "안 긁은 복권"은 마지막에만, 진심으로. 가볍게 던지면 효과 0.</div>
+</div>
+
 
 ---
 

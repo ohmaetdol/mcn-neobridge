@@ -64,6 +64,33 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR','App
 @media(min-width:640px){body{font-size:16px}.hero{padding:28px 32px}.hero-title{font-size:26px}.main{padding:28px 24px 64px}.md h2{font-size:22px}.md p,.md li{font-size:15px}.tw table{font-size:14px}}
 @media(max-width:480px){.header{padding:0 12px;gap:8px}.header-title{font-size:13px}.header-ch{display:none}.tab{padding:0 10px;font-size:11px}.main{padding:18px 12px 48px}.hero{padding:18px 16px}.hero-title{font-size:19px}.hero-stats{grid-template-columns:repeat(2,1fr)}.md h2{font-size:17px;margin:30px 0 12px}.md h3{font-size:14px}.tw table{font-size:12px}.tw td,.tw th{padding:7px 9px}}
 @media print{.header,.tab-bar,.prog{display:none!important}.main{margin:0;padding:20px;max-width:100%}.tw{overflow:visible;border:none}.tw table{font-size:11px}}
+.md .q-card{background:#fff;border-radius:14px;padding:20px;margin:14px 0;border:1px solid var(--border);border-left:4px solid #0064ff;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+.md .q-card.emotion{border-left-color:#dc2626}
+.md .q-card.system{border-left-color:#15803d}
+.md .q-card.cta{border-left-color:#b45309}
+.md .q-card.peak{border-left-color:#6d28d9}
+.md .q-card-header{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.md .q-card-num{width:30px;height:30px;background:#0064ff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;flex-shrink:0}
+.md .q-card.emotion .q-card-num{background:#dc2626}
+.md .q-card.system .q-card-num{background:#15803d}
+.md .q-card.cta .q-card-num{background:#b45309}
+.md .q-card.peak .q-card-num{background:#6d28d9}
+.md .q-card-tc{font-size:11px;font-weight:700;color:#8b95a1}
+.md .q-card-tag{font-size:11px;font-weight:700;padding:3px 9px;border-radius:5px;background:#e8f1ff;color:#0064ff}
+.md .q-card.emotion .q-card-tag{background:#fef2f2;color:#dc2626}
+.md .q-card.system .q-card-tag{background:#f0fdf4;color:#15803d}
+.md .q-card.cta .q-card-tag{background:#fef3c7;color:#b45309}
+.md .q-card.peak .q-card-tag{background:#f3e8ff;color:#6d28d9}
+.md .q-card-question{font-size:15px;font-weight:800;line-height:1.6;margin:8px 0 12px;color:#191f28;word-break:keep-all}
+.md .q-card-pd{font-size:13px;color:#4e5968;line-height:1.75;padding:12px 14px;background:#f8f9fa;border-radius:8px;margin-bottom:8px;word-break:keep-all}
+.md .q-card-ok{font-size:12px;font-weight:700;color:#15803d;padding:8px 12px;background:#f0fdf4;border-radius:6px;margin-top:6px;word-break:keep-all}
+.md .q-card-doubt{font-size:12px;font-weight:700;color:#6d28d9;margin-top:6px;padding:8px 12px;background:#f3e8ff;border-radius:6px;word-break:keep-all}
+.md .sec-hdr{color:#fff;padding:14px 18px;border-radius:10px;margin:28px 0 14px;font-weight:800;font-size:15px;background:#0064ff;word-break:keep-all}
+.md .sec-hdr.red{background:#dc2626}
+.md .sec-hdr.grn{background:#15803d}
+.md .sec-hdr.org{background:#b45309}
+.md .sec-hdr.purple{background:#6d28d9}
+.md .sec-hdr.dark{background:#191f28}
 </style>
 </head>
 <body>
@@ -337,10 +364,116 @@ const md=String.raw`## [킥오프 시트] 콘텐츠 기획 필수 체크리스�
 ## STEP 6. 질문지 (촬영감독용)
 
 > **원칙 1**: 브이로그 = 상황 속에서 질문. 인터뷰 X.
-> **원칙 2**: 촬영감독 = 시청자 대변자.
+> **원칙 2**: 촬영감독 = "의심하는 시청자 대변자" (한방언니 PD 모드).
 > **원칙 3**: 이세령이 자연스럽게 길게 말하도록. 단답 압박 금지.
+> **원칙 4**: 감정 구간에서만 의심 해제 → 진심 경청.
+
+---
+
+### 매운맛 질문 10선 (Q-Card) — MAIN
+
+> **PD는 "의심하는 사람" 모드.** 시청자를 대변하여 의심, 설득되면 시청자도 설득됨.
+> 모두의지인/한방언니 DNA 적용: "제발", "반드시 걸러야", "결혼은 현실이에요", "PD님 생각했을 때 어때요?" 계열 대사 추출.
+>
+> **X 나쁜 질문:** "1000만 원 회원권이 있으시다면서요?"
+> **O 좋은 질문:** "이 카드 한 장이 진짜 1000만 원이에요? 한 명 만날 때마다 30만 원씩 빠진다고요?"
+
+<div class="sec-hdr">ACT 1 — 메이크업 / 카페 (0~3분 · 캐릭터 진입)</div>
+
+<div class="q-card">
+<div class="q-card-header"><div class="q-card-num">01</div><div class="q-card-tc">TC 00:30 · L1 메이크업룸</div><div class="q-card-tag">풀세팅 루틴</div></div>
+<div class="q-card-question">"결정사 대표는 이렇게 풀세팅 받고 출근해야 돼요? 본인이 똥손이라서 메이크업 받는다고요?"</div>
+<div class="q-card-pd">PD: 편안한 톤, 자학 개그 유도. 메이크업 도구 클로즈업 → 거울 속 이세령 → 카메라 보는 순간까지 자연스러운 전환. 인사 0회.</div>
+<div class="q-card-ok">OK 기준: "저 진짜 똥손이에요" 멘트 + 자연스러운 거울/손 인서트</div>
+<div class="q-card-doubt">MC 의심: "9시에 일어나서 12시 출근이라고요? 야행성이에요?"</div>
+</div>
+
+<div class="q-card">
+<div class="q-card-header"><div class="q-card-num">02</div><div class="q-card-tc">TC 02:00 · [경유] 단골 카페</div><div class="q-card-tag">일 중독 혼잣말</div></div>
+<div class="q-card-question">"(뒤에서 조용히) 지금 보고 있는 분 어떤 분이세요? 오늘 누구 매칭 생각하고 계세요?"</div>
+<div class="q-card-pd">PD: 카메라 의식 X, B-roll 누적 모드. 창가 자리 + 종이 회원 프로필(가림) 훑기 + 혼잣말 독백. 사찍남식 "외부 액션 → 내면 성찰" 전환 워밍업.</div>
+<div class="q-card-ok">OK 기준: 자연스러운 혼잣말 1~2문장 + 한숨 or 미소</div>
+</div>
+
+<div class="sec-hdr red">ACT 2 — 0초 후크 (3~5분 · 영상의 심장)</div>
+
+<div class="q-card emotion">
+<div class="q-card-header"><div class="q-card-num">03</div><div class="q-card-tc">TC 03:00 · L2 사무실 책상</div><div class="q-card-tag">0초 후크</div></div>
+<div class="q-card-question">"본인 소개 한 마디 부탁드려요. 인사 없이, 다짜고짜."</div>
+<div class="q-card-pd">PD: <strong style="color:#dc2626">영상의 심장.</strong> 풀세팅 정면. "결정사 대표인데, 30살에 아직 결혼 못 한 노처녀예요" — 5초 안에 자연스럽게 나와야. 무표정 직설 + 살짝 자학. MC는 뒤에서 카메라만 잡기. 이 한 문장이 썸네일/제목과 100% 매치.</div>
+<div class="q-card-ok">OK 기준: <code>결정사 대표</code> + <code>30살</code> + <code>노처녀</code> 3키워드 모두 포함, 5초 이내</div>
+<div class="q-card-doubt">⚠️ 절대 금지: "안녕하세요" / 정형문 소개 / 웃음 / 카메라 의식</div>
+</div>
+
+<div class="sec-hdr purple">ACT 3 — 인생 스토리 (3~5분 · 바닥 서사 PEAK 1)</div>
+
+<div class="q-card peak">
+<div class="q-card-header"><div class="q-card-num">04</div><div class="q-card-tc">TC 04:30 · L2 사무실</div><div class="q-card-tag">90kg 반지하 시절</div></div>
+<div class="q-card-question">"본인은 왜 결혼 못 했어요? 어디 출신이에요? 근데 고등학교 때 90kg였다고요? 진짜요?"</div>
+<div class="q-card-pd">PD: 시청자 대변자 모드. "왜 결혼 못 했어요?" 직격. 이세령은 담담하게 회상 톤. 과거 사진 인서트(대표님 동의 시) 준비. <strong>90kg → 반지하 → 폭식</strong> 연쇄가 자연스럽게 나오면 카메라 끊지 말 것.</div>
+<div class="q-card-ok">OK 기준: 대구 + 노현정 + 집안 기울음 + 반지하 + 90kg 키워드 전부 등장</div>
+<div class="q-card-doubt">MC 의심 (한방언니 DNA): "아니 근데, 90kg면 거의 2배잖아요. 그게 어떻게 가능해요?"</div>
+</div>
+
+<div class="q-card peak">
+<div class="q-card-header"><div class="q-card-num">05</div><div class="q-card-tc">TC 05:30 · L2 사무실</div><div class="q-card-tag">편입 7번 → 연대 (간절함)</div></div>
+<div class="q-card-question">"편입을 7번이나 떨어졌다고요? 그때 어떻게 버텼어요? 근데 결국 연세대 가셨잖아요. 어떻게 된 거예요?"</div>
+<div class="q-card-pd">PD: 진지 톤으로 전환. <strong style="color:#6d28d9">눈물 살짝 올라와도 카메라 그대로.</strong> 신촌 편입학원 거리 스틸 인서트 준비. "보름달에 10년 빌었다" "연금술사" 이야기 자연스럽게 나오면 벅차오름으로 전환.</div>
+<div class="q-card-ok">OK 기준: 수능 망함 + 영남대 + 편입 7번 + 신촌 눈물 + 8번째 합격 + 연금술사</div>
+<div class="q-card-doubt">MC 의심: "7번 떨어졌는데 계속 도전한 이유가 뭐예요? 포기가 안 됐어요?"</div>
+</div>
+
+<div class="sec-hdr org">ACT 4 — 가격 폭로 (7~11분 · 진정성 PEAK 2)</div>
+
+<div class="q-card emotion">
+<div class="q-card-header"><div class="q-card-num">06</div><div class="q-card-tc">TC 07:30 · L3 베스트클래스</div><div class="q-card-tag">1000만 원 카드 폭로</div></div>
+<div class="q-card-question">"(가격 카드 보여주며) 이 카드 한 장이 얼마예요? 진짜요?? 한 명 만날 때마다 30만 원씩 차감된다고요?"</div>
+<div class="q-card-pd">PD: 한방언니식 단계적 숫자 빌드업. <strong>가격 카드 클로즈업 필수.</strong> 1000만 → 30만(차감) → 165만(4:4) 단계적 공개. MC는 매 숫자마다 "그러면..." 리액션. 이세령은 <strong style="color:#b45309">당당하게</strong>, 부끄럽지 않게.</div>
+<div class="q-card-ok">OK 기준: 1000만/30만/165만 3숫자 모두 공개 + 카드 클로즈업 인서트</div>
+<div class="q-card-doubt">MC 의심: "1000만 원이면 아파트 보증금인데, 결혼 못 할 수도 있잖아요?"</div>
+</div>
+
+<div class="q-card emotion">
+<div class="q-card-header"><div class="q-card-num">07</div><div class="q-card-tc">TC 09:00 · L3 베스트클래스 · <strong style="color:#dc2626">영상 감정 핵심</strong></div><div class="q-card-tag">한 달 매출 150만 원</div></div>
+<div class="q-card-question">"그런데 대표님 한 달 매출은 어떻게 되세요? 최악의 달엔 얼마였어요? 그거 진짜예요? 빈말 아니고요? 그런데도 왜 계속해요?"</div>
+<div class="q-card-pd"><strong style="color:#dc2626">PD: 이 답변이 영상 전체의 감정 핵심.</strong> 모두의지인식 "제발" 톤. MC가 믿지 못하는 리액션. 이세령 표정 4K 크롭. 눈물/침묵 나오면 절대 서두르지 마라. 카메라 2대 클로즈업.<br><br><strong style="color:#dc2626">⚠️ 45~50번 구간(=씬 07) 리테이크 절대 금지. 첫 테이크 그대로.</strong></div>
+<div class="q-card-ok">OK 기준: "150만 원" 숫자 + "사실 저 무서워요" 멘트 + 그럼에도 계속하는 이유</div>
+<div class="q-card-doubt">MC 의심 (모두의지인 DNA): "제발 솔직히 말해주세요. 진짜 150만 원밖에 안 남아요? 빈말 아니고요?"</div>
+</div>
+
+<div class="sec-hdr grn">ACT 5 — 솔로 독백 (13분 · 카타르시스 PEAK 3)</div>
+
+<div class="q-card peak">
+<div class="q-card-header"><div class="q-card-num">08</div><div class="q-card-tc">TC 13:00 · L2 사무실 복귀</div><div class="q-card-tag">회원 메시지 리액션 + 독백</div></div>
+<div class="q-card-question">"(PD가 뒤에서 조용히) 지금 온 문자 누구예요? 기억에 남는 회원 한 명만 떠올려 보세요. 그 사람 지금 어떻게 살고 있어요?"</div>
+<div class="q-card-pd"><strong>씬 구조 (사찍남 리얼리티 패턴):</strong><br>① 사무실 복귀 → 책상 앉음 → 핸드폰 진동<br>② 실제 회원 문자/청첩장 확인 (화면 가림 처리)<br>③ 잠깐 미소 or 한숨 → 핸드폰 내려놓음<br>④ <strong style="color:#6d28d9">카메라 정면 응시 3초 침묵</strong> (사찍남 "숨 고르기")<br>⑤ 혼잣말처럼 독백 (톤 낮춤, 진심)<br>⑥ 책상 위 청첩장/감사카드로 팬 이동 (B-roll)<br><br><strong>PD:</strong> 재질문 없음. 침묵 그대로. 카메라 정면 응시 비율 90% 이상.</div>
+<div class="q-card-ok">OK 기준: 실제 회원 스토리 1개 + "계속하게 돼요" 톤 + 3초 침묵 확보</div>
+<div class="q-card-doubt">⚠️ D-1까지 대표님이 회원 메시지 1~2개 선별 필수 (개인정보 가림 협의)</div>
+</div>
+
+<div class="q-card cta">
+<div class="q-card-header"><div class="q-card-num">09</div><div class="q-card-tc">TC 13:30 · L2 사무실</div><div class="q-card-tag">본인한테 오는 문자</div></div>
+<div class="q-card-question">"(혼잣말처럼) 본인한테는 언제 그런 문자가 올까요?"</div>
+<div class="q-card-pd">PD: 마지막 질문 후 완전 침묵. 이세령이 울어도, 웃어도, 10초 침묵해도 OK. 카메라 그대로 유지.</div>
+<div class="q-card-ok">OK 기준: 혼잣말 톤 + 톤 낮춤 + 자연스러운 감정 노출</div>
+</div>
+
+<div class="sec-hdr dark">ENDING — 식당 외부 (14~15분 · 클로징)</div>
+
+<div class="q-card cta">
+<div class="q-card-header"><div class="q-card-num">10</div><div class="q-card-tc">TC 14:00 · L4 식당 외부 · 해질녘</div><div class="q-card-tag">안 긁은 복권 — 채널 시그니처</div></div>
+<div class="q-card-question">"오늘 하루 어땠어요? 오늘도 남의 인연 만들어주고 혼자 집 가는 거잖아요. 근데 괜찮아요?"</div>
+<div class="q-card-pd">PD: 마지막 질문 하나만. 답변 구성 X, 대본 X, <strong style="color:#15803d">길게 말하게 놔둠</strong>. 추가 질문 절대 금지. 10초+ 침묵 그대로 버티기. 와이드샷 + 백라이트 (석양).</div>
+<div class="q-card-ok">OK 기준: <code>남의 인연</code> + <code>혼자 집</code> + <code>안 긁은 복권</code> 3키워드 자연 등장</div>
+<div class="q-card-doubt">⚠️ "안 긁은 복권"은 마지막에만, 진심으로. 가볍게 던지면 효과 0.</div>
+</div>
+
+---
+
+### 전체 63개 질문지 (백업 레퍼런스)
+
+> **아래 63개는 Q-Card 10선이 막힐 때 참고용.** 매운맛 10선이 메인.
 > **태그**: [후킹] [위기장치] [감정이입] [반론] [시청자대리] [재후킹] [마무리]
-> **전체**: 63개. 상황에 맞게 선택.
 
 ---
 
