@@ -95,6 +95,10 @@
   }
   .filter-btn.reset:hover,
   .filter-btn.reset:active { color: var(--text); border-color: var(--text); }
+  .filter-btn.export {
+    flex: 0 0 auto; color: var(--blue); border-color: var(--blue);
+  }
+  .filter-btn.export:active { background: var(--blue); color: #fff; }
 
   main { padding: 14px 14px 40px; }
 
@@ -254,6 +258,7 @@
       <button class="filter-btn active" data-filter="all">전체</button>
       <button class="filter-btn" data-filter="todo">미완료</button>
       <button class="filter-btn" data-filter="done">완료</button>
+      <button class="filter-btn export" id="exportBtn">Export</button>
       <button class="filter-btn reset" id="resetBtn">초기화</button>
     </div>
   </div>
@@ -536,6 +541,56 @@ document.getElementById('resetBtn').addEventListener('click', () => {
     render();
     showToast('초기화 완료');
   }
+});
+
+document.getElementById('exportBtn').addEventListener('click', () => {
+  const exportData = {
+    schema_version: '1.0',
+    performer: 'aneon-seryeong',
+    episode: 'shoot-0412',
+    channel: 'gyeoljeongsa',
+    exported_at: new Date().toISOString(),
+    storage_key: STORAGE_KEY,
+    total_questions: 0,
+    total_checked: 0,
+    usage_rate_pct: 0,
+    locations: [],
+  };
+
+  for (const loc of LOCATIONS) {
+    const realQs = loc.questions.filter(q => q.n > 0);
+    const checkedQs = realQs.filter(q => state.checks[loc.id + ':' + q.n]);
+    exportData.total_questions += realQs.length;
+    exportData.total_checked += checkedQs.length;
+    exportData.locations.push({
+      id: loc.id,
+      title: loc.title,
+      time: loc.time,
+      total: realQs.length,
+      checked: checkedQs.length,
+      rate_pct: realQs.length > 0 ? Math.round(checkedQs.length / realQs.length * 1000) / 10 : 0,
+      checked_questions: checkedQs.map(q => ({
+        n: q.n,
+        tag: q.tag,
+        q: q.q.replace(/\n+/g, ' ').replace(/\*\*/g, ''),
+      })),
+    });
+  }
+  exportData.usage_rate_pct = exportData.total_questions > 0
+    ? Math.round(exportData.total_checked / exportData.total_questions * 1000) / 10
+    : 0;
+
+  const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const dateStr = new Date().toISOString().slice(0, 10);
+  a.href = url;
+  a.download = `${exportData.performer}_${exportData.episode}_${dateStr}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast(`Export 완료 (${exportData.total_checked}/${exportData.total_questions})`);
 });
 
 function showToast(msg) {

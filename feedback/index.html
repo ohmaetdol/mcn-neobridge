@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>기획부 피드백 대시보드 · Neobridge</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  :root {
+    --navy: #0A1628;
+    --navy-m: #132B4D;
+    --navy-l: #1F4680;
+    --gold: #D4A017;
+    --gold-b: #FFB800;
+    --cream: #FFFBEA;
+    --gray: #F8F9FA;
+    --bg: #ffffff;
+    --text: #0A1628;
+    --mute: #6b7280;
+    --border: #e5e7eb;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg); color: var(--text);
+    font-family: 'Pretendard Variable', Pretendard, -apple-system, sans-serif;
+    font-size: 15px; line-height: 1.6;
+  }
+  header {
+    background: var(--navy); color: #fff;
+    padding: 28px 20px 24px;
+    border-bottom: 4px solid var(--gold);
+  }
+  header .wrap { max-width: 1000px; margin: 0 auto; }
+  header h1 {
+    margin: 0 0 6px; font-size: 22px; font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+  header .sub { color: var(--gold-b); font-size: 13px; font-weight: 600; }
+  header .ts { color: #9ca3af; font-size: 12px; margin-top: 4px; }
+
+  main { max-width: 1000px; margin: 0 auto; padding: 20px 20px 80px; }
+
+  .summary-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+    margin: 24px 0;
+  }
+  .stat-card {
+    background: var(--cream);
+    border: 2px solid var(--gold);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .stat-card .label {
+    font-size: 11px; font-weight: 800; color: var(--navy);
+    letter-spacing: 1px; text-transform: uppercase;
+  }
+  .stat-card .value {
+    font-size: 28px; font-weight: 900; color: var(--navy);
+    margin-top: 4px; font-variant-numeric: tabular-nums;
+  }
+  .stat-card .hint { font-size: 12px; color: var(--mute); margin-top: 2px; }
+
+  section {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 22px;
+    margin-bottom: 18px;
+  }
+  section h2 {
+    margin: 0 0 14px;
+    font-size: 17px; font-weight: 800;
+    color: var(--navy);
+    display: flex; align-items: center; gap: 10px;
+  }
+  section h2::before {
+    content: "";
+    width: 4px; height: 18px; background: var(--gold);
+    border-radius: 2px;
+  }
+  section p.desc {
+    font-size: 13px; color: var(--mute); margin: -4px 0 14px;
+  }
+
+  table {
+    width: 100%; border-collapse: collapse;
+    font-size: 13px;
+  }
+  th {
+    text-align: left; padding: 10px 12px;
+    background: var(--gray);
+    font-weight: 700; color: var(--navy);
+    border-bottom: 2px solid var(--gold);
+    font-size: 12px;
+  }
+  td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  tr:last-child td { border-bottom: none; }
+
+  .rate-bar {
+    display: inline-block;
+    background: var(--cream);
+    height: 18px;
+    border-radius: 4px;
+    position: relative;
+    min-width: 80px;
+  }
+  .rate-bar .fill {
+    background: var(--gold);
+    height: 100%;
+    border-radius: 4px;
+  }
+  .rate-bar .text {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 800; color: var(--navy);
+  }
+
+  .chip {
+    display: inline-block;
+    background: var(--cream);
+    border: 1px solid var(--gold);
+    color: var(--navy);
+    padding: 3px 10px;
+    border-radius: 999px;
+    font-size: 12px; font-weight: 700;
+    margin: 2px 4px 2px 0;
+  }
+  .chip.ban {
+    background: var(--navy); color: var(--gold-b);
+    border-color: var(--navy);
+  }
+
+  .empty {
+    padding: 16px; background: var(--gray);
+    border-radius: 8px; color: var(--mute);
+    font-size: 13px; text-align: center;
+  }
+
+  .footer {
+    color: var(--mute); font-size: 12px; text-align: center;
+    padding: 20px; margin-top: 20px;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 640px) {
+    .summary-grid { grid-template-columns: 1fr; }
+    header h1 { font-size: 18px; }
+    section { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>기획부 피드백 대시보드</h1>
+    <div class="sub">SAJJIKNAM × GYEOLJEONGSA · Feedback Loop</div>
+    <div class="ts">업데이트: 2026-04-12 01:57</div>
+  </div>
+</header>
+
+<main>
+
+  <div class="summary-grid">
+    <div class="stat-card">
+      <div class="label">Thumbnail Tests</div>
+      <div class="value">0/1</div>
+      <div class="hint">완료 / 등록</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Ban Keywords</div>
+      <div class="value">4</div>
+      <div class="hint">4개 편집 분석</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Question Usage</div>
+      <div class="value">0%</div>
+      <div class="hint">0/0</div>
+    </div>
+  </div>
+
+  <!-- 1. Thumbnail A/B -->
+  <section>
+    <h2>1. 썸네일 A/B/C 승률</h2>
+    <p class="desc">등록된 썸네일 테스트 1개 중 0개 완료. 컨셉별 승률.</p>
+    <div class="empty">아직 완료된 테스트 없음. 영상 공개 후 <code>collect_thumbnail_ab.py update</code>로 승자 등록하면 여기에 표시됩니다.</div>
+  </section>
+
+  <!-- 2. Ban Patterns -->
+  <section>
+    <h2>2. 편집 → 기획부 Ban 패턴</h2>
+    <p class="desc">편집코치 4개 프로젝트에서 drop_alert 7개 세그먼트 분석. 3회+ 반복 키워드는 다음 기획서 원천 차단 대상.</p>
+    <div style="margin-bottom:14px"><strong style="color:#0A1628">🚫 Ban 리스트:</strong><br>
+<span class="chip ban">잘하는</span>
+<span class="chip ban">이게</span>
+<span class="chip ban">내년에</span>
+<span class="chip ban">없으면</span>
+</div>
+<table><tr><th>키워드</th><th>빈도</th><th>상태</th></tr>
+<tr><td><strong>잘하는</strong></td><td>6</td><td>🔴 BAN</td></tr>
+<tr><td><strong>이게</strong></td><td>3</td><td>🔴 BAN</td></tr>
+<tr><td><strong>내년에</strong></td><td>3</td><td>🔴 BAN</td></tr>
+<tr><td><strong>없으면</strong></td><td>3</td><td>🔴 BAN</td></tr>
+<tr><td><strong>통장에</strong></td><td>2</td><td>⚠️ 주의</td></tr>
+<tr><td><strong>계속</strong></td><td>2</td><td>⚠️ 주의</td></tr>
+<tr><td><strong>있었어요</strong></td><td>2</td><td>⚠️ 주의</td></tr>
+<tr><td><strong>안에</strong></td><td>2</td><td>⚠️ 주의</td></tr>
+<tr><td><strong>그걸</strong></td><td>2</td><td>⚠️ 주의</td></tr>
+<tr><td><strong>거의</strong></td><td>2</td><td>⚠️ 주의</td></tr>
+<tr><td><strong>판매가로</strong></td><td>2</td><td>⚠️ 주의</td></tr>
+<tr><td><strong>치면</strong></td><td>2</td><td>⚠️ 주의</td></tr>
+<tr><td><strong>사업이</strong></td><td>2</td><td>⚠️ 주의</td></tr>
+<tr><td><strong>화장품도</strong></td><td>2</td><td>⚠️ 주의</td></tr>
+<tr><td><strong>제일</strong></td><td>2</td><td>⚠️ 주의</td></tr>
+</table>
+  </section>
+
+  <!-- 3. Question Usage -->
+  <section>
+    <h2>3. 질문지 실사용률</h2>
+    <p class="desc">0개 촬영 Export 집계. 총 0개 질문 풀 중 0개 실사용 (0.0%).</p>
+    <div class="empty">아직 Export된 데이터 없음.<br>촬영 후 checklist.html의 <strong>Export</strong> 버튼 클릭 → JSON 다운로드 → <code>memory/feedback/question_exports/</code> 에 복사.</div>
+  </section>
+
+  <div class="footer">
+    <div>Neobridge 기획부 · 피드백 루프 v1.0</div>
+    <div>scripts/feedback/build_dashboard.py</div>
+  </div>
+
+</main>
+</body>
+</html>
