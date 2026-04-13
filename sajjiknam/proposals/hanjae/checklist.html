@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#ffffff">
+<title>사찍남 · 한희재 주도주 · PD 촬영 체크리스트</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  :root {
+    --bg: #ffffff;
+    --card: #ffffff;
+    --card2: #f8f9fb;
+    --border: #e5e7eb;
+    --border2: #f0f2f5;
+    --text: #111827;
+    --mute: #6b7280;
+    --dim: #9ca3af;
+    --hint: #adb5bd;
+    --navy: #0A1628;
+    --gold: #D4A017;
+    --gold-b: #FFB800;
+    --cream: #FFFBEA;
+    --dark: #1f2937;
+    --done: #D4A017;
+    --accent: #b45309;
+    --shadow-sm: 0 1px 2px rgba(17,24,39,0.04);
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-size: 15px; line-height: 1.55;
+    overscroll-behavior-y: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  body { padding-bottom: 80px; }
+
+  .header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,0.94);
+    backdrop-filter: saturate(180%) blur(14px);
+    -webkit-backdrop-filter: saturate(180%) blur(14px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 16px 10px;
+  }
+  .header h1 {
+    font-size: 15px; font-weight: 800; margin: 0 0 4px;
+    letter-spacing: -0.02em;
+    color: var(--navy);
+  }
+  .header .sub {
+    color: var(--mute); font-size: 12px; margin-bottom: 10px;
+  }
+  .progress-wrap {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+  }
+  .progress-bar {
+    flex: 1; height: 8px; background: var(--card2);
+    border-radius: 999px; overflow: hidden;
+    border: 1px solid var(--border2);
+  }
+  .progress-fill {
+    height: 100%; background: var(--gold);
+    width: 0%; transition: width 0.3s ease;
+    border-radius: 999px;
+  }
+  .progress-text {
+    font-size: 13px; font-weight: 700; color: var(--text);
+    min-width: 84px; text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .filter-row {
+    display: flex; gap: 6px; flex-wrap: wrap;
+  }
+  .filter-btn {
+    flex: 1; min-width: 0;
+    background: var(--card); border: 1px solid var(--border);
+    color: var(--mute); padding: 9px 10px;
+    border-radius: 8px; font-size: 12px; font-weight: 700;
+    cursor: pointer; transition: all 0.15s;
+    font-family: inherit;
+  }
+  .filter-btn:active { transform: scale(0.97); }
+  .filter-btn.active {
+    background: var(--navy); border-color: var(--navy); color: #fff;
+  }
+  .filter-btn.reset {
+    flex: 0 0 auto; color: var(--dim);
+  }
+  .filter-btn.reset:hover,
+  .filter-btn.reset:active { color: var(--text); border-color: var(--text); }
+  .filter-btn.export {
+    flex: 0 0 auto; color: var(--gold); border-color: var(--gold);
+  }
+  .filter-btn.export:active { background: var(--gold); color: #fff; }
+
+  main { padding: 14px 14px 40px; }
+
+  .loc-group { margin-bottom: 20px; }
+  .loc-header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    font-weight: 800; font-size: 14px;
+    margin-bottom: 10px; color: var(--navy);
+    letter-spacing: -0.01em;
+  }
+  .loc-header .loc-title { flex: 1; min-width: 0; }
+  .loc-header .loc-time {
+    font-size: 11px; font-weight: 600; color: var(--mute);
+    margin-left: 6px;
+  }
+  .loc-header .loc-count {
+    font-size: 12px; font-weight: 700; color: var(--mute);
+    background: var(--card2); padding: 3px 9px;
+    border-radius: 999px; font-variant-numeric: tabular-nums;
+    border: 1px solid var(--border);
+  }
+
+  .q {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; margin-bottom: 8px;
+    overflow: hidden; transition: all 0.15s;
+    box-shadow: var(--shadow-sm);
+  }
+  .q.done {
+    background: var(--card2);
+    opacity: 0.62;
+  }
+  .q-row {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 14px;
+    cursor: pointer; user-select: none;
+    min-height: 52px;
+  }
+  .q-check {
+    flex-shrink: 0;
+    width: 24px; height: 24px;
+    border: 2px solid var(--dim);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+    margin-top: 1px;
+    background: #fff;
+  }
+  .q.done .q-check {
+    background: var(--gold); border-color: var(--gold);
+  }
+  .q-check::after {
+    content: ""; width: 6px; height: 11px;
+    border: solid #fff; border-width: 0 2px 2px 0;
+    transform: rotate(45deg) translate(-1px, -1px);
+    opacity: 0;
+  }
+  .q.done .q-check::after { opacity: 1; }
+
+  .q-body { flex: 1; min-width: 0; }
+  .q-meta {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 6px; flex-wrap: wrap;
+  }
+  .q-num {
+    background: var(--card2); color: var(--text);
+    font-size: 11px; font-weight: 800;
+    padding: 2px 8px; border-radius: 5px;
+    font-variant-numeric: tabular-nums;
+    border: 1px solid var(--border);
+  }
+  .q.done .q-num { background: var(--gold); color: #fff; border-color: var(--gold); }
+  .q-tag {
+    color: var(--mute); font-size: 12px; font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .q-text {
+    font-size: 14px; line-height: 1.65;
+    color: var(--text); word-break: keep-all;
+    white-space: pre-wrap;
+  }
+  .q.done .q-text {
+    text-decoration: line-through;
+    text-decoration-color: var(--dim);
+    color: var(--mute);
+  }
+
+  .q-text strong {
+    color: var(--accent);
+    font-weight: 800;
+    background: #fef3c7;
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+
+  .q-hint {
+    margin-top: 8px;
+    padding: 8px 10px;
+    background: #fafbfc;
+    border-left: 2px solid #e5e7eb;
+    border-radius: 0 4px 4px 0;
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--hint);
+    font-weight: 500;
+    word-break: keep-all;
+    white-space: pre-wrap;
+  }
+  .q-hint::before {
+    content: "유도 답안 · ";
+    font-size: 10px;
+    font-weight: 700;
+    color: #c1c7cd;
+    letter-spacing: 0.02em;
+  }
+  .q.done .q-hint { opacity: 0.5; }
+
+  .q.hidden { display: none; }
+  .loc-group.empty { display: none; }
+
+  .toast {
+    position: fixed; left: 50%; bottom: 24px;
+    transform: translateX(-50%) translateY(20px);
+    background: #111827; color: #fff;
+    padding: 10px 20px; border-radius: 999px;
+    font-size: 13px; font-weight: 600;
+    opacity: 0; transition: all 0.3s;
+    pointer-events: none;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .toast.show {
+    opacity: 1; transform: translateX(-50%) translateY(0);
+  }
+
+  @media (min-width: 768px) {
+    body { font-size: 16px; }
+    main { max-width: 760px; margin: 0 auto; padding: 18px 20px 60px; }
+    .header { padding: 16px 20px 12px; }
+    .header > div { max-width: 760px; margin: 0 auto; }
+    .header h1 { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>사찍남 · 한희재 주도주 · PD 촬영 체크리스트</h1>
+    <div class="sub">5개 장소 · 120개 질문 · 체크 자동 저장</div>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-text" id="progressText">0/0 (0%)</div>
+    </div>
+    <div class="filter-row">
+      <button class="filter-btn active" data-filter="all">전체</button>
+      <button class="filter-btn" data-filter="todo">미완료</button>
+      <button class="filter-btn" data-filter="done">완료</button>
+      <button class="filter-btn export" id="exportBtn">Export</button>
+      <button class="filter-btn reset" id="resetBtn">초기화</button>
+    </div>
+  </div>
+</div>
+
+<main id="main"></main>
+
+<div class="toast" id="toast">저장됨</div>
+
+<script>
+const STORAGE_KEY = 'sajjiknam-hanjae-checklist-v1';
+
+const LOCATIONS = [
+  {
+    id: 'L1', color: 'L1',
+    title: 'L1 자택 거실',
+    time: '0:00~3:00 · N페이+선제방어+시골+욕구',
+    questions: [
+      { n: 1, tag: 'HOOK·실물', q: '대표님, 지금 N페이 앱 한번 열어봐도 될까요? 총자산이 얼마예요?', hint: '0~15초 인서트. N페이 1,005,850,436원. LF8 Wealth.' },
+      { n: 2, tag: '선제 방어 1', q: '"부모 돈으로 시작한 거 아니에요?" 댓글 많이 달릴 텐데, 부모님 직업이 어떻게 되세요?', hint: '의심형 35% 1위 의심 차단. 아버지 건설노동자, 어머니 마트 캐셔.' },
+      { n: 3, tag: '첫 월급', q: '첫 월급이 정확히 얼마였어요?', hint: '133만원 사실 확정. 검산 가능 수치.' },
+      { n: 4, tag: '유산 확인', q: '부모님께 받은 종잣돈이나 유산이 있나요?', hint: '"유산 0원" 한 번 더 못박기.' },
+      { n: 5, tag: '최강 후킹', q: '리딩방 사기로 정확히 얼마 잃으셨어요? 시기는요?', hint: '2,500만원 사전 확정. 과장 NO. 킬러 질문.' },
+      { n: 6, tag: '돈 출처', q: '그 돈은 어떻게 모은 돈이었어요?', hint: '"시급 5천원 알바로 모은 돈" 연결.' },
+      { n: 7, tag: '가족 반응', q: '사기 당했을 때 부모님께 말씀드렸어요?', hint: '인간적 디테일. 가족 관계.' },
+      { n: 8, tag: '현재 감정', q: '지금 다시 리딩방 광고 보면 어떤 생각이 드세요?', hint: '현재 시점 감정. 회복 서사.' },
+      { n: 9, tag: '출신', q: '충북 어디 출신이세요? 어떤 동네였어요?', hint: '에피파니 1: 배경. 지역 디테일.' },
+      { n: 10, tag: '투자 영향', q: '시골에서 자란 게 지금 투자에 영향을 줬어요?', hint: '자기 분석. 통찰 유도.' },
+      { n: 11, tag: '친구 진로', q: '동네 친구들은 다 어떤 진로를 갔어요?', hint: '비교 대조. "지방대 친구들의 길".' },
+      { n: 12, tag: '명절', q: '명절에 친척들 모이면 본인 얘기 많이 나와요?', hint: '가족 관점에서 본 자수성가.' },
+      { n: 13, tag: '박탈감', q: '처음 서울 친구들 만났을 때 무슨 생각했어요?', hint: '에피파니 1: 배경. 박탈감. LF8 Status.' },
+      { n: 14, tag: '결핍', q: '충북 시골에서 가장 부족했던 게 뭐였어요?', hint: '결핍 시각화.' },
+      { n: 15, tag: '부모 반응', q: '부모님은 본인 진로에 어떻게 반응하셨어요?', hint: '가족 동의/반대 서사.' },
+      { n: 16, tag: '고향', q: '지금도 고향 자주 가세요?', hint: '현재의 거리감. 회복 정서.' },
+      { n: 17, tag: '숫자 갭', q: '고깃집 알바 시급 5천원이 언제예요? 지금이랑 어떻게 달라요?', hint: '5천원 → 월 5천만원 = 1만배 갭.' },
+      { n: 18, tag: '월급', q: '그때 한 달에 얼마 벌었어요?', hint: '월급 사실 확인.' },
+      { n: 19, tag: '병행', q: '알바하면서 학교는 어떻게 다녔어요?', hint: '학생 신분 + 노동 병행 디테일.' },
+      { n: 20, tag: '에피소드', q: '가장 힘들었던 알바 에피소드 하나만 떠올려주세요.', hint: '구체적 장면. 시각화 재료.' },
+      { n: 21, tag: '생활비', q: '시급 5천원 받을 때 한 달 생활비가 얼마였어요?', hint: '결핍 수치화.' },
+      { n: 22, tag: '욕구', q: '그때 가장 사고 싶었던 게 뭐였어요?', hint: '욕구 트리거. LF8 Comfort.' },
+      { n: 23, tag: '에피파니 2', q: '소개팅 연상女 오피스텔 갔을 때, 첫 인상이 어땠어요?', hint: '에피파니 2: 욕구. 변화 시작점.' },
+      { n: 24, tag: '결심', q: '그때 정확히 뭘 결심했어요?', hint: '결심 명사화.' },
+      { n: 25, tag: '유지', q: '그 결심이 지금까지 유지되고 있어요?', hint: '현재까지 연결.' },
+    ]
+  },
+  {
+    id: 'L2', color: 'L2',
+    title: 'L2 자택 책상',
+    time: '3:00~7:00 · 대학+대기업+리딩방+적금',
+    questions: [
+      { n: 26, tag: '건축과', q: '지방대 건축공학과는 왜 가게 됐어요?', hint: '출발점 합리화.' },
+      { n: 27, tag: '연결고리', q: '건축공학이 지금 투자랑 관계가 있어요?', hint: '예상 외 연결고리.' },
+      { n: 28, tag: '위기장치 1', q: '대외활동 14개 동시에 — 그게 실제로 가능해요? 잠은 잤어요?', hint: '시청자 대리 의심. 위기장치.' },
+      { n: 29, tag: '디테일', q: '잠은 몇 시간 잤어요? 학점은요?', hint: '디테일 강화.' },
+      { n: 30, tag: '최고 활동', q: '14개 중 가장 도움 된 활동 하나만 꼽으면?', hint: '구체화 유도.' },
+      { n: 31, tag: '기회비용', q: '과외 2~300만원 포기한 결정은 후회 안 해요?', hint: '기회비용 정당화.' },
+      { n: 32, tag: '월급', q: '대기업 마케터/영업 시절 월급이 얼마였어요?', hint: '수치 비교 재료.' },
+      { n: 33, tag: '이직', q: '핀테크 PM으로 이직한 결정적 이유가 뭐예요?', hint: '커리어 전환 동기.' },
+      { n: 34, tag: '전문성', q: '핀테크에서 배운 게 투자에 도움 됐어요?', hint: '전문성 입증.' },
+      { n: 35, tag: '퇴사', q: '대기업 퇴사 결정 내릴 때 가족 반응은요?', hint: '가족 갈등 디테일.' },
+      { n: 36, tag: '시련 시작', q: '리딩방을 어떻게 알게 됐어요? 누가 추천했어요?', hint: '에피파니 3: 시련. 입성 계기.' },
+      { n: 37, tag: '첫 투자', q: '처음에 얼마 넣었어요? 한 번에 다 넣은 거예요?', hint: '단계적 손실 시각화.' },
+      { n: 38, tag: '종목', q: '어떤 종목을 추천받았어요?', hint: '디테일. 검증 가능성.' },
+      { n: 39, tag: '공포', q: '손실이 어디서부터 무서워졌어요?', hint: '감정 변곡점.' },
+      { n: 40, tag: '운영자', q: '리딩방 운영자랑 직접 대화한 적 있어요?', hint: '인간적 디테일.' },
+      { n: 41, tag: '적금 신화', q: '정기적금 복리 신화는 누구한테서 배웠어요?', hint: '출처 추적. 사회적 신화 비판.' },
+      { n: 42, tag: '적금 기간', q: '정기적금 얼마 동안 부었어요?', hint: '시간·금액 사실.' },
+      { n: 43, tag: '손절', q: '코로나 폭락 당시 손절 비율이 얼마였어요?', hint: '-40% 사실 확인.' },
+      { n: 44, tag: '3FB 파괴', q: '정기적금 복리 믿었다가 코로나 폭락 맞았잖아요. 그때 주식 완전 포기 안 했어요?', hint: '3FB 파괴: 정기적금=안전. 에피파니 빌드업.' },
+      { n: 45, tag: '주변 압박', q: '주변에서 "주식 그만해라" 안 했어요?', hint: '주변 압박 디테일.' },
+    ]
+  },
+  {
+    id: 'L3', color: 'L3',
+    title: 'L3 노트북 화면',
+    time: '7:00~12:00 · 검은수요일+수익차트+에피파니',
+    questions: [
+      { n: 46, tag: '검은 수요일', q: '2026년 3월 4일 검은 수요일, KOSPI 18% 빠진 그날 — 대표님 계좌 손실률 얼마였어요?', hint: '최강 후킹. -3.2% 답. 커뮤니티 1위.' },
+      { n: 47, tag: '생존 비결', q: '왜 다른 사람들 다 -19% 당할 때 대표님은 안 당했어요? 분산이에요? 기본비중이에요?', hint: '폐쇄형. 답을 받기 위해 끝까지 봄.' },
+      { n: 48, tag: '그날 디테일', q: '그날 정확히 몇 시쯤 시장 보셨어요?', hint: '그날의 디테일. 시각화.' },
+      { n: 49, tag: '매도 충동', q: '그때 매도 충동 안 들었어요?', hint: '인간적 흔들림 인정.' },
+      { n: 50, tag: '분산 비중', q: '분산 비중을 어떻게 가져가시는 거예요?', hint: '실전 노하우.' },
+      { n: 51, tag: '신호', q: '검은 수요일 직전에 뭔가 신호를 보셨어요?', hint: '신호 감지력.' },
+      { n: 52, tag: '매매 사례', q: '폭락장에 들어갔다 나간 종목 하나만 알려주세요.', hint: '구체적 매매 사례.' },
+      { n: 53, tag: '다음 날', q: '검은 수요일 다음 날 행동은 어땠어요?', hint: '위기 직후 대응.' },
+      { n: 54, tag: '빚투 지인', q: '빚투했던 친구나 지인이 있어요? 그들에게 뭐라고 했어요?', hint: '주변 사례. 공감 강화.' },
+      { n: 55, tag: '가정형', q: '만약 그날 -19% 맞았으면 본인 대응은요?', hint: '가정형. 원칙 점검.' },
+      { n: 56, tag: '킬러 구간', q: '지금 화면에서 작년 수익차트 보여주실 수 있어요? (라이브 공개)', hint: '122,865,049원. 돈탐생 패턴. 킬러.' },
+      { n: 57, tag: '종목', q: '작년 한 해 총수익 122,865,049원 — 어떤 종목이 메인이었어요?', hint: '종목 디테일.' },
+      { n: 58, tag: '매매 스타일', q: '매매 횟수가 얼마나 돼요? 단타예요? 장기예요?', hint: '매매 스타일 공개.' },
+      { n: 59, tag: '최고 수익', q: '가장 큰 한 종목 수익이 얼마예요?', hint: '최고 사례.' },
+      { n: 60, tag: '최대 손실', q: '가장 큰 한 종목 손실은요?', hint: '균형 — 손실도 인정.' },
+      { n: 61, tag: '손절 원칙', q: '손실 종목은 어떻게 손절했어요?', hint: '손절 원칙.' },
+      { n: 62, tag: '위기장치 2', q: '이거 한 종목 운빨 아니에요? 매매내역 한번 보여주실 수 있어요?', hint: '위기장치. 운 vs 실력.' },
+      { n: 63, tag: '보유 기간', q: '평균 보유 기간이 얼마나 돼요?', hint: '호흡 공개.' },
+      { n: 64, tag: '매수 기준', q: '매수 타이밍 결정 기준이 뭐예요?', hint: '노하우 시연.' },
+      { n: 65, tag: '매도 기준', q: '매도 타이밍 결정 기준은요?', hint: '노하우 시연 2.' },
+      { n: 66, tag: '시각 증거', q: '지금 ETF 수익률이랑 주도주 수익률 나란히 띄워볼 수 있어요?', hint: '에피파니 5: 깨달음. 시각 증거.' },
+      { n: 67, tag: '3년 비교', q: '3년치 비교하면 차이가 얼마나 나요?', hint: '수치 비교.' },
+      { n: 68, tag: '위기장치 3', q: 'ETF 사도 충분하지 않나요? 왜 굳이 주도주예요?', hint: '위기장치 3. 대안 제시. 차별화.' },
+      { n: 69, tag: '설명', q: '주도주가 뭐예요? ETF랑 어떻게 달라요?', hint: '전문성. 진입장벽 낮추기.' },
+      { n: 70, tag: '비유', q: '초등학생도 알게 설명해주세요.', hint: '비유법 강제. 명료성.' },
+      { n: 71, tag: '에피파니 6', q: '"저점 못 사고 고점 못 판다" — 이거 인정한 게 언제예요?', hint: '에피파니 6: 마인드셋 전환. 깨달음 순간.' },
+      { n: 72, tag: 'Before/After', q: '그 깨달음 이후 어떻게 행동이 바뀌었어요?', hint: 'Before/After 명시.' },
+      { n: 73, tag: '섹터', q: '지금 봐야 할 주도주 섹터가 있다면?', hint: 'AI·반도체·전력. 구체적 조언.' },
+      { n: 74, tag: '확신', q: 'AI·반도체·전력 — 이 셋 중 가장 확신이 큰 건요?', hint: '우선순위 강제.' },
+      { n: 75, tag: '전망', q: '다음 사이클은 어떻게 보세요?', hint: '미래 전망.' },
+    ]
+  },
+  {
+    id: 'L4', color: 'L4',
+    title: 'L4 서재',
+    time: '12:00~17:00 · 책+회계사+권위+감정피크',
+    questions: [
+      { n: 76, tag: '책 메시지', q: '교보문고 베스트셀러 — 책 쓰면서 가장 담고 싶었던 메시지가 뭐예요?', hint: '권위. 실물 책 클로즈업.' },
+      { n: 77, tag: '출간 제안', q: '책 출간 제안은 어떻게 받으셨어요?', hint: '권위 자연 노출.' },
+      { n: 78, tag: '기간', q: '책 한 권 쓰는 데 얼마나 걸렸어요?', hint: '노력 디테일.' },
+      { n: 79, tag: '어려움', q: '책 쓰면서 가장 어려웠던 게 뭐예요?', hint: '인간적 측면.' },
+      { n: 80, tag: '독자 반응', q: '책에서 가장 자주 묻는 질문이 뭐예요?', hint: '독자 반응 시각화.' },
+      { n: 81, tag: '권위 역전', q: '회계사·세무사가 본인한테 자문 받으러 온다고요? 진짜예요?', hint: '권위 역전. B2B 신뢰.' },
+      { n: 82, tag: '디테일', q: '어떤 분들이 와요? 어떤 질문을 해요?', hint: '디테일.' },
+      { n: 83, tag: '답변', q: '그분들한테 무슨 답을 드려요?', hint: '답변 노하우.' },
+      { n: 84, tag: '첫 자문', q: '처음 자문 의뢰 받았을 때 기분이 어땠어요?', hint: '첫 권위 인정 순간.' },
+      { n: 85, tag: '위기장치 4', q: '왜 회계사가 본인한테 묻는 거예요? 그분들이 더 잘 아는 거 아니에요?', hint: '위기장치 4. 권위 역전 강화.' },
+      { n: 86, tag: '현백 강의', q: '현대백화점 강의는 어떻게 시작됐어요?', hint: '외부 권위 1.' },
+      { n: 87, tag: '신한라이프', q: '신한라이프 소속이라고 들었는데, 무슨 일을 해요?', hint: '외부 권위 2.' },
+      { n: 88, tag: '회원 사례', q: '멤버십 운영하면서 가장 인상 깊었던 회원 사례는요?', hint: '사회적 증명.' },
+      { n: 89, tag: '수익 사례', q: '실제로 회원 중 누가 큰 수익 봤어요?', hint: '효과 입증 (가명 사례).' },
+      { n: 90, tag: '모임 차이', q: '멤버십이랑 모임이 다른 거예요?', hint: 'Offer 구조 자연 노출.' },
+      { n: 91, tag: '감정 피크', q: '아까 리딩방 사기 얘기 잠깐 하셨는데, 그날로 돌아가면 어떤 기분이세요?', hint: '감정 피크. 휴먼스토리 19분 패턴.' },
+      { n: 92, tag: '감정 강화', q: '시급 5천원으로 모은 돈이었잖아요. 그게 다 날아갔을 때...', hint: '감정 피크 강화. 정적 + BGM 페이드.' },
+      { n: 93, tag: '가족', q: '그때 가족들에게 말씀드렸어요?', hint: '가족 반응 디테일.' },
+      { n: 94, tag: '후회', q: '가장 크게 후회하는 결정이 뭐였어요?', hint: '후회 정서 노출.' },
+      { n: 95, tag: '일상', q: '그때 잠은 잘 잤어요?', hint: '일상 디테일.' },
+      { n: 96, tag: '친구', q: '친구들에게 어떻게 말씀드렸어요?', hint: '사회적 고립 vs 지지.' },
+      { n: 97, tag: '카타르시스', q: '그 사기 당한 사람한테 지금 만나면 뭐라고 말할 거예요?', hint: '가정형. 카타르시스.' },
+      { n: 98, tag: '철학', q: '그 사건이 본인 투자 철학에 어떤 영향을 줬어요?', hint: '의미 부여.' },
+      { n: 99, tag: '메타 인지', q: '다시 그 시간으로 돌아가도 같은 실수를 할 것 같아요?', hint: '메타 인지.' },
+      { n: 100, tag: '복귀', q: '시골 알바 때의 자신에게 지금 뭐라고 말하고 싶어요?', hint: '카타르시스. 12단계 변화 완료.' },
+    ]
+  },
+  {
+    id: 'L5', color: 'L5',
+    title: 'L5 야외 산책',
+    time: '17:00~22:00 · 자동화+긴박감+CTA',
+    questions: [
+      { n: 101, tag: 'Dream', q: '강아지 산책 중에도 폰이 울리잖아요. 이게 실제로 자동화돼요?', hint: 'Dream Outcome. Value Equation Time/Effort 0.' },
+      { n: 102, tag: '시간', q: '하루에 매매에 쓰는 시간이 얼마나 돼요?', hint: 'Time 수치화.' },
+      { n: 103, tag: '기준', q: '자동화가 가능한 종목 기준이 뭐예요?', hint: '노하우.' },
+      { n: 104, tag: '단점', q: '자동화 라이프의 가장 큰 단점은 뭐예요?', hint: '균형 — 신뢰 강화.' },
+      { n: 105, tag: '강아지', q: '강아지는 언제부터 키우셨어요?', hint: '인간적 디테일.' },
+      { n: 106, tag: '이름', q: '강아지 이름이 뭐예요? 의미가 있어요?', hint: '유머·공감.' },
+      { n: 107, tag: '퇴사', q: '29살에 10억 달성하고 퇴사 결제 눌렀을 때 — 솔직히 무섭지 않았어요?', hint: '인간적 측면. 공감 강화.' },
+      { n: 108, tag: '아침', q: '지금 33살, 아침에 눈 떴을 때 가장 좋은 게 뭐예요?', hint: 'Dream Outcome 디테일.' },
+      { n: 109, tag: '긴박감', q: '사상 최초 예탁금 100조 돌파했다는 거, 보통 사람한테 어떤 의미예요?', hint: '긴박감. Scarcity. AI 시대 부의 사다리.' },
+      { n: 110, tag: 'Loss', q: 'AI 시대에 지금 안 들어가면 어떻게 돼요?', hint: 'Loss Aversion.' },
+      { n: 111, tag: '메타포', q: '부의 사다리가 끊긴다는 게 무슨 뜻이에요?', hint: '메타포 시각화.' },
+      { n: 112, tag: '리스크', q: '지금 시점 가장 큰 리스크는 뭐예요?', hint: '균형 — 리스크도 인정.' },
+      { n: 113, tag: '위기장치 5', q: '솔직히 지금 들어가도 안 늦었어요?', hint: '위기장치 5. 시청자 대리 망설임.' },
+      { n: 114, tag: '실행', q: '만약 지금 다시 시작한다면 뭐부터 할 거예요?', hint: '실행 가이드.' },
+      { n: 115, tag: 'CTA', q: '왜 강의가 아니라 모임이에요? 차이가 뭐예요?', hint: 'Offer 자연 연결. 진입장벽 낮음.' },
+      { n: 116, tag: '활동', q: '모임에서 실제로 뭘 해요?', hint: '활동 디테일.' },
+      { n: 117, tag: '가격', q: '모임 가입하려면 얼마예요? 진입장벽이 어떻게 돼요?', hint: '가격·접근성 명시.' },
+      { n: 118, tag: '회원', q: '모임 회원 평균 나이대가 어떻게 돼요?', hint: '시청자 유사성 확인.' },
+      { n: 119, tag: '변화', q: '모임 가입 후 가장 빨리 변화가 오는 분들의 공통점은요?', hint: '사회적 증명 + 실행 유도.' },
+      { n: 120, tag: '엔딩', q: '마지막으로 영상 보고 있는 분들에게 한마디 해주세요.', hint: '엔딩 멘트. 시청자 대화.' },
+    ]
+  },
+];
+
+let state = { checks: {}, filter: 'all' };
+function load() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) state.checks = JSON.parse(raw) || {};
+  } catch (e) {}
+}
+function save() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state.checks)); } catch (e) {}
+}
+
+const TOTAL = LOCATIONS.reduce((acc, l) => acc + l.questions.length, 0);
+
+function escapeHTML(s) {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+function renderQuestionText(s) {
+  return escapeHTML(s)
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n/g, '<br>');
+}
+function renderHint(s) {
+  return escapeHTML(s).replace(/\n/g, '<br>');
+}
+
+function render() {
+  const main = document.getElementById('main');
+  main.innerHTML = '';
+  let done = 0;
+
+  for (const loc of LOCATIONS) {
+    const group = document.createElement('section');
+    group.className = 'loc-group';
+
+    const locDone = loc.questions.filter(q => state.checks[loc.id + ':' + q.n]).length;
+    const locTotal = loc.questions.length;
+    done += locDone;
+
+    const header = document.createElement('div');
+    header.className = 'loc-header';
+    header.innerHTML = `
+      <div class="loc-title">${escapeHTML(loc.title)}<span class="loc-time"> · ${escapeHTML(loc.time)}</span></div>
+      <div class="loc-count">${locDone}/${locTotal}</div>
+    `;
+    group.appendChild(header);
+
+    let visibleInGroup = 0;
+    for (const q of loc.questions) {
+      const key = loc.id + ':' + q.n;
+      const isDone = !!state.checks[key];
+
+      if (state.filter === 'todo' && isDone) continue;
+      if (state.filter === 'done' && !isDone) continue;
+
+      visibleInGroup++;
+
+      const card = document.createElement('div');
+      card.className = 'q' + (isDone ? ' done' : '');
+
+      const hintHTML = q.hint ? `<div class="q-hint">${renderHint(q.hint)}</div>` : '';
+
+      card.innerHTML = `
+        <div class="q-row" data-key="${key}">
+          <div class="q-check"></div>
+          <div class="q-body">
+            <div class="q-meta">
+              <span class="q-num">${q.n}</span>
+              <span class="q-tag">${escapeHTML(q.tag)}</span>
+            </div>
+            <div class="q-text">${renderQuestionText(q.q)}</div>
+            ${hintHTML}
+          </div>
+        </div>
+      `;
+
+      card.querySelector('.q-row').addEventListener('click', () => {
+        state.checks[key] = !state.checks[key];
+        save();
+        render();
+      });
+
+      group.appendChild(card);
+    }
+
+    if (visibleInGroup === 0) group.classList.add('empty');
+    main.appendChild(group);
+  }
+
+  const pct = TOTAL > 0 ? Math.round((done / TOTAL) * 100) : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = `${done}/${TOTAL} (${pct}%)`;
+}
+
+document.querySelectorAll('.filter-btn[data-filter]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn[data-filter]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    state.filter = btn.dataset.filter;
+    render();
+  });
+});
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  if (confirm('모든 체크를 초기화할까요?')) {
+    state.checks = {};
+    save();
+    render();
+    showToast('초기화 완료');
+  }
+});
+
+document.getElementById('exportBtn').addEventListener('click', () => {
+  const exportData = {
+    schema_version: '1.0',
+    performer: 'hanjae',
+    episode: 'EP01',
+    channel: 'sajjiknam',
+    exported_at: new Date().toISOString(),
+    storage_key: STORAGE_KEY,
+    total_questions: 0,
+    total_checked: 0,
+    usage_rate_pct: 0,
+    locations: [],
+  };
+
+  for (const loc of LOCATIONS) {
+    const checkedQs = loc.questions.filter(q => state.checks[loc.id + ':' + q.n]);
+    exportData.total_questions += loc.questions.length;
+    exportData.total_checked += checkedQs.length;
+    exportData.locations.push({
+      id: loc.id,
+      title: loc.title,
+      time: loc.time,
+      total: loc.questions.length,
+      checked: checkedQs.length,
+      rate_pct: loc.questions.length > 0 ? Math.round(checkedQs.length / loc.questions.length * 1000) / 10 : 0,
+      checked_questions: checkedQs.map(q => ({
+        n: q.n,
+        tag: q.tag,
+        q: q.q.replace(/\n+/g, ' ').replace(/\*\*/g, ''),
+      })),
+    });
+  }
+  exportData.usage_rate_pct = exportData.total_questions > 0
+    ? Math.round(exportData.total_checked / exportData.total_questions * 1000) / 10
+    : 0;
+
+  const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const dateStr = new Date().toISOString().slice(0, 10);
+  a.href = url;
+  a.download = `${exportData.performer}_${exportData.episode}_${dateStr}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast(`Export 완료 (${exportData.total_checked}/${exportData.total_questions})`);
+});
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1500);
+}
+
+load();
+render();
+</script>
+
+</body>
+</html>
