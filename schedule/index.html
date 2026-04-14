@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>타이탄클래스 x Neobridge - 업로드 스케줄</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#fafbfc;--card:#fff;--border:#e5e8ec;--border-s:#cbd0d8;
+  --text:#1a1d23;--soft:#5a6170;--dim:#8e95a3;
+  --accent:#1c2b3a;--accent-l:#e8edf2;
+  --orange:#ea580c;--orange-bg:#fff7ed;
+  --blue:#4f46e5;--blue-bg:#eef2ff;
+  --green:#16a34a;--green-bg:#f0fdf4;
+  --red:#dc2626;--red-bg:#fef2f2;
+  --r:8px
+}
+html{font-size:15px}
+body{
+  font-family:'Pretendard Variable',Pretendard,-apple-system,sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.55;
+  min-height:100vh;-webkit-font-smoothing:antialiased
+}
+.hd{background:var(--accent);color:#fff;padding:28px 0 24px;border-bottom:3px solid #0f1a24}
+.hd-in{max-width:1100px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:flex-end}
+.hd h1{font-size:1.35rem;font-weight:700;letter-spacing:-.02em}
+.hd p{font-size:.8rem;color:#8a9bb0;margin-top:4px}
+.hd-r{text-align:right;font-size:.75rem;color:#6b7d8f}
+.ct{max-width:1100px;margin:0 auto;padding:32px 24px 60px}
+.sm{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:40px}
+.sc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px}
+.sc-l{font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-bottom:8px}
+.sc-v{font-size:1.6rem;font-weight:700;letter-spacing:-.03em}
+.sc-s{font-size:.78rem;color:var(--soft);margin-top:4px}
+.ch{margin-bottom:48px}
+.ch-h{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--border)}
+.ch-d{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.ch-n{font-size:1.1rem;font-weight:700;letter-spacing:-.02em}
+.ch-c{font-size:.78rem;color:var(--dim);margin-left:auto}
+.mb{margin-bottom:28px}
+.ml{font-size:.78rem;font-weight:600;color:var(--soft);letter-spacing:.04em;margin-bottom:10px;padding-left:2px}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;font-size:.88rem}
+thead th{background:var(--accent);color:#fff;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:10px 14px;text-align:left;white-space:nowrap}
+tbody tr{border-bottom:1px solid var(--border);transition:background 120ms}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:#f7f8fa}
+td{padding:12px 14px;vertical-align:middle}
+td.d{color:var(--dim);font-size:.82rem}
+td.e{text-align:center;color:var(--dim);font-style:italic;padding:16px}
+.tg{display:inline-block;font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:20px;white-space:nowrap}
+.tg-ok{background:var(--green-bg);color:var(--green)}
+.tg-wait{background:var(--orange-bg);color:var(--orange)}
+.tg-no{background:var(--red-bg);color:var(--red)}
+.tg-none{background:var(--accent-l);color:var(--dim)}
+.nm{font-weight:600;letter-spacing:-.01em}
+.dt{font-variant-numeric:tabular-nums}
+.dt-up{color:var(--orange);font-weight:600}
+.dt-past{color:var(--dim)}
+.lk{color:var(--blue);text-decoration:none;font-size:.82rem;word-break:break-all}
+.lk:hover{text-decoration:underline}
+.ft{text-align:center;padding:24px;font-size:.75rem;color:var(--dim);border-top:1px solid var(--border);margin-top:20px}
+@media(max-width:768px){
+  html{font-size:14px}
+  .hd-in{flex-direction:column;align-items:flex-start;gap:8px}
+  .hd-r{text-align:left}
+  table{font-size:.82rem}
+  thead th,td{padding:8px 10px}
+  .hm{display:none}
+}
+</style>
+</head>
+<body>
+<div class="hd"><div class="hd-in">
+  <div><h1>타이탄클래스 x Neobridge MCN</h1><p>강의 플랫폼 제휴 - 업로드 스케줄</p></div>
+  <div class="hd-r">마지막 갱신: 2026.04.15 00:17</div>
+</div></div>
+<div class="ct" id="ct"></div>
+<div class="ft">Flowmus / Neobridge MCN - 타이탄클래스 제휴 스케줄 관리</div>
+
+<script>
+var DATA=[{"name": "사장찍어주는남자", "color": "#ea580c", "months": [{"label": "2026년 4월", "items": [{"no": "1", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "2", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "3", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "4", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}]}, {"label": "2026년 5월", "items": [{"no": "1", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "2", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "3", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "4", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}]}, {"label": "2026년 6월", "items": [{"no": "1", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "2", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "3", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "4", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}]}, {"label": "2026년 7월", "items": [{"no": "1", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "2", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "3", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "4", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}]}]}, {"name": "부업소개하는남자", "color": "#4f46e5", "months": [{"label": "2026년 4월", "items": [{"no": "1", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "2", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "3", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "4", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}]}, {"label": "2026년 5월", "items": [{"no": "1", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "2", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "3", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "4", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}]}, {"label": "2026년 6월", "items": [{"no": "1", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "2", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "3", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "4", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}]}, {"label": "2026년 7월", "items": [{"no": "1", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "2", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "3", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "4", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}]}]}];
+var TODAY='2026-04-15';
+var COLORS={'사장찍어주는남자':'#ea580c','부업소개하는남자':'#4f46e5'};
+
+function main(){
+  var h='';
+  var total=0,confirmed=0,upcoming=[];
+  DATA.forEach(function(ch){
+    ch.months.forEach(function(m){
+      m.items.forEach(function(it){
+        if(it.instructor){total++;if(it.castConfirm==='확인')confirmed++}
+        if(it.lectureDate&&it.instructor&&it.lectureDate>=TODAY)
+          upcoming.push({ch:ch.name,inst:it.instructor,dt:it.lectureDate})
+      })
+    })
+  });
+  upcoming.sort(function(a,b){return a.dt<b.dt?-1:1});
+  var nx=upcoming[0];
+  var dday=nx?ddayStr(nx.dt):'-';
+  var ddesc=nx?(nx.inst+' / '+fmtD(nx.dt)):'예정된 강의 없음';
+
+  h+='<div class="sm">';
+  h+=sc('전체 강사',total+'명',confirmed+'명 섭외 확정');
+  h+=sc('채널',DATA.length+'개','사장찍어주는남자 / 부업소개하는남자');
+  h+=sc('다음 강의',dday,ddesc);
+  h+=sc('예정 강의',upcoming.length+'건','오늘 이후 기준');
+  h+='</div>';
+
+  DATA.forEach(function(ch){
+    var col=COLORS[ch.name]||'#666';
+    var ct=0,cc=0;
+    ch.months.forEach(function(m){m.items.forEach(function(it){if(it.instructor){ct++;if(it.castConfirm==='확인')cc++}});});
+    h+='<div class="ch"><div class="ch-h"><div class="ch-d" style="background:'+col+'"></div>';
+    h+='<div class="ch-n">'+ch.name+'</div><div class="ch-c">'+cc+' / '+ct+' 확정</div></div>';
+    ch.months.forEach(function(m){
+      h+='<div class="mb"><div class="ml">'+m.label+'</div>';
+      h+='<table><thead><tr><th style="width:40px">No.</th><th style="width:110px">무료강의일</th>';
+      h+='<th style="width:44px">요일</th><th>강사명</th><th class="hm">연락처</th>';
+      h+='<th class="hm">참고</th><th class="hm">메모</th><th style="width:80px">섭외</th>';
+      h+='<th style="width:80px">최종</th><th style="width:110px">업로드일</th></tr></thead><tbody>';
+      var any=false;
+      m.items.forEach(function(it){
+        if(!it.instructor&&!it.lectureDate)return;
+        any=true;
+        var dc='dt';
+        if(it.lectureDate)dc+=it.lectureDate>=TODAY?' dt-up':' dt-past';
+        h+='<tr><td class="d">'+it.no+'</td><td class="'+dc+'">'+fmtD(it.lectureDate)+'</td>';
+        h+='<td class="d">'+it.day+'</td><td class="nm">'+it.instructor+'</td>';
+        h+='<td class="d hm">'+it.contact+'</td><td class="hm">'+lnk(it.refLink)+'</td>';
+        h+='<td class="d hm">'+it.memo+'</td><td>'+tag(it.castConfirm)+'</td>';
+        h+='<td>'+tag(it.finalConfirm)+'</td><td class="'+dc+'">'+fmtD(it.uploadDate)+'</td></tr>';
+      });
+      if(!any)h+='<tr><td class="e" colspan="10">아직 등록된 일정이 없습니다</td></tr>';
+      h+='</tbody></table></div>';
+    });
+    h+='</div>';
+  });
+  document.getElementById('ct').innerHTML=h;
+}
+
+function sc(l,v,s){return '<div class="sc"><div class="sc-l">'+l+'</div><div class="sc-v">'+v+'</div><div class="sc-s">'+s+'</div></div>'}
+function tag(v){if(!v)return'<span class="tg tg-none">-</span>';v=v.trim();if(v==='확인')return'<span class="tg tg-ok">확인</span>';if(v==='미확인')return'<span class="tg tg-wait">미확인</span>';if(v==='취소')return'<span class="tg tg-no">취소</span>';return'<span class="tg tg-none">'+v+'</span>'}
+function fmtD(s){if(!s)return'-';var p=s.split('-');if(p.length===3)return p[1].replace(/^0/,'')+'/'+p[2].replace(/^0/,'');return s}
+function ddayStr(s){var d=new Date(s);var t=new Date(TODAY);var diff=Math.ceil((d-t)/86400000);return diff===0?'D-DAY':diff>0?'D-'+diff:'D+'+Math.abs(diff)}
+function lnk(s){if(!s)return'';s=s.trim();if(s.indexOf('http')===0){var sh=s.length>28?s.substring(0,28)+'...':s;return'<a class="lk" href="'+s+'" target="_blank">'+sh+'</a>'}return s}
+
+main();
+</script>
+</body>
+</html>
