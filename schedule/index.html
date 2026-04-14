@@ -42,15 +42,15 @@ body{
 .ch-c{font-size:.78rem;color:var(--dim);margin-left:auto}
 .mb{margin-bottom:28px}
 .ml{font-size:.78rem;font-weight:600;color:var(--soft);letter-spacing:.04em;margin-bottom:10px;padding-left:2px}
-table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--border-s);border-radius:var(--r);overflow:hidden;font-size:.88rem;table-layout:fixed}
-thead th{background:var(--accent);color:#fff;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:10px 12px;text-align:center;white-space:nowrap;border-right:1px solid rgba(255,255,255,.15)}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:4px}
+table{width:100%;min-width:820px;border-collapse:collapse;background:var(--card);border:1px solid var(--border-s);border-radius:var(--r);overflow:hidden;font-size:.88rem;table-layout:fixed}
+thead th{background:var(--accent);color:#fff;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:10px 12px;text-align:center;white-space:nowrap;border-right:1px solid rgba(255,255,255,.2)}
 thead th:last-child{border-right:none}
-tbody tr{border-bottom:1px solid var(--border);transition:background 120ms}
+tbody tr{border-bottom:1px solid var(--border-s);transition:background 120ms}
 tbody tr:last-child{border-bottom:none}
 tbody tr:hover{background:#f7f8fa}
-td{padding:11px 10px;vertical-align:middle;text-align:center;border-right:1px solid var(--border);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+td{padding:11px 10px;vertical-align:middle;text-align:center;border-right:1px solid var(--border-s);white-space:nowrap}
 td:last-child{border-right:none}
-td.al{text-align:left}
 td.d{color:var(--dim);font-size:.82rem}
 td.e{text-align:center;color:var(--dim);font-style:italic;padding:16px;border-right:none}
 .tg{display:inline-block;font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:20px;white-space:nowrap}
@@ -70,15 +70,14 @@ td.e{text-align:center;color:var(--dim);font-style:italic;padding:16px;border-ri
   .hd-in{flex-direction:column;align-items:flex-start;gap:8px}
   .hd-r{text-align:left}
   table{font-size:.82rem}
-  thead th,td{padding:8px 10px}
-  .hm{display:none}
+  thead th,td{padding:8px 8px}
 }
 </style>
 </head>
 <body>
 <div class="hd"><div class="hd-in">
   <div><h1>타이탄클래스 x Neobridge MCN</h1><p>강의 플랫폼 제휴 - 업로드 스케줄</p></div>
-  <div class="hd-r">마지막 갱신: 2026.04.15 00:51</div>
+  <div class="hd-r">마지막 갱신: 2026.04.15 00:58</div>
 </div></div>
 <div class="ct" id="ct"></div>
 <div class="ft">Flowmus / Neobridge MCN - 타이탄클래스 제휴 스케줄 관리</div>
@@ -120,10 +119,10 @@ function main(){
     h+='<div class="ch-n">'+ch.name+'</div><div class="ch-c">'+cc+' / '+ct+' 확정</div></div>';
     ch.months.forEach(function(m){
       h+='<div class="mb"><div class="ml">'+m.label+'</div>';
-      h+='<table><colgroup><col style="width:5%"><col style="width:11%"><col style="width:5%"><col style="width:12%"><col style="width:12%">';
-      h+='<col style="width:14%"><col style="width:14%"><col style="width:9%"><col style="width:9%"><col style="width:9%"></colgroup>';
-      h+='<thead><tr><th>No.</th><th>강의일</th><th>요일</th><th>강사명</th><th class="hm">연락처</th>';
-      h+='<th class="hm">참고</th><th class="hm">메모</th><th>섭외</th><th>최종</th><th>업로드일</th></tr></thead><tbody>';
+      h+='<div class="tw"><table><colgroup><col style="width:42px"><col style="width:90px"><col style="width:42px"><col style="width:100px"><col style="width:110px">';
+      h+='<col style="width:110px"><col style="width:110px"><col style="width:72px"><col style="width:72px"><col style="width:90px"></colgroup>';
+      h+='<thead><tr><th>No.</th><th>강의일</th><th>요일</th><th>강사명</th><th>연락처</th>';
+      h+='<th>참고</th><th>메모</th><th>섭외</th><th>최종</th><th>업로드일</th></tr></thead><tbody>';
       var any=false;
       m.items.forEach(function(it){
         if(!it.instructor&&!it.lectureDate)return;
@@ -131,13 +130,13 @@ function main(){
         var dc='dt';
         if(it.lectureDate)dc+=it.lectureDate>=TODAY?' dt-up':' dt-past';
         h+='<tr><td class="d">'+it.no+'</td><td class="'+dc+'">'+fmtD(it.lectureDate)+'</td>';
-        h+='<td class="d">'+it.day+'</td><td class="nm al">'+it.instructor+'</td>';
-        h+='<td class="d hm">'+it.contact+'</td><td class="hm al">'+lnk(it.refLink)+'</td>';
-        h+='<td class="d hm al">'+it.memo+'</td><td>'+tag(it.castConfirm)+'</td>';
+        h+='<td class="d">'+it.day+'</td><td class="nm">'+it.instructor+'</td>';
+        h+='<td class="d">'+it.contact+'</td><td class="d">'+lnk(it.refLink)+'</td>';
+        h+='<td class="d">'+it.memo+'</td><td>'+tag(it.castConfirm)+'</td>';
         h+='<td>'+tag(it.finalConfirm)+'</td><td class="'+dc+'">'+fmtD(it.uploadDate)+'</td></tr>';
       });
       if(!any)h+='<tr><td class="e" colspan="10">아직 등록된 일정이 없습니다</td></tr>';
-      h+='</tbody></table></div>';
+      h+='</tbody></table></div></div>';
     });
     h+='</div>';
   });
