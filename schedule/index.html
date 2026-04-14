@@ -42,12 +42,13 @@ body{
 .ch-c{font-size:.78rem;color:var(--dim);margin-left:auto}
 .mb{margin-bottom:28px}
 .ml{font-size:.78rem;font-weight:600;color:var(--soft);letter-spacing:.04em;margin-bottom:10px;padding-left:2px}
-table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;font-size:.88rem}
-thead th{background:var(--accent);color:#fff;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:10px 14px;text-align:left;white-space:nowrap}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;font-size:.88rem;table-layout:fixed}
+thead th{background:var(--accent);color:#fff;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:10px 14px;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 tbody tr{border-bottom:1px solid var(--border);transition:background 120ms}
 tbody tr:last-child{border-bottom:none}
 tbody tr:hover{background:#f7f8fa}
-td{padding:12px 14px;vertical-align:middle}
+td{padding:12px 14px;vertical-align:middle;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+td.al{text-align:left}
 td.d{color:var(--dim);font-size:.82rem}
 td.e{text-align:center;color:var(--dim);font-style:italic;padding:16px}
 .tg{display:inline-block;font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:20px;white-space:nowrap}
@@ -117,10 +118,8 @@ function main(){
     h+='<div class="ch-n">'+ch.name+'</div><div class="ch-c">'+cc+' / '+ct+' 확정</div></div>';
     ch.months.forEach(function(m){
       h+='<div class="mb"><div class="ml">'+m.label+'</div>';
-      h+='<table><thead><tr><th style="width:40px">No.</th><th style="width:110px">무료강의일</th>';
-      h+='<th style="width:44px">요일</th><th>강사명</th><th class="hm">연락처</th>';
-      h+='<th class="hm">참고</th><th class="hm">메모</th><th style="width:80px">섭외</th>';
-      h+='<th style="width:80px">최종</th><th style="width:110px">업로드일</th></tr></thead><tbody>';
+      h+='<table><colgroup><col style="width:5%"><col style="width:12%"><col style="width:5%"><col style="width:13%"><col class="hm" style="width:12%"><col class="hm" style="width:13%"><col class="hm" style="width:13%"><col style="width:9%"><col style="width:9%"><col style="width:9%"></colgroup>';
+      h+='<thead><tr><th>No.</th><th>무료강의일</th><th>요일</th><th>강사명</th><th class="hm">연락처</th><th class="hm">참고</th><th class="hm">메모</th><th>섭외</th><th>최종</th><th>업로드일</th></tr></thead><tbody>';
       var any=false;
       m.items.forEach(function(it){
         if(!it.instructor&&!it.lectureDate)return;
@@ -128,9 +127,9 @@ function main(){
         var dc='dt';
         if(it.lectureDate)dc+=it.lectureDate>=TODAY?' dt-up':' dt-past';
         h+='<tr><td class="d">'+it.no+'</td><td class="'+dc+'">'+fmtD(it.lectureDate)+'</td>';
-        h+='<td class="d">'+it.day+'</td><td class="nm">'+it.instructor+'</td>';
-        h+='<td class="d hm">'+it.contact+'</td><td class="hm">'+lnk(it.refLink)+'</td>';
-        h+='<td class="d hm">'+it.memo+'</td><td>'+tag(it.castConfirm)+'</td>';
+        h+='<td class="d">'+it.day+'</td><td class="nm al">'+it.instructor+'</td>';
+        h+='<td class="d hm">'+it.contact+'</td><td class="hm al">'+lnk(it.refLink)+'</td>';
+        h+='<td class="d hm al">'+it.memo+'</td><td>'+tag(it.castConfirm)+'</td>';
         h+='<td>'+tag(it.finalConfirm)+'</td><td class="'+dc+'">'+fmtD(it.uploadDate)+'</td></tr>';
       });
       if(!any)h+='<tr><td class="e" colspan="10">아직 등록된 일정이 없습니다</td></tr>';
