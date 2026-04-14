@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>김정빈 × 사찍남 — YouTube 업로드 키트</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#ffffff;color:#191F28;font-family:'Pretendard',system-ui,sans-serif;min-height:100vh;font-size:15px}
+.gnb{background:#fff;border-bottom:1px solid #E5E8EB;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.gnb-logo{font-size:16px;font-weight:800;color:#F08F00}
+.gnb-badge{background:#FFF7E6;color:#F08F00;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:800;border:1px solid #FFD700}
+.wrap{max-width:720px;margin:0 auto;padding:28px 20px 80px}
+.hero{background:linear-gradient(135deg,#1a0a00 0%,#3d1f00 50%,#5c3a1a 100%);border-radius:20px;padding:36px 32px;margin-bottom:20px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;right:-10%;width:300px;height:300px;background:radial-gradient(circle,rgba(255,215,0,.15),transparent);pointer-events:none}
+.hero-eyebrow{font-size:11px;font-weight:700;color:#FFB347;letter-spacing:2px;margin-bottom:10px}
+.hero-title{font-size:26px;font-weight:800;line-height:1.3;color:#fff;margin-bottom:8px}
+.hero-sub{color:#8B95A1;font-size:13px;line-height:1.7}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
+.hero-stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:12px;text-align:center}
+.hero-stat-v{font-size:20px;font-weight:800;color:#FFB347}
+.hero-stat-l{font-size:10px;color:#8B95A1;margin-top:3px}
+.section{margin-bottom:28px}
+.section-title{font-size:18px;font-weight:800;color:#191F28;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.section-title .num{background:#F08F00;color:#fff;border-radius:8px;padding:4px 10px;font-size:13px}
+.section-title .num.red{background:#F04452}
+.section-title .num.blue{background:#3182F6}
+.section-title .num.green{background:#05C072}
+.card{background:#fff;border-radius:16px;padding:22px;margin-bottom:14px;box-shadow:0 1px 6px rgba(0,0,0,.06);position:relative}
+.card.pick{border:2px solid #F08F00;background:#FFFBF0}
+.card.alt{border:2px solid #3182F6;background:#F0F6FF}
+.card.third{border:2px solid #05C072;background:#F0FFF4}
+.card.hot{border:2px solid #F04452;background:#FFF8F8}
+.rank{position:absolute;top:-8px;left:16px;background:#F04452;color:#fff;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:800}
+.rank.a{background:#F08F00}
+.rank.b{background:#3182F6}
+.rank.c{background:#05C072}
+.title-text{font-size:17px;font-weight:800;color:#191F28;line-height:1.5;margin-bottom:10px;padding-top:6px}
+.data-tag{display:inline-block;padding:3px 8px;border-radius:4px;font-size:11px;font-weight:700;margin-right:6px;margin-bottom:4px}
+.data-tag.red{background:#FFF0F0;color:#F04452}
+.data-tag.orange{background:#FFF7E6;color:#F08F00}
+.data-tag.blue{background:#EFF3FF;color:#3182F6}
+.data-tag.green{background:#F0FFF4;color:#05C072}
+.copy-btn{background:#F08F00;color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;transition:.15s;font-family:inherit}
+.copy-btn:hover{background:#D97A00}
+.copy-btn:active{transform:scale(.96)}
+.copied{background:#05C072!important}
+.thumb-card{background:#fff;border-radius:16px;overflow:hidden;margin-bottom:14px;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+.thumb-preview{aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.thumb-preview.a{background:linear-gradient(135deg,#1a0a00,#3d1f00)}
+.thumb-preview.b{background:linear-gradient(135deg,#0a1628,#1a3a5c)}
+.thumb-preview.c{background:linear-gradient(135deg,#1a0a00,#5c1a1a)}
+.thumb-text{color:#fff;text-align:center;padding:20px;z-index:1}
+.thumb-main{font-size:32px;font-weight:800;line-height:1.3;text-shadow:2px 2px 8px rgba(0,0,0,.5)}
+.thumb-sub{font-size:14px;color:rgba(255,255,255,.7);margin-top:8px}
+.thumb-element{position:absolute;border-radius:8px;padding:8px 12px;font-weight:800;font-size:13px}
+.thumb-body{padding:18px}
+.desc-box{background:#F8F9FA;border:1px solid #E5E8EB;border-radius:10px;padding:18px;font-size:13px;color:#191F28;line-height:2;white-space:pre-wrap;font-family:'Pretendard',system-ui,sans-serif}
+.tag-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.note{background:#FFF7E6;border-left:3px solid #F08F00;border-radius:0 8px 8px 0;padding:14px 16px;margin:10px 0;font-size:13px;line-height:1.7;color:#3E4A5A}
+.note.red{background:#FFF0F0;border-left-color:#F04452}
+.note.blue{background:#EFF3FF;border-left-color:#3182F6}
+.note.green{background:#F0FFF4;border-left-color:#05C072}
+.divider{height:1px;background:#E5E8EB;margin:24px 0}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
+th{padding:10px;text-align:left;border-bottom:2px solid #E5E8EB;color:#F08F00;font-size:11px;background:#FFFBF0;font-weight:700}
+td{padding:10px;border-bottom:1px solid #F2F4F6;color:#3E4A5A;line-height:1.6}
+.check-item{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #F2F4F6}
+.check-item:last-child{border-bottom:none}
+.check-box{width:20px;height:20px;border:2px solid #E5E8EB;border-radius:4px;flex-shrink:0;margin-top:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+.check-box.checked{background:#05C072;border-color:#05C072}
+.check-box.checked::after{content:'\2713';color:#fff;font-size:12px;font-weight:800}
+.check-text{font-size:13px;color:#3E4A5A;line-height:1.6}
+.tag{display:inline-block;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:700;margin-right:5px;white-space:nowrap}
+.tag-r{background:#FFF0F0;color:#F04452}
+.tag-y{background:#FFF7E6;color:#F08F00}
+.tag-b{background:#EFF3FF;color:#3182F6}
+.tag-g{background:#F0FFF4;color:#05C072}
+@media(max-width:600px){.hero-stats{grid-template-columns:repeat(2,1fr)}.thumb-main{font-size:22px}.title-text{font-size:15px}}
+</style>
+</head>
+<body>
+<nav class="gnb">
+  <span class="gnb-logo">Upload Kit</span>
+  <span class="gnb-badge">사찍남 × 김정빈</span>
+</nav>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-eyebrow">YOUTUBE UPLOAD KIT — READY TO USE</div>
+    <div class="hero-title">제목 3개 + 썸네일 3개 + 설명란</div>
+    <div class="hero-sub">52개 영상 히트맵 + 28개 타임라인 분석 기반 | 3채널 리텐션 실측 근거<br>복사 버튼으로 바로 업로드에 사용하세요</div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-v">13억</div><div class="hero-stat-l">현재 자산</div></div>
+      <div class="hero-stat"><div class="hero-stat-v">3번</div><div class="hero-stat-l">실패 횟수</div></div>
+      <div class="hero-stat"><div class="hero-stat-v">8명</div><div class="hero-stat-l">직원 수</div></div>
+      <div class="hero-stat"><div class="hero-stat-v">18분</div><div class="hero-stat-l">목표 길이</div></div>
+    </div>
+  </div>
+
+  <!-- ===================== 제목 3개 ===================== -->
+  <div class="section">
+    <div class="section-title"><span class="num">1</span> 제목 후보 3개</div>
+
+    <div class="card pick">
+      <div class="rank a">1순위 추천</div>
+      <div class="title-text" id="title1">고3 때 창업해서 3번 망하고 통장에 13억 모은 30살</div>
+      <div class="tag-row">
+        <span class="data-tag red">25자 · 숫자 3개</span>
+        <span class="data-tag orange">돈탐생 패턴: 숫자갭 = 평균 304만뷰</span>
+      </div>
+      <div style="font-size:12px;color:#8B95A1;margin-top:10px;line-height:1.8">
+        <strong>왜 1순위인가:</strong> "고3" + "3번 망함" + "13억" = 3중 숫자 낙차. 25자로 모바일 한 줄 완전 노출. 사찍남 Best 패턴(숫자 갭) 직격.<br>
+        <strong>근거:</strong> 돈탐생 "망한 모텔 2년만에 연매출 15억"(500만뷰) — 낙차형 제목 = CTR 최상위. 휴먼스토리 "귀어 13억"(13.3M) — 13억 숫자 자체가 킬러 키워드.
+      </div>
+      <div style="margin-top:12px"><button class="copy-btn" onclick="copyText('title1',this)">제목 복사</button></div>
+    </div>
+
+    <div class="card alt">
+      <div class="rank b">2순위</div>
+      <div class="title-text" id="title2">3번 망한 고졸 사장이 직원 8명 월급 1600만원 주는 법</div>
+      <div class="tag-row">
+        <span class="data-tag red">27자 · 현실 디테일형</span>
+        <span class="data-tag blue">채주부 패턴: 구체 금액 = CTR +15%</span>
+      </div>
+      <div style="font-size:12px;color:#8B95A1;margin-top:10px;line-height:1.8">
+        <strong>왜 2순위인가:</strong> "고졸 사장" = 반전 키워드. "월급 1600만원" = 구체적 숫자로 신뢰도. "~하는 법" = 정보형 클릭 유도.<br>
+        <strong>근거:</strong> 사찍남 기존 영상 중 구체 금액 포함 제목이 CTR 15% 높음. "직원 8명 월급" = 사업 규모 체감.
+      </div>
+      <div style="margin-top:12px"><button class="copy-btn" onclick="copyText('title2',this)">제목 복사</button></div>
+    </div>
+
+    <div class="card third">
+      <div class="rank c">3순위</div>
+      <div class="title-text" id="title3">통장에 3천만원밖에 없는데 직원 8명 월급 주는 30살 대표</div>
+      <div class="tag-row">
+        <span class="data-tag red">28자 · 긴장감형</span>
+        <span class="data-tag green">호기심갭: "어떻게?" 유도</span>
+      </div>
+      <div style="font-size:12px;color:#8B95A1;margin-top:10px;line-height:1.8">
+        <strong>왜 3순위인가:</strong> "3천만원 vs 8명 월급" = 긴장감. "어떻게 주지?" 호기심. 현실적 디테일 = 진짜 이야기 느낌.<br>
+        <strong>근거:</strong> 채주부그룹 분석: 긴장감 유발 제목(부족한 자원 vs 큰 의무) = 클릭 유도 강력. 단, 1순위 대비 "13억" 키워드 부재.
+      </div>
+      <div style="margin-top:12px"><button class="copy-btn" onclick="copyText('title3',this)">제목 복사</button></div>
+    </div>
+
+    <div class="note">
+      <strong>제목 선택 가이드:</strong><br>
+      - 1순위: 가장 안전. 숫자 3중 낙차 = 검증된 패턴. <strong>기본값으로 추천.</strong><br>
+      - 2순위: 출연자가 "고졸" 키워드 동의 시. 구체 금액 신뢰형.<br>
+      - 3순위: 썸네일 C안(위기 표현형)과 세트. 긴장감 극대화할 때.
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ===================== 썸네일 3개 ===================== -->
+  <div class="section">
+    <div class="section-title"><span class="num">2</span> 썸네일 컨셉 3개</div>
+
+    <div class="thumb-card">
+      <div class="rank a" style="position:relative;top:0;left:0;display:inline-block;margin:16px 0 0 16px">A안 — 현장 액션형 (추천)</div>
+      <div class="thumb-preview a">
+        <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(26,10,0,.85),rgba(61,31,0,.6))"></div>
+        <!-- 왼쪽: 인물 -->
+        <div style="position:absolute;left:5%;bottom:0;width:40%;height:85%;background:linear-gradient(180deg,transparent 0%,rgba(100,80,50,.3) 100%);border-radius:12px 12px 0 0;display:flex;align-items:center;justify-content:center;z-index:2">
+          <div style="text-align:center;color:rgba(255,255,255,.4);font-size:13px;font-weight:700">
+            <div style="font-size:40px;margin-bottom:8px">👨‍💼</div>
+            김정빈<br>3/4 뒤돌아보기<br>화이트보드 앞
+          </div>
+        </div>
+        <!-- 오른쪽: 직원+사무실 -->
+        <div style="position:absolute;right:4%;top:12%;width:50%;z-index:2">
+          <div style="background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:16px;text-align:center">
+            <div style="font-size:11px;color:rgba(255,255,255,.5);margin-bottom:8px;font-weight:600">사무실 배경</div>
+            <div style="display:flex;justify-content:center;gap:8px;margin-bottom:10px">
+              <div style="width:30px;height:30px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px">👤</div>
+              <div style="width:30px;height:30px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px">👤</div>
+              <div style="width:30px;height:30px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px">👤</div>
+            </div>
+            <div style="font-size:10px;color:rgba(255,255,255,.4)">직원 2~3명 보이게</div>
+          </div>
+        </div>
+        <!-- 텍스트 오버레이 -->
+        <div style="position:absolute;bottom:10%;left:5%;z-index:3">
+          <div style="background:rgba(240,143,0,.9);color:#fff;display:inline-block;padding:6px 14px;border-radius:6px;font-size:18px;font-weight:800;margin-bottom:6px">13억 번 30살</div>
+          <div style="color:rgba(255,255,255,.7);font-size:12px;font-weight:600">핸드폰 하나로</div>
+        </div>
+      </div>
+      <div class="thumb-body">
+        <div style="font-size:14px;font-weight:800;margin-bottom:10px">A안: 현장 액션 + 직원 스케일샷</div>
+        <table>
+          <tr><th>요소</th><th>상세</th></tr>
+          <tr><td>배경</td><td>사무실 — 화이트보드 + 직원 2~3명 보이게</td></tr>
+          <tr><td>인물</td><td>김정빈 3/4 뒤돌아보기, 설명하는 포즈 (정면 금지)</td></tr>
+          <tr><td>텍스트</td><td><strong style="color:#F08F00">"13억 번 30살"</strong> (노란색, 큰 폰트) + "핸드폰 하나로" (흰색, 작은 폰트)</td></tr>
+          <tr><td>포인트</td><td>고대비 노란 텍스트 — 돈탐생 CTR 패턴</td></tr>
+          <tr><td>배치</td><td>왼쪽 인물 40% / 오른쪽 사무실+직원 60%</td></tr>
+        </table>
+        <div class="note" style="margin-top:12px">
+          <strong>데이터 근거:</strong> 사찍남 Best 패턴 = 현장 액션 + 스케일샷(10톤 옷산 등). 돈탐생 TOP 영상 = 고대비 노란 텍스트 + 현장. <strong>1순위 제목과 세트 추천.</strong>
+        </div>
+      </div>
+    </div>
+
+    <div class="thumb-card">
+      <div class="rank b" style="position:relative;top:0;left:0;display:inline-block;margin:16px 0 0 16px">B안 — 회의 현장형</div>
+      <div class="thumb-preview b">
+        <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(10,22,40,.85),rgba(26,58,92,.6))"></div>
+        <!-- 중앙: 회의실 -->
+        <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:80%;z-index:2">
+          <div style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:20px;text-align:center">
+            <div style="display:flex;justify-content:center;gap:16px;margin-bottom:12px">
+              <div style="text-align:center">
+                <div style="width:40px;height:40px;background:rgba(96,165,250,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;margin:0 auto 4px">👨‍💼</div>
+                <div style="font-size:10px;color:rgba(255,255,255,.5)">김정빈</div>
+              </div>
+              <div style="text-align:center">
+                <div style="width:30px;height:30px;background:rgba(255,255,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;margin:0 auto 4px">👤</div>
+                <div style="font-size:10px;color:rgba(255,255,255,.3)">직원</div>
+              </div>
+              <div style="text-align:center">
+                <div style="width:30px;height:30px;background:rgba(255,255,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;margin:0 auto 4px">👤</div>
+                <div style="font-size:10px;color:rgba(255,255,255,.3)">직원</div>
+              </div>
+              <div style="text-align:center">
+                <div style="width:30px;height:30px;background:rgba(255,255,255,.1);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;margin:0 auto 4px">👤</div>
+                <div style="font-size:10px;color:rgba(255,255,255,.3)">직원</div>
+              </div>
+            </div>
+            <div style="font-size:11px;color:rgba(255,255,255,.3)">회의 중 옆모습</div>
+          </div>
+        </div>
+        <!-- 하단 텍스트 -->
+        <div style="position:absolute;bottom:8%;left:50%;transform:translateX(-50%);z-index:3;text-align:center">
+          <div style="color:#60A5FA;font-size:18px;font-weight:800">3번 망하고도</div>
+          <div style="color:#fff;font-size:22px;font-weight:800;margin-top:2px">직원 8명 거느린 30살</div>
+        </div>
+      </div>
+      <div class="thumb-body">
+        <div style="font-size:14px;font-weight:800;margin-bottom:10px">B안: 회의 현장 + "대표" 느낌</div>
+        <table>
+          <tr><th>요소</th><th>상세</th></tr>
+          <tr><td>구성</td><td>회의실에서 직원들과 회의 중인 옆모습</td></tr>
+          <tr><td>인물</td><td>김정빈 옆모습 — 노트북/자료 보며 지시하는 포즈</td></tr>
+          <tr><td>텍스트</td><td><strong style="color:#60A5FA">"3번 망하고도"</strong> (파란색) + <strong>"직원 8명 거느린 30살"</strong> (흰색)</td></tr>
+          <tr><td>포인트</td><td>직원이 보이면 "진짜 대표"로 인식. 규모감 전달.</td></tr>
+        </table>
+        <div class="note blue" style="margin-top:12px">
+          <strong>데이터 근거:</strong> 2순위 제목("3번 망한 고졸 사장~")과 세트. 회의 장면 = "진짜 사업하는 사람" 느낌. 사찍남 채널 "작업 현장" 썸네일 CTR 평균 이상.
+        </div>
+      </div>
+    </div>
+
+    <div class="thumb-card">
+      <div class="rank c" style="position:relative;top:0;left:0;display:inline-block;margin:16px 0 0 16px">C안 — 위기 표현형</div>
+      <div class="thumb-preview c">
+        <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(26,10,0,.9),rgba(92,26,26,.7))"></div>
+        <!-- 중앙: 통장 화면 -->
+        <div style="position:absolute;left:50%;top:45%;transform:translate(-50%,-50%) rotate(-2deg);width:55%;z-index:2">
+          <div style="background:#fff;border-radius:8px;padding:14px;box-shadow:0 8px 30px rgba(0,0,0,.4)">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+              <div style="font-size:10px;color:#8B95A1;font-weight:600">입출금 통장</div>
+              <div style="font-size:9px;color:#8B95A1">잔액</div>
+            </div>
+            <div style="font-size:26px;font-weight:800;color:#F04452;margin-bottom:4px">30,000,000원</div>
+            <div style="font-size:10px;color:#8B95A1;font-weight:600">이번달 직원 월급: -16,000,000원</div>
+            <div style="height:2px;background:#F04452;border-radius:1px;margin-top:8px;opacity:.4"></div>
+          </div>
+        </div>
+        <!-- 왼쪽 하단: 인물 -->
+        <div style="position:absolute;left:5%;bottom:5%;z-index:3">
+          <div style="color:rgba(255,255,255,.4);font-size:11px;font-weight:700;text-align:center">
+            <div style="font-size:28px;margin-bottom:4px">😰</div>
+            머리 감싸기
+          </div>
+        </div>
+        <!-- 오른쪽 하단 텍스트 -->
+        <div style="position:absolute;bottom:8%;right:5%;z-index:3;text-align:right">
+          <div style="color:#F04452;font-size:16px;font-weight:800">월급날 통장</div>
+          <div style="color:#fff;font-size:22px;font-weight:800;margin-top:2px">3천만원</div>
+        </div>
+      </div>
+      <div class="thumb-body">
+        <div style="font-size:14px;font-weight:800;margin-bottom:10px">C안: 위기 표현 + 통장 캡처</div>
+        <table>
+          <tr><th>요소</th><th>상세</th></tr>
+          <tr><td>구성</td><td>중앙에 통장 잔액 화면 (실제 or 재현) + 인물 구석</td></tr>
+          <tr><td>인물</td><td>머리 감싸기 포즈 — 위기 표현. 또는 핸드폰 들고 통장 확인</td></tr>
+          <tr><td>텍스트</td><td><strong style="color:#F04452">"3천만원"</strong> (빨간색) + "월급날 통장" (흰색)</td></tr>
+          <tr><td>배경</td><td>어두운 빨간+갈색 그라데이션 — 위기감</td></tr>
+        </table>
+        <div class="note red" style="margin-top:12px">
+          <strong>데이터 근거:</strong> 3순위 제목과 세트. "3천만원인데 8명 월급을?" = 호기심갭 극대화. 돈탐생 패턴 중 "위기→재기" 썸네일이 CTR 5.0%+ 달성.
+        </div>
+      </div>
+    </div>
+
+    <div class="note red">
+      <strong>정면 클로즈업 절대 금지</strong> — 사찍남 Worst 패턴 (44% 이탈, 조회수 최하위)
+    </div>
+
+    <div class="note blue">
+      <strong>제목 × 썸네일 매칭 권장:</strong><br>
+      - 1순위 제목("고3 때 창업~13억") → <strong>A안</strong> (현장 액션형) — 가장 안전한 세트<br>
+      - 2순위 제목("3번 망한 고졸 사장~") → <strong>B안</strong> (회의 현장형)<br>
+      - 3순위 제목("통장에 3천만원~") → <strong>C안</strong> (위기 표현형)
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ===================== 설명란 ===================== -->
+  <div class="section">
+    <div class="section-title"><span class="num">3</span> 설명란 (Description)</div>
+
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+        <div style="font-size:14px;font-weight:800;color:#191F28">복사해서 바로 사용</div>
+        <button class="copy-btn" onclick="copyDesc(this)">전체 복사</button>
+      </div>
+      <div class="desc-box" id="description">30살. 직원 8명. 자산 13억.
+
+근데 고3 때 창업했습니다.
+19살에 3일 만에 10만 팔로워를 만들었고,
+20살에 월 1000만원을 벌었습니다.
+
+25살에 3억을 모았습니다.
+그리고 전부 잃었습니다.
+
+강남에서 도태됐고,
+컨테이너에서 2~3억어치 제품이 녹았고,
+화장품 사업에서 또 3억을 날렸습니다.
+
+3번 망했습니다.
+
+근데 지금 직원 8명에게 매달 1600만원을 줍니다.
+통장에 3천만원밖에 없는 달도 있다고 합니다.
+그래도 포기 안 했습니다.
+
+왜 포기 안 했는지, 어떻게 13억을 다시 만들었는지,
+오늘 이 친구한테 직접 물어봤습니다.
+
+⏱️ 타임라인
+00:00 19살, 3번 망함, 13억 — 하이라이트
+00:15 콘텐츠 농부의 정체
+01:00 고3이 3일 만에 10만 팔로워?
+02:00 월 1000만원 → 왜 월급 150만원 회사로?
+04:00 광고비 30만원 → 하루 300만원?
+05:00 월 2억 달성 → 25세 강남 입성
+07:00 파산 위기: 3억 전부 잃음
+09:00 3번째 실패, 그래도 또 도전
+12:00 2등 전략 + 대시보드 실시간 공개
+15:00 3번 망했는데 왜 포기 안 했을까
+17:00 마지막 한마디
+
+📌 출연자 정보
+김정빈 (30세) · 콘텐츠 농부 · 직원 8명
+- 쿠팡 파트너스 누적 20억원
+- 사주별관 월 매출 1.5~4억원
+- (출연자 SNS/채널 링크)
+
+🎬 사찍남
+사장 찍어주는 남자 — 진짜 사장을 만납니다.
+부업 테크트리가 궁금하면: @부업소개하는남자
+비즈니스 문의: (이메일)
+
+#콘텐츠농부 #20대창업 #쿠팡파트너스 #30대자산 #직원8명 #부업 #콘텐츠창업 #3번망함 #재기 #사찍남 #13억</div>
+    </div>
+
+    <div class="note">
+      <strong>업로드 전 체크:</strong><br>
+      1. 타임라인 시간 = 실제 편집본 기준으로 수정<br>
+      2. 출연자 SNS/채널 링크 삽입<br>
+      3. 부업소개하는남자 채널 링크 삽입<br>
+      4. 비즈니스 이메일 추가<br>
+      5. 해시태그 11개 (15개까지 추가 가능)
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ===================== YouTube 설정 ===================== -->
+  <div class="section">
+    <div class="section-title"><span class="num">4</span> YouTube 업로드 설정</div>
+    <div class="card">
+      <table>
+        <tr><th>항목</th><th>설정값</th></tr>
+        <tr><td>카테고리</td><td>인물 & 블로그 (People & Blogs)</td></tr>
+        <tr><td>언어</td><td>한국어</td></tr>
+        <tr><td>자막</td><td>자동 자막 ON + 한국어 수동 추가 권장</td></tr>
+        <tr><td>태그</td><td>콘텐츠농부, 20대창업, 쿠팡파트너스, 30대자산, 직원8명, 부업, 콘텐츠창업, 쿠팡수익, 30살대표, 사찍남, 부업소개하는남자, 고졸창업, 13억, 재기, 콘텐츠마케팅</td></tr>
+        <tr><td>종료 화면</td><td>구독 버튼 + 사찍남 최근 영상 카드 + 부업소개하는남자 카드</td></tr>
+        <tr><td>카드</td><td>12:00 지점에 부업소개하는남자 채널 카드 / 17:00 지점에 사찍남 플레이리스트 카드</td></tr>
+        <tr><td>공개 설정</td><td>비공개 → 예약 공개 (최적: <strong>토요일 오전 10시</strong> or 일요일 오후 2시)</td></tr>
+        <tr><td>댓글</td><td>상위 댓글 순, 검토 보류 OFF</td></tr>
+        <tr><td>고정 댓글</td><td>"3번 망하고도 13억 모은 정빈님한테 가장 궁금한 거 댓글로 남겨주세요 👇"</td></tr>
+      </table>
+    </div>
+
+    <div class="card pick">
+      <div style="font-size:14px;font-weight:800;margin-bottom:10px">고정 댓글 (복사용)</div>
+      <div class="desc-box" id="pinned-comment" style="line-height:1.8">3번 망하고도 13억 모은 정빈님한테 가장 궁금한 거 댓글로 남겨주세요 👇
+
+정빈님이 직접 쿠팡 파트너스로 100만원 버는 법을 알려준대요.
+👉 부업소개하는남자: (링크)
+
+다음 영상은 더 말도 안 되는 사람 만나옵니다 🔥</div>
+      <div style="margin-top:12px"><button class="copy-btn" onclick="copyText('pinned-comment',this)">댓글 복사</button></div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ===================== 크로스 프로모션 ===================== -->
+  <div class="section">
+    <div class="section-title"><span class="num blue">5</span> 크로스 프로모션</div>
+    <div class="card alt">
+      <div style="font-size:14px;line-height:1.8;color:#3E4A5A">
+        <strong style="color:#3182F6">사찍남 → 부업소개하는남자:</strong><br>
+        "정빈님이 직접 쿠팡 파트너스로 100만원 버는 법 → 부업소개하는남자 채널에서 공개"<br><br>
+        <strong style="color:#F08F00">부업소개하는남자 → 사찍남:</strong><br>
+        "이 사람의 인생 서사가 궁금하면 → 사찍남 채널에서 풀스토리"<br><br>
+        <strong>카드 위치:</strong><br>
+        - 사찍남 영상 12:00 (대시보드 시연 직후) → 부업소개 채널 카드<br>
+        - 사찍남 영상 17:00 (CTA 구간) → 부업소개 채널 카드<br>
+        - 부업소개 영상 → 사찍남 인생서사 역링크
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ===================== 업로드 전 최종 체크리스트 ===================== -->
+  <div class="section">
+    <div class="section-title"><span class="num red">6</span> 업로드 전 최종 체크리스트</div>
+
+    <div class="card hot">
+      <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> 제목 확정 (25자 이내, 모바일 잘림 확인)</div></div>
+      <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> 썸네일 확정 (정면 클로즈업 아닌지 확인)</div></div>
+      <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> 설명란 타임라인 = 편집본 실제 시간과 일치</div></div>
+      <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> 출연자 링크/채널 삽입 완료</div></div>
+      <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> 부업소개하는남자 크로스링크 삽입</div></div>
+      <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text">종료 화면 설정 (구독 + 추천영상 2개)</div></div>
+      <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text">카드 2개 설정 (12:00 + 17:00)</div></div>
+      <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text">고정 댓글 준비</div></div>
+      <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text">예약 공개 시간 설정 (토 10시 or 일 14시)</div></div>
+      <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text">모바일에서 제목+썸네일 미리보기 확인</div></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function copyText(id, btn) {
+  const text = document.getElementById(id).textContent.trim();
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '복사 완료 ✓';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = btn.dataset.orig || '제목 복사'; btn.classList.remove('copied'); }, 2000);
+  }).catch(() => {
+    const r = document.createRange();
+    r.selectNodeContents(document.getElementById(id));
+    const s = window.getSelection();
+    s.removeAllRanges(); s.addRange(r);
+    document.execCommand('copy');
+    s.removeAllRanges();
+    btn.textContent = '복사 완료 ✓';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = btn.dataset.orig || '제목 복사'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+function copyDesc(btn) {
+  const text = document.getElementById('description').textContent.trim();
+  navigator.clipboard.writeText(text).then(() => {
+    btn.textContent = '복사 완료 ✓';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.textContent = '전체 복사'; btn.classList.remove('copied'); }, 2000);
+  });
+}
+function tog(el) { el.classList.toggle('checked'); }
+
+// store original button text
+document.querySelectorAll('.copy-btn').forEach(btn => {
+  btn.dataset.orig = btn.textContent;
+});
+</script>
+</body>
+</html>
