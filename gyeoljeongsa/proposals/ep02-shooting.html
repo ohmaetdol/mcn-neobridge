@@ -41,7 +41,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR','App
 .ban-box{background:var(--ban);border-left:4px solid var(--ban-b);border-radius:0 10px 10px 0;padding:13px 16px;margin:14px 0 18px;font-size:13px}
 .ban-box .memo-k{color:#991b1b}
 .ban-box .memo-v{color:#7f1d1d}
-.grp-t{font-size:13px;font-weight:700;color:var(--accent);margin:18px 0 10px;padding-left:10px;border-left:3px solid var(--accent)}
 .q{display:flex;align-items:flex-start;gap:12px;padding:13px 14px;background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:8px;cursor:pointer;transition:.15s;user-select:none}
 .q:active{transform:scale(.99)}
 .q.on{background:var(--done-bg);border-color:var(--done)}
@@ -53,21 +52,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR','App
 .q-body{flex:1;min-width:0}
 .q-top{display:flex;align-items:center;gap:6px;margin-bottom:4px;flex-wrap:wrap}
 .q-n{font-size:11px;font-weight:800;color:var(--text2);background:var(--border2);padding:2px 8px;border-radius:6px;flex-shrink:0}
-.q-tag{font-size:10px;font-weight:700;padding:2px 8px;border-radius:5px;flex-shrink:0;letter-spacing:.3px}
-.tg-후킹{color:#fff;background:#ef4444}
-.tg-위기장치{color:#fff;background:#f59e0b}
-.tg-감정이입{color:#fff;background:#6366f1}
-.tg-시청자대리{color:#fff;background:#06b6d4}
-.tg-반론{color:#fff;background:#ec4899}
-.tg-재후킹{color:#fff;background:#f97316}
-.tg-마무리{color:#fff;background:#16a34a}
-.tg-트렌드{color:#fff;background:#7c3aed}
-.tg-대표Q{color:#fff;background:#ea580c}
+.q-tag{font-size:10px;font-weight:700;padding:2px 8px;border-radius:5px;flex-shrink:0;letter-spacing:.3px;color:#fff}
+.tg-PEAK{background:#ef4444}
+.tg-PD{background:#06b6d4}
+.tg-TREND{background:#7c3aed}
 .q-q{font-size:15px;line-height:1.55;color:var(--text);word-break:keep-all}
 .q-hint{font-size:12px;color:var(--text2);margin-top:4px;line-height:1.5;word-break:keep-all;font-style:italic}
-.props{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin:14px 0}
-.props-t{font-size:12px;font-weight:700;color:var(--accent);margin-bottom:8px;letter-spacing:.5px}
-.props li{font-size:13px;color:var(--text2);margin:4px 0;padding-left:4px}
 @media(min-width:640px){body{font-size:16px}.hd{padding:0 24px}.hd-t{font-size:16px}.main{padding:28px 24px 64px}.sec-t{font-size:22px}.q{padding:16px 18px}.q-q{font-size:15.5px}}
 @media(max-width:400px){.hd{padding:0 12px;gap:8px}.hd-t{font-size:12px}.prog-lbl{padding:5px 8px;min-width:52px}.prog-lbl strong{font-size:12px}.btn{padding:5px 7px}.tab{padding:0 10px;font-size:11px}.main{padding:16px 12px 48px}.sec-t{font-size:17px}.q{padding:12px 12px;gap:10px}.q-q{font-size:14px}.memo{padding:12px 14px;font-size:12px}}
 @media print{.hd,.tabs{display:none!important}.main{margin:0;padding:20px;max-width:100%}.q{break-inside:avoid;background:#fff!important}.sec{break-inside:auto}.ck{display:none}}
@@ -76,7 +66,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR','App
 <body>
 <header class="hd">
 <div class="hd-l">
-<div class="hd-ep">EP.02 · 촬영 질문지</div>
+<div class="hd-ep">EP.02 · 촬영 질문지 v2</div>
 <div class="hd-t">결정사 대표가 본인 등급을 매겨봤습니다</div>
 </div>
 <div class="hd-r">
@@ -88,128 +78,75 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR','App
 <main class="main" id="main"></main>
 <script>
 const D=[
-{id:1,title:"프리훅",time:"0:00~0:30",stage:"패턴 인터럽트 → 오픈 루프",
+{id:1,title:"킥",time:"0:00~0:30",stage:"패턴 인터럽트 → 오픈 루프",
 memo:[
 {k:"설정",v:"이세령이 등급표 보드(A2)를 들고 앉아 있는 상태에서 시작. 인사 없이 바로."},
-{k:"촬영",v:"카메라 1대 정면. 4K. 핀마이크 ON 확인. 등급표 보드가 화면에 잘 잡히도록."},
+{k:"촬영",v:"카메라 정면. 4K. 핀마이크 ON 확인. 등급표 보드가 화면에 잘 잡히도록."},
 {k:"톤",v:"자신감 + 약간의 도발. '제가 직접 해봤어요' 느낌."},
-{k:"주의",v:"인사 금지. '안녕하세요' 절대 X. 등급표 들고 바로 시작. 점수는 가림 처리(봉투)."},
-{k:"키워드",v:"등급, 본인 등급, 매겨봤다, 점수, 충격"}
+{k:"주의",v:"인사 금지. '안녕하세요' 절대 X. 점수는 가림 처리(봉투)."}
 ],
-groups:[{title:null,qs:[
-{n:1,tag:"후킹",q:"(등급표 보드 들고) 결정사에 등급이 있다는 거 다들 아시죠?",hint:"등급표 보드를 카메라에 보여주면서 시작. 시청자가 '뭐야 이게' 반응."},
-{n:2,tag:"후킹",q:"대표님은 본인 등급 매겨봤어요?",hint:"이세령이 '네, 해봤는데...' 하면 바로 → '점수가 나왔는데 좀 충격이었어요. 끝까지 보시면 알려드릴게요' 오픈 루프."}
-]}]},
-
-{id:2,title:"1막: 등급 시스템 해부",time:"0:30~5:00",stage:"정보 전달 — 시청자가 '이렇게 작동하는구나' 이해",
-memo:[
-{k:"설정",v:"등급표 보드를 테이블 위에 놓고 항목별로 가리키면서 설명. PD가 시청자 입장에서 질문."},
-{k:"촬영",v:"등급표 보드 클로즈업 인서트 필수. 항목 설명할 때마다 해당 항목 줌. 이세령+보드 투샷 기본."},
-{k:"톤",v:"업계 인사이더가 '솔직히 이래요' 하는 정보 전달 톤. 비하 X, 분석 O."},
-{k:"주의",v:"경쟁사 실명 금지(듀오/가연/엔노블 등). '메이저 결정사' '노블 결정사'로만. 본인 결정사 가격 직접 언급 금지."},
-{k:"키워드",v:"52점 만점, 나이/외모/재산/연봉/집안/학력, S등급=의사/판사/검사, 남녀 차이, 가격 270만~1억"}
-],
-groups:[
-{title:"A. 등급 기준",qs:[
-{n:3,tag:"시청자대리",q:"결정사 등급은 어떻게 매기는 거예요? 기준이 뭐예요?",hint:"이세령이 자연스럽게 '항목이 있어요' → 52점 만점 체계 설명으로 이어지게."},
-{n:4,tag:"시청자대리",q:"52점 만점이라고요? 항목이 뭐뭐예요?",hint:"나이/외모/재산/연봉/집안/학력 — 이세령이 보드 가리키면서 하나씩."},
-{n:5,tag:"위기장치",q:"남자 S등급은 어떤 사람이에요?",hint:"'의사, 판사, 검사. 이것만 돼요' — 이 대답이 위기장치. 시청자 충격 유발."},
-{n:6,tag:"시청자대리",q:"대기업 다니면 S등급이에요?",hint:"'아니요, A등급이에요' — 시청자 예상 깨기."},
-{n:7,tag:"후킹",q:"A등급은요? B등급은요? 쭉 내려가면 어떻게 돼요?",hint:"등급 체계 전체를 훑는 질문. 이세령이 단계별로 설명."}
-]},
-{title:"B. 남녀 기준 차이",qs:[
-{n:8,tag:"위기장치",q:"여자 기준은 뭐예요? 남자랑 다르다면서요?",hint:"'남자는 돈/직업, 여자는 외모/나이' — 이 대답이 2번째 위기장치."},
-{n:9,tag:"반론",q:"남자는 돈, 여자는 외모라는 게 진짜예요? 그게 차별 아니에요?",hint:"반론으로 긴장감. 이세령이 업계 현실을 솔직하게 설명하되 중립 유지."},
-{n:10,tag:"트렌드",q:"아나운서나 승무원이면 등급이 올라간다는 말도 있던데요?",hint:"커뮤니티 화제. 이세령이 본인 아나운서 출신이니까 '네, 가산점이 있긴 해요' 자연스럽게."},
-{n:11,tag:"시청자대리",q:"나이가 1살 차이나도 등급이 달라져요?",hint:"시청자 궁금증 대리. 이세령이 '네, 특히 여자는...' 하면서 현실 설명."}
-]},
-{title:"C. 가격 구조",qs:[
-{n:12,tag:"시청자대리",q:"결정사 가격이 대체 얼마예요? 범위가 어떻게 돼요?",hint:"이세령이 업계 평균 범위(수백만~수천만)를 설명. 특정 회사 가격 X."},
-{n:13,tag:"위기장치",q:"제일 비싼 데는 1억이라는 말도 있던데, 진짜 그 정도 하는 데가 있어요?",hint:"리서치 데이터를 질문에 녹임. 이세령 반응: '네, 그 정도 하는 데도 있죠' 또는 본인 경험."},
-{n:14,tag:"트렌드",q:"근데 가격이 불투명하다는 비판이 많잖아요. 커뮤니티에서도 '왜 알려주지 않느냐'는 글이 많은데, 왜 그런 거예요?",hint:"에펨코리아/블라인드 커뮤니티 이슈 반영. 이세령이 업계 관행을 솔직하게 설명."},
-{n:15,tag:"반론",q:"여자가 남자보다 더 비싸다는 게 사실이에요?",hint:"반론으로 긴장감. 이세령이 '구조가 그렇게 돼 있어요' 하면서 왜 그런지 설명."}
-]}
+qs:[
+{n:1,tag:"PEAK",q:"(등급표 들고) 결정사에 등급이 있다는 거 다들 아시죠?",hint:"등급표 보드를 카메라에 보여주면서 시작. 시청자 '뭐야 이게' 반응."},
+{n:2,tag:"PD",q:"대표님 본인 등급 매겨봤다고요?",hint:"이세령 '네, 해봤는데... 좀 충격이었어요' → 점수 가림(봉투). 오픈 루프 완성."}
 ]},
 
-{id:3,title:"2막: 본인 등급 공개 ⭐",time:"5:00~7:00",stage:"영상 최대 피크 — 첫 반응 리테이크 금지",
+{id:2,title:"해부",time:"0:30~5:00",stage:'"결정사 안에서 보면요" — 정보 전달',
 memo:[
-{k:"설정",v:"이세령 앞에 본인 채점표(봉투). 항목별로 PD가 하나씩 물어봄. 총점은 봉투 안에 — 마지막에 개봉."},
-{k:"촬영",v:"이세령 표정 클로즈업 필수. 총점 공개 순간 = 리액션 캠 ON. 리테이크 절대 금지."},
-{k:"톤",v:"자학 유머 + 솔직. '저도 이 정도밖에 안 돼요' 느낌."},
-{k:"주의",v:"총점 공개 순간 리테이크 절대 금지. 첫 반응이 콘텐츠. 봉투 개봉 → 2초 무음 → 드럼 임팩트(편집)."},
-{k:"키워드",v:"본인 등급, 항목별 점수, 총점, 봉투 개봉, 첫 반응"}
+{k:"목표",v:"시청자가 '등급 시스템이 이렇게 작동하는구나' 이해. 정보 + '진짜?' 놀람."},
+{k:"촬영",v:"등급표 보드 클로즈업 인서트 필수. 항목 설명할 때마다 해당 항목 줌."},
+{k:"PD패턴",v:'"진짜요?" + "그건 좀 불공평하지 않아요?"'},
+{k:"주의",v:"경쟁사 실명 금지. '메이저 결정사'로만. 본인 결정사 가격 직접 언급 금지."}
 ],
-groups:[{title:"D. 항목별 본인 등급 채점",qs:[
-{n:16,tag:"후킹",q:"자, 그러면 대표님. 본인 등급을 직접 매겨봤다고요?",hint:"전환 질문. 1막(정보)에서 2막(본인)으로 넘어가는 순간. 시청자 집중 피크."},
-{n:17,tag:"위기장치",q:"항목별로 하나씩 가볼까요? 나이부터. 30세면 몇 점이에요?",hint:"이세령이 '30세면 여자 기준으로는...' 하면서 본인 점수 매김."},
-{n:18,tag:"시청자대리",q:"외모는요? 본인이 본인 외모를 평가한다면?",hint:"자학 포인트. 이세령이 웃으면서 솔직하게. PD가 '에이~' 리액션."},
-{n:19,tag:"감정이입",q:"아나운서 출신이면 가산점 있다고 했잖아요. 본인한테도 적용돼요?",hint:"1막 트렌드 질문(Q10)과 연결. 이세령 본인 이야기로 전환."},
-{n:20,tag:"시청자대리",q:"학력은요? 연세대면 몇 점?",hint:"이세령이 '학력은 이 정도면...' 하면서 점수 매김."},
-{n:21,tag:"위기장치",q:"재산이랑 연봉은요? 결정사 대표면 높아요?",hint:"'사업 초기라...' — 예상 외로 낮을 수 있음. 자학 유머 포인트."},
-{n:22,tag:"후킹",q:"총점 몇 점이에요? (봉투 개봉)",hint:"★ 영상 최대 피크. 봉투를 열고 처음 보는 순간. 이세령 리액션 = 콘텐츠. PD는 3초 침묵."},
-{n:23,tag:"감정이입",q:"그 점수 보고 어떤 기분이었어요?",hint:"첫 반응 직후 감정 질문. 이세령이 솔직하게 '솔직히 좀...' 하면서."},
-{n:24,tag:"반론",q:"본인 등급에 수긍해요? 아니면 억울해요?",hint:"반론으로 한 번 더 꼬기. 이세령의 솔직한 반응."}
-]}]},
-
-{id:4,title:"2막 후반: 커뮤니티 트렌드",time:"7:00~10:00",stage:"화제 사례로 시청자 체류 유지",
-memo:[
-{k:"설정",v:"본인 등급 공개 후 에너지 전환. PD가 최근 방송/커뮤니티 화제를 언급하며 질문. 이세령은 아는 만큼 답변."},
-{k:"촬영",v:"해당 방송 캡처 인서트(편집 시 삽입). 이세령 리액션 위주."},
-{k:"톤",v:"가볍게 토크. '아 그거요?' 느낌. 모르면 '모르겠는데요?' OK."},
-{k:"주의",v:"연예인 사례는 PD 질문에 녹여서 자연스럽게. 이세령이 외운 느낌 절대 X. 모르면 모른다고."},
-{k:"키워드",v:"탁재훈, 김요한, 이선민, 나솔 순자, 결정사 7년차 매니저"}
-],
-groups:[
-{title:"E. 연예인/화제 사례",qs:[
-{n:25,tag:"트렌드",q:"요즘 방송에서 결정사 가입비가 1억이라는 얘기가 나왔잖아요. 진짜 그 정도 나와요?",hint:"탁재훈 신랑수업2 (2026.04). PD가 자연스럽게 언급 → 이세령이 업계 경험으로 답변."},
-{n:26,tag:"트렌드",q:"또 어떤 방송에서 '너무 잘생기면 오히려 감점'이라는 말이 나왔는데, 그런 경우 진짜 있어요?",hint:"김요한 신랑수업2 (2026.04). 이세령: '그런 케이스 있어요' 또는 본인 경험."},
-{n:27,tag:"트렌드",q:"요즘 화제가 된 게, 어떤 분이 52점 만점에 24점 받았다고 충격받았거든요. 그 정도면 어떤 수준이에요?",hint:"이선민 갓경규 (2026.02). 이세령이 '24점이면...' 하면서 업계 기준으로 해석."},
-{n:28,tag:"트렌드",q:"한양대 나오고 공무원인데 D등급이라는 사례도 있던데, 가능해요?",hint:"나솔 순자 (2025). 이세령이 '그게 여자 기준에서는...' 하면서 남녀 차이 다시 짚기."},
-{n:29,tag:"트렌드",q:"결정사 7년 차 매니저가 '이 시장도 끝났다'고 했다는 글이 있었는데, 어떻게 봐요?",hint:"인스티즈 화제글. 이세령이 업계 현실 + 본인 생각. '끝났다기보다는...'"}
-]},
-{title:"F. 외모/가격 논란 정면 돌파",qs:[
-{n:30,tag:"트렌드",q:"커뮤니티에서 결정사가 여자 외모를 직접 평가한다는 글이 올라와서 논란이 됐었는데, 실제로 그래요?",hint:"블라인드/디시 커뮤니티 이슈. 이세령이 '솔직히 말하면...' 하면서 업계 현실 설명."},
-{n:31,tag:"반론",q:"본인 결정사도 외모 봐요?",hint:"반론 직격. 이세령이 본인 결정사 기준을 솔직하게."},
-{n:32,tag:"트렌드",q:"결정사에서 20명 만나고 나서 '결혼의 본질을 깨달았다'는 후기가 있었는데, 어떻게 봐요?",hint:"네이트판 화제 후기. 이세령이 매칭 경험에서 본 인사이트."}
-]}
+qs:[
+{n:3,tag:null,q:"결정사 등급은 어떻게 매기는 거예요?",hint:"52점 만점 체계 (나이/외모/재산/연봉/집안/학력). 보드 가리키면서."},
+{n:4,tag:"PEAK",q:"남자 S등급은 어떤 사람이에요?",hint:"'의사, 판사, 검사. 이것만 돼요' — 위기장치 ①. PD: '진짜요?'"},
+{n:5,tag:"PD",q:"여자 기준은요? 남자랑 다르다면서요?",hint:"'남자는 돈/직업, 여자는 외모/나이' — 위기장치 ②. PD: '불공평하지 않아요?'"},
+{n:6,tag:null,q:"결정사 가격이 대체 얼마예요?",hint:"'270만~1억.' 탁재훈 얘기 자연스럽게 나오면 OK."},
+{n:7,tag:null,q:"근데 가격이 왜 불투명해요? 커뮤니티에서 불만이 많던데.",hint:"에펨/블라인드 트렌드 반영. 이세령이 업계 관행 솔직 설명."}
 ]},
 
-{id:5,title:"3막: 등급 너머의 진실",time:"10:00~13:30",stage:"반전 메시지 — '등급은 시작점이지 결론이 아니다'",
+{id:3,title:"본인",time:"5:00~10:00",stage:'"겪어봐야 아는 거예요" — 영상 최대 피크',
 memo:[
-{k:"설정",v:"톤 전환. 정보 → 감성. 이세령이 실제 케이스를 이야기하면서 메시지 전달."},
+{k:"목표",v:"본인 등급 공개 = 영상 최대 피크. 첫 반응 리테이크 절대 금지."},
+{k:"촬영",v:"이세령 표정 클로즈업 필수. 총점 공개 = 리액션 캠 ON. 봉투 개봉 순간 리테이크 금지."},
+{k:"PD패턴",v:'"대표님은요?" (해부→본인 전환 트리거)'},
+{k:"편집",v:"봉투 개봉 순간: 2초 무음 → 드럼 임팩트. 항목별 점수 자막으로 쌓기."}
+],
+qs:[
+{n:8,tag:"PD",q:"그러면 대표님은요? 본인 등급 직접 매겨봤다고요?",hint:"전환 순간. 해부(정보) → 본인(감정)으로 넘어감."},
+{n:9,tag:"PEAK",q:"항목별로 가볼까요? 나이, 외모, 학력, 연봉... 하나씩.",hint:"항목별 본인 점수 매기기. PD는 각 항목마다 '진짜요?' '에이~' 리액션. 총점은 봉투에서."},
+{n:10,tag:"TREND",q:"요즘 방송에서 결정사 가입비 1억이라는 얘기가 나왔잖아요. 진짜 그 정도 나와요?",hint:"탁재훈 신랑수업2. 본인 등급 채점 흐름 중 자연스럽게."},
+{n:11,tag:"TREND",q:'"잘생기면 오히려 감점"이라는 말도 있던데, 그런 경우 있어요?',hint:"김요한 신랑수업2. 등급 기준의 아이러니."},
+{n:12,tag:"TREND",q:"어떤 분이 52점 만점에 24점 받았다고 충격받았거든요. 그 정도면 어떤 수준이에요?",hint:"이선민 갓경규. 이세령 '24점이면...' 업계 기준으로 해석."},
+{n:13,tag:"TREND",q:"한양대 공무원인데 D등급이라는 사례도 있었어요. 가능해요?",hint:"나솔 순자. '여자 기준에서는 충분히 가능' — 남녀 차이 다시 짚기."},
+{n:14,tag:"TREND",q:'결정사 7년차 매니저가 "이 시장 끝났다"고 했는데, 어떻게 봐요?',hint:"인스티즈 화제글. 이세령 본인 생각."}
+]},
+
+{id:4,title:"반전",time:"10:00~13:30",stage:'"등급이 다가 아니에요" — 메시지',
+memo:[
+{k:"목표",v:"정보 → 감성 톤 전환. '등급은 시작점이지 결론이 아니다' 메시지."},
 {k:"촬영",v:"BGM 피아노 전환(편집). 이세령 표정 클로즈업. 마지막 멘트 = 긴 컷 10초+."},
-{k:"톤",v:"따뜻하고 진심. '등급이 다가 아니에요' 메시지."},
-{k:"주의",v:"특정 회원 정보 절대 X. '어떤 분이~' 식으로만. 엔딩 CTA 멘트 0회. 마지막 질문 후 10초+ 침묵 버티기."},
-{k:"키워드",v:"S등급인데 안 되는 사람, 등급 낮은데 된 사람, 태도, 등급은 시작점, 겪어본 사람"}
+{k:"PD패턴",v:'"그러면 어떡해요?" (본인→반전 전환)'},
+{k:"주의",v:"특정 회원 정보 절대 X. '어떤 분이~' 익명 처리. 엔딩 CTA 0회."}
 ],
-groups:[
-{title:"G. 등급의 반전",qs:[
-{n:33,tag:"재후킹",q:"등급 높으면 결혼 잘 돼요?",hint:"전환 질문. 시청자가 '당연히 그렇지 않나?' → 반전."},
-{n:34,tag:"위기장치",q:"S등급인데 매칭 안 되는 사람도 있어요? 왜요?",hint:"실화 기반. 이세령이 '있어요. 어떤 분은 3년째...' 하면서 (익명). 등급 ≠ 결혼."},
-{n:35,tag:"감정이입",q:"반대로 등급 낮은데 결혼 잘 된 케이스는?",hint:"반전 사례. '태도가 다른 분이었어요' — 이세령의 업계 경험."},
-{n:36,tag:"시청자대리",q:"그러면 결정사에서 진짜 중요한 건 뭐예요? 등급이 아니라면?",hint:"핵심 메시지 유도 질문. 이세령이 '태도' '진정성' 등 본인 철학."}
-]},
-{title:"H. 선언 + 엔딩",qs:[
-{n:37,tag:"마무리",q:"본인 결정사는 등급을 어떻게 할 거예요?",hint:"사업 연결. '우리는 등급을 투명 공개할 거예요' 등 차별점 선언."},
-{n:38,tag:"마무리",q:"지금 등급 때문에 결정사 고민하는 사람한테 한마디 한다면?",hint:"★ 마지막 질문. 대본 X. 이세령 감정으로 자유롭게. PD는 10초+ 침묵 버티기. 리테이크 금지."}
-]}
+qs:[
+{n:15,tag:"PEAK",q:"등급 높으면 결혼 잘 돼요?",hint:"'S등급인데 3년째 안 되는 분 있어요.' 반전 — 등급 ≠ 결혼. 위기장치."},
+{n:16,tag:null,q:"반대로 등급 낮은데 잘 된 케이스는?",hint:"'태도가 달랐어요.' 이세령 업계 경험."},
+{n:17,tag:"PD",q:"그러면 어떡해요? 결정사에서 진짜 중요한 건 뭐예요?",hint:'이세령 철학. "등급이 다가 아니에요." 캐치프레이즈 순간.'}
 ]},
 
-{id:6,title:"오맷돌님 추가 질문",time:"삽입 위치 TBD",stage:"리뷰 후 추가",
+{id:5,title:"아웃",time:"13:30~14:30",stage:"여운 + EP.03 떡밥",
 memo:[
-{k:"안내",v:"오맷돌님이 리뷰 후 추가할 질문 5자리. 1막/2막/3막 어디든 삽입 가능."},
-{k:"방법",v:"질문 확정 후 해당 막의 적절한 위치에 삽입. 태그는 [대표Q]."}
+{k:"목표",v:"캐치프레이즈 + 여운 + 페이드아웃."},
+{k:"촬영",v:"대본 X. 이세령 감정으로 자유롭게. PD 10초+ 침묵 버티기. 리테이크 금지."},
+{k:"편집",v:"마지막 멘트 → 3초 정적 → 미소 → 페이드아웃(5초). EP.03 프리뷰 5초 삽입."}
 ],
-groups:[{title:null,qs:[
-{n:39,tag:"대표Q",q:"(추가 예정)",hint:"오맷돌님 추가 질문 1"},
-{n:40,tag:"대표Q",q:"(추가 예정)",hint:"오맷돌님 추가 질문 2"},
-{n:41,tag:"대표Q",q:"(추가 예정)",hint:"오맷돌님 추가 질문 3"},
-{n:42,tag:"대표Q",q:"(추가 예정)",hint:"오맷돌님 추가 질문 4"},
-{n:43,tag:"대표Q",q:"(추가 예정)",hint:"오맷돌님 추가 질문 5"}
-]}]}
+qs:[
+{n:18,tag:null,q:"지금 등급 때문에 결정사 고민하는 사람한테 한마디 한다면?",hint:"대본 X. 이세령 감정으로 자유롭게. PD 10초+ 침묵. 리테이크 금지."}
+]}
 ];
 
-const SK='ep02pd_checks_v1';
+const SK='ep02_checks_v2';
 let checks=(()=>{try{return JSON.parse(localStorage.getItem(SK)||'{}')}catch(e){return {}}})();
 const save=()=>localStorage.setItem(SK,JSON.stringify(checks));
 const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -221,22 +158,22 @@ const mainEl=document.getElementById('main');
 D.forEach(loc=>{
  const a=document.createElement('a');
  a.className='tab';a.href='#sec-'+loc.id;a.dataset.id=loc.id;
- a.textContent=loc.title.replace(/:.*/,'').replace(/ ⭐/,'');
+ a.textContent=loc.title;
  tabsEl.appendChild(a);
 });
 
 // Count total questions
 let totalQ=0;
-D.forEach(loc=>loc.groups.forEach(g=>totalQ+=g.qs.length));
+D.forEach(loc=>totalQ+=loc.qs.length);
 document.getElementById('pt').textContent=totalQ;
 
 // Render sections
 D.forEach(loc=>{
  const sec=document.createElement('section');
  sec.className='sec';sec.id='sec-'+loc.id;
- const total=loc.groups.reduce((s,g)=>s+g.qs.length,0);
+ const total=loc.qs.length;
  let h='<div class="sec-hd"><div class="sec-hd-l">'
-  +'<div class="sec-t">'+esc(loc.title)+'</div>'
+  +'<div class="sec-t">['+esc(loc.title)+']</div>'
   +'<div><span class="sec-time">'+esc(loc.time)+'</span></div>'
   +'<div class="sec-stage">'+esc(loc.stage)+'</div>'
   +'</div>'
@@ -244,47 +181,45 @@ D.forEach(loc=>{
   +'</div>';
 
  // Memo block
- const hasBan=loc.memo.some(m=>m.k==='Ban');
  h+='<div class="memo">';
  loc.memo.forEach(m=>{
   h+='<div class="memo-r"><div class="memo-k">'+esc(m.k)+'</div><div class="memo-v">'+esc(m.v)+'</div></div>';
  });
  h+='</div>';
 
- // Groups and questions
- loc.groups.forEach(grp=>{
-  if(grp.title)h+='<div class="grp-t">'+esc(grp.title)+'</div>';
-  grp.qs.forEach(q=>{
-   const on=checks[q.n]?' on':'';
-   h+='<div class="q'+on+'" data-n="'+q.n+'">'
-    +'<div class="ck"></div>'
-    +'<div class="q-body">'
-    +'<div class="q-top"><span class="q-n">#'+q.n+'</span>'
-    +(q.tag?'<span class="q-tag tg-'+q.tag+'">['+q.tag+']</span>':'')
-    +'</div>'
-    +'<div class="q-q">'+esc(q.q)+'</div>'
-    +(q.hint?'<div class="q-hint">→ '+esc(q.hint)+'</div>':'')
-    +'</div></div>';
-  });
+ // Questions
+ loc.qs.forEach(q=>{
+  const on=checks[q.n]?' on':'';
+  h+='<div class="q'+on+'" data-n="'+q.n+'">'
+   +'<div class="ck"></div>'
+   +'<div class="q-body">'
+   +'<div class="q-top"><span class="q-n">#'+q.n+'</span>'
+   +(q.tag?'<span class="q-tag tg-'+q.tag+'">['+q.tag+']</span>':'')
+   +'</div>'
+   +'<div class="q-q">'+esc(q.q)+'</div>'
+   +(q.hint?'<div class="q-hint">→ '+esc(q.hint)+'</div>':'')
+   +'</div></div>';
  });
  sec.innerHTML=h;
  mainEl.appendChild(sec);
 });
 
-// Add props + ban at bottom
+// Ban at bottom
 const extras=document.createElement('div');
 extras.innerHTML=`
-<div class="ban-box">
-<div class="memo-r"><div class="memo-k">Ban</div><div class="memo-v">경쟁사 실명(듀오/가연/엔노블/제이노블) → "메이저 결정사"로만</div></div>
-<div class="memo-r"><div class="memo-k">Ban</div><div class="memo-v">특정 회원 정보 → "어떤 분이~" 익명 처리</div></div>
-<div class="memo-r"><div class="memo-k">Ban</div><div class="memo-v">"안녕하세요" 인사 → 등급표 들고 바로 시작</div></div>
-<div class="memo-r"><div class="memo-k">Ban</div><div class="memo-v">"구독/좋아요" 멘트 → 영상 내 0회</div></div>
-<div class="memo-r"><div class="memo-k">Ban</div><div class="memo-v">MCN/네오브릿지 관계 → 순수 개인 채널</div></div>
-<div class="memo-r"><div class="memo-k">Ban</div><div class="memo-v">워터밤 / 황정우·이나영 사건 → 절대 금지</div></div>
-<div class="memo-r"><div class="memo-k">Ban</div><div class="memo-v">본인 결정사 가격 직접 공개 → "업계 평균"으로만</div></div>
-<div class="memo-r"><div class="memo-k">Ban</div><div class="memo-v">EP01 인생 스토리(90kg/편입/복권) 반복 → X</div></div>
-<div class="memo-r"><div class="memo-k">Ban</div><div class="memo-v">등급 시스템 비하("쓰레기 시스템") → 분석 O, 비하 X</div></div>
-<div class="memo-r"><div class="memo-k">Ban</div><div class="memo-v">특정 성별 편들기 → 중립. 남녀 양쪽 솔직하게</div></div>
+<div class="ban-box" style="margin-top:32px">
+<div class="memo-r"><div class="memo-k" style="min-width:60px">절대금지</div><div class="memo-v">"안녕하세요" 인사 — 등급표 들고 바로 시작</div></div>
+<div class="memo-r"><div class="memo-k" style="min-width:60px">절대금지</div><div class="memo-v">"구독/좋아요" 멘트 — 영상 내 0회</div></div>
+<div class="memo-r"><div class="memo-k" style="min-width:60px">절대금지</div><div class="memo-v">경쟁사 실명(듀오/가연/엔노블) — "메이저 결정사"로만</div></div>
+<div class="memo-r"><div class="memo-k" style="min-width:60px">절대금지</div><div class="memo-v">특정 회원 정보 — "어떤 분이~" 익명 처리</div></div>
+<div class="memo-r"><div class="memo-k" style="min-width:60px">절대금지</div><div class="memo-v">EP01 인생 스토리 반복 — 90kg/편입/복권 다시 X</div></div>
+</div>
+<div class="memo" style="margin-top:12px">
+<div class="memo-r"><div class="memo-k" style="min-width:42px">주의</div><div class="memo-v">MCN/네오브릿지 관계 → 순수 개인 채널</div></div>
+<div class="memo-r"><div class="memo-k" style="min-width:42px">주의</div><div class="memo-v">워터밤 / 황정우·이나영 사건 → 절대 금지</div></div>
+<div class="memo-r"><div class="memo-k" style="min-width:42px">주의</div><div class="memo-v">본인 결정사 가격 직접 공개 → "업계 평균"으로만</div></div>
+<div class="memo-r"><div class="memo-k" style="min-width:42px">주의</div><div class="memo-v">등급 시스템 비하 → 분석 O, 비하 X</div></div>
+<div class="memo-r"><div class="memo-k" style="min-width:42px">주의</div><div class="memo-v">특정 성별 편들기 → 중립. 남녀 양쪽 솔직하게</div></div>
 </div>`;
 mainEl.appendChild(extras);
 
@@ -292,11 +227,11 @@ mainEl.appendChild(extras);
 function updateCounts(){
  let total=0,done=0;
  D.forEach(loc=>{
-  let ld=0,lt=0;
-  loc.groups.forEach(g=>g.qs.forEach(q=>{
-   lt++;total++;
+  let ld=0,lt=loc.qs.length;
+  loc.qs.forEach(q=>{
+   total++;
    if(checks[q.n]){ld++;done++}
-  }));
+  });
   const el=document.querySelector('[data-loc="'+loc.id+'"]');
   if(el){el.textContent=ld+' / '+lt;el.classList.toggle('done',ld===lt&&lt>0)}
  });

@@ -6,623 +6,460 @@
 <meta name="theme-color" content="#ffffff">
 <title>[PD용] EP.02 — 결정사 대표가 본인 등급을 매겨봤습니다</title>
 <style>
-:root{--bg:#ffffff;--card:#ffffff;--card2:#f4f6f8;--border:#e5e7eb;--border2:#f1f3f5;--text:#191f28;--text2:#4e5968;--text3:#8b95a1;--accent:#0064ff;--accent-br:#3385ff;--accent-d:#0048b3;--accent-l:#e8f1ff;--green:#15803d;--amber:#b45309;--red:#dc2626;--hh:58px;--th:50px}
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR','Apple SD Gothic Neo',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:15px;-webkit-font-smoothing:antialiased}
-.header{position:fixed;top:0;left:0;right:0;height:var(--hh);background:rgba(255,255,255,.92);backdrop-filter:saturate(180%) blur(12px);-webkit-backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 18px;gap:10px;z-index:100}
-.header-ep{font-size:11px;font-weight:700;color:var(--accent);background:var(--accent-l);padding:4px 10px;border-radius:6px;flex-shrink:0}
-.header-title{font-size:14px;font-weight:700;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text);letter-spacing:-.01em}
-.header-ver{font-size:10px;font-weight:700;color:#fff;background:var(--accent);padding:3px 8px;border-radius:4px;flex-shrink:0}
-.header-ch{font-size:12px;color:var(--text3);flex-shrink:0}
-.tab-bar{position:fixed;top:var(--hh);left:0;right:0;height:var(--th);background:rgba(255,255,255,.92);backdrop-filter:saturate(180%) blur(12px);-webkit-backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border);display:flex;overflow-x:auto;z-index:99;scrollbar-width:none;padding:0 10px;gap:2px}
-.tab-bar::-webkit-scrollbar{display:none}
-.tab{display:flex;align-items:center;padding:0 14px;text-decoration:none;color:var(--text3);font-size:12px;font-weight:600;white-space:nowrap;border-bottom:3px solid transparent;transition:.15s;flex-shrink:0}
-.tab:hover{color:var(--text2);background:var(--card2)}
-.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
-.prog{position:fixed;top:calc(var(--hh) + var(--th));left:0;right:0;height:3px;background:var(--border);z-index:98}
-.prog-bar{height:100%;background:var(--accent);width:0%;transition:width .1s}
-.hero{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px;margin-bottom:28px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 4px 16px rgba(0,0,0,.04)}
-.hero-top{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap}
-.hero-ep{font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-l);padding:5px 12px;border-radius:8px}
-.hero-badge{font-size:11px;font-weight:600;padding:5px 10px;border-radius:8px}
-.hero-title{font-size:26px;font-weight:800;line-height:1.3;margin-bottom:8px;word-break:keep-all;color:var(--text);letter-spacing:-.02em}
-.hero-sub{font-size:15px;color:var(--text2);margin-bottom:18px;font-weight:500;word-break:keep-all}
-.hero-meta{font-size:12px;color:var(--text3);margin-bottom:18px;display:flex;gap:8px;flex-wrap:wrap}
-.hero-meta span{background:var(--card2);padding:5px 10px;border-radius:8px}
-.hero-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px}
-.stat{background:var(--card2);border-radius:14px;padding:14px 10px;text-align:center}
-.stat-v{font-size:20px;font-weight:800;color:var(--text);letter-spacing:-.01em}
-.stat-l{font-size:11px;color:var(--text3);margin-top:4px;word-break:keep-all;font-weight:500}
-.main{margin-top:calc(var(--hh) + var(--th) + 3px);padding:24px 18px 64px;max-width:860px;margin-left:auto;margin-right:auto}
-.md h2{font-size:22px;font-weight:800;margin:44px 0 16px;padding-bottom:10px;border-bottom:1px solid var(--border);scroll-margin-top:calc(var(--hh) + var(--th) + 20px);word-break:keep-all;color:var(--text);letter-spacing:-.02em}
-.md h3{font-size:17px;font-weight:700;margin:28px 0 12px;color:var(--text);word-break:keep-all;letter-spacing:-.01em}
-.md h4{font-size:14px;font-weight:700;margin:20px 0 8px;word-break:keep-all;color:var(--text)}
-.md p{margin:10px 0;font-size:15px;word-break:keep-all;color:var(--text2)}
-.md strong{color:var(--text);font-weight:700}
-.md a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}
-.md blockquote{border-left:3px solid var(--accent);padding:14px 18px;margin:16px 0;background:var(--card);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;font-size:14px;word-break:keep-all;color:var(--text2)}
-.tw{overflow-x:auto;margin:16px 0;-webkit-overflow-scrolling:touch;border:1px solid var(--border);border-radius:14px;background:var(--card)}
-.tw table{margin:0;border-collapse:collapse;width:100%;font-size:13px;min-width:100%}
-.tw th{background:var(--card2);color:var(--text2);padding:11px 14px;text-align:left;font-weight:700;font-size:12px;white-space:nowrap;border-bottom:1px solid var(--border)}
-.tw td{padding:11px 14px;border-bottom:1px solid var(--border2);word-break:keep-all;vertical-align:top;color:var(--text2)}
-.tw tr:last-child td{border-bottom:none}
-.tw tr:hover td{background:var(--card2)}
-.md code{font-family:'SF Mono','Menlo',monospace;font-size:12px;background:var(--card2);color:var(--accent);padding:2px 6px;border-radius:6px}
-.md ul,.md ol{padding-left:22px;margin:10px 0;color:var(--text2)}
-.md li{margin:5px 0;font-size:15px;word-break:keep-all}
-.md li::marker{color:var(--accent)}
-.md hr{border:none;border-top:1px solid var(--border);margin:32px 0}
-.t-hook{color:#dc2626;font-weight:700}
-.t-crisis{color:#b45309;font-weight:700}
-.t-emp{color:#6d28d9;font-weight:700}
-.t-view{color:#0891b2;font-weight:700}
-.t-counter{color:#be185d;font-weight:700}
-.t-rehook{color:#c2410c;font-weight:700}
-.t-close{color:#15803d;font-weight:700}
-.t-trend{color:#7c3aed;font-weight:700;background:#f5f3ff;padding:1px 6px;border-radius:4px}
-.t-ceo{color:#ea580c;font-weight:700;background:#fff7ed;padding:1px 6px;border-radius:4px}
-@media(min-width:640px){body{font-size:16px}.hero{padding:28px 32px}.hero-title{font-size:26px}.main{padding:28px 24px 64px}.md h2{font-size:22px}.md p,.md li{font-size:15px}.tw table{font-size:14px}}
-@media(max-width:480px){.header{padding:0 12px;gap:8px}.header-title{font-size:13px}.header-ch{display:none}.tab{padding:0 10px;font-size:11px}.main{padding:18px 12px 48px}.hero{padding:18px 16px}.hero-title{font-size:19px}.hero-stats{grid-template-columns:repeat(2,1fr)}.md h2{font-size:17px;margin:30px 0 12px}.md h3{font-size:14px}.tw table{font-size:12px}.tw td,.tw th{padding:7px 9px}}
-@media print{.header,.tab-bar,.prog{display:none!important}.main{margin:0;padding:20px;max-width:100%}.tw{overflow:visible;border:none}.tw table{font-size:11px}}
+:root{--bg:#fff;--card:#fff;--card2:#f4f6f8;--border:#e5e7eb;--text:#191f28;--text2:#4e5968;--text3:#8b95a1;--accent:#0064ff;--accent-l:#e8f1ff;--green:#15803d;--amber:#b45309;--red:#dc2626}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);line-height:1.75;font-size:15px;-webkit-font-smoothing:antialiased;padding:0 0 60px}
+.bar{position:sticky;top:0;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 20px;z-index:10;display:flex;align-items:center;gap:10px}
+.bar .badge{font-size:11px;font-weight:700;color:#fff;background:var(--accent);padding:4px 10px;border-radius:6px}
+.bar .title{font-size:14px;font-weight:700;flex:1}
+.bar .ver{font-size:11px;color:var(--text3)}
+.ct{max-width:720px;margin:0 auto;padding:24px 20px}
+h1{font-size:24px;font-weight:800;line-height:1.3;margin-bottom:6px;word-break:keep-all}
+h2{font-size:19px;font-weight:800;margin:40px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--text);word-break:keep-all}
+h3{font-size:15px;font-weight:700;margin:24px 0 8px;color:var(--text)}
+p{margin:6px 0;color:var(--text2);word-break:keep-all}
+strong{color:var(--text)}
+.hero{text-align:center;padding:28px 0 24px;border-bottom:1px solid var(--border);margin-bottom:28px}
+.hero p{font-size:14px;color:var(--text2)}
+.hero .meta{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--text3);margin-top:12px}
+.hero .meta span{background:var(--card2);padding:5px 10px;border-radius:8px}
+.card{background:var(--card2);border-radius:12px;padding:16px 18px;margin:10px 0}
+.card-t{font-size:12px;font-weight:700;color:var(--accent);margin-bottom:6px;letter-spacing:.3px}
+.card p{font-size:14px;margin:3px 0}
+.hl{background:var(--accent-l);border-left:3px solid var(--accent);padding:14px 18px;border-radius:0 10px 10px 0;margin:14px 0;font-size:14px}
+.ban{background:#fef2f2;border-left:3px solid var(--red);padding:14px 18px;border-radius:0 10px 10px 0;margin:14px 0}
+.ban-t{font-size:12px;font-weight:700;color:var(--red);margin-bottom:4px}
+.ban p{font-size:13px;color:#991b1b;margin:2px 0}
+.warn{background:#fffbeb;border-left:3px solid var(--amber);padding:14px 18px;border-radius:0 10px 10px 0;margin:14px 0}
+.warn-t{font-size:12px;font-weight:700;color:var(--amber);margin-bottom:4px}
+.warn p{font-size:13px;color:#92400e;margin:2px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+th{background:var(--card2);padding:10px 12px;text-align:left;font-weight:700;font-size:12px;border-bottom:1px solid var(--border)}
+td{padding:10px 12px;border-bottom:1px solid var(--card2);color:var(--text2);vertical-align:top}
+.q{display:flex;gap:10px;padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:10px;margin:8px 0}
+.q-n{flex-shrink:0;width:28px;height:28px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800}
+.q-body{flex:1;min-width:0}
+.q-text{font-size:14px;color:var(--text);word-break:keep-all}
+.q-hint{font-size:12px;color:var(--text3);margin-top:3px;font-style:italic}
+.q-tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:4px;color:#fff}
+.tg-peak{background:var(--red)}
+.tg-pd{background:#06b6d4}
+.tg-trend{background:#7c3aed}
+.sig{background:linear-gradient(135deg,var(--accent-l),#f0f4ff);border-radius:12px;padding:18px;margin:14px 0;text-align:center}
+.sig .label{font-size:11px;font-weight:700;color:var(--accent);margin-bottom:6px}
+.sig .quote{font-size:18px;font-weight:800;color:var(--text);line-height:1.4}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+@media(max-width:500px){.grid2{grid-template-columns:1fr}.ct{padding:16px 14px}h1{font-size:20px}h2{font-size:17px}}
+@media print{.bar{display:none!important}.ct{max-width:100%;padding:20px}}
 </style>
 </head>
 <body>
-<header class="header">
-<span class="header-ep">PD용</span>
-<span class="header-title">EP.02 — 결정사 대표가 본인 등급을 매겨봤습니다</span>
-<span class="header-ver">v1</span>
-<span class="header-ch">아는언니 리지</span>
-</header>
-<nav class="tab-bar" id="tabBar">
-<a class="tab" href="#s-0" data-i="0">킥오프</a>
-<a class="tab" href="#s-1" data-i="1">제목</a>
-<a class="tab" href="#s-2" data-i="2">개요</a>
-<a class="tab" href="#s-3" data-i="3">타겟</a>
-<a class="tab" href="#s-4" data-i="4">ACT구조</a>
-<a class="tab" href="#s-5" data-i="5">AVD</a>
-<a class="tab" href="#s-6" data-i="6">질문지</a>
-<a class="tab" href="#s-7" data-i="7">엔딩</a>
-<a class="tab" href="#s-8" data-i="8">트렌드</a>
-<a class="tab" href="#s-9" data-i="9">USP</a>
-<a class="tab" href="#s-10" data-i="10">편집</a>
-<a class="tab" href="#s-11" data-i="11">Ban</a>
-<a class="tab" href="#s-12" data-i="12">승인</a>
-</nav>
-<div class="prog"><div class="prog-bar" id="pBar"></div></div>
-<main class="main">
+
+<div class="bar">
+<span class="badge">PD용 런시트</span>
+<span class="title">EP.02 — 본인 등급</span>
+<span class="ver">v2 · 2026.04.16</span>
+</div>
+
+<div class="ct">
+
 <div class="hero">
-<div class="hero-top">
-<span class="hero-ep">EP.02 PD용 브리프</span>
-<span class="hero-badge" style="background:var(--accent);color:#fff">v1</span>
-<span class="hero-badge" style="background:var(--accent-l);color:var(--accent)">스튜디오</span>
-<span class="hero-badge" style="background:var(--card2);color:var(--text2)">13~15분</span>
-<span class="hero-badge" style="background:#fef2f2;color:var(--red)">등급 폭로형</span>
-</div>
-<h1 class="hero-title">결정사 대표가 본인 등급을 매겨봤습니다</h1>
-<div class="hero-sub">EP.02 — 결정사 등급 시스템 최초 업계 인사이더 해부</div>
-<div class="hero-meta">
+<h1>결정사 대표가<br>본인 등급을 매겨봤습니다</h1>
+<p>EP.02 · 등급 해부 → 본인 등급 → "등급이 다가 아니에요"</p>
+<div class="meta">
+<span>13~15분</span>
+<span>스튜디오 Solo</span>
 <span>아는언니 리지</span>
-<span>촬영일 TBD</span>
-<span>포맷: 스튜디오 Solo</span>
-</div>
-<div class="hero-stats">
-<div class="stat"><div class="stat-v">38개</div><div class="stat-l">질문지 (태그)</div></div>
-<div class="stat"><div class="stat-v">3막</div><div class="stat-l">ACT 구조</div></div>
-<div class="stat"><div class="stat-v">7개</div><div class="stat-l">위기장치</div></div>
-<div class="stat"><div class="stat-v">8개</div><div class="stat-l">커뮤니티 트렌드</div></div>
-<div class="stat"><div class="stat-v">5자리</div><div class="stat-l">오맷돌님 추가 Q</div></div>
-<div class="stat"><div class="stat-v">13개</div><div class="stat-l">Ban 리스트</div></div>
+<span>v2</span>
 </div>
 </div>
-<div class="md" id="ct"></div>
-</main>
-<textarea id="md-src" style="display:none">## [킥오프 시트] EP.02 기획 체크리스트
-
-| 항목 | 내용 |
-|------|------|
-| 에피소드 | EP.02 (두 번째 영상) |
-| 채널 | 아는언니 리지 |
-| 호스트 | 이세령 대표 (30세, 아나운서 출신, 결정사 공동대표) |
-| 포맷 | **스튜디오 Solo 토크** (이세령 + PD 질문) |
-| 타겟 러닝타임 | 13~15분 |
-| 촬영일 | TBD (오맷돌님 결정) |
-| 콘셉트 | **등급 폭로형** — 결정사 등급 시스템을 업계 인사이더가 해부하고 본인 등급까지 공개 |
-| EP01 연결 | EP01(대표의 하루/브이로그) → "이 대표 본인은 몇 등급인데?" 궁금증 해소 |
-| EP01과 겹침 | **0%** — EP01은 인생 스토리/하루. EP02는 업계 시스템 폭로 |
-| 시의성 핵심 | 탁재훈 1억(2026.04) / 이선민 "차갑다"(2026.02) / 나솔 순자 D등급(2025) / 김요한 충격(2026.04) |
-
----
-
-## STEP 0. 제목 & 썸네일 설계
 
-### 제목 공식 (3안)
-
-| 안 | 제목 | 글자수 | 공식 | 컨셉 |
-|---|------|-------|------|------|
-| **A (메인)** | **결정사 대표가 본인 등급을 매겨봤습니다** | 18자 | 자학형 + 호기심갭 | question |
-| B | 결정사 등급의 진실 [대표가 직접 공개] | 18자 | 폭로형 + 대괄호 | reveal |
-| C | 탁재훈 1억, 이선민 24점… 결정사 등급 진짜 공개합니다 | 27자 | 트렌드형 + 숫자 | shock_number |
-
-**A안 선택 근거:**
-- "본인 등급을 매겨봤습니다" = **결정사 대표가 자기 등급을 공개한다** → 클릭 안 할 수가 없음
-- "결정사 대표"인데 "본인 등급" = **위치의 아이러니** → 호기심갭 극대화
-- 18자 = 모바일 최적 길이
-- 벤치마크: 이선민 "결정사는 차갑다" 영상 화제 → 동일 포맷에 업계 인사이더 시각 추가
-
-**제목 체크리스트:**
-- [x] 30자 이내 (18자)
-- [x] 호기심갭 (대표가 본인 등급?)
-- [x] 결정사 키워드 포함
-- [x] 제목-썸네일 상보성
-
-### 썸네일 설계
-
-| 요소 | 내용 |
-|------|------|
-| 주인공 | 이세령 — 등급표를 손에 들고 곤란한 표정 |
-| 텍스트 (우) | 본인 등급 점수 (큰 숫자, 빨간색 80pt) |
-| 서브 텍스트 | "52점 만점에..." (흰색 작은 글씨) |
-| 배경 | 스튜디오 or 사무실 (깔끔) |
-| 모바일 비율 | 이세령 55% + 등급표/숫자 45% |
-
----
-
-## STEP 1. 영상 개요
-
-| 항목 | 내용 |
-|------|------|
-| 출연자 | 이세령 (30세, 연세대, 前 아나운서, 결정사 공동대표, 인스타 85K) |
-| 포맷 | **스튜디오 Solo 토크** |
-| 핵심 와우 포인트 | ① 등급 시스템 업계 인사이더 해부 ② **본인 등급 직접 공개** (자학) ③ 탁재훈 1억/이선민 24점 등 트렌드 정면 돌파 ④ "등급이 높다고 결혼 잘 되냐?" 반전 ⑤ 남녀 비대칭 기준 솔직 해설 |
-| 러닝타임 | 13~15분 |
-| 한 줄 요약 | 결정사 대표가 업계 등급 시스템을 처음부터 끝까지 해부하고, 본인 스펙으로 본인 등급까지 매겨보면서, "등급 너머에 진짜 중요한 것"을 말하는 스튜디오 토크 |
-| 촬영 장비 | 카메라 1대 (4K) + 핀마이크 × 2 + 삼각대 + LED 조명 2개 |
-| 촬영 시간 | 약 3~4시간 (세팅 포함) |
-
----
-
-## STEP 2. 타겟 시청자
-
-### 투트랙 타겟
-
-| 트랙 | 타겟 | 작동 방식 |
-|------|------|---------|
-| **겉 (1차)** | "나는 몇 등급?" 궁금한 25~40세 미혼 전체 | 등급 시스템 호기심 → 본인 대입 → **댓글/공유 폭발** ("나는 몇 점이지?") |
-| **속 (2차)** | 결정사 가입 고민 중인 30~45세 | 업계 인사이더 정보 → 신뢰 구축 → **무료 진단 폼 클릭** |
-
-### 예상 댓글 반응
-
-- "결정사 대표가 본인 등급 공개하는 건 처음이다"
-- "52점 만점에 OO점?? 대표인데??"
-- "남자는 돈, 여자는 외모라니 ㄷㄷ"
-- "탁재훈 1억이 진짜였어??"
-- "솔직한 거 인정. 다른 결정사 유튜버는 이런 말 못 함"
-- "나도 등급 궁금하다... 무료 진단 어디서?"
-- "등급 높아도 결혼 못 한다는 말 찔린다"
-- "이 언니 진짜 업계를 아는 사람"
-
-### 알고리즘 키워드
-
-**제목용:** 결정사, 결정사 등급, 결혼정보회사, 등급표, 탁재훈, 이선민, 결정사 가격
-
-**해시태그:** #결정사 #결정사등급 #결혼정보회사 #등급표 #30대결혼 #결정사가격 #탁재훈결정사
-
----
-
-## STEP 3. ACT 구조 (3막)
-
-### 전체 타임라인
-
-| 시간 | 막 | 핵심 | 감정선 |
-|------|-----|------|--------|
-| **0:00~0:30** | 프리훅 | "결정사 대표인데 제 등급을 매겨봤어요" | 충격+호기심 |
-| **0:30~5:00** | **1막: 등급 시스템 해부** | 어떻게 매기나 / 남녀 기준 차이 / 가격 구조 | 놀람→분노→"진짜?" |
-| **5:00~10:00** | **2막: 본인 등급 + 트렌드** | 본인 채점 / 탁재훈 1억 / 이선민 24점 / 외모 논란 | 충격→자학→공감 |
-| **10:00~13:30** | **3막: 등급 너머** | 등급 높아도 안 되는 이유 / 진짜 중요한 것 / 본인 결정사 차별점 | 반전→납득→신뢰 |
-| **13:30~14:30** | 엔딩 | "등급은 시작점이지 결론이 아니에요" + CTA + 다음편 | 여운 |
-
----
-
-### 1막 상세: 등급 시스템 해부 (0:30~5:00)
-
-| 구간 | 내용 | 핵심 포인트 |
-|------|------|-----------|
-| 0:30~1:30 | 등급은 어떻게 매기나 | 52점 만점 체계 (나이/외모/재산/연봉/집안/학력) |
-| 1:30~3:00 | **남녀 기준 차이** | 남자=돈/직업, 여자=외모/나이. "S등급 남자 = 의사/판사/검사" |
-| 3:00~4:00 | 가격 구조 솔직 공개 | 듀오 270만~, 엔노블 ~1억. "여자가 더 비싸다" |
-| 4:00~5:00 | 업계의 공식 입장 vs 현실 | "등급표 없다"고 하지만 → 암묵적 분류 불가피 |
-
-> **1막의 목표**: 시청자가 "등급 시스템이 이렇게 작동하는 거구나" 이해. 정보 전달 + "진짜?" 놀람.
-
----
-
-### 2막 상세: 본인 등급 + 커뮤니티 트렌드 (5:00~10:00)
-
-| 구간 | 내용 | 핵심 포인트 |
-|------|------|-----------|
-| 5:00~6:30 | **이세령 본인 등급 채점** | 항목별 자기 평가 → 최종 점수 공개 (자학 + 솔직) |
-| 6:30~7:30 | 탁재훈 1억 / 김요한 "잘생기면 감점" | 연예인 사례로 등급 시스템 체감 |
-| 7:30~8:30 | 이선민 52점 중 24점 / 나솔 순자 D등급 | "이 정도 스펙인데 이 등급?" 시청자 충격 대변 |
-| 8:30~10:00 | 외모 평가 논란 + 가격 불투명 비판 | "솔직히 외모 봐요" + "가격이 왜 비싼지 진짜 이유" |
-
-> **2막의 목표**: 본인 등급 공개 = 영상의 클라이맥스. 트렌드 소재로 시청자 체류 유지.
-
----
-
-### 3막 상세: 등급 너머의 진실 (10:00~13:30)
-
-| 구간 | 내용 | 핵심 포인트 |
-|------|------|-----------|
-| 10:00~11:00 | **등급 높아도 결혼 못 하는 사람** | S등급인데 매칭 안 되는 실화. "조건 맞아도 만나면 안 맞음" |
-| 11:00~12:00 | **등급 낮아도 결혼 잘 된 사람** | 반전 사례. "결정사에서 진짜 중요한 건 태도" |
-| 12:00~13:00 | 본인 결정사의 철학 | "우리는 등급표를 투명 공개할 거예요" + 차별점 |
-| 13:00~13:30 | 대표인데 미혼 = 최대 무기 | "저도 등급 매겨봤는데 이 정도예요. 이 시장 진짜 어려움" |
-
-> **3막의 목표**: "등급은 시작점이지 결론이 아니다" 반전 메시지. 결정사=사업 연결.
-
----
-
-## STEP 4. AVD 설계
-
-### 후킹 타임라인
-
-| 시간대 | 장치 유형 | 내용 | 기대 효과 |
-|--------|---------|------|---------|
-| **0~5초** | 패턴 인터럽트 | 등급표 들고 "결정사 대표인데 제 등급을 매겨봤어요." (인사 0회) | "뭐? 본인 등급?" |
-| **5~30초** | 오픈 루프 | "점수가 나왔는데... 좀 충격이었어요. 끝까지 보시면 알려드릴게요" | 끝까지 봐야 하는 이유 |
-| **2분** | 위기장치 ① | "남자 S등급이 뭔 줄 아세요? 의사, 판사, 검사. 이것만 돼요" | 충격 — 기준 공개 |
-| **3분** | 위기장치 ② | "여자는요? 외모랑 나이예요. 솔직히 말하면 그래요" | 논란 직격 — 시청자 반응 유발 |
-| **4분** | 위기장치 ③ | "가격요? 가장 비싼 데는 1억이에요. 탁재훈 씨가 그 정도라고" | 숫자 충격 |
-| **6분** | 위기장치 ④ | **본인 등급 공개** | **영상 최대 피크** |
-| **8분** | 위기장치 ⑤ | "이선민 씨가 52점에 24점 받았는데, 남자만 따지면 50% 이하래요" | 연예인 사례 충격 |
-| **10분** | 위기장치 ⑥ | "S등급인데 3년째 매칭 안 되는 분이 있어요" | 반전 — 등급 ≠ 결혼 |
-| **13분** | 위기장치 ⑦ | "등급은 시작점이지 결론이 아니에요" + 본인 결정사 철학 | 메시지 전환 |
-
-**첫 30초 목표 유지율: 75% 이상** (등급 궁금증 오픈 루프)
-
----
-
-## STEP 5. 질문지 (촬영감독용)
-
-> **원칙 1**: PD = 시청자 대변자. "시청자가 궁금한 것"을 물어본다.
-> **원칙 2**: 이세령이 업계 인사이더로서 솔직하게 답변.
-> **원칙 3**: [트렌드] = 커뮤니티 핫이슈 직접 연결. [대표Q] = 오맷돌님 추가 질문.
-> **전체**: 38개 + 오맷돌님 5자리
-
----
-
-### 프리훅 (0:00~0:30)
-
-| # | 태그 | 질문/지시 |
-|---|------|---------|
-| 1 | [후킹] | (등급표 들고) 결정사에 등급이 있다는 거 다들 아시죠? |
-| 2 | [후킹] | 대표님은 본인 등급 매겨봤어요? |
-
----
-
-### 1막: 등급 시스템 해부 (0:30~5:00)
-
-#### A. 등급 기준 (0:30~2:00)
-
-| # | 태그 | 질문 |
-|---|------|------|
-| 3 | [시청자대리] | 결정사 등급은 어떻게 매기는 거예요? 기준이 뭐예요? |
-| 4 | [시청자대리] | 52점 만점이라고요? 항목이 뭐뭐예요? |
-| 5 | [위기장치] | 남자 S등급은 어떤 사람이에요? |
-| 6 | [시청자대리] | 대기업 다니면 S등급이에요? |
-| 7 | [후킹] | A등급은요? B등급은요? |
-
-#### B. 남녀 차이 (2:00~3:30)
-
-| # | 태그 | 질문 |
-|---|------|------|
-| 8 | [위기장치] | 여자 기준은 뭐예요? 남자랑 다르다면서요? |
-| 9 | [반론] | 남자는 돈, 여자는 외모라는 게 진짜예요? |
-| 10 | [트렌드] | 아나운서나 승무원이면 등급이 올라간다고요? |
-| 11 | [시청자대리] | 나이가 1살 차이나도 등급이 달라져요? |
-
-#### C. 가격 구조 (3:30~5:00)
-
-| # | 태그 | 질문 |
-|---|------|------|
-| 12 | [시청자대리] | 결정사 가격이 대체 얼마예요? 범위가 어떻게 돼요? |
-| 13 | [위기장치] | 제일 비싼 데는 1억이라고요? |
-| 14 | [트렌드] | 가격이 불투명하다는 비판이 많잖아요. 왜 그런 거예요? |
-| 15 | [반론] | 여자가 남자보다 더 비싸다는 게 사실이에요? |
-
----
-
-### 2막: 본인 등급 + 트렌드 (5:00~10:00)
-
-#### D. 본인 등급 공개 (5:00~6:30) — ⭐ 영상 최대 피크
-
-| # | 태그 | 질문 |
-|---|------|------|
-| 16 | [후킹] | 자, 그러면 대표님. 본인 등급을 직접 매겨봤다고요? |
-| 17 | [위기장치] | 항목별로 하나씩 가볼까요? 나이부터. 30세면 몇 점이에요? |
-| 18 | [시청자대리] | 외모는요? 본인이 본인 외모를 평가한다면? |
-| 19 | [감정이입] | 아나운서 출신이면 가산점 있어요? |
-| 20 | [시청자대리] | 학력은요? 연세대면 몇 점? |
-| 21 | [위기장치] | 재산/연봉은요? 결정사 대표면 높아요? |
-| 22 | [후킹] | **총점 몇 점이에요?** |
-| 23 | [감정이입] | 그 점수 보고 어떤 기분이었어요? |
-| 24 | [반론] | 본인 등급에 수긍해요? |
-
-#### E. 연예인/화제 사례 (6:30~8:30)
-
-| # | 태그 | 질문 |
-|---|------|------|
-| 25 | [트렌드] | 탁재훈 씨가 가입비 1억이라고 했는데, 진짜 그 정도 나와요? |
-| 26 | [트렌드] | 김요한은 "너무 잘생기면 오히려 감점"이라고 들었다는데, 그런 경우 있어요? |
-| 27 | [트렌드] | 이선민이 52점에 24점, 상위 39%인데 충격받았잖아요. 어떻게 봤어요? |
-| 28 | [트렌드] | 나솔 순자가 한양대 공무원인데 D등급이라면서요? |
-| 29 | [트렌드] | 결정사 7년차 매니저가 "이 시장도 끝났다"고 했는데, 동의해요? |
-
-#### F. 외모/가격 논란 정면 돌파 (8:30~10:00)
-
-| # | 태그 | 질문 |
-|---|------|------|
-| 30 | [트렌드] | 결정사에서 여자 외모를 직접 평가한다는데, 차별 아니에요? |
-| 31 | [반론] | 본인 결정사도 외모를 봐요? |
-| 32 | [트렌드] | 결정사에서 20명 만나고 "결혼의 본질을 깨달았다"는 후기가 있는데, 어떻게 봐요? |
-
----
-
-### 3막: 등급 너머 (10:00~13:30)
-
-#### G. 등급의 반전 (10:00~12:00)
-
-| # | 태그 | 질문 |
-|---|------|------|
-| 33 | [재후킹] | 등급 높으면 결혼 잘 돼요? |
-| 34 | [위기장치] | S등급인데 매칭 안 되는 사람도 있어요? 왜요? |
-| 35 | [감정이입] | 반대로 등급 낮은데 결혼 잘 된 케이스는? |
-| 36 | [시청자대리] | 그러면 결정사에서 진짜 중요한 건 뭐예요? |
-
-#### H. 선언 + CTA (12:00~13:30)
-
-| # | 태그 | 질문 |
-|---|------|------|
-| 37 | [마무리] | 본인 결정사는 등급을 어떻게 할 거예요? |
-| 38 | [마무리] | 지금 등급 때문에 결정사 고민하는 사람한테 한마디 한다면? |
-
----
-
-### 오맷돌님 추가 질문 (5자리)
-
-> **리뷰 후 추가해주세요.**
-
-| # | 태그 | 질문 | 삽입 위치 |
-|---|------|------|---------|
-| A1 | [대표Q] | (추가 예정) | 1막 / 2막 / 3막 |
-| A2 | [대표Q] | (추가 예정) | 1막 / 2막 / 3막 |
-| A3 | [대표Q] | (추가 예정) | 1막 / 2막 / 3막 |
-| A4 | [대표Q] | (추가 예정) | 1막 / 2막 / 3막 |
-| A5 | [대표Q] | (추가 예정) | 1막 / 2막 / 3막 |
-
----
-
-## STEP 6. 엔딩 설계
-
-**마지막 질문:** *"지금 등급 때문에 결정사 고민하는 사람한테 한마디?"*
-
-**톤 가이드:**
-- 대본 X. 이세령 감정으로 자유롭게
-- PD는 10초+ 침묵 버티기
-- 건드릴 키워드: **등급은 시작점** / **태도** / **겪어본 사람**
-- 리테이크 금지
-
-### 화면 마무리
-
-- 이세령 마지막 멘트 → 3초 정적 → 미소
-- 페이드아웃 (5초)
-- 엔딩 자막: **"겪어본 사람이 차린 결정사 · 아는언니 리지"**
-- 암전 후 EP.03 프리뷰 5초
-
-### CTA — 영상 내 0회
-
-- **무료 등급 진단 폼** → 더보기란 + 고정 댓글만
-- 영상 내 "구독/좋아요" 멘트 0회
-- 댓글 유도: "본인 등급 궁금하면 댓글 남겨주세요" 엔드카드만
-
----
-
-## STEP 7. 커뮤니티 트렌드 연동
-
-> 2025~2026 커뮤니티에서 가장 뜨거운 결정사 이슈 8개를 질문으로 직접 연결.
-
-| # | 트렌드 | 출처 | 질문 | 숏폼 클립 가능 |
-|---|--------|------|------|-------------|
-| 1 | **탁재훈 가입비 1억** | 신랑수업2 (2026.04) | Q25 | ✅ "결정사 1억이 진짜?" |
-| 2 | **김요한 "잘생기면 감점"** | 신랑수업2 (2026.04) | Q26 | ✅ |
-| 3 | **이선민 52점 중 24점** | 갓경규 (2026.02) | Q27 | ✅ "이선민 등급 충격" |
-| 4 | **나솔 순자 D등급** | 나는솔로 (2025) | Q28 | ✅ |
-| 5 | **결정사 7년차 "시장 끝"** | 인스티즈 | Q29 | ✅ |
-| 6 | **외모 직접 평가 논란** | 블라인드/디시 | Q30 | ✅ "결정사 외모 차별?" |
-| 7 | **가격 불투명 비판** | 에펨코리아/블라인드 | Q14 | ✅ |
-| 8 | **20명 만남 후기** | 네이트판 | Q32 | — |
-
-### 숏폼 클립 후보
-
-| 클립 | 구간 | 예상 길이 | 후킹 |
-|------|------|---------|------|
-| "본인 등급 공개" | 5:30~6:30 | 50초 | "결정사 대표 본인 등급 OO점" |
-| "S등급 기준" | 1:30~2:30 | 40초 | "S등급 남자 = 의사/판사/검사만" |
-| "여자는 외모/나이" | 2:00~3:00 | 40초 | "남자는 돈, 여자는 외모??" |
-| "탁재훈 1억" | 6:30~7:30 | 40초 | "결정사 가입비 1억이 진짜?" |
-| "등급 높아도 안 됨" | 10:00~11:00 | 50초 | "S등급인데 3년째 매칭 안 되는 이유" |
-
----
-
-## STEP 8. USP 매핑
-
-| # | 항목 | 본 EP 장면 | 작동 방식 |
-|---|------|----------|---------|
-| 1 | **업계 인사이더** | 등급 시스템 해부 | 다른 유튜버는 밖에서 구경, 이세령은 안에서 공개 |
-| 2 | **자학 = 신뢰** | 본인 등급 공개 | "대표도 이 등급이면 솔직한 사람" |
-| 3 | **트렌드 직격** | 탁재훈/이선민/나솔 사례 | 시청자가 이미 궁금한 것에 답변 |
-| 4 | **반전 메시지** | "등급 높아도 안 됨" | 정보 전달 + 깨달음 |
-| 5 | **투명성 선언** | "우리는 등급 투명 공개" | 경쟁사 차별화 |
-| 6 | **당사자 시각** | 30세 미혼 대표 | "등급 시스템 안에서 직접 겪는 사람" |
-
----
-
-## STEP 9. 편집 가이드
-
-### 오프닝 (0~30초)
-
-| 항목 | 내용 |
-|------|------|
-| 인사 | **금지**. 등급표 들고 바로 시작 |
-| 자막 | "30세 · 결정사 대표 · 前 아나운서" 즉시 |
-| 오픈 루프 | "점수가 나왔는데... 끝까지 보시면 알려드릴게요" → 점수 가림 처리 |
-
-### 1막 (0:30~5:00) — 정보 전달
-
-| 항목 | 내용 |
-|------|------|
-| 시각 자료 | 등급표 보드 + 항목별 자막 오버레이 필수 |
-| BGM | 미니멀 비트 (정보 전달 톤) |
-| 자막 숫자 | S등급/A등급 기준 → 큰 숫자 80pt |
-| 가격 | **270만~1억** 가격대 자막 오버레이 |
-| 남녀 비교 | 화면 분할 (좌: 남자 기준 / 우: 여자 기준) |
-
-### 2막 (5:00~10:00) — 감정 피크
-
-| 항목 | 내용 |
-|------|------|
-| 본인 등급 | 항목별 점수 하나씩 자막으로 쌓기 → 총점 공개 시 **드럼 임팩트** |
-| 연예인 사례 | 해당 방송 캡처 인서트 (저작권 확인) |
-| 이세령 표정 | **등급 공개 순간 리테이크 절대 금지** — 첫 반응 그대로 |
-| BGM | 본인 등급 공개 = 무음 2초 → 드럼 |
-
-### 3막 (10:00~14:30) — 반전 + 메시지
-
-| 항목 | 내용 |
-|------|------|
-| 톤 전환 | 정보 → 감성. BGM 피아노 전환 |
-| 핵심 대사 | "등급은 시작점이지 결론이 아니에요" → **대형 자막** |
-| 엔딩 | 3초 정적 → 미소 → 페이드아웃 → EP.03 프리뷰 |
-
-### 공통 규격
-
-| 항목 | 내용 |
-|------|------|
-| 총 러닝타임 | 13~15분 |
-| 자막 폰트 | 프리텐다드 Bold, 흰색 + 검정 외곽선 |
-| 등급/숫자 강조 | 빨간색 80pt (S, A, B, 24점, 1억 등) |
-| 위기장치 | 2~3분 주기 |
-
----
-
-## STEP 10. Ban 리스트
-
-| # | 금지 | 이유 |
-|---|------|------|
-| 1 | "안녕하세요" 인사 | 0초 후크 룰 |
-| 2 | "구독 좋아요" 멘트 | 0회 |
-| 3 | 대본 읽는 느낌 | 키워드만, 즉흥 |
-| 4 | **경쟁사 실명** (듀오/가연/엔노블/제이노블 등) | "메이저 결정사" "노블 결정사" 등으로만 |
-| 5 | 베스트클래스 구체적 회사명 | "매칭 서비스 경험"으로만 |
-| 6 | **특정 회원 정보** | 가림 + 익명 처리 |
-| 7 | MCN/Neobridge 관계 | 순수 개인 채널 |
-| 8 | 워터밤 언급 | 결정사 이미지 충돌 |
-| 9 | 황정우/이나영 사건 | 절대 금지 |
-| 10 | 연세대 재적/퇴학 | EP01과도 무관, 언급 불필요 |
-| 11 | 등급 시스템을 비하 | 시스템을 분석하되 "쓰레기 시스템"식 비하 X |
-| 12 | 특정 성별 편들기 | 중립. 남녀 양쪽 다 솔직하게 |
-| 13 | 가격 자기 결정사 직접 공개 | "업계 평균"으로만. 본인 결정사 가격은 아직 X |
-
-### Drop 유발 Ban 키워드
-
-- "잘하는" → "적성에 맞는" 대체
-- "이게" → 구체적 주어로 대체
-- "내년에" → "앞으로" 대체
-- "없으면" → 긍정형 전환
-
----
-
-## STEP 11. 승인 체크리스트
-
-| # | 항목 | 확인 |
-|---|------|------|
-| 1 | 이세령 — 본인 등급 공개 동의 (항목별 점수 + 총점) | ☐ |
-| 2 | 이세령 — 등급 시스템 설명 범위 확인 (어디까지 말해도 되는지) | ☐ |
-| 3 | 이세령 — 커뮤니티 이슈 답변 동의 (탁재훈/이선민/외모 등) | ☐ |
-| 4 | 이세령 — 스튜디오 촬영일 확정 | ☐ |
-| 5 | 오맷돌님 — 추가 질문 5자리 채움 | ☐ |
-| 6 | 오맷돌님 — 제목/썸네일 A안 승인 | ☐ |
-| 7 | 촬영팀 — 스튜디오 예약 | ☐ |
-| 8 | 촬영팀 — 등급표 보드 제작 (A2) | ☐ |
-| 9 | 촬영팀 — 가격 비교표 제작 (A3) | ☐ |
-| 10 | 촬영팀 — 연예인 사례 캡처 저작권 확인 | ☐ |
-| 11 | 무료 등급 진단 폼 URL 확정 | ☐ |
-
----
-
-> **서명란**
-> - 오맷돌 대표: ________________ (날짜: )
-> - 이세령 대표: ________________ (날짜: )
-> - 촬영감독: ________________ (날짜: )
-
-**기획부 코디 / 2026.04.16**
-**다음 단계**: 오맷돌님 리뷰 → 추가 질문 확정 → 이세령 동의 → 촬영일 확정
-</textarea>
-<script>
-function initPage(){
-var md=document.getElementById('md-src').value;
-marked.setOptions({breaks:true,gfm:true,headerIds:false});
-var el=document.getElementById('ct');
-var r=marked.parse(md);
-let si=0;
-r=r.replace(/<h2/g,()=>'<h2 id="s-'+si+++'"');
-r=r.replace(/<table>/g,'<div class="tw"><table>');
-r=r.replace(/<\/table>/g,'</table></div>');
-r=r.replace(/\[후킹\]/g,'<span class="t-hook">[후킹]</span>');
-r=r.replace(/\[위기장치\]/g,'<span class="t-crisis">[위기장치]</span>');
-r=r.replace(/\[감정이입\]/g,'<span class="t-emp">[감정이입]</span>');
-r=r.replace(/\[시청자대리\]/g,'<span class="t-view">[시청자대리]</span>');
-r=r.replace(/\[반론\]/g,'<span class="t-counter">[반론]</span>');
-r=r.replace(/\[재후킹\]/g,'<span class="t-rehook">[재후킹]</span>');
-r=r.replace(/\[마무리\]/g,'<span class="t-close">[마무리]</span>');
-r=r.replace(/\[트렌드\]/g,'<span class="t-trend">[트렌드]</span>');
-r=r.replace(/\[대표Q\]/g,'<span class="t-ceo">[대표Q]</span>');
-el.innerHTML=r;
-const tabs=document.querySelectorAll('.tab'),secs=document.querySelectorAll('.md h2');
-function upd(){
- const o=130;let c=0;
- secs.forEach((s,i)=>{if(s.getBoundingClientRect().top<=o)c=i});
- tabs.forEach((t,i)=>t.classList.toggle('active',i===c));
- const a=document.querySelector('.tab.active');
- if(a){const b=document.getElementById('tabBar'),l=a.offsetLeft,w=a.offsetWidth,bw=b.offsetWidth;b.scrollTo({left:l-bw/2+w/2,behavior:'smooth'})}
-}
-window.addEventListener('scroll',()=>{
- upd();
- const h=document.documentElement.scrollHeight-window.innerHeight;
- document.getElementById('pBar').style.width=(h>0?window.scrollY/h*100:0)+'%';
-},{passive:true});
-tabs.forEach(t=>t.addEventListener('click',e=>{
- e.preventDefault();
- const s=document.getElementById('s-'+t.dataset.i);
- if(s)s.scrollIntoView({behavior:'smooth'});
-}));
-upd();
-}
-// Load marked.js then init
-(function(){
-var s=document.createElement('script');
-s.src='https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js';
-s.onload=initPage;
-s.onerror=function(){
- var s2=document.createElement('script');
- s2.src='https://unpkg.com/marked@4.3.0/marked.min.js';
- s2.onload=initPage;
- s2.onerror=function(){document.getElementById('ct').innerHTML='<p style="color:red;padding:40px">marked.js 로드 실패. 새로고침 해주세요.</p>'};
- document.head.appendChild(s2);
-};
-document.head.appendChild(s);
-})();
-</script>
+<!-- ============ 반복 포맷 ============ -->
+<h2>0. 아는언니 리지 반복 포맷</h2>
+
+<p>EP02부터 모든 에피소드는 <strong>동일한 4단 구조</strong>를 반복합니다.</p>
+
+<div class="card">
+<div class="card-t">매 에피소드 구조</div>
+<p><strong>[킥]</strong> 주제 관련 뭔가 들고 바로 시작. 인사 X. (0~30초)</p>
+<p><strong>[해부]</strong> 업계가 이렇게 돌아감. 이세령 = 인사이더. (5분)</p>
+<p><strong>[본인]</strong> "그래서 나는?" 본인에게 적용. 자학+솔직. (5분)</p>
+<p><strong>[반전]</strong> "근데 진짜 중요한 건..." 메시지. (3분)</p>
+<p><strong>[아웃]</strong> 캐치프레이즈 + 여운 + 페이드아웃. (1분)</p>
+</div>
+
+<h3>캐치프레이즈 3개 (매 회 반복)</h3>
+<table>
+<tr><th>문장</th><th>타이밍</th><th>용도</th></tr>
+<tr><td><strong>"결정사 안에서 보면요"</strong></td><td>해부 블록</td><td>인사이더 시각 선언</td></tr>
+<tr><td><strong>"겪어봐야 아는 거예요"</strong></td><td>본인 블록</td><td>당사자 경험</td></tr>
+<tr><td><strong>"[XX]이 다가 아니에요"</strong></td><td>반전 블록</td><td>채널 핵심 메시지</td></tr>
+</table>
+<p style="font-size:13px;color:var(--text3)">EP02: "등급이 다가 아니에요" / EP03: "조건이 다가 아니에요" / EP04: "가격이 다가 아니에요"</p>
+
+<h3>PD 고정 4패턴</h3>
+<table>
+<tr><th>패턴</th><th>용도</th><th>타이밍</th></tr>
+<tr><td><strong>"진짜요?"</strong></td><td>놀람/확인</td><td>해부 블록 — 충격 정보</td></tr>
+<tr><td><strong>"그건 좀 불공평하지 않아요?"</strong></td><td>시청자 대리 반론</td><td>남녀 차이, 외모 등 논란</td></tr>
+<tr><td><strong>"대표님은요?"</strong></td><td>자학 전환 트리거</td><td>해부 → 본인 넘어갈 때</td></tr>
+<tr><td><strong>"그러면 어떡해요?"</strong></td><td>해결책/반전 유도</td><td>본인 → 반전 넘어갈 때</td></tr>
+</table>
+
+<!-- ============ 콘셉트 ============ -->
+<h2>1. 콘셉트</h2>
+
+<table>
+<tr><th>항목</th><th>내용</th></tr>
+<tr><td>에피소드</td><td>EP.02 (첫 스튜디오 토크)</td></tr>
+<tr><td>호스트</td><td>이세령 (30세, 연세대, 前 아나운서, 결정사 공동대표)</td></tr>
+<tr><td>콘셉트</td><td><strong>등급 해부 → 본인 등급 → "등급이 다가 아니에요"</strong></td></tr>
+<tr><td>EP01 연결</td><td>EP01(대표의 하루) → "이 대표 본인은 몇 등급?" 궁금증 해소</td></tr>
+<tr><td>시의성</td><td>탁재훈 1억(2026.04) / 이선민 24점(2026.02) / 나솔 순자 D등급(2025) / 김요한 감점(2026.04)</td></tr>
+<tr><td>타겟 러닝타임</td><td>13~15분</td></tr>
+</table>
+
+<!-- ============ 제목/썸네일 ============ -->
+<h2>2. 제목 & 썸네일</h2>
+
+<h3>제목</h3>
+<table>
+<tr><th>안</th><th>제목</th><th>공식</th></tr>
+<tr><td><strong>A (메인)</strong></td><td><strong>결정사 대표가 본인 등급을 매겨봤습니다</strong></td><td>자학형 + 호기심갭</td></tr>
+<tr><td>B</td><td>결정사 등급 52점, 대표 본인은 몇 점? [최초 공개]</td><td>숫자형 + 대괄호</td></tr>
+<tr><td>C</td><td>탁재훈 1억, 이선민 24점… 결정사 등급 진짜 공개합니다</td><td>트렌드형 + 숫자</td></tr>
+</table>
+<p style="font-size:13px;color:var(--text3)">촬영 후 총점 나오면 B안에 실제 점수 넣어서 최종 결정 가능. 18~25자 최적.</p>
+
+<h3>썸네일</h3>
+<div class="card">
+<div class="card-t">채주부 5대 규칙 적용</div>
+<p><strong>이세령 70%+</strong> — 등급표 들고 곤란한 표정 (과장된 감정 필수)</p>
+<p><strong>텍스트</strong> — 본인 점수 숫자 (빨간색 80pt, <strong>흰색 굵은 고딕 + 검정 두꺼운 외곽선</strong>)</p>
+<p><strong>서브</strong> — "52점 만점에..." (흰색 작은 글씨)</p>
+<p><strong>톤</strong> — 밝고 선명. 어두운 배경 X.</p>
+<p><strong>제목과 다른 정보</strong> — 제목="본인 등급 매겨봤다", 썸네일="XX점" 숫자</p>
+</div>
+
+<!-- ============ 시장 인텔 ============ -->
+<h2>3. 시장 인텔리전스</h2>
+
+<h3>경쟁 채널 벤치마크</h3>
+<table>
+<tr><th>채널</th><th>평균 조회수</th><th>포지셔닝</th><th>우리 차별점</th></tr>
+<tr><td>한방언니</td><td><strong>540K</strong></td><td>14년 경력 <strong>관찰자</strong> — "내가 봤는데"</td><td rowspan="2">이세령 = <strong>당사자</strong><br>"내가 그 안에 있는데"<br>본인 등급 공개 = 한방언니도 못 하는 것</td></tr>
+<tr><td>모두의지인</td><td><strong>254K</strong></td><td>상담가형 — "이렇게 해보세요"</td></tr>
+</table>
+
+<h3>이 영상이 먹히는 이유</h3>
+<div class="card">
+<p>1. <strong>한방언니</strong>는 등급을 말하지만 <strong>본인 등급은 절대 안 밝힘</strong> → 이세령이 밝힘 = 차별화</p>
+<p>2. <strong>모두의지인</strong>은 상담 위주 → 등급 시스템 해부 콘텐츠 없음</p>
+<p>3. 탁재훈/이선민/김요한 방송 터진 직후 → <strong>"결정사 등급" 검색 수요 급증 타이밍</strong></p>
+<p>4. "결정사 대표 본인 등급 공개"는 <strong>유튜브 결정사 콘텐츠 역사상 최초</strong></p>
+</div>
+
+<h3>커뮤니티 트렌드 (질문에 녹일 것)</h3>
+<table>
+<tr><th>#</th><th>트렌드</th><th>출처</th><th>연결 질문</th></tr>
+<tr><td>1</td><td>탁재훈 가입비 1억</td><td>신랑수업2 (2026.04)</td><td>Q10</td></tr>
+<tr><td>2</td><td>김요한 "잘생기면 감점"</td><td>신랑수업2 (2026.04)</td><td>Q11</td></tr>
+<tr><td>3</td><td>이선민 52점 중 24점</td><td>갓경규 (2026.02)</td><td>Q12</td></tr>
+<tr><td>4</td><td>나솔 순자 D등급</td><td>나는솔로 (2025)</td><td>Q13</td></tr>
+<tr><td>5</td><td>결정사 7년차 "시장 끝"</td><td>인스티즈</td><td>Q14</td></tr>
+<tr><td>6</td><td>여자 외모 직접 평가 논란</td><td>블라인드/디시</td><td>해부 블록 자연 연결</td></tr>
+<tr><td>7</td><td>가격 불투명 비판</td><td>에펨코리아</td><td>해부 블록 자연 연결</td></tr>
+<tr><td>8</td><td>20명 만남 후 깨달음 후기</td><td>네이트판</td><td>반전 블록 자연 연결</td></tr>
+</table>
+
+<!-- ============ 촬영 런시트 ============ -->
+<h2>4. 촬영 런시트</h2>
+
+<div class="hl">
+<strong>원칙:</strong> 질문은 15개. 나머지는 이세령 답변에 따라 PD가 꼬리 질문으로 현장에서.<br>
+PD 4패턴("진짜요?" / "불공평하지 않아요?" / "대표님은요?" / "어떡해요?")만 기억.
+</div>
+
+<!-- 킥 -->
+<h3>[킥] 0:00~0:30 — 패턴 인터럽트</h3>
+<div class="card">
+<div class="card-t">설정</div>
+<p>이세령이 등급표 보드를 들고 앉아 있는 상태. 인사 없이 바로 시작.</p>
+<p>"점수가 나왔는데... 끝까지 보시면 알려드릴게요" → 오픈 루프.</p>
+</div>
+
+<div class="q">
+<div class="q-n">1</div>
+<div class="q-body">
+<div class="q-text"><span class="q-tag tg-peak">PEAK</span>(등급표 들고) 결정사에 등급이 있다는 거 다들 아시죠?</div>
+<div class="q-hint">→ 등급표 카메라에 보여주면서. 시청자 "뭐야 이게" 반응.</div>
+</div>
+</div>
+
+<div class="q">
+<div class="q-n">2</div>
+<div class="q-body">
+<div class="q-text"><span class="q-tag tg-pd">PD</span>대표님 본인 등급 매겨봤다고요?</div>
+<div class="q-hint">→ "네, 해봤는데... 좀 충격이었어요" → 점수 가림(봉투). 오픈 루프 완성.</div>
+</div>
+</div>
+
+<!-- 해부 -->
+<h3>[해부] 0:30~5:00 — "결정사 안에서 보면요"</h3>
+<div class="card">
+<div class="card-t">이 블록의 목표</div>
+<p>시청자가 "등급 시스템이 이렇게 작동하는 거구나" 이해. 정보 + "진짜?" 놀람.</p>
+<p><strong>PD 패턴:</strong> "진짜요?" + "그건 좀 불공평하지 않아요?"</p>
+</div>
+
+<div class="q">
+<div class="q-n">3</div>
+<div class="q-body">
+<div class="q-text">결정사 등급은 어떻게 매기는 거예요?</div>
+<div class="q-hint">→ 52점 만점 체계 (나이/외모/재산/연봉/집안/학력). 보드 가리키면서.</div>
+</div>
+</div>
+
+<div class="q">
+<div class="q-n">4</div>
+<div class="q-body">
+<div class="q-text"><span class="q-tag tg-peak">PEAK</span>남자 S등급은 어떤 사람이에요?</div>
+<div class="q-hint">→ "의사, 판사, 검사. 이것만 돼요" — 위기장치 ①. PD: "진짜요?"</div>
+</div>
+</div>
+
+<div class="q">
+<div class="q-n">5</div>
+<div class="q-body">
+<div class="q-text"><span class="q-tag tg-pd">PD</span>여자 기준은요? 남자랑 다르다면서요?</div>
+<div class="q-hint">→ "남자는 돈/직업, 여자는 외모/나이" — 위기장치 ②. PD: "불공평하지 않아요?"</div>
+</div>
+</div>
+
+<div class="q">
+<div class="q-n">6</div>
+<div class="q-body">
+<div class="q-text">결정사 가격이 대체 얼마예요?</div>
+<div class="q-hint">→ "270만~1억." 탁재훈 얘기 자연스럽게 나오면 OK. 안 나오면 PD가 Q10에서.</div>
+</div>
+</div>
+
+<div class="q">
+<div class="q-n">7</div>
+<div class="q-body">
+<div class="q-text">근데 가격이 왜 불투명해요? 커뮤니티에서 불만이 많던데.</div>
+<div class="q-hint">→ 에펨/블라인드 트렌드 반영. 이세령이 업계 관행 솔직 설명.</div>
+</div>
+</div>
+
+<!-- 본인 -->
+<h3>[본인] 5:00~10:00 — "겪어봐야 아는 거예요"</h3>
+<div class="card">
+<div class="card-t">이 블록의 목표</div>
+<p>본인 등급 공개 = <strong>영상 최대 피크.</strong> 첫 반응 리테이크 절대 금지.</p>
+<p><strong>PD 패턴:</strong> "대표님은요?"</p>
+</div>
+
+<div class="q">
+<div class="q-n">8</div>
+<div class="q-body">
+<div class="q-text"><span class="q-tag tg-pd">PD</span>그러면 대표님은요? 본인 등급 직접 매겨봤다고요?</div>
+<div class="q-hint">→ 전환 순간. 해부(정보) → 본인(감정)으로 넘어감.</div>
+</div>
+</div>
+
+<div class="q">
+<div class="q-n">9</div>
+<div class="q-body">
+<div class="q-text"><span class="q-tag tg-peak">PEAK</span>항목별로 가볼까요? 나이, 외모, 학력, 연봉... 하나씩.</div>
+<div class="q-hint">→ 항목별 본인 점수 매기기. PD는 각 항목마다 "진짜요?" "에이~" 리액션.</div>
+</div>
+</div>
+
+<div class="q">
+<div class="q-n">10</div>
+<div class="q-body">
+<div class="q-text"><span class="q-tag tg-trend">TREND</span>요즘 방송에서 결정사 가입비 1억이라는 얘기가 나왔잖아요. 진짜 그 정도 나와요?</div>
+<div class="q-hint">→ 탁재훈 신랑수업2. 본인 등급 채점 흐름 중 자연스럽게.</div>
+</div>
+</div>
+
+<div class="q">
+<div class="q-n">11</div>
+<div class="q-body">
+<div class="q-text"><span class="q-tag tg-trend">TREND</span>"잘생기면 오히려 감점"이라는 말도 있던데, 그런 경우 있어요?</div>
+<div class="q-hint">→ 김요한 신랑수업2. 등급 기준의 아이러니.</div>
+</div>
+</div>
+
+<div class="q">
+<div class="q-n">12</div>
+<div class="q-body">
+<div class="q-text"><span class="q-tag tg-trend">TREND</span>어떤 분이 52점 만점에 24점 받았다고 충격받았거든요. 그 정도면 어떤 수준이에요?</div>
+<div class="q-hint">→ 이선민 갓경규. 이세령 "24점이면..." 업계 기준으로 해석.</div>
+</div>
+</div>
+
+<div class="q">
+<div class="q-n">13</div>
+<div class="q-body">
+<div class="q-text"><span class="q-tag tg-trend">TREND</span>한양대 공무원인데 D등급이라는 사례도 있었어요. 가능해요?</div>
+<div class="q-hint">→ 나솔 순자. "여자 기준에서는 충분히 가능" — 남녀 차이 다시 짚기.</div>
+</div>
+</div>
+
+<div class="q">
+<div class="q-n">14</div>
+<div class="q-body">
+<div class="q-text"><span class="q-tag tg-trend">TREND</span>결정사 7년차 매니저가 "이 시장 끝났다"고 했는데, 어떻게 봐요?</div>
+<div class="q-hint">→ 인스티즈 화제글. 이세령 본인 생각.</div>
+</div>
+</div>
+
+<div class="warn">
+<div class="warn-t">봉투 개봉 순간</div>
+<p>Q9 항목별 채점 끝난 후, 총점은 <strong>봉투에서 처음 확인.</strong></p>
+<p><strong>리테이크 절대 금지.</strong> 첫 반응 = 콘텐츠. PD는 3초 침묵.</p>
+<p>편집: 2초 무음 → 드럼 임팩트.</p>
+</div>
+
+<!-- 반전 -->
+<h3>[반전] 10:00~13:30 — "등급이 다가 아니에요"</h3>
+<div class="card">
+<div class="card-t">이 블록의 목표</div>
+<p>정보 → 감성 톤 전환. "등급은 시작점이지 결론이 아니다" 메시지.</p>
+<p><strong>PD 패턴:</strong> "그러면 어떡해요?"</p>
+</div>
+
+<div class="q">
+<div class="q-n">15</div>
+<div class="q-body">
+<div class="q-text"><span class="q-tag tg-peak">PEAK</span>등급 높으면 결혼 잘 돼요?</div>
+<div class="q-hint">→ "S등급인데 3년째 안 되는 분 있어요." 반전 — 등급 ≠ 결혼. 위기장치.</div>
+</div>
+</div>
+
+<div class="q">
+<div class="q-n">16</div>
+<div class="q-body">
+<div class="q-text">반대로 등급 낮은데 잘 된 케이스는?</div>
+<div class="q-hint">→ "태도가 달랐어요." 이세령 업계 경험.</div>
+</div>
+</div>
+
+<div class="q">
+<div class="q-n">17</div>
+<div class="q-body">
+<div class="q-text"><span class="q-tag tg-pd">PD</span>그러면 어떡해요? 결정사에서 진짜 중요한 건 뭐예요?</div>
+<div class="q-hint">→ 이세령 철학. "등급이 다가 아니에요." 캐치프레이즈 순간.</div>
+</div>
+</div>
+
+<!-- 아웃 -->
+<h3>[아웃] 13:30~14:30 — 여운</h3>
+
+<div class="q">
+<div class="q-n">18</div>
+<div class="q-body">
+<div class="q-text">지금 등급 때문에 결정사 고민하는 사람한테 한마디 한다면?</div>
+<div class="q-hint">→ 대본 X. 이세령 감정으로 자유롭게. PD 10초+ 침묵 버티기. 리테이크 금지.</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-t">아웃 편집</div>
+<p>이세령 마지막 멘트 → 3초 정적 → 미소 → 페이드아웃 (5초)</p>
+<p>엔딩 자막: <strong>"겪어본 사람이 차린 결정사 · 아는언니 리지"</strong></p>
+<p>암전 후 <strong>EP.03 프리뷰 5초</strong>: "다음 편 — 결정사 첫 매칭, 어떤 사람이 나올까?"</p>
+</div>
+
+<!-- ============ Ban ============ -->
+<h2>5. Ban 리스트</h2>
+
+<div class="ban">
+<div class="ban-t">절대 금지 5개</div>
+<p>1. <strong>"안녕하세요" 인사</strong> — 등급표 들고 바로 시작</p>
+<p>2. <strong>"구독/좋아요" 멘트</strong> — 영상 내 0회</p>
+<p>3. <strong>경쟁사 실명</strong> (듀오/가연/엔노블/제이노블) — "메이저 결정사"로만</p>
+<p>4. <strong>특정 회원 정보</strong> — "어떤 분이~" 익명 처리</p>
+<p>5. <strong>EP01 인생 스토리 반복</strong> — 90kg/편입/복권 등 다시 X</p>
+</div>
+
+<div class="warn">
+<div class="warn-t">주의 5개</div>
+<p>1. MCN/네오브릿지 관계 → 순수 개인 채널</p>
+<p>2. 워터밤 / 황정우·이나영 사건 → 절대 금지</p>
+<p>3. 본인 결정사 가격 직접 공개 → "업계 평균"으로만</p>
+<p>4. 등급 시스템 비하 ("쓰레기 시스템") → 분석 O, 비하 X</p>
+<p>5. 특정 성별 편들기 → 중립. 남녀 양쪽 솔직하게</p>
+</div>
+
+<!-- ============ 편집 핵심 ============ -->
+<h2>6. 편집 핵심</h2>
+
+<div class="grid2">
+<div class="card">
+<div class="card-t">오프닝 30초</div>
+<p>인사 삭제. 자막 즉시: "30세 · 결정사 대표 · 前 아나운서"</p>
+<p>점수 가림 처리 (오픈 루프)</p>
+</div>
+<div class="card">
+<div class="card-t">해부 블록</div>
+<p>등급표 보드 클로즈업 인서트 필수</p>
+<p>남녀 기준: 화면 분할 (좌 남자 / 우 여자)</p>
+<p>숫자 강조: 빨간색 80pt</p>
+</div>
+<div class="card">
+<div class="card-t">본인 블록</div>
+<p>항목별 점수 자막으로 쌓기</p>
+<p>봉투 개봉 = <strong>2초 무음 → 드럼</strong></p>
+<p>표정 리액션 절대 컷 안 함</p>
+</div>
+<div class="card">
+<div class="card-t">반전 블록</div>
+<p>BGM 피아노 전환</p>
+<p>"등급이 다가 아니에요" → 대형 자막</p>
+<p>엔딩: 3초 정적 → 미소 → 페이드</p>
+</div>
+</div>
+
+<table>
+<tr><th>항목</th><th>규격</th></tr>
+<tr><td>총 러닝타임</td><td>13~15분 (20분 절대 금지)</td></tr>
+<tr><td>자막 폰트</td><td>프리텐다드 Bold, 흰색+검정 외곽선</td></tr>
+<tr><td>숫자 강조</td><td>빨간색 80pt (S, A, 24점, 1억 등)</td></tr>
+<tr><td>위기장치</td><td>Q4, Q5, Q9(봉투), Q15 — 약 3분 주기</td></tr>
+<tr><td>CTA</td><td>영상 내 0회. 더보기+고정댓글+엔드카드에만</td></tr>
+</table>
+
+<!-- ============ 승인 ============ -->
+<h2>7. 승인</h2>
+
+<table>
+<tr><th>#</th><th>항목</th><th>확인</th></tr>
+<tr><td>1</td><td>이세령 — 본인 등급 공개 동의 (항목별+총점)</td><td>☐</td></tr>
+<tr><td>2</td><td>이세령 — 커뮤니티 트렌드 답변 동의</td><td>☐</td></tr>
+<tr><td>3</td><td>오맷돌님 — 제목/썸네일 승인</td><td>☐</td></tr>
+<tr><td>4</td><td>오맷돌님 — 추가 질문 확정 (2~3개)</td><td>☐</td></tr>
+<tr><td>5</td><td>촬영팀 — 스튜디오 예약 + 장비 세팅</td><td>☐</td></tr>
+<tr><td>6</td><td>촬영팀 — 연예인 사례 캡처 저작권 확인</td><td>☐</td></tr>
+<tr><td>7</td><td>무료 등급 진단 폼 URL 확정</td><td>☐</td></tr>
+</table>
+
+<div style="margin-top:20px">
+<p><strong>서명</strong></p>
+<p style="color:var(--text3);font-size:14px">
+오맷돌 대표: ________________ (날짜:　　　　)<br>
+이세령 대표: ________________ (날짜:　　　　)<br>
+촬영감독: ________________ (날짜:　　　　)
+</p>
+</div>
+
+<p style="text-align:center;font-size:12px;color:var(--text3);margin-top:40px">
+기획부 코디 · v2 · 2026.04.16 · 아는언니 리지
+</p>
+
+</div>
 </body>
 </html>
