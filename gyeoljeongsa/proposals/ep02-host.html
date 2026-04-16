@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
 <meta name="theme-color" content="#ffffff">
-<title>[출연자용] EP.02 — 90키로 대구 여고생이 결정사 대표가 되기까지</title>
+<title>[출연자용] EP.02 — 결정사 대표가 본인 등급을 매겨봤습니다</title>
 <style>
 :root{--bg:#ffffff;--card:#ffffff;--card2:#f4f6f8;--border:#e5e7eb;--text:#191f28;--text2:#4e5968;--text3:#8b95a1;--accent:#0064ff;--accent-l:#e8f1ff;--green:#15803d;--amber:#b45309;--red:#dc2626}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -32,6 +32,9 @@ p{margin:8px 0;color:var(--text2);word-break:keep-all}
 .ban{background:#fef2f2;border-left:3px solid var(--red);padding:14px 18px;border-radius:0 12px 12px 0;margin:12px 0}
 .ban-title{font-size:13px;font-weight:700;color:var(--red);margin-bottom:6px}
 .ban p{font-size:14px;color:#991b1b;margin:3px 0}
+.warn{background:#fffbeb;border-left:3px solid var(--amber);padding:14px 18px;border-radius:0 12px 12px 0;margin:12px 0}
+.warn-title{font-size:13px;font-weight:700;color:var(--amber);margin-bottom:6px}
+.warn p{font-size:14px;color:#92400e;margin:3px 0}
 .timeline{list-style:none;padding:0;margin:16px 0}
 .timeline li{position:relative;padding:12px 0 12px 24px;border-left:2px solid var(--border)}
 .timeline li::before{content:'';position:absolute;left:-5px;top:16px;width:8px;height:8px;background:var(--accent);border-radius:50%}
@@ -41,9 +44,17 @@ p{margin:8px 0;color:var(--text2);word-break:keep-all}
 .sig{background:linear-gradient(135deg,var(--accent-l),#f0f4ff);border-radius:14px;padding:20px;margin:16px 0;text-align:center}
 .sig .label{font-size:11px;font-weight:700;color:var(--accent);margin-bottom:8px;text-transform:uppercase}
 .sig .quote{font-size:18px;font-weight:800;color:var(--text);line-height:1.4}
+.checklist{list-style:none;padding:0;margin:12px 0}
+.checklist li{padding:10px 0 10px 32px;border-bottom:1px solid var(--card2);font-size:14px;color:var(--text2);position:relative}
+.checklist li::before{content:'☐';position:absolute;left:8px;color:var(--accent);font-size:16px}
 table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
 th{background:var(--card2);padding:10px 12px;text-align:left;font-weight:700;color:var(--text2);font-size:12px;border-bottom:1px solid var(--border)}
 td{padding:10px 12px;border-bottom:1px solid var(--card2);color:var(--text2)}
+.prep-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:var(--accent);color:#fff;border-radius:50%;font-size:13px;font-weight:700;margin-right:8px;flex-shrink:0}
+.prep-item{display:flex;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--card2)}
+.prep-item:last-child{border-bottom:none}
+.prep-text{font-size:14px;color:var(--text2)}
+.prep-text strong{color:var(--text)}
 @media(max-width:480px){.container{padding:16px 14px}.hero h1{font-size:20px}section h2{font-size:17px}}
 </style>
 </head>
@@ -58,11 +69,11 @@ td{padding:10px 12px;border-bottom:1px solid var(--card2);color:var(--text2)}
 <div class="container">
 
 <div class="hero">
-<h1>90키로 대구 여고생이<br>결정사 대표가 되기까지</h1>
-<p>EP.02 · 스튜디오 토크 · 이세령 Solo</p>
+<h1>결정사 대표가<br>본인 등급을 매겨봤습니다</h1>
+<p>EP.02 · 스튜디오 Solo 토크 · 등급 폭로형</p>
 <div class="meta">
 <span>13~15분</span>
-<span>인생 서사형</span>
+<span>스튜디오</span>
 <span>아는언니 리지</span>
 </div>
 </div>
@@ -70,155 +81,248 @@ td{padding:10px 12px;border-bottom:1px solid var(--card2);color:var(--text2)}
 <!-- 1. 이 영상이 뭔지 -->
 <section>
 <h2>이 영상은 뭔가요?</h2>
-<p>이세령 대표님의 <strong>인생 이야기를 처음으로 전부 푸는 영상</strong>입니다.</p>
-<p>대구에서 90kg 여고생이었던 시절부터 → 연세대 편입 → 아나운서 → tvN → 추락 → 부활 → 결정사까지. 지금까지 한 번도 전체를 풀어본 적 없는 스토리를 카메라 앞에서 처음 이야기합니다.</p>
+<p><strong>결정사 등급 시스템을 업계 인사이더 시각으로 해부하고, 본인 등급까지 직접 공개하는 영상</strong>입니다.</p>
+<p>시청자들이 가장 궁금해하는 "결정사 등급은 어떻게 매기나?" "나는 몇 등급이지?" "가격은 왜 비싼가?"를 세령 대표님이 업계 안에서 직접 설명합니다.</p>
 
 <div class="card">
 <div class="card-title">촬영 포맷</div>
 <p><strong>스튜디오 Solo 토크</strong> — 카메라 앞에 편하게 앉아서 PD 질문에 자연스럽게 답변.</p>
 <p>대본 없습니다. 키워드만 숙지하시면 됩니다.</p>
-<p>촬영 시간: 약 2~3시간 (세팅 포함 3~4시간)</p>
+<p>촬영 시간: 약 3~4시간 (세팅 포함)</p>
+</div>
+
+<div class="highlight">
+<strong>핵심 원칙:</strong> PD가 질문을 던지면, 대표님이 아는 만큼 솔직하게 답변하면 됩니다.<br>
+리서치 데이터나 통계는 PD가 질문 속에 녹여서 물어봅니다. 대표님은 그 질문에 자연스럽게 반응하면 됩니다.<br>
+<strong>암기할 것은 없습니다. 솔직함이 이 영상의 전부입니다.</strong>
 </div>
 </section>
 
-<!-- 2. 핵심 메시지 -->
+<!-- 2. EP01과의 차이 -->
+<section>
+<h2>EP01과 뭐가 다른가요?</h2>
+
+<table>
+<tr><th>구분</th><th>EP01</th><th>EP02 (이번)</th></tr>
+<tr><td>콘셉트</td><td>대표의 하루 (브이로그)</td><td><strong>등급 시스템 해부 + 본인 등급 공개</strong></td></tr>
+<tr><td>톤</td><td>일상, 따뜻함</td><td><strong>정보 + 충격 + 솔직</strong></td></tr>
+<tr><td>포맷</td><td>하이브리드 (실외+스튜디오)</td><td><strong>스튜디오 Solo 토크</strong></td></tr>
+<tr><td>인생 이야기</td><td>O (90kg, 편입, 연세대…)</td><td><strong>X (등급 시스템에 집중)</strong></td></tr>
+<tr><td>시청자 반응</td><td>"이 사람이 누구지?"</td><td><strong>"나는 몇 등급이지?"</strong></td></tr>
+</table>
+
+<div class="warn">
+<div class="warn-title">주의</div>
+<p>EP01에서 이미 인생 스토리를 풀었기 때문에, EP02에서는 90kg/편입/연세대 이야기를 <strong>반복하지 않습니다.</strong></p>
+<p>등급 질문 중 "아나운서 출신이면 가산점 있어요?" 정도로 짧게만 언급.</p>
+</div>
+</section>
+
+<!-- 3. 핵심 메시지 -->
 <section>
 <h2>이 영상에서 전달할 핵심 메시지</h2>
 
 <div class="sig">
-<div class="label">시그니처 캐치프레이즈</div>
-<div class="quote">"긁지 않은 복권"</div>
-</div>
-
-<div class="highlight">
-이 영상이 끝나고 시청자 머릿속에 남아야 하는 한 문장:<br>
-<strong>"90kg 대구 여고생이 결정사 대표가 됐다. 이 사람은 해내는 사람이다."</strong>
+<div class="label">이 영상이 끝나고 남아야 할 한 문장</div>
+<div class="quote">"등급은 시작점이지 결론이 아니다"</div>
 </div>
 
 <div class="card">
 <div class="card-title">핵심 메시지 3개</div>
-<p>1. <strong>겪어본 사람</strong> — 실패와 좌절을 이겨낸 사람이기 때문에 결정사를 차린 것</p>
-<p>2. <strong>진행형 인물</strong> — 완성형이 아니라 지금도 만들어가는 중</p>
-<p>3. <strong>솔직함</strong> — 좋은 것만 보여주지 않겠다는 약속</p>
+<p>1. <strong>등급 시스템의 진짜 구조</strong> — 업계 안에서 본 사람만 아는 등급의 현실</p>
+<p>2. <strong>본인도 예외가 아니다</strong> — 결정사 대표도 등급 시스템 앞에선 한 사람의 회원</p>
+<p>3. <strong>등급이 전부가 아니다</strong> — S등급이어도 안 되는 사람, 낮아도 되는 사람이 있음</p>
 </div>
 </section>
 
-<!-- 3. 이야기 흐름 -->
+<!-- 4. 촬영 흐름 -->
 <section>
-<h2>이야기 흐름 (3막)</h2>
-<p>자연스럽게 이야기하시면 됩니다. 순서만 참고해주세요.</p>
+<h2>촬영 흐름 (대략)</h2>
+<p>아래는 대략적인 흐름입니다. 실제 질문은 PD가 현장에서 자연스럽게 던집니다.</p>
 
-<h3>1막: 대구 여고생 (약 5분)</h3>
 <ul class="timeline">
-<li><span class="time">초3 꿈의 시작</span><span class="desc">노현정 아나운서 보고 꽂힌 이야기. 10년 동안 혼자 KBS 뉴스 녹음 연습.</span></li>
-<li><span class="time">학창시절</span><span class="desc">뿔테 안경 모범생, 10년 연속 실장. "찐따 모범생"이었다는 솔직한 자기 묘사.</span></li>
-<li><span class="time">몰락</span><span class="desc">집안 형편 악화 → 반지하 이사 → 폭식 → 90kg 진입. 이 부분이 충격 포인트.</span></li>
-<li><span class="time">수능~편입</span><span class="desc">수능 공황장애 → 편입 7번 실패 → 재수 1년 → 연세대 합격. "긁지 않은 복권" 대사.</span></li>
-</ul>
-
-<h3>2막: 화려함과 추락 (약 5분)</h3>
-<ul class="timeline">
-<li><span class="time">아나운서</span><span class="desc">연세대 → 아나운서 학원 → 스포티비 합격. "이미 실력이 만들어져 있었다."</span></li>
-<li><span class="time">tvN</span><span class="desc">천정명씨 애프터 에피소드 — 유머로 풀기. "국민 앞에서 차임 (웃음)"</span></li>
-<li><span class="time">추락</span><span class="desc">미스코리아 탈락 + 코로나 + 방송 끊김 = 트리플 슬럼프. "전부 사라졌어요."</span></li>
-<li><span class="time">부활</span><span class="desc">영어 강사 1등 → 마케팅 회사 창업 → "아나운서보다 더 멋진 여자가 되겠다."</span></li>
-</ul>
-
-<h3>3막: 왜 결정사인가 (약 3~4분)</h3>
-<ul class="timeline">
-<li><span class="time">전환점</span><span class="desc">"사람을 연결하는 게 내가 진짜 잘하는 일이더라." — 이 한마디가 영상의 정점.</span></li>
-<li><span class="time">커뮤니티 이슈</span><span class="desc">PD가 요즘 결정사 관련 커뮤니티 화제를 질문합니다. 솔직하게 답변해주세요.</span></li>
-<li><span class="time">선언</span><span class="desc">"거짓말 안 할게요. 실패해도 다 보여줄 거예요." + 시청자에게 한마디.</span></li>
+<li>
+<div class="time">오프닝 (0~30초)</div>
+<div class="desc">등급표 보드를 들고 바로 시작. <strong>"결정사 대표인데 제 등급을 매겨봤어요"</strong><br>→ 인사 없이 바로. 점수는 끝에 공개한다고 예고.</div>
+</li>
+<li>
+<div class="time">1막: 등급 시스템이란? (약 5분)</div>
+<div class="desc">PD가 "등급은 어떻게 매기나요?" "남녀 기준이 다르다면서요?" "가격은 얼마예요?" 등을 물어봅니다.<br>→ <strong>대표님이 아는 대로 솔직하게.</strong> 업계 경험 기반으로 자연스럽게 설명.</div>
+</li>
+<li>
+<div class="time">2막: 본인 등급 공개 (약 5분) ⭐</div>
+<div class="desc">PD가 항목별로 하나씩 물어봅니다. "나이는 몇 점?" "외모는?" "학력은?"<br>→ <strong>하나씩 답하면서 본인 점수를 매기는 과정.</strong><br>→ 최종 총점은 이 구간 끝에 공개. <strong>첫 반응이 중요합니다 (리테이크 X).</strong></div>
+</li>
+<li>
+<div class="time">2막 후반: 요즘 화제 (약 2분)</div>
+<div class="desc">PD가 최근 방송/커뮤니티 화제를 언급하며 질문합니다.<br>→ <strong>모르는 건 "모르겠는데요?"로 OK.</strong> 아는 것만 솔직하게.</div>
+</li>
+<li>
+<div class="time">3막: 등급 너머의 진실 (약 3분)</div>
+<div class="desc">"등급 높으면 결혼 잘 돼요?" "S등급인데 안 되는 사람도 있어요?"<br>→ <strong>실제 업계 경험에서 본 케이스를 이야기.</strong> 등급이 전부가 아니라는 메시지.</div>
+</li>
+<li>
+<div class="time">엔딩 (약 1분)</div>
+<div class="desc">"등급 때문에 결정사 고민하는 사람한테 한마디?"<br>→ <strong>대본 없이 마음에서 우러나오는 말.</strong> PD가 10초+ 기다려줍니다.</div>
+</li>
 </ul>
 </section>
 
-<!-- 4. 꼭 나와야 하는 대사 -->
+<!-- 5. 촬영 전 준비 -->
 <section>
-<h2>영상에 꼭 나와야 하는 키워드</h2>
-<p>아래 키워드가 자연스럽게 나오면 됩니다. 외울 필요 없습니다.</p>
+<h2>촬영 전 준비할 것</h2>
 
-<table>
-<tr><th>키워드</th><th>맥락</th></tr>
-<tr><td><strong>"90키로"</strong></td><td>고등학교 시절 이야기할 때</td></tr>
-<tr><td><strong>"긁지 않은 복권"</strong></td><td>친구들 별명 이야기할 때 + 엔딩</td></tr>
-<tr><td><strong>"편입 7번"</strong></td><td>연세대 합격 과정</td></tr>
-<tr><td><strong>"10년 빌었다"</strong></td><td>보름달 이야기 / 연금술사</td></tr>
-<tr><td><strong>"사람을 연결하는 일"</strong></td><td>왜 결정사를 차렸는가 (3막 핵심)</td></tr>
-<tr><td><strong>"겪어본 사람"</strong></td><td>결정사 대표로서의 차별점</td></tr>
-<tr><td><strong>"아직 시작"</strong></td><td>엔딩 근처</td></tr>
-</table>
+<div class="prep-item">
+<span class="prep-num">1</span>
+<div class="prep-text"><strong>본인 등급 셀프 채점</strong><br>결정사 등급 항목(나이/외모/재산/연봉/집안/학력)으로 본인 점수를 미리 매겨보세요. 촬영 때 항목별로 PD가 물어볼 겁니다. <strong>총점은 촬영 당일 현장에서 처음 확인하면 더 좋습니다</strong> (봉투에 넣어놓을게요).</div>
+</div>
+
+<div class="prep-item">
+<span class="prep-num">2</span>
+<div class="prep-text"><strong>업계 등급 기준 정리</strong><br>S등급/A등급/B등급 남녀 기준을 대략 정리해두세요. "의사/판사/검사가 S등급" 같은 업계 상식 수준이면 됩니다. <strong>정확한 점수 체계를 외울 필요는 없습니다.</strong></div>
+</div>
+
+<div class="prep-item">
+<span class="prep-num">3</span>
+<div class="prep-text"><strong>가격 범위 숙지</strong><br>업계 평균 가격대(수백만~수천만 원 범위)만 알고 계시면 됩니다. <strong>특정 회사 가격은 언급하지 않습니다.</strong></div>
+</div>
+
+<div class="prep-item">
+<span class="prep-num">4</span>
+<div class="prep-text"><strong>등급 관련 실화 2~3개</strong><br>"S등급인데 매칭이 안 됐던 분" / "등급은 낮은데 결혼 잘 된 분" 같은 실제 케이스를 떠올려두세요. 이름/정보는 가림 처리합니다.</div>
+</div>
+
+<div class="prep-item">
+<span class="prep-num">5</span>
+<div class="prep-text"><strong>우리 결정사의 차별점</strong><br>"우리는 등급을 어떻게 할 건지"에 대한 본인 철학을 정리해두세요. (예: 투명 공개, 태도 중시 등)</div>
+</div>
 </section>
 
-<!-- 5. 톤 가이드 -->
+<!-- 6. 톤 가이드 -->
 <section>
-<h2>촬영 톤 가이드</h2>
+<h2>톤 가이드</h2>
 
 <div class="card">
-<div class="card-title">분위기</div>
-<p><strong>솔직하되 축축하지 않게.</strong></p>
-<p>진지한 이야기 사이에 자학 개그로 밸런스. 울먹임은 자연스러우면 OK, 일부러 감정 끌어내지 않아도 됩니다.</p>
+<div class="card-title">이렇게 말해주세요</div>
+<p><strong>업계 인사이더의 솔직함</strong> — "솔직히 말하면 이래요" "업계에서는 이걸 이렇게 불러요"</p>
+<p><strong>자학 유머</strong> — 본인 등급 공개할 때 "저도 이 정도밖에 안 돼요" 식의 솔직함</p>
+<p><strong>중립적 해설</strong> — 등급 시스템을 비판하거나 옹호하지 않고, "이렇게 작동해요" 팩트 전달</p>
+<p><strong>첫 반응 그대로</strong> — 특히 본인 등급 총점 확인 순간, 꾸미지 않은 리얼 리액션</p>
 </div>
 
 <div class="card">
-<div class="card-title">말투</div>
-<p>평소 편한 말투 그대로. 격식 없이. 대구 사투리 자연스럽게 나와도 OK.</p>
-<p>PD 질문에 "네" "아니오"가 아니라 <strong>에피소드로 답변</strong>해주세요.</p>
-</div>
-
-<div class="card">
-<div class="card-title">카메라</div>
-<p>카메라 = 친한 후배. 편하게 이야기하는 느낌.</p>
-<p>카메라 정면을 자주 봐주시면 좋습니다 (시청자와 눈 맞춤).</p>
+<div class="card-title">이렇게 말하지 마세요</div>
+<p>"결정사 시스템이 쓰레기다" — 비하 X, 분석 O</p>
+<p>"남자가 불쌍하다 / 여자가 불쌍하다" — 한쪽 편들기 X</p>
+<p>"우리 채널 구독해주세요" — 영상 내 구독 유도 0회</p>
+<p>대본 읽는 듯한 말투 — 키워드만 가지고 자연스럽게</p>
 </div>
 </section>
 
-<!-- 6. 절대 하면 안 되는 것 -->
+<!-- 7. PD 질문 방식 안내 -->
 <section>
-<h2>절대 하면 안 되는 것</h2>
+<h2>PD 질문 방식 안내</h2>
+
+<div class="highlight">
+PD가 던지는 질문에는 <strong>리서치 자료가 자연스럽게 녹아 있습니다.</strong><br><br>
+예를 들어 PD가 "요즘 방송에서 결정사 가입비가 1억이라는 얘기가 나왔는데, 진짜 그 정도 나와요?" 라고 물으면,<br>
+대표님은 <strong>"아, 그 정도 하는 데도 있죠"</strong> 식으로 아는 만큼 자연스럽게 답하면 됩니다.<br><br>
+<strong>PD 질문을 미리 다 외울 필요 없습니다.</strong> 질문을 듣고 반응하면 됩니다.
+</div>
+
+<div class="warn">
+<div class="warn-title">모를 때는?</div>
+<p>PD가 특정 사례를 물어봤는데 모르겠으면 <strong>"그건 모르겠는데, 근데 비슷한 케이스로…"</strong> 식으로 본인이 아는 이야기로 연결하면 됩니다.</p>
+<p>모르는 건 모른다고 하는 게 오히려 진정성 있습니다.</p>
+</div>
+</section>
+
+<!-- 8. Ban 리스트 -->
+<section>
+<h2>절대 하지 말 것</h2>
 
 <div class="ban">
 <div class="ban-title">Ban 리스트</div>
-<p>1. <strong>"안녕하세요" 인사</strong> — 인사 없이 바로 시작합니다</p>
-<p>2. <strong>"구독 좋아요" 멘트</strong> — 영상 내 0회</p>
-<p>3. <strong>연세대 재적/퇴학 이야기</strong> — 언급하지 않습니다</p>
-<p>4. <strong>황정우/이나영 사건</strong> — 절대 언급 금지</p>
-<p>5. <strong>천정명 실명</strong> — "유명 배우분"으로만</p>
-<p>6. <strong>경쟁사 실명</strong> (듀오/가연/한방언니 등) — "다른 결정사"로</p>
-<p>7. <strong>베스트클래스 구체적 회사명</strong> — "매칭 서비스 경험"으로만</p>
-<p>8. <strong>워터밤 관련</strong> — 언급/영상 사용 금지</p>
-<p>9. <strong>MCN/Neobridge 관계</strong> — 개인 채널로 보여야 합니다</p>
+<p>1. <strong>경쟁사 실명</strong> (듀오, 가연, 엔노블, 제이노블 등) → "메이저 결정사", "노블 결정사"로만</p>
+<p>2. <strong>특정 회원 정보</strong> → 이름/직업/지역 가림. "어떤 분이~" 식으로만</p>
+<p>3. <strong>"안녕하세요" 인사</strong> → 등급표 들고 바로 시작</p>
+<p>4. <strong>"구독/좋아요" 멘트</strong> → 영상 내 0회</p>
+<p>5. <strong>MCN/네오브릿지 언급</strong> → 순수 개인 채널</p>
+<p>6. <strong>워터밤 언급</strong></p>
+<p>7. <strong>황정우/이나영 사건</strong></p>
+<p>8. <strong>본인 결정사 가격 직접 공개</strong> → "업계 평균"으로만</p>
+<p>9. <strong>EP01 인생 스토리 반복</strong> → 90kg, 편입 7번, 긁지 않은 복권 등 다시 X</p>
 </div>
 </section>
 
-<!-- 7. 촬영 전 준비 -->
+<!-- 9. 소품/의상 -->
 <section>
-<h2>촬영 전 준비해주실 것</h2>
+<h2>소품 & 의상</h2>
 
-<div class="card">
-<div class="card-title">사진 자료 (가능한 것만)</div>
-<p>1. 대구 여고 시절 사진 1~2장 (90kg 시절)</p>
-<p>2. 감량 후 대학 시절 사진 1~2장</p>
-<p>3. 아나운서 시절 사진 1~2장</p>
-<p>→ D-1까지 기획팀에 전달 부탁드립니다. 강제가 아닙니다!</p>
-</div>
+<h3>소품 (촬영팀 준비)</h3>
+<ul class="checklist">
+<li>등급표 보드 (A2) — 남자 기준 + 여자 기준 인쇄</li>
+<li>본인 등급 채점 결과 (봉투) — 촬영 중 개봉</li>
+<li>가격 비교표 (A3) — 업계 평균 범위</li>
+<li>무료 등급 진단 폼 QR코드</li>
+</ul>
 
+<h3>의상 가이드</h3>
 <div class="card">
-<div class="card-title">컨디션</div>
-<p>2~3시간 이야기하는 촬영입니다. 컨디션 관리 부탁드립니다.</p>
-<p>메이크업: 평소 촬영 세팅 (풀세팅 권장)</p>
-<p>의상: 깔끔한 캐주얼 또는 사무실 룩</p>
+<div class="card-title">의상</div>
+<p><strong>깔끔한 비즈니스 캐주얼</strong> — "결정사 대표"다운 느낌</p>
+<p>EP01(브이로그)보다 약간 포멀하게. 재킷 or 블라우스 추천.</p>
+<p>색상: 무채색 or 파스텔 (배경과 안 겹치게)</p>
 </div>
 </section>
 
-<!-- 8. 마지막 한마디 -->
+<!-- 10. 촬영 당일 타임테이블 -->
 <section>
-<h2>마지막으로</h2>
-<div class="highlight">
-대본이 없습니다. 본인의 이야기를 본인의 말로 해주시면 됩니다.<br><br>
-PD가 질문하면 편하게 답변해주세요. 길게 이야기해도 좋고, 잠깐 멈춰도 좋습니다.<br><br>
-<strong>이 영상의 주인공은 이세령 대표님입니다.</strong>
+<h2>촬영 당일 타임테이블</h2>
+
+<table>
+<tr><th>시간</th><th>내용</th></tr>
+<tr><td>-60분</td><td>스튜디오 도착, 세팅, 메이크업</td></tr>
+<tr><td>-15분</td><td>PD와 간단 미팅 (흐름 확인, 질문 NOT 공유)</td></tr>
+<tr><td>0분</td><td><strong>촬영 시작</strong> (등급표 들고 바로)</td></tr>
+<tr><td>~60분</td><td>1막 촬영 (등급 시스템 해부)</td></tr>
+<tr><td>~80분</td><td>2막 촬영 (본인 등급 + 트렌드)</td></tr>
+<tr><td>~100분</td><td>3막 촬영 (등급 너머 + 엔딩)</td></tr>
+<tr><td>~120분</td><td>보충 촬영 + B-roll</td></tr>
+</table>
+
+<div class="warn">
+<div class="warn-title">중요</div>
+<p><strong>본인 등급 총점 공개 순간은 리테이크 하지 않습니다.</strong> 봉투를 처음 열고 보는 첫 반응이 가장 좋습니다.</p>
 </div>
 </section>
+
+<!-- 11. 동의 확인 -->
+<section>
+<h2>동의 확인</h2>
+
+<p>아래 항목을 촬영 전에 확인해주세요.</p>
+
+<ul class="checklist">
+<li>등급 시스템 해부 — 업계 등급 기준을 카메라 앞에서 설명하는 것에 동의</li>
+<li><strong>본인 등급 공개</strong> — 항목별 점수 + 총점을 영상에서 공개하는 것에 동의</li>
+<li>커뮤니티 이슈 답변 — PD가 물어보는 최근 화제 사례에 답변하는 것에 동의</li>
+<li>실화 언급 — 익명 처리 조건으로 실제 매칭 케이스를 이야기하는 것에 동의</li>
+<li>엔딩 — 대본 없이 마지막 메시지를 자유 발언하는 것에 동의</li>
+</ul>
+
+<div class="sig">
+<div class="label">서명</div>
+<div class="quote" style="font-size:14px;font-weight:500;color:var(--text2)">
+이세령 대표: ________________ (날짜:　　　　)<br><br>
+오맷돌 대표: ________________ (날짜:　　　　)
+</div>
+</div>
+</section>
+
+<p style="text-align:center;font-size:12px;color:var(--text3);margin-top:40px">
+기획부 코디 · 2026.04.16 · 아는언니 리지
+</p>
 
 </div>
 </body>
