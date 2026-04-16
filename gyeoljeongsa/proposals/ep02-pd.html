@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
+<meta name="theme-color" content="#ffffff">
+<title>[PD용] EP.02 — 90키로 대구 여고생이 결정사 대표가 되기까지</title>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+:root{--bg:#ffffff;--card:#ffffff;--card2:#f4f6f8;--border:#e5e7eb;--border2:#f1f3f5;--text:#191f28;--text2:#4e5968;--text3:#8b95a1;--accent:#0064ff;--accent-br:#3385ff;--accent-d:#0048b3;--accent-l:#e8f1ff;--green:#15803d;--amber:#b45309;--red:#dc2626;--hh:58px;--th:50px}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR','Apple SD Gothic Neo',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:15px;-webkit-font-smoothing:antialiased}
+.header{position:fixed;top:0;left:0;right:0;height:var(--hh);background:rgba(255,255,255,.92);backdrop-filter:saturate(180%) blur(12px);-webkit-backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 18px;gap:10px;z-index:100}
+.header-ep{font-size:11px;font-weight:700;color:var(--accent);background:var(--accent-l);padding:4px 10px;border-radius:6px;flex-shrink:0}
+.header-title{font-size:14px;font-weight:700;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--text);letter-spacing:-.01em}
+.header-ver{font-size:10px;font-weight:700;color:#fff;background:var(--accent);padding:3px 8px;border-radius:4px;flex-shrink:0}
+.header-ch{font-size:12px;color:var(--text3);flex-shrink:0}
+.tab-bar{position:fixed;top:var(--hh);left:0;right:0;height:var(--th);background:rgba(255,255,255,.92);backdrop-filter:saturate(180%) blur(12px);-webkit-backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--border);display:flex;overflow-x:auto;z-index:99;scrollbar-width:none;padding:0 10px;gap:2px}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab{display:flex;align-items:center;padding:0 14px;text-decoration:none;color:var(--text3);font-size:12px;font-weight:600;white-space:nowrap;border-bottom:3px solid transparent;transition:.15s;flex-shrink:0}
+.tab:hover{color:var(--text2);background:var(--card2)}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.prog{position:fixed;top:calc(var(--hh) + var(--th));left:0;right:0;height:3px;background:var(--border);z-index:98}
+.prog-bar{height:100%;background:var(--accent);width:0%;transition:width .1s}
+.hero{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px;margin-bottom:28px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 4px 16px rgba(0,0,0,.04)}
+.hero-top{display:flex;align-items:center;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.hero-ep{font-size:12px;font-weight:700;color:var(--accent);background:var(--accent-l);padding:5px 12px;border-radius:8px}
+.hero-badge{font-size:11px;font-weight:600;padding:5px 10px;border-radius:8px}
+.hero-title{font-size:26px;font-weight:800;line-height:1.3;margin-bottom:8px;word-break:keep-all;color:var(--text);letter-spacing:-.02em}
+.hero-sub{font-size:15px;color:var(--text2);margin-bottom:18px;font-weight:500;word-break:keep-all}
+.hero-meta{font-size:12px;color:var(--text3);margin-bottom:18px;display:flex;gap:8px;flex-wrap:wrap}
+.hero-meta span{background:var(--card2);padding:5px 10px;border-radius:8px}
+.hero-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px}
+.stat{background:var(--card2);border-radius:14px;padding:14px 10px;text-align:center}
+.stat-v{font-size:20px;font-weight:800;color:var(--text);letter-spacing:-.01em}
+.stat-l{font-size:11px;color:var(--text3);margin-top:4px;word-break:keep-all;font-weight:500}
+.main{margin-top:calc(var(--hh) + var(--th) + 3px);padding:24px 18px 64px;max-width:860px;margin-left:auto;margin-right:auto}
+.md h2{font-size:22px;font-weight:800;margin:44px 0 16px;padding-bottom:10px;border-bottom:1px solid var(--border);scroll-margin-top:calc(var(--hh) + var(--th) + 20px);word-break:keep-all;color:var(--text);letter-spacing:-.02em}
+.md h3{font-size:17px;font-weight:700;margin:28px 0 12px;color:var(--text);word-break:keep-all;letter-spacing:-.01em}
+.md h4{font-size:14px;font-weight:700;margin:20px 0 8px;word-break:keep-all;color:var(--text)}
+.md p{margin:10px 0;font-size:15px;word-break:keep-all;color:var(--text2)}
+.md strong{color:var(--text);font-weight:700}
+.md a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}
+.md blockquote{border-left:3px solid var(--accent);padding:14px 18px;margin:16px 0;background:var(--card);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 12px 12px 0;font-size:14px;word-break:keep-all;color:var(--text2)}
+.tw{overflow-x:auto;margin:16px 0;-webkit-overflow-scrolling:touch;border:1px solid var(--border);border-radius:14px;background:var(--card)}
+.tw table{margin:0;border-collapse:collapse;width:100%;font-size:13px;min-width:100%}
+.tw th{background:var(--card2);color:var(--text2);padding:11px 14px;text-align:left;font-weight:700;font-size:12px;white-space:nowrap;border-bottom:1px solid var(--border)}
+.tw td{padding:11px 14px;border-bottom:1px solid var(--border2);word-break:keep-all;vertical-align:top;color:var(--text2)}
+.tw tr:last-child td{border-bottom:none}
+.tw tr:hover td{background:var(--card2)}
+.md code{font-family:'SF Mono','Menlo',monospace;font-size:12px;background:var(--card2);color:var(--accent);padding:2px 6px;border-radius:6px}
+.md ul,.md ol{padding-left:22px;margin:10px 0;color:var(--text2)}
+.md li{margin:5px 0;font-size:15px;word-break:keep-all}
+.md li::marker{color:var(--accent)}
+.md hr{border:none;border-top:1px solid var(--border);margin:32px 0}
+.t-hook{color:#dc2626;font-weight:700}
+.t-crisis{color:#b45309;font-weight:700}
+.t-emp{color:#6d28d9;font-weight:700}
+.t-view{color:#0891b2;font-weight:700}
+.t-counter{color:#be185d;font-weight:700}
+.t-rehook{color:#c2410c;font-weight:700}
+.t-close{color:#15803d;font-weight:700}
+.t-trend{color:#7c3aed;font-weight:700;background:#f5f3ff;padding:1px 6px;border-radius:4px}
+.t-ceo{color:#ea580c;font-weight:700;background:#fff7ed;padding:1px 6px;border-radius:4px}
+@media(min-width:640px){body{font-size:16px}.hero{padding:28px 32px}.hero-title{font-size:26px}.main{padding:28px 24px 64px}.md h2{font-size:22px}.md p,.md li{font-size:15px}.tw table{font-size:14px}}
+@media(max-width:480px){.header{padding:0 12px;gap:8px}.header-title{font-size:13px}.header-ch{display:none}.tab{padding:0 10px;font-size:11px}.main{padding:18px 12px 48px}.hero{padding:18px 16px}.hero-title{font-size:19px}.hero-stats{grid-template-columns:repeat(2,1fr)}.md h2{font-size:17px;margin:30px 0 12px}.md h3{font-size:14px}.tw table{font-size:12px}.tw td,.tw th{padding:7px 9px}}
+@media print{.header,.tab-bar,.prog{display:none!important}.main{margin:0;padding:20px;max-width:100%}.tw{overflow:visible;border:none}.tw table{font-size:11px}}
+</style>
+</head>
+<body>
+<header class="header">
+<span class="header-ep">PD용</span>
+<span class="header-title">EP.02 — 90키로 대구 여고생이 결정사 대표가 되기까지</span>
+<span class="header-ver">v1</span>
+<span class="header-ch">아는언니 리지</span>
+</header>
+<nav class="tab-bar" id="tabBar">
+<a class="tab" href="#s-0" data-i="0">킥오프</a>
+<a class="tab" href="#s-1" data-i="1">제목</a>
+<a class="tab" href="#s-2" data-i="2">개요</a>
+<a class="tab" href="#s-3" data-i="3">타겟</a>
+<a class="tab" href="#s-4" data-i="4">ACT구조</a>
+<a class="tab" href="#s-5" data-i="5">AVD</a>
+<a class="tab" href="#s-6" data-i="6">질문지</a>
+<a class="tab" href="#s-7" data-i="7">엔딩</a>
+<a class="tab" href="#s-8" data-i="8">커뮤니티</a>
+<a class="tab" href="#s-9" data-i="9">USP</a>
+<a class="tab" href="#s-10" data-i="10">편집</a>
+<a class="tab" href="#s-11" data-i="11">Ban</a>
+<a class="tab" href="#s-12" data-i="12">승인</a>
+</nav>
+<div class="prog"><div class="prog-bar" id="pBar"></div></div>
+<main class="main">
+<div class="hero">
+<div class="hero-top">
+<span class="hero-ep">EP.02 PD용 브리프</span>
+<span class="hero-badge" style="background:var(--accent);color:#fff">v1</span>
+<span class="hero-badge" style="background:var(--accent-l);color:var(--accent)">스튜디오</span>
+<span class="hero-badge" style="background:var(--card2);color:var(--text2)">13~15분</span>
+<span class="hero-badge" style="background:var(--accent-l);color:var(--accent)">인생 서사형</span>
+</div>
+<h1 class="hero-title">90키로 대구 여고생이 결정사 대표가 되기까지</h1>
+<div class="hero-sub">EP.02 스튜디오 토크 — 이세령 인생 서사 최초 전체 공개</div>
+<div class="hero-meta">
+<span>아는언니 리지</span>
+<span>촬영일 TBD</span>
+<span>포맷: 스튜디오 Solo</span>
+</div>
+<div class="hero-stats">
+<div class="stat"><div class="stat-v">42개</div><div class="stat-l">질문지 (태그)</div></div>
+<div class="stat"><div class="stat-v">3막</div><div class="stat-l">ACT 구조</div></div>
+<div class="stat"><div class="stat-v">7개</div><div class="stat-l">위기장치</div></div>
+<div class="stat"><div class="stat-v">6개</div><div class="stat-l">커뮤니티 트렌드</div></div>
+<div class="stat"><div class="stat-v">5자리</div><div class="stat-l">오맷돌님 추가 Q</div></div>
+<div class="stat"><div class="stat-v">12개</div><div class="stat-l">Ban 리스트</div></div>
+</div>
+</div>
+<div class="md" id="ct"></div>
+</main>
+<script>
+const md=String.raw`## [킥오프 시트] EP.02 기획 체크리스트
+
+| 항목 | 내용 |
+|------|------|
+| 에피소드 | EP.02 (두 번째 영상) |
+| 채널 | 아는언니 리지 |
+| 호스트 | 이세령 대표 (30세, 아나운서 출신, 결정사 공동대표) |
+| 포맷 | **스튜디오 토크** (이세령 Solo + PD 질문) |
+| 타겟 러닝타임 | 13~15분 |
+| 촬영일 | TBD (오맷돌님 결정) |
+| 업로드일 | TBD |
+| 기획자 | 기획부 (코디) |
+| 콘셉트 | **인생 서사형** — 대구 여고생 90kg에서 결정사 대표까지 전체 아크 |
+| 시리즈 위치 | EP.01(브이로그/하루) 이후 — "이 대표 누구야?" 궁금증 해소 영상 |
+| 핵심 소재 | 90kg→연대→아나운서→추락→부활→결정사 (인생 전체 최초 공개) |
+| 커뮤니티 연동 | 결정사 등급 논란 / 탁재훈 1억 / 30대 결혼 압박 등 트렌딩 토픽 6개 |
+
+---
+
+## STEP 0. 제목 & 썸네일 설계
+
+### 제목 공식 (3안)
+
+| 안 | 제목 | 글자수 | 공식 | 컨셉 |
+|---|------|-------|------|------|
+| **A (메인)** | **90키로 대구 여고생이 결정사 대표가 되기까지 [실화]** | 25자 | 숫자갭 + 변신 + 대괄호 | contrast |
+| B | 편입 7번 떨어진 여자가 결정사를 차린 이유 | 20자 | 숫자 + 역경 + 의문 | question |
+| C | 아나운서 7년 했는데 결정사 차렸습니다 [90→56kg] | 26자 | 직업갭 + 숫자 변신 | shock_number |
+
+**A안 선택 근거:**
+- "90키로 → 결정사 대표" = 갭(낙차) 극대 → CTR 최강 공식
+- 숫자 "90" = 0.5초 만에 시선 고정
+- [실화] = 호기심 + 신뢰 동시 확보
+- 벤치마크: 예보링 "23살에 7억 모은 썰" (735만뷰) 동일 구조
+
+**제목 체크리스트:**
+- [x] 30자 이내 (25자)
+- [x] 숫자 포함 (90키로)
+- [x] 믿기 어렵지만 사실
+- [x] 제목과 썸네일이 같은 말 안 함
+- [x] 결정사 키워드 포함
+
+### 썸네일 설계
+
+| 요소 | 내용 |
+|------|------|
+| 주인공 표정 | 담담한 미소 + 카메라 정면 (자신감) |
+| 배경 | 스튜디오 or 사무실 (깔끔) |
+| 텍스트 (좌) | "90kg → 대표" (흰 굵은 고딕 70pt + 검정 외곽선) |
+| 서브 요소 | 좌측 하단에 고딩 시절 사진 작게 (비포) |
+| 빨간 화살표 | → 방향 (비포→현재 연결) |
+| 모바일 비율 | 이세령 60% + 텍스트 40% |
+
+**제목-썸네일 상보성:** 제목이 "과정"을 궁금하게 하고, 썸네일이 "비포/애프터"를 시각적으로 증명.
+
+---
+
+## STEP 1. 영상 개요
+
+| 항목 | 내용 |
+|------|------|
+| 출연자 | 이세령 (30세, 연세대 아나운서 출신, 결정사 공동대표, 인스타 85K) |
+| 포맷 | **스튜디오 Solo 토크** (카메라 정면 + PD 오프카메라 질문) |
+| 촬영 장소 | 스튜디오 1곳 (단일 로케이션) |
+| 핵심 와우 포인트 | ① 90kg→56kg 극적 변신 ② 편입 7번 실패→연세대 합격 ③ 아나운서→추락→부활 ④ "왜 결정사를 차렸나" 전환점 ⑤ 커뮤니티 핫이슈 정면 돌파 |
+| 예상 러닝타임 | 13~15분 |
+| 한 줄 요약 | 90kg 대구 여고생이 30kg 빼고, 편입 7번 떨어지고, 아나운서 됐다가 추락한 뒤, 결정사 대표가 되기까지의 인생 전체를 처음으로 풀어놓는 스튜디오 토크 |
+| 촬영 인력 | 카메라 1명 + PD/질문자 1명 |
+| 촬영 장비 | 카메라 1대 (4K) + 무선 핀마이크 × 2 + 삼각대 + LED 조명 2개 |
+| 촬영 시간 | 약 3~4시간 (실 촬영 2시간 + 세팅/리셋) |
+
+---
+
+## STEP 2. 타겟 시청자 & 알고리즘 설계
+
+### 투트랙 타겟
+
+| 트랙 | 타겟 | 작동 방식 |
+|------|------|---------|
+| **겉 (1차)** | 28~35세 미혼 여성 | "나도 30인데 아직 혼자야" 자기 대입 + 인생역전 응원 → **댓글/공유** |
+| **속 (2차, 진짜 컨버전)** | 30~45세 미혼 사업가 남성 | "이 사람이 직접 운영하는 결정사라면 신뢰가 간다" → **상담 폼 클릭** |
+
+### 예상 댓글 반응 (캡처/공유될 문장)
+
+- "고딩 때 90키로 진짜?? 지금 완전 다른 사람"
+- "편입 7번 떨어지고도 연세대 갔다고? 미친 멘탈"
+- "긁지 않은 복권ㅋㅋㅋ 이 표현 천재"
+- "결정사 대표가 아직 결혼 못 한 거 오히려 설득력"
+- "tvN에서 봤는데 결정사 차렸다고??"
+- "인생 드라마 짬뽕이네"
+- "다음 편 첫 회원 만나는 거 빨리 올려주세요"
+- "무료 진단 어디서 받아요?"
+
+### 알고리즘 키워드
+
+**제목용:** 90키로, 결정사, 결정사 대표, 다이어트, 아나운서, 연세대, 편입, 30대 결혼
+
+**해시태그:** #결정사 #30대결혼 #다이어트변신 #아나운서 #인생역전 #결혼정보회사
+
+---
+
+## STEP 3. ACT 구조 (3막)
+
+> 스튜디오 토크는 장소 전환 없이 **이야기 전환**으로 구조를 만든다.
+> 3막 = 3개의 감정 아크. 각 막마다 위기장치로 리텐션 유지.
+
+### 전체 타임라인
+
+| 시간 | 막 | 핵심 내용 | 감정선 |
+|------|-----|---------|--------|
+| **0:00~0:30** | 프리훅 | "결정사 대표인데, 고등학교 때 90키로였어요" | 충격 |
+| **0:30~5:00** | **1막: 대구 여고생** | 초3 노현정→10년 자기확신→90kg→반지하→편입 7번→연세대 | 공감→응원 |
+| **5:00~10:00** | **2막: 화려함과 추락** | 아나운서→tvN 천정명→미스코리아 탈락→트리플 슬럼프→부활 | 충격→안타까움→카타르시스 |
+| **10:00~13:30** | **3막: 왜 결정사인가** | 사업 전환→결정사를 차린 진짜 이유→커뮤니티 이슈 정면 돌파→선언 | 납득→신뢰→동기부여 |
+| **13:30~14:30** | 엔딩 | "긁지 않은 복권" 클로징 + 다음편 떡밥 | 여운 |
+
+### 1막 상세: 대구 여고생 (0:30~5:00)
+
+| 구간 | 내용 | 핵심 대사 | 감정 |
+|------|------|---------|------|
+| 0:30~1:30 | 초3 노현정, 아나운서 꿈 각인 | "성장플러스에서 노현정 아나운서 보는 순간 꽂혔어요" | 설렘 |
+| 1:30~2:30 | 찐따 모범생, 10년 실장, 혼자 KBS 뉴스 녹음 | "뿔테 안경 쓰고 쉬는 시간에도 공부하는 찐따 모범생" | 공감 |
+| 2:30~3:30 | 집안 몰락→반지하→90kg 진입 | "좋은 집에서 반지하로 이사하면서 모든 게 무너졌어요" | 안타까움 |
+| 3:30~4:00 | 수능 공황장애→계명대→일진→자퇴 | "수능 1교시에 공황장애가 왔어요" | 충격 |
+| 4:00~5:00 | 감량 + 편입 7번 실패→연세대 합격 | "8번째에 합격 보자마자 바로 울었어요. 10년 빌었거든요" | 카타르시스 |
+
+### 2막 상세: 화려함과 추락 (5:00~10:00)
+
+| 구간 | 내용 | 핵심 대사 | 감정 |
+|------|------|---------|------|
+| 5:00~6:00 | 연세대→아나운서 합격 (스포티비) | "아나운서 학원 가니까 이미 실력이 만들어져 있었어요" | 성취감 |
+| 6:00~7:00 | 방송 경력 + tvN 출연 + 천정명 | "국민 앞에서 애프터 받았다가 최종에서 떨어졌어요 (웃음)" | 유머 |
+| 7:00~8:00 | 미스코리아 전패 + 코로나→트리플 슬럼프 | "아나운서도 끊기고, 미스코리아도 떨어지고, 전부 사라졌어요" | 좌절 |
+| 8:00~9:00 | 방황→각성→영어 강사 1등 | "돈을 벌기 시작하니까 뭔가 달라졌어요. 말로 하는 게 적성" | 부활 |
+| 9:00~10:00 | 마케팅 회사 창업→사업가 전환 | "아나운서보다 더 멋진 여자가 되겠다" | 각오 |
+
+### 3막 상세: 왜 결정사인가 (10:00~13:30)
+
+| 구간 | 내용 | 핵심 대사 | 감정 |
+|------|------|---------|------|
+| 10:00~11:00 | 네트워킹→매칭 업계 진입→결정사를 차린 이유 | "내가 진짜 잘하는 건 사람을 연결하는 거더라고요" | 전환점 |
+| 11:00~12:00 | 커뮤니티 이슈 정면 돌파 (등급/가격/외모) | "결정사 등급 시스템이 차갑다고요? 솔직히 맞아요" | 솔직 |
+| 12:00~13:00 | 결정사 대표인데 미혼 = 최대 무기 | "저도 결혼 못 했으니까. 이 시장 얼마나 어려운지 알아요" | 진정성 |
+| 13:00~13:30 | 비전 선언 + 팬덤 초대 | "거짓말 안 할게요. 실패해도 다 보여줄 거예요" | 동기부여 |
+
+---
+
+## STEP 4. 시청 지속률 설계 (AVD 최적화)
+
+> 13~15분 기준. 2~3분마다 위기장치. 첫 30초 유지율 70%+.
+
+### 후킹 타임라인
+
+| 시간대 | 장치 유형 | 내용 | 기대 효과 |
+|--------|---------|------|---------|
+| **0~5초** | 패턴 인터럽트 | 카메라 정면 "결정사 대표인데, 고등학교 때 90키로였어요. 진짜로요." (인사 0회) | 충격 즉시 인지 |
+| **5~30초** | 썸네일 이행 | "오늘 제 인생 이야기를 처음으로 다 해볼게요" + 과거 사진 인서트 | 약속 이행 |
+| **3분** | 위기장치 ① | "좋은 집에서 반지하로 이사했어요. 공부 손 놓고 폭식 → 90kg" | 재후킹 — 몰락 |
+| **4분** | 위기장치 ② | "편입 7번 떨어졌어요. 신촌 가면 아직도 눈물 나요" | 재후킹 — 간절함 |
+| **5분** | 위기장치 ③ | "연세대 합격 보자마자 울었어요. 10년 빌었거든요" | 카타르시스 |
+| **7분** | 위기장치 ④ | "tvN에서 천정명씨한테 애프터 받았는데... 최종은 다른 분 (웃음)" | 유머+충격 |
+| **8분** | 위기장치 ⑤ | "미스코리아 떨어지고 아나운서도 끊기고. 전부 사라졌어요" | 진정성 피크 |
+| **10분** | 위기장치 ⑥ | "사람을 연결하는 게 내가 진짜 잘하는 일이더라고요" | 전환점 감정 정점 |
+| **11분** | 위기장치 ⑦ | 커뮤니티 이슈 정면 돌파 ("탁재훈 1억이라는데 진짜예요?") | 재후킹 — 트렌드 |
+| **13:30** | 엔딩 | "90키로 여고생이 결정사 대표가 됐어요. 이게 끝이 아니라 시작" + "긁지 않은 복권" | 여운 |
+
+**첫 30초 목표 유지율: 70% 이상**
+
+### 위기장치 목록
+
+| # | 유형 | 위치 | 내용 |
+|---|------|------|------|
+| 1 | 몰락형 | 3분 | 반지하 이사 + 90kg 진입 (사진 인서트) |
+| 2 | 간절형 | 4분 | 편입 7번 실패 + 신촌 눈물 |
+| 3 | 카타르시스형 | 5분 | 연세대 합격 + "10년 빌었다" |
+| 4 | 유머형 | 7분 | 천정명 애프터→최종 탈락 (웃음) |
+| 5 | 진정성형 | 8분 | 트리플 슬럼프 솔직 고백 |
+| 6 | 전환점형 | 10분 | "사람을 연결하는 일" 깨달음 |
+| 7 | 트렌드형 | 11분 | 커뮤니티 핫이슈 정면 돌파 |
+
+---
+
+## STEP 5. 질문지 (촬영감독용)
+
+> **원칙 1**: 스튜디오 토크 = PD가 시청자 대변자. 자연스럽게 이야기를 끌어냄.
+> **원칙 2**: 이세령이 길게 말하도록. 단답 압박 금지. 침묵 OK.
+> **원칙 3**: 커뮤니티 트렌드 질문은 [트렌드] 태그. 오맷돌님 추가 질문은 [대표Q] 태그.
+> **태그**: [후킹] [위기장치] [감정이입] [반론] [시청자대리] [재후킹] [마무리] [트렌드] [대표Q]
+> **전체**: 42개 + 오맷돌님 추가 5자리
+
+---
+
+### 프리훅 (0:00~0:30)
+
+| # | 태그 | 질문/지시 |
+|---|------|---------|
+| 1 | [후킹] | (카메라 ON, 인사 없이) 이세령 대표님, 고등학교 때 몸무게가 어떻게 되셨어요? |
+| 2 | [후킹] | 지금은 결정사 대표잖아요. 그 사이에 뭐가 있었어요? |
+
+---
+
+### 1막: 대구 여고생 (0:30~5:00)
+
+#### A. 꿈의 시작 (0:30~1:30)
+
+| # | 태그 | 질문 |
+|---|------|------|
+| 3 | [감정이입] | 아나운서가 되고 싶었다고요? 언제부터요? |
+| 4 | [시청자대리] | 초등학교 3학년이면 진짜 어린데, 그때 뭘 보고 꽂혔어요? |
+| 5 | [감정이입] | 그 꿈이 한 번도 안 흔들렸어요? 10년 동안? |
+| 6 | [시청자대리] | 혼자 KBS 뉴스 외워서 녹음했다는 게 진짜예요? |
+
+#### B. 몰락과 90kg (1:30~3:00)
+
+| # | 태그 | 질문 |
+|---|------|------|
+| 7 | [감정이입] | 학창시절 본인은 어떤 학생이었어요? |
+| 8 | [위기장치] | 반지하로 이사했다는 게 무슨 상황이었어요? |
+| 9 | [위기장치] | 그때 90키로까지 간 거예요? 진짜요? |
+| 10 | [시청자대리] | 그 시절 거울 보면 어떤 생각이 들었어요? |
+| 11 | [재후킹] | 친구들이 "긁지 않은 복권"이라고 했다면서요? 그때는 어떻게 느꼈어요? |
+
+#### C. 수능~편입 (3:00~5:00)
+
+| # | 태그 | 질문 |
+|---|------|------|
+| 12 | [위기장치] | 수능 때 공황장애가 왔다고요? |
+| 13 | [감정이입] | 계명대에서 자퇴를 결심한 이유가 뭐예요? |
+| 14 | [위기장치] | 편입을 7번 떨어졌다고요? 7번이요?? |
+| 15 | [시청자대리] | 그때 부모님 반응은 어땠어요? |
+| 16 | [감정이입] | 편입학원 시절이 지금도 눈물 난다고요? |
+| 17 | [재후킹] | 8번째에 연세대 합격. 합격 보자마자 뭘 했어요? |
+| 18 | [감정이입] | 인생책이 연금술사라고요? 어떤 문장이요? |
+
+---
+
+### 2막: 화려함과 추락 (5:00~10:00)
+
+#### D. 아나운서~tvN (5:00~7:00)
+
+| # | 태그 | 질문 |
+|---|------|------|
+| 19 | [시청자대리] | 아나운서 학원 갔을 때 반응이 어땠어요? 이미 잘했다면서요? |
+| 20 | [감정이입] | 아나운서 합격했을 때 느낌이 어떠셨어요? |
+| 21 | [후킹] | tvN '이젠 사랑할 수 있을까' 나갔잖아요. 천정명씨가 애프터 신청했다고요? |
+| 22 | [시청자대리] | 근데 최종 선택은 못 받았다고요? |
+| 23 | [감정이입] | 국민 앞에서 차인 기분이 어때요? |
+
+#### E. 추락과 부활 (7:00~10:00)
+
+| # | 태그 | 질문 |
+|---|------|------|
+| 24 | [위기장치] | 미스코리아도 떨어지고, 아나운서도 끊기고. 그때 어떤 상태였어요? |
+| 25 | [감정이입] | 솔직히 완전 무너진 시기가 있었어요? |
+| 26 | [시청자대리] | 그 시기를 어떻게 벗어났어요? |
+| 27 | [재후킹] | 영어 강사를 했는데 1등을 했다고요? |
+| 28 | [감정이입] | "아나운서보다 더 멋진 여자가 되겠다" 이 결심은 언제 한 거예요? |
+| 29 | [시청자대리] | 마케팅 회사까지 창업한 거잖아요. 사업이 적성이었어요? |
+
+---
+
+### 3막: 왜 결정사인가 (10:00~13:30)
+
+#### F. 전환점 — 결정사를 차린 이유 (10:00~11:00)
+
+| # | 태그 | 질문 |
+|---|------|------|
+| 30 | [후킹] | 근데 왜 결정사예요? 마케팅 회사가 잘 되고 있었잖아요. |
+| 31 | [감정이입] | "사람을 연결하는 게 내가 잘하는 일"이라고 깨달은 순간이 있어요? |
+| 32 | [반론] | 주변에서 30세 미혼 여자가 결정사 차린다고 했을 때 반응이 어땠어요? |
+| 33 | [시청자대리] | 결정사 대표인데 본인은 결혼 안 했잖아요. 그게 약점 아니에요? |
+
+#### G. 커뮤니티 트렌드 정면 돌파 (11:00~12:30)
+
+| # | 태그 | 질문 |
+|---|------|------|
+| 34 | [트렌드] | 요즘 커뮤니티에서 "결정사 등급 시스템이 차갑다"는 말이 많은데, 어떻게 생각해요? |
+| 35 | [트렌드] | 탁재훈 가입비 1억이 화제가 됐잖아요. 결정사 가격이 왜 이렇게 비싼 거예요? |
+| 36 | [트렌드] | "결정사는 외모를 본다"는 건 차별 아니에요? |
+| 37 | [트렌드] | "혼자 사는 게 괜찮은 건 30대까지다"라는 말이 커뮤니티에서 도는데, 동의해요? |
+| 38 | [트렌드] | 결정사에서 20명 만나고 결혼의 본질을 깨달았다는 후기가 있는데, 진짜 그런 경우 봤어요? |
+| 39 | [트렌드] | 결정사 가격이 불투명하다는 비판이 있잖아요. 본인 결정사는 투명하게 공개할 거예요? |
+
+#### H. 선언 + CTA (12:30~13:30)
+
+| # | 태그 | 질문 |
+|---|------|------|
+| 40 | [마무리] | 이 채널에서 앞으로 뭘 보여줄 거예요? |
+| 41 | [마무리] | 5년 뒤 이세령 대표는 어떻게 되어 있을까요? |
+| 42 | [마무리] | 마지막으로 지금 혼자인 사람들한테 한마디 한다면? |
+
+---
+
+### 오맷돌님 추가 질문 (5자리)
+
+> **아래 자리는 오맷돌님이 직접 추가할 질문입니다.**
+> 기획서 리뷰 후 추가해주세요.
+
+| # | 태그 | 질문 | 삽입 위치 |
+|---|------|------|---------|
+| A1 | [대표Q] | (추가 예정) | 1막 / 2막 / 3막 |
+| A2 | [대표Q] | (추가 예정) | 1막 / 2막 / 3막 |
+| A3 | [대표Q] | (추가 예정) | 1막 / 2막 / 3막 |
+| A4 | [대표Q] | (추가 예정) | 1막 / 2막 / 3막 |
+| A5 | [대표Q] | (추가 예정) | 1막 / 2막 / 3막 |
+
+---
+
+## STEP 6. 엔딩 설계
+
+### 이세령이 자연스럽게 마무리
+
+> 엔딩 = CTA가 아니라 이세령의 진짜 이야기.
+> 마지막 질문만 던지고 **길게 말하게 놔둠**. 답변 가이드 없음.
+
+**마지막 질문 (이것만):** *"마지막으로 지금 혼자인 사람들한테 한마디 한다면?"*
+
+**톤 가이드:**
+- 답변 구성 X, 대본 X
+- 이세령 본인 감정으로 자유롭게
+- PD는 추가 질문 하지 말고 **10초+ 침묵 버티기**
+- 건드릴 주제: `긁지 않은 복권` / `겪어본 사람` / `아직 시작`
+- 리테이크 금지 — 첫 테이크 그대로
+
+### 화면 마무리
+
+- 이세령 마지막 멘트 → 정적 + 미소 (3초)
+- 페이드아웃 (5초)
+- 엔딩 자막: **"겪어본 사람이 차린 결정사 · 아는언니 리지"**
+- 암전 후 5초 EP.03 프리뷰 ("다음 편에 첫 회원을 만납니다...")
+
+### CTA — 영상 내 0회
+
+- 무료 등급 진단 폼 → **더보기란 + 고정 댓글만**
+- 영상 내 "구독", "좋아요", "알림 설정" 0회
+- 댓글 유도: "결정사 대표한테 물어보고 싶은 거 있으면 댓글 남겨주세요" 카드만
+
+---
+
+## STEP 7. 커뮤니티 트렌드 연동
+
+> 요즘 커뮤니티에서 돌고 있는 결정사/결혼 관련 핫이슈 6개를 질문으로 녹였습니다.
+> 이세령의 솔직한 답변이 클립/숏폼으로 확산되는 것이 목표.
+
+| # | 트렌드 | 출처 | 질문 연결 | 기대 효과 |
+|---|--------|------|---------|---------|
+| 1 | **결정사 등급 시스템 "차갑다" 논란** | 네이트판/에펨코리아 | Q34 | "대표가 직접 인정하면서 해석" → 클립 바이럴 |
+| 2 | **탁재훈 결정사 가입비 1억** | 뉴스/에펨코리아 | Q35 | 가격 논란에 업계 인사이더 시각 제공 |
+| 3 | **결정사 외모 평가 = 차별?** | 블라인드/디시 | Q36 | "솔직하게 외모 본다" 차별화 |
+| 4 | **"혼자 사는 게 괜찮은 건 30대까지"** | 디시 베스트 갤러리 | Q37 | 30세 미혼 대표의 당사자 답변 |
+| 5 | **결정사 20명 만남 후기** | 네이트판 | Q38 | 운영자 관점의 내부자 인사이트 |
+| 6 | **결정사 가격 불투명 비판** | 에펨코리아/블라인드 | Q39 | "우리는 투명 공개" 포지셔닝 |
+
+### 숏폼 클립 후보 (편집팀 참고)
+
+| 클립 | 구간 | 예상 길이 | 후킹 문장 |
+|------|------|---------|---------|
+| "90kg이었어요" | 0:00~0:30 | 30초 | "결정사 대표인데 고등학교 때 90키로였어요" |
+| "편입 7번" | 4:00~5:00 | 40초 | "편입 7번 떨어지고 8번째에 연세대" |
+| "국민 앞에서 차임" | 6:30~7:00 | 30초 | "tvN에서 천정명씨한테 차였어요 (웃음)" |
+| "등급 시스템 솔직" | 11:00~11:30 | 40초 | "결정사 등급이 차갑다고요? 솔직히 맞아요" |
+| "1억 가입비" | 11:30~12:00 | 30초 | "탁재훈 1억... 결정사 가격의 진짜 이유" |
+
+---
+
+## STEP 8. USP — 셀링포인트 매핑
+
+| # | 항목 | 본 EP 장면 | 작동 방식 |
+|---|------|----------|---------|
+| 1 | 타겟 동일 위치 | "저도 30살 미혼" | 당사자 = 시청자 |
+| 2 | 극적 변신 증거 | 90kg→56kg 사진 | 시각적 충격 |
+| 3 | 검증된 경력 | 아나운서 7년 + tvN | 신뢰 기반 |
+| 4 | 실패 = 설득력 | 편입7번/미코탈락/추락 | "완벽한 사람이 아닌 겪어본 사람" |
+| 5 | 업계 인사이더 | 결정사 운영 경험 | 커뮤니티 이슈에 답할 수 있는 권위 |
+| 6 | 약점→강점 | "미혼 대표 = 시장을 아는 사람" | 선제 방어 |
+| 7 | 트렌드 연결 | 커뮤니티 핫이슈 정면 돌파 | 검색 유입 + 클립 확산 |
+| 8 | 성장 진행형 | "0에서 시작, 다 보여줄 것" | 시리즈 구독 동기 |
+
+---
+
+## STEP 9. 편집 가이드
+
+### 오프닝 (0~30초)
+
+| 항목 | 내용 |
+|------|------|
+| 인사 | **금지**. "결정사 대표인데" 직행 |
+| 분위기 | 환경음만. BGM 없음 |
+| 인서트 | "90키로" 멘트에 과거 사진 인서트 |
+| 자막 | "30세 · 결정사 대표 · 前 아나운서" 정보 자막 즉시 |
+
+### 1막 (0:30~5:00)
+
+| 항목 | 내용 |
+|------|------|
+| 컷 흐름 | 이세령 정면 위주. PD 목소리만 (얼굴 X) |
+| BGM | 환경음 + 미니멀 피아노 (감정 구간만) |
+| 인서트 | 대구 시절 사진 / 90kg 사진 / 반지하 이미지 / 편입학원 거리 스틸 |
+| 핵심 대사 강조 | "긁지 않은 복권" "10년 빌었다" → 대형 자막 |
+| 자막 숫자 | **90kg**, **7번**, **10년** → 80pt 강조 |
+
+### 2막 (5:00~10:00)
+
+| 항목 | 내용 |
+|------|------|
+| BGM | 아나운서 시절 = 밝은 비트 → 추락 = 무음 → 부활 = 감성 피아노 |
+| 인서트 | 아나운서 시절 사진 / tvN 출연 장면 캡처 (저작권 확인) |
+| 유머 구간 | 천정명 에피소드 = PD 웃음 자연스럽게 살리기 |
+| 자르지 말 것 | 8분대 "전부 사라졌어요" 구간 — 표정 그대로 5초+ |
+| 부활 전환 | "아나운서보다 더 멋진 여자" = BGM 전환 포인트 |
+
+### 3막 (10:00~14:30)
+
+| 항목 | 내용 |
+|------|------|
+| 톤 | 진지→솔직→당당 순서로 톤 변화 |
+| 커뮤니티 질문 | 질문 텍스트를 화면 하단에 자막으로 띄움 (시청자 궁금증 대변) |
+| BGM | "사람을 연결하는 거" = 감성 BGM 시작. 이후 유지 |
+| 엔딩 | 마지막 멘트 → 3초 정적 → 페이드아웃 → 5초 EP.03 프리뷰 |
+| CTA 화면 | 상담 폼 QR코드 5초 노출 (영상 내 멘트 없이 화면만) |
+
+### 공통 규격
+
+| 항목 | 내용 |
+|------|------|
+| 총 러닝타임 | 13~15분 |
+| 자막 폰트 | 프리텐다드 Bold, 흰색 + 검정 외곽선 |
+| 핵심 대사 | "사람을 연결하는 거" "긁지 않은 복권" "거짓말 안 할게요" → 대형 자막 |
+| 위기장치 | 2~3분 주기 (인서트/효과음/자막 변화) |
+| 과거 사진 | 본인 동의 시에만. 인서트 길이 3~4초. 과잉 반복 금지 |
+
+---
+
+## STEP 10. Ban 리스트
+
+| # | 금지 | 이유 |
+|---|------|------|
+| 1 | "안녕하세요" 인사 | 0초 후크 룰 |
+| 2 | "구독 좋아요 알림설정" 멘트 | 채주부 룰, 0회 |
+| 3 | 대본 읽는 느낌 | 키워드만 숙지, 즉흥 |
+| 4 | **연세대 재적/퇴학/재입학 언급** | 이미지 리스크 |
+| 5 | **1년 술/클럽 방황 디테일** | 수위 조절 ("힘든 시기"로 대체) |
+| 6 | **황정우/이나영 사건** | 절대 금지 (별도 동의 필요) |
+| 7 | 천정명 실명 직접 | "유명 배우분"으로만 |
+| 8 | 경쟁사 실명 (한방언니/모두의지인/듀오/가연) | "다른 결정사"로 통일 |
+| 9 | MCN/Neobridge 관계 언급 | 순수 개인 채널로 인식되어야 |
+| 10 | 워터밤 직접 언급/영상 | 결정사 대표 이미지 충돌 |
+| 11 | 엔딩에서 CTA 멘트 | 이세령 멘트로 끝 |
+| 12 | 베스트클래스 구체적 회사명 | "매칭 서비스 운영 경험"으로만 |
+
+### Drop 유발 Ban 키워드 (편집 기획부 리포트 기반)
+
+> 이전 편집 분석에서 3회 이상 반복 드롭 유발된 키워드.
+> 대본/질문지에서 원천 차단.
+
+- "잘하는" → "적성에 맞는" 또는 "좋아하는"으로 대체
+- "이게" → 구체적 주어로 대체
+- "내년에" → "앞으로" 또는 구체적 시점으로 대체
+- "없으면" → 긍정형으로 전환
+
+---
+
+## STEP 11. 승인 체크리스트
+
+### 대표 승인
+
+| # | 항목 | 확인 |
+|---|------|------|
+| 1 | 이세령 — 인생 스토리 전체 공개 최종 동의 | ☐ |
+| 2 | 이세령 — "90키로" 수치 공개 동의 | ☐ |
+| 3 | 이세령 — 과거 사진 (고딩/90kg 시절) 사용 동의 | ☐ |
+| 4 | 이세령 — tvN 출연 장면 캡처 사용 가능 여부 확인 | ☐ |
+| 5 | 이세령 — 아나운서 시절 사진 저작권 확인 | ☐ |
+| 6 | 이세령 — 커뮤니티 이슈 (등급/가격/외모) 답변 동의 | ☐ |
+| 7 | 이세령 — 스튜디오 촬영일 확정 | ☐ |
+| 8 | 오맷돌님 — 추가 질문 5자리 채움 | ☐ |
+| 9 | 오맷돌님 — 제목/썸네일 A안 최종 승인 | ☐ |
+| 10 | 촬영팀 — 스튜디오 예약 | ☐ |
+| 11 | 촬영팀 — 장비 세팅 (카메라+핀마이크+조명) | ☐ |
+| 12 | 무료 등급 진단 폼 URL 확정 | ☐ |
+
+### 소품/자료 체크리스트
+
+- [ ] 이세령 과거 사진 3~5장 (대구 시절/90kg 시절/아나운서 시절)
+- [ ] tvN 출연 장면 캡처 (사용권 확인)
+- [ ] 무료 등급 진단 폼 QR코드 출력본
+- [ ] 스튜디오 배경 세팅 (깔끔한 사무실/상담실 분위기)
+
+---
+
+> **서명란**
+> - 오맷돌 대표: ________________ (날짜: )
+> - 이세령 대표: ________________ (날짜: )
+> - 촬영감독: ________________ (날짜: )
+
+**기획부 코디 / 2026.04.16**
+**다음 단계**: 오맷돌님 추가 질문 확정 → 이세령 동의 → 촬영일 확정 → D-DAY
+`;
+
+marked.setOptions({breaks:true,gfm:true,headerIds:false});
+const el=document.getElementById('ct');
+let r=marked.parse(md);
+let si=0;
+r=r.replace(/<h2/g,()=>'<h2 id="s-'+si+++'"');
+r=r.replace(/<table>/g,'<div class="tw"><table>');
+r=r.replace(/<\/table>/g,'</table></div>');
+r=r.replace(/\[후킹\]/g,'<span class="t-hook">[후킹]</span>');
+r=r.replace(/\[위기장치\]/g,'<span class="t-crisis">[위기장치]</span>');
+r=r.replace(/\[감정이입\]/g,'<span class="t-emp">[감정이입]</span>');
+r=r.replace(/\[시청자대리\]/g,'<span class="t-view">[시청자대리]</span>');
+r=r.replace(/\[반론\]/g,'<span class="t-counter">[반론]</span>');
+r=r.replace(/\[재후킹\]/g,'<span class="t-rehook">[재후킹]</span>');
+r=r.replace(/\[마무리\]/g,'<span class="t-close">[마무리]</span>');
+r=r.replace(/\[트렌드\]/g,'<span class="t-trend">[트렌드]</span>');
+r=r.replace(/\[대표Q\]/g,'<span class="t-ceo">[대표Q]</span>');
+el.innerHTML=r;
+const tabs=document.querySelectorAll('.tab'),secs=document.querySelectorAll('.md h2');
+function upd(){
+ const o=130;let c=0;
+ secs.forEach((s,i)=>{if(s.getBoundingClientRect().top<=o)c=i});
+ tabs.forEach((t,i)=>t.classList.toggle('active',i===c));
+ const a=document.querySelector('.tab.active');
+ if(a){const b=document.getElementById('tabBar'),l=a.offsetLeft,w=a.offsetWidth,bw=b.offsetWidth;b.scrollTo({left:l-bw/2+w/2,behavior:'smooth'})}
+}
+window.addEventListener('scroll',()=>{
+ upd();
+ const h=document.documentElement.scrollHeight-window.innerHeight;
+ document.getElementById('pBar').style.width=(h>0?window.scrollY/h*100:0)+'%';
+},{passive:true});
+tabs.forEach(t=>t.addEventListener('click',e=>{
+ e.preventDefault();
+ const s=document.getElementById('s-'+t.dataset.i);
+ if(s)s.scrollIntoView({behavior:'smooth'});
+}));
+upd();
+</script>
+</body>
+</html>
