@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
 <meta name="theme-color" content="#ffffff">
 <title>[PD용] EP.02 — 결정사 대표가 본인 등급을 매겨봤습니다</title>
-<script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
 <style>
 :root{--bg:#ffffff;--card:#ffffff;--card2:#f4f6f8;--border:#e5e7eb;--border2:#f1f3f5;--text:#191f28;--text2:#4e5968;--text3:#8b95a1;--accent:#0064ff;--accent-br:#3385ff;--accent-d:#0048b3;--accent-l:#e8f1ff;--green:#15803d;--amber:#b45309;--red:#dc2626;--hh:58px;--th:50px}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -118,8 +117,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR','App
 </div>
 <div class="md" id="ct"></div>
 </main>
-<script>
-const md=String.raw`## [킥오프 시트] EP.02 기획 체크리스트
+<textarea id="md-src" style="display:none">## [킥오프 시트] EP.02 기획 체크리스트
 
 | 항목 | 내용 |
 |------|------|
@@ -587,11 +585,13 @@ const md=String.raw`## [킥오프 시트] EP.02 기획 체크리스트
 
 **기획부 코디 / 2026.04.16**
 **다음 단계**: 오맷돌님 리뷰 → 추가 질문 확정 → 이세령 동의 → 촬영일 확정
-`;
-
+</textarea>
+<script>
+function initPage(){
+var md=document.getElementById('md-src').value;
 marked.setOptions({breaks:true,gfm:true,headerIds:false});
-const el=document.getElementById('ct');
-let r=marked.parse(md);
+var el=document.getElementById('ct');
+var r=marked.parse(md);
 let si=0;
 r=r.replace(/<h2/g,()=>'<h2 id="s-'+si+++'"');
 r=r.replace(/<table>/g,'<div class="tw"><table>');
@@ -625,6 +625,21 @@ tabs.forEach(t=>t.addEventListener('click',e=>{
  if(s)s.scrollIntoView({behavior:'smooth'});
 }));
 upd();
+}
+// Load marked.js then init
+(function(){
+var s=document.createElement('script');
+s.src='https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js';
+s.onload=initPage;
+s.onerror=function(){
+ var s2=document.createElement('script');
+ s2.src='https://unpkg.com/marked@4.3.0/marked.min.js';
+ s2.onload=initPage;
+ s2.onerror=function(){document.getElementById('ct').innerHTML='<p style="color:red;padding:40px">marked.js 로드 실패. 새로고침 해주세요.</p>'};
+ document.head.appendChild(s2);
+};
+document.head.appendChild(s);
+})();
 </script>
 </body>
 </html>
