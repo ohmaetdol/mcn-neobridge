@@ -310,10 +310,12 @@ function init() {
     }
 
     if (TRACKER_API !== 'APPS_SCRIPT_URL_HERE') {
+        // Apps Script에서 실시간 데이터 로드 (채널 필터 지원)
+        var chParam = CURRENT_CHANNEL ? '&channel=' + CURRENT_CHANNEL : '';
         Promise.all([
-            fetch(TRACKER_API+'?action=campaigns').then(function(r){return r.json();}),
+            fetch(TRACKER_API+'?action=campaigns'+chParam).then(function(r){return r.json();}),
             fetch(TRACKER_API+'?action=clicks').then(function(r){return r.json();}),
-            fetch(TRACKER_API+'?action=summary').then(function(r){return r.json();})
+            fetch(TRACKER_API+'?action=summary'+chParam).then(function(r){return r.json();})
         ]).then(function(res) {
             var camps = res[0].campaigns || [];
             var clicks = res[1].clicks || {};
