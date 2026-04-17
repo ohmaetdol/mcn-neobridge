@@ -749,11 +749,11 @@ async function submitForm(e) {
     const data = Object.fromEntries(new FormData(form));
 
     try {
+        const formBody = new URLSearchParams(data);
         await fetch(APPS_SCRIPT_URL, {
             method: 'POST',
             mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
+            body: formBody
         });
         form.style.display = 'none';
         document.getElementById('formSuccess').style.display = 'block';
