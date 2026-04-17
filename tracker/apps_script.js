@@ -13,8 +13,18 @@
 // A:캠페인slug  B:유형  C:타겟URL  D:플랫폼/브랜드  E:영상ID
 // F:쿠폰코드  G:할인  H:RS%  I:상태  J:생성일  K:채널
 
+// ── 에디터에서 실행할 테스트 함수 (권한 승인용) ──
+function test() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName("캠페인관리");
+  var data = sheet.getDataRange().getValues();
+  Logger.log("캠페인 수: " + (data.length - 1));
+  Logger.log("테스트 성공! 이제 배포하면 됩니다.");
+}
+
 // ── 클릭 로그 (POST) ──────────────────────────────
 function doPost(e) {
+  if (!e || !e.parameter) return jsonResponse({result: "no_params"});
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var action = (e.parameter && e.parameter.action) || "log";
 
@@ -41,6 +51,7 @@ function doPost(e) {
 
 // ── 캠페인 조회 / 정산 데이터 (GET) ───────────────
 function doGet(e) {
+  if (!e || !e.parameter) return jsonResponse({result: "ok", message: "UTM Tracker API is running."});
   var action = e.parameter.action || "";
   var ss = SpreadsheetApp.getActiveSpreadsheet();
 
