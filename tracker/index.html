@@ -20,8 +20,32 @@
 
         /* ── 헤더 ── */
         .header{text-align:center;padding:48px 24px 32px;background:linear-gradient(180deg,#f0f4ff,#fff);}
+        .header-profile{display:none;margin-bottom:16px;}
+        .header-profile img{
+            width:72px;height:72px;border-radius:50%;border:3px solid var(--brand);
+            object-fit:cover;
+        }
         .header h1{font-size:28px;font-weight:800;letter-spacing:-0.5px;}
         .header p{font-size:15px;color:var(--med);margin-top:6px;}
+        .header .ch-badge{
+            display:inline-block;margin-top:8px;padding:4px 14px;border-radius:20px;
+            font-size:12px;font-weight:700;background:var(--brand-light);color:var(--brand);
+        }
+
+        /* ── 요약 카드 (유튜버 뷰) ── */
+        .my-summary{
+            display:none;max-width:560px;margin:-12px auto 24px;
+            background:#fff;border:2px solid var(--brand);border-radius:20px;
+            padding:28px;box-shadow:0 4px 24px rgba(37,99,235,0.08);position:relative;z-index:1;
+        }
+        .my-summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+        .my-stat{text-align:center;padding:12px 8px;background:var(--surface);border-radius:12px;}
+        .my-stat .m-num{font-size:22px;font-weight:800;line-height:1.2;}
+        .my-stat .m-label{font-size:11px;color:var(--med);font-weight:600;margin-top:2px;}
+        .my-stat:nth-child(1) .m-num{color:var(--brand);}
+        .my-stat:nth-child(2) .m-num{color:var(--navy);}
+        .my-stat:nth-child(3) .m-num{color:var(--orange);}
+        .my-stat:nth-child(4) .m-num{color:var(--green);}
 
         .container{max-width:960px;margin:0 auto;padding:0 24px 48px;}
 
@@ -49,38 +73,25 @@
 
         /* ── 결과 카드 ── */
         .result{display:none;margin-top:24px;}
-        .result-card{
-            border:2px solid var(--brand);border-radius:16px;overflow:hidden;
-            background:#fff;
-        }
+        .result-card{border:2px solid var(--brand);border-radius:16px;overflow:hidden;background:#fff;}
         .result-header{
             background:var(--brand);color:#fff;padding:20px 24px;
             display:flex;justify-content:space-between;align-items:center;
         }
         .result-header h3{font-size:18px;font-weight:700;}
-        .result-header .r-badge{
-            padding:4px 14px;border-radius:20px;font-size:12px;font-weight:700;
-            background:rgba(255,255,255,0.2);
-        }
+        .result-header .r-badge{padding:4px 14px;border-radius:20px;font-size:12px;font-weight:700;background:rgba(255,255,255,0.2);}
         .result-body{padding:24px;}
         .result-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
-        .r-stat{
-            background:var(--surface);border-radius:12px;padding:16px;text-align:center;
-        }
+        .r-stat{background:var(--surface);border-radius:12px;padding:16px;text-align:center;}
         .r-stat .r-num{font-size:24px;font-weight:800;color:var(--navy);line-height:1.2;}
         .r-stat .r-label{font-size:12px;color:var(--med);font-weight:600;margin-top:4px;}
         .r-stat.highlight .r-num{color:var(--brand);}
         .r-stat.revenue .r-num{color:var(--orange);}
         .r-stat.rs .r-num{color:var(--green);}
-
-        .result-detail{
-            margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:12px;
-            font-size:14px;
-        }
+        .result-detail{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:14px;}
         .r-detail{display:flex;justify-content:space-between;padding:8px 12px;background:var(--surface);border-radius:8px;}
         .r-detail .r-key{color:var(--med);}
         .r-detail .r-val{font-weight:600;}
-
         .result-footer{
             padding:16px 24px;background:var(--surface);border-top:1px solid var(--border);
             display:flex;justify-content:space-between;align-items:center;font-size:13px;
@@ -89,58 +100,32 @@
             font-family:monospace;font-size:15px;font-weight:700;color:var(--brand);
             background:var(--brand-light);padding:4px 12px;border-radius:6px;
         }
-
         .result-not-found{
             display:none;text-align:center;padding:24px;margin-top:16px;
             background:var(--red-light);border-radius:12px;color:var(--red);font-weight:600;
         }
 
-        /* ── 전체 캠페인 ── */
+        /* ── 섹션 ── */
         .section{margin-top:40px;}
-        .section-title{
-            font-size:18px;font-weight:700;margin-bottom:16px;
-            display:flex;align-items:center;gap:8px;
-        }
-        .tag{
-            font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;
-            background:var(--brand-light);color:var(--brand);text-transform:uppercase;
-        }
+        .section-title{font-size:18px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px;}
+        .tag{font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;background:var(--brand-light);color:var(--brand);text-transform:uppercase;}
 
         /* ── 카드 그리드 ── */
         .campaign-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
-        .c-card{
-            border:1px solid var(--border);border-radius:14px;padding:20px;
-            background:#fff;transition:box-shadow 0.2s;
-        }
+        .c-card{border:1px solid var(--border);border-radius:14px;padding:20px;background:#fff;transition:box-shadow 0.2s;}
         .c-card:hover{box-shadow:0 4px 16px rgba(0,0,0,0.06);}
         .c-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
         .c-card-top h4{font-size:15px;font-weight:700;}
-        .c-card-top .badge{
-            display:inline-block;padding:2px 8px;border-radius:6px;
-            font-size:11px;font-weight:600;
-        }
+        .c-card-top .badge{display:inline-block;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:600;}
         .badge-lecture{background:var(--brand-light);color:var(--brand);}
         .badge-funnel{background:var(--orange-light);color:var(--orange);}
-        .badge-active{background:var(--green-light);color:var(--green);}
-
         .c-card-stats{display:flex;gap:16px;margin-bottom:12px;}
         .c-card-stat{text-align:center;flex:1;}
         .c-card-stat .s-num{font-size:20px;font-weight:800;color:var(--navy);}
         .c-card-stat .s-label{font-size:11px;color:var(--med);}
-
-        .c-card-bottom{
-            display:flex;justify-content:space-between;align-items:center;
-            padding-top:12px;border-top:1px solid var(--border);
-        }
-        .c-card-coupon{
-            font-family:monospace;font-size:13px;font-weight:600;
-            color:var(--navy);background:var(--surface);padding:3px 10px;border-radius:6px;
-        }
-        .copy-btn{
-            padding:5px 12px;border:1px solid var(--border);border-radius:8px;
-            background:#fff;font-size:12px;cursor:pointer;color:var(--med);
-            transition:all 0.2s;
-        }
+        .c-card-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid var(--border);}
+        .c-card-coupon{font-family:monospace;font-size:13px;font-weight:600;color:var(--navy);background:var(--surface);padding:3px 10px;border-radius:6px;}
+        .copy-btn{padding:5px 12px;border:1px solid var(--border);border-radius:8px;background:#fff;font-size:12px;cursor:pointer;color:var(--med);transition:all 0.2s;}
         .copy-btn:hover{border-color:var(--brand);color:var(--brand);}
 
         /* ── 정산 테이블 ── */
@@ -150,28 +135,27 @@
         td{padding:12px 14px;border-bottom:1px solid var(--border);}
         tr:last-child td{border-bottom:none;}
         tr:hover td{background:var(--surface);}
+        .empty-state{text-align:center;padding:48px;color:var(--low);font-size:14px;background:var(--surface);border-radius:14px;border:1px dashed var(--border);}
 
-        .empty-state{
-            text-align:center;padding:48px;color:var(--low);font-size:14px;
-            background:var(--surface);border-radius:14px;border:1px dashed var(--border);
-        }
-
-        /* ── 푸터 링크 ── */
-        .footer-links{
-            display:flex;justify-content:center;gap:24px;margin-top:40px;
-            padding:24px;background:var(--surface);border-radius:14px;
-        }
+        /* ── 푸터 ── */
+        .footer-links{display:flex;justify-content:center;gap:24px;margin-top:40px;padding:24px;background:var(--surface);border-radius:14px;}
         .footer-links a{color:var(--brand);text-decoration:none;font-weight:600;font-size:14px;}
         .footer-links a:hover{text-decoration:underline;}
+        .powered{text-align:center;margin-top:24px;font-size:12px;color:var(--low);}
+        .powered a{color:var(--med);text-decoration:none;}
 
         /* ── 반응형 ── */
         @media(max-width:768px){
             .header{padding:36px 16px 24px;}
             .header h1{font-size:22px;}
+            .header-profile img{width:56px;height:56px;}
             .container{padding:0 16px 36px;}
             .lookup{margin:-16px 16px 32px;padding:24px 20px;}
             .lookup-input{flex-direction:column;}
             .lookup-input button{width:100%;}
+            .my-summary{margin:-8px 16px 24px;padding:20px;}
+            .my-summary-grid{grid-template-columns:repeat(2,1fr);gap:8px;}
+            .my-stat .m-num{font-size:18px;}
             .result-stats{grid-template-columns:1fr 1fr;}
             .result-detail{grid-template-columns:1fr;}
             .campaign-grid{grid-template-columns:1fr;}
@@ -182,9 +166,21 @@
 </head>
 <body>
 
-<div class="header">
-    <h1>캠페인 성과 트래커</h1>
-    <p>(주)플로우머스 MCN — 클릭부터 전환까지 투명하게</p>
+<div class="header" id="header">
+    <div class="header-profile" id="headerProfile"><img id="headerImg" src="" alt=""></div>
+    <h1 id="headerTitle">캠페인 성과 트래커</h1>
+    <p id="headerDesc">(주)플로우머스 MCN — 클릭부터 전환까지 투명하게</p>
+    <div class="ch-badge" id="headerBadge" style="display:none;"></div>
+</div>
+
+<!-- ════════ 유튜버 전용 요약 ════════ -->
+<div class="my-summary" id="mySummary">
+    <div class="my-summary-grid">
+        <div class="my-stat"><div class="m-num" id="myCampaigns">0</div><div class="m-label">활성 캠페인</div></div>
+        <div class="my-stat"><div class="m-num" id="myClicks">0</div><div class="m-label">총 클릭</div></div>
+        <div class="my-stat"><div class="m-num" id="myRevenue">0</div><div class="m-label">추적 매출</div></div>
+        <div class="my-stat"><div class="m-num" id="myRS">0</div><div class="m-label">RS 정산</div></div>
+    </div>
 </div>
 
 <!-- ════════ 쿠폰 조회 ════════ -->
@@ -202,22 +198,10 @@
             </div>
             <div class="result-body">
                 <div class="result-stats">
-                    <div class="r-stat highlight">
-                        <div class="r-num" id="rClicks">0</div>
-                        <div class="r-label">총 클릭수</div>
-                    </div>
-                    <div class="r-stat">
-                        <div class="r-num" id="rCoupons">0</div>
-                        <div class="r-label">쿠폰 사용</div>
-                    </div>
-                    <div class="r-stat revenue">
-                        <div class="r-num" id="rRevenue">0원</div>
-                        <div class="r-label">추적 매출</div>
-                    </div>
-                    <div class="r-stat rs">
-                        <div class="r-num" id="rRS">0원</div>
-                        <div class="r-label">RS 정산액</div>
-                    </div>
+                    <div class="r-stat highlight"><div class="r-num" id="rClicks">0</div><div class="r-label">총 클릭수</div></div>
+                    <div class="r-stat"><div class="r-num" id="rCoupons">0</div><div class="r-label">쿠폰 사용</div></div>
+                    <div class="r-stat revenue"><div class="r-num" id="rRevenue">0원</div><div class="r-label">추적 매출</div></div>
+                    <div class="r-stat rs"><div class="r-num" id="rRS">0원</div><div class="r-label">RS 정산액</div></div>
                 </div>
                 <div class="result-detail">
                     <div class="r-detail"><span class="r-key">캠페인</span><span class="r-val" id="rSlug">-</span></div>
@@ -236,54 +220,95 @@
 </div>
 
 <div class="container">
-
-    <!-- ════════ 전체 캠페인 카드 ════════ -->
     <div class="section">
-        <div class="section-title">활성 캠페인 <span class="tag">campaigns</span></div>
+        <div class="section-title" id="campaignTitle">활성 캠페인 <span class="tag">campaigns</span></div>
         <div class="campaign-grid" id="campaignGrid"></div>
     </div>
 
-    <!-- ════════ 월별 정산 ════════ -->
     <div class="section">
         <div class="section-title">월별 RS 정산 <span class="tag">settlement</span></div>
-        <div id="summaryArea">
-            <div class="empty-state">캠페인 진행 후 월별 정산 데이터가 여기에 표시됩니다</div>
-        </div>
+        <div id="summaryArea"><div class="empty-state">캠페인 진행 후 월별 정산 데이터가 여기에 표시됩니다</div></div>
     </div>
 
-    <!-- 링크 -->
-    <div class="footer-links">
+    <!-- 관리자 전용: 유튜버 뷰에서는 숨김 -->
+    <div class="footer-links" id="adminLinks">
         <a href="https://docs.google.com/spreadsheets/d/1qRANdVfdy5Q05zI0yoSc15cPldX9m2OGXMg5tfyjZes/edit" target="_blank">Google Sheets 열기</a>
         <a href="/mcn-neobridge/b2b/">B2B 파트너십 페이지</a>
+    </div>
+
+    <div class="powered" id="poweredBy" style="display:none;">
+        <a href="/mcn-neobridge/b2b/">Powered by (주)플로우머스 MCN</a>
     </div>
 </div>
 
 <script>
-// Apps Script 배포 후 이 URL을 교체
 var TRACKER_API = 'APPS_SCRIPT_URL_HERE';
 var BASE_URL = location.origin + '/mcn-neobridge/go/?c=';
 
-// ── 샘플 데이터 (Apps Script 배포 전 데모) ──
+// ── 채널 정보 ──
+var CHANNELS = {
+    sajjiknam: {
+        name: '사찍남',
+        fullName: '사장찍어주는남자',
+        subs: '14.4만',
+        img: 'https://yt3.ggpht.com/GAlyx83tPBTynHPbwZxMStrzD1hb667j80kw5KhdWy_MBMWnLcT75qVj1ILJSgsKh2kUFjbbUg=s240-c-k-c0x00ffffff-no-rj'
+    },
+    gogo: {
+        name: '현장속으로',
+        fullName: '현장속으로',
+        subs: '11.9만',
+        img: 'https://yt3.ggpht.com/SN7u3JX9En-azJxO2A3V6CEraGFaBgaQ2pDEmxE_Lfj9dy8OroVmplKEonlR8dOOfY4tTF6Gxg=s240-c-k-c0x00ffffff-no-rj'
+    },
+    moneyroad: {
+        name: '머니로드',
+        fullName: '머니로드',
+        subs: '21.6만',
+        img: 'https://yt3.ggpht.com/hHTPVxaR8iOYL17Y-G-Xn3pSj572ymTFuLWsfTALzPim0pZLUw9ZY-6sAyl4kO5JdpbWX2c0nmE=s240-c-k-c0x00ffffff-no-rj'
+    }
+};
+
+// ── 샘플 데이터 ──
 var ALL_CAMPAIGNS = [
     {
-        slug:'titan-blog', type:'강의', platform:'타이탄클래스',
+        slug:'titan-blog', channel:'sajjiknam', type:'강의', platform:'타이탄클래스',
         coupon:'SAJJIK-BLOG-01', discount:'5%', rs:'20%', status:'활성',
         clicks:847, couponUsed:43, revenue:21500000, rsAmount:4300000, created:'2026-04-17'
     },
     {
-        slug:'mua-invest', type:'강의', platform:'무아클래스',
+        slug:'mua-invest', channel:'sajjiknam', type:'강의', platform:'무아클래스',
         coupon:'SAJJIK-INVEST-01', discount:'5%', rs:'20%', status:'활성',
         clicks:523, couponUsed:28, revenue:14000000, rsAmount:2800000, created:'2026-04-17'
+    },
+    {
+        slug:'gogo-realestate', channel:'gogo', type:'가맹', platform:'직방프랜차이즈',
+        coupon:'GOGO-REAL-01', discount:'가맹비 50만 할인', rs:'10%', status:'활성',
+        clicks:312, couponUsed:8, revenue:40000000, rsAmount:4000000, created:'2026-04-17'
+    },
+    {
+        slug:'money-finance', channel:'moneyroad', type:'강의', platform:'패스트캠퍼스',
+        coupon:'MONEY-FIN-01', discount:'10%', rs:'20%', status:'활성',
+        clicks:634, couponUsed:35, revenue:17500000, rsAmount:3500000, created:'2026-04-17'
     }
 ];
 
 var ALL_SUMMARY = [
-    {month:'2026-04', slug:'titan-blog', type:'강의', platform:'타이탄클래스', clicks:847, couponUsed:43, convRate:'5.1%', revenue:21500000, rs:'20%', rsAmount:4300000},
-    {month:'2026-04', slug:'mua-invest', type:'강의', platform:'무아클래스', clicks:523, couponUsed:28, convRate:'5.4%', revenue:14000000, rs:'20%', rsAmount:2800000}
+    {month:'2026-04', slug:'titan-blog', channel:'sajjiknam', platform:'타이탄클래스', clicks:847, couponUsed:43, convRate:'5.1%', revenue:21500000, rs:'20%', rsAmount:4300000},
+    {month:'2026-04', slug:'mua-invest', channel:'sajjiknam', platform:'무아클래스', clicks:523, couponUsed:28, convRate:'5.4%', revenue:14000000, rs:'20%', rsAmount:2800000},
+    {month:'2026-04', slug:'gogo-realestate', channel:'gogo', platform:'직방프랜차이즈', clicks:312, couponUsed:8, convRate:'2.6%', revenue:40000000, rs:'10%', rsAmount:4000000},
+    {month:'2026-04', slug:'money-finance', channel:'moneyroad', platform:'패스트캠퍼스', clicks:634, couponUsed:35, convRate:'5.5%', revenue:17500000, rs:'20%', rsAmount:3500000}
 ];
 
-// ── 초기화 ──
+// ── 현재 채널 (URL ?id= 파라미터) ──
+var CURRENT_CHANNEL = null;
+
 function init() {
+    var p = new URLSearchParams(location.search);
+    CURRENT_CHANNEL = p.get('id') || null;
+
+    if (CURRENT_CHANNEL && CHANNELS[CURRENT_CHANNEL]) {
+        setupChannelView(CURRENT_CHANNEL);
+    }
+
     if (TRACKER_API !== 'APPS_SCRIPT_URL_HERE') {
         Promise.all([
             fetch(TRACKER_API+'?action=campaigns').then(function(r){return r.json();}),
@@ -292,20 +317,77 @@ function init() {
         ]).then(function(res) {
             var camps = res[0].campaigns || [];
             var clicks = res[1].clicks || {};
-            var summary = res[2].summary || [];
             camps.forEach(function(c){c.clicks=clicks[c.slug]||0;});
             ALL_CAMPAIGNS = camps;
-            ALL_SUMMARY = summary;
+            ALL_SUMMARY = res[2].summary || [];
             renderAll();
         }).catch(function(){renderAll();});
     } else {
         renderAll();
     }
+
+    // URL에 쿠폰 코드가 있으면 자동 조회
+    var code = p.get('coupon') || p.get('c');
+    if (code) {
+        document.getElementById('couponInput').value = code;
+        setTimeout(lookupCoupon, 100);
+    }
+}
+
+// ── 유튜버 전용 뷰 설정 ──
+function setupChannelView(chId) {
+    var ch = CHANNELS[chId];
+
+    // 헤더 개인화
+    document.getElementById('headerProfile').style.display = 'block';
+    document.getElementById('headerImg').src = ch.img;
+    document.getElementById('headerImg').alt = ch.name;
+    document.getElementById('headerTitle').textContent = ch.name + ' 채널 성과';
+    document.getElementById('headerDesc').textContent = ch.fullName + ' — 구독자 ' + ch.subs;
+    document.getElementById('headerBadge').style.display = 'inline-block';
+    document.getElementById('headerBadge').textContent = 'FLOWMUS MCN PARTNER';
+
+    document.title = ch.name + ' — 캠페인 성과 트래커';
+
+    // 유튜버 요약 카드 표시
+    document.getElementById('mySummary').style.display = 'block';
+
+    // 관리자 링크 숨기고 powered by 표시
+    document.getElementById('adminLinks').style.display = 'none';
+    document.getElementById('poweredBy').style.display = 'block';
+
+    // 섹션 타이틀 변경
+    document.getElementById('campaignTitle').innerHTML = '내 캠페인 <span class="tag">my campaigns</span>';
 }
 
 function renderAll() {
-    renderCampaignCards();
-    renderSummaryTable();
+    var campaigns = ALL_CAMPAIGNS;
+    var summary = ALL_SUMMARY;
+
+    // 채널 필터
+    if (CURRENT_CHANNEL) {
+        campaigns = campaigns.filter(function(c){return c.channel === CURRENT_CHANNEL;});
+        summary = summary.filter(function(s){return s.channel === CURRENT_CHANNEL;});
+        updateMySummary(campaigns);
+    }
+
+    renderCampaignCards(campaigns);
+    renderSummaryTable(summary);
+}
+
+// ── 유튜버 요약 업데이트 ──
+function updateMySummary(campaigns) {
+    var totalCampaigns = 0, totalClicks = 0, totalRevenue = 0, totalRS = 0;
+    campaigns.forEach(function(c) {
+        if (c.status === '활성') totalCampaigns++;
+        totalClicks += (c.clicks || 0);
+        totalRevenue += (c.revenue || 0);
+        totalRS += (c.rsAmount || 0);
+    });
+    document.getElementById('myCampaigns').textContent = totalCampaigns;
+    document.getElementById('myClicks').textContent = totalClicks.toLocaleString();
+    document.getElementById('myRevenue').textContent = totalRevenue >= 10000 ? (totalRevenue/10000).toFixed(0) + '만원' : totalRevenue.toLocaleString() + '원';
+    document.getElementById('myRS').textContent = totalRS >= 10000 ? (totalRS/10000).toFixed(0) + '만원' : totalRS.toLocaleString() + '원';
 }
 
 // ── 쿠폰 조회 ──
@@ -313,8 +395,12 @@ function lookupCoupon() {
     var code = document.getElementById('couponInput').value.trim().toUpperCase();
     if (!code) return;
 
+    var searchIn = CURRENT_CHANNEL
+        ? ALL_CAMPAIGNS.filter(function(c){return c.channel === CURRENT_CHANNEL;})
+        : ALL_CAMPAIGNS;
+
     var found = null;
-    ALL_CAMPAIGNS.forEach(function(c) {
+    searchIn.forEach(function(c) {
         if (c.coupon && c.coupon.toUpperCase() === code) found = c;
     });
 
@@ -324,7 +410,6 @@ function lookupCoupon() {
     if (found) {
         resultEl.style.display = 'block';
         notFoundEl.style.display = 'none';
-
         var clicks = found.clicks || 0;
         var coupons = found.couponUsed || 0;
         var revenue = found.revenue || 0;
@@ -350,15 +435,14 @@ function lookupCoupon() {
 }
 
 // ── 캠페인 카드 ──
-function renderCampaignCards() {
+function renderCampaignCards(campaigns) {
     var grid = document.getElementById('campaignGrid');
-    if (!ALL_CAMPAIGNS.length) {
+    if (!campaigns.length) {
         grid.innerHTML = '<div class="empty-state" style="grid-column:span 2;">등록된 캠페인이 없습니다</div>';
         return;
     }
-
     var html = '';
-    ALL_CAMPAIGNS.forEach(function(c) {
+    campaigns.forEach(function(c) {
         var typeBadge = c.type === '강의'
             ? '<span class="badge badge-lecture">강의</span>'
             : '<span class="badge badge-funnel">가맹</span>';
@@ -379,24 +463,21 @@ function renderCampaignCards() {
             + '<button class="copy-btn" onclick="copyLink(\'' + goUrl + '\',this)">링크 복사</button>'
             + '</div></div>';
     });
-
     grid.innerHTML = html;
 }
 
 // ── 정산 테이블 ──
-function renderSummaryTable() {
+function renderSummaryTable(summary) {
     var area = document.getElementById('summaryArea');
-    if (!ALL_SUMMARY.length) {
+    if (!summary.length) {
         area.innerHTML = '<div class="empty-state">캠페인 진행 후 월별 정산 데이터가 여기에 표시됩니다</div>';
         return;
     }
-
     var html = '<div class="table-wrap"><table><thead><tr>'
         + '<th>월</th><th>캠페인</th><th>플랫폼</th><th>클릭</th>'
         + '<th>쿠폰</th><th>전환율</th><th>매출</th><th>RS%</th><th>RS 금액</th>'
         + '</tr></thead><tbody>';
-
-    ALL_SUMMARY.forEach(function(s) {
+    summary.forEach(function(s) {
         html += '<tr>'
             + '<td>' + s.month + '</td>'
             + '<td>' + s.slug + '</td>'
@@ -409,34 +490,18 @@ function renderSummaryTable() {
             + '<td><strong>' + (s.rsAmount||0).toLocaleString() + '원</strong></td>'
             + '</tr>';
     });
-
     html += '</tbody></table></div>';
     area.innerHTML = html;
 }
 
-// ── 링크 복사 ──
 function copyLink(url, btn) {
     navigator.clipboard.writeText(url).then(function() {
         btn.textContent = '복사됨';
         btn.style.color = 'var(--green)';
         btn.style.borderColor = 'var(--green)';
-        setTimeout(function() {
-            btn.textContent = '링크 복사';
-            btn.style.color = '';
-            btn.style.borderColor = '';
-        }, 2000);
+        setTimeout(function(){btn.textContent='링크 복사';btn.style.color='';btn.style.borderColor='';}, 2000);
     });
 }
-
-// URL에 쿠폰 코드가 있으면 자동 조회
-(function() {
-    var p = new URLSearchParams(location.search);
-    var code = p.get('coupon') || p.get('c');
-    if (code) {
-        document.getElementById('couponInput').value = code;
-        setTimeout(lookupCoupon, 100);
-    }
-})();
 
 init();
 </script>
