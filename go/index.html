@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flowmus — Redirecting...</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Pretendard', -apple-system, sans-serif; }
+        body { background: #fff; display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+        .loader { text-align: center; color: #64748b; }
+        .spinner {
+            width: 32px; height: 32px; border: 3px solid #e2e8f0;
+            border-top-color: #2563EB; border-radius: 50%;
+            animation: spin 0.8s linear infinite; margin: 0 auto 16px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loader p { font-size: 14px; }
+        .error { display: none; margin-top: 16px; }
+        .error a { color: #2563EB; text-decoration: none; font-weight: 600; }
+    </style>
+</head>
+<body>
+<div class="loader" id="loader">
+    <div class="spinner"></div>
+    <p>이동 중입니다...</p>
+    <div class="error" id="error">
+        <p>캠페인을 찾을 수 없습니다.</p>
+        <p><a href="/mcn-neobridge/b2b/">플로우머스 MCN 홈으로 이동</a></p>
+    </div>
+</div>
+
+<script>
+// ── 설정 ──
+// Apps Script 배포 후 이 URL을 교체하세요
+var TRACKER_API = 'APPS_SCRIPT_URL_HERE';
+
+// ── 캠페인 매핑 (Apps Script 배포 전 임시 사용) ──
+var CAMPAIGNS = {
+    'titan-blog': 'https://www.youtube.com/watch?v=M0nYqv_SFJI',
+    'mua-invest': 'https://www.youtube.com/watch?v=iynwLv5LJuY'
+};
+
+(function() {
+    var params = new URLSearchParams(location.search);
+    var slug = params.get('c');
+
+    if (!slug) {
+        showError();
+        return;
+    }
+
+    // 클릭 로그 전송 (비동기, 기다리지 않음)
+    logClick(slug);
+
+    // 타겟 URL 결정
+    if (TRACKER_API !== 'APPS_SCRIPT_URL_HERE') {
+        // Apps Script API에서 타겟 URL 조회
+        fetch(TRACKER_API + '?action=redirect&c=' + encodeURIComponent(slug))
+            .then(function(r) { return r.json(); })
+            .then(function(data) {
+                if (data.result === 'found' && data.url) {
+                    redirect(data.url, slug);
+                } else {
+                    showError();
+                }
+            })
+            .catch(function() {
+                // API 실패 시 로컬 매핑으로 폴백
+                fallbackRedirect(slug);
+            });
+    } else {
+        // Apps Script 미배포 상태: 로컬 매핑 사용
+        fallbackRedirect(slug);
+    }
+})();
+
+function logClick(slug) {
+    var logUrl = TRACKER_API !== 'APPS_SCRIPT_URL_HERE' ? TRACKER_API : null;
+    if (!logUrl) return;
+
+    var body = new URLSearchParams({
+        campaign: slug,
+        referrer: document.referrer || '',
+        ua: navigator.userAgent || ''
+    });
+
+    fetch(logUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: body
+    }).catch(function() {});
+}
+
+function redirect(url, slug) {
+    // UTM 파라미터 부착
+    var separator = url.indexOf('?') >= 0 ? '&' : '?';
+    var utm = 'utm_source=flowmus&utm_medium=youtube&utm_campaign=' + encodeURIComponent(slug);
+    location.href = url + separator + utm;
+}
+
+function fallbackRedirect(slug) {
+    var url = CAMPAIGNS[slug];
+    if (url) {
+        redirect(url, slug);
+    } else {
+        showError();
+    }
+}
+
+function showError() {
+    document.querySelector('.spinner').style.display = 'none';
+    document.querySelector('.loader p').style.display = 'none';
+    document.getElementById('error').style.display = 'block';
+}
+</script>
+</body>
+</html>

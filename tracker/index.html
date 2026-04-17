@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>플로우머스 MCN — UTM 트래커 + RS 정산</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #ffffff;
+            --surface: #f8fafc;
+            --border: #e2e8f0;
+            --brand: #2563EB;
+            --brand-light: rgba(37,99,235,0.08);
+            --orange: #ea580c;
+            --orange-light: rgba(234,88,12,0.08);
+            --navy: #1a1d23;
+            --text-med: #64748b;
+            --text-low: #94a3b8;
+            --green: #16a34a;
+            --green-light: rgba(22,163,74,0.08);
+        }
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Pretendard',-apple-system,sans-serif; }
+        body { background:var(--bg); color:var(--navy); line-height:1.6; }
+
+        .header {
+            padding:32px 24px 24px; border-bottom:1px solid var(--border);
+            max-width:1000px; margin:0 auto;
+        }
+        .header h1 { font-size:24px; font-weight:800; }
+        .header p { font-size:14px; color:var(--text-med); margin-top:4px; }
+
+        .container { max-width:1000px; margin:0 auto; padding:24px; }
+
+        /* ── 요약 카드 ── */
+        .summary-grid {
+            display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:32px;
+        }
+        .summary-card {
+            background:var(--surface); border:1px solid var(--border);
+            border-radius:14px; padding:20px; text-align:center;
+        }
+        .summary-card .num { font-size:28px; font-weight:800; color:var(--brand); }
+        .summary-card .label { font-size:12px; color:var(--text-med); font-weight:600; margin-top:4px; }
+
+        /* ── 섹션 ── */
+        .section { margin-bottom:32px; }
+        .section-title {
+            font-size:18px; font-weight:700; margin-bottom:16px;
+            display:flex; align-items:center; gap:8px;
+        }
+        .section-title .tag {
+            font-size:11px; font-weight:700; padding:3px 10px; border-radius:6px;
+            background:var(--brand-light); color:var(--brand); text-transform:uppercase;
+        }
+
+        /* ── 테이블 ── */
+        .table-wrap { overflow-x:auto; }
+        table { width:100%; border-collapse:collapse; font-size:14px; }
+        th {
+            text-align:left; padding:10px 14px; background:var(--navy); color:#fff;
+            font-size:12px; font-weight:600; white-space:nowrap;
+        }
+        td { padding:12px 14px; border-bottom:1px solid var(--border); }
+        tr:hover td { background:var(--surface); }
+
+        .badge {
+            display:inline-block; padding:2px 8px; border-radius:6px;
+            font-size:11px; font-weight:600;
+        }
+        .badge-active { background:var(--green-light); color:var(--green); }
+        .badge-lecture { background:var(--brand-light); color:var(--brand); }
+        .badge-funnel { background:var(--orange-light); color:var(--orange); }
+
+        .copy-btn {
+            padding:4px 10px; border:1px solid var(--border); border-radius:6px;
+            background:#fff; font-size:12px; cursor:pointer; color:var(--text-med);
+        }
+        .copy-btn:hover { border-color:var(--brand); color:var(--brand); }
+
+        .link { color:var(--brand); text-decoration:none; font-weight:600; font-size:13px; }
+        .link:hover { text-decoration:underline; }
+
+        .empty-state {
+            text-align:center; padding:48px; color:var(--text-low); font-size:14px;
+            background:var(--surface); border-radius:14px; border:1px dashed var(--border);
+        }
+
+        /* ── 반응형 ── */
+        @media (max-width:768px) {
+            .summary-grid { grid-template-columns:repeat(2,1fr); gap:10px; }
+            .summary-card .num { font-size:22px; }
+            .header h1 { font-size:20px; }
+            th, td { padding:8px 10px; font-size:13px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>UTM 트래커 + RS 정산 대시보드</h1>
+    <p>(주)플로우머스 MCN — 클릭부터 전환까지 투명하게</p>
+</div>
+
+<div class="container">
+
+    <!-- 요약 카드 -->
+    <div class="summary-grid">
+        <div class="summary-card">
+            <div class="num" id="totalCampaigns">-</div>
+            <div class="label">활성 캠페인</div>
+        </div>
+        <div class="summary-card">
+            <div class="num" id="totalClicks">-</div>
+            <div class="label">총 클릭</div>
+        </div>
+        <div class="summary-card">
+            <div class="num" id="totalCoupons">-</div>
+            <div class="label">쿠폰 사용</div>
+        </div>
+        <div class="summary-card">
+            <div class="num" id="totalRS">-</div>
+            <div class="label">RS 정산(원)</div>
+        </div>
+    </div>
+
+    <!-- 캠페인 목록 -->
+    <div class="section">
+        <div class="section-title">
+            캠페인 관리
+            <span class="tag">campaigns</span>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>캠페인</th>
+                        <th>유형</th>
+                        <th>플랫폼</th>
+                        <th>쿠폰 코드</th>
+                        <th>RS%</th>
+                        <th>클릭수</th>
+                        <th>상태</th>
+                        <th>링크</th>
+                    </tr>
+                </thead>
+                <tbody id="campaignBody">
+                    <tr><td colspan="8" class="empty-state">데이터 로딩 중...</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 월별 정산 -->
+    <div class="section">
+        <div class="section-title">
+            월별 RS 정산
+            <span class="tag">settlement</span>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>월</th>
+                        <th>캠페인</th>
+                        <th>플랫폼</th>
+                        <th>클릭수</th>
+                        <th>쿠폰사용</th>
+                        <th>전환율</th>
+                        <th>매출</th>
+                        <th>RS%</th>
+                        <th>RS 금액</th>
+                    </tr>
+                </thead>
+                <tbody id="summaryBody">
+                    <tr><td colspan="9" class="empty-state">정산 데이터가 없습니다. 캠페인 진행 후 월별 데이터가 여기에 표시됩니다.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 시트 링크 -->
+    <div style="text-align:center; margin-top:24px; padding:24px; background:var(--surface); border-radius:14px;">
+        <p style="font-size:14px; color:var(--text-med); margin-bottom:8px;">데이터 원본</p>
+        <a href="https://docs.google.com/spreadsheets/d/1qRANdVfdy5Q05zI0yoSc15cPldX9m2OGXMg5tfyjZes/edit" target="_blank" class="link">
+            Google Sheets 열기
+        </a>
+    </div>
+</div>
+
+<script>
+// Apps Script 배포 후 이 URL을 교체하세요
+var TRACKER_API = 'APPS_SCRIPT_URL_HERE';
+
+// ── 임시 데이터 (Apps Script 배포 전) ──
+var TEMP_CAMPAIGNS = [
+    { slug:'titan-blog', type:'강의', platform:'타이탄클래스', coupon:'SAJJIK-BLOG-01', rs:'20%', status:'활성' },
+    { slug:'mua-invest', type:'강의', platform:'무아클래스', coupon:'SAJJIK-INVEST-01', rs:'20%', status:'활성' }
+];
+var TEMP_CLICKS = { 'titan-blog': 0, 'mua-invest': 0 };
+
+var BASE_URL = location.origin + '/mcn-neobridge/go/?c=';
+
+function init() {
+    if (TRACKER_API !== 'APPS_SCRIPT_URL_HERE') {
+        Promise.all([
+            fetch(TRACKER_API + '?action=campaigns').then(function(r){ return r.json(); }),
+            fetch(TRACKER_API + '?action=clicks').then(function(r){ return r.json(); }),
+            fetch(TRACKER_API + '?action=summary').then(function(r){ return r.json(); })
+        ]).then(function(results) {
+            renderCampaigns(results[0].campaigns, results[1].clicks);
+            renderSummary(results[2].summary);
+        }).catch(function() {
+            renderCampaigns(TEMP_CAMPAIGNS, TEMP_CLICKS);
+        });
+    } else {
+        renderCampaigns(TEMP_CAMPAIGNS, TEMP_CLICKS);
+    }
+}
+
+function renderCampaigns(campaigns, clicks) {
+    var tbody = document.getElementById('campaignBody');
+    var activeCount = 0;
+    var totalClicks = 0;
+
+    if (!campaigns || campaigns.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" class="empty-state">등록된 캠페인이 없습니다.</td></tr>';
+        return;
+    }
+
+    var html = '';
+    campaigns.forEach(function(c) {
+        var clickCount = (clicks && clicks[c.slug]) || 0;
+        totalClicks += clickCount;
+        if (c.status === '활성') activeCount++;
+
+        var typeBadge = c.type === '강의'
+            ? '<span class="badge badge-lecture">강의</span>'
+            : '<span class="badge badge-funnel">가맹</span>';
+        var statusBadge = c.status === '활성'
+            ? '<span class="badge badge-active">활성</span>'
+            : '<span class="badge">' + c.status + '</span>';
+
+        var goUrl = BASE_URL + c.slug;
+
+        html += '<tr>'
+            + '<td><strong>' + c.slug + '</strong></td>'
+            + '<td>' + typeBadge + '</td>'
+            + '<td>' + c.platform + '</td>'
+            + '<td><code style="background:var(--surface);padding:2px 8px;border-radius:4px;font-size:13px;">' + c.coupon + '</code></td>'
+            + '<td>' + c.rs + '</td>'
+            + '<td><strong>' + clickCount.toLocaleString() + '</strong></td>'
+            + '<td>' + statusBadge + '</td>'
+            + '<td><button class="copy-btn" onclick="copyLink(\'' + goUrl + '\',this)">복사</button></td>'
+            + '</tr>';
+    });
+
+    tbody.innerHTML = html;
+    document.getElementById('totalCampaigns').textContent = activeCount;
+    document.getElementById('totalClicks').textContent = totalClicks.toLocaleString();
+}
+
+function renderSummary(summary) {
+    var tbody = document.getElementById('summaryBody');
+    if (!summary || summary.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="9" class="empty-state">정산 데이터가 없습니다. 캠페인 진행 후 월별 데이터가 여기에 표시됩니다.</td></tr>';
+        document.getElementById('totalCoupons').textContent = '0';
+        document.getElementById('totalRS').textContent = '0';
+        return;
+    }
+
+    var totalCoupons = 0;
+    var totalRS = 0;
+    var html = '';
+
+    summary.forEach(function(s) {
+        totalCoupons += (parseInt(s.couponUsed) || 0);
+        totalRS += (parseInt(s.rsAmount) || 0);
+
+        html += '<tr>'
+            + '<td>' + s.month + '</td>'
+            + '<td>' + s.slug + '</td>'
+            + '<td>' + s.platform + '</td>'
+            + '<td>' + (parseInt(s.clicks) || 0).toLocaleString() + '</td>'
+            + '<td>' + (parseInt(s.couponUsed) || 0).toLocaleString() + '</td>'
+            + '<td>' + (s.convRate || '-') + '</td>'
+            + '<td>' + (parseInt(s.revenue) || 0).toLocaleString() + '원</td>'
+            + '<td>' + s.rs + '</td>'
+            + '<td><strong>' + (parseInt(s.rsAmount) || 0).toLocaleString() + '원</strong></td>'
+            + '</tr>';
+    });
+
+    tbody.innerHTML = html;
+    document.getElementById('totalCoupons').textContent = totalCoupons.toLocaleString();
+    document.getElementById('totalRS').textContent = totalRS.toLocaleString() + '원';
+}
+
+function copyLink(url, btn) {
+    navigator.clipboard.writeText(url).then(function() {
+        btn.textContent = '복사됨';
+        btn.style.color = '#16a34a';
+        btn.style.borderColor = '#16a34a';
+        setTimeout(function() {
+            btn.textContent = '복사';
+            btn.style.color = '';
+            btn.style.borderColor = '';
+        }, 2000);
+    });
+}
+
+init();
+</script>
+
+</body>
+</html>
