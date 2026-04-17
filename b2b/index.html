@@ -291,21 +291,68 @@
         .cta-inner { max-width: 600px; margin: 0 auto; }
         .cta-section h2 { font-size: 30px; margin-bottom: 16px; }
         .cta-section .desc { margin-bottom: 32px; }
-        .cta-button {
-            display: inline-block; padding: 16px 40px; border-radius: 12px;
-            background: var(--accent-brand); color: #fff;
-            font-size: 17px; font-weight: 700; text-decoration: none;
-            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.25);
-            transition: transform 0.2s, box-shadow 0.2s;
+        .cta-form {
+            max-width: 480px; margin: 0 auto; text-align: left;
         }
-        .cta-button:hover {
+        .form-group { margin-bottom: 16px; }
+        .form-group label {
+            display: block; font-size: 14px; font-weight: 600;
+            color: var(--navy); margin-bottom: 6px;
+        }
+        .form-group label .req { color: var(--accent-brand); margin-left: 2px; }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%; padding: 12px 16px; border: 1px solid var(--border-line);
+            border-radius: 10px; font-size: 15px; font-family: inherit;
+            color: var(--navy); background: #fff; outline: none;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent-brand);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
+        }
+        .form-group input::placeholder,
+        .form-group textarea::placeholder { color: var(--text-low); }
+        .form-group textarea { resize: vertical; min-height: 80px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+        .submit-btn {
+            display: block; width: 100%; padding: 16px; border: none;
+            border-radius: 12px; background: var(--accent-brand); color: #fff;
+            font-size: 17px; font-weight: 700; cursor: pointer;
+            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.25);
+            transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+            margin-top: 8px;
+        }
+        .submit-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 24px rgba(37, 99, 235, 0.35);
         }
+        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+        .form-success {
+            display: none; text-align: center; padding: 40px 20px;
+        }
+        .form-success .check {
+            width: 56px; height: 56px; border-radius: 50%;
+            background: rgba(22, 163, 74, 0.08); color: #16a34a;
+            display: inline-flex; align-items: center; justify-content: center;
+            font-size: 28px; font-weight: 800; margin-bottom: 16px;
+        }
+        .form-success h3 { font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+        .form-success p { font-size: 15px; color: var(--text-med); }
+
         .cta-contact {
             margin-top: 24px; font-size: 14px; color: var(--text-med);
         }
         .cta-contact a { color: var(--accent-brand); text-decoration: none; font-weight: 600; }
+
+        @media (max-width: 768px) {
+            .form-row { grid-template-columns: 1fr; }
+        }
 
         /* ── Footer ── */
         footer {
@@ -634,18 +681,89 @@
 <section class="cta-section">
     <div class="cta-inner">
         <div class="section-tag" style="text-align:center;">GET STARTED</div>
-        <h2>지금 미팅을 잡으세요</h2>
+        <h2>미팅 요청</h2>
         <p class="desc">
-            강사 콘텐츠의 기획부터 수익화까지,<br>
-            사찍남 MCN이 파트너로 함께합니다.
+            아래 양식을 작성해주시면 영업일 기준 1일 이내에 연락드립니다.
         </p>
-        <a href="mailto:ceo@flowmus.com" class="cta-button">미팅 요청하기</a>
+
+        <form id="meetingForm" class="cta-form" onsubmit="return submitForm(event)">
+            <div class="form-row">
+                <div class="form-group">
+                    <label>담당자명 <span class="req">*</span></label>
+                    <input type="text" name="name" placeholder="홍길동" required>
+                </div>
+                <div class="form-group">
+                    <label>회사/플랫폼명 <span class="req">*</span></label>
+                    <input type="text" name="company" placeholder="타이탄클래스" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>연락처 <span class="req">*</span></label>
+                    <input type="tel" name="phone" placeholder="010-0000-0000" required>
+                </div>
+                <div class="form-group">
+                    <label>이메일</label>
+                    <input type="email" name="email" placeholder="name@company.com">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>소속 강사 수</label>
+                <select name="instructors">
+                    <option value="">선택해주세요</option>
+                    <option value="1~10명">1~10명</option>
+                    <option value="10~50명">10~50명</option>
+                    <option value="50명 이상">50명 이상</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>문의 내용</label>
+                <textarea name="message" placeholder="추가 요청사항이 있으시면 적어주세요"></textarea>
+            </div>
+            <button type="submit" class="submit-btn" id="submitBtn">미팅 요청하기</button>
+        </form>
+
+        <div class="form-success" id="formSuccess">
+            <div class="check">V</div>
+            <h3>요청이 접수되었습니다</h3>
+            <p>영업일 기준 1일 이내에 연락드리겠습니다.</p>
+        </div>
+
         <div class="cta-contact">
             <p>Email: <a href="mailto:ceo@flowmus.com">ceo@flowmus.com</a></p>
             <p style="margin-top:4px;">카카오톡 채널: <strong>사찍남</strong></p>
         </div>
     </div>
 </section>
+
+<script>
+const APPS_SCRIPT_URL = 'APPS_SCRIPT_URL_HERE';
+
+async function submitForm(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const form = document.getElementById('meetingForm');
+    btn.disabled = true;
+    btn.textContent = '전송 중...';
+
+    const data = Object.fromEntries(new FormData(form));
+
+    try {
+        await fetch(APPS_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        form.style.display = 'none';
+        document.getElementById('formSuccess').style.display = 'block';
+    } catch (err) {
+        alert('전송에 실패했습니다. 이메일로 직접 문의해주세요.');
+        btn.disabled = false;
+        btn.textContent = '미팅 요청하기';
+    }
+}
+</script>
 
 <footer>
     <div class="brand">사찍남 MCN &mdash; (주)플로우머스</div>
