@@ -60,6 +60,21 @@
             font-weight: 400; line-height: 1.7;
         }
 
+        .hero-profiles {
+            display: flex; justify-content: center; gap: 24px;
+            margin-bottom: 40px;
+        }
+        .hero-profile {
+            display: flex; flex-direction: column; align-items: center; gap: 6px;
+            text-decoration: none; color: inherit;
+        }
+        .hero-profile img {
+            width: 64px; height: 64px; border-radius: 50%;
+            border: 2px solid var(--border-line); object-fit: cover;
+        }
+        .hero-profile .hp-name { font-size: 12px; font-weight: 600; color: var(--navy); }
+        .hero-profile .hp-subs { font-size: 11px; color: var(--text-med); }
+
         .stat-grid {
             display: grid; grid-template-columns: repeat(4, 1fr);
             gap: 16px; max-width: 720px; margin: 0 auto;
@@ -111,7 +126,7 @@
             width: 48px; height: 48px; border-radius: 14px;
             background: var(--accent-brand-light); color: var(--accent-brand);
             display: inline-flex; align-items: center; justify-content: center;
-            font-size: 20px; margin-bottom: 10px; position: relative; z-index: 1;
+            font-size: 14px; font-weight: 800; margin-bottom: 10px; position: relative; z-index: 1;
         }
         .flow-step .step-title { font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
         .flow-step .step-desc { font-size: 11.5px; color: var(--text-low); line-height: 1.4; }
@@ -336,22 +351,39 @@
             기획부터 촬영, 편집, 업로드, 쇼츠, DM 마케팅까지<br>
             원스톱으로 강사의 유튜브 콘텐츠를 만들고, 성과를 함께 나눕니다
         </p>
+        <div class="hero-profiles">
+            <a href="https://www.youtube.com/@sajjiknam_" target="_blank" class="hero-profile">
+                <img src="https://yt3.ggpht.com/GAlyx83tPBTynHPbwZxMStrzD1hb667j80kw5KhdWy_MBMWnLcT75qVj1ILJSgsKh2kUFjbbUg=s240-c-k-c0x00ffffff-no-rj" alt="사찍남">
+                <span class="hp-name">사찍남</span>
+                <span class="hp-subs">14.4만</span>
+            </a>
+            <a href="https://www.youtube.com/@gogo_work" target="_blank" class="hero-profile">
+                <img src="https://yt3.ggpht.com/SN7u3JX9En-azJxO2A3V6CEraGFaBgaQ2pDEmxE_Lfj9dy8OroVmplKEonlR8dOOfY4tTF6Gxg=s240-c-k-c0x00ffffff-no-rj" alt="현장속으로">
+                <span class="hp-name">현장속으로</span>
+                <span class="hp-subs">11.9만</span>
+            </a>
+            <a href="https://www.youtube.com/@%EB%A8%B8%EB%8B%88%EB%A1%9C%EB%93%9C" target="_blank" class="hero-profile">
+                <img src="https://yt3.ggpht.com/hHTPVxaR8iOYL17Y-G-Xn3pSj572ymTFuLWsfTALzPim0pZLUw9ZY-6sAyl4kO5JdpbWX2c0nmE=s240-c-k-c0x00ffffff-no-rj" alt="머니로드">
+                <span class="hp-name">머니로드</span>
+                <span class="hp-subs">21.6만</span>
+            </a>
+        </div>
         <div class="stat-grid">
             <div class="stat-card">
-                <div class="num">7+</div>
+                <div class="num">3</div>
                 <div class="label">운영 채널</div>
             </div>
             <div class="stat-card">
-                <div class="num">47.9만+</div>
+                <div class="num">47.9만</div>
                 <div class="label">총 구독자</div>
             </div>
             <div class="stat-card">
-                <div class="num">63만</div>
-                <div class="label">평균 조회수</div>
+                <div class="num">1.6억</div>
+                <div class="label">총 조회수</div>
             </div>
             <div class="stat-card">
-                <div class="num">250만</div>
-                <div class="label">원스톱 패키지</div>
+                <div class="num">1,362</div>
+                <div class="label">총 영상</div>
             </div>
         </div>
     </div>
@@ -367,37 +399,37 @@
 
         <div class="flow-track">
             <div class="flow-step">
-                <div class="flow-icon">&#128218;</div>
+                <div class="flow-icon">01</div>
                 <div class="step-title">줌 미팅</div>
                 <div class="step-desc">강사 사전 인터뷰</div>
             </div>
             <div class="flow-step">
-                <div class="flow-icon">&#128196;</div>
+                <div class="flow-icon">02</div>
                 <div class="step-title">SEO 기획</div>
                 <div class="step-desc">제목, 키워드 설계</div>
             </div>
             <div class="flow-step">
-                <div class="flow-icon">&#127909;</div>
+                <div class="flow-icon">03</div>
                 <div class="step-title">촬영</div>
                 <div class="step-desc">현장 인력+장비</div>
             </div>
             <div class="flow-step">
-                <div class="flow-icon">&#9986;&#65039;</div>
+                <div class="flow-icon">04</div>
                 <div class="step-title">편집</div>
                 <div class="step-desc">롱폼 본편 제작</div>
             </div>
             <div class="flow-step">
-                <div class="flow-icon">&#128228;</div>
+                <div class="flow-icon">05</div>
                 <div class="step-title">업로드</div>
                 <div class="step-desc">썸네일+SEO 최적화</div>
             </div>
             <div class="flow-step">
-                <div class="flow-icon">&#128248;</div>
+                <div class="flow-icon">06</div>
                 <div class="step-title">쇼츠 4~5개</div>
                 <div class="step-desc">숏폼 자동 추출</div>
             </div>
             <div class="flow-step">
-                <div class="flow-icon">&#128172;</div>
+                <div class="flow-icon">07</div>
                 <div class="step-title">DM 마케팅</div>
                 <div class="step-desc">소셜비즈 자동발송</div>
             </div>
@@ -405,24 +437,24 @@
 
         <div class="detail-grid">
             <div class="detail-card">
-                <h4><span class="icon">&#128218;</span> 줌 미팅 + SEO 기획안</h4>
+                <h4>줌 미팅 + SEO 기획안</h4>
                 <p>강사의 전문 분야, 타겟 수강생, 강의 USP를 파악하고 검색 최적화된 제목과 기획안을 설계합니다.</p>
             </div>
             <div class="detail-card">
-                <h4><span class="icon">&#127909;</span> 롱폼 본편 제작</h4>
+                <h4>롱폼 본편 제작</h4>
                 <p>인터뷰형/강의형/다큐형 등 강사에 맞는 포맷으로 유튜브 본편을 기획, 촬영, 편집합니다.</p>
             </div>
             <div class="detail-card">
-                <h4><span class="icon">&#127916;</span> 촬영 (인력+장비)</h4>
+                <h4>촬영 (인력+장비)</h4>
                 <p>PD 1명 + 촬영감독 1명 최소 2인 체제. 카메라, 조명, 마이크 등 전문 장비 풀세트 투입.</p>
             </div>
             <div class="detail-card">
-                <h4><span class="icon">&#128248;</span> 쇼츠 4~5개</h4>
+                <h4>쇼츠 4~5개</h4>
                 <p>롱폼에서 핵심 구간을 추출하여 세로형 숏폼 4~5개를 추가 제작합니다.</p>
                 <span class="included">패키지 포함</span>
             </div>
             <div class="detail-card" style="grid-column: span 2;">
-                <h4><span class="icon">&#128172;</span> 소셜비즈 DM 발송</h4>
+                <h4>소셜비즈 DM 발송</h4>
                 <p>인스타그램 DM 자동화 마케팅. 강사의 타겟 수강생에게 콘텐츠 알림과 강의 링크를 자동 발송합니다. 영상 공개 직후 최대 노출을 확보합니다.</p>
                 <span class="included" style="background: var(--accent-orange-light); color: var(--accent-orange);">별도 협의</span>
             </div>
@@ -507,7 +539,7 @@
         </div>
 
         <div class="rs-box">
-            <h3>&#128202; Revenue Share (RS) 모델</h3>
+            <h3>Revenue Share (RS) 모델</h3>
             <p>
                 영상 설명란과 댓글 고정에 <strong>UTM 파라미터가 포함된 강의 링크</strong>를 삽입합니다.<br>
                 시청자가 해당 링크를 통해 강의를 결제하면, 결제 금액의 일정 비율을 RS로 공유합니다.<br>
@@ -531,19 +563,19 @@
                 <div class="ch-desc">비즈니스 · 창업 · 사업가</div>
                 <div class="ch-tag main-tag">메인 채널</div>
             </a>
-            <a href="https://www.youtube.com/@gogo_work" target="_blank" class="channel-card" style="text-decoration:none; color:inherit;">
+            <a href="https://www.youtube.com/@gogo_work" target="_blank" class="channel-card main" style="text-decoration:none; color:inherit;">
                 <div class="ch-icon"><img src="https://yt3.ggpht.com/SN7u3JX9En-azJxO2A3V6CEraGFaBgaQ2pDEmxE_Lfj9dy8OroVmplKEonlR8dOOfY4tTF6Gxg=s240-c-k-c0x00ffffff-no-rj" alt="현장속으로"></div>
                 <h4>현장속으로</h4>
                 <div class="ch-subs">11.9만</div>
                 <div class="ch-desc">현장 밀착 · 리얼 다큐</div>
-                <div class="ch-tag sub-tag">서브 채널</div>
+                <div class="ch-tag main-tag">메인 채널</div>
             </a>
-            <a href="https://www.youtube.com/@%EB%A8%B8%EB%8B%88%EB%A1%9C%EB%93%9C" target="_blank" class="channel-card" style="text-decoration:none; color:inherit;">
+            <a href="https://www.youtube.com/@%EB%A8%B8%EB%8B%88%EB%A1%9C%EB%93%9C" target="_blank" class="channel-card main" style="text-decoration:none; color:inherit;">
                 <div class="ch-icon"><img src="https://yt3.ggpht.com/hHTPVxaR8iOYL17Y-G-Xn3pSj572ymTFuLWsfTALzPim0pZLUw9ZY-6sAyl4kO5JdpbWX2c0nmE=s240-c-k-c0x00ffffff-no-rj" alt="머니로드"></div>
                 <h4>머니로드</h4>
                 <div class="ch-subs">21.6만</div>
                 <div class="ch-desc">재테크 · 투자 · 머니</div>
-                <div class="ch-tag sub-tag">서브 채널</div>
+                <div class="ch-tag main-tag">메인 채널</div>
             </a>
         </div>
         <div class="coming-soon">
@@ -609,8 +641,8 @@
         </p>
         <a href="mailto:ceo@flowmus.com" class="cta-button">미팅 요청하기</a>
         <div class="cta-contact">
-            <p>&#128231; <a href="mailto:ceo@flowmus.com">ceo@flowmus.com</a></p>
-            <p style="margin-top:4px;">&#128222; 카카오톡 채널: <strong>사찍남</strong></p>
+            <p>Email: <a href="mailto:ceo@flowmus.com">ceo@flowmus.com</a></p>
+            <p style="margin-top:4px;">카카오톡 채널: <strong>사찍남</strong></p>
         </div>
     </div>
 </section>
