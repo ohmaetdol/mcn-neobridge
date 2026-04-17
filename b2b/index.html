@@ -371,77 +371,105 @@
 
         /* ── Responsive ── */
         @media (max-width: 768px) {
-            h1 { font-size: 26px; letter-spacing: -0.5px; }
-            h2 { font-size: 21px; }
+            /* 전역 텍스트 정렬 */
+            h1 { font-size: 26px; letter-spacing: -0.5px; text-align: center; }
+            h2 { font-size: 21px; text-align: left; }
+            .section-tag { text-align: left; font-size: 12px; }
+            .desc { font-size: 14px; margin-bottom: 24px; text-align: left; line-height: 1.7; }
+
+            /* Hero */
             .hero { padding: 48px 16px 36px; }
             .hero-badge { font-size: 12px; padding: 5px 12px; }
-            .hero-sub { font-size: 15px; margin-bottom: 32px; }
+            .hero-sub { font-size: 15px; margin-bottom: 32px; text-align: center; }
             .hero-sub br { display: none; }
 
-            .hero-profiles { gap: 16px; }
+            .hero-profiles { gap: 20px; justify-content: center; }
+            .hero-profile { align-items: center; }
             .hero-profile img { width: 52px; height: 52px; }
-            .hero-profile .hp-name { font-size: 11px; }
-            .hero-profile .hp-subs { font-size: 10px; }
+            .hero-profile .hp-name { font-size: 11px; text-align: center; }
+            .hero-profile .hp-subs { font-size: 10px; text-align: center; }
 
+            /* Stat 카드 */
             .stat-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-            .stat-card { padding: 16px 12px; }
+            .stat-card { padding: 16px 12px; text-align: center; }
             .stat-card .num { font-size: 24px; }
             .stat-card .label { font-size: 11px; }
 
+            /* 컨테이너 */
             .container { padding: 32px 16px; }
             .section { padding: 40px 0; }
-            .desc { font-size: 14px; margin-bottom: 24px; }
 
+            /* 플로우 7단계 */
             .flow-track {
                 display: grid; grid-template-columns: repeat(4, 1fr);
                 gap: 8px;
             }
-            .flow-step { min-width: unset; }
+            .flow-step { min-width: unset; text-align: center; }
             .flow-step::after { display: none; }
             .flow-icon { width: 40px; height: 40px; font-size: 12px; }
-            .flow-step .step-title { font-size: 11px; }
+            .flow-step .step-title { font-size: 11px; line-height: 1.3; }
             .flow-step .step-desc { font-size: 10px; }
 
+            /* 서비스 상세 카드 */
             .detail-grid { grid-template-columns: 1fr; gap: 12px; margin-top: 24px; }
-            .detail-card { padding: 20px; }
-            .detail-card h4 { font-size: 14px; }
-            .detail-card p { font-size: 13px; }
+            .detail-card { padding: 20px; text-align: left; }
+            .detail-card h4 { font-size: 14px; text-align: left; }
+            .detail-card p { font-size: 13px; text-align: left; line-height: 1.6; }
             .detail-card[style*="span 2"] { grid-column: span 1 !important; }
 
+            /* 가격표 */
             .pricing-grid { grid-template-columns: 1fr; gap: 16px; }
-            .price-box { padding: 24px 20px; }
-            .price-box .price { font-size: 30px; }
-            .price-box li { font-size: 13px; }
+            .price-box { padding: 24px 20px; text-align: left; }
+            .price-box h3 { text-align: left; }
+            .price-box .price { font-size: 30px; text-align: left; }
+            .price-box .original { text-align: left; }
+            .price-box li { font-size: 13px; text-align: left; }
             .price-table table { font-size: 13px; }
             .price-table th, .price-table td { padding: 10px 8px; }
 
-            .rs-box { padding: 24px 20px; }
+            /* RS 박스 */
+            .rs-box { padding: 24px 20px; text-align: left; }
             .rs-box h3 { font-size: 16px; }
-            .rs-box p { font-size: 14px; }
+            .rs-box p { font-size: 14px; text-align: left; }
 
+            /* 채널 네트워크 */
             .channel-grid { grid-template-columns: 1fr; gap: 12px; }
-            .channel-card { padding: 20px 16px; display: flex; align-items: center; gap: 16px; text-align: left; }
-            .channel-card .ch-icon { margin-bottom: 0; min-width: 56px; width: 56px; height: 56px; }
+            .channel-card {
+                padding: 20px 16px; display: flex; align-items: center;
+                gap: 16px; text-align: left; flex-wrap: wrap;
+            }
+            .channel-card .ch-icon { margin-bottom: 0; min-width: 56px; width: 56px; height: 56px; flex-shrink: 0; }
+            .channel-card .ch-info { flex: 1; }
             .channel-card .ch-subs { font-size: 16px; }
             .channel-card h4 { font-size: 15px; margin-bottom: 2px; }
             .channel-card .ch-desc { font-size: 12px; }
             .channel-card .ch-tag { margin-top: 4px; }
 
-            .process-item { flex-direction: row; gap: 16px; padding: 20px; }
-            .process-num { min-width: 36px; height: 36px; font-size: 15px; border-radius: 10px; }
-            .process-content h4 { font-size: 15px; }
-            .process-content p { font-size: 13px; }
+            /* 프로세스 */
+            .process-item { flex-direction: row; gap: 16px; padding: 20px; align-items: flex-start; }
+            .process-num { min-width: 36px; height: 36px; font-size: 15px; border-radius: 10px; flex-shrink: 0; }
+            .process-content { flex: 1; }
+            .process-content h4 { font-size: 15px; text-align: left; }
+            .process-content p { font-size: 13px; text-align: left; line-height: 1.6; }
 
+            /* CTA 폼 */
             .cta-section { padding: 48px 16px; }
-            .cta-section h2 { font-size: 24px; }
+            .cta-section h2 { font-size: 24px; text-align: center; }
+            .cta-section .desc { text-align: center; }
             .cta-form { padding: 0; }
+            .form-group label { font-size: 13px; text-align: left; }
             .form-group input,
             .form-group select,
             .form-group textarea { font-size: 16px; padding: 14px 16px; }
-            .submit-btn { font-size: 16px; padding: 16px; }
+            .submit-btn { font-size: 16px; padding: 16px; text-align: center; }
 
-            .coming-soon { padding: 12px; }
+            .coming-soon { padding: 12px; text-align: center; }
             .coming-soon span { font-size: 13px; }
+
+            /* 푸터 */
+            footer { padding: 24px 16px; }
+            footer .brand { font-size: 14px; }
+            footer .legal { font-size: 11px; }
         }
     </style>
 </head>
