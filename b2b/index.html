@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>플로우머스 MCN — 강의 플랫폼 전용 콘텐츠 제작 파트너</title>
+    <title>플로우머스 MCN — B2B 콘텐츠 제작 파트너</title>
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -37,7 +37,7 @@
         /* ── Hero ── */
         .hero {
             text-align: center;
-            padding: 80px 24px 60px;
+            padding: 80px 24px 40px;
             background: linear-gradient(180deg, #f0f4ff 0%, #ffffff 100%);
         }
         .hero-inner { max-width: 900px; margin: 0 auto; }
@@ -90,6 +90,27 @@
         }
         .stat-card .label { font-size: 13px; color: var(--text-med); font-weight: 500; }
 
+        /* ── Tab Navigation ── */
+        .tab-nav {
+            display: flex; justify-content: center; gap: 8px;
+            padding: 24px 24px 0;
+            max-width: 900px; margin: 0 auto;
+        }
+        .tab-btn {
+            padding: 12px 32px; border: 2px solid var(--border-line);
+            border-radius: 12px; background: #fff; color: var(--text-med);
+            font-size: 15px; font-weight: 700; cursor: pointer;
+            transition: all 0.2s;
+        }
+        .tab-btn:hover { border-color: var(--accent-brand); color: var(--accent-brand); }
+        .tab-btn.active {
+            background: var(--accent-brand); color: #fff;
+            border-color: var(--accent-brand);
+            box-shadow: 0 2px 12px rgba(37, 99, 235, 0.25);
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
         /* ── Section ── */
         .section {
             padding: 64px 0; border-bottom: 1px solid var(--border-line);
@@ -109,7 +130,7 @@
             line-height: 1.7;
         }
 
-        /* ── Flow Steps (Section 2) ── */
+        /* ── Flow Steps ── */
         .flow-track {
             display: flex; align-items: flex-start; gap: 0;
             overflow-x: auto; padding-bottom: 8px;
@@ -131,7 +152,7 @@
         .flow-step .step-title { font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 2px; }
         .flow-step .step-desc { font-size: 11.5px; color: var(--text-low); line-height: 1.4; }
 
-        /* ── Detail Cards (Section 2 expanded) ── */
+        /* ── Detail Cards ── */
         .detail-grid {
             display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 36px;
         }
@@ -157,6 +178,7 @@
             border: 1px solid var(--border-line); border-radius: 16px;
             overflow: hidden; background: #fff;
             transition: box-shadow 0.2s;
+            display: flex; flex-direction: column;
         }
         .portfolio-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
         .portfolio-card a { text-decoration: none; color: inherit; display: block; }
@@ -172,7 +194,6 @@
             display: flex; align-items: center; justify-content: center;
             font-size: 18px;
         }
-        .portfolio-card { display: flex; flex-direction: column; }
         .portfolio-info { padding: 20px; flex: 1; display: flex; flex-direction: column; }
         .portfolio-info h4 {
             font-size: 15px; font-weight: 700; color: var(--navy);
@@ -187,7 +208,17 @@
         .portfolio-stat.revenue { background: var(--accent-orange-light); color: var(--accent-orange); }
         .portfolio-stat.platform { background: var(--surface-secondary); color: var(--text-med); }
 
-        /* ── Pricing (Section 3) ── */
+        /* ── Portfolio placeholder ── */
+        .portfolio-placeholder {
+            background: var(--surface-primary); border: 2px dashed var(--border-line);
+            border-radius: 16px; padding: 48px 32px; text-align: center;
+        }
+        .portfolio-placeholder h4 {
+            font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 8px;
+        }
+        .portfolio-placeholder p { font-size: 14px; color: var(--text-med); line-height: 1.6; }
+
+        /* ── Pricing ── */
         .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 
         .price-box {
@@ -265,7 +296,7 @@
             margin-top: 12px;
         }
 
-        /* ── Channel Network (Section 4) ── */
+        /* ── Channel Network ── */
         .channel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
         .channel-card {
             background: var(--surface-primary); border: 1px solid var(--border-line);
@@ -303,7 +334,7 @@
         }
         .coming-soon .plus { color: var(--accent-brand); font-weight: 800; }
 
-        /* ── Process (Section 5) ── */
+        /* ── Process ── */
         .process-list { display: grid; gap: 16px; }
         .process-item {
             display: flex; gap: 20px; align-items: flex-start;
@@ -319,7 +350,7 @@
         .process-content h4 { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
         .process-content p { font-size: 14px; color: var(--text-med); line-height: 1.6; }
 
-        /* ── CTA (Section 6) ── */
+        /* ── CTA ── */
         .cta-section {
             text-align: center; padding: 80px 24px;
             background: linear-gradient(180deg, #ffffff 0%, #f0f4ff 100%);
@@ -414,7 +445,7 @@
             .desc { font-size: 14px; margin-bottom: 24px; text-align: left; line-height: 1.7; }
 
             /* Hero */
-            .hero { padding: 48px 16px 36px; }
+            .hero { padding: 48px 16px 24px; }
             .hero-badge { font-size: 12px; padding: 5px 12px; }
             .hero-sub { font-size: 15px; margin-bottom: 32px; text-align: center; }
             .hero-sub br { display: none; }
@@ -431,11 +462,15 @@
             .stat-card .num { font-size: 24px; }
             .stat-card .label { font-size: 11px; }
 
+            /* 탭 */
+            .tab-nav { padding: 16px 16px 0; gap: 6px; }
+            .tab-btn { padding: 10px 20px; font-size: 14px; border-radius: 10px; }
+
             /* 컨테이너 */
             .container { padding: 32px 16px; }
             .section { padding: 40px 0; }
 
-            /* 플로우 7단계 */
+            /* 플로우 */
             .flow-track {
                 display: grid; grid-template-columns: repeat(4, 1fr);
                 gap: 8px;
@@ -459,6 +494,8 @@
             .portfolio-info h4 { font-size: 14px; }
             .portfolio-stats { gap: 8px; }
             .portfolio-stat { font-size: 12px; padding: 5px 10px; }
+            .portfolio-placeholder { padding: 32px 20px; }
+            .portfolio-placeholder h4 { font-size: 16px; }
 
             /* 가격표 */
             .pricing-grid { grid-template-columns: 1fr; gap: 16px; }
@@ -518,14 +555,14 @@
 </head>
 <body>
 
-<!-- ════════ Section 1: Hero ════════ -->
+<!-- ════════ Hero ════════ -->
 <section class="hero">
     <div class="hero-inner">
         <div class="hero-badge">CONTENT PRODUCTION PARTNER</div>
-        <h1>강의 플랫폼 전용<br><span>콘텐츠 제작 파트너</span></h1>
+        <h1>영상 하나로 매출을 만드는<br><span>콘텐츠 제작 파트너</span></h1>
         <p class="hero-sub">
-            기획부터 촬영, 편집, 업로드, 쇼츠, DM 마케팅까지<br>
-            원스톱으로 강사의 유튜브 콘텐츠를 만들고, 성과를 함께 나눕니다
+            기획부터 촬영, 편집, 업로드, 퍼널 설계까지<br>
+            원스톱으로 콘텐츠를 만들고, 성과를 함께 나눕니다
         </p>
         <div class="hero-profiles">
             <a href="https://www.youtube.com/@sajjiknam_" target="_blank" class="hero-profile">
@@ -565,9 +602,19 @@
     </div>
 </section>
 
+<!-- ════════ Tab Navigation ════════ -->
+<div class="tab-nav">
+    <button class="tab-btn active" data-tab="lecture" onclick="switchTab('lecture')">강의 플랫폼</button>
+    <button class="tab-btn" data-tab="funnel" onclick="switchTab('funnel')">퍼널 설계</button>
+</div>
+
+<!-- ════════════════════════════════════════════════ -->
+<!-- ══  TAB 1: 강의 플랫폼  ══ -->
+<!-- ════════════════════════════════════════════════ -->
+<div class="tab-content active" id="tab-lecture">
 <div class="container">
 
-    <!-- ════════ Section 2: 서비스 소개 ════════ -->
+    <!-- SERVICE (강의) -->
     <section class="section">
         <div class="section-tag">SERVICE</div>
         <h2>원스톱 콘텐츠 제작 플로우</h2>
@@ -637,7 +684,7 @@
         </div>
     </section>
 
-    <!-- ════════ Portfolio ════════ -->
+    <!-- PORTFOLIO (강의) -->
     <section class="section">
         <div class="section-tag">PORTFOLIO</div>
         <h2>제작 실적</h2>
@@ -679,7 +726,7 @@
         </div>
     </section>
 
-    <!-- ════════ Section 3: 가격표 ════════ -->
+    <!-- PRICING (강의) -->
     <section class="section">
         <div class="section-tag">PRICING</div>
         <h2>투명한 가격, 확실한 성과</h2>
@@ -767,7 +814,7 @@
         </div>
     </section>
 
-    <!-- ════════ Section 4: 채널 네트워크 ════════ -->
+    <!-- NETWORK (강의 — 공용) -->
     <section class="section">
         <div class="section-tag">NETWORK</div>
         <h2>MCN 채널 네트워크</h2>
@@ -801,7 +848,7 @@
         </div>
     </section>
 
-    <!-- ════════ Section 5: 진행 프로세스 ════════ -->
+    <!-- PROCESS (강의) -->
     <section class="section">
         <div class="section-tag">PROCESS</div>
         <h2>진행 프로세스</h2>
@@ -847,8 +894,247 @@
     </section>
 
 </div>
+</div>
 
-<!-- ════════ Section 6: CTA ════════ -->
+<!-- ════════════════════════════════════════════════ -->
+<!-- ══  TAB 2: 퍼널 설계  ══ -->
+<!-- ════════════════════════════════════════════════ -->
+<div class="tab-content" id="tab-funnel">
+<div class="container">
+
+    <!-- SERVICE (퍼널) -->
+    <section class="section">
+        <div class="section-tag">SERVICE</div>
+        <h2>가맹점 모집 퍼널 설계</h2>
+        <p class="desc">가맹점을 더 오픈해야 하는 대표님을 위한 풀퍼널.<br>모집 영상 제작부터 상담 신청 랜딩페이지, 광고, 계약까지 한 번에.</p>
+
+        <div class="flow-track">
+            <div class="flow-step">
+                <div class="flow-icon">01</div>
+                <div class="step-title">사전 미팅</div>
+                <div class="step-desc">가맹 사업 구조 파악</div>
+            </div>
+            <div class="flow-step">
+                <div class="flow-icon">02</div>
+                <div class="step-title">영상 기획</div>
+                <div class="step-desc">성공사례/인터뷰</div>
+            </div>
+            <div class="flow-step">
+                <div class="flow-icon">03</div>
+                <div class="step-title">촬영+편집</div>
+                <div class="step-desc">가맹 모집 영상</div>
+            </div>
+            <div class="flow-step">
+                <div class="flow-icon">04</div>
+                <div class="step-title">랜딩페이지</div>
+                <div class="step-desc">상담 신청 페이지</div>
+            </div>
+            <div class="flow-step">
+                <div class="flow-icon">05</div>
+                <div class="step-title">광고 세팅</div>
+                <div class="step-desc">유튜브/메타 광고</div>
+            </div>
+        </div>
+
+        <div class="detail-grid">
+            <div class="detail-card">
+                <h4>가맹 모집 영상 제작</h4>
+                <p>기존 가맹점주 인터뷰, 성공사례, 본사 투어 등 예비 점주가 신뢰할 수 있는 콘텐츠를 제작합니다.</p>
+            </div>
+            <div class="detail-card">
+                <h4>상담 신청 랜딩페이지</h4>
+                <p>영상을 본 예비 점주가 바로 상담을 신청할 수 있는 전용 랜딩페이지. CTA 버튼, 신청 폼, 전환 추적 포함.</p>
+                <span class="included">패키지 포함</span>
+            </div>
+            <div class="detail-card">
+                <h4>광고 세팅 + 리타겟팅</h4>
+                <p>유튜브 인스트림 광고와 메타(인스타/페이스북) 광고를 세팅합니다. 영상 시청자를 리타겟팅하여 전환율을 극대화합니다.</p>
+            </div>
+            <div class="detail-card">
+                <h4>상담 전환 관리</h4>
+                <p>상담 신청 데이터를 CRM에 자동 연동합니다. 신청 즉시 알림, 상담 예약 자동화로 이탈을 최소화합니다.</p>
+                <span class="included" style="background: var(--accent-orange-light); color: var(--accent-orange);">별도 협의</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO (퍼널) -->
+    <section class="section">
+        <div class="section-tag">PORTFOLIO</div>
+        <h2>제작 실적</h2>
+        <p class="desc">가맹점 모집 퍼널 사례를 준비 중입니다.</p>
+
+        <div class="portfolio-placeholder">
+            <h4>프랜차이즈 전용 퍼널 포트폴리오</h4>
+            <p>현재 첫 번째 프로젝트를 진행 중입니다.<br>미팅 시 강의 플랫폼 제작 실적과 함께 퍼널 설계 방향을 상세히 안내해드립니다.</p>
+        </div>
+    </section>
+
+    <!-- PRICING (퍼널) -->
+    <section class="section">
+        <div class="section-tag">PRICING</div>
+        <h2>투명한 가격, 확실한 성과</h2>
+        <p class="desc">영상 제작부터 랜딩페이지, 광고까지 올인원 패키지. 가맹 오픈 시 RS로 성과를 공유합니다.</p>
+
+        <div class="pricing-grid">
+            <div class="price-box">
+                <h3>단건 패키지</h3>
+                <div class="price">250만<small>원 /건</small></div>
+                <ul>
+                    <li>사전 미팅 + 기획안 — 30만</li>
+                    <li>가맹 모집 영상 촬영+편집 — 120만</li>
+                    <li>상담 신청 랜딩페이지 — 50만</li>
+                    <li>광고 세팅 (유튜브+메타) — 50만</li>
+                </ul>
+            </div>
+            <div class="price-box featured">
+                <div class="badge-top">BEST VALUE</div>
+                <h3>3개월 정기권</h3>
+                <div class="original">월 250만원</div>
+                <div class="price">200만<small>원 /월</small></div>
+                <div class="save">20% 할인</div>
+                <ul>
+                    <li>월 1건 영상 + 랜딩페이지 관리</li>
+                    <li>3개월 총 600만원 (150만 절약)</li>
+                    <li>전담 매니저 배정</li>
+                    <li>월간 전환 리포트 제공</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="price-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>항목</th>
+                        <th>내용</th>
+                        <th>금액</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>사전 미팅 + 기획안</td>
+                        <td>가맹 사업 분석, 콘텐츠 방향 설계</td>
+                        <td>30만원</td>
+                    </tr>
+                    <tr>
+                        <td>영상 촬영+편집</td>
+                        <td>가맹 모집 전용 영상 제작</td>
+                        <td>120만원</td>
+                    </tr>
+                    <tr>
+                        <td>랜딩페이지</td>
+                        <td>상담 신청 페이지 + 전환 추적</td>
+                        <td>50만원</td>
+                    </tr>
+                    <tr>
+                        <td>광고 세팅</td>
+                        <td>유튜브 + 메타 광고 + 리타겟팅</td>
+                        <td>50만원</td>
+                    </tr>
+                    <tr style="background: var(--surface-secondary); font-weight: 700;">
+                        <td>합계</td>
+                        <td></td>
+                        <td>250만원</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="rs-box">
+            <h3>Revenue Share (RS) 모델</h3>
+            <p>
+                영상과 랜딩페이지를 통해 유입된 예비 점주가 <strong>가맹 계약을 체결</strong>하면,<br>
+                가맹비(가맹 오픈 비용)의 일정 비율을 RS로 공유합니다.<br>
+                상담 신청부터 계약까지 전 과정의 전환 데이터를 <strong>월간 리포트</strong>로 제공합니다.
+            </p>
+            <div class="rs-highlight">RS 10% &mdash; 가맹 오픈 건당 정산</div>
+        </div>
+    </section>
+
+    <!-- NETWORK (퍼널 — 공용) -->
+    <section class="section">
+        <div class="section-tag">NETWORK</div>
+        <h2>MCN 채널 네트워크</h2>
+        <p class="desc">플로우머스 MCN 다채널 네트워크. 예비 점주가 가장 많이 모인 비즈니스 채널에 콘텐츠를 노출합니다.</p>
+
+        <div class="channel-grid">
+            <a href="https://www.youtube.com/@sajjiknam_" target="_blank" class="channel-card main" style="text-decoration:none; color:inherit;">
+                <div class="ch-icon"><img src="https://yt3.ggpht.com/GAlyx83tPBTynHPbwZxMStrzD1hb667j80kw5KhdWy_MBMWnLcT75qVj1ILJSgsKh2kUFjbbUg=s240-c-k-c0x00ffffff-no-rj" alt="사찍남"></div>
+                <h4>사장찍어주는남자</h4>
+                <div class="ch-subs">14.4만</div>
+                <div class="ch-desc">비즈니스 · 창업 · 사업가</div>
+                <div class="ch-tag main-tag">메인 채널</div>
+            </a>
+            <a href="https://www.youtube.com/@gogo_work" target="_blank" class="channel-card main" style="text-decoration:none; color:inherit;">
+                <div class="ch-icon"><img src="https://yt3.ggpht.com/SN7u3JX9En-azJxO2A3V6CEraGFaBgaQ2pDEmxE_Lfj9dy8OroVmplKEonlR8dOOfY4tTF6Gxg=s240-c-k-c0x00ffffff-no-rj" alt="현장속으로"></div>
+                <h4>현장속으로</h4>
+                <div class="ch-subs">11.9만</div>
+                <div class="ch-desc">현장 밀착 · 리얼 다큐</div>
+                <div class="ch-tag main-tag">메인 채널</div>
+            </a>
+            <a href="https://www.youtube.com/@%EB%A8%B8%EB%8B%88%EB%A1%9C%EB%93%9C" target="_blank" class="channel-card main" style="text-decoration:none; color:inherit;">
+                <div class="ch-icon"><img src="https://yt3.ggpht.com/hHTPVxaR8iOYL17Y-G-Xn3pSj572ymTFuLWsfTALzPim0pZLUw9ZY-6sAyl4kO5JdpbWX2c0nmE=s240-c-k-c0x00ffffff-no-rj" alt="머니로드"></div>
+                <h4>머니로드</h4>
+                <div class="ch-subs">21.6만</div>
+                <div class="ch-desc">재테크 · 투자 · 머니</div>
+                <div class="ch-tag main-tag">메인 채널</div>
+            </a>
+        </div>
+        <div class="coming-soon">
+            <span><span class="plus">+4</span> 채널 추가 합류 예정 &mdash; 총 7개 채널 동시 노출 가능</span>
+        </div>
+    </section>
+
+    <!-- PROCESS (퍼널) -->
+    <section class="section">
+        <div class="section-tag">PROCESS</div>
+        <h2>진행 프로세스</h2>
+        <p class="desc">계약부터 가맹 오픈까지, 5단계로 깔끔하게 진행됩니다.</p>
+
+        <div class="process-list">
+            <div class="process-item">
+                <div class="process-num">1</div>
+                <div class="process-content">
+                    <h4>계약 체결</h4>
+                    <p>서비스 범위, RS 조건(가맹 오픈 건당 10%), 광고 예산 등을 확정하고 계약합니다.</p>
+                </div>
+            </div>
+            <div class="process-item">
+                <div class="process-num">2</div>
+                <div class="process-content">
+                    <h4>사전 미팅 + 기획</h4>
+                    <p>가맹 사업 구조, 기존 가맹점 현황, 타겟 예비 점주 프로필을 분석합니다. 영상 콘셉트와 랜딩페이지 구조를 설계합니다.</p>
+                </div>
+            </div>
+            <div class="process-item">
+                <div class="process-num">3</div>
+                <div class="process-content">
+                    <h4>영상 촬영 + 랜딩페이지 제작</h4>
+                    <p>가맹점주 인터뷰/본사 투어/성공사례 영상을 촬영하고, 상담 신청 랜딩페이지를 동시에 제작합니다.</p>
+                </div>
+            </div>
+            <div class="process-item">
+                <div class="process-num">4</div>
+                <div class="process-content">
+                    <h4>광고 세팅 + 퍼널 오픈</h4>
+                    <p>유튜브 인스트림 + 메타 광고를 세팅하고, 영상 → 랜딩페이지 → 상담 신청 퍼널을 오픈합니다.</p>
+                </div>
+            </div>
+            <div class="process-item">
+                <div class="process-num">5</div>
+                <div class="process-content">
+                    <h4>성과 리포트</h4>
+                    <p>상담 신청수, 상담 전환율, 가맹 계약 건수, RS 정산 내역을 월간 리포트로 제공합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+</div>
+
+<!-- ════════ CTA (공용) ════════ -->
 <section class="cta-section">
     <div class="cta-inner">
         <div class="section-tag" style="text-align:center;">GET STARTED</div>
@@ -858,14 +1144,23 @@
         </p>
 
         <form id="meetingForm" class="cta-form" onsubmit="return submitForm(event)">
+            <div class="form-group">
+                <label>서비스 유형 <span class="req">*</span></label>
+                <select name="service_type" id="serviceType" required>
+                    <option value="">선택해주세요</option>
+                    <option value="강의 플랫폼 콘텐츠">강의 플랫폼 콘텐츠</option>
+                    <option value="가맹점 모집 퍼널">가맹점 모집 퍼널</option>
+                    <option value="기타">기타</option>
+                </select>
+            </div>
             <div class="form-row">
                 <div class="form-group">
                     <label>담당자명 <span class="req">*</span></label>
                     <input type="text" name="name" placeholder="홍길동" required>
                 </div>
                 <div class="form-group">
-                    <label>회사/플랫폼명 <span class="req">*</span></label>
-                    <input type="text" name="company" placeholder="타이탄클래스" required>
+                    <label>회사명 <span class="req">*</span></label>
+                    <input type="text" name="company" placeholder="회사/플랫폼/브랜드명" required>
                 </div>
             </div>
             <div class="form-row">
@@ -879,12 +1174,12 @@
                 </div>
             </div>
             <div class="form-group">
-                <label>소속 강사 수</label>
-                <select name="instructors">
+                <label>규모</label>
+                <select name="scale">
                     <option value="">선택해주세요</option>
-                    <option value="1~10명">1~10명</option>
-                    <option value="10~50명">10~50명</option>
-                    <option value="50명 이상">50명 이상</option>
+                    <option value="1~10">1~10</option>
+                    <option value="10~50">10~50</option>
+                    <option value="50+">50+</option>
                 </select>
             </div>
             <div class="form-group">
@@ -910,17 +1205,43 @@
 <script>
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwDZiNL9vbHtXtM28o2ByvTMNx5FqcwsSxE4o4TCb9MDmcHBS81V5mUYtaTCBXtTG8T/exec';
 
+function switchTab(tab) {
+    document.querySelectorAll('.tab-btn').forEach(function(btn) {
+        btn.classList.toggle('active', btn.dataset.tab === tab);
+    });
+    document.querySelectorAll('.tab-content').forEach(function(content) {
+        content.classList.toggle('active', content.id === 'tab-' + tab);
+    });
+    // 서비스 유형 자동 선택
+    var serviceSelect = document.getElementById('serviceType');
+    if (tab === 'lecture') {
+        serviceSelect.value = '강의 플랫폼 콘텐츠';
+    } else if (tab === 'funnel') {
+        serviceSelect.value = '가맹점 모집 퍼널';
+    }
+    // URL hash 업데이트
+    history.replaceState(null, '', '#' + tab);
+}
+
+// URL hash로 탭 초기화
+(function() {
+    var hash = location.hash.replace('#', '');
+    if (hash === 'funnel') {
+        switchTab('funnel');
+    }
+})();
+
 async function submitForm(e) {
     e.preventDefault();
-    const btn = document.getElementById('submitBtn');
-    const form = document.getElementById('meetingForm');
+    var btn = document.getElementById('submitBtn');
+    var form = document.getElementById('meetingForm');
     btn.disabled = true;
     btn.textContent = '전송 중...';
 
-    const data = Object.fromEntries(new FormData(form));
+    var data = Object.fromEntries(new FormData(form));
 
     try {
-        const formBody = new URLSearchParams(data);
+        var formBody = new URLSearchParams(data);
         await fetch(APPS_SCRIPT_URL, {
             method: 'POST',
             mode: 'no-cors',
