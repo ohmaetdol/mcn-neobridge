@@ -222,10 +222,16 @@
         }
         .channel-card.main { border: 2px solid var(--accent-brand); }
         .channel-card .ch-icon {
-            width: 56px; height: 56px; border-radius: 50%;
+            width: 72px; height: 72px; border-radius: 50%;
             background: var(--accent-brand-light); color: var(--accent-brand);
             display: inline-flex; align-items: center; justify-content: center;
-            font-size: 24px; margin-bottom: 12px;
+            font-size: 24px; margin-bottom: 12px; overflow: hidden;
+        }
+        .channel-card .ch-icon img {
+            width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+        }
+        .channel-card .ch-subs {
+            font-size: 20px; font-weight: 800; color: var(--navy); margin: 4px 0 2px;
         }
         .channel-card h4 { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
         .channel-card .ch-desc { font-size: 13px; color: var(--text-med); }
@@ -336,7 +342,7 @@
                 <div class="label">운영 채널</div>
             </div>
             <div class="stat-card">
-                <div class="num">150만+</div>
+                <div class="num">47.9만+</div>
                 <div class="label">총 구독자</div>
             </div>
             <div class="stat-card">
@@ -518,24 +524,27 @@
         <p class="desc">사찍남을 중심으로 한 다채널 네트워크. 강사의 타겟 수강생이 가장 많이 모인 곳에 콘텐츠를 노출합니다.</p>
 
         <div class="channel-grid">
-            <div class="channel-card main">
-                <div class="ch-icon">&#127909;</div>
-                <h4>사찍남</h4>
+            <a href="https://www.youtube.com/@sajjiknam_" target="_blank" class="channel-card main" style="text-decoration:none; color:inherit;">
+                <div class="ch-icon"><img src="https://yt3.ggpht.com/GAlyx83tPBTynHPbwZxMStrzD1hb667j80kw5KhdWy_MBMWnLcT75qVj1ILJSgsKh2kUFjbbUg=s240-c-k-c0x00ffffff-no-rj" alt="사찍남"></div>
+                <h4>사장찍어주는남자</h4>
+                <div class="ch-subs">14.4만</div>
                 <div class="ch-desc">비즈니스 · 창업 · 사업가</div>
                 <div class="ch-tag main-tag">메인 채널</div>
-            </div>
-            <div class="channel-card">
-                <div class="ch-icon">&#127911;</div>
+            </a>
+            <a href="https://www.youtube.com/@gogo_work" target="_blank" class="channel-card" style="text-decoration:none; color:inherit;">
+                <div class="ch-icon"><img src="https://yt3.ggpht.com/SN7u3JX9En-azJxO2A3V6CEraGFaBgaQ2pDEmxE_Lfj9dy8OroVmplKEonlR8dOOfY4tTF6Gxg=s240-c-k-c0x00ffffff-no-rj" alt="현장속으로"></div>
                 <h4>현장속으로</h4>
+                <div class="ch-subs">11.9만</div>
                 <div class="ch-desc">현장 밀착 · 리얼 다큐</div>
                 <div class="ch-tag sub-tag">서브 채널</div>
-            </div>
-            <div class="channel-card">
-                <div class="ch-icon">&#128176;</div>
+            </a>
+            <a href="https://www.youtube.com/@%EB%A8%B8%EB%8B%88%EB%A1%9C%EB%93%9C" target="_blank" class="channel-card" style="text-decoration:none; color:inherit;">
+                <div class="ch-icon"><img src="https://yt3.ggpht.com/hHTPVxaR8iOYL17Y-G-Xn3pSj572ymTFuLWsfTALzPim0pZLUw9ZY-6sAyl4kO5JdpbWX2c0nmE=s240-c-k-c0x00ffffff-no-rj" alt="머니로드"></div>
                 <h4>머니로드</h4>
+                <div class="ch-subs">21.6만</div>
                 <div class="ch-desc">재테크 · 투자 · 머니</div>
                 <div class="ch-tag sub-tag">서브 채널</div>
-            </div>
+            </a>
         </div>
         <div class="coming-soon">
             <span><span class="plus">+4</span> 채널 추가 합류 예정 &mdash; 총 7개 채널 동시 노출 가능</span>
