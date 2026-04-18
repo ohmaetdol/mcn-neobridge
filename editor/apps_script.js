@@ -180,11 +180,16 @@ function applyForVideo(data) {
   var plan = data.plan;
   var expectedDate = data.expectedDate;
 
-  // 중복 신청 체크
+  // 중복 & 충돌 체크
   var existing = appSheet.getDataRange().getValues();
   for (var i = 1; i < existing.length; i++) {
-    if (existing[i][1] === videoId && existing[i][2] === editor) {
+    // 본인 중복 신청 방지
+    if (existing[i][1] === videoId && existing[i][2] === editor && existing[i][5] !== '반려') {
       return {success: false, message: '이미 신청한 영상입니다.'};
+    }
+    // 다른 편집자가 이미 승인받은 영상
+    if (existing[i][1] === videoId && existing[i][5] === '승인') {
+      return {success: false, message: '이미 다른 편집자에게 배정된 영상입니다.'};
     }
   }
 
