@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>편집자 보드 — Flowmus</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #f8fafc; --card: #ffffff; --border: #e2e8f0;
+  --navy: #0A1628; --navy-light: #1F4680;
+  --text: #1a1d23; --text-soft: #64748b; --text-dim: #94a3b8;
+  --green: #16a34a; --green-bg: #f0fdf4;
+  --orange: #ea580c; --orange-bg: #fff7ed;
+  --red: #dc2626; --red-bg: #fef2f2;
+  --blue: #2563eb; --blue-bg: #eff6ff;
+  --r: 10px;
+}
+body { font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+
+/* Header */
+.header { background: var(--navy); color: #fff; padding: 20px 24px; }
+.header-inner { max-width: 800px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+.header h1 { font-size: 18px; font-weight: 700; }
+.header-right { display: flex; gap: 8px; align-items: center; }
+.header select { padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); color: #fff; font-size: 13px; }
+.header select option { color: #333; }
+.btn-admin { padding: 6px 14px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.3); background: transparent; color: #fff; font-size: 12px; cursor: pointer; }
+.btn-admin:hover { background: rgba(255,255,255,0.15); }
+.btn-admin.active { background: var(--blue); border-color: var(--blue); }
+
+/* Container */
+.container { max-width: 800px; margin: 0 auto; padding: 24px; }
+
+/* Tabs */
+.tabs { display: flex; gap: 4px; margin-bottom: 24px; background: var(--card); padding: 4px; border-radius: 8px; border: 1px solid var(--border); }
+.tab { flex: 1; padding: 10px; text-align: center; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600; color: var(--text-soft); transition: all 0.2s; }
+.tab.active { background: var(--navy); color: #fff; }
+.tab:hover:not(.active) { background: #f1f5f9; }
+.tab-badge { display: inline-block; background: var(--red); color: #fff; font-size: 10px; padding: 1px 6px; border-radius: 10px; margin-left: 4px; }
+
+/* Cards */
+.card { background: var(--card); border: 1px solid var(--border); border-radius: var(--r); padding: 20px; margin-bottom: 12px; transition: box-shadow 0.2s; }
+.card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+.card-title { font-size: 15px; font-weight: 700; }
+.card-channel { font-size: 12px; color: var(--text-soft); }
+.card-meta { display: flex; gap: 16px; font-size: 13px; color: var(--text-soft); margin-bottom: 12px; }
+.card-meta span { display: flex; align-items: center; gap: 4px; }
+
+/* Badges */
+.badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+.badge-wait { background: var(--blue-bg); color: var(--blue); }
+.badge-applied { background: var(--orange-bg); color: var(--orange); }
+.badge-editing { background: #faf5ff; color: #7c3aed; }
+.badge-draft { background: #fefce8; color: #ca8a04; }
+.badge-fix { background: var(--red-bg); color: var(--red); }
+.badge-done { background: var(--green-bg); color: var(--green); }
+.badge-pending { background: #f1f5f9; color: var(--text-soft); }
+.badge-approved { background: var(--green-bg); color: var(--green); }
+.badge-rejected { background: var(--red-bg); color: var(--red); }
+
+/* Buttons */
+.btn { padding: 8px 16px; border-radius: 6px; border: none; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.btn-primary { background: var(--navy); color: #fff; }
+.btn-primary:hover { background: var(--navy-light); }
+.btn-success { background: var(--green); color: #fff; }
+.btn-danger { background: var(--red); color: #fff; }
+.btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-soft); }
+.btn-outline:hover { border-color: var(--text-soft); }
+.btn-sm { padding: 5px 12px; font-size: 12px; }
+.btn-group { display: flex; gap: 8px; margin-top: 12px; }
+
+/* DDay */
+.dday { font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 6px; }
+.dday-overdue { background: var(--red); color: #fff; }
+.dday-urgent { background: var(--orange); color: #fff; }
+.dday-soon { background: #fbbf24; color: #78350f; }
+.dday-normal { background: #e2e8f0; color: var(--text-soft); }
+
+/* Modal */
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 100; align-items: center; justify-content: center; }
+.modal-overlay.show { display: flex; }
+.modal { background: var(--card); border-radius: 12px; padding: 24px; width: 90%; max-width: 500px; max-height: 90vh; overflow-y: auto; }
+.modal h3 { font-size: 16px; margin-bottom: 16px; }
+.modal label { display: block; font-size: 13px; font-weight: 600; color: var(--text-soft); margin-bottom: 4px; margin-top: 12px; }
+.modal input, .modal textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px; font-family: inherit; }
+.modal textarea { min-height: 120px; resize: vertical; }
+.modal .btn-group { justify-content: flex-end; }
+
+/* Loading */
+.loading { text-align: center; padding: 60px; color: var(--text-dim); }
+.spinner { display: inline-block; width: 24px; height: 24px; border: 3px solid var(--border); border-top-color: var(--navy); border-radius: 50%; animation: spin 0.6s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Empty */
+.empty { text-align: center; padding: 48px 24px; color: var(--text-dim); }
+.empty-icon { font-size: 36px; margin-bottom: 12px; }
+
+/* Plan preview */
+.plan-preview { background: #f8fafc; padding: 12px; border-radius: 6px; font-size: 13px; line-height: 1.6; margin-top: 8px; white-space: pre-wrap; }
+
+/* Responsive */
+@media (max-width: 600px) {
+  .header-inner { flex-direction: column; gap: 12px; align-items: flex-start; }
+  .card-meta { flex-wrap: wrap; gap: 8px; }
+  .tabs { flex-wrap: wrap; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <h1>편집자 보드</h1>
+    <div class="header-right">
+      <select id="editorSelect" onchange="onEditorChange()">
+        <option value="">편집자 선택</option>
+      </select>
+      <button class="btn-admin" id="adminBtn" onclick="toggleAdmin()">관리자</button>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <!-- 편집자 뷰 -->
+  <div id="editorView">
+    <div class="tabs">
+      <div class="tab active" data-tab="available" onclick="switchTab('available')">대기 영상</div>
+      <div class="tab" data-tab="mywork" onclick="switchTab('mywork')">내 작업 <span id="myworkBadge" class="tab-badge" style="display:none;">0</span></div>
+    </div>
+
+    <div id="availableTab"></div>
+    <div id="myworkTab" style="display:none;"></div>
+  </div>
+
+  <!-- 관리자 뷰 -->
+  <div id="adminView" style="display:none;">
+    <div class="tabs">
+      <div class="tab active" data-tab="admin-all" onclick="switchAdminTab('admin-all')">전체 영상</div>
+      <div class="tab" data-tab="admin-pending" onclick="switchAdminTab('admin-pending')">승인 대기 <span id="pendingBadge" class="tab-badge" style="display:none;">0</span></div>
+      <div class="tab" data-tab="admin-review" onclick="switchAdminTab('admin-review')">초안 검토</div>
+    </div>
+    <div id="adminAllTab"></div>
+    <div id="adminPendingTab" style="display:none;"></div>
+    <div id="adminReviewTab" style="display:none;"></div>
+  </div>
+</div>
+
+<!-- 신청 모달 -->
+<div class="modal-overlay" id="applyModal">
+  <div class="modal">
+    <h3>편집 신청</h3>
+    <p id="applyVideoTitle" style="font-size:14px;color:var(--text-soft);margin-bottom:8px;"></p>
+    <label>편집 기획서</label>
+    <textarea id="applyPlan" placeholder="어떻게 편집할 계획인지 작성해주세요.&#10;&#10;예:&#10;- 오프닝: 00:23 강한 멘트로 시작&#10;- 중반: 스토리 순서 재배치&#10;- 엔딩: 구독 유도 + 다음 영상 예고"></textarea>
+    <label>예상 완료일</label>
+    <input type="date" id="applyExpected">
+    <div class="btn-group">
+      <button class="btn btn-outline" onclick="closeModal('applyModal')">취소</button>
+      <button class="btn btn-primary" onclick="submitApply()">신청하기</button>
+    </div>
+  </div>
+</div>
+
+<!-- 초안 제출 모달 -->
+<div class="modal-overlay" id="draftModal">
+  <div class="modal">
+    <h3>초안 제출</h3>
+    <label>드롭박스 링크 (편집 완료 파일)</label>
+    <input type="url" id="draftLink" placeholder="https://www.dropbox.com/...">
+    <div class="btn-group">
+      <button class="btn btn-outline" onclick="closeModal('draftModal')">취소</button>
+      <button class="btn btn-success" onclick="submitDraft()">제출하기</button>
+    </div>
+  </div>
+</div>
+
+<!-- 반려 모달 -->
+<div class="modal-overlay" id="rejectModal">
+  <div class="modal">
+    <h3>신청 반려</h3>
+    <label>반려 사유</label>
+    <textarea id="rejectReason" placeholder="반려 사유를 입력해주세요." style="min-height:80px;"></textarea>
+    <div class="btn-group">
+      <button class="btn btn-outline" onclick="closeModal('rejectModal')">취소</button>
+      <button class="btn btn-danger" onclick="submitReject()">반려</button>
+    </div>
+  </div>
+</div>
+
+<!-- 피드백 모달 -->
+<div class="modal-overlay" id="feedbackModal">
+  <div class="modal">
+    <h3>피드백 보내기</h3>
+    <label>수정 요청사항</label>
+    <textarea id="feedbackText" placeholder="수정이 필요한 부분을 알려주세요." style="min-height:100px;"></textarea>
+    <div class="btn-group">
+      <button class="btn btn-outline" onclick="closeModal('feedbackModal')">취소</button>
+      <button class="btn btn-primary" onclick="submitFeedback()">피드백 보내기</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── 설정 ──
+var API_URL = ''; // Apps Script 배포 URL 입력
+var currentEditor = '';
+var isAdmin = false;
+var currentVideoId = '';
+var currentActionEditor = '';
+
+// URL 파라미터 확인
+var params = new URLSearchParams(window.location.search);
+if (params.get('admin') === 'true') isAdmin = true;
+
+// ── 초기화 ──
+function init() {
+  if (!API_URL) {
+    document.querySelector('.container').innerHTML =
+      '<div class="empty"><div class="empty-icon">!</div><p>API_URL이 설정되지 않았습니다.<br>Apps Script 배포 후 URL을 입력해주세요.</p></div>';
+    return;
+  }
+  loadEditors();
+  if (isAdmin) {
+    document.getElementById('adminBtn').classList.add('active');
+    document.getElementById('editorView').style.display = 'none';
+    document.getElementById('adminView').style.display = 'block';
+    loadAdminData();
+  } else {
+    loadVideos();
+  }
+}
+
+// ── API 호출 ──
+function api(action, params) {
+  var url = API_URL + '?action=' + action;
+  if (params) {
+    for (var key in params) url += '&' + key + '=' + encodeURIComponent(params[key]);
+  }
+  return fetch(url).then(function(r) { return r.json(); });
+}
+
+function apiPost(data) {
+  return fetch(API_URL, {
+    method: 'POST', headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(data)
+  }).then(function(r) { return r.json(); });
+}
+
+// ── 편집자 로드 ──
+function loadEditors() {
+  api('editors').then(function(data) {
+    var sel = document.getElementById('editorSelect');
+    (data.editors || []).forEach(function(e) {
+      var opt = document.createElement('option');
+      opt.value = e.name;
+      opt.textContent = e.name + (e.specialty ? ' (' + e.specialty + ')' : '');
+      sel.appendChild(opt);
+    });
+    // 저장된 편집자 복원
+    var saved = localStorage.getItem('editorBoard_editor');
+    if (saved) { sel.value = saved; currentEditor = saved; loadMyWork(); }
+  });
+}
+
+function onEditorChange() {
+  currentEditor = document.getElementById('editorSelect').value;
+  localStorage.setItem('editorBoard_editor', currentEditor);
+  if (currentEditor) loadMyWork();
+}
+
+// ── 영상 목록 ──
+function loadVideos() {
+  var el = document.getElementById('availableTab');
+  el.innerHTML = '<div class="loading"><div class="spinner"></div><p style="margin-top:8px;">로딩 중...</p></div>';
+
+  api('videos').then(function(data) {
+    var videos = (data.videos || []).filter(function(v) { return v.status === '대기'; });
+    if (videos.length === 0) {
+      el.innerHTML = '<div class="empty"><div class="empty-icon">-</div><p>현재 대기 중인 영상이 없습니다.</p></div>';
+      return;
+    }
+    el.innerHTML = videos.map(function(v) { return videoCard(v); }).join('');
+  });
+}
+
+function videoCard(v) {
+  var dday = getDday(v.deadline);
+  return '<div class="card">' +
+    '<div class="card-header"><div><div class="card-title">' + (v.title || v.id) + '</div>' +
+    '<div class="card-channel">' + v.channel + (v.guest ? ' / ' + v.guest : '') + '</div></div>' +
+    '<span class="badge ' + statusBadge(v.status) + '">' + v.status + '</span></div>' +
+    '<div class="card-meta">' +
+    '<span>마감: ' + (v.deadline || '-') + '</span>' +
+    (dday !== null ? '<span class="dday ' + ddayClass(dday) + '">' + ddayText(dday) + '</span>' : '') +
+    '</div>' +
+    (v.dropbox ? '<a href="' + v.dropbox + '" target="_blank" class="btn btn-outline btn-sm" style="margin-right:8px;">드롭박스 원본</a>' : '') +
+    '<button class="btn btn-primary btn-sm" onclick="openApply(\'' + v.id + '\',\'' + esc(v.title || v.id) + '\')">신청하기</button>' +
+    '</div>';
+}
+
+// ── 내 작업 ──
+function loadMyWork() {
+  if (!currentEditor) return;
+  var el = document.getElementById('myworkTab');
+
+  api('my', {editor: currentEditor}).then(function(data) {
+    var work = data.work || [];
+    var badge = document.getElementById('myworkBadge');
+    if (work.length > 0) { badge.style.display = 'inline'; badge.textContent = work.length; }
+    else { badge.style.display = 'none'; }
+
+    if (work.length === 0) {
+      el.innerHTML = '<div class="empty"><p>신청한 영상이 없습니다.</p></div>';
+      return;
+    }
+    el.innerHTML = work.map(function(w) { return myWorkCard(w); }).join('');
+  });
+}
+
+function myWorkCard(w) {
+  var v = w.video || {};
+  var dday = getDday(v.deadline);
+  var btns = '';
+
+  if (w.approvalStatus === '승인' && (v.status === '편집중' || v.status === '수정중')) {
+    btns = '<button class="btn btn-success btn-sm" onclick="openDraft(\'' + w.videoId + '\')">초안 제출</button>';
+  }
+
+  return '<div class="card">' +
+    '<div class="card-header"><div><div class="card-title">' + (v.title || w.videoId) + '</div>' +
+    '<div class="card-channel">' + (v.channel || '') + (v.guest ? ' / ' + v.guest : '') + '</div></div>' +
+    '<span class="badge ' + approvalBadge(w.approvalStatus) + '">' + w.approvalStatus + '</span></div>' +
+    '<div class="card-meta">' +
+    '<span>신청일: ' + w.applyDate + '</span>' +
+    '<span>마감: ' + (v.deadline || '-') + '</span>' +
+    (dday !== null ? '<span class="dday ' + ddayClass(dday) + '">' + ddayText(dday) + '</span>' : '') +
+    '</div>' +
+    (w.plan ? '<div class="plan-preview">' + w.plan + '</div>' : '') +
+    (w.memo ? '<div style="font-size:12px;color:var(--text-soft);margin-top:8px;">' + w.memo + '</div>' : '') +
+    '<div class="btn-group">' + btns + '</div>' +
+    '</div>';
+}
+
+// ── 관리자 ──
+function toggleAdmin() {
+  isAdmin = !isAdmin;
+  var btn = document.getElementById('adminBtn');
+  btn.classList.toggle('active');
+  document.getElementById('editorView').style.display = isAdmin ? 'none' : 'block';
+  document.getElementById('adminView').style.display = isAdmin ? 'block' : 'none';
+  if (isAdmin) loadAdminData();
+  else loadVideos();
+}
+
+function loadAdminData() {
+  var allEl = document.getElementById('adminAllTab');
+  allEl.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
+
+  api('admin').then(function(data) {
+    var videos = data.videos || [];
+    var apps = data.applications || [];
+
+    // 전체 영상
+    allEl.innerHTML = videos.length === 0
+      ? '<div class="empty"><p>등록된 영상이 없습니다.</p></div>'
+      : videos.map(function(v) {
+          var assigns = apps.filter(function(a) { return a.videoId === v.id && a.approvalStatus === '승인'; });
+          var assignText = assigns.length > 0 ? assigns.map(function(a) { return a.editor; }).join(', ') : '미배정';
+          return '<div class="card">' +
+            '<div class="card-header"><div><div class="card-title">' + (v.title || v.id) + '</div>' +
+            '<div class="card-channel">' + v.channel + (v.guest ? ' / ' + v.guest : '') + ' | 편집자: ' + assignText + '</div></div>' +
+            '<span class="badge ' + statusBadge(v.status) + '">' + v.status + '</span></div>' +
+            '<div class="card-meta"><span>마감: ' + (v.deadline || '-') + '</span></div>' +
+            (v.status === '초안제출' ? '<div class="btn-group">' +
+              '<button class="btn btn-success btn-sm" onclick="adminComplete(\'' + v.id + '\')">완료 처리</button>' +
+              '<button class="btn btn-outline btn-sm" onclick="openFeedback(\'' + v.id + '\',\'' + (assigns[0] ? assigns[0].editor : '') + '\')">피드백</button></div>' : '') +
+            '</div>';
+        }).join('');
+
+    // 승인 대기
+    var pending = apps.filter(function(a) { return a.approvalStatus === '대기'; });
+    var pendingBadge = document.getElementById('pendingBadge');
+    if (pending.length > 0) { pendingBadge.style.display = 'inline'; pendingBadge.textContent = pending.length; }
+    else { pendingBadge.style.display = 'none'; }
+
+    document.getElementById('adminPendingTab').innerHTML = pending.length === 0
+      ? '<div class="empty"><p>승인 대기 중인 신청이 없습니다.</p></div>'
+      : pending.map(function(a) {
+          return '<div class="card">' +
+            '<div class="card-header"><div><div class="card-title">' + a.editor + ' → ' + a.videoId + '</div>' +
+            '<div class="card-channel">신청일: ' + a.applyDate + ' | 예상완료: ' + (a.expectedDate || '-') + '</div></div>' +
+            '<span class="badge badge-pending">' + a.approvalStatus + '</span></div>' +
+            (a.plan ? '<div class="plan-preview">' + a.plan + '</div>' : '') +
+            '<div class="btn-group">' +
+            '<button class="btn btn-success btn-sm" onclick="adminApprove(\'' + a.videoId + '\',\'' + a.editor + '\')">승인</button>' +
+            '<button class="btn btn-danger btn-sm" onclick="openReject(\'' + a.videoId + '\',\'' + a.editor + '\')">반려</button>' +
+            '</div></div>';
+        }).join('');
+
+    // 초안 검토
+    var drafts = videos.filter(function(v) { return v.status === '초안제출'; });
+    document.getElementById('adminReviewTab').innerHTML = drafts.length === 0
+      ? '<div class="empty"><p>검토할 초안이 없습니다.</p></div>'
+      : drafts.map(function(v) {
+          var assign = apps.find(function(a) { return a.videoId === v.id && a.approvalStatus === '승인'; });
+          return '<div class="card">' +
+            '<div class="card-header"><div><div class="card-title">' + (v.title || v.id) + '</div>' +
+            '<div class="card-channel">편집자: ' + (assign ? assign.editor : '-') + '</div></div>' +
+            '<span class="badge badge-draft">초안제출</span></div>' +
+            (assign && assign.memo ? '<div style="font-size:12px;color:var(--text-soft);margin:8px 0;">' + assign.memo + '</div>' : '') +
+            '<div class="btn-group">' +
+            '<button class="btn btn-success btn-sm" onclick="adminComplete(\'' + v.id + '\')">완료</button>' +
+            '<button class="btn btn-outline btn-sm" onclick="openFeedback(\'' + v.id + '\',\'' + (assign ? assign.editor : '') + '\')">피드백</button>' +
+            '</div></div>';
+        }).join('');
+  });
+}
+
+// ── 액션 ──
+function openApply(videoId, title) {
+  if (!currentEditor) { alert('먼저 편집자를 선택해주세요.'); return; }
+  currentVideoId = videoId;
+  document.getElementById('applyVideoTitle').textContent = title;
+  document.getElementById('applyPlan').value = '';
+  document.getElementById('applyExpected').value = '';
+  document.getElementById('applyModal').classList.add('show');
+}
+
+function submitApply() {
+  var plan = document.getElementById('applyPlan').value.trim();
+  var expected = document.getElementById('applyExpected').value;
+  if (!plan) { alert('편집 기획서를 작성해주세요.'); return; }
+  if (!expected) { alert('예상 완료일을 선택해주세요.'); return; }
+
+  apiPost({action: 'apply', videoId: currentVideoId, editor: currentEditor, plan: plan, expectedDate: expected})
+    .then(function(r) { alert(r.message); closeModal('applyModal'); loadVideos(); loadMyWork(); });
+}
+
+function openDraft(videoId) {
+  currentVideoId = videoId;
+  document.getElementById('draftLink').value = '';
+  document.getElementById('draftModal').classList.add('show');
+}
+
+function submitDraft() {
+  var link = document.getElementById('draftLink').value.trim();
+  if (!link) { alert('드롭박스 링크를 입력해주세요.'); return; }
+
+  apiPost({action: 'submit_draft', videoId: currentVideoId, editor: currentEditor, draftLink: link})
+    .then(function(r) { alert(r.message); closeModal('draftModal'); loadMyWork(); });
+}
+
+function adminApprove(videoId, editor) {
+  if (!confirm(editor + '의 신청을 승인하시겠습니까?')) return;
+  apiPost({action: 'approve', videoId: videoId, editor: editor})
+    .then(function(r) { alert(r.message); loadAdminData(); });
+}
+
+function openReject(videoId, editor) {
+  currentVideoId = videoId;
+  currentActionEditor = editor;
+  document.getElementById('rejectReason').value = '';
+  document.getElementById('rejectModal').classList.add('show');
+}
+
+function submitReject() {
+  var reason = document.getElementById('rejectReason').value.trim();
+  apiPost({action: 'reject', videoId: currentVideoId, editor: currentActionEditor, reason: reason})
+    .then(function(r) { alert(r.message); closeModal('rejectModal'); loadAdminData(); });
+}
+
+function openFeedback(videoId, editor) {
+  currentVideoId = videoId;
+  currentActionEditor = editor;
+  document.getElementById('feedbackText').value = '';
+  document.getElementById('feedbackModal').classList.add('show');
+}
+
+function submitFeedback() {
+  var text = document.getElementById('feedbackText').value.trim();
+  if (!text) { alert('피드백 내용을 입력해주세요.'); return; }
+  apiPost({action: 'feedback', videoId: currentVideoId, editor: currentActionEditor, feedback: text})
+    .then(function(r) { alert(r.message); closeModal('feedbackModal'); loadAdminData(); });
+}
+
+function adminComplete(videoId) {
+  if (!confirm('이 영상을 완료 처리하시겠습니까?')) return;
+  apiPost({action: 'complete', videoId: videoId})
+    .then(function(r) { alert(r.message); loadAdminData(); });
+}
+
+// ── UI 헬퍼 ──
+function switchTab(name) {
+  document.querySelectorAll('#editorView .tab').forEach(function(t) { t.classList.toggle('active', t.dataset.tab === name); });
+  document.getElementById('availableTab').style.display = name === 'available' ? 'block' : 'none';
+  document.getElementById('myworkTab').style.display = name === 'mywork' ? 'block' : 'none';
+}
+
+function switchAdminTab(name) {
+  document.querySelectorAll('#adminView .tab').forEach(function(t) { t.classList.toggle('active', t.dataset.tab === name); });
+  document.getElementById('adminAllTab').style.display = name === 'admin-all' ? 'block' : 'none';
+  document.getElementById('adminPendingTab').style.display = name === 'admin-pending' ? 'block' : 'none';
+  document.getElementById('adminReviewTab').style.display = name === 'admin-review' ? 'block' : 'none';
+}
+
+function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+
+function statusBadge(s) {
+  var m = {'대기':'badge-wait','신청됨':'badge-applied','편집중':'badge-editing','초안제출':'badge-draft','수정중':'badge-fix','완료':'badge-done'};
+  return m[s] || 'badge-pending';
+}
+function approvalBadge(s) {
+  var m = {'대기':'badge-pending','승인':'badge-approved','반려':'badge-rejected'};
+  return m[s] || 'badge-pending';
+}
+
+function getDday(dateStr) {
+  if (!dateStr) return null;
+  var d = new Date(dateStr); var t = new Date(); t.setHours(0,0,0,0); d.setHours(0,0,0,0);
+  return Math.ceil((d - t) / 86400000);
+}
+function ddayClass(d) {
+  if (d < 0) return 'dday-overdue'; if (d <= 1) return 'dday-urgent';
+  if (d <= 3) return 'dday-soon'; return 'dday-normal';
+}
+function ddayText(d) {
+  if (d === 0) return 'D-DAY'; if (d < 0) return 'D+' + Math.abs(d); return 'D-' + d;
+}
+function esc(s) { return (s || '').replace(/'/g, "\\'").replace(/"/g, '&quot;'); }
+
+// ── 시작 ──
+init();
+</script>
+</body>
+</html>
