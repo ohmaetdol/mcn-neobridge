@@ -168,7 +168,7 @@ body { font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif; background
   <div class="header-inner">
     <div>
       <h1>편집자 보드</h1>
-      <div class="header-sub">Flowmus MCN</div>
+      <div class="header-sub" id="headerSub">Flowmus MCN</div>
     </div>
     <div class="header-right">
       <select id="editorSelect" onchange="onEditorChange()">
@@ -365,6 +365,7 @@ body { font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif; background
 var API_URL = 'https://script.google.com/macros/s/AKfycbw3P0VA5QVPQeP3O97c2-Ixj9j9tZ19RK38WylrpPt8iFEk9DEfZFjZ421l-rylry3f/exec';
 var currentEditor = '';
 var isAdmin = false;
+var isLocked = false; // URL로 편집자 지정 시 잠금
 var currentVideoId = '';
 var currentActionEditor = '';
 var ADMIN_PW = 'flowmus2026';
@@ -383,6 +384,8 @@ function toast(msg, type) {
 // ── 초기화 ──
 function init() {
   var params = new URLSearchParams(window.location.search);
+
+  // 관리자 모드
   if (params.get('admin') === 'true') {
     var pw = prompt('관리자 비밀번호를 입력하세요:');
     if (pw === ADMIN_PW) {
@@ -390,13 +393,32 @@ function init() {
     }
   }
 
+  // 편집자 전용 링크: ?editor=이름
+  var editorParam = params.get('editor');
+  if (editorParam) {
+    currentEditor = decodeURIComponent(editorParam);
+    isLocked = true;
+    // 드롭다운 대신 이름 표시 + 잠금
+    var sel = document.getElementById('editorSelect');
+    sel.style.display = 'none';
+    var nameTag = document.createElement('span');
+    nameTag.style.cssText = 'padding:6px 14px;border-radius:6px;background:rgba(255,255,255,0.15);color:#fff;font-size:13px;font-weight:600;';
+    nameTag.textContent = currentEditor;
+    sel.parentNode.insertBefore(nameTag, sel);
+    localStorage.setItem('editorBoard_editor', currentEditor);
+    document.getElementById('headerSub').textContent = currentEditor + ' 전용 보드';
+  }
+
   if (!API_URL) {
     document.querySelector('.container').innerHTML =
       '<div class="empty"><div class="empty-icon">!</div><p>API_URL이 설정되지 않았습니다.</p></div>';
     return;
   }
-  loadEditors();
+
+  if (!isLocked) loadEditors();
+  else document.getElementById('adminBtn').style.display = 'none'; // 편집자 전용 링크에서 관리자 버튼 숨김
   loadChannelGuides();
+
   if (isAdmin) {
     document.getElementById('adminBtn').classList.add('active');
     document.getElementById('editorView').style.display = 'none';
@@ -404,6 +426,11 @@ function init() {
     loadAdminData();
   } else {
     loadVideos();
+    // 편집자 전용 링크면 바로 내 작업 탭 + 데이터 로드
+    if (isLocked && currentEditor) {
+      loadMyWork();
+      switchTab('mywork');
+    }
   }
 }
 
