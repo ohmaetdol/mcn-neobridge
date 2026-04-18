@@ -151,54 +151,95 @@ body { font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif; background
 <div class="modal-overlay" id="applyModal">
   <div class="modal">
     <h3>편집 신청</h3>
-    <p id="applyVideoTitle" style="font-size:14px;color:var(--text-soft);margin-bottom:8px;"></p>
+    <p id="applyVideoTitle" style="font-size:14px;color:var(--text-soft);margin-bottom:4px;"></p>
+    <p id="applyGuideToggle" style="font-size:12px;color:var(--blue);cursor:pointer;margin-bottom:12px;" onclick="toggleGuide()">편집 기획서 작성 가이드 보기</p>
 
-    <label>1. 편집 방향 <span style="color:var(--red);">*</span></label>
+    <!-- 가이드 패널 -->
+    <div id="applyGuide" style="display:none;background:#f0f4ff;border:1px solid #dbe4ff;border-radius:8px;padding:14px;margin-bottom:16px;font-size:12px;line-height:1.7;color:#334155;">
+      <b style="font-size:13px;">편집 기획서 작성 가이드</b>
+      <div style="margin-top:8px;">
+        <b>오프닝 (0~30초) — 승패가 결정되는 구간</b><br>
+        - 첫 3초: 가장 강한 씬/멘트로 시작 (시청자 50~60%가 여기서 이탈)<br>
+        - 15초 내: "이 영상을 왜 봐야 하는지" 설득 완료<br>
+        - 25~35초: 패턴 인터럽트 (앵글 전환, 효과음, 자막 강조)<br>
+        <span style="color:#6366f1;">→ 처음 30초에서 70% 유지하면 알고리즘이 추천 시작</span>
+      </div>
+      <div style="margin-top:8px;">
+        <b>본편 — 컷 리듬이 핵심</b><br>
+        - 15~25초마다 시각 변화 (B-roll, 줌컷, 자막, 효과음)<br>
+        - 2~3분마다 "버스트 시퀀스" (빠른 컷 5~10개) → 다시 안정<br>
+        - 킬러 씬은 7~10분 사이에 집중 배치 (사찍남 데이터: 뒤로 밀리면 리텐션 하락)<br>
+        - 6~12분 구간은 "안전지대" — 이탈률이 거의 없음
+      </div>
+      <div style="margin-top:8px;">
+        <b>자막 효과 (데이터)</b><br>
+        - 자막 있는 영상: 91%가 끝까지 시청 (없으면 66%)<br>
+        - 조회수 12~13% 상승, 모바일에서 효과 더 큼
+      </div>
+      <div style="margin-top:8px;">
+        <b>BGM 볼륨 기준</b><br>
+        - 차분한 구간: 목소리 대비 -20~-25dB<br>
+        - 에너지 구간: 목소리 대비 -8~-12dB<br>
+        - 템포: 설명/교육 60~80 BPM / 빌드업/하이라이트 100~120 BPM
+      </div>
+    </div>
+
+    <label>1. 편집 스타일 <span style="color:var(--red);">*</span></label>
     <select id="applyStyle" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:6px;font-size:14px;font-family:inherit;">
       <option value="">스타일을 선택하세요</option>
-      <option value="빠른 컷 + 자막 강조">빠른 컷 + 자막 강조 (숏폼/예능형)</option>
-      <option value="감성 편집 + BGM 중심">감성 편집 + BGM 중심 (브이로그형)</option>
-      <option value="스토리 순서 재배치">스토리 순서 재배치 (구성형)</option>
-      <option value="원본 흐름 유지 + 다듬기">원본 흐름 유지 + 다듬기 (미니멀)</option>
+      <option value="예능 컷편집 (15~25초 간격 컷 + 자막 강조 + 효과음)">예능 컷편집 — 15~25초 간격 컷, 자막 강조, 효과음</option>
+      <option value="감성 브이로그 (BGM 중심 + 롱테이크 + 최소 자막)">감성 브이로그 — BGM 중심, 롱테이크, 최소 자막</option>
+      <option value="스토리 재구성 (시간순 해체 + 결과→원인 도치 + 내러티브 루프)">스토리 재구성 — 시간순 해체, 결과부터, 내러티브 루프</option>
+      <option value="하이브리드 (설명=빠른 컷 10~15초 + 감성=슬로우 40초 혼합)">하이브리드 — 설명 구간 빠른 컷 + 감성 구간 슬로우</option>
       <option value="직접 입력">직접 입력</option>
     </select>
     <input type="text" id="applyStyleCustom" placeholder="직접 입력: 편집 톤/스타일 설명" style="display:none;margin-top:6px;">
 
-    <label>2. 구성 흐름 <span style="color:var(--red);">*</span></label>
-    <textarea id="applyStructure" placeholder="오프닝 → 본편 → 엔딩 구조를 간단히 적어주세요.&#10;&#10;예: 강한 멘트(15초) → 인트로 → 장소1 하이라이트 → 장소2 전환 → 엔딩 CTA" style="min-height:70px;"></textarea>
+    <label>2. 오프닝 설계 (0~30초) <span style="color:var(--red);">*</span></label>
+    <select id="applyHookType" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:6px;font-size:14px;margin-bottom:6px;">
+      <option value="">훅 유형을 선택하세요</option>
+      <option value="결과 먼저 (가장 강한 씬/숫자/반전으로 시작)">결과 먼저 — 가장 강한 씬/숫자/반전으로 시작</option>
+      <option value="공감형 (시청자 고민/상황으로 시작 → '혹시 이런 경험?')">공감형 — 시청자 고민/상황으로 시작</option>
+      <option value="질문형 (강한 질문 던지기 → 답은 본편에서)">질문형 — 강한 질문 던지기, 답은 본편에서</option>
+      <option value="도치형 (결말/클라이맥스부터 → 되감기)">도치형 — 결말/클라이맥스부터 시작</option>
+    </select>
+    <textarea id="applyHookDetail" placeholder="구체적으로: 어떤 장면/멘트로 시작할 건지 (타임코드 포함)&#10;예: 00:23:15 '월 3천만원 벌었는데 직원은 0명' 멘트 → 3초 컷 → 인트로" style="min-height:55px;"></textarea>
 
-    <label>3. 킬러 씬 (원본에서 가장 강한 장면 2~3개)</label>
-    <textarea id="applyKillerScenes" placeholder="예: 00:12:30 반전 멘트 / 00:25:00 감정 폭발 / 00:08:15 웃긴 리액션&#10;(원본 확인 후 타임코드 적어주세요)" style="min-height:50px;"></textarea>
+    <label>3. 본편 구성 <span style="color:var(--red);">*</span></label>
+    <textarea id="applyStructure" placeholder="ACT 구조로 적어주세요:&#10;&#10;ACT1 (0:00~3:00) 훅 + 인트로: [내용]&#10;ACT2 (3:00~7:00) 메인 스토리 전개: [내용]&#10;ACT3 (7:00~10:00) 킬러 구간/반전/핵심 공개: [내용]&#10;ACT4 (10:00~끝) 정리 + CTA: [내용]&#10;&#10;* 킬러 구간은 7~10분에 집중 배치 권장" style="min-height:100px;"></textarea>
 
-    <label>4. 예상 러닝타임</label>
+    <label>4. 킬러 씬 TOP 3 <span style="color:var(--red);">*</span></label>
+    <textarea id="applyKillerScenes" placeholder="원본에서 절대 삭제하면 안 되는 장면 3개 (타임코드 필수):&#10;&#10;1. 00:__:__ [장면 설명 + 왜 강한지]&#10;2. 00:__:__ [장면 설명 + 왜 강한지]&#10;3. 00:__:__ [장면 설명 + 왜 강한지]&#10;&#10;* 이 중 1개는 오프닝 훅으로 사용할 것" style="min-height:80px;"></textarea>
+
+    <label>5. 예상 러닝타임</label>
     <select id="applyRuntime" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:6px;font-size:14px;">
       <option value="">선택</option>
-      <option value="10분 이내">10분 이내 (숏폼)</option>
-      <option value="10~15분">10~15분</option>
-      <option value="15~20분">15~20분</option>
-      <option value="20~25분">20~25분</option>
-      <option value="25분 이상">25분 이상</option>
+      <option value="8분 이내 (숏폼/하이라이트)">8분 이내 — 숏폼/하이라이트</option>
+      <option value="8~12분 (핵심만, 리텐션 최적)">8~12분 — 핵심만 (리텐션 최적 구간)</option>
+      <option value="12~18분 (표준 롱폼)">12~18분 — 표준 롱폼</option>
+      <option value="18~25분 (풀 스토리)">18~25분 — 풀 스토리</option>
     </select>
+    <p style="font-size:11px;color:var(--text-dim);margin-top:4px;">8분 이상 시청 시 알고리즘 부스트 / 6~12분 구간은 이탈률 최저</p>
 
-    <label>5. 자막/BGM <span style="font-weight:400;color:var(--text-dim);">(선택)</span></label>
+    <label>6. 자막 / BGM</label>
     <div style="display:flex;gap:8px;margin-top:4px;">
       <select id="applySubtitle" style="flex:1;padding:8px;border:1px solid var(--border);border-radius:6px;font-size:13px;">
         <option value="">자막 스타일</option>
-        <option value="전체 자막">전체 자막</option>
-        <option value="핵심만 강조">핵심만 강조</option>
+        <option value="전체 자막 (시청 완료율 91%, 조회수 +12%)">전체 자막 (완료율 91%)</option>
+        <option value="핵심 강조 자막 (키워드/숫자/반전만)">핵심 강조 (키워드/숫자만)</option>
         <option value="자막 없음">자막 없음</option>
       </select>
       <select id="applyBgm" style="flex:1;padding:8px;border:1px solid var(--border);border-radius:6px;font-size:13px;">
         <option value="">BGM 방향</option>
-        <option value="잔잔/감성">잔잔/감성</option>
-        <option value="업비트/밝은">업비트/밝은</option>
-        <option value="긴장/극적">긴장/극적</option>
-        <option value="BGM 없음">BGM 없음</option>
+        <option value="감성/잔잔 (60~80 BPM, -20dB)">감성/잔잔 (60~80 BPM)</option>
+        <option value="업비트/밝은 (100~120 BPM, -12dB)">업비트/밝은 (100~120 BPM)</option>
+        <option value="감정 변화 포인트에만 (구간별 전환)">감정 변화 포인트에만</option>
+        <option value="BGM 없음 (토크 중심)">BGM 없음 (토크 중심)</option>
       </select>
     </div>
 
-    <label>6. 추가 메모 <span style="font-weight:400;color:var(--text-dim);">(선택)</span></label>
-    <textarea id="applyMemo" placeholder="참고 영상 링크, 특별 요청사항 등" style="min-height:50px;"></textarea>
+    <label>7. 참고 영상 / 메모 <span style="font-weight:400;color:var(--text-dim);">(선택)</span></label>
+    <textarea id="applyMemo" placeholder="참고할 편집 스타일 유튜브 링크, 특별 요청사항 등" style="min-height:45px;"></textarea>
 
     <label>예상 완료일 <span style="color:var(--red);">*</span></label>
     <input type="date" id="applyExpected">
@@ -481,9 +522,12 @@ function openApply(videoId, title) {
   if (!currentEditor) { alert('먼저 편집자를 선택해주세요.'); return; }
   currentVideoId = videoId;
   document.getElementById('applyVideoTitle').textContent = title;
+  document.getElementById('applyGuide').style.display = 'none';
   document.getElementById('applyStyle').value = '';
   document.getElementById('applyStyleCustom').value = '';
   document.getElementById('applyStyleCustom').style.display = 'none';
+  document.getElementById('applyHookType').value = '';
+  document.getElementById('applyHookDetail').value = '';
   document.getElementById('applyStructure').value = '';
   document.getElementById('applyKillerScenes').value = '';
   document.getElementById('applyRuntime').value = '';
@@ -492,6 +536,13 @@ function openApply(videoId, title) {
   document.getElementById('applyMemo').value = '';
   document.getElementById('applyExpected').value = '';
   document.getElementById('applyModal').classList.add('show');
+}
+
+function toggleGuide() {
+  var g = document.getElementById('applyGuide');
+  g.style.display = g.style.display === 'none' ? 'block' : 'none';
+  document.getElementById('applyGuideToggle').textContent =
+    g.style.display === 'none' ? '편집 기획서 작성 가이드 보기' : '가이드 닫기';
 }
 
 // 직접 입력 토글
@@ -504,6 +555,8 @@ document.addEventListener('change', function(e) {
 function submitApply() {
   var style = document.getElementById('applyStyle').value;
   if (style === '직접 입력') style = document.getElementById('applyStyleCustom').value.trim();
+  var hookType = document.getElementById('applyHookType').value;
+  var hookDetail = document.getElementById('applyHookDetail').value.trim();
   var structure = document.getElementById('applyStructure').value.trim();
   var killer = document.getElementById('applyKillerScenes').value.trim();
   var runtime = document.getElementById('applyRuntime').value;
@@ -512,14 +565,18 @@ function submitApply() {
   var memo = document.getElementById('applyMemo').value.trim();
   var expected = document.getElementById('applyExpected').value;
 
-  if (!style) { alert('편집 방향을 선택해주세요.'); return; }
-  if (!structure) { alert('구성 흐름을 작성해주세요.'); return; }
+  if (!style) { alert('편집 스타일을 선택해주세요.'); return; }
+  if (!hookType) { alert('오프닝 훅 유형을 선택해주세요.'); return; }
+  if (!structure) { alert('본편 구성을 작성해주세요.'); return; }
+  if (!killer) { alert('킬러 씬 TOP 3을 작성해주세요.'); return; }
   if (!expected) { alert('예상 완료일을 선택해주세요.'); return; }
 
   // 항목별로 합쳐서 기획서 텍스트 생성
-  var plan = '[편집 방향] ' + style;
-  plan += '\n[구성 흐름] ' + structure;
-  if (killer) plan += '\n[킬러 씬] ' + killer;
+  var plan = '[편집 스타일] ' + style;
+  plan += '\n[오프닝 훅] ' + hookType;
+  if (hookDetail) plan += '\n  → ' + hookDetail;
+  plan += '\n[본편 구성]\n' + structure;
+  plan += '\n[킬러 씬 TOP 3]\n' + killer;
   if (runtime) plan += '\n[예상 러닝타임] ' + runtime;
   if (subtitle || bgm) plan += '\n[자막/BGM] ' + [subtitle, bgm].filter(Boolean).join(' / ');
   if (memo) plan += '\n[메모] ' + memo;
