@@ -152,10 +152,57 @@ body { font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif; background
   <div class="modal">
     <h3>편집 신청</h3>
     <p id="applyVideoTitle" style="font-size:14px;color:var(--text-soft);margin-bottom:8px;"></p>
-    <label>편집 기획서</label>
-    <textarea id="applyPlan" placeholder="어떻게 편집할 계획인지 작성해주세요.&#10;&#10;예:&#10;- 오프닝: 00:23 강한 멘트로 시작&#10;- 중반: 스토리 순서 재배치&#10;- 엔딩: 구독 유도 + 다음 영상 예고"></textarea>
-    <label>예상 완료일</label>
+
+    <label>1. 편집 방향 <span style="color:var(--red);">*</span></label>
+    <select id="applyStyle" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:6px;font-size:14px;font-family:inherit;">
+      <option value="">스타일을 선택하세요</option>
+      <option value="빠른 컷 + 자막 강조">빠른 컷 + 자막 강조 (숏폼/예능형)</option>
+      <option value="감성 편집 + BGM 중심">감성 편집 + BGM 중심 (브이로그형)</option>
+      <option value="스토리 순서 재배치">스토리 순서 재배치 (구성형)</option>
+      <option value="원본 흐름 유지 + 다듬기">원본 흐름 유지 + 다듬기 (미니멀)</option>
+      <option value="직접 입력">직접 입력</option>
+    </select>
+    <input type="text" id="applyStyleCustom" placeholder="직접 입력: 편집 톤/스타일 설명" style="display:none;margin-top:6px;">
+
+    <label>2. 구성 흐름 <span style="color:var(--red);">*</span></label>
+    <textarea id="applyStructure" placeholder="오프닝 → 본편 → 엔딩 구조를 간단히 적어주세요.&#10;&#10;예: 강한 멘트(15초) → 인트로 → 장소1 하이라이트 → 장소2 전환 → 엔딩 CTA" style="min-height:70px;"></textarea>
+
+    <label>3. 킬러 씬 (원본에서 가장 강한 장면 2~3개)</label>
+    <textarea id="applyKillerScenes" placeholder="예: 00:12:30 반전 멘트 / 00:25:00 감정 폭발 / 00:08:15 웃긴 리액션&#10;(원본 확인 후 타임코드 적어주세요)" style="min-height:50px;"></textarea>
+
+    <label>4. 예상 러닝타임</label>
+    <select id="applyRuntime" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:6px;font-size:14px;">
+      <option value="">선택</option>
+      <option value="10분 이내">10분 이내 (숏폼)</option>
+      <option value="10~15분">10~15분</option>
+      <option value="15~20분">15~20분</option>
+      <option value="20~25분">20~25분</option>
+      <option value="25분 이상">25분 이상</option>
+    </select>
+
+    <label>5. 자막/BGM <span style="font-weight:400;color:var(--text-dim);">(선택)</span></label>
+    <div style="display:flex;gap:8px;margin-top:4px;">
+      <select id="applySubtitle" style="flex:1;padding:8px;border:1px solid var(--border);border-radius:6px;font-size:13px;">
+        <option value="">자막 스타일</option>
+        <option value="전체 자막">전체 자막</option>
+        <option value="핵심만 강조">핵심만 강조</option>
+        <option value="자막 없음">자막 없음</option>
+      </select>
+      <select id="applyBgm" style="flex:1;padding:8px;border:1px solid var(--border);border-radius:6px;font-size:13px;">
+        <option value="">BGM 방향</option>
+        <option value="잔잔/감성">잔잔/감성</option>
+        <option value="업비트/밝은">업비트/밝은</option>
+        <option value="긴장/극적">긴장/극적</option>
+        <option value="BGM 없음">BGM 없음</option>
+      </select>
+    </div>
+
+    <label>6. 추가 메모 <span style="font-weight:400;color:var(--text-dim);">(선택)</span></label>
+    <textarea id="applyMemo" placeholder="참고 영상 링크, 특별 요청사항 등" style="min-height:50px;"></textarea>
+
+    <label>예상 완료일 <span style="color:var(--red);">*</span></label>
     <input type="date" id="applyExpected">
+
     <div class="btn-group">
       <button class="btn btn-outline" onclick="closeModal('applyModal')">취소</button>
       <button class="btn btn-primary" onclick="submitApply()">신청하기</button>
@@ -434,16 +481,48 @@ function openApply(videoId, title) {
   if (!currentEditor) { alert('먼저 편집자를 선택해주세요.'); return; }
   currentVideoId = videoId;
   document.getElementById('applyVideoTitle').textContent = title;
-  document.getElementById('applyPlan').value = '';
+  document.getElementById('applyStyle').value = '';
+  document.getElementById('applyStyleCustom').value = '';
+  document.getElementById('applyStyleCustom').style.display = 'none';
+  document.getElementById('applyStructure').value = '';
+  document.getElementById('applyKillerScenes').value = '';
+  document.getElementById('applyRuntime').value = '';
+  document.getElementById('applySubtitle').value = '';
+  document.getElementById('applyBgm').value = '';
+  document.getElementById('applyMemo').value = '';
   document.getElementById('applyExpected').value = '';
   document.getElementById('applyModal').classList.add('show');
 }
 
+// 직접 입력 토글
+document.addEventListener('change', function(e) {
+  if (e.target.id === 'applyStyle') {
+    document.getElementById('applyStyleCustom').style.display = e.target.value === '직접 입력' ? 'block' : 'none';
+  }
+});
+
 function submitApply() {
-  var plan = document.getElementById('applyPlan').value.trim();
+  var style = document.getElementById('applyStyle').value;
+  if (style === '직접 입력') style = document.getElementById('applyStyleCustom').value.trim();
+  var structure = document.getElementById('applyStructure').value.trim();
+  var killer = document.getElementById('applyKillerScenes').value.trim();
+  var runtime = document.getElementById('applyRuntime').value;
+  var subtitle = document.getElementById('applySubtitle').value;
+  var bgm = document.getElementById('applyBgm').value;
+  var memo = document.getElementById('applyMemo').value.trim();
   var expected = document.getElementById('applyExpected').value;
-  if (!plan) { alert('편집 기획서를 작성해주세요.'); return; }
+
+  if (!style) { alert('편집 방향을 선택해주세요.'); return; }
+  if (!structure) { alert('구성 흐름을 작성해주세요.'); return; }
   if (!expected) { alert('예상 완료일을 선택해주세요.'); return; }
+
+  // 항목별로 합쳐서 기획서 텍스트 생성
+  var plan = '[편집 방향] ' + style;
+  plan += '\n[구성 흐름] ' + structure;
+  if (killer) plan += '\n[킬러 씬] ' + killer;
+  if (runtime) plan += '\n[예상 러닝타임] ' + runtime;
+  if (subtitle || bgm) plan += '\n[자막/BGM] ' + [subtitle, bgm].filter(Boolean).join(' / ');
+  if (memo) plan += '\n[메모] ' + memo;
 
   apiPost({action: 'apply', videoId: currentVideoId, editor: currentEditor, plan: plan, expectedDate: expected})
     .then(function(r) { alert(r.message); closeModal('applyModal'); loadVideos(); loadMyWork(); });
