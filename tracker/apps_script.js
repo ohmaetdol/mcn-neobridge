@@ -16,10 +16,16 @@
 // ── 에디터에서 실행할 테스트 함수 (권한 승인용) ──
 function test() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var sheet = ss.getSheetByName("캠페인관리");
-  var data = sheet.getDataRange().getValues();
-  Logger.log("캠페인 수: " + (data.length - 1));
-  Logger.log("테스트 성공! 이제 배포하면 됩니다.");
+  var tabs = ["캠페인관리", "클릭로그", "월별정산", "고객DB", "쿠폰풀"];
+  tabs.forEach(function(t) {
+    var sheet = ss.getSheetByName(t);
+    if (sheet) {
+      Logger.log(t + ": " + (sheet.getDataRange().getValues().length - 1) + "행");
+    } else {
+      Logger.log(t + ": 탭 없음!");
+    }
+  });
+  Logger.log("테스트 성공!");
 }
 
 // ── 클릭 로그 (POST) ──────────────────────────────
@@ -106,6 +112,13 @@ function doGet(e) {
       return jsonResponse({result: "found", campaign: found});
     }
     return jsonResponse({result: "not_found", code: code});
+  }
+
+  // 쿠폰 잔여 수량
+  if (action === "coupon_stock") {
+    var slug = e.parameter.c || "";
+    var stock = getCouponStock(ss, slug);
+    return jsonResponse({result: "ok", remaining: stock.remaining, total: stock.total});
   }
 
   return ContentService.createTextOutput("UTM Tracker API is running.");
@@ -270,40 +283,77 @@ function getClickStats(ss) {
   return stats;
 }
 
-// ── 쿠폰 수령 고객 저장 (고객DB 탭) ──────────────
+// ── 1인 1쿠폰: 고유 쿠폰 배정 + 고객 저장 ───────
 function saveCouponClaim(ss, params) {
-  var sheet = ss.getSheetByName("고객DB");
   var slug = params.campaign || "";
+  var name = params.name || "";
+  var phone = params.phone || "";
+  var email = params.email || "";
+  var now = new Date().toLocaleString("ko-KR", {timeZone: "Asia/Seoul"});
 
-  // 캠페인 정보 가져오기
+  // 캠페인 정보
   var campaign = findCampaign(ss, slug);
   var channel = campaign ? campaign.channel : "";
   var platform = campaign ? campaign.platform : "";
-  var coupon = campaign ? campaign.coupon : "";
 
-  sheet.appendRow([
-    new Date().toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}),
-    slug,
-    channel,
-    platform,
-    coupon,
-    params.name || "",
-    params.phone || "",
-    params.email || "",
-    params.referrer || "",
-    "쿠폰발급"
-  ]);
+  // ── 1인 1쿠폰: 쿠폰풀에서 미발급 코드 배정 ──
+  var poolSheet = ss.getSheetByName("쿠폰풀");
+  var poolData = poolSheet.getDataRange().getValues();
+  var assignedCoupon = "";
+  var assignedRow = -1;
 
-  // 클릭로그에도 기록
+  // 이미 발급받았는지 체크 (같은 연락처 + 같은 캠페인)
+  for (var i = 1; i < poolData.length; i++) {
+    if (poolData[i][1] === slug && poolData[i][2] === "발급완료" && poolData[i][5] === phone) {
+      // 이미 발급받음 → 기존 코드 반환
+      return jsonResponse({result: "saved", coupon: poolData[i][0]});
+    }
+  }
+
+  // 미발급 코드 찾기
+  for (var j = 1; j < poolData.length; j++) {
+    if (poolData[j][1] === slug && poolData[j][2] === "미발급") {
+      assignedCoupon = poolData[j][0];
+      assignedRow = j + 1; // 시트 행 번호 (1-based)
+      break;
+    }
+  }
+
+  // 쿠폰 소진
+  if (!assignedCoupon) {
+    return jsonResponse({result: "no_stock"});
+  }
+
+  // 쿠폰풀 업데이트: 미발급 → 발급완료
+  poolSheet.getRange(assignedRow, 3).setValue("발급완료");  // 상태
+  poolSheet.getRange(assignedRow, 4).setValue(now);          // 발급일
+  poolSheet.getRange(assignedRow, 5).setValue(name);         // 고객명
+  poolSheet.getRange(assignedRow, 6).setValue(phone);        // 연락처
+  poolSheet.getRange(assignedRow, 7).setValue(email);        // 이메일
+
+  // 고객DB에도 저장
+  var dbSheet = ss.getSheetByName("고객DB");
+  dbSheet.appendRow([now, slug, channel, platform, assignedCoupon, name, phone, email, params.referrer || "", "쿠폰발급"]);
+
+  // 클릭로그 기록
   var logSheet = ss.getSheetByName("클릭로그");
-  logSheet.appendRow([
-    new Date().toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}),
-    slug,
-    params.referrer || "",
-    params.ua || ""
-  ]);
+  logSheet.appendRow([now, slug, params.referrer || "", params.ua || ""]);
 
-  return jsonResponse({result: "saved", coupon: coupon});
+  return jsonResponse({result: "saved", coupon: assignedCoupon});
+}
+
+// ── 쿠폰 잔여 수량 ──────────────────────────────
+function getCouponStock(ss, slug) {
+  var sheet = ss.getSheetByName("쿠폰풀");
+  var data = sheet.getDataRange().getValues();
+  var total = 0, remaining = 0;
+  for (var i = 1; i < data.length; i++) {
+    if (data[i][1] === slug) {
+      total++;
+      if (data[i][2] === "미발급") remaining++;
+    }
+  }
+  return {total: total, remaining: remaining};
 }
 
 // ── 캠페인 추가 ──────────────────────────────────

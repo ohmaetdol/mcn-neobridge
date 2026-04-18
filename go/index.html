@@ -7,248 +7,304 @@
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --brand:#2563EB; --brand-light:rgba(37,99,235,0.08);
+            --brand:#2563EB; --brand-light:#eff4ff;
             --navy:#1a1d23; --med:#64748b; --low:#94a3b8;
             --border:#e2e8f0; --surface:#f8fafc;
-            --green:#16a34a; --green-light:rgba(22,163,74,0.08);
-            --orange:#ea580c;
+            --green:#16a34a; --green-light:#f0fdf4;
+            --orange:#ea580c; --red:#dc2626;
         }
         *{margin:0;padding:0;box-sizing:border-box;font-family:'Pretendard',-apple-system,sans-serif;}
-        body{background:#fff;color:var(--navy);line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh;}
+        body{background:#fff;color:var(--navy);-webkit-font-smoothing:antialiased;}
 
-        /* ── 헤더 ── */
-        .top-bar{text-align:center;padding:16px;border-bottom:1px solid var(--border);}
-        .top-bar img{height:28px;}
-        .top-bar span{font-size:14px;font-weight:700;color:var(--navy);letter-spacing:-0.5px;}
+        /* ── Tally 스타일: 중앙 카드 ── */
+        .page-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px;}
+        .card{width:100%;max-width:420px;position:relative;}
 
-        /* ── 메인 컨테이너 ── */
-        .container{max-width:480px;margin:0 auto;padding:32px 20px 48px;}
+        /* ── 단계 인디케이터 ── */
+        .steps{display:flex;gap:6px;margin-bottom:24px;justify-content:center;}
+        .step-dot{width:32px;height:4px;border-radius:2px;background:var(--border);transition:all .3s;}
+        .step-dot.active{background:var(--brand);width:48px;}
+        .step-dot.done{background:var(--green);}
 
-        /* ── 로딩 ── */
-        .loading{text-align:center;padding:80px 0;}
-        .spinner{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--brand);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px;}
-        @keyframes spin{to{transform:rotate(360deg)}}
+        /* ── 각 스텝 ── */
+        .step{display:none;animation:fadeIn .3s ease;}
+        .step.active{display:block;}
+        @keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
-        /* ── 캠페인 카드 ── */
-        .campaign-card{
-            background:var(--surface);border-radius:16px;padding:24px;margin-bottom:24px;
-            border:1px solid var(--border);text-align:center;
+        /* ── Step 1: 캠페인 소개 ── */
+        .intro-icon{font-size:48px;text-align:center;margin-bottom:16px;}
+        .intro h1{font-size:26px;font-weight:800;text-align:center;line-height:1.35;letter-spacing:-0.5px;margin-bottom:8px;}
+        .intro .sub{font-size:15px;color:var(--med);text-align:center;line-height:1.5;margin-bottom:24px;}
+        .benefit-box{
+            background:var(--brand-light);border-radius:14px;padding:20px;margin-bottom:24px;
+            text-align:center;border:1px solid rgba(37,99,235,0.12);
         }
-        .campaign-card .platform{font-size:13px;color:var(--brand);font-weight:700;margin-bottom:4px;}
-        .campaign-card h1{font-size:24px;font-weight:800;line-height:1.3;letter-spacing:-0.5px;}
-        .campaign-card .discount-badge{
-            display:inline-block;margin-top:12px;padding:8px 20px;border-radius:24px;
-            background:var(--brand);color:#fff;font-size:18px;font-weight:800;
+        .benefit-box .discount{font-size:32px;font-weight:900;color:var(--brand);}
+        .benefit-box .platform{font-size:14px;color:var(--med);margin-top:4px;font-weight:600;}
+        .benefit-box .limit{
+            display:inline-block;margin-top:10px;padding:4px 14px;border-radius:20px;
+            font-size:12px;font-weight:700;background:#fff;color:var(--orange);
+            border:1px solid rgba(234,88,12,0.2);
         }
-        .campaign-card .desc{font-size:14px;color:var(--med);margin-top:12px;}
 
-        /* ── 폼 ── */
-        .form-section h2{font-size:16px;font-weight:700;margin-bottom:16px;text-align:center;}
-        .form-group{margin-bottom:14px;}
-        .form-group label{display:block;font-size:13px;font-weight:600;color:var(--med);margin-bottom:6px;}
-        .form-group input{
-            width:100%;padding:14px 16px;border:2px solid var(--border);border-radius:12px;
-            font-size:16px;font-family:inherit;color:var(--navy);outline:none;transition:border-color .2s;
+        /* ── Step 2: 폼 ── */
+        .form-title{font-size:20px;font-weight:800;text-align:center;margin-bottom:4px;}
+        .form-sub{font-size:14px;color:var(--med);text-align:center;margin-bottom:24px;}
+        .field{margin-bottom:16px;}
+        .field label{display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:6px;}
+        .field label span{color:var(--red);margin-left:2px;}
+        .field input{
+            width:100%;padding:14px 16px;border:1.5px solid var(--border);border-radius:10px;
+            font-size:16px;font-family:inherit;color:var(--navy);outline:none;
+            transition:border-color .2s,box-shadow .2s;background:#fff;
         }
-        .form-group input:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(37,99,235,0.08);}
-        .form-group input::placeholder{color:var(--low);}
-        .submit-btn{
-            width:100%;padding:16px;border:none;border-radius:12px;
-            background:var(--brand);color:#fff;font-size:17px;font-weight:800;
-            cursor:pointer;transition:all .2s;margin-top:8px;
+        .field input:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(37,99,235,0.06);}
+        .field input::placeholder{color:var(--low);}
+        .privacy-check{
+            display:flex;align-items:flex-start;gap:10px;margin-bottom:20px;
+            font-size:12px;color:var(--med);line-height:1.5;
         }
-        .submit-btn:hover{background:#1d4ed8;transform:translateY(-1px);}
-        .submit-btn:disabled{background:var(--low);cursor:not-allowed;transform:none;}
-        .privacy{font-size:11px;color:var(--low);text-align:center;margin-top:12px;}
+        .privacy-check input[type=checkbox]{
+            margin-top:3px;width:18px;height:18px;accent-color:var(--brand);flex-shrink:0;
+        }
 
-        /* ── 쿠폰 결과 (숨김 → 표시) ── */
-        .coupon-result{display:none;}
-        .success-icon{text-align:center;margin-bottom:16px;font-size:48px;}
-        .coupon-box{
-            background:#fff;border:3px dashed var(--brand);border-radius:16px;padding:28px;
-            text-align:center;margin-bottom:20px;position:relative;
+        /* ── Step 3: 쿠폰 결과 ── */
+        .result-icon{font-size:56px;text-align:center;margin-bottom:12px;}
+        .result h2{font-size:22px;font-weight:800;text-align:center;margin-bottom:4px;}
+        .result .result-sub{font-size:14px;color:var(--med);text-align:center;margin-bottom:24px;}
+        .coupon-reveal{
+            background:linear-gradient(135deg,#eff4ff,#f0fdf4);
+            border:2px dashed var(--brand);border-radius:16px;padding:28px;
+            text-align:center;margin-bottom:20px;position:relative;overflow:hidden;
         }
-        .coupon-box .label{font-size:13px;color:var(--med);font-weight:600;margin-bottom:8px;}
-        .coupon-box .code{
-            font-size:32px;font-weight:900;color:var(--brand);letter-spacing:2px;
-            font-family:'Courier New',monospace;word-break:break-all;
+        .coupon-reveal::before{
+            content:'';position:absolute;top:-20px;right:-20px;width:80px;height:80px;
+            background:rgba(37,99,235,0.06);border-radius:50%;
         }
-        .coupon-box .discount-info{
-            margin-top:12px;font-size:15px;font-weight:700;color:var(--orange);
+        .coupon-reveal .c-label{font-size:12px;color:var(--med);font-weight:600;letter-spacing:1px;text-transform:uppercase;}
+        .coupon-reveal .c-code{
+            font-size:28px;font-weight:900;color:var(--brand);letter-spacing:3px;
+            font-family:'Courier New',monospace;margin:12px 0;word-break:break-all;
         }
-        .copy-coupon{
-            margin-top:16px;padding:10px 24px;border:2px solid var(--brand);border-radius:10px;
+        .coupon-reveal .c-discount{font-size:15px;font-weight:700;color:var(--orange);}
+        .copy-btn{
+            margin-top:16px;padding:10px 28px;border:1.5px solid var(--brand);border-radius:8px;
             background:#fff;color:var(--brand);font-size:14px;font-weight:700;
+            cursor:pointer;transition:all .15s;
+        }
+        .copy-btn:hover{background:var(--brand-light);}
+        .copy-btn.copied{background:var(--green-light);border-color:var(--green);color:var(--green);}
+        .expire-notice{
+            display:flex;align-items:center;justify-content:center;gap:6px;
+            margin-bottom:20px;font-size:13px;color:var(--orange);font-weight:600;
+        }
+        .how-to{
+            background:var(--surface);border-radius:12px;padding:16px 20px;margin-top:16px;
+            font-size:13px;color:var(--med);line-height:1.8;
+        }
+        .how-to strong{color:var(--navy);font-size:14px;display:block;margin-bottom:4px;}
+
+        /* ── 공통 버튼 ── */
+        .btn-primary{
+            width:100%;padding:16px;border:none;border-radius:10px;
+            background:var(--brand);color:#fff;font-size:16px;font-weight:700;
             cursor:pointer;transition:all .2s;
         }
-        .copy-coupon:hover{background:var(--brand-light);}
-        .go-platform{
-            width:100%;padding:16px;border:none;border-radius:12px;
-            background:var(--green);color:#fff;font-size:17px;font-weight:800;
-            cursor:pointer;transition:all .2s;text-decoration:none;display:block;text-align:center;
-        }
-        .go-platform:hover{background:#15803d;transform:translateY(-1px);}
-        .or-text{text-align:center;font-size:13px;color:var(--low);margin:12px 0;}
-        .manual-note{
-            background:var(--surface);border-radius:12px;padding:16px;margin-top:16px;
-            font-size:13px;color:var(--med);line-height:1.6;
-        }
-        .manual-note strong{color:var(--navy);}
+        .btn-primary:hover{background:#1d4ed8;transform:translateY(-1px);box-shadow:0 4px 12px rgba(37,99,235,0.25);}
+        .btn-primary:disabled{background:var(--low);cursor:not-allowed;transform:none;box-shadow:none;}
+        .btn-green{background:var(--green);}
+        .btn-green:hover{background:#15803d;box-shadow:0 4px 12px rgba(22,163,74,0.25);}
 
         /* ── 에러 ── */
-        .error-state{display:none;text-align:center;padding:60px 0;}
-        .error-state h2{font-size:20px;font-weight:700;margin-bottom:8px;}
-        .error-state p{color:var(--med);margin-bottom:20px;}
-        .error-state a{color:var(--brand);text-decoration:none;font-weight:600;}
+        .error-msg{display:none;text-align:center;padding:60px 0;}
+        .error-msg h2{font-size:20px;font-weight:700;margin-bottom:8px;}
+        .error-msg p{color:var(--med);margin-bottom:16px;font-size:14px;}
+        .error-msg a{color:var(--brand);text-decoration:none;font-weight:600;}
 
         .powered{text-align:center;margin-top:32px;font-size:11px;color:var(--low);}
         .powered a{color:var(--med);text-decoration:none;}
 
-        @media(max-width:480px){
-            .container{padding:24px 16px 36px;}
-            .campaign-card h1{font-size:20px;}
-            .coupon-box .code{font-size:24px;}
+        @media(max-width:440px){
+            .intro h1{font-size:22px;}
+            .benefit-box .discount{font-size:26px;}
+            .coupon-reveal .c-code{font-size:22px;letter-spacing:2px;}
         }
     </style>
 </head>
 <body>
 
-<div class="top-bar">
-    <span>FLOWMUS MCN</span>
-</div>
-
-<div class="container">
-    <!-- 로딩 -->
-    <div class="loading" id="loadingState">
-        <div class="spinner"></div>
-        <p style="font-size:14px;color:var(--med);">캠페인 정보를 불러오는 중...</p>
-    </div>
-
-    <!-- 메인: 폼 -->
-    <div id="formState" style="display:none;">
-        <div class="campaign-card" id="campaignCard">
-            <div class="platform" id="cardPlatform">-</div>
-            <h1 id="cardTitle">할인 쿠폰을 받아보세요</h1>
-            <div class="discount-badge" id="cardDiscount">-</div>
-            <p class="desc" id="cardDesc">아래 정보를 입력하시면 할인 쿠폰을 바로 드립니다</p>
+<div class="page-wrap">
+    <div class="card">
+        <div class="steps" id="stepDots">
+            <div class="step-dot active" data-step="1"></div>
+            <div class="step-dot" data-step="2"></div>
+            <div class="step-dot" data-step="3"></div>
         </div>
 
-        <div class="form-section">
-            <h2>쿠폰 받기</h2>
-            <div class="form-group">
-                <label>이름</label>
-                <input type="text" id="inputName" placeholder="홍길동" required>
+        <!-- ══ Step 1: 소개 ══ -->
+        <div class="step active" id="step1">
+            <div class="intro">
+                <div class="intro-icon" id="introIcon">&#127915;</div>
+                <h1 id="introTitle">특별 할인 쿠폰을<br>받아보세요</h1>
+                <p class="sub" id="introSub">영상을 시청해주셔서 감사합니다!<br>아래 버튼을 눌러 전용 할인 쿠폰을 받으세요.</p>
             </div>
-            <div class="form-group">
-                <label>연락처 (휴대폰 번호)</label>
-                <input type="tel" id="inputPhone" placeholder="010-1234-5678" required>
+            <div class="benefit-box">
+                <div class="discount" id="benefitDiscount">-</div>
+                <div class="platform" id="benefitPlatform">-</div>
+                <div class="limit" id="benefitLimit">선착순 한정 수량</div>
             </div>
-            <div class="form-group">
-                <label>이메일 (선택)</label>
+            <button class="btn-primary" onclick="goStep(2)">쿠폰 받기</button>
+        </div>
+
+        <!-- ══ Step 2: 정보 입력 ══ -->
+        <div class="step" id="step2">
+            <div class="form-title">간단한 정보만 입력하세요</div>
+            <p class="form-sub">입력하시면 전용 할인 쿠폰이 바로 발급됩니다</p>
+
+            <div class="field">
+                <label>이름 <span>*</span></label>
+                <input type="text" id="inputName" placeholder="홍길동">
+            </div>
+            <div class="field">
+                <label>연락처 <span>*</span></label>
+                <input type="tel" id="inputPhone" placeholder="010-1234-5678">
+            </div>
+            <div class="field">
+                <label>이메일</label>
                 <input type="email" id="inputEmail" placeholder="email@example.com">
             </div>
-            <button class="submit-btn" id="submitBtn" onclick="submitForm()">할인 쿠폰 받기</button>
-            <p class="privacy">입력하신 정보는 쿠폰 발급 및 혜택 안내 목적으로만 사용됩니다</p>
-        </div>
-    </div>
 
-    <!-- 결과: 쿠폰 표시 -->
-    <div class="coupon-result" id="resultState">
-        <div class="success-icon">&#127881;</div>
-        <div class="coupon-box">
-            <div class="label">나만의 할인 쿠폰</div>
-            <div class="code" id="couponCode">-</div>
-            <div class="discount-info" id="couponDiscount">-</div>
-            <button class="copy-coupon" onclick="copyCoupon()">쿠폰 코드 복사</button>
+            <div class="privacy-check">
+                <input type="checkbox" id="agreeCheck">
+                <span>개인정보 수집 및 이용에 동의합니다. (수집항목: 이름, 연락처, 이메일 / 목적: 쿠폰 발급 및 혜택 안내 / 보유기간: 발급일로부터 6개월)</span>
+            </div>
+
+            <button class="btn-primary" id="submitBtn" onclick="submitForm()">쿠폰 발급받기</button>
         </div>
 
-        <a class="go-platform" id="goPlatform" href="#" target="_blank">
-            지금 바로 수강 신청하기 →
-        </a>
+        <!-- ══ Step 3: 쿠폰 발급 ══ -->
+        <div class="step" id="step3">
+            <div class="result">
+                <div class="result-icon">&#127881;</div>
+                <h2>쿠폰이 발급되었습니다!</h2>
+                <p class="result-sub" id="resultName">-님 전용 할인 쿠폰</p>
+            </div>
 
-        <div class="manual-note">
-            <strong>쿠폰 사용법:</strong><br>
-            1. 위 버튼을 눌러 플랫폼으로 이동<br>
-            2. 원하는 강의/상품 선택<br>
-            3. 결제 시 쿠폰 코드 입력<br>
-            4. 할인 적용 확인 후 결제 완료
+            <div class="expire-notice" id="expireNotice">
+                &#9200; 48시간 내 사용 가능
+            </div>
+
+            <div class="coupon-reveal">
+                <div class="c-label">나만의 할인 코드</div>
+                <div class="c-code" id="revealCode">-</div>
+                <div class="c-discount" id="revealDiscount">-</div>
+                <button class="copy-btn" id="copyBtn" onclick="copyCoupon()">코드 복사하기</button>
+            </div>
+
+            <a class="btn-primary btn-green" id="goPlatformBtn" href="#" target="_blank">
+                지금 바로 신청하기 &#8594;
+            </a>
+
+            <div class="how-to">
+                <strong>쿠폰 사용 방법</strong>
+                1. 위 버튼을 눌러 플랫폼으로 이동<br>
+                2. 원하는 강의/상품 선택<br>
+                3. 결제 시 위 쿠폰 코드 입력<br>
+                4. 할인 적용 확인 후 결제 완료
+            </div>
         </div>
-    </div>
 
-    <!-- 에러 -->
-    <div class="error-state" id="errorState">
-        <h2>캠페인을 찾을 수 없습니다</h2>
-        <p>링크가 만료되었거나 잘못된 링크입니다</p>
-        <a href="/mcn-neobridge/b2b/">플로우머스 MCN 홈으로 이동</a>
-    </div>
+        <!-- ══ 에러 ══ -->
+        <div class="error-msg" id="errorState">
+            <h2>캠페인을 찾을 수 없습니다</h2>
+            <p>링크가 만료되었거나 잘못된 링크입니다</p>
+            <a href="/mcn-neobridge/b2b/">플로우머스 MCN 홈으로</a>
+        </div>
 
-    <div class="powered"><a href="/mcn-neobridge/b2b/">Powered by (주)플로우머스 MCN</a></div>
+        <div class="powered"><a href="/mcn-neobridge/b2b/">Powered by Flowmus MCN</a></div>
+    </div>
 </div>
 
 <script>
-var TRACKER_API = 'https://script.google.com/macros/s/AKfycbxZNKua0oV7UcfzAOmiTgs5iQkqqUqMF1Yaz74rAk7nKaYIvbke2fRHzvoPExYNWaTo/exec';
-
-var CAMPAIGN = null; // 현재 캠페인 데이터
+var API = 'https://script.google.com/macros/s/AKfycby_OyIuKLHn6kABRq_38ucQTnUDuHheTjpTK23O6T9gElU-Icippj9Bm7jkG8sJbD_kWA/exec';
+var CAMPAIGN = null;
 var SLUG = '';
+var currentStep = 1;
 
 (function init() {
-    var params = new URLSearchParams(location.search);
-    SLUG = params.get('c') || '';
+    var p = new URLSearchParams(location.search);
+    SLUG = p.get('c') || '';
+    if (!SLUG) { showError(); return; }
 
-    if (!SLUG) {
-        showState('error');
-        return;
-    }
-
-    // Apps Script에서 캠페인 정보 조회
-    fetch(TRACKER_API + '?action=redirect&c=' + encodeURIComponent(SLUG))
+    fetch(API + '?action=redirect&c=' + encodeURIComponent(SLUG))
         .then(function(r) { return r.json(); })
         .then(function(data) {
             if (data.result === 'found') {
                 CAMPAIGN = data;
-                setupCampaignCard(data);
-                showState('form');
+                setupIntro(data);
             } else {
-                showState('error');
+                showError();
             }
         })
-        .catch(function() {
-            showState('error');
-        });
+        .catch(function() { showError(); });
 })();
 
-function setupCampaignCard(data) {
+function setupIntro(data) {
     var platform = data.platform || '파트너 플랫폼';
     var discount = data.discount || '특별 할인';
     var type = data.type || '강의';
 
-    document.getElementById('cardPlatform').textContent = platform;
+    document.getElementById('benefitDiscount').textContent = discount + ' 할인';
+    document.getElementById('benefitPlatform').textContent = platform + (type === '가맹' ? ' 가맹 혜택' : ' 전용');
 
     if (type === '가맹') {
-        document.getElementById('cardTitle').textContent = platform + ' 가맹 특별 혜택';
-        document.getElementById('cardDesc').textContent = '아래 정보를 입력하시면 가맹 할인 쿠폰을 바로 드립니다';
-        document.getElementById('goPlatform').textContent = '가맹 상담 신청하기 →';
+        document.getElementById('introIcon').textContent = '\uD83C\uDFEA';
+        document.getElementById('introTitle').innerHTML = platform + '<br>가맹 특별 혜택';
+        document.getElementById('introSub').textContent = '아래 정보를 입력하시면 가맹 할인 쿠폰을 발급해 드립니다.';
+        document.getElementById('goPlatformBtn').textContent = '가맹 상담 신청하기 \u2192';
     } else {
-        document.getElementById('cardTitle').textContent = platform + ' 특별 할인 쿠폰';
+        document.getElementById('introTitle').innerHTML = platform + '<br>특별 할인 쿠폰';
     }
 
-    document.getElementById('cardDiscount').textContent = discount + ' 할인';
     document.title = platform + ' 할인 쿠폰 — Flowmus';
+
+    // 쿠폰 풀 잔여 수량 체크
+    fetch(API + '?action=coupon_stock&c=' + encodeURIComponent(SLUG))
+        .then(function(r) { return r.json(); })
+        .then(function(res) {
+            if (res.remaining !== undefined && res.remaining <= 20) {
+                document.getElementById('benefitLimit').textContent = '잔여 ' + res.remaining + '개';
+            }
+        })
+        .catch(function() {});
+}
+
+function goStep(n) {
+    currentStep = n;
+    document.querySelectorAll('.step').forEach(function(el) { el.classList.remove('active'); });
+    document.getElementById('step' + n).classList.add('active');
+
+    document.querySelectorAll('.step-dot').forEach(function(dot, i) {
+        dot.classList.remove('active', 'done');
+        if (i + 1 === n) dot.classList.add('active');
+        else if (i + 1 < n) dot.classList.add('done');
+    });
 }
 
 function submitForm() {
     var name = document.getElementById('inputName').value.trim();
     var phone = document.getElementById('inputPhone').value.trim();
     var email = document.getElementById('inputEmail').value.trim();
+    var agree = document.getElementById('agreeCheck').checked;
 
-    if (!name) { alert('이름을 입력해주세요'); return; }
-    if (!phone) { alert('연락처를 입력해주세요'); return; }
+    if (!name) { shakeField('inputName'); return; }
+    if (!phone) { shakeField('inputPhone'); return; }
+    if (!agree) { alert('개인정보 수집 동의를 체크해주세요.'); return; }
 
     var btn = document.getElementById('submitBtn');
     btn.disabled = true;
-    btn.textContent = '처리 중...';
+    btn.textContent = '발급 중...';
 
-    // 고객 정보 + 캠페인 정보를 Apps Script로 전송
     var body = new URLSearchParams({
         action: 'coupon_claim',
         campaign: SLUG,
@@ -259,63 +315,57 @@ function submitForm() {
         ua: navigator.userAgent || ''
     });
 
-    fetch(TRACKER_API, {
-        method: 'POST',
-        body: body
-    })
-    .then(function(r) { return r.json(); })
-    .then(function(res) {
-        showCouponResult();
-    })
-    .catch(function() {
-        // 네트워크 에러여도 쿠폰은 보여줌 (고객 경험 우선)
-        showCouponResult();
-    });
+    fetch(API, { method: 'POST', body: body })
+        .then(function(r) { return r.json(); })
+        .then(function(res) {
+            if (res.result === 'saved' && res.coupon) {
+                showCoupon(res.coupon, name);
+            } else if (res.result === 'no_stock') {
+                btn.textContent = '쿠폰이 모두 소진되었습니다';
+                btn.style.background = 'var(--red)';
+            } else {
+                // 폴백: 캠페인 기본 쿠폰
+                showCoupon(CAMPAIGN.coupon || 'FLOWMUS', name);
+            }
+        })
+        .catch(function() {
+            showCoupon(CAMPAIGN.coupon || 'FLOWMUS', name);
+        });
 }
 
-function showCouponResult() {
-    var coupon = CAMPAIGN.coupon || 'FLOWMUS-COUPON';
-    var discount = CAMPAIGN.discount || '특별 할인';
+function showCoupon(code, name) {
+    document.getElementById('revealCode').textContent = code;
+    document.getElementById('revealDiscount').textContent = (CAMPAIGN.discount || '') + ' 할인';
+    document.getElementById('resultName').textContent = name + '님 전용 할인 쿠폰';
+
     var url = CAMPAIGN.url || '#';
+    var sep = url.indexOf('?') >= 0 ? '&' : '?';
+    document.getElementById('goPlatformBtn').href = url + sep + 'utm_source=flowmus&utm_medium=youtube&utm_campaign=' + encodeURIComponent(SLUG);
 
-    document.getElementById('couponCode').textContent = coupon;
-    document.getElementById('couponDiscount').textContent = discount + ' 할인';
-
-    // 플랫폼 이동 링크에 UTM 부착
-    var separator = url.indexOf('?') >= 0 ? '&' : '?';
-    var utm = 'utm_source=flowmus&utm_medium=youtube&utm_campaign=' + encodeURIComponent(SLUG);
-    document.getElementById('goPlatform').href = url + separator + utm;
-
-    showState('result');
+    goStep(3);
 }
 
 function copyCoupon() {
-    var code = document.getElementById('couponCode').textContent;
+    var code = document.getElementById('revealCode').textContent;
     navigator.clipboard.writeText(code).then(function() {
-        var btn = document.querySelector('.copy-coupon');
+        var btn = document.getElementById('copyBtn');
         btn.textContent = '복사 완료!';
-        btn.style.background = 'var(--green-light)';
-        btn.style.borderColor = 'var(--green)';
-        btn.style.color = 'var(--green)';
-        setTimeout(function() {
-            btn.textContent = '쿠폰 코드 복사';
-            btn.style.background = '';
-            btn.style.borderColor = '';
-            btn.style.color = '';
-        }, 2000);
+        btn.classList.add('copied');
+        setTimeout(function() { btn.textContent = '코드 복사하기'; btn.classList.remove('copied'); }, 2000);
     });
 }
 
-function showState(state) {
-    document.getElementById('loadingState').style.display = 'none';
-    document.getElementById('formState').style.display = 'none';
-    document.getElementById('resultState').style.display = 'none';
-    document.getElementById('errorState').style.display = 'none';
+function shakeField(id) {
+    var el = document.getElementById(id);
+    el.style.borderColor = 'var(--red)';
+    el.focus();
+    setTimeout(function() { el.style.borderColor = ''; }, 2000);
+}
 
-    if (state === 'loading') document.getElementById('loadingState').style.display = 'block';
-    if (state === 'form') document.getElementById('formState').style.display = 'block';
-    if (state === 'result') document.getElementById('resultState').style.display = 'block';
-    if (state === 'error') document.getElementById('errorState').style.display = 'block';
+function showError() {
+    document.querySelectorAll('.step').forEach(function(el) { el.classList.remove('active'); });
+    document.getElementById('stepDots').style.display = 'none';
+    document.getElementById('errorState').style.display = 'block';
 }
 </script>
 </body>

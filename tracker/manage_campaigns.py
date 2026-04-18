@@ -219,6 +219,98 @@ def extract_video_id(url):
     return match.group(1) if match else ''
 
 
+def cmd_generate(args):
+    """캠페인에 대한 쿠폰 풀 벌크 생성"""
+    sheets = get_sheets()
+    rows, _ = read_campaigns(sheets)
+
+    slug = args.slug
+    count = args.count
+
+    # 캠페인 존재 확인
+    campaign = None
+    for r in rows:
+        if r[0] == slug:
+            campaign = r
+            break
+
+    if not campaign:
+        print(f"  캠페인 '{slug}'을 찾을 수 없습니다.")
+        print("  사용 가능한 캠페인:")
+        for r in rows:
+            print(f"    - {r[0]}")
+        return
+
+    channel = campaign[10] if len(campaign) > 10 else ''
+    platform = campaign[3] if len(campaign) > 3 else ''
+
+    ch_prefix = CHANNEL_PREFIX.get(channel, channel.upper()[:6])
+    plat_abbr = PLATFORM_ABBR.get(platform, ''.join(
+        c for c in platform.upper() if c.isascii() and c.isalpha()
+    )[:6]) or 'NEW'
+
+    # 기존 쿠폰풀 확인
+    pool_result = sheets.spreadsheets().values().get(
+        spreadsheetId=SHEET_ID, range='쿠폰풀!A:B'
+    ).execute()
+    pool_rows = pool_result.get('values', [])[1:]  # 헤더 제외
+
+    existing_for_slug = [r[0] for r in pool_rows if len(r) > 1 and r[1] == slug]
+    start_num = len(existing_for_slug) + 1
+
+    # 쿠폰 생성
+    new_coupons = []
+    for i in range(start_num, start_num + count):
+        code = f"{ch_prefix}-{plat_abbr}-{i:04d}"
+        new_coupons.append([code, slug, '미발급', '', '', '', ''])
+
+    sheets.spreadsheets().values().append(
+        spreadsheetId=SHEET_ID, range='쿠폰풀!A:G',
+        valueInputOption='RAW', body={'values': new_coupons}
+    ).execute()
+
+    print(f"\n  쿠폰 {count}개 생성 완료!")
+    print(f"  캠페인: {slug}")
+    print(f"  코드 범위: {new_coupons[0][0]} ~ {new_coupons[-1][0]}")
+    print(f"  기존: {len(existing_for_slug)}개 → 총: {len(existing_for_slug) + count}개")
+    print(f"\n  이 코드를 플랫폼({platform})에 벌크 등록해주세요.\n")
+
+
+def cmd_stock(args):
+    """쿠폰 풀 현황"""
+    sheets = get_sheets()
+
+    pool_result = sheets.spreadsheets().values().get(
+        spreadsheetId=SHEET_ID, range='쿠폰풀!A:C'
+    ).execute()
+    pool_rows = pool_result.get('values', [])[1:]
+
+    stats = {}
+    for r in pool_rows:
+        if len(r) < 3:
+            continue
+        slug = r[1]
+        if slug not in stats:
+            stats[slug] = {'total': 0, 'remaining': 0, 'used': 0}
+        stats[slug]['total'] += 1
+        if r[2] == '미발급':
+            stats[slug]['remaining'] += 1
+        else:
+            stats[slug]['used'] += 1
+
+    if not stats:
+        print("  쿠폰풀이 비어있습니다. generate 명령어로 쿠폰을 생성하세요.")
+        return
+
+    print(f"\n  {'캠페인':<20} {'총 쿠폰':<10} {'발급됨':<10} {'잔여':<10} {'소진율'}")
+    print("  " + "─" * 65)
+    for slug, s in stats.items():
+        rate = f"{s['used'] / s['total'] * 100:.0f}%" if s['total'] > 0 else '-'
+        bar = '█' * int(s['used'] / max(s['total'], 1) * 10) + '░' * (10 - int(s['used'] / max(s['total'], 1) * 10))
+        print(f"  {slug:<20} {s['total']:<10} {s['used']:<10} {s['remaining']:<10} {bar} {rate}")
+    print()
+
+
 def main():
     parser = argparse.ArgumentParser(description='캠페인 + 쿠폰 관리')
     sub = parser.add_subparsers(dest='command')
@@ -236,12 +328,24 @@ def main():
     # list 명령어
     sub.add_parser('list', help='캠페인 목록')
 
+    # generate 명령어
+    gen_p = sub.add_parser('generate', help='쿠폰 벌크 생성')
+    gen_p.add_argument('--slug', required=True, help='캠페인 slug')
+    gen_p.add_argument('--count', type=int, default=100, help='생성할 쿠폰 수 (기본 100)')
+
+    # stock 명령어
+    sub.add_parser('stock', help='쿠폰 풀 현황')
+
     args = parser.parse_args()
 
     if args.command == 'add':
         cmd_add(args)
     elif args.command == 'list':
         cmd_list(args)
+    elif args.command == 'generate':
+        cmd_generate(args)
+    elif args.command == 'stock':
+        cmd_stock(args)
     else:
         parser.print_help()
 
