@@ -209,13 +209,20 @@ var currentEditor = '';
 var isAdmin = false;
 var currentVideoId = '';
 var currentActionEditor = '';
-
-// URL 파라미터 확인
-var params = new URLSearchParams(window.location.search);
-if (params.get('admin') === 'true') isAdmin = true;
+var ADMIN_PW = 'flowmus2026';
 
 // ── 초기화 ──
 function init() {
+  // URL로 admin 직접 접근 차단
+  var params = new URLSearchParams(window.location.search);
+  if (params.get('admin') === 'true') {
+    var pw = prompt('관리자 비밀번호를 입력하세요:');
+    if (pw === ADMIN_PW) {
+      isAdmin = true;
+      document.getElementById('adminBtn').classList.add('active');
+    }
+  }
+
   if (!API_URL) {
     document.querySelector('.container').innerHTML =
       '<div class="empty"><div class="empty-icon">!</div><p>API_URL이 설정되지 않았습니다.<br>Apps Script 배포 후 URL을 입력해주세요.</p></div>';
@@ -345,6 +352,10 @@ function myWorkCard(w) {
 
 // ── 관리자 ──
 function toggleAdmin() {
+  if (!isAdmin) {
+    var pw = prompt('관리자 비밀번호를 입력하세요:');
+    if (pw !== ADMIN_PW) { alert('비밀번호가 틀렸습니다.'); return; }
+  }
   isAdmin = !isAdmin;
   var btn = document.getElementById('adminBtn');
   btn.classList.toggle('active');
