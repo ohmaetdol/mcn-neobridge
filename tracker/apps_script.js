@@ -13,10 +13,100 @@
 // A:캠페인slug  B:유형  C:타겟URL  D:플랫폼/브랜드  E:영상ID
 // F:쿠폰코드  G:할인  H:RS%  I:상태  J:생성일  K:채널
 
+// ── 시트 메뉴 ─────────────────────────────────────
+function onOpen() {
+  var ui = SpreadsheetApp.getUi();
+  ui.createMenu('채널 관리')
+    .addItem('전체 보기', 'filterAll')
+    .addSeparator()
+    .addItem('사찍남만 보기', 'filterSajjiknam')
+    .addItem('현장속으로만 보기', 'filterHyunjang')
+    .addItem('머니로드만 보기', 'filterMoneyroad')
+    .addSeparator()
+    .addItem('채널별 현황 요약', 'showChannelSummary')
+    .addSeparator()
+    .addItem('자동 트리거 설정', 'setupTriggers')
+    .addToUi();
+}
+
+function filterAll() { applyChannelFilter(''); }
+function filterSajjiknam() { applyChannelFilter('sajjiknam'); }
+function filterHyunjang() { applyChannelFilter('hyunjang'); }
+function filterMoneyroad() { applyChannelFilter('moneyroad'); }
+
+function applyChannelFilter(channel) {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName('캠페인관리');
+  ss.setActiveSheet(sheet);
+
+  var range = sheet.getDataRange();
+  var filter = sheet.getFilter();
+  if (filter) filter.remove();
+
+  if (!channel) {
+    SpreadsheetApp.getUi().alert('전체 캠페인을 표시합니다.');
+    return;
+  }
+
+  filter = range.createFilter();
+  var criteria = SpreadsheetApp.newFilterCriteria()
+    .whenTextEqualTo(channel)
+    .build();
+  filter.setColumnFilterCriteria(11, criteria); // K열 = 채널
+}
+
+function showChannelSummary() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var campSheet = ss.getSheetByName('캠페인관리');
+  var campData = campSheet.getDataRange().getValues();
+  var chSheet = ss.getSheetByName('채널관리');
+  var chData = chSheet.getDataRange().getValues();
+
+  var stats = {};
+  for (var i = 1; i < campData.length; i++) {
+    var ch = campData[i][10] || '미지정';
+    if (!stats[ch]) stats[ch] = {total: 0, active: 0};
+    stats[ch].total++;
+    if (campData[i][8] === '활성') stats[ch].active++;
+  }
+
+  // 쿠폰 현황
+  var poolSheet = ss.getSheetByName('쿠폰풀');
+  var poolData = poolSheet.getDataRange().getValues();
+  var couponStats = {};
+  for (var j = 1; j < poolData.length; j++) {
+    var slug = poolData[j][1];
+    // slug에서 채널 찾기
+    for (var k = 1; k < campData.length; k++) {
+      if (campData[k][0] === slug) {
+        var ch2 = campData[k][10] || '미지정';
+        if (!couponStats[ch2]) couponStats[ch2] = {total: 0, used: 0, remaining: 0};
+        couponStats[ch2].total++;
+        if (poolData[j][2] === '발급완료') couponStats[ch2].used++;
+        else couponStats[ch2].remaining++;
+        break;
+      }
+    }
+  }
+
+  var msg = '--- 채널별 현황 ---\n\n';
+  for (var c = 1; c < chData.length; c++) {
+    var chSlug = chData[c][0];
+    var chName = chData[c][1];
+    var s = stats[chSlug] || {total: 0, active: 0};
+    var cs = couponStats[chSlug] || {total: 0, used: 0, remaining: 0};
+    msg += chName + ' (' + chSlug + ')\n';
+    msg += '  캠페인: ' + s.active + '개 활성 / ' + s.total + '개 전체\n';
+    msg += '  쿠폰: ' + cs.remaining + '개 잔여 / ' + cs.total + '개 전체 (발급 ' + cs.used + '개)\n\n';
+  }
+
+  SpreadsheetApp.getUi().alert(msg);
+}
+
 // ── 에디터에서 실행할 테스트 함수 (권한 승인용) ──
 function test() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
-  var tabs = ["캠페인관리", "클릭로그", "월별정산", "고객DB", "쿠폰풀"];
+  var tabs = ["캠페인관리", "클릭로그", "월별정산", "고객DB", "쿠폰풀", "채널관리", "채널암호"];
   tabs.forEach(function(t) {
     var sheet = ss.getSheetByName(t);
     if (sheet) {
@@ -55,6 +145,11 @@ function doPost(e) {
   // 캠페인 추가 (관리자용)
   if (action === "add_campaign") {
     return addCampaign(ss, e.parameter);
+  }
+
+  // 로그인
+  if (action === "login") {
+    return handleLogin(ss, e.parameter);
   }
 
   return jsonResponse({result: "unknown_action"});
@@ -119,6 +214,11 @@ function doGet(e) {
     var slug = e.parameter.slug || "";
     var stock = getCouponStock(ss, slug);
     return jsonResponse({result: "ok", remaining: stock.remaining, total: stock.total});
+  }
+
+  // 토큰 검증
+  if (action === "verify_token") {
+    return handleVerifyToken(e.parameter);
   }
 
   return ContentService.createTextOutput("UTM Tracker API is running.");
@@ -384,4 +484,317 @@ function addCampaign(ss, params) {
 
   sheet.appendRow([slug, type, url, platform, videoId, coupon, discount, rs, "활성", today, channel]);
   return jsonResponse({result: "added", slug: slug, coupon: coupon});
+}
+
+// ══════════════════════════════════════════════════
+// ── 비밀번호 로그인 ──────────────────────────────
+// ══════════════════════════════════════════════════
+
+function handleLogin(ss, params) {
+  var channel = params.channel || "";
+  var pw = params.pw || "";
+
+  var pwSheet = ss.getSheetByName("채널암호");
+  if (!pwSheet) return jsonResponse({result: "error", message: "채널암호 탭이 없습니다"});
+
+  var data = pwSheet.getDataRange().getValues();
+  for (var i = 1; i < data.length; i++) {
+    if (data[i][0] === channel && String(data[i][1]) === pw) {
+      var token = generateToken(channel);
+      return jsonResponse({result: "ok", token: token, channel: channel});
+    }
+  }
+  return jsonResponse({result: "fail", message: "비밀번호가 일치하지 않습니다"});
+}
+
+function handleVerifyToken(params) {
+  var token = params.token || "";
+  var channel = verifyToken(token);
+  if (channel) {
+    return jsonResponse({result: "ok", channel: channel});
+  }
+  return jsonResponse({result: "invalid"});
+}
+
+function generateToken(channel) {
+  var ts = new Date().getTime().toString();
+  var secret = getSecretKey();
+  var raw = channel + "." + ts;
+  var sig = Utilities.base64EncodeWebSafe(
+    Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, raw + "." + secret)
+  ).substring(0, 24);
+  return raw + "." + sig;
+}
+
+function verifyToken(token) {
+  if (!token) return null;
+  var parts = token.split(".");
+  if (parts.length !== 3) return null;
+
+  var channel = parts[0];
+  var ts = parseInt(parts[1]);
+  var sig = parts[2];
+
+  // 24시간 만료
+  var now = new Date().getTime();
+  if (now - ts > 24 * 60 * 60 * 1000) return null;
+
+  // 서명 검증
+  var secret = getSecretKey();
+  var raw = channel + "." + parts[1];
+  var expectedSig = Utilities.base64EncodeWebSafe(
+    Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, raw + "." + secret)
+  ).substring(0, 24);
+
+  if (sig !== expectedSig) return null;
+  return channel;
+}
+
+function getSecretKey() {
+  var props = PropertiesService.getScriptProperties();
+  var key = props.getProperty("TOKEN_SECRET");
+  if (!key) {
+    key = Utilities.getUuid();
+    props.setProperty("TOKEN_SECRET", key);
+  }
+  return key;
+}
+
+// ══════════════════════════════════════════════════
+// ── 쿠폰 소진 알림 (매일 오전 9시 트리거) ───────
+// ══════════════════════════════════════════════════
+
+function dailyStockAlert() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var campSheet = ss.getSheetByName("캠페인관리");
+  var campData = campSheet.getDataRange().getValues();
+  var poolSheet = ss.getSheetByName("쿠폰풀");
+  var poolData = poolSheet.getDataRange().getValues();
+  var chSheet = ss.getSheetByName("채널관리");
+  var chData = chSheet ? chSheet.getDataRange().getValues() : [];
+
+  // 캠페인별 잔여 쿠폰 집계
+  var stockBySlug = {};
+  for (var i = 1; i < poolData.length; i++) {
+    var slug = poolData[i][1];
+    if (!stockBySlug[slug]) stockBySlug[slug] = {total: 0, remaining: 0};
+    stockBySlug[slug].total++;
+    if (poolData[i][2] === "미발급") stockBySlug[slug].remaining++;
+  }
+
+  // 10개 미만인 활성 캠페인
+  var alerts = [];
+  for (var j = 1; j < campData.length; j++) {
+    if (campData[j][8] !== "활성") continue;
+    var cSlug = campData[j][0];
+    var stock = stockBySlug[cSlug];
+    if (stock && stock.remaining < 10) {
+      alerts.push({
+        slug: cSlug,
+        platform: campData[j][3],
+        channel: campData[j][10] || "",
+        remaining: stock.remaining,
+        total: stock.total
+      });
+    }
+  }
+
+  if (alerts.length === 0) return; // 알림 불필요
+
+  // HTML 이메일 본문
+  var html = '<div style="font-family:-apple-system,sans-serif;max-width:600px;margin:0 auto;">';
+  html += '<div style="background:#1a1d23;color:#fff;padding:20px 24px;border-radius:12px 12px 0 0;">';
+  html += '<h2 style="margin:0;font-size:18px;">쿠폰 잔여 알림</h2></div>';
+  html += '<div style="padding:20px 24px;border:1px solid #e2e8f0;border-top:none;border-radius:0 0 12px 12px;">';
+  html += '<p style="color:#64748b;margin:0 0 16px;">아래 캠페인의 쿠폰이 <strong>10개 미만</strong>입니다:</p>';
+  html += '<table style="width:100%;border-collapse:collapse;font-size:14px;">';
+  html += '<tr style="background:#f8fafc;"><th style="padding:10px;text-align:left;border-bottom:2px solid #e2e8f0;">캠페인</th>';
+  html += '<th style="padding:10px;text-align:left;border-bottom:2px solid #e2e8f0;">플랫폼</th>';
+  html += '<th style="padding:10px;text-align:left;border-bottom:2px solid #e2e8f0;">채널</th>';
+  html += '<th style="padding:10px;text-align:right;border-bottom:2px solid #e2e8f0;">잔여</th>';
+  html += '<th style="padding:10px;text-align:right;border-bottom:2px solid #e2e8f0;">전체</th></tr>';
+
+  alerts.forEach(function(a) {
+    var color = a.remaining <= 3 ? '#dc2626' : '#ea580c';
+    html += '<tr>';
+    html += '<td style="padding:10px;border-bottom:1px solid #e2e8f0;">' + a.slug + '</td>';
+    html += '<td style="padding:10px;border-bottom:1px solid #e2e8f0;">' + a.platform + '</td>';
+    html += '<td style="padding:10px;border-bottom:1px solid #e2e8f0;">' + a.channel + '</td>';
+    html += '<td style="padding:10px;text-align:right;border-bottom:1px solid #e2e8f0;color:' + color + ';font-weight:bold;">' + a.remaining + '개</td>';
+    html += '<td style="padding:10px;text-align:right;border-bottom:1px solid #e2e8f0;">' + a.total + '개</td>';
+    html += '</tr>';
+  });
+
+  html += '</table>';
+  html += '<p style="margin:16px 0 0;font-size:12px;color:#94a3b8;">Flowmus MCN UTM 트래커 자동 발송</p>';
+  html += '</div></div>';
+
+  // 수신자: 관리자 + 채널관리 탭 이메일 (C열)
+  var recipients = ['ceo@flowmus.com'];
+  for (var k = 1; k < chData.length; k++) {
+    var email = chData[k][2]; // C열 = 이메일
+    if (email && recipients.indexOf(email) < 0) {
+      recipients.push(email);
+    }
+  }
+
+  MailApp.sendEmail({
+    to: recipients.join(','),
+    subject: '[Flowmus MCN] 쿠폰 잔여 알림 — ' + alerts.length + '개 캠페인',
+    htmlBody: html
+  });
+}
+
+// ══════════════════════════════════════════════════
+// ── 월별 RS 리포트 (매월 1일 오전 10시 트리거) ──
+// ══════════════════════════════════════════════════
+
+function monthlyReport() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var chSheet = ss.getSheetByName("채널관리");
+  if (!chSheet) return;
+  var chData = chSheet.getDataRange().getValues();
+
+  // 지난 달 계산
+  var now = new Date();
+  var lastMonth = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+  var monthStr = lastMonth.getFullYear() + '-' + String(lastMonth.getMonth() + 1).padStart(2, '0');
+
+  for (var c = 1; c < chData.length; c++) {
+    var chSlug = chData[c][0];
+    var chName = chData[c][1];
+    var chEmail = chData[c][2]; // C열 = 이메일
+
+    if (!chEmail) continue;
+
+    // 해당 채널의 정산 데이터
+    var summary = getSummary(ss, chSlug);
+    var monthData = summary.filter(function(s) { return s.month === monthStr; });
+
+    if (monthData.length === 0) continue;
+
+    // 합계 계산
+    var totalClicks = 0, totalCoupons = 0, totalRevenue = 0, totalRS = 0;
+    monthData.forEach(function(s) {
+      totalClicks += Number(s.clicks) || 0;
+      totalCoupons += Number(s.couponUsed) || 0;
+      totalRevenue += Number(s.revenue) || 0;
+      totalRS += Number(s.rsAmount) || 0;
+    });
+
+    // HTML 이메일
+    var html = '<div style="font-family:-apple-system,sans-serif;max-width:640px;margin:0 auto;background:#fff;">';
+
+    // 헤더
+    html += '<div style="background:#1a1d23;color:#fff;padding:24px 32px;border-radius:12px 12px 0 0;">';
+    html += '<h1 style="margin:0;font-size:20px;">Flowmus MCN — ' + monthStr + ' RS 리포트</h1>';
+    html += '<p style="margin:8px 0 0;font-size:14px;opacity:0.8;">' + chName + ' 채널</p>';
+    html += '</div>';
+
+    // 요약 수치
+    html += '<div style="padding:24px 32px;border:1px solid #e2e8f0;border-top:none;">';
+    html += '<table style="width:100%;margin-bottom:24px;" cellpadding="0" cellspacing="0"><tr>';
+    html += '<td style="text-align:center;padding:16px;background:#f8fafc;border-radius:8px;"><div style="font-size:24px;font-weight:800;color:#2563EB;">' + totalClicks.toLocaleString() + '</div><div style="font-size:12px;color:#64748b;margin-top:4px;">총 클릭</div></td>';
+    html += '<td style="width:12px;"></td>';
+    html += '<td style="text-align:center;padding:16px;background:#f8fafc;border-radius:8px;"><div style="font-size:24px;font-weight:800;color:#1a1d23;">' + totalCoupons.toLocaleString() + '</div><div style="font-size:12px;color:#64748b;margin-top:4px;">쿠폰 사용</div></td>';
+    html += '<td style="width:12px;"></td>';
+    html += '<td style="text-align:center;padding:16px;background:#f8fafc;border-radius:8px;"><div style="font-size:24px;font-weight:800;color:#ea580c;">' + formatKRW(totalRevenue) + '</div><div style="font-size:12px;color:#64748b;margin-top:4px;">추적 매출</div></td>';
+    html += '<td style="width:12px;"></td>';
+    html += '<td style="text-align:center;padding:16px;background:rgba(22,163,74,0.06);border-radius:8px;border:1px solid rgba(22,163,74,0.15);"><div style="font-size:24px;font-weight:800;color:#16a34a;">' + formatKRW(totalRS) + '</div><div style="font-size:12px;color:#64748b;margin-top:4px;">RS 정산</div></td>';
+    html += '</tr></table>';
+
+    // 캠페인별 테이블
+    html += '<table style="width:100%;border-collapse:collapse;font-size:13px;">';
+    html += '<tr style="background:#1a1d23;color:#fff;">';
+    html += '<th style="padding:10px 12px;text-align:left;">캠페인</th>';
+    html += '<th style="padding:10px 12px;text-align:left;">플랫폼</th>';
+    html += '<th style="padding:10px 12px;text-align:right;">클릭</th>';
+    html += '<th style="padding:10px 12px;text-align:right;">쿠폰</th>';
+    html += '<th style="padding:10px 12px;text-align:right;">전환율</th>';
+    html += '<th style="padding:10px 12px;text-align:right;">매출</th>';
+    html += '<th style="padding:10px 12px;text-align:center;">RS%</th>';
+    html += '<th style="padding:10px 12px;text-align:right;">RS 금액</th>';
+    html += '</tr>';
+
+    monthData.forEach(function(s, idx) {
+      var bg = idx % 2 === 0 ? '#fff' : '#f8fafc';
+      html += '<tr style="background:' + bg + ';">';
+      html += '<td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;">' + s.slug + '</td>';
+      html += '<td style="padding:10px 12px;border-bottom:1px solid #e2e8f0;">' + s.platform + '</td>';
+      html += '<td style="padding:10px 12px;text-align:right;border-bottom:1px solid #e2e8f0;">' + Number(s.clicks).toLocaleString() + '</td>';
+      html += '<td style="padding:10px 12px;text-align:right;border-bottom:1px solid #e2e8f0;">' + Number(s.couponUsed).toLocaleString() + '</td>';
+      html += '<td style="padding:10px 12px;text-align:right;border-bottom:1px solid #e2e8f0;">' + (s.convRate || '-') + '</td>';
+      html += '<td style="padding:10px 12px;text-align:right;border-bottom:1px solid #e2e8f0;">' + Number(s.revenue).toLocaleString() + '원</td>';
+      html += '<td style="padding:10px 12px;text-align:center;border-bottom:1px solid #e2e8f0;">' + s.rs + '</td>';
+      html += '<td style="padding:10px 12px;text-align:right;border-bottom:1px solid #e2e8f0;font-weight:700;color:#16a34a;">' + Number(s.rsAmount).toLocaleString() + '원</td>';
+      html += '</tr>';
+    });
+
+    // 합계 행
+    html += '<tr style="background:#f0fdf4;">';
+    html += '<td colspan="2" style="padding:10px 12px;font-weight:700;">합계</td>';
+    html += '<td style="padding:10px 12px;text-align:right;font-weight:700;">' + totalClicks.toLocaleString() + '</td>';
+    html += '<td style="padding:10px 12px;text-align:right;font-weight:700;">' + totalCoupons.toLocaleString() + '</td>';
+    html += '<td style="padding:10px 12px;text-align:right;font-weight:700;">' + (totalClicks > 0 ? (totalCoupons / totalClicks * 100).toFixed(1) + '%' : '-') + '</td>';
+    html += '<td style="padding:10px 12px;text-align:right;font-weight:700;">' + totalRevenue.toLocaleString() + '원</td>';
+    html += '<td style="padding:10px 12px;text-align:center;">-</td>';
+    html += '<td style="padding:10px 12px;text-align:right;font-weight:700;color:#16a34a;">' + totalRS.toLocaleString() + '원</td>';
+    html += '</tr>';
+    html += '</table></div>';
+
+    // 푸터
+    html += '<div style="padding:16px 32px;background:#f8fafc;text-align:center;font-size:12px;color:#94a3b8;border:1px solid #e2e8f0;border-top:none;border-radius:0 0 12px 12px;">';
+    html += 'Powered by Flowmus MCN | 문의: ceo@flowmus.com</div>';
+    html += '</div>';
+
+    MailApp.sendEmail({
+      to: chEmail,
+      subject: '[Flowmus MCN] ' + monthStr + ' RS 정산 리포트 — ' + chName,
+      htmlBody: html
+    });
+  }
+}
+
+function formatKRW(amount) {
+  if (amount >= 100000000) return (amount / 100000000).toFixed(1) + '억';
+  if (amount >= 10000) return (amount / 10000).toFixed(0) + '만원';
+  return amount.toLocaleString() + '원';
+}
+
+// ══════════════════════════════════════════════════
+// ── 트리거 자동 설정 ────────────────────────────
+// ══════════════════════════════════════════════════
+
+function setupTriggers() {
+  // 기존 트리거 제거 (중복 방지)
+  var triggers = ScriptApp.getProjectTriggers();
+  triggers.forEach(function(t) {
+    var fn = t.getHandlerFunction();
+    if (fn === 'dailyStockAlert' || fn === 'monthlyReport') {
+      ScriptApp.deleteTrigger(t);
+    }
+  });
+
+  // 매일 오전 9시: 쿠폰 소진 알림
+  ScriptApp.newTrigger('dailyStockAlert')
+    .timeBased()
+    .atHour(9)
+    .everyDays(1)
+    .inTimezone('Asia/Seoul')
+    .create();
+
+  // 매월 1일 오전 10시: RS 리포트
+  ScriptApp.newTrigger('monthlyReport')
+    .timeBased()
+    .onMonthDay(1)
+    .atHour(10)
+    .inTimezone('Asia/Seoul')
+    .create();
+
+  SpreadsheetApp.getUi().alert(
+    '트리거 설정 완료!\n\n'
+    + '1. 쿠폰 소진 알림: 매일 오전 9시\n'
+    + '2. 월별 RS 리포트: 매월 1일 오전 10시\n\n'
+    + '설정 확인: 확장 프로그램 → Apps Script → 트리거'
+  );
 }

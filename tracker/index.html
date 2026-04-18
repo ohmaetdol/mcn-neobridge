@@ -144,6 +144,47 @@
         .powered{text-align:center;margin-top:24px;font-size:12px;color:var(--low);}
         .powered a{color:var(--med);text-decoration:none;}
 
+        /* ── 로그인 오버레이 ── */
+        .login-overlay{
+            position:fixed;top:0;left:0;right:0;bottom:0;z-index:1000;
+            background:#fff;display:flex;align-items:center;justify-content:center;
+        }
+        .login-overlay.hidden{display:none;}
+        .login-card{width:100%;max-width:380px;padding:0 24px;}
+        .login-logo{
+            text-align:center;font-size:13px;font-weight:700;letter-spacing:2px;
+            color:var(--brand);text-transform:uppercase;margin-bottom:32px;
+        }
+        .login-title{font-size:24px;font-weight:800;text-align:center;margin-bottom:6px;}
+        .login-sub{font-size:14px;color:var(--med);text-align:center;margin-bottom:28px;}
+        .login-field{margin-bottom:16px;}
+        .login-field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--navy);}
+        .login-field select,
+        .login-field input{
+            width:100%;padding:14px 16px;border:1.5px solid var(--border);border-radius:10px;
+            font-size:16px;font-family:inherit;color:var(--navy);outline:none;
+            background:#fff;transition:border-color .2s;
+        }
+        .login-field select:focus,
+        .login-field input:focus{border-color:var(--brand);box-shadow:0 0 0 3px rgba(37,99,235,0.06);}
+        .login-btn{
+            width:100%;padding:15px;border:none;border-radius:10px;
+            background:var(--brand);color:#fff;font-size:16px;font-weight:700;
+            cursor:pointer;margin-top:8px;transition:all .2s;
+        }
+        .login-btn:hover{background:#1d4ed8;}
+        .login-btn:disabled{background:var(--low);cursor:not-allowed;}
+        .login-error{
+            text-align:center;font-size:13px;color:var(--red);font-weight:600;
+            margin-top:12px;min-height:20px;
+        }
+        .logout-btn{
+            padding:6px 14px;border:1px solid var(--border);border-radius:8px;
+            background:#fff;font-size:12px;font-weight:600;color:var(--med);
+            cursor:pointer;transition:all .2s;margin-top:10px;
+        }
+        .logout-btn:hover{border-color:var(--red);color:var(--red);}
+
         /* ── 반응형 ── */
         @media(max-width:768px){
             .header{padding:36px 16px 24px;}
@@ -166,11 +207,36 @@
 </head>
 <body>
 
+<!-- ════════ 로그인 오버레이 (채널 뷰 전용) ════════ -->
+<div class="login-overlay hidden" id="loginOverlay">
+    <div class="login-card">
+        <div class="login-logo">Flowmus MCN</div>
+        <h2 class="login-title">채널 대시보드</h2>
+        <p class="login-sub">비밀번호를 입력하여 성과 데이터를 확인하세요</p>
+        <div class="login-field">
+            <label>채널</label>
+            <select id="loginChannel">
+                <option value="">채널을 선택하세요</option>
+                <option value="sajjiknam">사찍남</option>
+                <option value="gogo">현장속으로</option>
+                <option value="moneyroad">머니로드</option>
+            </select>
+        </div>
+        <div class="login-field">
+            <label>비밀번호</label>
+            <input type="password" id="loginPw" placeholder="비밀번호 입력" onkeydown="if(event.key==='Enter')doLogin()">
+        </div>
+        <button class="login-btn" id="loginBtn" onclick="doLogin()">로그인</button>
+        <div class="login-error" id="loginError"></div>
+    </div>
+</div>
+
 <div class="header" id="header">
     <div class="header-profile" id="headerProfile"><img id="headerImg" src="" alt=""></div>
     <h1 id="headerTitle">캠페인 성과 트래커</h1>
     <p id="headerDesc">(주)플로우머스 MCN — 클릭부터 전환까지 투명하게</p>
     <div class="ch-badge" id="headerBadge" style="display:none;"></div>
+    <button class="logout-btn" id="logoutBtn" style="display:none;" onclick="doLogout()">로그아웃</button>
 </div>
 
 <!-- ════════ 유튜버 전용 요약 ════════ -->
@@ -267,7 +333,7 @@ var CHANNELS = {
     }
 };
 
-// ── 샘플 데이터 ──
+// ── 샘플 데이터 (API 연결 전 폴백) ──
 var ALL_CAMPAIGNS = [
     {
         slug:'titan-blog', channel:'sajjiknam', type:'강의', platform:'타이탄클래스',
@@ -306,11 +372,98 @@ function init() {
     CURRENT_CHANNEL = p.get('id') || null;
 
     if (CURRENT_CHANNEL && CHANNELS[CURRENT_CHANNEL]) {
-        setupChannelView(CURRENT_CHANNEL);
+        // 채널 뷰: 인증 필요
+        checkAuth();
+    } else {
+        // 관리자 뷰: 바로 로드
+        loadDashboard();
     }
+}
 
+// ── 인증 체크 ──
+function checkAuth() {
+    var token = sessionStorage.getItem('flowmus_token');
+    if (token) {
+        fetch(TRACKER_API + '?action=verify_token&token=' + encodeURIComponent(token))
+            .then(function(r) { return r.json(); })
+            .then(function(res) {
+                if (res.result === 'ok' && res.channel === CURRENT_CHANNEL) {
+                    onAuthSuccess();
+                } else {
+                    sessionStorage.removeItem('flowmus_token');
+                    showLogin();
+                }
+            })
+            .catch(function() { showLogin(); });
+    } else {
+        showLogin();
+    }
+}
+
+function showLogin() {
+    document.getElementById('loginOverlay').classList.remove('hidden');
+    document.getElementById('loginChannel').value = CURRENT_CHANNEL || '';
+    document.getElementById('loginPw').focus();
+}
+
+function doLogin() {
+    var channel = document.getElementById('loginChannel').value;
+    var pw = document.getElementById('loginPw').value;
+    var errEl = document.getElementById('loginError');
+    var btn = document.getElementById('loginBtn');
+
+    if (!channel) { errEl.textContent = '채널을 선택하세요'; return; }
+    if (!pw) { errEl.textContent = '비밀번호를 입력하세요'; return; }
+
+    errEl.textContent = '';
+    btn.disabled = true;
+    btn.textContent = '확인 중...';
+
+    var body = new URLSearchParams({ action: 'login', channel: channel, pw: pw });
+    fetch(TRACKER_API, { method: 'POST', body: body })
+        .then(function(r) { return r.json(); })
+        .then(function(res) {
+            if (res.result === 'ok' && res.token) {
+                sessionStorage.setItem('flowmus_token', res.token);
+                // URL에 채널이 다르면 업데이트
+                if (channel !== CURRENT_CHANNEL) {
+                    CURRENT_CHANNEL = channel;
+                    history.replaceState(null, '', '?id=' + channel);
+                }
+                onAuthSuccess();
+            } else {
+                errEl.textContent = res.message || '로그인 실패';
+                btn.disabled = false;
+                btn.textContent = '로그인';
+            }
+        })
+        .catch(function() {
+            errEl.textContent = '서버 연결 실패';
+            btn.disabled = false;
+            btn.textContent = '로그인';
+        });
+}
+
+function onAuthSuccess() {
+    document.getElementById('loginOverlay').classList.add('hidden');
+    document.getElementById('logoutBtn').style.display = 'inline-block';
+    setupChannelView(CURRENT_CHANNEL);
+    loadDashboard();
+
+    // 24시간 후 자동 로그아웃
+    setTimeout(function() {
+        doLogout();
+        alert('세션이 만료되었습니다. 다시 로그인해주세요.');
+    }, 24 * 60 * 60 * 1000);
+}
+
+function doLogout() {
+    sessionStorage.removeItem('flowmus_token');
+    location.reload();
+}
+
+function loadDashboard() {
     if (TRACKER_API !== 'APPS_SCRIPT_URL_HERE') {
-        // Apps Script에서 실시간 데이터 로드 (채널 필터 지원)
         var chParam = CURRENT_CHANNEL ? '&channel=' + CURRENT_CHANNEL : '';
         Promise.all([
             fetch(TRACKER_API+'?action=campaigns'+chParam).then(function(r){return r.json();}),
@@ -328,7 +481,7 @@ function init() {
         renderAll();
     }
 
-    // URL에 쿠폰 코드가 있으면 자동 조회
+    var p = new URLSearchParams(location.search);
     var code = p.get('coupon') || p.get('c');
     if (code) {
         document.getElementById('couponInput').value = code;
