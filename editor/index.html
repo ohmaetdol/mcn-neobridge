@@ -7,21 +7,23 @@
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
-  --bg: #f8fafc; --card: #ffffff; --border: #e2e8f0;
-  --navy: #0A1628; --navy-light: #1F4680;
+  --bg: #ffffff; --card: #ffffff; --border: #e2e8f0;
+  --navy: #0A1628; --navy-light: #1F4680; --navy-soft: #132B4D;
   --text: #1a1d23; --text-soft: #64748b; --text-dim: #94a3b8;
   --green: #16a34a; --green-bg: #f0fdf4;
   --orange: #ea580c; --orange-bg: #fff7ed;
   --red: #dc2626; --red-bg: #fef2f2;
   --blue: #2563eb; --blue-bg: #eff6ff;
+  --purple: #7c3aed; --purple-bg: #faf5ff;
   --r: 10px;
 }
 body { font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
 
 /* Header */
-.header { background: var(--navy); color: #fff; padding: 20px 24px; }
+.header { background: var(--navy); color: #fff; padding: 16px 24px; position: sticky; top: 0; z-index: 50; }
 .header-inner { max-width: 800px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-.header h1 { font-size: 18px; font-weight: 700; }
+.header h1 { font-size: 16px; font-weight: 700; letter-spacing: -0.3px; }
+.header-sub { font-size: 11px; color: rgba(255,255,255,0.5); margin-top: 2px; }
 .header-right { display: flex; gap: 8px; align-items: center; }
 .header select { padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.1); color: #fff; font-size: 13px; }
 .header select option { color: #333; }
@@ -30,29 +32,29 @@ body { font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif; background
 .btn-admin.active { background: var(--blue); border-color: var(--blue); }
 
 /* Container */
-.container { max-width: 800px; margin: 0 auto; padding: 24px; }
+.container { max-width: 800px; margin: 0 auto; padding: 20px; }
 
 /* Tabs */
-.tabs { display: flex; gap: 4px; margin-bottom: 24px; background: var(--card); padding: 4px; border-radius: 8px; border: 1px solid var(--border); }
+.tabs { display: flex; gap: 4px; margin-bottom: 20px; background: #f1f5f9; padding: 4px; border-radius: 8px; }
 .tab { flex: 1; padding: 10px; text-align: center; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600; color: var(--text-soft); transition: all 0.2s; }
-.tab.active { background: var(--navy); color: #fff; }
-.tab:hover:not(.active) { background: #f1f5f9; }
+.tab.active { background: var(--navy); color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
+.tab:hover:not(.active) { background: #e2e8f0; }
 .tab-badge { display: inline-block; background: var(--red); color: #fff; font-size: 10px; padding: 1px 6px; border-radius: 10px; margin-left: 4px; }
 
 /* Cards */
-.card { background: var(--card); border: 1px solid var(--border); border-radius: var(--r); padding: 20px; margin-bottom: 12px; transition: box-shadow 0.2s; }
-.card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-.card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
-.card-title { font-size: 15px; font-weight: 700; }
-.card-channel { font-size: 12px; color: var(--text-soft); }
+.card { background: var(--card); border: 1px solid var(--border); border-radius: var(--r); padding: 20px; margin-bottom: 12px; transition: all 0.2s; }
+.card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.06); transform: translateY(-1px); }
+.card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+.card-title { font-size: 15px; font-weight: 700; letter-spacing: -0.3px; }
+.card-channel { font-size: 12px; color: var(--text-soft); margin-top: 2px; }
 .card-meta { display: flex; gap: 16px; font-size: 13px; color: var(--text-soft); margin-bottom: 12px; }
 .card-meta span { display: flex; align-items: center; gap: 4px; }
 
 /* Badges */
-.badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+.badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; white-space: nowrap; }
 .badge-wait { background: var(--blue-bg); color: var(--blue); }
 .badge-applied { background: var(--orange-bg); color: var(--orange); }
-.badge-editing { background: #faf5ff; color: #7c3aed; }
+.badge-editing { background: var(--purple-bg); color: var(--purple); }
 .badge-draft { background: #fefce8; color: #ca8a04; }
 .badge-fix { background: var(--red-bg); color: var(--red); }
 .badge-done { background: var(--green-bg); color: var(--green); }
@@ -61,32 +63,78 @@ body { font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif; background
 .badge-rejected { background: var(--red-bg); color: var(--red); }
 
 /* Buttons */
-.btn { padding: 8px 16px; border-radius: 6px; border: none; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+.btn { padding: 8px 16px; border-radius: 6px; border: none; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.15s; }
+.btn:active { transform: scale(0.97); }
 .btn-primary { background: var(--navy); color: #fff; }
 .btn-primary:hover { background: var(--navy-light); }
 .btn-success { background: var(--green); color: #fff; }
+.btn-success:hover { opacity: 0.9; }
 .btn-danger { background: var(--red); color: #fff; }
+.btn-danger:hover { opacity: 0.9; }
 .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text-soft); }
-.btn-outline:hover { border-color: var(--text-soft); }
+.btn-outline:hover { border-color: var(--navy); color: var(--navy); }
 .btn-sm { padding: 5px 12px; font-size: 12px; }
 .btn-group { display: flex; gap: 8px; margin-top: 12px; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
 /* DDay */
-.dday { font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 6px; }
+.dday { font-size: 11px; font-weight: 700; padding: 3px 8px; border-radius: 4px; }
 .dday-overdue { background: var(--red); color: #fff; }
 .dday-urgent { background: var(--orange); color: #fff; }
 .dday-soon { background: #fbbf24; color: #78350f; }
 .dday-normal { background: #e2e8f0; color: var(--text-soft); }
 
+/* Stepper */
+.stepper { display: flex; align-items: center; gap: 0; margin: 12px 0; }
+.step { display: flex; align-items: center; font-size: 11px; font-weight: 600; color: var(--text-dim); white-space: nowrap; }
+.step.active { color: var(--navy); }
+.step.done { color: var(--green); }
+.step-dot { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; margin-right: 4px; background: #e2e8f0; color: var(--text-dim); flex-shrink: 0; }
+.step.active .step-dot { background: var(--navy); color: #fff; }
+.step.done .step-dot { background: var(--green); color: #fff; }
+.step-line { width: 16px; height: 2px; background: #e2e8f0; margin: 0 4px; flex-shrink: 0; }
+.step-line.done { background: var(--green); }
+
+/* Plan Preview — 구조화된 표시 */
+.plan-preview { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px; margin-top: 10px; font-size: 13px; line-height: 1.6; }
+.plan-section { margin-bottom: 10px; }
+.plan-section:last-child { margin-bottom: 0; }
+.plan-tag { display: inline-block; background: var(--navy); color: #fff; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 4px; margin-bottom: 4px; letter-spacing: 0.3px; }
+.plan-content { color: #334155; white-space: pre-wrap; padding-left: 2px; }
+
 /* Modal */
-.modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 100; align-items: center; justify-content: center; }
+.modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 100; align-items: center; justify-content: center; animation: fadeIn 0.15s; }
 .modal-overlay.show { display: flex; }
-.modal { background: var(--card); border-radius: 12px; padding: 24px; width: 90%; max-width: 500px; max-height: 90vh; overflow-y: auto; }
-.modal h3 { font-size: 16px; margin-bottom: 16px; }
-.modal label { display: block; font-size: 13px; font-weight: 600; color: var(--text-soft); margin-bottom: 4px; margin-top: 12px; }
-.modal input, .modal textarea { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px; font-family: inherit; }
+.modal { background: var(--card); border-radius: 14px; padding: 24px; width: 92%; max-width: 520px; max-height: 90vh; overflow-y: auto; animation: slideUp 0.2s; }
+.modal h3 { font-size: 16px; margin-bottom: 4px; letter-spacing: -0.3px; }
+.modal label { display: block; font-size: 13px; font-weight: 600; color: var(--text-soft); margin-bottom: 4px; margin-top: 14px; }
+.modal input, .modal textarea, .modal select { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 14px; font-family: inherit; transition: border-color 0.15s; }
+.modal input:focus, .modal textarea:focus, .modal select:focus { outline: none; border-color: var(--navy); }
 .modal textarea { min-height: 120px; resize: vertical; }
-.modal .btn-group { justify-content: flex-end; }
+.modal .btn-group { justify-content: flex-end; margin-top: 16px; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Toast */
+.toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: var(--navy); color: #fff; padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; z-index: 200; box-shadow: 0 4px 12px rgba(0,0,0,0.2); animation: toastIn 0.3s; }
+.toast.error { background: var(--red); }
+.toast.success { background: var(--green); }
+@keyframes toastIn { from { opacity: 0; transform: translate(-50%, 20px); } to { opacity: 1; transform: translate(-50%, 0); } }
+
+/* Checklist */
+.checklist { background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 14px; margin: 12px 0; }
+.checklist-title { font-size: 13px; font-weight: 700; color: #92400e; margin-bottom: 8px; }
+.check-item { display: flex; align-items: flex-start; gap: 8px; padding: 4px 0; font-size: 13px; color: #78350f; }
+.check-item input[type="checkbox"] { margin-top: 3px; accent-color: var(--green); }
+
+/* Guide panel */
+.guide-panel { background: #f0f4ff; border: 1px solid #dbe4ff; border-radius: 8px; padding: 14px; margin-bottom: 16px; font-size: 12px; line-height: 1.7; color: #334155; }
+.guide-section { margin-top: 10px; }
+.guide-section b { font-size: 12px; }
+.guide-data { color: #6366f1; font-weight: 600; }
+.guide-channel { background: #fff; border: 1px solid #dbe4ff; border-radius: 6px; padding: 10px; margin-top: 10px; font-size: 12px; }
+.guide-channel-title { font-weight: 700; color: var(--navy); margin-bottom: 4px; }
 
 /* Loading */
 .loading { text-align: center; padding: 60px; color: var(--text-dim); }
@@ -95,16 +143,22 @@ body { font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif; background
 
 /* Empty */
 .empty { text-align: center; padding: 48px 24px; color: var(--text-dim); }
-.empty-icon { font-size: 36px; margin-bottom: 12px; }
+.empty-icon { font-size: 32px; margin-bottom: 8px; opacity: 0.5; }
 
-/* Plan preview */
-.plan-preview { background: #f8fafc; padding: 12px; border-radius: 6px; font-size: 13px; line-height: 1.6; margin-top: 8px; white-space: pre-wrap; }
+/* Stat bar (관리자) */
+.stat-bar { display: flex; gap: 8px; margin-bottom: 16px; }
+.stat-item { flex: 1; background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 12px; text-align: center; }
+.stat-num { font-size: 22px; font-weight: 800; color: var(--navy); }
+.stat-label { font-size: 11px; color: var(--text-soft); margin-top: 2px; }
 
 /* Responsive */
 @media (max-width: 600px) {
-  .header-inner { flex-direction: column; gap: 12px; align-items: flex-start; }
+  .header-inner { flex-direction: column; gap: 10px; align-items: flex-start; }
   .card-meta { flex-wrap: wrap; gap: 8px; }
   .tabs { flex-wrap: wrap; }
+  .stat-bar { flex-wrap: wrap; }
+  .stat-item { min-width: calc(50% - 4px); }
+  .stepper { flex-wrap: wrap; gap: 2px; }
 }
 </style>
 </head>
@@ -112,7 +166,10 @@ body { font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif; background
 
 <div class="header">
   <div class="header-inner">
-    <h1>편집자 보드</h1>
+    <div>
+      <h1>편집자 보드</h1>
+      <div class="header-sub">Flowmus MCN</div>
+    </div>
     <div class="header-right">
       <select id="editorSelect" onchange="onEditorChange()">
         <option value="">편집자 선택</option>
@@ -129,15 +186,15 @@ body { font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif; background
       <div class="tab active" data-tab="available" onclick="switchTab('available')">대기 영상</div>
       <div class="tab" data-tab="mywork" onclick="switchTab('mywork')">내 작업 <span id="myworkBadge" class="tab-badge" style="display:none;">0</span></div>
     </div>
-
     <div id="availableTab"></div>
     <div id="myworkTab" style="display:none;"></div>
   </div>
 
   <!-- 관리자 뷰 -->
   <div id="adminView" style="display:none;">
+    <div id="adminStats"></div>
     <div class="tabs">
-      <div class="tab active" data-tab="admin-all" onclick="switchAdminTab('admin-all')">전체 영상</div>
+      <div class="tab active" data-tab="admin-all" onclick="switchAdminTab('admin-all')">전체</div>
       <div class="tab" data-tab="admin-pending" onclick="switchAdminTab('admin-pending')">승인 대기 <span id="pendingBadge" class="tab-badge" style="display:none;">0</span></div>
       <div class="tab" data-tab="admin-review" onclick="switchAdminTab('admin-review')">초안 검토</div>
     </div>
@@ -152,101 +209,101 @@ body { font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif; background
   <div class="modal">
     <h3>편집 신청</h3>
     <p id="applyVideoTitle" style="font-size:14px;color:var(--text-soft);margin-bottom:4px;"></p>
-    <p id="applyGuideToggle" style="font-size:12px;color:var(--blue);cursor:pointer;margin-bottom:12px;" onclick="toggleGuide()">편집 기획서 작성 가이드 보기</p>
+    <p id="applyGuideToggle" style="font-size:12px;color:var(--blue);cursor:pointer;margin-bottom:4px;text-decoration:underline;" onclick="toggleGuide()">편집 기획서 작성 가이드 보기</p>
+
+    <!-- 채널별 편집코치 가이드 -->
+    <div id="channelGuide" style="display:none;"></div>
 
     <!-- 가이드 패널 -->
-    <div id="applyGuide" style="display:none;background:#f0f4ff;border:1px solid #dbe4ff;border-radius:8px;padding:14px;margin-bottom:16px;font-size:12px;line-height:1.7;color:#334155;">
+    <div id="applyGuide" class="guide-panel" style="display:none;">
       <b style="font-size:13px;">편집 기획서 작성 가이드</b>
-      <div style="margin-top:8px;">
+
+      <div class="guide-section">
         <b>오프닝 (0~30초) — 승패가 결정되는 구간</b><br>
-        - 첫 3초: 가장 강한 씬/멘트로 시작 (시청자 50~60%가 여기서 이탈)<br>
+        - 첫 3초: 가장 강한 씬/멘트로 시작 <span class="guide-data">(시청자 50~60%가 여기서 이탈)</span><br>
         - 15초 내: "이 영상을 왜 봐야 하는지" 설득 완료<br>
         - 25~35초: 패턴 인터럽트 (앵글 전환, 효과음, 자막 강조)<br>
-        <span style="color:#6366f1;">→ 처음 30초에서 70% 유지하면 알고리즘이 추천 시작</span>
+        <span class="guide-data">→ 처음 30초에서 70% 유지하면 알고리즘이 추천 시작</span>
       </div>
-      <div style="margin-top:8px;">
-        <b>본편 — 컷 리듬이 핵심</b><br>
+
+      <div class="guide-section">
+        <b>본편 — 컷 리듬</b><br>
         - 15~25초마다 시각 변화 (B-roll, 줌컷, 자막, 효과음)<br>
         - 2~3분마다 "버스트 시퀀스" (빠른 컷 5~10개) → 다시 안정<br>
-        - 킬러 씬은 7~10분 사이에 집중 배치 (사찍남 데이터: 뒤로 밀리면 리텐션 하락)<br>
-        - 6~12분 구간은 "안전지대" — 이탈률이 거의 없음
+        - <span class="guide-data">킬러 씬은 7~10분 사이에 집중 배치</span> (데이터: 뒤로 밀리면 리텐션 하락)<br>
+        - 6~12분 구간 = "안전지대" — 이탈률 거의 없음<br>
+        - <span class="guide-data">8분 이상 시청 시 알고리즘 부스트</span>
       </div>
-      <div style="margin-top:8px;">
-        <b>자막 효과 (데이터)</b><br>
-        - 자막 있는 영상: 91%가 끝까지 시청 (없으면 66%)<br>
-        - 조회수 12~13% 상승, 모바일에서 효과 더 큼
-      </div>
-      <div style="margin-top:8px;">
-        <b>BGM 볼륨 기준</b><br>
-        - 차분한 구간: 목소리 대비 -20~-25dB<br>
-        - 에너지 구간: 목소리 대비 -8~-12dB<br>
-        - 템포: 설명/교육 60~80 BPM / 빌드업/하이라이트 100~120 BPM
+
+      <div class="guide-section">
+        <b>자막</b>: 자막 있으면 <span class="guide-data">시청 완료율 91%</span> (없으면 66%), 조회수 +12%<br>
+        <b>BGM</b>: 차분 -20~-25dB, 에너지 -8~-12dB | 설명 60~80 BPM, 하이라이트 100~120 BPM
       </div>
     </div>
 
     <label>1. 편집 스타일 <span style="color:var(--red);">*</span></label>
-    <select id="applyStyle" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:6px;font-size:14px;font-family:inherit;">
-      <option value="">스타일을 선택하세요</option>
-      <option value="예능 컷편집 (15~25초 간격 컷 + 자막 강조 + 효과음)">예능 컷편집 — 15~25초 간격 컷, 자막 강조, 효과음</option>
+    <select id="applyStyle">
+      <option value="">스타일 선택</option>
+      <option value="예능 컷편집 (15~25초 간격 컷 + 자막 강조 + 효과음)">예능 컷편집 — 15~25초 컷, 자막 강조, 효과음</option>
       <option value="감성 브이로그 (BGM 중심 + 롱테이크 + 최소 자막)">감성 브이로그 — BGM 중심, 롱테이크, 최소 자막</option>
-      <option value="스토리 재구성 (시간순 해체 + 결과→원인 도치 + 내러티브 루프)">스토리 재구성 — 시간순 해체, 결과부터, 내러티브 루프</option>
-      <option value="하이브리드 (설명=빠른 컷 10~15초 + 감성=슬로우 40초 혼합)">하이브리드 — 설명 구간 빠른 컷 + 감성 구간 슬로우</option>
+      <option value="스토리 재구성 (시간순 해체 + 결과→원인 도치 + 내러티브 루프)">스토리 재구성 — 시간순 해체, 결과부터</option>
+      <option value="하이브리드 (설명=빠른 컷 10~15초 + 감성=슬로우 40초 혼합)">하이브리드 — 설명 빠른 컷 + 감성 슬로우</option>
       <option value="직접 입력">직접 입력</option>
     </select>
     <input type="text" id="applyStyleCustom" placeholder="직접 입력: 편집 톤/스타일 설명" style="display:none;margin-top:6px;">
 
-    <label>2. 오프닝 설계 (0~30초) <span style="color:var(--red);">*</span></label>
-    <select id="applyHookType" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:6px;font-size:14px;margin-bottom:6px;">
-      <option value="">훅 유형을 선택하세요</option>
-      <option value="결과 먼저 (가장 강한 씬/숫자/반전으로 시작)">결과 먼저 — 가장 강한 씬/숫자/반전으로 시작</option>
-      <option value="공감형 (시청자 고민/상황으로 시작 → '혹시 이런 경험?')">공감형 — 시청자 고민/상황으로 시작</option>
-      <option value="질문형 (강한 질문 던지기 → 답은 본편에서)">질문형 — 강한 질문 던지기, 답은 본편에서</option>
-      <option value="도치형 (결말/클라이맥스부터 → 되감기)">도치형 — 결말/클라이맥스부터 시작</option>
+    <label>2. 오프닝 훅 (0~30초) <span style="color:var(--red);">*</span></label>
+    <select id="applyHookType" style="margin-bottom:6px;">
+      <option value="">훅 유형 선택</option>
+      <option value="결과 먼저 (가장 강한 씬/숫자/반전으로 시작)">결과 먼저 — 가장 강한 씬으로 시작</option>
+      <option value="공감형 (시청자 고민/상황으로 시작)">공감형 — 시청자 고민/상황으로 시작</option>
+      <option value="질문형 (강한 질문 던지기 → 답은 본편에서)">질문형 — 강한 질문 → 답은 본편에서</option>
+      <option value="도치형 (결말/클라이맥스부터 → 되감기)">도치형 — 결말부터 시작</option>
     </select>
-    <textarea id="applyHookDetail" placeholder="구체적으로: 어떤 장면/멘트로 시작할 건지 (타임코드 포함)&#10;예: 00:23:15 '월 3천만원 벌었는데 직원은 0명' 멘트 → 3초 컷 → 인트로" style="min-height:55px;"></textarea>
+    <textarea id="applyHookDetail" placeholder="어떤 장면/멘트로 시작할 건지 (타임코드 포함)&#10;예: 00:23:15 '월 3천만원 벌었는데 직원은 0명' → 3초 컷 → 인트로" style="min-height:50px;"></textarea>
 
-    <label>3. 본편 구성 <span style="color:var(--red);">*</span></label>
-    <textarea id="applyStructure" placeholder="ACT 구조로 적어주세요:&#10;&#10;ACT1 (0:00~3:00) 훅 + 인트로: [내용]&#10;ACT2 (3:00~7:00) 메인 스토리 전개: [내용]&#10;ACT3 (7:00~10:00) 킬러 구간/반전/핵심 공개: [내용]&#10;ACT4 (10:00~끝) 정리 + CTA: [내용]&#10;&#10;* 킬러 구간은 7~10분에 집중 배치 권장" style="min-height:100px;"></textarea>
+    <label>3. 본편 ACT 구성 <span style="color:var(--red);">*</span></label>
+    <textarea id="applyStructure" placeholder="ACT1 (0:00~3:00) 훅 + 인트로:&#10;ACT2 (3:00~7:00) 메인 스토리:&#10;ACT3 (7:00~10:00) 킬러 구간/반전:&#10;ACT4 (10:00~끝) 정리 + CTA:&#10;&#10;* 킬러 구간은 7~10분 배치 권장" style="min-height:90px;"></textarea>
 
     <label>4. 킬러 씬 TOP 3 <span style="color:var(--red);">*</span></label>
-    <textarea id="applyKillerScenes" placeholder="원본에서 절대 삭제하면 안 되는 장면 3개 (타임코드 필수):&#10;&#10;1. 00:__:__ [장면 설명 + 왜 강한지]&#10;2. 00:__:__ [장면 설명 + 왜 강한지]&#10;3. 00:__:__ [장면 설명 + 왜 강한지]&#10;&#10;* 이 중 1개는 오프닝 훅으로 사용할 것" style="min-height:80px;"></textarea>
+    <textarea id="applyKillerScenes" placeholder="절대 삭제 불가 장면 3개 (타임코드 필수):&#10;1. 00:__:__ [장면] — [이유]&#10;2. 00:__:__ [장면] — [이유]&#10;3. 00:__:__ [장면] — [이유]&#10;&#10;* 1개는 오프닝 훅으로 사용" style="min-height:70px;"></textarea>
 
-    <label>5. 예상 러닝타임</label>
-    <select id="applyRuntime" style="width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:6px;font-size:14px;">
-      <option value="">선택</option>
-      <option value="8분 이내 (숏폼/하이라이트)">8분 이내 — 숏폼/하이라이트</option>
-      <option value="8~12분 (핵심만, 리텐션 최적)">8~12분 — 핵심만 (리텐션 최적 구간)</option>
-      <option value="12~18분 (표준 롱폼)">12~18분 — 표준 롱폼</option>
-      <option value="18~25분 (풀 스토리)">18~25분 — 풀 스토리</option>
-    </select>
-    <p style="font-size:11px;color:var(--text-dim);margin-top:4px;">8분 이상 시청 시 알고리즘 부스트 / 6~12분 구간은 이탈률 최저</p>
-
-    <label>6. 자막 / BGM</label>
-    <div style="display:flex;gap:8px;margin-top:4px;">
-      <select id="applySubtitle" style="flex:1;padding:8px;border:1px solid var(--border);border-radius:6px;font-size:13px;">
-        <option value="">자막 스타일</option>
-        <option value="전체 자막 (시청 완료율 91%, 조회수 +12%)">전체 자막 (완료율 91%)</option>
-        <option value="핵심 강조 자막 (키워드/숫자/반전만)">핵심 강조 (키워드/숫자만)</option>
-        <option value="자막 없음">자막 없음</option>
-      </select>
-      <select id="applyBgm" style="flex:1;padding:8px;border:1px solid var(--border);border-radius:6px;font-size:13px;">
-        <option value="">BGM 방향</option>
-        <option value="감성/잔잔 (60~80 BPM, -20dB)">감성/잔잔 (60~80 BPM)</option>
-        <option value="업비트/밝은 (100~120 BPM, -12dB)">업비트/밝은 (100~120 BPM)</option>
-        <option value="감정 변화 포인트에만 (구간별 전환)">감정 변화 포인트에만</option>
-        <option value="BGM 없음 (토크 중심)">BGM 없음 (토크 중심)</option>
+    <label>5. 러닝타임 / 자막 / BGM</label>
+    <div style="display:flex;gap:6px;margin-bottom:6px;">
+      <select id="applyRuntime" style="flex:1;">
+        <option value="">러닝타임</option>
+        <option value="8분 이내 (숏폼)">8분 이내</option>
+        <option value="8~12분 (리텐션 최적)">8~12분 (최적)</option>
+        <option value="12~18분 (표준)">12~18분</option>
+        <option value="18~25분 (풀)">18~25분</option>
       </select>
     </div>
+    <div style="display:flex;gap:6px;">
+      <select id="applySubtitle" style="flex:1;">
+        <option value="">자막</option>
+        <option value="전체 자막 (완료율 91%)">전체 (완료율 91%)</option>
+        <option value="핵심 강조 (키워드/숫자만)">핵심 강조</option>
+        <option value="자막 없음">없음</option>
+      </select>
+      <select id="applyBgm" style="flex:1;">
+        <option value="">BGM</option>
+        <option value="감성 (60~80 BPM)">감성 60~80 BPM</option>
+        <option value="업비트 (100~120 BPM)">업비트 100~120 BPM</option>
+        <option value="감정 포인트에만">감정 포인트에만</option>
+        <option value="BGM 없음">없음</option>
+      </select>
+    </div>
+    <p style="font-size:11px;color:var(--text-dim);margin-top:4px;">8분+ 알고리즘 부스트 / 6~12분 이탈률 최저 / 자막 시 조회수 +12%</p>
 
-    <label>7. 참고 영상 / 메모 <span style="font-weight:400;color:var(--text-dim);">(선택)</span></label>
-    <textarea id="applyMemo" placeholder="참고할 편집 스타일 유튜브 링크, 특별 요청사항 등" style="min-height:45px;"></textarea>
+    <label>6. 참고 / 메모 <span style="font-weight:400;color:var(--text-dim);">(선택)</span></label>
+    <textarea id="applyMemo" placeholder="참고 유튜브 링크, 특별 요청 등" style="min-height:40px;"></textarea>
 
     <label>예상 완료일 <span style="color:var(--red);">*</span></label>
     <input type="date" id="applyExpected">
 
     <div class="btn-group">
       <button class="btn btn-outline" onclick="closeModal('applyModal')">취소</button>
-      <button class="btn btn-primary" onclick="submitApply()">신청하기</button>
+      <button class="btn btn-primary" id="applySubmitBtn" onclick="submitApply()">신청하기</button>
     </div>
   </div>
 </div>
@@ -255,11 +312,24 @@ body { font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif; background
 <div class="modal-overlay" id="draftModal">
   <div class="modal">
     <h3>초안 제출</h3>
-    <label>드롭박스 링크 (편집 완료 파일)</label>
+    <p style="font-size:13px;color:var(--text-soft);margin-bottom:12px;">편집 완료된 파일의 드롭박스 링크를 입력해주세요.</p>
+
+    <div class="checklist">
+      <div class="checklist-title">제출 전 체크리스트</div>
+      <label class="check-item"><input type="checkbox" class="draft-check"> Never-Cut 씬이 모두 포함되어 있는가?</label>
+      <label class="check-item"><input type="checkbox" class="draft-check"> 오프닝 30초 안에 훅이 있는가?</label>
+      <label class="check-item"><input type="checkbox" class="draft-check"> 킬러 씬이 7~10분 사이에 배치되었는가?</label>
+      <label class="check-item"><input type="checkbox" class="draft-check"> 자막/BGM이 기획서대로 적용되었는가?</label>
+      <label class="check-item"><input type="checkbox" class="draft-check"> 최종 러닝타임이 기획 범위 내인가?</label>
+    </div>
+
+    <label>드롭박스 링크</label>
     <input type="url" id="draftLink" placeholder="https://www.dropbox.com/...">
+    <label>편집 노트 <span style="font-weight:400;color:var(--text-dim);">(선택)</span></label>
+    <textarea id="draftNote" placeholder="특이사항, 기획서와 달라진 점, 확인이 필요한 부분 등" style="min-height:60px;"></textarea>
     <div class="btn-group">
       <button class="btn btn-outline" onclick="closeModal('draftModal')">취소</button>
-      <button class="btn btn-success" onclick="submitDraft()">제출하기</button>
+      <button class="btn btn-success" id="draftSubmitBtn" onclick="submitDraft()">제출하기</button>
     </div>
   </div>
 </div>
@@ -282,7 +352,7 @@ body { font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif; background
   <div class="modal">
     <h3>피드백 보내기</h3>
     <label>수정 요청사항</label>
-    <textarea id="feedbackText" placeholder="수정이 필요한 부분을 알려주세요." style="min-height:100px;"></textarea>
+    <textarea id="feedbackText" placeholder="타임코드와 함께 수정이 필요한 부분을 알려주세요.&#10;&#10;예: 00:03:20 이 구간 컷이 너무 빠름, 여유 있게&#10;예: 00:08:00 BGM 볼륨 낮춰주세요" style="min-height:100px;"></textarea>
     <div class="btn-group">
       <button class="btn btn-outline" onclick="closeModal('feedbackModal')">취소</button>
       <button class="btn btn-primary" onclick="submitFeedback()">피드백 보내기</button>
@@ -298,25 +368,35 @@ var isAdmin = false;
 var currentVideoId = '';
 var currentActionEditor = '';
 var ADMIN_PW = 'flowmus2026';
+var channelGuides = {};
+
+// ── Toast ──
+function toast(msg, type) {
+  var el = document.createElement('div');
+  el.className = 'toast' + (type ? ' ' + type : '');
+  el.textContent = msg;
+  document.body.appendChild(el);
+  setTimeout(function() { el.style.opacity = '0'; el.style.transition = 'opacity 0.3s'; }, 2500);
+  setTimeout(function() { el.remove(); }, 3000);
+}
 
 // ── 초기화 ──
 function init() {
-  // URL로 admin 직접 접근 차단
   var params = new URLSearchParams(window.location.search);
   if (params.get('admin') === 'true') {
     var pw = prompt('관리자 비밀번호를 입력하세요:');
     if (pw === ADMIN_PW) {
       isAdmin = true;
-      document.getElementById('adminBtn').classList.add('active');
     }
   }
 
   if (!API_URL) {
     document.querySelector('.container').innerHTML =
-      '<div class="empty"><div class="empty-icon">!</div><p>API_URL이 설정되지 않았습니다.<br>Apps Script 배포 후 URL을 입력해주세요.</p></div>';
+      '<div class="empty"><div class="empty-icon">!</div><p>API_URL이 설정되지 않았습니다.</p></div>';
     return;
   }
   loadEditors();
+  loadChannelGuides();
   if (isAdmin) {
     document.getElementById('adminBtn').classList.add('active');
     document.getElementById('editorView').style.display = 'none';
@@ -327,20 +407,29 @@ function init() {
   }
 }
 
-// ── API 호출 ──
+// ── API ──
 function api(action, params) {
   var url = API_URL + '?action=' + action;
   if (params) {
     for (var key in params) url += '&' + key + '=' + encodeURIComponent(params[key]);
   }
-  return fetch(url).then(function(r) { return r.json(); });
+  return fetch(url).then(function(r) { return r.json(); }).catch(function() { toast('서버 연결 실패', 'error'); return {}; });
 }
 
 function apiPost(data) {
   return fetch(API_URL, {
     method: 'POST', headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(data)
-  }).then(function(r) { return r.json(); });
+  }).then(function(r) { return r.json(); }).catch(function() { toast('서버 연결 실패', 'error'); return {}; });
+}
+
+// ── 편집코치 가이드 로드 ──
+function loadChannelGuides() {
+  api('videos').then(function(data) {
+    if (data.guides) {
+      data.guides.forEach(function(g) { channelGuides[g.channel] = g.guide; });
+    }
+  });
 }
 
 // ── 편집자 로드 ──
@@ -353,7 +442,6 @@ function loadEditors() {
       opt.textContent = e.name + (e.specialty ? ' (' + e.specialty + ')' : '');
       sel.appendChild(opt);
     });
-    // 저장된 편집자 복원
     var saved = localStorage.getItem('editorBoard_editor');
     if (saved) { sel.value = saved; currentEditor = saved; loadMyWork(); }
   });
@@ -368,7 +456,7 @@ function onEditorChange() {
 // ── 영상 목록 ──
 function loadVideos() {
   var el = document.getElementById('availableTab');
-  el.innerHTML = '<div class="loading"><div class="spinner"></div><p style="margin-top:8px;">로딩 중...</p></div>';
+  el.innerHTML = '<div class="loading"><div class="spinner"></div><p style="margin-top:8px;font-size:13px;">영상 목록 불러오는 중...</p></div>';
 
   api('videos').then(function(data) {
     var videos = (data.videos || []).filter(function(v) { return v.status === '대기'; });
@@ -390,9 +478,10 @@ function videoCard(v) {
     '<span>마감: ' + (v.deadline || '-') + '</span>' +
     (dday !== null ? '<span class="dday ' + ddayClass(dday) + '">' + ddayText(dday) + '</span>' : '') +
     '</div>' +
-    (v.dropbox ? '<a href="' + v.dropbox + '" target="_blank" class="btn btn-outline btn-sm" style="margin-right:8px;">드롭박스 원본</a>' : '') +
-    '<button class="btn btn-primary btn-sm" onclick="openApply(\'' + v.id + '\',\'' + esc(v.title || v.id) + '\')">신청하기</button>' +
-    '</div>';
+    '<div class="btn-group">' +
+    (v.dropbox ? '<a href="' + v.dropbox + '" target="_blank" class="btn btn-outline btn-sm">원본 보기</a>' : '') +
+    '<button class="btn btn-primary btn-sm" onclick="openApply(\'' + v.id + '\',\'' + esc(v.title || v.id) + '\',\'' + esc(v.channel || '') + '\')">신청하기</button>' +
+    '</div></div>';
 }
 
 // ── 내 작업 ──
@@ -423,26 +512,79 @@ function myWorkCard(w) {
     btns = '<button class="btn btn-success btn-sm" onclick="openDraft(\'' + w.videoId + '\')">초안 제출</button>';
   }
 
+  // 상태 스테퍼
+  var steps = ['신청', '승인', '편집중', '초안제출', '완료'];
+  var currentStep = 0;
+  if (w.approvalStatus === '반려') currentStep = -1;
+  else if (v.status === '완료') currentStep = 4;
+  else if (v.status === '초안제출' || v.status === '수정중') currentStep = 3;
+  else if (v.status === '편집중') currentStep = 2;
+  else if (w.approvalStatus === '승인') currentStep = 1;
+  else currentStep = 0;
+
+  var stepperHtml = '<div class="stepper">';
+  for (var i = 0; i < steps.length; i++) {
+    var cls = i < currentStep ? 'done' : (i === currentStep ? 'active' : '');
+    var dot = i < currentStep ? 'V' : (i + 1);
+    stepperHtml += '<div class="step ' + cls + '"><span class="step-dot">' + dot + '</span>' + steps[i] + '</div>';
+    if (i < steps.length - 1) stepperHtml += '<div class="step-line' + (i < currentStep ? ' done' : '') + '"></div>';
+  }
+  stepperHtml += '</div>';
+
+  if (w.approvalStatus === '반려') {
+    stepperHtml = '<div style="background:var(--red-bg);color:var(--red);padding:8px 12px;border-radius:6px;font-size:13px;font-weight:600;margin:8px 0;">반려됨' + (w.memo ? ' — ' + w.memo : '') + '</div>';
+  }
+
   return '<div class="card">' +
     '<div class="card-header"><div><div class="card-title">' + (v.title || w.videoId) + '</div>' +
     '<div class="card-channel">' + (v.channel || '') + (v.guest ? ' / ' + v.guest : '') + '</div></div>' +
     '<span class="badge ' + approvalBadge(w.approvalStatus) + '">' + w.approvalStatus + '</span></div>' +
+    stepperHtml +
     '<div class="card-meta">' +
     '<span>신청일: ' + w.applyDate + '</span>' +
     '<span>마감: ' + (v.deadline || '-') + '</span>' +
     (dday !== null ? '<span class="dday ' + ddayClass(dday) + '">' + ddayText(dday) + '</span>' : '') +
     '</div>' +
-    (w.plan ? '<div class="plan-preview">' + w.plan + '</div>' : '') +
-    (w.memo ? '<div style="font-size:12px;color:var(--text-soft);margin-top:8px;">' + w.memo + '</div>' : '') +
+    (w.plan ? formatPlan(w.plan) : '') +
     '<div class="btn-group">' + btns + '</div>' +
     '</div>';
+}
+
+// ── 기획서 파싱 & 포매팅 ──
+function formatPlan(text) {
+  if (!text) return '';
+  var sections = text.split('\n');
+  var html = '<div class="plan-preview">';
+  var currentTag = '';
+  var buffer = '';
+
+  for (var i = 0; i < sections.length; i++) {
+    var line = sections[i];
+    var tagMatch = line.match(/^\[(.+?)\]\s*(.*)/);
+    if (tagMatch) {
+      if (currentTag) {
+        html += '<div class="plan-section"><span class="plan-tag">' + currentTag + '</span><div class="plan-content">' + buffer.trim() + '</div></div>';
+      }
+      currentTag = tagMatch[1];
+      buffer = tagMatch[2] ? tagMatch[2] + '\n' : '';
+    } else {
+      buffer += line + '\n';
+    }
+  }
+  if (currentTag) {
+    html += '<div class="plan-section"><span class="plan-tag">' + currentTag + '</span><div class="plan-content">' + buffer.trim() + '</div></div>';
+  } else if (buffer.trim()) {
+    html += '<div class="plan-content">' + buffer.trim() + '</div>';
+  }
+  html += '</div>';
+  return html;
 }
 
 // ── 관리자 ──
 function toggleAdmin() {
   if (!isAdmin) {
     var pw = prompt('관리자 비밀번호를 입력하세요:');
-    if (pw !== ADMIN_PW) { alert('비밀번호가 틀렸습니다.'); return; }
+    if (pw !== ADMIN_PW) { toast('비밀번호가 틀렸습니다.', 'error'); return; }
   }
   isAdmin = !isAdmin;
   var btn = document.getElementById('adminBtn');
@@ -461,17 +603,34 @@ function loadAdminData() {
     var videos = data.videos || [];
     var apps = data.applications || [];
 
+    // 통계 바
+    var waiting = videos.filter(function(v) { return v.status === '대기'; }).length;
+    var editing = videos.filter(function(v) { return v.status === '편집중' || v.status === '수정중'; }).length;
+    var pending = apps.filter(function(a) { return a.approvalStatus === '대기'; }).length;
+    var done = videos.filter(function(v) { return v.status === '완료'; }).length;
+
+    document.getElementById('adminStats').innerHTML =
+      '<div class="stat-bar">' +
+      '<div class="stat-item"><div class="stat-num">' + waiting + '</div><div class="stat-label">대기</div></div>' +
+      '<div class="stat-item"><div class="stat-num" style="color:var(--purple);">' + editing + '</div><div class="stat-label">편집중</div></div>' +
+      '<div class="stat-item"><div class="stat-num" style="color:var(--orange);">' + pending + '</div><div class="stat-label">승인 대기</div></div>' +
+      '<div class="stat-item"><div class="stat-num" style="color:var(--green);">' + done + '</div><div class="stat-label">완료</div></div>' +
+      '</div>';
+
     // 전체 영상
     allEl.innerHTML = videos.length === 0
       ? '<div class="empty"><p>등록된 영상이 없습니다.</p></div>'
       : videos.map(function(v) {
           var assigns = apps.filter(function(a) { return a.videoId === v.id && a.approvalStatus === '승인'; });
           var assignText = assigns.length > 0 ? assigns.map(function(a) { return a.editor; }).join(', ') : '미배정';
+          var dday = getDday(v.deadline);
           return '<div class="card">' +
             '<div class="card-header"><div><div class="card-title">' + (v.title || v.id) + '</div>' +
             '<div class="card-channel">' + v.channel + (v.guest ? ' / ' + v.guest : '') + ' | 편집자: ' + assignText + '</div></div>' +
             '<span class="badge ' + statusBadge(v.status) + '">' + v.status + '</span></div>' +
-            '<div class="card-meta"><span>마감: ' + (v.deadline || '-') + '</span></div>' +
+            '<div class="card-meta"><span>마감: ' + (v.deadline || '-') + '</span>' +
+            (dday !== null ? '<span class="dday ' + ddayClass(dday) + '">' + ddayText(dday) + '</span>' : '') +
+            '</div>' +
             (v.status === '초안제출' ? '<div class="btn-group">' +
               '<button class="btn btn-success btn-sm" onclick="adminComplete(\'' + v.id + '\')">완료 처리</button>' +
               '<button class="btn btn-outline btn-sm" onclick="openFeedback(\'' + v.id + '\',\'' + (assigns[0] ? assigns[0].editor : '') + '\')">피드백</button></div>' : '') +
@@ -479,19 +638,19 @@ function loadAdminData() {
         }).join('');
 
     // 승인 대기
-    var pending = apps.filter(function(a) { return a.approvalStatus === '대기'; });
+    var pendingApps = apps.filter(function(a) { return a.approvalStatus === '대기'; });
     var pendingBadge = document.getElementById('pendingBadge');
-    if (pending.length > 0) { pendingBadge.style.display = 'inline'; pendingBadge.textContent = pending.length; }
+    if (pendingApps.length > 0) { pendingBadge.style.display = 'inline'; pendingBadge.textContent = pendingApps.length; }
     else { pendingBadge.style.display = 'none'; }
 
-    document.getElementById('adminPendingTab').innerHTML = pending.length === 0
+    document.getElementById('adminPendingTab').innerHTML = pendingApps.length === 0
       ? '<div class="empty"><p>승인 대기 중인 신청이 없습니다.</p></div>'
-      : pending.map(function(a) {
+      : pendingApps.map(function(a) {
           return '<div class="card">' +
             '<div class="card-header"><div><div class="card-title">' + a.editor + ' → ' + a.videoId + '</div>' +
             '<div class="card-channel">신청일: ' + a.applyDate + ' | 예상완료: ' + (a.expectedDate || '-') + '</div></div>' +
             '<span class="badge badge-pending">' + a.approvalStatus + '</span></div>' +
-            (a.plan ? '<div class="plan-preview">' + a.plan + '</div>' : '') +
+            (a.plan ? formatPlan(a.plan) : '') +
             '<div class="btn-group">' +
             '<button class="btn btn-success btn-sm" onclick="adminApprove(\'' + a.videoId + '\',\'' + a.editor + '\')">승인</button>' +
             '<button class="btn btn-danger btn-sm" onclick="openReject(\'' + a.videoId + '\',\'' + a.editor + '\')">반려</button>' +
@@ -508,7 +667,8 @@ function loadAdminData() {
             '<div class="card-header"><div><div class="card-title">' + (v.title || v.id) + '</div>' +
             '<div class="card-channel">편집자: ' + (assign ? assign.editor : '-') + '</div></div>' +
             '<span class="badge badge-draft">초안제출</span></div>' +
-            (assign && assign.memo ? '<div style="font-size:12px;color:var(--text-soft);margin:8px 0;">' + assign.memo + '</div>' : '') +
+            (assign && assign.plan ? formatPlan(assign.plan) : '') +
+            (assign && assign.memo ? '<div style="font-size:12px;color:var(--text-soft);margin:8px 0;padding:8px;background:#f8fafc;border-radius:6px;">' + assign.memo + '</div>' : '') +
             '<div class="btn-group">' +
             '<button class="btn btn-success btn-sm" onclick="adminComplete(\'' + v.id + '\')">완료</button>' +
             '<button class="btn btn-outline btn-sm" onclick="openFeedback(\'' + v.id + '\',\'' + (assign ? assign.editor : '') + '\')">피드백</button>' +
@@ -518,11 +678,12 @@ function loadAdminData() {
 }
 
 // ── 액션 ──
-function openApply(videoId, title) {
-  if (!currentEditor) { alert('먼저 편집자를 선택해주세요.'); return; }
+function openApply(videoId, title, channel) {
+  if (!currentEditor) { toast('먼저 편집자를 선택해주세요.', 'error'); return; }
   currentVideoId = videoId;
   document.getElementById('applyVideoTitle').textContent = title;
   document.getElementById('applyGuide').style.display = 'none';
+  document.getElementById('applyGuideToggle').textContent = '편집 기획서 작성 가이드 보기';
   document.getElementById('applyStyle').value = '';
   document.getElementById('applyStyleCustom').value = '';
   document.getElementById('applyStyleCustom').style.display = 'none';
@@ -535,6 +696,16 @@ function openApply(videoId, title) {
   document.getElementById('applyBgm').value = '';
   document.getElementById('applyMemo').value = '';
   document.getElementById('applyExpected').value = '';
+
+  // 채널별 편집코치 가이드 표시
+  var guideEl = document.getElementById('channelGuide');
+  if (channel && channelGuides[channel]) {
+    guideEl.innerHTML = '<div class="guide-channel"><div class="guide-channel-title">' + channel + ' 편집 가이드</div><div style="white-space:pre-wrap;margin-top:4px;">' + channelGuides[channel] + '</div></div>';
+    guideEl.style.display = 'block';
+  } else {
+    guideEl.style.display = 'none';
+  }
+
   document.getElementById('applyModal').classList.add('show');
 }
 
@@ -545,7 +716,6 @@ function toggleGuide() {
     g.style.display === 'none' ? '편집 기획서 작성 가이드 보기' : '가이드 닫기';
 }
 
-// 직접 입력 토글
 document.addEventListener('change', function(e) {
   if (e.target.id === 'applyStyle') {
     document.getElementById('applyStyleCustom').style.display = e.target.value === '직접 입력' ? 'block' : 'none';
@@ -565,44 +735,65 @@ function submitApply() {
   var memo = document.getElementById('applyMemo').value.trim();
   var expected = document.getElementById('applyExpected').value;
 
-  if (!style) { alert('편집 스타일을 선택해주세요.'); return; }
-  if (!hookType) { alert('오프닝 훅 유형을 선택해주세요.'); return; }
-  if (!structure) { alert('본편 구성을 작성해주세요.'); return; }
-  if (!killer) { alert('킬러 씬 TOP 3을 작성해주세요.'); return; }
-  if (!expected) { alert('예상 완료일을 선택해주세요.'); return; }
+  if (!style) { toast('편집 스타일을 선택해주세요.', 'error'); return; }
+  if (!hookType) { toast('오프닝 훅 유형을 선택해주세요.', 'error'); return; }
+  if (!structure) { toast('본편 구성을 작성해주세요.', 'error'); return; }
+  if (!killer) { toast('킬러 씬 TOP 3을 작성해주세요.', 'error'); return; }
+  if (!expected) { toast('예상 완료일을 선택해주세요.', 'error'); return; }
 
-  // 항목별로 합쳐서 기획서 텍스트 생성
   var plan = '[편집 스타일] ' + style;
   plan += '\n[오프닝 훅] ' + hookType;
   if (hookDetail) plan += '\n  → ' + hookDetail;
   plan += '\n[본편 구성]\n' + structure;
   plan += '\n[킬러 씬 TOP 3]\n' + killer;
-  if (runtime) plan += '\n[예상 러닝타임] ' + runtime;
+  if (runtime) plan += '\n[러닝타임] ' + runtime;
   if (subtitle || bgm) plan += '\n[자막/BGM] ' + [subtitle, bgm].filter(Boolean).join(' / ');
   if (memo) plan += '\n[메모] ' + memo;
 
+  var btn = document.getElementById('applySubmitBtn');
+  btn.disabled = true; btn.textContent = '신청 중...';
+
   apiPost({action: 'apply', videoId: currentVideoId, editor: currentEditor, plan: plan, expectedDate: expected})
-    .then(function(r) { alert(r.message); closeModal('applyModal'); loadVideos(); loadMyWork(); });
+    .then(function(r) {
+      btn.disabled = false; btn.textContent = '신청하기';
+      if (r.message) { toast(r.message, 'success'); closeModal('applyModal'); loadVideos(); loadMyWork(); }
+      else { toast('신청 실패', 'error'); }
+    });
 }
 
 function openDraft(videoId) {
   currentVideoId = videoId;
   document.getElementById('draftLink').value = '';
+  document.getElementById('draftNote').value = '';
+  document.querySelectorAll('.draft-check').forEach(function(c) { c.checked = false; });
   document.getElementById('draftModal').classList.add('show');
 }
 
 function submitDraft() {
   var link = document.getElementById('draftLink').value.trim();
-  if (!link) { alert('드롭박스 링크를 입력해주세요.'); return; }
+  if (!link) { toast('드롭박스 링크를 입력해주세요.', 'error'); return; }
 
-  apiPost({action: 'submit_draft', videoId: currentVideoId, editor: currentEditor, draftLink: link})
-    .then(function(r) { alert(r.message); closeModal('draftModal'); loadMyWork(); });
+  var checks = document.querySelectorAll('.draft-check');
+  var unchecked = 0;
+  checks.forEach(function(c) { if (!c.checked) unchecked++; });
+  if (unchecked > 0 && !confirm('체크리스트 ' + unchecked + '개 항목이 미확인입니다. 그래도 제출하시겠습니까?')) return;
+
+  var note = document.getElementById('draftNote').value.trim();
+  var btn = document.getElementById('draftSubmitBtn');
+  btn.disabled = true; btn.textContent = '제출 중...';
+
+  apiPost({action: 'submit_draft', videoId: currentVideoId, editor: currentEditor, draftLink: link, note: note})
+    .then(function(r) {
+      btn.disabled = false; btn.textContent = '제출하기';
+      if (r.message) { toast(r.message, 'success'); closeModal('draftModal'); loadMyWork(); }
+      else { toast('제출 실패', 'error'); }
+    });
 }
 
 function adminApprove(videoId, editor) {
   if (!confirm(editor + '의 신청을 승인하시겠습니까?')) return;
   apiPost({action: 'approve', videoId: videoId, editor: editor})
-    .then(function(r) { alert(r.message); loadAdminData(); });
+    .then(function(r) { if (r.message) { toast(r.message, 'success'); loadAdminData(); } });
 }
 
 function openReject(videoId, editor) {
@@ -615,7 +806,7 @@ function openReject(videoId, editor) {
 function submitReject() {
   var reason = document.getElementById('rejectReason').value.trim();
   apiPost({action: 'reject', videoId: currentVideoId, editor: currentActionEditor, reason: reason})
-    .then(function(r) { alert(r.message); closeModal('rejectModal'); loadAdminData(); });
+    .then(function(r) { if (r.message) { toast(r.message, 'success'); closeModal('rejectModal'); loadAdminData(); } });
 }
 
 function openFeedback(videoId, editor) {
@@ -627,15 +818,15 @@ function openFeedback(videoId, editor) {
 
 function submitFeedback() {
   var text = document.getElementById('feedbackText').value.trim();
-  if (!text) { alert('피드백 내용을 입력해주세요.'); return; }
+  if (!text) { toast('피드백 내용을 입력해주세요.', 'error'); return; }
   apiPost({action: 'feedback', videoId: currentVideoId, editor: currentActionEditor, feedback: text})
-    .then(function(r) { alert(r.message); closeModal('feedbackModal'); loadAdminData(); });
+    .then(function(r) { if (r.message) { toast(r.message, 'success'); closeModal('feedbackModal'); loadAdminData(); } });
 }
 
 function adminComplete(videoId) {
   if (!confirm('이 영상을 완료 처리하시겠습니까?')) return;
   apiPost({action: 'complete', videoId: videoId})
-    .then(function(r) { alert(r.message); loadAdminData(); });
+    .then(function(r) { if (r.message) { toast(r.message, 'success'); loadAdminData(); } });
 }
 
 // ── UI 헬퍼 ──

@@ -75,7 +75,17 @@ function getVideos() {
       status: data[i][6] || '대기'
     });
   }
-  return {videos: videos};
+  // 편집코치 가이드
+  var guideSheet = ss.getSheetByName('편집코치가이드');
+  var guides = [];
+  if (guideSheet) {
+    var gData = guideSheet.getDataRange().getValues();
+    for (var j = 1; j < gData.length; j++) {
+      if (gData[j][0]) guides.push({channel: gData[j][0], guide: gData[j][1] || ''});
+    }
+  }
+
+  return {videos: videos, guides: guides};
 }
 
 function getMyWork(editorName) {
