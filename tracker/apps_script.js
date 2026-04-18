@@ -25,6 +25,8 @@ function onOpen() {
     .addSeparator()
     .addItem('채널별 현황 요약', 'showChannelSummary')
     .addSeparator()
+    .addItem('새 캠페인 처리 (쿠폰 자동생성)', 'processNewCampaigns')
+    .addSeparator()
     .addItem('자동 트리거 설정', 'setupTriggers')
     .addToUi();
 }
@@ -101,6 +103,77 @@ function showChannelSummary() {
   }
 
   SpreadsheetApp.getUi().alert(msg);
+}
+
+// ══════════════════════════════════════════════════
+// ── 시트에서 새 캠페인 처리 (slug + 쿠폰 자동생성) ─
+// ══════════════════════════════════════════════════
+// 사용법: 캠페인관리 탭에 아래만 채우고 메뉴 클릭
+//   B(유형) C(플랫폼 결제URL) D(플랫폼명) E(영상ID) G(할인) H(RS%) K(채널)
+//   → A(slug) F(쿠폰코드) I(상태) J(생성일) 자동 채움 + 쿠폰풀 100개 생성
+
+function processNewCampaigns() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getSheetByName("캠페인관리");
+  var data = sheet.getDataRange().getValues();
+  var poolSheet = ss.getSheetByName("쿠폰풀");
+
+  var processed = 0;
+
+  for (var i = 1; i < data.length; i++) {
+    var slug = data[i][0];
+    var channel = data[i][10] || "";
+    var videoId = String(data[i][4] || "");
+
+    // slug이 비어있고 채널+영상ID가 있으면 새 캠페인
+    if (slug || !channel || !videoId) continue;
+
+    var vid6 = videoId.substring(0, 6);
+    var newSlug = channel + "-" + vid6;
+
+    // slug 중복 체크
+    var counter = 2;
+    var baseSlug = newSlug;
+    var exists = true;
+    while (exists) {
+      exists = false;
+      for (var j = 1; j < data.length; j++) {
+        if (data[j][0] === newSlug) { exists = true; break; }
+      }
+      if (exists) {
+        newSlug = baseSlug + "-" + counter;
+        counter++;
+      }
+    }
+
+    var couponCode = "FLOW-" + vid6 + "-01";
+    var today = new Date().toISOString().split("T")[0];
+    var row = i + 1; // 시트 행 번호 (1-based)
+
+    // A: slug, F: 쿠폰코드, I: 상태, J: 생성일
+    sheet.getRange(row, 1).setValue(newSlug);
+    sheet.getRange(row, 6).setValue(couponCode);
+    sheet.getRange(row, 9).setValue("활성");
+    sheet.getRange(row, 10).setValue(today);
+
+    // 쿠폰풀에 100개 생성
+    var poolRows = [];
+    for (var k = 1; k <= 100; k++) {
+      var code = "FLOW-" + vid6 + "-" + ("0000" + k).slice(-4);
+      poolRows.push([code, newSlug, "미발급", "", "", "", ""]);
+    }
+    poolSheet.getRange(poolSheet.getLastRow() + 1, 1, poolRows.length, 7).setValues(poolRows);
+
+    // data 배열도 업데이트 (중복 체크용)
+    data[i][0] = newSlug;
+    processed++;
+  }
+
+  if (processed === 0) {
+    SpreadsheetApp.getUi().alert("처리할 새 캠페인이 없습니다.\n\n캠페인관리 탭에 새 행을 추가하세요:\n  B(유형) C(플랫폼URL) D(플랫폼명) E(영상ID) G(할인) H(RS%) K(채널)\n\nA(slug)는 비워두세요 — 자동 생성됩니다.");
+  } else {
+    SpreadsheetApp.getUi().alert(processed + "개 캠페인 처리 완료!\n\n각 캠페인에 쿠폰 100개씩 생성됨.\n쿠폰풀 탭에서 확인하세요.");
+  }
 }
 
 // ── 에디터에서 실행할 테스트 함수 (권한 승인용) ──
