@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>김정빈 × 사찍남 | 심층 인터뷰 기획서 v4.0</title>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F2F4F6;color:#191F28;font-family:'Pretendard',system-ui,sans-serif;min-height:100vh;font-size:15px}
+a{color:inherit;text-decoration:none}
+.gnb{background:#fff;border-bottom:1px solid #E5E8EB;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.gnb-logo{font-size:16px;font-weight:800;color:#3182F6}
+.gnb-badge{background:#EFF3FF;color:#3182F6;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:700}
+.wrap{max-width:960px;margin:0 auto;padding:32px 20px 80px}
+.hero{background:#fff;border-radius:20px;padding:36px 32px;margin-bottom:20px;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+.hero-eyebrow{font-size:12px;font-weight:700;color:#3182F6;letter-spacing:1.5px;margin-bottom:10px}
+.hero-title{font-size:28px;font-weight:800;line-height:1.25;margin-bottom:8px}
+.hero-sub{color:#6B7684;font-size:14px;line-height:1.6}
+.timeline{display:flex;gap:0;background:#fff;border-radius:16px;overflow:hidden;margin-bottom:20px;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+.tl{flex:1;padding:16px 10px;text-align:center;border-right:1px solid #F2F4F6}
+.tl:last-child{border-right:none}
+.tl.active{background:#EFF3FF}
+.tl.done{background:#F0FFF4}
+.tl-d{font-size:10px;font-weight:700;color:#8B95A1;margin-bottom:4px;letter-spacing:.5px}
+.tl-l{font-size:12px;font-weight:800}
+.tl.active .tl-l{color:#3182F6}
+.tl.done .tl-l{color:#05C072}
+.tabs{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap}
+.tab-btn{padding:9px 18px;border-radius:10px;border:1.5px solid #E5E8EB;background:#fff;font-size:13px;font-weight:700;cursor:pointer;color:#6B7684;transition:.15s}
+.tab-btn.on{background:#3182F6;border-color:#3182F6;color:#fff}
+.panel{display:none}.panel.on{display:block}
+.card{background:#fff;border-radius:16px;padding:24px;margin-bottom:14px;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+.card-label{font-size:11px;font-weight:700;color:#3182F6;letter-spacing:1.5px;margin-bottom:14px;text-transform:uppercase}
+.sec-title{font-size:18px;font-weight:800;margin-bottom:4px}
+.sec-sub{font-size:13px;color:#6B7684;margin-bottom:18px;line-height:1.6}
+.chip{display:inline-block;padding:2px 8px;border-radius:6px;font-size:11px;font-weight:700;margin-right:4px}
+.chip-r{background:#FFF0F0;color:#F04452}
+.chip-o{background:#FFF7E6;color:#F08F00}
+.chip-b{background:#EFF3FF;color:#3182F6}
+.chip-g{background:#F0FFF4;color:#05C072}
+.chip-purple{background:#F3EEFF;color:#7B61FF}
+.chk-list{list-style:none}
+.chk-item{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid #F2F4F6;font-size:14px;line-height:1.5}
+.chk-item:last-child{border-bottom:none}
+.chk-box{width:22px;height:22px;border:2px solid #E5E8EB;border-radius:6px;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.15s;margin-top:1px}
+.chk-box.ck{background:#05C072;border-color:#05C072;color:#fff;font-size:12px;font-weight:800}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:600px){.two{grid-template-columns:1fr}.timeline{flex-wrap:wrap}.stat-row{grid-template-columns:1fr}}
+.info-box{border-radius:12px;padding:16px 18px;margin-bottom:10px}
+.info-box.blue{background:#EFF3FF}.info-box.red{background:#FFF0F0}.info-box.green{background:#F0FFF4}.info-box.yellow{background:#FFF7E6}.info-box.purple{background:#F3EEFF}
+.info-label{font-size:11px;font-weight:700;color:#6B7684;letter-spacing:.5px;margin-bottom:4px}
+.info-value{font-size:15px;font-weight:800;line-height:1.4}
+.info-box.blue .info-value{color:#3182F6}
+.info-box.red .info-value{color:#F04452}
+.info-box.green .info-value{color:#05C072}
+.info-box.yellow .info-value{color:#F08F00}
+.info-box.purple .info-value{color:#7B61FF}
+.q-row{padding:12px 0;border-bottom:1px solid #F2F4F6;font-size:14px;line-height:1.55;display:flex;gap:10px}
+.q-row:last-child{border-bottom:none}
+.q-time{font-size:12px;font-weight:800;color:#3182F6;min-width:52px;padding-top:1px}
+.q-tag{font-size:11px;font-weight:700;padding:1px 7px;border-radius:4px;background:#EFF3FF;color:#3182F6;white-space:nowrap;margin-right:6px}
+.q-tag.red{background:#FFF0F0;color:#F04452}
+.q-tag.grn{background:#F0FFF4;color:#05C072}
+.q-tag.org{background:#FFF7E6;color:#F08F00}
+.q-tag.purple{background:#F3EEFF;color:#7B61FF}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.stat{background:#F8F9FA;border-radius:12px;padding:14px;text-align:center}
+.stat-v{font-size:20px;font-weight:800;color:#191F28}
+.stat-l{font-size:11px;color:#6B7684;margin-top:2px}
+.q-card{background:#fff;border-radius:14px;padding:20px;margin-bottom:12px;border-left:4px solid #3182F6;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+.q-card.emotion{border-left-color:#F04452}
+.q-card.system{border-left-color:#05C072}
+.q-card.cta{border-left-color:#F08F00}
+.q-card.peak{border-left-color:#7B61FF}
+.q-card-header{display:flex;align-items:center;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.q-card-num{width:28px;height:28px;background:#3182F6;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;flex-shrink:0}
+.q-card.emotion .q-card-num{background:#F04452}
+.q-card.system .q-card-num{background:#05C072}
+.q-card.cta .q-card-num{background:#F08F00}
+.q-card.peak .q-card-num{background:#7B61FF}
+.q-card-tc{font-size:11px;font-weight:700;color:#6B7684}
+.q-card-tag{font-size:11px;font-weight:700;padding:2px 8px;border-radius:4px;background:#EFF3FF;color:#3182F6}
+.q-card.emotion .q-card-tag{background:#FFF0F0;color:#F04452}
+.q-card.system .q-card-tag{background:#F0FFF4;color:#05C072}
+.q-card.cta .q-card-tag{background:#FFF7E6;color:#F08F00}
+.q-card.peak .q-card-tag{background:#F3EEFF;color:#7B61FF}
+.q-card-question{font-size:15px;font-weight:700;line-height:1.6;margin-bottom:12px;color:#191F28}
+.q-card-pd{font-size:12px;color:#6B7684;line-height:1.6;padding:10px 14px;background:#F8F9FA;border-radius:8px;margin-bottom:8px}
+.q-card-ok{font-size:12px;font-weight:700;color:#05C072;display:flex;align-items:center;gap:4px}
+.q-card-doubt{font-size:12px;font-weight:700;color:#7B61FF;display:flex;align-items:center;gap:4px;margin-top:6px;padding:6px 10px;background:#F3EEFF;border-radius:6px}
+.section-header{background:#3182F6;color:#fff;padding:14px 18px;border-radius:10px;margin:24px 0 16px;font-weight:800;font-size:15px;display:flex;align-items:center;gap:10px}
+.section-header.red-bg{background:#F04452}
+.section-header.grn-bg{background:#05C072}
+.section-header.org-bg{background:#F08F00}
+.section-header.purple-bg{background:#7B61FF}
+.boring-item{display:flex;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #F2F4F6;font-size:13px;line-height:1.5}
+.boring-item:last-child{border-bottom:none}
+.boring-x{width:22px;height:22px;background:#FFF0F0;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#F04452;flex-shrink:0}
+.boring-o{width:22px;height:22px;background:#F0FFF4;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#05C072;flex-shrink:0}
+.persona-box{background:linear-gradient(135deg,#EFF3FF 0%,#F0FFF4 100%);border-radius:14px;padding:20px;margin-bottom:14px;border:1.5px solid #E5E8EB}
+.new-badge{display:inline-block;background:#F04452;color:#fff;font-size:10px;font-weight:800;padding:1px 6px;border-radius:4px;margin-left:6px;vertical-align:middle}
+.v4-badge{display:inline-block;background:#7B61FF;color:#fff;font-size:10px;font-weight:800;padding:1px 6px;border-radius:4px;margin-left:6px;vertical-align:middle}
+.track-box{border:2px solid #E5E8EB;border-radius:14px;padding:20px;margin-bottom:14px}
+.track-box.t1{border-color:#3182F6;background:#FAFCFF}
+.track-box.t2{border-color:#F08F00;background:#FFFCF5}
+.track-label{font-size:12px;font-weight:800;letter-spacing:1px;margin-bottom:8px}
+.track-box.t1 .track-label{color:#3182F6}
+.track-box.t2 .track-label{color:#F08F00}
+.track-title{font-size:17px;font-weight:800;margin-bottom:6px}
+.track-desc{font-size:13px;color:#6B7684;line-height:1.6}
+.decision-table{width:100%;border-collapse:collapse;font-size:13px}
+.decision-table th{background:#F8F9FA;padding:10px 12px;text-align:left;font-weight:700;border-bottom:2px solid #E5E8EB}
+.decision-table td{padding:10px 12px;border-bottom:1px solid #F2F4F6;line-height:1.5}
+.decision-table tr:last-child td{border-bottom:none}
+.title-rank{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;color:#fff;flex-shrink:0}
+.title-item{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid #F2F4F6;font-size:14px;line-height:1.5}
+.title-item:last-child{border-bottom:none}
+.quote-item{padding:14px 18px;border-left:3px solid #3182F6;background:#FAFCFF;border-radius:0 10px 10px 0;margin-bottom:10px;font-size:14px;line-height:1.6}
+.quote-use{font-size:11px;font-weight:700;color:#6B7684;margin-top:4px}
+</style>
+</head>
+<body>
+
+<nav class="gnb">
+  <span class="gnb-logo">김정빈 x 사찍남</span>
+  <span class="gnb-badge">v4.0 | 데이터 분석부 정식 브리핑 반영</span>
+</nav>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-eyebrow">INTERVIEW PLANNING GUIDE v4.0 — 대본 기획부 작성</div>
+    <div class="hero-title">사찍남표 매운맛 심층 인터뷰<br>김정빈 / 콘텐츠 농부 편</div>
+    <div class="hero-sub">
+      <strong>출연자: 김정빈 (30세 / 직원 8명 / 콘텐츠 농부 / 쿠팡 파트너스 + AI 서비스)</strong><br>
+      핵심 서사: 19세 고3 창업 → 25세 3억 모으고 강남서 다 날림 → 3번 망하고도 30살에 직원 8명<br><br>
+      <strong style="color:#7B61FF">v4 핵심:</strong> 두 트랙 구조 / 머니로드 차별화 / MC 의심 시스템 / ACT 4단계 / 피크 3개<br>
+      <span style="font-size:12px;color:#F04452">소스: 데이터 분석부 브리핑 4건 (28영상 타임라인 + 30썸네일 + 줌미팅 2건 + 머니로드 대본)</span>
+    </div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl done"><div class="tl-d">4/1</div><div class="tl-l">줌 미팅</div></div>
+    <div class="tl done"><div class="tl-d">4/1</div><div class="tl-l">Agent 1</div></div>
+    <div class="tl done"><div class="tl-d">4/2</div><div class="tl-l">Agent 2 v4</div></div>
+    <div class="tl active"><div class="tl-d">이번주</div><div class="tl-l">촬영일</div></div>
+    <div class="tl"><div class="tl-d">촬영+4일</div><div class="tl-l">업로드</div></div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn on" onclick="go('q',this)">매운맛 질문 10선</button>
+    <button class="tab-btn" onclick="go('hook',this)">오프닝 훅 + 브릿지</button>
+    <button class="tab-btn" onclick="go('track',this)">두 트랙 구조<span class="v4-badge">v4</span></button>
+    <button class="tab-btn" onclick="go('diff',this)">머니로드 차별화<span class="v4-badge">v4</span></button>
+    <button class="tab-btn" onclick="go('doubt',this)">MC 의심 시스템<span class="v4-badge">v4</span></button>
+    <button class="tab-btn" onclick="go('drama',this)">ACT 드라마 구조</button>
+    <button class="tab-btn" onclick="go('title',this)">제목/썸네일<span class="v4-badge">v4</span></button>
+    <button class="tab-btn" onclick="go('guide',this)">촬영 가이드</button>
+    <button class="tab-btn" onclick="go('data',this)">Agent 1 데이터</button>
+  </div>
+
+  <!-- ========== TAB 1: 매운맛 질문 10선 ========== -->
+  <div class="panel on" id="tab-q">
+
+    <div class="card" style="border:2px solid #7B61FF;background:#F3EEFF">
+      <div class="card-label" style="color:#7B61FF">v4 사찍남 매운맛 룰</div>
+      <div style="font-size:13px;line-height:1.8;color:#3E4A5A">
+        <strong>뻔한 네/아니오 닫힌 질문 절대 금지.</strong> MC는 "의심하는 사람 (박명수 모드)" — 시청자를 대변하여 의심, 설득되면 시청자도 설득.<br>
+        <strong style="color:#7B61FF">감정 구간에서만 의심 해제 → 진심 경청.</strong><br>
+        <span style="color:#F04452;font-weight:700">X 나쁜 질문:</span> "쿠팡 파트너스 한 달에 얼마 버나요?"<br>
+        <span style="color:#05C072;font-weight:700">O 좋은 질문:</span> "25살에 3억이면 아파트 살 수 있었잖아요. 강남에서 뭘 한 거예요?"
+      </div>
+    </div>
+
+    <div class="persona-box">
+      <div style="font-size:11px;font-weight:700;color:#7B61FF;letter-spacing:1px;margin-bottom:6px">TARGET PERSONA v4</div>
+      <div style="font-size:14px;font-weight:700;line-height:1.6">"콘텐츠로 돈 벌 수 있다는 건 아는데, 어디서 시작할지 모르는 20~30대. <span style="color:#F04452">'성공 팔이겠지'</span> 의심하면서도 19살 고3이 3번 망하고도 30살에 직원 8명이라는 서사에 클릭 안 할 수 없는 남녀."</div>
+      <div style="margin-top:8px;font-size:12px;color:#6B7684">머니로드 봤던 시청자도 "사찍남에서는 다른 이야기가 나오네?" 확인 동기.</div>
+    </div>
+
+    <!-- ACT 1 -->
+    <div class="section-header">ACT 1 — 도입: 정체 공개 + 호기심</div>
+
+    <div class="q-card">
+      <div class="q-card-header">
+        <div class="chk-box"></div>
+        <div class="q-card-num">01</div>
+        <div class="q-card-tc">TC 01:00</div>
+        <div class="q-card-tag">30살 대표의 정체</div>
+      </div>
+      <div class="q-card-question">"직원 8명이 있는 30살 대표요? 근데 '콘텐츠 농부'라고요. 그게 대체 뭐 하는 건데요? 그걸로 돈을 벌어요?"</div>
+      <div class="q-card-pd">PD: MC 처음부터 의심 모드. "콘텐츠 농부"라는 타이틀에 대한 시청자의 '뭐 이런 직업이?' 반응 대변. 쿠팡 수익 화면 or 사주 매출 화면 1차 증거 제시까지.</div>
+      <div class="q-card-ok">OK: "콘텐츠로 트래픽 만들어서 수익화하는 사람" 자기 정의 + 1차 수익 증빙 화면</div>
+      <div class="q-card-doubt">MC 의심: "직원 8명이 꼭 필요해요? 자동화하면 되는 거 아니에요?"</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-card-header">
+        <div class="chk-box"></div>
+        <div class="q-card-num">02</div>
+        <div class="q-card-tc">TC 03:00</div>
+        <div class="q-card-tag">19살의 시작 (갭 충격)</div>
+      </div>
+      <div class="q-card-question">"처음 사업 시작한 게 19살이라고요? 고3이 뭘 했길래? 3일 만에 팔로워 10만이요? 그거 지금 보여줄 수 있어요?"</div>
+      <div class="q-card-pd">PD: "3일 만에 10만" 결과가 아니라, 구체적 방법론(네이버 캡처+순위 콘텐츠)이 자연스럽게 나와야. 과거 페이스북 페이지 흔적 있으면 카메라에 잡기.</div>
+      <div class="q-card-ok">OK: 19살 당시 구체적 행동 + 방법론 + (가능하면) 과거 페이지 화면</div>
+      <div class="q-card-doubt">MC 의심: "19살에 어떻게 그걸 알았어요?"</div>
+    </div>
+
+    <!-- ACT 2 -->
+    <div class="section-header red-bg">ACT 2 — 과거 서사: 성공과 자만</div>
+
+    <div class="q-card">
+      <div class="q-card-header">
+        <div class="chk-box"></div>
+        <div class="q-card-num">03</div>
+        <div class="q-card-tc">TC 05:00</div>
+        <div class="q-card-tag">월 1000만원 → 150만원 역행</div>
+      </div>
+      <div class="q-card-question">"20살에 월 1000만원 벌고 있었는데, 왜 월급 150만원짜리 스타트업에 들어간 거예요? 솔직히 이해가 안 되는데요."</div>
+      <div class="q-card-pd">PD: MC 의심 최대치. "돈 벌다가 왜 월급쟁이로?" 갭이 시청자에게 충격. 출연자가 "배우고 싶었다"고 답하면 → MC: "그래서 뭘 배운 건데요?" → 2년 뒤 회사 망한 이야기로 연결.</div>
+      <div class="q-card-ok">OK: 역행의 이유(배움 투자) + 스타트업에서 배운 것 + 망한 과정</div>
+      <div class="q-card-doubt">MC 의심: "월 1000만원 벌다가 왜 150만원짜리 회사를 가요?"</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-card-header">
+        <div class="chk-box"></div>
+        <div class="q-card-num">04</div>
+        <div class="q-card-tc">TC 07:00</div>
+        <div class="q-card-tag">하루 300만원 전환점 (10배 갭)</div>
+      </div>
+      <div class="q-card-question">"광고 대행 한 건에 30만원 받던 사람이 직접 팔아보니 하루 300만원이요? 그게 진짜예요? 6개월 만에 월 2억까지 갔다고요?"</div>
+      <div class="q-card-pd">PD: 숫자 빌드업 구간. 30만원 → 300만원 → 월 2억 단계적 상승. MC는 숫자마다 "그러면 연으로 치면..." 리액션. 위탁판매 구조 간략 (머니로드 중복 주의, 1~2문장만).</div>
+      <div class="q-card-ok">OK: 30만원→300만원 전환 계기 + 월 2억 도달 과정</div>
+    </div>
+
+    <!-- PEAK 1 -->
+    <div class="section-header purple-bg">PEAK 1 — 자만과 추락: 감정 핵심</div>
+
+    <div class="q-card peak">
+      <div class="q-card-header">
+        <div class="chk-box"></div>
+        <div class="q-card-num">05</div>
+        <div class="q-card-tc">TC 09:00</div>
+        <div class="q-card-tag">25살에 3억, 강남에서 다 날림</div>
+      </div>
+      <div class="q-card-question">"25살에 2억 5천에서 3억 모았다고요. 아파트 살 수 있었잖아요. 근데 강남으로 이사해서 뭘 한 거예요? '일 뭐하러 열심히 해' 이런 생각을 했다고요?"</div>
+      <div class="q-card-pd">PD: <strong style="color:#7B61FF">"일 뭐하러 열심히 해. 이렇게 하면 돈을 버는데?"</strong> 이 대사가 나와야 한다. MC "25살에 3억이면 집 살 수 있었잖아요. 왜 날린 거예요?" 직격. 시청자 공감/분노 유발.</div>
+      <div class="q-card-ok">OK: "일 뭐하러 열심히 해" 대사 + 강남에서 구체적 행동(술, 유흥) + 브랜드 공급 끊김</div>
+      <div class="q-card-doubt">MC 의심: "25살에 3억이면 집 살 수 있었잖아요. 왜 날린 거예요?"</div>
+    </div>
+
+    <div class="q-card emotion">
+      <div class="q-card-header">
+        <div class="chk-box"></div>
+        <div class="q-card-num">06</div>
+        <div class="q-card-tc">TC 10:30</div>
+        <div class="q-card-tag">파산 공포 — 영상 감정 핵심</div>
+      </div>
+      <div class="q-card-question">"컨테이너에서 제품이 녹았다고요? 2~3억 어치가? 그래서 통장에 3~4천만원 남았는데 직원 월급이 1600만원이요? 2개월 뒤면 직원 월급도 못 주는 거잖아요?!"</div>
+      <div class="q-card-pd">PD: <strong style="color:#F04452">이 답변이 영상의 감정 핵심.</strong> "빚을 진 건 아니지만 모아놨던 돈 다 안녕" 대사 필수. 컨테이너 녹음 사고의 비주얼(냄새, 쓰레기) + 통장 잔고 vs 직원 월급 공포. 눈물/침묵 나오면 절대 서두르지 마라. 카메라 2대 클로즈업.</div>
+      <div class="q-card-ok">OK: 컨테이너 사고 구체 묘사 + "모아놨던 돈 다 안녕" 대사 + 파산 공포의 감정</div>
+    </div>
+
+    <!-- ACT 3 -->
+    <div class="section-header grn-bg">ACT 3 — 재기와 노하우</div>
+
+    <div class="q-card">
+      <div class="q-card-header">
+        <div class="chk-box"></div>
+        <div class="q-card-num">07</div>
+        <div class="q-card-tc">TC 12:00</div>
+        <div class="q-card-tag">화장품 3억, 3번째 추락</div>
+      </div>
+      <div class="q-card-question">"재고 없는 사업으로 전환해서 쿠팡 파트너스 시작했다고요. K-TEST로 네이버 실검 1위, 하루 25000달러. 근데 또 화장품 브랜드에서 3억 날렸잖아요. '돈으로 찍어 눌러야겠다' 했다면서요? 3억이 겨우라고요?"</div>
+      <div class="q-card-pd">PD: "겨우 그 정도 돈으로 그런 생각을 한 게 잘못" 자기비판 대사 필수. MC: "3번이나 망했는데 또 하면 또 망하는 거 아니에요?" 재기→재실패→콘텐츠 확신 도달.</div>
+      <div class="q-card-ok">OK: 화장품 실패 구체 과정 + "겨우 그 정도 돈으로" 자기비판 + 콘텐츠 확신</div>
+      <div class="q-card-doubt">MC 의심: "3번이나 망했는데 또 하면 또 망하는 거 아니에요?" / "3억이 겨우라고요?"</div>
+    </div>
+
+    <div class="q-card system">
+      <div class="q-card-header">
+        <div class="chk-box"></div>
+        <div class="q-card-num">08</div>
+        <div class="q-card-tc">TC 14:00</div>
+        <div class="q-card-tag">2등 전략 + 대시보드 시연 (Peak 2)</div>
+      </div>
+      <div class="q-card-question">"'콘텐츠는 정답지가 나와 있는 게임'이라고 했는데, 2등 전략이라는 게 뭔데요? '1등이 잘 되는 이유는 1등은 몰라요. 2등이 분석해서 공식화해야 돼요.' 이게 무슨 뜻이에요? 말로만 말고, 지금 한번 보여줄 수 있어요?"</div>
+      <div class="q-card-pd">PD: <strong style="color:#05C072">현장 시연 필수.</strong> 실제 분석 대시보드를 큰 모니터에 띄우고, 카메라에 잡히게. 어떤 채널을 분석하는지, 무슨 키워드 때문에 잘 되는지 실시간 시연. 추상적 설명 100% 거부.</div>
+      <div class="q-card-ok">OK: 대시보드 화면 카메라 촬영 + 구체적 채널/키워드 분석 시연 + 2등 전략 작동 원리</div>
+    </div>
+
+    <!-- ACT 4 -->
+    <div class="section-header org-bg">ACT 4 — 감정과 깨달음</div>
+
+    <div class="q-card emotion">
+      <div class="q-card-header">
+        <div class="chk-box"></div>
+        <div class="q-card-num">09</div>
+        <div class="q-card-tc">TC 17:00</div>
+        <div class="q-card-tag">3번 망한 진짜 이유 (Peak 3)</div>
+      </div>
+      <div class="q-card-question">"3번이나 망했는데, 25살에 3억 있었으면 지금 아파트 있었을 텐데, 후회 안 해요? 부모님은 뭐라고 하세요? 어머니가 인테리어 일하시면서 몸이 안 좋으시다고 하셨는데... 3번 망하고도 포기 안 하신 진짜 이유가 뭐예요?"</div>
+      <div class="q-card-pd">PD: <strong style="color:#F04452">가족 이야기 = 감정 피크 최고 트리거</strong> (백반집 4.8M, 김밥집 3.8M 패턴). 어머니 몸 아프면서 일하시는 이야기 → 테슬라 프로포즈도 자연스럽게. MC 이 구간에서 의심 해제 → 진심 경청 모드.</div>
+      <div class="q-card-ok">OK: 어머니/가족 이야기 + 3번 망하고도 계속한 이유 + 감정 깊이</div>
+    </div>
+
+    <!-- 아웃트로 -->
+    <div class="section-header" style="background:#333">아웃트로 — 명언 + 부업소개하는남자 예고</div>
+
+    <div class="q-card cta">
+      <div class="q-card-header">
+        <div class="chk-box"></div>
+        <div class="q-card-num">10</div>
+        <div class="q-card-tc">TC 19:00</div>
+        <div class="q-card-tag">콘텐츠는 정답지가 나와 있는 게임</div>
+      </div>
+      <div class="q-card-question">"'콘텐츠는 정답지가 나와 있는 게임'이라고 하셨잖아요. 지금 아무것도 없는 사람한테, 콘텐츠 한 번도 안 만들어 본 사람한테, 진짜 한마디만 해주세요."</div>
+      <div class="q-card-pd">PD: 명언 마무리. MC 마무리: 의심했던 포인트 정리 → "근데 인정할 건 인정해야겠다." <strong style="color:#F08F00">부업소개하는남자 예고:</strong> "대표님이 쿠팡 파트너스로 100만원 버는 법을 알려준다고?"</div>
+      <div class="q-card-ok">OK: 핵심 명언 + 여운 → 시청자가 부업소개하는남자 채널로 이동하는 구조</div>
+    </div>
+
+    <!-- 피해야 할 주제 -->
+    <div class="card" style="margin-top:20px">
+      <div class="card-label" style="color:#F04452">BORING RISKS — 피해야 할 주제 (v4: 8개)</div>
+      <div class="boring-item"><div class="boring-x">X</div><div><strong>쿠팡 파트너스 수익 구조 상세</strong> — 머니로드에서 이미 다룸. 1~2문장 넘기기</div></div>
+      <div class="boring-item"><div class="boring-x">X</div><div><strong>핸드폰/PC 제작 시연</strong> — 부업소개하는남자 트랙에서만</div></div>
+      <div class="boring-item"><div class="boring-x">X</div><div><strong>와이프 수익 직접 공개</strong> — 머니로드에서 이미 나옴. 간접 언급만</div></div>
+      <div class="boring-item"><div class="boring-x">X</div><div><strong>강의 판매 직접 언급</strong> — 사찍남은 스토리 집중</div></div>
+      <div class="boring-item"><div class="boring-x">X</div><div><strong>컴퓨터 앞 정적 인터뷰</strong> — 사찍남 최약점(44%). 현장/액션 필수</div></div>
+      <div class="boring-item"><div class="boring-x">X</div><div><strong>제목과 썸네일 같은 내용</strong> — 사찍남 67%가 이 실수. 다른 각도 필수</div></div>
+      <div class="boring-item"><div class="boring-x">X</div><div><strong>노하우만 나열</strong> — 반드시 실패 에피소드와 함께 엮기</div></div>
+      <div class="boring-item"><div class="boring-x">X</div><div><strong>숫자 한 번에 다 공개</strong> — 빌드업 후 단계적 공개</div></div>
+    </div>
+  </div>
+
+  <!-- ========== TAB 2: 오프닝 훅 + 브릿지 ========== -->
+  <div class="panel" id="tab-hook">
+    <div class="card" style="border:2px solid #3182F6">
+      <div class="card-label">v4 오프닝 — 숫자 3개 투하 (15초)</div>
+      <div class="sec-title">Hook Script (0~15초)</div>
+      <div style="background:#F8F9FA;border-radius:10px;padding:16px 20px;margin-top:12px;font-size:14px;line-height:1.8">
+        <strong style="color:#6B7684">[하이라이트 몽타주]</strong><br>
+        <strong>0:00~0:05</strong> — 분석 대시보드 or 수익 화면 클로즈업 + <strong>"월 수천만원"</strong><br>
+        <strong>0:05~0:10</strong> — 김정빈 대사: <strong style="color:#F04452">"빚은 아닌데 모아놨던 돈 다 안녕"</strong><br>
+        <strong>0:10~0:15</strong> — 30살 청년 얼굴 + <strong>"19살에 창업해서 3번 망했습니다"</strong>
+      </div>
+      <div style="margin-top:12px;font-size:12px;color:#6B7684;line-height:1.6">
+        <strong>숫자 3개:</strong> 19살, 3번 망함, 직원 8명<br>
+        <strong>레퍼런스:</strong> 휴먼스토리 01 귀어(13.3M) — 오프닝 15초에 숫자 3개
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">BRIDGE QUESTIONS — 이탈 방지 7개 (v4)</div>
+      <div class="sec-sub">시청자가 나갈 만한 타이밍에 던지는 브릿지 질문. "숫자 충격" 또는 "갭 의심" 구조.</div>
+      <div class="q-row"><div class="q-time">03:00</div><div><span class="q-tag red">충격</span>"20살에 월 1000만원이요?!"</div></div>
+      <div class="q-row"><div class="q-time">05:00</div><div><span class="q-tag red">의심</span>"월 1000만원 벌다가 월 150만원요? 이해가 안 되는데"</div></div>
+      <div class="q-row"><div class="q-time">07:00</div><div><span class="q-tag red">10배갭</span>"하루 매출 300만원? 광고 대행 30만원 받던 분이?"</div></div>
+      <div class="q-row"><div class="q-time">09:00</div><div><span class="q-tag purple">전조</span>"25살에 3억이면 아파트 사겠네요?"</div></div>
+      <div class="q-row"><div class="q-time">11:00</div><div><span class="q-tag red">공포</span>"2개월 뒤면 직원 월급도 못 주는 거잖아요?!"</div></div>
+      <div class="q-row"><div class="q-time">14:00</div><div><span class="q-tag grn">시연</span>"한번 보여주실 수 있어요?" (대시보드)</div></div>
+      <div class="q-row"><div class="q-time">17:00</div><div><span class="q-tag org">감정</span>"3번이나 망했는데 포기 안 하신 진짜 이유가 뭐예요?"</div></div>
+    </div>
+  </div>
+
+  <!-- ========== TAB 3: 두 트랙 구조 ========== -->
+  <div class="panel" id="tab-track">
+    <div class="card">
+      <div class="card-label" style="color:#7B61FF">v4 신규 — 두 트랙 동시 촬영</div>
+      <div class="sec-title">사찍남 + 부업소개하는남자</div>
+      <div class="sec-sub">같은 날 연속 촬영. 사찍남 먼저(20분) → 부업소개하는남자 연속(10분). 감정 살아있을 때.</div>
+    </div>
+
+    <div class="track-box t1">
+      <div class="track-label">TRACK 1 — 사찍남 (18~22분)</div>
+      <div class="track-title">인생 서사 다큐</div>
+      <div class="track-desc">
+        <strong>MC 역할:</strong> 의심하는 사람 (무한도전 박명수) — 시청자를 대변하여 의심, 설득되면 시청자도 설득<br>
+        <strong>핵심:</strong> 3번 망하고 일어선 스토리. 19살 → 25살 3억 → 강남 도태 → 컨테이너 → 파산 → 재기<br>
+        <strong>강의 언급:</strong> 최소화 — 스토리에 집중. 아웃트로에서만 부업소개하는남자 예고<br>
+        <strong>피크 3개:</strong> 파산 공포(9~11분) / 대시보드 시연(13~15분) / 가족 이야기(17~18분)
+      </div>
+    </div>
+
+    <div style="text-align:center;padding:8px 0;font-size:24px;color:#8B95A1">↓ 같은 날 연속 촬영 ↓</div>
+
+    <div class="track-box t2">
+      <div class="track-label">TRACK 2 — 부업소개하는남자 (7~10분)</div>
+      <div class="track-title">실전 How-to: 쿠팡 파트너스 100만원 테크트리</div>
+      <div class="track-desc">
+        <strong>톤:</strong> 짧고 실전적, '알려주는 선배' 느낌<br>
+        <strong>구조:</strong> 훅(스마트폰 하나) → 쿠팡 구조 → 제작법 → 멀티플랫폼 → 100만원 경로<br>
+        <strong>핵심:</strong> 사찍남에서 다루지 않는 실전 노하우<br>
+        <strong>시너지:</strong> 사찍남 아웃트로 → 부업소개하는남자 예고 / 부업소개하는남자 → 사찍남 역연결
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">두 트랙 시너지 설계</div>
+      <div class="info-box blue"><div class="info-label">사찍남 → 부업소개하는남자</div><div class="info-value" style="font-size:13px">"이 사람의 쿠팡 파트너스 100만원 버는 법이 궁금하면?" → 부업소개하는남자 채널 링크</div></div>
+      <div class="info-box yellow"><div class="info-label">부업소개하는남자 → 사찍남</div><div class="info-value" style="font-size:13px">"이 사람이 3번 망하고도 이걸 할 수 있었던 이유가 궁금하면?" → 사찍남 풀 스토리</div></div>
+    </div>
+  </div>
+
+  <!-- ========== TAB 4: 머니로드 차별화 ========== -->
+  <div class="panel" id="tab-diff">
+    <div class="card">
+      <div class="card-label" style="color:#7B61FF">v4 신규 — 머니로드 vs 사찍남 차별화</div>
+      <div class="sec-title">반복 금지 7개 + 새로 파야 할 것 7개</div>
+      <div class="sec-sub">머니로드 레퍼런스 분석 기반. 같은 이야기 반복하면 시청자 이탈. 사찍남 독점 소재로 차별화.</div>
+    </div>
+
+    <div class="card" style="border:2px solid #F04452">
+      <div class="card-label" style="color:#F04452">반복 금지 — 머니로드에서 이미 다룬 것</div>
+      <div class="boring-item"><div class="boring-x">1</div><div><strong>쿠팡 파트너스 수익 구조</strong> (24시간 쿠키, 3% 수수료) — 1~2문장으로 넘기기</div></div>
+      <div class="boring-item"><div class="boring-x">2</div><div><strong>핸드폰/PC 콘텐츠 제작 시연</strong> — 부업소개하는남자 트랙에서만</div></div>
+      <div class="boring-item"><div class="boring-x">3</div><div><strong>와이프 수익</strong> (하루 1시간, 월 450~550만원) — 간접 언급만</div></div>
+      <div class="boring-item"><div class="boring-x">4</div><div><strong>멀티 플랫폼 배포 전략</strong> — 부업소개하는남자 트랙에서만</div></div>
+      <div class="boring-item"><div class="boring-x">5</div><div><strong>사무실/직원 규모 간략 소개</strong> — 이미 나옴</div></div>
+      <div class="boring-item"><div class="boring-x">6</div><div><strong>40살 1000억 매출 목표</strong> — 아웃트로에서만 간접</div></div>
+      <div class="boring-item"><div class="boring-x">7</div><div><strong>저작권 이슈 해명</strong> — MC가 의심으로 짧게만</div></div>
+    </div>
+
+    <div class="card" style="border:2px solid #05C072">
+      <div class="card-label" style="color:#05C072">새로 파야 할 것 — 사찍남 독점 소재 7개</div>
+      <div class="boring-item"><div class="boring-o">1</div><div><strong style="color:#05C072">강남 도태기</strong> — 25살에 3억 모았는데 술 마시고 놀다 도태. "일 뭐하러 열심히 해"</div></div>
+      <div class="boring-item"><div class="boring-o">2</div><div><strong style="color:#05C072">컨테이너 녹음 사고</strong> — 2~3억 구매 제품이 온도 문제로 전량 폐기. 비주얼 강력</div></div>
+      <div class="boring-item"><div class="boring-o">3</div><div><strong style="color:#05C072">파산 위기 디테일</strong> — 통장 3~4천만원 vs 직원 월급 1600만원 = 2개월 뒤 파산</div></div>
+      <div class="boring-item"><div class="boring-o">4</div><div><strong style="color:#05C072">2등 전략 + 대시보드 시연</strong> — 체계적 전략 + 실제 화면 시연 = 비주얼+지적 임팩트</div></div>
+      <div class="boring-item"><div class="boring-o">5</div><div><strong style="color:#05C072">화장품 브랜드 3억 실패</strong> — "돈으로 찍어 눌러야겠다 → 겨우 그 정도 돈으로"</div></div>
+      <div class="boring-item"><div class="boring-o">6</div><div><strong style="color:#05C072">사주 서비스 매출 1.5~4억</strong> — 머니로드 완전 미공개. "그것만 하는 줄 알았는데?"</div></div>
+      <div class="boring-item"><div class="boring-o">7</div><div><strong style="color:#05C072">가족 이야기 깊게</strong> — 어머니 몸 아프면서 인테리어 + 테슬라 프로포즈</div></div>
+    </div>
+  </div>
+
+  <!-- ========== TAB 5: MC 의심 시스템 ========== -->
+  <div class="panel" id="tab-doubt">
+    <div class="card">
+      <div class="card-label" style="color:#7B61FF">v4 신규 — MC 의심 시스템 (박명수 모드)</div>
+      <div class="sec-title">시청자를 대변하는 의심, 설득되면 시청자도 설득</div>
+      <div class="sec-sub">MC는 시청자가 "이거 진짜야?" 할 포인트를 먼저 의심한다. 감정 구간(ACT4)에서만 의심 해제 → 진심 경청.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">의심 포인트 8개</div>
+      <div class="q-row"><div class="q-time">Q2</div><div><span class="q-tag purple">의심</span><strong>"19살에 어떻게 그걸 알았어요?"</strong></div></div>
+      <div class="q-row"><div class="q-time">Q3</div><div><span class="q-tag purple">의심</span><strong>"월 1000만원 벌다가 왜 150만원짜리 회사를 가요?"</strong></div></div>
+      <div class="q-row"><div class="q-time">Q5</div><div><span class="q-tag purple">직격</span><strong>"25살에 3억이면 집 살 수 있었잖아요. 왜 날린 거예요?"</strong></div></div>
+      <div class="q-row"><div class="q-time">Q1</div><div><span class="q-tag purple">의심</span><strong>"직원 8명이 꼭 필요해요? 자동화하면 되는 거 아니에요?"</strong></div></div>
+      <div class="q-row"><div class="q-time">Q7</div><div><span class="q-tag purple">의심</span><strong>"쿠팡 순수익 1000만원이요? 강의 시작하고 줄었다면서요?"</strong></div></div>
+      <div class="q-row"><div class="q-time">Q7</div><div><span class="q-tag red">직격</span><strong>"3번이나 망했는데 또 하면 또 망하는 거 아니에요?"</strong></div></div>
+      <div class="q-row"><div class="q-time">ACT3</div><div><span class="q-tag purple">의심</span><strong>"수강생이 6개월이면 300만원 번다고요? 증거 있어요?"</strong></div></div>
+      <div class="q-row"><div class="q-time">Q7</div><div><span class="q-tag red">직격</span><strong>"3억이 겨우라고요?"</strong></div></div>
+    </div>
+
+    <div class="card" style="border:2px solid #F08F00;background:#FFFCF5">
+      <div class="card-label" style="color:#F08F00">의심 해제 타이밍</div>
+      <div style="font-size:14px;line-height:1.7;color:#3E4A5A">
+        <strong>ACT 1~3:</strong> MC는 계속 의심. 시청자 대변. "진짜야?" "증거 있어요?"<br>
+        <strong>ACT 4 (감정 구간):</strong> 가족 이야기 나오면 의심 해제 → 진심 경청 모드로 전환<br>
+        <strong>아웃트로:</strong> "의심했던 포인트 정리 → 근데 인정할 건 인정해야겠다"
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== TAB 6: ACT 드라마 구조 ========== -->
+  <div class="panel" id="tab-drama">
+    <div class="card">
+      <div class="card-label">ACT 4단계 + 피크 3개 타임코드 맵</div>
+      <div class="sec-sub">v4: ACT 구조 기반 재설계. 하몬서클 → ACT 4단계로 전환.</div>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-v">18~22분</div><div class="stat-l">사찍남 트랙</div></div>
+        <div class="stat"><div class="stat-v">피크 3개</div><div class="stat-l">감정 설계</div></div>
+        <div class="stat"><div class="stat-v">의심 8개</div><div class="stat-l">MC 포인트</div></div>
+      </div>
+
+      <div class="info-box purple"><div class="info-label">오프닝 / 00:00~00:15 — 하이라이트 몽타주</div><div class="info-value" style="font-size:13px">숫자 3개 투하: 19살, 3번 망함, 직원 8명. 충격 최고점.</div></div>
+      <div class="info-box blue"><div class="info-label">ACT 1 / 00:15~04:00 — 도입: 정체 공개 + 19살 시작</div><div class="info-value" style="font-size:13px">콘텐츠 농부 정체 → 19살 고3 페이스북 10만 팔로워. 호기심 → 갭 충격.</div></div>
+      <div class="info-box blue"><div class="info-label">ACT 2 / 04:00~09:00 — 과거 서사: 150만원 역행 → 하루 300만원 → 월 2억</div><div class="info-value" style="font-size:13px">놀라움 → 부러움. 숫자 단계적 빌드업. MC 의심 최대 구간.</div></div>
+      <div class="info-box red"><div class="info-label">PEAK 1 / 09:00~12:00 — 강남 도태 → 컨테이너 → 파산 위기</div><div class="info-value" style="font-size:13px"><strong>"빚을 진 건 아니지만 모아놨던 돈 다 안녕"</strong> — 절망 최저점. 바이럴 클립 후보 #1.</div></div>
+      <div class="info-box green"><div class="info-label">ACT 3 / 12:00~16:00 — 화장품 3억 실패 → 2등 전략 → 대시보드 시연</div><div class="info-value" style="font-size:13px">반전 → 경이. Peak 2: 대시보드 시연 = 비주얼+지적 임팩트.</div></div>
+      <div class="info-box yellow"><div class="info-label">ACT 4 / 16:00~19:00 — 3번 망한 이유 + 가족 이야기</div><div class="info-value" style="font-size:13px">Peak 3: 감동 카타르시스. MC 의심 해제 → 진심 경청.</div></div>
+      <div class="info-box purple"><div class="info-label">아웃트로 / 19:00~21:00 — 명언 + 부업소개하는남자 예고</div><div class="info-value" style="font-size:13px">"콘텐츠는 정답지가 나와 있는 게임" + 여운 → 동기부여 → 채널 이동.</div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">피크 3개 설계</div>
+      <div class="info-box red">
+        <div class="info-label">Peak 1 / 9~11분 (40~50%)</div>
+        <div class="info-value" style="font-size:13px">강남 도태 → 컨테이너 녹음 → 파산 위기<br>"빚을 진 건 아니지만 모아놨던 돈 다 안녕"<br><strong>MC:</strong> "25살에 3억이면 집 살 수 있었잖아요"</div>
+      </div>
+      <div class="info-box green">
+        <div class="info-label">Peak 2 / 13~15분 (60~70%)</div>
+        <div class="info-value" style="font-size:13px">2등 전략 공개 + 대시보드 시연 + 사주 매출 공개<br>"1등이 잘 되는 이유는 1등은 몰라요"<br><strong>MC:</strong> "한번 보여주실 수 있어요?"</div>
+      </div>
+      <div class="info-box yellow">
+        <div class="info-label">Peak 3 / 17~18분 (80%)</div>
+        <div class="info-value" style="font-size:13px">가족 이야기 — 어머니 + 3번 망한 이유<br>(촬영 현장에서 발굴)<br><strong>MC:</strong> "3번이나 망했는데 포기 안 하신 진짜 이유"</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">감정 곡선 요약</div>
+      <div style="font-size:13px;line-height:1.7;color:#3E4A5A;text-align:center;padding:10px 0">
+        <span style="color:#7B61FF;font-weight:700">충격(0~0.25분)</span> →
+        호기심(0.25~4분) →
+        <span style="color:#3182F6;font-weight:700">부러움(4~9분)</span> →
+        <span style="color:#F04452;font-weight:700">절망(9~12분)</span> →
+        <span style="color:#05C072;font-weight:700">반전(12~16분)</span> →
+        <span style="color:#F08F00;font-weight:700">감동(16~19분)</span> →
+        여운(19~21분)
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== TAB 7: 제목/썸네일 ========== -->
+  <div class="panel" id="tab-title">
+
+    <div class="card" style="border:2px solid #7B61FF;background:#F3EEFF">
+      <div class="card-label" style="color:#7B61FF">v4 최종 — 10라운드 검증 완료</div>
+      <div style="font-size:13px;line-height:1.7;color:#3E4A5A">
+        <strong>검증 기반:</strong> 사찍남 10편 분석 + 휴먼스토리 19편 분석 + 썸네일 비교분석 + 머니로드 대본 해체<br>
+        <strong style="color:#F04452">핵심 규칙:</strong> 제목 = 성공 서사 / 썸네일 = 위기 순간 (다른 각도 필수)<br>
+        <strong style="color:#F04452">정면 금지:</strong> 사찍남 Best = 현장 액션/스케일샷, Worst = 컴퓨터 앞 정적 정면
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:#7B61FF">제목 최종 3안</div>
+
+      <div class="title-item">
+        <div class="title-rank" style="background:#F04452">1</div>
+        <div><strong>고3 때 창업해서 3번 망하고도 30살에 직원 8명 거느린 대표</strong><br><span style="font-size:12px;color:#6B7684">30자 | 갭: 고3+3번 망함 → 직원 8명 | 숫자 4개 | 모바일 잘림 없음</span></div>
+      </div>
+      <div class="title-item">
+        <div class="title-rank" style="background:#F04452">2</div>
+        <div><strong>3번 망한 고졸 사장이 직원 8명 월급 1600만원 주는 법</strong><br><span style="font-size:12px;color:#6B7684">27자 | 갭: 3번 망함+고졸 → 월급 1600만원 | "~법" 검색 친화</span></div>
+      </div>
+      <div class="title-item">
+        <div class="title-rank" style="background:#3182F6">3</div>
+        <div><strong>통장에 3천만원밖에 없는데 직원 8명 월급 주는 30살 대표</strong><br><span style="font-size:12px;color:#6B7684">28자 | 갭: 3천만원뿐 → 8명 월급 | 위기→책임감 서사</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:#05C072">썸네일 최종 3안</div>
+      <div style="font-size:13px;line-height:1.7;color:#3E4A5A;margin-bottom:14px">
+        <strong style="color:#F04452">정면 금지.</strong> 사찍남 Best 썸네일(10톤 옷산) = 현장 스케일샷. Worst(코인/블로그) = 모니터 앞 정면.<br>
+        <strong>구도 원칙:</strong> 3/4 뒤돌아보기 / 현장 액션 옆모습 / 환경 대비 — 정면 클로즈업 절대 안 씀.
+      </div>
+
+      <div class="info-box red">
+        <div class="info-label">A — 3/4 뒤돌아보기 + 스케일 (1순위 추천)</div>
+        <div class="info-value" style="font-size:13px">
+          <strong>비주얼:</strong> 사무실에서 카메라 쪽으로 뒤돌아보는 김정빈 + 배경에 직원 2~3명 모니터 앞 작업 중<br>
+          <strong>텍스트:</strong> "통장 3천만원 / 직원 월급 1600만원"<br>
+          <strong>구도 레퍼런스:</strong> 백반집 썸네일 ("가게 앞에서 뒤돌아보는 청년") — 사찍남 기존 포맷<br>
+          <strong>의도:</strong> 제목이 성공 서사 → 썸네일은 위기 순간. 배경 직원으로 스케일 전달.
+        </div>
+      </div>
+      <div class="info-box blue">
+        <div class="info-label">B — 현장 액션 옆모습</div>
+        <div class="info-value" style="font-size:13px">
+          <strong>비주얼:</strong> 회의실 화이트보드 앞에서 직원들에게 설명하는 김정빈 옆모습<br>
+          <strong>텍스트:</strong> "3번 망하고도 / 직원 8명 거느린 30살"<br>
+          <strong>구도 레퍼런스:</strong> 휴먼스토리 현장 액션 패턴 (38%)<br>
+          <strong>의도:</strong> "일하는 대표" 현장감. 정적샷 탈피.
+        </div>
+      </div>
+      <div class="info-box yellow">
+        <div class="info-label">C — 당황 표정 + 대비 오브젝트</div>
+        <div class="info-value" style="font-size:13px">
+          <strong>비주얼:</strong> 핸드폰(통장 잔고) 보며 머리 감싸는 김정빈 옆모습 + 배경에 사무실 전경<br>
+          <strong>텍스트:</strong> "월급날 통장 / 3천만원"<br>
+          <strong>구도 레퍼런스:</strong> 옷산 사장님 구조 (위기 순간 포착 + 스케일)<br>
+          <strong>의도:</strong> "이 돈으로 어떻게 8명 월급?" 감정 자극. 핸드폰이 시선 앵커.
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:#F08F00">추천 조합 TOP 3</div>
+      <div class="title-item">
+        <div class="title-rank" style="background:#F04452">1</div>
+        <div><strong>제목1 + 썸네일A</strong><br><span style="font-size:12px;color:#6B7684">제목=성공(고3→대표), 썸네일=위기(통장3천/월급1600). 가장 큰 각도 차이.</span></div>
+      </div>
+      <div class="title-item">
+        <div class="title-rank" style="background:#F04452">2</div>
+        <div><strong>제목3 + 썸네일C</strong><br><span style="font-size:12px;color:#6B7684">둘 다 위기지만 제목="그래도 준다" 반전, 썸네일=공포. 감정 극대화.</span></div>
+      </div>
+      <div class="title-item">
+        <div class="title-rank" style="background:#3182F6">3</div>
+        <div><strong>제목2 + 썸네일B</strong><br><span style="font-size:12px;color:#6B7684">제목=방법론 훅(~법), 썸네일=현장 대표 이미지. 실용+비주얼.</span></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">촬영 필수 컷 (썸네일용)</div>
+      <ul class="chk-list">
+        <li class="chk-item"><div class="chk-box"></div><div><span class="chip chip-r">필수</span><strong>사무실에서 뒤돌아보는 3/4 앵글</strong> — 배경에 직원 2~3명 작업 중 보이도록</div></li>
+        <li class="chk-item"><div class="chk-box"></div><div><span class="chip chip-r">필수</span><strong>화이트보드 앞 설명하는 옆모습</strong> — 직원 1~2명 듣고 있는 구도</div></li>
+        <li class="chk-item"><div class="chk-box"></div><div><span class="chip chip-r">필수</span><strong>핸드폰 보며 머리 감싸는 옆모습</strong> — 배경에 사무실 전경</div></li>
+        <li class="chk-item"><div class="chk-box"></div><div><span class="chip chip-o">권장</span><strong>사무실 전경 와이드</strong> — 김정빈 서있고 직원들 작업 중 (스케일 대비)</div></li>
+      </ul>
+      <div style="margin-top:10px;font-size:12px;color:#F04452;font-weight:700;line-height:1.5">
+        X 정면 클로즈업 금지 — 사찍남 Worst 패턴 (코인/블로그 = 조회수 최하위)<br>
+        X 컴퓨터 앞 정적 앉아있기 금지 — 사찍남 44%가 이 실수
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:#7B61FF">기획부 결정 사항 (v4 확정)</div>
+      <table class="decision-table">
+        <thead><tr><th>#</th><th>항목</th><th>확정</th><th>근거</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1</strong></td><td>제목</td><td><strong style="color:#F04452">3안 중 선택</strong></td><td>10라운드 검증 완료</td></tr>
+          <tr><td><strong>2</strong></td><td>두 트랙</td><td><strong>같은 날 연속 촬영</strong></td><td>감정 살아있을 때</td></tr>
+          <tr><td><strong>3</strong></td><td>강의 노출</td><td><strong>사찍남에서 안 함</strong></td><td>스토리 집중</td></tr>
+          <tr><td><strong>4</strong></td><td>가족 이야기</td><td><strong>깊게</strong></td><td>백반집 4.8M 패턴 = 가족 피크</td></tr>
+          <tr><td><strong>5</strong></td><td>나이</td><td><strong>30살</strong></td><td>갭 극대화 (고3→30살)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ========== TAB 8: 촬영 가이드 ========== -->
+  <div class="panel" id="tab-guide">
+    <div class="card">
+      <div class="card-label">김정빈 대표님께 — 촬영 준비물 체크리스트 (v4)</div>
+      <div class="sec-sub">데이터 분석부 촬영설계서 기반. 사찍남 먼저 → 부업소개하는남자 연속 촬영.</div>
+      <ul class="chk-list">
+        <li class="chk-item"><div class="chk-box"></div><div><span class="chip chip-r">필수</span><strong>분석 대시보드 화면</strong> — 2등 전략 시연용. 큰 모니터에 띄울 수 있게. Peak 2 핵심.</div></li>
+        <li class="chk-item"><div class="chk-box"></div><div><span class="chip chip-r">필수</span><strong>쿠팡 파트너스 정산 화면</strong> — 실시간 앱/웹 접속. 캡처 NO, 실시간 YES.</div></li>
+        <li class="chk-item"><div class="chk-box"></div><div><span class="chip chip-r">필수</span><strong>사주별관 매출 화면</strong> — 머니로드 미공개 소재. 1.5~4억 증빙.</div></li>
+        <li class="chk-item"><div class="chk-box"></div><div><span class="chip chip-r">필수</span><strong>K-TEST 관련 자료</strong> — 네이버 실검 1위, 하루 25000달러. 재기 증거.</div></li>
+        <li class="chk-item"><div class="chk-box"></div><div><span class="chip chip-o">권장</span><strong>과거 페이스북 페이지 흔적</strong> — 19세 3일 만에 10만 팔로워. 있으면 충격 배가.</div></li>
+        <li class="chk-item"><div class="chk-box"></div><div><span class="chip chip-o">권장</span><strong>컨테이너 녹음 사고 관련 사진/자료</strong> — Peak 1 비주얼 강화.</div></li>
+        <li class="chk-item"><div class="chk-box"></div><div><span class="chip chip-b">촬영용</span><strong>사무실 현장</strong> — 직원 작업 모습, 모니터 화면, 시스템 실체.</div></li>
+        <li class="chk-item"><div class="chk-box"></div><div><span class="chip chip-b">촬영용</span><strong>썸네일 전용 3컷</strong> — A) 사무실 뒤돌아보기 3/4 B) 화이트보드 앞 옆모습 C) 핸드폰 보며 당황 옆모습. <strong style="color:#F04452">정면 금지.</strong></div></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-label">촬영 순서 (v4)</div>
+      <ul class="chk-list">
+        <li class="chk-item"><div class="chk-box"></div><div><strong>1) 사찍남 촬영 (18~22분)</strong><br>ACT 1~4 순서. 오프닝 몽타주는 별도 촬영 or 본편 컷 활용. MC 의심 모드 유지.</div></li>
+        <li class="chk-item"><div class="chk-box"></div><div><strong>2) 부업소개하는남자 촬영 (7~10분)</strong><br>사찍남 직후 연속. 톤 전환: 의심→알려주는 선배. 쿠팡 파트너스 100만원 테크트리.</div></li>
+        <li class="chk-item"><div class="chk-box"></div><div><strong>3) 썸네일 전용 촬영</strong><br>A) 사무실 뒤돌아보기 3/4 + 직원 배경 B) 화이트보드 앞 설명 옆모습 C) 핸드폰 당황 옆모습 + 사무실. <strong style="color:#F04452">정면 금지.</strong></div></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="card-label" style="color:#05C072">핵심 명언 6개 — 촬영 중 반드시 끌어내기</div>
+      <div class="quote-item" style="border-left-color:#F08F00">
+        "콘텐츠는 정답지가 나와 있는 게임이에요"
+        <div class="quote-use">활용: 아웃트로 명언</div>
+      </div>
+      <div class="quote-item" style="border-left-color:#05C072">
+        "1등이 잘 되는 이유는 1등은 몰라요. 2등이 공식화해야 돼요"
+        <div class="quote-use">활용: Peak 2 노하우</div>
+      </div>
+      <div class="quote-item" style="border-left-color:#F04452">
+        "빚을 진 건 아니지만 모아놨던 돈 다 안녕"
+        <div class="quote-use">활용: Peak 1 위기 절정</div>
+      </div>
+      <div class="quote-item" style="border-left-color:#7B61FF">
+        "일 뭐하러 열심히 해. 이렇게 하면 돈을 버는데?"
+        <div class="quote-use">활용: Q5 자만기</div>
+      </div>
+      <div class="quote-item">
+        "쿠팡에서 1등 하는 제품을 못 팔면서 내 제품을 어떻게 팔아?"
+        <div class="quote-use">활용: 부업소개하는남자 훅</div>
+      </div>
+      <div class="quote-item">
+        "콘텐츠 못 만들면 무조건 시장에서 도태된다"
+        <div class="quote-use">활용: 시청자 각성 구간</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== TAB 9: Agent 1 데이터 ========== -->
+  <div class="panel" id="tab-data">
+    <div class="card">
+      <div class="card-label">AGENT 1 — 김정빈 핵심 데이터 (v4)</div>
+      <div class="two">
+        <div class="info-box blue"><div class="info-label">이름 / 나이</div><div class="info-value">김정빈 / 30세</div></div>
+        <div class="info-box blue"><div class="info-label">직원 수</div><div class="info-value">8명</div></div>
+        <div class="info-box green"><div class="info-label">쿠팡 파트너스 누적</div><div class="info-value">20억원</div></div>
+        <div class="info-box green"><div class="info-label">사주 서비스 월매출</div><div class="info-value">1.5~4억원</div></div>
+        <div class="info-box red"><div class="info-label">자산 손실</div><div class="info-value">25세 3억 전부 잃음</div></div>
+        <div class="info-box red"><div class="info-label">실패 횟수</div><div class="info-value">3번 (위탁/컨테이너/화장품)</div></div>
+        <div class="info-box yellow"><div class="info-label">K-TEST</div><div class="info-value">네이버 실검1위, 하루 $25,000</div></div>
+        <div class="info-box yellow"><div class="info-label">파산 위기</div><div class="info-value">통장 3~4천 vs 월급 1600만</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">13단계 연대기 타임라인</div>
+      <div class="q-row"><div class="q-time">19세</div><div>고3 페이스북 10만 팔로워 (3일). 광고 수익 시작.</div></div>
+      <div class="q-row"><div class="q-time">20세</div><div>광고 대행 월 1000만원. 콘텐츠 마케팅 감각 확인.</div></div>
+      <div class="q-row"><div class="q-time">21~22세</div><div>스타트업 입사 (월 150만원). 배움에 투자. 회사 망함.</div></div>
+      <div class="q-row"><div class="q-time">23세</div><div>위탁판매 월 2억. 하루 매출 300만원 직접 판매 전환.</div></div>
+      <div class="q-row"><div class="q-time">24세</div><div>6개월 만에 월 2억 돌파. 숫자 빌드업 절정.</div></div>
+      <div class="q-row"><div class="q-time" style="color:#F04452">25세</div><div style="color:#F04452"><strong>자산 2.5~3억 + 강남 이사 + 도태기.</strong> "일 뭐하러 열심히 해."</div></div>
+      <div class="q-row"><div class="q-time" style="color:#F04452">25~26세</div><div style="color:#F04452"><strong>위탁 브랜드 공급 끊김.</strong> 매출 급감.</div></div>
+      <div class="q-row"><div class="q-time" style="color:#F04452">26세</div><div style="color:#F04452"><strong>컨테이너 녹음 사고</strong> (2~3억 전량 폐기). 통장 3~4천만원.</div></div>
+      <div class="q-row"><div class="q-time" style="color:#F04452">26세</div><div style="color:#F04452"><strong>화장품 브랜드 3억 실패.</strong> "겨우 그 정도 돈으로."</div></div>
+      <div class="q-row"><div class="q-time" style="color:#05C072">27세</div><div style="color:#05C072"><strong>쿠팡 파트너스 전환.</strong> "재고 없으면 망할 수 없다."</div></div>
+      <div class="q-row"><div class="q-time" style="color:#05C072">28세</div><div style="color:#05C072"><strong>K-TEST 네이버 실검 1위.</strong> 하루 25,000달러.</div></div>
+      <div class="q-row"><div class="q-time">29세</div><div>사주별관/쇼츠비서 AI서비스 런칭. 월 1.5~4억.</div></div>
+      <div class="q-row"><div class="q-time" style="color:#3182F6">30세</div><div style="color:#3182F6"><strong>직원 8명, 월 수천만원 시스템. 콘텐츠 농부.</strong></div></div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">분석 기반</div>
+      <div class="two">
+        <div class="info-box blue"><div class="info-label">사찍남 영상 분석</div><div class="info-value" style="font-size:13px">28개 영상 타임라인 해체</div></div>
+        <div class="info-box blue"><div class="info-label">썸네일 분석</div><div class="info-value" style="font-size:13px">30개 비교 분석</div></div>
+        <div class="info-box green"><div class="info-label">줌미팅 전사본</div><div class="info-value" style="font-size:13px">2건 (구조화 + 원본)</div></div>
+        <div class="info-box yellow"><div class="info-label">머니로드 대본</div><div class="info-value" style="font-size:13px">세그먼트별 해체 분석</div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function go(id,btn){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('on'));
+  document.getElementById('tab-'+id).classList.add('on');
+  btn.classList.add('on');
+}
+document.querySelectorAll('.chk-box').forEach(b=>{
+  b.addEventListener('click',()=>{
+    b.classList.toggle('ck');
+    b.textContent=b.classList.contains('ck')?'V':'';
+  });
+});
+</script>
+</body>
+</html>
