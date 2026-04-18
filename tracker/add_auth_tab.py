@@ -51,7 +51,7 @@ def main():
 
     sheets.spreadsheets().values().update(
         spreadsheetId=SHEET_ID,
-        range='채널암호!A1:C4',
+        range="'채널암호'!A1:C4",
         valueInputOption='RAW',
         body={'values': [header] + sample}
     ).execute()

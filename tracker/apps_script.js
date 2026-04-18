@@ -27,6 +27,13 @@ function onOpen() {
     .addSeparator()
     .addItem('새 캠페인 처리 (쿠폰 자동생성)', 'processNewCampaigns')
     .addSeparator()
+    .addSubMenu(ui.createMenu('쿠폰 관리')
+      .addItem('캠페인별 쿠폰 보기', 'filterCouponByCampaign')
+      .addItem('전체 쿠폰 보기', 'filterCouponAll')
+      .addSeparator()
+      .addItem('종료 캠페인 쿠폰 삭제', 'deleteEndedCoupons')
+      .addItem('선택한 쿠폰 삭제', 'deleteSelectedCoupons'))
+    .addSeparator()
     .addItem('자동 트리거 설정', 'setupTriggers')
     .addToUi();
 }
@@ -192,6 +199,157 @@ function processNewCampaigns() {
   } else {
     SpreadsheetApp.getUi().alert(processed + "개 캠페인 처리 완료!\n\n각 캠페인에 쿠폰 100개씩 생성됨.\n쿠폰풀 탭에서 확인하세요.");
   }
+}
+
+// ══════════════════════════════════════════════════
+// ── 쿠폰 관리 (필터 / 삭제) ─────────────────────
+// ══════════════════════════════════════════════════
+
+// ── 캠페인별 쿠폰 보기 (필터) ──
+function filterCouponByCampaign() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var campSheet = ss.getSheetByName("캠페인관리");
+  var campData = campSheet.getDataRange().getValues();
+
+  // 캠페인 목록 만들기
+  var campaigns = [];
+  for (var i = 1; i < campData.length; i++) {
+    if (campData[i][0]) {
+      campaigns.push(campData[i][0] + " (" + campData[i][3] + ")");
+    }
+  }
+
+  if (campaigns.length === 0) {
+    SpreadsheetApp.getUi().alert("등록된 캠페인이 없습니다.");
+    return;
+  }
+
+  var ui = SpreadsheetApp.getUi();
+  var response = ui.prompt(
+    "캠페인별 쿠폰 보기",
+    "번호를 입력하세요:\n\n" + campaigns.map(function(c, i) { return (i + 1) + ". " + c; }).join("\n"),
+    ui.ButtonSet.OK_CANCEL
+  );
+
+  if (response.getSelectedButton() !== ui.Button.OK) return;
+  var idx = parseInt(response.getResponseText()) - 1;
+  if (isNaN(idx) || idx < 0 || idx >= campaigns.length) return;
+
+  var selectedSlug = campData[idx + 1][0];
+
+  // 쿠폰풀 탭으로 이동 + 필터 적용
+  var poolSheet = ss.getSheetByName("쿠폰풀");
+  ss.setActiveSheet(poolSheet);
+
+  var filter = poolSheet.getFilter();
+  if (filter) filter.remove();
+
+  var range = poolSheet.getDataRange();
+  filter = range.createFilter();
+  var criteria = SpreadsheetApp.newFilterCriteria()
+    .whenTextEqualTo(selectedSlug)
+    .build();
+  filter.setColumnFilterCriteria(2, criteria); // B열 = 캠페인slug
+}
+
+// ── 전체 쿠폰 보기 (필터 해제) ──
+function filterCouponAll() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var poolSheet = ss.getSheetByName("쿠폰풀");
+  ss.setActiveSheet(poolSheet);
+
+  var filter = poolSheet.getFilter();
+  if (filter) filter.remove();
+
+  SpreadsheetApp.getUi().alert("전체 쿠폰을 표시합니다.");
+}
+
+// ── 종료 캠페인 쿠폰 삭제 ──
+function deleteEndedCoupons() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var campSheet = ss.getSheetByName("캠페인관리");
+  var campData = campSheet.getDataRange().getValues();
+  var poolSheet = ss.getSheetByName("쿠폰풀");
+  var poolData = poolSheet.getDataRange().getValues();
+
+  // 종료된 캠페인 slug 수집
+  var endedSlugs = {};
+  for (var i = 1; i < campData.length; i++) {
+    if (campData[i][8] === "종료") {
+      endedSlugs[campData[i][0]] = campData[i][3];
+    }
+  }
+
+  if (Object.keys(endedSlugs).length === 0) {
+    SpreadsheetApp.getUi().alert("종료된 캠페인이 없습니다.\n\n캠페인관리 탭에서 I열(상태)을 '종료'로 변경한 후 다시 실행하세요.");
+    return;
+  }
+
+  // 삭제 대상 확인
+  var toDelete = [];
+  var details = {};
+  for (var j = 1; j < poolData.length; j++) {
+    var slug = poolData[j][1];
+    if (endedSlugs[slug]) {
+      toDelete.push(j + 1); // 시트 행 번호
+      details[slug] = (details[slug] || 0) + 1;
+    }
+  }
+
+  if (toDelete.length === 0) {
+    SpreadsheetApp.getUi().alert("삭제할 쿠폰이 없습니다.");
+    return;
+  }
+
+  // 확인 프롬프트
+  var msg = "아래 쿠폰을 삭제합니다:\n\n";
+  for (var s in details) {
+    msg += endedSlugs[s] + " (" + s + "): " + details[s] + "개\n";
+  }
+  msg += "\n총 " + toDelete.length + "개 삭제됩니다. 계속할까요?";
+
+  var ui = SpreadsheetApp.getUi();
+  var confirm = ui.alert("쿠폰 삭제 확인", msg, ui.ButtonSet.YES_NO);
+  if (confirm !== ui.Button.YES) return;
+
+  // 아래에서 위로 삭제 (인덱스 밀림 방지)
+  toDelete.sort(function(a, b) { return b - a; });
+  for (var k = 0; k < toDelete.length; k++) {
+    poolSheet.deleteRow(toDelete[k]);
+  }
+
+  SpreadsheetApp.getUi().alert("삭제 완료!\n\n총 " + toDelete.length + "개 쿠폰이 삭제되었습니다.");
+}
+
+// ── 선택한 쿠폰 삭제 ──
+function deleteSelectedCoupons() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var poolSheet = ss.getSheetByName("쿠폰풀");
+
+  if (ss.getActiveSheet().getName() !== "쿠폰풀") {
+    SpreadsheetApp.getUi().alert("쿠폰풀 탭에서 삭제할 행을 선택한 후 실행하세요.");
+    return;
+  }
+
+  var selection = poolSheet.getActiveRange();
+  var startRow = selection.getRow();
+  var numRows = selection.getNumRows();
+
+  if (startRow <= 1) {
+    SpreadsheetApp.getUi().alert("헤더 행은 삭제할 수 없습니다.\n2행 이하를 선택하세요.");
+    return;
+  }
+
+  var ui = SpreadsheetApp.getUi();
+  var confirm = ui.alert(
+    "선택 삭제 확인",
+    startRow + "행 ~ " + (startRow + numRows - 1) + "행 (" + numRows + "개) 삭제할까요?",
+    ui.ButtonSet.YES_NO
+  );
+  if (confirm !== ui.Button.YES) return;
+
+  poolSheet.deleteRows(startRow, numRows);
+  SpreadsheetApp.getUi().alert(numRows + "개 행 삭제 완료!");
 }
 
 // ── 에디터에서 실행할 테스트 함수 (권한 승인용) ──
