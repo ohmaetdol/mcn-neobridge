@@ -28,7 +28,7 @@ TRACKER_BASE = 'https://ohmaetdol.github.io/mcn-neobridge/tracker/'
 # ── 채널 접두어 매핑 ──
 CHANNEL_PREFIX = {
     'sajjiknam': 'SAJJIK',
-    'gogo': 'GOGO',
+    'hyunjang': 'HYUNJANG',
     'moneyroad': 'MONEY',
 }
 
@@ -67,24 +67,16 @@ def read_campaigns(sheets):
     return rows[1:], rows[0]
 
 
-def make_slug(channel, platform):
-    """캠페인 slug 생성: channel-platform (영문 소문자)"""
-    plat = PLATFORM_ABBR.get(platform, platform)
-    return f"{channel}-{plat.lower()}"
+def make_slug(channel, video_id):
+    """캠페인 slug 생성: channel-videoID앞6자"""
+    vid = video_id[:6] if video_id else 'novid'
+    return f"{channel}-{vid}"
 
 
-def make_coupon(channel, platform, existing_coupons):
-    """쿠폰 코드 자동 생성: CHANNEL-PLATFORM-순번"""
-    ch_prefix = CHANNEL_PREFIX.get(channel, channel.upper()[:6])
-    plat_abbr = PLATFORM_ABBR.get(platform, ''.join(
-        c for c in platform.upper() if c.isascii() and c.isalpha()
-    )[:6])
-
-    if not plat_abbr:
-        # 한글 플랫폼명의 영문 약어가 없으면 등록 유도
-        plat_abbr = 'NEW'
-
-    prefix = f"{ch_prefix}-{plat_abbr}-"
+def make_coupon(video_id, existing_coupons):
+    """쿠폰 코드 자동 생성: FLOW-videoID앞6자-순번"""
+    vid = video_id[:6] if video_id else 'NOvid'
+    prefix = f"FLOW-{vid}-"
 
     # 기존 쿠폰 중 같은 접두어 찾아서 순번 결정
     max_seq = 0
@@ -149,8 +141,8 @@ def cmd_add(args):
     discount = args.discount or input('  할인 (예: 5%, 가맹비 50만 할인): ').strip()
     rs = args.rs or ('20%' if camp_type == '강의' else '10%')
 
-    # 자동 생성
-    slug = make_slug(channel, platform)
+    # 자동 생성 (영상 ID 기반)
+    slug = make_slug(channel, video_id)
     # slug 중복 체크
     base_slug = slug
     counter = 2
@@ -158,7 +150,7 @@ def cmd_add(args):
         slug = f"{base_slug}-{counter}"
         counter += 1
 
-    coupon = make_coupon(channel, platform, existing_coupons)
+    coupon = make_coupon(video_id, existing_coupons)
     today = date.today().isoformat()
 
     # 확인
@@ -241,13 +233,9 @@ def cmd_generate(args):
             print(f"    - {r[0]}")
         return
 
-    channel = campaign[10] if len(campaign) > 10 else ''
+    video_id = campaign[4] if len(campaign) > 4 else ''
     platform = campaign[3] if len(campaign) > 3 else ''
-
-    ch_prefix = CHANNEL_PREFIX.get(channel, channel.upper()[:6])
-    plat_abbr = PLATFORM_ABBR.get(platform, ''.join(
-        c for c in platform.upper() if c.isascii() and c.isalpha()
-    )[:6]) or 'NEW'
+    vid = video_id[:6] if video_id else 'NOvid'
 
     # 기존 쿠폰풀 확인
     pool_result = sheets.spreadsheets().values().get(
@@ -258,10 +246,10 @@ def cmd_generate(args):
     existing_for_slug = [r[0] for r in pool_rows if len(r) > 1 and r[1] == slug]
     start_num = len(existing_for_slug) + 1
 
-    # 쿠폰 생성
+    # 쿠폰 생성 (FLOW-영상ID-순번)
     new_coupons = []
     for i in range(start_num, start_num + count):
-        code = f"{ch_prefix}-{plat_abbr}-{i:04d}"
+        code = f"FLOW-{vid}-{i:04d}"
         new_coupons.append([code, slug, '미발급', '', '', '', ''])
 
     sheets.spreadsheets().values().append(
@@ -317,7 +305,7 @@ def main():
 
     # add 명령어
     add_p = sub.add_parser('add', help='새 캠페인 추가')
-    add_p.add_argument('--channel', help='채널 slug (sajjiknam, gogo, moneyroad)')
+    add_p.add_argument('--channel', help='채널 slug (sajjiknam, hyunjang, moneyroad)')
     add_p.add_argument('--type', help='캠페인 유형 (강의, 가맹)')
     add_p.add_argument('--platform', help='플랫폼/브랜드명')
     add_p.add_argument('--url', help='타겟 URL')
