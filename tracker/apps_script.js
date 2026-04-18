@@ -13,6 +13,21 @@
 // A:캠페인slug  B:유형  C:타겟URL  D:플랫폼/브랜드  E:영상ID
 // F:쿠폰코드  G:할인  H:RS%  I:상태  J:생성일  K:채널
 
+// ── 플랫폼 약어 매핑 ──
+var PLATFORM_ABBR = {
+  "타이탄클래스": "TITAN", "무아클래스": "MUA", "무순클래스": "MUSUN",
+  "패스트캠퍼스": "FAST", "클래스101": "C101", "콜로소": "COLOSO",
+  "인프런": "INFLEARN", "직방프랜차이즈": "REAL",
+  "BBQ": "BBQ", "교촌": "GYOCHON", "맘스터치": "MOMS",
+  "bhc": "BHC", "메가커피": "MEGA", "컴포즈커피": "COMPOSE"
+};
+
+function getPlatformAbbr(platformName) {
+  if (PLATFORM_ABBR[platformName]) return PLATFORM_ABBR[platformName];
+  // 매핑에 없으면 앞 3글자 대문자
+  return platformName.substring(0, 3).toUpperCase();
+}
+
 // ── 시트 메뉴 ─────────────────────────────────────
 function onOpen() {
   var ui = SpreadsheetApp.getUi();
@@ -148,6 +163,8 @@ function processNewCampaigns() {
     // YouTube URL → 영상 ID 추출
     var videoId = extractVideoId(rawVideoInput);
     var vid6 = videoId.substring(0, 6);
+    var platform = data[i][3] || "";
+    var platAbbr = getPlatformAbbr(platform);
     var newSlug = channel + "-" + vid6;
 
     // E열을 영상 ID로 교체 (URL → ID)
@@ -171,7 +188,7 @@ function processNewCampaigns() {
       }
     }
 
-    var couponCode = "FLOW-" + vid6 + "-01";
+    var couponCode = "FLOW-" + platAbbr + "-" + vid6 + "-01";
     var today = new Date().toISOString().split("T")[0];
     var row = i + 1; // 시트 행 번호 (1-based)
 
@@ -184,7 +201,7 @@ function processNewCampaigns() {
     // 쿠폰풀에 100개 생성
     var poolRows = [];
     for (var k = 1; k <= 100; k++) {
-      var code = "FLOW-" + vid6 + "-" + ("0000" + k).slice(-4);
+      var code = "FLOW-" + platAbbr + "-" + vid6 + "-" + ("0000" + k).slice(-4);
       poolRows.push([code, newSlug, "미발급", "", "", "", ""]);
     }
     poolSheet.getRange(poolSheet.getLastRow() + 1, 1, poolRows.length, 7).setValues(poolRows);
