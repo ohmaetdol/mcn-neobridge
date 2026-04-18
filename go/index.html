@@ -226,7 +226,7 @@
 </div>
 
 <script>
-var API = 'https://script.google.com/macros/s/AKfycby_OyIuKLHn6kABRq_38ucQTnUDuHheTjpTK23O6T9gElU-Icippj9Bm7jkG8sJbD_kWA/exec';
+var API = 'https://script.google.com/macros/s/AKfycbxWFnJrHbenkNxlDC3m1sgG9ZzTL80r62TsMGvGG0X-nsUsyCQR3ZwpHWIs05ibomf_/exec';
 var CAMPAIGN = null;
 var SLUG = '';
 var currentStep = 1;
@@ -236,7 +236,7 @@ var currentStep = 1;
     SLUG = p.get('c') || '';
     if (!SLUG) { showError(); return; }
 
-    fetch(API + '?action=redirect&c=' + encodeURIComponent(SLUG))
+    fetch(API + '?action=redirect&slug=' + encodeURIComponent(SLUG))
         .then(function(r) { return r.json(); })
         .then(function(data) {
             if (data.result === 'found') {

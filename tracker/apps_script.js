@@ -68,7 +68,7 @@ function doGet(e) {
 
   // 리다이렉트: 캠페인 slug로 타겟 URL 조회 (쿠폰 랜딩페이지용)
   if (action === "redirect") {
-    var slug = e.parameter.c || "";
+    var slug = e.parameter.slug || "";
     var campaign = findCampaign(ss, slug);
     if (campaign) {
       return jsonResponse({
@@ -116,7 +116,7 @@ function doGet(e) {
 
   // 쿠폰 잔여 수량
   if (action === "coupon_stock") {
-    var slug = e.parameter.c || "";
+    var slug = e.parameter.slug || "";
     var stock = getCouponStock(ss, slug);
     return jsonResponse({result: "ok", remaining: stock.remaining, total: stock.total});
   }
