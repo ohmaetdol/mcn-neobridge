@@ -109,8 +109,18 @@ function showChannelSummary() {
 // ── 시트에서 새 캠페인 처리 (slug + 쿠폰 자동생성) ─
 // ══════════════════════════════════════════════════
 // 사용법: 캠페인관리 탭에 아래만 채우고 메뉴 클릭
-//   B(유형) C(플랫폼 결제URL) D(플랫폼명) E(영상ID) G(할인) H(RS%) K(채널)
-//   → A(slug) F(쿠폰코드) I(상태) J(생성일) 자동 채움 + 쿠폰풀 100개 생성
+//   B(유형) C(플랫폼 결제URL) D(플랫폼명) E(YouTube URL) G(할인) H(RS%) K(채널)
+//   → A(slug) E(영상ID로 변환) F(쿠폰코드) I(상태) J(생성일) 자동 채움 + 쿠폰풀 100개 생성
+
+function extractVideoId(input) {
+  input = String(input || "").trim();
+  // YouTube URL에서 ID 추출
+  var match = input.match(/(?:v=|youtu\.be\/|\/embed\/|\/v\/)([a-zA-Z0-9_-]{11})/);
+  if (match) return match[1];
+  // 이미 11자 ID면 그대로
+  if (/^[a-zA-Z0-9_-]{11}$/.test(input)) return input;
+  return input;
+}
 
 function processNewCampaigns() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -123,13 +133,21 @@ function processNewCampaigns() {
   for (var i = 1; i < data.length; i++) {
     var slug = data[i][0];
     var channel = data[i][10] || "";
-    var videoId = String(data[i][4] || "");
+    var rawVideoInput = String(data[i][4] || "");
 
-    // slug이 비어있고 채널+영상ID가 있으면 새 캠페인
-    if (slug || !channel || !videoId) continue;
+    // slug이 비어있고 채널+영상 정보가 있으면 새 캠페인
+    if (slug || !channel || !rawVideoInput) continue;
 
+    // YouTube URL → 영상 ID 추출
+    var videoId = extractVideoId(rawVideoInput);
     var vid6 = videoId.substring(0, 6);
     var newSlug = channel + "-" + vid6;
+
+    // E열을 영상 ID로 교체 (URL → ID)
+    var row = i + 1;
+    if (videoId !== rawVideoInput) {
+      sheet.getRange(row, 5).setValue(videoId);
+    }
 
     // slug 중복 체크
     var counter = 2;
@@ -170,7 +188,7 @@ function processNewCampaigns() {
   }
 
   if (processed === 0) {
-    SpreadsheetApp.getUi().alert("처리할 새 캠페인이 없습니다.\n\n캠페인관리 탭에 새 행을 추가하세요:\n  B(유형) C(플랫폼URL) D(플랫폼명) E(영상ID) G(할인) H(RS%) K(채널)\n\nA(slug)는 비워두세요 — 자동 생성됩니다.");
+    SpreadsheetApp.getUi().alert("처리할 새 캠페인이 없습니다.\n\n캠페인관리 탭에 새 행을 추가하세요:\n  B(유형) C(플랫폼 결제URL) D(플랫폼명)\n  E(YouTube URL) G(할인) H(RS%) K(채널)\n\nA(slug)는 비워두세요 — 자동 생성됩니다.");
   } else {
     SpreadsheetApp.getUi().alert(processed + "개 캠페인 처리 완료!\n\n각 캠페인에 쿠폰 100개씩 생성됨.\n쿠폰풀 탭에서 확인하세요.");
   }
