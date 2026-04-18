@@ -41,6 +41,11 @@ function doPost(e) {
     return jsonResponse({result: "logged"});
   }
 
+  // 쿠폰 수령 (고객 정보 저장)
+  if (action === "coupon_claim") {
+    return saveCouponClaim(ss, e.parameter);
+  }
+
   // 캠페인 추가 (관리자용)
   if (action === "add_campaign") {
     return addCampaign(ss, e.parameter);
@@ -55,7 +60,7 @@ function doGet(e) {
   var action = e.parameter.action || "";
   var ss = SpreadsheetApp.getActiveSpreadsheet();
 
-  // 리다이렉트: 캠페인 slug로 타겟 URL 조회
+  // 리다이렉트: 캠페인 slug로 타겟 URL 조회 (쿠폰 랜딩페이지용)
   if (action === "redirect") {
     var slug = e.parameter.c || "";
     var campaign = findCampaign(ss, slug);
@@ -64,6 +69,9 @@ function doGet(e) {
         result: "found",
         url: campaign.url,
         coupon: campaign.coupon,
+        discount: campaign.discount,
+        platform: campaign.platform,
+        type: campaign.type,
         slug: slug
       });
     }
@@ -260,6 +268,42 @@ function getClickStats(ss) {
     }
   }
   return stats;
+}
+
+// ── 쿠폰 수령 고객 저장 (고객DB 탭) ──────────────
+function saveCouponClaim(ss, params) {
+  var sheet = ss.getSheetByName("고객DB");
+  var slug = params.campaign || "";
+
+  // 캠페인 정보 가져오기
+  var campaign = findCampaign(ss, slug);
+  var channel = campaign ? campaign.channel : "";
+  var platform = campaign ? campaign.platform : "";
+  var coupon = campaign ? campaign.coupon : "";
+
+  sheet.appendRow([
+    new Date().toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}),
+    slug,
+    channel,
+    platform,
+    coupon,
+    params.name || "",
+    params.phone || "",
+    params.email || "",
+    params.referrer || "",
+    "쿠폰발급"
+  ]);
+
+  // 클릭로그에도 기록
+  var logSheet = ss.getSheetByName("클릭로그");
+  logSheet.appendRow([
+    new Date().toLocaleString("ko-KR", {timeZone: "Asia/Seoul"}),
+    slug,
+    params.referrer || "",
+    params.ua || ""
+  ]);
+
+  return jsonResponse({result: "saved", coupon: coupon});
 }
 
 // ── 캠페인 추가 ──────────────────────────────────
