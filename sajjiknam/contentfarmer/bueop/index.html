@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>부업소개 질문지 v2 — 김정빈 40Q</title>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#0a0a0a;color:#e5e5e5;font-family:'Pretendard',system-ui,sans-serif;min-height:100vh;font-size:15px;padding-bottom:100px}
+.gnb{background:#111;border-bottom:1px solid #222;padding:0 16px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.gnb-logo{font-size:14px;font-weight:800;color:#F08F00}
+.gnb-badge{background:#1a1a1a;color:#8B95A1;border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700}
+.warn{background:#F08F00;color:#fff;text-align:center;padding:10px 16px;font-size:12px;font-weight:800;letter-spacing:.5px}
+.guide{background:#1a1a1a;border:1px solid #333;border-radius:10px;margin:12px 12px 0;padding:12px 14px;font-size:11px;color:#8B95A1;line-height:1.6}
+.guide strong{color:#F08F00}
+.guide .must-label{display:inline-block;background:#F08F00;color:#fff;border-radius:4px;padding:1px 6px;font-size:10px;font-weight:800;margin-right:4px}
+.wrap{max-width:600px;margin:0 auto;padding:16px 12px}
+.act-header{background:#1a1a1a;border-radius:12px;padding:14px 16px;margin:20px 0 10px;border-left:4px solid #F08F00}
+.act-header.evidence{border-left-color:#E91E63;background:#1a0a12}
+.act-header.peak{border-left-color:#9C27B0;background:#120a1a}
+.act-header.skeptic{border-left-color:#2196F3;background:#0a0f1a}
+.act-header.cta{border-left-color:#05C072;background:#0a1a10}
+.act-title{font-size:15px;font-weight:800;color:#fff;margin-bottom:4px}
+.act-meta{font-size:11px;color:#6B7684;line-height:1.5}
+.act-meta strong{color:#F08F00}
+.data-tag{display:inline-block;background:#1a1a2a;color:#7B8CDE;border:1px solid #2a2a4a;border-radius:4px;padding:2px 6px;font-size:9px;font-weight:600;margin-top:4px;line-height:1.4}
+.q{display:flex;gap:10px;padding:10px 12px;border-bottom:1px solid #1a1a1a;align-items:flex-start;-webkit-tap-highlight-color:transparent;cursor:pointer;transition:background .15s}
+.q.done{opacity:.35}
+.q:active{background:#1a1a1a}
+.q.must{border-left:3px solid #F08F00;background:#111}
+.q-num{min-width:28px;height:28px;background:#1a1a1a;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#6B7684;flex-shrink:0}
+.q.done .q-num{background:#05C072;color:#fff}
+.q.must .q-num{background:#F08F00;color:#fff}
+.q.must.done .q-num{background:#05C072;color:#fff}
+.q-text{font-size:14px;line-height:1.6;font-weight:500}
+.q-text strong{color:#F08F00}
+.q-note{font-size:11px;color:#6B7684;margin-top:4px;font-style:italic}
+.counter{position:fixed;bottom:0;left:0;right:0;background:#111;border-top:1px solid #222;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;z-index:100}
+.counter-text{font-size:13px;font-weight:700;color:#8B95A1}
+.counter-text span{color:#05C072}
+.counter-text .must-count{color:#F08F00}
+.counter-btn{background:#1a1a1a;color:#8B95A1;border:none;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer}
+.counter-btn:active{background:#333}
+.star{color:#F04452;font-size:11px;margin-left:4px}
+.must-label{display:inline-block;background:#F08F00;color:#fff;border-radius:4px;padding:1px 5px;font-size:9px;font-weight:800;margin-left:4px;vertical-align:middle}
+.loc{margin:0 -12px 16px;padding:14px 16px;font-size:13px;font-weight:800;letter-spacing:1px;display:flex;align-items:center;gap:8px}
+.loc-home{background:linear-gradient(90deg,#1a2a1a,#0a0a0a);border-top:3px solid #05C072;border-bottom:3px solid #05C072;color:#05C072}
+.loc span{font-size:20px}
+.loc-note{font-size:10px;font-weight:500;color:#6B7684;margin-left:auto}
+.thumb-guide{background:#111;border:2px solid #F08F00;border-radius:14px;margin:30px 0 20px;padding:0;overflow:hidden}
+.thumb-title{background:linear-gradient(135deg,#F08F00,#E91E63);padding:14px 16px;font-size:14px;font-weight:800;color:#fff;letter-spacing:.5px}
+.thumb-body{padding:16px}
+.thumb-shot{background:#1a1a1a;border-radius:10px;padding:14px;margin-bottom:12px;border-left:4px solid #F08F00}
+.thumb-shot.best{border-left-color:#05C072}
+.thumb-shot.ban{border-left-color:#F04452;background:#1a0a0a}
+.thumb-shot-label{font-size:10px;font-weight:800;color:#F08F00;letter-spacing:1px;margin-bottom:6px}
+.thumb-shot.best .thumb-shot-label{color:#05C072}
+.thumb-shot.ban .thumb-shot-label{color:#F04452}
+.thumb-shot-desc{font-size:14px;font-weight:700;color:#fff;line-height:1.6;margin-bottom:6px}
+.thumb-shot-why{font-size:11px;color:#8B95A1;line-height:1.5}
+.thumb-shot-why strong{color:#F08F00}
+.thumb-text-spec{background:#0a0a1a;border:1px solid #2a2a4a;border-radius:10px;padding:14px;margin-top:12px}
+.thumb-text-spec dt{font-size:10px;font-weight:800;color:#7B8CDE;margin-bottom:2px}
+.thumb-text-spec dd{font-size:13px;color:#e5e5e5;margin-bottom:10px;padding-left:0}
+.thumb-text-spec dd:last-child{margin-bottom:0}
+.thumb-combo{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.thumb-combo-card{background:#1a1a1a;border-radius:8px;padding:10px;text-align:center}
+.thumb-combo-card .rank{font-size:10px;font-weight:800;color:#F08F00;margin-bottom:4px}
+.thumb-combo-card .line1{font-size:11px;color:#8B95A1;margin-bottom:2px}
+.thumb-combo-card .line2{font-size:14px;font-weight:800;color:#fff}
+</style>
+</head>
+<body>
+
+<div class="warn">부업소개하는남자 MC 전용 — 출연자 공유 금지</div>
+
+<nav class="gnb">
+  <span class="gnb-logo">김정빈 부업소개 v2 40Q</span>
+  <span class="gnb-badge">탭하면 체크</span>
+</nav>
+
+<div class="guide">
+  <strong>유도질문 원칙:</strong> 숫자/답을 절대 먼저 말하지 말 것.<br>
+  <span class="must-label">★</span> = 반드시 물어야 할 핵심 질문 (10개)<br>
+  <strong>모든 질문에 데이터 근거 표시됨</strong> — 옆집CEO/절약왕정약용 분석 기반
+</div>
+
+<div class="wrap">
+
+<!-- MC 인트로 -->
+<div style="background:linear-gradient(135deg,#1a0f00,#1a1a1a);border:2px solid #F08F00;border-radius:14px;padding:20px 18px;margin-bottom:20px">
+  <div style="font-size:11px;font-weight:800;color:#F08F00;letter-spacing:1px;margin-bottom:10px">MC 오프닝 멘트 (0:00~0:10) — 택 1</div>
+  <div style="font-size:16px;font-weight:800;color:#fff;line-height:1.7;margin-bottom:14px;border-left:3px solid #F08F00;padding-left:12px">
+    A. "핸드폰 하나. 하루 1시간. 초기 자본 0원.<br>이걸로 13억을 번 사람이 있습니다.<br>오늘 그 방법을 전부 공개합니다."
+  </div>
+  <div style="font-size:16px;font-weight:800;color:#fff;line-height:1.7;margin-bottom:14px;border-left:3px solid #E91E63;padding-left:12px">
+    B. "중국 영상을 쇼츠로 올렸습니다.<br>2년. 순수익 13억.<br>지금부터 이 사람이 어떻게 했는지 보여드리겠습니다."
+  </div>
+  <div style="font-size:16px;font-weight:800;color:#fff;line-height:1.7;border-left:3px solid #2196F3;padding-left:12px">
+    C. "쿠팡에서 1등 하는 제품을 소개만 했습니다.<br>직접 만든 것도, 재고를 가진 것도 아닙니다.<br>그런데 13억이 들어왔습니다."
+  </div>
+  <div style="font-size:10px;color:#6B7684;margin-top:12px;line-height:1.5">
+    <strong style="color:#F08F00">연출:</strong> 멘트 후 바로 쿠팡 파트너스 수익 화면 클로즈업 → Q1으로 이어짐<br>
+    인사말/채널소개 생략. 숫자로 시작, 증거로 잡는다.<br>
+    <strong style="color:#F08F00">데이터:</strong> 절약왕 1위 210만뷰 "0초에 수익 화면" + 옆집CEO "아무도 안하네요" 103만뷰 의심 훅
+  </div>
+</div>
+
+<!-- 장소 표시 -->
+<div class="loc loc-home"><span>🏠</span> 집 전체 촬영 <span class="loc-note">부업소개 전 구간 집에서 촬영</span></div>
+
+<!-- 구간 1 -->
+<div class="act-header">
+  <div class="act-title">구간 1 — 수익 증거 (0~1:30)</div>
+  <div class="act-meta"><strong>절약왕 1위(210만뷰) 공식: 0초에 수익 화면부터</strong><br>절약왕 "하루 X분 + 월 X만원" = 64~107만뷰 공식</div>
+</div>
+
+<div class="q must" onclick="tog(this)"><div class="q-num">1</div><div class="q-text"><strong>쿠팡 파트너스 수익 화면 지금 바로 열어볼 수 있어요?</strong><span class="must-label">★</span><span class="star">시연</span><div class="q-note">→ 누적 13억 화면 먼저 — 말보다 증거가 먼저</div><div class="data-tag">절약왕 1위 210만뷰 — 0초에 수익 인증 화면, 말 없음</div></div></div>
+
+<div class="q must" onclick="tog(this)"><div class="q-num">2</div><div class="q-text"><strong>이 화면에서 시청자가 가장 놀랄 숫자가 뭐예요?</strong><span class="must-label">★</span><div class="q-note">→ 출연자가 직접 킬러 숫자 고르게 유도</div><div class="data-tag">이소정 기획서 "첫 3초: 수익 증거" 원칙</div></div></div>
+
+<div class="q" onclick="tog(this)"><div class="q-num">3</div><div class="q-text">이거 하는 데 하루에 시간을 진짜 얼마나 써요? 정확히요.<div class="q-note">→ "하루 1~2시간" 유도</div><div class="data-tag">절약왕 "하루30분 월80만"=107만뷰, "하루10분 월1300만"=69만뷰</div></div></div>
+
+<div class="q" onclick="tog(this)"><div class="q-num">4</div><div class="q-text">직장인이 퇴근 후 1시간이면 뭘 할 수 있어요? 쇼츠 몇 개 만들 수 있어요?<div class="data-tag">옆집CEO 2위 "퇴근후 1시간! 월200"=53만뷰</div></div></div>
+
+<div class="q must" onclick="tog(this)"><div class="q-num">5</div><div class="q-text"><strong>한 번 올린 쇼츠가 계속 돈을 벌어다 줘요? 1년 전에 올린 것도요?</strong><span class="must-label">★</span><div class="data-tag">절약왕 "딱1번 실행 월60~270만"=80만뷰, like_rate 3.261% 전체1위</div></div></div>
+
+<!-- 구간 2 -->
+<div class="act-header">
+  <div class="act-title">구간 2 — 구조 공개 (1:30~3:00)</div>
+  <div class="act-meta"><strong>옆집CEO식: MC가 산수로 직접 검증</strong><br>옆집CEO 댓글 40%가 "사업자/정산/배송" 질문 → 선제 해소</div>
+</div>
+
+<div class="q" onclick="tog(this)"><div class="q-num">6</div><div class="q-text">쿠팡 파트너스가 뭔지 모르는 사람한테 한마디로 설명하면?</div></div>
+
+<div class="q must" onclick="tog(this)"><div class="q-num">7</div><div class="q-text"><strong>수수료가 3%잖아요. 1만원짜리 팔면 300원이에요. 이걸로 어떻게 13억이 돼요? 제가 계산해볼게요.</strong><span class="must-label">★</span><span class="star">의심</span><div class="q-note">→ MC가 직접 계산하며 의심 — 산수로 검증</div><div class="data-tag">부업소개 레퍼런스분석 "비용/수익 실증" + 옆집CEO Skeptic-Ally</div></div></div>
+
+<div class="q" onclick="tog(this)"><div class="q-num">8</div><div class="q-text">사업자 등록 필요해요? 배송은요? 재고는요?<div class="q-note">→ "전부 필요 없다" 유도</div><div class="data-tag">옆집CEO 댓글 40%가 사업자/정산/배송 질문 — 시청자가 가장 많이 묻는 것</div></div></div>
+
+<div class="q" onclick="tog(this)"><div class="q-num">9</div><div class="q-text">처음 시작할 때 돈이 얼마나 들었어요? 0원이었어요?<div class="data-tag">옆집CEO "나이+소자본+수익" 조합=12~22만뷰 안정권</div></div></div>
+
+<div class="q must" onclick="tog(this)"><div class="q-num">10</div><div class="q-text"><strong>"쿠팡에서 1등 하는 제품을 못 팔면서 내 제품을 어떻게 팔아?" — 이게 무슨 뜻이에요?</strong><span class="must-label">★</span><div class="q-note">→ 2등 전략 핵심 철학 유도</div><div class="data-tag">촬영설계서 핵심 훅 + 옆집CEO "99% 블루오션"=20만뷰</div></div></div>
+
+<!-- 구간 3 -->
+<div class="act-header">
+  <div class="act-title">구간 3 — 쇼츠 시연 (3:00~5:00)</div>
+  <div class="act-meta"><strong>옆집CEO 7:21 피크: 실제 화면 공개 = 최고 신뢰 장치</strong><br>이론 설명 X, 화면으로 보여주기</div>
+</div>
+
+<div class="q must" onclick="tog(this)"><div class="q-num">11</div><div class="q-text"><strong>지금 실시간으로 쇼츠 하나 만들어 보여줄 수 있어요? GPT 대본부터 올리는 것까지요.</strong><span class="must-label">★</span><span class="star">시연</span><div class="data-tag">옆집CEO 7:21 피크 = 실제 화면 공개 순간 체류 최고</div></div></div>
+
+<div class="q" onclick="tog(this)"><div class="q-num">12</div><div class="q-text">영상 소스는 어디서 가져와요?<div class="q-note">→ 중국 영상 소스 유도</div></div></div>
+
+<div class="q" onclick="tog(this)"><div class="q-num">13</div><div class="q-text">대본은 직접 써요? 아니면 AI한테 시켜요?<div class="q-note">→ GPT 대본 + TTS</div></div></div>
+
+<div class="q" onclick="tog(this)"><div class="q-num">14</div><div class="q-text">편집은 뭘로 해요? 컴퓨터 켜야 돼요?<div class="q-note">→ 인샷 앱 — 핸드폰만으로 가능</div></div></div>
+
+<div class="q must" onclick="tog(this)"><div class="q-num">15</div><div class="q-text"><strong>잠깐, 지금 한 거 제가 정리해볼게요. 1단계 OO, 2단계 OO, 3단계 OO — 이게 맞아요?</strong><span class="must-label">★</span><div class="q-note">→ MC가 시청자 눈높이로 단계 정리</div><div class="data-tag">촬영설계서 "MC가 정리" = 머니로드(출연자가 직접)와 차별화</div></div></div>
+
+<div class="q" onclick="tog(this)"><div class="q-num">16</div><div class="q-text">10분이면 뭘 할 수 있어요? 순서대로 전부 알려주세요.<div class="data-tag">절약왕 "하루10분 월1300만"=69만뷰, 댓글 5,589개 — "10분"이 매직 워드</div></div></div>
+
+<!-- 구간 4 -->
+<div class="act-header">
+  <div class="act-title">구간 4 — 핵심 노하우: 2등 전략 (5:00~6:30)</div>
+  <div class="act-meta"><strong>옆집CEO "99% 블루오션"=20만뷰</strong> + 김정빈 "1등을 분석하면 공식이 보인다"</div>
+</div>
+
+<div class="q" onclick="tog(this)"><div class="q-num">17</div><div class="q-text">이미 잘 팔리는 제품을 어떻게 찾아요? 1등 제품 찾는 공식이 있어요?<div class="data-tag">옆집CEO "99% 블루오션"=14~20만뷰 + 촬영설계서 2등 전략</div></div></div>
+
+<div class="q" onclick="tog(this)"><div class="q-num">18</div><div class="q-text">잘되는 영상이랑 안 되는 영상 차이가 뭐예요?</div></div>
+
+<div class="q" onclick="tog(this)"><div class="q-num">19</div><div class="q-text">채널을 몇 개 운영해요? 200개는 아니잖아요. 몇 개가 적정이에요?<div class="data-tag">옆집CEO "쇼츠 채널 200개 월7천만원 43살 아빠"=22만뷰</div></div></div>
+
+<div class="q" onclick="tog(this)"><div class="q-num">20</div><div class="q-text">AI로 쇼츠 만드는 거 — 이거 아직 99%가 모르는 방법이에요? 아니면 이미 레드오션이에요?<div class="q-note">→ 이 답변이 영상 제목을 결정</div><div class="data-tag">절약왕 "(99%가 모르는) 자동 부업"=46~52만뷰 제목 공식</div></div></div>
+
+<div class="q" onclick="tog(this)"><div class="q-num">21</div><div class="q-text">쿠팡 파트너스로 수익 내는 방법 딱 3가지만 추리면 뭐예요? BEST 3로 정리해주세요.<div class="data-tag">절약왕 "BEST5"=210만뷰, "BEST3"=54만뷰 — 리스트형이 최고 조회수</div></div></div>
+
+<!-- 구간 5 -->
+<div class="act-header evidence">
+  <div class="act-title">구간 5 — 수강생 실증 + 사적 증거 (6:30~7:30)</div>
+  <div class="act-meta"><strong>절약왕 1위 댓글(809좋아요) "유익한데 쉽진 않다" → "쉬운 사례"로 반격</strong><br>옆집CEO 7:21 피크: 카톡 단톡방 = 시청자 체류 최고 순간</div>
+</div>
+
+<div class="q must" onclick="tog(this)"><div class="q-num">22</div><div class="q-text"><strong>사람들이 "부업 영상 봐도 어려워서 안 한다"고 하거든요. 쿠팡 파트너스에서 진짜 어려운 거 딱 하나만 말하면 뭐예요?</strong><span class="must-label">★</span><div class="data-tag">절약왕 1위 댓글(809좋아요) "유익한데 어느 하나도 쉽진 않다" — 시청자 집단 심리</div></div></div>
+
+<div class="q" onclick="tog(this)"><div class="q-num">23</div><div class="q-text">그러면 그 어려운 걸 넘긴 사람 있어요? 실제로 돈 번 사람이요.</div></div>
+
+<div class="q must" onclick="tog(this)"><div class="q-num">24</div><div class="q-text"><strong>그 사람 계정 지금 보여줄 수 있어요? 수강생 단톡방도 열어볼 수 있어요?</strong><span class="must-label">★</span><span class="star">시연</span><div class="q-note">→ @wendy_home__ 인스타 + 단톡방 실제 화면</div><div class="data-tag">옆집CEO 7:21 피크 = 실제 카톡 대화 공개 순간 체류 최고. "사적 증거"가 최고 신뢰</div></div></div>
+
+<div class="q" onclick="tog(this)"><div class="q-num">25</div><div class="q-text">이 분은 원래 뭐 하던 분이에요? 경험이 있었어요?<div class="q-note">→ 주부/일반인 → "나도 할 수 있겠다"</div></div></div>
+
+<div class="q" onclick="tog(this)"><div class="q-num">26</div><div class="q-text">이 분이 처음 돈이 들어온 게 구독자 몇 명일 때요? 0명일 때도 돼요?<div class="data-tag">영진 기획서 — "0명에서 첫 수익"이 진입장벽 파괴의 결정적 순간</div></div></div>
+
+<!-- 구간 6 -->
+<div class="act-header peak">
+  <div class="act-title">구간 6 — 자동화 전환점 (7:30~8:30)</div>
+  <div class="act-meta"><strong>절약왕 Most Replayed 7:40~8:10: 수동→자동화 = 시청자 최고 피크</strong><br>여기가 시청자가 가장 멈춰서 다시 보는 구간</div>
+</div>
+
+<div class="q must" onclick="tog(this)"><div class="q-num">27</div><div class="q-text"><strong>처음에는 직접 다 했잖아요. AI가 대본 쓰고 TTS로 목소리 넣는다고요? 그 전환이 언제 일어난 거예요?</strong><span class="must-label">★</span><div class="data-tag">절약왕 Most Replayed 7:40~8:10 = "수동→자동화" 전환에서 시청자 최고 열광</div></div></div>
+
+<div class="q" onclick="tog(this)"><div class="q-num">28</div><div class="q-text">지금 돈 들어오는 라인이 몇 개예요? 쿠팡 파트너스만 하는 거예요?<div class="data-tag">옆집CEO "부업 파이프라인 3가지"=26만뷰, engagement score 10.803 최고</div></div></div>
+
+<div class="q" onclick="tog(this)"><div class="q-num">29</div><div class="q-text">1년 전에 올린 쇼츠도 지금 돈이 들어와요? 한 번 만들면 진짜 계속 벌리는 거예요?<div class="data-tag">절약왕 "딱1번" like_rate 3.261% + 옆집CEO "아무도안하네요" 103만뷰 합성</div></div></div>
+
+<div class="q" onclick="tog(this)"><div class="q-num">30</div><div class="q-text">혼자 했을 때랑 시스템 만든 다음이랑, 수익 차이가 구체적으로 얼마나 돼요?</div></div>
+
+<!-- 구간 7 -->
+<div class="act-header skeptic">
+  <div class="act-title">구간 7 — 의심 대리 해소 (8:30~9:30)</div>
+  <div class="act-meta"><strong>옆집CEO Skeptic-Ally: MC가 시청자 대신 의심하고 검증</strong><br>촬영설계서 위기장치에서 추출한 의심 포인트</div>
+</div>
+
+<div class="q must" onclick="tog(this)"><div class="q-num">31</div><div class="q-text"><strong>쿠팡 파트너스로 13억이라고 하면 "사기 아니야?"라고 할 텐데, 주변에서 의심받은 적 있어요?</strong><span class="must-label">★</span><span class="star">의심</span><div class="data-tag">옆집CEO 1위 "아무도 안하네요?"=103만뷰 — 의심 훅이 채널 최고 조회수</div></div></div>
+
+<div class="q" onclick="tog(this)"><div class="q-num">32</div><div class="q-text">쿠팡 파트너스는 쿠팡이 직접 하면 되는 거 아니에요? 중간에 끼면 수수료만 빼앗기는 거 아닌가요?<span class="star">의심</span><div class="data-tag">옆집CEO 댓글 15% 의심 유형 — "제조사가 직접 하면 되는 거 아닌가요?"</div></div></div>
+
+<div class="q" onclick="tog(this)"><div class="q-num">33</div><div class="q-text">강의하면서 본업 수익이 줄지 않았어요? 강의에 시간 쓰면 쿠팡에 쓸 시간이 줄잖아요.<span class="star">의심</span><div class="q-note">→ "강의 파는 사람 = 본업으로 못 번다" 의심 정면 돌파</div><div class="data-tag">촬영설계서 위기장치5 — "쿠팡 순수익 1000만? 강의 시작하고 줄었다고?"</div></div></div>
+
+<div class="q must" onclick="tog(this)"><div class="q-num">34</div><div class="q-text"><strong>이거 지금 시작해도 돼요? 1년 뒤에 시작하면 진짜 차이가 있어요?</strong><span class="must-label">★</span><span class="star">의심</span><div class="data-tag">옆집CEO "빨리 시작할수록 이득이에요"=31만뷰 — 긴박감 트리거</div></div></div>
+
+<div class="q" onclick="tog(this)"><div class="q-num">35</div><div class="q-text">쿠팡 파트너스 수수료가 바뀌거나 쇼츠 정책이 바뀌면 다 끝나는 거 아니에요?<span class="star">의심</span><div class="data-tag">이소정 기획서 "토스PG 막힘=선점효과" 긴박감 패턴 적용</div></div></div>
+
+<div class="q" onclick="tog(this)"><div class="q-num">36</div><div class="q-text">지금 따라하면 처음에 가장 많이 막히는 게 뭐예요? 3가지만 솔직하게요.<div class="data-tag">레퍼런스분석 7~9분대 "막히는 것 3가지" 구조</div></div></div>
+
+<!-- 구간 8 -->
+<div class="act-header cta">
+  <div class="act-title">구간 8 — 마무리 + CTA (9:30~10:00)</div>
+  <div class="act-meta"><strong>실행 유도 → 사찍남 크로스 링크</strong></div>
+</div>
+
+<div class="q" onclick="tog(this)"><div class="q-num">37</div><div class="q-text">3개월 동안 수익 0원이면 어떡해요? 그래도 계속 해야 하는 이유가 있어요?<div class="data-tag">절약왕 심리 "죄책감→희망→긴박감" + 영진 기획서 Q19 "3개월 0원 버틸 방법"</div></div></div>
+
+<div class="q" onclick="tog(this)"><div class="q-num">38</div><div class="q-text">쿠팡 파트너스로 월 500만원 벌려면 채널 몇 개가 필요해요? 구체적으로요.<div class="data-tag">절약왕 "월500만원 BEST5"=210만뷰, 댓글 10,153개 — "500만원"이 매직 넘버</div></div></div>
+
+<div class="q must" onclick="tog(this)"><div class="q-num">39</div><div class="q-text"><strong>오늘 이 영상 보고 바로 시작하려는 사람한테, 첫 3일 동안 할 일을 알려주세요.</strong><span class="must-label">★</span></div></div>
+
+<div class="q" onclick="tog(this)"><div class="q-num">40</div><div class="q-text">마지막으로, 시청자분들이 댓글로 뭘 물어봤으면 좋겠어요? "이것만은 꼭 물어봐라" — 하나만요.<div class="data-tag">옆집CEO "56억 MZ대표"=댓글 2,698개 score 17.762 — 출연자가 댓글 주제 지정</div></div></div>
+
+</div>
+
+<!-- 썸네일 촬영 가이드 -->
+<div class="thumb-guide">
+<div class="thumb-title">📸 부업소개 썸네일 촬영 가이드</div>
+<div class="thumb-body">
+
+<div class="thumb-shot best">
+  <div class="thumb-shot-label">A안 — 핸드폰 갭 대비샷 (1순위)</div>
+  <div class="thumb-shot-desc">핸드폰 하나 들고 있는 손 + 쿠팡 수익 13억 화면</div>
+  <div class="thumb-shot-why"><strong>촬영법:</strong> 김정빈이 핸드폰을 자연스럽게 보고 있는 모습. 화면에 쿠팡 파트너스 누적 수익 13억이 보이게.<br><strong>데이터:</strong> 옆집CEO 1위(103만뷰) 빨간 화살표+수익화면 패턴. 절약왕 1위(210만뷰) 수익 인증 스크린샷. 핸드폰(저렴) vs 13억(고가) = 한 프레임 갭 대비<br><strong>앵글:</strong> 45도 측면, 핸드폰 화면과 얼굴 동시 노출</div>
+</div>
+
+<div class="thumb-shot best">
+  <div class="thumb-shot-label">B안 — 현장 액션샷</div>
+  <div class="thumb-shot-desc">사무실에서 직원들과 쇼츠 제작 중인 모습</div>
+  <div class="thumb-shot-why"><strong>촬영법:</strong> 모니터 여러 대 + 직원 2~3명과 함께 작업 중. 김정빈이 지시하는 모습.<br><strong>데이터:</strong> 휴먼스토리 TOP5 공통 = 인물이 행동 중인 현장 액션. 사찍남 Best "10톤 옷산"(유일한 현장샷). 3채널 공통: 연출 없는 실제 현장 100%<br><strong>앵글:</strong> 약간 뒤에서 전체 사무실 분위기 포함</div>
+</div>
+
+<div class="thumb-shot">
+  <div class="thumb-shot-label">C안 — 실패 잔해물 스케일샷</div>
+  <div class="thumb-shot-desc">양말/찌글이 굿즈/팔찌 재고 더미 앞에 서있는 김정빈</div>
+  <div class="thumb-shot-why"><strong>촬영법:</strong> 과거 실패한 제품들을 한곳에 모아놓고 그 앞에 서있는 모습<br><strong>데이터:</strong> 사찍남 Best 썸네일 "10톤 옷산"과 동일 구조(비현실적 스케일). 휴먼스토리 갭 대비샷(람보르기니+주차요원)=523만뷰<br><strong>앵글:</strong> 와이드, 잔해물 스케일이 보이도록</div>
+</div>
+
+<div class="thumb-shot ban">
+  <div class="thumb-shot-label">❌ 절대 금지 — 이렇게 찍지 마세요</div>
+  <div class="thumb-shot-desc">컴퓨터 앞 정적 뒷모습 / 포즈 잡은 정면 / 건물 외관</div>
+  <div class="thumb-shot-why"><strong>데이터:</strong> 사찍남 9개 중 4개(44%)가 "컴퓨터 앞 뒷모습" → 조회수 최하위. 휴먼스토리는 21개 중 1개(5%)만 정적. 3채널 공통: 인위적 포즈, 들고 있는 연출 = 0개</div>
+</div>
+
+<div class="thumb-text-spec">
+  <dt>텍스트 줄 수</dt><dd>반드시 2줄 (1줄 = 배경/자격, 2줄 = 결과/수익)</dd>
+  <dt>폰트</dt><dd>흰색 극굵은 고딕 + 검정 외곽선. 화면 하단 1/3~1/2 차지</dd>
+  <dt>강조색</dt><dd>형광 노란 or 빨간색 (절약왕+옆집CEO 공통 패턴)</dd>
+  <dt>핵심 규칙</dt><dd>제목과 썸네일 텍스트 반드시 다르게! (사찍남 67% 동일 = 최악 패턴)</dd>
+</div>
+
+<div class="thumb-combo">
+  <div class="thumb-combo-card"><div class="rank">1순위</div><div class="line1">중국 영상 쇼츠로 올려서</div><div class="line2">순수익 13억 번 30살</div></div>
+  <div class="thumb-combo-card"><div class="rank">2순위</div><div class="line1">핸드폰 하나로</div><div class="line2">13억 번 30살</div></div>
+  <div class="thumb-combo-card"><div class="rank">3순위</div><div class="line1">3번 망하고도</div><div class="line2">13억 모은 30살</div></div>
+  <div class="thumb-combo-card"><div class="rank">4순위</div><div class="line1">직원 월급 1600만원인데</div><div class="line2">통장에 3천만원뿐인 사장</div></div>
+</div>
+
+<div style="font-size:10px;color:#6B7684;margin-top:12px;line-height:1.5">
+  <strong style="color:#F08F00">인서트 필수 촬영:</strong> ①쿠팡 수익 화면 클로즈업 ②핸드폰 인샷 앱 작업 ③사무실 전경 ④손 클로즈업(키보드/핸드폰) ⑤양말/팔찌 실패 제품 실물<br>
+  <strong style="color:#F08F00">데이터 출처:</strong> 휴먼스토리 CTR 5.1%, 절약왕 49.4만 구독, 옆집CEO 17.4만 구독, 사찍남 썸네일 9개 분석, 3채널 교차 분석
+</div>
+
+</div>
+</div>
+
+</div>
+
+<div class="counter">
+  <div class="counter-text">체크: <span id="cnt">0</span>/40 | <span class="must-count">★ <span id="mcnt">0</span>/10</span></div>
+  <button class="counter-btn" onclick="resetAll()">초기화</button>
+</div>
+
+<script>
+let count=0,mcount=0;
+function tog(el){
+  el.classList.toggle('done');
+  const n=el.querySelector('.q-num');
+  const isMust=el.classList.contains('must');
+  if(el.classList.contains('done')){n.textContent='V';count++;if(isMust)mcount++}
+  else{n.textContent=el.dataset.n||n.textContent;count--;if(isMust)mcount--}
+  document.getElementById('cnt').textContent=count;
+  document.getElementById('mcnt').textContent=mcount;
+}
+function resetAll(){
+  document.querySelectorAll('.q.done').forEach(el=>{
+    el.classList.remove('done');
+    const n=el.querySelector('.q-num');
+    n.textContent=n.dataset.n||n.textContent;
+  });
+  count=0;mcount=0;
+  document.getElementById('cnt').textContent=0;
+  document.getElementById('mcnt').textContent=0;
+}
+document.querySelectorAll('.q-num').forEach(n=>{n.dataset.n=n.textContent});
+</script>
+</body>
+</html>
