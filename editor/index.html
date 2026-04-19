@@ -547,9 +547,10 @@ function myWorkCard(w) {
   }
 
   // 상태 스테퍼
-  var steps = ['신청', '승인', '편집중', '초안제출', '완료'];
+  var steps = ['신청', '승인', '편집중', '초안제출', '완료', '입금'];
   var currentStep = 0;
   if (w.approvalStatus === '반려') currentStep = -1;
+  else if (w.paymentStatus === '입금완료') currentStep = 5;
   else if (v.status === '완료') currentStep = 4;
   else if (v.status === '초안제출' || v.status === '수정중') currentStep = 3;
   else if (v.status === '편집중') currentStep = 2;
@@ -579,6 +580,7 @@ function myWorkCard(w) {
     '<span>마감: ' + (v.deadline || '-') + '</span>' +
     (dday !== null ? '<span class="dday ' + ddayClass(dday) + '">' + ddayText(dday) + '</span>' : '') +
     '</div>' +
+    (v.status === '완료' || w.paymentStatus ? paymentBadgeHtml(w) : '') +
     (w.plan ? formatPlan(w.plan) : '') +
     '<div class="btn-group">' + btns + '</div>' +
     '</div>';
@@ -642,6 +644,7 @@ function loadAdminData() {
     var editing = videos.filter(function(v) { return v.status === '편집중' || v.status === '수정중'; }).length;
     var pending = apps.filter(function(a) { return a.approvalStatus === '신청'; }).length;
     var done = videos.filter(function(v) { return v.status === '완료'; }).length;
+    var unpaid = apps.filter(function(a) { return a.paymentStatus === '입금대기'; }).length;
 
     document.getElementById('adminStats').innerHTML =
       '<div class="stat-bar">' +
@@ -649,6 +652,7 @@ function loadAdminData() {
       '<div class="stat-item"><div class="stat-num" style="color:var(--purple);">' + editing + '</div><div class="stat-label">편집중</div></div>' +
       '<div class="stat-item"><div class="stat-num" style="color:var(--orange);">' + pending + '</div><div class="stat-label">승인 대기</div></div>' +
       '<div class="stat-item"><div class="stat-num" style="color:var(--green);">' + done + '</div><div class="stat-label">완료</div></div>' +
+      '<div class="stat-item"><div class="stat-num" style="color:var(--red);">' + unpaid + '</div><div class="stat-label">입금대기</div></div>' +
       '</div>';
 
     // 전체 영상
@@ -880,6 +884,17 @@ function statusBadge(s) {
 function approvalBadge(s) {
   var m = {'대기':'badge-pending','승인':'badge-approved','반려':'badge-rejected'};
   return m[s] || 'badge-pending';
+}
+
+function paymentBadgeHtml(w) {
+  if (w.paymentStatus === '입금완료') {
+    var amt = w.paymentAmount ? ' \\u20A9' + Number(w.paymentAmount).toLocaleString() : '';
+    return '<div style="background:var(--green-bg);color:var(--green);padding:8px 12px;border-radius:6px;font-size:13px;font-weight:600;margin:8px 0;">입금완료' + amt + (w.paymentDate ? ' (' + w.paymentDate + ')' : '') + '</div>';
+  }
+  if (w.paymentStatus === '입금대기') {
+    return '<div style="background:var(--orange-bg);color:var(--orange);padding:8px 12px;border-radius:6px;font-size:13px;font-weight:600;margin:8px 0;">입금대기</div>';
+  }
+  return '';
 }
 
 function getDday(dateStr) {
