@@ -486,7 +486,7 @@ function loadVideos() {
   el.innerHTML = '<div class="loading"><div class="spinner"></div><p style="margin-top:8px;font-size:13px;">영상 목록 불러오는 중...</p></div>';
 
   api('videos').then(function(data) {
-    var videos = (data.videos || []).filter(function(v) { return v.status === '대기' || v.status === '신청됨'; });
+    var videos = (data.videos || []).filter(function(v) { return v.status === '대기'; });
     if (videos.length === 0) {
       el.innerHTML = '<div class="empty"><div class="empty-icon">-</div><p>현재 대기 중인 영상이 없습니다.</p></div>';
       return;
