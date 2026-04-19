@@ -484,6 +484,10 @@ function buildApplyEmail(editor, videoId, plan, expectedDate, vidInfo) {
 }
 
 function buildApprovalEmail(editor, vidInfo, guide) {
+  var coachMap = {'사찍남':'sajjiknam_jhada','부소남':'busonam_leesojung','아는언니리지':'gyeoljeongsa_ep02'};
+  var coachProject = coachMap[vidInfo.channel] || '';
+  var coachUrl = coachProject ? 'https://editor-app-gilt.vercel.app/?project=' + coachProject : '';
+
   return '<div style="font-family:-apple-system,sans-serif;max-width:600px;margin:0 auto;">' +
     '<div style="background:#217a38;color:#fff;padding:20px;border-radius:8px 8px 0 0;">' +
     '<h2 style="margin:0;">편집이 승인되었습니다!</h2></div>' +
@@ -496,8 +500,9 @@ function buildApprovalEmail(editor, vidInfo, guide) {
     '<tr><td style="padding:8px 0;color:#888;">마감일</td><td style="padding:8px 0;font-weight:700;color:#c01a1a;">' + (vidInfo.deadline || '-') + '</td></tr>' +
     '</table>' +
     (vidInfo.dropbox ? '<p><a href="' + vidInfo.dropbox + '" style="display:inline-block;background:#0061fe;color:#fff;padding:10px 20px;border-radius:6px;text-decoration:none;margin:12px 0;">드롭박스에서 원본 다운로드</a></p>' : '') +
+    (coachUrl ? '<p><a href="' + coachUrl + '" style="display:inline-block;background:#384460;color:#fff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:700;margin:12px 0;">📋 편집코치 가이드 보기 →</a></p>' : '') +
     '<div style="background:#f0fdf4;padding:16px;border-radius:8px;margin:16px 0;border-left:4px solid #217a38;">' +
-    '<strong>편집 가이드:</strong><br><br>' + guide.replace(/\n/g, '<br>') + '</div>' +
+    '<strong>편집 가이드 요약:</strong><br><br>' + guide.replace(/\n/g, '<br>') + '</div>' +
     '<p style="color:#888;font-size:13px;">편집 완료 후 편집자 보드에서 초안을 제출해주세요.</p>' +
     '</div></div>';
 }
