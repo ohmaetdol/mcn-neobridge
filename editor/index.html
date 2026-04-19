@@ -640,7 +640,7 @@ function loadAdminData() {
     // 통계 바
     var waiting = videos.filter(function(v) { return v.status === '대기'; }).length;
     var editing = videos.filter(function(v) { return v.status === '편집중' || v.status === '수정중'; }).length;
-    var pending = apps.filter(function(a) { return a.approvalStatus === '대기'; }).length;
+    var pending = apps.filter(function(a) { return a.approvalStatus === '신청'; }).length;
     var done = videos.filter(function(v) { return v.status === '완료'; }).length;
 
     document.getElementById('adminStats').innerHTML =
@@ -672,7 +672,7 @@ function loadAdminData() {
         }).join('');
 
     // 승인 대기
-    var pendingApps = apps.filter(function(a) { return a.approvalStatus === '대기'; });
+    var pendingApps = apps.filter(function(a) { return a.approvalStatus === '신청'; });
     var pendingBadge = document.getElementById('pendingBadge');
     if (pendingApps.length > 0) { pendingBadge.style.display = 'inline'; pendingBadge.textContent = pendingApps.length; }
     else { pendingBadge.style.display = 'none'; }
