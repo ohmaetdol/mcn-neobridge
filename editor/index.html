@@ -884,7 +884,12 @@ function approvalBadge(s) {
 
 function getDday(dateStr) {
   if (!dateStr) return null;
-  var d = new Date(dateStr); var t = new Date(); t.setHours(0,0,0,0); d.setHours(0,0,0,0);
+  var d = new Date(dateStr);
+  if (isNaN(d.getTime()) && /^\d{1,2}\/\d{1,2}$/.test(dateStr)) {
+    d = new Date(new Date().getFullYear() + '/' + dateStr);
+  }
+  if (isNaN(d.getTime())) return null;
+  var t = new Date(); t.setHours(0,0,0,0); d.setHours(0,0,0,0);
   return Math.ceil((d - t) / 86400000);
 }
 function ddayClass(d) {
