@@ -72,7 +72,8 @@ function getVideos() {
       deadline: data[i][5] instanceof Date
         ? Utilities.formatDate(data[i][5], 'Asia/Seoul', 'yyyy-MM-dd')
         : String(data[i][5]),
-      status: data[i][6] || '대기'
+      status: data[i][6] || '대기',
+      coachUrl: data[i][7] || ''
     });
   }
   // 편집코치 가이드
@@ -102,7 +103,8 @@ function getMyWork(editorName) {
       deadline: vidData[i][5] instanceof Date
         ? Utilities.formatDate(vidData[i][5], 'Asia/Seoul', 'yyyy-MM-dd')
         : String(vidData[i][5]),
-      status: vidData[i][6]
+      status: vidData[i][6],
+      coachUrl: vidData[i][7] || ''
     };
   }
 
@@ -441,7 +443,8 @@ function getVideoInfo(ss, videoId) {
         dropbox: data[i][4],
         deadline: data[i][5] instanceof Date
           ? Utilities.formatDate(data[i][5], 'Asia/Seoul', 'yyyy-MM-dd')
-          : String(data[i][5])
+          : String(data[i][5]),
+        coachUrl: data[i][7] || ''
       };
     }
   }
@@ -484,9 +487,7 @@ function buildApplyEmail(editor, videoId, plan, expectedDate, vidInfo) {
 }
 
 function buildApprovalEmail(editor, vidInfo, guide) {
-  var coachMap = {'사찍남':'sajjiknam_jhada','부소남':'busonam_leesojung','아는언니리지':'gyeoljeongsa_ep02'};
-  var coachProject = coachMap[vidInfo.channel] || '';
-  var coachUrl = coachProject ? 'https://editor-app-gilt.vercel.app/?project=' + coachProject : '';
+  var coachUrl = vidInfo.coachUrl || '';
 
   return '<div style="font-family:-apple-system,sans-serif;max-width:600px;margin:0 auto;">' +
     '<div style="background:#217a38;color:#fff;padding:20px;border-radius:8px 8px 0 0;">' +
