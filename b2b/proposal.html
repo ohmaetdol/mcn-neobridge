@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>플로우머스 MCN — 강의 플랫폼 콘텐츠 제작 제안서</title>
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --navy: #1a1d23;
+    --blue: #2563EB;
+    --blue-light: rgba(37,99,235,0.07);
+    --orange: #ea580c;
+    --orange-light: rgba(234,88,12,0.07);
+    --green: #16a34a;
+    --green-light: rgba(22,163,74,0.07);
+    --text: #1a1d23;
+    --text-med: #64748b;
+    --text-low: #94a3b8;
+    --border: #e2e8f0;
+    --surface: #f8fafc;
+  }
+
+  html { font-size: 11pt; }
+  body {
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    color: var(--text);
+    background: #fff;
+    line-height: 1.65;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    padding: 48px 56px;
+    position: relative;
+    page-break-after: always;
+    background: #fff;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  @media print {
+    html { font-size: 10.5pt; }
+    body { background: #fff; }
+    .page { padding: 40px 48px; margin: 0; box-shadow: none; }
+    .no-print { display: none !important; }
+    a { text-decoration: none !important; }
+  }
+  @media screen {
+    body { background: #e5e7eb; padding: 24px 0; }
+    .page { box-shadow: 0 2px 16px rgba(0,0,0,0.08); margin-bottom: 24px; border-radius: 2px; }
+  }
+
+  h1 { font-size: 28pt; font-weight: 800; line-height: 1.25; letter-spacing: -0.02em; }
+  h2 { font-size: 15pt; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 14px; color: var(--navy); }
+  h3 { font-size: 11.5pt; font-weight: 700; margin-bottom: 6px; }
+  p { margin-bottom: 8px; }
+  .subtitle { font-size: 13pt; color: var(--text-med); font-weight: 400; line-height: 1.6; }
+  .label { font-size: 9pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-low); margin-bottom: 6px; }
+  .accent { color: var(--blue); }
+  .accent-orange { color: var(--orange); }
+  .small { font-size: 9pt; color: var(--text-med); }
+  .bold { font-weight: 700; }
+
+  /* ── 커버 ── */
+  .cover { display: flex; flex-direction: column; justify-content: center; }
+  .cover .brand { font-size: 11pt; font-weight: 700; color: var(--blue); margin-bottom: 40px; letter-spacing: 0.04em; }
+  .cover h1 { margin-bottom: 20px; }
+  .cover .subtitle { margin-bottom: 48px; }
+  .cover-stats { display: flex; gap: 32px; margin-bottom: 48px; }
+  .cover-stat { text-align: center; }
+  .cover-stat .num { font-size: 24pt; font-weight: 800; color: var(--navy); }
+  .cover-stat .unit { font-size: 9pt; color: var(--text-med); margin-top: 2px; }
+
+  .cover-portfolio { margin-bottom: 40px; }
+  .cover-portfolio h2 { font-size: 13pt; margin-bottom: 12px; }
+
+  .cover-footer { margin-top: auto; padding-top: 32px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .cover-footer .company { font-weight: 700; font-size: 12pt; }
+  .cover-footer .date { color: var(--text-med); font-size: 10pt; }
+
+  /* ── 컴포넌트 ── */
+  .divider { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+
+  .tag {
+    display: inline-block; font-size: 8.5pt; font-weight: 600;
+    padding: 3px 10px; border-radius: 20px; margin-right: 6px;
+  }
+  .tag-blue { background: var(--blue-light); color: var(--blue); }
+  .tag-orange { background: var(--orange-light); color: var(--orange); }
+  .tag-green { background: var(--green-light); color: var(--green); }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+
+  .card {
+    border: 1px solid var(--border); border-radius: 12px;
+    padding: 20px; background: #fff;
+  }
+  .card-blue { border-left: 3px solid var(--blue); }
+
+  /* ── 포트폴리오 (커버 내) ── */
+  .pf-row { display: flex; gap: 14px; }
+  .pf-item {
+    flex: 1; border: 1px solid var(--border); border-radius: 12px;
+    padding: 18px; display: flex; flex-direction: column; gap: 8px;
+  }
+  .pf-item .pf-title { font-size: 10pt; font-weight: 600; line-height: 1.4; }
+  .pf-item .pf-metrics { display: flex; gap: 16px; }
+  .pf-item .pf-val { font-size: 16pt; font-weight: 800; }
+  .pf-item .pf-lbl { font-size: 8pt; color: var(--text-med); }
+
+  /* ── 플로우 ── */
+  .flow { display: flex; align-items: center; gap: 5px; margin: 16px 0; flex-wrap: wrap; }
+  .flow-step {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    padding: 8px 12px; font-size: 9pt; font-weight: 600; text-align: center;
+  }
+  .flow-arrow { color: var(--text-low); font-size: 12pt; }
+
+  /* ── 채널 ── */
+  .channel-card { border: 1px solid var(--border); border-radius: 10px; padding: 14px; text-align: center; }
+  .channel-name { font-weight: 700; font-size: 10.5pt; margin-bottom: 2px; }
+  .channel-subs { font-size: 15pt; font-weight: 800; color: var(--blue); }
+  .channel-desc { font-size: 8pt; color: var(--text-med); margin-top: 2px; }
+
+  /* ── CTA ── */
+  .cta-box {
+    background: var(--navy); border-radius: 16px; padding: 36px;
+    text-align: center; color: #fff; margin-top: 20px;
+  }
+  .cta-box h2 { color: #fff; margin-bottom: 10px; font-size: 16pt; }
+  .cta-box p { color: rgba(255,255,255,0.7); font-size: 10.5pt; margin-bottom: 20px; }
+  .cta-btn {
+    display: inline-block; background: var(--blue); color: #fff;
+    padding: 14px 36px; border-radius: 10px; font-weight: 700;
+    font-size: 12pt; text-decoration: none; letter-spacing: -0.01em;
+  }
+  .cta-link {
+    display: block; margin-top: 12px;
+    font-size: 9pt; color: rgba(255,255,255,0.5); word-break: break-all;
+  }
+
+  .page-num {
+    position: absolute; bottom: 32px; right: 56px;
+    font-size: 9pt; color: var(--text-low);
+  }
+
+  .print-btn {
+    position: fixed; bottom: 24px; right: 24px; z-index: 100;
+    background: var(--navy); color: #fff; border: none;
+    padding: 14px 28px; border-radius: 10px;
+    font-size: 11pt; font-weight: 700; cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    font-family: 'Pretendard', sans-serif;
+  }
+  .print-btn:hover { background: #2d3f52; }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">PDF 저장 (Ctrl+P)</button>
+
+<!-- ════════════════════════════════════════ -->
+<!-- PAGE 1: 커버 + 실적 + 채널 -->
+<!-- ════════════════════════════════════════ -->
+<div class="page cover">
+  <div class="brand">FLOWMUS MCN</div>
+  <h1>강의 플랫폼<br>콘텐츠 제작 제안서</h1>
+  <p class="subtitle">
+    줌 미팅 한 번이면, 나머지는 전부 저희가 합니다.<br>
+    기획 &rarr; 촬영 &rarr; 편집 &rarr; 업로드 &rarr; 쇼츠 &rarr; DM 마케팅
+  </p>
+
+  <div class="cover-stats">
+    <div class="cover-stat">
+      <div class="num">3+</div>
+      <div class="unit">운영 채널</div>
+    </div>
+    <div class="cover-stat">
+      <div class="num">47.9만</div>
+      <div class="unit">총 구독자</div>
+    </div>
+    <div class="cover-stat">
+      <div class="num">1.6억</div>
+      <div class="unit">총 조회수</div>
+    </div>
+    <div class="cover-stat">
+      <div class="num">1,362</div>
+      <div class="unit">총 영상</div>
+    </div>
+  </div>
+
+  <div class="cover-portfolio">
+    <p class="label">Proven Results</p>
+    <div class="pf-row">
+      <div class="pf-item">
+        <span class="tag tag-orange">타이탄클래스</span>
+        <div class="pf-title">블로그로 17억 모은 92년생 디지털농사꾼</div>
+        <div class="pf-metrics">
+          <div><div class="pf-val accent">144만</div><div class="pf-lbl">조회수</div></div>
+          <div><div class="pf-val accent-orange">10억+</div><div class="pf-lbl">강의 매출</div></div>
+        </div>
+      </div>
+      <div class="pf-item">
+        <span class="tag tag-blue">무아클래스</span>
+        <div class="pf-title">유튜브 공식 하나로 매달 7억 버는 93년생</div>
+        <div class="pf-metrics">
+          <div><div class="pf-val accent">45만</div><div class="pf-lbl">조회수</div></div>
+          <div><div class="pf-val accent-orange">30억+</div><div class="pf-lbl">강의 매출</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cover-footer">
+    <div>
+      <div class="company">(주) 플로우머스</div>
+      <div class="small">ceo@flowmus.com</div>
+    </div>
+    <div class="date">2026년 4월</div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════ -->
+<!-- PAGE 2: 서비스 요약 + 채널 + CTA -->
+<!-- ════════════════════════════════════════ -->
+<div class="page">
+  <p class="label">Service</p>
+  <h2>원스톱 콘텐츠 제작</h2>
+  <p style="margin-bottom: 4px;">강사님은 줌 미팅 한 번만 참여하시면 됩니다. 기획부터 DM 마케팅까지 전부 저희가 진행합니다.</p>
+
+  <div class="flow">
+    <div class="flow-step">줌 미팅</div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step">SEO 기획</div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step">촬영</div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step">편집</div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step">업로드</div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step">쇼츠 4~5개</div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step">DM 마케팅</div>
+  </div>
+
+  <div class="grid-2" style="margin-bottom: 8px;">
+    <div class="card card-blue">
+      <h3>롱폼 + 쇼츠 패키지</h3>
+      <p class="small">인터뷰형 / 강의형 / 다큐형 본편 제작 + 숏폼 4~5개 자동 추출. PD + 촬영감독 최소 2인 체제.</p>
+    </div>
+    <div class="card card-blue">
+      <h3>성과 공유 (RS 20%)</h3>
+      <p class="small">UTM 기반으로 클릭부터 결제까지 투명하게 추적. 월간 리포트로 정산합니다.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <p class="label">Network</p>
+  <h2>채널 네트워크</h2>
+  <div class="grid-3" style="margin-bottom: 10px;">
+    <div class="channel-card">
+      <div class="channel-name">사찍남</div>
+      <div class="channel-subs">14.4만</div>
+      <div class="channel-desc">비즈니스 / 창업</div>
+    </div>
+    <div class="channel-card">
+      <div class="channel-name">현장속으로</div>
+      <div class="channel-subs">11.9만</div>
+      <div class="channel-desc">현장밀착 / 다큐</div>
+    </div>
+    <div class="channel-card">
+      <div class="channel-name">머니로드</div>
+      <div class="channel-subs">21.6만</div>
+      <div class="channel-desc">재테크 / 투자</div>
+    </div>
+  </div>
+  <p class="small" style="text-align: center; margin-bottom: 0;">+4개 채널 추가 합류 예정 &mdash; 총 7개 채널 동시 노출 가능</p>
+
+  <hr class="divider">
+
+  <!-- CTA: B2B 페이지로 유도 -->
+  <div class="cta-box">
+    <h2>서비스 상세 안내</h2>
+    <p>가격, 프로세스, 포트폴리오 영상 등<br>자세한 내용은 아래 페이지에서 확인하실 수 있습니다.</p>
+    <a class="cta-btn" href="https://ohmaetdol.github.io/mcn-neobridge/b2b/#lecture" target="_blank">상세 안내 보기</a>
+    <span class="cta-link">ohmaetdol.github.io/mcn-neobridge/b2b</span>
+  </div>
+
+  <div style="text-align: center; margin-top: 24px;">
+    <p style="font-size: 10.5pt; margin-bottom: 4px;"><strong>미팅 요청은 페이지 하단 양식 또는 이메일로 가능합니다.</strong></p>
+    <p class="small" style="margin: 0;">ceo@flowmus.com &nbsp;|&nbsp; 카카오톡: 사찍남 채널 &nbsp;|&nbsp; 영업일 1일 이내 회신</p>
+  </div>
+
+  <span class="page-num">2</span>
+</div>
+
+</body>
+</html>
