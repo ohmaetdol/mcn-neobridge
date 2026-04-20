@@ -16,6 +16,8 @@
   --blue:#4f46e5;--blue-bg:#eef2ff;
   --green:#16a34a;--green-bg:#f0fdf4;
   --red:#dc2626;--red-bg:#fef2f2;
+  --purple:#7c3aed;--purple-bg:#faf5ff;
+  --yellow:#ca8a04;--yellow-bg:#fefce8;
   --r:8px
 }
 html{font-size:15px}
@@ -28,7 +30,9 @@ body{
 .hd-in{max-width:1100px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:flex-end}
 .hd h1{font-size:1.35rem;font-weight:700;letter-spacing:-.02em}
 .hd p{font-size:.8rem;color:#8a9bb0;margin-top:4px}
-.hd-r{text-align:right;font-size:.75rem;color:#6b7d8f}
+.hd-r{display:flex;align-items:center;gap:12px;text-align:right;font-size:.75rem;color:#6b7d8f}
+.hd-link{color:#8a9bb0;text-decoration:none;font-size:.78rem;padding:5px 12px;border:1px solid rgba(255,255,255,.2);border-radius:6px;transition:all .15s}
+.hd-link:hover{background:rgba(255,255,255,.1);color:#fff}
 .ct{max-width:1100px;margin:0 auto;padding:32px 24px 60px}
 .sm{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:40px}
 .sc{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px 22px}
@@ -43,7 +47,7 @@ body{
 .mb{margin-bottom:28px}
 .ml{font-size:.78rem;font-weight:600;color:var(--soft);letter-spacing:.04em;margin-bottom:10px;padding-left:2px}
 .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:4px}
-table{width:100%;min-width:820px;border-collapse:collapse;background:var(--card);border:1px solid #eaedf0;border-radius:var(--r);overflow:hidden;font-size:.88rem;table-layout:fixed}
+table{width:100%;min-width:900px;border-collapse:collapse;background:var(--card);border:1px solid #eaedf0;border-radius:var(--r);overflow:hidden;font-size:.88rem;table-layout:fixed}
 thead th{background:var(--accent);color:#fff;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:10px 12px;text-align:center;white-space:nowrap;border-right:1px solid rgba(255,255,255,.2)}
 thead th:last-child{border-right:none}
 tbody tr{border-bottom:1px solid #eaedf0;transition:background 120ms}
@@ -54,14 +58,21 @@ td:last-child{border-right:none}
 td.d{color:var(--dim);font-size:.82rem}
 td.e{text-align:center;color:var(--dim);font-style:italic;padding:16px;border-right:none}
 .tg{display:inline-block;font-size:.72rem;font-weight:600;padding:3px 10px;border-radius:20px;white-space:nowrap}
-.tg-ok{background:var(--green-bg);color:var(--green)}
-.tg-wait{background:var(--orange-bg);color:var(--orange)}
-.tg-no{background:var(--red-bg);color:var(--red)}
+.tg-cast{background:var(--green-bg);color:var(--green)}
+.tg-plan{background:var(--blue-bg);color:var(--blue)}
+.tg-shoot{background:var(--purple-bg);color:var(--purple)}
+.tg-edit{background:var(--yellow-bg);color:var(--yellow)}
+.tg-review{background:var(--orange-bg);color:var(--orange)}
+.tg-done{background:var(--green-bg);color:var(--green)}
 .tg-none{background:var(--accent-l);color:var(--dim)}
 .nm{font-weight:600;letter-spacing:-.01em}
 .dt{font-variant-numeric:tabular-nums}
 .dt-up{color:var(--orange);font-weight:600}
 .dt-past{color:var(--dim)}
+.dd{font-weight:700;font-variant-numeric:tabular-nums}
+.dd-warn{color:var(--red)}
+.dd-soon{color:var(--orange)}
+.dd-ok{color:var(--green)}
 .lk{color:var(--blue);text-decoration:none;font-size:.82rem;word-break:break-all}
 .lk:hover{text-decoration:underline}
 .ft{text-align:center;padding:24px;font-size:.75rem;color:var(--dim);border-top:1px solid var(--border);margin-top:20px}
@@ -77,65 +88,85 @@ td.e{text-align:center;color:var(--dim);font-style:italic;padding:16px;border-ri
 <body>
 <div class="hd"><div class="hd-in">
   <div><h1>타이탄클래스 x Neobridge MCN</h1><p>강의 플랫폼 제휴 - 업로드 스케줄</p></div>
-  <div class="hd-r">마지막 갱신: 2026.04.19 16:22</div>
+  <div class="hd-r">
+    <a class="hd-link" href="../editor/">편집자 보드</a>
+    <span id="updatedAt">마지막 갱신: -</span>
+  </div>
 </div></div>
 <div class="ct" id="ct"></div>
 <div class="ft">Flowmus / Neobridge MCN - 타이탄클래스 제휴 스케줄 관리</div>
 
 <script>
-var DATA=[{"name": "사장찍어주는남자", "color": "#ea580c", "months": [{"label": "2026년 4월", "items": [{"no": "1", "lectureDate": "2026-04-30", "day": "", "instructor": "최대표", "contact": "", "refLink": "", "memo": "", "castConfirm": "확인", "finalConfirm": "확인", "uploadDate": "4월 21일"}, {"no": "3", "lectureDate": "2026-05-05", "day": "", "instructor": "빈이파파", "contact": "010-4221-5507", "refLink": "", "memo": "", "castConfirm": "미확인", "finalConfirm": "미확인", "uploadDate": "4월 26일"}, {"no": "4", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "미확인", "finalConfirm": "미확인", "uploadDate": "4월 20일"}]}, {"label": "2026년 5월", "items": [{"no": "1", "lectureDate": "2026-05-11", "day": "월", "instructor": "빽형", "contact": "010-4233-0583", "refLink": "https://classaround.notion.site/33096da43e0880cc964dcf64ce51597a", "memo": "", "castConfirm": "확인", "finalConfirm": "", "uploadDate": ""}, {"no": "2", "lectureDate": "2026-05-18", "day": "월", "instructor": "돈린이", "contact": "010-5593-4922", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}]}, {"label": "2026년 6월", "items": [{"no": "1", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "2", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "3", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "4", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}]}, {"label": "2026년 7월", "items": [{"no": "1", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "2", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "3", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "4", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}]}]}, {"name": "부업소개하는남자", "color": "#4f46e5", "months": [{"label": "2026년 4월", "items": [{"no": "1", "lectureDate": "2026-04-26", "day": "", "instructor": "알파남", "contact": "010-5862-5255", "refLink": "", "memo": "", "castConfirm": "확인", "finalConfirm": "확인", "uploadDate": "4월 20일"}, {"no": "2", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "3", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "4", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}]}, {"label": "2026년 5월", "items": [{"no": "1", "lectureDate": "2026-05-19", "day": "화", "instructor": "연주", "contact": "010-7512-8694", "refLink": "https://youtu.be/9FrP3b8uS2c", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "2", "lectureDate": "2026-05-28", "day": "목", "instructor": "김해준", "contact": "010-9068-9982", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "3", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "4", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}]}, {"label": "2026년 6월", "items": [{"no": "1", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "2", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "3", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "4", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}]}, {"label": "2026년 7월", "items": [{"no": "1", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "2", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "3", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}, {"no": "4", "lectureDate": "", "day": "", "instructor": "", "contact": "", "refLink": "", "memo": "", "castConfirm": "", "finalConfirm": "", "uploadDate": ""}]}]}];
-var TODAY='2026-04-19';
-var COLORS={'사장찍어주는남자':'#ea580c','부업소개하는남자':'#4f46e5'};
+var DATA=[{"name":"사장찍어주는남자","color":"#ea580c","months":[{"label":"2026년 5월","items":[{"no":"3","lectureDate":"5/11 (월)","day":"월","instructor":"빽형","status":"섭외완료","editDeadline":"5/20","uploadDeadline":"5/25","dday":"D-35","contact":"010-4233-0583","refLink":"https://classaround.notion.site/33096da43e0880cc964dcf64ce51597a","memo":""},{"no":"4","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""}]},{"label":"2026년 6월","items":[{"no":"5","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""},{"no":"6","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""},{"no":"7","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""},{"no":"8","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""},{"no":"9","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""},{"no":"10","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""},{"no":"11","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""},{"no":"12","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""}]}]},{"name":"부업소개하는남자","color":"#4f46e5","months":[{"label":"2026년 5월","items":[{"no":"2","lectureDate":"5/19 (화)","day":"화","instructor":"연주","status":"기획중","editDeadline":"5/28","uploadDeadline":"6/2","dday":"D-43","contact":"010-7512-8694","refLink":"https://youtu.be/9FrP3b8uS2c","memo":""},{"no":"3","lectureDate":"5/28 (목)","day":"목","instructor":"김해준","status":"기획중","editDeadline":"6/6","uploadDeadline":"6/11","dday":"D-52","contact":"010-9068-9982","refLink":"","memo":""}]},{"label":"2026년 6월","items":[{"no":"4","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""},{"no":"5","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""},{"no":"6","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""},{"no":"7","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""}]},{"label":"2026년 7월","items":[{"no":"8","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""},{"no":"9","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""},{"no":"10","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""},{"no":"11","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""}]}]}];
+var TODAY='2026-04-20';
+var UPDATED='2026.04.20 10:35';
 
 function main(){
+  document.getElementById('updatedAt').textContent='마지막 갱신: '+UPDATED;
   var h='';
-  var total=0,confirmed=0,upcoming=[];
+  var total=0,active=0,upcoming=[];
+  var statusCounts={};
   DATA.forEach(function(ch){
     ch.months.forEach(function(m){
       m.items.forEach(function(it){
-        if(it.instructor){total++;if(it.castConfirm==='확인')confirmed++}
-        if(it.lectureDate&&it.instructor&&it.lectureDate>=TODAY)
-          upcoming.push({ch:ch.name,inst:it.instructor,dt:it.lectureDate})
+        if(it.instructor){
+          total++;
+          if(it.status){
+            statusCounts[it.status]=(statusCounts[it.status]||0)+1;
+            if(it.status!=='업로드완료')active++;
+          }
+        }
+        if(it.lectureDate&&it.instructor)
+          upcoming.push({ch:ch.name,inst:it.instructor,dt:it.lectureDate,dday:it.dday})
       })
     })
   });
-  upcoming.sort(function(a,b){return a.dt<b.dt?-1:1});
   var nx=upcoming[0];
-  var dday=nx?ddayStr(nx.dt):'-';
-  var ddesc=nx?(nx.inst+' / '+fmtD(nx.dt)):'예정된 강의 없음';
+  var ddayStr=nx?(nx.dday||'-'):'-';
+  var ddesc=nx?(nx.inst+' / '+nx.dt):'예정된 강의 없음';
 
   h+='<div class="sm">';
-  h+=sc('전체 강사',total+'명',confirmed+'명 섭외 확정');
+  h+=sc('전체 강사',total+'명',active+'건 진행중');
   h+=sc('채널',DATA.length+'개','사장찍어주는남자 / 부업소개하는남자');
-  h+=sc('다음 강의',dday,ddesc);
-  h+=sc('예정 강의',upcoming.length+'건','오늘 이후 기준');
+  h+=sc('다음 강의',ddayStr,ddesc);
+  h+=sc('진행 현황',statsLine(statusCounts),'상태별 건수');
   h+='</div>';
 
   DATA.forEach(function(ch){
-    var col=COLORS[ch.name]||'#666';
-    var ct=0,cc=0;
-    ch.months.forEach(function(m){m.items.forEach(function(it){if(it.instructor){ct++;if(it.castConfirm==='확인')cc++}});});
+    var col=ch.color||'#666';
+    var ct=0,ac=0;
+    ch.months.forEach(function(m){m.items.forEach(function(it){
+      if(it.instructor){ct++;if(it.status&&it.status!=='업로드완료')ac++}
+    })});
     h+='<div class="ch"><div class="ch-h"><div class="ch-d" style="background:'+col+'"></div>';
-    h+='<div class="ch-n">'+ch.name+'</div><div class="ch-c">'+cc+' / '+ct+' 확정</div></div>';
+    h+='<div class="ch-n">'+ch.name+'</div><div class="ch-c">'+ac+' / '+ct+' 진행중</div></div>';
     ch.months.forEach(function(m){
       h+='<div class="mb"><div class="ml">'+m.label+'</div>';
-      h+='<div class="tw"><table><colgroup><col style="width:42px"><col style="width:90px"><col style="width:42px"><col style="width:100px"><col style="width:110px">';
-      h+='<col style="width:110px"><col style="width:110px"><col style="width:72px"><col style="width:72px"><col style="width:90px"></colgroup>';
-      h+='<thead><tr><th>No.</th><th>강의일</th><th>요일</th><th>강사명</th><th>연락처</th>';
-      h+='<th>참고</th><th>메모</th><th>섭외</th><th>최종</th><th>업로드일</th></tr></thead><tbody>';
+      h+='<div class="tw"><table><colgroup>';
+      h+='<col style="width:42px"><col style="width:88px"><col style="width:38px"><col style="width:80px">';
+      h+='<col style="width:80px"><col style="width:72px"><col style="width:72px"><col style="width:60px">';
+      h+='<col style="width:100px"><col style="width:100px"><col style="width:80px">';
+      h+='</colgroup>';
+      h+='<thead><tr><th>No.</th><th>강의일</th><th>요일</th><th>강사명</th>';
+      h+='<th>상태</th><th>편집마감</th><th>업로드마감</th><th>D-Day</th>';
+      h+='<th>연락처</th><th>참고</th><th>메모</th></tr></thead><tbody>';
       var any=false;
       m.items.forEach(function(it){
         if(!it.instructor&&!it.lectureDate)return;
         any=true;
-        var dc='dt';
-        if(it.lectureDate)dc+=it.lectureDate>=TODAY?' dt-up':' dt-past';
-        h+='<tr><td class="d">'+it.no+'</td><td class="'+dc+'">'+fmtD(it.lectureDate)+'</td>';
-        h+='<td class="d">'+it.day+'</td><td class="nm">'+it.instructor+'</td>';
-        h+='<td class="d">'+it.contact+'</td><td class="d">'+lnk(it.refLink)+'</td>';
-        h+='<td class="d">'+it.memo+'</td><td>'+tag(it.castConfirm)+'</td>';
-        h+='<td>'+tag(it.finalConfirm)+'</td><td class="'+dc+'">'+fmtD(it.uploadDate)+'</td></tr>';
+        h+='<tr><td class="d">'+it.no+'</td>';
+        h+='<td class="dt">'+v(it.lectureDate)+'</td>';
+        h+='<td class="d">'+v(it.day)+'</td>';
+        h+='<td class="nm">'+v(it.instructor)+'</td>';
+        h+='<td>'+statusTag(it.status)+'</td>';
+        h+='<td class="dt">'+v(it.editDeadline)+'</td>';
+        h+='<td class="dt">'+v(it.uploadDeadline)+'</td>';
+        h+='<td class="'+ddayCls(it.dday)+'">'+v(it.dday)+'</td>';
+        h+='<td class="d">'+v(it.contact)+'</td>';
+        h+='<td class="d">'+lnk(it.refLink)+'</td>';
+        h+='<td class="d">'+v(it.memo)+'</td></tr>';
       });
-      if(!any)h+='<tr><td class="e" colspan="10">아직 등록된 일정이 없습니다</td></tr>';
+      if(!any)h+='<tr><td class="e" colspan="11">아직 등록된 일정이 없습니다</td></tr>';
       h+='</tbody></table></div></div>';
     });
     h+='</div>';
@@ -143,11 +174,40 @@ function main(){
   document.getElementById('ct').innerHTML=h;
 }
 
-function sc(l,v,s){return '<div class="sc"><div class="sc-l">'+l+'</div><div class="sc-v">'+v+'</div><div class="sc-s">'+s+'</div></div>'}
-function tag(v){if(!v)return'<span class="tg tg-none">-</span>';v=v.trim();if(v==='확인')return'<span class="tg tg-ok">확인</span>';if(v==='미확인')return'<span class="tg tg-wait">미확인</span>';if(v==='취소')return'<span class="tg tg-no">취소</span>';return'<span class="tg tg-none">'+v+'</span>'}
-function fmtD(s){if(!s)return'-';var p=s.split('-');if(p.length===3)return p[1].replace(/^0/,'')+'/'+p[2].replace(/^0/,'');return s}
-function ddayStr(s){var d=new Date(s);var t=new Date(TODAY);var diff=Math.ceil((d-t)/86400000);return diff===0?'D-DAY':diff>0?'D-'+diff:'D+'+Math.abs(diff)}
-function lnk(s){if(!s)return'';s=s.trim();if(s.indexOf('http')===0){var sh=s.length>28?s.substring(0,28)+'...':s;return'<a class="lk" href="'+s+'" target="_blank">'+sh+'</a>'}return s}
+function sc(l,val,s){return '<div class="sc"><div class="sc-l">'+l+'</div><div class="sc-v">'+val+'</div><div class="sc-s">'+s+'</div></div>'}
+function v(s){return s||'-'}
+
+function statusTag(s){
+  if(!s)return'<span class="tg tg-none">-</span>';
+  var cls='tg-none';
+  if(s==='섭외중')cls='tg-none';
+  else if(s==='섭외완료')cls='tg-cast';
+  else if(s==='기획중')cls='tg-plan';
+  else if(s==='촬영완료')cls='tg-shoot';
+  else if(s==='편집중')cls='tg-edit';
+  else if(s==='검수중')cls='tg-review';
+  else if(s==='업로드완료')cls='tg-done';
+  return'<span class="tg '+cls+'">'+s+'</span>';
+}
+
+function ddayCls(s){
+  if(!s)return'dd';
+  var n=parseInt(s.replace(/[^0-9-]/g,''));
+  if(isNaN(n))return'dd';
+  if(s.indexOf('D+')===0)return'dd dd-warn';
+  if(n<=7)return'dd dd-soon';
+  return'dd dd-ok';
+}
+
+function statsLine(counts){
+  var parts=[];
+  ['섭외완료','기획중','촬영완료','편집중','검수중'].forEach(function(k){
+    if(counts[k])parts.push(k+' '+counts[k]);
+  });
+  return parts.join(' / ')||'-';
+}
+
+function lnk(s){if(!s)return'-';s=s.trim();if(s.indexOf('http')===0){var sh=s.length>25?s.substring(0,25)+'...':s;return'<a class="lk" href="'+s+'" target="_blank">'+sh+'</a>'}return s}
 
 main();
 </script>
