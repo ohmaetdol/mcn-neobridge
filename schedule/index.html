@@ -97,12 +97,39 @@ td.e{text-align:center;color:var(--dim);font-style:italic;padding:16px;border-ri
 <div class="ft">Flowmus / Neobridge MCN - 타이탄클래스 제휴 스케줄 관리</div>
 
 <script>
-var DATA=[{"name":"사장찍어주는남자","color":"#ea580c","months":[{"label":"2026년 5월","items":[{"no":"3","lectureDate":"5/11 (월)","day":"월","instructor":"빽형","status":"섭외완료","editDeadline":"5/20","uploadDeadline":"5/25","dday":"D-35","contact":"010-4233-0583","refLink":"https://classaround.notion.site/33096da43e0880cc964dcf64ce51597a","memo":""},{"no":"4","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""}]},{"label":"2026년 6월","items":[{"no":"5","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""},{"no":"6","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""},{"no":"7","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""},{"no":"8","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""},{"no":"9","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""},{"no":"10","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""},{"no":"11","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""},{"no":"12","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""}]}]},{"name":"부업소개하는남자","color":"#4f46e5","months":[{"label":"2026년 5월","items":[{"no":"2","lectureDate":"5/19 (화)","day":"화","instructor":"연주","status":"기획중","editDeadline":"5/28","uploadDeadline":"6/2","dday":"D-43","contact":"010-7512-8694","refLink":"https://youtu.be/9FrP3b8uS2c","memo":""},{"no":"3","lectureDate":"5/28 (목)","day":"목","instructor":"김해준","status":"기획중","editDeadline":"6/6","uploadDeadline":"6/11","dday":"D-52","contact":"010-9068-9982","refLink":"","memo":""}]},{"label":"2026년 6월","items":[{"no":"4","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""},{"no":"5","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""},{"no":"6","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""},{"no":"7","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""}]},{"label":"2026년 7월","items":[{"no":"8","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""},{"no":"9","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""},{"no":"10","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""},{"no":"11","lectureDate":"","day":"","instructor":"","status":"","editDeadline":"","uploadDeadline":"","dday":"","contact":"","refLink":"","memo":""}]}]}];
-var TODAY='2026-04-20';
-var UPDATED='2026.04.20 10:35';
+// Apps Script 배포 후 아래 URL을 교체하세요
+var API_URL = '';
 
-function main(){
-  document.getElementById('updatedAt').textContent='마지막 갱신: '+UPDATED;
+// 폴백 데이터 (API 연결 전 사용)
+var FALLBACK=[{"name":"사장찍어주는남자","color":"#ea580c","months":[{"label":"2026년 4월","items":[{"no":"1","lectureDate":"4/30 (목)","day":"목","instructor":"최대표","status":"검수중","editDeadline":"5/9","uploadDeadline":"5/14","dday":"D-24","contact":"","refLink":"","memo":"제출 4/21"},{"no":"2","lectureDate":"5/5 (화)","day":"화","instructor":"빈이파파","status":"업로드완료","editDeadline":"5/14","uploadDeadline":"5/19","dday":"D-29","contact":"010-4221-5507","refLink":"","memo":"업로드 4/26"}]},{"label":"2026년 5월","items":[{"no":"3","lectureDate":"5/11 (월)","day":"월","instructor":"빽형","status":"섭외완료","editDeadline":"5/20","uploadDeadline":"5/25","dday":"D-35","contact":"010-4233-0583","refLink":"https://classaround.notion.site/33096da43e0880cc964dcf64ce51597a","memo":""},{"no":"4","lectureDate":"5/18 (월)","day":"월","instructor":"돈린이","status":"기획중","editDeadline":"5/27","uploadDeadline":"6/1","dday":"D-42","contact":"010-5593-4922","refLink":"","memo":""}]}]},{"name":"부업소개하는남자","color":"#4f46e5","months":[{"label":"2026년 4월","items":[{"no":"1","lectureDate":"4/26 (일)","day":"일","instructor":"알파남","status":"검수중","editDeadline":"5/5","uploadDeadline":"5/10","dday":"D-20","contact":"010-5862-5255","refLink":"","memo":"제출 4/20"}]},{"label":"2026년 5월","items":[{"no":"2","lectureDate":"5/19 (화)","day":"화","instructor":"연주","status":"기획중","editDeadline":"5/28","uploadDeadline":"6/2","dday":"D-43","contact":"010-7512-8694","refLink":"https://youtu.be/9FrP3b8uS2c","memo":""},{"no":"3","lectureDate":"5/28 (목)","day":"목","instructor":"김해준","status":"기획중","editDeadline":"6/6","uploadDeadline":"6/11","dday":"D-52","contact":"010-9068-9982","refLink":"","memo":""}]}]}];
+
+var DATA = FALLBACK;
+var TODAY = new Date().toISOString().slice(0,10);
+var UPDATED = '';
+
+function init(){
+  if(API_URL){
+    document.getElementById('ct').innerHTML='<div style="text-align:center;padding:60px;color:#8e95a3;">시트에서 데이터 불러오는 중...</div>';
+    fetch(API_URL)
+      .then(function(r){return r.json()})
+      .then(function(d){
+        DATA=d.channels||d;
+        TODAY=d.today||TODAY;
+        UPDATED=d.updated||'';
+        render();
+      })
+      .catch(function(){
+        UPDATED='폴백 데이터 (API 연결 필요)';
+        render();
+      });
+  } else {
+    UPDATED='정적 데이터 — 시트 연동 설정 필요';
+    render();
+  }
+}
+
+function render(){
+  document.getElementById('updatedAt').textContent='마지막 갱신: '+(UPDATED||'-');
   var h='';
   var total=0,active=0,upcoming=[];
   var statusCounts={};
@@ -209,7 +236,7 @@ function statsLine(counts){
 
 function lnk(s){if(!s)return'-';s=s.trim();if(s.indexOf('http')===0){var sh=s.length>25?s.substring(0,25)+'...':s;return'<a class="lk" href="'+s+'" target="_blank">'+sh+'</a>'}return s}
 
-main();
+init();
 </script>
 </body>
 </html>
