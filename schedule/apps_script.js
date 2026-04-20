@@ -58,12 +58,12 @@ function getScheduleData() {
 
       currentItems.push({
         no: String(row[0] || ''),
-        lectureDate: String(row[1] || ''),
+        lectureDate: fmtDate(row[1]),
         day: String(row[2] || ''),
         instructor: String(row[3] || ''),
         status: String(row[4] || ''),
-        editDeadline: String(row[5] || ''),
-        uploadDeadline: String(row[6] || ''),
+        editDeadline: fmtDate(row[5]),
+        uploadDeadline: fmtDate(row[6]),
         dday: String(row[7] || ''),
         contact: String(row[8] || ''),
         refLink: String(row[9] || ''),
@@ -92,4 +92,12 @@ function getScheduleData() {
     today: todayStr,
     updated: updatedStr
   };
+}
+
+function fmtDate(val) {
+  if (!val) return '';
+  if (val instanceof Date) {
+    return Utilities.formatDate(val, 'Asia/Seoul', 'M/d');
+  }
+  return String(val);
 }
