@@ -29,184 +29,179 @@
   body {
     font-family: 'Pretendard', -apple-system, sans-serif;
     color: var(--text); background: #fff; line-height: 1.7;
+    padding-bottom: 72px;
   }
   a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; height: auto; display: block; }
 
-  /* ── HERO ── */
+  /* ── HERO (모바일 퍼스트) ── */
   .hero {
-    min-height: 100vh; display: flex; align-items: center;
     background: linear-gradient(160deg, #0f0a1a 0%, #1a1030 50%, #0f0a1a 100%);
-    color: #fff; padding: 60px 24px;
-    position: relative; overflow: hidden;
+    color: #fff; padding: 48px 20px 40px;
+    text-align: center;
   }
-  .hero::before {
-    content: ''; position: absolute; top: -50%; right: -20%;
-    width: 600px; height: 600px; border-radius: 50%;
-    background: radial-gradient(circle, rgba(124,58,237,0.15), transparent 70%);
-    pointer-events: none;
-  }
-  .hero-inner {
-    max-width: 1000px; margin: 0 auto; width: 100%;
-    display: flex; gap: 48px; align-items: center;
-    position: relative; z-index: 1;
-  }
-  .hero-text { flex: 1; }
-  .hero-visual { flex: 1; }
-
   .hero-badge {
-    display: inline-block; font-size: 13px; font-weight: 600;
-    padding: 6px 14px; border-radius: 100px; margin-bottom: 20px;
-    background: rgba(124,58,237,0.25); color: #c4b5fd;
+    display: inline-block; font-size: 12px; font-weight: 600;
+    padding: 5px 12px; border-radius: 100px; margin-bottom: 16px;
+    background: rgba(245,158,11,0.2); color: var(--gold);
   }
   .hero h1 {
-    font-size: clamp(24px, 5vw, 38px); font-weight: 800;
-    line-height: 1.3; letter-spacing: -0.03em; margin-bottom: 16px;
+    font-size: 26px; font-weight: 800;
+    line-height: 1.35; letter-spacing: -0.03em; margin-bottom: 12px;
   }
   .hero h1 .highlight { color: var(--gold); }
-  .hero h1 .num { color: #c4b5fd; }
   .hero-desc {
-    font-size: 16px; color: rgba(255,255,255,0.6); line-height: 1.7;
-    margin-bottom: 32px; max-width: 420px;
+    font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.7;
+    margin-bottom: 24px;
   }
-  .hero-stats { display: flex; gap: 28px; margin-bottom: 32px; }
-  .hero-stat-num { font-size: 28px; font-weight: 800; }
-  .hero-stat-label { font-size: 12px; color: rgba(255,255,255,0.4); }
-  .hero-stat-num.gold { color: var(--gold); }
 
-  .hero-cta {
-    display: inline-block; background: var(--purple); color: #fff;
-    padding: 16px 36px; border-radius: 12px; font-weight: 700;
-    font-size: 16px; transition: all 0.2s; box-shadow: 0 4px 20px rgba(124,58,237,0.3);
-  }
-  .hero-cta:hover { background: var(--purple-dark); transform: translateY(-1px); }
-
-  /* ── THUMBNAIL ── */
+  /* ── THUMB ── */
   .thumb-wrap {
-    position: relative; border-radius: 16px; overflow: hidden;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-    cursor: pointer;
+    position: relative; border-radius: 12px; overflow: hidden;
+    margin-bottom: 24px; box-shadow: 0 8px 30px rgba(0,0,0,0.4);
   }
-  .thumb-wrap img { width: 100%; display: block; }
   .thumb-play {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    width: 64px; height: 64px; border-radius: 50%;
+    width: 48px; height: 48px; border-radius: 50%;
     background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    transition: transform 0.2s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
   }
-  .thumb-wrap:hover .thumb-play { transform: translate(-50%, -50%) scale(1.1); }
   .thumb-play::after {
     content: ''; width: 0; height: 0;
-    border-top: 12px solid transparent; border-bottom: 12px solid transparent;
-    border-left: 20px solid var(--navy); margin-left: 4px;
+    border-top: 8px solid transparent; border-bottom: 8px solid transparent;
+    border-left: 14px solid var(--navy); margin-left: 3px;
   }
   .thumb-channel {
-    position: absolute; bottom: 12px; left: 12px;
+    position: absolute; bottom: 8px; left: 8px;
     background: rgba(0,0,0,0.75); color: #fff;
-    padding: 4px 12px; border-radius: 6px;
-    font-size: 12px; font-weight: 600;
-    backdrop-filter: blur(4px);
+    padding: 3px 10px; border-radius: 6px;
+    font-size: 11px; font-weight: 600;
+  }
+
+  .hero-stats {
+    display: flex; justify-content: center; gap: 24px; margin-bottom: 24px;
+  }
+  .hero-stat { text-align: center; }
+  .hero-stat-num { font-size: 22px; font-weight: 800; }
+  .hero-stat-num.gold { color: var(--gold); }
+  .hero-stat-label { font-size: 11px; color: rgba(255,255,255,0.4); }
+
+  .hero-cta {
+    display: block; background: var(--purple); color: #fff;
+    padding: 14px; border-radius: 10px; font-weight: 700;
+    font-size: 15px; text-align: center;
+    box-shadow: 0 4px 16px rgba(124,58,237,0.3);
+  }
+
+  /* ── PROOF (실적 증빙) ── */
+  .proof {
+    padding: 40px 20px; background: var(--navy); color: #fff;
+    text-align: center;
+  }
+  .proof h2 {
+    font-size: 20px; font-weight: 800; margin-bottom: 6px;
+  }
+  .proof .sub { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 24px; }
+  .proof-img {
+    border-radius: 12px; overflow: hidden; margin-bottom: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .proof-caption {
+    font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 8px;
+  }
+
+  /* ── STATS HIGHLIGHT ── */
+  .stats-bar {
+    display: flex; justify-content: center; gap: 0;
+    background: linear-gradient(90deg, var(--purple), var(--purple-dark));
+    padding: 20px 16px;
+  }
+  .stat-block {
+    flex: 1; text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.15);
+  }
+  .stat-block:last-child { border-right: none; }
+  .stat-block .num {
+    font-size: 20px; font-weight: 800; color: #fff;
+  }
+  .stat-block .label {
+    font-size: 10px; color: rgba(255,255,255,0.6); margin-top: 2px;
   }
 
   /* ── PAIN POINTS ── */
-  .pain {
-    padding: 80px 24px; background: var(--surface);
-    border-top: 1px solid var(--border);
+  .pain { padding: 40px 20px; background: var(--surface); }
+  .section-title {
+    font-size: 20px; font-weight: 800; text-align: center;
+    margin-bottom: 6px; color: var(--navy); letter-spacing: -0.02em;
   }
-  .pain-inner { max-width: 700px; margin: 0 auto; text-align: center; }
-  .pain h2 {
-    font-size: 26px; font-weight: 800; margin-bottom: 12px;
-    color: var(--navy); letter-spacing: -0.02em;
+  .section-sub {
+    font-size: 13px; color: var(--text-med); text-align: center;
+    margin-bottom: 24px;
   }
-  .pain .sub { font-size: 15px; color: var(--text-med); margin-bottom: 40px; }
-  .pain-list {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
-    text-align: left;
-  }
+  .pain-list { display: flex; flex-direction: column; gap: 10px; }
   .pain-item {
-    background: #fff; border: 1px solid var(--border); border-radius: 14px;
-    padding: 20px 24px; display: flex; align-items: flex-start; gap: 12px;
+    background: #fff; border: 1px solid var(--border); border-radius: 12px;
+    padding: 16px; display: flex; align-items: flex-start; gap: 12px;
   }
-  .pain-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+  .pain-icon { font-size: 20px; flex-shrink: 0; }
   .pain-item h4 { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
-  .pain-item p { font-size: 13px; color: var(--text-med); margin: 0; }
+  .pain-item p { font-size: 12px; color: var(--text-med); margin: 0; }
 
-  /* ── VIDEO SECTION ── */
-  .video-section {
-    padding: 80px 24px; text-align: center;
-  }
-  .video-section h2 {
-    font-size: 26px; font-weight: 800; margin-bottom: 8px;
-    color: var(--navy); letter-spacing: -0.02em;
-  }
-  .video-section .sub {
-    font-size: 15px; color: var(--text-med); margin-bottom: 32px;
-  }
+  /* ── VIDEO ── */
+  .video-section { padding: 40px 20px; text-align: center; }
   .video-embed {
-    max-width: 720px; margin: 0 auto; border-radius: 16px; overflow: hidden;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+    border-radius: 12px; overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     aspect-ratio: 16/9;
   }
   .video-embed iframe { width: 100%; height: 100%; border: none; }
 
-  /* ── BENEFITS ── */
-  .benefits {
-    padding: 80px 24px; border-top: 1px solid var(--border);
-  }
-  .benefits-inner { max-width: 800px; margin: 0 auto; }
-  .benefits h2 {
-    font-size: 26px; font-weight: 800; text-align: center;
-    margin-bottom: 12px; color: var(--navy);
-  }
-  .benefits .sub {
-    font-size: 15px; color: var(--text-med); text-align: center;
-    margin-bottom: 40px;
-  }
-  .benefits-grid {
-    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
-  }
+  /* ── BENEFITS (강의 내용) ── */
+  .benefits { padding: 40px 20px; }
+  .benefits-grid { display: flex; flex-direction: column; gap: 12px; }
   .benefit-card {
-    border: 1px solid var(--border); border-radius: 14px;
-    padding: 28px 20px; text-align: center;
-    transition: all 0.2s;
+    border: 1px solid var(--border); border-radius: 12px;
+    padding: 20px; display: flex; align-items: flex-start; gap: 14px;
   }
-  .benefit-card:hover { border-color: var(--purple); transform: translateY(-2px); }
   .benefit-icon {
-    width: 48px; height: 48px; border-radius: 12px;
+    width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
     display: flex; align-items: center; justify-content: center;
-    margin: 0 auto 14px; font-size: 24px;
-    background: var(--purple-light);
+    font-size: 20px; background: var(--purple-light);
   }
-  .benefit-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
-  .benefit-card p { font-size: 13px; color: var(--text-med); margin: 0; line-height: 1.5; }
+  .benefit-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+  .benefit-card p { font-size: 12px; color: var(--text-med); margin: 0; line-height: 1.5; }
 
-  /* ── FORM SECTION ── */
-  .form-section {
-    padding: 80px 24px;
-    background: linear-gradient(180deg, #fff 0%, var(--surface) 100%);
+  /* ── INSTRUCTOR ── */
+  .instructor {
+    padding: 40px 20px; background: var(--navy); color: #fff;
+    text-align: center;
   }
+  .instructor h2 { font-size: 20px; font-weight: 800; margin-bottom: 6px; }
+  .instructor .sub { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 20px; }
+  .instructor-img {
+    border-radius: 12px; overflow: hidden; margin-bottom: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+
+  /* ── FORM ── */
+  .form-section { padding: 40px 20px; }
   .form-inner { max-width: 520px; margin: 0 auto; text-align: center; }
-  .form-section h2 {
-    font-size: 28px; font-weight: 800; letter-spacing: -0.02em;
-    margin-bottom: 8px; color: var(--navy);
-  }
-  .form-section .form-sub {
-    font-size: 15px; color: var(--text-med); margin-bottom: 36px;
-  }
+  .form-section .section-title { margin-bottom: 4px; }
 
   .form-box {
     background: #fff; border: 1px solid var(--border);
-    border-radius: 16px; padding: 32px;
-    text-align: left; box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+    border-radius: 14px; padding: 24px;
+    text-align: left; box-shadow: 0 2px 16px rgba(0,0,0,0.04);
+    margin-top: 24px;
   }
-  .form-group { margin-bottom: 16px; }
+  .form-group { margin-bottom: 14px; }
   .form-label {
-    display: block; font-size: 13px; font-weight: 600;
-    color: var(--text); margin-bottom: 6px;
+    display: block; font-size: 12px; font-weight: 600;
+    color: var(--text); margin-bottom: 5px;
   }
   .form-input {
-    width: 100%; padding: 14px 16px; border: 1px solid var(--border);
-    border-radius: 10px; font-size: 15px; font-family: 'Pretendard', sans-serif;
+    width: 100%; padding: 12px 14px; border: 1px solid var(--border);
+    border-radius: 8px; font-size: 15px; font-family: 'Pretendard', sans-serif;
     background: #fff; color: var(--text); outline: none;
     transition: border-color 0.2s;
   }
@@ -214,24 +209,22 @@
   .form-input::placeholder { color: var(--text-low); }
 
   .form-select {
-    width: 100%; padding: 14px 16px; border: 1px solid var(--border);
-    border-radius: 10px; font-size: 15px; font-family: 'Pretendard', sans-serif;
+    width: 100%; padding: 12px 14px; border: 1px solid var(--border);
+    border-radius: 8px; font-size: 15px; font-family: 'Pretendard', sans-serif;
     background: #fff; color: var(--text); outline: none;
     appearance: none; cursor: pointer;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat; background-position: right 16px center;
+    background-repeat: no-repeat; background-position: right 14px center;
   }
   .form-select:focus { border-color: var(--purple); }
 
   .form-btn {
-    width: 100%; padding: 16px; border: none; border-radius: 10px;
-    background: var(--purple); color: #fff; font-size: 16px;
+    width: 100%; padding: 14px; border: none; border-radius: 10px;
+    background: var(--purple); color: #fff; font-size: 15px;
     font-weight: 700; font-family: 'Pretendard', sans-serif;
-    cursor: pointer; transition: all 0.2s;
-    margin-top: 8px;
+    cursor: pointer; margin-top: 6px;
     box-shadow: 0 4px 16px rgba(124,58,237,0.25);
   }
-  .form-btn:hover { background: var(--purple-dark); }
   .form-btn:disabled { background: var(--text-low); cursor: not-allowed; box-shadow: none; }
 
   .consent-label {
@@ -241,126 +234,125 @@
     width: 18px; height: 18px; margin-top: 2px; flex-shrink: 0;
     accent-color: var(--purple); cursor: pointer;
   }
-  .consent-text {
-    font-size: 13px; color: var(--text); line-height: 1.5;
-  }
+  .consent-text { font-size: 12px; color: var(--text); line-height: 1.5; }
   .consent-toggle {
     background: none; border: none; color: var(--purple);
-    font-size: 12px; cursor: pointer; padding: 0; margin-left: 4px;
+    font-size: 11px; cursor: pointer; padding: 0; margin-left: 4px;
     text-decoration: underline;
   }
   .consent-detail {
-    display: none; margin-top: 10px; padding: 14px 16px;
+    display: none; margin-top: 8px; padding: 12px;
     background: var(--surface); border: 1px solid var(--border);
-    border-radius: 8px; font-size: 12px; color: var(--text-med);
-    line-height: 1.7;
+    border-radius: 8px; font-size: 11px; color: var(--text-med);
+    line-height: 1.6;
   }
   .consent-detail.show { display: block; }
   .consent-detail p { margin-bottom: 2px; }
 
-  .form-note {
-    font-size: 12px; color: var(--text-low); text-align: center;
-    margin-top: 12px;
-  }
-
   /* ── SUCCESS ── */
   .form-success {
-    display: none; text-align: center; padding: 40px 20px;
+    display: none; text-align: center; padding: 32px 16px;
   }
   .form-success.show { display: block; }
   .form-success-icon {
-    width: 64px; height: 64px; border-radius: 50%;
+    width: 56px; height: 56px; border-radius: 50%;
     background: rgba(22,163,74,0.1); display: flex;
     align-items: center; justify-content: center;
-    margin: 0 auto 16px; font-size: 28px; color: var(--green);
+    margin: 0 auto 12px; font-size: 24px; color: var(--green);
   }
-  .form-success h3 { font-size: 22px; font-weight: 800; margin-bottom: 8px; color: var(--navy); }
-  .form-success p { font-size: 14px; color: var(--text-med); line-height: 1.6; margin-bottom: 20px; }
+  .form-success h3 { font-size: 18px; font-weight: 800; margin-bottom: 6px; color: var(--navy); }
+  .form-success p { font-size: 13px; color: var(--text-med); line-height: 1.6; margin-bottom: 16px; }
   .kakao-btn {
     display: inline-flex; align-items: center; gap: 8px;
-    background: #FEE500; color: #191919; padding: 14px 32px;
-    border-radius: 10px; font-weight: 700; font-size: 15px;
-    transition: all 0.2s; border: none; cursor: pointer;
-    text-decoration: none;
+    background: #FEE500; color: #191919; padding: 12px 28px;
+    border-radius: 10px; font-weight: 700; font-size: 14px;
+    border: none; cursor: pointer;
   }
-  .kakao-btn:hover { background: #f5dc00; transform: translateY(-1px); }
-  .kakao-btn svg { width: 20px; height: 20px; }
+  .kakao-btn svg { width: 18px; height: 18px; }
 
   /* ── TRUST ── */
   .trust {
-    padding: 40px 24px; text-align: center;
+    padding: 28px 20px; text-align: center;
     border-top: 1px solid var(--border); background: var(--surface);
   }
-  .trust p { font-size: 13px; color: var(--text-low); margin-bottom: 12px; }
-  .trust-channels {
-    display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;
-  }
-  .trust-item { font-size: 14px; font-weight: 700; color: var(--text-med); }
+  .trust p { font-size: 12px; color: var(--text-low); margin-bottom: 8px; }
+  .trust-channels { display: flex; justify-content: center; gap: 20px; }
+  .trust-item { font-size: 13px; font-weight: 700; color: var(--text-med); }
   .trust-item span { color: var(--purple); }
 
   /* ── FOOTER ── */
   .landing-footer {
-    padding: 32px 24px; text-align: center;
+    padding: 24px 20px; text-align: center;
     border-top: 1px solid var(--border);
   }
-  .landing-footer p { font-size: 12px; color: var(--text-low); }
+  .landing-footer p { font-size: 11px; color: var(--text-low); }
 
-  /* ── FLOATING CTA (Mobile) ── */
+  /* ── FLOATING CTA ── */
   .floating-cta {
-    display: none; position: fixed; bottom: 0; left: 0; right: 0;
-    padding: 12px 20px; background: #fff;
+    position: fixed; bottom: 0; left: 0; right: 0;
+    padding: 10px 16px; background: #fff;
     border-top: 1px solid var(--border);
-    box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
     z-index: 100;
   }
   .floating-cta a {
     display: block; background: var(--purple); color: #fff;
-    text-align: center; padding: 14px; border-radius: 10px;
-    font-weight: 700; font-size: 15px;
+    text-align: center; padding: 13px; border-radius: 10px;
+    font-weight: 700; font-size: 14px;
   }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
-    .hero { padding: 40px 20px; min-height: auto; }
-    .hero-inner { flex-direction: column; gap: 32px; }
-    .hero h1 { font-size: 26px; }
-    .hero-stats { gap: 20px; }
-    .hero-stat-num { font-size: 22px; }
-    .pain-list { grid-template-columns: 1fr; }
-    .form-box { padding: 24px; }
-    .benefits-grid { grid-template-columns: 1fr; }
-    .thumb-play { width: 48px; height: 48px; }
-    .thumb-play::after { border-top: 8px solid transparent; border-bottom: 8px solid transparent; border-left: 14px solid var(--navy); }
-    .floating-cta { display: block; }
-    body { padding-bottom: 72px; }
+  /* ── DESKTOP ── */
+  @media (min-width: 769px) {
+    body { padding-bottom: 0; }
+    .floating-cta { display: none; }
+    .hero { padding: 80px 24px; }
+    .hero-inner { max-width: 1000px; margin: 0 auto; display: flex; gap: 48px; align-items: center; text-align: left; }
+    .hero-text { flex: 1; }
+    .hero-visual { flex: 1; }
+    .hero h1 { font-size: 36px; }
+    .hero-desc { font-size: 16px; }
+    .hero-stats { justify-content: flex-start; }
+    .hero-stat-num { font-size: 28px; }
+    .hero-cta { display: inline-block; padding: 16px 36px; }
+    .proof { padding: 60px 24px; }
+    .proof-inner { max-width: 600px; margin: 0 auto; }
+    .stat-block .num { font-size: 26px; }
+    .pain { padding: 60px 24px; }
+    .pain-inner { max-width: 700px; margin: 0 auto; }
+    .pain-list { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .section-title { font-size: 26px; }
+    .video-section { padding: 60px 24px; }
+    .benefits { padding: 60px 24px; }
+    .benefits-inner { max-width: 700px; margin: 0 auto; }
+    .form-section { padding: 60px 24px; }
+    .form-box { padding: 32px; }
+    .instructor { padding: 60px 24px; }
+    .instructor-inner { max-width: 600px; margin: 0 auto; }
   }
 </style>
 </head>
 <body>
 
 <!-- ── HERO ── -->
-<section class="hero" id="hero">
+<section class="hero">
   <div class="hero-inner">
     <div class="hero-text">
-      <div class="hero-badge">1회 한정 강의 · 십억채널</div>
-      <h1>
-        AI사주 <span class="highlight">당근마켓 + 자사몰</span><br>
-        만들기 강의
-      </h1>
+      <div class="hero-badge">1회 한정 강의 &middot; 5월 시작</div>
+      <h1>AI사주 <span class="highlight">당근마켓 + 자사몰</span><br>만들기 강의</h1>
       <p class="hero-desc">
-        당근마켓 사주 판매 5기 마감. 이번엔 자사몰까지 포함된 단 1회 한정 강의입니다.
+        당근마켓 사주 5기 마감. 이번엔 자사몰까지 포함된 단 1회 한정 강의입니다.
         자사몰이 당근보다 매출이 훨씬 잘 나옵니다.
       </p>
       <div class="hero-stats">
-        <div><div class="hero-stat-num gold">2억</div><div class="hero-stat-label">월 매출 달성</div></div>
-        <div><div class="hero-stat-num">5기</div><div class="hero-stat-label">당근 강의 마감</div></div>
-        <div><div class="hero-stat-num">1회</div><div class="hero-stat-label">한정 진행</div></div>
+        <div class="hero-stat"><div class="hero-stat-num gold">8.25억</div><div class="hero-stat-label">6개월 매출</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">10만+</div><div class="hero-stat-label">판매 건수</div></div>
+        <div class="hero-stat"><div class="hero-stat-num">4.8</div><div class="hero-stat-label">리뷰 평점</div></div>
       </div>
       <a href="#form" class="hero-cta">라이브 알림 받기</a>
     </div>
     <div class="hero-visual">
       <a href="https://www.youtube.com/watch?v=uNrjjUoOGGQ" target="_blank" rel="noopener" class="thumb-wrap">
-        <img src="https://i.ytimg.com/vi/uNrjjUoOGGQ/maxresdefault.jpg" alt="3900원짜리 AI 사주인데 왜 월 매출이 2억이에요? 영상 썸네일">
+        <img src="https://i.ytimg.com/vi/uNrjjUoOGGQ/maxresdefault.jpg" alt="영상 썸네일" loading="lazy">
         <div class="thumb-play"></div>
         <div class="thumb-channel">사장찍어주는남자</div>
       </a>
@@ -368,74 +360,137 @@
   </div>
 </section>
 
+<!-- ── STATS BAR ── -->
+<div class="stats-bar">
+  <div class="stat-block">
+    <div class="num">2.25억</div>
+    <div class="label">월 매출</div>
+  </div>
+  <div class="stat-block">
+    <div class="num">6억</div>
+    <div class="label">순이익</div>
+  </div>
+  <div class="stat-block">
+    <div class="num">19,436</div>
+    <div class="label">리뷰 수</div>
+  </div>
+  <div class="stat-block">
+    <div class="num">1회</div>
+    <div class="label">한정 강의</div>
+  </div>
+</div>
+
+<!-- ── PROOF ── -->
+<section class="proof">
+  <div class="proof-inner">
+    <h2>실적으로 증명합니다</h2>
+    <p class="sub">국세청 부가세 신고로 검증된 실제 매출</p>
+    <div class="proof-img">
+      <img src="https://postfiles.pstatic.net/MjAyNjA0MDNfMTcy/MDAxNzc1MTgxMzgxNzc1.OaJKtAsYbF0RYDk4rztmVQsJBLY0hB9-XMijut4Xvb0g.8F1_teurunjlA-KLn1VD_ATAjyu6jMLvReiAyy3tlg4g.PNG/3-2.png?type=w773" alt="매출 실적 증빙 - 월매출 2.25억, 6개월 총매출 8.25억, 순이익 6억" loading="lazy">
+    </div>
+    <p class="proof-caption">4,900원 AI 사주 서비스 &middot; 실제 국세청 부가세 신고 자료</p>
+  </div>
+</section>
+
+<!-- ── VIDEO ── -->
+<section class="video-section">
+  <h2 class="section-title">영상으로 먼저 확인하세요</h2>
+  <p class="section-sub">사찍남 채널에서 공개된 실제 이야기</p>
+  <div class="video-embed">
+    <iframe src="https://www.youtube.com/embed/uNrjjUoOGGQ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="3900원짜리 AI 사주인데 왜 월 매출이 2억이에요?" loading="lazy"></iframe>
+  </div>
+</section>
+
 <!-- ── PAIN POINTS ── -->
 <section class="pain">
   <div class="pain-inner">
-    <h2>이런 분들을 위한 강의입니다</h2>
-    <p class="sub">AI 사주 부업에 관심은 있지만 혼자서는 시작이 어려운 분</p>
+    <h2 class="section-title">이런 분들을 위한 강의입니다</h2>
+    <p class="section-sub">AI 사주 부업에 관심은 있지만 혼자서는 시작이 어려운 분</p>
     <div class="pain-list">
       <div class="pain-item">
-        <div class="pain-icon">&#128161;</div>
+        <div class="pain-icon">&#128722;</div>
         <div>
-          <h4>당근마켓에서 사주를 팔고 싶은데</h4>
-          <p>어떻게 시작해�� 할지 감이 안 잡힌다</p>
+          <h4>당근마켓에서 사주를 팔고 싶다</h4>
+          <p>어떻게 시작하고 어떻게 팔아야 하는지 모르겠다</p>
         </div>
       </div>
       <div class="pain-item">
-        <div class="pain-icon">&#128200;</div>
+        <div class="pain-icon">&#128187;</div>
         <div>
-          <h4>자사몰을 만들고 싶은데</h4>
-          <p>PG 승인이 안 나서 막혀 있다</p>
+          <h4>자사몰을 만들고 싶다</h4>
+          <p>PG 승인이 안 나서 결제 시스템 구축이 막혀 있다</p>
         </div>
       </div>
       <div class="pain-item">
         <div class="pain-icon">&#129302;</div>
         <div>
-          <h4>AI 사주 서비스를 만들고 싶은데</h4>
-          <p>기술적으로 어떻게 구현하는지 모르겠다</p>
+          <h4>AI 사주 프로그램이 필요하다</h4>
+          <p>직접 만들 수 없어서 시작 자체가 안 된다</p>
         </div>
       </div>
       <div class="pain-item">
-        <div class="pain-icon">&#127919;</div>
+        <div class="pain-icon">&#128200;</div>
         <div>
-          <h4>당근 말고 더 큰 매출을 원하는데</h4>
-          <p>자사몰로 확장하는 방법이 궁금하다</p>
+          <h4>당근을 넘어서 더 큰 매출을 원한다</h4>
+          <p>자사몰이 당근보다 매출이 훨씬 잘 나온다는데?</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ── VIDEO ── -->
-<section class="video-section" id="video">
-  <h2>먼저 영상을 확인해보세요</h2>
-  <p class="sub">사찍남 채널에서 공개된 AI 사주 사업의 실제 이야기</p>
-  <div class="video-embed">
-    <iframe src="https://www.youtube.com/embed/uNrjjUoOGGQ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="3900원짜리 AI 사주인데 왜 월 매출이 2억이에요?"></iframe>
-  </div>
-</section>
-
 <!-- ── BENEFITS ── -->
 <section class="benefits">
   <div class="benefits-inner">
-    <h2>이번 강의에서 배우는 것</h2>
-    <p class="sub">현존하는 모든 사주 부업·당근마켓·마케팅 강의를 통틀어 가장 양질의 강의</p>
+    <h2 class="section-title">이번 강의에서 배우는 것</h2>
+    <p class="section-sub">현존하는 사주 부업·당근마켓 강의 중 가장 양질의 강의</p>
     <div class="benefits-grid">
       <div class="benefit-card">
         <div class="benefit-icon">&#128722;</div>
-        <h4>당근마켓 사주 판매법</h4>
-        <p>5기 수강생들이 검증한 당근마켓 사주 판매 노하우 전수</p>
+        <div>
+          <h4>당근마켓 사주 판매법</h4>
+          <p>5기 수강생이 검증한 당근마켓 사주 판매 노하우 전수</p>
+        </div>
       </div>
       <div class="benefit-card">
         <div class="benefit-icon">&#128187;</div>
-        <h4>자사몰 구축 A to Z</h4>
-        <p>당근보다 매출이 훨씬 잘 나오는 자사몰 만들기 전 과정</p>
+        <div>
+          <h4>자사몰 구축 A to Z</h4>
+          <p>당근보다 매출이 훨씬 잘 나오는 자사몰 만들기 전 과정</p>
+        </div>
       </div>
       <div class="benefit-card">
         <div class="benefit-icon">&#128179;</div>
-        <h4>PG 승인 지원</h4>
-        <p>현재 사주 자사몰 PG 승인 불가 — 수강생 한정 특별 지원</p>
+        <div>
+          <h4>PG 승인 지원 (수강생 한정)</h4>
+          <p>현재 사주 자사몰 PG 승인 불가 — 이번 강의 수강생만 특별 지원</p>
+        </div>
       </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">&#129302;</div>
+        <div>
+          <h4>AI 사주 프로그램 + 프롬프트 제공</h4>
+          <p>자체 AI 사주 웹·프롬프트 제공. 직접 개발할 필요 없음</p>
+        </div>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">&#9997;&#65039;</div>
+        <div>
+          <h4>마케팅 + 글쓰기 + 1:1 피드백</h4>
+          <p>십억채널의 1:1 글쓰기 피드백 세션 포함</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── INSTRUCTOR ── -->
+<section class="instructor">
+  <div class="instructor-inner">
+    <h2>강사 소개</h2>
+    <p class="sub">운세위키 공동 개발자 &middot; 십억채널</p>
+    <div class="instructor-img">
+      <img src="https://postfiles.pstatic.net/MjAyNjA0MDNfMjU1/MDAxNzc1MTkyNzEyMjQ2.YbyevKpwETah6-hVDMa8vZ97eH49pN2QSGKqBgQ9CI0g.9nMsdoO9roam36BXFdtESph3rVogiq6J2raeBJhGHRkg.PNG/6.png?type=w773" alt="강사 소개 및 강의 커리큘럼" loading="lazy">
     </div>
   </div>
 </section>
@@ -443,8 +498,8 @@
 <!-- ── FORM ── -->
 <section class="form-section" id="form">
   <div class="form-inner">
-    <h2>라이브 강의 알림 신청</h2>
-    <p class="form-sub">알림 신청하시면 라이브 일정을 가장 먼저 안내드립니다</p>
+    <h2 class="section-title">라이브 강의 알림 신청</h2>
+    <p class="section-sub">알림 신청하시면 라이브 일정을 가장 먼저 안내드립니다</p>
 
     <div class="form-box">
       <form id="leadForm" onsubmit="return submitForm(event)">
@@ -477,7 +532,7 @@
             <option value="기타">기타</option>
           </select>
         </div>
-        <div class="form-group" style="margin-top: 20px;">
+        <div class="form-group" style="margin-top: 16px;">
           <label class="consent-label">
             <input type="checkbox" id="consent" name="consent" required>
             <span class="consent-text">
@@ -489,7 +544,7 @@
             <p><strong>수집 항목:</strong> 이름, 연락처, 이메일, 관심 분야</p>
             <p><strong>수집 목적:</strong> 강의 라이브 일정 안내 및 관련 정보 제공</p>
             <p><strong>보유 기간:</strong> 수집일로부터 1년 (이후 즉시 파기)</p>
-            <p>동의를 거부할 수 있으며, 거부 시 상담 신청이 제한됩니다.</p>
+            <p>동의를 거부할 수 있으며, 거부 시 알림 신청이 제한됩니다.</p>
           </div>
         </div>
         <button type="submit" class="form-btn" id="submitBtn">라이브 알림 받기</button>
@@ -498,7 +553,7 @@
       <div class="form-success" id="formSuccess">
         <div class="form-success-icon">&#10003;</div>
         <h3>신청이 완료되었습니다!</h3>
-        <p>카카오톡 오픈채팅방에서<br>더 자세한 이야기를 나눠보세요</p>
+        <p>카카오톡 오픈채팅방에서<br>라이브 알림을 받아보세요</p>
         <a href="https://open.kakao.com/o/gn495Aoi" target="_blank" rel="noopener" class="kakao-btn">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.48 3 2 6.58 2 10.9c0 2.78 1.86 5.21 4.65 6.6-.2.73-.73 2.64-.84 3.05-.13.5.18.49.39.36.16-.1 2.59-1.76 3.63-2.47.7.1 1.43.16 2.17.16 5.52 0 10-3.58 10-7.9S17.52 3 12 3z"/></svg>
           카카오톡 오픈채팅 참여하기
@@ -512,7 +567,7 @@
 <section class="trust">
   <p>십억채널 &times; 사장찍어주는남자</p>
   <div class="trust-channels">
-    <div class="trust-item">십억채널 <span>강의 5기 완판</span></div>
+    <div class="trust-item">십억채널 <span>5기 완판</span></div>
     <div class="trust-item">사찍남 <span>14.4만 구독</span></div>
   </div>
 </section>
@@ -522,42 +577,34 @@
   <p>(주) 플로우머스 &nbsp;|&nbsp; 서울 서초구 서초대로 398 &nbsp;|&nbsp; ceo@flowmus.com</p>
 </footer>
 
-<!-- ── FLOATING CTA (Mobile) ── -->
-<div class="floating-cta">
+<!-- ── FLOATING CTA ── -->
+<div class="floating-cta" id="floatingCta">
   <a href="#form">라이브 알림 받기</a>
 </div>
 
 <script>
-  // ── 개인정보 동의 토글 ──
   function toggleConsent() {
     document.getElementById('consentDetail').classList.toggle('show');
   }
 
-  // ── UTM 파라미터 자동 수집 ──
+  // UTM 파라미터
   const params = new URLSearchParams(window.location.search);
   ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'].forEach(key => {
     const el = document.getElementById(key);
     if (el && params.get(key)) el.value = params.get(key);
   });
 
-  // ── Google Apps Script Web App URL (시트 연동용) ──
   const FORM_ACTION = 'https://script.google.com/macros/s/AKfycbwnrryI717W2q-XfwlW64wI2nSY5Jggrb0nUhijM9gW6kVgpwP21pjiyDZEqSj1_6C0Gg/exec';
 
-  // ── 폼 제출 ──
   function submitForm(e) {
     e.preventDefault();
     const btn = document.getElementById('submitBtn');
     btn.disabled = true;
     btn.textContent = '전송 중...';
-
-    const form = document.getElementById('leadForm');
-    const data = new FormData(form);
-
+    const data = new FormData(document.getElementById('leadForm'));
     if (FORM_ACTION) {
-      fetch(FORM_ACTION, {
-        method: 'POST',
-        body: data
-      }).then(() => showSuccess()).catch(() => showSuccess());
+      fetch(FORM_ACTION, { method: 'POST', body: data })
+        .then(() => showSuccess()).catch(() => showSuccess());
     } else {
       setTimeout(() => showSuccess(), 800);
     }
@@ -565,24 +612,17 @@
   }
 
   function showSuccess() {
-    // DB 저장 후 바로 카카오톡 오픈채팅방으로 이동
     window.location.href = 'https://open.kakao.com/o/gn495Aoi';
   }
 
-  // ── 스크롤 시 floating CTA 표시 (폼 도달 전까지만) ──
-  const floatingCta = document.querySelector('.floating-cta');
-  if (floatingCta) {
-    const formSection = document.getElementById('form');
-    window.addEventListener('scroll', () => {
-      const formTop = formSection.getBoundingClientRect().top;
-      if (formTop < window.innerHeight) {
-        floatingCta.style.transform = 'translateY(100%)';
-        floatingCta.style.transition = 'transform 0.3s';
-      } else {
-        floatingCta.style.transform = 'translateY(0)';
-      }
-    });
-  }
+  // Floating CTA: 폼 영역 도달하면 숨기기
+  const floatingCta = document.getElementById('floatingCta');
+  const formSection = document.getElementById('form');
+  window.addEventListener('scroll', () => {
+    const formTop = formSection.getBoundingClientRect().top;
+    floatingCta.style.transform = formTop < window.innerHeight ? 'translateY(100%)' : 'translateY(0)';
+    floatingCta.style.transition = 'transform 0.3s';
+  }, { passive: true });
 </script>
 
 </body>
