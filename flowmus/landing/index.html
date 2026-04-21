@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>무료 자료 신청 — 플로우머스</title>
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --navy: #0f1419;
+    --blue: #2563EB;
+    --blue-dark: #1d4ed8;
+    --blue-light: rgba(37,99,235,0.08);
+    --orange: #ea580c;
+    --text: #1a1d23;
+    --text-med: #64748b;
+    --text-low: #94a3b8;
+    --border: #e2e8f0;
+    --surface: #f8fafc;
+    --green: #16a34a;
+  }
+  html { font-size: 16px; scroll-behavior: smooth; }
+  body {
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    color: var(--text); background: #fff; line-height: 1.7;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center;
+    background: linear-gradient(160deg, #0f1419 0%, #1a2332 50%, #0f1419 100%);
+    color: #fff; padding: 60px 24px;
+  }
+  .hero-inner {
+    max-width: 1000px; margin: 0 auto; width: 100%;
+    display: flex; gap: 48px; align-items: center;
+  }
+  .hero-text { flex: 1; }
+  .hero-visual { flex: 1; }
+
+  .hero-badge {
+    display: inline-block; font-size: 13px; font-weight: 600;
+    padding: 6px 14px; border-radius: 100px; margin-bottom: 20px;
+    background: rgba(37,99,235,0.2); color: #60a5fa;
+  }
+  .hero h1 {
+    font-size: clamp(24px, 5vw, 40px); font-weight: 800;
+    line-height: 1.25; letter-spacing: -0.03em; margin-bottom: 16px;
+  }
+  .hero h1 .highlight { color: #60a5fa; }
+  .hero-desc {
+    font-size: 16px; color: rgba(255,255,255,0.6); line-height: 1.7;
+    margin-bottom: 32px; max-width: 420px;
+  }
+  .hero-stats {
+    display: flex; gap: 28px; margin-bottom: 32px;
+  }
+  .hero-stat-num { font-size: 28px; font-weight: 800; }
+  .hero-stat-label { font-size: 12px; color: rgba(255,255,255,0.4); }
+
+  /* ── THUMBNAIL ── */
+  .thumb-wrap {
+    position: relative; border-radius: 16px; overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  }
+  .thumb-wrap img { width: 100%; display: block; }
+  .thumb-play {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 64px; height: 64px; border-radius: 50%;
+    background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .thumb-play::after {
+    content: ''; width: 0; height: 0;
+    border-top: 12px solid transparent; border-bottom: 12px solid transparent;
+    border-left: 20px solid var(--navy); margin-left: 4px;
+  }
+  .thumb-views {
+    position: absolute; bottom: 12px; right: 12px;
+    background: rgba(0,0,0,0.7); color: #fff;
+    padding: 4px 10px; border-radius: 6px;
+    font-size: 12px; font-weight: 600;
+  }
+
+  /* ── FORM SECTION ── */
+  .form-section {
+    padding: 80px 24px; background: #fff;
+  }
+  .form-inner {
+    max-width: 520px; margin: 0 auto; text-align: center;
+  }
+  .form-section h2 {
+    font-size: 28px; font-weight: 800; letter-spacing: -0.02em;
+    margin-bottom: 8px; color: var(--navy);
+  }
+  .form-section .form-sub {
+    font-size: 15px; color: var(--text-med); margin-bottom: 36px;
+  }
+
+  .form-box {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 32px; text-align: left;
+  }
+  .form-group { margin-bottom: 16px; }
+  .form-label {
+    display: block; font-size: 13px; font-weight: 600;
+    color: var(--text); margin-bottom: 6px;
+  }
+  .form-input {
+    width: 100%; padding: 14px 16px; border: 1px solid var(--border);
+    border-radius: 10px; font-size: 15px; font-family: 'Pretendard', sans-serif;
+    background: #fff; color: var(--text); outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-input:focus { border-color: var(--blue); }
+  .form-input::placeholder { color: var(--text-low); }
+
+  .form-select {
+    width: 100%; padding: 14px 16px; border: 1px solid var(--border);
+    border-radius: 10px; font-size: 15px; font-family: 'Pretendard', sans-serif;
+    background: #fff; color: var(--text); outline: none;
+    appearance: none; cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 16px center;
+  }
+
+  .form-btn {
+    width: 100%; padding: 16px; border: none; border-radius: 10px;
+    background: var(--blue); color: #fff; font-size: 16px;
+    font-weight: 700; font-family: 'Pretendard', sans-serif;
+    cursor: pointer; transition: background 0.2s;
+    margin-top: 8px;
+  }
+  .form-btn:hover { background: var(--blue-dark); }
+  .form-btn:disabled { background: var(--text-low); cursor: not-allowed; }
+
+  .form-note {
+    font-size: 12px; color: var(--text-low); text-align: center;
+    margin-top: 12px;
+  }
+
+  /* ── SUCCESS ── */
+  .form-success {
+    display: none; text-align: center; padding: 40px 20px;
+  }
+  .form-success.show { display: block; }
+  .form-success-icon {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: rgba(22,163,74,0.1); display: flex;
+    align-items: center; justify-content: center;
+    margin: 0 auto 16px; font-size: 28px;
+  }
+  .form-success h3 { font-size: 20px; font-weight: 800; margin-bottom: 8px; color: var(--navy); }
+  .form-success p { font-size: 14px; color: var(--text-med); }
+
+  /* ── BENEFITS ── */
+  .benefits {
+    padding: 60px 24px; border-top: 1px solid var(--border);
+  }
+  .benefits-inner { max-width: 800px; margin: 0 auto; }
+  .benefits h2 {
+    font-size: 24px; font-weight: 800; text-align: center;
+    margin-bottom: 36px; color: var(--navy);
+  }
+  .benefits-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+  .benefit-card {
+    border: 1px solid var(--border); border-radius: 14px;
+    padding: 24px; text-align: center;
+  }
+  .benefit-icon { font-size: 28px; margin-bottom: 12px; display: block; }
+  .benefit-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+  .benefit-card p { font-size: 13px; color: var(--text-med); margin: 0; }
+
+  /* ── TRUST ── */
+  .trust {
+    padding: 40px 24px; text-align: center;
+    border-top: 1px solid var(--border); background: var(--surface);
+  }
+  .trust p { font-size: 13px; color: var(--text-low); margin-bottom: 12px; }
+  .trust-channels {
+    display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;
+  }
+  .trust-item { font-size: 14px; font-weight: 700; color: var(--text-med); }
+  .trust-item span { color: var(--blue); }
+
+  /* ── FOOTER ── */
+  .landing-footer {
+    padding: 32px 24px; text-align: center;
+    border-top: 1px solid var(--border);
+  }
+  .landing-footer p { font-size: 12px; color: var(--text-low); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .hero { padding: 40px 20px; min-height: auto; }
+    .hero-inner { flex-direction: column; gap: 32px; }
+    .hero-stats { gap: 20px; }
+    .hero-stat-num { font-size: 22px; }
+    .form-box { padding: 24px; }
+    .benefits-grid { grid-template-columns: 1fr; }
+    .thumb-play { width: 48px; height: 48px; }
+    .thumb-play::after { border-top: 8px solid transparent; border-bottom: 8px solid transparent; border-left: 14px solid var(--navy); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     CONFIG: 아래 값만 바꾸면 다른 강의에 재사용
+     ═══════════════════════════════════════ -->
+<script>
+const CONFIG = {
+  // 출연자 / 강의 정보
+  badge: "무료 자료 제공",
+  title: "유튜브에서 <span class='highlight'>화제가 된</span><br>그 노하우, 핵심만 정리했습니다",
+  description: "영상 하나로는 담을 수 없었던 핵심 내용을 PDF로 정리했습니다. 이름과 연락처만 남겨주시면 무료로 보내드립니다.",
+  thumbnail: "https://i.ytimg.com/vi/VKTCh4CWVq4/maxresdefault.jpg",
+  videoViews: "177만회",
+  stats: [
+    { num: "177만", label: "영상 조회수" },
+    { num: "10억+", label: "강의 매출" },
+    { num: "4.9", label: "수강생 평점" }
+  ],
+  benefits: [
+    { icon: "&#128218;", title: "핵심 요약 PDF", desc: "영상 속 핵심 노하우를 한눈에" },
+    { icon: "&#127891;", title: "강의 할인 쿠폰", desc: "신청자 한정 특별 할인" },
+    { icon: "&#128172;", title: "1:1 무료 상담", desc: "전문가 상담 기회 제공" }
+  ],
+  // Google Apps Script Web App URL (시트 연동용)
+  formAction: "",
+  // 관심 강의 옵션
+  courseOptions: ["부업/사이드프로젝트", "마케팅/블로그", "투자/재테크", "창업/사업", "기타"]
+};
+</script>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge" id="cfg-badge"></div>
+      <h1 id="cfg-title"></h1>
+      <p class="hero-desc" id="cfg-desc"></p>
+      <div class="hero-stats" id="cfg-stats"></div>
+      <a href="#form" style="display: inline-block; background: var(--blue); color: #fff; padding: 14px 32px; border-radius: 10px; font-weight: 700; font-size: 15px; transition: background 0.2s;">무료 자료 받기</a>
+    </div>
+    <div class="hero-visual">
+      <div class="thumb-wrap">
+        <img id="cfg-thumb" alt="영상 썸네일">
+        <div class="thumb-play"></div>
+        <div class="thumb-views" id="cfg-views"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits">
+  <div class="benefits-inner">
+    <h2>신청하시면 이런 걸 받아요</h2>
+    <div class="benefits-grid" id="cfg-benefits"></div>
+  </div>
+</section>
+
+<!-- FORM -->
+<section class="form-section" id="form">
+  <div class="form-inner">
+    <h2>무료 자료 신청</h2>
+    <p class="form-sub">아래 정보를 남겨주시면 자료를 보내드립니다.</p>
+
+    <div class="form-box">
+      <form id="leadForm" onsubmit="return submitForm(event)">
+        <input type="hidden" id="utm_source" name="utm_source">
+        <input type="hidden" id="utm_medium" name="utm_medium">
+        <input type="hidden" id="utm_campaign" name="utm_campaign">
+        <input type="hidden" id="utm_content" name="utm_content">
+
+        <div class="form-group">
+          <label class="form-label" for="name">이름</label>
+          <input type="text" class="form-input" id="name" name="name" placeholder="홍길동" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="phone">연락처</label>
+          <input type="tel" class="form-input" id="phone" name="phone" placeholder="010-0000-0000" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="email">이메일</label>
+          <input type="email" class="form-input" id="email" name="email" placeholder="example@email.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="course">관심 분야</label>
+          <select class="form-select" id="course" name="course" required>
+            <option value="" disabled selected>선택해주세요</option>
+          </select>
+        </div>
+        <button type="submit" class="form-btn" id="submitBtn">무료 자료 받기</button>
+        <p class="form-note">입력하신 정보는 자료 발송 목적으로만 사용됩니다.</p>
+      </form>
+
+      <div class="form-success" id="formSuccess">
+        <div class="form-success-icon">&#10003;</div>
+        <h3>신청 완료!</h3>
+        <p>입력하신 연락처로 자료를 보내드리겠습니다.<br>영업일 기준 1일 이내에 발송됩니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust">
+  <p>플로우머스가 운영하는 채널</p>
+  <div class="trust-channels">
+    <div class="trust-item">사찍남 <span>14.4만</span></div>
+    <div class="trust-item">머니로드 <span>21.6만</span></div>
+    <div class="trust-item">현장속으로 <span>11.9만</span></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="landing-footer">
+  <p>(주) 플로우머스 &nbsp;|&nbsp; 서울 서초구 서초대로 398 &nbsp;|&nbsp; ceo@flowmus.com</p>
+</footer>
+
+<script>
+  // ── CONFIG 적용 ──
+  document.getElementById('cfg-badge').textContent = CONFIG.badge;
+  document.getElementById('cfg-title').innerHTML = CONFIG.title;
+  document.getElementById('cfg-desc').textContent = CONFIG.description;
+  document.getElementById('cfg-thumb').src = CONFIG.thumbnail;
+  document.getElementById('cfg-views').textContent = CONFIG.videoViews;
+
+  const statsEl = document.getElementById('cfg-stats');
+  CONFIG.stats.forEach(s => {
+    statsEl.innerHTML += `<div><div class="hero-stat-num">${s.num}</div><div class="hero-stat-label">${s.label}</div></div>`;
+  });
+
+  const benefitsEl = document.getElementById('cfg-benefits');
+  CONFIG.benefits.forEach(b => {
+    benefitsEl.innerHTML += `<div class="benefit-card"><span class="benefit-icon">${b.icon}</span><h4>${b.title}</h4><p>${b.desc}</p></div>`;
+  });
+
+  const courseSelect = document.getElementById('course');
+  CONFIG.courseOptions.forEach(opt => {
+    courseSelect.innerHTML += `<option value="${opt}">${opt}</option>`;
+  });
+
+  // ── UTM 파라미터 자동 수집 ──
+  const params = new URLSearchParams(window.location.search);
+  ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'].forEach(key => {
+    const el = document.getElementById(key);
+    if (el && params.get(key)) el.value = params.get(key);
+  });
+
+  // ── 폼 제출 ──
+  function submitForm(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = '전송 중...';
+
+    const form = document.getElementById('leadForm');
+    const data = new FormData(form);
+
+    // Google Apps Script Web App URL이 설정된 경우
+    if (CONFIG.formAction) {
+      fetch(CONFIG.formAction, {
+        method: 'POST',
+        body: data
+      }).then(() => showSuccess()).catch(() => showSuccess());
+    } else {
+      // 데모: URL 미설정 시 바로 성공 표시
+      setTimeout(() => showSuccess(), 800);
+    }
+    return false;
+  }
+
+  function showSuccess() {
+    document.getElementById('leadForm').style.display = 'none';
+    document.getElementById('formSuccess').classList.add('show');
+  }
+</script>
+
+</body>
+</html>
