@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>플로우머스 — 사람을 모으고, 콘텐츠로 연결합니다</title>
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --navy: #0f1419;
+    --blue: #2563EB;
+    --blue-light: rgba(37,99,235,0.06);
+    --orange: #ea580c;
+    --orange-light: rgba(234,88,12,0.06);
+    --green: #16a34a;
+    --green-light: rgba(22,163,74,0.06);
+    --purple: #7c3aed;
+    --purple-light: rgba(124,58,237,0.06);
+    --text: #1a1d23;
+    --text-med: #64748b;
+    --text-low: #94a3b8;
+    --border: #e5e7eb;
+    --surface: #f9fafb;
+    --max-w: 1120px;
+  }
+  html { scroll-behavior: smooth; font-size: 16px; }
+  body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: var(--text); background: #fff; line-height: 1.7; overflow-x: hidden;
+  }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  nav.scrolled { border-bottom-color: var(--border); box-shadow: 0 1px 8px rgba(0,0,0,0.04); }
+  .nav-inner {
+    max-width: var(--max-w); margin: 0 auto; padding: 0 32px;
+    height: 64px; display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo { font-size: 18px; font-weight: 800; color: var(--navy); letter-spacing: -0.02em; }
+  .nav-logo span { color: var(--blue); }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-links a { font-size: 14px; font-weight: 500; color: var(--text-med); transition: color 0.2s; }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-contact {
+    font-size: 13px; font-weight: 600; color: #fff; background: var(--navy);
+    padding: 8px 20px; border-radius: 8px; transition: background 0.2s;
+  }
+  .nav-contact:hover { background: #2d3748; }
+
+  /* SECTIONS */
+  section { padding: 120px 32px; }
+  .container { max-width: var(--max-w); margin: 0 auto; }
+  .section-label {
+    font-size: 13px; font-weight: 600; color: var(--blue); margin-bottom: 12px;
+    letter-spacing: 0.02em;
+  }
+  .section-title {
+    font-size: 36px; font-weight: 800; letter-spacing: -0.03em;
+    line-height: 1.25; margin-bottom: 16px; color: var(--navy);
+  }
+  .section-desc {
+    font-size: 17px; color: var(--text-med); line-height: 1.7;
+    max-width: 580px; margin-bottom: 56px;
+  }
+
+  /* HERO */
+  .hero { padding: 180px 32px 120px; position: relative; overflow: hidden; }
+  .hero::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(160deg, #f0f4ff 0%, #fff 50%, #fafafa 100%);
+    z-index: -1;
+  }
+  .hero .container { display: flex; align-items: center; gap: 60px; }
+  .hero-text { flex: 1; }
+  .hero-visual { flex: 1; position: relative; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px; font-weight: 600; color: var(--blue);
+    background: var(--blue-light); padding: 6px 14px; border-radius: 100px;
+    margin-bottom: 24px;
+  }
+  .hero-tag::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--blue); }
+  .hero h1 {
+    font-size: clamp(32px, 4.5vw, 48px); font-weight: 800;
+    line-height: 1.2; letter-spacing: -0.03em; margin-bottom: 20px; color: var(--navy);
+  }
+  .hero p { font-size: 17px; color: var(--text-med); line-height: 1.7; margin-bottom: 40px; max-width: 440px; }
+  .hero-stats { display: flex; gap: 32px; }
+  .hero-stat-num { font-size: 32px; font-weight: 800; color: var(--navy); }
+  .hero-stat-unit { font-size: 13px; color: var(--text-low); margin-top: 2px; }
+
+  /* Hero video grid */
+  .hero-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+    border-radius: 16px; overflow: hidden;
+  }
+  .hero-grid img {
+    width: 100%; height: 140px; object-fit: cover;
+    transition: transform 0.4s;
+  }
+  .hero-grid img:hover { transform: scale(1.05); }
+  .hero-grid-item:first-child img { height: 288px; border-radius: 16px 0 0 16px; }
+  .hero-grid-large { grid-row: span 2; }
+
+  /* BUSINESS */
+  .biz-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+  .biz-card {
+    border: 1px solid var(--border); border-radius: 16px; padding: 36px;
+    background: #fff; transition: transform 0.25s, box-shadow 0.25s;
+    position: relative;
+  }
+  .biz-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.06); }
+  .biz-badge {
+    display: inline-block; font-size: 11px; font-weight: 700;
+    padding: 4px 10px; border-radius: 6px; margin-bottom: 16px;
+  }
+  .biz-card h3 { font-size: 20px; font-weight: 800; margin-bottom: 10px; color: var(--navy); }
+  .biz-card p { font-size: 15px; color: var(--text-med); line-height: 1.65; margin-bottom: 16px; }
+  .biz-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-size: 12px; font-weight: 500; padding: 5px 12px;
+    border-radius: 6px; background: var(--surface); color: var(--text-med);
+    border: 1px solid var(--border);
+  }
+
+  /* CHANNELS */
+  .channels-bg { background: var(--navy); color: #fff; }
+  .channels-bg .section-label { color: rgba(255,255,255,0.4); }
+  .channels-bg .section-title { color: #fff; }
+  .channels-bg .section-desc { color: rgba(255,255,255,0.5); }
+
+  .ch-group { margin-bottom: 48px; }
+  .ch-group-label {
+    font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.35);
+    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;
+  }
+  .ch-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .ch-card {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px; overflow: hidden;
+    transition: transform 0.25s, background 0.25s;
+  }
+  .ch-card:hover { transform: translateY(-4px); background: rgba(255,255,255,0.08); }
+  .ch-thumb {
+    width: 100%; height: 160px; object-fit: cover;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .ch-info { padding: 20px; }
+  .ch-badge {
+    display: inline-block; font-size: 10px; font-weight: 600;
+    padding: 3px 8px; border-radius: 4px; margin-bottom: 8px;
+  }
+  .ch-badge-own { background: rgba(37,99,235,0.2); color: #60a5fa; }
+  .ch-badge-collab { background: rgba(234,88,12,0.2); color: #fb923c; }
+  .ch-name { font-size: 17px; font-weight: 800; margin-bottom: 2px; }
+  .ch-subs { font-size: 24px; font-weight: 800; color: #60a5fa; margin-bottom: 4px; }
+  .ch-desc { font-size: 13px; color: rgba(255,255,255,0.4); }
+
+  /* PORTFOLIO */
+  .portfolio-scroll { display: flex; gap: 16px; overflow-x: auto; padding-bottom: 16px; scroll-snap-type: x mandatory; }
+  .portfolio-scroll::-webkit-scrollbar { height: 4px; }
+  .portfolio-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+  .pf-card {
+    min-width: 320px; border-radius: 16px; overflow: hidden;
+    border: 1px solid var(--border); background: #fff;
+    transition: transform 0.25s, box-shadow 0.25s;
+    scroll-snap-align: start; flex-shrink: 0;
+  }
+  .pf-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(0,0,0,0.06); }
+  .pf-thumb { width: 100%; height: 180px; object-fit: cover; }
+  .pf-body { padding: 20px; }
+  .pf-platform {
+    display: inline-block; font-size: 11px; font-weight: 600;
+    padding: 3px 8px; border-radius: 4px; margin-bottom: 8px;
+  }
+  .pf-title { font-size: 15px; font-weight: 700; margin-bottom: 12px; line-height: 1.4; }
+  .pf-metrics { display: flex; gap: 20px; }
+  .pf-val { font-size: 22px; font-weight: 800; }
+  .pf-lbl { font-size: 11px; color: var(--text-med); }
+
+  /* PARTNERS */
+  .partners-row {
+    display: flex; align-items: center; justify-content: center;
+    gap: 48px; flex-wrap: wrap;
+  }
+  .partner-item {
+    text-align: center; opacity: 0.7; transition: opacity 0.2s;
+  }
+  .partner-item:hover { opacity: 1; }
+  .partner-name { font-size: 18px; font-weight: 800; color: var(--navy); letter-spacing: -0.01em; }
+  .partner-desc { font-size: 11px; color: var(--text-low); margin-top: 2px; }
+
+  /* PROCESS */
+  .process-bg { background: var(--surface); }
+  .process-flow {
+    display: flex; align-items: center; justify-content: center;
+    gap: 6px; flex-wrap: wrap; margin-bottom: 48px;
+  }
+  .process-step {
+    background: #fff; border: 1px solid var(--border); border-radius: 10px;
+    padding: 12px 18px; font-size: 14px; font-weight: 600;
+  }
+  .process-step.active { background: var(--blue); color: #fff; border-color: var(--blue); }
+  .process-arrow { color: var(--text-low); font-size: 14px; }
+  .process-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .process-card {
+    background: #fff; border: 1px solid var(--border); border-radius: 14px;
+    padding: 28px; text-align: center;
+  }
+  .process-icon { font-size: 24px; margin-bottom: 12px; display: block; }
+  .process-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .process-card p { font-size: 13px; color: var(--text-med); margin: 0; }
+
+  /* PHILOSOPHY */
+  .philosophy-section { background: var(--navy); color: #fff; text-align: center; }
+  .philosophy-section .section-label { color: rgba(255,255,255,0.3); }
+  .philosophy-quote {
+    font-size: clamp(28px, 4vw, 40px); font-weight: 800;
+    line-height: 1.35; letter-spacing: -0.02em; margin-bottom: 16px;
+  }
+  .philosophy-sub { font-size: 17px; color: rgba(255,255,255,0.45); margin-bottom: 56px; }
+  .philosophy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 680px; margin: 0 auto; }
+  .philosophy-card {
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px; padding: 28px; text-align: left;
+  }
+  .philosophy-card h4 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .philosophy-card p { font-size: 14px; color: rgba(255,255,255,0.45); margin: 0; line-height: 1.6; }
+
+  /* FOOTER */
+  footer { padding: 48px 32px; border-top: 1px solid var(--border); }
+  .footer-inner {
+    max-width: var(--max-w); margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-company { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .footer-info { font-size: 13px; color: var(--text-med); line-height: 1.8; }
+  .footer-mail { font-size: 15px; font-weight: 600; color: var(--blue); }
+
+  /* ANIMATIONS */
+  .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero .container { flex-direction: column; }
+    .hero-visual { width: 100%; }
+    .biz-grid { grid-template-columns: 1fr; }
+    .ch-grid { grid-template-columns: 1fr; }
+    .process-grid { grid-template-columns: 1fr; }
+    .philosophy-grid { grid-template-columns: 1fr; }
+    .nav-links, .nav-contact { display: none; }
+    .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
+    .partners-row { gap: 28px; }
+    .hero-grid { grid-template-columns: 1fr 1fr; }
+    .hero-grid-large { grid-row: auto; }
+    .hero-grid-large img, .hero-grid img { height: 120px !important; border-radius: 8px !important; }
+    section { padding: 80px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-inner">
+    <div class="nav-logo"><img src="assets/flowmus-logo.png" alt="플로우머스" style="height: 28px; display: inline-block; vertical-align: middle; margin-right: 6px;"><span>FLOW</span>MUS</div>
+    <div class="nav-links">
+      <a href="#business">사업 영역</a>
+      <a href="#channels">채널</a>
+      <a href="#portfolio">포트폴리오</a>
+      <a href="#process">프로세스</a>
+    </div>
+    <a href="mailto:ceo@flowmus.com" class="nav-contact">문의하기</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-text">
+      <div class="hero-tag">IT Media Company</div>
+      <h1>사람을 모으고,<br>콘텐츠로 연결합니다.</h1>
+      <p>유튜브 채널 네트워크를 기반으로 출판, 강의, 사주 플랫폼까지 운영하는 IT 미디어 기업입니다.</p>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-num">47.9만</div>
+          <div class="hero-stat-unit">총 구독자</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">1.6억</div>
+          <div class="hero-stat-unit">총 조회수</div>
+        </div>
+        <div>
+          <div class="hero-stat-num">1,362</div>
+          <div class="hero-stat-unit">총 영상</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-grid">
+        <div class="hero-grid-item hero-grid-large">
+          <img src="https://i.ytimg.com/vi/VKTCh4CWVq4/maxresdefault.jpg" alt="사찍남 대표 영상">
+        </div>
+        <div class="hero-grid-item">
+          <img src="https://i.ytimg.com/vi/HTXSXYC5Jec/maxresdefault.jpg" alt="머니로드 영상">
+        </div>
+        <div class="hero-grid-item">
+          <img src="https://i.ytimg.com/vi/M0nYqv_SFJI/maxresdefault.jpg" alt="타이탄클래스 영상">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section style="padding: 60px 32px; border-bottom: 1px solid var(--border);">
+  <div class="container">
+    <p style="text-align: center; font-size: 13px; color: var(--text-low); margin-bottom: 32px;">협업 강의 플랫폼</p>
+    <div class="partners-row">
+      <div class="partner-item">
+        <div class="partner-name">타이탄클래스</div>
+        <div class="partner-desc">강의 플랫폼</div>
+      </div>
+      <div class="partner-item">
+        <div class="partner-name">인베이더스쿨</div>
+        <div class="partner-desc">강의 플랫폼</div>
+      </div>
+      <div class="partner-item">
+        <div class="partner-name">피크닉</div>
+        <div class="partner-desc">강의 플랫폼</div>
+      </div>
+      <div class="partner-item">
+        <div class="partner-name">101클래스</div>
+        <div class="partner-desc">강의 플랫폼</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUSINESS -->
+<section id="business">
+  <div class="container">
+    <div class="section-label">Business</div>
+    <div class="section-title">4가지 사업 영역</div>
+    <div class="section-desc">유튜브 채널에서 시작해, 콘텐츠가 만드는 모든 비즈니스를 연결합니다.</div>
+
+    <div class="biz-grid">
+      <div class="biz-card fade-up">
+        <div class="biz-badge" style="background: var(--blue-light); color: var(--blue);">MCN</div>
+        <h3>유튜브 채널 네트워크</h3>
+        <p>자체 채널과 협업 채널 운영. 기획부터 촬영, 편집, 업로드, 쇼츠, DM 마케팅까지 원스톱 제작. 카페 · 블로그 대량 마케팅으로 검색 유입까지 잡습니다.</p>
+        <div class="biz-tags">
+          <span class="tag">기획</span><span class="tag">촬영</span><span class="tag">편집</span>
+          <span class="tag">쇼츠</span><span class="tag">DM 마케팅</span>
+          <span class="tag">카페 마케팅</span><span class="tag">블로그 SEO</span>
+        </div>
+      </div>
+      <div class="biz-card fade-up">
+        <div class="biz-badge" style="background: var(--green-light); color: var(--green);">강의플랫폼</div>
+        <h3>온라인 클래스</h3>
+        <p>유튜브에 출연한 전문가들의 강의를 제작하고 판매합니다. 타이탄클래스, 인베이더스쿨, 피크닉, 101클래스 등 주요 플랫폼과 협업합니다.</p>
+        <div class="biz-tags">
+          <span class="tag">강의 제작</span><span class="tag">수익 공유 (RS)</span><span class="tag">UTM 성과 추적</span>
+        </div>
+      </div>
+      <div class="biz-card fade-up">
+        <div class="biz-badge" style="background: var(--orange-light); color: var(--orange);">플로우북스</div>
+        <h3>출판 사업</h3>
+        <p>유튜브 출연자들의 이야기를 책으로 만드는 출판 임프린트. 영상 콘텐츠에서 출발해 출판, 강연까지 확장하는 IP 비즈니스입니다.</p>
+        <div class="biz-tags">
+          <span class="tag">기획출판</span><span class="tag">출연자 IP</span><span class="tag">강연 연계</span>
+        </div>
+      </div>
+      <div class="biz-card fade-up">
+        <div class="biz-badge" style="background: var(--purple-light); color: var(--purple);">사주플랫폼 · 런칭 준비 중</div>
+        <h3>100원사주</h3>
+        <p>1983년 정통 명리 기반의 사주 · 운세 플랫폼. 100원으로 재물운, 연애운, 오늘의 운세를 즉시 확인할 수 있는 서비스를 준비하고 있습니다.</p>
+        <div class="biz-tags">
+          <span class="tag">재물운</span><span class="tag">연애운</span><span class="tag">궁합</span><span class="tag">오늘의 운세</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHANNELS -->
+<section class="channels-bg" id="channels">
+  <div class="container">
+    <div class="section-label">Channel Network</div>
+    <div class="section-title">유튜브 채널 네트워크</div>
+    <div class="section-desc">자체 채널과 협업 채널을 함께 운영하며,<br>기업 CEO 유튜브 채널까지 관리합니다.</div>
+
+    <div class="ch-group">
+      <div class="ch-group-label">자체 채널</div>
+      <div class="ch-grid">
+        <div class="ch-card fade-up">
+          <img class="ch-thumb" src="https://i.ytimg.com/vi/5bDYpdRrvEM/maxresdefault.jpg" alt="사찍남">
+          <div class="ch-info">
+            <div class="ch-badge ch-badge-own">자체 운영</div>
+            <div class="ch-name">사찍남</div>
+            <div class="ch-subs">14.4만</div>
+            <div class="ch-desc">비즈니스 / 창업 / 인터뷰</div>
+          </div>
+        </div>
+        <div class="ch-card fade-up">
+          <div style="height: 160px; display: flex; align-items: center; justify-content: center; background: #fff; border-bottom: 1px solid rgba(255,255,255,0.06);">
+            <img src="assets/프로필 이미지2.png" alt="부업클래스" style="height: 80px; object-fit: contain;">
+          </div>
+          <div class="ch-info">
+            <div class="ch-badge ch-badge-own">자체 운영</div>
+            <div class="ch-name">부업클래스</div>
+            <div class="ch-subs">성장 중</div>
+            <div class="ch-desc">부업 / 사이드프로젝트</div>
+          </div>
+        </div>
+        <div class="ch-card fade-up" style="border-style: dashed; background: rgba(255,255,255,0.02);">
+          <div style="height: 160px; display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.15); font-size: 48px; font-weight: 200;">+</div>
+          <div class="ch-info">
+            <div class="ch-badge" style="background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.3);">준비 중</div>
+            <div class="ch-name" style="color: rgba(255,255,255,0.3);">추가 채널</div>
+            <div class="ch-desc">확장 예정</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ch-group">
+      <div class="ch-group-label">협업 채널</div>
+      <div class="ch-grid">
+        <div class="ch-card fade-up">
+          <img class="ch-thumb" src="https://i.ytimg.com/vi/HTXSXYC5Jec/maxresdefault.jpg" alt="머니로드">
+          <div class="ch-info">
+            <div class="ch-badge ch-badge-collab">협업</div>
+            <div class="ch-name">머니로드</div>
+            <div class="ch-subs">21.6만</div>
+            <div class="ch-desc">재테크 / 투자</div>
+          </div>
+        </div>
+        <div class="ch-card fade-up">
+          <img class="ch-thumb" src="https://i.ytimg.com/vi/RJVSGqN-6zg/maxresdefault.jpg" alt="현장속으로">
+          <div class="ch-info">
+            <div class="ch-badge ch-badge-collab">협업</div>
+            <div class="ch-name">현장속으로</div>
+            <div class="ch-subs">11.9만</div>
+            <div class="ch-desc">현장밀착 / 다큐</div>
+          </div>
+        </div>
+        <div class="ch-card fade-up">
+          <img class="ch-thumb" src="https://i.ytimg.com/vi/Rm8n551uu80/maxresdefault.jpg" alt="기업CEO채널">
+          <div class="ch-info">
+            <div class="ch-badge ch-badge-collab">협업</div>
+            <div class="ch-name">기업 CEO 채널</div>
+            <div class="ch-subs">관리 중</div>
+            <div class="ch-desc">기업 대표 유튜브 운영 대행</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="container">
+    <div class="section-label">Portfolio</div>
+    <div class="section-title">검증된 성과</div>
+    <div class="section-desc">유튜브 콘텐츠 하나가 강의 플랫폼에서 수십억 매출로 이어집니다.</div>
+
+    <div class="portfolio-scroll">
+      <div class="pf-card fade-up">
+        <img class="pf-thumb" src="https://i.ytimg.com/vi/M0nYqv_SFJI/maxresdefault.jpg" alt="디지털농사꾼">
+        <div class="pf-body">
+          <div class="pf-platform" style="background: var(--orange-light); color: var(--orange);">타이탄클래스</div>
+          <div class="pf-title">블로그로 17억 모은<br>92년생 디지털농사꾼</div>
+          <div class="pf-metrics">
+            <div><div class="pf-val" style="color: var(--blue);">144만</div><div class="pf-lbl">조회수</div></div>
+            <div><div class="pf-val" style="color: var(--orange);">10억+</div><div class="pf-lbl">강의 매출</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pf-card fade-up">
+        <img class="pf-thumb" src="https://i.ytimg.com/vi/VKTCh4CWVq4/maxresdefault.jpg" alt="19살 사업가">
+        <div class="pf-body">
+          <div class="pf-platform" style="background: var(--blue-light); color: var(--blue);">사찍남</div>
+          <div class="pf-title">고등학교 다니면서 월 1200만원<br>버는 19살</div>
+          <div class="pf-metrics">
+            <div><div class="pf-val" style="color: var(--blue);">177만</div><div class="pf-lbl">조회수</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pf-card fade-up">
+        <img class="pf-thumb" src="https://i.ytimg.com/vi/HTXSXYC5Jec/maxresdefault.jpg" alt="폰케이스 대표">
+        <div class="pf-body">
+          <div class="pf-platform" style="background: var(--green-light); color: var(--green);">머니로드</div>
+          <div class="pf-title">전재산 12만원으로 시작해<br>연매출 250억</div>
+          <div class="pf-metrics">
+            <div><div class="pf-val" style="color: var(--blue);">141만</div><div class="pf-lbl">조회수</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pf-card fade-up">
+        <img class="pf-thumb" src="https://i.ytimg.com/vi/5bDYpdRrvEM/maxresdefault.jpg" alt="백반집 25살">
+        <div class="pf-body">
+          <div class="pf-platform" style="background: var(--blue-light); color: var(--blue);">사찍남</div>
+          <div class="pf-title">3900만원에 백반집 인수해서<br>하루 300만원 파는 25살</div>
+          <div class="pf-metrics">
+            <div><div class="pf-val" style="color: var(--blue);">93만</div><div class="pf-lbl">조회수</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="pf-card fade-up">
+        <img class="pf-thumb" src="https://i.ytimg.com/vi/o0WDWUUNxow/maxresdefault.jpg" alt="연매출 120억">
+        <div class="pf-body">
+          <div class="pf-platform" style="background: var(--green-light); color: var(--green);">머니로드</div>
+          <div class="pf-title">전재산 사기 당하고 시작한 부업으로<br>연매출 120억</div>
+          <div class="pf-metrics">
+            <div><div class="pf-val" style="color: var(--blue);">127만</div><div class="pf-lbl">조회수</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-bg" id="process">
+  <div class="container">
+    <div class="section-label">How We Work</div>
+    <div class="section-title">원스톱 콘텐츠 제작</div>
+    <div class="section-desc">출연자는 줌 미팅 한 번만 참여하시면 됩니다.<br>기획부터 마케팅까지 전부 저희가 합니다.</div>
+
+    <div class="process-flow">
+      <div class="process-step active">줌 미팅</div>
+      <div class="process-arrow">&rarr;</div>
+      <div class="process-step">SEO 기획</div>
+      <div class="process-arrow">&rarr;</div>
+      <div class="process-step">촬영</div>
+      <div class="process-arrow">&rarr;</div>
+      <div class="process-step">편집</div>
+      <div class="process-arrow">&rarr;</div>
+      <div class="process-step">업로드</div>
+      <div class="process-arrow">&rarr;</div>
+      <div class="process-step">쇼츠 4~5개</div>
+      <div class="process-arrow">&rarr;</div>
+      <div class="process-step">DM · 카페 · 블로그</div>
+    </div>
+
+    <div class="process-grid">
+      <div class="process-card fade-up">
+        <span class="process-icon">&#127909;</span>
+        <h4>유튜브 콘텐츠</h4>
+        <p>롱폼 본편 + 쇼츠 4~5개 동시 제작. PD + 촬영감독 최소 2인 체제.</p>
+      </div>
+      <div class="process-card fade-up">
+        <span class="process-icon">&#128227;</span>
+        <h4>다채널 마케팅</h4>
+        <p>DM 마케팅, 카페 대량 포스팅, 블로그 SEO 배포로 검색 유입 극대화.</p>
+      </div>
+      <div class="process-card fade-up">
+        <span class="process-icon">&#128200;</span>
+        <h4>성과 기반 협업</h4>
+        <p>UTM 기반 클릭~결제 추적. 데이터로 판단하고, 데이터로 개선합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy-section" id="philosophy">
+  <div class="container">
+    <div class="section-label">Philosophy</div>
+    <div class="philosophy-quote">
+      "사람을 모으고,<br>그 사람의 이야기를 콘텐츠로 만든다"
+    </div>
+    <div class="philosophy-sub">유튜브 채널이 입구이고, 출판 · 강의 · 플랫폼이 출구입니다.</div>
+
+    <div class="philosophy-grid">
+      <div class="philosophy-card fade-up">
+        <h4>사람이 먼저</h4>
+        <p>재미있는 사람을 찾고, 그 사람의 진짜 이야기를 끌어냅니다. 기술보다 사람, 트렌드보다 진정성.</p>
+      </div>
+      <div class="philosophy-card fade-up">
+        <h4>하나의 콘텐츠, 여러 비즈니스</h4>
+        <p>영상 하나가 유튜브에서 끝나지 않습니다. 강의, 책, 플랫폼으로 확장해 출연자와 함께 성장합니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OFFICE -->
+<section id="office" style="padding: 80px 32px; background: var(--surface);">
+  <div class="container" style="text-align: center;">
+    <div class="section-label">Office</div>
+    <div class="section-title" style="margin-bottom: 12px;">오시는 길</div>
+    <p style="font-size: 17px; color: var(--text-med); margin-bottom: 40px;">서울 서초구 서초대로 398 · 패스트파이브 서초점</p>
+    <div style="border-radius: 16px; overflow: hidden; border: 1px solid var(--border); max-width: 800px; margin: 0 auto;">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3165.5!2d127.0075!3d37.4925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca15a1a2b6d9b%3A0x!2z7ISc7LSI6rWs7ISc7LSI64yA66GcMzk4!5e0!3m2!1sko!2skr!4v1" width="100%" height="320" style="border:0; display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <div style="margin-top: 24px; display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;">
+      <div style="font-size: 14px; color: var(--text-med);">
+        <strong style="color: var(--navy);">지하철</strong>&nbsp; 2호선 서초역 3번 출구 도보 3분
+      </div>
+      <div style="font-size: 14px; color: var(--text-med);">
+        <strong style="color: var(--navy);">주차</strong>&nbsp; 건물 내 주차 가능
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-company"><img src="assets/flowmus-logo.png" alt="" style="height: 20px; display: inline-block; vertical-align: middle; margin-right: 6px;">(주) 플로우머스</div>
+      <div class="footer-info">서울 서초구 서초대로 398 · 패스트파이브 서초점</div>
+      <div class="footer-info">MCN · 플로우북스 · 사주플랫폼 · 강의플랫폼</div>
+    </div>
+    <div style="text-align: right;">
+      <a href="mailto:ceo@flowmus.com" class="footer-mail">ceo@flowmus.com</a>
+      <div class="footer-info">flowmus.com</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 10));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
