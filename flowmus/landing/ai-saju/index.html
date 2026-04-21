@@ -234,6 +234,30 @@
   .form-btn:hover { background: var(--purple-dark); }
   .form-btn:disabled { background: var(--text-low); cursor: not-allowed; box-shadow: none; }
 
+  .consent-label {
+    display: flex; align-items: flex-start; gap: 8px; cursor: pointer;
+  }
+  .consent-label input[type="checkbox"] {
+    width: 18px; height: 18px; margin-top: 2px; flex-shrink: 0;
+    accent-color: var(--purple); cursor: pointer;
+  }
+  .consent-text {
+    font-size: 13px; color: var(--text); line-height: 1.5;
+  }
+  .consent-toggle {
+    background: none; border: none; color: var(--purple);
+    font-size: 12px; cursor: pointer; padding: 0; margin-left: 4px;
+    text-decoration: underline;
+  }
+  .consent-detail {
+    display: none; margin-top: 10px; padding: 14px 16px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; font-size: 12px; color: var(--text-med);
+    line-height: 1.7;
+  }
+  .consent-detail.show { display: block; }
+  .consent-detail p { margin-bottom: 2px; }
+
   .form-note {
     font-size: 12px; color: var(--text-low); text-align: center;
     margin-top: 12px;
@@ -453,8 +477,22 @@
             <option value="기타">기타</option>
           </select>
         </div>
+        <div class="form-group" style="margin-top: 20px;">
+          <label class="consent-label">
+            <input type="checkbox" id="consent" name="consent" required>
+            <span class="consent-text">
+              <strong>[필수]</strong> 개인정보 수집·이용에 동의합니다
+              <button type="button" class="consent-toggle" onclick="toggleConsent()">(내용 보기)</button>
+            </span>
+          </label>
+          <div class="consent-detail" id="consentDetail">
+            <p><strong>수집 항목:</strong> 이름, 연락처, 이메일, 관심 분야</p>
+            <p><strong>수집 목적:</strong> 강의 상담 안내 및 관련 정보 제공</p>
+            <p><strong>보유 기간:</strong> 수집일로부터 1년 (이후 즉시 파기)</p>
+            <p>동의를 거부할 수 있으며, 거부 시 상담 신청이 제한됩니다.</p>
+          </div>
+        </div>
         <button type="submit" class="form-btn" id="submitBtn">무료 상담 신청하기</button>
-        <p class="form-note">입력하신 정보는 상담 안내 목적으로만 사용됩니다</p>
       </form>
 
       <div class="form-success" id="formSuccess">
@@ -489,6 +527,11 @@
 </div>
 
 <script>
+  // ── 개인정보 동의 토글 ──
+  function toggleConsent() {
+    document.getElementById('consentDetail').classList.toggle('show');
+  }
+
   // ── UTM 파라미터 자동 수집 ──
   const params = new URLSearchParams(window.location.search);
   ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'].forEach(key => {
