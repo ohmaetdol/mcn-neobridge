@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 사주 사업, 월 매출 2억의 비밀 — 무료 상담 신청</title>
+<meta name="description" content="3900원짜리 AI 사주로 월 매출 2억. 이 사업의 비밀이 궁금하다면, 무료 상담을 신청하세요.">
+<meta property="og:title" content="AI 사주 사업, 월 매출 2억의 비밀">
+<meta property="og:description" content="3900원짜리 AI 사주로 월 매출 2억을 만드는 방법을 알려드립니다.">
+<meta property="og:image" content="https://i.ytimg.com/vi/uNrjjUoOGGQ/maxresdefault.jpg">
+<meta property="og:type" content="website">
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --navy: #0f1419;
+    --purple: #7c3aed;
+    --purple-dark: #6d28d9;
+    --purple-light: rgba(124,58,237,0.08);
+    --gold: #f59e0b;
+    --text: #1a1d23;
+    --text-med: #64748b;
+    --text-low: #94a3b8;
+    --border: #e2e8f0;
+    --surface: #f8fafc;
+    --green: #16a34a;
+  }
+  html { font-size: 16px; scroll-behavior: smooth; }
+  body {
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    color: var(--text); background: #fff; line-height: 1.7;
+  }
+  a { color: inherit; text-decoration: none; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh; display: flex; align-items: center;
+    background: linear-gradient(160deg, #0f0a1a 0%, #1a1030 50%, #0f0a1a 100%);
+    color: #fff; padding: 60px 24px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -50%; right: -20%;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(124,58,237,0.15), transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 1000px; margin: 0 auto; width: 100%;
+    display: flex; gap: 48px; align-items: center;
+    position: relative; z-index: 1;
+  }
+  .hero-text { flex: 1; }
+  .hero-visual { flex: 1; }
+
+  .hero-badge {
+    display: inline-block; font-size: 13px; font-weight: 600;
+    padding: 6px 14px; border-radius: 100px; margin-bottom: 20px;
+    background: rgba(124,58,237,0.25); color: #c4b5fd;
+  }
+  .hero h1 {
+    font-size: clamp(24px, 5vw, 38px); font-weight: 800;
+    line-height: 1.3; letter-spacing: -0.03em; margin-bottom: 16px;
+  }
+  .hero h1 .highlight { color: var(--gold); }
+  .hero h1 .num { color: #c4b5fd; }
+  .hero-desc {
+    font-size: 16px; color: rgba(255,255,255,0.6); line-height: 1.7;
+    margin-bottom: 32px; max-width: 420px;
+  }
+  .hero-stats { display: flex; gap: 28px; margin-bottom: 32px; }
+  .hero-stat-num { font-size: 28px; font-weight: 800; }
+  .hero-stat-label { font-size: 12px; color: rgba(255,255,255,0.4); }
+  .hero-stat-num.gold { color: var(--gold); }
+
+  .hero-cta {
+    display: inline-block; background: var(--purple); color: #fff;
+    padding: 16px 36px; border-radius: 12px; font-weight: 700;
+    font-size: 16px; transition: all 0.2s; box-shadow: 0 4px 20px rgba(124,58,237,0.3);
+  }
+  .hero-cta:hover { background: var(--purple-dark); transform: translateY(-1px); }
+
+  /* ── THUMBNAIL ── */
+  .thumb-wrap {
+    position: relative; border-radius: 16px; overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    cursor: pointer;
+  }
+  .thumb-wrap img { width: 100%; display: block; }
+  .thumb-play {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 64px; height: 64px; border-radius: 50%;
+    background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    transition: transform 0.2s;
+  }
+  .thumb-wrap:hover .thumb-play { transform: translate(-50%, -50%) scale(1.1); }
+  .thumb-play::after {
+    content: ''; width: 0; height: 0;
+    border-top: 12px solid transparent; border-bottom: 12px solid transparent;
+    border-left: 20px solid var(--navy); margin-left: 4px;
+  }
+  .thumb-channel {
+    position: absolute; bottom: 12px; left: 12px;
+    background: rgba(0,0,0,0.75); color: #fff;
+    padding: 4px 12px; border-radius: 6px;
+    font-size: 12px; font-weight: 600;
+    backdrop-filter: blur(4px);
+  }
+
+  /* ── PAIN POINTS ── */
+  .pain {
+    padding: 80px 24px; background: var(--surface);
+    border-top: 1px solid var(--border);
+  }
+  .pain-inner { max-width: 700px; margin: 0 auto; text-align: center; }
+  .pain h2 {
+    font-size: 26px; font-weight: 800; margin-bottom: 12px;
+    color: var(--navy); letter-spacing: -0.02em;
+  }
+  .pain .sub { font-size: 15px; color: var(--text-med); margin-bottom: 40px; }
+  .pain-list {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    text-align: left;
+  }
+  .pain-item {
+    background: #fff; border: 1px solid var(--border); border-radius: 14px;
+    padding: 20px 24px; display: flex; align-items: flex-start; gap: 12px;
+  }
+  .pain-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+  .pain-item h4 { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+  .pain-item p { font-size: 13px; color: var(--text-med); margin: 0; }
+
+  /* ── VIDEO SECTION ── */
+  .video-section {
+    padding: 80px 24px; text-align: center;
+  }
+  .video-section h2 {
+    font-size: 26px; font-weight: 800; margin-bottom: 8px;
+    color: var(--navy); letter-spacing: -0.02em;
+  }
+  .video-section .sub {
+    font-size: 15px; color: var(--text-med); margin-bottom: 32px;
+  }
+  .video-embed {
+    max-width: 720px; margin: 0 auto; border-radius: 16px; overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+    aspect-ratio: 16/9;
+  }
+  .video-embed iframe { width: 100%; height: 100%; border: none; }
+
+  /* ── BENEFITS ── */
+  .benefits {
+    padding: 80px 24px; border-top: 1px solid var(--border);
+  }
+  .benefits-inner { max-width: 800px; margin: 0 auto; }
+  .benefits h2 {
+    font-size: 26px; font-weight: 800; text-align: center;
+    margin-bottom: 12px; color: var(--navy);
+  }
+  .benefits .sub {
+    font-size: 15px; color: var(--text-med); text-align: center;
+    margin-bottom: 40px;
+  }
+  .benefits-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+  }
+  .benefit-card {
+    border: 1px solid var(--border); border-radius: 14px;
+    padding: 28px 20px; text-align: center;
+    transition: all 0.2s;
+  }
+  .benefit-card:hover { border-color: var(--purple); transform: translateY(-2px); }
+  .benefit-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 14px; font-size: 24px;
+    background: var(--purple-light);
+  }
+  .benefit-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+  .benefit-card p { font-size: 13px; color: var(--text-med); margin: 0; line-height: 1.5; }
+
+  /* ── FORM SECTION ── */
+  .form-section {
+    padding: 80px 24px;
+    background: linear-gradient(180deg, #fff 0%, var(--surface) 100%);
+  }
+  .form-inner { max-width: 520px; margin: 0 auto; text-align: center; }
+  .form-section h2 {
+    font-size: 28px; font-weight: 800; letter-spacing: -0.02em;
+    margin-bottom: 8px; color: var(--navy);
+  }
+  .form-section .form-sub {
+    font-size: 15px; color: var(--text-med); margin-bottom: 36px;
+  }
+
+  .form-box {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 16px; padding: 32px;
+    text-align: left; box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+  }
+  .form-group { margin-bottom: 16px; }
+  .form-label {
+    display: block; font-size: 13px; font-weight: 600;
+    color: var(--text); margin-bottom: 6px;
+  }
+  .form-input {
+    width: 100%; padding: 14px 16px; border: 1px solid var(--border);
+    border-radius: 10px; font-size: 15px; font-family: 'Pretendard', sans-serif;
+    background: #fff; color: var(--text); outline: none;
+    transition: border-color 0.2s;
+  }
+  .form-input:focus { border-color: var(--purple); }
+  .form-input::placeholder { color: var(--text-low); }
+
+  .form-select {
+    width: 100%; padding: 14px 16px; border: 1px solid var(--border);
+    border-radius: 10px; font-size: 15px; font-family: 'Pretendard', sans-serif;
+    background: #fff; color: var(--text); outline: none;
+    appearance: none; cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: right 16px center;
+  }
+  .form-select:focus { border-color: var(--purple); }
+
+  .form-btn {
+    width: 100%; padding: 16px; border: none; border-radius: 10px;
+    background: var(--purple); color: #fff; font-size: 16px;
+    font-weight: 700; font-family: 'Pretendard', sans-serif;
+    cursor: pointer; transition: all 0.2s;
+    margin-top: 8px;
+    box-shadow: 0 4px 16px rgba(124,58,237,0.25);
+  }
+  .form-btn:hover { background: var(--purple-dark); }
+  .form-btn:disabled { background: var(--text-low); cursor: not-allowed; box-shadow: none; }
+
+  .form-note {
+    font-size: 12px; color: var(--text-low); text-align: center;
+    margin-top: 12px;
+  }
+
+  /* ── SUCCESS ── */
+  .form-success {
+    display: none; text-align: center; padding: 40px 20px;
+  }
+  .form-success.show { display: block; }
+  .form-success-icon {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: rgba(22,163,74,0.1); display: flex;
+    align-items: center; justify-content: center;
+    margin: 0 auto 16px; font-size: 28px; color: var(--green);
+  }
+  .form-success h3 { font-size: 22px; font-weight: 800; margin-bottom: 8px; color: var(--navy); }
+  .form-success p { font-size: 14px; color: var(--text-med); line-height: 1.6; margin-bottom: 20px; }
+  .kakao-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #FEE500; color: #191919; padding: 14px 32px;
+    border-radius: 10px; font-weight: 700; font-size: 15px;
+    transition: all 0.2s; border: none; cursor: pointer;
+    text-decoration: none;
+  }
+  .kakao-btn:hover { background: #f5dc00; transform: translateY(-1px); }
+  .kakao-btn svg { width: 20px; height: 20px; }
+
+  /* ── TRUST ── */
+  .trust {
+    padding: 40px 24px; text-align: center;
+    border-top: 1px solid var(--border); background: var(--surface);
+  }
+  .trust p { font-size: 13px; color: var(--text-low); margin-bottom: 12px; }
+  .trust-channels {
+    display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;
+  }
+  .trust-item { font-size: 14px; font-weight: 700; color: var(--text-med); }
+  .trust-item span { color: var(--purple); }
+
+  /* ── FOOTER ── */
+  .landing-footer {
+    padding: 32px 24px; text-align: center;
+    border-top: 1px solid var(--border);
+  }
+  .landing-footer p { font-size: 12px; color: var(--text-low); }
+
+  /* ── FLOATING CTA (Mobile) ── */
+  .floating-cta {
+    display: none; position: fixed; bottom: 0; left: 0; right: 0;
+    padding: 12px 20px; background: #fff;
+    border-top: 1px solid var(--border);
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+    z-index: 100;
+  }
+  .floating-cta a {
+    display: block; background: var(--purple); color: #fff;
+    text-align: center; padding: 14px; border-radius: 10px;
+    font-weight: 700; font-size: 15px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .hero { padding: 40px 20px; min-height: auto; }
+    .hero-inner { flex-direction: column; gap: 32px; }
+    .hero h1 { font-size: 26px; }
+    .hero-stats { gap: 20px; }
+    .hero-stat-num { font-size: 22px; }
+    .pain-list { grid-template-columns: 1fr; }
+    .form-box { padding: 24px; }
+    .benefits-grid { grid-template-columns: 1fr; }
+    .thumb-play { width: 48px; height: 48px; }
+    .thumb-play::after { border-top: 8px solid transparent; border-bottom: 8px solid transparent; border-left: 14px solid var(--navy); }
+    .floating-cta { display: block; }
+    body { padding-bottom: 72px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-badge">사찍남 채널 출연 영상</div>
+      <h1>
+        <span class="num">3,900원</span>짜리 AI 사주가<br>
+        <span class="highlight">월 매출 2억</span>을 만드는 비밀
+      </h1>
+      <p class="hero-desc">
+        AI 사주 플랫폼으로 실제 월 매출 2억을 달성한 사업의 핵심 전략.
+        영상에서 다 담지 못한 이야기를 직접 들어보세요.
+      </p>
+      <div class="hero-stats">
+        <div><div class="hero-stat-num gold">2억</div><div class="hero-stat-label">월 매출</div></div>
+        <div><div class="hero-stat-num">3,900원</div><div class="hero-stat-label">서비스 단가</div></div>
+        <div><div class="hero-stat-num">AI</div><div class="hero-stat-label">핵심 기술</div></div>
+      </div>
+      <a href="#form" class="hero-cta">무료 상담 신청하기</a>
+    </div>
+    <div class="hero-visual">
+      <a href="https://www.youtube.com/watch?v=uNrjjUoOGGQ" target="_blank" rel="noopener" class="thumb-wrap">
+        <img src="https://i.ytimg.com/vi/uNrjjUoOGGQ/maxresdefault.jpg" alt="3900원짜리 AI 사주인데 왜 월 매출이 2억이에요? 영상 썸네일">
+        <div class="thumb-play"></div>
+        <div class="thumb-channel">사장찍어주는남자</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── PAIN POINTS ── -->
+<section class="pain">
+  <div class="pain-inner">
+    <h2>이런 고민을 하고 계신가요?</h2>
+    <p class="sub">AI 사업에 관심은 있지만 어디서부터 시작해야 할지 모르겠다면</p>
+    <div class="pain-list">
+      <div class="pain-item">
+        <div class="pain-icon">&#128161;</div>
+        <div>
+          <h4>AI로 사업하고 싶은데</h4>
+          <p>구체적으로 뭘 해야 하는지 감이 안 잡힌다</p>
+        </div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-icon">&#128200;</div>
+        <div>
+          <h4>소자본으로 시작하고 싶은데</h4>
+          <p>정말 적은 돈으로 매출을 낼 수 있을까?</p>
+        </div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-icon">&#129302;</div>
+        <div>
+          <h4>사주/운세 시장이 궁금한데</h4>
+          <p>AI를 어떻게 접목하는지 모르겠다</p>
+        </div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-icon">&#127919;</div>
+        <div>
+          <h4>실제 성공 사례를 보고 싶은데</h4>
+          <p>월 2억 매출의 구조가 궁금하다</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── VIDEO ── -->
+<section class="video-section" id="video">
+  <h2>먼저 영상을 확인해보세요</h2>
+  <p class="sub">사찍남 채널에서 공개된 AI 사주 사업의 실제 이야기</p>
+  <div class="video-embed">
+    <iframe src="https://www.youtube.com/embed/uNrjjUoOGGQ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="3900원짜리 AI 사주인데 왜 월 매출이 2억이에요?"></iframe>
+  </div>
+</section>
+
+<!-- ── BENEFITS ── -->
+<section class="benefits">
+  <div class="benefits-inner">
+    <h2>상담 신청하시면</h2>
+    <p class="sub">영상에서 다루지 못한 핵심 내용을 직접 알려드립니다</p>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon">&#128218;</div>
+        <h4>사업 모델 상세 분석</h4>
+        <p>3,900원 단가로 월 2억을 만드는 매출 구조와 핵심 지표</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">&#129520;</div>
+        <h4>AI 기술 활용법</h4>
+        <p>사주/운세 AI를 만들고 서비스화하는 구체적인 방법</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">&#128176;</div>
+        <h4>창업 로드맵</h4>
+        <p>소자본으로 시작해서 수익화까지 단계별 가이드</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FORM ── -->
+<section class="form-section" id="form">
+  <div class="form-inner">
+    <h2>무료 상담 신청</h2>
+    <p class="form-sub">아래 정보를 남겨주시면 자세한 안내를 보내드립니다</p>
+
+    <div class="form-box">
+      <form id="leadForm" onsubmit="return submitForm(event)">
+        <input type="hidden" id="utm_source" name="utm_source">
+        <input type="hidden" id="utm_medium" name="utm_medium">
+        <input type="hidden" id="utm_campaign" name="utm_campaign">
+        <input type="hidden" id="utm_content" name="utm_content">
+        <input type="hidden" name="video_id" value="uNrjjUoOGGQ">
+
+        <div class="form-group">
+          <label class="form-label" for="name">이름</label>
+          <input type="text" class="form-input" id="name" name="name" placeholder="홍길동" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="phone">연락처</label>
+          <input type="tel" class="form-input" id="phone" name="phone" placeholder="010-0000-0000" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="email">이메일</label>
+          <input type="email" class="form-input" id="email" name="email" placeholder="example@email.com" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="interest">관심 분야</label>
+          <select class="form-select" id="interest" name="interest" required>
+            <option value="" disabled selected>선택해주세요</option>
+            <option value="AI 사주/운세 사업">AI 사주/운세 사업</option>
+            <option value="AI 활용 창업 전반">AI 활용 창업 전반</option>
+            <option value="소자본 온라인 사업">소자본 온라인 사업</option>
+            <option value="사업 모델 컨설팅">사업 모델 컨설팅</option>
+            <option value="기타">기타</option>
+          </select>
+        </div>
+        <button type="submit" class="form-btn" id="submitBtn">무료 상담 신청하기</button>
+        <p class="form-note">입력하신 정보는 상담 안내 목적으로만 사용됩니다</p>
+      </form>
+
+      <div class="form-success" id="formSuccess">
+        <div class="form-success-icon">&#10003;</div>
+        <h3>신청이 완료되었습니다!</h3>
+        <p>카카오톡 오픈채팅방에서<br>더 자세한 이야기를 나눠보세요</p>
+        <a href="https://open.kakao.com/o/gn495Aoi" target="_blank" rel="noopener" class="kakao-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.48 3 2 6.58 2 10.9c0 2.78 1.86 5.21 4.65 6.6-.2.73-.73 2.64-.84 3.05-.13.5.18.49.39.36.16-.1 2.59-1.76 3.63-2.47.7.1 1.43.16 2.17.16 5.52 0 10-3.58 10-7.9S17.52 3 12 3z"/></svg>
+          카카오톡 오픈채팅 참여하기
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TRUST ── -->
+<section class="trust">
+  <p>플로우머스가 운영하는 유튜브 채널</p>
+  <div class="trust-channels">
+    <div class="trust-item">사찍남 <span>14.4만</span></div>
+    <div class="trust-item">머니로드 <span>21.6만</span></div>
+    <div class="trust-item">현장속으로 <span>11.9만</span></div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="landing-footer">
+  <p>(주) 플로우머스 &nbsp;|&nbsp; 서울 서초구 서초대로 398 &nbsp;|&nbsp; ceo@flowmus.com</p>
+</footer>
+
+<!-- ── FLOATING CTA (Mobile) ── -->
+<div class="floating-cta">
+  <a href="#form">무료 상담 신청하기</a>
+</div>
+
+<script>
+  // ── UTM 파라미터 자동 수집 ──
+  const params = new URLSearchParams(window.location.search);
+  ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content'].forEach(key => {
+    const el = document.getElementById(key);
+    if (el && params.get(key)) el.value = params.get(key);
+  });
+
+  // ── Google Apps Script Web App URL (시트 연동용) ──
+  const FORM_ACTION = '';
+
+  // ── 폼 제출 ──
+  function submitForm(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.textContent = '전송 중...';
+
+    const form = document.getElementById('leadForm');
+    const data = new FormData(form);
+
+    if (FORM_ACTION) {
+      fetch(FORM_ACTION, {
+        method: 'POST',
+        body: data
+      }).then(() => showSuccess()).catch(() => showSuccess());
+    } else {
+      setTimeout(() => showSuccess(), 800);
+    }
+    return false;
+  }
+
+  function showSuccess() {
+    document.getElementById('leadForm').style.display = 'none';
+    document.getElementById('formSuccess').classList.add('show');
+  }
+
+  // ── 스크롤 시 floating CTA 표시 (폼 도달 전까지만) ──
+  const floatingCta = document.querySelector('.floating-cta');
+  if (floatingCta) {
+    const formSection = document.getElementById('form');
+    window.addEventListener('scroll', () => {
+      const formTop = formSection.getBoundingClientRect().top;
+      if (formTop < window.innerHeight) {
+        floatingCta.style.transform = 'translateY(100%)';
+        floatingCta.style.transition = 'transform 0.3s';
+      } else {
+        floatingCta.style.transform = 'translateY(0)';
+      }
+    });
+  }
+</script>
+
+</body>
+</html>
