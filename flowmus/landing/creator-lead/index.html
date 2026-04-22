@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>크리에이터 리드 관리 — 내 DB는 내가 지킨다 | Flowmus</title>
+<meta name="description" content="강의플랫폼에 고객 DB를 뺏기지 마세요. 자체 랜딩페이지 + 구글시트 자동 수집. 세팅비 30만원부터.">
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --navy: #0f172a;
+    --navy-light: #1e293b;
+    --blue: #3b82f6;
+    --blue-dark: #2563eb;
+    --blue-light: rgba(59,130,246,0.08);
+    --red: #ef4444;
+    --green: #22c55e;
+    --gold: #f59e0b;
+    --text: #1a1d23;
+    --text-med: #64748b;
+    --text-low: #94a3b8;
+    --border: #e2e8f0;
+    --surface: #f8fafc;
+  }
+  html { font-size: 16px; scroll-behavior: smooth; }
+  body {
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    color: var(--text); background: #fff; line-height: 1.7;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; height: auto; display: block; }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--navy); color: #fff;
+    padding: 56px 20px 48px; text-align: center;
+  }
+  .hero-eyebrow {
+    display: inline-block; font-size: 12px; font-weight: 600;
+    padding: 5px 14px; border-radius: 100px; margin-bottom: 20px;
+    background: rgba(59,130,246,0.15); color: var(--blue);
+  }
+  .hero h1 {
+    font-size: 28px; font-weight: 800; line-height: 1.35;
+    letter-spacing: -0.03em; margin-bottom: 14px;
+  }
+  .hero h1 em {
+    font-style: normal; color: var(--red);
+    text-decoration: underline; text-decoration-color: rgba(239,68,68,0.3);
+    text-underline-offset: 4px;
+  }
+  .hero-sub {
+    font-size: 15px; color: rgba(255,255,255,0.6); line-height: 1.7;
+    margin-bottom: 28px; max-width: 400px; margin-left: auto; margin-right: auto;
+  }
+  .hero-cta {
+    display: inline-block; background: var(--blue); color: #fff;
+    padding: 14px 32px; border-radius: 10px; font-weight: 700;
+    font-size: 15px; box-shadow: 0 4px 16px rgba(59,130,246,0.3);
+  }
+
+  /* ── PROBLEM ── */
+  .problem { padding: 48px 20px; background: #fff; }
+  .section-label {
+    font-size: 11px; font-weight: 700; color: var(--blue);
+    text-transform: uppercase; letter-spacing: 0.08em;
+    text-align: center; margin-bottom: 8px;
+  }
+  .section-title {
+    font-size: 22px; font-weight: 800; text-align: center;
+    margin-bottom: 8px; color: var(--navy); letter-spacing: -0.02em;
+  }
+  .section-sub {
+    font-size: 13px; color: var(--text-med); text-align: center;
+    margin-bottom: 28px; line-height: 1.6;
+  }
+  .problem-list { display: flex; flex-direction: column; gap: 12px; max-width: 500px; margin: 0 auto; }
+  .problem-item {
+    background: #fff; border: 1px solid var(--border); border-radius: 12px;
+    padding: 16px; display: flex; align-items: flex-start; gap: 12px;
+  }
+  .problem-icon {
+    width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; background: rgba(239,68,68,0.08);
+  }
+  .problem-item h4 { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+  .problem-item p { font-size: 12px; color: var(--text-med); margin: 0; line-height: 1.5; }
+
+  /* ── FLOW DIAGRAM ── */
+  .flow { padding: 48px 20px; background: var(--surface); }
+  .flow-compare { display: flex; flex-direction: column; gap: 20px; max-width: 500px; margin: 0 auto; }
+  .flow-box {
+    border-radius: 14px; padding: 24px 20px; text-align: center;
+  }
+  .flow-box.before {
+    background: #fff; border: 2px solid var(--border);
+  }
+  .flow-box.after {
+    background: var(--navy); color: #fff; border: 2px solid var(--blue);
+  }
+  .flow-box-label {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.05em;
+    margin-bottom: 12px; display: inline-block;
+    padding: 3px 10px; border-radius: 100px;
+  }
+  .flow-box.before .flow-box-label { background: rgba(239,68,68,0.1); color: var(--red); }
+  .flow-box.after .flow-box-label { background: rgba(59,130,246,0.2); color: var(--blue); }
+  .flow-step {
+    font-size: 13px; padding: 8px 0;
+    border-bottom: 1px solid rgba(128,128,128,0.15);
+  }
+  .flow-step:last-child { border-bottom: none; }
+  .flow-step .arrow { color: var(--text-low); margin: 0 4px; }
+  .flow-box.after .flow-step .arrow { color: rgba(255,255,255,0.4); }
+  .flow-result {
+    margin-top: 12px; padding: 10px; border-radius: 8px;
+    font-size: 13px; font-weight: 700;
+  }
+  .flow-box.before .flow-result { background: rgba(239,68,68,0.06); color: var(--red); }
+  .flow-box.after .flow-result { background: rgba(34,197,94,0.15); color: var(--green); }
+
+  /* ── CASE STUDY ── */
+  .case { padding: 48px 20px; background: #fff; }
+  .case-card {
+    max-width: 500px; margin: 0 auto;
+    border: 1px solid var(--border); border-radius: 16px; overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+  }
+  .case-header {
+    background: var(--navy); color: #fff; padding: 20px;
+    text-align: center;
+  }
+  .case-header h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+  .case-header p { font-size: 12px; color: rgba(255,255,255,0.5); }
+  .case-body { padding: 20px; }
+  .case-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    margin-bottom: 16px;
+  }
+  .case-stat {
+    background: var(--surface); border-radius: 10px;
+    padding: 14px; text-align: center;
+  }
+  .case-stat-num { font-size: 20px; font-weight: 800; color: var(--navy); }
+  .case-stat-label { font-size: 11px; color: var(--text-med); margin-top: 2px; }
+  .case-features { display: flex; flex-direction: column; gap: 8px; }
+  .case-feature {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--text);
+  }
+  .case-check { color: var(--green); font-weight: 700; flex-shrink: 0; }
+  .case-link {
+    display: block; text-align: center; margin-top: 16px;
+    color: var(--blue); font-size: 13px; font-weight: 600;
+  }
+
+  /* ── FEATURES ── */
+  .features { padding: 48px 20px; background: var(--surface); }
+  .features-grid { display: flex; flex-direction: column; gap: 12px; max-width: 500px; margin: 0 auto; }
+  .feature-card {
+    background: #fff; border: 1px solid var(--border); border-radius: 12px;
+    padding: 18px; display: flex; align-items: flex-start; gap: 14px;
+  }
+  .feature-icon {
+    width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; background: var(--blue-light);
+  }
+  .feature-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+  .feature-card p { font-size: 12px; color: var(--text-med); margin: 0; line-height: 1.5; }
+
+  /* ── PRICING ── */
+  .pricing { padding: 48px 20px; background: #fff; }
+  .pricing-card {
+    max-width: 500px; margin: 0 auto;
+    border: 2px solid var(--blue); border-radius: 16px;
+    overflow: hidden;
+  }
+  .pricing-header {
+    background: var(--blue); color: #fff; padding: 20px;
+    text-align: center;
+  }
+  .pricing-header h3 { font-size: 18px; font-weight: 800; }
+  .pricing-header p { font-size: 13px; opacity: 0.8; margin-top: 4px; }
+  .pricing-body { padding: 24px 20px; }
+  .pricing-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 0; border-bottom: 1px solid var(--border);
+  }
+  .pricing-row:last-child { border-bottom: none; }
+  .pricing-label { font-size: 14px; font-weight: 600; }
+  .pricing-value { font-size: 14px; font-weight: 800; color: var(--navy); }
+  .pricing-note { font-size: 11px; color: var(--text-med); margin-top: 4px; }
+
+  .sim-title {
+    font-size: 14px; font-weight: 700; color: var(--navy);
+    margin: 24px 0 12px; text-align: center;
+  }
+  .sim-table {
+    width: 100%; border-collapse: collapse;
+    font-size: 13px; text-align: center;
+  }
+  .sim-table th {
+    background: var(--surface); padding: 10px 8px;
+    font-weight: 600; color: var(--text-med); font-size: 11px;
+    border-bottom: 1px solid var(--border);
+  }
+  .sim-table td {
+    padding: 10px 8px; border-bottom: 1px solid var(--border);
+  }
+  .sim-table td:last-child { font-weight: 700; color: var(--blue-dark); }
+
+  /* ── CTA ── */
+  .cta-section {
+    padding: 48px 20px; text-align: center;
+    background: var(--navy); color: #fff;
+  }
+  .cta-section h2 {
+    font-size: 22px; font-weight: 800; margin-bottom: 10px;
+  }
+  .cta-section p {
+    font-size: 14px; color: rgba(255,255,255,0.6); margin-bottom: 24px;
+    line-height: 1.6;
+  }
+  .cta-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #FEE500; color: #191919; padding: 14px 32px;
+    border-radius: 10px; font-weight: 700; font-size: 15px;
+  }
+  .cta-btn svg { width: 20px; height: 20px; }
+  .cta-sub {
+    font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 12px;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    padding: 24px 20px; text-align: center;
+    border-top: 1px solid var(--border); background: #fff;
+  }
+  .footer p { font-size: 11px; color: var(--text-low); }
+  .footer-brand { font-weight: 700; color: var(--blue); }
+
+  /* ── DESKTOP ── */
+  @media (min-width: 769px) {
+    .hero { padding: 80px 24px; }
+    .hero h1 { font-size: 38px; }
+    .hero-sub { font-size: 17px; }
+    .section-title { font-size: 28px; }
+    .flow-compare { flex-direction: row; max-width: 700px; }
+    .flow-box { flex: 1; }
+    .case-card { max-width: 560px; }
+    .features-grid { display: grid; grid-template-columns: 1fr 1fr; max-width: 700px; }
+    .pricing-card { max-width: 560px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-eyebrow">크리에이터 전용 서비스</div>
+  <h1>강의플랫폼에<br>고객 DB <em>뺏기고</em> 계신가요?</h1>
+  <p class="hero-sub">
+    내 영상에서 모은 고객인데, 정작 DB는 플랫폼 것.<br>
+    이제 내 고객은 내가 직접 관리하세요.
+  </p>
+  <a href="#contact" class="hero-cta">도입 문의하기</a>
+</section>
+
+<!-- ── PROBLEM ── -->
+<section class="problem">
+  <div class="section-label">Problem</div>
+  <h2 class="section-title">이런 경험, 있으시죠?</h2>
+  <p class="section-sub">강의를 팔수록 플랫폼만 배불러지는 구조</p>
+  <div class="problem-list">
+    <div class="problem-item">
+      <div class="problem-icon">&#128274;</div>
+      <div>
+        <h4>고객 DB가 플랫폼에 잠겨있다</h4>
+        <p>내 영상 보고 온 고객인데, 연락처도 못 가져온다</p>
+      </div>
+    </div>
+    <div class="problem-item">
+      <div class="problem-icon">&#128200;</div>
+      <div>
+        <h4>실제 유입 수를 검증할 수 없다</h4>
+        <p>"이번에 50명 왔어요" — 진짜인지 확인할 방법이 없다</p>
+      </div>
+    </div>
+    <div class="problem-item">
+      <div class="problem-icon">&#128176;</div>
+      <div>
+        <h4>정산할 때 불리하다</h4>
+        <p>플랫폼이 말하는 숫자를 그대로 믿어야 하는 구조</p>
+      </div>
+    </div>
+    <div class="problem-item">
+      <div class="problem-icon">&#128683;</div>
+      <div>
+        <h4>플랫폼 바꾸면 고객도 잃는다</h4>
+        <p>다른 플랫폼으로 이동하면 기존 고객 데이터 전부 사라짐</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FLOW DIAGRAM ── -->
+<section class="flow">
+  <div class="section-label">Solution</div>
+  <h2 class="section-title">구조를 바꾸면 됩니다</h2>
+  <p class="section-sub">내 영상 → 내 랜딩 → 내 DB → 그 다음 플랫폼</p>
+  <div class="flow-compare">
+    <div class="flow-box before">
+      <div class="flow-box-label">BEFORE</div>
+      <div class="flow-step">내 영상 <span class="arrow">&rarr;</span> 플랫폼 링크</div>
+      <div class="flow-step">고객 정보 <span class="arrow">&rarr;</span> 플랫폼 DB</div>
+      <div class="flow-step">정산 <span class="arrow">&rarr;</span> 플랫폼이 알려주는 숫자</div>
+      <div class="flow-result">DB 주권 = 플랫폼</div>
+    </div>
+    <div class="flow-box after">
+      <div class="flow-box-label">AFTER</div>
+      <div class="flow-step">내 영상 <span class="arrow">&rarr;</span> 내 랜딩페이지</div>
+      <div class="flow-step">고객 정보 <span class="arrow">&rarr;</span> 내 구글시트</div>
+      <div class="flow-step">자동 이동 <span class="arrow">&rarr;</span> 플랫폼 오픈채팅</div>
+      <div class="flow-result">DB 주권 = 나</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CASE STUDY ── -->
+<section class="case">
+  <div class="section-label">Case Study</div>
+  <h2 class="section-title">실제 운영 중인 레퍼런스</h2>
+  <p class="section-sub">AI사주 강의 랜딩페이지 — 현재 라이브 운영 중</p>
+  <div class="case-card">
+    <div class="case-header">
+      <h3>AI사주 당근마켓 + 자사몰 강의</h3>
+      <p>십억채널 &times; 사장찍어주는남자</p>
+    </div>
+    <div class="case-body">
+      <div class="case-stats">
+        <div class="case-stat">
+          <div class="case-stat-num">8.25억</div>
+          <div class="case-stat-label">6개월 매출</div>
+        </div>
+        <div class="case-stat">
+          <div class="case-stat-num">19,436</div>
+          <div class="case-stat-label">리뷰 수</div>
+        </div>
+      </div>
+      <div class="case-features">
+        <div class="case-feature"><span class="case-check">&#10003;</span> 상세페이지 이미지 + 영상 임베드</div>
+        <div class="case-feature"><span class="case-check">&#10003;</span> 실시간 마감 카운트다운</div>
+        <div class="case-feature"><span class="case-check">&#10003;</span> 폼 제출 &rarr; 구글시트 자동 저장</div>
+        <div class="case-feature"><span class="case-check">&#10003;</span> 제출 후 카카오톡 오픈채팅 자동 이동</div>
+        <div class="case-feature"><span class="case-check">&#10003;</span> UTM 파라미터 자동 추적</div>
+        <div class="case-feature"><span class="case-check">&#10003;</span> 모바일 최적화 (핸드폰 퍼스트)</div>
+      </div>
+      <a href="https://ohmaetdol.github.io/mcn-neobridge/flowmus/landing/ai-saju/" target="_blank" rel="noopener" class="case-link">
+        실제 랜딩페이지 보기 &rarr;
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES ── -->
+<section class="features">
+  <div class="section-label">What We Do</div>
+  <h2 class="section-title">제공 항목</h2>
+  <p class="section-sub">세팅부터 관리까지 전부 해드립니다</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">&#127912;</div>
+      <div>
+        <h4>맞춤 랜딩페이지 제작</h4>
+        <p>상세페이지 이미지 기반, 모바일 최적화 디자인</p>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">&#128202;</div>
+      <div>
+        <h4>구글시트 DB 자동 연동</h4>
+        <p>이름·연락처·이메일 실시간 수집, 내 시트에 저장</p>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">&#127919;</div>
+      <div>
+        <h4>UTM 추적 세팅</h4>
+        <p>어떤 영상에서 유입됐는지 자동 추적</p>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">&#9203;</div>
+      <div>
+        <h4>마감 카운트다운</h4>
+        <p>실시간 D-day 타이머로 전환율 극대화</p>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">&#128172;</div>
+      <div>
+        <h4>카카오톡 오픈채팅 연동</h4>
+        <p>폼 제출 후 자동으로 오픈채팅방 이동</p>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">&#128203;</div>
+      <div>
+        <h4>월간 리드 리포트</h4>
+        <p>매월 리드 수·유입 경로·전환율 리포트 제공</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICING ── -->
+<section class="pricing">
+  <div class="section-label">Pricing</div>
+  <h2 class="section-title">투명한 가격 정책</h2>
+  <p class="section-sub">성과가 없으면 비용도 없습니다</p>
+  <div class="pricing-card">
+    <div class="pricing-header">
+      <h3>크리에이터 리드 관리</h3>
+      <p>세팅비 + 건당 과금</p>
+    </div>
+    <div class="pricing-body">
+      <div class="pricing-row">
+        <div>
+          <div class="pricing-label">초기 세팅비</div>
+          <div class="pricing-note">랜딩 제작 + 시트 연동 + UTM 세팅</div>
+        </div>
+        <div class="pricing-value">30만원~</div>
+      </div>
+      <div class="pricing-row">
+        <div>
+          <div class="pricing-label">월 100건까지</div>
+          <div class="pricing-note">소규모 채널도 부담 없이</div>
+        </div>
+        <div class="pricing-value" style="color:var(--green);">무료</div>
+      </div>
+      <div class="pricing-row">
+        <div>
+          <div class="pricing-label">101건 이상</div>
+          <div class="pricing-note">리드가 들어올 때만 과금</div>
+        </div>
+        <div class="pricing-value">건당 200원</div>
+      </div>
+
+      <div class="sim-title">월 예상 비용 시뮬레이션</div>
+      <table class="sim-table">
+        <thead>
+          <tr><th>채널 규모</th><th>월 리드</th><th>월 비용</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>소형</td><td>100건</td><td>0원</td></tr>
+          <tr><td>중형</td><td>500건</td><td>8만원</td></tr>
+          <tr><td>대형</td><td>2,000건</td><td>38만원</td></tr>
+          <tr><td>초대형</td><td>5,000건</td><td>98만원</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="cta-section" id="contact">
+  <h2>내 DB는 내가 지킵니다</h2>
+  <p>강의 1개만 있어도 시작할 수 있습니다.<br>편하게 문의 주세요.</p>
+  <a href="https://open.kakao.com/o/gn495Aoi" target="_blank" rel="noopener" class="cta-btn">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3C6.48 3 2 6.58 2 10.9c0 2.78 1.86 5.21 4.65 6.6-.2.73-.73 2.64-.84 3.05-.13.5.18.49.39.36.16-.1 2.59-1.76 3.63-2.47.7.1 1.43.16 2.17.16 5.52 0 10-3.58 10-7.9S17.52 3 12 3z"/></svg>
+    카카오톡으로 문의하기
+  </a>
+  <p class="cta-sub">평일 10:00 ~ 18:00 응답</p>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <p><span class="footer-brand">Flowmus</span> &nbsp;|&nbsp; (주) 플로우머스 &nbsp;|&nbsp; ceo@flowmus.com</p>
+</footer>
+
+</body>
+</html>
