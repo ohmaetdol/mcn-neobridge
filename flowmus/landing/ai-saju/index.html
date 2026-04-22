@@ -9,6 +9,14 @@
 <meta property="og:description" content="월 매출 2억 AI 사주 사업의 비밀. 당근마켓 + 자사몰 강의 1회 한정 진행.">
 <meta property="og:image" content="https://i.ytimg.com/vi/uNrjjUoOGGQ/maxresdefault.jpg">
 <meta property="og:type" content="website">
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-NYKW1C5WZS"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-NYKW1C5WZS');
+</script>
 <style>
   @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -483,6 +491,10 @@
   }
 
   function showSuccess() {
+    gtag('event', 'generate_lead', {
+      event_category: 'form',
+      event_label: document.getElementById('interest').value
+    });
     window.location.href = 'https://open.kakao.com/o/gn495Aoi';
   }
 
