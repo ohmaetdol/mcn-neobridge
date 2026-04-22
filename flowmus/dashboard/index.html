@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>리드 관리 대시보드 — Flowmus</title>
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --navy: #0f172a;
+    --navy-light: #1e293b;
+    --navy-card: #1a2332;
+    --blue: #3b82f6;
+    --blue-dark: #2563eb;
+    --green: #22c55e;
+    --green-bg: rgba(34,197,94,0.1);
+    --red: #ef4444;
+    --gold: #f59e0b;
+    --purple: #8b5cf6;
+    --text: #e2e8f0;
+    --text-dim: #94a3b8;
+    --text-bright: #f8fafc;
+    --border: rgba(255,255,255,0.06);
+  }
+  html { font-size: 16px; }
+  body {
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    background: var(--navy); color: var(--text);
+    min-height: 100vh; line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 20px; border-bottom: 1px solid var(--border);
+  }
+  .header-brand {
+    display: flex; align-items: center; gap: 10px;
+  }
+  .header-logo {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: var(--blue); display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 14px; color: #fff;
+  }
+  .header-title { font-size: 15px; font-weight: 700; color: var(--text-bright); }
+  .header-sub { font-size: 11px; color: var(--text-dim); }
+  .header-badge {
+    font-size: 11px; padding: 4px 10px; border-radius: 100px;
+    background: var(--green-bg); color: var(--green); font-weight: 600;
+  }
+
+  /* ── MAIN ── */
+  .main { padding: 20px; max-width: 900px; margin: 0 auto; }
+
+  /* ── CHANNEL INFO ── */
+  .channel-bar {
+    display: flex; align-items: center; gap: 12px;
+    padding: 16px; background: var(--navy-card); border-radius: 12px;
+    border: 1px solid var(--border); margin-bottom: 20px;
+  }
+  .channel-avatar {
+    width: 44px; height: 44px; border-radius: 10px;
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; color: #fff; flex-shrink: 0;
+  }
+  .channel-info h2 { font-size: 16px; font-weight: 700; color: var(--text-bright); }
+  .channel-info p { font-size: 12px; color: var(--text-dim); }
+
+  /* ── KPI CARDS ── */
+  .kpi-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    margin-bottom: 20px;
+  }
+  .kpi-card {
+    background: var(--navy-card); border-radius: 12px;
+    padding: 18px 16px; border: 1px solid var(--border);
+  }
+  .kpi-label { font-size: 11px; color: var(--text-dim); margin-bottom: 6px; }
+  .kpi-value {
+    font-size: 28px; font-weight: 800; color: var(--text-bright);
+    font-variant-numeric: tabular-nums; line-height: 1;
+  }
+  .kpi-change {
+    display: inline-flex; align-items: center; gap: 3px;
+    font-size: 11px; font-weight: 600; margin-top: 6px;
+    padding: 2px 8px; border-radius: 100px;
+  }
+  .kpi-change.up { background: var(--green-bg); color: var(--green); }
+  .kpi-change.down { background: rgba(239,68,68,0.1); color: var(--red); }
+  .kpi-value.blue { color: var(--blue); }
+  .kpi-value.green { color: var(--green); }
+  .kpi-value.gold { color: var(--gold); }
+
+  /* ── CHART ── */
+  .chart-card {
+    background: var(--navy-card); border-radius: 12px;
+    padding: 20px; border: 1px solid var(--border);
+    margin-bottom: 20px;
+  }
+  .chart-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 16px;
+  }
+  .chart-title { font-size: 14px; font-weight: 700; color: var(--text-bright); }
+  .chart-legend { font-size: 11px; color: var(--text-dim); }
+
+  .bar-chart {
+    display: flex; align-items: flex-end; gap: 8px;
+    height: 160px; padding-top: 8px;
+  }
+  .bar-col {
+    flex: 1; display: flex; flex-direction: column;
+    align-items: center; justify-content: flex-end; height: 100%;
+  }
+  .bar {
+    width: 100%; border-radius: 6px 6px 2px 2px;
+    min-height: 4px; position: relative;
+    transition: height 0.5s ease;
+  }
+  .bar.blue { background: linear-gradient(180deg, var(--blue), var(--blue-dark)); }
+  .bar.green { background: linear-gradient(180deg, var(--green), #16a34a); }
+  .bar-value {
+    font-size: 10px; font-weight: 700; color: var(--text-dim);
+    margin-bottom: 4px; text-align: center;
+  }
+  .bar-label {
+    font-size: 10px; color: var(--text-dim); margin-top: 6px;
+    text-align: center;
+  }
+  .bar-label.active { color: var(--blue); font-weight: 700; }
+
+  /* ── TABLE ── */
+  .table-card {
+    background: var(--navy-card); border-radius: 12px;
+    border: 1px solid var(--border); overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .table-header {
+    padding: 16px 16px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .table-title { font-size: 14px; font-weight: 700; color: var(--text-bright); }
+  .table-wrap { overflow-x: auto; }
+  table {
+    width: 100%; border-collapse: collapse; font-size: 13px;
+  }
+  th {
+    text-align: left; padding: 10px 16px;
+    font-size: 11px; font-weight: 600; color: var(--text-dim);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  td {
+    padding: 12px 16px; border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  tr:last-child td { border-bottom: none; }
+  .td-num { font-variant-numeric: tabular-nums; font-weight: 600; }
+  .td-amount { color: var(--blue); font-weight: 700; }
+  .td-free { color: var(--green); font-weight: 600; }
+
+  .status-badge {
+    display: inline-block; font-size: 11px; padding: 3px 10px;
+    border-radius: 100px; font-weight: 600;
+  }
+  .status-badge.paid { background: var(--green-bg); color: var(--green); }
+  .status-badge.pending { background: rgba(245,158,11,0.1); color: var(--gold); }
+  .status-badge.free { background: rgba(139,92,246,0.1); color: var(--purple); }
+
+  /* ── BILLING SUMMARY ── */
+  .billing-card {
+    background: linear-gradient(135deg, var(--blue-dark), var(--purple));
+    border-radius: 12px; padding: 24px 20px; margin-bottom: 20px;
+    text-align: center;
+  }
+  .billing-label { font-size: 12px; color: rgba(255,255,255,0.6); margin-bottom: 4px; }
+  .billing-amount { font-size: 36px; font-weight: 800; color: #fff; }
+  .billing-detail { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 8px; }
+  .billing-breakdown {
+    display: flex; justify-content: center; gap: 24px; margin-top: 16px;
+    padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.15);
+  }
+  .billing-item { text-align: center; }
+  .billing-item-num { font-size: 18px; font-weight: 700; color: #fff; }
+  .billing-item-label { font-size: 10px; color: rgba(255,255,255,0.5); }
+
+  /* ── UTM ── */
+  .utm-list { display: flex; flex-direction: column; gap: 10px; padding: 16px; }
+  .utm-row {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .utm-source {
+    font-size: 13px; font-weight: 600; color: var(--text-bright);
+    min-width: 100px;
+  }
+  .utm-bar-bg {
+    flex: 1; height: 24px; background: rgba(255,255,255,0.04);
+    border-radius: 6px; overflow: hidden; position: relative;
+  }
+  .utm-bar-fill {
+    height: 100%; border-radius: 6px;
+    display: flex; align-items: center; padding-left: 8px;
+    font-size: 11px; font-weight: 600; color: #fff;
+    min-width: 30px;
+  }
+  .utm-bar-fill.b1 { background: var(--blue); }
+  .utm-bar-fill.b2 { background: var(--purple); }
+  .utm-bar-fill.b3 { background: var(--green); }
+  .utm-bar-fill.b4 { background: var(--gold); }
+  .utm-count { font-size: 12px; color: var(--text-dim); min-width: 40px; text-align: right; }
+
+  /* ── FOOTER ── */
+  .dash-footer {
+    text-align: center; padding: 24px 20px;
+    border-top: 1px solid var(--border);
+  }
+  .dash-footer p { font-size: 11px; color: var(--text-dim); }
+  .dash-footer span { color: var(--blue); font-weight: 600; }
+
+  /* ── RESPONSIVE ── */
+  @media (min-width: 640px) {
+    .kpi-grid { grid-template-columns: repeat(4, 1fr); }
+    .main { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header class="header">
+  <div class="header-brand">
+    <div class="header-logo">F</div>
+    <div>
+      <div class="header-title">리드 관리 대시보드</div>
+      <div class="header-sub">Flowmus Creator Lead Management</div>
+    </div>
+  </div>
+  <div class="header-badge">Live</div>
+</header>
+
+<!-- ── MAIN ── -->
+<main class="main">
+
+  <!-- Channel Info -->
+  <div class="channel-bar">
+    <div class="channel-avatar">&#9733;</div>
+    <div class="channel-info">
+      <h2>AI사주 당근마켓 + 자사몰 강의</h2>
+      <p>십억채널 &times; 사장찍어주는남자 &nbsp;|&nbsp; 2026.04 ~</p>
+    </div>
+  </div>
+
+  <!-- KPI Cards -->
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">이번 달 리드</div>
+      <div class="kpi-value" id="kpi-month">127</div>
+      <div class="kpi-change up">&#9650; 32%</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">누적 리드</div>
+      <div class="kpi-value">423</div>
+      <div class="kpi-change up">&#9650; 운영 중</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">이번 달 전환율</div>
+      <div class="kpi-value green">4.2%</div>
+      <div class="kpi-change up">&#9650; 0.8%p</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">평균 일일 리드</div>
+      <div class="kpi-value blue">5.8</div>
+      <div class="kpi-change up">&#9650; 1.2</div>
+    </div>
+  </div>
+
+  <!-- Billing Summary -->
+  <div class="billing-card">
+    <div class="billing-label">이번 달 청구 금액</div>
+    <div class="billing-amount">38,500원</div>
+    <div class="billing-detail">127건 - 50건(무료) = 77건 &times; 500원</div>
+    <div class="billing-breakdown">
+      <div class="billing-item">
+        <div class="billing-item-num">127</div>
+        <div class="billing-item-label">총 리드</div>
+      </div>
+      <div class="billing-item">
+        <div class="billing-item-num">50</div>
+        <div class="billing-item-label">무료 구간</div>
+      </div>
+      <div class="billing-item">
+        <div class="billing-item-num">77</div>
+        <div class="billing-item-label">과금 리드</div>
+      </div>
+      <div class="billing-item">
+        <div class="billing-item-num">500원</div>
+        <div class="billing-item-label">건당 단가</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Monthly Chart -->
+  <div class="chart-card">
+    <div class="chart-header">
+      <div class="chart-title">월별 리드 추이</div>
+      <div class="chart-legend">2026년</div>
+    </div>
+    <div class="bar-chart">
+      <div class="bar-col">
+        <div class="bar-value">-</div>
+        <div class="bar blue" style="height:0%"></div>
+        <div class="bar-label">1월</div>
+      </div>
+      <div class="bar-col">
+        <div class="bar-value">-</div>
+        <div class="bar blue" style="height:0%"></div>
+        <div class="bar-label">2월</div>
+      </div>
+      <div class="bar-col">
+        <div class="bar-value">-</div>
+        <div class="bar blue" style="height:0%"></div>
+        <div class="bar-label">3월</div>
+      </div>
+      <div class="bar-col">
+        <div class="bar-value">96</div>
+        <div class="bar blue" style="height:48%"></div>
+        <div class="bar-label">4월</div>
+      </div>
+      <div class="bar-col">
+        <div class="bar-value">127</div>
+        <div class="bar green" style="height:63%"></div>
+        <div class="bar-label active">5월</div>
+      </div>
+      <div class="bar-col">
+        <div class="bar-value">200</div>
+        <div class="bar blue" style="height:100%;opacity:0.3;border:1px dashed rgba(255,255,255,0.2)"></div>
+        <div class="bar-label" style="color:var(--gold)">목표</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- UTM Source -->
+  <div class="table-card">
+    <div class="table-header">
+      <div class="table-title">유입 경로 분석 (UTM)</div>
+    </div>
+    <div class="utm-list">
+      <div class="utm-row">
+        <div class="utm-source">유튜브 영상</div>
+        <div class="utm-bar-bg"><div class="utm-bar-fill b1" style="width:72%">72%</div></div>
+        <div class="utm-count">91건</div>
+      </div>
+      <div class="utm-row">
+        <div class="utm-source">유튜브 댓글</div>
+        <div class="utm-bar-bg"><div class="utm-bar-fill b2" style="width:15%">15%</div></div>
+        <div class="utm-count">19건</div>
+      </div>
+      <div class="utm-row">
+        <div class="utm-source">블로그</div>
+        <div class="utm-bar-bg"><div class="utm-bar-fill b3" style="width:9%">9%</div></div>
+        <div class="utm-count">11건</div>
+      </div>
+      <div class="utm-row">
+        <div class="utm-source">기타/직접</div>
+        <div class="utm-bar-bg"><div class="utm-bar-fill b4" style="width:5%">5%</div></div>
+        <div class="utm-count">6건</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Leads -->
+  <div class="table-card">
+    <div class="table-header">
+      <div class="table-title">최근 리드</div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>일시</th><th>이름</th><th>관심분야</th><th>유입경로</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-num">04.22 14:32</td>
+            <td>김*수</td>
+            <td>당근 + 자사몰 둘 다</td>
+            <td><span class="status-badge paid">유튜브</span></td>
+          </tr>
+          <tr>
+            <td class="td-num">04.22 13:18</td>
+            <td>이*진</td>
+            <td>자사몰 구축</td>
+            <td><span class="status-badge pending">댓글</span></td>
+          </tr>
+          <tr>
+            <td class="td-num">04.22 11:45</td>
+            <td>박*현</td>
+            <td>당근마켓 사주 판매</td>
+            <td><span class="status-badge paid">유튜브</span></td>
+          </tr>
+          <tr>
+            <td class="td-num">04.22 10:02</td>
+            <td>최*영</td>
+            <td>AI 사주 서비스 전반</td>
+            <td><span class="status-badge free">블로그</span></td>
+          </tr>
+          <tr>
+            <td class="td-num">04.21 22:15</td>
+            <td>정*은</td>
+            <td>당근 + 자사몰 둘 다</td>
+            <td><span class="status-badge paid">유튜브</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Monthly Billing History -->
+  <div class="table-card">
+    <div class="table-header">
+      <div class="table-title">월별 정산 내역</div>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>월</th><th>총 리드</th><th>무료</th><th>과금</th><th>청구 금액</th><th>상태</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="td-num">2026.05</td>
+            <td class="td-num">127</td>
+            <td class="td-free">50</td>
+            <td class="td-num">77</td>
+            <td class="td-amount">38,500원</td>
+            <td><span class="status-badge pending">진행중</span></td>
+          </tr>
+          <tr>
+            <td class="td-num">2026.04</td>
+            <td class="td-num">96</td>
+            <td class="td-free">50</td>
+            <td class="td-num">46</td>
+            <td class="td-amount">23,000원</td>
+            <td><span class="status-badge paid">입금완료</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</main>
+
+<!-- ── FOOTER ── -->
+<footer class="dash-footer">
+  <p>Powered by <span>Flowmus</span> &nbsp;|&nbsp; Creator Lead Management System</p>
+</footer>
+
+<script>
+  // 실시간 느낌 — KPI 카운트업 애니메이션
+  function animateCount(el, target) {
+    let current = 0;
+    const step = Math.ceil(target / 30);
+    const timer = setInterval(() => {
+      current += step;
+      if (current >= target) { current = target; clearInterval(timer); }
+      el.textContent = current.toLocaleString();
+    }, 30);
+  }
+  document.querySelectorAll('.kpi-value').forEach(el => {
+    const num = parseInt(el.textContent);
+    if (!isNaN(num) && num > 0) animateCount(el, num);
+  });
+</script>
+
+</body>
+</html>
