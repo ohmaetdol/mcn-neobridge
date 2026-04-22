@@ -102,7 +102,8 @@ td strong{color:#191F28}
 
   <!-- 탭 -->
   <div class="tabs">
-    <button class="tab-btn on" onclick="showTab('tab-flow')">영상 구성</button>
+    <button class="tab-btn on" onclick="showTab('tab-bench')">벤치마크</button>
+    <button class="tab-btn" onclick="showTab('tab-flow')">영상 구성</button>
     <button class="tab-btn" onclick="showTab('tab-script')">오프닝 스크립트</button>
     <button class="tab-btn" onclick="showTab('tab-ai')">AI 시연</button>
     <button class="tab-btn" onclick="showTab('tab-questions')">질문지</button>
@@ -111,14 +112,90 @@ td strong{color:#191F28}
     <button class="tab-btn gold" onclick="showTab('tab-cta')">CTA/퍼널</button>
   </div>
 
+  <!-- 탭0: 벤치마크 -->
+  <div id="tab-bench" class="panel on">
+    <div class="section-title"><span class="num gold">DATA</span> 레퍼런스 채널 벤치마크</div>
+    <div class="note">절약왕정약용 (348개 영상, 4,770만 뷰) + 옆집CEO (84개 영상, 828만 뷰) 실측 데이터 기반 설계</div>
+
+    <div class="card dark">
+      <div style="font-size:14px;font-weight:800;color:#FFB800;margin-bottom:14px">채널 비교 (부업 장르 상위 2개)</div>
+      <table style="color:#fff">
+        <tr><th style="background:#132B4D;color:#FFB800">지표</th><th style="background:#132B4D;color:#FFB800">절약왕정약용</th><th style="background:#132B4D;color:#FFB800">옆집CEO</th><th style="background:#132B4D;color:#FFB800">백종환 설계</th></tr>
+        <tr><td style="color:#8B95A1">평균 조회수</td><td style="color:#fff"><strong>13.7만</strong></td><td style="color:#fff"><strong>9.9만</strong></td><td style="color:#FFB800"><strong>목표 15만+</strong></td></tr>
+        <tr><td style="color:#8B95A1">평균 영상길이</td><td style="color:#fff">16.6분</td><td style="color:#fff">17.7분</td><td style="color:#FFB800"><strong>15분</strong></td></tr>
+        <tr><td style="color:#8B95A1">킬러구간 위치</td><td style="color:#fff">영상의 51%</td><td style="color:#fff">영상의 51%</td><td style="color:#FFB800"><strong>5~8분 (47%)</strong></td></tr>
+        <tr><td style="color:#8B95A1">킬러 효율 (6~12분)</td><td style="color:#fff" colspan="2" style="text-align:center">킬러 8.3%</td><td style="color:#FFB800"><strong>15분 컷</strong></td></tr>
+        <tr><td style="color:#8B95A1">킬러 효율 (15분+)</td><td style="color:#fff" colspan="2" style="text-align:center">킬러 4.2%</td><td style="color:#8B95A1">회피</td></tr>
+        <tr><td style="color:#8B95A1">초반 30초 리텐션</td><td style="color:#fff" colspan="2" style="text-align:center">0.02~0.19</td><td style="color:#FFB800"><strong>AI 화면 훅</strong></td></tr>
+      </table>
+    </div>
+
+    <div class="card hot">
+      <div class="card-label">Most Replayed 피크 패턴 (TOP 영상)</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+        <div style="background:#F8F9FA;border-radius:10px;padding:14px">
+          <div style="font-size:11px;color:#D4A017;font-weight:700;margin-bottom:6px">절약왕정약용 TOP1 (210만뷰)</div>
+          <div style="font-size:15px;font-weight:800;color:#191F28;margin-bottom:4px">7:40~8:10 피크</div>
+          <div style="font-size:12px;color:#8B95A1">수익 인증 화면 + "수동→자동화" 전환 설명</div>
+        </div>
+        <div style="background:#F8F9FA;border-radius:10px;padding:14px">
+          <div style="font-size:11px;color:#D4A017;font-weight:700;margin-bottom:6px">옆집CEO TOP1 (103만뷰)</div>
+          <div style="font-size:15px;font-weight:800;color:#191F28;margin-bottom:4px">7:21 피크</div>
+          <div style="font-size:12px;color:#8B95A1">카카오톡 단톡방 실제 화면 공개 (날것)</div>
+        </div>
+      </div>
+      <div class="note">두 채널 모두 <strong>7~8분에 "실제 화면 공개"</strong>가 피크. → 백종환은 5~8분에 AI 시연 + 8~10분에 매출 공개 배치</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">5대 법칙 (20개 영상 히트맵 분석)</div>
+      <table>
+        <tr><th>#</th><th>법칙</th><th>근거</th><th>백종환 적용</th></tr>
+        <tr><td><strong>1</strong></td><td><strong>킬러 = 화면 공유 순간</strong></td><td>20개 중 18개: 실제 클릭 = 피크</td><td>AI 프로그램 실시간 시연</td></tr>
+        <tr><td><strong>2</strong></td><td><strong>피크 = 영상의 50~70%</strong></td><td>양 채널 평균 51%</td><td>5~8분 (15분의 47%)</td></tr>
+        <tr><td><strong>3</strong></td><td><strong>초반 30초 약함</strong></td><td>부업 장르 평균 0.02~0.19</td><td>0초에 AI 화면 먼저</td></tr>
+        <tr><td><strong>4</strong></td><td><strong>마지막 10% 급하락</strong></td><td>전 영상 공통</td><td>CTA는 13~14분에 삽입</td></tr>
+        <tr><td><strong>5</strong></td><td><strong>6~12분이 효율 최고</strong></td><td>킬러 8.3% vs 15분+ 4.2%</td><td>15분 컷 (최대한 압축)</td></tr>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="card-label">TOP 조회수 제목 패턴</div>
+      <table>
+        <tr><th>채널</th><th>제목</th><th>조회수</th><th>패턴</th></tr>
+        <tr><td>절약왕</td><td>퇴근 후 부업으로 월 500만원 버는 방법 BEST5</td><td><strong>210만</strong></td><td>시간+금액+BEST</td></tr>
+        <tr><td>절약왕</td><td>하루 30분으로 월80만원 돈버는 방법</td><td><strong>107만</strong></td><td>시간+금액</td></tr>
+        <tr><td>옆집CEO</td><td>공동구매중개, 빨리 시작할수록 이득</td><td><strong>103만</strong></td><td>긴급성 트리거</td></tr>
+        <tr><td>절약왕</td><td>딱 1번 실행, 월 60~270만원 자동 입금</td><td><strong>80만</strong></td><td>1회+자동화+수익 범위</td></tr>
+        <tr><td>옆집CEO</td><td>퇴근후 이렇게 했더니 월100은 더 벌렸어요</td><td><strong>54만</strong></td><td>퇴근후+수익</td></tr>
+      </table>
+    </div>
+
+    <div class="card navy">
+      <div style="font-size:14px;font-weight:800;color:#FFB800;margin-bottom:10px">백종환 제목 후보 (데이터 기반)</div>
+      <div style="font-size:13px;color:#fff;line-height:2.2">
+        <strong style="color:#FFB800">A.</strong> 건강식품 부업, AI가 1분 만에 다 해줍니다 (월 순이익 1억)<br>
+        <span style="color:#8B95A1;font-size:11px;margin-left:20px">← 절약왕 "시간+금액" 패턴 + AI 차별화</span><br>
+        <strong style="color:#FFB800">B.</strong> 직원 0명인데 월 5억? 건강식품 AI 자동화의 진짜 구조<br>
+        <span style="color:#8B95A1;font-size:11px;margin-left:20px">← 옆집CEO "의심+검증" 패턴</span><br>
+        <strong style="color:#FFB800">C.</strong> 편의점 알바 출신이 건강식품으로 월 1억 버는 현실적인 방법<br>
+        <span style="color:#8B95A1;font-size:11px;margin-left:20px">← 절약왕 TOP1 "현실적인 방법" + 갭 구조</span>
+      </div>
+    </div>
+  </div>
+
   <!-- 탭1: 영상 구성 -->
-  <div id="tab-flow" class="panel on">
+  <div id="tab-flow" class="panel">
     <div class="section-title"><span class="num">1</span> 15분 영상 구성</div>
 
     <div class="card hot">
       <div class="card-label">핵심 앵글</div>
       <div style="font-size:16px;font-weight:800;color:#191F28;margin-bottom:8px">건강식품 = "욕구 시장" (절대 안 죽는 시장)</div>
       <div style="font-size:13px;color:#3E4A5A;line-height:1.8">남성의 성욕, 여성의 미용 욕구, 노인의 건강 불안 — 인간의 본능적 욕구를 건드리는 시장.<br>재구매율 높고, 목적성 구매라 키워드만 잡으면 바로 돈이 된다.<br><strong>다른 건강식품 강사에게 없는 프레임.</strong></div>
+    </div>
+
+    <div class="note blue">
+      <strong>설계 근거:</strong> 절약왕+옆집CEO 20개 히트맵 분석 → 킬러구간 7~8분(51%), 화면공유=피크, 초반30초 약함(0.02~0.19) → AI 화면 오프닝 + 5~8분 풀시연 + 8~10분 매출공개
     </div>
 
     <div class="card">
