@@ -34,10 +34,10 @@
   a { color: inherit; text-decoration: none; }
   img { max-width: 100%; height: auto; display: block; }
 
-  /* ── HERO (모바일 퍼스트) ── */
+  /* ── HERO ── */
   .hero {
     background: linear-gradient(160deg, #0f0a1a 0%, #1a1030 50%, #0f0a1a 100%);
-    color: #fff; padding: 48px 20px 40px;
+    color: #fff; padding: 48px 20px 32px;
     text-align: center;
   }
   .hero-badge {
@@ -54,63 +54,15 @@
     font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.7;
     margin-bottom: 24px;
   }
-
-  /* ── THUMB ── */
-  .thumb-wrap {
-    position: relative; border-radius: 12px; overflow: hidden;
-    margin-bottom: 24px; box-shadow: 0 8px 30px rgba(0,0,0,0.4);
-  }
-  .thumb-play {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    width: 48px; height: 48px; border-radius: 50%;
-    background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
-  }
-  .thumb-play::after {
-    content: ''; width: 0; height: 0;
-    border-top: 8px solid transparent; border-bottom: 8px solid transparent;
-    border-left: 14px solid var(--navy); margin-left: 3px;
-  }
-  .thumb-channel {
-    position: absolute; bottom: 8px; left: 8px;
-    background: rgba(0,0,0,0.75); color: #fff;
-    padding: 3px 10px; border-radius: 6px;
-    font-size: 11px; font-weight: 600;
-  }
-
-  .hero-stats {
-    display: flex; justify-content: center; gap: 24px; margin-bottom: 24px;
-  }
-  .hero-stat { text-align: center; }
-  .hero-stat-num { font-size: 22px; font-weight: 800; }
-  .hero-stat-num.gold { color: var(--gold); }
-  .hero-stat-label { font-size: 11px; color: rgba(255,255,255,0.4); }
-
   .hero-cta {
     display: block; background: var(--purple); color: #fff;
     padding: 14px; border-radius: 10px; font-weight: 700;
     font-size: 15px; text-align: center;
     box-shadow: 0 4px 16px rgba(124,58,237,0.3);
+    max-width: 320px; margin: 0 auto;
   }
 
-  /* ── PROOF (실적 증빙) ── */
-  .proof {
-    padding: 40px 20px; background: var(--navy); color: #fff;
-    text-align: center;
-  }
-  .proof h2 {
-    font-size: 20px; font-weight: 800; margin-bottom: 6px;
-  }
-  .proof .sub { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 24px; }
-  .proof-img {
-    border-radius: 12px; overflow: hidden; margin-bottom: 16px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-  }
-  .proof-caption {
-    font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 8px;
-  }
-
-  /* ── STATS HIGHLIGHT ── */
+  /* ── STATS BAR ── */
   .stats-bar {
     display: flex; justify-content: center; gap: 0;
     background: linear-gradient(90deg, var(--purple), var(--purple-dark));
@@ -121,15 +73,19 @@
     border-right: 1px solid rgba(255,255,255,0.15);
   }
   .stat-block:last-child { border-right: none; }
-  .stat-block .num {
-    font-size: 20px; font-weight: 800; color: #fff;
+  .stat-block .num { font-size: 20px; font-weight: 800; color: #fff; }
+  .stat-block .label { font-size: 10px; color: rgba(255,255,255,0.6); margin-top: 2px; }
+
+  /* ── 상세페이지 이미지 섹션 ── */
+  .story-section {
+    width: 100%; overflow: hidden;
   }
-  .stat-block .label {
-    font-size: 10px; color: rgba(255,255,255,0.6); margin-top: 2px;
+  .story-section img {
+    width: 100%; height: auto; display: block;
   }
 
-  /* ── PAIN POINTS ── */
-  .pain { padding: 40px 20px; background: var(--surface); }
+  /* ── VIDEO ── */
+  .video-section { padding: 40px 20px; text-align: center; background: #fff; }
   .section-title {
     font-size: 20px; font-weight: 800; text-align: center;
     margin-bottom: 6px; color: var(--navy); letter-spacing: -0.02em;
@@ -138,17 +94,6 @@
     font-size: 13px; color: var(--text-med); text-align: center;
     margin-bottom: 24px;
   }
-  .pain-list { display: flex; flex-direction: column; gap: 10px; }
-  .pain-item {
-    background: #fff; border: 1px solid var(--border); border-radius: 12px;
-    padding: 16px; display: flex; align-items: flex-start; gap: 12px;
-  }
-  .pain-icon { font-size: 20px; flex-shrink: 0; }
-  .pain-item h4 { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
-  .pain-item p { font-size: 12px; color: var(--text-med); margin: 0; }
-
-  /* ── VIDEO ── */
-  .video-section { padding: 32px 20px; text-align: center; }
   .video-embed {
     border-radius: 10px; overflow: hidden;
     box-shadow: 0 4px 20px rgba(0,0,0,0.08);
@@ -157,31 +102,19 @@
   }
   .video-embed iframe { width: 100%; height: 100%; border: none; }
 
-  /* ── BENEFITS (강의 내용) ── */
-  .benefits { padding: 40px 20px; }
-  .benefits-grid { display: flex; flex-direction: column; gap: 12px; }
-  .benefit-card {
-    border: 1px solid var(--border); border-radius: 12px;
-    padding: 20px; display: flex; align-items: flex-start; gap: 14px;
+  /* ── MID CTA ── */
+  .mid-cta {
+    padding: 32px 20px; text-align: center;
+    background: linear-gradient(160deg, #0f0a1a 0%, #1a1030 50%, #0f0a1a 100%);
   }
-  .benefit-icon {
-    width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px; background: var(--purple-light);
+  .mid-cta a {
+    display: block; background: var(--purple); color: #fff;
+    padding: 16px; border-radius: 12px; font-weight: 700;
+    font-size: 16px; max-width: 320px; margin: 0 auto;
+    box-shadow: 0 4px 20px rgba(124,58,237,0.35);
   }
-  .benefit-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
-  .benefit-card p { font-size: 12px; color: var(--text-med); margin: 0; line-height: 1.5; }
-
-  /* ── INSTRUCTOR ── */
-  .instructor {
-    padding: 40px 20px; background: var(--navy); color: #fff;
-    text-align: center;
-  }
-  .instructor h2 { font-size: 20px; font-weight: 800; margin-bottom: 6px; }
-  .instructor .sub { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 20px; }
-  .instructor-img {
-    border-radius: 12px; overflow: hidden; margin-bottom: 16px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  .mid-cta p {
+    color: rgba(255,255,255,0.5); font-size: 12px; margin-top: 10px;
   }
 
   /* ── FORM ── */
@@ -208,7 +141,6 @@
   }
   .form-input:focus { border-color: var(--purple); }
   .form-input::placeholder { color: var(--text-low); }
-
   .form-select {
     width: 100%; padding: 12px 14px; border: 1px solid var(--border);
     border-radius: 8px; font-size: 15px; font-family: 'Pretendard', sans-serif;
@@ -307,28 +239,16 @@
     body { padding-bottom: 0; }
     .floating-cta { display: none; }
     .hero { padding: 80px 24px; }
-    .hero-inner { max-width: 1000px; margin: 0 auto; display: flex; gap: 48px; align-items: center; text-align: left; }
-    .hero-text { flex: 1; }
-    .hero-visual { flex: 1; }
     .hero h1 { font-size: 36px; }
     .hero-desc { font-size: 16px; }
-    .hero-stats { justify-content: flex-start; }
-    .hero-stat-num { font-size: 28px; }
     .hero-cta { display: inline-block; padding: 16px 36px; }
-    .proof { padding: 60px 24px; }
-    .proof-inner { max-width: 600px; margin: 0 auto; }
     .stat-block .num { font-size: 26px; }
-    .pain { padding: 60px 24px; }
-    .pain-inner { max-width: 700px; margin: 0 auto; }
-    .pain-list { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .story-section { max-width: 600px; margin: 0 auto; }
     .section-title { font-size: 26px; }
     .video-section { padding: 60px 24px; }
-    .benefits { padding: 60px 24px; }
-    .benefits-inner { max-width: 700px; margin: 0 auto; }
     .form-section { padding: 60px 24px; }
     .form-box { padding: 32px; }
-    .instructor { padding: 60px 24px; }
-    .instructor-inner { max-width: 600px; margin: 0 auto; }
+    .mid-cta { padding: 48px 24px; }
   }
 </style>
 </head>
@@ -336,23 +256,10 @@
 
 <!-- ── HERO ── -->
 <section class="hero">
-  <div class="hero-inner">
-    <div class="hero-text">
-      <div class="hero-badge">1회 한정 &middot; 5월 라이브</div>
-      <h1>AI사주 <span class="highlight">당근마켓 + 자사몰</span><br>만들기 강의</h1>
-      <p class="hero-desc">
-        당근 5기 마감. 자사몰까지 포함된 단 1회 한정 강의.
-      </p>
-      <a href="#form" class="hero-cta">라이브 알림 받기</a>
-    </div>
-    <div class="hero-visual">
-      <a href="https://www.youtube.com/watch?v=uNrjjUoOGGQ" target="_blank" rel="noopener" class="thumb-wrap">
-        <img src="https://i.ytimg.com/vi/uNrjjUoOGGQ/maxresdefault.jpg" alt="영상 썸네일" loading="lazy">
-        <div class="thumb-play"></div>
-        <div class="thumb-channel">사장찍어주는남자</div>
-      </a>
-    </div>
-  </div>
+  <div class="hero-badge">1회 한정 &middot; 5월 라이브</div>
+  <h1>AI사주 <span class="highlight">당근마켓 + 자사몰</span><br>만들기 강의</h1>
+  <p class="hero-desc">당근 5기 마감. 자사몰까지 포함된 단 1회 한정 강의.</p>
+  <a href="#form" class="hero-cta">라이브 알림 받기</a>
 </section>
 
 <!-- ── STATS BAR ── -->
@@ -367,38 +274,40 @@
   </div>
   <div class="stat-block">
     <div class="num">4.8</div>
-    <div class="label">평점</div>
+    <div class="label">평점 (19,436개)</div>
   </div>
 </div>
 
-<!-- ── PROOF ── -->
-<section class="proof">
-  <div class="proof-inner">
-    <h2>실적으로 증명합니다</h2>
-    <p class="sub">국세청 부가세 신고로 검증된 실제 매출</p>
-    <div style="display:flex;flex-direction:column;gap:12px;margin-top:8px;">
-      <div style="background:rgba(255,255,255,0.08);border-radius:10px;padding:16px;text-align:center;">
-        <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:4px;">2025년 하반기 총매출</div>
-        <div style="font-size:32px;font-weight:800;color:var(--gold);">8.25억</div>
-      </div>
-      <div style="display:flex;gap:10px;">
-        <div style="flex:1;background:rgba(255,255,255,0.08);border-radius:10px;padding:14px;text-align:center;">
-          <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:4px;">순이익</div>
-          <div style="font-size:22px;font-weight:800;">6억</div>
-        </div>
-        <div style="flex:1;background:rgba(255,255,255,0.08);border-radius:10px;padding:14px;text-align:center;">
-          <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:4px;">리뷰</div>
-          <div style="font-size:22px;font-weight:800;">19,436개</div>
-        </div>
-        <div style="flex:1;background:rgba(255,255,255,0.08);border-radius:10px;padding:14px;text-align:center;">
-          <div style="font-size:11px;color:rgba(255,255,255,0.5);margin-bottom:4px;">평점</div>
-          <div style="font-size:22px;font-weight:800;">4.8</div>
-        </div>
-      </div>
-    </div>
-    <p class="proof-caption" style="margin-top:12px;">4,900원 AI 사주 서비스 &middot; 국세청 부가세 신고 기준</p>
-  </div>
-</section>
+<!-- ── 상세페이지 스토리 ── -->
+<div class="story-section">
+  <img src="1-g.gif" alt="작년 7월, 첫달 매출 1200만원에서 6개월차 한 달에 2억 2500만원" loading="eager">
+</div>
+<div class="story-section">
+  <img src="2-g.gif" alt="2025년 월별 매출 성장 그래프 — 1200만원에서 2.3억까지" loading="lazy">
+</div>
+<div class="story-section">
+  <img src="3-1.png" alt="자... 제가 뭘 팔았을까요?" loading="lazy">
+</div>
+<div class="story-section">
+  <img src="3-2.png" alt="4900원짜리 AI사주 — 총매출 8.25억, 리뷰 19,436개, 국세청 부가세 증빙" loading="lazy">
+</div>
+
+<!-- ── 중간 CTA ── -->
+<div class="mid-cta">
+  <a href="#form">이 강의가 궁금하다면</a>
+  <p>라이브 일정을 가장 먼저 안내드립니다</p>
+</div>
+
+<!-- ── 상세페이지 스토리 (증빙 + USP) ── -->
+<div class="story-section">
+  <img src="4-g.gif" alt="부가세 5940만원 증빙 — 실제 은행 거래내역 공개" loading="lazy">
+</div>
+<div class="story-section">
+  <img src="5-g.gif" alt="컴공 전공 개발자 — 사주 몰라도 됩니다. AI 프로그램 + 프롬프트 제공" loading="lazy">
+</div>
+<div class="story-section">
+  <img src="6.png" alt="이런 분들을 위한 강의 — 강의 차별점 — 강사 소개" loading="lazy">
+</div>
 
 <!-- ── VIDEO ── -->
 <section class="video-section">
@@ -406,111 +315,6 @@
   <p class="section-sub">사찍남 채널에서 공개된 실제 이야기</p>
   <div class="video-embed">
     <iframe src="https://www.youtube.com/embed/uNrjjUoOGGQ" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="3900원짜리 AI 사주인데 왜 월 매출이 2억이에요?" loading="lazy"></iframe>
-  </div>
-</section>
-
-<!-- ── PAIN POINTS ── -->
-<section class="pain">
-  <div class="pain-inner">
-    <h2 class="section-title">이런 분들을 위한 강의입니다</h2>
-    <p class="section-sub">AI 사주 부업에 관심은 있지만 혼자서는 시작이 어려운 분</p>
-    <div class="pain-list">
-      <div class="pain-item">
-        <div class="pain-icon">&#128722;</div>
-        <div>
-          <h4>당근마켓에서 사주를 팔고 싶다</h4>
-          <p>어떻게 시작하고 어떻게 팔아야 하는지 모르겠다</p>
-        </div>
-      </div>
-      <div class="pain-item">
-        <div class="pain-icon">&#128187;</div>
-        <div>
-          <h4>자사몰을 만들고 싶다</h4>
-          <p>PG 승인이 안 나서 결제 시스템 구축이 막혀 있다</p>
-        </div>
-      </div>
-      <div class="pain-item">
-        <div class="pain-icon">&#129302;</div>
-        <div>
-          <h4>AI 사주 프로그램이 필요하다</h4>
-          <p>직접 만들 수 없어서 시작 자체가 안 된다</p>
-        </div>
-      </div>
-      <div class="pain-item">
-        <div class="pain-icon">&#128200;</div>
-        <div>
-          <h4>당근을 넘어서 더 큰 매출을 원한다</h4>
-          <p>자사몰이 당근보다 매출이 훨씬 잘 나온다는데?</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── BENEFITS ── -->
-<section class="benefits">
-  <div class="benefits-inner">
-    <h2 class="section-title">이번 강의에서 배우는 것</h2>
-    <p class="section-sub">현존하는 사주 부업·당근마켓 강의 중 가장 양질의 강의</p>
-    <div class="benefits-grid">
-      <div class="benefit-card">
-        <div class="benefit-icon">&#128722;</div>
-        <div>
-          <h4>당근마켓 사주 판매법</h4>
-          <p>5기 수강생이 검증한 당근마켓 사주 판매 노하우 전수</p>
-        </div>
-      </div>
-      <div class="benefit-card">
-        <div class="benefit-icon">&#128187;</div>
-        <div>
-          <h4>자사몰 구축 A to Z</h4>
-          <p>당근보다 매출이 훨씬 잘 나오는 자사몰 만들기 전 과정</p>
-        </div>
-      </div>
-      <div class="benefit-card">
-        <div class="benefit-icon">&#128179;</div>
-        <div>
-          <h4>PG 승인 지원 (수강생 한정)</h4>
-          <p>현재 사주 자사몰 PG 승인 불가 — 이번 강의 수강생만 특별 지원</p>
-        </div>
-      </div>
-      <div class="benefit-card">
-        <div class="benefit-icon">&#129302;</div>
-        <div>
-          <h4>AI 사주 프로그램 + 프롬프트 제공</h4>
-          <p>자체 AI 사주 웹·프롬프트 제공. 직접 개발할 필요 없음</p>
-        </div>
-      </div>
-      <div class="benefit-card">
-        <div class="benefit-icon">&#9997;&#65039;</div>
-        <div>
-          <h4>마케팅 + 글쓰기 + 1:1 피드백</h4>
-          <p>십억채널의 1:1 글쓰기 피드백 세션 포함</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ── INSTRUCTOR ── -->
-<section class="instructor">
-  <div class="instructor-inner">
-    <h2>강사 소개</h2>
-    <p class="sub">운세위키 공동 개발자 &middot; 십억채널</p>
-    <div style="display:flex;flex-direction:column;gap:8px;text-align:left;margin-top:16px;">
-      <div style="background:rgba(255,255,255,0.08);border-radius:10px;padding:14px 16px;font-size:13px;">
-        &#128187; 사주 자사몰 + 인스타 & 스레드 기반의 사주 판매
-      </div>
-      <div style="background:rgba(255,255,255,0.08);border-radius:10px;padding:14px 16px;font-size:13px;">
-        &#128200; 당근마켓 단기간 고매출 달성 · 십억채널 운영
-      </div>
-      <div style="background:rgba(255,255,255,0.08);border-radius:10px;padding:14px 16px;font-size:13px;">
-        &#127891; 라커기, 종기부, 삼성 등 AI·IT 분야 강연 다수
-      </div>
-      <div style="background:rgba(255,255,255,0.08);border-radius:10px;padding:14px 16px;font-size:13px;">
-        &#9997;&#65039; 위디즈 '유혹의 글쓰기', 십이인, '구매대행에서 브랜드까지' 외 마케팅 강의 다수
-      </div>
-    </div>
   </div>
 </section>
 
