@@ -62,14 +62,19 @@
     max-width: 320px; margin: 0 auto;
   }
 
-  /* ── COUNTDOWN ── */
+  /* ── COUNTDOWN (상단 고정) ── */
   .countdown {
-    background: #0f0a1a; padding: 20px 16px; text-align: center;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    position: sticky; top: 0; z-index: 200;
+    background: #0f0a1a; padding: 10px 16px; text-align: center;
+    border-bottom: 1px solid rgba(239,68,68,0.2);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  }
+  .countdown-inner {
+    display: flex; align-items: center; justify-content: center; gap: 12px;
   }
   .countdown-label {
-    font-size: 12px; font-weight: 600; color: #ef4444;
-    letter-spacing: 0.05em; margin-bottom: 10px;
+    font-size: 12px; font-weight: 700; color: #ef4444;
+    white-space: nowrap;
     animation: pulse-text 2s ease-in-out infinite;
   }
   @keyframes pulse-text {
@@ -77,21 +82,21 @@
     50% { opacity: 0.6; }
   }
   .countdown-timer {
-    display: flex; justify-content: center; gap: 8px;
+    display: flex; gap: 6px;
   }
   .countdown-block {
     background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.25);
-    border-radius: 10px; padding: 10px 0; min-width: 64px;
+    border-radius: 8px; padding: 6px 0; min-width: 48px;
   }
   .countdown-num {
-    font-size: 28px; font-weight: 800; color: #fff;
+    font-size: 20px; font-weight: 800; color: #fff;
     font-variant-numeric: tabular-nums; line-height: 1;
   }
   .countdown-unit {
-    font-size: 10px; color: rgba(255,255,255,0.5); margin-top: 4px;
+    font-size: 9px; color: rgba(255,255,255,0.5); margin-top: 2px;
   }
   .countdown-expired {
-    font-size: 16px; font-weight: 700; color: #ef4444;
+    font-size: 14px; font-weight: 700; color: #ef4444;
   }
 
   /* ── STATS BAR ── */
@@ -296,23 +301,25 @@
 
 <!-- ── COUNTDOWN ── -->
 <div class="countdown" id="countdown">
-  <div class="countdown-label">5월 10일 마감까지</div>
-  <div class="countdown-timer" id="countdownTimer">
-    <div class="countdown-block">
-      <div class="countdown-num" id="cd-days">--</div>
-      <div class="countdown-unit">일</div>
-    </div>
-    <div class="countdown-block">
-      <div class="countdown-num" id="cd-hours">--</div>
-      <div class="countdown-unit">시간</div>
-    </div>
-    <div class="countdown-block">
-      <div class="countdown-num" id="cd-mins">--</div>
-      <div class="countdown-unit">분</div>
-    </div>
-    <div class="countdown-block">
-      <div class="countdown-num" id="cd-secs">--</div>
-      <div class="countdown-unit">초</div>
+  <div class="countdown-inner">
+    <div class="countdown-label">5월 10일 마감</div>
+    <div class="countdown-timer" id="countdownTimer">
+      <div class="countdown-block">
+        <div class="countdown-num" id="cd-days">--</div>
+        <div class="countdown-unit">일</div>
+      </div>
+      <div class="countdown-block">
+        <div class="countdown-num" id="cd-hours">--</div>
+        <div class="countdown-unit">시간</div>
+      </div>
+      <div class="countdown-block">
+        <div class="countdown-num" id="cd-mins">--</div>
+        <div class="countdown-unit">분</div>
+      </div>
+      <div class="countdown-block">
+        <div class="countdown-num" id="cd-secs">--</div>
+        <div class="countdown-unit">초</div>
+      </div>
     </div>
   </div>
 </div>
