@@ -185,9 +185,13 @@ body { font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif; background
     <div class="tabs">
       <div class="tab active" data-tab="available" onclick="switchTab('available')">대기 영상</div>
       <div class="tab" data-tab="mywork" onclick="switchTab('mywork')">내 작업 <span id="myworkBadge" class="tab-badge" style="display:none;">0</span></div>
+      <div class="tab" data-tab="dashboard" onclick="switchTab('dashboard')">정산 확인</div>
     </div>
     <div id="availableTab"></div>
     <div id="myworkTab" style="display:none;"></div>
+    <div id="dashboardTab" style="display:none;">
+      <iframe id="dashboardFrame" src="" style="width:100%;border:none;border-radius:10px;min-height:80vh;background:#fff;" title="편집자 대시보드"></iframe>
+    </div>
   </div>
 
   <!-- 관리자 뷰 -->
@@ -866,6 +870,20 @@ function switchTab(name) {
   document.querySelectorAll('#editorView .tab').forEach(function(t) { t.classList.toggle('active', t.dataset.tab === name); });
   document.getElementById('availableTab').style.display = name === 'available' ? 'block' : 'none';
   document.getElementById('myworkTab').style.display = name === 'mywork' ? 'block' : 'none';
+  document.getElementById('dashboardTab').style.display = name === 'dashboard' ? 'block' : 'none';
+  // 대시보드 탭 클릭 시 iframe 로드 (편집자 이름 매핑)
+  if (name === 'dashboard') {
+    var frame = document.getElementById('dashboardFrame');
+    var editorKey = getEditorKey(currentEditor);
+    var dashUrl = 'https://editor-app-gilt.vercel.app/?editor=' + encodeURIComponent(editorKey);
+    if (!frame.src || frame.src !== dashUrl) frame.src = dashUrl;
+  }
+}
+
+// 편집자 이름 → 대시보드 키 매핑
+function getEditorKey(fullName) {
+  var map = { '장정현': '정현', '조정민': '정민' };
+  return map[fullName] || fullName;
 }
 
 function switchAdminTab(name) {
