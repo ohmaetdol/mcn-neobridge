@@ -189,44 +189,57 @@
 
   /* ── PRICING ── */
   .pricing { padding: 48px 20px; background: #fff; }
-  .pricing-card {
+  .pricing-cards {
+    display: flex; flex-direction: column; gap: 16px;
     max-width: 500px; margin: 0 auto;
-    border: 2px solid var(--blue); border-radius: 16px;
-    overflow: hidden;
+  }
+  .pricing-card {
+    border: 2px solid var(--border); border-radius: 16px;
+    overflow: hidden; position: relative;
+  }
+  .pricing-card.popular {
+    border-color: var(--blue);
+    box-shadow: 0 4px 24px rgba(59,130,246,0.15);
+  }
+  .pricing-badge {
+    position: absolute; top: -1px; right: 16px;
+    background: var(--blue); color: #fff;
+    font-size: 11px; font-weight: 700;
+    padding: 4px 12px; border-radius: 0 0 8px 8px;
   }
   .pricing-header {
-    background: var(--blue); color: #fff; padding: 20px;
-    text-align: center;
+    padding: 20px; text-align: center;
   }
-  .pricing-header h3 { font-size: 18px; font-weight: 800; }
-  .pricing-header p { font-size: 13px; opacity: 0.8; margin-top: 4px; }
-  .pricing-body { padding: 24px 20px; }
-  .pricing-row {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 12px 0; border-bottom: 1px solid var(--border);
+  .pricing-card.popular .pricing-header {
+    background: var(--navy); color: #fff;
   }
-  .pricing-row:last-child { border-bottom: none; }
-  .pricing-label { font-size: 14px; font-weight: 600; }
-  .pricing-value { font-size: 14px; font-weight: 800; color: var(--navy); }
-  .pricing-note { font-size: 11px; color: var(--text-med); margin-top: 4px; }
-
-  .sim-title {
-    font-size: 14px; font-weight: 700; color: var(--navy);
-    margin: 24px 0 12px; text-align: center;
+  .pricing-header h3 { font-size: 17px; font-weight: 800; }
+  .pricing-header .price { font-size: 28px; font-weight: 800; margin-top: 6px; }
+  .pricing-header .price-note { font-size: 12px; color: var(--text-med); margin-top: 2px; }
+  .pricing-card.popular .pricing-header .price-note { color: rgba(255,255,255,0.5); }
+  .pricing-body { padding: 20px; }
+  .pricing-feature {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; padding: 6px 0;
   }
-  .sim-table {
-    width: 100%; border-collapse: collapse;
-    font-size: 13px; text-align: center;
+  .pricing-check { color: var(--green); font-weight: 700; flex-shrink: 0; }
+  .pricing-x { color: var(--text-low); flex-shrink: 0; }
+  .pricing-cta {
+    display: block; text-align: center; padding: 12px;
+    border-radius: 8px; font-weight: 700; font-size: 14px;
+    margin-top: 12px; border: none; cursor: pointer;
+    font-family: inherit;
   }
-  .sim-table th {
-    background: var(--surface); padding: 10px 8px;
-    font-weight: 600; color: var(--text-med); font-size: 11px;
-    border-bottom: 1px solid var(--border);
+  .pricing-cta.outline {
+    background: #fff; color: var(--navy);
+    border: 1px solid var(--border);
   }
-  .sim-table td {
-    padding: 10px 8px; border-bottom: 1px solid var(--border);
+  .pricing-cta.fill {
+    background: var(--blue); color: #fff;
   }
-  .sim-table td:last-child { font-weight: 700; color: var(--blue-dark); }
+  .pricing-cta.dark {
+    background: var(--navy); color: #fff;
+  }
 
   /* ── CTA ── */
   .cta-section {
@@ -436,49 +449,71 @@
 <!-- ── PRICING ── -->
 <section class="pricing">
   <div class="section-label">Pricing</div>
-  <h2 class="section-title">투명한 가격 정책</h2>
+  <h2 class="section-title">맞는 플랜을 선택하세요</h2>
   <p class="section-sub">성과가 없으면 비용도 없습니다</p>
-  <div class="pricing-card">
-    <div class="pricing-header">
-      <h3>크리에이터 리드 관리</h3>
-      <p>세팅비 + 건당 과금</p>
-    </div>
-    <div class="pricing-body">
-      <div class="pricing-row">
-        <div>
-          <div class="pricing-label">초기 세팅비</div>
-          <div class="pricing-note">랜딩 제작 + 시트 연동 + UTM 세팅</div>
-        </div>
-        <div class="pricing-value">50만원~</div>
-      </div>
-      <div class="pricing-row">
-        <div>
-          <div class="pricing-label">월 50건까지</div>
-          <div class="pricing-note">소규모 채널도 부담 없이</div>
-        </div>
-        <div class="pricing-value" style="color:var(--green);">무료</div>
-      </div>
-      <div class="pricing-row">
-        <div>
-          <div class="pricing-label">51건 이상</div>
-          <div class="pricing-note">리드가 들어올 때만 과금</div>
-        </div>
-        <div class="pricing-value">건당 500원</div>
-      </div>
+  <div class="pricing-cards">
 
-      <div class="sim-title">월 예상 비용 시뮬레이션</div>
-      <table class="sim-table">
-        <thead>
-          <tr><th>채널 규모</th><th>월 리드</th><th>월 비용</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>소형</td><td>50건</td><td>0원</td></tr>
-          <tr><td>중형</td><td>300건</td><td>12.5만원</td></tr>
-          <tr><td>대형</td><td>1,000건</td><td>47.5만원</td></tr>
-          <tr><td>초대형</td><td>3,000건</td><td>147.5만원</td></tr>
-        </tbody>
-      </table>
+    <!-- BASIC -->
+    <div class="pricing-card">
+      <div class="pricing-header">
+        <h3>Basic</h3>
+        <div class="price">50만원</div>
+        <div class="price-note">세팅비 (1회)</div>
+      </div>
+      <div class="pricing-body">
+        <div class="pricing-feature"><span class="pricing-check">&#10003;</span> 맞춤 랜딩페이지 1개</div>
+        <div class="pricing-feature"><span class="pricing-check">&#10003;</span> 구글시트 DB 연동</div>
+        <div class="pricing-feature"><span class="pricing-check">&#10003;</span> 카카오톡 오픈채팅 연동</div>
+        <div class="pricing-feature"><span class="pricing-check">&#10003;</span> 월 50건 무료</div>
+        <div class="pricing-feature"><span class="pricing-check">&#10003;</span> 51건부터 건당 500원</div>
+        <div class="pricing-feature"><span class="pricing-x">&#8212;</span> 마감 카운트다운</div>
+        <div class="pricing-feature"><span class="pricing-x">&#8212;</span> 전용 대시보드</div>
+        <div class="pricing-feature"><span class="pricing-x">&#8212;</span> 데이터 분석 리포트</div>
+        <a href="#contact" class="pricing-cta outline">문의하기</a>
+      </div>
     </div>
+
+    <!-- STANDARD (추천) -->
+    <div class="pricing-card popular">
+      <div class="pricing-badge">추천</div>
+      <div class="pricing-header">
+        <h3>Standard</h3>
+        <div class="price">80만원</div>
+        <div class="price-note">세팅비 (1회)</div>
+      </div>
+      <div class="pricing-body">
+        <div class="pricing-feature"><span class="pricing-check">&#10003;</span> 맞춤 랜딩페이지 1개</div>
+        <div class="pricing-feature"><span class="pricing-check">&#10003;</span> 구글시트 DB 연동</div>
+        <div class="pricing-feature"><span class="pricing-check">&#10003;</span> 카카오톡 오픈채팅 연동</div>
+        <div class="pricing-feature"><span class="pricing-check">&#10003;</span> 월 50건 무료</div>
+        <div class="pricing-feature"><span class="pricing-check">&#10003;</span> 51건부터 건당 500원</div>
+        <div class="pricing-feature"><span class="pricing-check">&#10003;</span> 마감 카운트다운</div>
+        <div class="pricing-feature"><span class="pricing-check">&#10003;</span> 전용 대시보드 (실시간)</div>
+        <div class="pricing-feature"><span class="pricing-x">&#8212;</span> 데이터 분석 리포트</div>
+        <a href="#contact" class="pricing-cta fill">문의하기</a>
+      </div>
+    </div>
+
+    <!-- PREMIUM -->
+    <div class="pricing-card">
+      <div class="pricing-header">
+        <h3>Premium</h3>
+        <div class="price">150만원</div>
+        <div class="price-note">세팅비 (1회)</div>
+      </div>
+      <div class="pricing-body">
+        <div class="pricing-feature"><span class="pricing-check">&#10003;</span> 맞춤 랜딩페이지 1개</div>
+        <div class="pricing-feature"><span class="pricing-check">&#10003;</span> 구글시트 DB 연동</div>
+        <div class="pricing-feature"><span class="pricing-check">&#10003;</span> 카카오톡 오픈채팅 연동</div>
+        <div class="pricing-feature"><span class="pricing-check">&#10003;</span> 월 100건 무료</div>
+        <div class="pricing-feature"><span class="pricing-check">&#10003;</span> 101건부터 건당 500원</div>
+        <div class="pricing-feature"><span class="pricing-check">&#10003;</span> 마감 카운트다운</div>
+        <div class="pricing-feature"><span class="pricing-check">&#10003;</span> 전용 대시보드 (실시간)</div>
+        <div class="pricing-feature"><span class="pricing-check">&#10003;</span> 월간 데이터 분석 리포트</div>
+        <a href="#contact" class="pricing-cta dark">문의하기</a>
+      </div>
+    </div>
+
   </div>
 </section>
 
