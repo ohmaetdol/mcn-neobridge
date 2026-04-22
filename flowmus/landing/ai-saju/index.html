@@ -62,6 +62,38 @@
     max-width: 320px; margin: 0 auto;
   }
 
+  /* ── COUNTDOWN ── */
+  .countdown {
+    background: #0f0a1a; padding: 20px 16px; text-align: center;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .countdown-label {
+    font-size: 12px; font-weight: 600; color: #ef4444;
+    letter-spacing: 0.05em; margin-bottom: 10px;
+    animation: pulse-text 2s ease-in-out infinite;
+  }
+  @keyframes pulse-text {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+  .countdown-timer {
+    display: flex; justify-content: center; gap: 8px;
+  }
+  .countdown-block {
+    background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.25);
+    border-radius: 10px; padding: 10px 0; min-width: 64px;
+  }
+  .countdown-num {
+    font-size: 28px; font-weight: 800; color: #fff;
+    font-variant-numeric: tabular-nums; line-height: 1;
+  }
+  .countdown-unit {
+    font-size: 10px; color: rgba(255,255,255,0.5); margin-top: 4px;
+  }
+  .countdown-expired {
+    font-size: 16px; font-weight: 700; color: #ef4444;
+  }
+
   /* ── STATS BAR ── */
   .stats-bar {
     display: flex; justify-content: center; gap: 0;
@@ -256,11 +288,34 @@
 
 <!-- ── HERO ── -->
 <section class="hero">
-  <div class="hero-badge">1회 한정 &middot; 5월 라이브</div>
+  <div class="hero-badge">5월 10일 마감 &middot; 1회 한정</div>
   <h1>AI사주 <span class="highlight">당근마켓 + 자사몰</span><br>만들기 강의</h1>
   <p class="hero-desc">당근 5기 마감. 자사몰까지 포함된 단 1회 한정 강의.</p>
   <a href="#form" class="hero-cta">라이브 알림 받기</a>
 </section>
+
+<!-- ── COUNTDOWN ── -->
+<div class="countdown" id="countdown">
+  <div class="countdown-label">5월 10일 마감까지</div>
+  <div class="countdown-timer" id="countdownTimer">
+    <div class="countdown-block">
+      <div class="countdown-num" id="cd-days">--</div>
+      <div class="countdown-unit">일</div>
+    </div>
+    <div class="countdown-block">
+      <div class="countdown-num" id="cd-hours">--</div>
+      <div class="countdown-unit">시간</div>
+    </div>
+    <div class="countdown-block">
+      <div class="countdown-num" id="cd-mins">--</div>
+      <div class="countdown-unit">분</div>
+    </div>
+    <div class="countdown-block">
+      <div class="countdown-num" id="cd-secs">--</div>
+      <div class="countdown-unit">초</div>
+    </div>
+  </div>
+</div>
 
 <!-- ── STATS BAR ── -->
 <div class="stats-bar">
@@ -437,6 +492,28 @@
   function showSuccess() {
     window.location.href = 'https://open.kakao.com/o/gn495Aoi';
   }
+
+  // Countdown Timer — 2026년 5월 10일 23:59:59 KST
+  const DEADLINE = new Date('2026-05-10T23:59:59+09:00').getTime();
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const diff = DEADLINE - now;
+    if (diff <= 0) {
+      document.getElementById('countdownTimer').innerHTML =
+        '<div class="countdown-expired">마감되었습니다</div>';
+      return;
+    }
+    const d = Math.floor(diff / (1000*60*60*24));
+    const h = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+    const m = Math.floor((diff % (1000*60*60)) / (1000*60));
+    const s = Math.floor((diff % (1000*60)) / 1000);
+    document.getElementById('cd-days').textContent = String(d).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
+    document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
 
   // Floating CTA: 폼 영역 도달하면 숨기기
   const floatingCta = document.getElementById('floatingCta');
