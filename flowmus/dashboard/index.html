@@ -13,44 +13,81 @@
     background: #fff; color: #111; min-height: 100vh; line-height: 1.6;
   }
 
+  /* ── 로그인 ── */
+  .login-wrap {
+    display: flex; align-items: center; justify-content: center;
+    min-height: 100vh; padding: 20px;
+  }
+  .login-box {
+    width: 100%; max-width: 340px; text-align: center;
+  }
+  .login-box h1 { font-size: 20px; font-weight: 800; margin-bottom: 6px; }
+  .login-box p { font-size: 13px; color: #888; margin-bottom: 28px; }
+  .login-box input {
+    width: 100%; padding: 12px 14px; border: 1px solid #ccc;
+    border-radius: 8px; font-size: 14px; margin-bottom: 10px;
+    font-family: inherit; outline: none;
+  }
+  .login-box input:focus { border-color: #111; }
+  .login-box button {
+    width: 100%; padding: 12px; background: #111; color: #fff;
+    border: none; border-radius: 8px; font-size: 14px;
+    font-weight: 700; cursor: pointer; font-family: inherit;
+    margin-top: 4px;
+  }
+  .login-box button:active { background: #333; }
+  .login-error {
+    font-size: 12px; color: #dc2626; margin-top: 10px;
+    display: none;
+  }
+
+  /* ── 대시보드 ── */
+  .dashboard { display: none; }
+
   .header {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 14px 20px; border-bottom: 1px solid #eee;
+    padding: 14px 20px; border-bottom: 1px solid #ccc;
   }
   .header-left { display: flex; align-items: center; gap: 8px; }
   .header-left strong { font-size: 15px; }
   .header-left span { font-size: 12px; color: #888; }
+  .header-right { display: flex; align-items: center; gap: 10px; }
   .header-live {
     font-size: 11px; padding: 3px 10px; border-radius: 100px;
     background: #f0fdf4; color: #16a34a; font-weight: 600;
+  }
+  .header-logout {
+    font-size: 11px; color: #aaa; cursor: pointer;
+    border: 1px solid #ddd; padding: 3px 10px; border-radius: 100px;
+    background: none; font-family: inherit;
   }
 
   .main { padding: 20px; max-width: 800px; margin: 0 auto; }
 
   .channel {
-    padding: 14px 0 20px; border-bottom: 1px solid #eee; margin-bottom: 20px;
+    padding: 14px 0 20px; border-bottom: 1px solid #ccc; margin-bottom: 20px;
   }
   .channel h2 { font-size: 17px; font-weight: 700; }
   .channel p { font-size: 12px; color: #888; }
 
   /* KPI */
   .kpi { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
-  .kpi-box { border: 1px solid #eee; border-radius: 10px; padding: 16px; }
+  .kpi-box { border: 1px solid #ccc; border-radius: 10px; padding: 16px; }
   .kpi-box .label { font-size: 11px; color: #888; margin-bottom: 4px; }
   .kpi-box .num { font-size: 26px; font-weight: 800; font-variant-numeric: tabular-nums; }
   .kpi-box .change { font-size: 11px; color: #16a34a; margin-top: 2px; }
 
   /* 청구 */
   .billing {
-    border: 1px solid #eee; border-radius: 10px; padding: 20px;
+    border: 1px solid #ccc; border-radius: 10px; padding: 20px;
     margin-bottom: 24px; text-align: center;
   }
   .billing .label { font-size: 12px; color: #888; }
   .billing .amount { font-size: 32px; font-weight: 800; margin: 4px 0; }
-  .billing .detail { font-size: 12px; color: #aaa; }
+  .billing .detail { font-size: 12px; color: #888; }
   .billing-row {
     display: flex; justify-content: center; gap: 20px; margin-top: 14px;
-    padding-top: 14px; border-top: 1px solid #eee;
+    padding-top: 14px; border-top: 1px solid #ccc;
   }
   .billing-item { text-align: center; }
   .billing-item .n { font-size: 16px; font-weight: 700; }
@@ -59,7 +96,7 @@
   /* 차트 */
   .section-title {
     font-size: 14px; font-weight: 700; margin-bottom: 12px;
-    padding-bottom: 8px; border-bottom: 1px solid #eee;
+    padding-bottom: 8px; border-bottom: 1px solid #ccc;
   }
   .chart {
     display: flex; align-items: flex-end; gap: 6px;
@@ -74,21 +111,21 @@
     background: #3b82f6;
   }
   .chart-bar.current { background: #111; }
-  .chart-bar.target { background: #eee; border: 1px dashed #ccc; }
-  .chart-val { font-size: 10px; color: #888; margin-bottom: 3px; font-weight: 600; }
-  .chart-label { font-size: 10px; color: #aaa; margin-top: 4px; }
+  .chart-bar.target { background: #ddd; border: 1px dashed #aaa; }
+  .chart-val { font-size: 10px; color: #666; margin-bottom: 3px; font-weight: 600; }
+  .chart-label { font-size: 10px; color: #888; margin-top: 4px; }
   .chart-label.current { color: #111; font-weight: 700; }
 
   /* UTM */
   .utm { margin-bottom: 24px; }
   .utm-row {
     display: flex; align-items: center; gap: 10px;
-    padding: 8px 0; border-bottom: 1px solid #f5f5f5;
+    padding: 8px 0; border-bottom: 1px solid #ddd;
   }
   .utm-row:last-child { border-bottom: none; }
   .utm-name { font-size: 13px; font-weight: 600; min-width: 90px; }
   .utm-bg {
-    flex: 1; height: 20px; background: #f5f5f5; border-radius: 4px;
+    flex: 1; height: 20px; background: #eee; border-radius: 4px;
     overflow: hidden;
   }
   .utm-fill {
@@ -99,17 +136,17 @@
   .utm-fill.a { background: #111; }
   .utm-fill.b { background: #555; }
   .utm-fill.c { background: #999; }
-  .utm-fill.d { background: #ccc; color: #555; }
-  .utm-cnt { font-size: 12px; color: #888; min-width: 36px; text-align: right; }
+  .utm-fill.d { background: #bbb; color: #555; }
+  .utm-cnt { font-size: 12px; color: #666; min-width: 36px; text-align: right; }
 
   /* 테이블 */
   .tbl { margin-bottom: 24px; }
   .tbl table { width: 100%; border-collapse: collapse; font-size: 13px; }
   .tbl th {
     text-align: left; padding: 8px 10px; font-size: 11px;
-    color: #888; font-weight: 600; border-bottom: 1px solid #eee;
+    color: #666; font-weight: 600; border-bottom: 1px solid #ccc;
   }
-  .tbl td { padding: 10px; border-bottom: 1px solid #f5f5f5; }
+  .tbl td { padding: 10px; border-bottom: 1px solid #ddd; }
   .tbl tr:last-child td { border-bottom: none; }
   .tbl .num { font-variant-numeric: tabular-nums; font-weight: 600; }
   .tbl .amt { font-weight: 700; }
@@ -122,8 +159,23 @@
 
   .footer {
     text-align: center; padding: 20px;
-    border-top: 1px solid #eee;
+    border-top: 1px solid #ccc;
     font-size: 11px; color: #aaa;
+  }
+
+  .loading {
+    text-align: center; padding: 60px 20px;
+    font-size: 13px; color: #888;
+  }
+
+  .empty {
+    text-align: center; padding: 40px 20px;
+    font-size: 13px; color: #aaa;
+  }
+
+  .last-update {
+    text-align: center; font-size: 11px; color: #aaa;
+    margin-bottom: 20px;
   }
 
   @media (min-width: 640px) {
@@ -133,116 +185,366 @@
 </head>
 <body>
 
+<!-- ── 로그인 화면 ── -->
+<div class="login-wrap" id="loginScreen">
+  <div class="login-box">
+    <h1>Flowmus</h1>
+    <p>리드 관리 대시보드</p>
+    <input type="text" id="loginId" placeholder="아이디" autocomplete="username">
+    <input type="password" id="loginPw" placeholder="비밀번호" autocomplete="current-password">
+    <button onclick="doLogin()">로그인</button>
+    <div class="login-error" id="loginError"></div>
+  </div>
+</div>
+
+<!-- ── 대시보드 ── -->
+<div class="dashboard" id="dashboard">
+
 <header class="header">
   <div class="header-left">
     <strong>Flowmus</strong>
     <span>리드 관리</span>
   </div>
-  <div class="header-live">Live</div>
+  <div class="header-right">
+    <div class="header-live">Live</div>
+    <button class="header-logout" onclick="doLogout()">로그아웃</button>
+  </div>
 </header>
 
 <main class="main">
+  <div class="loading" id="loadingMsg">데이터를 불러오는 중...</div>
 
-  <div class="channel">
-    <h2>AI사주 당근마켓 + 자사몰 강의</h2>
-    <p>십억채널 &times; 사장찍어주는남자 &nbsp;|&nbsp; 2026.04 ~</p>
+  <div id="dashboardContent" style="display:none">
+    <div class="channel">
+      <h2 id="channelName"></h2>
+      <p id="channelPartner"></p>
+    </div>
+
+    <div class="kpi">
+      <div class="kpi-box">
+        <div class="label">이번 달 리드</div>
+        <div class="num" id="kpiThisMonth">-</div>
+        <div class="change" id="kpiChange"></div>
+      </div>
+      <div class="kpi-box">
+        <div class="label">누적 리드</div>
+        <div class="num" id="kpiTotal">-</div>
+      </div>
+      <div class="kpi-box">
+        <div class="label">일 평균</div>
+        <div class="num" id="kpiDailyAvg">-</div>
+      </div>
+      <div class="kpi-box">
+        <div class="label">무료 잔여</div>
+        <div class="num" id="kpiFreeLeft">-</div>
+      </div>
+    </div>
+
+    <div class="billing">
+      <div class="label">이번 달 청구 금액</div>
+      <div class="amount" id="billingAmount">-</div>
+      <div class="detail" id="billingDetail"></div>
+      <div class="billing-row" id="billingRow"></div>
+    </div>
+
+    <div class="section-title">월별 리드</div>
+    <div class="chart" id="chart"></div>
+
+    <div class="utm" id="utmSection">
+      <div class="section-title">유입 경로</div>
+      <div id="utmRows"></div>
+    </div>
+
+    <div class="tbl">
+      <div class="section-title">최근 리드</div>
+      <table>
+        <thead><tr><th>일시</th><th>이름</th><th>관심분야</th><th>유입</th></tr></thead>
+        <tbody id="leadsBody"></tbody>
+      </table>
+      <div class="empty" id="leadsEmpty" style="display:none">아직 리드가 없습니다</div>
+    </div>
+
+    <div class="tbl">
+      <div class="section-title">정산 내역</div>
+      <table>
+        <thead><tr><th>월</th><th>리드</th><th>과금</th><th>금액</th><th>상태</th></tr></thead>
+        <tbody id="billingBody"></tbody>
+      </table>
+    </div>
+
+    <div class="last-update" id="lastUpdate"></div>
   </div>
-
-  <div class="kpi">
-    <div class="kpi-box">
-      <div class="label">이번 달 리드</div>
-      <div class="num">127</div>
-      <div class="change">+32%</div>
-    </div>
-    <div class="kpi-box">
-      <div class="label">누적 리드</div>
-      <div class="num">423</div>
-    </div>
-    <div class="kpi-box">
-      <div class="label">전환율</div>
-      <div class="num">4.2%</div>
-      <div class="change">+0.8%p</div>
-    </div>
-    <div class="kpi-box">
-      <div class="label">일 평균</div>
-      <div class="num">5.8</div>
-    </div>
-  </div>
-
-  <div class="billing">
-    <div class="label">이번 달 청구 금액</div>
-    <div class="amount">38,500원</div>
-    <div class="detail">127건 - 50건(무료) = 77건 &times; 500원</div>
-    <div class="billing-row">
-      <div class="billing-item"><div class="n">127</div><div class="l">총 리드</div></div>
-      <div class="billing-item"><div class="n">50</div><div class="l">무료</div></div>
-      <div class="billing-item"><div class="n">77</div><div class="l">과금</div></div>
-      <div class="billing-item"><div class="n">500원</div><div class="l">단가</div></div>
-    </div>
-  </div>
-
-  <div class="section-title">월별 리드</div>
-  <div class="chart">
-    <div class="chart-col"><div class="chart-val">-</div><div class="chart-bar" style="height:0"></div><div class="chart-label">1월</div></div>
-    <div class="chart-col"><div class="chart-val">-</div><div class="chart-bar" style="height:0"></div><div class="chart-label">2월</div></div>
-    <div class="chart-col"><div class="chart-val">-</div><div class="chart-bar" style="height:0"></div><div class="chart-label">3월</div></div>
-    <div class="chart-col"><div class="chart-val">96</div><div class="chart-bar" style="height:48%"></div><div class="chart-label">4월</div></div>
-    <div class="chart-col"><div class="chart-val">127</div><div class="chart-bar current" style="height:63%"></div><div class="chart-label current">5월</div></div>
-    <div class="chart-col"><div class="chart-val">200</div><div class="chart-bar target" style="height:100%"></div><div class="chart-label" style="color:#aaa">목표</div></div>
-  </div>
-
-  <div class="utm">
-    <div class="section-title">유입 경로</div>
-    <div class="utm-row">
-      <div class="utm-name">유튜브 영상</div>
-      <div class="utm-bg"><div class="utm-fill a" style="width:72%">72%</div></div>
-      <div class="utm-cnt">91건</div>
-    </div>
-    <div class="utm-row">
-      <div class="utm-name">유튜브 댓글</div>
-      <div class="utm-bg"><div class="utm-fill b" style="width:15%">15%</div></div>
-      <div class="utm-cnt">19건</div>
-    </div>
-    <div class="utm-row">
-      <div class="utm-name">블로그</div>
-      <div class="utm-bg"><div class="utm-fill c" style="width:9%">9%</div></div>
-      <div class="utm-cnt">11건</div>
-    </div>
-    <div class="utm-row">
-      <div class="utm-name">기타</div>
-      <div class="utm-bg"><div class="utm-fill d" style="width:5%">5%</div></div>
-      <div class="utm-cnt">6건</div>
-    </div>
-  </div>
-
-  <div class="tbl">
-    <div class="section-title">최근 리드</div>
-    <table>
-      <thead><tr><th>일시</th><th>이름</th><th>관심분야</th><th>유입</th></tr></thead>
-      <tbody>
-        <tr><td class="num">04.22 14:32</td><td>김*수</td><td>당근 + 자사몰</td><td>유튜브</td></tr>
-        <tr><td class="num">04.22 13:18</td><td>이*진</td><td>자사몰 구축</td><td>댓글</td></tr>
-        <tr><td class="num">04.22 11:45</td><td>박*현</td><td>당근마켓 판매</td><td>유튜브</td></tr>
-        <tr><td class="num">04.22 10:02</td><td>최*영</td><td>AI 사주 전반</td><td>블로그</td></tr>
-        <tr><td class="num">04.21 22:15</td><td>정*은</td><td>당근 + 자사몰</td><td>유튜브</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="tbl">
-    <div class="section-title">정산 내역</div>
-    <table>
-      <thead><tr><th>월</th><th>리드</th><th>과금</th><th>금액</th><th>상태</th></tr></thead>
-      <tbody>
-        <tr><td class="num">2026.05</td><td class="num">127</td><td class="num">77</td><td class="amt">38,500원</td><td><span class="badge ing">진행중</span></td></tr>
-        <tr><td class="num">2026.04</td><td class="num">96</td><td class="num">46</td><td class="amt">23,000원</td><td><span class="badge done">입금완료</span></td></tr>
-      </tbody>
-    </table>
-  </div>
-
 </main>
 
 <footer class="footer">Flowmus &nbsp;|&nbsp; Creator Lead Management</footer>
+
+</div>
+
+<script>
+// ── Apps Script 웹앱 URL (배포 후 여기에 입력) ──
+const API_URL = '';
+
+// ── 로그인 ──
+function doLogin() {
+  var id = document.getElementById('loginId').value.trim();
+  var pw = document.getElementById('loginPw').value.trim();
+  var errEl = document.getElementById('loginError');
+
+  if (!id || !pw) {
+    errEl.textContent = '아이디와 비밀번호를 입력하세요';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  if (!API_URL) {
+    // API 미연동 시 데모 로그인
+    if (id === 'aisaju' && pw === 'flowmus2026') {
+      localStorage.setItem('fm_token', 'demo');
+      localStorage.setItem('fm_channel', 'AI사주 당근마켓 + 자사몰 강의');
+      localStorage.setItem('fm_partner', '십억채널 × 사장찍어주는남자');
+      showDashboard();
+      return;
+    }
+    errEl.textContent = '아이디 또는 비밀번호가 올바르지 않습니다';
+    errEl.style.display = 'block';
+    return;
+  }
+
+  fetch(API_URL + '?action=login&id=' + encodeURIComponent(id) + '&pw=' + encodeURIComponent(pw))
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.success) {
+        localStorage.setItem('fm_token', data.token);
+        localStorage.setItem('fm_channel', data.channel);
+        localStorage.setItem('fm_partner', data.partner);
+        showDashboard();
+      } else {
+        errEl.textContent = data.error;
+        errEl.style.display = 'block';
+      }
+    })
+    .catch(function() {
+      errEl.textContent = '서버에 연결할 수 없습니다';
+      errEl.style.display = 'block';
+    });
+}
+
+function doLogout() {
+  localStorage.removeItem('fm_token');
+  localStorage.removeItem('fm_channel');
+  localStorage.removeItem('fm_partner');
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('dashboard').style.display = 'none';
+}
+
+// ── 대시보드 표시 ──
+function showDashboard() {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'block';
+  loadData();
+}
+
+function loadData() {
+  var token = localStorage.getItem('fm_token');
+  var channel = localStorage.getItem('fm_channel') || '';
+  var partner = localStorage.getItem('fm_partner') || '';
+
+  document.getElementById('channelName').textContent = channel;
+  document.getElementById('channelPartner').textContent = partner;
+
+  if (!API_URL || token === 'demo') {
+    // API 미연동 → 구글시트 직접 연동 전까지 빈 상태 표시
+    showEmptyState();
+    return;
+  }
+
+  fetch(API_URL + '?action=data&key=' + encodeURIComponent(token))
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.error) {
+        doLogout();
+        return;
+      }
+      renderDashboard(data);
+    })
+    .catch(function() {
+      showEmptyState();
+    });
+}
+
+function showEmptyState() {
+  document.getElementById('loadingMsg').style.display = 'none';
+  document.getElementById('dashboardContent').style.display = 'block';
+
+  document.getElementById('kpiThisMonth').textContent = '0';
+  document.getElementById('kpiTotal').textContent = '0';
+  document.getElementById('kpiChange').textContent = '';
+  document.getElementById('kpiDailyAvg').textContent = '0';
+  document.getElementById('kpiFreeLeft').textContent = '50';
+
+  document.getElementById('billingAmount').textContent = '0원';
+  document.getElementById('billingDetail').textContent = '0건 - 50건(무료) = 0건 × 500원';
+  document.getElementById('billingRow').innerHTML =
+    '<div class="billing-item"><div class="n">0</div><div class="l">총 리드</div></div>' +
+    '<div class="billing-item"><div class="n">50</div><div class="l">무료</div></div>' +
+    '<div class="billing-item"><div class="n">0</div><div class="l">과금</div></div>' +
+    '<div class="billing-item"><div class="n">500원</div><div class="l">단가</div></div>';
+
+  // 빈 차트
+  var now = new Date();
+  var thisMonth = now.getMonth() + 1;
+  var chartHtml = '';
+  for (var m = 1; m <= 12; m++) {
+    var isCurrent = m === thisMonth;
+    chartHtml += '<div class="chart-col">' +
+      '<div class="chart-val">-</div>' +
+      '<div class="chart-bar' + (isCurrent ? ' current' : '') + '" style="height:0"></div>' +
+      '<div class="chart-label' + (isCurrent ? ' current' : '') + '">' + m + '월</div></div>';
+  }
+  document.getElementById('chart').innerHTML = chartHtml;
+
+  document.getElementById('utmRows').innerHTML = '';
+  document.getElementById('leadsBody').innerHTML = '';
+  document.getElementById('leadsEmpty').style.display = 'block';
+  document.getElementById('billingBody').innerHTML = '';
+
+  var now2 = new Date();
+  document.getElementById('lastUpdate').textContent =
+    '마지막 업데이트: ' + now2.getFullYear() + '.' +
+    String(now2.getMonth()+1).padStart(2,'0') + '.' +
+    String(now2.getDate()).padStart(2,'0') + ' ' +
+    String(now2.getHours()).padStart(2,'0') + ':' +
+    String(now2.getMinutes()).padStart(2,'0');
+}
+
+function renderDashboard(data) {
+  document.getElementById('loadingMsg').style.display = 'none';
+  document.getElementById('dashboardContent').style.display = 'block';
+
+  // KPI
+  var kpi = data.kpi;
+  document.getElementById('kpiThisMonth').textContent = kpi.thisMonth.toLocaleString();
+  document.getElementById('kpiTotal').textContent = kpi.total.toLocaleString();
+  document.getElementById('kpiDailyAvg').textContent = kpi.dailyAvg;
+  var freeLeft = Math.max(0, 50 - kpi.thisMonth);
+  document.getElementById('kpiFreeLeft').textContent = freeLeft;
+
+  var changeEl = document.getElementById('kpiChange');
+  if (kpi.changeRate !== 0) {
+    changeEl.textContent = (kpi.changeRate > 0 ? '+' : '') + kpi.changeRate + '%';
+    changeEl.style.color = kpi.changeRate > 0 ? '#16a34a' : '#dc2626';
+  }
+
+  // 청구
+  var b = data.billing;
+  document.getElementById('billingAmount').textContent = b.amount.toLocaleString() + '원';
+  document.getElementById('billingDetail').textContent =
+    b.totalLeads + '건 - ' + b.freeLeads + '건(무료) = ' + b.billableLeads + '건 × ' + b.pricePerLead + '원';
+  document.getElementById('billingRow').innerHTML =
+    '<div class="billing-item"><div class="n">' + b.totalLeads + '</div><div class="l">총 리드</div></div>' +
+    '<div class="billing-item"><div class="n">' + b.freeLeads + '</div><div class="l">무료</div></div>' +
+    '<div class="billing-item"><div class="n">' + b.billableLeads + '</div><div class="l">과금</div></div>' +
+    '<div class="billing-item"><div class="n">' + b.pricePerLead + '원</div><div class="l">단가</div></div>';
+
+  // 차트
+  var chart = data.chart;
+  var maxVal = Math.max.apply(null, chart.map(function(c) { return c.count; }));
+  if (maxVal === 0) maxVal = 1;
+  var now = new Date();
+  var thisMonth = now.getMonth() + 1;
+
+  var chartHtml = '';
+  for (var i = 0; i < chart.length; i++) {
+    var c = chart[i];
+    var pct = Math.round(c.count / maxVal * 100);
+    var isCurrent = (i + 1) === thisMonth;
+    chartHtml += '<div class="chart-col">' +
+      '<div class="chart-val">' + (c.count > 0 ? c.count : '-') + '</div>' +
+      '<div class="chart-bar' + (isCurrent ? ' current' : '') + '" style="height:' + (c.count > 0 ? pct : 0) + '%"></div>' +
+      '<div class="chart-label' + (isCurrent ? ' current' : '') + '">' + c.month + '</div></div>';
+  }
+  document.getElementById('chart').innerHTML = chartHtml;
+
+  // UTM
+  var utm = data.utm;
+  var utmHtml = '';
+  var totalUtm = utm.reduce(function(s, u) { return s + u.count; }, 0);
+  var colors = ['a', 'b', 'c', 'd'];
+  for (var j = 0; j < utm.length; j++) {
+    var u = utm[j];
+    var pctU = totalUtm > 0 ? Math.round(u.count / totalUtm * 100) : 0;
+    utmHtml += '<div class="utm-row">' +
+      '<div class="utm-name">' + escapeHtml(u.name) + '</div>' +
+      '<div class="utm-bg"><div class="utm-fill ' + colors[Math.min(j, 3)] + '" style="width:' + Math.max(pctU, 3) + '%">' + pctU + '%</div></div>' +
+      '<div class="utm-cnt">' + u.count + '건</div></div>';
+  }
+  document.getElementById('utmRows').innerHTML = utmHtml;
+
+  // 최근 리드
+  var leads = data.recentLeads;
+  if (leads.length === 0) {
+    document.getElementById('leadsEmpty').style.display = 'block';
+    document.getElementById('leadsBody').innerHTML = '';
+  } else {
+    document.getElementById('leadsEmpty').style.display = 'none';
+    var lHtml = '';
+    for (var k = 0; k < leads.length; k++) {
+      var l = leads[k];
+      lHtml += '<tr><td class="num">' + escapeHtml(l.date) + '</td>' +
+        '<td>' + escapeHtml(l.name) + '</td>' +
+        '<td>' + escapeHtml(l.interest) + '</td>' +
+        '<td>' + escapeHtml(l.source) + '</td></tr>';
+    }
+    document.getElementById('leadsBody').innerHTML = lHtml;
+  }
+
+  // 정산 내역
+  var bh = data.billingHistory;
+  var bhHtml = '';
+  for (var m = 0; m < bh.length; m++) {
+    var item = bh[m];
+    var badgeClass = item.status === '진행중' ? 'ing' : 'done';
+    bhHtml += '<tr><td class="num">' + item.month + '</td>' +
+      '<td class="num">' + item.leads + '</td>' +
+      '<td class="num">' + item.billable + '</td>' +
+      '<td class="amt">' + item.amount.toLocaleString() + '원</td>' +
+      '<td><span class="badge ' + badgeClass + '">' + item.status + '</span></td></tr>';
+  }
+  document.getElementById('billingBody').innerHTML = bhHtml;
+
+  // 마지막 업데이트
+  if (data.lastUpdate) {
+    var d = new Date(data.lastUpdate);
+    document.getElementById('lastUpdate').textContent =
+      '마지막 업데이트: ' + d.getFullYear() + '.' +
+      String(d.getMonth()+1).padStart(2,'0') + '.' +
+      String(d.getDate()).padStart(2,'0') + ' ' +
+      String(d.getHours()).padStart(2,'0') + ':' +
+      String(d.getMinutes()).padStart(2,'0');
+  }
+}
+
+function escapeHtml(str) {
+  var div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// Enter키로 로그인
+document.getElementById('loginPw').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') doLogin();
+});
+document.getElementById('loginId').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') document.getElementById('loginPw').focus();
+});
+
+// 자동 로그인 체크
+(function() {
+  if (localStorage.getItem('fm_token')) {
+    showDashboard();
+  }
+})();
+</script>
 
 </body>
 </html>
