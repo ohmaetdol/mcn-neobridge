@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
+<meta name="theme-color" content="#0064ff">
+<title>EP.03 촬영 질문지 — 남자들이 3초 만에 넘기는 여자 프로필 TOP 5</title>
+<style>
+:root{--bg:#f5f6f9;--card:#fff;--border:#e4e6ec;--border2:#eef0f5;--text:#111827;--text2:#6b7280;--accent:#0064ff;--accent-l:#e8f1ff;--done:#16a34a;--done-bg:#dcfce7;--memo:#fffbeb;--memo-b:#f59e0b;--ban:#fef2f2;--ban-b:#ef4444;--hh:58px;--th:50px}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR','Apple SD Gothic Neo',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;padding-bottom:80px;font-size:15px}
+.hd{position:fixed;top:0;left:0;right:0;height:var(--hh);background:var(--card);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 16px;gap:10px;z-index:100;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.hd-l{flex:1;min-width:0}
+.hd-ep{font-size:10px;font-weight:700;color:var(--accent);letter-spacing:.5px}
+.hd-t{font-size:14px;font-weight:700;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hd-r{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.prog-lbl{font-size:11px;font-weight:700;color:var(--text2);padding:6px 10px;background:var(--accent-l);border-radius:8px;min-width:58px;text-align:center}
+.prog-lbl strong{color:var(--accent);font-size:13px}
+.btn{font-size:11px;font-weight:600;color:var(--text2);background:transparent;border:1px solid var(--border);border-radius:8px;padding:6px 10px;cursor:pointer;font-family:inherit}
+.btn:active{background:var(--border2)}
+.tabs{position:fixed;top:var(--hh);left:0;right:0;height:var(--th);background:var(--card);border-bottom:1px solid var(--border);display:flex;overflow-x:auto;z-index:99;scrollbar-width:none;padding:0 8px;gap:2px}
+.tabs::-webkit-scrollbar{display:none}
+.tab{display:flex;align-items:center;padding:0 14px;text-decoration:none;color:var(--text2);font-size:12px;font-weight:600;white-space:nowrap;border-bottom:3px solid transparent;flex-shrink:0;transition:.15s}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.main{margin-top:calc(var(--hh) + var(--th));padding:20px 14px 64px;max-width:780px;margin-left:auto;margin-right:auto}
+.sec{margin-bottom:40px;scroll-margin-top:calc(var(--hh) + var(--th) + 10px)}
+.sec-hd{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:8px}
+.sec-hd-l{flex:1;min-width:0}
+.sec-t{font-size:19px;font-weight:800;line-height:1.3;word-break:keep-all}
+.sec-time{display:inline-block;font-size:11px;font-weight:700;color:var(--accent);background:var(--accent-l);padding:3px 9px;border-radius:6px;margin-top:5px}
+.sec-stage{font-size:12px;color:var(--text2);margin-top:5px}
+.sec-cnt{font-size:11px;font-weight:700;color:var(--text2);background:var(--border2);padding:5px 10px;border-radius:20px;flex-shrink:0;white-space:nowrap}
+.sec-cnt.done{color:var(--done);background:var(--done-bg)}
+.memo{background:var(--memo);border-left:4px solid var(--memo-b);border-radius:0 10px 10px 0;padding:13px 16px;margin:14px 0 18px;font-size:13px}
+.memo-r{display:flex;gap:10px;margin:5px 0}
+.memo-r:first-child{margin-top:0}
+.memo-r:last-child{margin-bottom:0}
+.memo-k{flex-shrink:0;font-weight:700;color:#92400e;min-width:42px;font-size:12px}
+.memo-v{color:#451a03;line-height:1.55;word-break:keep-all}
+.ban-box{background:var(--ban);border-left:4px solid var(--ban-b);border-radius:0 10px 10px 0;padding:13px 16px;margin:14px 0 18px;font-size:13px}
+.ban-box .memo-k{color:#991b1b}
+.ban-box .memo-v{color:#7f1d1d}
+.q{display:flex;align-items:flex-start;gap:12px;padding:13px 14px;background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:8px;cursor:pointer;transition:.15s;user-select:none}
+.q:active{transform:scale(.99)}
+.q.on{background:var(--done-bg);border-color:var(--done)}
+.q.on .q-q{color:var(--text2);text-decoration:line-through}
+.q.on .q-n{color:var(--done);background:#fff}
+.ck{width:26px;height:26px;border:2px solid var(--border);border-radius:7px;flex-shrink:0;position:relative;background:#fff;transition:.15s;margin-top:1px}
+.q.on .ck{background:var(--done);border-color:var(--done)}
+.q.on .ck::after{content:'';position:absolute;left:7px;top:3px;width:7px;height:13px;border:solid #fff;border-width:0 3px 3px 0;transform:rotate(45deg)}
+.q-body{flex:1;min-width:0}
+.q-top{display:flex;align-items:center;gap:6px;margin-bottom:4px;flex-wrap:wrap}
+.q-n{font-size:11px;font-weight:800;color:var(--text2);background:var(--border2);padding:2px 8px;border-radius:6px;flex-shrink:0}
+.q-tag{font-size:10px;font-weight:700;padding:2px 8px;border-radius:5px;flex-shrink:0;letter-spacing:.3px;color:#fff}
+.tg-PEAK{background:#ef4444}
+.tg-PD{background:#06b6d4}
+.tg-TREND{background:#7c3aed}
+.q-q{font-size:15px;line-height:1.55;color:var(--text);word-break:keep-all}
+.q-hint{font-size:12px;color:var(--text2);margin-top:4px;line-height:1.5;word-break:keep-all;font-style:italic}
+@media(min-width:640px){body{font-size:16px}.hd{padding:0 24px}.hd-t{font-size:16px}.main{padding:28px 24px 64px}.sec-t{font-size:22px}.q{padding:16px 18px}.q-q{font-size:15.5px}}
+@media(max-width:400px){.hd{padding:0 12px;gap:8px}.hd-t{font-size:12px}.prog-lbl{padding:5px 8px;min-width:52px}.prog-lbl strong{font-size:12px}.btn{padding:5px 7px}.tab{padding:0 10px;font-size:11px}.main{padding:16px 12px 48px}.sec-t{font-size:17px}.q{padding:12px 12px;gap:10px}.q-q{font-size:14px}.memo{padding:12px 14px;font-size:12px}}
+@media print{.hd,.tabs{display:none!important}.main{margin:0;padding:20px;max-width:100%}.q{break-inside:avoid;background:#fff!important}.sec{break-inside:auto}.ck{display:none}}
+</style>
+</head>
+<body>
+<header class="hd">
+<div class="hd-l">
+<div class="hd-ep">EP.03 · 촬영 질문지 v1</div>
+<div class="hd-t">남자들이 3초 만에 넘기는 여자 프로필 TOP 5</div>
+</div>
+<div class="hd-r">
+<div class="prog-lbl"><strong id="pn">0</strong> / <span id="pt">0</span></div>
+<button class="btn" id="reset">리셋</button>
+</div>
+</header>
+<nav class="tabs" id="tabs"></nav>
+<main class="main" id="main"></main>
+<script>
+const D=[
+{id:1,title:"킥",time:"0:00~0:30",stage:"패턴 인터럽트 → 숫자 충격",
+memo:[
+{k:"설정",v:"야외 카페에서 핸드폰으로 프로필 넘기면서 시작. 인사 없이 바로."},
+{k:"촬영",v:"야외 자연광. 핀마이크 ON 확인. 핸드폰 스와이프 동작 위주로."},
+{k:"톤",v:"캐주얼 + 약간의 도발. '이거 아세요?' 느낌."},
+{k:"주의",v:"인사 금지. '안녕하세요' 절대 X. '3초' 숫자를 편집 자막으로 강조."}
+],
+qs:[
+{n:1,tag:"PEAK",q:"(핸드폰 스와이프하면서) 3초. 프로필 하나 넘기는 데 걸리는 시간이에요.",hint:"스와이프 하면서 시작. '3초' 숫자 충격. 편집 자막으로 3초 카운트."},
+{n:2,tag:"PD",q:"3초요? 어떻게 3초 만에 판단을 해요?",hint:"'사진 1초, 직업 1초, 나이 1초. 끝이에요.' → 시청자 충격."}
+]},
+
+{id:2,title:"해부",time:"0:30~4:30",stage:'"결정사 안에서 보면요" — TOP 5 카운트다운',
+memo:[
+{k:"목표",v:"프로필 탈락 사유 TOP 5를 5위→1위 카운트다운. 정보+충격."},
+{k:"촬영",v:"이세령 표정 위주. 각 순위 전환 시 편집으로 효과음+순위 자막 표시."},
+{k:"PD패턴",v:"\"진짜요?\" + \"좋은 사람 만나고 싶은 건 당연한 거 아니에요?\" (시청자 대리 반론)"},
+{k:"주의",v:"경쟁사 실명 금지. 실제 프로필 예시는 블러 처리. 커뮤니티 원문은 편집 자막으로."}
+],
+qs:[
+{n:3,tag:null,q:"5위부터 가볼까요? 제일 먼저 넘기는 프로필은?",hint:"5위: 과도한 조건 나열 ('연봉 OO 이상, 키 OO 이상' 목록형 프로필). 편집 자막으로 실제 예시 블러 처리."},
+{n:4,tag:"PD",q:"좋은 사람 만나고 싶은 건 당연한 거 아니에요?",hint:"PD = 시청자 대리 반론. '조건 나열 = 나는 이만큼 안 된다는 뜻으로 읽혀요' → 반전."},
+{n:5,tag:null,q:"4위는요?",hint:"4위: 성의 없는 사진 (셀카, 과도한 필터, 단체사진 크롭). 매칭 수락률 40% 하락 데이터."},
+{n:6,tag:"PEAK",q:"3위요?",hint:"3위: 부정적 에너지 프로필 ('이런 남자는 싫어요' 나열). 커뮤니티 원문 '만나기도 전에 지친다'. 거절률 94%. 위기장치."},
+{n:7,tag:"TREND",q:"커뮤니티에서 '35살 마지노선'이라는 말이 있던데, 2위는?",hint:"2위: 나이 (35세 cliff). 블라인드/네이트판 화제. '35 넘으면 소개 횟수 자체가 달라져요.' 위기장치. PD: '불공평하지 않아요?'"},
+{n:8,tag:"PEAK",q:"그러면 1위는요? 다들 예상하는 거?",hint:"1위: 사진-실물 불일치 (프사기). '만나자마자 5분 만에 끝나는 미팅' → 충격. EP04 떡밥. 위기장치."}
+]},
+
+{id:3,title:"본인",time:"4:30~8:00",stage:'"겪어봐야 아는 거예요" — 자학+공감',
+memo:[
+{k:"목표",v:"이세령 본인도 프로필에서 탈락/넘겨진 경험 솔직 공개. 자학 = 공감."},
+{k:"촬영",v:"이세령 표정 클로즈업 필수. 감정 순간 리테이크 금지."},
+{k:"PD패턴",v:"\"대표님은요?\" (해부→본인 전환 트리거)"},
+{k:"편집",v:"커뮤니티 원문은 편집 자막으로. YTN 보도 언급 시 뉴스 캡처 자막."}
+],
+qs:[
+{n:9,tag:"PD",q:"대표님은요? 대표님 프로필도 넘겨진 적 있어요?",hint:"전환 순간. 해부→본인. 자학 시작. '저도 다 해당됐어요.'"},
+{n:10,tag:null,q:"제일 충격이었던 건 뭐예요? 본인 프로필에서?",hint:"본인 경험 솔직 공개. '사진 교체했더니 매칭률이 2배 올랐어요' 같은 실화."},
+{n:11,tag:"TREND",q:"요즘 '연봉 3억이라 했는데 5천만 원이었다' 뉴스 있잖아요. 업계에서 진짜 이런 일 많아요?",hint:"YTN 2025.11 보도. 프사기 심각성. EP04 연결 떡밥. '다음에 이것만 따로 이야기할게요.'"},
+{n:12,tag:null,q:"프로필 때문에 자신감 떨어진 적 있어요?",hint:"이세령 감정 순간. '결정사 대표인데 내 프로필도 별로라는 게...' 자학 + 공감."}
+]},
+
+{id:4,title:"반전",time:"8:00~10:30",stage:'"프로필이 다가 아니에요" — 메시지',
+memo:[
+{k:"목표",v:"정보 → 감성 전환. '프로필은 입구지 결론이 아니다' 메시지."},
+{k:"촬영",v:"BGM 피아노 전환(편집). 이세령 표정 클로즈업. 캐치프레이즈 순간 = 긴 컷 10초+."},
+{k:"PD패턴",v:"\"그러면 어떡해요?\" (본인→반전 전환)"},
+{k:"주의",v:"특정 회원 정보 절대 X. '어떤 분이~' 익명 처리. 엔딩 CTA 0회."}
+],
+qs:[
+{n:13,tag:"PD",q:"그러면 어떡해요? 프로필을 어떻게 만들어야 해요?",hint:"이세령 솔루션 3가지. 1) 사진은 최근 6개월 자연광 2) 조건 대신 일상/취미 한 줄 3) '원하는 사람' 대신 '나는 이런 사람' 작성."},
+{n:14,tag:"PEAK",q:"프로필 잘 만들면 다 해결돼요?",hint:"'프로필이 다가 아니에요.' 캐치프레이즈 순간. '프로필로 만나지만, 결혼은 사람으로 하는 거예요.' 위기장치."}
+]},
+
+{id:5,title:"아웃",time:"10:30~11:30",stage:"여운 + EP.04 떡밥",
+memo:[
+{k:"목표",v:"캐치프레이즈 + 여운 + 페이드아웃."},
+{k:"촬영",v:"대본 X. 이세령 감정으로 자유롭게. PD 10초+ 침묵 버티기. 리테이크 금지."},
+{k:"편집",v:"마지막 멘트 → 3초 정적 → 미소 → 페이드아웃(5초). EP.04 프리뷰 5초: '다음 편 — 결정사에서 프로필 사기 안 당하는 법'"}
+],
+qs:[
+{n:15,tag:null,q:"지금 프로필 때문에 자신 없는 사람한테 한마디?",hint:"대본 X. 이세령 감정으로 자유롭게. PD 10초+ 침묵. 리테이크 금지."}
+]}
+];
+
+const SK='ep03_checks_v1';
+let checks=(()=>{try{return JSON.parse(localStorage.getItem(SK)||'{}')}catch(e){return {}}})();
+const save=()=>localStorage.setItem(SK,JSON.stringify(checks));
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+const tabsEl=document.getElementById('tabs');
+const mainEl=document.getElementById('main');
+
+// Render tabs
+D.forEach(loc=>{
+ const a=document.createElement('a');
+ a.className='tab';a.href='#sec-'+loc.id;a.dataset.id=loc.id;
+ a.textContent=loc.title;
+ tabsEl.appendChild(a);
+});
+
+// Count total questions
+let totalQ=0;
+D.forEach(loc=>totalQ+=loc.qs.length);
+document.getElementById('pt').textContent=totalQ;
+
+// Render sections
+D.forEach(loc=>{
+ const sec=document.createElement('section');
+ sec.className='sec';sec.id='sec-'+loc.id;
+ const total=loc.qs.length;
+ let h='<div class="sec-hd"><div class="sec-hd-l">'
+  +'<div class="sec-t">['+esc(loc.title)+']</div>'
+  +'<div><span class="sec-time">'+esc(loc.time)+'</span></div>'
+  +'<div class="sec-stage">'+esc(loc.stage)+'</div>'
+  +'</div>'
+  +'<div class="sec-cnt" data-loc="'+loc.id+'">0 / '+total+'</div>'
+  +'</div>';
+
+ // Memo block
+ h+='<div class="memo">';
+ loc.memo.forEach(m=>{
+  h+='<div class="memo-r"><div class="memo-k">'+esc(m.k)+'</div><div class="memo-v">'+esc(m.v)+'</div></div>';
+ });
+ h+='</div>';
+
+ // Questions
+ loc.qs.forEach(q=>{
+  const on=checks[q.n]?' on':'';
+  h+='<div class="q'+on+'" data-n="'+q.n+'">'
+   +'<div class="ck"></div>'
+   +'<div class="q-body">'
+   +'<div class="q-top"><span class="q-n">#'+q.n+'</span>'
+   +(q.tag?'<span class="q-tag tg-'+q.tag+'">['+q.tag+']</span>':'')
+   +'</div>'
+   +'<div class="q-q">'+esc(q.q)+'</div>'
+   +(q.hint?'<div class="q-hint">→ '+esc(q.hint)+'</div>':'')
+   +'</div></div>';
+ });
+ sec.innerHTML=h;
+ mainEl.appendChild(sec);
+});
+
+// Ban at bottom
+const extras=document.createElement('div');
+extras.innerHTML=`
+<div class="ban-box" style="margin-top:32px">
+<div class="memo-r"><div class="memo-k" style="min-width:60px">절대금지</div><div class="memo-v">"안녕하세요" 인사 — 핸드폰 스와이프하면서 바로 시작</div></div>
+<div class="memo-r"><div class="memo-k" style="min-width:60px">절대금지</div><div class="memo-v">"구독/좋아요" 멘트 — 영상 내 0회</div></div>
+<div class="memo-r"><div class="memo-k" style="min-width:60px">절대금지</div><div class="memo-v">경쟁사 실명(듀오/가연/엔노블/제이노블) — "메이저 결정사"로만</div></div>
+<div class="memo-r"><div class="memo-k" style="min-width:60px">절대금지</div><div class="memo-v">특정 회원 정보 — "어떤 분이~" 익명 처리</div></div>
+<div class="memo-r"><div class="memo-k" style="min-width:60px">절대금지</div><div class="memo-v">EP01-02 스토리 반복 — 인생서사/등급 채점 다시 X</div></div>
+</div>
+<div class="memo" style="margin-top:12px">
+<div class="memo-r"><div class="memo-k" style="min-width:42px">주의</div><div class="memo-v">MCN/네오브릿지 관계 → 순수 개인 채널</div></div>
+<div class="memo-r"><div class="memo-k" style="min-width:42px">주의</div><div class="memo-v">워터밤 / 황정우·이나영 사건 → 절대 금지</div></div>
+<div class="memo-r"><div class="memo-k" style="min-width:42px">주의</div><div class="memo-v">본인 결정사 가격 직접 공개 → "업계 평균"으로만</div></div>
+<div class="memo-r"><div class="memo-k" style="min-width:42px">주의</div><div class="memo-v">특정 성별 비하 → 중립. "남자가 나빠" "여자가 문제" X</div></div>
+<div class="memo-r"><div class="memo-k" style="min-width:42px">주의</div><div class="memo-v">프로필 탈락을 "당연하다" 식으로 → 분석 O, 판단 X</div></div>
+</div>`;
+mainEl.appendChild(extras);
+
+// Update counts
+function updateCounts(){
+ let total=0,done=0;
+ D.forEach(loc=>{
+  let ld=0,lt=loc.qs.length;
+  loc.qs.forEach(q=>{
+   total++;
+   if(checks[q.n]){ld++;done++}
+  });
+  const el=document.querySelector('[data-loc="'+loc.id+'"]');
+  if(el){el.textContent=ld+' / '+lt;el.classList.toggle('done',ld===lt&&lt>0)}
+ });
+ document.getElementById('pn').textContent=done;
+}
+
+// Click handler
+mainEl.addEventListener('click',e=>{
+ const q=e.target.closest('.q');
+ if(!q)return;
+ const n=q.dataset.n;
+ if(checks[n]){delete checks[n];q.classList.remove('on')}
+ else{checks[n]=1;q.classList.add('on')}
+ save();updateCounts();
+});
+
+// Reset
+document.getElementById('reset').addEventListener('click',()=>{
+ if(!confirm('체크 상태를 모두 리셋할까요?'))return;
+ checks={};save();
+ document.querySelectorAll('.q.on').forEach(q=>q.classList.remove('on'));
+ updateCounts();
+});
+
+// Tab scroll spy
+const tabEls=tabsEl.querySelectorAll('.tab');
+const secEls=document.querySelectorAll('.sec');
+function updActive(){
+ const off=130;let c=0;
+ secEls.forEach((s,i)=>{if(s.getBoundingClientRect().top<=off)c=i});
+ tabEls.forEach((t,i)=>t.classList.toggle('active',i===c));
+ const a=tabsEl.querySelector('.tab.active');
+ if(a){const l=a.offsetLeft,w=a.offsetWidth,bw=tabsEl.offsetWidth;tabsEl.scrollTo({left:l-bw/2+w/2,behavior:'smooth'})}
+}
+window.addEventListener('scroll',updActive,{passive:true});
+tabEls.forEach(t=>t.addEventListener('click',e=>{
+ e.preventDefault();
+ document.getElementById('sec-'+t.dataset.id).scrollIntoView({behavior:'smooth'});
+}));
+
+updateCounts();
+updActive();
+</script>
+</body>
+</html>
