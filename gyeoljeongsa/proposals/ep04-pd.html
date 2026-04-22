@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
+<meta name="theme-color" content="#ffffff">
+<title>[PD용] EP.04 — 결정사 첫 만남, 상대는 7분 안에 결정합니다</title>
+<style>
+:root{--bg:#fff;--card:#fff;--card2:#f4f6f8;--border:#e5e7eb;--text:#191f28;--text2:#4e5968;--text3:#8b95a1;--accent:#0064ff;--accent-l:#e8f1ff;--green:#15803d;--amber:#b45309;--red:#dc2626}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);line-height:1.75;font-size:15px;-webkit-font-smoothing:antialiased;padding:0 0 60px}
+.bar{position:sticky;top:0;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:12px 20px;z-index:10;display:flex;align-items:center;gap:10px}
+.bar .badge{font-size:11px;font-weight:700;color:#fff;background:var(--accent);padding:4px 10px;border-radius:6px}
+.bar .title{font-size:14px;font-weight:700;flex:1}
+.bar .ver{font-size:11px;color:var(--text3)}
+.ct{max-width:720px;margin:0 auto;padding:24px 20px}
+h1{font-size:24px;font-weight:800;line-height:1.3;margin-bottom:6px;word-break:keep-all}
+h2{font-size:19px;font-weight:800;margin:40px 0 14px;padding-bottom:8px;border-bottom:2px solid var(--text);word-break:keep-all}
+h3{font-size:15px;font-weight:700;margin:24px 0 8px;color:var(--text)}
+p{margin:6px 0;color:var(--text2);word-break:keep-all}
+strong{color:var(--text)}
+.hero{text-align:center;padding:28px 0 24px;border-bottom:1px solid var(--border);margin-bottom:28px}
+.hero p{font-size:14px;color:var(--text2)}
+.hero .meta{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--text3);margin-top:12px}
+.hero .meta span{background:var(--card2);padding:5px 10px;border-radius:8px}
+.card{background:var(--card2);border-radius:12px;padding:16px 18px;margin:10px 0}
+.card-t{font-size:12px;font-weight:700;color:var(--accent);margin-bottom:6px;letter-spacing:.3px}
+.card p{font-size:14px;margin:3px 0}
+.hl{background:var(--accent-l);border-left:3px solid var(--accent);padding:14px 18px;border-radius:0 10px 10px 0;margin:14px 0;font-size:14px}
+.ban{background:#fef2f2;border-left:3px solid var(--red);padding:14px 18px;border-radius:0 10px 10px 0;margin:14px 0}
+.ban-t{font-size:12px;font-weight:700;color:var(--red);margin-bottom:4px}
+.ban p{font-size:13px;color:#991b1b;margin:2px 0}
+.warn{background:#fffbeb;border-left:3px solid var(--amber);padding:14px 18px;border-radius:0 10px 10px 0;margin:14px 0}
+.warn-t{font-size:12px;font-weight:700;color:var(--amber);margin-bottom:4px}
+.warn p{font-size:13px;color:#92400e;margin:2px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+th{background:var(--card2);padding:10px 12px;text-align:left;font-weight:700;font-size:12px;border-bottom:1px solid var(--border)}
+td{padding:10px 12px;border-bottom:1px solid var(--card2);color:var(--text2);vertical-align:top}
+.q{display:flex;gap:10px;padding:12px 14px;background:var(--card);border:1px solid var(--border);border-radius:10px;margin:8px 0}
+.q-n{flex-shrink:0;width:28px;height:28px;background:var(--accent);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800}
+.q-body{flex:1;min-width:0}
+.q-text{font-size:14px;color:var(--text);word-break:keep-all}
+.q-hint{font-size:12px;color:var(--text3);margin-top:3px;font-style:italic}
+.q-tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;margin-right:4px;color:#fff}
+.tg-peak{background:var(--red)}
+.tg-pd{background:#06b6d4}
+.tg-trend{background:#7c3aed}
+.tg-loc{background:var(--green)}
+.sig{background:linear-gradient(135deg,var(--accent-l),#f0f4ff);border-radius:12px;padding:18px;margin:14px 0;text-align:center}
+.sig .label{font-size:11px;font-weight:700;color:var(--accent);margin-bottom:6px}
+.sig .quote{font-size:18px;font-weight:800;color:var(--text);line-height:1.4}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+@media(max-width:500px){.grid2{grid-template-columns:1fr}.ct{padding:16px 14px}h1{font-size:20px}h2{font-size:17px}}
+@media print{.bar{display:none!important}.ct{max-width:100%;padding:20px}}
+</style>
+</head>
+<body>
+
+<div class="bar">
+<span class="badge">PD용 런시트</span>
+<span class="title">EP.04 — 첫 만남 7분의 법칙</span>
+<span class="ver">v1 · 2026.04.23</span>
+</div>
+
+<div class="ct">
+
+<div class="hero">
+<h1>결정사 첫 만남,<br>상대는 7분 안에 결정합니다</h1>
+<p>EP.04 · 해부(TOP 5 카운트다운) → 본인 실패담 → "첫인상이 다가 아니에요"</p>
+<div class="meta">
+<span>12~14분</span>
+<span>카페 40% + 스튜디오 60%</span>
+<span>아는언니 리지</span>
+<span>v1</span>
+</div>
+</div>
+
+<!-- ============ 반복 포맷 ============ -->
+<h2>0. 아는언니 리지 반복 포맷</h2>
+
+<p>EP02부터 모든 에피소드는 <strong>동일한 5단 구조</strong>를 반복합니다.</p>
+
+<div class="card">
+<div class="card-t">매 에피소드 구조</div>
+<p><strong>[킥]</strong> 주제 관련 뭔가 들고 바로 시작. 인사 X. (0~30초)</p>
+<p><strong>[해부]</strong> 업계가 이렇게 돌아감. 이세령 = 인사이더. (5분)</p>
+<p><strong>[본인]</strong> "그래서 나는?" 본인에게 적용. 자학+솔직. (4분)</p>
+<p><strong>[반전]</strong> "근데 진짜 중요한 건..." 메시지. (3분)</p>
+<p><strong>[아웃]</strong> 캐치프레이즈 + 여운 + 페이드아웃. (1.5분)</p>
+</div>
+
+<h3>캐치프레이즈 3개 (매 회 반복)</h3>
+<table>
+<tr><th>문장</th><th>타이밍</th><th>용도</th></tr>
+<tr><td><strong>"결정사 안에서 보면요"</strong></td><td>해부 블록</td><td>인사이더 시각 선언</td></tr>
+<tr><td><strong>"겪어봐야 아는 거예요"</strong></td><td>본인 블록</td><td>당사자 경험</td></tr>
+<tr><td><strong>"[XX]이 다가 아니에요"</strong></td><td>반전 블록</td><td>채널 핵심 메시지</td></tr>
+</table>
+<p style="font-size:13px;color:var(--text3)">EP02: "등급이 다가 아니에요" / EP03: "프로필이 다가 아니에요" / <strong>EP04: "첫인상이 다가 아니에요"</strong></p>
+
+<h3>PD 고정 4패턴</h3>
+<table>
+<tr><th>패턴</th><th>용도</th><th>타이밍</th></tr>
+<tr><td><strong>"진짜요?"</strong></td><td>놀람/확인</td><td>해부 블록 — 충격 정보</td></tr>
+<tr><td><strong>"그건 좀 불공평하지 않아요?"</strong></td><td>시청자 대리 반론</td><td>밥값/외모 등 논란</td></tr>
+<tr><td><strong>"대표님은요?"</strong></td><td>자학 전환 트리거</td><td>해부 → 본인 넘어갈 때</td></tr>
+<tr><td><strong>"그러면 어떡해요?"</strong></td><td>해결책/반전 유도</td><td>본인 → 반전 넘어갈 때</td></tr>
+</table>
+
+<!-- ============ 콘셉트 ============ -->
+<h2>1. 콘셉트</h2>
+
+<table>
+<tr><th>항목</th><th>내용</th></tr>
+<tr><td>에피소드</td><td>EP.04 (듀얼 로케이션 — 카페 + 스튜디오)</td></tr>
+<tr><td>호스트</td><td>이세령 (30세, 연세대, 前 아나운서, 결정사 공동대표)</td></tr>
+<tr><td>콘셉트</td><td><strong>첫 만남 탈락 TOP 5 카운트다운 → 본인 실패담 → "첫인상이 다가 아니에요"</strong></td></tr>
+<tr><td>EP03 연결</td><td>EP03(프로필) → "프로필 통과 후 실제 만남은?" 자연스러운 다음 단계</td></tr>
+<tr><td>시의성</td><td>"밥값 논란" 블라인드/에펨 반복 화제 / "핸드폰만 보는 사람" 후기 폭발 / "질문 안 하는 남자" 커뮤니티 공감</td></tr>
+<tr><td>타겟 러닝타임</td><td>12~14분 (15분 절대 금지)</td></tr>
+<tr><td>촬영일</td><td>TBD — 카페 먼저, 스튜디오 후</td></tr>
+<tr><td>경쟁 사각지대</td><td><strong>"결정사 첫 만남 현장" 콘텐츠 = 0개 (업계 최초)</strong></td></tr>
+</table>
+
+<!-- ============ 제목/썸네일 ============ -->
+<h2>2. 제목 & 썸네일</h2>
+
+<h3>제목</h3>
+<table>
+<tr><th>안</th><th>제목</th><th>공식</th></tr>
+<tr><td><strong>A (메인)</strong></td><td><strong>결정사 첫 만남, 상대는 7분 안에 결정합니다</strong></td><td>숫자형 + 선언형</td></tr>
+<tr><td>B</td><td>첫 만남 7분, 결정사 대표가 알려주는 합격 시그널</td><td>숫자형 + 솔루션형</td></tr>
+<tr><td>C</td><td>결정사 첫 미팅에서 벌어지는 일 [현장 공개]</td><td>현장형 + 대괄호</td></tr>
+</table>
+
+<h3>썸네일</h3>
+<div class="card">
+<div class="card-t">채주부 5대 규칙 적용</div>
+<p><strong>이세령 70%+</strong> — 카페에서 상대방 쪽을 바라보는 샷 (또는 시계를 보는 제스처)</p>
+<p><strong>텍스트</strong> — "7분" 숫자 크게 (<strong>빨간색 80pt, 흰색 굵은 고딕 + 검정 두꺼운 외곽선</strong>)</p>
+<p><strong>서브</strong> — "첫 만남의 진실" (흰색 작은 글씨)</p>
+<p><strong>톤</strong> — 밝고 선명. 카페 배경. 어두운 배경 X.</p>
+<p><strong>제목과 다른 정보</strong> — 제목="7분 안에 결정", 썸네일="7분" + 시계/시선 비주얼</p>
+</div>
+
+<!-- ============ 시장 인텔 ============ -->
+<h2>3. 시장 인텔리전스</h2>
+
+<h3>경쟁 채널 벤치마크</h3>
+<table>
+<tr><th>채널</th><th>유사 콘텐츠</th><th>조회수</th><th>우리 차별점</th></tr>
+<tr><td>한방언니</td><td>"남자들이 여자 거르는 기준 모음집"</td><td><strong>187만</strong></td><td rowspan="2">한방언니=14년 <strong>관찰자</strong><br>모두의지인=<strong>멘토형</strong><br>이세령=<strong>당사자</strong>(본인도 실패함)<br>+ "첫 만남 현장" = 업계 최초</td></tr>
+<tr><td>모두의지인</td><td>"여자 마음 사로잡는 법"</td><td><strong>89만</strong></td></tr>
+</table>
+
+<div class="hl">
+<strong>경쟁 사각지대:</strong> "결정사 첫 만남 현장"을 다룬 콘텐츠 = <strong>0개.</strong> 유사 채널들은 모두 "기준/조건" 프레임이고, "실제 만남에서 벌어지는 일"을 다루는 콘텐츠는 없음. 업계 최초 포지셔닝.
+</div>
+
+<h3>커뮤니티 트렌드 (질문에 녹일 것)</h3>
+<table>
+<tr><th>#</th><th>트렌드</th><th>출처</th><th>연결 질문</th></tr>
+<tr><td>1</td><td>"핸드폰만 보는 사람" = 매칭 거절률 89%</td><td>블라인드/네이트판</td><td>Q3</td></tr>
+<tr><td>2</td><td>"인터뷰 당하는 느낌" (대화 독점)</td><td>네이트판</td><td>Q5</td></tr>
+<tr><td>3</td><td>"프사랑 실물이 너무 다르다" (EP03 연결)</td><td>블라인드/디시</td><td>Q6</td></tr>
+<tr><td>4</td><td>"밥값 누가 내야 하나" 논란</td><td>블라인드/에펨코리아</td><td>Q7</td></tr>
+<tr><td>5</td><td>"질문을 안 해요" = 관심 없다는 시그널</td><td>레딧/블라인드</td><td>Q8</td></tr>
+</table>
+
+<!-- ============ 촬영 런시트 ============ -->
+<h2>4. 촬영 런시트</h2>
+
+<div class="hl">
+<strong>원칙:</strong> 질문은 15개. 나머지는 이세령 답변에 따라 PD가 꼬리 질문으로 현장에서.<br>
+PD 4패턴("진짜요?" / "불공평하지 않아요?" / "대표님은요?" / "어떡해요?")만 기억.<br>
+<strong>듀얼 로케이션</strong> — 카페(킥·아웃) + 스튜디오(해부·본인·반전). 장소 전환은 자연스러운 컷으로.
+</div>
+
+<!-- 킥 -->
+<h3><span class="q-tag tg-loc">카페</span> [킥] 0:00~0:30 — 패턴 인터럽트</h3>
+<div class="card">
+<div class="card-t">설정</div>
+<p>카페에서 커피를 받으면서 시작. 인사 없이 바로.</p>
+<p>"7분. 첫 만남에서 상대를 판단하는 데 걸리는 평균 시간이에요." → 숫자 충격.</p>
+</div>
+
+<div class="q">
+<div class="q-n">1</div>
+<div class="q-body">
+<div class="q-text"><span class="q-tag tg-peak">PEAK</span>(커피 받으면서) 7분. 첫 만남에서 상대를 판단하는 데 걸리는 평균 시간이에요.</div>
+<div class="q-hint">→ 커피 주문 후 자연스럽게. "7분" 숫자 충격. 편집 자막으로 7분 타이머 이펙트.</div>
+</div>
+</div>
+
+<div class="q">
+<div class="q-n">2</div>
+<div class="q-body">
+<div class="q-text"><span class="q-tag tg-pd">PD</span>7분이요? 커피 한 잔도 안 마시는데요?</div>
+<div class="q-hint">→ "커피 나오기도 전에 결정 나요." → 시청자 충격+유머. 카페 분위기에서 가볍게.</div>
+</div>
+</div>
+
+<!-- 해부 -->
+<h3><span class="q-tag tg-loc">스튜디오</span> [해부] 0:30~5:00 — "결정사 안에서 보면요" / TOP 5 카운트다운</h3>
+<div class="card">
+<div class="card-t">이 블록의 목표</div>
+<p>첫 만남 탈락 사유 TOP 5를 <strong>5위→1위 카운트다운.</strong> 정보+충격.</p>
+<p><strong>PD 패턴:</strong> "진짜요?" + "불공평하지 않아요?"</p>
+<p><strong>장소:</strong> 스튜디오에서 데이터 분석 느낌으로.</p>
+</div>
+
+<div class="q">
+<div class="q-n">3</div>
+<div class="q-body">
+<div class="q-text">5위부터 가볼까요? 첫 만남에서 가장 먼저 탈락하는 이유?</div>
+<div class="q-hint">→ 5위: 핸드폰 확인 (만남 중 핸드폰 → 매칭 거절률 89%). "핸드폰 한 번 보는 순간 끝나요." 편집 자막으로 89% 강조.</div>
+</div>
+</div>
+
+<div class="q">
+<div class="q-n">4</div>
+<div class="q-body">
+<div class="q-text"><span class="q-tag tg-pd">PD</span>급한 연락일 수도 있잖아요. 그건 좀 불공평하지 않아요?</div>
+<div class="q-hint">→ PD = 시청자 대리 반론. "급한 연락이면 '잠깐만요' 한마디가 있어야죠. 아무 말 없이 보는 건 다릅니다." → 반전.</div>
+</div>
+</div>
+
+<div class="q">
+<div class="q-n">5</div>
+<div class="q-body">
+<div class="q-text">4위는요?</div>
+<div class="q-hint">→ 4위: 대화 독점 (본인 이야기만 → "인터뷰 당하는 느낌"). 커뮤니티 원문 인용. "30분 동안 본인 이야기만 하고 나한테 질문 0개." 편집 자막.</div>
+</div>
+</div>
+
+<div class="q">
+<div class="q-n">6</div>
+<div class="q-body">
+<div class="q-text"><span class="q-tag tg-peak">PEAK</span>3위요? 이건 EP03에서도 나왔죠?</div>
+<div class="q-hint">→ 3위: 외모 기대치 불일치 (프사 vs 실물 갭). EP03 연결. "프로필에서 넘어와도 실물에서 다시 한 번 판단돼요." 위기장치.</div>
+</div>
+</div>
+
+<div class="q">
+<div class="q-n">7</div>
+<div class="q-body">
+<div class="q-text"><span class="q-tag tg-trend">TREND</span>요즘 커뮤니티에서 "밥값 논란"이 있던데, 2위는 이거예요?</div>
+<div class="q-hint">→ 2위: "밥값 논란" — 블라인드/에펨 반복 화제. 결정사 내부 데이터: "밥값 계산 방식"이 2차 만남 성사율에 미치는 영향. PD: "불공평하지 않아요?" 위기장치.</div>
+</div>
+</div>
+
+<div class="q">
+<div class="q-n">8</div>
+<div class="q-body">
+<div class="q-text"><span class="q-tag tg-peak">PEAK</span>그러면 1위는? 가장 많은 탈락 사유?</div>
+<div class="q-hint">→ 1위: 질문을 안 함. "관심 없다는 시그널." "1시간 만났는데 나한테 질문 0개. 이건 만남이 아니라 독백이에요." 커뮤니티 공감 폭발. 위기장치.</div>
+</div>
+</div>
+
+<div class="warn">
+<div class="warn-t">TOP 5 카운트다운 편집</div>
+<p>EP03과 동일한 편집 패턴 유지. 각 순위(5→4→3→2→1) 전환 시 <strong>효과음 + 순위 자막.</strong></p>
+<p>1위 공개 직전에 <strong>2초 무음 + 드럼 임팩트.</strong></p>
+<p>커뮤니티 원문 인용은 편집 자막으로 표시.</p>
+</div>
+
+<!-- 본인 -->
+<h3><span class="q-tag tg-loc">카페→스튜디오</span> [본인] 5:00~9:00 — "겪어봐야 아는 거예요"</h3>
+<div class="card">
+<div class="card-t">이 블록의 목표</div>
+<p>이세령 본인도 첫 만남에서 실패한 경험 솔직 공개 + 회원 피드백 패턴. <strong>자학 = 공감.</strong></p>
+<p><strong>PD 패턴:</strong> "대표님은요?"</p>
+<p><strong>장소:</strong> Q9 카페에서 시작 → Q10~12 스튜디오에서 데이터와 함께.</p>
+</div>
+
+<div class="q">
+<div class="q-n">9</div>
+<div class="q-body">
+<div class="q-text"><span class="q-tag tg-pd">PD</span>대표님은요? 첫 만남에서 실패한 적 있어요?</div>
+<div class="q-hint">→ 전환 순간. 해부→본인. 자학 시작. "저도 다 해당됐어요." 카페에서 자연스럽게.</div>
+</div>
+</div>
+
+<div class="q">
+<div class="q-n">10</div>
+<div class="q-body">
+<div class="q-text">tvN 맞선에서도 그랬어요? 5번 만나셨잖아요.</div>
+<div class="q-hint">→ tvN 맞선 콜백. "5번 만났는데 진짜 질문을 못 했어요. 긴장해서." → 1위(질문 안 함)와 연결. 자학+웃음.</div>
+</div>
+</div>
+
+<div class="q">
+<div class="q-n">11</div>
+<div class="q-body">
+<div class="q-text">결정사 회원들은요? 첫 만남 후 피드백에서 가장 많이 나오는 말은?</div>
+<div class="q-hint">→ 스튜디오 전환. 데이터 분석. "90%가 '대화가 안 통했다'예요. 근데 진짜 대화가 안 통한 게 아니라, 질문이 없었던 거예요."</div>
+</div>
+</div>
+
+<div class="q">
+<div class="q-n">12</div>
+<div class="q-body">
+<div class="q-text"><span class="q-tag tg-peak">PEAK</span>그러면 7분 안에 합격하는 사람은? 공통점이 있어요?</div>
+<div class="q-hint">→ 데이터 반전. "합격하는 사람의 공통점은 딱 하나예요. 상대방한테 질문을 해요." → 단순하지만 강력한 인사이트. 편집 자막으로 데이터 강조.</div>
+</div>
+</div>
+
+<!-- 반전 -->
+<h3><span class="q-tag tg-loc">스튜디오</span> [반전] 9:00~12:00 — "첫인상이 다가 아니에요"</h3>
+<div class="card">
+<div class="card-t">이 블록의 목표</div>
+<p>정보 → 감성 전환. <strong>"첫인상이 다가 아니에요. 3번째 만남에서 역전된 커플이 있어요."</strong></p>
+<p><strong>PD 패턴:</strong> "그러면 어떡해요?"</p>
+</div>
+
+<div class="q">
+<div class="q-n">13</div>
+<div class="q-body">
+<div class="q-text"><span class="q-tag tg-pd">PD</span>그러면 어떡해요? 첫 만남을 어떻게 해야 해요?</div>
+<div class="q-hint">→ 이세령 솔루션 3가지. 1) 상대에게 진짜 궁금한 질문 3개를 미리 생각해가기 2) 핸드폰은 가방에 넣기 3) "나를 보여주려 하지 말고, 상대를 알려고 하세요"</div>
+</div>
+</div>
+
+<div class="q">
+<div class="q-n">14</div>
+<div class="q-body">
+<div class="q-text"><span class="q-tag tg-peak">PEAK</span>첫인상이 좋으면 다 해결되는 거 아니에요?</div>
+<div class="q-hint">→ "첫인상이 다가 아니에요." 캐치프레이즈 순간. "3번째 만남에서 역전된 실화가 있어요." → 성사 실화 공개. BGM 피아노 전환. 위기장치. "첫인상에서 탈락할 뻔했는데, 두 번째 만남을 요청했고, 세 번째에 교제 시작, 지금은 결혼 준비 중이에요."</div>
+</div>
+</div>
+
+<!-- 아웃 -->
+<h3><span class="q-tag tg-loc">카페</span> [아웃] 12:00~13:30 — 여운</h3>
+
+<div class="q">
+<div class="q-n">15</div>
+<div class="q-body">
+<div class="q-text">첫 만남이 두려운 사람한테 한마디?</div>
+<div class="q-hint">→ 카페 나가면서 마무리. 대본 X. 이세령 감정으로 자유롭게. PD 10초+ 침묵 버티기. 리테이크 금지.</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-t">아웃 편집</div>
+<p>이세령 마지막 멘트 → 카페 문 나가면서 → 3초 정적 → 미소 → 페이드아웃 (5초)</p>
+<p>엔딩 자막: <strong>"겪어본 사람이 차린 결정사 · 아는언니 리지"</strong></p>
+<p>암전 후 <strong>EP.05 프리뷰 5초</strong>: "다음 편 — 결정사 대표가 말하는 이상형의 함정" (가제)</p>
+</div>
+
+<!-- ============ Ban ============ -->
+<h2>5. Ban 리스트</h2>
+
+<div class="ban">
+<div class="ban-t">절대 금지 5개</div>
+<p>1. <strong>"안녕하세요" 인사</strong> — 커피 주문하면서 바로 시작</p>
+<p>2. <strong>"구독/좋아요" 멘트</strong> — 영상 내 0회</p>
+<p>3. <strong>경쟁사 실명</strong> (듀오/가연/엔노블/제이노블) — "메이저 결정사"로만</p>
+<p>4. <strong>특정 회원 정보</strong> — "어떤 분이~" 익명 처리</p>
+<p>5. <strong>EP01-03 스토리 반복</strong> — 인생서사/등급/프로필 다시 X</p>
+</div>
+
+<div class="warn">
+<div class="warn-t">주의 5개</div>
+<p>1. MCN/네오브릿지 관계 → 순수 개인 채널</p>
+<p>2. 워터밤 / 황정우·이나영 사건 → 절대 금지</p>
+<p>3. 본인 결정사 가격 직접 공개 → "업계 평균"으로만</p>
+<p>4. 특정 성별 비하 → 중립. "남자가 나빠" "여자가 문제" X</p>
+<p>5. 첫 만남을 "시험"으로 프레이밍 → 만남이지 테스트 X</p>
+</div>
+
+<!-- ============ 편집 핵심 ============ -->
+<h2>6. 편집 핵심</h2>
+
+<div class="grid2">
+<div class="card">
+<div class="card-t">오프닝 30초</div>
+<p>인사 삭제. 커피 받기 + "7분" 자막 즉시.</p>
+<p>편집 자막으로 7분 타이머 이펙트.</p>
+</div>
+<div class="card">
+<div class="card-t">장소 전환</div>
+<p>카페↔스튜디오 전환은 <strong>자연스러운 컷으로.</strong></p>
+<p>와이프 효과 X. J-cut 또는 L-cut 권장.</p>
+<p>전환 시 환경음 변화로 장소감 표현.</p>
+</div>
+<div class="card">
+<div class="card-t">해부 블록</div>
+<p>TOP 5 순위 자막 (5→4→3→2→1 카운트다운)</p>
+<p>EP03과 동일한 편집 패턴 유지</p>
+<p>커뮤니티 원문은 자막으로 표시</p>
+</div>
+<div class="card">
+<div class="card-t">본인 블록</div>
+<p>이세령 자학 표정 클로즈업</p>
+<p>tvN 맞선 언급 시 tvN 로고 자막</p>
+<p>감정 순간 긴 컷 유지 (자르지 말 것)</p>
+</div>
+<div class="card">
+<div class="card-t">반전 블록</div>
+<p>BGM 피아노 전환</p>
+<p>"첫인상이 다가 아니에요" → 대형 자막</p>
+<p>역전 성사 실화 = 감성 클라이맥스</p>
+</div>
+<div class="card">
+<div class="card-t">아웃</div>
+<p>카페 나가면서 마무리</p>
+<p>뒷모습 → 3초 정적 → 페이드</p>
+<p>EP05 프리뷰 5초</p>
+</div>
+</div>
+
+<table>
+<tr><th>항목</th><th>규격</th></tr>
+<tr><td>총 러닝타임</td><td>12~14분 (15분 절대 금지)</td></tr>
+<tr><td>자막 폰트</td><td>프리텐다드 Bold, 흰색+검정 외곽선</td></tr>
+<tr><td>숫자 강조</td><td>빨간색 80pt ("7분", 순위 숫자, 매칭 거절률 89% 등)</td></tr>
+<tr><td>위기장치</td><td>Q6(3위 외모), Q7(2위 밥값), Q8(1위 질문), Q14(반전 실화) — 약 2.5분 주기</td></tr>
+<tr><td>CTA</td><td>영상 내 0회. 더보기+고정댓글+엔드카드에만</td></tr>
+<tr><td>장소 전환</td><td>J-cut/L-cut. 와이프 효과 X.</td></tr>
+</table>
+
+<!-- ============ 승인 ============ -->
+<h2>7. 승인</h2>
+
+<table>
+<tr><th>#</th><th>항목</th><th>확인</th></tr>
+<tr><td>1</td><td>이세령 — 첫 만남 탈락 TOP 5 공개 동의</td><td>&#9744;</td></tr>
+<tr><td>2</td><td>이세령 — 본인 첫 만남 실패담 공개 동의</td><td>&#9744;</td></tr>
+<tr><td>3</td><td>이세령 — tvN 맞선 경험 언급 동의</td><td>&#9744;</td></tr>
+<tr><td>4</td><td>이세령 — 커뮤니티 트렌드 답변 동의</td><td>&#9744;</td></tr>
+<tr><td>5</td><td>오맷돌님 — 제목/썸네일 승인</td><td>&#9744;</td></tr>
+<tr><td>6</td><td>오맷돌님 — 추가 질문 확정 (2~3개)</td><td>&#9744;</td></tr>
+<tr><td>7</td><td>촬영팀 — 카페 로케이션 + 스튜디오 확정</td><td>&#9744;</td></tr>
+<tr><td>8</td><td>촬영팀 — 카페↔스튜디오 이동 동선 확인</td><td>&#9744;</td></tr>
+</table>
+
+<div style="margin-top:20px">
+<p><strong>서명</strong></p>
+<p style="color:var(--text3);font-size:14px">
+오맷돌 대표: ________________ (날짜:　　　　)<br>
+이세령 대표: ________________ (날짜:　　　　)<br>
+촬영감독: ________________ (날짜:　　　　)
+</p>
+</div>
+
+<p style="text-align:center;font-size:12px;color:var(--text3);margin-top:40px">
+기획부 코디 · v1 · 2026.04.23 · 아는언니 리지
+</p>
+
+</div>
+</body>
+</html>

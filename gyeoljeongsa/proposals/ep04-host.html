@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
+<meta name="theme-color" content="#ffffff">
+<title>[출연자용] EP.04 — 결정사 첫 만남, 상대는 7분 안에 결정합니다</title>
+<style>
+:root{--bg:#ffffff;--card:#ffffff;--card2:#f4f6f8;--border:#e5e7eb;--text:#191f28;--text2:#4e5968;--text3:#8b95a1;--accent:#0064ff;--accent-l:#e8f1ff;--green:#15803d;--amber:#b45309;--red:#dc2626}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);line-height:1.8;font-size:16px;-webkit-font-smoothing:antialiased;padding:0 0 60px}
+.top-bar{position:sticky;top:0;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:14px 20px;z-index:10;display:flex;align-items:center;gap:10px}
+.top-bar .badge{font-size:11px;font-weight:700;color:#fff;background:var(--accent);padding:4px 10px;border-radius:6px}
+.top-bar .title{font-size:15px;font-weight:700;flex:1}
+.top-bar .ver{font-size:11px;color:var(--text3)}
+.container{max-width:680px;margin:0 auto;padding:24px 20px}
+.hero{text-align:center;padding:32px 0 28px;border-bottom:1px solid var(--border);margin-bottom:32px}
+.hero h1{font-size:24px;font-weight:800;line-height:1.3;margin-bottom:8px;word-break:keep-all}
+.hero p{font-size:14px;color:var(--text2);margin-bottom:16px}
+.hero .meta{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--text3)}
+.hero .meta span{background:var(--card2);padding:5px 10px;border-radius:8px}
+section{margin-bottom:40px}
+section h2{font-size:20px;font-weight:800;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border);color:var(--text)}
+section h3{font-size:16px;font-weight:700;margin:20px 0 10px;color:var(--text)}
+p{margin:8px 0;color:var(--text2);word-break:keep-all}
+.card{background:var(--card2);border-radius:14px;padding:18px 20px;margin:12px 0}
+.card-title{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
+.card p{margin:4px 0;font-size:14px}
+.highlight{background:var(--accent-l);border-left:3px solid var(--accent);padding:14px 18px;border-radius:0 12px 12px 0;margin:16px 0;font-size:15px;color:var(--text)}
+.highlight strong{color:var(--accent)}
+.ban{background:#fef2f2;border-left:3px solid var(--red);padding:14px 18px;border-radius:0 12px 12px 0;margin:12px 0}
+.ban-title{font-size:13px;font-weight:700;color:var(--red);margin-bottom:6px}
+.ban p{font-size:14px;color:#991b1b;margin:3px 0}
+.warn{background:#fffbeb;border-left:3px solid var(--amber);padding:14px 18px;border-radius:0 12px 12px 0;margin:12px 0}
+.warn-title{font-size:13px;font-weight:700;color:var(--amber);margin-bottom:6px}
+.warn p{font-size:14px;color:#92400e;margin:3px 0}
+.timeline{list-style:none;padding:0;margin:16px 0}
+.timeline li{position:relative;padding:12px 0 12px 24px;border-left:2px solid var(--border)}
+.timeline li::before{content:'';position:absolute;left:-5px;top:16px;width:8px;height:8px;background:var(--accent);border-radius:50%}
+.timeline li:last-child{border-left-color:transparent}
+.timeline .time{font-size:12px;font-weight:700;color:var(--accent)}
+.timeline .desc{font-size:14px;color:var(--text2);margin-top:2px}
+.sig{background:linear-gradient(135deg,var(--accent-l),#f0f4ff);border-radius:14px;padding:20px;margin:16px 0;text-align:center}
+.sig .label{font-size:11px;font-weight:700;color:var(--accent);margin-bottom:8px;text-transform:uppercase}
+.sig .quote{font-size:18px;font-weight:800;color:var(--text);line-height:1.4}
+.checklist{list-style:none;padding:0;margin:12px 0}
+.checklist li{padding:10px 0 10px 32px;border-bottom:1px solid var(--card2);font-size:14px;color:var(--text2);position:relative}
+.checklist li::before{content:'☐';position:absolute;left:8px;color:var(--accent);font-size:16px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+th{background:var(--card2);padding:10px 12px;text-align:left;font-weight:700;color:var(--text2);font-size:12px;border-bottom:1px solid var(--border)}
+td{padding:10px 12px;border-bottom:1px solid var(--card2);color:var(--text2)}
+.prep-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:var(--accent);color:#fff;border-radius:50%;font-size:13px;font-weight:700;margin-right:8px;flex-shrink:0}
+.prep-item{display:flex;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--card2)}
+.prep-item:last-child{border-bottom:none}
+.prep-text{font-size:14px;color:var(--text2)}
+.prep-text strong{color:var(--text)}
+.catch-box{display:grid;gap:10px;margin:14px 0}
+.catch-item{background:var(--card2);border-radius:12px;padding:14px 16px;border-left:3px solid var(--accent)}
+.catch-label{font-size:11px;font-weight:700;color:var(--accent);margin-bottom:4px}
+.catch-phrase{font-size:16px;font-weight:800;color:var(--text)}
+.catch-when{font-size:12px;color:var(--text3);margin-top:3px}
+@media(max-width:480px){.container{padding:16px 14px}.hero h1{font-size:20px}section h2{font-size:17px}}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+<span class="badge">출연자용</span>
+<span class="title">EP.04 촬영 브리프</span>
+<span class="ver">v1 · 2026.04.23</span>
+</div>
+
+<div class="container">
+
+<div class="hero">
+<h1>결정사 첫 만남,<br>상대는 7분 안에 결정합니다</h1>
+<p>EP.04 · 듀얼 로케이션 (카페 + 스튜디오) · 첫 만남 해부형</p>
+<div class="meta">
+<span>12~14분</span>
+<span>야외 카페 + 스튜디오</span>
+<span>아는언니 리지</span>
+</div>
+</div>
+
+<!-- 1. 이 영상이 뭔지 -->
+<section>
+<h2>이 영상은 뭔가요?</h2>
+<p><strong>결정사 첫 만남에서 상대가 7분 안에 판단하는 기준 TOP 5를 공개하고, 본인도 첫 만남에서 실패한 경험을 솔직하게 고백하는 영상</strong>입니다.</p>
+<p>EP03에서 "프로필"을 다뤘으니, 이번엔 "첫 만남" — 프로필 통과 후 실제 만남에서 어떻게 판단되는지를 보여줍니다.</p>
+
+<div class="card">
+<div class="card-title">촬영 포맷</div>
+<p><strong>듀얼 로케이션</strong> — 야외 카페(40%)에서 현장감 있는 토크 + 스튜디오(60%)에서 데이터·분석.</p>
+<p>대본 없습니다. 키워드만 숙지하시면 됩니다.</p>
+<p>촬영 시간: 약 3시간 (카페 → 스튜디오 이동 포함)</p>
+</div>
+
+<div class="highlight">
+<strong>핵심 원칙:</strong> 아래 커뮤니티 이슈를 촬영 전에 한 번 읽어주세요.<br>
+"아 요즘 이런 게 화제구나" 정도만 머릿속에 넣으면 됩니다.<br>
+PD가 이 자료를 기반으로 질문합니다. 대표님은 <strong>아는 만큼, 느끼는 만큼 솔직하게 답변</strong>하면 됩니다.<br>
+<strong>카페에서 커피 주문하면서 시작합니다. 인사 없이 바로.</strong>
+</div>
+</section>
+
+<!-- 2. 채널 반복 포맷 -->
+<section>
+<h2>우리 채널의 반복 포맷</h2>
+<p>모든 에피소드는 같은 흐름으로 진행됩니다. 외울 필요 없고, "이런 흐름이구나" 정도만 알면 됩니다.</p>
+
+<div class="card">
+<div class="card-title">매 에피소드 5단 구조</div>
+<p><strong>[킥]</strong> 주제 관련 뭔가 들고 바로 시작. 인사 X. (0~30초)</p>
+<p><strong>[해부]</strong> 업계가 이렇게 돌아감. 이세령 = 인사이더. (약 5분)</p>
+<p><strong>[본인]</strong> "그래서 나는?" 본인에게 적용. 자학+솔직. (약 4분)</p>
+<p><strong>[반전]</strong> "근데 진짜 중요한 건..." 메시지. (약 3분)</p>
+<p><strong>[아웃]</strong> 캐치프레이즈 + 여운 + 페이드아웃. (약 1.5분)</p>
+</div>
+
+<h3>자연스럽게 나올 캐치프레이즈</h3>
+<p>아래 문장들은 외워서 읽는 게 아니라, 대화 중에 자연스럽게 나오면 좋은 표현입니다.</p>
+
+<div class="catch-box">
+<div class="catch-item">
+<div class="catch-label">해부 블록에서</div>
+<div class="catch-phrase">"결정사 안에서 보면요"</div>
+<div class="catch-when">첫 만남 탈락 사유를 설명할 때 — "업계 사람만 아는" 뉘앙스</div>
+</div>
+<div class="catch-item">
+<div class="catch-label">본인 블록에서</div>
+<div class="catch-phrase">"겪어봐야 아는 거예요"</div>
+<div class="catch-when">본인 첫 만남 실패 경험을 이야기할 때</div>
+</div>
+<div class="catch-item">
+<div class="catch-label">반전 블록에서</div>
+<div class="catch-phrase">"첫인상이 다가 아니에요"</div>
+<div class="catch-when">메시지 전달할 때 — 이 영상의 핵심 한 줄</div>
+</div>
+</div>
+
+<div class="warn">
+<div class="warn-title">이 표현들을 암기하지 마세요</div>
+<p>PD가 질문 흐름을 이끌어서 자연스럽게 이 표현이 나오도록 유도합니다. 대표님은 편하게 대화하시면 됩니다.</p>
+</div>
+</section>
+
+<!-- 3. 사전 리서치 자료 -->
+<section>
+<h2>촬영 전 읽을 자료</h2>
+<p>아래는 요즘 결정사 첫 만남/미팅 관련 <strong>커뮤니티에서 화제가 되고 있는 내용</strong>입니다. 촬영 전에 한 번 읽고 "아 이런 게 있구나" 정도만 파악해두세요.</p>
+
+<div class="card">
+<div class="card-title">1. "밥값 누가 내야 하나" (블라인드/에펨코리아)</div>
+<p>"결정사 첫 만남에서 남자가 다 내야 한다" vs "각자 내야 한다" 논쟁이 반복적으로 화제. 결정사 회원들도 후기에서 가장 많이 언급하는 이슈.</p>
+</div>
+
+<div class="card">
+<div class="card-title">2. "핸드폰만 보는 사람" (네이트판/블라인드)</div>
+<p>"첫 만남인데 핸드폰만 봐서 5분 만에 나왔다" 후기 다수. 결정사 매칭 거절 사유 상위권.</p>
+</div>
+
+<div class="card">
+<div class="card-title">3. "프사랑 실물이 너무 다르다" — EP03 연결</div>
+<p>EP03에서 다뤘던 "프사기"가 실제 만남에서 터지는 순간. "만나자마자 5분 만에 끝난 미팅" 후기가 계속 올라옴.</p>
+</div>
+
+<div class="card">
+<div class="card-title">4. "질문을 안 해요" (레딧/블라인드)</div>
+<p>"상대가 나한테 질문을 하나도 안 했다" = "관심 없다는 시그널"이라는 분석 게시물이 공감 폭발.</p>
+</div>
+
+<div class="card">
+<div class="card-title">5. "인터뷰 당하는 느낌" (네이트판)</div>
+<p>"본인 이야기만 30분 했다" "나는 듣기만 했다" — 대화 독점이 첫 만남 최악의 실수라는 글.</p>
+</div>
+
+<div class="warn">
+<div class="warn-title">이 자료를 외울 필요는 없습니다</div>
+<p>"아 요즘 이런 게 화제구나" 정도만 머릿속에 넣으면 됩니다. PD가 촬영 때 이 내용을 질문으로 물어봅니다. 모르는 건 "모르겠는데요?"로 OK.</p>
+</div>
+</section>
+
+<!-- 4. 촬영 흐름 -->
+<section>
+<h2>촬영 흐름</h2>
+<p>PD가 질문 15개로 흐름을 이끕니다. 대표님은 자연스럽게 답변만 하면 됩니다. 이번에는 <strong>카페와 스튜디오 두 곳</strong>에서 촬영합니다.</p>
+
+<ul class="timeline">
+<li>
+<div class="time">[킥] 0~30초 — 카페</div>
+<div class="desc">카페에서 커피를 받으면서 바로 시작.<br><strong>"7분. 첫 만남에서 상대를 판단하는 데 걸리는 평균 시간이에요."</strong><br>인사 없이 바로. 커피 주문 후 자연스럽게.</div>
+</li>
+<li>
+<div class="time">[해부] 약 5분 — 스튜디오 — "결정사 안에서 보면요"</div>
+<div class="desc">첫 만남 탈락 사유 TOP 5를 5위부터 1위까지 카운트다운.<br>PD가 "5위부터 가볼까요?" "그러면 4위는?" 식으로 물어봅니다.<br><strong>실제 첫 만남 피드백 데이터를 기반으로 자연스럽게 설명.</strong></div>
+</li>
+<li>
+<div class="time">[본인] 약 4분 — 카페→스튜디오 — "겪어봐야 아는 거예요"</div>
+<div class="desc">PD가 "대표님은요? 첫 만남에서 실패한 적?" 물어봅니다.<br><strong>본인도 첫 만남에서 실패한 경험을 솔직하게.</strong><br>tvN 맞선 에피소드 콜백, 회원 피드백 패턴도 자연스럽게.</div>
+</li>
+<li>
+<div class="time">[반전] 약 3분 — 스튜디오 — "첫인상이 다가 아니에요"</div>
+<div class="desc">"그러면 어떡해요?" 질문에 솔루션 3가지 제시.<br><strong>"첫인상이 다가 아니에요. 3번째 만남에서 역전된 커플이 있어요."</strong></div>
+</li>
+<li>
+<div class="time">[아웃] 약 1.5분 — 카페</div>
+<div class="desc">카페를 나가면서 마무리. "첫 만남이 두려운 사람한테 한마디?"<br><strong>대본 없이 마음에서 우러나오는 말.</strong> PD가 10초+ 기다려줍니다.</div>
+</li>
+</ul>
+</section>
+
+<!-- 5. 촬영 전 준비 -->
+<section>
+<h2>촬영 전 준비할 것</h2>
+
+<div class="prep-item">
+<span class="prep-num">1</span>
+<div class="prep-text"><strong>첫 만남 탈락 TOP 5 실제 사례</strong><br>회원들의 첫 만남 후 피드백에서 "이 사람은 다시 안 만나겠다"는 사례를 머릿속에 5개 정도 준비. 구체적일수록 좋습니다. (회원 정보는 당연히 익명 처리)</div>
+</div>
+
+<div class="prep-item">
+<span class="prep-num">2</span>
+<div class="prep-text"><strong>본인 첫 만남 실패담</strong><br>결정사/소개팅/맞선에서 첫 만남이 망한 적 있는지, 본인이 실수한 적 있는지 떠올려두세요. tvN 맞선 에피소드도 좋습니다.</div>
+</div>
+
+<div class="prep-item">
+<span class="prep-num">3</span>
+<div class="prep-text"><strong>"7분 안에 합격하는 사람"의 공통점</strong><br>결정사 데이터 기반으로 "첫 만남에서 2차 성사되는 사람"의 패턴을 정리해두세요. (예: 질문을 잘 한다, 리액션이 좋다, 시선 처리 등)</div>
+</div>
+
+<div class="prep-item">
+<span class="prep-num">4</span>
+<div class="prep-text"><strong>3번째 만남에서 역전된 실화</strong><br>첫인상은 별로였는데 2~3번째 만남에서 역전해서 성사된 실제 커플 사례가 있으면 준비. 반전 블록에서 가장 중요한 스토리입니다.</div>
+</div>
+
+<div class="prep-item">
+<span class="prep-num">5</span>
+<div class="prep-text"><strong>의상 2벌</strong><br>카페 촬영(캐주얼)과 스튜디오 촬영(단정함)에서 살짝 다른 톤으로 준비. 카페: 밝은 캐주얼. 스튜디오: EP02와 비슷한 깔끔한 톤.</div>
+</div>
+</section>
+
+<!-- 6. PD 질문 방식 안내 -->
+<section>
+<h2>PD 질문 방식 안내</h2>
+
+<div class="highlight">
+위에서 읽은 커뮤니티 이슈를 <strong>PD가 질문 15개로 만들어서 물어봅니다.</strong><br><br>
+예를 들어 PD가 "요즘 블라인드에서 '밥값 논란'이 있던데, 결정사 첫 만남에서 밥값은 어떻게 해요?" 라고 물으면,<br>
+대표님은 맥락을 알고 있는 상태에서 <strong>"실제로 저희 회원 중에 밥값 때문에..."</strong> 식으로 본인 경험을 자연스럽게 풀면 됩니다.<br><br>
+<strong>TOP 5 카운트다운 순서는 PD가 이끕니다. 대표님은 각 순위에 대해 편하게 이야기하시면 됩니다.</strong>
+</div>
+
+<div class="card">
+<div class="card-title">PD의 고정 질문 패턴 4개</div>
+<p>PD는 아래 4가지 패턴으로 질문합니다. 대표님은 자연스럽게 답하면 됩니다.</p>
+<p style="margin-top:10px"><strong>"진짜요?"</strong> — 충격 데이터가 나왔을 때. (매칭 거절률 89% 등)</p>
+<p><strong>"그건 좀 불공평하지 않아요?"</strong> — 밥값/외모 불일치 등 시청자 입장 반론.</p>
+<p><strong>"대표님은요?"</strong> — 업계 이야기에서 본인 이야기로 전환할 때.</p>
+<p><strong>"그러면 어떡해요?"</strong> — 솔루션/메시지로 유도할 때.</p>
+</div>
+</section>
+
+<!-- 7. 톤 가이드 -->
+<section>
+<h2>톤 가이드</h2>
+
+<div class="card">
+<div class="card-title">이렇게 말해주세요</div>
+<p><strong>업계 인사이더의 솔직함</strong> — "실제로 첫 만남 후 피드백에서 가장 많이 나오는 게..." "저희 데이터로 보면..."</p>
+<p><strong>자학 유머</strong> — "저도 그랬어요" "tvN에서 5번 만났는데 진짜 질문을 못 했어요"</p>
+<p><strong>구체적 데이터</strong> — "핸드폰 확인한 사람의 매칭 거절률 89%" 같은 숫자</p>
+<p><strong>분석은 OK, 판단은 NO</strong> — "거절 사유"는 설명, "당연하다"는 X</p>
+</div>
+
+<div class="card">
+<div class="card-title">이렇게 말하지 마세요</div>
+<p>"이런 사람은 당연히 탈락이죠" — 판단/비하 X</p>
+<p>"남자가 나빠" / "여자가 문제" — 성별 편들기 X</p>
+<p>"우리 채널 구독해주세요" — 영상 내 구독 유도 0회</p>
+<p>첫 만남을 "시험" "테스트"로 프레이밍 — 만남을 평가로 만들지 X</p>
+</div>
+</section>
+
+<!-- 8. 의상 -->
+<section>
+<h2>의상 가이드</h2>
+
+<div class="card">
+<div class="card-title">카페 촬영 (40%)</div>
+<p><strong>깔끔한 캐주얼</strong> — EP03과 비슷한 밝고 편한 톤</p>
+<p>실제 첫 만남 장소 분위기. 니트, 블라우스 등.</p>
+<p>색상: 밝은 톤 (야외 자연광 + 카페 배경에 어울리게)</p>
+</div>
+
+<div class="card">
+<div class="card-title">스튜디오 촬영 (60%)</div>
+<p><strong>단정한 캐주얼</strong> — EP02 스튜디오와 비슷한 톤</p>
+<p>데이터/분석을 이야기하는 전문가 느낌. 자켓 또는 깔끔한 블라우스.</p>
+<p>카페 의상과 완전히 다를 필요는 없고, 가디건이나 자켓을 걸치는 정도로 변화.</p>
+</div>
+</section>
+
+<!-- 9. Ban 리스트 -->
+<section>
+<h2>절대 하지 말 것</h2>
+
+<div class="ban">
+<div class="ban-title">절대 금지</div>
+<p>1. <strong>"안녕하세요" 인사</strong> — 커피 주문하면서 바로 시작</p>
+<p>2. <strong>"구독/좋아요" 멘트</strong> — 영상 내 0회</p>
+<p>3. <strong>경쟁사 실명</strong> (듀오, 가연, 엔노블, 제이노블) → "메이저 결정사"로만</p>
+<p>4. <strong>특정 회원 정보</strong> → "어떤 분이~" 익명 처리</p>
+<p>5. <strong>EP01~03 스토리 반복</strong> — 인생서사/등급/프로필 다시 X</p>
+</div>
+
+<div class="warn">
+<div class="warn-title">주의</div>
+<p>MCN/네오브릿지 언급 X → 순수 개인 채널</p>
+<p>워터밤 / 황정우·이나영 사건 → 절대 금지</p>
+<p>본인 결정사 가격 직접 공개 → "업계 평균"으로만</p>
+<p>특정 성별 비하 → 중립. "남자가 나빠" "여자가 문제" X</p>
+<p>첫 만남을 "시험"으로 프레이밍 → 만남이지 테스트 X</p>
+</div>
+</section>
+
+<!-- 10. 촬영 당일 타임테이블 -->
+<section>
+<h2>촬영 당일 타임테이블</h2>
+
+<table>
+<tr><th>시간</th><th>내용</th><th>장소</th></tr>
+<tr><td>-30분</td><td>카페 도착, 자리 세팅, 음료 주문</td><td>카페</td></tr>
+<tr><td>-10분</td><td>PD와 간단 미팅 (흐름 확인, 질문 NOT 공유)</td><td>카페</td></tr>
+<tr><td>0분</td><td><strong>촬영 시작</strong> (커피 받으면서 바로)</td><td>카페</td></tr>
+<tr><td>~15분</td><td>[킥] 촬영 (카페에서 "7분" 오프닝)</td><td>카페</td></tr>
+<tr><td>~30분</td><td>카페 B-roll + 이동</td><td>이동</td></tr>
+<tr><td>~40분</td><td>스튜디오 세팅, 의상 체크</td><td>스튜디오</td></tr>
+<tr><td>~70분</td><td>[해부] 촬영 (TOP 5 카운트다운)</td><td>스튜디오</td></tr>
+<tr><td>~100분</td><td>[본인] 촬영 (본인 실패담 + 데이터)</td><td>스튜디오</td></tr>
+<tr><td>~120분</td><td>[반전] 촬영 (솔루션 + "첫인상이 다가 아니에요")</td><td>스튜디오</td></tr>
+<tr><td>~140분</td><td>[아웃] 촬영 — 카페 나가면서 마무리</td><td>카페 or 스튜디오</td></tr>
+<tr><td>~160분</td><td>보충 촬영 + B-roll</td><td>양쪽</td></tr>
+</table>
+
+<div class="warn">
+<div class="warn-title">중요</div>
+<p><strong>감정이 나오는 순간(본인 실패담, 역전 성사 이야기)은 리테이크하지 않습니다.</strong> 첫 반응이 가장 좋습니다. 카페↔스튜디오 이동은 차량으로 30분 내 거리로 섭외.</p>
+</div>
+</section>
+
+<!-- 11. 동의 확인 -->
+<section>
+<h2>동의 확인</h2>
+
+<p>아래 항목을 촬영 전에 확인해주세요.</p>
+
+<ul class="checklist">
+<li>첫 만남 탈락 TOP 5 공개 — 실제 첫 만남 탈락 사유를 카메라 앞에서 설명하는 것에 동의</li>
+<li><strong>본인 첫 만남 실패담 공개</strong> — 본인도 첫 만남에서 실패한 경험을 말하는 것에 동의</li>
+<li>커뮤니티 이슈 답변 — PD가 물어보는 최근 화제(밥값 논란, 핸드폰 등)에 답변하는 것에 동의</li>
+<li>실화 언급 — 익명 처리 조건으로 실제 회원 첫 만남 사례를 이야기하는 것에 동의</li>
+<li>tvN 맞선 콜백 — 본인 tvN 출연 경험을 언급하는 것에 동의</li>
+<li>엔딩 — 대본 없이 마지막 메시지를 자유 발언하는 것에 동의</li>
+</ul>
+
+<div class="sig">
+<div class="label">서명</div>
+<div class="quote" style="font-size:14px;font-weight:500;color:var(--text2)">
+이세령 대표: ________________ (날짜:　　　　)<br><br>
+오맷돌 대표: ________________ (날짜:　　　　)
+</div>
+</div>
+</section>
+
+<p style="text-align:center;font-size:12px;color:var(--text3);margin-top:40px">
+기획부 코디 · v1 · 2026.04.23 · 아는언니 리지
+</p>
+
+</div>
+</body>
+</html>
