@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>사찍남 — 백종환 촬영 브리핑</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F2F4F6;color:#191F28;font-family:'Pretendard',system-ui,sans-serif;min-height:100vh;font-size:15px;line-height:1.6}
+.gnb{background:#fff;border-bottom:1px solid #E5E8EB;padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.gnb-logo{font-size:16px;font-weight:800;color:#D4A017}
+.gnb-badge{background:#FFFBEA;color:#8B6914;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:800;border:1px solid #D4A017}
+.wrap{max-width:720px;margin:0 auto;padding:24px 18px 80px}
+.hero{background:linear-gradient(135deg,#0A1628 0%,#132B4D 50%,#1F4680 100%);border-radius:20px;padding:32px 28px;margin-bottom:24px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;right:-10%;width:260px;height:260px;background:radial-gradient(circle,rgba(255,184,0,.18),transparent);pointer-events:none}
+.hero-eyebrow{font-size:11px;font-weight:700;color:#FFB800;letter-spacing:2px;margin-bottom:10px}
+.hero-title{font-size:24px;font-weight:800;line-height:1.35;color:#fff;margin-bottom:10px}
+.hero-sub{color:#8B95A1;font-size:13px;line-height:1.7}
+.hero-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:18px}
+.hero-m{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:10px;text-align:center}
+.hero-m-v{font-size:15px;font-weight:800;color:#FFB800}
+.hero-m-l{font-size:10px;color:#8B95A1;margin-top:2px}
+
+h2{font-size:20px;font-weight:800;color:#191F28;margin:36px 0 14px;display:flex;align-items:center;gap:10px}
+h2 .n{background:#0A1628;color:#FFB800;border-radius:8px;padding:4px 12px;font-size:14px}
+h2 .n.r{background:#D4A017;color:#fff}
+h2 .n.g{background:#D4A017;color:#fff}
+h2 .n.gold{background:#D4A017;color:#fff}
+h3{font-size:16px;font-weight:800;color:#191F28;margin:16px 0 8px}
+p{color:#3E4A5A;margin-bottom:10px;font-size:14px;line-height:1.75}
+.card{background:#fff;border-radius:16px;padding:22px;margin-bottom:14px;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+.card.hot{border:2px solid #D4A017;background:#FFFBEA}
+.card.gold{border:2px solid #D4A017;background:#FFFBEA}
+.card.blue{border:2px solid #0A1628;background:#F8F9FA}
+.card.green{border:2px solid #D4A017;background:#FFFBEA}
+.card.dark{background:#0A1628;color:#fff;border:none}
+.card.dark p{color:#8B95A1}
+
+.flow-row{display:flex;gap:14px;align-items:flex-start;padding:14px 0;border-bottom:1px solid #E5E8EB}
+.flow-row:last-child{border-bottom:none}
+.flow-time{font-size:13px;font-weight:800;color:#D4A017;min-width:68px;padding-top:2px}
+.flow-time.r{color:#D4A017}
+.flow-time.b{color:#0A1628}
+.flow-time.g{color:#D4A017}
+.flow-body{flex:1}
+.flow-ttl{font-size:15px;font-weight:700;color:#191F28;margin-bottom:4px}
+.flow-desc{font-size:13px;color:#6B7684;line-height:1.7}
+
+.peak-card{background:#fff;border-radius:16px;padding:22px;margin-bottom:14px;border:2px solid #D4A017;position:relative}
+.peak-label{position:absolute;top:-10px;left:18px;background:#D4A017;color:#fff;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:800}
+.peak-label.r{background:#D4A017}
+.peak-label.b{background:#0A1628}
+.peak-card h3{margin-top:6px}
+.peak-quote{background:#FFFBEA;border-left:3px solid #D4A017;border-radius:0 8px 8px 0;padding:12px 14px;margin:10px 0;font-size:14px;color:#3E4A5A;font-style:italic;line-height:1.7}
+.peak-quote.r{background:#FFFBEA;border-left-color:#D4A017}
+.peak-quote.b{background:#F8F9FA;border-left-color:#0A1628}
+
+.tone-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+.tone-box{border-radius:12px;padding:16px}
+.tone-box.good{background:#FFFBEA;border:1.5px solid #D4A017}
+.tone-box.bad{background:#FFFBEA;border:1.5px solid #D4A017}
+.tone-box h4{font-size:13px;font-weight:800;margin-bottom:8px}
+.tone-box.good h4{color:#D4A017}
+.tone-box.bad h4{color:#D4A017}
+.tone-box p{font-size:12px;color:#3E4A5A;line-height:1.7;margin:0}
+
+.qa{background:#fff;border-radius:12px;padding:16px 18px;margin-bottom:10px;border:1px solid #E5E8EB}
+.qa-q{font-size:14px;font-weight:800;color:#D4A017;margin-bottom:6px}
+.qa-a{font-size:13px;color:#3E4A5A;line-height:1.7}
+
+.prep-item{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #F2F4F6}
+.prep-item:last-child{border-bottom:none}
+.prep-num{background:#0A1628;color:#FFB800;border-radius:6px;min-width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;margin-top:1px}
+.prep-text{font-size:13px;color:#3E4A5A;line-height:1.6}
+.prep-text strong{color:#191F28}
+
+.note{background:#FFFBEA;border-left:3px solid #D4A017;border-radius:0 8px 8px 0;padding:14px 16px;margin:14px 0;font-size:13px;line-height:1.7;color:#3E4A5A}
+.note.r{background:#FFFBEA;border-left-color:#D4A017}
+.note.g{background:#FFFBEA;border-left-color:#D4A017}
+.note.b{background:#F8F9FA;border-left-color:#0A1628}
+.note strong{color:#191F28}
+
+.divider{height:1px;background:#E5E8EB;margin:28px 0}
+
+.tag{display:inline-block;padding:3px 9px;border-radius:5px;font-size:11px;font-weight:700;margin-right:5px}
+.tag-y{background:#FFFBEA;color:#8B6914}
+.tag-r{background:#FFFBEA;color:#D4A017}
+.tag-g{background:#FFFBEA;color:#D4A017}
+.tag-b{background:#F8F9FA;color:#0A1628}
+
+@media(max-width:560px){.tone-grid{grid-template-columns:1fr}.hero-title{font-size:20px}.hero-meta{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+<nav class="gnb">
+  <span class="gnb-logo">사찍남</span>
+  <span class="gnb-badge">백종환님 촬영 브리핑</span>
+</nav>
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">사찍남 — 촬영 전 꼭 한번 읽어주세요</div>
+    <div class="hero-title">백종환님,<br>내일 촬영 안내드립니다</div>
+    <div class="hero-sub">이 문서는 당일 흐름과 핵심 포인트만 정리한 거예요.<br>2~3번 편하게 읽어보시면 충분합니다. 대본 외우실 필요 전혀 없습니다.</div>
+    <div class="hero-meta">
+      <div class="hero-m"><div class="hero-m-v">18분</div><div class="hero-m-l">영상 길이</div></div>
+      <div class="hero-m"><div class="hero-m-v">4곳</div><div class="hero-m-l">촬영 장소</div></div>
+      <div class="hero-m"><div class="hero-m-v">25개</div><div class="hero-m-l">질문 (참고용)</div></div>
+    </div>
+  </div>
+
+  <!-- 인사말 -->
+  <div class="card dark">
+    <p style="color:#FFB800;font-size:13px;font-weight:700;margin-bottom:8px">먼저 드리고 싶은 말씀</p>
+    <p style="color:#fff;font-size:14px;line-height:1.8;margin:0">
+      대본 외우실 필요 없습니다. 평소 하시던 얘기 편하게 해주세요.<br><br>
+      다만 <strong style="color:#FFB800">"이 4장면만큼은 꼭 자연스럽게 나와야 영상이 산다"</strong>는 구간이 있어서, 그것만 미리 알고 계시면 촬영이 훨씬 수월할 거예요.
+    </p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 섹션 1: 촬영 흐름 -->
+  <h2><span class="n">1</span> 촬영 흐름 (18분 영상)</h2>
+  <div class="card">
+    <div class="flow-row">
+      <div class="flow-time r">0~1분</div>
+      <div class="flow-body">
+        <div class="flow-ttl">YK몰 — 오프닝 훅 (건강식품 쌓기)</div>
+        <div class="flow-desc">건강식품을 카트에 쌓으며 시작. "이거 다 합쳐서 10만원도 안 해요. 근데 온라인에서 팔면..." 첫 5초에 숫자+반전으로 시선 고정</div>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-time">1~4분</div>
+      <div class="flow-body">
+        <div class="flow-ttl">사무실/차량 — 신격화 (현재 규모 공개)</div>
+        <div class="flow-desc">월매출 4~5억, 벤츠, 순이익 1억+. 현재 삶의 스케일을 자연스럽게 보여주는 구간. 과장 없이 사실 기반으로</div>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-time">4~8분</div>
+      <div class="flow-body">
+        <div class="flow-ttl">편의점 — 과거 이야기 (CU 영업사원 시절)</div>
+        <div class="flow-desc">CU 편의점 영업관리직 시절, 코인 실패, 통장에 150만원. 편의점 실제 배경에서 과거를 회상하는 구간</div>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-time r">8~10분</div>
+      <div class="flow-body">
+        <div class="flow-ttl">사무실 — 건강식품 시작, 첫달 1천만 (킬러 타이밍)</div>
+        <div class="flow-desc">"통장에 150만원밖에 없었는데, 건강식품 시작하고 첫달에 1천만원 찍었어요" 반전 구간. 구체적 숫자가 핵심</div>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-time r">10~13분</div>
+      <div class="flow-body">
+        <div class="flow-ttl">사무실 — "욕구 시장" + AI 프로그램 시연</div>
+        <div class="flow-desc">건강식품 시장 구조 설명 + AI 자동화 프로그램 실제 화면 시연. 질병 키워드 → 원료 → 도매몰 연결 과정을 보여주는 핵심 장면</div>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-time">13~16분</div>
+      <div class="flow-body">
+        <div class="flow-ttl">사무실 — 회복 스토리, 아버지 카드</div>
+        <div class="flow-desc">바닥에서 올라온 감정선. 아버지에게 처음 용돈 드린 이야기 등 인간적인 면을 보여주는 구간</div>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-time g">16~18분</div>
+      <div class="flow-body">
+        <div class="flow-ttl">편의점 도시락 — 과거 회고 + 마무리</div>
+        <div class="flow-desc">편의점에서 도시락 먹으며 과거 회상. "폐기 도시락 3개월 먹었어요" + 지금과 대비. 자연스러운 엔딩</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 섹션 2: 핵심 4장면 -->
+  <h2><span class="n r">2</span> 꼭 나와야 할 핵심 4장면</h2>
+  <p style="margin-bottom:14px;color:#6B7684">이 4장면은 영상의 기둥입니다. 다른 건 편하게 하셔도 됩니다.<br>
+  <strong style="color:#D4A017">이 4장면이 시청자의 호기심을 유지하고 공감을 이끌어내는 핵심입니다.</strong></p>
+
+  <div class="peak-card">
+    <div class="peak-label r">핵심 1 -- 0~1분 -- YK몰</div>
+    <h3>건강식품 카트에 쌓으며 원가 공개</h3>
+    <p>YK몰 현장에서 건강식품을 실제로 카트에 담으면서 시작합니다. <strong>제품을 하나씩 집어들면서 가격을 말씀해주시면</strong> 됩니다. 시청자가 첫 5초 안에 "이거 뭐지?" 하고 멈추는 구간입니다.</p>
+    <div class="peak-quote r">
+      <strong>백종환님:</strong> (건강식품을 카트에 쌓으며) "이거 다 합쳐서 10만원도 안 해요. 근데 온라인에서 팔면... 마진이 장난 아닙니다."
+    </div>
+    <p style="font-size:13px;color:#8B95A1;margin:0">이 장면이 영상 전체의 첫인상을 결정합니다. 실제 매장에서 실물 제품을 만지면서 말하는 게 포인트예요. 앉아서 설명하는 것과 체감이 완전히 다릅니다.</p>
+  </div>
+
+  <div class="peak-card">
+    <div class="peak-label r">핵심 2 -- 8~10분 -- 사무실</div>
+    <h3>"통장에 150만원" → "첫달 1천만원" 반전</h3>
+    <p>편의점 시절 이야기에서 건강식품으로 넘어가는 전환점입니다. <strong>숫자 두 개(150만원 → 1천만원)의 대비</strong>가 이 영상 전체를 관통하는 서사입니다.</p>
+    <div class="peak-quote r">
+      <strong>백종환님:</strong> "통장에 150만원밖에 없었는데, 건강식품 시작하고 첫달에 1천만원 찍었어요. 그때 '아, 이거다' 했죠."
+    </div>
+    <p style="font-size:13px;color:#8B95A1;margin:0">시청자가 이 한 마디를 듣기 위해 8분을 기다립니다. 금액은 사실 그대로 말씀해주세요. 과장하면 댓글에서 즉시 검증당합니다.</p>
+  </div>
+
+  <div class="peak-card">
+    <div class="peak-label r">핵심 3 -- 10~13분 -- 사무실</div>
+    <h3>AI 프로그램 화면 시연 — 질병 키워드 → 원료 → 도매몰</h3>
+    <p>직접 개발한 AI 프로그램을 <strong>실제 화면으로 보여주시는 구간</strong>입니다. "말로만 하면 아무도 안 믿어요"라는 전제 하에, 화면을 띄우고 클릭 한 번으로 결과가 나오는 과정을 시연합니다.</p>
+    <div class="peak-quote r">
+      <strong>백종환님:</strong> (노트북 화면 보여주며) "여기서 질병 키워드를 누르면 원료가 나오고, 도매몰로 바로 연결돼요. 이걸 수작업으로 하면 3시간, AI로 하면 30초예요."
+    </div>
+    <p style="font-size:13px;color:#8B95A1;margin:0">이 장면이 "그냥 건강식품 파는 사람"과 "시스템을 가진 사업가"의 차이를 만듭니다. 실제 로그인된 화면에서 라이브로 시연해주시면 신뢰도가 극대화됩니다.</p>
+  </div>
+
+  <div class="peak-card">
+    <div class="peak-label r">핵심 4 -- 16~18분 -- 편의점</div>
+    <h3>편의점 도시락 먹으며 과거 회고</h3>
+    <p>편의점에서 실제로 도시락을 드시면서, 과거 폐기 도시락을 먹던 시절을 회상하는 구간입니다. <strong>같은 공간, 같은 행동인데 상황이 완전히 다른</strong> 대비가 영상의 엔딩을 만듭니다.</p>
+    <div class="peak-quote r">
+      <strong>백종환님:</strong> (편의점 도시락 먹으며) "편의점에서 폐기 도시락 3개월 먹었어요. 그때 시급 생각하면... 지금도 여기 오면 그때가 생각나요."
+    </div>
+    <p style="font-size:13px;color:#8B95A1;margin:0">억지로 감정을 만드실 필요 없습니다. 담담하게, 그때 실제 기분을 떠올려주시면 충분합니다. 그 진짜 톤이 시청자한테 가장 세게 와닿습니다.</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 섹션 3: 톤 가이드 -->
+  <h2><span class="n gold">3</span> 말하는 톤 가이드</h2>
+
+  <div class="tone-grid">
+    <div class="tone-box good">
+      <h4>O 이렇게 해주세요</h4>
+      <p>
+        담담하게 — 과거 얘기도 덤덤한 톤<br>
+        솔직하게 — 실패도 숨기지 않기<br>
+        구체적 숫자로 — "150만원" "첫달 1천만"<br>
+        보여주면서 — AI 화면, 매출 캡처 등<br>
+        대화하듯 — MC와 편하게 주고받는 톤
+      </p>
+    </div>
+    <div class="tone-box bad">
+      <h4>X 이건 피해주세요</h4>
+      <p>
+        자랑하듯이 — "벤츠 끝내주죠?" 식<br>
+        과장하듯이 — 숫자 부풀리기<br>
+        코인 디테일 금지 — 어떤 코인인지 구체적 X<br>
+        강의 톤 — 가르치듯 설명하기<br>
+        "쉽게 돈 번다" 식 표현 절대 금지
+      </p>
+    </div>
+  </div>
+
+  <div class="note r">
+    <strong>핵심 한 줄:</strong> 코인 이야기는 <strong style="color:#D4A017">"한 번 무너졌다 올라왔다"</strong> 정도만. 어떤 코인이었는지, 얼마 넣었는지 디테일은 빼주세요. 시청자가 궁금해할수록 댓글이 늘어납니다.
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 섹션 4: 부소남 촬영 안내 -->
+  <h2><span class="n">4</span> 부소남 촬영 안내 (별도 12분 영상)</h2>
+  <p style="margin-bottom:14px;color:#6B7684">사찍남 본편 외에, 부소남(부업 소개 숏폼/롱폼) 12분짜리를 별도로 찍습니다.<br>
+  <strong>본편과 겹치지 않게</strong>, 실전 소싱 과정 중심으로 촬영합니다.</p>
+
+  <div class="card">
+    <div class="flow-row">
+      <div class="flow-time r">파트 1</div>
+      <div class="flow-body">
+        <div class="flow-ttl">YK몰 현장 소싱</div>
+        <div class="flow-desc">실제로 건강식품을 고르는 과정. 어떤 기준으로 제품을 선택하는지 자연스럽게 설명</div>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-time">파트 2</div>
+      <div class="flow-body">
+        <div class="flow-ttl">편의점 1+1 활용법</div>
+        <div class="flow-desc">편의점 행사 제품을 활용한 마진 구조 설명. 시청자가 바로 따라할 수 있는 실전 팁</div>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-time r">파트 3</div>
+      <div class="flow-body">
+        <div class="flow-ttl">AI 도구 시연 (심화)</div>
+        <div class="flow-desc">본편보다 자세하게. 질병 키워드 → 원료 추천 → 도매몰 연결 → 가격 비교까지 풀 프로세스</div>
+      </div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-time">파트 4</div>
+      <div class="flow-body">
+        <div class="flow-ttl">수작업 vs AI 비교</div>
+        <div class="flow-desc">같은 작업을 수작업과 AI로 각각 해보는 장면. 시간 차이를 실시간으로 보여주기</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>부소남은 편하게 해주세요.</strong> 본편처럼 서사 구조가 아니라 "이렇게 하면 됩니다" 실전 위주입니다. 자연스럽게 과정을 보여주시면 충분합니다.
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 섹션 5: 준비물 -->
+  <h2><span class="n">5</span> 당일 준비물</h2>
+  <div class="card">
+    <div class="prep-item">
+      <div class="prep-num">1</div>
+      <div class="prep-text"><strong>AI 프로그램 화면</strong> — 로그인 상태로 준비. 촬영 전 한번 테스트해서 정상 작동 확인해주세요</div>
+    </div>
+    <div class="prep-item">
+      <div class="prep-num">2</div>
+      <div class="prep-text"><strong>매출 증빙 화면</strong> — 월 매출 캡처 또는 정산 화면. 스마트스토어/쇼핑몰 관리자 페이지 등</div>
+    </div>
+    <div class="prep-item">
+      <div class="prep-num">3</div>
+      <div class="prep-text"><strong>건강식품 재고/제품 실물</strong> — 사무실에 있는 재고 + YK몰에서 쓸 제품. 다양하게 보일수록 비주얼이 좋습니다</div>
+    </div>
+    <div class="prep-item">
+      <div class="prep-num">4</div>
+      <div class="prep-text"><strong>편의점 시절 사진</strong> — 있으면 금상첨화. CU 영업관리 시절 사진이나 당시 카톡 캡처 등. 없어도 괜찮습니다</div>
+    </div>
+  </div>
+
+  <div class="note b">
+    <strong>차량(벤츠) 촬영:</strong> 1~4분 신격화 구간에서 차량이 나옵니다. 깨끗한 상태로 준비해주시면 좋습니다. 일부러 세차하실 필요까지는 없어요.
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 섹션 6: 자주 묻는 질문 -->
+  <h2><span class="n g">6</span> 자주 묻는 질문</h2>
+
+  <div class="qa" style="border-color:#D4A017;background:#FFFBEA">
+    <div class="qa-q" style="color:#D4A017">Q. 코인 이야기 어디까지 해도 되나요?</div>
+    <div class="qa-a"><strong>"한 번 무너졌다 올라왔다"</strong> 정도면 충분합니다. 어떤 코인이었는지, 얼마를 넣었는지는 말씀 안 하셔도 됩니다. "투자를 잘못해서 돈을 날렸다" 수준이면 시청자가 충분히 공감합니다. 구체적으로 들어가면 코인 커뮤니티에서 검증이 시작돼서 오히려 역효과입니다.</div>
+  </div>
+
+  <div class="qa" style="border-color:#D4A017;background:#FFFBEA">
+    <div class="qa-q" style="color:#D4A017">Q. 매출 정확히 얼마라고 해야 하나요?</div>
+    <div class="qa-a"><strong>월 4~5억, 순이익 1억+</strong> — 솔직하게 말씀해주시면 됩니다. "정확한 숫자"가 가장 강력한 무기입니다. "많이 벌어요" 같은 추상적 표현은 오히려 의심을 삽니다. 매출 증빙 화면을 함께 보여주시면 완벽합니다.</div>
+  </div>
+
+  <div class="qa" style="border-color:#D4A017;background:#FFFBEA">
+    <div class="qa-q" style="color:#D4A017">Q. 강의(무료특강) 이야기 해도 되나요?</div>
+    <div class="qa-a">자연스럽게 한 번 정도는 괜찮습니다. 다만 <strong>"강의"라는 단어 대신 "무료 세미나" 또는 "같이 해보는 자리"</strong> 정도로 표현해주세요. "강의 팔러 나왔구나" 프레임이 붙는 순간 시청자가 이탈합니다. 강요하는 톤만 피하시면 됩니다.</div>
+  </div>
+
+  <div class="qa">
+    <div class="qa-q">Q. 대본 외워야 하나요?</div>
+    <div class="qa-a">전혀요. 평소 얘기하시는 대로 하시면 됩니다. 이 문서는 "이런 흐름으로 갈 거다" 정도만 미리 아시라고 드리는 겁니다.</div>
+  </div>
+
+  <div class="qa">
+    <div class="qa-q">Q. 질문이 예상과 다르게 와도 되나요?</div>
+    <div class="qa-a">네. 25개 질문은 참고용이고, 촬영 중 흐름에 따라 질문 순서와 내용은 바뀝니다. 편하게 답변해주시면 됩니다.</div>
+  </div>
+
+  <div class="qa">
+    <div class="qa-q">Q. 말 실수하거나 끊기면요?</div>
+    <div class="qa-a">괜찮습니다. 편집으로 다 정리됩니다. "잠깐만요, 다시 말할게요" 하셔도 자연스러우니 부담 가지실 필요 없어요.</div>
+  </div>
+
+  <div class="qa">
+    <div class="qa-q">Q. AI 프로그램 시연 중 에러나면요?</div>
+    <div class="qa-a">그것도 자연스러운 장면입니다. 완벽한 시연보다 "실제로 이렇게 쓴다"는 느낌이 더 중요해요. 만약 부담되시면 미리 녹화해둔 화면을 백업으로 준비해주셔도 됩니다.</div>
+  </div>
+
+  <div class="qa">
+    <div class="qa-q">Q. 누적 100억 이야기는 어떻게?</div>
+    <div class="qa-a">제가 자연스럽게 여쭤볼 겁니다. 직접 먼저 꺼내시기보다는 질문에 답하는 형태가 자랑처럼 안 보여서 더 좋습니다. "누적으로 하면... 100억 정도 됩니다" 담담하게.</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- 마무리 -->
+  <div class="card dark">
+    <p style="color:#FFB800;font-size:13px;font-weight:700;margin-bottom:10px">마지막 한 마디</p>
+    <p style="color:#fff;font-size:14px;line-height:1.8;margin:0">
+      백종환님 이야기는 이미 <strong style="color:#FFB800">"편의점 영업사원 → 월매출 5억"</strong>이라는 사실 하나만으로 충분히 강력합니다.<br><br>
+      거기에 AI 자동화까지 — 시청자가 가장 궁금해하는 두 가지(<strong style="color:#FFB800">어떻게 시작했는지</strong>와 <strong style="color:#FFB800">지금 뭘 쓰는지</strong>)를 다 가지고 계세요.<br><br>
+      저희가 할 일은 그 이야기가 시청자한테 가장 자연스럽게 닿도록 <strong style="color:#FFB800">흐름과 타이밍을 잡아드리는 것</strong>이에요.<br><br>
+      궁금하신 점이나 당일 추가 요청사항 있으시면 촬영 전까지 편하게 말씀주세요.<br><br>
+      <strong style="color:#FFB800">내일 뵙겠습니다.</strong>
+    </p>
+  </div>
+
+</div>
+</body>
+</html>

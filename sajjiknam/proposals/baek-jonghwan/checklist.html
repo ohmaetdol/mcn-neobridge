@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#ffffff">
+<title>사찍남 · 백종환 건강식품AI · PD 촬영 체크리스트</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+  :root {
+    --bg: #ffffff;
+    --card: #ffffff;
+    --card2: #f8f9fb;
+    --border: #e5e7eb;
+    --border2: #f0f2f5;
+    --text: #111827;
+    --mute: #6b7280;
+    --dim: #9ca3af;
+    --hint: #adb5bd;
+    --navy: #0A1628;
+    --navy-mid: #132B4D;
+    --navy-light: #1F4680;
+    --gold: #D4A017;
+    --gold-b: #FFB800;
+    --cream: #FFFBEA;
+    --dark: #1f2937;
+    --done: #D4A017;
+    --accent: #b45309;
+    --shadow-sm: 0 1px 2px rgba(17,24,39,0.04);
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    font-size: 15px; line-height: 1.55;
+    overscroll-behavior-y: none;
+    -webkit-font-smoothing: antialiased;
+  }
+  body { padding-bottom: 80px; }
+
+  .header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,0.94);
+    backdrop-filter: saturate(180%) blur(14px);
+    -webkit-backdrop-filter: saturate(180%) blur(14px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 16px 10px;
+  }
+  .header h1 {
+    font-size: 15px; font-weight: 800; margin: 0 0 4px;
+    letter-spacing: -0.02em;
+    color: var(--navy);
+  }
+  .header .sub {
+    color: var(--mute); font-size: 12px; margin-bottom: 10px;
+  }
+  .progress-wrap {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+  }
+  .progress-bar {
+    flex: 1; height: 8px; background: var(--card2);
+    border-radius: 999px; overflow: hidden;
+    border: 1px solid var(--border2);
+  }
+  .progress-fill {
+    height: 100%; background: var(--gold);
+    width: 0%; transition: width 0.3s ease;
+    border-radius: 999px;
+  }
+  .progress-text {
+    font-size: 13px; font-weight: 700; color: var(--text);
+    min-width: 84px; text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .filter-row {
+    display: flex; gap: 6px; flex-wrap: wrap;
+  }
+  .filter-btn {
+    flex: 1; min-width: 0;
+    background: var(--card); border: 1px solid var(--border);
+    color: var(--mute); padding: 9px 10px;
+    border-radius: 8px; font-size: 12px; font-weight: 700;
+    cursor: pointer; transition: all 0.15s;
+    font-family: inherit;
+  }
+  .filter-btn:active { transform: scale(0.97); }
+  .filter-btn.active {
+    background: var(--navy); border-color: var(--navy); color: #fff;
+  }
+  .filter-btn.reset {
+    flex: 0 0 auto; color: var(--dim);
+  }
+  .filter-btn.reset:hover,
+  .filter-btn.reset:active { color: var(--text); border-color: var(--text); }
+  .filter-btn.export {
+    flex: 0 0 auto; color: var(--gold); border-color: var(--gold);
+  }
+  .filter-btn.export:active { background: var(--gold); color: #fff; }
+
+  main { padding: 14px 14px 40px; }
+
+  .loc-group { margin-bottom: 20px; }
+  .loc-header {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--border);
+    border-left: 4px solid var(--gold);
+    font-weight: 800; font-size: 14px;
+    margin-bottom: 10px; color: var(--navy);
+    letter-spacing: -0.01em;
+  }
+  .loc-header .loc-title { flex: 1; min-width: 0; }
+  .loc-header .loc-time {
+    font-size: 11px; font-weight: 600; color: var(--mute);
+    margin-left: 6px;
+  }
+  .loc-header .loc-count {
+    font-size: 12px; font-weight: 700; color: var(--mute);
+    background: var(--card2); padding: 3px 9px;
+    border-radius: 999px; font-variant-numeric: tabular-nums;
+    border: 1px solid var(--border);
+  }
+
+  .q {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; margin-bottom: 8px;
+    overflow: hidden; transition: all 0.15s;
+    box-shadow: var(--shadow-sm);
+  }
+  .q.done {
+    background: var(--card2);
+    opacity: 0.62;
+  }
+  .q-row {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 14px;
+    cursor: pointer; user-select: none;
+    min-height: 52px;
+  }
+  .q-check {
+    flex-shrink: 0;
+    width: 24px; height: 24px;
+    border: 2px solid var(--dim);
+    border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+    margin-top: 1px;
+    background: #fff;
+  }
+  .q.done .q-check {
+    background: var(--gold); border-color: var(--gold);
+  }
+  .q-check::after {
+    content: ""; width: 6px; height: 11px;
+    border: solid #fff; border-width: 0 2px 2px 0;
+    transform: rotate(45deg) translate(-1px, -1px);
+    opacity: 0;
+  }
+  .q.done .q-check::after { opacity: 1; }
+
+  .q-body { flex: 1; min-width: 0; }
+  .q-meta {
+    display: flex; align-items: center; gap: 8px;
+    margin-bottom: 6px; flex-wrap: wrap;
+  }
+  .q-num {
+    background: var(--card2); color: var(--text);
+    font-size: 11px; font-weight: 800;
+    padding: 2px 8px; border-radius: 5px;
+    font-variant-numeric: tabular-nums;
+    border: 1px solid var(--border);
+  }
+  .q.done .q-num { background: var(--gold); color: #fff; border-color: var(--gold); }
+
+  /* Tag badge styles by category */
+  .q-tag {
+    font-size: 11px; font-weight: 700;
+    padding: 2px 8px; border-radius: 5px;
+    letter-spacing: -0.01em;
+    display: inline-block;
+  }
+  .q-tag.tag-default {
+    color: var(--mute); background: transparent; padding: 2px 0;
+  }
+  .q-tag.tag-required {
+    background: var(--gold); color: #fff;
+  }
+  .q-tag.tag-killer {
+    background: var(--navy); color: var(--gold-b);
+  }
+  .q-tag.tag-crisis {
+    background: transparent; color: var(--gold);
+    border: 1.5px solid var(--gold);
+  }
+  .q-tag.tag-preempt {
+    background: var(--cream); color: var(--accent);
+  }
+  .q-tag.tag-backup {
+    background: #f3f4f6; color: var(--dim);
+  }
+
+  .q-text {
+    font-size: 14px; line-height: 1.65;
+    color: var(--text); word-break: keep-all;
+    white-space: pre-wrap;
+  }
+  .q.done .q-text {
+    text-decoration: line-through;
+    text-decoration-color: var(--dim);
+    color: var(--mute);
+  }
+
+  .q-text strong {
+    color: var(--accent);
+    font-weight: 800;
+    background: #fef3c7;
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+
+  .q-hint {
+    margin-top: 8px;
+    padding: 8px 10px;
+    background: #fafbfc;
+    border-left: 2px solid #e5e7eb;
+    border-radius: 0 4px 4px 0;
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--hint);
+    font-weight: 500;
+    word-break: keep-all;
+    white-space: pre-wrap;
+  }
+  .q-hint::before {
+    content: "유도 답안 · ";
+    font-size: 10px;
+    font-weight: 700;
+    color: #c1c7cd;
+    letter-spacing: 0.02em;
+  }
+  .q.done .q-hint { opacity: 0.5; }
+
+  .q.hidden { display: none; }
+  .loc-group.empty { display: none; }
+
+  .toast {
+    position: fixed; left: 50%; bottom: 24px;
+    transform: translateX(-50%) translateY(20px);
+    background: #111827; color: #fff;
+    padding: 10px 20px; border-radius: 999px;
+    font-size: 13px; font-weight: 600;
+    opacity: 0; transition: all 0.3s;
+    pointer-events: none;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  }
+  .toast.show {
+    opacity: 1; transform: translateX(-50%) translateY(0);
+  }
+
+  @media (min-width: 768px) {
+    body { font-size: 16px; }
+    main { max-width: 760px; margin: 0 auto; padding: 18px 20px 60px; }
+    .header { padding: 16px 20px 12px; }
+    .header > div { max-width: 760px; margin: 0 auto; }
+    .header h1 { font-size: 17px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div>
+    <h1>사찍남 · 백종환 건강식품AI · PD 촬영 체크리스트</h1>
+    <div class="sub">4개 장소 · 120개 질문 · 체크 자동 저장</div>
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-text" id="progressText">0 / 120 완료</div>
+    </div>
+    <div class="filter-row">
+      <button class="filter-btn active" data-filter="all">전체</button>
+      <button class="filter-btn" data-filter="L1">L1 YK몰</button>
+      <button class="filter-btn" data-filter="L2">L2 편의점</button>
+      <button class="filter-btn" data-filter="L3">L3 사무실</button>
+      <button class="filter-btn" data-filter="L4">L4 저녁</button>
+      <button class="filter-btn reset" id="resetBtn">초기화</button>
+      <button class="filter-btn export" id="exportBtn">Export</button>
+    </div>
+  </div>
+</div>
+
+<main id="main"></main>
+
+<div class="toast" id="toast">저장됨</div>
+
+<script>
+const STORAGE_KEY = 'checklist_백종환_v1';
+
+const LOCATIONS = [
+  {
+    id: 'L1', color: 'L1',
+    title: 'L1 인천 YK몰 비밀창고',
+    time: '건강식품 도매 현장 · 소싱 실연 · 가격 비교 · 부소남 콘텐츠',
+    questions: [
+      // 1-1. 비밀창고 소개 (8)
+      { n: 1, tags: ['필수'], q: '"여기가 어디예요? 일반인도 올 수 있는 곳이에요?"', hint: 'YK몰 소개, 일반인 접근성. 도매몰이지만 누구나 구매 가능하다는 점 강조' },
+      { n: 2, tags: ['킬러'], q: '"이 건강식품 하나에 얼마예요? 온라인에서는 얼마에 팔아요?"', hint: '2~4천원 vs 2만원대, 마진 공개. 실물 들고 가격 비교 장면' },
+      { n: 3, tags: [], q: '"유통기한 임박이면 효과가 떨어지나요?"', hint: '효능은 동일, 유통기한의 비밀. 소비자 오해 해소' },
+      { n: 4, tags: [], q: '"편의점보다 싸요? 다이소보다?"', hint: '다이소보다 싸다는 임팩트. 가격 비교 인서트 활용' },
+      { n: 5, tags: ['필수'], q: '"이걸로 진짜 돈을 벌 수 있어요?"', hint: '실제 수익 사례, 월 70~80만원. 초보자 눈높이' },
+      { n: 6, tags: [], q: '"처음 시작하는 사람한테 추천하는 제품은?"', hint: '몰래샷, 밀크시슬 등 스테디셀러. 구체적 제품명' },
+      { n: 7, tags: [], q: '"한 번에 얼마나 사요? 10만원어치?"', hint: '실제 구매 장면, 카트에 쌓기. 비주얼 임팩트' },
+      { n: 8, tags: ['위기장치'], q: '"이거 리셀 아니에요? 불법 아닌가요?"', hint: '합법적 유통, 건강기능식품 영업신고증 보유. 시청자 의심 선제 차단' },
+
+      // 1-2. 소싱 노하우 (8)
+      { n: 9, tags: [], q: '"어떤 기준으로 제품을 고르세요?"', hint: '검색량 높은 질병 키워드 기준. 데이터 기반 소싱' },
+      { n: 10, tags: ['킬러'], q: '"욕구 시장이 뭐예요? 처음 듣는 개념인데"', hint: '남성 성욕, 여성 미용, 노인 건강불안. 3대 욕구 시장 설명' },
+      { n: 11, tags: [], q: '"발기 영양제가 진짜 잘 팔려요?"', hint: '리뷰 없어도 월 300~400개, 말 못하는 욕구. 수치로 증명' },
+      { n: 12, tags: [], q: '"수족냉증이나 이런 것도?"', hint: '계절성 + 만성, 재구매율 높음. 틈새 질병 시장' },
+      { n: 13, tags: [], q: '"건강식품의 재구매율이 높은 이유?"', hint: '목적성 구매, 한 번 먹기 시작하면 계속. 구독형 수익 구조' },
+      { n: 14, tags: ['필수'], q: '"다른 카테고리 말고 왜 건강식품?"', hint: '재구매 있음, CS 적음, 혼자 가능. 3가지 핵심 이유' },
+      { n: 15, tags: [], q: '"경쟁이 심하지 않아요?"', hint: '질병 키워드는 무한대, 틈새 있음. 경쟁 우려 해소' },
+      { n: 16, tags: [], q: '"도매몰 외에 다른 소싱처도 있어요?"', hint: '편의점 1+1, 코스트코, 직접 제조. 다양한 소싱 경로' },
+
+      // 1-3. 부소남 전용 (8)
+      { n: 17, tags: ['필수'], q: '"이걸 실제로 올려서 팔아볼까요?"', hint: '현장 실연, 사진 찍고 올리기. 라이브 시연 장면' },
+      { n: 18, tags: [], q: '"썸네일은 어떻게 만들어요?"', hint: 'AI가 질병 이미지 자동 생성. 프로그램 화면 인서트' },
+      { n: 19, tags: [], q: '"상품명은?"', hint: '노출도 상/중/하, 검색 태그 20개 자동. AI 추천 장면' },
+      { n: 20, tags: ['킬러'], q: '"수작업이면 얼마나 걸려요? AI면?"', hint: '30분 vs 1분, 극적 시간 비교. 화면 분할 비교' },
+      { n: 21, tags: [], q: '"쿠팡에 올려요? 네이버?"', hint: '초보자는 쿠팡, 확장하면 스마트스토어. 플랫폼별 전략' },
+      { n: 22, tags: [], q: '"하루에 몇 개 올릴 수 있어요?"', hint: 'AI면 10개 이상 가능. 자동화 효율' },
+      { n: 23, tags: [], q: '"월 100만원 벌려면 몇 개 올려야?"', hint: '10~15개면 충분. 구체적 목표 제시' },
+      { n: 24, tags: [], q: '"이거 부업으로 퇴근 후에 가능해요?"', hint: '하루 1~2시간, 출퇴근 시간 활용. 직장인 시간표' },
+
+      // 1-4. 오프닝 훅 (6)
+      { n: 25, tags: ['필수', '위기장치'], q: '"지금 카트에 있는 거 다 합쳐서 얼마예요?"', hint: '"10만원도 안 해요" 충격 금액. 카트 전체 클로즈업' },
+      { n: 26, tags: [], q: '"이걸 온라인에서 팔면 얼마 남아요?"', hint: '3~5배 마진, 구체적 숫자. 계산기 인서트' },
+      { n: 27, tags: ['선제방어'], q: '"이거 너무 쉬워 보이는데, 다 하면 경쟁 심해지지 않아요?"', hint: '질병 키워드 무한, 독점 불가. 시장 크기 설명' },
+      { n: 28, tags: [], q: '"대표님 처음에도 이렇게 시작했어요?"', hint: '편의점에서 우르샷 떼다 팔기 시작. 창업 원점' },
+      { n: 29, tags: [], q: '"이 비밀창고를 어떻게 알게 됐어요?"', hint: '업계에서 알려진 곳, 오프라인 도매. 정보 출처' },
+      { n: 30, tags: ['필수'], q: '"건강식품 사업의 핵심 한 줄?"', hint: '"AI 자동화로 건강식품 욕구 시장을 공략한다"' },
+    ]
+  },
+  {
+    id: 'L2', color: 'L2',
+    title: 'L2 편의점 CU',
+    time: '과거 회고 · 편의점 건강식품 · 직장인 시절',
+    questions: [
+      // 2-1. 직장인 시절 (10)
+      { n: 31, tags: ['필수'], q: '"여기서 일했어요? 어떤 일?"', hint: 'SC(스토어컨설턴트), 점포 14~15개 관리. 직책과 업무 범위' },
+      { n: 32, tags: [], q: '"연봉이 얼마였어요?"', hint: '4천 2~3백, 외근직. 구체적 수치' },
+      { n: 33, tags: [], q: '"나의 해방일지에 이민기 역할이랑 같다면서요?"', hint: '편의점 매출 컨설팅. 드라마 비유로 친숙하게' },
+      { n: 34, tags: ['킬러'], q: '"회사 다니면서 부업은 언제 했어요?"', hint: '외근직이라 중간중간, 잠 3시간. 극한 노력' },
+      { n: 35, tags: [], q: '"처음 부업은 뭐였어요?"', hint: '몸대방지 패드, 월 5~10만원. 작은 시작' },
+      { n: 36, tags: [], q: '"그때 한계를 느꼈죠?"', hint: '공산품은 재구매 없음, 마진 낮음. 전환 계기' },
+      { n: 37, tags: [], q: '"건강기능식품 영업신고증은 왜 만들어놨어요?"', hint: '미리 발급받아둠, 책상 밑에서 발견. 운명적 발견' },
+      { n: 38, tags: ['위기장치'], q: '"코인으로 얼마나 벌었다가 잃었어요?"', hint: '2.5억까지 갔다가 나락, "한 번 무너졌다"만. 깊이 파지 말 것' },
+      { n: 39, tags: [], q: '"누나 상가건물 중도금 이야기 해주세요"', hint: '1년 내 1억 필요, 직장인으로 불가능. 절박함의 시작' },
+      { n: 40, tags: [], q: '"그때 통장에 얼마 있었어요?"', hint: '150만원, 절체절명. 숫자 하나로 임팩트' },
+
+      // 2-2. 편의점 건강식품 (10)
+      { n: 41, tags: ['필수'], q: '"편의점에도 건강식품 많죠?"', hint: '올해 핵심 카테고리, 메인 진열대. 진열대 촬영' },
+      { n: 42, tags: [], q: '"여기 1+1 제품도 있네요?"', hint: '알비콤 등 원플러스원, 떼다 팔기. 실물 들기' },
+      { n: 43, tags: [], q: '"편의점에서 떼다 팔면 마진이?"', hint: '실제 계산해보기. 현장 계산 장면' },
+      { n: 44, tags: ['킬러'], q: '"옛날에 여기서 우르샷 사서 팔았다면서요?"', hint: '트렁크에 싣고, 일일이 포장, 월 7~80만원. 비주얼 재현' },
+      { n: 45, tags: [], q: '"택배 박스는 어떻게 했어요?"', hint: '병원 편의점에서 버려진 박스 주워서 사용. 극한 절약' },
+      { n: 46, tags: [], q: '"우체국 택배 비싸서 어떻게?"', hint: '100원이라도 아끼려고. 디테일이 진정성' },
+      { n: 47, tags: [], q: '"그때 얼마나 벌었어요?"', hint: '월 7~80만원, 그래도 값진 돈. 감정 담아서' },
+      { n: 48, tags: [], q: '"지금도 이렇게 할 수 있어요?"', hint: '물론, 초보자 진입 방법으로 최적. 현재 시점 연결' },
+      { n: 49, tags: [], q: '"편의점 건강식품과 도매몰 차이?"', hint: '편의점은 소량, 도매몰은 대량 마진. 성장 경로' },
+      { n: 50, tags: ['선제방어'], q: '"이거 점주한테 허락받고 산 거예요?"', hint: '정상 구매, 1+1은 소비자 혜택. 합법성 확인' },
+
+      // 2-3. 폐기 도시락 시절 (10)
+      { n: 51, tags: ['필수', '위기장치'], q: '"편의점 폐기 도시락 먹었다면서요?"', hint: '3개월간, 점주님한테 부탁. 진솔한 고백' },
+      { n: 52, tags: [], q: '"어떤 거 먹었어요?"', hint: '3,900원 소불고기 백도시락, 데워서 먹음. 구체적 장면' },
+      { n: 53, tags: [], q: '"점심은요?"', hint: '점포에서 미리 챙긴 빵, 샌드위치. 일상 디테일' },
+      { n: 54, tags: [], q: '"식비를 줄인 이유?"', hint: '컨트롤 가능한 비용이 식대뿐. 절박함의 논리' },
+      { n: 55, tags: [], q: '"그때 데이트 비용은?"', hint: '다 줄임, 식대와 데이트 비용만 컨트롤 가능' },
+      { n: 56, tags: ['킬러'], q: '"가장 힘든 순간은?"', hint: '보증금, 차 할부, 코인 빚, 전세사기까지 겹침. 절정의 위기' },
+      { n: 57, tags: [], q: '"전세 사기도 당했어요?"', hint: '허그 안심 전세 보증보험으로 돌려받음, 3~4개월 소요' },
+      { n: 58, tags: [], q: '"그때 포기하고 싶지 않았어요?"', hint: '누나 돈까지 날릴 위기, 심리적 압박. 감정 피크' },
+      { n: 59, tags: [], q: '"어머니 이야기..."', hint: '담담하게, 군대 입대 2주 만에 돌아가심. 디테일 강요 금지' },
+      { n: 60, tags: ['필수'], q: '"그 시절이 지금의 대표님을 만든 건가요?"', hint: '"궁지에 몰리면 뭐든 한다", 회복 탄력성. 챕터 마무리' },
+    ]
+  },
+  {
+    id: 'L3', color: 'L3',
+    title: 'L3 사무실',
+    time: '매출 공개 · AI 프로그램 · 사업 철학 · 강의',
+    questions: [
+      // 3-1. 매출 공개 & 신격화 (10)
+      { n: 61, tags: ['필수'], q: '"지금 월 매출이 얼마예요?"', hint: '4~5억, 화면으로 증빙. 관리자 페이지 클로즈업' },
+      { n: 62, tags: [], q: '"순수익은요?"', hint: '1억 좀 넘음, 솔직하게. 매출과 수익 구분' },
+      { n: 63, tags: ['킬러'], q: '"직원이 몇 명이에요?"', hint: '정규직 1명(콘텐츠 마케터), 나머지 프리랜서/파트타임. 충격 포인트' },
+      { n: 64, tags: [], q: '"직원 없이 이 매출이 가능해요?"', hint: '"직원 없이 건강식품으로 연매출 40억" 키 메시지' },
+      { n: 65, tags: [], q: '"메인 제품은 뭐예요?"', hint: '자체 제조 브랜드 + 위탁 계정 2개 + 도매. 수익 포트폴리오' },
+      { n: 66, tags: [], q: '"누적 매출이 100억이라면서요?"', hint: '10억 -> 20억 -> 40억 성장 곡선. 그래프 인서트' },
+      { n: 67, tags: [], q: '"자동차는 뭐 타세요?"', hint: '벤츠, 자연스럽게 노출. 성공의 시각적 증거' },
+      { n: 68, tags: [], q: '"최근에 이사했다면서요?"', hint: '4~5평 원룸 -> 아파트 (월세). Before/After' },
+      { n: 69, tags: [], q: '"아버지한테 카드 드렸다면서요?"', hint: '올해 초, 제한 없는 카드. 효도 감정 씬' },
+      { n: 70, tags: ['필수'], q: '"가장 극적인 변화는?"', hint: '폐기 도시락 -> 순이익 1억, 담담하게. 원라인 정리' },
+
+      // 3-2. AI 프로그램 시연 (10)
+      { n: 71, tags: ['필수', '킬러'], q: '"이 프로그램 직접 만든 거예요?"', hint: '바이브 코딩으로 프로토타입, 개발자가 정식 개발 중. 차별화 포인트' },
+      { n: 72, tags: [], q: '"화면 보여주실 수 있어요?"', hint: '화면 공유, UI 시연. 모니터 클로즈업' },
+      { n: 73, tags: ['필수'], q: '"10단계 인간 감각기관이 뭐예요?"', hint: '신경계/감각계 등 10개 -> 질병 키워드 -> 개선 원료. 체계적 설명' },
+      { n: 74, tags: [], q: '"예를 들어 기억력이면?"', hint: '포스파티딜세린, 식약처 인증 원료 추천. 구체적 예시' },
+      { n: 75, tags: [], q: '"도매몰 연동은 어떻게?"', hint: '원료 클릭 -> 실시간 검색 -> 최저가 순 정렬. 라이브 시연' },
+      { n: 76, tags: ['킬러'], q: '"썸네일도 AI가 만들어요?"', hint: '질병 이해 -> 증상 이미지 자동 생성. 생성 과정 녹화' },
+      { n: 77, tags: [], q: '"상품명 노출도 상/중/하?"', hint: '공격적 키워드 vs 안정적 키워드, 등록 즉시 상위 노출' },
+      { n: 78, tags: [], q: '"검색 태그 20개도?"', hint: '자동 추천, 복사 붙여넣기만. 효율성 강조' },
+      { n: 79, tags: [], q: '"경쟁사 분석도 돼요?"', hint: 'URL 입력 -> 원료/배합비/셀링포인트/제형/패키징 분석' },
+      { n: 80, tags: ['필수'], q: '"이 프로그램의 한 줄 설명?"', hint: '"AI가 질병을 읽고, 원료를 찾고, 상품을 만들어준다"' },
+
+      // 3-3. 사업 철학 & 강의 (10)
+      { n: 81, tags: [], q: '"왜 강의를 하세요? 월 1억인데?"', hint: '브랜드 확장 + 해외 K-웰니스 진출 위한 종잣돈. 큰 그림' },
+      { n: 82, tags: ['선제방어'], q: '"수강생 중에 성공한 사람?"', hint: '1000명+, 2개월 만에 월 7천만 달성자. 사회적 증명' },
+      { n: 83, tags: [], q: '"코주부 박수영 대표와 왜?"', hint: '본질을 쉽게 가르치는 방향, 위탁 접근. 협업 이유' },
+      { n: 84, tags: ['위기장치'], q: '"한 번 강의 망했다면서요?"', hint: '사이클에서 2월 특강 결과 안 좋음, 너무 어렵게 설명. 실패 인정' },
+      { n: 85, tags: [], q: '"배운 교훈은?"', hint: '백화점 물건을 시장에 내다 팔아야, 쉽게 설명해야. 비유' },
+      { n: 86, tags: [], q: '"무료특강 언제예요?"', hint: '5/11 월요일. CTA 자연 연결' },
+      { n: 87, tags: ['필수'], q: '"건강식품의 미래?"', hint: 'K-웰니스 해외 시장, 동남아 초기 시장. 비전' },
+      { n: 88, tags: [], q: '"궁극적 목표는?"', hint: '브랜드 키워서 해외 진출, 단타가 아닌 큰 그림' },
+      { n: 89, tags: [], q: '"사업하는 마인드 한마디?"', hint: '"궁지에 몰리면 쥐새끼도 고양이 물어뜯는다"' },
+      { n: 90, tags: ['선제방어'], q: '"이 시장 너무 쉬워 보이는데?"', hint: '"오지 말았으면 좋겠다" 역설, 진입장벽 세우기. 허들 높이기' },
+    ]
+  },
+  {
+    id: 'L4', color: 'L4',
+    title: 'L4 편의점 앞 저녁 (도시락)',
+    time: '과거 회고 마무리 · 인생 철학 · CTA',
+    questions: [
+      // 4-1. 도시락 장면 (10)
+      { n: 91, tags: ['필수'], q: '"이거 옛날에 맨날 먹던 거예요?"', hint: '3,900원 백도시락, 감정 올라오게. 도시락 클로즈업' },
+      { n: 92, tags: [], q: '"맛은 어때요 지금 먹어보니?"', hint: '추억의 맛, 감성적 장면. 표정 클로즈업' },
+      { n: 93, tags: [], q: '"이걸 3개월이나?"', hint: '아침 점심 저녁 다 편의점. 반복의 무게감' },
+      { n: 94, tags: ['킬러'], q: '"그때 시급으로 환산하면 얼마였어요?"', hint: '잠 3시간, 시급보다 낮았을 수도. 극적 대비' },
+      { n: 95, tags: [], q: '"지금은 하루에 얼마 벌어요?"', hint: '대비 극대화, 하루 수백만원. Before/After' },
+      { n: 96, tags: [], q: '"이 도시락 값어치를 알겠어요?"', hint: '그때 있었기에 지금이 있다. 의미 부여' },
+      { n: 97, tags: [], q: '"가장 배고팠던 날은?"', hint: '구체적 에피소드 하나. 시각화' },
+      { n: 98, tags: [], q: '"편의점 점주님한테 감사해요?"', hint: '감사한 마음, 인간적 면모. 따뜻한 장면' },
+      { n: 99, tags: [], q: '"그때로 돌아간다면?"', hint: '또 할 것이다, 후회 없음. 확신' },
+      { n: 100, tags: ['위기장치'], q: '"눈물 나지 않아요?"', hint: '"안 나요. 그때 이후로 눈물이 안 나요" (진짜 대사). 감정 피크' },
+
+      // 4-2. 인생 철학 (10)
+      { n: 101, tags: ['필수'], q: '"회복 탄력성이라는 말 아세요?"', hint: '위험 중독, 리스크 테이킹 도파민. 심리학 용어 자연스럽게' },
+      { n: 102, tags: [], q: '"CEO들의 공통점?"', hint: '무너져도 다시 올라오는 사람. 일반화' },
+      { n: 103, tags: ['킬러'], q: '"게임처럼 한다고요?"', hint: '퀘스트 깨는 느낌, 미션 깨면 깨지는 거고. MZ 공감' },
+      { n: 104, tags: [], q: '"사업이 재밌어요?"', hint: '"딱히 재밌는 게 없어요. 그래서 사업이 게임이에요". 담담함' },
+      { n: 105, tags: [], q: '"가장 후회하는 건?"', hint: '코인에 눈이 멀었던 것, but 그것도 배움. 균형' },
+      { n: 106, tags: [], q: '"가장 잘한 건?"', hint: '건강식품 하나 붙잡고 간 것. 집중의 힘' },
+      { n: 107, tags: ['선제방어'], q: '"돈이 전부는 아니죠?"', hint: '물질적 만족보다 성장, 아버지 카드. 인간적 깊이' },
+      { n: 108, tags: [], q: '"35살에 이 정도면 만족?"', hint: '아직 배울 것 많다, 겸손하게. 성장 마인드셋' },
+      { n: 109, tags: [], q: '"앞으로 3년 뒤?"', hint: '브랜드 해외 진출, K-웰니스. 미래 비전' },
+      { n: 110, tags: ['필수'], q: '"이 도시락처럼 시작하는 사람한테 한마디?"', hint: '"시작이 중요하다. 천 원이라도 팔아봐라". 메시지 한 줄' },
+
+      // 4-3. CTA & 마무리 (10)
+      { n: 111, tags: [], q: '"대표님한테 더 배우고 싶으면?"', hint: '자연스럽게 강의 안내. CTA 시작' },
+      { n: 112, tags: ['필수'], q: '"무료특강은 어떤 내용?"', hint: '위탁으로 건강식품 시작, 핵심 두 가지 방법. 구체적 내용' },
+      { n: 113, tags: [], q: '"수강료가 비싸지 않아요?"', hint: '"할 거면 와라, 안 할 거면 오지 마라" 역설. 허들 높이기' },
+      { n: 114, tags: ['킬러'], q: '"모든 사람이 할 수 있어요?"', hint: '"이런 사람은 오지 말았으면 좋겠다" -> 허들 높이기. 역설적 CTA' },
+      { n: 115, tags: [], q: '"건강식품 말고 다른 부업은?"', hint: '재구매 없는 건 한계, 건강식품이 답. 카테고리 확신' },
+      { n: 116, tags: [], q: '"AI가 대체하면 사람이 할 게 없어지지 않나?"', hint: 'AI는 도구, 기획과 소싱 눈은 사람. 균형 메시지' },
+      { n: 117, tags: ['선제방어'], q: '"너무 쉬워 보이는데 함정은?"', hint: '초반 노력 필수, 3~4개월 갈아넣어야. 현실적 기대치' },
+      { n: 118, tags: [], q: '"마지막으로 하고 싶은 말?"', hint: '"천 원이라도 먼저 팔아보세요". 엔딩 멘트' },
+      { n: 119, tags: ['필수'], q: '"이 도시락 한입 드세요"', hint: '먹는 장면, 미소, 감성 마무리. 비주얼 엔딩' },
+      { n: 120, tags: [], q: '"감사합니다"', hint: '자연스럽게 엔딩. 도시락 내려놓는 장면' },
+    ]
+  },
+];
+
+let state = { checks: {}, filter: 'all' };
+function load() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) state.checks = JSON.parse(raw) || {};
+  } catch (e) {}
+}
+function save() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state.checks)); } catch (e) {}
+}
+
+const TOTAL = LOCATIONS.reduce((acc, l) => acc + l.questions.length, 0);
+
+function escapeHTML(s) {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+function renderQuestionText(s) {
+  return escapeHTML(s)
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\n/g, '<br>');
+}
+function renderHint(s) {
+  return escapeHTML(s).replace(/\n/g, '<br>');
+}
+
+function getTagClass(tag) {
+  if (tag === '필수') return 'tag-required';
+  if (tag === '킬러') return 'tag-killer';
+  if (tag === '위기장치') return 'tag-crisis';
+  if (tag === '선제방어') return 'tag-preempt';
+  if (tag === '백업') return 'tag-backup';
+  return 'tag-default';
+}
+
+function renderTags(tags) {
+  if (!tags || tags.length === 0) return '';
+  return tags.map(t => `<span class="q-tag ${getTagClass(t)}">${escapeHTML(t)}</span>`).join('');
+}
+
+function render() {
+  const main = document.getElementById('main');
+  main.innerHTML = '';
+  let done = 0;
+
+  for (const loc of LOCATIONS) {
+    // Location filter
+    if (state.filter !== 'all' && state.filter.startsWith('L') && state.filter !== loc.id) continue;
+
+    const group = document.createElement('section');
+    group.className = 'loc-group';
+
+    const locDone = loc.questions.filter(q => state.checks[loc.id + ':' + q.n]).length;
+    const locTotal = loc.questions.length;
+    done += locDone;
+
+    const header = document.createElement('div');
+    header.className = 'loc-header';
+    header.innerHTML = `
+      <div class="loc-title">${escapeHTML(loc.title)}<span class="loc-time"> · ${escapeHTML(loc.time)}</span></div>
+      <div class="loc-count">${locDone}/${locTotal}</div>
+    `;
+    group.appendChild(header);
+
+    let visibleInGroup = 0;
+    for (const q of loc.questions) {
+      const key = loc.id + ':' + q.n;
+      const isDone = !!state.checks[key];
+
+      visibleInGroup++;
+
+      const card = document.createElement('div');
+      card.className = 'q' + (isDone ? ' done' : '');
+
+      const hintHTML = q.hint ? `<div class="q-hint">${renderHint(q.hint)}</div>` : '';
+      const tagsHTML = renderTags(q.tags);
+
+      card.innerHTML = `
+        <div class="q-row" data-key="${key}">
+          <div class="q-check"></div>
+          <div class="q-body">
+            <div class="q-meta">
+              <span class="q-num">${q.n}</span>
+              ${tagsHTML}
+            </div>
+            <div class="q-text">${renderQuestionText(q.q)}</div>
+            ${hintHTML}
+          </div>
+        </div>
+      `;
+
+      card.querySelector('.q-row').addEventListener('click', () => {
+        state.checks[key] = !state.checks[key];
+        save();
+        render();
+      });
+
+      group.appendChild(card);
+    }
+
+    if (visibleInGroup === 0) group.classList.add('empty');
+    main.appendChild(group);
+  }
+
+  // If filtering by location, recalculate total done across all locations
+  if (state.filter !== 'all' && state.filter.startsWith('L')) {
+    done = 0;
+    for (const loc of LOCATIONS) {
+      done += loc.questions.filter(q => state.checks[loc.id + ':' + q.n]).length;
+    }
+  }
+
+  const totalDone = LOCATIONS.reduce((acc, loc) => acc + loc.questions.filter(q => state.checks[loc.id + ':' + q.n]).length, 0);
+  const pct = TOTAL > 0 ? Math.round((totalDone / TOTAL) * 100) : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = `${totalDone} / ${TOTAL} 완료`;
+}
+
+// Filter buttons
+document.querySelectorAll('.filter-btn[data-filter]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn[data-filter]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    state.filter = btn.dataset.filter;
+    render();
+  });
+});
+
+// Reset button
+document.getElementById('resetBtn').addEventListener('click', () => {
+  if (confirm('모든 체크를 초기화할까요?')) {
+    state.checks = {};
+    save();
+    render();
+    showToast('초기화 완료');
+  }
+});
+
+// Export button
+document.getElementById('exportBtn').addEventListener('click', () => {
+  const exportData = {
+    schema_version: '1.0',
+    performer: '백종환',
+    episode: '건강식품AI',
+    channel: 'sajjiknam',
+    exported_at: new Date().toISOString(),
+    storage_key: STORAGE_KEY,
+    total_questions: 0,
+    total_checked: 0,
+    usage_rate_pct: 0,
+    locations: [],
+  };
+
+  for (const loc of LOCATIONS) {
+    const checkedQs = loc.questions.filter(q => state.checks[loc.id + ':' + q.n]);
+    const uncheckedQs = loc.questions.filter(q => !state.checks[loc.id + ':' + q.n]);
+    exportData.total_questions += loc.questions.length;
+    exportData.total_checked += checkedQs.length;
+    exportData.locations.push({
+      id: loc.id,
+      title: loc.title,
+      time: loc.time,
+      total: loc.questions.length,
+      checked: checkedQs.length,
+      rate_pct: loc.questions.length > 0 ? Math.round(checkedQs.length / loc.questions.length * 1000) / 10 : 0,
+      checked_questions: checkedQs.map(q => ({
+        n: q.n,
+        tags: q.tags,
+        q: q.q.replace(/\n+/g, ' ').replace(/\*\*/g, ''),
+      })),
+      unchecked_questions: uncheckedQs.map(q => ({
+        n: q.n,
+        tags: q.tags,
+        q: q.q.replace(/\n+/g, ' ').replace(/\*\*/g, ''),
+      })),
+    });
+  }
+  exportData.usage_rate_pct = exportData.total_questions > 0
+    ? Math.round(exportData.total_checked / exportData.total_questions * 1000) / 10
+    : 0;
+
+  // Generate text summary
+  let textLines = [];
+  textLines.push('=== 사찍남 · 백종환 건강식품AI · PD 촬영 체크리스트 ===');
+  textLines.push(`Export: ${new Date().toLocaleString('ko-KR')}`);
+  textLines.push(`진행률: ${exportData.total_checked} / ${exportData.total_questions} (${exportData.usage_rate_pct}%)`);
+  textLines.push('');
+
+  for (const loc of exportData.locations) {
+    textLines.push(`--- ${loc.title} (${loc.checked}/${loc.total}, ${loc.rate_pct}%) ---`);
+    for (const q of loc.checked_questions) {
+      const tagStr = q.tags && q.tags.length > 0 ? ` [${q.tags.join('/')}]` : '';
+      textLines.push(`  [v] Q${q.n}${tagStr}: ${q.q}`);
+    }
+    for (const q of loc.unchecked_questions) {
+      const tagStr = q.tags && q.tags.length > 0 ? ` [${q.tags.join('/')}]` : '';
+      textLines.push(`  [ ] Q${q.n}${tagStr}: ${q.q}`);
+    }
+    textLines.push('');
+  }
+
+  const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const dateStr = new Date().toISOString().slice(0, 10);
+  a.href = url;
+  a.download = `백종환_건강식품AI_${dateStr}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast(`Export 완료 (${exportData.total_checked}/${exportData.total_questions})`);
+});
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 1500);
+}
+
+load();
+render();
+</script>
+
+</body>
+</html>
