@@ -171,6 +171,50 @@
     font-size: 11px; color: #8B95A1; text-align: center;
   }
 
+  /* ===== 모바일 최적화 ===== */
+  @media (max-width: 640px) {
+    .wrap { padding: 0 12px; }
+
+    .cover { padding: 24px 20px; border-radius: 12px; margin-bottom: 20px; }
+    .cover-title { font-size: 22px; }
+    .cover-sub { font-size: 12px; }
+    .cover-meta { gap: 8px; }
+    .cover-m { padding: 8px 12px; flex: 1; }
+    .cover-m-v { font-size: 15px; }
+    .cover-m-l { font-size: 9px; }
+
+    .section-title { font-size: 14px; margin: 20px 0 10px; }
+
+    .funnel-box { padding: 16px; border-radius: 10px; }
+    .funnel-flow { font-size: 13px; line-height: 1.8; }
+
+    .summary-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .summary-table th, .summary-table td { white-space: nowrap; padding: 6px 8px; font-size: 11px; }
+
+    .author-card { padding: 16px; margin-bottom: 10px; border-radius: 10px; }
+    .author-name { font-size: 15px; }
+    .book-title { font-size: 14px; }
+    .author-grid { grid-template-columns: 1fr; gap: 2px; font-size: 12px; }
+    .author-note { padding: 8px 12px; font-size: 11px; }
+    .author-links { font-size: 10px; }
+
+    .group-member {
+      flex-wrap: wrap; gap: 4px 8px; padding: 8px 0; font-size: 11px;
+    }
+    .group-member .gm-name { min-width: auto; }
+    .group-member .gm-ch { min-width: auto; }
+    .group-member .gm-sub { min-width: auto; font-size: 11px; }
+    .group-member .gm-note { flex-basis: 100%; margin-top: 2px; }
+
+    .venue-grid { grid-template-columns: 1fr; gap: 8px; }
+    .venue-grid img { height: 200px; }
+    .venue-grid .wide { height: 200px; }
+    .venue-features { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+    .venue-feat { padding: 10px 8px; }
+    .venue-feat strong { font-size: 13px; }
+    .venue-feat span { font-size: 10px; }
+  }
+
   @media print {
     body { font-size: 11px; }
     .cover { border-radius: 0; margin: 0 -18mm; padding: 30px 36px; width: calc(100% + 36mm); }
