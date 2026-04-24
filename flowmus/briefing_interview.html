@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>플로우머스 — 회사 소개 브리핑</title>
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --navy: #1a1d23;
+    --blue: #2563EB;
+    --blue-light: rgba(37,99,235,0.07);
+    --orange: #ea580c;
+    --orange-light: rgba(234,88,12,0.07);
+    --green: #16a34a;
+    --green-light: rgba(22,163,74,0.07);
+    --purple: #7c3aed;
+    --purple-light: rgba(124,58,237,0.07);
+    --text: #1a1d23;
+    --text-med: #64748b;
+    --text-low: #94a3b8;
+    --border: #e2e8f0;
+    --surface: #f8fafc;
+  }
+  html { font-size: 11pt; }
+  body {
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    color: var(--text); background: #fff; line-height: 1.7;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .page {
+    width: 210mm; min-height: 297mm; margin: 0 auto;
+    padding: 48px 56px; position: relative;
+    page-break-after: always; background: #fff;
+  }
+  .page:last-child { page-break-after: auto; }
+  @media print {
+    html { font-size: 10.5pt; }
+    body { background: #fff; }
+    .page { padding: 40px 48px; margin: 0; box-shadow: none; }
+    .no-print { display: none !important; }
+  }
+  @media screen {
+    body { background: #e5e7eb; padding: 24px 0; }
+    .page { box-shadow: 0 2px 16px rgba(0,0,0,0.08); margin-bottom: 24px; border-radius: 2px; }
+  }
+  @media screen and (max-width: 768px) {
+    body { padding: 0; background: #fff; }
+    .page { width: 100%; min-height: auto; padding: 32px 20px; box-shadow: none; margin-bottom: 0; border-radius: 0; border-bottom: 8px solid var(--surface); }
+    h1 { font-size: 22pt; }
+    h2 { font-size: 13pt; }
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    .stats-row { flex-wrap: wrap; }
+    .stat-item { min-width: 45%; }
+    .cover-footer { flex-direction: column; gap: 8px; text-align: center; }
+    .print-btn { display: none; }
+  }
+
+  h1 { font-size: 28pt; font-weight: 800; line-height: 1.25; letter-spacing: -0.02em; }
+  h2 { font-size: 15pt; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 14px; color: var(--navy); }
+  h3 { font-size: 11.5pt; font-weight: 700; margin-bottom: 6px; }
+  p { margin-bottom: 8px; }
+  .label { font-size: 9pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-low); margin-bottom: 6px; }
+  .small { font-size: 9pt; color: var(--text-med); }
+  .accent { color: var(--blue); }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+
+  .cover { display: flex; flex-direction: column; justify-content: center; }
+  .cover-footer { margin-top: auto; padding-top: 32px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+
+  .card {
+    border: 1px solid var(--border); border-radius: 12px;
+    padding: 20px; background: #fff; margin-bottom: 12px;
+  }
+  .card-blue { border-left: 3px solid var(--blue); }
+  .card-orange { border-left: 3px solid var(--orange); }
+  .card-green { border-left: 3px solid var(--green); }
+  .card-purple { border-left: 3px solid var(--purple); }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; }
+
+  .tag {
+    display: inline-block; font-size: 8.5pt; font-weight: 600;
+    padding: 3px 10px; border-radius: 20px; margin-right: 4px; margin-bottom: 4px;
+  }
+  .tag-blue { background: var(--blue-light); color: var(--blue); }
+  .tag-orange { background: var(--orange-light); color: var(--orange); }
+  .tag-green { background: var(--green-light); color: var(--green); }
+  .tag-purple { background: var(--purple-light); color: var(--purple); }
+
+  .stats-row { display: flex; gap: 16px; margin-bottom: 40px; }
+  .stat-item { text-align: center; flex: 1; }
+  .stat-num { font-size: 28pt; font-weight: 800; color: var(--navy); letter-spacing: -0.02em; }
+  .stat-unit { font-size: 9pt; color: var(--text-low); font-weight: 600; margin-top: 2px; }
+
+  .vision-box {
+    background: var(--navy); border-radius: 16px; padding: 36px;
+    color: #fff; margin-top: 16px;
+  }
+  .vision-box h2 { color: #fff; margin-bottom: 8px; font-size: 16pt; }
+  .vision-box p { color: rgba(255,255,255,0.65); font-size: 10.5pt; line-height: 1.7; margin-bottom: 0; }
+  .vision-box .highlight { color: #60a5fa; font-weight: 700; }
+
+  .page-num { position: absolute; bottom: 32px; right: 56px; font-size: 9pt; color: var(--text-low); }
+
+  .print-btn {
+    position: fixed; bottom: 24px; right: 24px; z-index: 100;
+    background: var(--navy); color: #fff; border: none;
+    padding: 14px 28px; border-radius: 10px;
+    font-size: 11pt; font-weight: 700; cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    font-family: 'Pretendard', sans-serif;
+  }
+
+  ul { padding-left: 18px; margin-bottom: 8px; }
+  li { font-size: 10pt; color: var(--text-med); margin-bottom: 4px; line-height: 1.6; }
+  li strong { color: var(--text); }
+
+  .flow { display: flex; align-items: center; gap: 5px; margin: 14px 0; flex-wrap: wrap; justify-content: center; }
+  .flow-step {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    padding: 8px 14px; font-size: 9pt; font-weight: 600; text-align: center;
+  }
+  .flow-arrow { color: var(--text-low); font-size: 12pt; }
+
+  .roadmap { position: relative; padding-left: 28px; }
+  .roadmap::before {
+    content: ''; position: absolute; left: 8px; top: 8px; bottom: 8px;
+    width: 2px; background: var(--border);
+  }
+  .roadmap-item { position: relative; margin-bottom: 18px; }
+  .roadmap-dot {
+    position: absolute; left: -24px; top: 6px;
+    width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--blue);
+    background: #fff;
+  }
+  .roadmap-item.active .roadmap-dot { background: var(--blue); }
+  .roadmap-period { font-size: 9pt; font-weight: 700; color: var(--blue); margin-bottom: 2px; }
+  .roadmap-title { font-size: 12pt; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .roadmap-desc { font-size: 10pt; color: var(--text-med); line-height: 1.6; }
+
+  .quote-box {
+    background: var(--surface); border-radius: 14px; padding: 28px;
+    text-align: center; margin-bottom: 24px;
+  }
+  .quote-box p { font-size: 16pt; font-weight: 800; color: var(--navy); margin-bottom: 6px; line-height: 1.4; }
+  .quote-box .small { margin: 0; }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">PDF 저장 (Ctrl+P)</button>
+
+<!-- PAGE 1: 커버 -->
+<div class="page cover">
+  <div style="font-size: 11pt; font-weight: 700; color: var(--blue); margin-bottom: 48px; letter-spacing: 0.04em;">FLOWMUS</div>
+
+  <h1>사람을 모으고,<br>콘텐츠로 연결합니다.</h1>
+  <p style="font-size: 14pt; color: var(--text-med); font-weight: 400; line-height: 1.6; margin-bottom: 48px;">
+    (주)플로우머스는 유튜브 채널 네트워크를 기반으로<br>
+    사람의 이야기를 콘텐츠로 만들고, 그 콘텐츠를 비즈니스로 연결하는<br>
+    IT 미디어 기업입니다.
+  </p>
+
+  <div class="stats-row">
+    <div class="stat-item">
+      <div class="stat-num">47.9만</div>
+      <div class="stat-unit">총 구독자</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">1.6억</div>
+      <div class="stat-unit">총 조회수</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">1,362</div>
+      <div class="stat-unit">총 영상</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">4</div>
+      <div class="stat-unit">사업 영역</div>
+    </div>
+  </div>
+
+  <div class="cover-footer">
+    <div>
+      <div style="font-weight: 700; font-size: 12pt;">(주) 플로우머스</div>
+      <div class="small">서울 서초구 서초대로 398</div>
+    </div>
+    <div style="color: var(--text-med); font-size: 10pt;">2026년 4월</div>
+  </div>
+</div>
+
+<!-- PAGE 2: 핵심 구조 — 하나의 콘텐츠가 만드는 비즈니스 -->
+<div class="page">
+  <p class="label">Core Structure</p>
+  <h2>하나의 콘텐츠가 4개의 비즈니스가 됩니다</h2>
+  <p style="font-size: 10.5pt; color: var(--text-med); margin-bottom: 20px;">
+    재미있는 사람을 찾고, 그 사람의 이야기를 영상으로 만듭니다.<br>
+    그 영상 하나가 유튜브에서 끝나지 않고, <strong>강의, 책, 플랫폼으로 확장</strong>됩니다.
+  </p>
+
+  <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 24px; margin-bottom: 20px;">
+    <div style="text-align: center; margin-bottom: 12px;">
+      <span style="font-size: 10pt; font-weight: 700; color: var(--text-low);">출연자 1명의 콘텐츠가 만드는 가치</span>
+    </div>
+    <div class="flow">
+      <div class="flow-step" style="background: var(--blue); color: #fff; border-color: var(--blue);">재미있는 사람 발굴</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step">인터뷰 촬영</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-step">유튜브 업로드</div>
+    </div>
+    <div style="text-align: center; margin: 10px 0; color: var(--text-low); font-size: 11pt;">&darr; 하나의 영상이 &darr;</div>
+    <div class="grid-4">
+      <div style="text-align: center; padding: 14px; border: 1px solid var(--border); border-radius: 10px; background: #fff;">
+        <div style="font-size: 9.5pt; font-weight: 700; color: var(--blue);">MCN</div>
+        <div style="font-size: 8.5pt; color: var(--text-med); margin-top: 4px;">롱폼 + 쇼츠 5개</div>
+      </div>
+      <div style="text-align: center; padding: 14px; border: 1px solid var(--border); border-radius: 10px; background: #fff;">
+        <div style="font-size: 9.5pt; font-weight: 700; color: var(--green);">강의 플랫폼</div>
+        <div style="font-size: 8.5pt; color: var(--text-med); margin-top: 4px;">온라인 클래스</div>
+      </div>
+      <div style="text-align: center; padding: 14px; border: 1px solid var(--border); border-radius: 10px; background: #fff;">
+        <div style="font-size: 9.5pt; font-weight: 700; color: var(--orange);">플로우북스</div>
+        <div style="font-size: 8.5pt; color: var(--text-med); margin-top: 4px;">출판 + 강연</div>
+      </div>
+      <div style="text-align: center; padding: 14px; border: 1px solid var(--border); border-radius: 10px; background: #fff;">
+        <div style="font-size: 9.5pt; font-weight: 700; color: var(--purple);">플랫폼</div>
+        <div style="font-size: 8.5pt; color: var(--text-med); margin-top: 4px;">트래픽 연계</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <p class="label">Proven Results</p>
+  <h2>이미 검증된 구조입니다</h2>
+
+  <div class="grid-2">
+    <div class="card card-orange">
+      <span class="tag tag-orange">타이탄클래스</span>
+      <h3 style="margin-top: 8px;">블로그로 17억 모은 92년생 디지털농사꾼</h3>
+      <div style="display: flex; gap: 24px; margin-top: 12px;">
+        <div>
+          <div style="font-size: 20pt; font-weight: 800; color: var(--blue);">144만</div>
+          <div class="small">조회수</div>
+        </div>
+        <div>
+          <div style="font-size: 20pt; font-weight: 800; color: var(--orange);">10억+</div>
+          <div class="small">강의 매출</div>
+        </div>
+      </div>
+    </div>
+    <div class="card card-blue">
+      <span class="tag tag-blue">무아클래스</span>
+      <h3 style="margin-top: 8px;">유튜브 공식 하나로 매달 7억 버는 93년생</h3>
+      <div style="display: flex; gap: 24px; margin-top: 12px;">
+        <div>
+          <div style="font-size: 20pt; font-weight: 800; color: var(--blue);">45만</div>
+          <div class="small">조회수</div>
+        </div>
+        <div>
+          <div style="font-size: 20pt; font-weight: 800; color: var(--orange);">30억+</div>
+          <div class="small">강의 매출</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="background: var(--blue-light); border: 1px solid rgba(37,99,235,0.15); margin-top: 8px;">
+    <p style="font-size: 10pt; margin: 0;">
+      <strong class="accent">핵심:</strong>
+      영상 하나가 유튜브 조회수로 끝나지 않습니다. 강의 매출 10억, 30억으로 연결됩니다.
+      <strong>콘텐츠가 곧 비즈니스</strong>입니다.
+    </p>
+  </div>
+
+  <span class="page-num">2</span>
+</div>
+
+<!-- PAGE 3: 채널 네트워크 + 지금 하는 일 -->
+<div class="page">
+  <p class="label">Channel Network</p>
+  <h2>지금 운영 중인 채널</h2>
+  <p style="font-size: 10pt; color: var(--text-med); margin-bottom: 16px;">자체 채널과 협업 채널을 합쳐 총 47.9만 구독자 네트워크를 운영합니다.</p>
+
+  <p class="label" style="margin-top: 16px;">자체 채널</p>
+  <div class="grid-3" style="margin-bottom: 20px;">
+    <div class="card" style="text-align: center; padding: 16px;">
+      <div class="tag tag-blue" style="margin-bottom: 6px;">자체 운영</div>
+      <h3 style="font-size: 14pt;">사찍남</h3>
+      <div style="font-size: 20pt; font-weight: 800; color: var(--blue);">14.4만</div>
+      <div class="small">비즈니스 / 창업 / 인터뷰</div>
+    </div>
+    <div class="card" style="text-align: center; padding: 16px;">
+      <div class="tag tag-blue" style="margin-bottom: 6px;">자체 운영</div>
+      <h3 style="font-size: 14pt;">부업소개하는남자</h3>
+      <div style="font-size: 20pt; font-weight: 800; color: var(--blue);">신규</div>
+      <div class="small">부업 / 사이드프로젝트</div>
+    </div>
+    <div class="card" style="text-align: center; padding: 16px; border-style: dashed;">
+      <div class="tag tag-green" style="margin-bottom: 6px;">확장 예정</div>
+      <h3 style="font-size: 14pt;">추가 채널</h3>
+      <div style="font-size: 20pt; font-weight: 800; color: var(--text-low);">+</div>
+      <div class="small">2026 하반기</div>
+    </div>
+  </div>
+
+  <p class="label">협업 채널</p>
+  <div class="grid-3" style="margin-bottom: 20px;">
+    <div class="card" style="text-align: center; padding: 16px;">
+      <h3 style="font-size: 14pt;">머니로드</h3>
+      <div style="font-size: 20pt; font-weight: 800; color: var(--green);">21.6만</div>
+      <div class="small">재테크 / 투자</div>
+    </div>
+    <div class="card" style="text-align: center; padding: 16px;">
+      <h3 style="font-size: 14pt;">현장속으로</h3>
+      <div style="font-size: 20pt; font-weight: 800; color: var(--green);">11.9만</div>
+      <div class="small">현장밀착 / 다큐</div>
+    </div>
+    <div class="card" style="text-align: center; padding: 16px; border-style: dashed;">
+      <h3 style="font-size: 14pt;">기업 CEO 채널</h3>
+      <div style="font-size: 20pt; font-weight: 800; color: var(--text-low);">+4</div>
+      <div class="small">합류 예정</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <p class="label">4 Business Areas</p>
+  <h2>4가지 사업 영역</h2>
+
+  <div class="grid-2">
+    <div class="card card-blue">
+      <h3>MCN &mdash; 유튜브 채널 네트워크</h3>
+      <p class="small">기획부터 촬영, 편집, 업로드, 쇼츠, 마케팅까지 원스톱. 비즈니스/재테크/창업/다큐 등 사람 중심의 스토리를 만듭니다.</p>
+    </div>
+    <div class="card card-green">
+      <h3>강의 플랫폼 &mdash; 온라인 클래스</h3>
+      <p class="small">유튜브 출연 전문가의 강의를 제작하고 판매합니다. 타이탄클래스, 인베이더스쿨 등과 협업. 성과 공유(RS) 모델.</p>
+    </div>
+    <div class="card card-orange">
+      <h3>플로우북스 &mdash; 출판</h3>
+      <p class="small">출연자의 이야기를 책으로 만드는 출판 임프린트. 영상 → 출판 → 강연으로 이어지는 IP 비즈니스.</p>
+    </div>
+    <div class="card card-purple">
+      <h3>사주 플랫폼 &mdash; 런칭 준비 중</h3>
+      <p class="small">100원사주. 전통 사주/운세를 IT 플랫폼으로 서비스화. 콘텐츠 트래픽과 연계해 자연스러운 유입.</p>
+    </div>
+  </div>
+
+  <span class="page-num">3</span>
+</div>
+
+<!-- PAGE 4: 비전 — 라이프원픽 -->
+<div class="page">
+  <p class="label">Vision</p>
+  <h2>플로우머스가 그리는 미래</h2>
+
+  <div class="quote-box">
+    <p>"사람의 인생에서 가장 중요한 순간마다<br>플로우머스가 있게 하자"</p>
+    <p class="small">라이프원픽 &mdash; 인생의 모든 결정적 순간을 연결하는 플랫폼</p>
+  </div>
+
+  <p style="font-size: 10.5pt; color: var(--text-med); margin-bottom: 24px;">
+    지금은 MCN과 콘텐츠에서 시작하지만,<br>
+    우리가 만드는 콘텐츠의 시청자들이 겪는 <strong>인생의 결정적 순간</strong>을 하나씩 연결해 나갑니다.
+  </p>
+
+  <div class="roadmap">
+    <div class="roadmap-item active">
+      <div class="roadmap-dot"></div>
+      <div class="roadmap-period">현재 &mdash; 2026</div>
+      <div class="roadmap-title">MCN + 강의 + 출판</div>
+      <div class="roadmap-desc">
+        유튜브 채널 네트워크를 기반으로 콘텐츠 비즈니스를 확장합니다.<br>
+        47.9만 구독자, 강의 매출 40억+ 달성. 비즈니스 모델이 검증된 단계.
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-dot"></div>
+      <div class="roadmap-period">2026 하반기</div>
+      <div class="roadmap-title">결혼정보 + 모임 플랫폼</div>
+      <div class="roadmap-desc">
+        콘텐츠로 모인 사람들을 실제로 연결합니다.<br>
+        결혼정보 서비스와 모임 플랫폼(딱모여)을 통해 오프라인까지 확장.
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-dot"></div>
+      <div class="roadmap-period">2027</div>
+      <div class="roadmap-title">웨딩 + 부동산</div>
+      <div class="roadmap-desc">
+        결혼한 회원에게 웨딩 서비스를, 신혼부부에게 부동산 서비스를.<br>
+        이미 운영 중인 단기임대 숙박(삼삼엠투)이 부동산 사업의 시작점.
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-dot"></div>
+      <div class="roadmap-period">2028</div>
+      <div class="roadmap-title">보험 + 경조사</div>
+      <div class="roadmap-desc">
+        인생의 결정적 순간 — 결혼, 집, 보험, 경조사까지.<br>
+        플로우머스 하나로 인생의 모든 이벤트를 연결하는 라이프원픽 완성.
+      </div>
+    </div>
+  </div>
+
+  <span class="page-num">4</span>
+</div>
+
+<!-- PAGE 5: 당신이 합류하는 이유 -->
+<div class="page">
+  <p class="label">Why Now</p>
+  <h2>지금 합류하는 의미</h2>
+  <p style="font-size: 10.5pt; color: var(--text-med); margin-bottom: 24px;">
+    대기업에서는 큰 조직의 일부가 됩니다.<br>
+    플로우머스에서는 <strong>회사의 성장이 곧 나의 성장</strong>이 됩니다.
+  </p>
+
+  <div class="grid-2" style="margin-bottom: 24px;">
+    <div class="card card-blue">
+      <h3>내 이름이 남는 일</h3>
+      <p class="small">대행사에서는 클라이언트의 이름으로 일합니다. 여기서는 내가 만든 브랜드, 내가 키운 채널, 내가 설계한 시스템이 그대로 남습니다.</p>
+    </div>
+    <div class="card card-green">
+      <h3>전체를 보는 시야</h3>
+      <p class="small">콘텐츠 기획 → 마케팅 → 매출 → 정산까지 비즈니스의 전체 사이클을 경험합니다. 대기업에서 10년 걸릴 경험을 여기서는 1~2년에.</p>
+    </div>
+    <div class="card card-orange">
+      <h3>초기 멤버의 기회</h3>
+      <p class="small">회사가 10배 성장하면, 초기 멤버의 영향력도 10배가 됩니다. 나중에 합류하는 사람은 절대 가질 수 없는 기회입니다.</p>
+    </div>
+    <div class="card card-purple">
+      <h3>AI와 함께 일하는 방식</h3>
+      <p class="small">Google Apps Script, AI 콘텐츠 생성, 자동화 시스템을 실무에서 직접 다룹니다. 미래형 마케터로 성장할 수 있는 환경.</p>
+    </div>
+  </div>
+
+  <div class="vision-box">
+    <h2>우리가 찾는 사람</h2>
+    <p style="margin-bottom: 16px;">
+      화려한 스펙이 아니라 <span class="highlight">실행력</span>을 봅니다.<br>
+      아이디어를 말하는 사람은 많지만, 실제로 만들어내는 사람은 드뭅니다.<br><br>
+      기획서를 쓰는 것보다 <span class="highlight">기획서를 실행해서 결과를 만드는 사람</span>,<br>
+      시키는 일만 하는 것보다 <span class="highlight">스스로 문제를 찾고 해결하는 사람</span>,<br>
+      완벽한 계획보다 <span class="highlight">빠르게 실행하고 개선하는 사람</span>.<br><br>
+      그런 사람과 함께 회사를 만들어가고 싶습니다.
+    </p>
+  </div>
+
+  <hr class="divider">
+
+  <div style="text-align: center; margin-top: 16px;">
+    <p style="font-size: 16pt; font-weight: 800; color: var(--navy); margin-bottom: 8px;">
+      함께 만들어갑시다.
+    </p>
+    <p class="small" style="margin: 0;">
+      ceo@flowmus.com &nbsp;|&nbsp; 서울 서초구 서초대로 398 &nbsp;|&nbsp; (주) 플로우머스
+    </p>
+  </div>
+
+  <span class="page-num">5</span>
+</div>
+
+</body>
+</html>
