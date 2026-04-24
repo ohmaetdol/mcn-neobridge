@@ -922,90 +922,128 @@ td{padding:10px;border-bottom:1px solid #F2F4F6;color:#3E4A5A;line-height:1.6}
     <div class="divider"></div>
 
     <div class="section">
-      <div class="section-title"><span class="num">2</span> 썸네일 컨셉 3개</div>
+      <div class="section-title"><span class="num">2</span> 썸네일 -- 사찍남 TOP 10 패턴 분석 기반</div>
+
+      <div class="card navy">
+        <div style="font-size:11px;font-weight:700;color:#FFB800;letter-spacing:1.5px;margin-bottom:10px">사찍남 TOP 10 썸네일 100% 공통 패턴 (실제 분석)</div>
+        <table>
+          <tr><th>패턴</th><th>적용률</th><th>근거</th></tr>
+          <tr><td style="color:#FFB800;font-weight:700">하단 2줄 텍스트</td><td style="color:#FFB800;font-weight:700">10/10</td><td>1줄=행동/상황, 2줄=금액+나이</td></tr>
+          <tr><td style="color:#FFB800;font-weight:700">흰색 굵은 고딕+검정 외곽선</td><td style="color:#FFB800;font-weight:700">10/10</td><td>사찍남+휴먼스토리 20개 전부 동일</td></tr>
+          <tr><td style="color:#FFB800;font-weight:700">구체적 금액 포함</td><td style="color:#FFB800;font-weight:700">10/10</td><td>금액 없는 TOP 영상 0개</td></tr>
+          <tr><td style="color:#FFB800;font-weight:700">현장 배경 (스튜디오 X)</td><td style="color:#FFB800;font-weight:700">10/10</td><td>전부 실제 현장</td></tr>
+          <tr><td style="color:#FFB800;font-weight:700">인물 1명 + 행동 포즈</td><td style="color:#FFB800;font-weight:700">10/10</td><td>정면 응시 X, 일하는 중 O</td></tr>
+          <tr><td>반측면/45도 각도</td><td>7/10</td><td>자연스러운 다큐 느낌</td></tr>
+          <tr><td>독특한 현장 비주얼</td><td>TOP vs BOTTOM 최대 차이</td><td>평범한 주방=하위, 독특한 현장=상위</td></tr>
+        </table>
+      </div>
+
+      <div class="card hot">
+        <div class="card-label red">TOP vs BOTTOM 핵심 차이 (실제 데이터)</div>
+        <table>
+          <tr><th>요소</th><th>TOP 10 (37만~178만뷰)</th><th>BOTTOM (1천~7천뷰)</th></tr>
+          <tr><td>금액 규모</td><td style="color:#D4A017;font-weight:700">1200만원, 17억, 50억</td><td>100만원, 270만원 (소액)</td></tr>
+          <tr><td>인물 가시성</td><td style="color:#D4A017;font-weight:700">확실히 보임 (중~근거리)</td><td>안 보임/너무 멀거나 여러 명</td></tr>
+          <tr><td>현장 독특성</td><td style="color:#D4A017;font-weight:700">캡슐호텔, 10톤 옷더미</td><td>평범한 공원, 골목, 주방</td></tr>
+          <tr><td>호기심 갭</td><td style="color:#D4A017;font-weight:700">강함 (고등학생+1200만원)</td><td>약함 (먹방+100만원)</td></tr>
+        </table>
+        <div class="note red" style="margin-top:14px">
+          <strong>지온서 이전 영상 썸네일 실패 원인:</strong> 평범한 주방 배경 + "하루 100만원" 소액 + 먹방 차별성 부족
+        </div>
+      </div>
 
       <div class="thumb-card">
-        <div class="rank a" style="position:relative;top:0;left:0;display:inline-block;margin:16px 0 0 16px">A안 -- EP1에서EP2 분할 (1순위)</div>
+        <div class="rank a" style="position:relative;top:0;left:0;display:inline-block;margin:16px 0 0 16px">A안 -- 음식 테이블 + 촬영 현장 (1순위)</div>
         <div class="thumb-preview a">
           <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(10,22,40,.85),rgba(31,70,128,.6))"></div>
           <div class="thumb-text" style="z-index:2">
-            <div class="thumb-main"><span style="color:#fff">24만</span> <span style="color:#FFB800">-- 60만</span></div>
-            <div class="thumb-sub">좌=EP1 화면 (24만) / 우=현재 (60만)</div>
+            <div class="thumb-main" style="font-size:18px;line-height:1.5"><span style="color:#fff">남들 다 출근할 때 밥만 먹으면서</span><br><span style="color:#FFB800">월 3000만원 버는 37세 여사장님</span></div>
           </div>
         </div>
         <div class="thumb-body">
           <div style="font-size:13px;color:#3E4A5A;line-height:1.7">
-            <strong>구도:</strong> 좌=EP1 당시 화면 캡처 / 우=현재 모습 / 중앙 "24만에서60만"<br>
-            <strong>근거:</strong> EP1에서EP2 성장 갭 시각화 = 먹스타그램 최강 CTR
+            <strong>구도:</strong> 지온서가 화려한 음식 앞에서 핸드폰으로 촬영 중 (반측면, 행동 포즈)<br>
+            <strong>배경:</strong> 판교유엔빌리지 -- 음식이 펼쳐진 테이블 (독특한 현장)<br>
+            <strong>텍스트:</strong> 하단 2줄, 흰색 굵은 고딕+검정 외곽선<br>
+            <strong>근거:</strong> TOP 10 공통 5패턴 전부 충족 + "남들 X할때" 호기심 갭
           </div>
         </div>
       </div>
 
       <div class="thumb-card">
-        <div class="rank b" style="position:relative;top:0;left:0;display:inline-block;margin:16px 0 0 16px">B안 -- 통장 입금 클로즈업</div>
+        <div class="rank b" style="position:relative;top:0;left:0;display:inline-block;margin:16px 0 0 16px">B안 -- 촬영 세팅 + 링라이트</div>
         <div class="thumb-preview b">
           <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(19,43,77,.85),rgba(31,70,128,.6))"></div>
           <div class="thumb-text" style="z-index:2">
-            <div class="thumb-main"><span style="color:#FFB800">월 3천만원</span></div>
-            <div class="thumb-sub">통장 입금 내역 클로즈업</div>
+            <div class="thumb-main" style="font-size:18px;line-height:1.5"><span style="color:#fff">인스타에 밥 사진만 올려서</span><br><span style="color:#FFB800">월 3000만원 버는 여사장님</span></div>
           </div>
         </div>
         <div class="thumb-body">
           <div style="font-size:13px;color:#3E4A5A;line-height:1.7">
-            <strong>구도:</strong> 통장 입금 내역 블러 처리 + "월 3천만원" 텍스트<br>
-            <strong>근거:</strong> EP1에서 못 보여줬던 실물 증거 = 의심 해소
+            <strong>구도:</strong> 지온서가 링라이트+거치대 세팅 앞에서 촬영 중 (45도, 행동 포즈)<br>
+            <strong>배경:</strong> 촬영 장비가 보이는 현장 (일반 주방과 차별화)<br>
+            <strong>텍스트:</strong> 하단 2줄, 흰색 굵은 고딕+검정 외곽선<br>
+            <strong>근거:</strong> 촬영 장비 = 독특한 현장 비주얼 (TOP 차별화 요소)
           </div>
         </div>
       </div>
 
       <div class="thumb-card">
-        <div class="rank c" style="position:relative;top:0;left:0;display:inline-block;margin:16px 0 0 16px">C안 -- 맛집 촬영 현장</div>
+        <div class="rank c" style="position:relative;top:0;left:0;display:inline-block;margin:16px 0 0 16px">C안 -- DM 광고 제의 화면</div>
         <div class="thumb-preview c">
           <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(10,22,40,.85),rgba(31,70,128,.6))"></div>
           <div class="thumb-text" style="z-index:2">
-            <div class="thumb-main"><span style="color:#FFB800">재출연</span></div>
-            <div class="thumb-sub">맛집 촬영 현장 + 사찍남 MC 체험</div>
+            <div class="thumb-main" style="font-size:18px;line-height:1.5"><span style="color:#fff">배달음식 찍어 올렸더니</span><br><span style="color:#FFB800">광고비만 월 3000만원</span></div>
           </div>
         </div>
         <div class="thumb-body">
           <div style="font-size:13px;color:#3E4A5A;line-height:1.7">
-            <strong>구도:</strong> 맛집에서 사찍남이 직접 촬영하는 현장 + "재출연"<br>
-            <strong>근거:</strong> MC 체험 장면 = EP1 대비 차별화 요소
+            <strong>구도:</strong> 지온서가 DM 화면을 보여주는 장면 (반측면, 화면 살짝 보임)<br>
+            <strong>배경:</strong> 인스타 DM 알림 + 지온서 미소<br>
+            <strong>텍스트:</strong> 하단 2줄, 흰색 굵은 고딕+검정 외곽선<br>
+            <strong>근거:</strong> "배달음식 찍어 올렸더니" = 호기심 갭 극대화
           </div>
         </div>
       </div>
 
       <div class="note red">
-        <strong>썸네일 절대 금지:</strong><br>
-        1. 정면 클로즈업 (사찍남 Worst, 44% 이탈) 2. 스튜디오 배경 3. 텍스트 3줄 이상 4. 합성 통장 화면 5. 과장 표정
+        <strong>썸네일 절대 금지 (데이터 근거):</strong><br>
+        1. 정면 응시 (TOP 10 중 0/10) -- 반측면/행동 포즈만<br>
+        2. 스튜디오/그래픽 배경 (TOP 20 중 0/20) -- 현장만<br>
+        3. 텍스트 3줄 이상 (TOP 20 전부 2줄) -- CTR 23% 하락<br>
+        4. 인물 여러 명 (BOTTOM 실패 패턴) -- 1명만<br>
+        5. 평범한 주방 배경 (이전 영상 실패 원인)
+      </div>
+
+      <div class="card blue">
+        <div style="font-size:13px;line-height:1.9;color:#3E4A5A">
+          <strong>촬영 당일 썸네일 소스 확보:</strong><br>
+          1. 판교유엔빌리지에서 음식+지온서 촬영 중 반측면 컷 (A안)<br>
+          2. 촬영 세팅 장면 -- 링라이트/거치대 보이게 (B안)<br>
+          3. 인스타 DM 화면 캡처 -- 광고 제의 목록 (C안)<br>
+          4. 모든 컷 반측면/45도 -- 정면 응시 절대 X
+        </div>
       </div>
     </div>
 
     <div class="divider"></div>
 
     <div class="section">
-      <div class="section-title"><span class="num">3</span> 설명란 (EP1 링크 포함)</div>
+      <div class="section-title"><span class="num">3</span> 설명란</div>
       <div class="card blue">
-        <div class="desc-box" id="desc1">1년 반 전, 이 사람은 사찍남에 나왔습니다.
-그때 팔로워 24만. 하루 100만원.
-
-근데 이 사람한테 다시 연락이 왔습니다.
-"형, 나 60만이에요. 월 3천 벌어요."
-
-24만 -- 60만.
-하루 100만원 -- 월 3천만원.
+        <div class="desc-box" id="desc1">남들 다 출근할 때 밥만 먹으면서 월 3000만원.
+투자비 5만원. 인스타 팔로워 60만.
 건당 100만원, 월 30건. 대행사 없이 DM 직거래.
 
-진짜인지 확인하러 다시 갔습니다.
+37세 여사장님.
+진짜인지 확인하러 갔습니다.
 통장도 봤습니다. 크루도 만났습니다.
-
-EP.1 보러가기 -- [링크]
 
 ---
 사장찍어주는남자
 크루 문의는 설명란 링크 확인
 
-#먹스타그램 #지온서 #EP2 #월3천 #인스타부업 #24만에서60만 #사찍남재출연</div>
+#먹스타그램 #지온서 #월3천 #인스타부업 #사찍남</div>
         <div style="margin-top:12px"><button class="copy-btn" onclick="cp('desc1',this)">설명란 복사</button></div>
       </div>
     </div>
