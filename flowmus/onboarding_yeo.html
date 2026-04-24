@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>플로우머스 — 여다현 업무 안내</title>
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --navy: #1a1d23;
+    --blue: #2563EB;
+    --blue-light: rgba(37,99,235,0.07);
+    --orange: #ea580c;
+    --orange-light: rgba(234,88,12,0.07);
+    --green: #16a34a;
+    --green-light: rgba(22,163,74,0.07);
+    --purple: #7c3aed;
+    --purple-light: rgba(124,58,237,0.07);
+    --text: #1a1d23;
+    --text-med: #64748b;
+    --text-low: #94a3b8;
+    --border: #e2e8f0;
+    --surface: #f8fafc;
+  }
+  html { font-size: 11pt; }
+  body {
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    color: var(--text); background: #fff; line-height: 1.7;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .page {
+    width: 210mm; min-height: 297mm; margin: 0 auto;
+    padding: 48px 56px; position: relative;
+    page-break-after: always; background: #fff;
+  }
+  .page:last-child { page-break-after: auto; }
+  @media print {
+    html { font-size: 10.5pt; }
+    body { background: #fff; }
+    .page { padding: 40px 48px; margin: 0; box-shadow: none; }
+    .no-print { display: none !important; }
+  }
+  @media screen {
+    body { background: #e5e7eb; padding: 24px 0; }
+    .page { box-shadow: 0 2px 16px rgba(0,0,0,0.08); margin-bottom: 24px; border-radius: 2px; }
+  }
+  @media screen and (max-width: 768px) {
+    body { padding: 0; background: #fff; }
+    .page { width: 100%; min-height: auto; padding: 32px 20px; box-shadow: none; margin-bottom: 0; border-radius: 0; border-bottom: 8px solid var(--surface); }
+    h1 { font-size: 22pt; }
+    h2 { font-size: 13pt; }
+    .cover .subtitle { font-size: 12pt; margin-bottom: 32px; }
+    .cover .position-box { font-size: 11pt; padding: 8px 18px; }
+    .cover .brand { margin-bottom: 32px; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .hero-stat-num, .cover-stat .num { font-size: 20pt; }
+    table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .org-line { display: none; }
+    .vision-box { padding: 24px; border-radius: 12px; }
+    .vision-box h2 { color: #fff; font-size: 14pt; }
+    .vision-box p { font-size: 9.5pt; }
+    .roadmap-title { font-size: 11pt; }
+    .roadmap-desc { font-size: 9.5pt; }
+    .cover-footer { flex-direction: column; gap: 8px; text-align: center; }
+    .print-btn { display: none; }
+  }
+
+  h1 { font-size: 28pt; font-weight: 800; line-height: 1.25; letter-spacing: -0.02em; }
+  h2 { font-size: 15pt; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 14px; color: var(--navy); }
+  h3 { font-size: 11.5pt; font-weight: 700; margin-bottom: 6px; }
+  p { margin-bottom: 8px; }
+  .label { font-size: 9pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-low); margin-bottom: 6px; }
+  .small { font-size: 9pt; color: var(--text-med); }
+  .accent { color: var(--blue); }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+
+  .cover { display: flex; flex-direction: column; justify-content: center; }
+  .cover .brand { font-size: 11pt; font-weight: 700; color: var(--blue); margin-bottom: 48px; letter-spacing: 0.04em; }
+  .cover h1 { margin-bottom: 16px; }
+  .cover .subtitle { font-size: 14pt; color: var(--text-med); font-weight: 400; line-height: 1.6; margin-bottom: 48px; }
+  .cover .position-box {
+    display: inline-block; background: var(--blue); color: #fff;
+    padding: 10px 24px; border-radius: 10px; font-size: 13pt; font-weight: 700;
+    margin-bottom: 24px;
+  }
+  .cover-footer { margin-top: auto; padding-top: 32px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .cover-footer .company { font-weight: 700; font-size: 12pt; }
+  .cover-footer .date { color: var(--text-med); font-size: 10pt; }
+
+  .card {
+    border: 1px solid var(--border); border-radius: 12px;
+    padding: 20px; background: #fff; margin-bottom: 12px;
+  }
+  .card-blue { border-left: 3px solid var(--blue); }
+  .card-orange { border-left: 3px solid var(--orange); }
+  .card-green { border-left: 3px solid var(--green); }
+  .card-purple { border-left: 3px solid var(--purple); }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+
+  .tag {
+    display: inline-block; font-size: 8.5pt; font-weight: 600;
+    padding: 3px 10px; border-radius: 20px; margin-right: 4px; margin-bottom: 4px;
+  }
+  .tag-blue { background: var(--blue-light); color: var(--blue); }
+  .tag-orange { background: var(--orange-light); color: var(--orange); }
+  .tag-green { background: var(--green-light); color: var(--green); }
+  .tag-purple { background: var(--purple-light); color: var(--purple); }
+
+  .org-box {
+    display: inline-block; border: 1px solid var(--border); border-radius: 10px;
+    padding: 10px 20px; font-size: 10pt; font-weight: 600; margin: 4px;
+    background: #fff;
+  }
+  .org-box.me { background: var(--blue); color: #fff; border-color: var(--blue); }
+  .org-box.team { background: var(--surface); }
+  .org-line { color: var(--text-low); font-size: 14pt; }
+
+  .roadmap { position: relative; padding-left: 28px; }
+  .roadmap::before {
+    content: ''; position: absolute; left: 8px; top: 8px; bottom: 8px;
+    width: 2px; background: var(--border);
+  }
+  .roadmap-item { position: relative; margin-bottom: 20px; }
+  .roadmap-dot {
+    position: absolute; left: -24px; top: 6px;
+    width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--blue);
+    background: #fff;
+  }
+  .roadmap-item.active .roadmap-dot { background: var(--blue); }
+  .roadmap-period { font-size: 9pt; font-weight: 700; color: var(--blue); margin-bottom: 2px; }
+  .roadmap-title { font-size: 12pt; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+  .roadmap-desc { font-size: 10pt; color: var(--text-med); line-height: 1.6; }
+
+  .vision-box {
+    background: var(--navy); border-radius: 16px; padding: 36px;
+    color: #fff; margin-top: 16px;
+  }
+  .vision-box h2 { color: #fff; margin-bottom: 8px; font-size: 16pt; }
+  .vision-box p { color: rgba(255,255,255,0.65); font-size: 10.5pt; line-height: 1.7; margin-bottom: 0; }
+  .vision-box .highlight { color: #60a5fa; font-weight: 700; }
+
+  .page-num { position: absolute; bottom: 32px; right: 56px; font-size: 9pt; color: var(--text-low); }
+
+  .print-btn {
+    position: fixed; bottom: 24px; right: 24px; z-index: 100;
+    background: var(--navy); color: #fff; border: none;
+    padding: 14px 28px; border-radius: 10px;
+    font-size: 11pt; font-weight: 700; cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    font-family: 'Pretendard', sans-serif;
+  }
+
+  ul { padding-left: 18px; margin-bottom: 8px; }
+  li { font-size: 10pt; color: var(--text-med); margin-bottom: 4px; line-height: 1.6; }
+  li strong { color: var(--text); }
+
+  table { width: 100%; border-collapse: collapse; margin-bottom: 12px; }
+  th { background: var(--surface); font-size: 9pt; font-weight: 700; color: var(--text-low); text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--border); }
+  td { font-size: 10pt; padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: top; }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">PDF 저장 (Ctrl+P)</button>
+
+<!-- PAGE 1: 커버 -->
+<div class="page cover">
+  <div class="brand">FLOWMUS</div>
+  <h1>여다현님,<br>환영합니다.</h1>
+  <p class="subtitle">
+    플로우머스는 사람을 모으고, 콘텐츠로 연결하는 IT 미디어 기업입니다.<br>
+    병원 MSO 3개 지점 마케팅을 총괄하며 월매출 6배 성장을 만들어낸 실행력이<br>
+    우리 팀에 꼭 필요한 힘이라 확신합니다.
+  </p>
+
+  <div class="position-box">브랜드 마케팅 매니저</div>
+
+  <p style="font-size: 11pt; color: var(--text-med); margin-bottom: 8px;">
+    이 문서는 다현님이 플로우머스에서 맡게 될 업무, 성장 로드맵,<br>
+    그리고 이 회사를 통해 만들어갈 커리어 비전을 안내합니다.
+  </p>
+
+  <div class="cover-footer">
+    <div>
+      <div class="company">(주) 플로우머스</div>
+      <div class="small">서울 서초구 서초대로 398</div>
+    </div>
+    <div class="date">2026년 4월</div>
+  </div>
+</div>
+
+<!-- PAGE 2: 회사 소개 + 팀 구조 -->
+<div class="page">
+  <p class="label">Company</p>
+  <h2>플로우머스가 하는 일</h2>
+  <p style="font-size: 10.5pt; color: var(--text-med); margin-bottom: 20px;">
+    유튜브 채널 네트워크를 기반으로 출판, 강의, 플랫폼까지 운영하는 IT 미디어 기업입니다.<br>
+    핵심 철학은 단순합니다 — <strong>"사람을 모으고, 그 사람의 이야기를 콘텐츠로 만든다."</strong>
+  </p>
+
+  <div class="grid-2" style="margin-bottom: 20px;">
+    <div class="card card-blue">
+      <h3>MCN (유튜브 네트워크)</h3>
+      <p class="small">사찍남(14.4만), 머니로드(21.6만), 현장속으로(11.9만) 등 자체 + 협업 채널 운영. 기획·촬영·편집·업로드·쇼츠·마케팅까지 원스톱.</p>
+    </div>
+    <div class="card card-green">
+      <h3>강의 플랫폼</h3>
+      <p class="small">유튜브 출연 전문가의 강의를 제작·판매. 타이탄클래스, 인베이더스쿨, 피크닉, 101클래스와 협업. 성과 공유(RS) 모델.</p>
+    </div>
+    <div class="card card-orange">
+      <h3>플로우북스 (출판)</h3>
+      <p class="small">유튜브 출연자의 이야기를 책으로. 영상 → 출판 → 강연으로 이어지는 IP 비즈니스.</p>
+    </div>
+    <div class="card card-purple">
+      <h3>사주 플랫폼 (런칭 준비 중)</h3>
+      <p class="small">100원사주. 정통 명리 기반 사주·운세 서비스. 재물운, 연애운, 궁합, 오늘의 운세.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <p class="label">Team</p>
+  <h2>팀 구조</h2>
+  <p style="font-size: 10pt; color: var(--text-med); margin-bottom: 20px;">현재 소규모 팀이지만, 각자의 역할이 명확합니다. 다현님은 마케팅팀의 브랜드 마케팅을 담당합니다.</p>
+
+  <div style="text-align: center; margin-bottom: 16px;">
+    <div style="display: inline-flex; gap: 12px;">
+      <div class="org-box">대표 (CEO)</div>
+      <div class="org-box">권현우 (공동대표)</div>
+    </div>
+    <br>
+    <span class="org-line">┌────────┬────────────┴────────────┬────────┐</span><br>
+    <div style="display: inline-flex; gap: 16px;">
+      <div style="text-align: center;">
+        <div class="org-box team" style="border-style: dashed;">콘텐츠팀</div><br>
+        <span class="small">촬영 · 편집</span><br>
+        <span class="tag tag-orange" style="margin-top: 4px;">외주</span>
+      </div>
+      <div style="text-align: center;">
+        <div class="org-box team">마케팅팀</div><br>
+        <div style="display: flex; gap: 8px; justify-content: center; margin-top: 4px;">
+          <div>
+            <div class="org-box me" style="padding: 6px 14px; font-size: 9pt;">여다현 (나)</div>
+            <span class="small" style="color: var(--text-low);">브랜드 · 마케팅</span>
+          </div>
+        </div>
+      </div>
+      <div style="text-align: center;">
+        <div class="org-box team" style="border-style: dashed;">개발팀</div><br>
+        <span class="small">경은 · 대윤</span><br>
+        <span class="tag tag-orange" style="margin-top: 4px;">외주</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="background: var(--blue-light); border: 1px solid rgba(37,99,235,0.15);">
+    <p style="font-size: 10pt; margin: 0;">
+      <strong class="accent">핵심 흐름:</strong>
+      콘텐츠팀이 영상을 만들면 → <strong>다현님이 브랜드 전략을 세우고, 채널별 마케팅을 실행하고, 성과를 시스템으로 추적</strong>합니다.
+    </p>
+  </div>
+
+  <span class="page-num">2</span>
+</div>
+
+<!-- PAGE 3: 현재 업무 상세 -->
+<div class="page">
+  <p class="label">Your Role</p>
+  <h2>맡게 될 업무</h2>
+  <p style="font-size: 10.5pt; color: var(--text-med); margin-bottom: 20px;">
+    다현님의 역할은 <strong>"브랜드를 실행으로 연결하여 시스템으로 만드는 사람"</strong>입니다.<br>
+    병원 3개 지점 × 7개 플랫폼을 동시 운영했던 멀티채널 관리 능력이 여기서 핵심입니다.
+  </p>
+
+  <table>
+    <tr><th style="width: 80px;">주기</th><th>업무</th><th style="width: 180px;">상세</th></tr>
+    <tr>
+      <td rowspan="2"><strong>매일</strong></td>
+      <td><strong>채널 성과 모니터링</strong></td>
+      <td>유튜브·인스타·쇼츠 채널별 반응 확인, 트렌드 포인트 파악</td>
+    </tr>
+    <tr>
+      <td><strong>SNS 채널 운영</strong></td>
+      <td>인스타그램·카카오채널 콘텐츠 발행, 댓글·DM 관리</td>
+    </tr>
+    <tr>
+      <td rowspan="3"><strong>매주</strong></td>
+      <td><strong>콘텐츠 기획·제작</strong></td>
+      <td>카드뉴스, 쇼츠 썸네일, 릴스 소재 기획 및 디자인 제작</td>
+    </tr>
+    <tr>
+      <td><strong>인플루언서 섭외·관리</strong></td>
+      <td>채널 콘텐츠 홍보용 인플루언서 리스트업, 컨택, 가이드라인 제작</td>
+    </tr>
+    <tr>
+      <td><strong>커뮤니티 마케팅</strong></td>
+      <td>카페·오픈채팅방·당근마켓 등 타겟 커뮤니티 바이럴 기획·실행</td>
+    </tr>
+    <tr>
+      <td rowspan="3"><strong>매월</strong></td>
+      <td><strong>강의 캠페인 기획</strong></td>
+      <td>타이탄클래스 등 강의 플랫폼 판매 캠페인 설계·소재 제작</td>
+    </tr>
+    <tr>
+      <td><strong>월간 성과 리포트</strong></td>
+      <td>채널별 KPI 추적, 성과 분석 → COO 보고</td>
+    </tr>
+    <tr>
+      <td><strong>운영 자동화 구축</strong></td>
+      <td>Google Apps Script·Zapier로 반복 업무 자동화 시스템 설계</td>
+    </tr>
+  </table>
+
+  <hr class="divider">
+
+  <h2>다현님의 강점이 빛나는 포인트</h2>
+  <div class="grid-2">
+    <div class="card card-blue">
+      <h3>멀티 플랫폼 총괄 경험</h3>
+      <p class="small">3개 지점 × 7개 플랫폼(네이버·메타·Google·당근마켓·카카오 등) 동시 운영. 채널은 달라도 기준은 같게 만드는 능력.</p>
+    </div>
+    <div class="card card-green">
+      <h3>운영 자동화 & AI</h3>
+      <p class="small">Google Apps Script, Slack Webhook, Zapier 기반 실무 자동화 구축. AI 활용 콘텐츠 기획·제작 경험. 반복 업무를 시스템으로 만드는 능력.</p>
+    </div>
+    <div class="card card-orange">
+      <h3>인플루언서 네트워크</h3>
+      <p class="small">나노(1K)~메가(1M) 급 캠페인 100건+, 섭외 인원 1,000명+. 이마트24·테크노짐 등 브랜드 콜라보 섭외·가이드라인·성과 분석까지.</p>
+    </div>
+    <div class="card card-purple">
+      <h3>오프라인 이벤트 기획력</h3>
+      <p class="small">쇼레이어드 성수 팝업(에이전시 없이 직접 제안→운영), 친친플리마켓 500→1,500명 3배 성장. 기획서가 아니라 현장이 증명.</p>
+    </div>
+  </div>
+
+  <span class="page-num">3</span>
+</div>
+
+<!-- PAGE 4: 성장 로드맵 -->
+<div class="page">
+  <p class="label">Growth Roadmap</p>
+  <h2>성장 로드맵</h2>
+  <p style="font-size: 10.5pt; color: var(--text-med); margin-bottom: 28px;">
+    플로우머스는 지금 시작 단계입니다. 회사가 성장하면 다현님의 역할도 함께 커집니다.
+  </p>
+
+  <div class="roadmap">
+    <div class="roadmap-item active">
+      <div class="roadmap-dot"></div>
+      <div class="roadmap-period">지금 — 입사 6개월</div>
+      <div class="roadmap-title">브랜드 마케팅 매니저</div>
+      <div class="roadmap-desc">
+        채널별 브랜드 전략 수립, SNS 콘텐츠 기획·제작, 인플루언서 캠페인, 커뮤니티 마케팅.<br>
+        "채널은 달라도 기준은 같아야 한다"는 원칙을 플로우머스에 심습니다.
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-dot"></div>
+      <div class="roadmap-period">6개월 — 1년</div>
+      <div class="roadmap-title">퍼포먼스 마케팅 리드</div>
+      <div class="roadmap-desc">
+        광고 예산 운영, 채널별 ROAS 최적화, 강의 판매 캠페인 총괄.<br>
+        병원 MSO에서 월매출 6배를 만들었던 퍼포먼스 감각을 강의·콘텐츠 비즈니스에 적용합니다.
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-dot"></div>
+      <div class="roadmap-period">1년 — 2년</div>
+      <div class="roadmap-title">마케팅 시스템 설계자</div>
+      <div class="roadmap-desc">
+        반복 업무 전면 자동화, 데이터 기반 의사결정 체계 구축.<br>
+        Apps Script·Zapier·AI로 만드는 마케팅 운영 시스템의 설계자가 됩니다.
+      </div>
+    </div>
+    <div class="roadmap-item">
+      <div class="roadmap-dot"></div>
+      <div class="roadmap-period">2년 이후</div>
+      <div class="roadmap-title">CMO (마케팅 총괄)</div>
+      <div class="roadmap-desc">
+        마케팅 전략 전체를 총괄하는 C-Level. 팀 빌딩, 예산 운영, KPI 설계.<br>
+        브랜드 × 퍼포먼스 × 시스템을 모두 아우르는 마케팅 리더.
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <h2>회사 성장에 따라 추가될 업무</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h3>채널 10개+ 확장 시</h3>
+      <ul>
+        <li>채널별 브랜드 포지셔닝 전략 수립</li>
+        <li>크로스 채널 캠페인 설계</li>
+        <li>인플루언서 네트워크 체계화</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>브랜드 광고 유치 시</h3>
+      <ul>
+        <li>브랜디드 콘텐츠 기획·제안서 작성</li>
+        <li>광고주 소재 제작·심의 기준 검토</li>
+        <li>캠페인 성과 리포트 제작</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>사주 플랫폼 런칭 시</h3>
+      <ul>
+        <li>런칭 캠페인 전략 수립</li>
+        <li>SNS·커뮤니티 바이럴 시나리오 설계</li>
+        <li>인플루언서 시딩 캠페인 기획</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>오프라인 이벤트 확장 시</h3>
+      <ul>
+        <li>팝업스토어·플리마켓 기획 총괄</li>
+        <li>브랜드 협업 제안 및 운영 (직접 경험 활용)</li>
+        <li>현장 운영 및 사후 콘텐츠 제작</li>
+      </ul>
+    </div>
+  </div>
+
+  <span class="page-num">4</span>
+</div>
+
+<!-- PAGE 5: 비전 + 온보딩 -->
+<div class="page">
+  <p class="label">Vision</p>
+  <h2>플로우머스에서 얻게 될 것</h2>
+  <p style="font-size: 10.5pt; color: var(--text-med); margin-bottom: 24px;">
+    병원에서는 클라이언트의 브랜드를 키웠습니다. 플로우머스에서는 내 브랜드를 만듭니다.
+  </p>
+
+  <div class="grid-2" style="margin-bottom: 24px;">
+    <div class="card card-blue">
+      <h3>내 브랜드를 직접 키우는 경험</h3>
+      <p class="small">병원 MSO에서는 오운클리닉의 마케팅이었습니다. 여기서는 다현님이 직접 브랜드를 만들고, 성장시키고, 그 결과를 소유합니다.</p>
+    </div>
+    <div class="card card-green">
+      <h3>기획부터 매출까지 전체 사이클</h3>
+      <p class="small">병원에서는 예약 전환까지. 여기서는 콘텐츠 → 팬 → 강의 매출 → 정산까지. 마케팅이 비즈니스가 되는 전 과정을 경험합니다.</p>
+    </div>
+    <div class="card card-orange">
+      <h3>시스템을 설계하는 마케터</h3>
+      <p class="small">Apps Script·Zapier를 다루는 마케터는 희소합니다. 여기서는 그 능력이 회사 전체의 운영 효율을 바꿉니다. 마케터를 넘어 시스템 설계자로.</p>
+    </div>
+    <div class="card card-purple">
+      <h3>C-Level 성장 경로</h3>
+      <p class="small">초기 멤버로 합류해 회사와 함께 성장합니다. 매니저 → 리드 → 시스템 설계자 → CMO. 대행사에서는 절대 얻을 수 없는 속도.</p>
+    </div>
+  </div>
+
+  <div class="vision-box">
+    <h2>다현님이 만들어갈 커리어</h2>
+    <p style="margin-bottom: 16px;">
+      병원 3개 지점 마케팅을 총괄하며 월매출 6배를 만들고,<br>
+      일본 브랜드 팝업을 에이전시 없이 직접 성사시키고,<br>
+      Apps Script로 운영 자동화를 구축한 사람.<br><br>
+      플로우머스에서는 이 모든 경험이 <span class="highlight">"나의 브랜드"를 만드는 데 쓰입니다.</span>
+    </p>
+    <p style="margin-bottom: 16px;">
+      <span class="highlight">멀티 플랫폼 실행력 + 운영 자동화 + 인플루언서 네트워크</span><br>
+      이 세 가지를 가진 마케터가 직접 브랜드를 키우는 기회는<br>
+      대행사에서는 절대 오지 않습니다.
+    </p>
+    <p>
+      3년 후의 다현님은 "병원 마케터"가 아니라,<br>
+      <span class="highlight">"47만 구독자 네트워크의 마케팅을 총괄하는 CMO"</span>가 되어 있을 겁니다.
+    </p>
+  </div>
+
+  <hr class="divider">
+
+  <p class="label">First Week</p>
+  <h2>온보딩 첫 주 미션</h2>
+  <table>
+    <tr><th style="width: 70px;">일차</th><th>미션</th></tr>
+    <tr><td><strong>Day 1~2</strong></td><td>사찍남·머니로드·현장속으로 최근 영상 20개씩 시청. 채널별 톤앤매너, 타겟, 콘텐츠 구조 파악.</td></tr>
+    <tr><td><strong>Day 3</strong></td><td>각 채널 SNS(인스타·카카오·쇼츠) 현황 분석. 경쟁 MCN 채널 벤치마킹 리포트 작성.</td></tr>
+    <tr><td><strong>Day 4</strong></td><td>강의 플랫폼 4곳 (타이탄클래스·인베이더스쿨·피크닉·101클래스) 가입 후 캠페인 벤치마킹.</td></tr>
+    <tr><td><strong>Day 5</strong></td><td>첫 주 인사이트 리포트 작성. "채널별 마케팅 전략 + 자동화 가능한 업무 리스트" 초안 제출.</td></tr>
+  </table>
+
+  <hr class="divider">
+
+  <p class="label">Contact</p>
+  <h2>주요 연락처</h2>
+  <div class="grid-2">
+    <div class="card">
+      <h3>권현우 (공동대표)</h3>
+      <p class="small" style="margin: 0;">coo@flowmus.com<br>업무 방향, 의사결정, 주간 보고</p>
+    </div>
+    <div class="card">
+      <h3>대표 (CEO)</h3>
+      <p class="small" style="margin: 0;">ceo@flowmus.com<br>최종 승인, 대외 협업</p>
+    </div>
+  </div>
+
+  <div style="text-align: center; margin-top: 32px;">
+    <p style="font-size: 12pt; font-weight: 700; color: var(--navy); margin-bottom: 4px;">함께 만들어갑시다.</p>
+    <p class="small">ceo@flowmus.com &nbsp;|&nbsp; 서울 서초구 서초대로 398 &nbsp;|&nbsp; (주) 플로우머스</p>
+  </div>
+
+  <span class="page-num">5</span>
+</div>
+
+</body>
+</html>
