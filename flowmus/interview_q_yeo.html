@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>면접 질문지 — 여다현</title>
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --navy: #1a1d23; --blue: #2563EB; --blue-light: rgba(37,99,235,0.06);
+    --orange: #ea580c; --orange-light: rgba(234,88,12,0.06);
+    --green: #16a34a; --green-light: rgba(22,163,74,0.06);
+    --purple: #7c3aed; --purple-light: rgba(124,58,237,0.06);
+    --red: #dc2626; --red-light: rgba(220,38,38,0.06);
+    --text: #1a1d23; --text-med: #64748b; --text-low: #94a3b8;
+    --border: #e2e8f0; --surface: #f8fafc;
+    --yellow-bg: #fefce8; --yellow-border: #fde047;
+  }
+  html { font-size: 10.5pt; }
+  body { font-family: 'Pretendard', -apple-system, sans-serif; color: var(--text); background: #fff; line-height: 1.65; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .page { width: 210mm; min-height: 297mm; margin: 0 auto; padding: 40px 48px; position: relative; page-break-after: always; background: #fff; }
+  .page:last-child { page-break-after: auto; }
+  @media print { html { font-size: 10pt; } body { background: #fff; } .page { padding: 36px 44px; margin: 0; box-shadow: none; } .no-print { display: none !important; } }
+  @media screen { body { background: #e5e7eb; padding: 24px 0; } .page { box-shadow: 0 2px 16px rgba(0,0,0,0.08); margin-bottom: 24px; border-radius: 2px; } }
+  @media screen and (max-width: 768px) { body { padding: 0; background: #fff; } .page { width: 100%; min-height: auto; padding: 24px 16px; box-shadow: none; margin-bottom: 0; border-radius: 0; border-bottom: 8px solid var(--surface); } h1 { font-size: 18pt; } .grid-2 { grid-template-columns: 1fr; } .print-btn { display: none; } }
+
+  h1 { font-size: 22pt; font-weight: 800; line-height: 1.3; letter-spacing: -0.02em; }
+  h2 { font-size: 13pt; font-weight: 700; margin-bottom: 10px; color: var(--navy); }
+  h3 { font-size: 10.5pt; font-weight: 700; margin-bottom: 4px; }
+  p { margin-bottom: 6px; }
+  .label { font-size: 8pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-low); margin-bottom: 5px; }
+  .small { font-size: 8.5pt; color: var(--text-med); }
+  .accent { color: var(--blue); }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+
+  .badge { display: inline-block; font-size: 7.5pt; font-weight: 700; padding: 2px 10px; border-radius: 20px; }
+  .badge-internal { background: var(--red-light); color: var(--red); border: 1px solid rgba(220,38,38,0.15); }
+  .badge-blue { background: var(--blue-light); color: var(--blue); }
+
+  .card { border: 1px solid var(--border); border-radius: 10px; padding: 14px; background: #fff; margin-bottom: 8px; }
+  .card-blue { border-left: 3px solid var(--blue); }
+  .card-green { border-left: 3px solid var(--green); }
+  .card-orange { border-left: 3px solid var(--orange); }
+  .card-purple { border-left: 3px solid var(--purple); }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; }
+
+  .tag { display: inline-block; font-size: 7.5pt; font-weight: 600; padding: 2px 8px; border-radius: 16px; margin-right: 3px; }
+  .tag-blue { background: var(--blue-light); color: var(--blue); }
+  .tag-orange { background: var(--orange-light); color: var(--orange); }
+  .tag-green { background: var(--green-light); color: var(--green); }
+
+  .q-section { margin-bottom: 16px; }
+  .q-item { margin-bottom: 14px; padding-left: 14px; border-left: 2px solid var(--border); }
+  .q-item.highlight { border-left-color: var(--blue); }
+  .q-num { font-size: 8pt; font-weight: 700; color: var(--blue); margin-bottom: 2px; }
+  .q-text { font-size: 10.5pt; font-weight: 700; color: var(--navy); margin-bottom: 3px; line-height: 1.5; }
+  .q-intent { font-size: 8.5pt; color: var(--text-med); font-style: italic; margin-bottom: 3px; }
+  .q-followup { font-size: 8.5pt; color: var(--text-low); }
+  .q-followup strong { color: var(--text-med); }
+
+  .note-area { background: var(--surface); border: 1px dashed var(--border); border-radius: 8px; min-height: 48px; padding: 10px; margin-top: 4px; }
+  .note-area-sm { min-height: 32px; }
+
+  .eval-row { display: flex; align-items: center; gap: 6px; margin-bottom: 5px; }
+  .eval-label { font-size: 9pt; font-weight: 600; width: 100px; }
+  .eval-dots { display: flex; gap: 4px; }
+  .eval-dot { width: 16px; height: 16px; border: 1.5px solid var(--border); border-radius: 50%; }
+
+  .page-num { position: absolute; bottom: 28px; right: 48px; font-size: 8.5pt; color: var(--text-low); }
+  .print-btn { position: fixed; bottom: 24px; right: 24px; z-index: 100; background: var(--navy); color: #fff; border: none; padding: 12px 24px; border-radius: 10px; font-size: 10.5pt; font-weight: 700; cursor: pointer; box-shadow: 0 4px 16px rgba(0,0,0,0.2); font-family: 'Pretendard', sans-serif; }
+  ul { padding-left: 14px; margin-bottom: 4px; }
+  li { font-size: 9pt; color: var(--text-med); margin-bottom: 2px; line-height: 1.5; }
+  li strong { color: var(--text); }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">PDF 저장</button>
+
+<!-- PAGE 1 -->
+<div class="page">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+    <div>
+      <div style="font-size: 10pt; font-weight: 700; color: var(--blue); letter-spacing: 0.04em; margin-bottom: 4px;">FLOWMUS</div>
+      <h1>면접 질문지 &mdash; 여다현</h1>
+    </div>
+    <div style="text-align: right;">
+      <span class="badge badge-internal">INTERNAL</span>
+      <div class="small" style="margin-top: 4px;">2026.04.24 &mdash; 면접관: 권현우 대표</div>
+    </div>
+  </div>
+
+  <!-- 프로필 요약 -->
+  <div class="card" style="background: var(--blue-light); border: 1px solid rgba(37,99,235,0.12); margin-bottom: 16px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+      <div>
+        <span style="font-size: 14pt; font-weight: 800; color: var(--navy);">여다현</span>
+        <span class="small" style="margin-left: 8px;">브랜드 마케팅 매니저 지원</span>
+      </div>
+      <span class="badge badge-blue">16:35~</span>
+    </div>
+    <div class="grid-4">
+      <div><span class="tag tag-blue">멀티플랫폼</span><div class="small">3지점 x 7플랫폼</div></div>
+      <div><span class="tag tag-green">자동화</span><div class="small">Apps Script/Zapier</div></div>
+      <div><span class="tag tag-orange">인플루언서</span><div class="small">100건+ / 1,000명+</div></div>
+      <div><span class="tag tag-blue">이벤트</span><div class="small">쇼레이어드/플리마켓</div></div>
+    </div>
+  </div>
+
+  <!-- 경력 기반 심층 질문 -->
+  <p class="label">Portfolio Deep-Dive</p>
+  <h2>경력 기반 심층 질문</h2>
+
+  <div class="q-item highlight">
+    <div class="q-num">Q1 &mdash; 핵심 질문</div>
+    <div class="q-text">오운클리닉 3개 지점에서 7개 플랫폼을 동시에 운영하셨는데, 우선순위는 어떻게 정했나요?</div>
+    <div class="q-intent">확인 포인트: 체계적 사고, 리소스 배분 능력, 의사결정 기준</div>
+    <div class="q-followup"><strong>꼬리질문:</strong> "그중 가장 효과가 좋았던 채널과 가장 안 좋았던 채널은? 안 좋은 채널은 어떻게 처리했나요?"</div>
+  </div>
+
+  <div class="q-item highlight">
+    <div class="q-num">Q2 &mdash; 핵심 질문</div>
+    <div class="q-text">월매출 6배 성장을 만들었다고 하셨는데, 그 성장의 가장 큰 원인은 뭐였나요?</div>
+    <div class="q-intent">확인 포인트: 성과의 구체성, 본인 기여도 vs 팀/환경 요인 구분 능력</div>
+    <div class="q-followup"><strong>꼬리질문:</strong> "그 과정에서 본인이 직접 의사결정한 것과 지시받아서 한 것을 구분해주세요"</div>
+  </div>
+
+  <div class="q-item">
+    <div class="q-num">Q3</div>
+    <div class="q-text">Apps Script나 Zapier로 만든 자동화 시스템 중 가장 자신 있는 것을 설명해주세요.</div>
+    <div class="q-intent">확인 포인트: 기술 활용 수준 (직접 코딩 vs 노코드 조합), 문제 해결 방식</div>
+    <div class="q-followup"><strong>꼬리질문:</strong> "그 자동화가 없었으면 어떤 일이 벌어졌나요? 시간을 얼마나 아꼈나요?"</div>
+  </div>
+
+  <div class="q-item">
+    <div class="q-num">Q4</div>
+    <div class="q-text">인플루언서 캠페인 100건 중, 실패한 캠페인이 있다면 어떤 건가요?</div>
+    <div class="q-intent">확인 포인트: 실패 인정 능력, 학습 속도, 개선 프로세스</div>
+    <div class="q-followup"><strong>꼬리질문:</strong> "그 실패 이후에 섭외 기준이나 프로세스를 바꾼 부분이 있나요?"</div>
+  </div>
+
+  <div class="q-item">
+    <div class="q-num">Q5</div>
+    <div class="q-text">쇼레이어드 성수 팝업을 에이전시 없이 직접 제안하셨다고 했는데, 어떻게 성사시켰나요?</div>
+    <div class="q-intent">확인 포인트: 자기주도성, 비즈니스 감각, 대외 커뮤니케이션</div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- 실무 시뮬레이션 -->
+  <p class="label">Simulation</p>
+  <h2>실무 시뮬레이션 질문</h2>
+
+  <div class="q-item highlight">
+    <div class="q-num">S1 &mdash; 핵심 시뮬레이션</div>
+    <div class="q-text">사찍남 채널에서 다음 주에 올릴 영상이 있습니다. "40대에 사업 접고 취업한 남자" 인터뷰인데, 다현님이라면 이 영상의 마케팅을 어떻게 하시겠어요?</div>
+    <div class="q-intent">확인 포인트: 플랫폼 전략, 타겟 설정, 바이럴 시나리오, 실행 속도</div>
+    <div class="q-followup"><strong>추가:</strong> "쇼츠는 어떻게 잘라서 만들 건가요? 커뮤니티 배포는 어디부터?"</div>
+  </div>
+
+  <div class="q-item">
+    <div class="q-num">S2</div>
+    <div class="q-text">강의 매출이 떨어지고 있습니다. 지난달 대비 30% 하락인데, 원인 분석을 어떻게 시작하시겠어요?</div>
+    <div class="q-intent">확인 포인트: 데이터 분석 접근법, 문제 분해 능력</div>
+  </div>
+
+  <span class="page-num">1</span>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+  <p class="label">Culture Fit & Growth</p>
+  <h2>인성 / 팀 핏 / 성장 질문</h2>
+
+  <div class="q-item">
+    <div class="q-num">C1</div>
+    <div class="q-text">병원 MSO에서 나와서 스타트업 면접을 보고 있는 이유가 뭔가요?</div>
+    <div class="q-intent">확인 포인트: 이직 동기의 진정성, 스타트업 이해도</div>
+  </div>
+
+  <div class="q-item">
+    <div class="q-num">C2</div>
+    <div class="q-text">혼자 다 해야 하는 상황이 자주 생길 텐데, 그런 환경에서 어떻게 일하시는 편인가요?</div>
+    <div class="q-intent">확인 포인트: 멀티태스킹 대응력, 스트레스 관리</div>
+  </div>
+
+  <div class="q-item">
+    <div class="q-num">C3</div>
+    <div class="q-text">1년 후에 플로우머스에서 어떤 성과를 내고 싶으신가요?</div>
+    <div class="q-intent">확인 포인트: 목표 설정 능력, 회사 비전과의 정렬</div>
+  </div>
+
+  <div class="q-item">
+    <div class="q-num">C4</div>
+    <div class="q-text">AI 도구를 실무에서 쓰고 계신가요? 어떤 것을 어떻게 쓰시는지 구체적으로 알려주세요.</div>
+    <div class="q-intent">확인 포인트: AI 활용 수준, 학습 의지</div>
+  </div>
+
+  <hr class="divider">
+
+  <p class="label">Final Question</p>
+  <h2>마무리 질문</h2>
+
+  <div class="q-item">
+    <div class="q-num">F1</div>
+    <div class="q-text">궁금한 점이나 우려되는 부분이 있으면 편하게 말씀해주세요.</div>
+    <div class="q-intent">면접자의 실제 관심사와 우선순위를 파악</div>
+  </div>
+
+  <div class="q-item">
+    <div class="q-num">F2</div>
+    <div class="q-text">합류하게 되면 언제부터 출근 가능한가요?</div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- 메모 영역 -->
+  <p class="label">Notes</p>
+  <h2>면접 메모</h2>
+  <div class="note-area" style="min-height: 80px; margin-bottom: 16px;"></div>
+
+  <hr class="divider">
+
+  <!-- 평가 -->
+  <p class="label">Evaluation</p>
+  <h2>평가</h2>
+
+  <div class="grid-2" style="margin-bottom: 12px;">
+    <div>
+      <div class="eval-row"><div class="eval-label">실행력</div><div class="eval-dots"><div class="eval-dot"></div><div class="eval-dot"></div><div class="eval-dot"></div><div class="eval-dot"></div><div class="eval-dot"></div></div></div>
+      <div class="eval-row"><div class="eval-label">자기주도성</div><div class="eval-dots"><div class="eval-dot"></div><div class="eval-dot"></div><div class="eval-dot"></div><div class="eval-dot"></div><div class="eval-dot"></div></div></div>
+      <div class="eval-row"><div class="eval-label">전문 역량</div><div class="eval-dots"><div class="eval-dot"></div><div class="eval-dot"></div><div class="eval-dot"></div><div class="eval-dot"></div><div class="eval-dot"></div></div></div>
+    </div>
+    <div>
+      <div class="eval-row"><div class="eval-label">성장 마인드</div><div class="eval-dots"><div class="eval-dot"></div><div class="eval-dot"></div><div class="eval-dot"></div><div class="eval-dot"></div><div class="eval-dot"></div></div></div>
+      <div class="eval-row"><div class="eval-label">팀 핏</div><div class="eval-dots"><div class="eval-dot"></div><div class="eval-dot"></div><div class="eval-dot"></div><div class="eval-dot"></div><div class="eval-dot"></div></div></div>
+      <div class="eval-row"><div class="eval-label">AI 활용도</div><div class="eval-dots"><div class="eval-dot"></div><div class="eval-dot"></div><div class="eval-dot"></div><div class="eval-dot"></div><div class="eval-dot"></div></div></div>
+    </div>
+  </div>
+
+  <div style="display: flex; gap: 12px; margin-top: 12px;">
+    <div class="card" style="flex: 1; text-align: center; padding: 16px; border: 2px solid var(--border);">
+      <div style="font-size: 18pt; font-weight: 800; color: var(--green);">A</div>
+      <div class="small">바로 합류 제안</div>
+    </div>
+    <div class="card" style="flex: 1; text-align: center; padding: 16px; border: 2px solid var(--border);">
+      <div style="font-size: 18pt; font-weight: 800; color: var(--blue);">B</div>
+      <div class="small">추가 확인 후 결정</div>
+    </div>
+    <div class="card" style="flex: 1; text-align: center; padding: 16px; border: 2px solid var(--border);">
+      <div style="font-size: 18pt; font-weight: 800; color: var(--text-low);">C</div>
+      <div class="small">불합격</div>
+    </div>
+  </div>
+
+  <span class="page-num">2</span>
+</div>
+
+</body>
+</html>
