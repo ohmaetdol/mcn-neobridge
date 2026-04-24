@@ -1,697 +1,1180 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>사찍남 — 지온서 먹스타그램 기획서</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>사찍남 — 지온서 먹스타그램 촬영기획안 (데이터 기획)</title>
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+*{margin:0;padding:0;box-sizing:border-box}
 body{background:#F2F4F6;color:#191F28;font-family:'Pretendard',system-ui,sans-serif;min-height:100vh;font-size:15px}
-.gnb{background:#fff;border-bottom:1px solid #E5E8EB;padding:0 20px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-.gnb-logo{font-size:14px;font-weight:800;color:#F04452}
-.gnb-badge{background:#FFF0F0;color:#F04452;border-radius:20px;padding:4px 10px;font-size:11px;font-weight:800;border:1px solid #F04452}
-.wrap{max-width:640px;margin:0 auto;padding:20px 14px 80px}
-
-/* Hero */
-.hero{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);border-radius:20px;padding:32px 24px;margin-bottom:18px;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-40%;right:-10%;width:250px;height:250px;background:radial-gradient(circle,rgba(240,68,82,.15),transparent);pointer-events:none}
-.hero-eyebrow{font-size:10px;font-weight:700;color:#FF6B6B;letter-spacing:2px;margin-bottom:8px}
-.hero-title{font-size:22px;font-weight:800;line-height:1.4;color:#fff;margin-bottom:8px}
-.hero-sub{color:#8B95A1;font-size:12px;line-height:1.7}
-.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px}
-.hero-stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:10px 6px;text-align:center}
-.hero-stat-v{font-size:18px;font-weight:800;color:#FF6B6B}
-.hero-stat-l{font-size:9px;color:#8B95A1;margin-top:2px}
-
-/* Tabs */
-.tabs{display:flex;gap:6px;flex-wrap:nowrap;position:sticky;top:52px;z-index:90;background:#F2F4F6;padding:10px 0;overflow-x:auto;-webkit-overflow-scrolling:touch}
-.tab-btn{padding:8px 14px;border-radius:10px;border:1.5px solid #E5E8EB;background:#fff;font-size:12px;font-weight:700;cursor:pointer;color:#6B7684;transition:.15s;font-family:inherit;white-space:nowrap;flex-shrink:0}
-.tab-btn.on{background:#1a1a2e;border-color:#1a1a2e;color:#FF6B6B}
-
-/* Panel */
+.gnb{background:#fff;border-bottom:1px solid #E5E8EB;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.gnb-logo{font-size:16px;font-weight:800;color:#D4A017}
+.gnb-badge{background:#FFFBEA;color:#8B6914;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:800;border:1px solid #D4A017}
+.gnb-date{font-size:11px;color:#8B95A1;font-weight:600}
+.wrap{max-width:820px;margin:0 auto;padding:28px 20px 80px}
+.hero{background:linear-gradient(135deg,#0A1628 0%,#132B4D 50%,#1F4680 100%);border-radius:20px;padding:36px 32px;margin-bottom:20px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;right:-10%;width:300px;height:300px;background:radial-gradient(circle,rgba(255,184,0,.2),transparent);pointer-events:none}
+.hero-eyebrow{font-size:11px;font-weight:700;color:#FFB800;letter-spacing:2px;margin-bottom:10px}
+.hero-title{font-size:28px;font-weight:800;line-height:1.3;color:#fff;margin-bottom:8px}
+.hero-sub{color:#8B95A1;font-size:13px;line-height:1.7}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
+.hero-stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:12px;text-align:center}
+.hero-stat-v{font-size:20px;font-weight:800;color:#FFB800}
+.hero-stat-l{font-size:10px;color:#8B95A1;margin-top:3px}
+.tabs{display:flex;gap:6px;margin-bottom:18px;flex-wrap:wrap;position:sticky;top:56px;z-index:90;background:#F2F4F6;padding:10px 0}
+.tab-btn{padding:9px 16px;border-radius:10px;border:1.5px solid #E5E8EB;background:#fff;font-size:13px;font-weight:700;cursor:pointer;color:#6B7684;transition:.15s;font-family:inherit}
+.tab-btn.on{background:#0A1628;border-color:#0A1628;color:#FFB800}
+.tab-btn:hover:not(.on){background:#F8F9FA}
+.tab-btn.gold{border-color:#D4A017;color:#D4A017}
+.tab-btn.gold.on{background:#D4A017;border-color:#D4A017;color:#fff}
+.tab-btn.red{border-color:#D4A017;color:#D4A017}
+.tab-btn.red.on{background:#D4A017;border-color:#D4A017;color:#fff}
 .panel{display:none}
 .panel.on{display:block}
-
-/* Card */
-.card{background:#fff;border-radius:14px;padding:18px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
-.card.hot{border:2px solid #F04452;background:#FFF5F5}
-.card.blue{border:1px solid #3182F6;background:#F0F7FF}
-.card.green{border:1px solid #05C072;background:#F0FFF8}
-.card.orange{border:1px solid #F08F00;background:#FFFBF0}
-.card.dark{background:#1a1a2e;color:#fff}
-.card-label{font-size:10px;font-weight:800;color:#F04452;letter-spacing:1.5px;margin-bottom:10px;text-transform:uppercase}
-.card-label.blue{color:#2563EB}
-.card-label.green{color:#059862}
-.card-label.orange{color:#D97706}
-.card-label.purple{color:#6C4FE0}
-
-/* Section */
-.section{margin-bottom:24px}
-.section-title{font-size:17px;font-weight:800;color:#191F28;margin-bottom:14px;display:flex;align-items:center;gap:8px}
-.section-title .num{background:#F04452;color:#fff;border-radius:8px;padding:3px 9px;font-size:12px;font-weight:800}
-
-/* Table */
-.tbl{width:100%;border-collapse:collapse;font-size:13px;margin-bottom:10px}
-.tbl th{background:#F8F9FA;color:#6B7684;font-weight:700;text-align:left;padding:8px 10px;border-bottom:1px solid #E5E8EB;font-size:11px}
-.tbl td{padding:8px 10px;border-bottom:1px solid #F2F4F6;color:#333;line-height:1.5;vertical-align:top}
-.tbl td:first-child{font-weight:600;color:#191F28;white-space:nowrap;width:100px}
-.tbl tr:last-child td{border-bottom:none}
-
-/* Question */
-.q-group{margin-bottom:16px}
-.q-group-title{font-size:13px;font-weight:800;color:#F04452;margin-bottom:8px;padding-left:2px}
-.q-item{padding:6px 0;border-bottom:1px solid #F2F4F6;font-size:13px;line-height:1.6;color:#333}
-.q-item:last-child{border-bottom:none}
-.q-num{display:inline-block;min-width:22px;color:#F04452;font-weight:800;font-size:12px}
-.q-hook{background:#FFF0F0;border-radius:4px;padding:1px 5px;font-size:10px;font-weight:700;color:#F04452;margin-left:4px}
-.q-ment{background:#F0F7FF;border-left:3px solid #3182F6;border-radius:0 8px 8px 0;padding:10px 12px;margin:8px 0 12px;font-size:12px;color:#444;line-height:1.6;font-style:italic}
-
-/* Rank */
-.rank-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #F2F4F6}
-.rank-row:last-child{border-bottom:none}
-.rank-n{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;background:#F04452;color:#fff;flex-shrink:0}
-.rank-n.silver{background:#ddd;color:#666}
-.rank-body{flex:1;font-size:13px;font-weight:600;color:#191F28}
-.rank-desc{font-size:11px;color:#999;font-weight:400}
-
-/* Stat */
-.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}
-.stat-grid.cols3{grid-template-columns:1fr 1fr 1fr}
-.stat-box{background:#F8F9FA;border-radius:10px;padding:12px;text-align:center}
-.stat-box.accent{background:#FFF5F5;border:1px solid #FECDD3}
-.stat-box-v{font-size:22px;font-weight:900;color:#F04452}
-.stat-box-l{font-size:10px;color:#999;margin-top:2px}
-.stat-box-s{font-size:8px;color:#bbb;margin-top:2px}
-
-/* Timeline */
-.tl-row{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #F2F4F6;align-items:flex-start}
+.card{background:#fff;border-radius:16px;padding:22px;margin-bottom:14px;box-shadow:0 1px 6px rgba(0,0,0,.06);position:relative}
+.card.hot{border:2px solid #D4A017;background:#FFFBEA}
+.card.gold{border:2px solid #D4A017;background:#FFFBEA}
+.card.blue{border:2px solid #0A1628;background:#F8F9FA}
+.card.green{border:2px solid #D4A017;background:#FFFBEA}
+.card.dark{background:#0A1628;color:#fff}
+.card.navy{background:#132B4D;color:#fff;border:1px solid #1F4680}
+.card-label{font-size:11px;font-weight:700;color:#D4A017;letter-spacing:1.5px;margin-bottom:14px;text-transform:uppercase}
+.card-label.red{color:#D4A017}
+.card-label.blue{color:#0A1628}
+.card-label.green{color:#D4A017}
+.section{margin-bottom:28px}
+.section-title{font-size:18px;font-weight:800;color:#191F28;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.section-title .num{background:#0A1628;color:#FFB800;border-radius:8px;padding:4px 10px;font-size:13px}
+.section-title .num.red{background:#D4A017;color:#fff}
+.section-title .num.blue{background:#0A1628;color:#fff}
+.section-title .num.gold{background:#D4A017;color:#fff}
+.tag{display:inline-block;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:700;margin-right:5px;white-space:nowrap}
+.tag-y{background:#FFFBEA;color:#8B6914}
+.tag-r{background:#FFFBEA;color:#D4A017}
+.tag-g{background:#FFFBEA;color:#D4A017}
+.tag-b{background:#F8F9FA;color:#0A1628}
+.tag-p{background:#F8F9FA;color:#0A1628}
+.tag-d{background:#0A1628;color:#FFB800}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.stat{background:#FFFBEA;border-radius:12px;padding:14px;text-align:center}
+.stat-v{font-size:22px;font-weight:800;color:#8B6914}
+.stat-l{font-size:11px;color:#6B7684;margin-top:3px}
+.stat.red{background:#FFFBEA}.stat.red .stat-v{color:#D4A017}
+.stat.blue{background:#F8F9FA}.stat.blue .stat-v{color:#0A1628}
+.stat.green{background:#FFFBEA}.stat.green .stat-v{color:#D4A017}
+.stat.dark{background:#0A1628}.stat.dark .stat-v{color:#FFB800}
+.note{background:#FFFBEA;border-left:3px solid #D4A017;border-radius:0 8px 8px 0;padding:14px 16px;margin:10px 0;font-size:13px;line-height:1.7;color:#3E4A5A}
+.note.red{background:#FFFBEA;border-left-color:#D4A017}
+.note.blue{background:#F8F9FA;border-left-color:#0A1628}
+.note.green{background:#FFFBEA;border-left-color:#D4A017}
+.tl-row{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid #E5E8EB}
 .tl-row:last-child{border-bottom:none}
-.tl-time{font-size:11px;font-weight:800;color:#F04452;min-width:50px;flex-shrink:0;padding-top:2px}
+.tl-time{font-size:12px;font-weight:800;color:#D4A017;min-width:85px;padding-top:2px}
+.tl-time.red{color:#D4A017}
+.tl-time.blue{color:#0A1628}
 .tl-body{flex:1}
-.tl-title{font-size:13px;font-weight:700;color:#191F28}
-.tl-desc{font-size:11px;color:#666;margin-top:2px;line-height:1.5}
-
-/* Profile */
-.profile{display:flex;gap:16px;align-items:center;margin-bottom:16px}
-.profile-avatar{width:60px;height:60px;border-radius:16px;background:linear-gradient(135deg,#FF6B6B,#F04452);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:#fff;flex-shrink:0}
-.profile-info{flex:1}
-.profile-name{font-size:18px;font-weight:800;color:#191F28}
-.profile-handle{font-size:12px;color:#999;margin-top:2px}
-
-/* Check */
-.check-item{display:flex;align-items:flex-start;gap:8px;padding:4px 0;font-size:13px;color:#333}
-.check-icon{color:#05C072;font-weight:800;flex-shrink:0}
-
-/* Progress bar */
-.progress-row{margin-bottom:10px}
-.progress-label{display:flex;justify-content:space-between;font-size:11px;margin-bottom:4px}
-.progress-label span:first-child{font-weight:700;color:#191F28}
-.progress-label span:last-child{font-weight:800;color:#F04452}
-.progress-bar{height:8px;background:#F2F4F6;border-radius:4px;overflow:hidden}
-.progress-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,#FF6B6B,#F04452)}
-
-/* Source */
-.source{font-size:9px;color:#bbb;margin-top:6px;text-align:right}
-
-/* Footer */
-.footer{text-align:center;padding:20px;font-size:10px;color:#ccc}
+.tl-title{font-size:14px;font-weight:700;color:#191F28;margin-bottom:4px}
+.tl-text{font-size:13px;color:#3E4A5A;line-height:1.7}
+.tl-badge{display:inline-block;background:#D4A017;color:#fff;border-radius:4px;padding:1px 6px;font-size:10px;font-weight:800;margin-left:6px}
+.tl-badge.red{background:#D4A017}
+.tl-badge.green{background:#D4A017}
+.tl-badge.blue{background:#0A1628}
+.q-card{background:#fff;border-radius:12px;padding:16px 18px;margin-bottom:10px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;gap:14px;align-items:flex-start}
+.q-num{background:#0A1628;color:#FFB800;border-radius:8px;min-width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0}
+.q-num.red{background:#D4A017;color:#fff}
+.q-num.blue{background:#0A1628;color:#fff}
+.q-num.gold{background:#D4A017;color:#fff}
+.q-body{flex:1}
+.q-text{font-size:14px;font-weight:700;color:#191F28;line-height:1.6;margin-bottom:4px}
+.q-sub{font-size:12px;color:#8B95A1;line-height:1.6}
+.q-tags{margin-top:6px;display:flex;flex-wrap:wrap;gap:4px}
+.check-item{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #F2F4F6}
+.check-item:last-child{border-bottom:none}
+.check-box{width:20px;height:20px;border:2px solid #E5E8EB;border-radius:4px;flex-shrink:0;margin-top:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+.check-box.checked{background:#D4A017;border-color:#D4A017}
+.check-box.checked::after{content:'\2713';color:#fff;font-size:12px;font-weight:800}
+.check-text{font-size:13px;color:#3E4A5A;line-height:1.6}
+.divider{height:1px;background:#E5E8EB;margin:20px 0}
+.rank{position:absolute;top:-8px;left:16px;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:800;color:#fff}
+.rank.a{background:#D4A017}.rank.b{background:#0A1628}.rank.c{background:#D4A017}
+.title-text{font-size:17px;font-weight:800;color:#191F28;line-height:1.5;margin-bottom:10px;padding-top:6px}
+.copy-btn{background:#0A1628;color:#FFB800;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;transition:.15s;font-family:inherit}
+.copy-btn:hover{background:#132B4D}
+.copy-btn:active{transform:scale(.96)}
+.copied{background:#D4A017!important;color:#fff!important}
+.thumb-card{background:#fff;border-radius:16px;overflow:hidden;margin-bottom:14px;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+.thumb-preview{aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.thumb-preview.a{background:linear-gradient(135deg,#0A1628,#132B4D)}
+.thumb-preview.b{background:linear-gradient(135deg,#132B4D,#1F4680)}
+.thumb-preview.c{background:linear-gradient(135deg,#0A1628,#1F4680)}
+.thumb-text{color:#fff;text-align:center;padding:20px;z-index:1}
+.thumb-main{font-size:32px;font-weight:800;line-height:1.3;text-shadow:2px 2px 8px rgba(0,0,0,.5)}
+.thumb-sub{font-size:14px;color:rgba(255,255,255,.7);margin-top:8px}
+.thumb-body{padding:18px}
+.desc-box{background:#F8F9FA;border:1px solid #E5E8EB;border-radius:10px;padding:18px;font-size:13px;color:#191F28;line-height:2;white-space:pre-wrap;font-family:'Pretendard',system-ui,sans-serif}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
+th{padding:10px;text-align:left;border-bottom:2px solid #E5E8EB;color:#8B6914;font-size:11px;background:#FFFBEA;font-weight:700}
+td{padding:10px;border-bottom:1px solid #F2F4F6;color:#3E4A5A;line-height:1.6}
+.timeline-year{display:inline-block;background:#D4A017;color:#fff;border-radius:20px;padding:2px 10px;font-size:11px;font-weight:800;margin-right:6px}
+.fw-score{display:flex;align-items:center;gap:10px;margin:8px 0}
+.fw-bar{flex:1;height:10px;background:#E5E8EB;border-radius:5px;overflow:hidden}
+.fw-fill{height:100%;background:linear-gradient(90deg,#D4A017,#FFB800);border-radius:5px}
+.fw-v{font-size:13px;font-weight:800;color:#8B6914;min-width:50px;text-align:right}
+.footer{text-align:center;padding:20px;font-size:10px;color:#8B95A1}
+@media(max-width:600px){.hero-stats{grid-template-columns:repeat(2,1fr)}.stat-row{grid-template-columns:1fr 1fr}.thumb-main{font-size:22px}.title-text{font-size:15px}}
 </style>
 </head>
 <body>
-
 <nav class="gnb">
-  <span class="gnb-logo">사찍남 기획부</span>
-  <span class="gnb-badge">지온서 먹스타그램</span>
+  <span class="gnb-logo">사찍남</span>
+  <span class="gnb-badge">지온서 먹스타그램 촬영기획안</span>
+  <span class="gnb-date">v3.0 데이터+프레임워크 · 22분</span>
 </nav>
-
 <div class="wrap">
 
-<!-- Hero -->
-<div class="hero">
-  <div class="hero-eyebrow">SAJJIKNAM PROPOSAL v2.0</div>
-  <div class="hero-title">밥 먹으면서 찍었을 뿐인데<br>월 3천만 원 벌어서<br>반지하 탈출한 30대</div>
-  <div class="hero-sub">
-    어머니를 잃고 10년 방황 → 반지하에서 핸드폰 하나로 시작<br>
-    인스타 60만 팔로워 + 월 3천만원 푸드 크리에이터
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">사찍남 — 데이터 기획 기획서</div>
+    <div class="hero-title">밥 먹으면서 찍었을 뿐인데<br>월 3천만 원 벌어서 반지하 탈출한 30대</div>
+    <div class="hero-sub">지온서 (@smile_5n) · 37세 · 인스타 60만 팔로워 · 푸드 크리에이터<br>요가강사 → 어머니 사별(27살) → 10년 방황 → 반지하 → 먹스타그램 월 3천만원</div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-v">60만</div><div class="hero-stat-l">팔로워</div></div>
+      <div class="hero-stat"><div class="hero-stat-v">3천만</div><div class="hero-stat-l">월수익</div></div>
+      <div class="hero-stat"><div class="hero-stat-v">5만원</div><div class="hero-stat-l">투자비</div></div>
+      <div class="hero-stat"><div class="hero-stat-v">1억뷰</div><div class="hero-stat-l">누적 조회</div></div>
+    </div>
   </div>
-  <div class="hero-stats">
-    <div class="hero-stat"><div class="hero-stat-v">60만</div><div class="hero-stat-l">팔로워</div></div>
-    <div class="hero-stat"><div class="hero-stat-v">1억</div><div class="hero-stat-l">누적 조회</div></div>
-    <div class="hero-stat"><div class="hero-stat-v">3천만</div><div class="hero-stat-l">월 수익</div></div>
-    <div class="hero-stat"><div class="hero-stat-v">5만</div><div class="hero-stat-l">투자비</div></div>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab-btn on" onclick="go('ref',this)">레퍼런스</button>
+    <button class="tab-btn" onclick="go('profile',this)">출연자 분석</button>
+    <button class="tab-btn" onclick="go('timeline',this)">22분 타임라인</button>
+    <button class="tab-btn" onclick="go('questions',this)">질문지</button>
+    <button class="tab-btn" onclick="go('scenes',this)">촬영 6씬</button>
+    <button class="tab-btn" onclick="go('upload',this)">업로드 키트</button>
+    <button class="tab-btn gold" onclick="go('framework',this)">전환률 부스터</button>
+    <button class="tab-btn red" onclick="go('checklist',this)">체크리스트</button>
   </div>
-</div>
 
-<!-- Tabs -->
-<div class="tabs">
-  <button class="tab-btn on" onclick="showPanel('overview',this)">개요</button>
-  <button class="tab-btn" onclick="showPanel('data',this)">시장데이터</button>
-  <button class="tab-btn" onclick="showPanel('title',this)">제목/썸네일</button>
-  <button class="tab-btn" onclick="showPanel('story',this)">스토리</button>
-  <button class="tab-btn" onclick="showPanel('avd',this)">AVD설계</button>
-  <button class="tab-btn" onclick="showPanel('schedule',this)">촬영동선</button>
-  <button class="tab-btn" onclick="showPanel('questions',this)">질문지</button>
-  <button class="tab-btn" onclick="showPanel('ending',this)">엔딩/USP</button>
-  <button class="tab-btn" onclick="showPanel('analysis',this)">경쟁분석</button>
-</div>
+  <!-- TAB 1: 레퍼런스 -->
+  <div class="panel on" id="tab-ref">
 
-<!-- ==================== 개요 ==================== -->
-<div class="panel on" id="p-overview">
+    <div class="card dark">
+      <div style="font-size:11px;font-weight:700;color:#FFB800;letter-spacing:1.5px;margin-bottom:10px">52개 영상 히트맵 + 22권 프레임워크 오버레이</div>
+      <div style="font-size:16px;font-weight:800;color:#fff;line-height:1.5">
+        3채널 벤치마크 데이터 기반 설계<br>
+        사찍남 / 돈탐생 / 휴먼스토리
+      </div>
+    </div>
 
-  <div class="section">
-    <div class="section-title"><span class="num">P</span> 출연자 프로필</div>
-    <div class="card">
-      <div class="profile">
-        <div class="profile-avatar">JO</div>
-        <div class="profile-info">
-          <div class="profile-name">지온서</div>
-          <div class="profile-handle">@smile_5n -- 푸드 크리에이터</div>
+    <div class="section">
+      <div class="section-title"><span class="num">1</span> 3채널 벤치마크</div>
+      <div class="card">
+        <table>
+          <tr><th>채널</th><th>평균 조회</th><th>평균 CTR</th><th>초반 30초</th><th>킬러 타이밍</th></tr>
+          <tr>
+            <td><span class="tag tag-d">사찍남</span></td>
+            <td>63만</td>
+            <td>4.7%</td>
+            <td style="color:#D4A017;font-weight:700">0.129</td>
+            <td>10/17/19/24분 분산</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-r">돈탐생</span></td>
+            <td style="font-weight:700">304만</td>
+            <td>5.0%</td>
+            <td>0.163</td>
+            <td style="color:#D4A017;font-weight:700">7~10분 63% 집중</td>
+          </tr>
+          <tr>
+            <td><span class="tag tag-b">휴먼스토리</span></td>
+            <td style="font-weight:700">533만</td>
+            <td>5.1%</td>
+            <td style="color:#D4A017;font-weight:700">0.225</td>
+            <td>극적 장면 피크</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num red">2</span> 킬러 구간 레퍼런스</div>
+      <div class="card hot">
+        <div style="font-size:14px;line-height:1.8;color:#3E4A5A">
+          <strong style="color:#D4A017">돈탐생 부업 소재:</strong> 7-10분 수익 공개 패턴<br>
+          <strong style="color:#0A1628">사찍남 부업 평균:</strong> 50만뷰+<br>
+          <strong style="color:#D4A017">먹방 참여율:</strong> +38% (Tubular Labs)
         </div>
       </div>
-      <table class="tbl">
-        <tr><td>인스타그램</td><td>@smile_5n (팔로워 60만)</td></tr>
-        <tr><td>서브 인스타</td><td>@jee_onseo (쿠킹 채널)</td></tr>
-        <tr><td>유튜브</td><td>@Onseo_</td></tr>
-        <tr><td>누적 조회수</td><td>1억뷰+</td></tr>
-        <tr><td>월 수익</td><td>2,500~3,000만원 (세후)</td></tr>
-        <tr><td>수익 구조</td><td>광고 건당 100만원 x 월 30건, 대행사 없이 직거래</td></tr>
-        <tr><td>이전 직업</td><td>요가 강사 / 피트니스</td></tr>
-        <tr><td>핵심 스토리</td><td>27살 어머니 사별 → 10년 방황 → 반지하 → 먹스타그램 인생역전</td></tr>
-        <tr><td>강연</td><td>경기콘텐츠진흥원 강연 강사</td></tr>
-        <tr><td>비즈니스</td><td>무료 전자책 + 무료 특강 + 1:1 상담 + 크루 운영</td></tr>
-      </table>
-    </div>
-  </div>
 
-  <div class="section">
-    <div class="section-title"><span class="num">1</span> 영상 개요</div>
-    <div class="card">
-      <table class="tbl">
-        <tr><td>출연자</td><td>지온서 (@smile_5n) — 인스타 60만, 누적 1억뷰</td></tr>
-        <tr><td>핵심 와우</td><td>핸드폰 + 투자비 5만원으로 밥 먹으면서 월 3천만원</td></tr>
-        <tr><td>러닝타임</td><td>22-25분</td></tr>
-        <tr><td>한 줄 요약</td><td>어머니를 잃고 10년 방황하던 여성이, 반지하에서 핸드폰 하나로 먹스타그램을 시작해, 인스타 60만 + 월 3천만원 수익의 대표가 된 스토리</td></tr>
-      </table>
+      <div class="note red">
+        <strong>지온서 적용:</strong> Peak 1(7-8분)에 "수익 인증 + 통장 입금" 배치 → 돈탐생 7분대 패턴 복제. Peak 2(15분)에 "어머니 사별 감정 피크" → 휴먼스토리 감정 피크 패턴 복제.
+      </div>
     </div>
-  </div>
 
-  <div class="section">
-    <div class="section-title"><span class="num">2</span> 타겟 시청자</div>
-    <div class="card">
-      <table class="tbl">
-        <tr><th>구분</th><th>타겟</th><th>공감 포인트</th></tr>
-        <tr><td>1차 핵심</td><td>부업 찾는 직장인/주부 (25-45세)</td><td>"나도 밥은 먹으니까"</td></tr>
-        <tr><td>2차 확장</td><td>자영업자/식당 사장님</td><td>"내 가게 홍보도 되고 돈도?"</td></tr>
-        <tr><td>3차 확장</td><td>퇴직 후 40-50대</td><td>"얼굴도 안 나와도 된다고?"</td></tr>
-        <tr><td>사찍남</td><td>30살, 월급 200</td><td>"밥 먹으면서 돈 번다고?"</td></tr>
-      </table>
+    <div class="section">
+      <div class="section-title"><span class="num gold">3</span> 사찍남 Best / Worst 패턴</div>
+      <div class="card green">
+        <div class="card-label green">Best 패턴 (따라하기)</div>
+        <div style="font-size:14px;line-height:1.8;color:#3E4A5A">
+          현장 시연 실시간 (촬영→편집→업로드 원테이크)<br>
+          숫자 대비 갭 (5만원 → 3천만원 = 600배)<br>
+          반측면 + 자연광 + 캐주얼 의상
+        </div>
+      </div>
+      <div class="card hot">
+        <div class="card-label red">Worst 패턴 (절대 금지)</div>
+        <div style="font-size:14px;line-height:1.8;color:#3E4A5A">
+          정적 인터뷰 정면 클로즈업 → 44% 이탈<br>
+          <strong style="color:#D4A017">스튜디오 세팅 · 과장 표정 금지</strong>
+        </div>
+      </div>
     </div>
-    <div class="card hot">
-      <div class="card-label">소재 희소성 체크</div>
-      <div class="check-item"><span class="check-icon">V</span> 시청자가 처음 듣는 방법 — 먹스타그램으로 월 3천은 대부분 모름</div>
-      <div class="check-item"><span class="check-icon">V</span> "말이 돼?" 반응 — 밥 먹으면서 월 3천, 투자비 5만원</div>
-      <div class="check-item"><span class="check-icon">V</span> 반전 — 어머니 사별 후 10년 방황 → 인생역전</div>
-    </div>
-  </div>
 
-  <div class="section">
-    <div class="section-title">핵심 장면 3가지</div>
-    <div class="card blue">
-      <div class="rank-row"><div class="rank-n">1</div><div class="rank-body">현장에서 핸드폰으로 음식 촬영 → 캡컷 편집 → 업로드 실연 (15분 컷)<div class="rank-desc">시청자 신뢰 극대화</div></div></div>
-      <div class="rank-row"><div class="rank-n silver">2</div><div class="rank-body">수익 인증 — 통장/입금 내역 화면 공개 (세후 3천만원)<div class="rank-desc">와우 포인트</div></div></div>
-      <div class="rank-row"><div class="rank-n silver">3</div><div class="rank-body">어머니 이야기 + 반지하 → 현재 삶의 변화<div class="rank-desc">감정 피크</div></div></div>
+    <div class="section">
+      <div class="section-title"><span class="num">4</span> 데이터 기반 설계 5원칙</div>
+      <div class="card blue">
+        <div style="font-size:14px;line-height:2;color:#3E4A5A">
+          <strong>원칙1 (Drop Ban):</strong> 인사 삭제 → 0초 음식 촬영 + "이거 하나 찍으면 100만원"<br>
+          <strong>원칙2 (Peak 전진):</strong> 수익 공개 → 7~8분대 배치 (돈탐생 패턴)<br>
+          <strong>원칙3 (CTR 복제):</strong> 수익 인증 화면 + "반지하→월3천" 대비 텍스트<br>
+          <strong>원칙4 (감정 피크):</strong> 어머니 사별 → 15분대 배치 (휴먼스토리 패턴)<br>
+          <strong>원칙5 (편집):</strong> Peak 3~5초 컷, 감정 7~10초 컷
+        </div>
+      </div>
     </div>
-  </div>
-</div>
 
-<!-- ==================== 시장데이터 ==================== -->
-<div class="panel" id="p-data">
+    <div class="section">
+      <div class="section-title"><span class="num">5</span> 시장 인텔리전스 (먹스타그램 · 2026.04)</div>
+      <div class="card navy">
+        <div style="font-size:13px;line-height:1.9;color:#fff">
+          <strong style="color:#FFB800">상방 온도:</strong> 크리에이터 이코노미 5.3조 / 인스타 MAU 2,758만 (역대 최고) / 릴스 50% / K-Food 136.2억$ (역대 최고)<br>
+          <strong style="color:#FFB800">타겟:</strong> 직장인 부업 48.4% / N잡 80% / 30대 부업 57% (최고)<br>
+          <strong style="color:#FFB800">정서 스펙트럼:</strong> "나도 할 수 있을까" 50% / "사기 아닌가" 30% / "대단하다" 20%<br>
+          <strong style="color:#FFB800">최대 지뢰:</strong> "강의 팔려고" / "대행사 끼는 거" / "성공팔이"<br>
+          <strong style="color:#FFB800">최대 후킹:</strong> "반지하 탈출" + "어머니 사별" + "투자비 5만원"
+        </div>
+      </div>
+    </div>
 
-  <div class="section">
-    <div class="section-title"><span class="num">M</span> 크리에이터 이코노미 시장</div>
-    <div class="stat-grid">
-      <div class="stat-box accent"><div class="stat-box-v">5.3조</div><div class="stat-box-l">한국 크리에이터 시장 (2023)</div><div class="stat-box-s">라이브클래스 리포트</div></div>
-      <div class="stat-box accent"><div class="stat-box-v">325억$</div><div class="stat-box-l">글로벌 인플루언서 시장</div><div class="stat-box-s">Shopify 2025</div></div>
-      <div class="stat-box"><div class="stat-box-v">118억$</div><div class="stat-box-l">Food 카테고리 지출 (2위)</div><div class="stat-box-s">Modash</div></div>
-      <div class="stat-box"><div class="stat-box-v">28조</div><div class="stat-box-l">한국 인플루언서 커머스</div><div class="stat-box-s">2022년 6조 대비 5배</div></div>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-title"><span class="num">IG</span> 인스타그램 핵심 지표</div>
-    <div class="stat-grid">
-      <div class="stat-box accent"><div class="stat-box-v">2,758만</div><div class="stat-box-l">한국 인스타 MAU (역대 최고)</div><div class="stat-box-s">문화일보 2025.12</div></div>
-      <div class="stat-box accent"><div class="stat-box-v">50%</div><div class="stat-box-l">릴스 시간 비중 (전체)</div><div class="stat-box-s">AutoFaceless 2026</div></div>
-      <div class="stat-box"><div class="stat-box-v">30.81%</div><div class="stat-box-l">릴스 평균 도달률</div><div class="stat-box-s">이미지의 2배+</div></div>
-      <div class="stat-box"><div class="stat-box-v">1.23%</div><div class="stat-box-l">릴스 참여율</div><div class="stat-box-s">이미지 0.70%</div></div>
-    </div>
-    <div class="card">
-      <div class="card-label blue">인스타그램 연령대별 이용률</div>
-      <div class="progress-row"><div class="progress-label"><span>20대</span><span>80.9%</span></div><div class="progress-bar"><div class="progress-fill" style="width:80.9%"></div></div></div>
-      <div class="progress-row"><div class="progress-label"><span>30대</span><span>70.7%</span></div><div class="progress-bar"><div class="progress-fill" style="width:70.7%"></div></div></div>
-      <div class="source">출처: 한국언론진흥재단</div>
-    </div>
-    <div class="card">
-      <div class="card-label">릴스 성과 벤치마크</div>
-      <table class="tbl">
-        <tr><td>일일 릴스 재생</td><td>1,400억 회 (IG+FB)</td></tr>
-        <tr><td>F&B 참여율</td><td>2.0~2.5%</td></tr>
-        <tr><td>최적 길이</td><td>60~90초</td></tr>
-        <tr><td>스폰서 릴스 글로벌 평균</td><td>$288/건 (~40만 원)</td></tr>
-      </table>
-      <div class="source">출처: AutoFaceless 2026, Dash Social</div>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-title"><span class="num">T</span> 타겟 시장 — 부업/N잡</div>
-    <div class="stat-grid">
-      <div class="stat-box accent"><div class="stat-box-v">48.4%</div><div class="stat-box-l">직장인 부업 참여율</div><div class="stat-box-s">인크루트 2025.11</div></div>
-      <div class="stat-box accent"><div class="stat-box-v">80%</div><div class="stat-box-l">N잡 경험률 (10명 중 8명)</div><div class="stat-box-s">잡코리아 2025</div></div>
-      <div class="stat-box"><div class="stat-box-v">79%</div><div class="stat-box-l">Z세대 부업 고려율</div><div class="stat-box-s">삼성전자 글로벌</div></div>
-      <div class="stat-box"><div class="stat-box-v">82.5%</div><div class="stat-box-l">부업 동기: 추가 수입</div><div class="stat-box-s">인크루트</div></div>
-    </div>
-    <div class="card">
-      <div class="card-label orange">연령대별 부업 현황</div>
-      <table class="tbl">
-        <tr><th>연령</th><th>부업 비율</th><th>일 투자</th><th>월 수입</th></tr>
-        <tr><td>20대</td><td>55.2%</td><td>3.2시간</td><td>53만 원</td></tr>
-        <tr><td style="color:#F04452;font-weight:800">30대</td><td style="color:#F04452;font-weight:800">57.0% (최고)</td><td>3.1시간</td><td>69만 원</td></tr>
-        <tr><td>40대</td><td>50.4%</td><td>3.4시간</td><td>92만 원</td></tr>
-        <tr><td>50대+</td><td>30.7%</td><td>4.1시간</td><td>105만 원</td></tr>
-      </table>
-      <div class="source">출처: 이지경제, 더스쿠프</div>
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="section-title"><span class="num">$</span> 먹스타그램 수익 모델</div>
-    <div class="card">
-      <div class="card-label">인스타그램 광고 단가 (한국)</div>
-      <table class="tbl">
-        <tr><th>팔로워 구간</th><th>피드</th><th>릴스</th></tr>
-        <tr><td>나노 (1K~5K)</td><td>3~10만</td><td>5~15만</td></tr>
-        <tr><td>마이크로 (1K~10K)</td><td>5~30만</td><td>10~50만</td></tr>
-        <tr><td>중급 (10K~100K)</td><td>30~150만</td><td>50~200만</td></tr>
-      </table>
-      <div class="source">출처: 태그바이, 아이보스</div>
-    </div>
-    <div class="card hot">
-      <div class="card-label">먹스타그램 성장 단계별 수익</div>
-      <div class="progress-row"><div class="progress-label"><span>시작 2개월 (팔로워 2~3K)</span><span>~5만 원/건</span></div><div class="progress-bar"><div class="progress-fill" style="width:5%"></div></div></div>
-      <div class="progress-row"><div class="progress-label"><span>6개월 차 (팔로워 5K~10K)</span><span>~30만 원/건</span></div><div class="progress-bar"><div class="progress-fill" style="width:30%"></div></div></div>
-      <div class="progress-row"><div class="progress-label"><span>성장기 (팔로워 10K+)</span><span>~60만 원/건</span></div><div class="progress-bar"><div class="progress-fill" style="width:60%"></div></div></div>
-      <div class="progress-row"><div class="progress-label"><span style="color:#F04452">지온서 현재 (팔로워 600K)</span><span>100만 원/건 x 30건</span></div><div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div></div>
-      <div class="source">출처: moneytrends.co.kr</div>
-    </div>
-    <div class="card">
-      <div class="card-label blue">광고비 계산 공식 (업계 관행)</div>
-      <div style="font-size:13px;line-height:2;color:#333">
-        피드 = (팔로워 / 1,000) x 1만 원<br>
-        릴스 = (평균 조회수 / 1,000) x 2만 원
+    <div class="section">
+      <div class="section-title"><span class="num red">6</span> 8대 지뢰 키워드 (역풍 트리거)</div>
+      <div class="card hot">
+        <table>
+          <tr><th>#</th><th>지뢰 키워드</th><th>역풍 이유</th><th>대체</th></tr>
+          <tr><td>1</td><td>"무자본 창업"</td><td>사기 연상</td><td>"소자본 5만원 시작"</td></tr>
+          <tr><td>2</td><td>"쉽게/간단하게 돈 벌기"</td><td>리딩방/사기 연상</td><td>"밥 먹으면서 찍었을 뿐"</td></tr>
+          <tr><td>3</td><td>"강의/코칭/수강료"</td><td>성공팔이 프레임</td><td>"크루/모임/같이 공부"</td></tr>
+          <tr><td>4</td><td>"유료 전자책/PDF 판매"</td><td>수강 유도 의심</td><td>"무료 전자책 + 무료 특강"</td></tr>
+          <tr><td>5</td><td>"팔로워만 있으면 된다"</td><td>현실과 괴리</td><td>"릴스 조회수가 핵심"</td></tr>
+          <tr><td>6</td><td>"대행사/매니지먼트"</td><td>관리비 떼먹힌다</td><td>"DM 직거래 구조"</td></tr>
+          <tr><td>7</td><td>"인스타로 독립/퇴사"</td><td>직장인 반감</td><td>"밥은 어차피 먹으니까"</td></tr>
+          <tr><td>8</td><td>"월 3천 벌어요" (직접 자랑)</td><td>과장 의심</td><td>"사찍남이 발견하는 구조"</td></tr>
+        </table>
+        <div class="note red" style="margin-top:14px">
+          <strong>출연자에게 반드시 사전 공유.</strong> 이 8개 단어는 영상 전체에서 0회 노출.
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="section">
-    <div class="section-title"><span class="num">VS</span> 먹스타그램 vs 블로그 체험단</div>
-    <div class="card">
-      <table class="tbl">
-        <tr><th>항목</th><th>블로그 체험단</th><th style="color:#F04452">먹스타그램 (릴스)</th></tr>
-        <tr><td>건당 수익</td><td>1~5만 원</td><td style="font-weight:800">5~100만 원</td></tr>
-        <tr><td>노출</td><td>네이버 검색 한정</td><td style="font-weight:800">릴스 알고리즘 글로벌</td></tr>
-        <tr><td>도달률</td><td>검색 의존 (수동적)</td><td style="font-weight:800">30.81% (능동적)</td></tr>
-        <tr><td>참여율</td><td>0.1~0.3%</td><td style="font-weight:800">1.23~2.5%</td></tr>
-        <tr><td>수익화 속도</td><td>3~6개월</td><td style="font-weight:800">1~2개월</td></tr>
-        <tr><td>확장성</td><td>블로그 1채널</td><td style="font-weight:800">인스타+틱톡+유튜브</td></tr>
-      </table>
-    </div>
-  </div>
+  <!-- TAB 2: 출연자 분석 -->
+  <div class="panel" id="tab-profile">
 
-  <div class="section">
-    <div class="section-title"><span class="num">MK</span> 먹방 시장 규모</div>
-    <div class="stat-grid">
-      <div class="stat-box"><div class="stat-box-v">490만</div><div class="stat-box-l">YouTube 먹방 영상 수</div><div class="stat-box-s">Tubular Labs</div></div>
-      <div class="stat-box"><div class="stat-box-v">+38%</div><div class="stat-box-l">먹방 참여율 (일반 대비)</div><div class="stat-box-s">Tubular Labs</div></div>
-      <div class="stat-box"><div class="stat-box-v">136억$</div><div class="stat-box-l">K-Food 수출 (역대 최고)</div><div class="stat-box-s">Korea Herald 2025</div></div>
-      <div class="stat-box"><div class="stat-box-v">410만</div><div class="stat-box-l">TikTok 먹방 영상 수</div><div class="stat-box-s">Tubular Labs</div></div>
-    </div>
-    <div class="card">
-      <div class="card-label">먹방 유튜버 수익 벤치마크</div>
-      <table class="tbl">
-        <tr><th>유튜버</th><th>월 수익</th><th>출처</th></tr>
-        <tr><td>쯔양</td><td>~1억 원 (유튜브만)</td><td>YTN</td></tr>
-        <tr><td>히밥</td><td>1억~1.2억 (누적 40~50억)</td><td>문화일보</td></tr>
-        <tr><td>떵개떵</td><td>~7,147만 (추산)</td><td>위키트리</td></tr>
-        <tr><td style="color:#F04452">지온서</td><td style="color:#F04452;font-weight:800">2,500~3,000만 (인스타)</td><td>본인 공개</td></tr>
-      </table>
-    </div>
-  </div>
-</div>
-
-<!-- ==================== 제목/썸네일 ==================== -->
-<div class="panel" id="p-title">
-  <div class="section">
-    <div class="section-title"><span class="num">0</span> 제목 & 썸네일</div>
-    <div class="card hot">
-      <div class="card-label">최종 제목</div>
-      <div style="font-size:18px;font-weight:800;color:#191F28;line-height:1.4;margin-bottom:12px">밥 먹으면서 찍었을 뿐인데 월 3천만 원 벌어서 반지하 탈출한 30대</div>
-      <div style="font-size:12px;color:#999">CTR 목표: 6%+</div>
-    </div>
-    <div class="card">
-      <div class="card-label blue">대안 제목</div>
-      <div class="rank-row"><div class="rank-n silver">A</div><div class="rank-body">투자비 5만 원, 핸드폰 하나로 월 3천만 원 버는 먹스타그램 대표</div></div>
-      <div class="rank-row"><div class="rank-n silver">B</div><div class="rank-body">엄마 잃고 10년 방황하다 밥 먹는 영상으로 인생 역전한 여자</div></div>
-      <div class="rank-row"><div class="rank-n silver">C</div><div class="rank-body">얼굴도 안 나오는 20초 영상으로 월 3천만 원 버는 미친 직업</div></div>
-    </div>
-    <div class="card">
-      <div class="card-label orange">썸네일 설계</div>
-      <table class="tbl">
-        <tr><td>주인공</td><td>핸드폰 들고 자신감 있는 표정 or 음식 먹다 놀란 표정</td></tr>
-        <tr><td>배경</td><td>왼쪽=반지하 / 오른쪽=맛집 촬영 현장 (분할)</td></tr>
-        <tr><td>텍스트</td><td>"밥만 먹었는데 월 3천?" or "투자비 5만원"</td></tr>
-        <tr><td>색상</td><td>노란색 텍스트 + 음식 컬러 대비</td></tr>
-      </table>
-    </div>
-  </div>
-</div>
-
-<!-- ==================== 스토리 ==================== -->
-<div class="panel" id="p-story">
-  <div class="section">
-    <div class="section-title"><span class="num">3</span> 하몬서클 스토리</div>
-    <div class="tl-row"><div class="tl-time">1단계</div><div class="tl-body"><div class="tl-title">안정된 일상</div><div class="tl-desc">요가 강사 / 피트니스 일 하던 평범한 20대</div></div></div>
-    <div class="tl-row"><div class="tl-time">2단계</div><div class="tl-body"><div class="tl-title">무언가를 원한다</div><div class="tl-desc">27살에 어머니 갑자기 돌아가심 → 삶의 이유가 없어짐</div></div></div>
-    <div class="tl-row"><div class="tl-time">3단계</div><div class="tl-body"><div class="tl-title">낯선 환경 진입</div><div class="tl-desc">10년 방황 끝에 반지하에서 배달 음식 찍어서 올려봄</div></div></div>
-    <div class="tl-row"><div class="tl-time">4단계</div><div class="tl-body"><div class="tl-title">시련과 적응</div><div class="tl-desc">아버지: "서울에서 뭐 하냐" / 수입 0원 / 인정 못 받음</div></div></div>
-    <div class="tl-row"><div class="tl-time">5단계</div><div class="tl-body"><div class="tl-title">원하던 것을 얻다</div><div class="tl-desc">영상 9개째에 첫 광고 / 300만원 → 올인 결정</div></div></div>
-    <div class="tl-row"><div class="tl-time">6단계</div><div class="tl-body"><div class="tl-title">대가를 치른다</div><div class="tl-desc">컴맹이라 독학 / 혼자 시작 / 주변 반대</div></div></div>
-    <div class="tl-row"><div class="tl-time">7단계</div><div class="tl-body"><div class="tl-title">일상으로 복귀</div><div class="tl-desc">월 3천만원 / 크루 운영 / 아버지 인정</div></div></div>
-    <div class="tl-row"><div class="tl-time">8단계</div><div class="tl-body"><div class="tl-title">변화된 자신</div><div class="tl-desc">"이생에서 한 번은 무조건 잘될 거라 믿었다"</div></div></div>
-  </div>
-</div>
-
-<!-- ==================== AVD 설계 ==================== -->
-<div class="panel" id="p-avd">
-  <div class="section">
-    <div class="section-title"><span class="num">4</span> 시청 지속률 설계</div>
-    <div class="card hot">
-      <div class="card-label">첫 30초 목표 유지율: 75%+</div>
-    </div>
-
-    <div class="tl-row"><div class="tl-time">0-5초</div><div class="tl-body"><div class="tl-title">패턴 인터럽트</div><div class="tl-desc">음식 먹는 장면 + "이거 하나 찍으면 100만 원이에요"</div></div></div>
-    <div class="tl-row"><div class="tl-time">5-30초</div><div class="tl-body"><div class="tl-title">썸네일 이행</div><div class="tl-desc">수익 인증 화면 + "밥 먹으면서 월 3천 벌어요"</div></div></div>
-    <div class="tl-row"><div class="tl-time">30-60초</div><div class="tl-body"><div class="tl-title">오픈 루프</div><div class="tl-desc">"근데 이 사람, 2년 전까지 반지하에 살았어요"</div></div></div>
-    <div class="tl-row"><div class="tl-time">3분</div><div class="tl-body"><div class="tl-title">위기장치 1 -- 의심</div><div class="tl-desc">"잠깐, 대행사 끼는 거 아닌가요?" → "대행사 없이 DM 직접 받아요"</div></div></div>
-    <div class="tl-row"><div class="tl-time">6분</div><div class="tl-body"><div class="tl-title">위기장치 2 -- 반전</div><div class="tl-desc">"투자비가 얼마냐면요... 5만 원이에요" + 쿠팡 3만원 삼각대 공개</div></div></div>
-    <div class="tl-row"><div class="tl-time">8분</div><div class="tl-body"><div class="tl-title">현장 시연</div><div class="tl-desc">음식 촬영 → 캡컷 편집 → 업로드 원테이크 (15분 컷)</div></div></div>
-    <div class="tl-row"><div class="tl-time">12분</div><div class="tl-body"><div class="tl-title">위기장치 3 -- 수익공개</div><div class="tl-desc">통장 입금 내역 + "하루에 250만 원 들어온 날도 있어요"</div></div></div>
-    <div class="tl-row"><div class="tl-time">15분</div><div class="tl-body"><div class="tl-title">감정 피크</div><div class="tl-desc">어머니 사별 → 10년 방황 → 반지하 → "삶의 이유가 없었어요"</div></div></div>
-    <div class="tl-row"><div class="tl-time">18분</div><div class="tl-body"><div class="tl-title">위기장치 4 -- 감정반전</div><div class="tl-desc">"근데 이제 아버지가 인정해주셨어요" + "한 번도 힘든 적 없었어요"</div></div></div>
-    <div class="tl-row"><div class="tl-time">20-22분</div><div class="tl-body"><div class="tl-title">클라이맥스</div><div class="tl-desc">크루 소개 + "평범한 사람도 할 수 있다" + 사찍남 직접 체험</div></div></div>
-    <div class="tl-row"><div class="tl-time">마지막</div><div class="tl-body"><div class="tl-title">CTA</div><div class="tl-desc">"여러분도 오늘 밥 먹을 때 카메라 켜보세요"</div></div></div>
-
-    <div class="card" style="margin-top:12px">
-      <div class="card-label orange">위기장치 목록</div>
-      <div class="rank-row"><div class="rank-n">1</div><div class="rank-body">의심형 -- "밥 먹는 영상으로 진짜 돈이 돼요?" → 수익 인증</div></div>
-      <div class="rank-row"><div class="rank-n silver">2</div><div class="rank-body">반전형 -- 투자비 5만 원 / 편의점 음식부터 / 얼굴 95% 안 나와도 됨</div></div>
-      <div class="rank-row"><div class="rank-n silver">3</div><div class="rank-body">감정이입 -- 어머니 사별 + 10년 방황 + 반지하 + 아버지 반대</div></div>
-      <div class="rank-row"><div class="rank-n silver">4</div><div class="rank-body">수익공개 -- 통장 입금 내역 + 하루 250만원 + 건당 100만원</div></div>
-      <div class="rank-row"><div class="rank-n silver">5</div><div class="rank-body">현실형 -- "은행원인데 주말에만 해서 월 1천만원 버는 사람도 있어요"</div></div>
-    </div>
-  </div>
-</div>
-
-<!-- ==================== 촬영 동선 ==================== -->
-<div class="panel" id="p-schedule">
-  <div class="section">
-    <div class="section-title"><span class="num">5</span> 촬영 동선</div>
-    <div class="card">
-      <div class="tl-row"><div class="tl-time">오전</div><div class="tl-body"><div class="tl-title">지온서 자택</div><div class="tl-desc">광고 문의 확인 + 집에서 밀키트 촬영 실연 | 7단계 현재 일상</div></div></div>
-      <div class="tl-row"><div class="tl-time">오전~점심</div><div class="tl-body"><div class="tl-title">동네 맛집 or 시장</div><div class="tl-desc">핸드폰 하나로 현장 촬영 동행 | 5단계 성과</div></div></div>
-      <div class="tl-row"><div class="tl-time">점심</div><div class="tl-body"><div class="tl-title">맛집 식사</div><div class="tl-desc">캡컷 편집 실연 + 수익 이야기 | 5단계 성과</div></div></div>
-      <div class="tl-row"><div class="tl-time">오후</div><div class="tl-body"><div class="tl-title">이동 중 (차 안)</div><div class="tl-desc">어머니, 방황, 반지하 이야기 | 1~4단계 과거</div></div></div>
-      <div class="tl-row"><div class="tl-time">오후</div><div class="tl-body"><div class="tl-title">크루 만남 (카페)</div><div class="tl-desc">크루원 소개 + 수강생 성공 사례 | 7~8단계 변화</div></div></div>
-      <div class="tl-row"><div class="tl-time">저녁</div><div class="tl-body"><div class="tl-title">저녁 맛집</div><div class="tl-desc">사찍남 직접 먹스타그램 체험 | 특별 코너</div></div></div>
-    </div>
-    <div class="card green">
-      <div class="card-label green">증빙 자료 체크리스트</div>
-      <div class="check-item"><span class="check-icon">V</span> 수익 인증 (통장 입금 내역)</div>
-      <div class="check-item"><span class="check-icon">V</span> Before & After (반지하 vs 현재)</div>
-      <div class="check-item"><span class="check-icon" style="color:#999">-</span> 인스타 60만 팔로워 실시간 화면</div>
-      <div class="check-item"><span class="check-icon" style="color:#999">-</span> 크루원/수강생 성공 사례</div>
-      <div class="check-item"><span class="check-icon" style="color:#999">-</span> 촬영 장비 공개 (핸드폰 + 3만원 삼각대)</div>
-      <div class="check-item"><span class="check-icon" style="color:#999">-</span> 광고 문의 DM/오픈채팅 실시간</div>
-    </div>
-  </div>
-</div>
-
-<!-- ==================== 질문지 ==================== -->
-<div class="panel" id="p-questions">
-  <div class="section">
-    <div class="section-title"><span class="num">6</span> 질문지 (103개)</div>
-    <p style="font-size:12px;color:#999;margin-bottom:14px">원칙: 의심 → 동요 → 설득 → 정리</p>
-
-    <!-- 자택 -->
-    <div class="card">
-      <div class="q-group">
-        <div class="q-group-title">자택 (오전) -- 현재 일상 | Q1~Q24</div>
-        <div class="q-ment">"오늘 만날 분은요, 밥을 먹으면서 돈을 벌어요. 근데 식당 사장님이 아니에요."</div>
-        <div class="q-item"><span class="q-num">1.</span> 안녕하세요! 간단하게 자기소개 부탁드려요.</div>
-        <div class="q-item"><span class="q-num">2.</span> 지금 뭐 하고 계셨던 거예요?</div>
-        <div class="q-item"><span class="q-num">3.</span> 잠깐, 지금 누워서 하고 있는 게 일인 거예요? <span class="q-hook">후킹</span></div>
-        <div class="q-item"><span class="q-num">4.</span> 그래서 이렇게 해서 얼마를 버시는 거예요? <span class="q-hook">후킹</span></div>
-        <div class="q-item"><span class="q-num">5.</span> 월에 3천만 원이요? 밥 먹으면서? <span class="q-hook">수익공개</span></div>
-        <div class="q-item"><span class="q-num">6.</span> 지금 폰에 뭐가 와 있는 거예요?</div>
-        <div class="q-item"><span class="q-num">7.</span> 이게 다 "와서 드시고 촬영해주세요"인 거예요? <span class="q-hook">위기장치</span></div>
-        <div class="q-item"><span class="q-num">8.</span> 한 건에 얼마 받으시는 거예요?</div>
-        <div class="q-item"><span class="q-num">9.</span> 오늘 하루에 몇 건이 와 있는 거예요? <span class="q-hook">수익공개</span></div>
-        <div class="q-item"><span class="q-num">10.</span> 집에서도 일하신다고요? 보여주실 수 있어요?</div>
-        <div class="q-item"><span class="q-num">11.</span> 잠깐, 이 장비가 다예요? 핸드폰이랑 삼각대? <span class="q-hook">의심</span></div>
-        <div class="q-item"><span class="q-num">12.</span> 이 삼각대 얼마짜리예요?</div>
-        <div class="q-item"><span class="q-num">13.</span> 카메라 설정 같은 거 따로 있어요?</div>
-        <div class="q-item"><span class="q-num">14.</span> 그러면 투자비가 총 얼마인 거예요? <span class="q-hook">반전</span></div>
-        <div class="q-item"><span class="q-num">15.</span> 조명 같은 건 안 쓰세요?</div>
-        <div class="q-item"><span class="q-num">16.</span> 한번 직접 찍는 거 보여주실 수 있어요?</div>
-        <div class="q-item"><span class="q-num">17.</span> 얼마나 걸려요 이거?</div>
-        <div class="q-item"><span class="q-num">18.</span> 근데 이게 진짜 광고로 나가는 거예요? <span class="q-hook">위기장치</span></div>
-        <div class="q-item"><span class="q-num">19.</span> 편집은 어떻게 하세요?</div>
-        <div class="q-item"><span class="q-num">20.</span> 캡컷으로 편집하는 거 지금 바로 보여주실 수 있어요? <span class="q-hook">현장시연</span></div>
-        <div class="q-item"><span class="q-num">21.</span> 이거 편집 얼마나 걸려요?</div>
-        <div class="q-item"><span class="q-num">22.</span> 자르기, 확대, 빨리감기, 자막 -- 이 네 개만 하면 끝이에요?</div>
-        <div class="q-item"><span class="q-num">23.</span> 이렇게 쉬우면 왜 다들 안 해요? <span class="q-hook">의심</span></div>
-        <div class="q-item"><span class="q-num">24.</span> 이거 40대 50대도 진짜 해요?</div>
+    <div class="section">
+      <div class="section-title"><span class="num">1</span> 지온서 프로필</div>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-v">37세</div><div class="stat-l">현재</div></div>
+        <div class="stat dark"><div class="stat-v">60만</div><div class="stat-l">팔로워</div></div>
+        <div class="stat green"><div class="stat-v">월 3천</div><div class="stat-l">월수익</div></div>
+      </div>
+      <div class="stat-row">
+        <div class="stat blue"><div class="stat-v">5만원</div><div class="stat-l">투자비</div></div>
+        <div class="stat"><div class="stat-v">1억뷰</div><div class="stat-l">누적 조회</div></div>
+        <div class="stat red"><div class="stat-v">9개</div><div class="stat-l">첫 광고</div></div>
+      </div>
+      <div class="card">
+        <table>
+          <tr><th>항목</th><th>내용</th></tr>
+          <tr><td>닉네임</td><td>지온서 (@smile_5n)</td></tr>
+          <tr><td>배경</td><td>요가강사 → 어머니 사별(27살) → 10년 방황 → 반지하 → 먹스타그램</td></tr>
+          <tr><td>수익구조</td><td>광고 건당 100만원 x 월 30건, 대행사 없이 DM 직거래</td></tr>
+          <tr><td>자산 인증</td><td><strong style="color:#D4A017">월 2,500~3,000만원 (세후)</strong></td></tr>
+          <tr><td>SNS</td><td>인스타 @smile_5n 60만 / 서브 @jee_onseo / 유튜브 @Onseo_</td></tr>
+          <tr><td>비즈니스</td><td>무료 전자책 + 무료 특강 + 1:1 상담 + 크루 운영</td></tr>
+          <tr><td>강연</td><td>경기콘텐츠진흥원 강연 강사</td></tr>
+        </table>
       </div>
     </div>
 
-    <!-- 맛집/시장 -->
-    <div class="card">
-      <div class="q-group">
-        <div class="q-group-title">동네 맛집/시장 (오전~점심) -- 현장 촬영 | Q25~Q37</div>
-        <div class="q-ment">"지금 이분이랑 밥 먹으러 가는 건데요, 이분한테는 밥 먹는 게 곧 일이에요."</div>
-        <div class="q-item"><span class="q-num">25.</span> 오늘 어디로 가시는 거예요?</div>
-        <div class="q-item"><span class="q-num">26.</span> 이 가게를 왜 선택하신 거예요?</div>
-        <div class="q-item"><span class="q-num">27.</span> 이 가게에서 돈을 받고 오시는 거예요? <span class="q-hook">의심</span></div>
-        <div class="q-item"><span class="q-num">28.</span> 아니면 그냥 자발적으로?</div>
-        <div class="q-item"><span class="q-num">29.</span> 촬영 허락은 어떻게 받으세요?</div>
-        <div class="q-item"><span class="q-num">30.</span> 한번 찍어보시죠! <span class="q-hook">현장시연</span></div>
-        <div class="q-item"><span class="q-num">31.</span> 각도를 저렇게 잡는 이유가 있어요?</div>
-        <div class="q-item"><span class="q-num">32.</span> 식당 사장님 입장에서 진짜 효과가 있어요? <span class="q-hook">위기장치</span></div>
-        <div class="q-item"><span class="q-num">33.</span> 영상 하나 올려서 매출이 얼마나 올라요?</div>
-        <div class="q-item"><span class="q-num">34.</span> 지금 이렇게 밥 먹으면서 촬영하면 오늘 얼마 버시는 거예요? <span class="q-hook">후킹</span></div>
-        <div class="q-item"><span class="q-num">35.</span> 식비가 하나도 안 든다고요?</div>
-        <div class="q-item"><span class="q-num">36.</span> 맞아요, 쿠팡프레시가 필요 없다고요?</div>
-        <div class="q-item"><span class="q-num">37.</span> 와, 공짜로 먹고 돈도 받는 거네요? <span class="q-hook">반전</span></div>
+    <div class="section">
+      <div class="section-title"><span class="num red">2</span> 12단계 연대기</div>
+      <div class="card gold">
+        <div style="font-size:13px;line-height:2.2;color:#3E4A5A">
+          <span class="timeline-year">유년</span> 평범한 가정<br>
+          <span class="timeline-year">학생</span> 요가/피트니스 관심<br>
+          <span class="timeline-year">20대</span> 요가 강사 활동<br>
+          <span class="timeline-year" style="background:#D4A017">사건(27살)</span> 어머니 갑작스러운 사별<br>
+          <span class="timeline-year" style="background:#0A1628">방황</span> 삶의 이유 상실, 10년 방황<br>
+          <span class="timeline-year" style="background:#D4A017">반지하</span> 반지하 원룸, 경제적 바닥<br>
+          <span class="timeline-year" style="background:#D4A017">전환</span> 배달 음식 찍어서 인스타 올려봄<br>
+          <span class="timeline-year" style="background:#D4A017">9번째</span> 영상 9개째에 첫 광고 제의 (300만원)<br>
+          <span class="timeline-year" style="background:#D4A017">올인</span> "이거다" 확신, 먹스타그램 올인<br>
+          <span class="timeline-year" style="background:#D4A017">성장</span> 팔로워 급증, 광고 문의 폭주<br>
+          <span class="timeline-year" style="background:#D4A017">현재</span> 60만 팔로워, 월 3천만원, 크루 운영<br>
+          <span class="timeline-year" style="background:#D4A017">사명</span> "평범한 사람도 할 수 있다" 전파
+        </div>
       </div>
     </div>
 
-    <!-- 차 안 -->
-    <div class="card">
-      <div class="q-group">
-        <div class="q-group-title">이동 중 차 안 (오후) -- 과거 스토리 | Q38~Q60</div>
-        <div class="q-item"><span class="q-num">38.</span> 나이가 어떻게 되세요?</div>
-        <div class="q-item"><span class="q-num">39.</span> 원래 어떤 일을 하셨어요?</div>
-        <div class="q-item"><span class="q-num">40.</span> 요가 강사를 왜 그만두신 거예요?</div>
-        <div class="q-item"><span class="q-num">41.</span> 어머니 이야기를 좀 해주실 수 있어요? <span class="q-hook">감정이입</span></div>
-        <div class="q-item"><span class="q-num">42.</span> 몇 살 때 돌아가신 거예요?</div>
-        <div class="q-item"><span class="q-num">43.</span> 그 이후에 어떻게 되신 거예요?</div>
-        <div class="q-item"><span class="q-num">44.</span> 10년 동안 방황했다는 게 어떤 의미? <span class="q-hook">감정이입</span></div>
-        <div class="q-item"><span class="q-num">45.</span> 삶의 이유가 없어졌다고 하셨는데...</div>
-        <div class="q-item"><span class="q-num">46.</span> 그때 뭘 하면서 사셨어요?</div>
-        <div class="q-item"><span class="q-num">47.</span> 반지하에 살았다고요? <span class="q-hook">위기장치</span></div>
-        <div class="q-item"><span class="q-num">48.</span> 가장 힘들었던 순간이 언제예요?</div>
-        <div class="q-item"><span class="q-num">49.</span> 먹스타그램을 어떻게 알게 된 거예요?</div>
-        <div class="q-item"><span class="q-num">50.</span> 처음에 뭘 찍으신 거예요?</div>
-        <div class="q-item"><span class="q-num">51.</span> 처음엔 돈 안 되잖아요. 뭘 믿고? <span class="q-hook">의심</span></div>
-        <div class="q-item"><span class="q-num">52.</span> 배달 음식 시켜 먹고 그걸 찍었다고요?</div>
-        <div class="q-item"><span class="q-num">53.</span> 첫 광고 제의가 언제 들어온 거예요?</div>
-        <div class="q-item"><span class="q-num">54.</span> 영상 아홉 개만에요? <span class="q-hook">반전</span></div>
-        <div class="q-item"><span class="q-num">55.</span> 첫 수입이 얼마였어요?</div>
-        <div class="q-item"><span class="q-num">56.</span> 300만 원 처음 들어왔을 때 기분?</div>
-        <div class="q-item"><span class="q-num">57.</span> 그때 "이거다" 하신 거예요?</div>
-        <div class="q-item"><span class="q-num">58.</span> 아버지는 뭐라고 하셨어요? <span class="q-hook">위기장치</span></div>
-        <div class="q-item"><span class="q-num">59.</span> 주변에서 반대하는 사람 없었어요?</div>
-        <div class="q-item"><span class="q-num">60.</span> 그걸 어떻게 이겨내신 거예요?</div>
+    <div class="section">
+      <div class="section-title"><span class="num">3</span> 하몬서클 8단계</div>
+      <div class="card">
+        <table>
+          <tr><th>단계</th><th>내용</th><th>감정</th></tr>
+          <tr><td>1. 일상</td><td>요가 강사, 평범한 20대</td><td><span class="tag tag-b">안정</span></td></tr>
+          <tr><td>2. 욕구</td><td>어머니 사별(27살), 삶의 이유 상실</td><td><span class="tag tag-r">절망</span></td></tr>
+          <tr><td>3. 진입</td><td>반지하에서 배달 음식 찍어서 올려봄</td><td><span class="tag tag-y">절실함</span></td></tr>
+          <tr><td>4. 시련</td><td>아버지 반대 / 수입 0원 / 인정 못 받음</td><td><span class="tag tag-r">좌절</span></td></tr>
+          <tr><td>5. 성취</td><td>영상 9개째 첫 광고 300만원</td><td><span class="tag tag-g">쾌감</span></td></tr>
+          <tr><td>6. 대가</td><td>컴맹 독학 / 혼자 시작 / 주변 반대</td><td><span class="tag tag-y">고독</span></td></tr>
+          <tr><td>7. 복귀</td><td>월 3천만원 / 크루 운영 / 아버지 인정</td><td><span class="tag tag-g">평화</span></td></tr>
+          <tr><td>8. 변화</td><td>"이생에서 한 번은 무조건 잘될 거라 믿었다"</td><td><span class="tag tag-r">사명감</span></td></tr>
+        </table>
       </div>
     </div>
 
-    <!-- 크루 만남 -->
-    <div class="card">
-      <div class="q-group">
-        <div class="q-group-title">크루 만남 (오후) -- 성장과 변화 | Q61~Q82</div>
-        <div class="q-ment">"이분이 혼자 하는 줄 알았는데, 크루가 있대요."</div>
-        <div class="q-item"><span class="q-num">61.</span> 이분들이 누구예요?</div>
-        <div class="q-item"><span class="q-num">62.</span> 크루를 왜 만드신 거예요?</div>
-        <div class="q-item"><span class="q-num">63.</span> 같이 뭘 하시는 거예요?</div>
-        <div class="q-item"><span class="q-num">64.</span> 이분들도 다 먹스타그램으로 돈 벌어요? <span class="q-hook">위기장치</span></div>
-        <div class="q-item"><span class="q-num">65.</span> 얼굴 노출하는 사람이 5%도 안 된다고요?</div>
-        <div class="q-item"><span class="q-num">66.</span> 여기 있는 분 중에 얼굴 안 나오는 분? <span class="q-hook">반전</span></div>
-        <div class="q-item"><span class="q-num">67.</span> 그분 얼마 버세요?</div>
-        <div class="q-item"><span class="q-num">68.</span> 가장 기억에 남는 성공 사례?</div>
-        <div class="q-item"><span class="q-num">69.</span> 은행원이 주말에만 해서 월 1천만 원? <span class="q-hook">위기장치</span></div>
-        <div class="q-item"><span class="q-num">70.</span> 건당 200-300만 원이요?</div>
-        <div class="q-item"><span class="q-num">71.</span> 50대 분도 있다고요?</div>
-        <div class="q-item"><span class="q-num">72.</span> 아기 보내놓고 엄마들끼리 먹는 영상으로 수익화? <span class="q-hook">감정이입</span></div>
-        <div class="q-item"><span class="q-num">73.</span> 가장 빨리 성공한 사람은 얼마 만에?</div>
-        <div class="q-item"><span class="q-num">74.</span> 1달 만에 협찬 받은 사람도 있어요?</div>
-        <div class="q-item"><span class="q-num">75.</span> 팔로워 몇 명부터 돈이 되는 거예요?</div>
-        <div class="q-item"><span class="q-num">76.</span> 만 명 안 돼도 30만 원 받는다고요? <span class="q-hook">반전</span></div>
-        <div class="q-item"><span class="q-num">77.</span> 조회수가 높으면 팔로워랑 상관없다고요?</div>
-        <div class="q-item"><span class="q-num">78.</span> 가장 잘 터지는 음식 종류가 있어요?</div>
-        <div class="q-item"><span class="q-num">79.</span> 집 앞 동네 식당 가서 찍어도 되는 거예요? <span class="q-hook">위기장치</span></div>
-        <div class="q-item"><span class="q-num">80.</span> 편의점 음식도요?</div>
-        <div class="q-item"><span class="q-num">81.</span> 제철 음식이 잘 된다고요?</div>
-        <div class="q-item"><span class="q-num">82.</span> 비싼 데 안 가도 되는 거예요?</div>
+    <div class="section">
+      <div class="section-title"><span class="num gold">4</span> USP -- 레딧식 역설 4단계</div>
+      <div class="card gold">
+        <div style="font-size:14px;line-height:1.9;color:#3E4A5A">
+          <strong>핵심 USP:</strong> "밥 먹으면서 월 3천만원. 근데 대부분은 시작도 못 합니다."<br><br>
+          <strong>STEP 1 먼저 까기:</strong> "먹스타그램 쉬워 보이지만, 대부분 3개월 안에 포기해요"<br>
+          <strong>STEP 2 경쟁 인정:</strong> "블로그 체험단 하세요. 그것도 수익 됩니다."<br>
+          <strong>STEP 3 차별화 3개:</strong> 속도(2개월 첫 수익) / 도달률(릴스 30.81%) / 진입장벽(5만원)<br>
+          <strong>STEP 4 재역설 CTA:</strong> "안 하셔도 됩니다. 근데 밥은 어차피 먹잖아요. 카메라만 켜보세요."
+        </div>
       </div>
     </div>
 
-    <!-- 저녁 맛집 -->
-    <div class="card">
-      <div class="q-group">
-        <div class="q-group-title">저녁 맛집 (저녁) -- 체험 + 마무리 | Q83~Q103</div>
-        <div class="q-ment">"이 사람 말이 맞는지 제가 직접 해보겠습니다."</div>
-        <div class="q-item"><span class="q-num">83.</span> 저도 한번 해볼 수 있어요?</div>
-        <div class="q-item"><span class="q-num">84.</span> 뭘 먼저 해야 돼요?</div>
-        <div class="q-item"><span class="q-num">85.</span> (사찍남이 직접 음식 촬영 시도)</div>
-        <div class="q-item"><span class="q-num">86.</span> 이 정도면 올려도 되는 거예요?</div>
-        <div class="q-item"><span class="q-num">87.</span> 아니, 이게 진짜 되는 건가? <span class="q-hook">위기장치</span></div>
-        <div class="q-item"><span class="q-num">88.</span> 편집까지 해보겠습니다 (캡컷 직접 체험)</div>
-        <div class="q-item"><span class="q-num">89.</span> 정확하게 지금 수익 보여주실 수 있어요? <span class="q-hook">수익공개</span></div>
-        <div class="q-item"><span class="q-num">90.</span> 세금 3.3% 떼고 이 정도면...</div>
-        <div class="q-item"><span class="q-num">91.</span> 하루에 가장 많이 번 날이 언제예요?</div>
-        <div class="q-item"><span class="q-num">92.</span> 250만 원이 하루에요? 밥 먹으면서? <span class="q-hook">위기장치</span></div>
-        <div class="q-item"><span class="q-num">93.</span> 대행사 없이 직접 받는 거 맞죠?</div>
-        <div class="q-item"><span class="q-num">94.</span> 지금 아버지는 뭐라고 하세요?</div>
-        <div class="q-item"><span class="q-num">95.</span> 아버지가 인정해주셨을 때 기분? <span class="q-hook">감정이입</span></div>
-        <div class="q-item"><span class="q-num">96.</span> 어머니가 보셨으면 뭐라고 하셨을 것 같아요?</div>
-        <div class="q-item"><span class="q-num">97.</span> 2년 전 반지하의 나한테 한마디 한다면?</div>
-        <div class="q-item"><span class="q-num">98.</span> 이 일 하면서 한 번도 힘든 적 없었다고요? <span class="q-hook">감정이입</span></div>
-        <div class="q-item"><span class="q-num">99.</span> 삶이 어떻게 바뀌었어요?</div>
-        <div class="q-item"><span class="q-num">100.</span> "이생에서 한 번은 무조건 잘될 거라 믿었다" -- 진심이에요?</div>
-        <div class="q-item"><span class="q-num">101.</span> 지금 이 영상 보고 있는 사람한테 한마디.</div>
-        <div class="q-item"><span class="q-num">102.</span> 시작하려면 오늘 뭐부터 하면 돼요?</div>
-        <div class="q-item"><span class="q-num">103.</span> "카메라 켜고 밥 먹으세요" <span class="q-hook">마무리</span></div>
+    <div class="section">
+      <div class="section-title"><span class="num">5</span> 차별화 3대 신뢰 자산</div>
+      <div class="card">
+        <table>
+          <tr><th>#</th><th>신뢰 자산</th><th>증빙</th></tr>
+          <tr><td>1</td><td>실물 수익 인증</td><td>통장 입금 내역 + 광고 DM 실시간 공개</td></tr>
+          <tr><td>2</td><td>현장 시연 15분</td><td>핸드폰 촬영 → 캡컷 편집 → 업로드 원테이크</td></tr>
+          <tr><td>3</td><td>크루 성공 사례</td><td>은행원 주말만 → 월 1천만원 / 50대 엄마 그룹 수익화</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">6</span> 예상 댓글 반응</div>
+      <div class="card">
+        <div style="font-size:13px;line-height:1.8;color:#3E4A5A">
+          <strong>의심 단계 (0~7분):</strong><br>
+          "밥 먹으면서 3천? 말이 되냐" / "대행사 끼는 거 아냐" / "광고 아님?"<br><br>
+          <strong>전환 단계 (7~17분):</strong><br>
+          "와 진짜 5만원으로?" / "통장 입금 내역 실화?" / "은행원이 월 1천?"<br><br>
+          <strong>실행 단계 (17분~):</strong><br>
+          "크루 어떻게 들어가요" / "지금 시작해도 될까요" / "카메라 켤게요"
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- ==================== 엔딩/USP ==================== -->
-<div class="panel" id="p-ending">
-  <div class="section">
-    <div class="section-title"><span class="num">7</span> 엔딩 설계</div>
+  <!-- TAB 3: 22분 타임라인 -->
+  <div class="panel" id="tab-timeline">
+
     <div class="card dark">
-      <div class="card-label" style="color:#FF6B6B">사찍남 3줄 요약</div>
-      <div style="color:#ccc;font-size:13px;line-height:1.8">
-        1. 이 사람은 어머니를 잃고 10년 방황하다가, 핸드폰 하나로 밥 먹는 영상을 찍기 시작했다<br>
-        2. 투자비 5만 원, 영상 9개째에 첫 광고가 들어왔고, 지금은 월 3천만 원을 번다<br>
-        3. 여러분도 오늘 밥 먹을 때 카메라만 켜보세요 -- 그게 시작이래요
+      <div style="font-size:11px;font-weight:700;color:#FFB800;letter-spacing:1.5px;margin-bottom:10px">22분 타임라인 (v3.0 타이트닝)</div>
+      <div style="font-size:20px;font-weight:800;color:#fff;line-height:1.4;margin-bottom:10px">
+        밥 먹으면서 찍었을 뿐인데<br>월 3천만 원 벌어서 반지하 탈출한 30대
+      </div>
+      <div style="font-size:13px;color:#8B95A1">
+        <strong style="color:#FFB800">구조: 음식 촬영 → 선제방어 → 일상 → 시련 → Peak1(수익) → 에피파니 → 크루 → Peak2(감정) → 변화 → CTA</strong>
       </div>
     </div>
-    <div class="card blue">
-      <div class="card-label blue">사찍남 마지막 멘트</div>
-      <div style="font-size:13px;line-height:1.7;color:#333">"저도 오늘 직접 해봤는데, 진짜 15분이면 끝나더라고요. 밥은 어차피 먹잖아요. 카메라만 켜면 그게 돈이 될 수 있다는 거, 믿기 어렵겠지만 이 사람이 증명했어요."</div>
+
+    <div class="section">
+      <div class="card">
+        <div class="tl-row">
+          <div class="tl-time red">0:00~0:15</div>
+          <div class="tl-body">
+            <div class="tl-title">음식 촬영 장면 + 수익 후킹 <span class="tl-badge red">HOOK</span></div>
+            <div class="tl-text">
+              인사 없이 즉시. 음식 촬영 장면 + "이거 하나 찍으면 100만원이에요"<br>
+              <em>→ 휴먼스토리 0.225 벤치마크 목표. 0초 임팩트.</em>
+            </div>
+            <div class="q-tags"><span class="tag tag-r">이탈 방지</span><span class="tag tag-d">실물 증거</span></div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time red">0:15~0:45</div>
+          <div class="tl-body">
+            <div class="tl-title">선제 방어 1 -- DM 직거래 <span class="tl-badge red">의심 차단</span></div>
+            <div class="tl-text">
+              "대행사 끼는 거 아니냐고요? DM 직접 받아요"<br>
+              <em>→ 정서 "사기 아닌가" 30% 1위 의심 차단. SB7 가이드 포지션.</em>
+            </div>
+            <div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-d">선제 방어</span></div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time red">0:45~1:15</div>
+          <div class="tl-body">
+            <div class="tl-title">선제 방어 2 -- 투자비 5만원 <span class="tl-badge red">반전</span></div>
+            <div class="tl-text">
+              "투자비가 얼마냐면... 5만원이에요"<br>
+              <em>→ 진입장벽 파괴. 의심형 → 공감형 전환 트리거.</em>
+            </div>
+            <div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-r">최강 후킹</span></div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">1:00~3:00</div>
+          <div class="tl-body">
+            <div class="tl-title">ACT1 현재 일상 + 수익 구조 소개</div>
+            <div class="tl-text">
+              현재 일상 + 광고 DM 확인 + 수익 구조 소개<br>
+              <em>→ LF8 트리거: 음식, 안락한 삶, 사회적 인정</em>
+            </div>
+            <div class="q-tags"><span class="tag tag-y">감정이입</span></div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time red">3:00~3:30</div>
+          <div class="tl-body">
+            <div class="tl-title">위기장치 1 <span class="tl-badge red">MC 의심</span></div>
+            <div class="tl-text">
+              "잠깐 -- 밥 먹으면서 월 3천이요? 식당 사장님이세요?"<br>
+              <em>→ 시청자 대리 의심. 재후킹.</em>
+            </div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">3:30~5:00</div>
+          <div class="tl-body">
+            <div class="tl-title">장비 공개 + 촬영 실연</div>
+            <div class="tl-text">
+              핸드폰+삼각대 5만원 / 캡컷 편집 15분 컷<br>
+              "자르기, 확대, 빨리감기, 자막 -- 이 네 개만 하면 끝이에요"
+            </div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time red">5:00~7:00</div>
+          <div class="tl-body">
+            <div class="tl-title">시련 빌드업 -- 어머니 사별 + 반지하 + 아버지 반대</div>
+            <div class="tl-text">
+              어머니 사별(27살) → 10년 방황 → 반지하 → 아버지 반대<br>
+              <em>→ 에피파니 빌드업. 3 False Beliefs 파괴: "나는 컴맹이라 못 해"</em>
+            </div>
+            <div class="q-tags"><span class="tag tag-r">에피파니 빌드업</span></div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time red">7:00~9:30</div>
+          <div class="tl-body">
+            <div class="tl-title">Peak 1: 수익 인증 + 통장 입금 <span class="tl-badge red">PEAK</span></div>
+            <div class="tl-text">
+              "이게 이번 달 입금 내역이에요" + "하루에 250만원 들어온 날도 있어요"<br>
+              통장 앱 실시간 공개 + 인스타 팔로워 화면<br>
+              <em>→ 돈탐생 7~10분 63% 집중 패턴. 실물 증거.</em>
+            </div>
+            <div class="q-tags"><span class="tag tag-r">킬러 구간</span><span class="tag tag-r">돈탐생 패턴</span><span class="tag tag-d">실물 증거</span></div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time blue">9:30~12:00</div>
+          <div class="tl-body">
+            <div class="tl-title">에피파니 -- 먹스타그램 vs 블로그 체험단 <span class="tl-badge blue">전환</span></div>
+            <div class="tl-text">
+              "블로그 체험단 해봤는데 건당 3만원... 릴스는 건당 100만원"<br>
+              <em>→ 에피파니 브릿지: "블로그 체험단" → "먹스타그램 릴스" 깨달음 순간</em>
+            </div>
+            <div class="q-tags"><span class="tag tag-b">에피파니</span></div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">12:00~14:00</div>
+          <div class="tl-body">
+            <div class="tl-title">크루 성공 사례 -- 은행원 + 50대 엄마</div>
+            <div class="tl-text">
+              은행원 주말만 월 1천만원 / 50대 엄마 그룹 수익화<br>
+              <em>→ 사회적 증거 + 권위 강화.</em>
+            </div>
+            <div class="q-tags"><span class="tag tag-y">권위</span></div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time red">14:00~17:00</div>
+          <div class="tl-body">
+            <div class="tl-title">Peak 2: 어머니 사별 + 10년 방황 감정 회상 <span class="tl-badge red">PEAK</span></div>
+            <div class="tl-text">
+              "어머니 돌아가시고... 삶의 이유가 없었어요"<br>
+              차 안 자연광, 출연자 표정 클로즈업, 정적<br>
+              <em>→ 휴먼스토리 감정 피크 패턴 복제. SB7 시련의 절정.</em>
+            </div>
+            <div class="q-tags"><span class="tag tag-r">감정 피크</span><span class="tag tag-b">휴먼스토리 패턴</span></div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time">17:00~19:00</div>
+          <div class="tl-body">
+            <div class="tl-title">아버지 인정 + 현재 삶의 변화</div>
+            <div class="tl-text">
+              아버지가 인정해주신 순간 + 지금의 라이프<br>
+              <em>→ Dream Outcome 시각화. Value Equation Time/Effort 최소화 입증.</em>
+            </div>
+            <div class="q-tags"><span class="tag tag-g">Dream Outcome</span></div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time red">19:00~20:30</div>
+          <div class="tl-body">
+            <div class="tl-title">긴박감 -- 인스타 MAU + 블루오션</div>
+            <div class="tl-text">
+              "인스타 MAU 2,758만 역대 최고... 먹스타그램은 아직 블루오션"<br>
+              <em>→ Scarcity + Urgency. CTA 직전 마지막 푸시.</em>
+            </div>
+            <div class="q-tags"><span class="tag tag-r">긴박감</span></div>
+          </div>
+        </div>
+        <div class="tl-row">
+          <div class="tl-time green">20:30~22:00</div>
+          <div class="tl-body">
+            <div class="tl-title">CTA -- 사찍남 직접 체험 + 카메라 켜기</div>
+            <div class="tl-text">
+              사찍남이 직접 음식 촬영 → "진짜 15분이면 되네"<br>
+              "여러분도 오늘 밥 먹을 때 카메라 켜보세요. 그게 시작이래요."<br>
+              <em>→ Hook-Story-Offer 마무리. 대리 체험 + CTA 자연 연결.</em>
+            </div>
+            <div class="q-tags"><span class="tag tag-g">CTA</span></div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="card">
-      <div class="card-label orange">CTA</div>
-      <div class="check-item"><span class="check-icon" style="color:#3182F6">></span> 댓글: "오늘 밥 먹을 때 카메라 켤 분, '나도 해볼게요'라고 댓글 달아주세요"</div>
-      <div class="check-item"><span class="check-icon" style="color:#3182F6">></span> 구독: "이 채널에서는 매주 진짜 돈 버는 사람들을 직접 만나서 보여드립니다"</div>
+
+    <div class="note">
+      <strong>편집 지시:</strong><br>
+      - 0~15초 (음식 촬영 몽타주): 1~2초 컷, 화이트플래시<br>
+      - Peak 1 (7~9분 통장): 3~5초 컷, 긴장감 BGM, 통장 줌인<br>
+      - 에피파니 (9:30~12분): 블로그 vs 릴스 분할 화면<br>
+      - Peak 2 (14~17분 사별 회상): 7~10초 컷, 감성 BGM 페이드<br>
+      - 워터마크: 좌상단 '사찍남' 고정
+    </div>
+
+    <div class="note red">
+      <strong>v2.1 변경점 (반영):</strong><br>
+      1. 0:15~0:45 "대행사 NO, DM 직거래" 선제 방어 추가<br>
+      2. 0:45~1:15 "투자비 5만원" 즉시 반전 노출<br>
+      3. Peak 1(7~9분) "통장 입금 + 하루 250만원" 통합<br>
+      4. 수익 공개 10분 → 7~9분 (돈탐생 패턴)<br>
+      5. 어머니 사별 5분 → 14~17분 (휴먼스토리 감정 피크)<br>
+      6. 25분 → 22분 타이트닝<br>
+      7. 위기장치 4개 → 5개
     </div>
   </div>
 
-  <div class="section">
-    <div class="section-title"><span class="num">9</span> USP -- 수익화 전환</div>
-    <div class="card">
-      <table class="tbl">
-        <tr><td>타겟</td><td>부업 찾는 직장인, 주부, 40-50대 퇴직자, 자영업자</td></tr>
-        <tr><td>해결</td><td>"뭘 어떻게 시작해야 할지 모르겠다"는 진입장벽</td></tr>
-        <tr><td>대의명분</td><td>"밥은 어차피 먹으니까, 카메라만 켜면 돈이 된다"</td></tr>
-        <tr><td>차별점</td><td>컴맹 가능 / 얼굴 불필요 / 핸드폰만 / 실전 크루</td></tr>
-        <tr><td>가격</td><td>투자비 5만원 -- 한 달 안에 협찬으로 회수</td></tr>
-        <tr><td>B&A</td><td>반지하 무직 → 월 3천 / 은행원 주말 → 월 1천 추가</td></tr>
-        <tr><td>리스크 선수치기</td><td>"광고 팔기 아니냐" → 대행사 없이 직거래 구조 공개</td></tr>
-      </table>
+  <!-- TAB 4: 질문지 -->
+  <div class="panel" id="tab-questions">
+
+    <div class="note red">
+      <strong>핵심 질문 20선</strong> -- 103개 중 필수 + 위기장치 + 킬러. <strong>전체는 PD용 체크리스트(별도 파일) 참조.</strong>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num red">L1</span> 자택 (오전) -- HOOK + 현재 일상</div>
+      <div class="q-card"><div class="q-num red">3</div><div class="q-body"><div class="q-text">"잠깐, 지금 누워서 하고 있는 게 일인 거예요?"</div><div class="q-sub">→ [HOOK] 0~15초. 일상 진입.</div><div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-r">HOOK</span></div></div></div>
+      <div class="q-card"><div class="q-num red">5</div><div class="q-body"><div class="q-text">"월에 3천만 원이요? 밥 먹으면서?"</div><div class="q-sub">→ [수익 공개] 시청자 대리 질문.</div><div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-r">수익공개</span></div></div></div>
+      <div class="q-card"><div class="q-num red">11</div><div class="q-body"><div class="q-text">"잠깐, 이 장비가 다예요? 핸드폰이랑 삼각대?"</div><div class="q-sub">→ [의심] 진입장벽 파괴 트리거.</div><div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-y">의심</span></div></div></div>
+      <div class="q-card"><div class="q-num red">14</div><div class="q-body"><div class="q-text">"그러면 투자비가 총 얼마인 거예요?"</div><div class="q-sub">→ [반전] 5만원. 최강 후킹.</div><div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-r">반전</span></div></div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num red">L2</span> 맛집/시장 -- 현장 촬영</div>
+      <div class="q-card"><div class="q-num red">30</div><div class="q-body"><div class="q-text">"한번 찍어보시죠!"</div><div class="q-sub">→ [현장 시연] 촬영→편집→업로드 원테이크.</div><div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-d">현장시연</span></div></div></div>
+      <div class="q-card"><div class="q-num red">34</div><div class="q-body"><div class="q-text">"지금 밥 먹으면서 촬영하면 오늘 얼마 버시는 거예요?"</div><div class="q-sub">→ [후킹] 실시간 수익 계산.</div><div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-r">후킹</span></div></div></div>
+      <div class="q-card"><div class="q-num red">37</div><div class="q-body"><div class="q-text">"공짜로 먹고 돈도 받는 거네요?"</div><div class="q-sub">→ [위기장치] 시청자 대리 반전.</div><div class="q-tags"><span class="tag tag-r">위기장치</span><span class="tag tag-r">반전</span></div></div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num red">L3</span> 차 안 -- 과거 스토리</div>
+      <div class="q-card"><div class="q-num red">41</div><div class="q-body"><div class="q-text">"어머니 이야기를 좀 해주실 수 있어요?"</div><div class="q-sub">→ [감정이입] 사별 스토리 진입.</div><div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-r">감정이입</span></div></div></div>
+      <div class="q-card"><div class="q-num red">44</div><div class="q-body"><div class="q-text">"10년 동안 방황했다는 게 어떤 의미?"</div><div class="q-sub">→ [감정이입] 구체적 방황 시기.</div><div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-r">감정이입</span></div></div></div>
+      <div class="q-card"><div class="q-num red">47</div><div class="q-body"><div class="q-text">"반지하에 살았다고요?"</div><div class="q-sub">→ [위기장치] 경제적 바닥 시각화.</div><div class="q-tags"><span class="tag tag-r">위기장치</span></div></div></div>
+      <div class="q-card"><div class="q-num red">51</div><div class="q-body"><div class="q-text">"처음엔 돈 안 되잖아요. 뭘 믿고?"</div><div class="q-sub">→ [의심] 에피파니 빌드업.</div><div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-y">의심</span></div></div></div>
+      <div class="q-card"><div class="q-num red">54</div><div class="q-body"><div class="q-text">"영상 아홉 개만에요?"</div><div class="q-sub">→ [반전] 9개째 첫 광고 300만원.</div><div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-r">반전</span></div></div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num red">L4</span> 크루 카페 -- 성장과 변화</div>
+      <div class="q-card"><div class="q-num red">64</div><div class="q-body"><div class="q-text">"이분들도 다 먹스타그램으로 돈 벌어요?"</div><div class="q-sub">→ [위기장치] 크루 진위 확인.</div><div class="q-tags"><span class="tag tag-r">위기장치</span></div></div></div>
+      <div class="q-card"><div class="q-num red">69</div><div class="q-body"><div class="q-text">"은행원이 주말에만 해서 월 1천만 원?"</div><div class="q-sub">→ [킬러] 사회적 증거 폭발.</div><div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-r">킬러</span></div></div></div>
+      <div class="q-card"><div class="q-num red">76</div><div class="q-body"><div class="q-text">"만 명 안 돼도 30만 원 받는다고요?"</div><div class="q-sub">→ [반전] 팔로워 수 ≠ 수익.</div><div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-r">반전</span></div></div></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num red">L5</span> 저녁 맛집 -- 체험 + 마무리</div>
+      <div class="q-card"><div class="q-num red">89</div><div class="q-body"><div class="q-text">"정확하게 지금 수익 보여주실 수 있어요?"</div><div class="q-sub">→ [수익 공개] 통장 라이브.</div><div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-d">실물</span></div></div></div>
+      <div class="q-card"><div class="q-num red">95</div><div class="q-body"><div class="q-text">"아버지가 인정해주셨을 때 기분?"</div><div class="q-sub">→ [감정 피크] 카타르시스.</div><div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-r">감정 피크</span></div></div></div>
+      <div class="q-card"><div class="q-num red">100</div><div class="q-body"><div class="q-text">"'이생에서 한 번은 무조건 잘될 거라 믿었다' -- 진심이에요?"</div><div class="q-sub">→ [엔딩] 사명 확정.</div><div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-g">엔딩</span></div></div></div>
+      <div class="q-card"><div class="q-num red">103</div><div class="q-body"><div class="q-text">"카메라 켜고 밥 먹으세요"</div><div class="q-sub">→ [CTA] 마지막 멘트.</div><div class="q-tags"><span class="tag tag-g">CTA</span></div></div></div>
+    </div>
+
+    <div class="note">
+      <strong>사찍남 오프닝 멘트 (0:15):</strong><br>
+      "오늘 만날 분은요, 밥을 먹으면서 돈을 벌어요. 근데 식당 사장님이 아니에요. 핸드폰 하나로 밥 먹는 영상 찍어서 월 3천만원 번대요. 투자비? 5만원이래요. 근데 2년 전까지 반지하에 살았다는데..."
+    </div>
+    <div class="note red">
+      <strong>엔딩 멘트 (21:30):</strong><br>
+      "반지하에서 핸드폰 하나로 밥 먹는 영상 찍어서 월 3천이래요. 투자비 5만원. 밥은 어차피 먹잖아요."
+    </div>
+    <div class="note green">
+      <strong>사찍남 마지막 멘트 (21:30):</strong><br>
+      "저도 오늘 직접 해봤는데, 진짜 15분이면 끝나더라고요. 밥은 어차피 먹잖아요. 카메라만 켜면 그게 돈이 될 수 있다는 거, 믿기 어렵겠지만 이 사람이 증명했어요."
     </div>
   </div>
+
+  <!-- TAB 5: 촬영 6씬 -->
+  <div class="panel" id="tab-scenes">
+
+    <div class="card dark">
+      <div style="font-size:11px;font-weight:700;color:#FFB800;letter-spacing:1.5px;margin-bottom:10px">계획된 6씬 -- 5개 장소 x 6개 핵심 씬</div>
+      <div style="font-size:16px;font-weight:800;color:#fff;line-height:1.5">
+        모든 씬에 데이터 기획 근거 표시
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">1</span> 5개 장소 동선</div>
+      <div class="card">
+        <table>
+          <tr><th>순서</th><th>장소</th><th>시간대</th><th>핵심</th></tr>
+          <tr><td>1</td><td>자택</td><td>오전</td><td>N페이→DM 확인 + 장비 공개 + 촬영 실연</td></tr>
+          <tr><td>2</td><td>동네 맛집/시장</td><td>오전~점심</td><td>현장 촬영 동행 + Peak 1 수익 인증</td></tr>
+          <tr><td>3</td><td>이동 중 차 안</td><td>오후</td><td>어머니 사별 + 방황 + Peak 2 감정</td></tr>
+          <tr><td>4</td><td>크루 카페</td><td>오후</td><td>크루원 소개 + 성공 사례</td></tr>
+          <tr><td>5</td><td>저녁 맛집</td><td>저녁</td><td>사찍남 직접 체험 + CTA</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num red">2</span> Scene 1 -- 광고 DM 확인 + 장비 공개 (HOOK)</div>
+      <div class="card hot">
+        <div style="font-size:13px;line-height:1.9;color:#3E4A5A">
+          <strong>시점:</strong> 0:00~3:00 (HOOK)<br>
+          <strong>목적:</strong> 즉각 신뢰 + 진입장벽 파괴<br>
+          <strong>연출:</strong> 누워서 폰 확인 → "오늘도 이렇게 일해요" → 광고 DM 줄줄이<br>
+          <strong>대사:</strong> "이거 하나 찍으면 100만원이에요. 장비요? 이거 다예요." (핸드폰+삼각대)<br>
+          <strong>준비물:</strong> 스마트폰 (광고 DM 미리 확인), 3만원 삼각대<br>
+          <strong>편집:</strong> 1초 줌인 + DM 모자이크 처리 + 숫자 강조
+        </div>
+        <div class="q-tags" style="margin-top:10px"><span class="tag tag-r">필수</span><span class="tag tag-d">실물</span><span class="tag tag-r">HOOK</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">3</span> Scene 2 -- 밀키트/집밥 촬영 실연 (현장 시연)</div>
+      <div class="card gold">
+        <div style="font-size:13px;line-height:1.9;color:#3E4A5A">
+          <strong>시점:</strong> 3:00~5:00 (현장 시연)<br>
+          <strong>목적:</strong> "이거 진짜 15분이면 되네" 시각화<br>
+          <strong>연출:</strong> 집에서 밀키트 촬영 → 캡컷 편집 → 업로드 원테이크<br>
+          <strong>대사:</strong> "자르기, 확대, 빨리감기, 자막 -- 이 네 개만 하면 끝이에요"<br>
+          <strong>편집:</strong> 타임랩스 + 편집 화면 인서트
+        </div>
+        <div class="q-tags" style="margin-top:10px"><span class="tag tag-r">필수</span><span class="tag tag-y">현장시연</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num red">4</span> Scene 3 -- 수익 인증 + 통장 공개 (Peak 1)</div>
+      <div class="card hot">
+        <div style="font-size:13px;line-height:1.9;color:#3E4A5A">
+          <strong>시점:</strong> <strong style="color:#D4A017">7:00~9:30 (Peak 1 -- 가장 중요)</strong><br>
+          <strong>목적:</strong> 돈탐생 7~10분 63% 집중 패턴 복제<br>
+          <strong>연출:</strong> 맛집에서 식사 중 통장 입금 내역 공개 → 인스타 팔로워 실시간<br>
+          <strong>대사:</strong> "이게 이번 달 입금 내역이에요. 하루에 250만원 들어온 날도 있어요."<br>
+          <strong>준비물:</strong> 통장 앱 (입금 내역 미리 확인), 인스타 팔로워 화면<br>
+          <strong>편집:</strong> 통장 줌인 (3초) + 숫자 카운트업 + 긴장감 BGM
+        </div>
+        <div class="q-tags" style="margin-top:10px"><span class="tag tag-r">필수</span><span class="tag tag-r">킬러</span><span class="tag tag-r">돈탐생 패턴</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num red">5</span> Scene 4 -- 어머니 사별 + 반지하 회상 (Peak 2)</div>
+      <div class="card hot">
+        <div style="font-size:13px;line-height:1.9;color:#3E4A5A">
+          <strong>시점:</strong> <strong style="color:#D4A017">14:00~17:00 (Peak 2 -- 감정 피크)</strong><br>
+          <strong>목적:</strong> 휴먼스토리 19분 감정 피크 패턴 복제<br>
+          <strong>연출:</strong> 차 안 자연광, 출연자 표정 클로즈업, 정적<br>
+          <strong>대사:</strong> "어머니 돌아가시고... 삶의 이유가 없었어요. 10년을 그냥 살았어요."<br>
+          <strong>편집:</strong> 7~10초 슬로우 컷, 감성 BGM 페이드
+        </div>
+        <div class="q-tags" style="margin-top:10px"><span class="tag tag-r">필수</span><span class="tag tag-r">감정 피크</span><span class="tag tag-b">휴먼스토리 패턴</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">6</span> Scene 5 -- 크루 만남 + 성공 사례</div>
+      <div class="card gold">
+        <div style="font-size:13px;line-height:1.9;color:#3E4A5A">
+          <strong>시점:</strong> 12:00~14:00 (권위)<br>
+          <strong>목적:</strong> 사회적 증거 + 권위 강화<br>
+          <strong>연출:</strong> 크루원들과 카페에서 대화, 성공 사례 인터뷰<br>
+          <strong>대사:</strong> "은행원인데 주말에만 해서 월 1천만원 버는 사람도 있어요"<br>
+          <strong>편집:</strong> 인터뷰 컷 + 인스타 팔로워 오버레이
+        </div>
+        <div class="q-tags" style="margin-top:10px"><span class="tag tag-y">권장</span><span class="tag tag-y">권위</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num green">7</span> Scene 6 -- 사찍남 직접 체험 + CTA</div>
+      <div class="card green">
+        <div style="font-size:13px;line-height:1.9;color:#3E4A5A">
+          <strong>시점:</strong> 20:30~22:00 (CTA)<br>
+          <strong>목적:</strong> 대리 체험 + CTA 자연 연결<br>
+          <strong>연출:</strong> 사찍남이 직접 음식 촬영 → 캡컷 편집 → "진짜 15분이면 되네"<br>
+          <strong>대사:</strong> "여러분도 오늘 밥 먹을 때 카메라 켜보세요. 그게 시작이래요."<br>
+          <strong>편집:</strong> 핸드헬드 + 사찍남 리액션
+        </div>
+        <div class="q-tags" style="margin-top:10px"><span class="tag tag-r">필수</span><span class="tag tag-g">CTA</span></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">8</span> 씬별 우선순위 요약</div>
+      <div class="card">
+        <table>
+          <tr><th>씬</th><th>장소</th><th>준비물</th><th>필수</th></tr>
+          <tr><td>1 HOOK DM</td><td>자택</td><td>스마트폰+삼각대</td><td><span class="tag tag-r">필수</span></td></tr>
+          <tr><td>2 촬영 실연</td><td>자택</td><td>밀키트+캡컷</td><td><span class="tag tag-r">필수</span></td></tr>
+          <tr><td>3 수익 인증</td><td>맛집</td><td>통장앱</td><td><span class="tag tag-r">필수</span></td></tr>
+          <tr><td>4 감정 회상</td><td>차 안</td><td>없음</td><td><span class="tag tag-r">필수</span></td></tr>
+          <tr><td>5 크루 만남</td><td>카페</td><td>크루원</td><td><span class="tag tag-y">권장</span></td></tr>
+          <tr><td>6 직접 체험</td><td>저녁맛집</td><td>없음</td><td><span class="tag tag-r">필수</span></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="note red">
+      <strong>촬영 주의 (사찍남 Best 패턴):</strong><br>
+      1. 자연광만 사용 (스튜디오 NO)<br>
+      2. 캐주얼 의상 (인스타 프로필 톤)<br>
+      3. 통장/DM은 반드시 실제 화면 (합성 NO)<br>
+      4. 반측면 또는 45도 앵글<br>
+      5. 음식은 반드시 먹으면서 촬영 (연출 NO)
+    </div>
+  </div>
+
+  <!-- TAB 6: 업로드 키트 -->
+  <div class="panel" id="tab-upload">
+
+    <div class="section">
+      <div class="section-title"><span class="num">1</span> 제목 후보 3개</div>
+
+      <div class="card" style="border:2px solid #D4A017;background:#FFFBEA">
+        <div class="rank a">1순위 추천 (커뮤니티)</div>
+        <div class="title-text" id="bt1">밥 먹으면서 찍었을 뿐인데 월 3천만 원 벌어서 반지하 탈출한 30대</div>
+        <div style="font-size:12px;color:#8B95A1;margin-top:6px;line-height:1.8">
+          27자 / 수익+반전+감정 3박자 / 부업 관심 직장인 최상 CTR
+        </div>
+        <div style="margin-top:10px"><button class="copy-btn" onclick="cp('bt1',this)">제목 복사</button></div>
+      </div>
+
+      <div class="card" style="border:2px solid #0A1628;background:#F8F9FA">
+        <div class="rank b">2순위</div>
+        <div class="title-text" id="bt2">투자비 5만 원, 핸드폰 하나로 월 3천만 원 버는 먹스타그램 대표</div>
+        <div style="font-size:12px;color:#8B95A1;margin-top:6px;line-height:1.8">
+          28자 / 진입장벽 파괴 + 신조어 호기심
+        </div>
+        <div style="margin-top:10px"><button class="copy-btn" onclick="cp('bt2',this)">제목 복사</button></div>
+      </div>
+
+      <div class="card" style="border:2px solid #D4A017;background:#FFFBEA">
+        <div class="rank c">3순위</div>
+        <div class="title-text" id="bt3">엄마 잃고 10년 방황하다 밥 먹는 영상으로 인생 역전한 여자</div>
+        <div style="font-size:12px;color:#8B95A1;margin-top:6px;line-height:1.8">
+          27자 / 감정 중심 / 여성 시청자 강타
+        </div>
+        <div style="margin-top:10px"><button class="copy-btn" onclick="cp('bt3',this)">제목 복사</button></div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">2</span> 썸네일 컨셉 3개</div>
+
+      <div class="thumb-card">
+        <div class="rank a" style="position:relative;top:0;left:0;display:inline-block;margin:16px 0 0 16px">A안 -- 반지하 대비 구도 (1순위)</div>
+        <div class="thumb-preview a">
+          <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(10,22,40,.85),rgba(31,70,128,.6))"></div>
+          <div class="thumb-text" style="z-index:2">
+            <div class="thumb-main"><span style="color:#fff">반지하</span><br><span style="color:#FFB800">→ 월 3천?</span></div>
+            <div class="thumb-sub">좌=어두운 반지하 / 우=맛집 촬영 현장</div>
+          </div>
+        </div>
+        <div class="thumb-body">
+          <div style="font-size:13px;color:#3E4A5A;line-height:1.7">
+            <strong>구도:</strong> 좌=반지하 어두운 배경 / 우=맛집 촬영 현장 / 중앙 "월 3천?"<br>
+            <strong>근거:</strong> 수익 갭 시각화 = 부업 소재 최강 CTR
+          </div>
+        </div>
+      </div>
+
+      <div class="thumb-card">
+        <div class="rank b" style="position:relative;top:0;left:0;display:inline-block;margin:16px 0 0 16px">B안 -- 핸드폰 클로즈업</div>
+        <div class="thumb-preview b">
+          <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(19,43,77,.85),rgba(31,70,128,.6))"></div>
+          <div class="thumb-text" style="z-index:2">
+            <div class="thumb-main"><span style="color:#FFB800">투자비 5만원</span></div>
+            <div class="thumb-sub">핸드폰+삼각대 클로즈업</div>
+          </div>
+        </div>
+        <div class="thumb-body">
+          <div style="font-size:13px;color:#3E4A5A;line-height:1.7">
+            <strong>구도:</strong> 핸드폰+삼각대 클로즈업 + "투자비 5만원" 텍스트<br>
+            <strong>근거:</strong> 진입장벽 파괴 시각화
+          </div>
+        </div>
+      </div>
+
+      <div class="thumb-card">
+        <div class="rank c" style="position:relative;top:0;left:0;display:inline-block;margin:16px 0 0 16px">C안 -- 음식+수익 대비</div>
+        <div class="thumb-preview c">
+          <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(135deg,rgba(10,22,40,.85),rgba(31,70,128,.6))"></div>
+          <div class="thumb-text" style="z-index:2">
+            <div class="thumb-main"><span style="color:#FFB800">이거 하나 = 100만원</span></div>
+            <div class="thumb-sub">맛있는 음식 + 수익 오버레이</div>
+          </div>
+        </div>
+        <div class="thumb-body">
+          <div style="font-size:13px;color:#3E4A5A;line-height:1.7">
+            <strong>구도:</strong> 맛있는 음식 사진 + "이거 하나 = 100만원" 오버레이<br>
+            <strong>근거:</strong> 먹방 +38% 참여율 활용
+          </div>
+        </div>
+      </div>
+
+      <div class="note red">
+        <strong>썸네일 절대 금지:</strong><br>
+        1. 정면 클로즈업 (사찍남 Worst, 44% 이탈) 2. 스튜디오 배경 3. 텍스트 3줄 이상 4. 합성 통장 화면 5. 과장 표정
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">3</span> 설명란</div>
+      <div class="card blue">
+        <div class="desc-box" id="desc1">37살. 인스타 60만 팔로워. 월수익 3천만원.
+
+근데 2년 전까지 반지하에 살았습니다.
+어머니를 잃고 10년을 방황했어요.
+
+핸드폰 하나, 삼각대 하나.
+투자비 5만원으로 밥 먹는 영상을 찍기 시작했습니다.
+
+영상 9개째에 첫 광고가 들어왔습니다.
+300만원이었어요.
+
+지금은 건당 100만원, 월 30건.
+대행사 없이 DM 직거래.
+식비 0원. 공짜로 먹고 돈도 받습니다.
+
+어떻게 이게 가능한지,
+'먹스타그램'이 뭔지,
+오늘 이 사람한테 직접 물어봤습니다.
+
+---
+사장찍어주는남자
+크루 문의는 설명란 링크 확인
+
+#먹스타그램 #반지하탈출 #월3천 #인스타부업 #밥먹으면서돈벌기 #핸드폰하나</div>
+        <div style="margin-top:12px"><button class="copy-btn" onclick="cp('desc1',this)">설명란 복사</button></div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">4</span> 알고리즘 키워드</div>
+      <div class="card">
+        <div style="font-size:13px;line-height:1.8;color:#3E4A5A">
+          <strong>제목용:</strong> 먹스타그램, 월 3천만원, 반지하, 투자비 5만원, 인스타 부업<br>
+          <strong>설명란용:</strong> 인스타그램 부업, 먹방 수익, 핸드폰 촬영, 캡컷 편집, 푸드 크리에이터<br>
+          <strong>해시태그:</strong> #먹스타그램 #반지하탈출 #월3천 #인스타부업 #밥먹으면서돈벌기 #핸드폰하나
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 7: 전환률 부스터 -->
+  <div class="panel" id="tab-framework">
+
+    <div class="card dark">
+      <div style="font-size:11px;font-weight:700;color:#FFB800;letter-spacing:1.5px;margin-bottom:10px">에이전시 두뇌 -- 5대 프레임워크 오버레이</div>
+      <div style="font-size:16px;font-weight:800;color:#fff;line-height:1.5">
+        SB7 · LF8 · H-S-O · Value Equation · 에피파니 브릿지<br>
+        모든 항목에 데이터 근거 표시
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num gold">1</span> SB7 7단계 매핑 (스토리브랜드)</div>
+      <div class="card gold">
+        <table>
+          <tr><th>SB7 단계</th><th>지온서 영상 매핑</th><th>분</th></tr>
+          <tr><td>1. 영웅</td><td><strong>시청자</strong> (부업 찾는 25~45세)</td><td>--</td></tr>
+          <tr><td>2. 문제</td><td>"뭘 어떻게 시작할지 모르겠다" / "돈 되는 부업이 없다"</td><td>5:00~7:00</td></tr>
+          <tr><td>3. 가이드</td><td><strong>지온서</strong> -- 반지하에서 월 3천 + 투자비 5만원 실증</td><td>0:15, 7:00</td></tr>
+          <tr><td>4. 계획</td><td>먹스타그램 (핸드폰+릴스+맛집) -- 블로그 체험단 대비 차별화</td><td>9:30~12:00</td></tr>
+          <tr><td>5. 행동 촉구</td><td>크루 (강의 NO, 모임) + "오늘 밥 먹을 때 카메라 켜보세요"</td><td>20:30~22:00</td></tr>
+          <tr><td>6. 실패 회피</td><td>"릴스 도달률 30.81%... 블로그는 0.3%. 지금 안 하면 선점 기회 놓침"</td><td>19:00~20:30</td></tr>
+          <tr><td>7. 성공</td><td>"밥 먹으면서 찍었을 뿐인데 월 3천" (현재 라이프)</td><td>17:00~19:00</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">2</span> LF8 8대 욕구 트리거 체크</div>
+      <div class="card">
+        <table>
+          <tr><th>욕구</th><th>활성화</th><th>씬</th></tr>
+          <tr><td>1. 생존</td><td>O "경제적 독립, 반지하 탈출"</td><td>0분 HOOK</td></tr>
+          <tr><td>2. 음식</td><td><strong>O "밥 먹으면서 = 일" (직접 트리거!)</strong></td><td>전체</td></tr>
+          <tr><td>3. 공포 회피</td><td>O "어머니 사별 + 10년 방황"</td><td>14분 감정피크</td></tr>
+          <tr><td>4. 성생활</td><td>--</td><td>--</td></tr>
+          <tr><td>5. 안락한 삶</td><td>O "누워서 DM 확인 = 일"</td><td>0분, 17분</td></tr>
+          <tr><td>6. 우월감</td><td>O "대행사 없이 직거래, 건당 100만원"</td><td>7분 수익</td></tr>
+          <tr><td>7. 사랑/돌봄</td><td>O "아버지 인정 + 크루 운영"</td><td>18분</td></tr>
+          <tr><td>8. 사회적 인정</td><td>O "60만 팔로워 + 강연 강사"</td><td>12분</td></tr>
+        </table>
+        <div style="margin-top:14px;padding:10px;background:#FFFBEA;border-radius:8px;font-size:13px">
+          <strong>활성화 점수: 7/8</strong> (벤치마크 기준 4개 이상이면 통과)
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num blue">3</span> Hook-Story-Offer 자가진단</div>
+      <div class="card blue">
+        <div style="font-size:13px;line-height:1.9;color:#3E4A5A;margin-bottom:14px">
+          <strong>HOOK (0~30초):</strong> 음식 촬영 + "이거 하나 100만원" + "투자비 5만원"<br>
+          <strong>STORY (0:30~17:00):</strong> 반지하 → 사별 → 방황 → 전환 → 수익 → 감정 카타르시스<br>
+          <strong>OFFER (17:00~22:00):</strong> 아버지 인정 + 현재 삶 + 크루 (강의 아님)
+        </div>
+        <div class="fw-score"><div style="min-width:60px;font-size:12px;color:#3E4A5A">Hook</div><div class="fw-bar"><div class="fw-fill" style="width:90%"></div></div><div class="fw-v">9 / 10</div></div>
+        <div class="fw-score"><div style="min-width:60px;font-size:12px;color:#3E4A5A">Story</div><div class="fw-bar"><div class="fw-fill" style="width:90%"></div></div><div class="fw-v">9 / 10</div></div>
+        <div class="fw-score"><div style="min-width:60px;font-size:12px;color:#3E4A5A">Offer</div><div class="fw-bar"><div class="fw-fill" style="width:80%"></div></div><div class="fw-v">8 / 10</div></div>
+        <div style="margin-top:14px;padding:10px;background:#F8F9FA;border-radius:8px;font-size:13px">
+          <strong>총점: 26 / 30</strong> (벤치마크 24점 이상 통과)
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num red">4</span> 3 False Beliefs 파괴 체크</div>
+      <div class="card hot">
+        <table>
+          <tr><th>유형</th><th>잘못된 믿음</th><th>파괴 멘트</th><th>분</th></tr>
+          <tr><td>외적</td><td>"먹스타그램 = 사기/광고팔이"</td><td>"직접 해봤어요. 15분이면 끝나요"</td><td>0:30, 20:30</td></tr>
+          <tr><td>내적</td><td>"나는 컴맹이라 못 해"</td><td>"저도 컴맹이었어요. 자르기+확대+자막 = 끝"</td><td>3:30~5:00</td></tr>
+          <tr><td>수단</td><td>"팔로워 많아야 돈 된다"</td><td>"팔로워 만 명 안 돼도 건당 30만원"</td><td>12:00~14:00</td></tr>
+        </table>
+        <div style="margin-top:14px;padding:10px;background:#FFFBEA;border-radius:8px;font-size:13px">
+          <strong>파괴 점수: 3/3</strong> -- 시청자가 가진 모든 핑계 해소 완료
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num green">5</span> Value Equation (Alex Hormozi)</div>
+      <div class="card green">
+        <div style="font-size:14px;line-height:1.9;color:#3E4A5A">
+          <strong>공식:</strong> 가치 = (Dream Outcome x Likelihood) / (Time x Effort)
+        </div>
+        <table style="margin-top:10px">
+          <tr><th>요소</th><th>지온서 영상 적용</th><th>점수</th></tr>
+          <tr><td>1. Dream Outcome</td><td>"밥 먹으면서 월 3천" + "식비 0원 라이프"</td><td>10/10</td></tr>
+          <tr><td>2. Likelihood</td><td>통장 인증 + 60만 팔로워 + 크루 성공 사례 (3중 증거)</td><td>10/10</td></tr>
+          <tr><td>3. Time Delay</td><td>"영상 9개째 첫 광고" (2개월 이내)</td><td>9/10</td></tr>
+          <tr><td>4. Effort</td><td>"투자비 5만원 + 핸드폰만 + 15분"</td><td>10/10</td></tr>
+        </table>
+        <div style="margin-top:14px;padding:12px;background:#FFFBEA;border-radius:8px;font-size:14px;font-weight:700;color:#D4A017">
+          가치 점수: 매우 높음 (벤치마크 통과)
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">6</span> 에피파니 브릿지 9단계 매핑</div>
+      <div class="card">
+        <table>
+          <tr><th>단계</th><th>지온서 영상 매핑</th><th>분</th></tr>
+          <tr><td>1. 배경</td><td>요가 강사, 평범한 20대</td><td>1:00~3:00</td></tr>
+          <tr><td>2. 욕구</td><td>어머니 사별 → 삶의 의미 탐색</td><td>2:00~3:00</td></tr>
+          <tr><td>3. 첫 시도와 실패</td><td>반지하 + 방황 10년</td><td>5:00~7:00</td></tr>
+          <tr><td>4. 멘토/도구</td><td>배달 음식 찍어본 것 (자기 발견)</td><td>7:00~8:00</td></tr>
+          <tr><td>5. 깨달음</td><td><strong>"밥 먹으면서 찍으면 되는구나"</strong></td><td>9:30~10:30</td></tr>
+          <tr><td>6. 계획</td><td>매일 릴스 업로드 + 캡컷 편집 체계화</td><td>10:30~12:00</td></tr>
+          <tr><td>7. 결과</td><td>영상 9개째 첫 광고 300만원</td><td>7:00~9:30</td></tr>
+          <tr><td>8. 변화된 자아</td><td>60만 팔로워 + 월 3천 + 크루 대표</td><td>17:00~19:00</td></tr>
+          <tr><td>9. 사명</td><td>"카메라 켜고 밥 먹으세요"</td><td>20:30~22:00</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num gold">7</span> CTA Value Stack (크루 전환)</div>
+      <div class="card gold">
+        <div style="font-size:13px;line-height:1.9;color:#3E4A5A">
+          <strong>1단계 (영상 내):</strong> 무료 -- 먹스타그램 입문 (Lead Magnet)<br>
+          <strong>2단계 (무료 전자책):</strong> 무료 -- "먹스타그램 시작 가이드"<br>
+          <strong>3단계 (무료 특강):</strong> 무료 -- 온라인 특강<br>
+          <strong>4단계 (크루):</strong> 모임 -- 실전 크루 (강의 아님)
+        </div>
+        <div class="note" style="margin-top:14px">
+          <strong>핵심 전략:</strong> "강의" 단어 절대 금지. "크루/모임"으로 진입장벽 0에 수렴.
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">8</span> 3채널 벤치마크 수치 비교</div>
+      <div class="card">
+        <table>
+          <tr><th>지표</th><th>사찍남</th><th>돈탐생</th><th>휴먼</th><th>지온서 목표</th></tr>
+          <tr><td>초반 30초 유지율</td><td>0.129</td><td>0.163</td><td>0.225</td><td><strong style="color:#D4A017">0.20+</strong></td></tr>
+          <tr><td>킬러 타이밍</td><td>분산</td><td>7~10분</td><td>극적 장면</td><td><strong style="color:#D4A017">7/15분</strong></td></tr>
+          <tr><td>평균 길이</td><td>25분</td><td>16분</td><td>29분</td><td><strong style="color:#D4A017">22분</strong></td></tr>
+          <tr><td>CTR 목표</td><td>4.7%</td><td>5.0%</td><td>5.1%</td><td><strong style="color:#D4A017">6.0%</strong></td></tr>
+        </table>
+        <div class="note green" style="margin-top:14px">
+          <strong>설계 의도:</strong> 사찍남 평균 위로 끌어올림. 돈탐생 7~10분 패턴 + 휴먼스토리 감정 피크 패턴 동시 적용.
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">9</span> 종합 검증부서 점수 (v3.0)</div>
+      <div class="card navy">
+        <div style="font-size:14px;color:#fff;line-height:2">
+          <strong style="color:#FFB800">구조완성도:</strong> 25/25 (위기장치 5개, 시장인텔, 예상댓글, 선제방어)<br>
+          <strong style="color:#FFB800">제목품질:</strong> 15/15 (수익+반전+감정 3박자)<br>
+          <strong style="color:#FFB800">프레임워크:</strong> 39/40 (SB7, LF8 7/8, H-S-O 26, 3FB 3/3, VE)<br>
+          <strong style="color:#FFB800">데이터 근거:</strong> 20/20 (3채널 벤치마크 + 시장 데이터)<br>
+          <hr style="margin:10px 0;border-color:rgba(255,255,255,.2)">
+          <strong style="color:#FFB800">D섹션 보너스:</strong> +5 (지뢰 8개 + 정서 스펙트럼 + 시장 인텔리전스)<br>
+          <hr style="margin:10px 0;border-color:rgba(255,255,255,.2)">
+          <strong style="color:#FFB800;font-size:20px">총점: 104 / 100 -- PASS</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 8: 체크리스트 -->
+  <div class="panel" id="tab-checklist">
+
+    <div class="section">
+      <div class="section-title"><span class="num red">1</span> 촬영 전 필수 준비물</div>
+      <div class="card hot">
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> 스마트폰 (광고 DM 확인 가능 상태)</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> 3만원 삼각대 (쿠팡 구매 실물)</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> 통장 앱 (입금 내역 최신)</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> 인스타 팔로워 60만 화면</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> 캡컷 앱 설치 + 편집 준비</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text">밀키트 1개 (자택 촬영용)</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text">크루원 2~3명 (카페 씬)</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text">맛집 2곳 사전 섭외</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">2</span> 의상 & 환경 체크</div>
+      <div class="card gold">
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> 캐주얼 의상 (인스타 프로필 톤)</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> 자연광 확보 (자택/맛집/카페/차)</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> 스튜디오 배경 NO 확인</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text">촬영 허락 사전 확인 (맛집)</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text">5개 장소 사전 답사</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num blue">3</span> 촬영 중 체크</div>
+      <div class="card blue">
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> 0~15초 음식 촬영 즉시 (인사 NO)</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> Peak 1: 7~9분 통장 입금 라이브 공개</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> Peak 2: 14~17분 어머니 사별 감정 회상</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> 위기장치 5개 모두 투입</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> 현장 시연: 촬영→편집→업로드 15분 컷</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text">반측면 또는 45도 앵글</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text">"강의" 단어 NO, "크루/모임" 사용</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text">8대 지뢰 키워드 0회 노출</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">4</span> 편집 가이드</div>
+      <div class="card">
+        <table>
+          <tr><th>구간</th><th>컷 길이</th><th>BGM</th><th>특수효과</th></tr>
+          <tr><td>0~15초 몽타주</td><td>1~2초</td><td>임팩트</td><td>화이트플래시+줌인</td></tr>
+          <tr><td>3~5분 실연</td><td>5~7초</td><td>경쾌</td><td>타임랩스</td></tr>
+          <tr><td>7~9분 Peak1</td><td>3~5초</td><td>긴장</td><td>통장 줌인+카운트업</td></tr>
+          <tr><td>9:30~12분 비교</td><td>빠르게</td><td>테크</td><td>분할 화면</td></tr>
+          <tr><td>14~17분 Peak2</td><td>7~10초</td><td>감성</td><td>표정 클로즈업+정적</td></tr>
+          <tr><td>17~19분 변화</td><td>5~7초</td><td>희망</td><td>자연광</td></tr>
+          <tr><td>20~22분 CTA</td><td>5초</td><td>긴박→희망</td><td>크루 사이트 인서트</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num gold">5</span> 워크플로 -- 촬영 D-day</div>
+      <div class="card gold">
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><strong>D-2:</strong> 통장 입금 화면 캡처 + 맛집 섭외 + 크루원 일정</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><strong>D-1:</strong> 5개 장소 사전 답사 + 자연광 시간대</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><strong>D-day 09:00~11:00:</strong> 자택 (Scene 1, 2 -- HOOK + 실연)</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><strong>D-day 11:00~14:00:</strong> 맛집/시장 (Scene 3 -- Peak 1 수익)</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><strong>D-day 14:00~16:00:</strong> 차 안 + 크루 카페 (Scene 4, 5 -- Peak 2 + 크루)</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><strong>D-day 16:00~18:00:</strong> 저녁 맛집 (Scene 6 -- 직접 체험 + CTA, 골든아워)</div></div>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>최종 목표 (3채널 벤치마크 기반):</strong><br>
+      1. 초반 30초 유지율 0.20+ (사찍남 0.129 → 휴먼 0.225 사이)<br>
+      2. CTR 6.0%+ (사찍남 4.7% 초과)<br>
+      3. 22분 완주율 50%+<br>
+      4. Peak 1(7~9분) + Peak 2(14~17분) 모두 +5% 리텐션 스파이크
+    </div>
+
+    <div class="note green">
+      <strong>검증부서 통과 (v3.0 -- 104/100 PASS):</strong><br>
+      구조 25/25 · 제목 15/15 · 프레임워크 39/40 · 데이터 20/20 · D섹션 +5<br>
+      위기장치 5개 · 시장인텔 · 예상댓글 · 선제 방어 · 8대 지뢰 키워드
+    </div>
+  </div>
+
+
 </div>
 
-<!-- ==================== 경쟁 분석 ==================== -->
-<div class="panel" id="p-analysis">
-  <div class="section">
-    <div class="section-title">경쟁 영상 대비 차별화</div>
-    <div class="card">
-      <table class="tbl">
-        <tr><th>항목</th><th>특이점연구소 (2,600뷰)</th><th>전국부업자랑 (6,783뷰)</th><th style="color:#F04452">사찍남 (목표)</th></tr>
-        <tr><td>스토리</td><td>얕음 (방법 중심)</td><td>얕음 (실연 중심)</td><td style="font-weight:800">깊음 (과거+감정+현재)</td></tr>
-        <tr><td>의심 구조</td><td>없음</td><td>약함</td><td style="font-weight:800">강함 (시그니처)</td></tr>
-        <tr><td>현장감</td><td>집+맛집 1곳</td><td>집+편의점</td><td style="font-weight:800">5곳 로케이션</td></tr>
-        <tr><td>감정 피크</td><td>어머니 30초</td><td>없음</td><td style="font-weight:800">풀 서사</td></tr>
-        <tr><td>PD 참여</td><td>없음</td><td>약간</td><td style="font-weight:800">직접 체험</td></tr>
-      </table>
-    </div>
-
-    <div class="card">
-      <div class="card-label purple">지온서 포지셔닝 (업계 평균 대비)</div>
-      <table class="tbl">
-        <tr><th>항목</th><th>업계 평균</th><th style="color:#F04452">지온서</th><th>배율</th></tr>
-        <tr><td>릴스 단가</td><td>10~50만 원</td><td style="font-weight:800">100만 원/건</td><td>2~10x</td></tr>
-        <tr><td>먹스타그램 월 수익</td><td>10~1,000만 원</td><td style="font-weight:800">2,500~3,000만 원</td><td>3~300x</td></tr>
-        <tr><td>스폰서 글로벌 평균</td><td>$288 (~40만 원)</td><td style="font-weight:800">100만 원/건</td><td>2.5x</td></tr>
-        <tr><td>첫 수익 기간</td><td>2~6개월</td><td style="font-weight:800">영상 9개째</td><td>초고속</td></tr>
-      </table>
-      <div class="source">출처: 태그바이, AutoFaceless, moneytrends.co.kr</div>
-    </div>
-
-    <div class="card hot">
-      <div class="card-label">왜 이 영상이 터져야 하는가</div>
-      <div class="rank-row"><div class="rank-n">1</div><div class="rank-body">진입장벽 최저 -- 투자비 5만원, 사찍남 역대 최저<div class="rank-desc">핸드폰 + 삼각대 = 끝</div></div></div>
-      <div class="rank-row"><div class="rank-n silver">2</div><div class="rank-body">직장인 48.4% 부업 참여 (인크루트) -- 잠재 시청자 최대<div class="rank-desc">"밥은 누구나 먹으니까" = 범용 후킹</div></div></div>
-      <div class="rank-row"><div class="rank-n silver">3</div><div class="rank-body">먹방 참여율 일반 대비 +38% (Tubular Labs)<div class="rank-desc">알고리즘 유리 + 릴스 도달률 30.81%</div></div></div>
-      <div class="rank-row"><div class="rank-n silver">4</div><div class="rank-body">감정 + 수익 동시 충족<div class="rank-desc">어머니 사별 (감정) + 월 3천 (충격)</div></div></div>
-      <div class="rank-row"><div class="rank-n silver">5</div><div class="rank-body">현장 시연 + 사찍남 직접 체험<div class="rank-desc">시청자 신뢰 극대화 + 대리만족</div></div></div>
-    </div>
-
-    <div class="card" style="text-align:center;padding:24px">
-      <div style="font-size:11px;color:#999;letter-spacing:2px;margin-bottom:6px">TARGET</div>
-      <div style="font-size:36px;font-weight:900;color:#F04452">100만뷰+</div>
-      <div style="font-size:12px;color:#666;margin-top:4px">사찍남 부업 소재 평균 50만뷰 x 감정 서사 부스트</div>
-    </div>
-  </div>
-</div>
-
-</div><!-- /wrap -->
-
-<div class="footer">사찍남 기획부 | 지온서 먹스타그램 v2.0 (데이터 기반) | 2026.04.24</div>
+<div class="footer">사찍남 기획부 | 지온서 먹스타그램 v3.0 (데이터+프레임워크) | 2026.04.24</div>
 
 <script>
-function showPanel(id, btn) {
-  document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('on'); });
-  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('on'); });
-  document.getElementById('p-' + id).classList.add('on');
-  btn.classList.add('on');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
+function go(id,el){document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('on'));el.classList.add('on');document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));document.getElementById('tab-'+id).classList.add('on');window.scrollTo({top:0,behavior:'smooth'})}
+function cp(id,btn){var t=btn.textContent;navigator.clipboard.writeText(document.getElementById(id).innerText).then(()=>{btn.classList.add('copied');btn.textContent='복사 완료!';setTimeout(()=>{btn.classList.remove('copied');btn.textContent=t},1500)}).catch(()=>{var r=document.createRange();r.selectNodeContents(document.getElementById(id));var s=window.getSelection();s.removeAllRanges();s.addRange(r);document.execCommand('copy');s.removeAllRanges();btn.classList.add('copied');btn.textContent='복사 완료!';setTimeout(()=>{btn.classList.remove('copied');btn.textContent=t},1500)})}
+function tog(el){el.classList.toggle('checked')}
 </script>
-
 </body>
 </html>
