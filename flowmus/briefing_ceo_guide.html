@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>면접 브리핑 가이드 — 공동대표용</title>
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --navy: #1a1d23;
+    --blue: #2563EB;
+    --blue-light: rgba(37,99,235,0.06);
+    --orange: #ea580c;
+    --orange-light: rgba(234,88,12,0.06);
+    --green: #16a34a;
+    --green-light: rgba(22,163,74,0.06);
+    --purple: #7c3aed;
+    --purple-light: rgba(124,58,237,0.06);
+    --red: #dc2626;
+    --red-light: rgba(220,38,38,0.06);
+    --text: #1a1d23;
+    --text-med: #64748b;
+    --text-low: #94a3b8;
+    --border: #e2e8f0;
+    --surface: #f8fafc;
+    --yellow-bg: #fefce8;
+    --yellow-border: #fde047;
+  }
+  html { font-size: 11pt; }
+  body {
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    color: var(--text); background: #fff; line-height: 1.7;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .page {
+    width: 210mm; min-height: 297mm; margin: 0 auto;
+    padding: 44px 52px; position: relative;
+    page-break-after: always; background: #fff;
+  }
+  .page:last-child { page-break-after: auto; }
+  @media print {
+    html { font-size: 10.5pt; }
+    body { background: #fff; }
+    .page { padding: 36px 44px; margin: 0; box-shadow: none; }
+    .no-print { display: none !important; }
+  }
+  @media screen {
+    body { background: #e5e7eb; padding: 24px 0; }
+    .page { box-shadow: 0 2px 16px rgba(0,0,0,0.08); margin-bottom: 24px; border-radius: 2px; }
+  }
+  @media screen and (max-width: 768px) {
+    body { padding: 0; background: #fff; }
+    .page { width: 100%; min-height: auto; padding: 28px 18px; box-shadow: none; margin-bottom: 0; border-radius: 0; border-bottom: 8px solid var(--surface); }
+    h1 { font-size: 20pt; }
+    h2 { font-size: 13pt; }
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .timeline-grid { grid-template-columns: 1fr; }
+    .print-btn { display: none; }
+  }
+
+  h1 { font-size: 24pt; font-weight: 800; line-height: 1.3; letter-spacing: -0.02em; }
+  h2 { font-size: 14pt; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 12px; color: var(--navy); }
+  h3 { font-size: 11pt; font-weight: 700; margin-bottom: 4px; }
+  p { margin-bottom: 6px; }
+  .label { font-size: 8.5pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-low); margin-bottom: 6px; }
+  .small { font-size: 9pt; color: var(--text-med); }
+  .accent { color: var(--blue); }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+
+  .badge {
+    display: inline-block; font-size: 8pt; font-weight: 700;
+    padding: 2px 10px; border-radius: 20px; margin-bottom: 8px;
+  }
+  .badge-internal { background: var(--red-light); color: var(--red); border: 1px solid rgba(220,38,38,0.15); }
+  .badge-blue { background: var(--blue-light); color: var(--blue); }
+  .badge-green { background: var(--green-light); color: var(--green); }
+
+  .card {
+    border: 1px solid var(--border); border-radius: 10px;
+    padding: 16px; background: #fff; margin-bottom: 10px;
+  }
+  .card-blue { border-left: 3px solid var(--blue); }
+  .card-orange { border-left: 3px solid var(--orange); }
+  .card-green { border-left: 3px solid var(--green); }
+  .card-purple { border-left: 3px solid var(--purple); }
+
+  .note-box {
+    background: var(--yellow-bg); border: 1px solid var(--yellow-border);
+    border-radius: 10px; padding: 14px 16px; margin-bottom: 12px;
+  }
+  .note-box h3 { color: #a16207; font-size: 10pt; margin-bottom: 4px; }
+  .note-box p, .note-box li { font-size: 9.5pt; color: #78350f; }
+
+  .talk-box {
+    background: var(--blue-light); border: 1px solid rgba(37,99,235,0.12);
+    border-radius: 10px; padding: 14px 16px; margin-bottom: 10px;
+  }
+  .talk-box::before {
+    content: ''; display: inline-block; font-size: 9pt; font-weight: 700;
+    color: var(--blue); margin-bottom: 4px;
+  }
+  .talk-box p { font-size: 10pt; color: var(--navy); margin: 0; line-height: 1.65; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+  .timeline-grid { display: grid; grid-template-columns: 60px 1fr; gap: 0; }
+  .timeline-time { font-size: 10pt; font-weight: 800; color: var(--blue); padding-top: 12px; }
+  .timeline-content {
+    border-left: 2px solid var(--border); padding: 10px 0 10px 16px;
+    position: relative;
+  }
+  .timeline-content::before {
+    content: ''; position: absolute; left: -5px; top: 16px;
+    width: 8px; height: 8px; border-radius: 50%; background: var(--blue);
+  }
+  .timeline-content.active::before { background: var(--blue); box-shadow: 0 0 0 3px var(--blue-light); }
+  .timeline-title { font-size: 11pt; font-weight: 700; color: var(--navy); }
+  .timeline-desc { font-size: 9.5pt; color: var(--text-med); margin-top: 2px; }
+
+  .candidate-card {
+    border: 1px solid var(--border); border-radius: 10px;
+    padding: 16px; margin-bottom: 10px;
+  }
+  .candidate-name { font-size: 13pt; font-weight: 800; color: var(--navy); }
+  .candidate-role { font-size: 9pt; color: var(--text-med); margin-top: 2px; }
+
+  ul { padding-left: 16px; margin-bottom: 6px; }
+  li { font-size: 9.5pt; color: var(--text-med); margin-bottom: 3px; line-height: 1.55; }
+  li strong { color: var(--text); }
+
+  .page-num { position: absolute; bottom: 28px; right: 52px; font-size: 9pt; color: var(--text-low); }
+
+  .print-btn {
+    position: fixed; bottom: 24px; right: 24px; z-index: 100;
+    background: var(--navy); color: #fff; border: none;
+    padding: 12px 24px; border-radius: 10px;
+    font-size: 11pt; font-weight: 700; cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    font-family: 'Pretendard', sans-serif;
+  }
+
+  .check-row { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 6px; }
+  .check-box { width: 14px; height: 14px; border: 1.5px solid var(--border); border-radius: 3px; flex-shrink: 0; margin-top: 3px; }
+  .check-text { font-size: 9.5pt; color: var(--text); line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">PDF 저장 (Ctrl+P)</button>
+
+<!-- PAGE 1: 커버 + 면접 개요 -->
+<div class="page">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px;">
+    <div style="font-size: 11pt; font-weight: 700; color: var(--blue); letter-spacing: 0.04em;">FLOWMUS</div>
+    <span class="badge badge-internal">INTERNAL &mdash; 공동대표 전용</span>
+  </div>
+
+  <h1 style="margin-bottom: 8px;">면접 브리핑 가이드</h1>
+  <p style="font-size: 12pt; color: var(--text-med); margin-bottom: 36px;">
+    2026년 4월 24일 (목) 오후 4시 &mdash; 에이전시 팀 면접<br>
+    <span style="font-size: 10pt;">장소: 서울 서초구 서초대로 398</span>
+  </p>
+
+  <div class="note-box">
+    <h3>면접 구성</h3>
+    <p>
+      <strong>1부: 그룹 브리핑</strong> (3명 함께, 약 20분) &rarr; 회사소개 발표<br>
+      <strong>2부: 개별 면접</strong> (1:1, 각 15~20분) &rarr; 포지션별 심층 면접
+    </p>
+  </div>
+
+  <hr class="divider">
+
+  <p class="label">Interview Timeline</p>
+  <h2>면접 타임라인</h2>
+
+  <div class="timeline-grid">
+    <div class="timeline-time">16:00</div>
+    <div class="timeline-content active">
+      <div class="timeline-title">도착 / 안내</div>
+      <div class="timeline-desc">3명 도착 확인, 자리 안내, 음료 제공</div>
+    </div>
+
+    <div class="timeline-time">16:05</div>
+    <div class="timeline-content">
+      <div class="timeline-title">그룹 브리핑 (20분)</div>
+      <div class="timeline-desc">회사소개 발표 &mdash; briefing_interview.html 기반<br>
+      <span style="color: var(--blue); font-weight: 600;">발표자: 권현우 공동대표</span> / 대표 보충 멘트</div>
+    </div>
+
+    <div class="timeline-time">16:25</div>
+    <div class="timeline-content">
+      <div class="timeline-title">Q&A (5~10분)</div>
+      <div class="timeline-desc">브리핑 후 궁금한 점 자유롭게</div>
+    </div>
+
+    <div class="timeline-time">16:35</div>
+    <div class="timeline-content">
+      <div class="timeline-title">개별 면접 1 &mdash; 여다현</div>
+      <div class="timeline-desc">에이전시 매니저 / 약 15~20분</div>
+    </div>
+
+    <div class="timeline-time">16:55</div>
+    <div class="timeline-content">
+      <div class="timeline-title">개별 면접 2 &mdash; 박예리</div>
+      <div class="timeline-desc">에이전시 매니저 / 약 15~20분</div>
+    </div>
+
+    <div class="timeline-time">17:15</div>
+    <div class="timeline-content">
+      <div class="timeline-title">개별 면접 3 &mdash; 이유진</div>
+      <div class="timeline-desc">에이전시 매니저 / 약 15~20분</div>
+    </div>
+
+    <div class="timeline-time">17:35</div>
+    <div class="timeline-content">
+      <div class="timeline-title">마무리 / 내부 논의</div>
+      <div class="timeline-desc">3명 평가 정리, 합격자 결정</div>
+    </div>
+  </div>
+
+  <span class="page-num">1</span>
+</div>
+
+<!-- PAGE 2: 그룹 브리핑 발표 가이드 -->
+<div class="page">
+  <span class="badge badge-blue">1부</span>
+  <p class="label">Group Briefing Guide</p>
+  <h2>그룹 브리핑 &mdash; 발표 포인트</h2>
+  <p class="small" style="margin-bottom: 16px;">
+    회사소개 문서(briefing_interview.html) 5페이지를 넘기며 진행합니다.<br>
+    각 페이지별 핵심 멘트와 강조 포인트를 정리했습니다.
+  </p>
+
+  <!-- 페이지 1 -->
+  <div class="card card-blue" style="margin-bottom: 14px;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <h3>발표 p.1 &mdash; 커버</h3>
+      <span class="small">약 2분</span>
+    </div>
+    <div class="talk-box" style="margin-top: 8px;">
+      <p>
+        "저희 플로우머스는 IT 미디어 기업입니다. 유튜브 채널을 운영하는 것이 아니라,
+        <strong>사람의 이야기를 콘텐츠로 만들고 그걸 비즈니스로 연결하는 구조</strong>를 가진 회사입니다."
+      </p>
+    </div>
+    <ul>
+      <li><strong>47.9만 구독자, 1.6억 조회수</strong> &mdash; 숫자를 짧게 언급하고 넘어가기</li>
+      <li>"단순 유튜브 회사가 아니라 4개 사업 영역이 있다"는 점을 예고</li>
+    </ul>
+  </div>
+
+  <!-- 페이지 2 -->
+  <div class="card card-green" style="margin-bottom: 14px;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <h3>발표 p.2 &mdash; 핵심 구조 (플라이휠)</h3>
+      <span class="small">약 5분</span>
+    </div>
+    <div class="talk-box" style="margin-top: 8px;">
+      <p>
+        "출연자 한 명을 인터뷰하면, 그 영상 하나가 유튜브 수익뿐 아니라
+        <strong>강의 매출 10억, 30억</strong>으로 연결됩니다.
+        이게 저희만의 비즈니스 모델입니다."
+      </p>
+    </div>
+    <ul>
+      <li><strong>타이탄클래스 사례:</strong> 영상 144만 조회 &rarr; 강의 매출 10억+</li>
+      <li><strong>무아클래스 사례:</strong> 영상 45만 조회 &rarr; 강의 매출 30억+</li>
+      <li>핵심 키워드: "콘텐츠가 곧 비즈니스" &mdash; 이 한 문장이 이 페이지의 결론</li>
+    </ul>
+    <div class="note-box" style="margin-top: 8px; margin-bottom: 0;">
+      <h3>대표 보충 포인트</h3>
+      <p>실제 타이탄클래스 진행 과정이나 출연자와의 관계 등 현장감 있는 에피소드 한두 가지</p>
+    </div>
+  </div>
+
+  <!-- 페이지 3 -->
+  <div class="card card-orange" style="margin-bottom: 14px;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <h3>발표 p.3 &mdash; 채널 네트워크 + 4사업</h3>
+      <span class="small">약 5분</span>
+    </div>
+    <div class="talk-box" style="margin-top: 8px;">
+      <p>
+        "자체 채널 사찍남 14.4만, 협업 채널까지 합치면 47.9만 네트워크입니다.
+        그리고 이 트래픽을 <strong>MCN, 강의, 출판, 플랫폼</strong> 4가지 사업으로 연결합니다."
+      </p>
+    </div>
+    <ul>
+      <li>채널별 숫자는 빠르게 훑고, <strong>4개 사업 영역</strong>에 시간을 더 할애</li>
+      <li>"면접자분들이 합류하면 이 구조 안에서 일하게 된다"는 연결</li>
+      <li>100원사주(런칭 준비 중)는 "IT 플랫폼으로의 확장"이라고 가볍게</li>
+    </ul>
+  </div>
+
+  <!-- 페이지 4+5 -->
+  <div class="card card-purple">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+      <h3>발표 p.4~5 &mdash; 비전 + 합류 이유</h3>
+      <span class="small">약 8분</span>
+    </div>
+    <div class="talk-box" style="margin-top: 8px;">
+      <p>
+        "궁극적으로 사람의 인생에서 가장 중요한 순간마다 플로우머스가 있게 하는 것이 비전입니다.
+        지금 합류하면 <strong>초기 멤버로서 회사의 성장과 함께 본인의 커리어도 성장</strong>합니다."
+      </p>
+    </div>
+    <ul>
+      <li><strong>라이프원픽 로드맵:</strong> MCN &rarr; 결혼정보+모임 &rarr; 웨딩+부동산 &rarr; 보험+경조사</li>
+      <li>"지금은 작지만 비전이 큰 회사"라는 톤 &mdash; 압도하지 말고, 같이 만들어가자는 느낌</li>
+      <li>마지막 "우리가 찾는 사람" 부분: <strong>실행력</strong> 강조 &mdash; "화려한 스펙보다 실행하는 사람"</li>
+    </ul>
+    <div class="note-box" style="margin-top: 8px; margin-bottom: 0;">
+      <h3>이 부분이 가장 중요</h3>
+      <p>면접자들이 "와, 이 비전이면 나도 성장할 수 있겠다"고 느끼게 해야 합니다.<br>
+      "이렇게 많은 일을 해요"가 아니라 "이 방향으로 커지는 회사에서 함께 성장"이 핵심 톤.</p>
+    </div>
+  </div>
+
+  <span class="page-num">2</span>
+</div>
+
+<!-- PAGE 3: 면접자 프로필 + 질문 가이드 -->
+<div class="page">
+  <span class="badge badge-green">2부</span>
+  <p class="label">Individual Interview Guide</p>
+  <h2>개별 면접 &mdash; 면접자 프로필 & 질문</h2>
+
+  <!-- 여다현 -->
+  <div class="candidate-card" style="border-left: 3px solid var(--blue);">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+      <div>
+        <div class="candidate-name">여다현</div>
+        <div class="candidate-role">에이전시 매니저 지원 &mdash; 개별 면접 1번</div>
+      </div>
+      <span class="badge badge-blue">16:35~</span>
+    </div>
+
+    <div class="grid-2">
+      <div>
+        <h3 style="font-size: 9.5pt; color: var(--text-low); margin-bottom: 4px;">핵심 경력</h3>
+        <ul style="margin: 0;">
+          <li><strong>3지점 x 7플랫폼</strong> 멀티채널 총괄 경험</li>
+          <li>Apps Script/Zapier 자동화 구축</li>
+          <li>인플루언서 네트워크 100건+ 운영</li>
+          <li>오프라인 이벤트 기획 (쇼레이어드 팝업, 친친플리마켓)</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="font-size: 9.5pt; color: var(--text-low); margin-bottom: 4px;">확인 질문</h3>
+        <ul style="margin: 0;">
+          <li>"7개 플랫폼을 <strong>동시에 운영한 방법</strong>이 궁금합니다. 우선순위를 어떻게 정했나요?"</li>
+          <li>"자동화 시스템을 직접 만든 경험에 대해 구체적으로 설명해주세요"</li>
+          <li>"인플루언서 협업에서 <strong>가장 힘들었던 케이스</strong>와 해결 방법은?"</li>
+        </ul>
+      </div>
+    </div>
+    <div class="note-box" style="margin-top: 8px; margin-bottom: 0;">
+      <h3>주목 포인트</h3>
+      <p>자동화 역량이 우리 팀에 즉시 활용 가능. 멀티플랫폼 경험도 MCN 구조와 잘 맞음. <strong>실행력과 자기주도성</strong> 중심으로 검증.</p>
+    </div>
+  </div>
+
+  <!-- 박예리 -->
+  <div class="candidate-card" style="border-left: 3px solid var(--green);">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+      <div>
+        <div class="candidate-name">박예리</div>
+        <div class="candidate-role">에이전시 매니저 지원 &mdash; 개별 면접 2번</div>
+      </div>
+      <span class="badge badge-green">16:55~</span>
+    </div>
+
+    <div class="grid-2">
+      <div>
+        <h3 style="font-size: 9.5pt; color: var(--text-low); margin-bottom: 4px;">사전 정보</h3>
+        <ul style="margin: 0;">
+          <li>온보딩 문서 발송 완료</li>
+          <li>포트폴리오 확인 필요</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="font-size: 9.5pt; color: var(--text-low); margin-bottom: 4px;">공통 질문</h3>
+        <ul style="margin: 0;">
+          <li>"MCN이나 에이전시 업무에 대해 어떻게 이해하고 계신가요?"</li>
+          <li>"본인이 <strong>가장 잘하는 것</strong> 한 가지는?"</li>
+          <li>"어떤 환경에서 가장 몰입하고 성과를 내시나요?"</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- 이유진 -->
+  <div class="candidate-card" style="border-left: 3px solid var(--purple);">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+      <div>
+        <div class="candidate-name">이유진</div>
+        <div class="candidate-role">에이전시 매니저 지원 &mdash; 개별 면접 3번</div>
+      </div>
+      <span class="badge" style="background: var(--purple-light); color: var(--purple);">17:15~</span>
+    </div>
+
+    <div class="grid-2">
+      <div>
+        <h3 style="font-size: 9.5pt; color: var(--text-low); margin-bottom: 4px;">사전 정보</h3>
+        <ul style="margin: 0;">
+          <li>온보딩 문서 발송 완료</li>
+          <li>포트폴리오 확인 필요</li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="font-size: 9.5pt; color: var(--text-low); margin-bottom: 4px;">공통 질문</h3>
+        <ul style="margin: 0;">
+          <li>"플로우머스에 지원한 이유가 무엇인가요?"</li>
+          <li>"이전에 <strong>스스로 기획해서 실행한 프로젝트</strong>가 있다면?"</li>
+          <li>"1년 후 어떤 모습이고 싶으신가요?"</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <h2 style="font-size: 12pt;">공통 평가 기준</h2>
+  <div class="grid-3">
+    <div class="card card-blue" style="padding: 12px;">
+      <h3 style="font-size: 10pt;">실행력</h3>
+      <p class="small" style="margin: 0;">아이디어를 말만 하는지, 직접 만들어본 경험이 있는지</p>
+    </div>
+    <div class="card card-green" style="padding: 12px;">
+      <h3 style="font-size: 10pt;">자기주도성</h3>
+      <p class="small" style="margin: 0;">시키는 일만 하는지, 스스로 문제를 찾고 해결하는지</p>
+    </div>
+    <div class="card card-orange" style="padding: 12px;">
+      <h3 style="font-size: 10pt;">성장 마인드</h3>
+      <p class="small" style="margin: 0;">회사와 함께 성장하려는 의지와 학습 속도</p>
+    </div>
+  </div>
+
+  <span class="page-num">3</span>
+</div>
+
+<!-- PAGE 4: 면접 체크리스트 + 결정 프레임 -->
+<div class="page">
+  <p class="label">Decision Framework</p>
+  <h2>면접 후 의사결정 가이드</h2>
+
+  <div class="grid-2" style="margin-bottom: 20px;">
+    <div>
+      <h3 style="margin-bottom: 10px;">면접 중 체크리스트</h3>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">우리 회사 비전(라이프원픽)에 공감하는가</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">본인이 직접 실행해서 결과를 만든 경험이 있는가</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">모르는 것을 빠르게 학습하는 태도인가</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">팀 분위기와 맞는가 (커뮤니케이션 스타일)</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">AI 도구 / 자동화에 거부감이 없는가</div></div>
+      <div class="check-row"><div class="check-box"></div><div class="check-text">스타트업 환경(멀티태스킹)을 받아들이는가</div></div>
+    </div>
+    <div>
+      <h3 style="margin-bottom: 10px;">레드 플래그</h3>
+      <div style="background: var(--red-light); border: 1px solid rgba(220,38,38,0.12); border-radius: 10px; padding: 14px;">
+        <ul style="margin: 0; padding-left: 14px;">
+          <li style="color: var(--red);"><strong>답변이 추상적이고 구체적 경험이 없음</strong></li>
+          <li style="color: var(--red);"><strong>"시키면 잘 할 수 있어요" 스타일</strong></li>
+          <li style="color: var(--red);">안정적인 환경만 원하는 태도</li>
+          <li style="color: var(--red);">AI/자동화에 대한 부정적 인식</li>
+          <li style="color: var(--red);">급여/복지 중심의 질문만 하는 경우</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <h2 style="font-size: 12pt;">면접 후 바로 결정 &mdash; 3단계</h2>
+  <div class="grid-3" style="margin-bottom: 20px;">
+    <div class="card" style="text-align: center; padding: 20px; background: var(--green-light); border-color: var(--green);">
+      <div style="font-size: 20pt; font-weight: 800; color: var(--green);">A</div>
+      <h3 style="margin-top: 4px;">바로 합류 제안</h3>
+      <p class="small" style="margin: 0;">실행력 확인됨. 우리 팀에 바로 필요한 사람</p>
+    </div>
+    <div class="card" style="text-align: center; padding: 20px; background: var(--blue-light); border-color: var(--blue);">
+      <div style="font-size: 20pt; font-weight: 800; color: var(--blue);">B</div>
+      <h3 style="margin-top: 4px;">추가 확인 후 결정</h3>
+      <p class="small" style="margin: 0;">가능성 있으나 과제/레퍼런스 체크 필요</p>
+    </div>
+    <div class="card" style="text-align: center; padding: 20px; background: var(--surface); border-color: var(--border);">
+      <div style="font-size: 20pt; font-weight: 800; color: var(--text-low);">C</div>
+      <h3 style="margin-top: 4px;">불합격</h3>
+      <p class="small" style="margin: 0;">기준 미달 또는 팀 핏 불일치</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <h2 style="font-size: 12pt;">참고 링크</h2>
+  <div class="card" style="background: var(--surface);">
+    <div class="grid-2">
+      <div>
+        <h3 style="font-size: 9.5pt; color: var(--text-low);">면접자용 회사소개</h3>
+        <p style="font-size: 9pt; color: var(--blue); word-break: break-all; margin: 0;">
+          ohmaetdol.github.io/mcn-neobridge/flowmus/briefing_interview.html
+        </p>
+      </div>
+      <div>
+        <h3 style="font-size: 9.5pt; color: var(--text-low);">개별 온보딩 문서</h3>
+        <p style="font-size: 9pt; margin: 0;">
+          <span style="color: var(--blue);">여다현:</span> .../onboarding_yeo.html<br>
+          <span style="color: var(--green);">박예리:</span> .../onboarding_park.html<br>
+          <span style="color: var(--purple);">이유진:</span> .../onboarding_lee.html
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align: center; margin-top: 32px;">
+    <p class="small" style="margin: 0;">(주) 플로우머스 &mdash; 내부 문서 &mdash; 2026.04.24</p>
+  </div>
+
+  <span class="page-num">4</span>
+</div>
+
+</body>
+</html>
