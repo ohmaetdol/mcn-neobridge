@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>사업계획서 — (주)리지커넥트</title>
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --navy: #0f172a;
+    --navy-mid: #1e293b;
+    --gold: #b8860b;
+    --gold-light: rgba(184,134,11,0.08);
+    --gold-border: rgba(184,134,11,0.25);
+    --blue: #1e40af;
+    --blue-light: rgba(30,64,175,0.06);
+    --green: #15803d;
+    --green-light: rgba(21,128,61,0.06);
+    --orange: #c2410c;
+    --orange-light: rgba(194,65,12,0.06);
+    --purple: #6d28d9;
+    --purple-light: rgba(109,40,217,0.06);
+    --red: #dc2626;
+    --red-light: rgba(220,38,38,0.06);
+    --text: #0f172a;
+    --text-med: #475569;
+    --text-low: #94a3b8;
+    --border: #e2e8f0;
+    --surface: #f8fafc;
+  }
+  html { font-size: 10.5pt; }
+  body {
+    font-family: 'Pretendard', -apple-system, sans-serif;
+    color: var(--text); background: #fff; line-height: 1.75;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  }
+  .page {
+    width: 210mm; min-height: 297mm; margin: 0 auto;
+    padding: 40px 48px; position: relative;
+    page-break-after: always; background: #fff;
+  }
+  .page:last-child { page-break-after: auto; }
+  @media print {
+    html { font-size: 10pt; }
+    body { background: #fff; }
+    .page { padding: 32px 40px; margin: 0; box-shadow: none; }
+  }
+  @media screen {
+    body { background: #1e293b; padding: 24px 0; }
+    .page { box-shadow: 0 4px 24px rgba(0,0,0,0.15); margin-bottom: 24px; border-radius: 2px; }
+  }
+
+  /* Cover Page */
+  .cover { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+  .cover-badge { display: inline-block; background: var(--navy); color: #fff; font-size: 10px; font-weight: 600; letter-spacing: 3px; padding: 6px 20px; border-radius: 2px; text-transform: uppercase; margin-bottom: 32px; }
+  .cover-title { font-size: 32px; font-weight: 800; color: var(--navy); line-height: 1.3; margin-bottom: 8px; }
+  .cover-subtitle { font-size: 16px; font-weight: 500; color: var(--text-med); margin-bottom: 48px; }
+  .cover-divider { width: 60px; height: 3px; background: var(--gold); margin: 0 auto 48px; }
+  .cover-info { font-size: 12px; color: var(--text-med); line-height: 2; }
+  .cover-info strong { color: var(--text); font-weight: 600; }
+  .cover-date { margin-top: 24px; font-size: 11px; color: var(--text-low); }
+  .cover-footer { position: absolute; bottom: 40px; left: 0; right: 0; text-align: center; font-size: 9px; color: var(--text-low); letter-spacing: 1px; }
+
+  /* Headers */
+  .page-num { position: absolute; top: 40px; right: 48px; font-size: 9px; color: var(--text-low); font-weight: 500; }
+  .page-logo { position: absolute; top: 40px; left: 48px; font-size: 9px; color: var(--text-low); font-weight: 600; letter-spacing: 1px; }
+  .section-num { display: inline-block; font-size: 11px; font-weight: 700; color: var(--gold); letter-spacing: 2px; margin-bottom: 4px; }
+  h1 { font-size: 22px; font-weight: 800; color: var(--navy); margin-bottom: 20px; line-height: 1.3; }
+  h1 .thin { font-weight: 400; color: var(--text-med); }
+  h2 { font-size: 14px; font-weight: 700; color: var(--navy); margin: 20px 0 10px; padding-bottom: 6px; border-bottom: 1.5px solid var(--border); }
+  h3 { font-size: 12px; font-weight: 700; color: var(--navy-mid); margin: 14px 0 6px; }
+  p { font-size: 11px; color: var(--text-med); margin-bottom: 8px; }
+
+  /* Tables */
+  table { width: 100%; border-collapse: collapse; font-size: 10.5px; margin: 10px 0 14px; }
+  th { background: var(--navy); color: #fff; font-weight: 600; padding: 8px 12px; text-align: left; font-size: 10px; }
+  td { padding: 7px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:nth-child(even) td { background: var(--surface); }
+  .tbl-gold th { background: var(--gold); }
+  .tbl-blue th { background: var(--blue); }
+  .tbl-green th { background: var(--green); }
+  .tbl-compact td { padding: 5px 10px; font-size: 10px; }
+
+  /* Cards & Boxes */
+  .card { border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; margin: 10px 0; background: #fff; }
+  .card-header { font-size: 11px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+  .card-body { font-size: 10.5px; color: var(--text-med); }
+  .highlight-box { background: var(--gold-light); border-left: 3px solid var(--gold); padding: 12px 16px; margin: 12px 0; border-radius: 0 4px 4px 0; }
+  .highlight-box p { margin: 0; font-size: 11px; color: var(--navy-mid); }
+  .highlight-box strong { color: var(--navy); }
+  .blue-box { background: var(--blue-light); border-left: 3px solid var(--blue); padding: 12px 16px; margin: 12px 0; border-radius: 0 4px 4px 0; }
+  .green-box { background: var(--green-light); border-left: 3px solid var(--green); padding: 12px 16px; margin: 12px 0; border-radius: 0 4px 4px 0; }
+  .orange-box { background: var(--orange-light); border-left: 3px solid var(--orange); padding: 12px 16px; margin: 12px 0; border-radius: 0 4px 4px 0; }
+  .red-box { background: var(--red-light); border-left: 3px solid var(--red); padding: 12px 16px; margin: 12px 0; border-radius: 0 4px 4px 0; }
+
+  /* Grid */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+
+  /* Phase Timeline */
+  .phase { position: relative; padding-left: 24px; margin: 12px 0; }
+  .phase::before { content: ''; position: absolute; left: 6px; top: 24px; bottom: -12px; width: 2px; background: var(--border); }
+  .phase:last-child::before { display: none; }
+  .phase-dot { position: absolute; left: 0; top: 4px; width: 14px; height: 14px; border-radius: 50%; border: 2.5px solid var(--gold); background: #fff; }
+  .phase-dot.active { background: var(--gold); }
+  .phase-title { font-size: 12px; font-weight: 700; color: var(--navy); }
+  .phase-desc { font-size: 10.5px; color: var(--text-med); margin-top: 2px; }
+
+  /* Metric Cards */
+  .metric { text-align: center; padding: 12px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); }
+  .metric-value { font-size: 22px; font-weight: 800; color: var(--navy); }
+  .metric-label { font-size: 9px; color: var(--text-low); font-weight: 500; letter-spacing: 0.5px; margin-top: 2px; }
+  .metric-gold .metric-value { color: var(--gold); }
+
+  /* Flow Chart */
+  .flow { display: flex; align-items: center; gap: 0; margin: 14px 0; flex-wrap: wrap; }
+  .flow-item { background: var(--navy); color: #fff; font-size: 10px; font-weight: 600; padding: 8px 14px; border-radius: 4px; text-align: center; }
+  .flow-arrow { color: var(--gold); font-size: 16px; font-weight: 700; padding: 0 6px; }
+
+  /* Checklist */
+  .check-list { list-style: none; padding: 0; }
+  .check-list li { font-size: 10.5px; padding: 4px 0 4px 20px; position: relative; color: var(--text-med); }
+  .check-list li::before { content: ''; position: absolute; left: 0; top: 7px; width: 12px; height: 12px; border: 1.5px solid var(--border); border-radius: 2px; }
+
+  /* Tags */
+  .tag { display: inline-block; font-size: 9px; font-weight: 600; padding: 2px 8px; border-radius: 10px; margin-right: 4px; }
+  .tag-gold { background: var(--gold-light); color: var(--gold); border: 1px solid var(--gold-border); }
+  .tag-blue { background: var(--blue-light); color: var(--blue); }
+  .tag-green { background: var(--green-light); color: var(--green); }
+  .tag-red { background: var(--red-light); color: var(--red); }
+
+  /* Bar chart */
+  .bar-row { display: flex; align-items: center; margin: 4px 0; }
+  .bar-label { width: 90px; font-size: 10px; color: var(--text-med); text-align: right; padding-right: 10px; }
+  .bar-track { flex: 1; height: 18px; background: var(--surface); border-radius: 3px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 3px; display: flex; align-items: center; padding-left: 8px; font-size: 9px; font-weight: 600; color: #fff; }
+  .bar-navy { background: var(--navy); }
+  .bar-gold { background: var(--gold); }
+  .bar-blue { background: var(--blue); }
+  .bar-green { background: var(--green); }
+
+  /* Week plan */
+  .week { border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; margin: 6px 0; }
+  .week-header { font-size: 10px; font-weight: 700; color: #fff; background: var(--navy); display: inline-block; padding: 2px 10px; border-radius: 3px; margin-bottom: 6px; }
+  .week-items { font-size: 10.5px; color: var(--text-med); }
+  .week-items li { margin: 2px 0; }
+</style>
+</head>
+<body>
+
+<!-- ==================== PAGE 1: COVER ==================== -->
+<div class="page cover">
+  <div style="flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+    <div class="cover-badge">BUSINESS PLAN 2026</div>
+    <div class="cover-title">LIZZYCONNECT</div>
+    <div class="cover-subtitle">데이터 기반 인플루언서 커머스 사업계획서</div>
+    <div class="cover-divider"></div>
+    <div class="cover-info">
+      <strong>법인명</strong>&nbsp;&nbsp;(주)리지커넥트<br>
+      <strong>사업 영역</strong>&nbsp;&nbsp;인플루언서 벤더 / 건기식 커머스 / 콘텐츠<br>
+      <strong>참여자</strong>&nbsp;&nbsp;권현우 대표 &middot; 오맷돌 대표 &middot; 이세령 대표<br>
+    </div>
+    <div class="cover-date">2026. 04. 25</div>
+  </div>
+  <div class="cover-footer">CONFIDENTIAL &mdash; FOR INTERNAL USE ONLY</div>
+</div>
+
+<!-- ==================== PAGE 2: 사업 개요 ==================== -->
+<div class="page">
+  <div class="page-logo">LIZZYCONNECT</div>
+  <div class="page-num">02 / 08</div>
+
+  <div class="section-num">01</div>
+  <h1>사업 개요 <span class="thin">Business Overview</span></h1>
+
+  <div class="highlight-box">
+    <p><strong>핵심 한 줄:</strong> 이세령 대표의 실제 다이어트 스토리(-30kg)와 1,200명+ 인플루언서 네트워크를 기반으로, 건기식 공구에서 시작해 데이터 기반 인플루언서 벤더사로 성장한다.</p>
+  </div>
+
+  <h2>사업 구조</h2>
+  <div class="flow">
+    <div class="flow-item">브랜드사<br><span style="font-size:8px;opacity:0.7">(건기식 제조사)</span></div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-item" style="background:var(--gold)">리지커넥트<br><span style="font-size:8px;opacity:0.7">(벤더/큐레이션)</span></div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-item">인플루언서<br><span style="font-size:8px;opacity:0.7">(1,200명+ 네트워크)</span></div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-item" style="background:var(--green)">소비자<br><span style="font-size:8px;opacity:0.7">(공구 구매)</span></div>
+  </div>
+
+  <h2>핵심 원칙</h2>
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-header" style="color:var(--gold)">대행 느낌 절대 X</div>
+      <div class="card-body">레페리의 '뷰티레페리'처럼 데이터 기반으로 제품을 큐레이션하고 셀링한다. 단순 중개가 아닌 가치 창출.</div>
+    </div>
+    <div class="card">
+      <div class="card-header" style="color:var(--blue)">데이터 기반 셀링</div>
+      <div class="card-body">인플루언서별 전환율, 카테고리별 매출 데이터를 축적하여 최적의 상품-인플루언서 매칭을 실현.</div>
+    </div>
+    <div class="card">
+      <div class="card-header" style="color:var(--green)">스토리 중심 커머스</div>
+      <div class="card-body">90kg에서 60kg까지 실제 감량한 이세령 대표의 진정성 있는 스토리가 최강의 셀링 포인트.</div>
+    </div>
+  </div>
+
+  <h2>핵심 자산</h2>
+  <div class="grid-2">
+    <div class="metric">
+      <div class="metric-value">1,200<span style="font-size:14px">+</span></div>
+      <div class="metric-label">리지커넥트 인플루언서 네트워크</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value">70<span style="font-size:14px">+</span></div>
+      <div class="metric-label">누적 캠페인 집행 건수</div>
+    </div>
+  </div>
+
+  <h2>벤치마크: 레페리(Leferi)</h2>
+  <table>
+    <tr><th width="30%">항목</th><th width="35%">레페리</th><th width="35%">리지커넥트 (목표)</th></tr>
+    <tr><td>모델</td><td>Influencer Value Chain (수직통합)</td><td>데이터 기반 벤더 + 오프라인 네트워킹</td></tr>
+    <tr><td>매출</td><td>456억원 (2024)</td><td>Phase 1: 월 1억 목표</td></tr>
+    <tr><td>크리에이터</td><td>~400명 (뷰티 특화)</td><td>1,200명+ (다카테고리)</td></tr>
+    <tr><td>오프라인</td><td>셀렉트스토어 (B2C 리테일)</td><td>브랜드 라운지 (B2B 네트워킹)</td></tr>
+    <tr><td>차별점</td><td>대규모 팝업, 뷰티 편중</td><td>소규모 프리미엄, 관계 중심</td></tr>
+  </table>
+</div>
+
+<!-- ==================== PAGE 3: 참여자 & 역할 ==================== -->
+<div class="page">
+  <div class="page-logo">LIZZYCONNECT</div>
+  <div class="page-num">03 / 08</div>
+
+  <div class="section-num">02</div>
+  <h1>참여자 및 역할 <span class="thin">Team & Roles</span></h1>
+
+  <div class="grid-3">
+    <div class="card" style="border-top: 3px solid var(--navy);">
+      <div style="text-align:center; margin-bottom:10px;">
+        <div style="width:56px;height:56px;border-radius:50%;background:var(--navy);margin:0 auto 8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;font-weight:800;">권</div>
+        <div style="font-size:14px;font-weight:700;">권현우 대표</div>
+        <div class="tag tag-gold">커머스 총괄</div>
+      </div>
+      <div class="card-body">
+        <strong>담당 영역</strong><br>
+        &middot; 건기식 브랜드 소싱<br>
+        &middot; 셀러 네트워크 관리<br>
+        &middot; 공급가/마진 협상<br>
+        &middot; 물류/CS 체계 구축<br>
+        <br>
+        <strong>핵심 역량</strong><br>
+        풍부한 셀러/브랜드사 인맥, 커머스 운영 경험
+      </div>
+    </div>
+    <div class="card" style="border-top: 3px solid var(--gold);">
+      <div style="text-align:center; margin-bottom:10px;">
+        <div style="width:56px;height:56px;border-radius:50%;background:var(--gold);margin:0 auto 8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;font-weight:800;">오</div>
+        <div style="font-size:14px;font-weight:700;">오맷돌 대표</div>
+        <div class="tag tag-gold">플랫폼/운영 총괄</div>
+      </div>
+      <div class="card-body">
+        <strong>담당 영역</strong><br>
+        &middot; 전체 사업 기획/전략<br>
+        &middot; 3자 간 브릿지 역할<br>
+        &middot; 데이터 분석 체계 설계<br>
+        &middot; 브랜드 라운지 기획<br>
+        <br>
+        <strong>핵심 역량</strong><br>
+        플로우머스/네오브릿지 운영, 플랫폼 설계 경험
+      </div>
+    </div>
+    <div class="card" style="border-top: 3px solid var(--purple);">
+      <div style="text-align:center; margin-bottom:10px;">
+        <div style="width:56px;height:56px;border-radius:50%;background:var(--purple);margin:0 auto 8px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;font-weight:800;">이</div>
+        <div style="font-size:14px;font-weight:700;">이세령 대표</div>
+        <div class="tag tag-gold">인플루언서/콘텐츠 총괄</div>
+      </div>
+      <div class="card-body">
+        <strong>담당 영역</strong><br>
+        &middot; 다이어트 인스타 메인 운영<br>
+        &middot; 인플루언서 네트워크 관리<br>
+        &middot; 콘텐츠 기획/제작<br>
+        &middot; 교육/강의 프로그램<br>
+        <br>
+        <strong>핵심 역량</strong><br>
+        @lizzyconnect 85K, 1,200명+ 인플루언서 풀, 실제 -30kg 스토리
+      </div>
+    </div>
+  </div>
+
+  <h2>협업 구조</h2>
+  <div style="text-align:center; margin: 16px 0;">
+    <div style="display:inline-block; border:2px solid var(--gold); border-radius:8px; padding:16px 28px; background:var(--gold-light);">
+      <div style="font-size:11px; font-weight:700; color:var(--gold); margin-bottom:8px;">3자 시너지 구조</div>
+      <div style="display:flex; gap:20px; align-items:center; justify-content:center;">
+        <div style="text-align:center;">
+          <div style="font-size:12px;font-weight:700;color:var(--navy);">셀러/브랜드</div>
+          <div style="font-size:10px;color:var(--text-med);">권현우 대표</div>
+        </div>
+        <div style="font-size:20px;color:var(--gold);">+</div>
+        <div style="text-align:center;">
+          <div style="font-size:12px;font-weight:700;color:var(--navy);">인플루언서</div>
+          <div style="font-size:10px;color:var(--text-med);">이세령 대표</div>
+        </div>
+        <div style="font-size:20px;color:var(--gold);">+</div>
+        <div style="text-align:center;">
+          <div style="font-size:12px;font-weight:700;color:var(--navy);">플랫폼/운영</div>
+          <div style="font-size:10px;color:var(--text-med);">오맷돌 대표</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2>법인 전환 기준</h2>
+  <div class="highlight-box">
+    <p><strong>월 순수익 2,000만원 이상 달성 시</strong> &rarr; (주)리지커넥트 법인 설립<br>
+    매출 목표: 월 1억원 / 법인 전 개인사업자로 운영하며 매출 실적 선행 확보</p>
+  </div>
+
+  <h2>시장 기회</h2>
+  <div class="grid-2">
+    <div class="metric metric-gold">
+      <div class="metric-value">6조</div>
+      <div class="metric-label">건강기능식품 시장 규모</div>
+    </div>
+    <div class="metric metric-gold">
+      <div class="metric-value">28조</div>
+      <div class="metric-label">인플루언서 커머스 시장 (2025)</div>
+    </div>
+  </div>
+  <div class="grid-3" style="margin-top:8px;">
+    <div class="metric">
+      <div class="metric-value" style="font-size:18px;">69.8%</div>
+      <div class="metric-label">건기식 온라인 구매 비중</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value" style="font-size:18px;">2,345억</div>
+      <div class="metric-label">체지방 감소 건기식 시장</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value" style="font-size:18px;">$5.2</div>
+      <div class="metric-label">인플루언서 마케팅 ROI ($1당)</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PAGE 4: 로드맵 ==================== -->
+<div class="page">
+  <div class="page-logo">LIZZYCONNECT</div>
+  <div class="page-num">04 / 08</div>
+
+  <div class="section-num">03</div>
+  <h1>사업 로드맵 <span class="thin">Roadmap</span></h1>
+
+  <div class="phase">
+    <div class="phase-dot active"></div>
+    <div class="phase-title" style="color:var(--gold);">Phase 1: 매출 생성기 <span style="font-weight:400;color:var(--text-low);">2026년 5월~</span></div>
+    <div class="phase-desc">
+      <div class="card" style="margin-top:8px;">
+        <div class="grid-2">
+          <div>
+            <h3>다이어트 인스타 계정</h3>
+            <p>&middot; 이세령 대표 메인 얼굴<br>
+            &middot; 90kg &rarr; 60kg 변환 스토리 콘텐츠<br>
+            &middot; 비포/애프터 + 일상 다이어트 기록<br>
+            &middot; 릴스 중심 바이럴 전략</p>
+            <div class="tag tag-gold">목표: 3개월 내 팔로워 3~5만</div>
+          </div>
+          <div>
+            <h3>건기식 공구 시작</h3>
+            <p>&middot; 권현우 대표 루트로 건기식 소싱<br>
+            &middot; 주력: 단백질, 유산균, 다이어트 보조제<br>
+            &middot; 객단가 3~5만원, 월 4~8회 공구<br>
+            &middot; 스룩페이/셀럽션 결제 시스템 활용</p>
+            <div class="tag tag-blue">목표: 월 매출 3,000~5,000만원</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-dot"></div>
+    <div class="phase-title" style="color:var(--blue);">Phase 2: 벤더사 전환기 <span style="font-weight:400;color:var(--text-low);">월 순수익 2,000만원 달성 시</span></div>
+    <div class="phase-desc">
+      <div class="card" style="margin-top:8px;">
+        <div class="grid-2">
+          <div>
+            <h3>법인 설립 & 시스템 구축</h3>
+            <p>&middot; (주)리지커넥트 법인 등기<br>
+            &middot; CS/물류/정산 시스템 체계화<br>
+            &middot; 데이터 기반 셀링 시스템 (LSI 참고)<br>
+            &middot; MD 1~2명 채용</p>
+          </div>
+          <div>
+            <h3>인플루언서 네트워크 가동</h3>
+            <p>&middot; 리지커넥트 1,200명+에 공구 상품 중개<br>
+            &middot; 인플루언서별 카테고리/전환율 데이터 매핑<br>
+            &middot; 상품-인플루언서 최적 매칭<br>
+            &middot; 벤더 수수료 10~15% 수취</p>
+          </div>
+        </div>
+        <div class="tag tag-green" style="margin-top:8px;">목표: 월 매출 1억+, 순수익 3,000~4,000만원</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-dot"></div>
+    <div class="phase-title" style="color:var(--green);">Phase 3: 플랫폼 확장기 <span style="font-weight:400;color:var(--text-low);">법인 설립 6개월~</span></div>
+    <div class="phase-desc">
+      <div class="card" style="margin-top:8px;">
+        <div class="grid-2">
+          <div>
+            <h3>카테고리 & 사업 확장</h3>
+            <p>&middot; 건기식 &rarr; 뷰티/라이프스타일 확장<br>
+            &middot; 브랜드 라운지 오프라인 행사 시작<br>
+            &middot; 자체 브랜드(PB) 상품 개발 검토<br>
+            &middot; 스마트스토어/자사몰 구축</p>
+          </div>
+          <div>
+            <h3>교육/인플루언서 육성</h3>
+            <p>&middot; 이세령 대표 다이어트 스토리 기반 강의<br>
+            &middot; 인플루언서 육성 프로그램 운영<br>
+            &middot; 레페리 Beauty Creator Lab 참고<br>
+            &middot; 수강생 &rarr; 네트워크 유입 선순환</p>
+          </div>
+        </div>
+        <div class="tag tag-green" style="margin-top:8px;">목표: 연 매출 20억+, 코스닥 상장 준비</div>
+      </div>
+    </div>
+  </div>
+
+  <h2>성장 시나리오</h2>
+  <div class="bar-row">
+    <div class="bar-label">Phase 1<br><span style="font-size:8px;">5~7월</span></div>
+    <div class="bar-track"><div class="bar-fill bar-gold" style="width:30%">월 3,000~5,000만</div></div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label">Phase 2<br><span style="font-size:8px;">법인전환 후</span></div>
+    <div class="bar-track"><div class="bar-fill bar-navy" style="width:55%">월 1억~1.5억</div></div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label">Phase 3<br><span style="font-size:8px;">6개월~</span></div>
+    <div class="bar-track"><div class="bar-fill bar-green" style="width:85%">월 2억+ (연 20억+)</div></div>
+  </div>
+</div>
+
+<!-- ==================== PAGE 5: 수익 시뮬레이션 ==================== -->
+<div class="page">
+  <div class="page-logo">LIZZYCONNECT</div>
+  <div class="page-num">05 / 08</div>
+
+  <div class="section-num">04</div>
+  <h1>수익 시뮬레이션 <span class="thin">Revenue Model</span></h1>
+
+  <h2>Phase 1: 자체 공구 수익 구조</h2>
+  <table class="tbl-gold">
+    <tr><th width="35%">항목</th><th width="30%">수치</th><th width="35%">비고</th></tr>
+    <tr><td>건기식 평균 객단가</td><td><strong>4만원</strong></td><td>단백질/유산균/다이어트 보조제</td></tr>
+    <tr><td>공구 빈도</td><td><strong>월 4~8회</strong></td><td>주 1~2회</td></tr>
+    <tr><td>회당 판매 건수</td><td><strong>500~600건</strong></td><td>전환율 3~5% 기준</td></tr>
+    <tr><td>공구 수수료율</td><td><strong>25~30%</strong></td><td>업계 평균 28.9%</td></tr>
+    <tr><td style="font-weight:700;">월 매출</td><td style="font-weight:700;color:var(--gold);">8,000만~1억원</td><td>4만원 x 500건 x 4~5회</td></tr>
+    <tr><td style="font-weight:700;">월 순수익</td><td style="font-weight:700;color:var(--gold);">2,000~2,500만원</td><td>마진율 약 25%</td></tr>
+  </table>
+
+  <h2>Phase 2: 벤더사 추가 수익</h2>
+  <table class="tbl-blue">
+    <tr><th width="35%">항목</th><th width="30%">수치</th><th width="35%">비고</th></tr>
+    <tr><td>자체 공구 수익 (유지)</td><td><strong>2,000~2,500만원/월</strong></td><td>Phase 1 유지</td></tr>
+    <tr><td>인플루언서 중개 규모</td><td><strong>50명 x 200만원</strong></td><td>1,200명 중 50명 활성화</td></tr>
+    <tr><td>벤더 마진</td><td><strong>10~15%</strong></td><td>중개 수수료</td></tr>
+    <tr><td>중개 수익</td><td><strong>1,000~1,500만원/월</strong></td><td>1억 x 10~15%</td></tr>
+    <tr><td style="font-weight:700;">합산 월 순수익</td><td style="font-weight:700;color:var(--blue);">3,000~4,000만원</td><td>자체 + 중개</td></tr>
+  </table>
+
+  <h2>비용 구조 (월 매출 1억 기준)</h2>
+  <div class="bar-row">
+    <div class="bar-label">제품 원가</div>
+    <div class="bar-track"><div class="bar-fill bar-navy" style="width:45%">40~50% (4,000~5,000만)</div></div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label">인플루언서</div>
+    <div class="bar-track"><div class="bar-fill bar-gold" style="width:22%">20~25% (2,000~2,500만)</div></div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label">물류/배송</div>
+    <div class="bar-track"><div class="bar-fill" style="width:7%;background:var(--text-med)">5~8%</div></div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label">PG/결제</div>
+    <div class="bar-track"><div class="bar-fill" style="width:4%;background:var(--text-low)">3~5%</div></div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label">운영비</div>
+    <div class="bar-track"><div class="bar-fill" style="width:3%;background:var(--border)"></div></div>
+  </div>
+  <div class="bar-row">
+    <div class="bar-label" style="font-weight:700;color:var(--gold);">순이익</div>
+    <div class="bar-track"><div class="bar-fill bar-gold" style="width:20%">15~25% (1,500~2,500만)</div></div>
+  </div>
+
+  <h2>월 1억 달성 필요 조건</h2>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-header">시나리오 A: 자체 계정 중심</div>
+      <div class="card-body">
+        <table class="tbl-compact" style="margin:0;">
+          <tr><td>필요 팔로워</td><td><strong>5~10만명</strong></td></tr>
+          <tr><td>전환율</td><td>3~5%</td></tr>
+          <tr><td>공구 빈도</td><td>월 4~8회</td></tr>
+          <tr><td>객단가</td><td>3~5만원</td></tr>
+          <tr><td>제품 라인업</td><td>3~5개 이상</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">시나리오 B: 네트워크 활용</div>
+      <div class="card-body">
+        <table class="tbl-compact" style="margin:0;">
+          <tr><td>자체 팔로워</td><td><strong>3~5만명</strong></td></tr>
+          <tr><td>서브 인플루언서</td><td>10~20명 동시 공구</td></tr>
+          <tr><td>인플루언서당 매출</td><td>500~1,000만원</td></tr>
+          <tr><td>벤더 마진</td><td>30~40%</td></tr>
+          <tr><td>자체+중개 합산</td><td>1억+</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight-box" style="margin-top:12px;">
+    <p><strong>핵심 포인트:</strong> 이세령 대표의 -30kg 실제 스토리는 다이어트 인플루언서 중 가장 강력한 콘텐츠 자산이다. 유사 사례(미소 miso 등)에서 릴스 조회수 수백만 회, 팔로워 9개월 내 7만명 달성 사례가 있다. 여기에 1,200명+ 네트워크가 더해지면 Phase 1의 3개월 내 팔로워 5만 달성은 현실적 목표다.</p>
+  </div>
+</div>
+
+<!-- ==================== PAGE 6: 시장 분석 ==================== -->
+<div class="page">
+  <div class="page-logo">LIZZYCONNECT</div>
+  <div class="page-num">06 / 08</div>
+
+  <div class="section-num">05</div>
+  <h1>시장 분석 & 경쟁 <span class="thin">Market & Competition</span></h1>
+
+  <h2>건기식 시장 현황</h2>
+  <div class="grid-2">
+    <div>
+      <table>
+        <tr><th>연도</th><th>시장 규모</th><th>변동</th></tr>
+        <tr><td>2022</td><td>6조 1,498억</td><td>-</td></tr>
+        <tr><td>2023</td><td>6조 1,415억</td><td>-0.1%</td></tr>
+        <tr><td>2024</td><td>5조 9,531억</td><td>-3.1%</td></tr>
+        <tr><td>2025</td><td>~6조 4,000억</td><td>+5.2%</td></tr>
+      </table>
+    </div>
+    <div>
+      <div class="blue-box">
+        <p><strong>기회 포인트</strong><br>
+        &middot; 전체 시장은 정체이나 <strong>온라인 비중 69.8%</strong>로 지속 상승<br>
+        &middot; <strong>체지방 감소 건기식</strong>은 2,345억으로 꾸준히 성장<br>
+        &middot; 식약처 기능성 원료 신청 1위 = 체지방 감소(44건)</p>
+      </div>
+    </div>
+  </div>
+
+  <h2>다이어트 건기식 인기 품목</h2>
+  <div class="bar-row"><div class="bar-label">단백질 쉐이크</div><div class="bar-track"><div class="bar-fill bar-navy" style="width:53%">52.8%</div></div></div>
+  <div class="bar-row"><div class="bar-label">녹차추출물</div><div class="bar-track"><div class="bar-fill bar-gold" style="width:51%">50.8%</div></div></div>
+  <div class="bar-row"><div class="bar-label">키토산</div><div class="bar-track"><div class="bar-fill bar-blue" style="width:32%">32.2%</div></div></div>
+  <div class="bar-row"><div class="bar-label">락토페린</div><div class="bar-track"><div class="bar-fill bar-green" style="width:29%">29.4%</div></div></div>
+  <div class="bar-row"><div class="bar-label">가르시니아</div><div class="bar-track"><div class="bar-fill" style="width:29%;background:var(--purple)">29.2%</div></div></div>
+  <p style="font-size:9px;color:var(--text-low);margin-top:4px;">* 최근 1년 구매 경험률 기준</p>
+
+  <h2>인플루언서 커머스 시장</h2>
+  <div class="bar-row"><div class="bar-label">2022년</div><div class="bar-track"><div class="bar-fill bar-navy" style="width:21%">6조원</div></div></div>
+  <div class="bar-row"><div class="bar-label" style="font-weight:700;">2025년</div><div class="bar-track"><div class="bar-fill bar-gold" style="width:100%">28조원 (4.7배 성장)</div></div></div>
+
+  <h2>경쟁사 비교</h2>
+  <table>
+    <tr><th>회사</th><th>매출</th><th>모델</th><th>리지커넥트 차별점</th></tr>
+    <tr><td><strong>레페리</strong></td><td>456억</td><td>뷰티 MCN + 커머스 수직통합</td><td>대행X, 관계 기반, 다카테고리</td></tr>
+    <tr><td><strong>태그바이</strong></td><td>154억</td><td>인플루언서 체험단 SaaS</td><td>디지털만 vs 오프라인 네트워킹</td></tr>
+    <tr><td><strong>피처링</strong></td><td>97억</td><td>AI 인플루언서 분석 플랫폼</td><td>분석 도구 vs 직접 셀링</td></tr>
+    <tr><td><strong>브릭스</strong></td><td>비공개</td><td>공구 중개 플랫폼</td><td>플랫폼 vs 네트워크 보유</td></tr>
+    <tr><td><strong>다노</strong></td><td>비공개</td><td>다이어트 D2C</td><td>D2C vs 벤더(확장성)</td></tr>
+  </table>
+
+  <div class="highlight-box">
+    <p><strong>시장 공백:</strong> "프리미엄 라운지에서 브랜드 대표와 인플루언서가 정기적으로 만나는 소셜 네트워킹" 포맷은 한국에 아직 없다. 기존 플레이어는 모두 디지털 플랫폼이거나 일회성 대규모 이벤트에 집중한다.</p>
+  </div>
+</div>
+
+<!-- ==================== PAGE 7: 법적 요건 & 5월 액션플랜 ==================== -->
+<div class="page">
+  <div class="page-logo">LIZZYCONNECT</div>
+  <div class="page-num">07 / 08</div>
+
+  <div class="section-num">06</div>
+  <h1>법적 요건 & 실행 계획 <span class="thin">Legal & Action Plan</span></h1>
+
+  <h2>건기식 판매 법적 요건</h2>
+  <table>
+    <tr><th width="35%">항목</th><th width="40%">내용</th><th width="25%">비고</th></tr>
+    <tr><td>영업 형태</td><td>건강기능식품 일반판매업</td><td>필수</td></tr>
+    <tr><td>교육 이수</td><td>한국건강기능식품협회 2시간</td><td>수강료 2만원</td></tr>
+    <tr><td>신고 수수료</td><td>25,000원 (정부24)</td><td>처리 3일</td></tr>
+    <tr><td>추가 신고</td><td>통신판매업 신고</td><td>필수</td></tr>
+    <tr><td>사업자등록</td><td>개인사업자 (법인 전 단계)</td><td>세무서</td></tr>
+  </table>
+
+  <div class="red-box">
+    <p><strong>광고 규제 주의사항 (식약처 단속 강화 중)</strong><br>
+    &middot; "OO 먹고 10kg 빠졌다" 등 체험기 형태도 허위/과대광고로 적발 가능<br>
+    &middot; 질병 예방/치료 효능 표현 절대 금지<br>
+    &middot; "개인적 경험"임을 반드시 명시<br>
+    &middot; 건기식 광고 <strong>사전심의 필수</strong> (한국건강기능식품협회)<br>
+    &middot; 위반 시: <strong>10년 이하 징역 또는 1억 이하 벌금</strong></p>
+  </div>
+
+  <h2>5월 실행 액션플랜</h2>
+
+  <div class="week">
+    <div class="week-header">WEEK 1 (5/1~5/7)</div>
+    <ul class="week-items">
+      <li>인스타그램 다이어트 계정 개설 (계정명/프로필 확정)</li>
+      <li>건기식 일반판매업 교육 이수 (온라인 2시간)</li>
+      <li>건기식 일반판매업 신고 + 통신판매업 신고</li>
+      <li>콘텐츠 기획안 작성 (릴스 10개 사전 촬영 목록)</li>
+      <li>권현우 대표: 건기식 브랜드 1차 리스트업 (단백질/유산균/다이어트)</li>
+    </ul>
+  </div>
+
+  <div class="week">
+    <div class="week-header">WEEK 2 (5/8~5/14)</div>
+    <ul class="week-items">
+      <li>첫 콘텐츠 업로드 시작 (비포/애프터 + 다이어트 여정 릴스)</li>
+      <li>매일 1개 릴스 or 피드 업로드 (초기 알고리즘 학습 기간)</li>
+      <li>건기식 브랜드 미팅 시작 (공급가/수수료 협상)</li>
+      <li>결제 시스템 셋업 (스룩페이 or 셀럽션)</li>
+    </ul>
+  </div>
+
+  <div class="week">
+    <div class="week-header">WEEK 3 (5/15~5/21)</div>
+    <ul class="week-items">
+      <li>팔로워 성장 모니터링 (목표: 2주차 3,000~5,000명)</li>
+      <li>건기식 1차 소싱 확정 (2~3개 제품)</li>
+      <li>공구 상세페이지 제작</li>
+      <li>광고 사전심의 신청 (필요 시)</li>
+    </ul>
+  </div>
+
+  <div class="week">
+    <div class="week-header" style="background:var(--gold);">WEEK 4 (5/22~5/31)</div>
+    <ul class="week-items">
+      <li><strong>첫 공구 오픈</strong> (스토리 + 릴스 + 피드 동시 노출)</li>
+      <li>공구 성과 분석 (전환율, 객단가, 취소율)</li>
+      <li>CS 대응 체계 수립</li>
+      <li>6월 공구 일정 & 제품 라인업 확정</li>
+    </ul>
+  </div>
+
+  <h2>월별 KPI 리뷰 항목</h2>
+  <div class="grid-3">
+    <div class="card" style="text-align:center;">
+      <div class="card-header">성장 지표</div>
+      <div class="card-body">팔로워 수<br>릴스 조회수<br>인게이지먼트율</div>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div class="card-header">매출 지표</div>
+      <div class="card-body">공구 매출<br>전환율<br>객단가</div>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div class="card-header">운영 지표</div>
+      <div class="card-body">취소/반품률<br>CS 응답시간<br>재구매율</div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PAGE 8: 비전 & 포지셔닝 ==================== -->
+<div class="page">
+  <div class="page-logo">LIZZYCONNECT</div>
+  <div class="page-num">08 / 08</div>
+
+  <div class="section-num">07</div>
+  <h1>비전 & 포지셔닝 <span class="thin">Vision</span></h1>
+
+  <h2>레페리와의 차별화</h2>
+  <table>
+    <tr><th width="25%">구분</th><th width="37%">레페리</th><th width="38%">리지커넥트</th></tr>
+    <tr><td><strong>본질</strong></td><td>판매 전환 (B2C 리테일)</td><td style="color:var(--gold);font-weight:600;">관계 구축 (B2B 네트워킹)</td></tr>
+    <tr><td><strong>브랜드 역할</strong></td><td>수동적 (납품 후 대기)</td><td style="color:var(--gold);font-weight:600;">능동적 (대표가 직접 소개)</td></tr>
+    <tr><td><strong>진입 비용</strong></td><td>높음 (대형 팝업)</td><td style="color:var(--gold);font-weight:600;">낮음 (참가비 형태)</td></tr>
+    <tr><td><strong>카테고리</strong></td><td>뷰티 편중</td><td style="color:var(--gold);font-weight:600;">건기식 &rarr; 전 카테고리</td></tr>
+    <tr><td><strong>데이터</strong></td><td>BBPI/LSI (크리에이터 리뷰)</td><td style="color:var(--gold);font-weight:600;">인플루언서별 전환율/매출 데이터</td></tr>
+    <tr><td><strong>오프라인</strong></td><td>셀렉트스토어 (고비용)</td><td style="color:var(--gold);font-weight:600;">브랜드 라운지 (저비용, 프리미엄)</td></tr>
+  </table>
+
+  <h2>브랜드 라운지 로드맵</h2>
+  <div class="flow">
+    <div class="flow-item" style="background:var(--gold);">Phase 1<br><span style="font-size:8px;">공구로 매출 확보</span></div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-item">Phase 2<br><span style="font-size:8px;">벤더사 법인 설립</span></div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-item" style="background:var(--blue);">Phase 3<br><span style="font-size:8px;">브랜드 라운지 런칭</span></div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-item" style="background:var(--green);">Phase 4<br><span style="font-size:8px;">데이터 플랫폼</span></div>
+  </div>
+
+  <div class="green-box" style="margin-top:12px;">
+    <p><strong>브랜드 라운지 컨셉:</strong> 프리미엄 라운지에서 브랜드사 대표들이 직접 자기 브랜드를 소개하고, 인플루언서들과 자연스럽게 네트워킹하는 정기 소셜 모임. 인플루언서 참석 자체가 SNS 콘텐츠가 되어 광고비 0원 바이럴 효과.</p>
+  </div>
+
+  <h2>장기 비전: Value Chain</h2>
+  <div style="border:2px solid var(--navy); border-radius:8px; padding:16px; text-align:center; margin:12px 0;">
+    <div style="font-size:10px; font-weight:600; color:var(--text-low); letter-spacing:2px; margin-bottom:10px;">LIZZYCONNECT INFLUENCER VALUE CHAIN</div>
+    <div class="flow" style="justify-content:center;">
+      <div class="flow-item" style="font-size:9px;">콘텐츠<br>교육</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-item" style="font-size:9px;">인플루언서<br>매니지먼트</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-item" style="font-size:9px;background:var(--gold);">데이터 기반<br>매칭</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-item" style="font-size:9px;">벤더<br>커머스</div>
+      <div class="flow-arrow">&rarr;</div>
+      <div class="flow-item" style="font-size:9px;background:var(--green);">브랜드 라운지<br>네트워킹</div>
+    </div>
+  </div>
+
+  <h2>핵심 경쟁력 요약</h2>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-header">왜 리지커넥트인가?</div>
+      <div class="card-body">
+        1. <strong>1,200명+ 인플루언서 네트워크</strong> &mdash; 이미 확보된 자산<br>
+        2. <strong>실제 -30kg 스토리</strong> &mdash; 가장 강력한 콘텐츠<br>
+        3. <strong>3자 시너지</strong> &mdash; 셀러+인플루언서+플랫폼<br>
+        4. <strong>시장 공백</strong> &mdash; 관계 기반 벤더 모델 부재
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">리스크 관리</div>
+      <div class="card-body">
+        1. <strong>광고 규제</strong> &mdash; 사전심의 철저 준수<br>
+        2. <strong>핵심 인플루언서 이탈</strong> &mdash; 네트워크 다변화<br>
+        3. <strong>매출 변동성</strong> &mdash; 정기 공구로 안정화<br>
+        4. <strong>경쟁 심화</strong> &mdash; 데이터 + 오프라인 차별화
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center; margin-top:24px; padding:20px; border-top:2px solid var(--border);">
+    <div style="font-size:9px;color:var(--text-low);letter-spacing:2px;margin-bottom:8px;">OUR GOAL</div>
+    <div style="font-size:18px;font-weight:800;color:var(--navy);">5월 시작, 월 1억 매출, 순수익 2,000만원</div>
+    <div style="font-size:11px;color:var(--text-med);margin-top:4px;">법인 전환 후 데이터 기반 인플루언서 벤더 플랫폼으로 성장</div>
+  </div>
+
+  <div style="position:absolute;bottom:40px;left:48px;right:48px;text-align:center;">
+    <div style="font-size:9px;color:var(--text-low);letter-spacing:1px;">CONFIDENTIAL &mdash; (주)리지커넥트 &middot; 2026. 04. 25</div>
+  </div>
+</div>
+
+</body>
+</html>
