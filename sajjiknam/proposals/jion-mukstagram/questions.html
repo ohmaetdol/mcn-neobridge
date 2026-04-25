@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>질문지 -- 지온서 먹스타그램 EP2</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F2F4F6;color:#191F28;font-family:'Pretendard',system-ui,sans-serif;min-height:100vh;font-size:15px}
+.gnb{background:#fff;border-bottom:1px solid #E5E8EB;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.gnb-logo{font-size:16px;font-weight:800;color:#D4A017}
+.gnb-badge{background:#FFFBEA;color:#8B6914;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:800;border:1px solid #D4A017}
+.gnb-date{font-size:11px;color:#8B95A1;font-weight:600}
+.wrap{max-width:720px;margin:0 auto;padding:28px 20px 80px}
+.hero{background:linear-gradient(135deg,#0A1628 0%,#132B4D 50%,#1F4680 100%);border-radius:20px;padding:32px;margin-bottom:24px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;right:-10%;width:300px;height:300px;background:radial-gradient(circle,rgba(255,184,0,.2),transparent);pointer-events:none}
+.hero-eyebrow{font-size:11px;font-weight:700;color:#FFB800;letter-spacing:2px;margin-bottom:10px}
+.hero-title{font-size:24px;font-weight:800;line-height:1.3;color:#fff;margin-bottom:8px}
+.hero-sub{color:#8B95A1;font-size:13px;line-height:1.7}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
+.hero-stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:10px;text-align:center}
+.hero-stat-v{font-size:18px;font-weight:800;color:#FFB800}
+.hero-stat-l{font-size:10px;color:#8B95A1;margin-top:3px}
+.card{background:#fff;border-radius:16px;padding:22px;margin-bottom:14px;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+.card.hot{border:2px solid #D4A017;background:#FFFBEA}
+.card.dark{background:#0A1628;color:#fff}
+.card.navy{background:#132B4D;color:#fff;border:1px solid #1F4680}
+.card.gold{border:2px solid #D4A017;background:#FFFBEA}
+.card.blue{border:2px solid #0A1628;background:#F8F9FA}
+.section{margin-bottom:28px}
+.section-title{font-size:18px;font-weight:800;color:#191F28;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.section-title .num{background:#0A1628;color:#FFB800;border-radius:8px;padding:4px 10px;font-size:13px}
+.section-title .num.red{background:#D4A017;color:#fff}
+.section-title .num.gold{background:#D4A017;color:#fff}
+.section-title .sub{font-size:13px;font-weight:600;color:#8B95A1;margin-left:auto}
+.tag{display:inline-block;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:700;margin-right:5px;white-space:nowrap}
+.tag-r{background:#FFFBEA;color:#D4A017}.tag-b{background:#F8F9FA;color:#0A1628}.tag-d{background:#0A1628;color:#FFB800}.tag-g{background:#F0FFF4;color:#276749}
+.note{background:#FFFBEA;border-left:3px solid #D4A017;border-radius:0 8px 8px 0;padding:14px 16px;margin:10px 0;font-size:13px;line-height:1.7;color:#3E4A5A}
+.note.blue{background:#F8F9FA;border-left-color:#0A1628}
+.q-block{background:#fff;border-radius:14px;padding:0;margin-bottom:12px;box-shadow:0 1px 6px rgba(0,0,0,.06);overflow:hidden}
+.q-block.must{border-left:4px solid #D4A017}
+.q-block.optional{border-left:4px solid #E5E8EB}
+.q-header{display:flex;align-items:center;gap:12px;padding:16px 18px 8px}
+.q-num{background:#0A1628;color:#FFB800;border-radius:8px;min-width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0}
+.q-num.red{background:#D4A017;color:#fff}
+.q-question{font-size:15px;font-weight:700;color:#191F28;line-height:1.5;flex:1}
+.q-meta{padding:4px 18px 16px 62px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.q-meta-item{font-size:12px;color:#6B7684;line-height:1.5}
+.q-meta-item strong{color:#3E4A5A;font-weight:700}
+.q-intent{padding:0 18px 16px 62px;font-size:12px;color:#8B95A1;line-height:1.6;border-top:1px solid #F2F4F6;padding-top:10px}
+.q-tags{padding:0 18px 14px 62px;display:flex;flex-wrap:wrap;gap:4px}
+.divider{height:1px;background:#E5E8EB;margin:20px 0}
+.scene-bar{display:flex;align-items:center;gap:10px;background:#0A1628;border-radius:10px;padding:12px 16px;margin-bottom:14px}
+.scene-time{font-size:13px;font-weight:800;color:#FFB800;min-width:90px}
+.scene-name{font-size:14px;font-weight:700;color:#fff}
+.scene-loc{font-size:11px;color:#8B95A1;margin-left:auto}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
+th{padding:10px;text-align:left;border-bottom:2px solid #E5E8EB;color:#8B6914;font-size:11px;background:#FFFBEA;font-weight:700}
+td{padding:10px;border-bottom:1px solid #F2F4F6;color:#3E4A5A;line-height:1.6}
+.footer{text-align:center;padding:20px;font-size:10px;color:#8B95A1}
+.print-btn{background:#0A1628;color:#FFB800;border:none;border-radius:8px;padding:10px 20px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;margin-bottom:20px}
+.print-btn:hover{background:#132B4D}
+@media(max-width:600px){.hero-stats{grid-template-columns:repeat(2,1fr)}.q-meta{grid-template-columns:1fr}}
+@media print{
+.gnb{position:static;border-bottom:2px solid #000}
+.print-btn{display:none}
+body{background:#fff;font-size:12px}
+.hero{padding:20px;margin-bottom:16px}
+.q-block{break-inside:avoid;margin-bottom:8px;box-shadow:none;border:1px solid #ddd}
+.q-header{padding:10px 12px 4px}
+.q-meta{padding:2px 12px 10px 50px}
+.q-intent{padding:0 12px 10px 50px}
+.q-tags{padding:0 12px 8px 50px}
+.section{margin-bottom:16px}
+.card{break-inside:avoid;box-shadow:none;border:1px solid #ddd}
+.scene-bar{break-inside:avoid}
+.note{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<nav class="gnb"><span class="gnb-logo">사찍남</span><span class="gnb-badge">MC/PD 질문지</span><span class="gnb-date">지온서 EP2</span></nav>
+<div class="wrap">
+
+<div class="hero">
+<div class="hero-eyebrow">MC/PD용 -- 촬영 현장 질문지</div>
+<div class="hero-title">지온서 먹스타그램 EP2<br>20개 질문 -- 5단계</div>
+<div class="hero-sub">599개 영상 데이터 + Most Replayed 피크 분석 기반 설계</div>
+<div class="hero-stats">
+<div class="hero-stat"><div class="hero-stat-v">20</div><div class="hero-stat-l">전체 질문</div></div>
+<div class="hero-stat"><div class="hero-stat-v">14</div><div class="hero-stat-l">필수 질문</div></div>
+<div class="hero-stat"><div class="hero-stat-v">6</div><div class="hero-stat-l">선택 질문</div></div>
+<div class="hero-stat"><div class="hero-stat-v">22분</div><div class="hero-stat-l">목표 길이</div></div>
+</div>
+</div>
+
+<button class="print-btn" onclick="window.print()">인쇄하기</button>
+
+<!-- 질문 설계 원칙 -->
+<div class="card navy">
+<div style="font-size:11px;font-weight:700;color:#FFB800;letter-spacing:1.5px;margin-bottom:10px">질문 운영 원칙</div>
+<div style="font-size:13px;color:#fff;line-height:2">
+<strong style="color:#FFB800">1.</strong> 필수 질문 14개는 반드시 소화. 선택 6개는 시간/분위기에 따라 조절.<br>
+<strong style="color:#FFB800">2.</strong> 수익 관련 질문에서 구체적 숫자를 유도. "많이"가 아니라 "몇 건, 얼마"로.<br>
+<strong style="color:#FFB800">3.</strong> 화면 공유(통장, DM, 캡컷)가 나오는 순간 = 킬러 구간. 카메라 앵글 사전 세팅.<br>
+<strong style="color:#FFB800">4.</strong> 어머니 질문(Q13)은 무리하지 않는다. 감정이 올라오면 기다린다.<br>
+<strong style="color:#FFB800">5.</strong> 8대 지뢰 키워드가 나오면 자연스럽게 대체 표현으로 리다이렉트.
+</div>
+</div>
+
+<!-- ===== L1 ===== -->
+<div class="scene-bar">
+<div class="scene-time">0:00 ~ 3:00</div>
+<div class="scene-name">L1. HOOK -- 첫 5초 + 현재</div>
+<div class="scene-loc">자택 / 작업 공간</div>
+</div>
+
+<div class="q-block must">
+<div class="q-header">
+<div class="q-num red">1</div>
+<div class="q-question">"이거 보여주세요. 이번 달 입금 내역."</div>
+</div>
+<div class="q-meta">
+<div class="q-meta-item"><strong>목적:</strong> 첫 5초 수익 화면 무음 후 연결</div>
+<div class="q-meta-item"><strong>기대 답변:</strong> 통장 앱 실시간 공개</div>
+</div>
+<div class="q-intent">Most Replayed: 수익 수치가 3채널 모두 최고 피크. 첫 5초에 통장 화면 무음 클로즈업 후 이 질문으로 연결.</div>
+<div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-d">HIGH: 수익수치=최고피크</span></div>
+</div>
+
+<div class="q-block must">
+<div class="q-header">
+<div class="q-num red">2</div>
+<div class="q-question">"지금 DM 열어보세요. 광고 제의 몇 개 와 있어요?"</div>
+</div>
+<div class="q-meta">
+<div class="q-meta-item"><strong>목적:</strong> 실시간 DM 증거</div>
+<div class="q-meta-item"><strong>기대 답변:</strong> DM 화면 공개 + 건수</div>
+</div>
+<div class="q-intent">화면 공유(18/20 킬러). 실시간 DM 공개 = 통장 다음의 킬러 증거.</div>
+<div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-d">화면공유 18/20 피크</span></div>
+</div>
+
+<div class="q-block must">
+<div class="q-header">
+<div class="q-num red">3</div>
+<div class="q-question">"1년 반 전에 사찍남에 나왔잖아요. 그때 24만이었는데, 지금 몇이에요?"</div>
+</div>
+<div class="q-meta">
+<div class="q-meta-item"><strong>목적:</strong> 성장 갭 (24만 -> 60만)</div>
+<div class="q-meta-item"><strong>기대 답변:</strong> "60만이요" + 반응</div>
+</div>
+<div class="q-intent">EP1 대비 성장 갭 = 최강 후킹. 숫자 대비로 시청자 궁금증 극대화.</div>
+<div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-r">HOOK</span></div>
+</div>
+
+<div class="q-block optional">
+<div class="q-header">
+<div class="q-num">4</div>
+<div class="q-question">"사찍남 나온 뒤에 인생이 어떻게 바뀌었어요? 솔직하게."</div>
+</div>
+<div class="q-meta">
+<div class="q-meta-item"><strong>목적:</strong> 이전 출연 메타 서사</div>
+<div class="q-meta-item"><strong>기대 답변:</strong> 재출연 = "진짜였다" 증명</div>
+</div>
+<div class="q-tags"><span class="tag tag-b">선택</span></div>
+</div>
+
+<!-- ===== L2 ===== -->
+<div class="scene-bar">
+<div class="scene-time">5:00 ~ 7:00</div>
+<div class="scene-name">L2. 편집 실연 -- "어떻게" 증명</div>
+<div class="scene-loc">자택 / 작업 공간</div>
+</div>
+
+<div class="q-block must">
+<div class="q-header">
+<div class="q-num red">5</div>
+<div class="q-question">"지금 여기서 촬영하고, 편집하고, 올리는 것까지 보여주세요. 타이머 켤게요."</div>
+</div>
+<div class="q-meta">
+<div class="q-meta-item"><strong>목적:</strong> 진입장벽 파괴 (원테이크 시연)</div>
+<div class="q-meta-item"><strong>기대 답변:</strong> 캡컷 편집 과정 공개</div>
+</div>
+<div class="q-intent">화면 공유 = 킬러구간 (20개 중 18개 피크). "어떻게 하는지" 시연으로 끝까지 시청 유도.</div>
+<div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-d">화면공유 18/20 피크</span></div>
+</div>
+
+<div class="q-block must">
+<div class="q-header">
+<div class="q-num red">6</div>
+<div class="q-question">"제가 지금 여기서 촬영하고 올리면 얼마 벌어요? 실시간으로 계산해주세요."</div>
+</div>
+<div class="q-meta">
+<div class="q-meta-item"><strong>목적:</strong> 실시간 수익 계산</div>
+<div class="q-meta-item"><strong>기대 답변:</strong> 구체적 금액 계산</div>
+</div>
+<div class="q-intent">탐구생활 다중피크 패턴: 노하우/수치 나올 때마다 반복시청.</div>
+<div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-d">다중피크 패턴</span></div>
+</div>
+
+<div class="q-block optional">
+<div class="q-header">
+<div class="q-num">7</div>
+<div class="q-question">"경기콘텐츠진흥원에서 강연도 하신다고요? 거기서 뭐라고 가르쳐요?"</div>
+</div>
+<div class="q-meta">
+<div class="q-meta-item"><strong>목적:</strong> 권위 부여</div>
+<div class="q-meta-item"><strong>기대 답변:</strong> 신규 이력 공개</div>
+</div>
+<div class="q-tags"><span class="tag tag-b">선택</span></div>
+</div>
+
+<!-- ===== L3 ===== -->
+<div class="scene-bar">
+<div class="scene-time">7:00 ~ 9:30</div>
+<div class="scene-name">L3. 수익 인증 -- Peak 1</div>
+<div class="scene-loc">판교유엔빌리지 (13:00~)</div>
+</div>
+
+<div class="note" style="margin-bottom:14px"><strong>카메라 주의:</strong> 통장 앱 / DM 화면이 나오는 구간. 핸드폰 화면 앵글 사전 세팅 필수. 줌인 3초 + 카운트업 편집.</div>
+
+<div class="q-block must">
+<div class="q-header">
+<div class="q-num red">8</div>
+<div class="q-question">"건당 100만원이면, 오늘 여기서 밥 먹으면서 찍는 이것도 100만원이에요?"</div>
+</div>
+<div class="q-meta">
+<div class="q-meta-item"><strong>목적:</strong> 현장 수익 실감</div>
+<div class="q-meta-item"><strong>기대 답변:</strong> "네, 이것도 광고예요" (또는 구조 설명)</div>
+</div>
+<div class="q-intent">Most Replayed: 구체적 수익 수치 = 3채널 모두 HIGH.</div>
+<div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-d">수익수치=HIGH</span></div>
+</div>
+
+<div class="q-block must">
+<div class="q-header">
+<div class="q-num red">9</div>
+<div class="q-question">"크루 중에 가장 빨리 수익 낸 사람은 며칠 만에 첫 광고 받았어요?"</div>
+</div>
+<div class="q-meta">
+<div class="q-meta-item"><strong>목적:</strong> 사회적 증거 + 실행 가능성</div>
+<div class="q-meta-item"><strong>기대 답변:</strong> 구체적 기간 + 사례</div>
+</div>
+<div class="q-intent">"나도 할 수 있다" 심리 트리거. 크루/성공사례 = 끝까지 시청.</div>
+<div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-r">킬러</span></div>
+</div>
+
+<div class="q-block must">
+<div class="q-header">
+<div class="q-num red">10</div>
+<div class="q-question">"은행원이 주말에만 해서 월 1천만원이요? 통장 본 적 있어요?"</div>
+</div>
+<div class="q-meta">
+<div class="q-meta-item"><strong>목적:</strong> 크루 성공 사례 (사회적 증거)</div>
+<div class="q-meta-item"><strong>기대 답변:</strong> 실제 사례 + 수치</div>
+</div>
+<div class="q-intent">휴먼스토리 패턴: "평균 얼마나 나오세요?"가 피크.</div>
+<div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-d">휴먼 수익질문=피크</span></div>
+</div>
+
+<div class="q-block optional">
+<div class="q-header">
+<div class="q-num">11</div>
+<div class="q-question">"하루에 가장 많이 입금된 날이 얼마예요? 그날 뭘 했어요?"</div>
+</div>
+<div class="q-meta">
+<div class="q-meta-item"><strong>목적:</strong> 최대 수익일의 비밀</div>
+<div class="q-meta-item"><strong>기대 답변:</strong> 금액 + 그날의 행동</div>
+</div>
+<div class="q-tags"><span class="tag tag-b">선택</span><span class="tag tag-d">업계비밀=HIGH</span></div>
+</div>
+
+<div class="q-block optional">
+<div class="q-header">
+<div class="q-num">12</div>
+<div class="q-question">"광고주가 왜 DM으로 직접 연락해요? 대행사 안 끼는 이유가 뭐예요?"</div>
+</div>
+<div class="q-meta">
+<div class="q-meta-item"><strong>목적:</strong> "대행사" 지뢰 키워드 선제 방어</div>
+<div class="q-meta-item"><strong>기대 답변:</strong> DM 직거래 구조 설명</div>
+</div>
+<div class="q-tags"><span class="tag tag-b">선택</span><span class="tag tag-d">선제 방어</span></div>
+</div>
+
+<!-- ===== L4 ===== -->
+<div class="scene-bar">
+<div class="scene-time">14:00 ~ 17:00</div>
+<div class="scene-name">L4. 감정 심화 -- Peak 2</div>
+<div class="scene-loc">차량 이동 (자연광)</div>
+</div>
+
+<div class="note" style="margin-bottom:14px"><strong>연출 주의:</strong> 차 안 자연광, 표정 클로즈업, 정적. 감정이 올라오면 카메라 멈추지 말고 기다린다. 7~10초 슬로우 컷, 감성 BGM 페이드.</div>
+
+<div class="q-block must">
+<div class="q-header">
+<div class="q-num red">13</div>
+<div class="q-question">"어머니 돌아가시기 전에 마지막으로 뭐라고 하셨어요?"</div>
+</div>
+<div class="q-meta">
+<div class="q-meta-item"><strong>목적:</strong> 감정 피크 (극적 장면)</div>
+<div class="q-meta-item"><strong>주의:</strong> 무리하지 않는다. 감정이 올라오면 기다린다.</div>
+</div>
+<div class="q-intent">Most Replayed: 극적/충격적 장면 = HIGH. 휴먼스토리 361개 중 감정 피크가 항상 최고 피크.</div>
+<div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-d">극적장면=HIGH</span></div>
+</div>
+
+<div class="q-block must">
+<div class="q-header">
+<div class="q-num red">14</div>
+<div class="q-question">"10년 방황하면서 가장 바닥이었던 순간은 언제예요?"</div>
+</div>
+<div class="q-meta">
+<div class="q-meta-item"><strong>목적:</strong> 바닥 경험 -> 현재 성공 대비</div>
+<div class="q-meta-item"><strong>기대 답변:</strong> 구체적 에피소드</div>
+</div>
+<div class="q-intent">인물 배경/감성 = MED. 바닥 경험이 현재 성공과 대비되어 감정 갭 극대화.</div>
+<div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-r">감정 피크</span></div>
+</div>
+
+<div class="q-block must">
+<div class="q-header">
+<div class="q-num red">15</div>
+<div class="q-question">"아버지가 처음에 반대하셨잖아요. 언제 인정해주셨어요?"</div>
+</div>
+<div class="q-meta">
+<div class="q-meta-item"><strong>목적:</strong> Dream Outcome + 카타르시스</div>
+<div class="q-meta-item"><strong>기대 답변:</strong> 반대 -> 인정 전환점</div>
+</div>
+<div class="q-intent">반대에서 인정 = 극적 반전 (HIGH). Dream Outcome 시각화.</div>
+<div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-g">카타르시스</span></div>
+</div>
+
+<div class="q-block optional">
+<div class="q-header">
+<div class="q-num">16</div>
+<div class="q-question">"'1년만 해보자' 그렇게 시작했다고 했잖아요. 그 1년 지나고 어떻게 됐어요?"</div>
+</div>
+<div class="q-meta">
+<div class="q-meta-item"><strong>목적:</strong> 시간 갭 서사</div>
+<div class="q-meta-item"><strong>기대 답변:</strong> 기한 + 결과</div>
+</div>
+<div class="q-tags"><span class="tag tag-b">선택</span></div>
+</div>
+
+<!-- ===== L5 ===== -->
+<div class="scene-bar">
+<div class="scene-time">20:30 ~ 22:00</div>
+<div class="scene-name">L5. MC 체험 + 마무리</div>
+<div class="scene-loc">샤브지오 (15:30~)</div>
+</div>
+
+<div class="q-block must">
+<div class="q-header">
+<div class="q-num red">17</div>
+<div class="q-question">"저도 직접 해볼게요. 핸드폰 주세요. 제가 찍고 편집까지 해볼게요."</div>
+</div>
+<div class="q-meta">
+<div class="q-meta-item"><strong>목적:</strong> MC 체험으로 "어렵지 않다" 최종 증명</div>
+<div class="q-meta-item"><strong>연출:</strong> MC 핸드헬드 촬영</div>
+</div>
+<div class="q-intent">탐구생활 리텐션 TOP = "어떻게 하는지" 시연이 끝까지 시청의 핵심. EP1 최대 부족점 보완.</div>
+<div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-g">CTA</span></div>
+</div>
+
+<div class="q-block must">
+<div class="q-header">
+<div class="q-num red">18</div>
+<div class="q-question">"EP1 보고 시작한 사람 있어요? 그 사람 지금 얼마 벌어요?"</div>
+</div>
+<div class="q-meta">
+<div class="q-meta-item"><strong>목적:</strong> 메타 서사 + 사회적 증거</div>
+<div class="q-meta-item"><strong>기대 답변:</strong> EP1 영향력 실증</div>
+</div>
+<div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-d">메타</span></div>
+</div>
+
+<div class="q-block must">
+<div class="q-header">
+<div class="q-num red">19</div>
+<div class="q-question">"EP1 때 쓴 편지 가져왔어요. 다시 읽어보세요."</div>
+</div>
+<div class="q-meta">
+<div class="q-meta-item"><strong>목적:</strong> 서사 완결 (과거의 나 -> 현재의 나)</div>
+<div class="q-meta-item"><strong>연출:</strong> 편지 클로즈업 + 읽는 표정</div>
+</div>
+<div class="q-intent">이전 출연 서사 완결. 감정 마무리.</div>
+<div class="q-tags"><span class="tag tag-r">필수</span><span class="tag tag-d">이전 출연</span></div>
+</div>
+
+<div class="q-block optional">
+<div class="q-header">
+<div class="q-num">20</div>
+<div class="q-question">"지금 이 영상 보는 사람한테 한마디만. 뭐부터 하라고 할 거예요?"</div>
+</div>
+<div class="q-meta">
+<div class="q-meta-item"><strong>목적:</strong> 실행 촉구 (엔딩)</div>
+<div class="q-meta-item"><strong>기대 답변:</strong> "카메라부터 켜세요" 류의 한마디</div>
+</div>
+<div class="q-intent">탐구생활 피크 패턴: 실전 노하우 = 반복시청.</div>
+<div class="q-tags"><span class="tag tag-b">선택</span><span class="tag tag-g">엔딩</span></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 요약표 -->
+<div class="section"><div class="section-title"><span class="num red">REF</span> 질문 요약표</div>
+<div class="card">
+<table>
+<tr><th>Q</th><th>질문 (요약)</th><th>단계</th><th>필수</th><th>타임</th></tr>
+<tr><td>1</td><td>이번 달 입금 내역 보여주세요</td><td>L1</td><td style="color:#D4A017;font-weight:700">필수</td><td>0:00</td></tr>
+<tr><td>2</td><td>DM 광고 제의 몇 개?</td><td>L1</td><td style="color:#D4A017;font-weight:700">필수</td><td>0:00</td></tr>
+<tr><td>3</td><td>24만 -> 지금 몇?</td><td>L1</td><td style="color:#D4A017;font-weight:700">필수</td><td>0:00</td></tr>
+<tr><td>4</td><td>사찍남 이후 변화</td><td>L1</td><td>선택</td><td>0:30</td></tr>
+<tr><td>5</td><td>촬영+편집+업로드 시연</td><td>L2</td><td style="color:#D4A017;font-weight:700">필수</td><td>5:00</td></tr>
+<tr><td>6</td><td>여기서 찍으면 얼마?</td><td>L2</td><td style="color:#D4A017;font-weight:700">필수</td><td>5:00</td></tr>
+<tr><td>7</td><td>경기콘텐츠진흥원 강연</td><td>L2</td><td>선택</td><td>5:00</td></tr>
+<tr><td>8</td><td>이것도 100만원?</td><td>L3</td><td style="color:#D4A017;font-weight:700">필수</td><td>7:00</td></tr>
+<tr><td>9</td><td>크루 가장 빨리 수익</td><td>L3</td><td style="color:#D4A017;font-weight:700">필수</td><td>7:00</td></tr>
+<tr><td>10</td><td>은행원 월 1천만원 통장</td><td>L3</td><td style="color:#D4A017;font-weight:700">필수</td><td>7:00</td></tr>
+<tr><td>11</td><td>최대 입금일</td><td>L3</td><td>선택</td><td>7:00</td></tr>
+<tr><td>12</td><td>대행사 안 끼는 이유</td><td>L3</td><td>선택</td><td>9:00</td></tr>
+<tr><td>13</td><td>어머니 마지막 말씀</td><td>L4</td><td style="color:#D4A017;font-weight:700">필수</td><td>14:00</td></tr>
+<tr><td>14</td><td>10년 방황 바닥</td><td>L4</td><td style="color:#D4A017;font-weight:700">필수</td><td>14:00</td></tr>
+<tr><td>15</td><td>아버지 인정</td><td>L4</td><td style="color:#D4A017;font-weight:700">필수</td><td>15:00</td></tr>
+<tr><td>16</td><td>"1년만 해보자" 그 후</td><td>L4</td><td>선택</td><td>16:00</td></tr>
+<tr><td>17</td><td>MC 직접 체험</td><td>L5</td><td style="color:#D4A017;font-weight:700">필수</td><td>20:30</td></tr>
+<tr><td>18</td><td>EP1 보고 시작한 사람</td><td>L5</td><td style="color:#D4A017;font-weight:700">필수</td><td>20:30</td></tr>
+<tr><td>19</td><td>EP1 편지 다시 읽기</td><td>L5</td><td style="color:#D4A017;font-weight:700">필수</td><td>21:00</td></tr>
+<tr><td>20</td><td>시청자에게 한마디</td><td>L5</td><td>선택</td><td>21:30</td></tr>
+</table>
+</div></div>
+
+<!-- 8대 지뢰 -->
+<div class="section"><div class="section-title"><span class="num" style="background:#E53E3E">!</span> 8대 지뢰 키워드 (빠른 참조)</div>
+<div class="card" style="border:2px solid #E53E3E;background:#FFF5F5">
+<table>
+<tr><th>지뢰 표현</th><th>대체 표현</th></tr>
+<tr><td style="color:#E53E3E;font-weight:700">"무자본 창업"</td><td>"소자본 5만원 시작"</td></tr>
+<tr><td style="color:#E53E3E;font-weight:700">"쉽게 돈 벌기"</td><td>"밥 먹으면서 찍었을 뿐"</td></tr>
+<tr><td style="color:#E53E3E;font-weight:700">"강의 / 코칭"</td><td>"크루 / 모임 / 같이 공부"</td></tr>
+<tr><td style="color:#E53E3E;font-weight:700">"유료 전자책"</td><td>"무료 전자책 + 무료 특강"</td></tr>
+<tr><td style="color:#E53E3E;font-weight:700">"팔로워만 있으면"</td><td>"릴스 조회수가 핵심"</td></tr>
+<tr><td style="color:#E53E3E;font-weight:700">"대행사"</td><td>"DM 직거래 구조"</td></tr>
+<tr><td style="color:#E53E3E;font-weight:700">"인스타로 퇴사"</td><td>"밥은 어차피 먹으니까"</td></tr>
+<tr><td style="color:#E53E3E;font-weight:700">"월 3천 벌어요"</td><td>사찍남이 확인하는 구조</td></tr>
+</table>
+</div></div>
+
+</div>
+<div class="footer">사찍남 기획부 | 지온서 먹스타그램 EP2 | MC/PD 질문지 | 2026.04.25</div>
+</body>
+</html>

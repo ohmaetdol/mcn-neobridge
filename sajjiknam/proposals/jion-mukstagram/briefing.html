@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>출연자 브리핑 -- 지온서 먹스타그램 EP2</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F2F4F6;color:#191F28;font-family:'Pretendard',system-ui,sans-serif;min-height:100vh;font-size:15px}
+.gnb{background:#fff;border-bottom:1px solid #E5E8EB;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.gnb-logo{font-size:16px;font-weight:800;color:#D4A017}
+.gnb-badge{background:#FFFBEA;color:#8B6914;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:800;border:1px solid #D4A017}
+.gnb-date{font-size:11px;color:#8B95A1;font-weight:600}
+.wrap{max-width:720px;margin:0 auto;padding:28px 20px 80px}
+.hero{background:linear-gradient(135deg,#0A1628 0%,#132B4D 50%,#1F4680 100%);border-radius:20px;padding:36px 32px;margin-bottom:24px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;right:-10%;width:300px;height:300px;background:radial-gradient(circle,rgba(255,184,0,.2),transparent);pointer-events:none}
+.hero-eyebrow{font-size:11px;font-weight:700;color:#FFB800;letter-spacing:2px;margin-bottom:10px}
+.hero-title{font-size:26px;font-weight:800;line-height:1.3;color:#fff;margin-bottom:8px}
+.hero-sub{color:#8B95A1;font-size:13px;line-height:1.7}
+.card{background:#fff;border-radius:16px;padding:22px;margin-bottom:14px;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+.card.hot{border:2px solid #D4A017;background:#FFFBEA}
+.card.dark{background:#0A1628;color:#fff}
+.card.navy{background:#132B4D;color:#fff;border:1px solid #1F4680}
+.card.gold{border:2px solid #D4A017;background:#FFFBEA}
+.card.blue{border:2px solid #0A1628;background:#F8F9FA}
+.card.danger{border:2px solid #E53E3E;background:#FFF5F5}
+.section{margin-bottom:24px}
+.section-title{font-size:18px;font-weight:800;color:#191F28;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.section-title .num{background:#0A1628;color:#FFB800;border-radius:8px;padding:4px 10px;font-size:13px}
+.section-title .num.red{background:#D4A017;color:#fff}
+.section-title .num.danger{background:#E53E3E;color:#fff}
+.tag{display:inline-block;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:700;margin-right:5px;white-space:nowrap}
+.tag-r{background:#FFFBEA;color:#D4A017}.tag-b{background:#F8F9FA;color:#0A1628}.tag-d{background:#0A1628;color:#FFB800}.tag-danger{background:#FFF5F5;color:#E53E3E}
+.note{background:#FFFBEA;border-left:3px solid #D4A017;border-radius:0 8px 8px 0;padding:14px 16px;margin:10px 0;font-size:13px;line-height:1.7;color:#3E4A5A}
+.note.danger{background:#FFF5F5;border-left-color:#E53E3E}
+.note.blue{background:#F8F9FA;border-left-color:#0A1628}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
+th{padding:10px;text-align:left;border-bottom:2px solid #E5E8EB;color:#8B6914;font-size:11px;background:#FFFBEA;font-weight:700}
+td{padding:10px;border-bottom:1px solid #F2F4F6;color:#3E4A5A;line-height:1.6}
+.check-item{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #F2F4F6}
+.check-item:last-child{border-bottom:none}
+.check-box{width:20px;height:20px;border:2px solid #E5E8EB;border-radius:4px;flex-shrink:0;margin-top:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+.check-box.checked{background:#D4A017;border-color:#D4A017}
+.check-box.checked::after{content:'\2713';color:#fff;font-size:12px;font-weight:800}
+.check-text{font-size:13px;color:#3E4A5A;line-height:1.6}
+.tl-row{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid #E5E8EB}
+.tl-row:last-child{border-bottom:none}
+.tl-time{font-size:12px;font-weight:800;color:#D4A017;min-width:85px;padding-top:2px}
+.tl-body{flex:1}.tl-title{font-size:14px;font-weight:700;color:#191F28;margin-bottom:4px}
+.tl-text{font-size:13px;color:#3E4A5A;line-height:1.7}
+.mine-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:10px}
+.mine-item{background:#FFF5F5;border:1px solid #FED7D7;border-radius:10px;padding:12px;text-align:center}
+.mine-word{font-size:14px;font-weight:800;color:#E53E3E;margin-bottom:4px}
+.mine-alt{font-size:11px;color:#718096;line-height:1.4}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.stat{background:#FFFBEA;border-radius:12px;padding:14px;text-align:center}
+.stat-v{font-size:22px;font-weight:800;color:#8B6914}.stat-l{font-size:11px;color:#6B7684;margin-top:3px}
+.stat.dark{background:#0A1628}.stat.dark .stat-v{color:#FFB800}
+.divider{height:1px;background:#E5E8EB;margin:20px 0}
+.footer{text-align:center;padding:20px;font-size:10px;color:#8B95A1}
+@media(max-width:600px){.stat-row{grid-template-columns:1fr 1fr}.mine-grid{grid-template-columns:1fr 1fr}}
+@media print{.gnb{position:static}.check-box{border:2px solid #333!important}.card{break-inside:avoid}body{background:#fff}}
+</style>
+</head>
+<body>
+<nav class="gnb"><span class="gnb-logo">사찍남</span><span class="gnb-badge">출연자 브리핑</span><span class="gnb-date">지온서 먹스타그램 EP2</span></nav>
+<div class="wrap">
+
+<div class="hero">
+<div class="hero-eyebrow">CONFIDENTIAL -- 출연자 사전 공유용</div>
+<div class="hero-title">지온서님, 촬영 전<br>꼭 읽어주세요</div>
+<div class="hero-sub">사찍남 EP2 | 먹스타그램 | 촬영 브리핑 문서</div>
+</div>
+
+<!-- 1. 촬영 개요 -->
+<div class="section"><div class="section-title"><span class="num red">1</span> 촬영 개요</div>
+<div class="card dark">
+<div style="font-size:13px;color:#fff;line-height:2.2">
+<strong style="color:#FFB800">채널:</strong> 사찍남 (사장찍어주는남자) + 부업소개하는남자 (동시 촬영)<br>
+<strong style="color:#FFB800">컨셉:</strong> "남들 다 출근할 때 밥만 먹으면서 월 3000만원 버는 37세 여사장님"<br>
+<strong style="color:#FFB800">형식:</strong> 다큐 인터뷰 (22분) -- 자연스러운 대화 형식<br>
+<strong style="color:#FFB800">톤:</strong> 진솔하고 편안한 대화. 과장 없이 팩트 중심.<br>
+<strong style="color:#FFB800">핵심:</strong> EP1(2025.08) 이후 성장을 증명하는 재출연 영상
+</div>
+</div>
+
+<div class="stat-row">
+<div class="stat dark"><div class="stat-v">EP2</div><div class="stat-l">재출연 (1년 6개월 만)</div></div>
+<div class="stat"><div class="stat-v">22분</div><div class="stat-l">사찍남 영상 길이</div></div>
+<div class="stat"><div class="stat-v">2채널</div><div class="stat-l">동시 촬영</div></div>
+</div>
+</div>
+
+<!-- 2. EP2 핵심 방향 -->
+<div class="section"><div class="section-title"><span class="num red">2</span> EP1 vs EP2 -- 이번에 다르게 하는 것</div>
+<div class="card hot">
+<table><tr><th>항목</th><th>EP1 (2025.08)</th><th>EP2 (이번 촬영)</th></tr>
+<tr><td style="font-weight:700">팔로워</td><td>24만</td><td style="font-weight:700;color:#D4A017">60만 (+150%)</td></tr>
+<tr><td style="font-weight:700">수익</td><td>하루 ~100만</td><td style="font-weight:700;color:#D4A017">월 2,500~3,000만</td></tr>
+<tr><td style="font-weight:700">수익 증빙</td><td>구두 설명만</td><td style="font-weight:700;color:#D4A017">통장 앱 실시간 공개</td></tr>
+<tr><td style="font-weight:700">크루</td><td>동생 1명</td><td style="font-weight:700;color:#D4A017">조직화된 크루</td></tr>
+<tr><td style="font-weight:700">어머니 이야기</td><td>간략 언급</td><td style="font-weight:700;color:#D4A017">깊이 있는 대화</td></tr>
+<tr><td style="font-weight:700">MC 체험</td><td>없음</td><td style="font-weight:700;color:#D4A017">MC가 직접 촬영+편집</td></tr></table>
+<div class="note" style="margin-top:14px"><strong>핵심 메시지:</strong> EP1에서 보여줬던 것들이 "진짜였다"는 것을 숫자로 증명하는 영상입니다. 자연스럽게 현재 상황을 이야기해주시면 됩니다.</div>
+</div></div>
+
+<!-- 3. 촬영 일정 -->
+<div class="section"><div class="section-title"><span class="num red">3</span> 촬영 일정 (D-day)</div>
+<div class="card gold">
+<div class="tl-row">
+<div class="tl-time">오전</div>
+<div class="tl-body">
+<div class="tl-title">자택 또는 작업 공간</div>
+<div class="tl-text">인사 / 현재 상황 대화 / 캡컷 편집 시연<br>편안한 분위기에서 시작합니다.</div>
+</div></div>
+<div class="tl-row">
+<div class="tl-time" style="color:#D4A017">13:00~</div>
+<div class="tl-body">
+<div class="tl-title">판교유엔빌리지 (점심 식사)</div>
+<div class="tl-text">식사하면서 수익 / 통장 / DM 대화<br><strong>-- 여기서 통장 앱을 보여주시게 됩니다.</strong></div>
+</div></div>
+<div class="tl-row">
+<div class="tl-time">이동 중</div>
+<div class="tl-body">
+<div class="tl-title">차량 이동</div>
+<div class="tl-text">자연광 + 편안한 분위기에서 깊은 대화<br>-- 어머니 이야기, 10년 방황, 아버지 인정</div>
+</div></div>
+<div class="tl-row">
+<div class="tl-time" style="color:#D4A017">15:30~</div>
+<div class="tl-body">
+<div class="tl-title">샤브지오 (저녁 식사)</div>
+<div class="tl-text">크루 만남 / MC 체험 / EP1 편지<br>-- 크루원 2~3명과 함께하는 시간</div>
+</div></div>
+</div>
+<div class="note blue"><strong>총 촬영 시간:</strong> 약 4~5시간 (식사 포함). 빠듯하지 않게 여유있게 진행됩니다.</div>
+</div>
+
+<!-- 4. 준비물 -->
+<div class="section"><div class="section-title"><span class="num red">4</span> 준비물 체크리스트</div>
+<div class="card hot">
+<div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> <strong>통장 앱</strong> -- 최근 입금 내역이 보이는 상태로 준비. 촬영 중 실시간으로 보여드리게 됩니다.</div></div>
+<div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> <strong>스마트폰 (인스타 로그인)</strong> -- DM 광고 제의 보여주기 + 팔로워 60만 화면</div></div>
+<div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> <strong>캡컷 앱</strong> -- 편집 실연에 사용합니다. 평소 쓰시는 설정 그대로.</div></div>
+<div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-r">필수</span> <strong>인스타 팔로워 화면</strong> -- 60만 숫자가 보이는 프로필 화면</div></div>
+<div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-b">권장</span> EP1 때 쓴 편지가 있으시면 가져와 주세요.</div></div>
+<div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text"><span class="tag tag-b">권장</span> 밀키트 1개 (편집 실연에 사용할 음식)</div></div>
+</div>
+<div class="note"><strong>통장 화면 안내:</strong> 민감한 개인정보(계좌번호, 잔액 등)는 편집 과정에서 모자이크 처리합니다. 입금 건수와 대략적인 금액만 노출됩니다.</div>
+</div>
+
+<!-- 5. 의상 및 외모 -->
+<div class="section"><div class="section-title"><span class="num">5</span> 의상 및 외모</div>
+<div class="card">
+<table><tr><th>항목</th><th>권장</th><th>비고</th></tr>
+<tr><td style="font-weight:700">의상</td><td style="font-weight:700;color:#D4A017">캐주얼 (인스타 프로필 톤)</td><td>평소 먹스타그램 촬영할 때 입는 옷</td></tr>
+<tr><td style="font-weight:700">메이크업</td><td>평소대로 자연스럽게</td><td>스튜디오 촬영이 아닙니다</td></tr>
+<tr><td style="font-weight:700">피해야 할 것</td><td style="color:#E53E3E">정장, 과한 액세서리, 로고 큰 옷</td><td>자연스러운 "일상" 느낌이 핵심</td></tr></table>
+</div></div>
+
+<!-- 6. 8대 지뢰 키워드 -->
+<div class="section"><div class="section-title"><span class="num danger">6</span> 절대 사용하면 안 되는 8가지 표현</div>
+<div class="card danger">
+<div style="font-size:14px;font-weight:700;color:#E53E3E;margin-bottom:14px">아래 표현은 영상 전체에서 0회 노출이 목표입니다.</div>
+<div class="mine-grid">
+<div class="mine-item"><div class="mine-word">"무자본 창업"</div><div class="mine-alt">대신: "소자본 5만원 시작"</div></div>
+<div class="mine-item"><div class="mine-word">"쉽게 돈 벌기"</div><div class="mine-alt">대신: "밥 먹으면서 찍었을 뿐"</div></div>
+<div class="mine-item"><div class="mine-word">"강의 / 코칭"</div><div class="mine-alt">대신: "크루 / 모임 / 같이 공부"</div></div>
+<div class="mine-item"><div class="mine-word">"유료 전자책"</div><div class="mine-alt">대신: "무료 전자책 + 무료 특강"</div></div>
+<div class="mine-item"><div class="mine-word">"팔로워만 있으면"</div><div class="mine-alt">대신: "릴스 조회수가 핵심"</div></div>
+<div class="mine-item"><div class="mine-word">"대행사"</div><div class="mine-alt">대신: "DM 직거래 구조"</div></div>
+<div class="mine-item"><div class="mine-word">"인스타로 퇴사"</div><div class="mine-alt">대신: "밥은 어차피 먹으니까"</div></div>
+<div class="mine-item"><div class="mine-word">"월 3천 벌어요"</div><div class="mine-alt">대신: 사찍남이 확인하는 구조</div></div>
+</div>
+<div class="note danger" style="margin-top:14px"><strong>왜 이 표현을 피하나요?</strong><br>시청자가 "성공 팔이", "사기", "과장"으로 오해할 수 있는 표현들입니다. 이런 표현이 나오면 댓글 반응이 부정적으로 바뀌고, 영상 리텐션이 급격히 떨어집니다.<br><br>
+자연스럽게 대화하시되, 위 표현 대신 <strong>옆에 적힌 대체 표현</strong>을 사용해주세요. MC가 대화 중에 자연스럽게 유도합니다.</div>
+</div></div>
+
+<!-- 7. 질문 미리보기 -->
+<div class="section"><div class="section-title"><span class="num red">7</span> 이런 질문을 드립니다 (미리보기)</div>
+<div class="card navy">
+<div style="font-size:11px;font-weight:700;color:#FFB800;letter-spacing:1.5px;margin-bottom:12px">정답을 준비하실 필요 없습니다. 자연스러운 답변이 최고입니다.</div>
+<div style="font-size:13px;color:#fff;line-height:2.2">
+<strong style="color:#FFB800">현재 상황:</strong> 팔로워, 수익, EP1 이후 변화<br>
+<strong style="color:#FFB800">수익 관련:</strong> 통장, DM 광고 제의, 건당 단가, 수익 구조<br>
+<strong style="color:#FFB800">실연 요청:</strong> 캡컷 편집 과정을 보여달라는 요청 (평소 하시던 대로)<br>
+<strong style="color:#FFB800">크루 관련:</strong> 크루 운영, 성공 사례<br>
+<strong style="color:#FFB800">개인적 이야기:</strong> 어머니, 10년 방황, 아버지 인정<br>
+<strong style="color:#FFB800">과거 vs 현재:</strong> EP1 때와 지금의 차이, "1년만 해보자" 그 후
+</div>
+</div>
+<div class="note"><strong>대화 포인트:</strong> 수치를 말씀하실 때 최대한 구체적으로 해주시면 좋습니다. "많이 벌어요"보다 "이번 달에 28건 들어왔어요" 같은 구체적 숫자가 시청자에게 신뢰를 줍니다.</div>
+</div>
+
+<!-- 8. 촬영 중 주의사항 -->
+<div class="section"><div class="section-title"><span class="num">8</span> 촬영 중 참고사항</div>
+<div class="card blue">
+<div style="font-size:13px;line-height:2;color:#3E4A5A">
+<strong>1. 카메라 의식하지 마세요.</strong> 다큐 형식이라 MC와 자연스럽게 대화하시면 됩니다.<br>
+<strong>2. 답변이 막히면 멈추셔도 됩니다.</strong> 편집으로 정리됩니다.<br>
+<strong>3. 감정이 올라오면 그대로 두세요.</strong> 억지로 참거나 억지로 만들 필요 없습니다.<br>
+<strong>4. 핸드폰 화면 공유 요청이 있습니다.</strong> 민감한 부분은 편집 시 모자이크합니다.<br>
+<strong>5. EP1 내용을 반복하지 않습니다.</strong> 새로운 이야기 중심으로 진행됩니다.<br>
+<strong>6. 촬영은 2채널(사찍남 + 부업소개하는남자)에 사용됩니다.</strong> 별도 동의서 안내드립니다.
+</div>
+</div></div>
+
+<!-- 9. 크루 관련 -->
+<div class="section"><div class="section-title"><span class="num">9</span> 크루 관련 안내</div>
+<div class="card">
+<div style="font-size:13px;line-height:2;color:#3E4A5A">
+<strong>15:30 샤브지오에서 크루원 2~3명과 함께 촬영합니다.</strong><br><br>
+크루원에게도 간단한 질문을 드립니다:<br>
+- 먹스타그램을 시작한 계기<br>
+- 얼마 만에 첫 광고를 받았는지<br>
+- 현재 수익<br><br>
+가능하다면 <strong>은행원 출신 크루원</strong>(주말에만 해서 월 1천만원 사례)이 참석하면 좋겠습니다.
+</div>
+</div></div>
+
+<!-- 10. 최종 요약 -->
+<div class="section"><div class="section-title"><span class="num red">10</span> 한 줄 요약</div>
+<div class="card dark">
+<div style="font-size:16px;font-weight:800;color:#FFB800;line-height:1.6;text-align:center;padding:10px 0">
+"EP1에서 보여줬던 것이 진짜였다"를<br>숫자와 화면으로 증명하는 영상입니다.
+</div>
+<div style="font-size:13px;color:#8B95A1;text-align:center;margin-top:8px">
+편하게 오셔서, 평소대로 대화해주시면 됩니다.
+</div>
+</div></div>
+
+<div class="divider"></div>
+
+<div class="card">
+<div style="font-size:13px;line-height:1.8;color:#3E4A5A;text-align:center">
+<strong>문의 사항이 있으시면 촬영 전 언제든 연락주세요.</strong><br>
+사찍남 기획부
+</div>
+</div>
+
+</div>
+<div class="footer">사찍남 기획부 | 지온서 먹스타그램 EP2 출연자 브리핑 | 2026.04.25</div>
+<script>function tog(el){el.classList.toggle('checked')}</script>
+</body>
+</html>
