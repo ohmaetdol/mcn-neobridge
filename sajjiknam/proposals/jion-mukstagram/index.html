@@ -128,71 +128,191 @@ td{padding:10px;border-bottom:1px solid #F2F4F6;color:#3E4A5A;line-height:1.6}
 
 <!-- TAB1 레퍼런스 -->
 <div class="panel on" id="tab-ref">
-<div class="section"><div class="section-title"><span class="num red">1</span> 3채널 실측 데이터 (599개 영상)</div>
-<div class="card navy">
-<div style="font-size:11px;font-weight:700;color:#FFB800;letter-spacing:1.5px;margin-bottom:12px">채널별 핵심 지표 비교</div>
-<table><tr><th>채널</th><th>영상 수</th><th>평균 조회수</th><th>평균 리텐션</th><th>초반30초</th></tr>
-<tr><td style="color:#FFB800;font-weight:700">사찍남</td><td>99개</td><td style="color:#FFB800;font-weight:700">24,436</td><td style="color:#FFB800;font-weight:700">26.4%</td><td style="color:#FFB800">14.0%</td></tr>
-<tr><td style="color:#fff">휴먼스토리</td><td>361개</td><td style="color:#fff;font-weight:700">917,002</td><td>25.7%</td><td>--</td></tr>
-<tr><td style="color:#fff">탐구생활</td><td>139개</td><td style="color:#fff;font-weight:700">787,116</td><td>23.4%</td><td style="color:#D4A017">31.6%</td></tr></table>
-<div style="margin-top:14px;padding:10px;background:rgba(255,184,0,.1);border-radius:8px;font-size:12px;color:#FFB800"><strong>핵심:</strong> 사찍남 초반30초 14.0%는 탐구생활 31.6%의 절반 미만. EP2에서 첫 5초 수익 화면 무음 클로즈업(절약왕 패턴)으로 반드시 개선.</div>
-</div></div>
 
-<div class="section"><div class="section-title"><span class="num red">2</span> 사찍남 카테고리 리텐션 분석</div>
+<!-- 3채널 비교 요약 -->
+<div class="card dark">
+<div style="font-size:11px;font-weight:700;color:#FFB800;letter-spacing:1.5px;margin-bottom:10px">599개 영상 실측 -- 3채널 벤치마크</div>
+<div style="font-size:16px;font-weight:800;color:#fff;line-height:1.5;margin-bottom:14px">사찍남이 도달해야 할 기준선: 휴먼스토리 + 탐구생활</div>
+<table><tr><th>채널</th><th>구독자</th><th>영상 수</th><th>평균 조회수</th><th>평균 리텐션</th><th>초반30초</th></tr>
+<tr><td style="color:#FFB800;font-weight:700">사찍남</td><td>--</td><td>99개</td><td style="color:#FFB800;font-weight:700">24,436</td><td style="color:#FFB800">26.4%</td><td style="color:#FFB800">14.0%</td></tr>
+<tr><td style="color:#fff;font-weight:700">휴먼스토리</td><td style="color:#fff;font-weight:700">118만</td><td>361개</td><td style="color:#fff;font-weight:700">917,002</td><td>25.7%</td><td style="color:#fff;font-weight:700">24.3%</td></tr>
+<tr><td style="color:#fff;font-weight:700">탐구생활</td><td style="color:#fff;font-weight:700">55.3만</td><td>139개</td><td style="color:#fff;font-weight:700">787,116</td><td>23.4%</td><td>13.7%</td></tr></table>
+<div style="margin-top:14px;padding:12px;background:rgba(255,184,0,.15);border-radius:8px;font-size:13px;color:#FFB800;line-height:1.8">
+<strong>조회수 갭:</strong> 사찍남 24,436 vs 휴먼스토리 917,002 = <strong>37.5배 차이</strong><br>
+<strong>초반30초 갭:</strong> 사찍남 14.0% vs 휴먼스토리 24.3% = <strong>10.3%p 차이</strong><br>
+<strong>리텐션:</strong> 사찍남 26.4% > 휴먼스토리 25.7% > 탐구생활 23.4% -- 리텐션은 이미 1위. 문제는 유입(제목/썸네일)과 초반30초.
+</div>
+</div>
+
+<!-- 휴먼스토리 벤치마크 -->
+<div class="section"><div class="section-title"><span class="num red">1</span> 휴먼스토리 (118만 구독) -- TOP 10</div>
+<div class="card navy">
+<div style="font-size:11px;font-weight:700;color:#FFB800;letter-spacing:1.5px;margin-bottom:12px">인간극장형 다큐 인터뷰 | 361개 영상 | 평균 91.7만뷰</div>
+<table><tr><th>#</th><th>제목</th><th>조회수</th><th>길이</th><th>리텐션</th><th>초반30초</th></tr>
+<tr><td style="font-weight:800;color:#FFB800">1</td><td>직장 관두고 바다로 귀어해 낚시로 매출 월1000만원 선장님</td><td style="font-weight:800;color:#FFB800">1,334만</td><td>18분</td><td>20.6%</td><td>14.1%</td></tr>
+<tr><td style="font-weight:800;color:#FFB800">2</td><td>한달매출 3200만원 아기 2명 키우는 20대 부부가 직장 관두고 장사하는 이유</td><td style="font-weight:800;color:#FFB800">835만</td><td>24분</td><td>15.5%</td><td>8.7%</td></tr>
+<tr><td style="font-weight:800;color:#FFB800">3</td><td>SK 대기업 재벌 3세의 하루 [돌고도네이션 이승환 대표]</td><td style="font-weight:800;color:#FFB800">799만</td><td>47분</td><td>21.1%</td><td>28.3%</td></tr>
+<tr><td style="font-weight:800">4</td><td>PC방 하나없는 시골에서 호랑이 키워 한달 1억 버는 33살</td><td style="font-weight:800">663만</td><td>20분</td><td>24.3%</td><td>22.5%</td></tr>
+<tr><td style="font-weight:800">5</td><td>매출 4000억 재벌 회장님의 하루 [영림임업 황복현]</td><td style="font-weight:800">658만</td><td>23분</td><td>23.5%</td><td>24.4%</td></tr>
+<tr><td>6</td><td>4성급 호텔 대표가 17평 고기집에서 장사하는 이유</td><td>565만</td><td>70분</td><td>24.5%</td><td>40.8%</td></tr>
+<tr><td>7</td><td>포항 28살 여사장님이 배 타고 직접잡은 생선만 팔아 장사하는 이유</td><td>552만</td><td>23분</td><td>11.9%</td><td>14.5%</td></tr>
+<tr><td>8</td><td>연매출 120억 34살 칼국수집 사장님이 주차요원을 하는 이유</td><td>524만</td><td>18분</td><td>19.4%</td><td>9.7%</td></tr>
+<tr><td>9</td><td>신림동 33살 백반집 여사장님이 하루 2시간 자며 줄 서서 먹는 가게 만든 이유</td><td>483만</td><td>38분</td><td>24.1%</td><td>15.0%</td></tr>
+<tr><td>10</td><td>한달매출 3200만원 24살 커플이 직장 관두고 동거하며 장사 시작한 이유</td><td>436만</td><td>21분</td><td>14.6%</td><td>13.9%</td></tr></table>
+</div>
+
 <div class="card hot">
+<div class="card-label red">휴먼스토리 제목 공식 (361개 분석)</div>
+<table><tr><th>공식</th><th>예시</th><th>적용률</th></tr>
+<tr><td style="font-weight:700;color:#D4A017">[극적 반전] + [나이/신분] + [수익 수치] + "이유/하루"</td><td>직장 관두고 ~ 월1000만원 선장님</td><td>TOP 10 중 8개</td></tr>
+<tr><td>[숫자] + [인물] + [행동] + "이유"</td><td>연매출 120억 34살 ~ 주차요원을 하는 이유</td><td>고조회 70%</td></tr></table>
+<div style="margin-top:14px;font-size:13px;line-height:1.8;color:#3E4A5A">
+<strong>숫자형 (176개):</strong> 평균 100.5만뷰, 리텐션 25.6% -- 스토리형보다 조회수 20% 높음<br>
+<strong>스토리형 (185개):</strong> 평균 83.4만뷰, 리텐션 25.7% -- 감정 단어 "이유", "하루", "만든"이 핵심
+</div>
+</div>
+
+<div class="card gold">
+<div class="card-label red">휴먼스토리 Most Replayed -- 1위 영상 (1,334만뷰)</div>
+<table><tr><th>피크</th><th>타임</th><th>내용</th><th>유형</th></tr>
+<tr><td style="font-weight:700">Peak 1</td><td>1:44</td><td>"평생 낚시하는 사람이..."</td><td>인물 배경/감성</td></tr>
+<tr><td style="font-weight:700;color:#D4A017">Peak 2</td><td style="color:#D4A017">5:08</td><td>"평균 얼마나 나오세요?"</td><td style="color:#D4A017;font-weight:700">수입 직접 질문</td></tr>
+<tr><td style="font-weight:700;color:#D4A017">Peak 3</td><td style="color:#D4A017">13:17</td><td>"상어 떼 나타나니까"</td><td style="color:#D4A017;font-weight:700">극적 장면 (최고)</td></tr>
+<tr><td>Peak 4</td><td>16:17</td><td>거제도 통영 여행</td><td>라이프스타일</td></tr></table>
+<div class="note" style="margin-top:14px"><strong>곡선:</strong> 완만한 단일 피크 -- 스토리를 따라가다 클라이맥스(13:17)에서 폭발. EP2 어머니 심화(14~17분)는 이 패턴 정확히 재현.</div>
+</div>
+
+<div class="card blue">
+<div class="card-label blue">휴먼스토리 리텐션 TOP 5 (숨은 히트)</div>
+<table><tr><th>#</th><th>제목</th><th>리텐션</th><th>초반30초</th><th>조회수</th></tr>
+<tr><td>1</td><td>직장 관두고 덮밥&라멘집 차려 한달 1800만원씩 버는 미혼 여성의 하루</td><td style="font-weight:800;color:#D4A017">45.8%</td><td style="font-weight:800;color:#D4A017">87.8%</td><td>18만</td></tr>
+<tr><td>2</td><td>28살 빚 2억 무직 백수가 5개월 만에 빚 다 갚을수 있었던 이유</td><td style="font-weight:800;color:#D4A017">45.3%</td><td>61.9%</td><td>62만</td></tr>
+<tr><td>3</td><td>하루매출 1000만원 30대 미모의 여사장님이 지하에서 배달장사</td><td style="font-weight:800;color:#D4A017">45.1%</td><td>57.2%</td><td>23만</td></tr>
+<tr><td>4</td><td>휴먼스토리 출연 후 매출 500억 만든 30대 대표의 하루</td><td style="font-weight:800">44.8%</td><td>52.0%</td><td>28만</td></tr>
+<tr><td>5</td><td>34살 사장님이 망한가게 들어가서 대박가게 만든 이유 4화</td><td style="font-weight:800">44.8%</td><td>36.6%</td><td>54만</td></tr></table>
+<div class="note" style="margin-top:14px"><strong>발견:</strong> 리텐션 1위(45.8%) = <strong>여사장님 + 음식(덮밥라멘) + 월 수익</strong>. 지온서 먹스타그램(여사장님+음식+월3천)과 정확히 동일 구조. 리텐션 TOP에서 "여사장님/여성" 비율 높음.</div>
+</div>
+</div>
+
+<!-- 탐구생활 벤치마크 -->
+<div class="section"><div class="section-title"><span class="num red">2</span> 탐구생활 (55.3만 구독) -- TOP 10</div>
+<div class="card navy">
+<div style="font-size:11px;font-weight:700;color:#FFB800;letter-spacing:1.5px;margin-bottom:12px">현장 직업 탐구 | 139개 영상 | 평균 78.7만뷰 | 평균 15.4분 (사찍남보다 짧음)</div>
+<table><tr><th>#</th><th>제목</th><th>조회수</th><th>길이</th><th>리텐션</th><th>초반30초</th></tr>
+<tr><td style="font-weight:800;color:#FFB800">1</td><td>250만원 받던 직장 그만두고 귀어해서 하루 500만원 버는 39살</td><td style="font-weight:800;color:#FFB800">718만</td><td>17분</td><td>23.4%</td><td>23.8%</td></tr>
+<tr><td style="font-weight:800;color:#FFB800">2</td><td>자동차로 전국을 돌며 강아지 목욕으로 돈 버는 36살 사장님</td><td style="font-weight:800;color:#FFB800">636만</td><td>11분</td><td>25.7%</td><td>3.8%</td></tr>
+<tr><td style="font-weight:800;color:#FFB800">3</td><td>망한 모텔 사서 한 달에 4천만원 버는 38살 사장님</td><td style="font-weight:800;color:#FFB800">500만</td><td>20분</td><td style="color:#FFB800;font-weight:700">33.5%</td><td>12.8%</td></tr>
+<tr><td style="font-weight:800">4</td><td>도시에서 금을 캐서 돈 버는 대표님 | 도시 광산 사업</td><td style="font-weight:800">440만</td><td>11분</td><td>19.7%</td><td>15.7%</td></tr>
+<tr><td style="font-weight:800">5</td><td>남들 골프 칠 때 골프공 주워서 파는 49세 대표</td><td style="font-weight:800">351만</td><td>18분</td><td style="color:#FFB800;font-weight:700">38.3%</td><td style="color:#FFB800;font-weight:700">32.5%</td></tr>
+<tr><td>6</td><td>"월급 450인데 할 사람이 없어요.." 남들 공부할 때 운전대 잡은 28살</td><td>332만</td><td>16분</td><td>27.9%</td><td>20.7%</td></tr>
+<tr><td>7</td><td>남들 공원 산책할 때 공원 청소해서 하루 200 버는 40살</td><td>329만</td><td>15분</td><td>20.4%</td><td>10.2%</td></tr>
+<tr><td>8</td><td>"90명에게 월세 받아요" 아이 키우며 고시원하는 워킹맘</td><td>308만</td><td>17분</td><td>21.4%</td><td>7.8%</td></tr>
+<tr><td>9</td><td>"코인에 영혼을 갈아 넣었어요" 강남에서 가상화폐 만드는 25살 대표님</td><td>301만</td><td>13분</td><td>22.5%</td><td>7.9%</td></tr>
+<tr><td>10</td><td>대학 포기하고 온라인에 상품 10만개 등록한 22살</td><td>265만</td><td>15분</td><td style="color:#FFB800;font-weight:700">37.4%</td><td>13.3%</td></tr></table>
+</div>
+
+<div class="card hot">
+<div class="card-label red">탐구생활 제목 공식 (139개 분석)</div>
+<table><tr><th>공식</th><th>예시</th><th>적용률</th></tr>
+<tr><td style="font-weight:700;color:#D4A017">[이전직장/상황] + [변화 동사] + [수익 숫자] + [나이]</td><td>250만원 받던 직장 그만두고 ~ 하루 500만원 버는 39살</td><td>TOP 5 중 3개</td></tr>
+<tr><td style="font-weight:700;color:#D4A017">"남들 X할 때" + [비일상 행동] + [수익] + [나이]</td><td>남들 골프 칠 때 골프공 주워서 파는 49세 대표</td><td>TOP 10 중 3개</td></tr></table>
+<div style="margin-top:14px;font-size:13px;line-height:1.8;color:#3E4A5A">
+<strong>EP2 제목 "남들 다 출근할 때 밥만 먹으면서 월 3000만원 버는 37세 여사장님"</strong><br>
+= 탐구생활 "남들 X할 때" 공식 + 휴먼스토리 "여사장님/이유" 공식 <strong>동시 적용</strong>
+</div>
+</div>
+
+<div class="card gold">
+<div class="card-label red">탐구생활 Most Replayed -- 1위 영상 (718만뷰)</div>
+<table><tr><th>피크</th><th>타임</th><th>내용</th><th>유형</th></tr>
+<tr><td style="font-weight:700;color:#D4A017">Peak 1</td><td style="color:#D4A017">1:26</td><td>"바다에 대표님 구역이 따로 있어요?"</td><td style="color:#D4A017;font-weight:700">업계 비밀</td></tr>
+<tr><td style="font-weight:700;color:#D4A017">Peak 2</td><td style="color:#D4A017">4:50</td><td>"이정도면 수입이 진짜 엄청나신 건데"</td><td style="color:#D4A017;font-weight:700">수익 공개</td></tr>
+<tr><td style="font-weight:700">Peak 3</td><td>8:16</td><td>"어업인들 만 39세 미만에게는..."</td><td>정부 지원/혜택</td></tr>
+<tr><td style="font-weight:700">Peak 4</td><td>11:35</td><td>"신용보증기금에서도 잘 봐주셔가지고"</td><td>자금 조달 노하우</td></tr></table>
+<div class="note" style="margin-top:14px"><strong>곡선:</strong> 다중 균등 피크 -- 노하우/비밀이 나올 때마다 반복시청. EP2에서 블로그 3만원 vs 릴스 100만원(에피파니), DM 직거래 구조(업계비밀)에 이 패턴 적용.</div>
+</div>
+
+<div class="card blue">
+<div class="card-label blue">탐구생활 리텐션 TOP 5 (숨은 히트)</div>
+<table><tr><th>#</th><th>제목</th><th>리텐션</th><th>초반30초</th><th>조회수</th></tr>
+<tr><td>1</td><td>27살 "디지털 노마드"가 제주도에서 노트북으로 돈 버는 방법들</td><td style="font-weight:800;color:#D4A017">43.2%</td><td>9.8%</td><td>54만</td></tr>
+<tr><td>2</td><td>남들 골프 칠 때 골프공 주워서 파는 49세 대표</td><td style="font-weight:800;color:#D4A017">38.3%</td><td style="font-weight:800;color:#D4A017">32.5%</td><td>351만</td></tr>
+<tr><td>3</td><td>오래된 집으로 수익 내는 시니어 "집을 사랑하니 돈을 벌어다 주네요"</td><td style="font-weight:800;color:#D4A017">38.2%</td><td>8.1%</td><td>161만</td></tr>
+<tr><td>4</td><td>대학 포기하고 온라인에 상품 10만개 등록한 22살</td><td style="font-weight:800">37.4%</td><td>13.3%</td><td>265만</td></tr>
+<tr><td>5</td><td>반지하에서 에어비앤비와 쇼핑몰로 자수성가 한 30살 대표님</td><td style="font-weight:800">35.5%</td><td>12.4%</td><td>17만</td></tr></table>
+<div class="note" style="margin-top:14px"><strong>발견:</strong> 리텐션 TOP은 "비일상적 방법 + 구체적 수익 구조"가 공통. "어떻게 하는지" 알고 싶어서 끝까지 시청.</div>
+</div>
+</div>
+
+<!-- 3채널 공통 인사이트 -->
+<div class="section"><div class="section-title"><span class="num red">3</span> 사찍남이 배워야 할 것 (3채널 비교)</div>
+<div class="card hot">
+<table><tr><th>항목</th><th>휴먼스토리 (118만)</th><th>탐구생활 (55.3만)</th><th>사찍남 EP2 적용</th></tr>
+<tr><td style="font-weight:700">강점</td><td>극적 장면 감정 표현</td><td>업계 비밀/노하우 공개</td><td style="color:#D4A017;font-weight:700">둘 다 적용 (감정+노하우)</td></tr>
+<tr><td style="font-weight:700">최고 피크</td><td>13:17 극적 장면</td><td>4:50 수익 공개</td><td style="color:#D4A017;font-weight:700">7분 통장(수익) + 15분 어머니(극적)</td></tr>
+<tr><td style="font-weight:700">리텐션 곡선</td><td>단일 피크 (클라이맥스 폭발)</td><td>다중 피크 (노하우 반복)</td><td style="color:#D4A017;font-weight:700">이중 피크 (7분+15분)</td></tr>
+<tr><td style="font-weight:700">제목 공식</td><td>[반전]+[수치]+[신분]+"이유"</td><td>"남들 X할 때"+[수익]+[나이]</td><td style="color:#D4A017;font-weight:700">"남들 출근할 때" + "3천만원" + "여사장님"</td></tr>
+<tr><td style="font-weight:700">평균 길이</td><td>22.3분</td><td>15.4분</td><td style="color:#D4A017;font-weight:700">22분 (휴먼스토리급)</td></tr>
+<tr><td style="font-weight:700">약점</td><td>일부 오프닝이 약함</td><td>초반30초 13.7% (매우 약함)</td><td style="color:#D4A017;font-weight:700">첫5초 무음 수익화면으로 해결</td></tr></table>
+</div>
+
+<div class="card navy">
+<div style="font-size:11px;font-weight:700;color:#FFB800;letter-spacing:1.5px;margin-bottom:12px">무조건 반복시청되는 콘텐츠 유형 (Most Replayed 실측)</div>
+<table><tr><th>등급</th><th>유형</th><th>휴먼</th><th>탐구</th><th>EP2 적용 구간</th></tr>
+<tr><td><span class="tag tag-d">HIGH</span></td><td style="color:#FFB800;font-weight:700">구체적 수익/매출 수치</td><td>5:08</td><td>4:50</td><td style="color:#FFB800;font-weight:700">7:00~9:30 통장 공개</td></tr>
+<tr><td><span class="tag tag-d">HIGH</span></td><td style="color:#FFB800;font-weight:700">업계 비밀/치트키</td><td>--</td><td>1:26</td><td style="color:#FFB800;font-weight:700">9:30~12:00 에피파니</td></tr>
+<tr><td><span class="tag tag-d">HIGH</span></td><td style="color:#FFB800;font-weight:700">극적/충격적 장면</td><td>13:17</td><td>--</td><td style="color:#FFB800;font-weight:700">14:00~17:00 어머니 심화</td></tr>
+<tr><td><span class="tag tag-b">MED</span></td><td>사업 모델 설명</td><td>--</td><td>4:19</td><td>5:00~7:00 편집 실연</td></tr>
+<tr><td><span class="tag tag-b">MED</span></td><td>정부 지원/실용 정보</td><td>--</td><td>8:16</td><td>--</td></tr>
+<tr><td><span class="tag tag-b">MED</span></td><td>인물 배경/감성</td><td>1:44</td><td>--</td><td>0:05~3:00 이전출연</td></tr>
+<tr><td style="color:#8B95A1">LOW</td><td style="color:#8B95A1">배경 설명, 이동</td><td colspan="2" style="color:#8B95A1">--</td><td style="color:#8B95A1">타임랩스 처리</td></tr></table>
+<div style="margin-top:14px;padding:10px;background:rgba(255,184,0,.1);border-radius:8px;font-size:12px;color:#FFB800"><strong>편집 원칙:</strong> HIGH = 슬로우 컷(5~10초) + BGM. LOW = 타임랩스. 50~70% 지점(7~9분)에 최대 피크.<br>출처: 3채널 Most Replayed 실측</div>
+</div>
+</div>
+
+<!-- 사찍남 카테고리 분석 -->
+<div class="section"><div class="section-title"><span class="num red">4</span> 사찍남 카테고리 + 캐스팅보드</div>
+<div class="card hot">
+<div class="stat-row">
+<div class="stat dark"><div class="stat-v">29.7%</div><div class="stat-l">먹방/음식 리텐션 (채널1위)</div></div>
+<div class="stat red"><div class="stat-v">77.1</div><div class="stat-l">한식/분식 CTR (최고)</div></div>
+<div class="stat green"><div class="stat-v">1편</div><div class="stat-l">한식/분식 영상 수 (블루오션)</div></div>
+</div>
 <table><tr><th>카테고리</th><th>리텐션</th><th>채널 평균 대비</th></tr>
 <tr><td style="font-weight:700;color:#D4A017">먹방/음식</td><td style="font-weight:800;color:#D4A017">29.7%</td><td style="font-weight:700;color:#D4A017">+3.3%p</td></tr>
 <tr><td style="font-weight:700;color:#D4A017">여사장님 영상</td><td style="font-weight:800;color:#D4A017">29.1%</td><td style="font-weight:700;color:#D4A017">+2.7%p</td></tr>
 <tr><td>채널 평균</td><td>26.4%</td><td>기준 (99개)</td></tr></table>
-<div class="note" style="margin-top:14px"><strong>결론:</strong> 먹방/음식 + 여사장님 = 사찍남 채널 최고 리텐션 조합. 지온서 먹스타그램은 두 카테고리를 동시에 충족.<br><span class="dsrc">출처: 사찍남 99개 영상 실측 분석</span></div>
+<div class="note" style="margin-top:14px"><strong>결론:</strong> 사찍남에서 먹방/음식 + 여사장님이 최고 리텐션. 휴먼스토리에서도 리텐션 1위가 "여사장님+음식(덮밥라멘)". 지온서 먹스타그램 = 두 채널의 검증된 최적 조합.</div>
 </div></div>
 
-<div class="section"><div class="section-title"><span class="num">3</span> "두 아이한테 간식 사주려고..." 초반30초</div>
+<!-- 초반30초 -->
+<div class="section"><div class="section-title"><span class="num">5</span> 초반30초 벤치마크</div>
 <div class="card gold">
 <div class="stat-row">
-<div class="stat dark"><div class="stat-v">35.2%</div><div class="stat-l">초반30초 리텐션</div></div>
-<div class="stat red"><div class="stat-v">14.0%</div><div class="stat-l">사찍남 평균</div></div>
-<div class="stat green"><div class="stat-v">+21.2%p</div><div class="stat-l">차이 (압도적)</div></div>
+<div class="stat dark"><div class="stat-v">14.0%</div><div class="stat-l">사찍남 평균 초반30초</div></div>
+<div class="stat red"><div class="stat-v">24.3%</div><div class="stat-l">휴먼스토리 평균</div></div>
+<div class="stat green"><div class="stat-v">35.2%</div><div class="stat-l">사찍남 최고 (간식 영상)</div></div>
 </div>
-<div class="note"><strong>비밀:</strong> 감정적 후킹 + 수익 화면이 첫 5초에 등장. EP2에서 통장/인스타 수익 화면을 0:00~0:05에 무음 클로즈업.<br><span class="dsrc">출처: 사찍남 99개 영상 초반30초 실측</span></div>
-</div></div>
-
-<div class="section"><div class="section-title"><span class="num red">4</span> 캐스팅보드: 한식/분식 블루오션</div>
-<div class="card hot">
-<div class="stat-row">
-<div class="stat dark"><div class="stat-v">1편</div><div class="stat-l">한식/분식 사찍남 영상</div></div>
-<div class="stat red"><div class="stat-v">77.1</div><div class="stat-l">CTR (음식 최고)</div></div>
-<div class="stat green"><div class="stat-v">블루오션</div><div class="stat-l">경쟁 영상 부재</div></div>
+<div style="font-size:13px;line-height:1.8;color:#3E4A5A;padding:0 4px">
+<strong>휴먼스토리 초반30초 최고:</strong> "4성급 호텔 대표" 40.8% -- 훅이 강한 반전 제목<br>
+<strong>탐구생활 초반30초 최고:</strong> "골프공 주워서 파는 49세" 32.5% -- 비일상적 행동 즉시 공개<br>
+<strong>EP2 해결책:</strong> 첫5초 수익 화면 무음(절약왕 패턴) + 이전출연 HOOK = 30%+ 타겟
 </div>
-<div class="note"><strong>한식/분식 카테고리에 사찍남 영상 단 1편.</strong> CTR 77.1 = 음식 카테고리 최고. 지온서 먹스타그램 = 블루오션 정조준.<br><span class="dsrc">출처: 사찍남 카테고리별 실측</span></div>
 </div></div>
 
-<div class="section"><div class="section-title"><span class="num gold">5</span> Most Replayed 피크 데이터 (3채널 공통)</div>
-<div class="card navy">
-<div style="font-size:11px;font-weight:700;color:#FFB800;letter-spacing:1.5px;margin-bottom:12px">무조건 반복시청되는 콘텐츠 유형</div>
-<table><tr><th>등급</th><th>유형</th><th>근거</th><th>편집 적용</th></tr>
-<tr><td><span class="tag tag-d">HIGH</span></td><td style="color:#FFB800;font-weight:700">구체적 수익/매출 수치</td><td>3채널 모두 피크</td><td>매출/수익, 업계 비밀, 극적 반전</td></tr>
-<tr><td><span class="tag tag-d">HIGH</span></td><td style="color:#FFB800;font-weight:700">업계 비밀/치트키</td><td>2채널 피크</td><td>슬로우 + BGM 강조</td></tr>
-<tr><td><span class="tag tag-d">HIGH</span></td><td style="color:#FFB800;font-weight:700">극적/충격적 장면</td><td>감정 피크 일치</td><td>7~10초 컷, 정적</td></tr>
-<tr><td><span class="tag tag-b">MED</span></td><td>사업 모델 설명</td><td>중간 피크</td><td>사업 모델, 라이프스타일</td></tr>
-<tr><td><span class="tag tag-b">MED</span></td><td>정부 지원/실용 정보</td><td>중간 피크</td><td>정보 카드 오버레이</td></tr>
-<tr><td><span class="tag tag-b">MED</span></td><td>인물 배경/감성</td><td>중간 피크</td><td>감성 BGM</td></tr>
-<tr><td style="color:#8B95A1">LOW</td><td style="color:#8B95A1">배경 설명, 이동</td><td>하위</td><td>타임랩스 / 빠른 컷</td></tr></table>
-<div style="margin-top:14px;padding:10px;background:rgba(255,184,0,.1);border-radius:8px;font-size:12px;color:#FFB800"><strong>편집 원칙:</strong> HIGH = 슬로우 컷(5~10초) + BGM. LOW = 타임랩스. 50~70% 지점(7~9분)에 최대 피크 -- 절약왕/옆집CEO 공통.<br><span class="dsrc" style="color:rgba(255,255,255,.5)">출처: 3채널 Most Replayed 실측</span></div>
-</div></div>
-
+<!-- EP2 설계 원칙 -->
 <div class="section"><div class="section-title"><span class="num">6</span> EP1 교훈 + EP2 설계 원칙</div>
 <div class="card blue">
 <div style="font-size:14px;line-height:2;color:#3E4A5A">
 <strong>원칙1 (첫 5초 수익 화면):</strong> 통장/인스타 수익 화면 무음 클로즈업 (절약왕 1위 210만뷰 패턴)<br>
-<strong>원칙2 (Peak 전진 -- 7분 통장):</strong> 수익 공개 7~9분대 (50~70% 지점 = 최고 피크)<br>
-<strong>원칙3 (감정 전진 -- 15분 어머니):</strong> 어머니 심화 14~17분대 (휴먼스토리 패턴)<br>
+<strong>원칙2 (Peak 전진 -- 7분 통장):</strong> 수익 공개 7~9분대 (50~70% 지점 = 휴먼스토리+탐구생활 공통 피크)<br>
+<strong>원칙3 (감정 전진 -- 15분 어머니):</strong> 어머니 심화 14~17분대 (휴먼스토리 극적 장면 패턴)<br>
 <strong>원칙4 (MC 체험):</strong> MC 직접 체험 추가 -- CTA 강화<br>
 <strong>원칙5 (성장 갭):</strong> 24만에서60만, 하루100만에서월3천
-</div><div class="dsrc">근거: 3채널 Most Replayed + EP1 교훈 6가지</div>
-</div></div>
+</div></div></div>
 
-<div class="section"><div class="section-title"><span class="num">7</span> 사찍남 Top 5 영상</div>
+<!-- 사찍남 Top 5 -->
+<div class="section"><div class="section-title"><span class="num">7</span> 사찍남 Top 5</div>
 <div class="card">
 <table><tr><th>#</th><th>제목</th><th>조회수</th><th>길이</th></tr>
 <tr><td style="font-weight:800;color:#D4A017">1</td><td>"고등학교 다니면서 사업자등록 하고 한 달에 1200만원 버는 19살"</td><td style="font-weight:700;color:#D4A017">178만</td><td>24분</td></tr>
@@ -200,8 +320,10 @@ td{padding:10px;border-bottom:1px solid #F2F4F6;color:#3E4A5A;line-height:1.6}
 <tr><td style="font-weight:800">3</td><td>"15년이 넘은 백반집 3900만원으로 인수해서 하루 300만원 파는 25살"</td><td style="font-weight:700">93만</td><td>22분</td></tr>
 <tr><td>4</td><td>"고등학교 졸업하고 6년동안 2억 모으고, 24평 아파트 구매한 26살"</td><td>63만</td><td>27분</td></tr>
 <tr><td>5</td><td>"서울대 출신이 대기업 퇴사하고 5억 매출 캡슐호텔 대표가 된 이유"</td><td>57만</td><td>28분</td></tr></table>
+<div class="note" style="margin-top:14px"><strong>사찍남 1위 178만 vs 휴먼스토리 1위 1,334만 = 7.5배 갭.</strong> 제목 공식은 이미 동일 패턴. 차이는 초반30초 리텐션과 썸네일 클릭률.</div>
 </div></div>
 
+<!-- 8대 지뢰 키워드 -->
 <div class="section"><div class="section-title"><span class="num red">8</span> 8대 지뢰 키워드</div>
 <div class="card hot">
 <table><tr><th>#</th><th>지뢰</th><th>이유</th><th>대체</th></tr>
