@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>리지커넥트 JV 미팅 안건</title>
+<style>
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #1a1a1a;
+    background: #fff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    padding: 48px 56px;
+    page-break-after: always;
+    position: relative;
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 3px solid #1a1a1a;
+    padding-bottom: 16px;
+    margin-bottom: 48px;
+  }
+  .header-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a1a1a;
+    letter-spacing: 0.5px;
+  }
+  .header-date {
+    font-size: 12px;
+    color: #888;
+  }
+
+  /* Cover */
+  .cover {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 200mm;
+  }
+  .cover-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #888;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .cover-title {
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1.3;
+    color: #1a1a1a;
+    margin-bottom: 16px;
+  }
+  .cover-subtitle {
+    font-size: 18px;
+    font-weight: 400;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 64px;
+  }
+  .cover-info {
+    font-size: 13px;
+    color: #888;
+    line-height: 2;
+  }
+  .cover-info strong {
+    color: #1a1a1a;
+  }
+
+  /* Section */
+  .section {
+    margin-bottom: 40px;
+  }
+  .section-number {
+    font-size: 11px;
+    font-weight: 700;
+    color: #888;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+  }
+  .section-desc {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  /* Agenda Items */
+  .agenda-list {
+    list-style: none;
+  }
+  .agenda-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+  }
+  .agenda-item:last-child {
+    border-bottom: none;
+  }
+  .agenda-num {
+    font-size: 32px;
+    font-weight: 800;
+    color: #ddd;
+    min-width: 56px;
+    line-height: 1;
+    margin-right: 20px;
+    margin-top: 2px;
+  }
+  .agenda-content h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 6px;
+  }
+  .agenda-content p {
+    font-size: 13px;
+    color: #777;
+    line-height: 1.7;
+  }
+
+  /* Key Point Box */
+  .key-point {
+    background: #f8f8f8;
+    border-left: 4px solid #1a1a1a;
+    padding: 24px 28px;
+    margin: 32px 0;
+  }
+  .key-point h3 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #1a1a1a;
+  }
+  .key-point ul {
+    list-style: none;
+    padding: 0;
+  }
+  .key-point li {
+    font-size: 13px;
+    color: #555;
+    line-height: 2;
+    padding-left: 16px;
+    position: relative;
+  }
+  .key-point li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 11px;
+    width: 6px;
+    height: 6px;
+    background: #1a1a1a;
+    border-radius: 50%;
+  }
+
+  /* Footer */
+  .footer {
+    position: absolute;
+    bottom: 48px;
+    left: 56px;
+    right: 56px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #bbb;
+    border-top: 1px solid #eee;
+    padding-top: 16px;
+  }
+
+  /* Closing */
+  .closing {
+    margin-top: 48px;
+    padding: 32px 0;
+    border-top: 3px solid #1a1a1a;
+  }
+  .closing p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.8;
+  }
+  .closing .sign {
+    margin-top: 32px;
+    font-size: 13px;
+    color: #888;
+    line-height: 2;
+  }
+</style>
+</head>
+<body>
+
+<!-- Page 1: Cover -->
+<div class="page">
+  <div class="cover">
+    <div class="cover-label">Meeting Agenda</div>
+    <div class="cover-title">웰니스 벤더 사업<br>파트너십 논의</div>
+    <div class="cover-subtitle">
+      리지커넥트 x 플로우머스<br>
+      금요일 미팅에서 나눌 이야기를 정리했습니다.
+    </div>
+    <div class="cover-info">
+      <strong>Prepared by</strong> Flowmus<br>
+      <strong>Date</strong> 2026. 04
+    </div>
+  </div>
+  <div class="footer">
+    <span>Confidential</span>
+    <span>1</span>
+  </div>
+</div>
+
+<!-- Page 2: Agenda -->
+<div class="page">
+  <div class="header">
+    <div class="header-title">Meeting Agenda</div>
+    <div class="header-date">2026. 04</div>
+  </div>
+
+  <div class="section">
+    <div class="section-number">AGENDA</div>
+    <div class="section-title">논의 안건</div>
+    <div class="section-desc">
+      금요일 미팅에서 아래 순서로 이야기 나눠보려고 합니다.
+    </div>
+  </div>
+
+  <ul class="agenda-list">
+    <li class="agenda-item">
+      <div class="agenda-num">01</div>
+      <div class="agenda-content">
+        <h3>시장 현황</h3>
+        <p>웰니스/다이어트 인플루언서 벤더 시장의 현재와 기회.<br>
+        왜 지금이 타이밍인지에 대해 이야기하려고 합니다.</p>
+      </div>
+    </li>
+    <li class="agenda-item">
+      <div class="agenda-num">02</div>
+      <div class="agenda-content">
+        <h3>사업 구조</h3>
+        <p>에이전시와 벤더의 차이, 그리고 우리가 함께 만들 수 있는 구조.<br>
+        각자의 역할과 강점을 어떻게 조합할 수 있을지 논의합니다.</p>
+      </div>
+    </li>
+    <li class="agenda-item">
+      <div class="agenda-num">03</div>
+      <div class="agenda-content">
+        <h3>시작 방법</h3>
+        <p>첫 번째 공구부터 수익 검증까지, 구체적인 첫 스텝.<br>
+        어디서부터 시작하면 좋을지 함께 정해보려고 합니다.</p>
+      </div>
+    </li>
+    <li class="agenda-item">
+      <div class="agenda-num">04</div>
+      <div class="agenda-content">
+        <h3>채널 운영</h3>
+        <p>결정사(아는언니리지) 유튜브 채널 운영 계획.<br>
+        업로드 일정, 콘텐츠 준비 상황, 채널 세팅 관련 논의합니다.</p>
+      </div>
+    </li>
+    <li class="agenda-item">
+      <div class="agenda-num">05</div>
+      <div class="agenda-content">
+        <h3>수익과 조건</h3>
+        <p>수익 분배, 초기 비용 분담, 법인 전환 기준 등<br>
+        구체적인 파트너십 조건에 대해 열린 논의를 합니다.</p>
+      </div>
+    </li>
+  </ul>
+
+  <div class="footer">
+    <span>Confidential</span>
+    <span>2</span>
+  </div>
+</div>
+
+<!-- Page 3: Key Context + Closing -->
+<div class="page">
+  <div class="header">
+    <div class="header-title">Meeting Agenda</div>
+    <div class="header-date">2026. 04</div>
+  </div>
+
+  <div class="section">
+    <div class="section-number">CONTEXT</div>
+    <div class="section-title">미팅 전 참고</div>
+    <div class="section-desc">
+      논의의 배경이 되는 핵심 사항입니다.
+    </div>
+  </div>
+
+  <div class="key-point">
+    <h3>시장 기회</h3>
+    <ul>
+      <li>뷰티 인플루언서 벤더(레페리 등)는 이미 시장 검증 완료</li>
+      <li>웰니스/다이어트 카테고리는 전문 벤더가 아직 부재</li>
+      <li>건기식 시장 지속 성장 중, 인플루언서 공구가 주요 유통 채널로 부상</li>
+    </ul>
+  </div>
+
+  <div class="key-point">
+    <h3>리지커넥트의 강점</h3>
+    <ul>
+      <li>웰니스 카테고리 특화 인플루언서 네트워크 보유</li>
+      <li>업계 평균 대비 높은 ER 및 도달률</li>
+      <li>누적 캠페인 경험과 브랜드 레퍼런스 확보</li>
+      <li>대표 본인의 리얼 스토리가 콘텐츠 자산</li>
+    </ul>
+  </div>
+
+  <div class="key-point">
+    <h3>채널 운영 현황</h3>
+    <ul>
+      <li>결정사 채널 기획서 10편 준비 완료</li>
+      <li>채널아트 및 브랜딩 세팅 진행 중</li>
+      <li>매주 일요일 저녁 8시 고정 업로드 목표</li>
+    </ul>
+  </div>
+
+  <div class="closing">
+    <p>
+      금요일에 편하게 이야기 나누면서<br>
+      서로 생각하는 방향을 맞춰보면 좋겠습니다.
+    </p>
+    <div class="sign">
+      Flowmus<br>
+      오맷돌 드림
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>Confidential</span>
+    <span>3</span>
+  </div>
+</div>
+
+</body>
+</html>
