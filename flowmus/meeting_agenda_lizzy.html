@@ -134,6 +134,7 @@
     line-height: 1;
     margin-right: 20px;
     margin-top: 2px;
+    flex-shrink: 0;
   }
   .agenda-content h3 {
     font-size: 17px;
@@ -212,6 +213,74 @@
     font-size: 13px;
     color: #888;
     line-height: 2;
+  }
+
+  /* Mobile */
+  @media screen and (max-width: 768px) {
+    .page {
+      width: 100%;
+      min-height: auto;
+      padding: 32px 24px;
+      page-break-after: auto;
+    }
+    .page + .page {
+      border-top: 1px solid #eee;
+      padding-top: 40px;
+    }
+    .cover {
+      min-height: auto;
+      padding: 40px 0 32px;
+    }
+    .cover-title {
+      font-size: 28px;
+    }
+    .cover-subtitle {
+      font-size: 15px;
+      margin-bottom: 40px;
+    }
+    .header {
+      margin-bottom: 32px;
+    }
+    .section {
+      margin-bottom: 24px;
+    }
+    .section-title {
+      font-size: 20px;
+    }
+    .agenda-item {
+      padding: 16px 0;
+    }
+    .agenda-num {
+      font-size: 24px;
+      min-width: 40px;
+      margin-right: 14px;
+    }
+    .agenda-content h3 {
+      font-size: 15px;
+    }
+    .agenda-content p {
+      font-size: 12px;
+    }
+    .key-point {
+      padding: 18px 20px;
+      margin: 24px 0;
+    }
+    .key-point h3 {
+      font-size: 14px;
+    }
+    .key-point li {
+      font-size: 12px;
+    }
+    .footer {
+      position: relative;
+      bottom: auto;
+      left: auto;
+      right: auto;
+      margin-top: 40px;
+    }
+    .closing {
+      margin-top: 32px;
+    }
   }
 </style>
 </head>
