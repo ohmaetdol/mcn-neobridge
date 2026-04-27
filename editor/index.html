@@ -456,7 +456,7 @@ function myWorkCard(w) {
   var dday = getDday(v.deadline);
   var btns = '';
 
-  if (w.approvalStatus === '승인' && (v.status === '편집중' || v.status === '수정중')) {
+  if (w.approvalStatus === '승인' && (v.status === '편집중' || v.status === '편집 진행중' || v.status === '수정중')) {
     btns = '<button class="btn btn-success btn-sm" onclick="openDraft(\'' + w.videoId + '\')">초안 제출</button>';
   }
 
@@ -466,13 +466,13 @@ function myWorkCard(w) {
   }
 
   // 상태 스테퍼
-  var steps = ['신청', '승인', '편집중', '초안제출', '완료', '입금'];
+  var steps = ['신청', '승인', '편집 진행중', '초안제출', '완료', '입금'];
   var currentStep = 0;
   if (w.approvalStatus === '반려') currentStep = -1;
   else if (w.paymentStatus === '입금완료') currentStep = 5;
   else if (v.status === '완료') currentStep = 4;
   else if (v.status === '초안제출' || v.status === '수정중') currentStep = 3;
-  else if (v.status === '편집중') currentStep = 2;
+  else if (v.status === '편집중' || v.status === '편집 진행중') currentStep = 2;
   else if (w.approvalStatus === '승인') currentStep = 1;
   else currentStep = 0;
 
@@ -560,7 +560,7 @@ function loadAdminData() {
 
     // 통계 바
     var waiting = videos.filter(function(v) { return v.status === '대기'; }).length;
-    var editing = videos.filter(function(v) { return v.status === '편집중' || v.status === '수정중'; }).length;
+    var editing = videos.filter(function(v) { return v.status === '편집중' || v.status === '편집 진행중' || v.status === '수정중'; }).length;
     var pending = apps.filter(function(a) { return a.approvalStatus === '신청'; }).length;
     var done = videos.filter(function(v) { return v.status === '완료'; }).length;
     var unpaid = apps.filter(function(a) { return a.paymentStatus === '입금대기'; }).length;
@@ -762,7 +762,7 @@ function switchAdminTab(name) {
 function closeModal(id) { document.getElementById(id).classList.remove('show'); }
 
 function statusBadge(s) {
-  var m = {'대기':'badge-wait','신청됨':'badge-applied','편집중':'badge-editing','초안제출':'badge-draft','수정중':'badge-fix','완료':'badge-done'};
+  var m = {'대기':'badge-wait','신청됨':'badge-applied','편집중':'badge-editing','편집 진행중':'badge-editing','초안제출':'badge-draft','수정중':'badge-fix','완료':'badge-done'};
   return m[s] || 'badge-pending';
 }
 function approvalBadge(s) {
