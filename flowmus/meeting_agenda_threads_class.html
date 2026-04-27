@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>부업클래스 쓰레드 강사 미팅 안건</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', sans-serif;
+    color: #1a1a1a;
+    background: #fff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @media screen {
+    body { background: #f0f0f0; padding: 24px 0; }
+    .page { box-shadow: 0 2px 16px rgba(0,0,0,0.1); margin-bottom: 24px; }
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    padding: 48px 56px;
+    page-break-after: always;
+    position: relative;
+    background: #fff;
+  }
+
+  /* Header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 3px solid #FF6B2B;
+    padding-bottom: 16px;
+    margin-bottom: 48px;
+  }
+  .header-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #FF6B2B;
+    letter-spacing: 0.5px;
+  }
+  .header-date {
+    font-size: 12px;
+    color: #888;
+  }
+
+  /* Cover */
+  .cover {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 200mm;
+  }
+  .cover-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #FF6B2B;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .cover-title {
+    font-size: 38px;
+    font-weight: 800;
+    line-height: 1.3;
+    color: #1a1a1a;
+    margin-bottom: 16px;
+  }
+  .cover-subtitle {
+    font-size: 17px;
+    font-weight: 400;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 64px;
+  }
+  .cover-info {
+    font-size: 13px;
+    color: #888;
+    line-height: 2;
+  }
+  .cover-info strong {
+    color: #1a1a1a;
+  }
+
+  /* Section */
+  .section {
+    margin-bottom: 36px;
+  }
+  .section-number {
+    font-size: 11px;
+    font-weight: 700;
+    color: #FF6B2B;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+  .section-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+  }
+  .section-desc {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  /* Flow Chart */
+  .flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 28px 0;
+    flex-wrap: wrap;
+  }
+  .flow-item {
+    background: #FF6B2B;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 10px 16px;
+    border-radius: 6px;
+    text-align: center;
+    line-height: 1.5;
+  }
+  .flow-arrow {
+    color: #FF6B2B;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 0 8px;
+  }
+  .flow-sub {
+    font-size: 9px;
+    font-weight: 400;
+    opacity: 0.85;
+    display: block;
+    margin-top: 2px;
+  }
+
+  /* Agenda Items */
+  .agenda-list {
+    list-style: none;
+  }
+  .agenda-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 18px 0;
+    border-bottom: 1px solid #eee;
+  }
+  .agenda-item:last-child {
+    border-bottom: none;
+  }
+  .agenda-num {
+    font-size: 28px;
+    font-weight: 800;
+    color: #FFD4BF;
+    min-width: 48px;
+    line-height: 1;
+    margin-right: 18px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+  .agenda-content h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 6px;
+  }
+  .agenda-content p {
+    font-size: 12.5px;
+    color: #666;
+    line-height: 1.7;
+  }
+
+  /* Detail List */
+  .detail-list {
+    list-style: none;
+    margin: 16px 0;
+  }
+  .detail-list li {
+    font-size: 12.5px;
+    color: #555;
+    line-height: 1.8;
+    padding: 6px 0 6px 18px;
+    position: relative;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  .detail-list li:last-child {
+    border-bottom: none;
+  }
+  .detail-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 13px;
+    width: 6px;
+    height: 6px;
+    background: #FF6B2B;
+    border-radius: 50%;
+  }
+  .detail-list li strong {
+    color: #1a1a1a;
+  }
+
+  /* Highlight Box */
+  .highlight-box {
+    background: #FFF5EE;
+    border-left: 4px solid #FF6B2B;
+    padding: 20px 24px;
+    margin: 24px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .highlight-box h4 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #FF6B2B;
+    margin-bottom: 8px;
+  }
+  .highlight-box p {
+    font-size: 12px;
+    color: #555;
+    line-height: 1.8;
+    margin: 0;
+  }
+
+  /* Metric Row */
+  .metric-row {
+    display: flex;
+    gap: 16px;
+    margin: 24px 0;
+  }
+  .metric {
+    flex: 1;
+    text-align: center;
+    padding: 20px 12px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background: #fafafa;
+  }
+  .metric-value {
+    font-size: 28px;
+    font-weight: 800;
+    color: #FF6B2B;
+  }
+  .metric-label {
+    font-size: 11px;
+    color: #888;
+    margin-top: 4px;
+  }
+
+  /* Footer */
+  .footer {
+    position: absolute;
+    bottom: 48px;
+    left: 56px;
+    right: 56px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: #bbb;
+    border-top: 1px solid #eee;
+    padding-top: 16px;
+  }
+
+  /* Closing */
+  .closing {
+    margin-top: 40px;
+    padding: 28px 0;
+    border-top: 3px solid #FF6B2B;
+  }
+  .closing p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.8;
+  }
+  .closing .sign {
+    margin-top: 28px;
+    font-size: 13px;
+    color: #888;
+    line-height: 2;
+  }
+
+  /* Mobile */
+  @media screen and (max-width: 768px) {
+    .page {
+      width: 100%;
+      min-height: auto;
+      padding: 32px 24px;
+      page-break-after: auto;
+    }
+    .page + .page {
+      border-top: 1px solid #eee;
+      padding-top: 40px;
+    }
+    .cover { min-height: auto; padding: 40px 0 32px; }
+    .cover-title { font-size: 26px; }
+    .cover-subtitle { font-size: 14px; margin-bottom: 40px; }
+    .header { margin-bottom: 32px; }
+    .section-title { font-size: 18px; }
+    .flow { gap: 4px; }
+    .flow-item { font-size: 10px; padding: 8px 10px; }
+    .flow-arrow { font-size: 14px; padding: 0 4px; }
+    .agenda-num { font-size: 22px; min-width: 36px; margin-right: 12px; }
+    .agenda-content h3 { font-size: 14px; }
+    .agenda-content p { font-size: 12px; }
+    .metric-row { flex-direction: column; gap: 10px; }
+    .metric-value { font-size: 22px; }
+    .footer {
+      position: relative;
+      bottom: auto; left: auto; right: auto;
+      margin-top: 40px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Page 1: Cover -->
+<div class="page">
+  <div class="cover">
+    <div class="cover-label">Meeting Agenda</div>
+    <div class="cover-title">부업클래스<br>쓰레드 강의 퍼널 설계</div>
+    <div class="cover-subtitle">
+      세미나 모집부터 3개월 클래스까지<br>
+      퍼널 구조와 협업 방식을 논의합니다.
+    </div>
+    <div class="cover-info">
+      <strong>Prepared by</strong> Flowmus<br>
+      <strong>Date</strong> 2026. 04. 27
+    </div>
+  </div>
+  <div class="footer">
+    <span>Confidential</span>
+    <span>1</span>
+  </div>
+</div>
+
+<!-- Page 2: Funnel + Agenda -->
+<div class="page">
+  <div class="header">
+    <div class="header-title">부업클래스 x Threads</div>
+    <div class="header-date">2026. 04</div>
+  </div>
+
+  <div class="section">
+    <div class="section-number">FUNNEL</div>
+    <div class="section-title">퍼널 구조</div>
+  </div>
+
+  <div class="flow">
+    <div class="flow-item">유튜브<span class="flow-sub">영상 말미 + 고정댓글</span></div>
+    <div class="flow-arrow">+</div>
+    <div class="flow-item">인스타그램<span class="flow-sub">소셜비즈 안내</span></div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-item">무료 세미나<span class="flow-sub">100명 모집</span></div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-item">클래스 전환<span class="flow-sub">목표 30%</span></div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-item">3개월 강의<span class="flow-sub">쓰레드 클래스</span></div>
+  </div>
+
+  <div class="metric-row">
+    <div class="metric">
+      <div class="metric-value">100명</div>
+      <div class="metric-label">세미나 1회 모집</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value">30%</div>
+      <div class="metric-label">전환율 목표</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value">30명</div>
+      <div class="metric-label">클래스 수강생</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value">3개월</div>
+      <div class="metric-label">강의 기간</div>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <h4>웨비나 병행 검토</h4>
+    <p>오프라인 세미나 외에 웨비나도 병행하여 모집 범위를 넓힐 수 있는지 함께 논의합니다.</p>
+  </div>
+
+  <div class="section" style="margin-top: 36px;">
+    <div class="section-number">AGENDA</div>
+    <div class="section-title">논의 안건</div>
+  </div>
+
+  <ul class="agenda-list">
+    <li class="agenda-item">
+      <div class="agenda-num">01</div>
+      <div class="agenda-content">
+        <h3>퍼널 흐름</h3>
+        <p>유튜브 + 인스타에서 세미나로 모으는 구조 공유.<br>
+        이 흐름에 대한 강사님 경험과 의견을 듣고 싶습니다.</p>
+      </div>
+    </li>
+    <li class="agenda-item">
+      <div class="agenda-num">02</div>
+      <div class="agenda-content">
+        <h3>세미나 구성</h3>
+        <p>성과 레퍼런스 + 노하우 공유, 마지막에 클래스 안내.<br>
+        무료로 풀 범위와 전환 포인트를 함께 설계합니다.</p>
+      </div>
+    </li>
+    <li class="agenda-item">
+      <div class="agenda-num">03</div>
+      <div class="agenda-content">
+        <h3>3개월 클래스 설계</h3>
+        <p>쓰레드 강의 커리큘럼, 주기, 실습 포함 여부 등<br>
+        강사님이 구상하는 3개월 플랜을 듣고 조율합니다.</p>
+      </div>
+    </li>
+    <li class="agenda-item">
+      <div class="agenda-num">04</div>
+      <div class="agenda-content">
+        <h3>전환율 전략</h3>
+        <p>세미나 100명 중 30명 전환(30%)을 위한 전략.<br>
+        웨비나 병행 시 효과에 대해서도 논의합니다.</p>
+      </div>
+    </li>
+    <li class="agenda-item">
+      <div class="agenda-num">05</div>
+      <div class="agenda-content">
+        <h3>일정 및 준비</h3>
+        <p>첫 세미나 시기, 퍼널 세팅 기간, 강사님 가능 일정 등<br>
+        실행 타임라인을 잡습니다.</p>
+      </div>
+    </li>
+  </ul>
+
+  <div class="footer">
+    <span>Confidential</span>
+    <span>2</span>
+  </div>
+</div>
+
+<!-- Page 3: Detail -->
+<div class="page">
+  <div class="header">
+    <div class="header-title">부업클래스 x Threads</div>
+    <div class="header-date">2026. 04</div>
+  </div>
+
+  <div class="section">
+    <div class="section-number">DETAIL</div>
+    <div class="section-title">안건별 세부 논의 사항</div>
+  </div>
+
+  <div class="section">
+    <h3 style="font-size:14px; font-weight:700; color:#FF6B2B; margin-bottom:10px;">01. 퍼널 흐름</h3>
+    <ul class="detail-list">
+      <li>유튜브 영상 말미 + 고정댓글로 세미나 안내</li>
+      <li>인스타그램 소셜비즈로 세미나 링크 전달</li>
+      <li>강사님이 해보셨던 퍼널이 있으면 성과 데이터 공유</li>
+      <li>온라인(웨비나) / 오프라인 중 전환이 더 잘 되는 방식은?</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3 style="font-size:14px; font-weight:700; color:#FF6B2B; margin-bottom:10px;">02. 세미나 구성</h3>
+    <ul class="detail-list">
+      <li>세미나에서 어떤 내용을 다루면 좋을지</li>
+      <li>무료로 풀어줄 노하우 범위 — 적으면 전환 안 되고, 많으면 클래스를 안 듣게 됨</li>
+      <li>강사님 쓰레드 성과 레퍼런스를 세미나에서 직접 보여줄 수 있는지</li>
+      <li>세미나 마지막 클래스 안내 구성 — 가격 공개 타이밍, 혜택 설계</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3 style="font-size:14px; font-weight:700; color:#FF6B2B; margin-bottom:10px;">03. 3개월 클래스 설계</h3>
+    <ul class="detail-list">
+      <li>3개월 동안 쓰레드 강의를 어떤 커리큘럼으로 구성할 건지</li>
+      <li>주 몇 회, 회당 몇 분 기준인지</li>
+      <li>수강생 실습/과제 포함 여부</li>
+      <li>라이브 / 녹화 / 혼합 중 어떤 방식인지</li>
+      <li>수강생 질문 대응 — 커뮤니티, 오픈채팅 등</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3 style="font-size:14px; font-weight:700; color:#FF6B2B; margin-bottom:10px;">04. 전환율 전략</h3>
+    <ul class="detail-list">
+      <li>세미나 100명 → 30명(30%) 전환이 현실적으로 가능한지</li>
+      <li>강사님이 해봤던 세미나 → 유료 전환 경험과 핵심 포인트</li>
+      <li>웨비나 병행 시 추가 전환 효과가 있는지</li>
+      <li>얼리버드, 한정 인원 등 전환 장치 설계</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h3 style="font-size:14px; font-weight:700; color:#FF6B2B; margin-bottom:10px;">05. 일정 및 준비</h3>
+    <ul class="detail-list">
+      <li>첫 세미나 시기와 퍼널 세팅에 필요한 준비 기간</li>
+      <li>강사님 가능 일정 (세미나 + 3개월 클래스)</li>
+      <li>본인 채널에서 세미나 홍보 협조 가능 여부</li>
+    </ul>
+  </div>
+
+  <div class="closing">
+    <p>
+      오늘 자리에서 큰 그림을 맞추고,<br>
+      세부 사항은 이후 조율하면 좋겠습니다.
+    </p>
+    <div class="sign">
+      Flowmus<br>
+      오맷돌 드림
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>Confidential</span>
+    <span>3</span>
+  </div>
+</div>
+
+</body>
+</html>
