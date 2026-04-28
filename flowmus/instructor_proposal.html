@@ -166,7 +166,100 @@ h2 em{font-style:normal;color:#e8b84b}
 .pf{position:absolute;bottom:16px;left:48px;right:48px;display:flex;justify-content:space-between;font-size:9px;color:#ccc}
 
 @media print{body{background:#fff}.page{box-shadow:none;margin:0}}
-@media(max-width:800px){.page{width:100%;min-height:auto}.pi{padding:24px 16px}.cover h1{font-size:24px}.cover-logo{height:200px}.case-page{flex-direction:column}.case-img{flex:none;height:200px}.cases-grid{grid-template-columns:1fr}.svc-grid{grid-template-columns:1fr 1fr}.compare{grid-template-columns:1fr}.partner-grid{grid-template-columns:1fr 1fr}.flow-6{flex-direction:column;align-items:center}.flow-connector{transform:rotate(90deg);padding:0}}
+@media(max-width:800px){
+  body{background:#fff}
+  .page{width:100%;min-height:auto;margin:0;box-shadow:none;border-bottom:1px solid #eee}
+
+  /* COVER */
+  .cover{min-height:100vh;min-height:100svh;padding:40px 20px}
+  .cover-logo{height:160px;margin-bottom:24px}
+  .cover h1{font-size:24px;letter-spacing:-1px}
+  .cover-sub{font-size:13px}
+  .cover-stats{flex-direction:column;gap:0;margin-top:32px}
+  .cover-stat{padding:12px 0;border-right:none;border-bottom:1px solid rgba(255,255,255,.08)}
+  .cover-stat:last-child{border-bottom:none}
+  .cover-stat .n{font-size:28px}
+  .cover-bottom{font-size:9px;flex-direction:column;text-align:center;gap:4px}
+
+  /* CONTENTS */
+  .contents{flex-direction:column}
+  .contents-left{flex:none;padding:32px 20px}
+  .contents-left h2{font-size:32px}
+  .contents-right{padding:24px 20px}
+  .toc-item{padding:12px 0}
+  .toc-num{font-size:22px;width:40px}
+  .toc-text{font-size:15px}
+
+  /* HEADER BAR */
+  .hbar{padding:14px 20px}
+  .hbar .title{font-size:17px}
+  .hbar .sub{display:none}
+  .hbar .sec{font-size:10px}
+
+  /* PAGE INNER */
+  .pi{padding:24px 20px}
+  h2{font-size:20px}
+  .sub{font-size:12px;margin-bottom:16px}
+
+  /* ECOSYSTEM */
+  .eco-wrap{flex-direction:column;gap:12px}
+  .eco-circle{width:120px;height:120px}
+  .eco-circle.platform{width:140px;height:140px}
+  .eco-arrow{transform:rotate(90deg)}
+  .eco-arrow .arr{font-size:20px}
+
+  /* CASES */
+  .case-page{flex-direction:column}
+  .case-img{flex:none;height:200px}
+  .case-card-info .cc-rev{font-size:22px}
+
+  /* PARTNER */
+  .partner-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+  .partner-chip{padding:14px 8px}
+  .partner-chip .pc-name{font-size:13px}
+  .pr{flex-wrap:wrap;gap:20px}
+  .pi-item img{width:60px;height:60px}
+
+  /* COMPARE */
+  .compare{grid-template-columns:1fr}
+  .compare-col{padding:20px}
+
+  /* SERVICE */
+  .svc-grid{grid-template-columns:1fr 1fr;gap:10px}
+  .svc-card{padding:20px 14px}
+  .svc-card .svc-num{font-size:28px}
+  .svc-card h4{font-size:13px}
+  .svc-card p{font-size:11px}
+
+  /* REVENUE */
+  .rev-box{padding:20px;margin:16px 0}
+  .rev-table td{font-size:12px;padding:10px 0}
+
+  /* FLOW */
+  .flow-6{flex-direction:column;align-items:center;gap:4px}
+  .flow-step .fs-circle{width:48px;height:48px;font-size:16px}
+  .flow-step .fs-title{font-size:12px}
+  .flow-connector{transform:rotate(90deg);padding:0;width:auto;height:20px}
+
+  /* PILLS */
+  .pills{gap:6px}
+  .pill{padding:5px 12px;font-size:10px}
+
+  /* INSTRUCTOR PROFILES */
+  .pf{font-size:8px;left:20px;right:20px}
+
+  /* CTA */
+  .cta-page{min-height:80vh;padding:40px 20px}
+  .cta-page h2{font-size:22px}
+  .cta-page .cta-email{font-size:18px}
+  .cta-page .cta-info{font-size:11px}
+
+  /* INLINE GRID OVERRIDES */
+  .grid-4{grid-template-columns:repeat(2,1fr)!important}
+  .grid-5{grid-template-columns:repeat(2,1fr)!important}
+  .grid-5 > div img{width:90px!important;height:90px!important}
+  .grid-2{grid-template-columns:1fr!important}
+}
 </style>
 </head>
 <body>
@@ -250,7 +343,7 @@ h2 em{font-style:normal;color:#e8b84b}
     <h2>유튜브 영상 한 편이 강의 퍼널을 만들고,<br/><em>실제 매출</em>로 이어집니다.</h2>
     <p class="sub">채널주인부재중(117만) 단일 영상 30억 포함, 7건 합산 75억 누적.</p>
 
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px">
+    <div class="grid-4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px">
       <div class="case-card" style="border:2px solid #e8b84b">
         <img src="img/instructor/t_hero.jpg" alt="채널주인부재중"/>
         <div class="case-card-info">
@@ -280,7 +373,7 @@ h2 em{font-style:normal;color:#e8b84b}
         </div>
       </div>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+    <div class="grid-4" style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
       <div class="case-card">
         <img src="img/instructor/t2.jpg" alt="사뚜"/>
         <div class="case-card-info">
@@ -450,7 +543,7 @@ h2 em{font-style:normal;color:#e8b84b}
     <h2>강의 판매 유형은 <em>2가지</em>로 구분됩니다.</h2>
     <p class="sub">강사님의 전문성과 시장 상황에 맞는 최적의 모델을 함께 설계합니다.</p>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0">
+    <div class="grid-2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0">
       <div style="background:#f8f6f2;border:1px solid #e8e0d4;border-radius:12px;padding:28px">
         <div style="font-size:11px;color:#b08d57;font-weight:700;letter-spacing:1px;margin-bottom:8px">MODEL A</div>
         <h3 style="font-size:20px;margin:0 0 12px">프리미엄 모델</h3>
@@ -535,7 +628,7 @@ h2 em{font-style:normal;color:#e8b84b}
     <h2>저희가 <em>함께 협업했던</em> 강사분들입니다.</h2>
     <p class="sub">각 분야 실전 경험을 보유한 전문가들과 협업해왔습니다.</p>
 
-    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:20px;margin:28px 0">
+    <div class="grid-5" style="display:grid;grid-template-columns:repeat(5,1fr);gap:20px;margin:28px 0">
       <div style="text-align:center">
         <img src="img/instructor/prof_alphanam.jpg" alt="알파남" style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid #e8e0d4;display:block;margin:0 auto 12px"/>
         <div style="font-size:16px;font-weight:800;color:#1a1a1a">알파남</div>
