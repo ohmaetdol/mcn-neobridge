@@ -6,278 +6,390 @@
 <title>부업클래스 강사 협력 제안서</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-@page{size:A4;margin:0}
-body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#1a1a1a;background:#e8e4df;-webkit-font-smoothing:antialiased;line-height:1.7}
-.page{width:210mm;min-height:297mm;margin:24px auto;background:#fff;page-break-after:always;position:relative;overflow:hidden;box-shadow:0 4px 40px rgba(0,0,0,.08)}
+@page{size:A4 landscape;margin:0}
+body{font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#1a1a1a;background:#d5d0ca;-webkit-font-smoothing:antialiased;line-height:1.7}
+.page{width:297mm;min-height:210mm;margin:20px auto;background:#fff;page-break-after:always;position:relative;overflow:hidden;box-shadow:0 4px 40px rgba(0,0,0,.08)}
 .page:last-child{page-break-after:avoid}
-.pi{padding:52px 56px 40px}
+
+/* HEADER BAR */
+.hbar{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);padding:18px 48px;display:flex;justify-content:space-between;align-items:center}
+.hbar .sec{font-size:11px;font-weight:800;color:rgba(255,255,255,.4);letter-spacing:2px}
+.hbar .title{font-size:22px;font-weight:900;color:#fff;letter-spacing:-0.5px}
+.hbar .title em{font-style:normal;color:#e8b84b}
+.hbar .sub{font-size:13px;color:rgba(255,255,255,.5);margin-left:12px;font-weight:400}
+.hbar-right{display:flex;align-items:center;gap:12px}
+.hbar .logo-sm{height:20px;opacity:.5}
+
+/* PAGE INNER */
+.pi{padding:36px 48px}
 
 /* COVER */
-.cover{min-height:297mm;background:#fff;display:flex;flex-direction:column;padding:0;position:relative}
-.cover-top{padding:44px 56px 0;display:flex;justify-content:space-between;align-items:center}
-.cover-logo{height:350px}
-.cover-badge{font-size:11px;font-weight:700;color:#b08d57;letter-spacing:1px;border:1.5px solid #b08d57;padding:5px 14px;border-radius:20px}
-.cover-hero{flex:1;display:flex;align-items:center;padding:0 56px}
-.cover-hero-inner{width:100%}
-.cover-num{font-size:120px;font-weight:900;color:rgba(0,0,0,.04);line-height:1;letter-spacing:-6px;margin-bottom:-30px;position:relative;z-index:0}
-.cover-hero h1{font-size:46px;font-weight:900;color:#1a1a1a;line-height:1.2;letter-spacing:-2px;position:relative;z-index:1}
-.cover-hero h1 span{display:inline;background:linear-gradient(to top,#fef3c7 40%,transparent 40%);padding:0 4px}
-.cover-desc{font-size:17px;color:#888;margin-top:20px;line-height:1.8;font-weight:400}
-.cover-stats{display:flex;gap:0;margin-top:44px;border-top:1px solid #eee;border-bottom:1px solid #eee}
-.cover-stat{flex:1;padding:24px 0;text-align:center;border-right:1px solid #eee}
+.cover{min-height:210mm;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 40%,#0f3460 100%);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative}
+.cover::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(232,184,75,.08) 0%,transparent 70%)}
+.cover-logo{height:350px;margin-bottom:32px;position:relative;z-index:1}
+.cover h1{font-size:40px;font-weight:900;color:#fff;line-height:1.25;letter-spacing:-2px;position:relative;z-index:1}
+.cover h1 span{background:linear-gradient(to top,rgba(232,184,75,.3) 35%,transparent 35%);padding:0 6px}
+.cover-sub{font-size:16px;color:rgba(255,255,255,.45);margin-top:16px;position:relative;z-index:1}
+.cover-stats{display:flex;gap:0;margin-top:48px;position:relative;z-index:1}
+.cover-stat{padding:20px 48px;text-align:center;border-right:1px solid rgba(255,255,255,.1)}
 .cover-stat:last-child{border-right:none}
-.cover-stat .n{font-size:36px;font-weight:900;color:#1a1a1a;letter-spacing:-1px}
-.cover-stat .n em{font-style:normal;color:#b08d57}
-.cover-stat .l{font-size:11px;color:#aaa;margin-top:4px;letter-spacing:.5px;font-weight:500}
-.cover-bottom{padding:28px 56px;display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #f0f0f0}
-.cover-meta{font-size:11px;color:#bbb;line-height:1.8}
+.cover-stat .n{font-size:36px;font-weight:900;color:#e8b84b}
+.cover-stat .l{font-size:11px;color:rgba(255,255,255,.35);margin-top:2px;letter-spacing:1px}
+.cover-bottom{position:absolute;bottom:24px;left:48px;right:48px;display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.2)}
 
-/* COMMON */
-.sec-num{font-size:64px;font-weight:900;color:rgba(0,0,0,.04);letter-spacing:-3px;line-height:1;margin-bottom:-10px}
-.stag{display:inline-block;font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:#b08d57;margin-bottom:10px}
-.pnum{position:absolute;top:44px;right:56px;font-size:10px;color:#ddd;font-weight:700;letter-spacing:1px}
-h2{font-size:30px;font-weight:900;letter-spacing:-1px;line-height:1.25;margin-bottom:6px;color:#1a1a1a}
-h2 em{font-style:normal;color:#b08d57}
-.sub{font-size:14px;color:#999;margin-bottom:36px;font-weight:400}
-h3{font-size:18px;font-weight:800;margin:36px 0 16px;letter-spacing:-.3px;color:#1a1a1a}
-h4{font-size:14px;font-weight:700;margin:0 0 8px;color:#1a1a1a}
-p{font-size:13.5px;color:#666;margin-bottom:10px}
+/* CONTENTS */
+.contents{min-height:210mm;background:#fff;display:flex}
+.contents-left{flex:0 0 40%;background:linear-gradient(135deg,#1a1a2e,#0f3460);display:flex;align-items:center;justify-content:center}
+.contents-left h2{font-size:52px;font-weight:900;color:rgba(255,255,255,.15);letter-spacing:-2px}
+.contents-right{flex:1;display:flex;flex-direction:column;justify-content:center;padding:60px}
+.toc-item{display:flex;align-items:baseline;padding:18px 0;border-bottom:1px solid #f0f0f0}
+.toc-item:last-child{border-bottom:none}
+.toc-num{font-size:28px;font-weight:900;color:#e8b84b;width:56px;flex-shrink:0}
+.toc-text{font-size:18px;font-weight:800;color:#1a1a1a}
+.toc-text small{display:block;font-size:12px;font-weight:400;color:#999;margin-top:2px}
+
+/* ECOSYSTEM */
+.eco-wrap{display:flex;align-items:center;justify-content:center;gap:40px;margin:24px 0}
+.eco-circle{width:160px;height:160px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:3px solid}
+.eco-circle.creator{border-color:#e8b84b;background:rgba(232,184,75,.05)}
+.eco-circle.platform{border-color:#1a1a2e;background:#1a1a2e;color:#fff;width:200px;height:200px}
+.eco-circle.student{border-color:#4ade80;background:rgba(74,222,128,.05)}
+.eco-circle .ec-icon{font-size:32px;margin-bottom:4px}
+.eco-circle .ec-label{font-size:14px;font-weight:800}
+.eco-circle .ec-sub{font-size:10px;color:#888;margin-top:2px}
+.eco-circle.platform .ec-sub{color:rgba(255,255,255,.5)}
+.eco-arrow{font-size:13px;color:#ccc;text-align:center;line-height:1.6}
+.eco-arrow .arr{font-size:24px;color:#e8b84b;display:block}
+
+/* HIGHLIGHT */
+.hl{background:linear-gradient(to top,#fef3c7 40%,transparent 40%);padding:0 4px;font-weight:700}
 
 /* HERO CASE */
-.hero-case{position:relative;border-radius:14px;overflow:hidden;margin-bottom:20px}
-.hero-case img{width:100%;display:block}
-.hero-case .overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85) 0%,rgba(0,0,0,0) 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:28px 32px}
-.hero-case .revenue{font-size:44px;font-weight:900;color:#fff;letter-spacing:-1px}
-.hero-case .name{font-size:14px;color:rgba(255,255,255,.7);margin-top:2px}
-.hero-case .desc{font-size:12px;color:rgba(255,255,255,.4);margin-top:2px}
+.case-page{display:flex;min-height:calc(210mm - 60px)}
+.case-img{flex:0 0 50%;position:relative;overflow:hidden}
+.case-img img{width:100%;height:100%;object-fit:cover}
+.case-img .badge{position:absolute;top:16px;left:16px;background:#e8b84b;color:#fff;font-size:10px;font-weight:800;padding:4px 12px;border-radius:4px;letter-spacing:1px}
+.case-info{flex:1;display:flex;flex-direction:column;justify-content:center;padding:40px 48px}
+.case-info .case-name{font-size:14px;font-weight:700;color:#888;margin-bottom:4px}
+.case-info .case-revenue{font-size:72px;font-weight:900;color:#1a1a1a;letter-spacing:-3px;line-height:1}
+.case-info .case-revenue em{color:#e8b84b;font-style:normal}
+.case-info .case-desc{font-size:15px;color:#666;margin-top:16px;line-height:1.8}
+.case-info .case-tags{display:flex;gap:8px;margin-top:20px;flex-wrap:wrap}
+.case-info .case-tag{background:#f5f0e5;color:#b08d57;font-size:11px;font-weight:700;padding:5px 12px;border-radius:16px}
 
-/* THUMB GRID */
-.tg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
-.tc{position:relative;border-radius:10px;overflow:hidden;aspect-ratio:16/9}
-.tc img{width:100%;height:100%;object-fit:cover;display:block}
-.tc .ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.8) 0%,transparent 50%);display:flex;flex-direction:column;justify-content:flex-end;padding:10px 12px}
-.tc .rv{font-size:20px;font-weight:900;color:#fff}
-.tc .nm{font-size:10px;color:rgba(255,255,255,.6)}
+/* THUMB GRID - compact cases */
+.cases-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:20px 0}
+.case-card{border-radius:12px;overflow:hidden;border:1px solid #eee}
+.case-card img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block}
+.case-card-info{padding:16px}
+.case-card-info .cc-name{font-size:12px;color:#888;font-weight:600}
+.case-card-info .cc-rev{font-size:28px;font-weight:900;color:#1a1a1a;letter-spacing:-1px}
+.case-card-info .cc-rev em{color:#e8b84b;font-style:normal}
+.case-card-info .cc-desc{font-size:11px;color:#aaa;margin-top:4px}
 
-/* TOTAL BAR */
-.total-bar{background:#faf8f5;border:1px solid #e8e0d4;border-radius:10px;padding:18px 28px;display:flex;justify-content:space-between;align-items:center;margin:16px 0}
-.total-bar .left{font-size:13px;color:#999}
-.total-bar .right{font-size:26px;font-weight:900;color:#b08d57}
+/* SUMMARY BAR */
+.sum-bar{background:#1a1a2e;border-radius:12px;padding:24px 36px;display:flex;justify-content:space-between;align-items:center;margin:24px 0}
+.sum-bar .sb-left{color:rgba(255,255,255,.5);font-size:14px}
+.sum-bar .sb-right{font-size:32px;font-weight:900;color:#e8b84b}
+
+/* PARTNER */
+.partner-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin:20px 0}
+.partner-chip{background:#f8f6f2;border:1px solid #e8e0d4;border-radius:10px;padding:20px 12px;text-align:center}
+.partner-chip .pc-name{font-size:15px;font-weight:800;color:#1a1a1a}
+.partner-chip .pc-sub{font-size:10px;color:#aaa;margin-top:4px}
+.partner-chip.accent{border-color:#e8b84b;background:#fef9ef}
 
 /* PROFILE ROW */
-.pr{display:flex;gap:32px;justify-content:center;align-items:flex-start;margin:28px 0}
-.pi-item{text-align:center;flex:0 0 auto}
-.pi-item img{width:68px;height:68px;border-radius:50%;object-fit:cover;border:2.5px solid #e8e0d4;display:block;margin:0 auto 8px}
-.pi-item .n{font-size:11px;font-weight:700;color:#1a1a1a}
-.badge{display:inline-block;font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px;margin-top:3px}
-.badge-collab{background:#f5f0e8;color:#b08d57}
+.pr{display:flex;gap:36px;justify-content:center;align-items:flex-start;margin:20px 0}
+.pi-item{text-align:center}
+.pi-item img{width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid #e8e0d4;display:block;margin:0 auto 8px}
+.pi-item .n{font-size:12px;font-weight:700;color:#1a1a1a}
+.badge-tag{display:inline-block;font-size:9px;font-weight:700;padding:3px 8px;border-radius:10px;margin-top:3px}
+.badge-self{background:#e8b84b;color:#fff}
+.badge-collab{background:#f0ebe3;color:#b08d57}
 
-/* PARTNER SECTION */
-.partner-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
-.partner-chip{background:#faf8f5;border:1px solid #e8e0d4;border-radius:10px;padding:16px;text-align:center}
-.partner-chip .pc-name{font-size:14px;font-weight:800;color:#1a1a1a}
-.partner-chip .pc-sub{font-size:10px;color:#aaa;margin-top:3px}
+/* COMPARE */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:20px 0;border-radius:12px;overflow:hidden;border:1px solid #eee}
+.compare-col{padding:28px 32px}
+.compare-col.before{background:#f5f5f5}
+.compare-col.after{background:#1a1a2e;color:#fff}
+.compare-col h4{font-size:16px;font-weight:800;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.compare-col h4 .dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+.compare-col.before h4 .dot{background:#ccc}
+.compare-col.after h4 .dot{background:#e8b84b}
+.compare-col ul{list-style:none;padding:0}
+.compare-col ul li{padding:8px 0;border-bottom:1px solid rgba(0,0,0,.06);font-size:13px;color:#666;display:flex;align-items:center;gap:8px}
+.compare-col.after ul li{border-color:rgba(255,255,255,.08);color:rgba(255,255,255,.7)}
+.compare-col ul li .mark{color:#e8b84b;font-weight:700;font-size:15px}
 
-/* HIGHLIGHT BOX */
-.hl-box{border:2px solid #b08d57;border-radius:12px;padding:28px 36px;text-align:center;margin:24px 0;position:relative}
-.hl-box::before{content:'';position:absolute;inset:4px;border:1px solid rgba(176,141,87,.15);border-radius:9px}
-.hl-box .big{font-size:22px;font-weight:900;color:#1a1a1a}
-.hl-box .big em{color:#b08d57;font-style:normal}
-.hl-box .sm{font-size:13px;color:#999;margin-top:6px}
-
-/* CARDS */
-.cg{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
-.cd{background:#faf8f5;border-radius:12px;padding:24px;border:1px solid #ede8df;transition:box-shadow .2s}
-.cd h4{margin:0 0 8px;font-size:14px;color:#1a1a1a}
-.cd p{font-size:12.5px;color:#888;margin-bottom:4px;line-height:1.6}
-.cd-num{font-size:28px;font-weight:900;color:#b08d57;margin-bottom:8px;opacity:.5}
-ul{padding-left:16px;margin:6px 0}
-li{font-size:12.5px;color:#666;margin-bottom:5px;line-height:1.5}
-li strong{color:#1a1a1a}
-
-/* FEATURE STRIP */
-.fstrip{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:24px 0;border-radius:12px;overflow:hidden;border:1px solid #e8e0d4}
-.fs-item{padding:24px 16px;text-align:center;background:#fff;border-right:1px solid #e8e0d4}
-.fs-item:last-child{border-right:none}
-.fs-item .num{font-size:30px;font-weight:900;color:#b08d57;margin-bottom:4px}
-.fs-item .label{font-size:11px;color:#999;font-weight:600}
-.fs-item.accent{background:#b08d57}
-.fs-item.accent .num{color:#fff}
-.fs-item.accent .label{color:rgba(255,255,255,.7)}
+/* SERVICE CARDS */
+.svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:20px 0}
+.svc-card{background:#f8f6f2;border-radius:12px;padding:28px 20px;text-align:center;border:1px solid #ede8df}
+.svc-card .svc-num{font-size:36px;font-weight:900;color:rgba(232,184,75,.3);margin-bottom:8px}
+.svc-card h4{font-size:15px;font-weight:800;margin-bottom:10px;color:#1a1a1a}
+.svc-card p{font-size:12px;color:#888;line-height:1.6}
 
 /* REVENUE TABLE */
-.rev-section{background:#1a1a1a;border-radius:12px;padding:28px 32px;margin:24px 0;color:#fff}
-.rev-section h3{color:#fff;margin:0 0 16px;font-size:16px}
+.rev-box{background:#1a1a2e;border-radius:12px;padding:28px 36px;margin:20px 0;color:#fff}
+.rev-box h3{font-size:18px;font-weight:800;margin-bottom:16px;color:#fff}
 .rev-table{width:100%;border-collapse:collapse}
-.rev-table td{padding:12px 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:13px;color:rgba(255,255,255,.6)}
-.rev-table td:first-child{font-weight:700;color:#fff;width:30%}
-.rev-table .accent{color:#b08d57;font-weight:700}
+.rev-table td{padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:14px;color:rgba(255,255,255,.5)}
+.rev-table td:first-child{font-weight:700;color:#fff;width:28%}
+.rev-table .accent{color:#e8b84b;font-weight:700}
 .rev-table tr:last-child td{border-bottom:none}
 
-/* FLOW */
-.flow{display:flex;align-items:center;margin:24px 0;gap:6px}
-.fl-step{flex:1;text-align:center;padding:18px 10px;background:#faf8f5;border:1px solid #e8e0d4;border-radius:10px}
-.fl-step .fw{font-size:10px;font-weight:800;color:#b08d57;letter-spacing:1px;margin-bottom:4px}
-.fl-step .ft{font-size:11.5px;color:#555;font-weight:600;line-height:1.4}
-.fl-step.active{background:#b08d57;border-color:#b08d57}
-.fl-step.active .fw{color:rgba(255,255,255,.7)}
-.fl-step.active .ft{color:#fff}
-.fl-arrow{color:#ccc;font-size:16px;flex-shrink:0}
-
-/* TABLE */
-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px}
-thead th{background:#1a1a1a;color:#fff;padding:11px 16px;text-align:left;font-weight:600;font-size:11px;letter-spacing:.5px}
-thead th:first-child{border-radius:8px 0 0 0}
-thead th:last-child{border-radius:0 8px 0 0}
-tbody td{padding:11px 16px;border-bottom:1px solid #f0f0f0;color:#555}
-tbody td strong{color:#1a1a1a}
+/* FLOW PROCESS */
+.flow-6{display:flex;align-items:flex-start;gap:8px;margin:28px 0}
+.flow-step{flex:1;text-align:center}
+.flow-step .fs-circle{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#1a1a2e,#0f3460);margin:0 auto 10px;display:flex;align-items:center;justify-content:center;color:#e8b84b;font-size:22px;font-weight:900}
+.flow-step .fs-num{font-size:10px;font-weight:800;color:#e8b84b;letter-spacing:1px;margin-bottom:4px}
+.flow-step .fs-title{font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:2px}
+.flow-step .fs-desc{font-size:10px;color:#999;line-height:1.5}
+.flow-connector{width:40px;display:flex;align-items:center;justify-content:center;padding-top:24px;color:#ddd;font-size:18px;flex-shrink:0}
 
 /* PILLS */
 .pills{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
-.pill{background:#faf8f5;border:1px solid #e8e0d4;border-radius:20px;padding:7px 16px;font-size:11px;font-weight:600;color:#888}
+.pill{background:#f8f6f2;border:1px solid #e8e0d4;border-radius:20px;padding:7px 16px;font-size:11px;font-weight:600;color:#888}
 .pill.hot{background:#fef3c7;border-color:#fcd34d;color:#92400e;font-weight:700}
 
 /* CTA */
-.cta-box{background:#faf8f5;border:2px solid #b08d57;border-radius:14px;padding:40px;text-align:center;margin:28px 0}
-.cta-box h3{color:#1a1a1a;font-size:22px;margin:0 0 8px;letter-spacing:-1px}
-.cta-box p{color:#999;font-size:14px;margin:0 0 16px}
-.cta-btn{display:inline-block;background:#b08d57;color:#fff;font-size:14px;font-weight:700;padding:12px 36px;border-radius:8px;text-decoration:none;letter-spacing:.5px}
-.cta-email{margin-top:12px;font-size:16px;font-weight:700;color:#b08d57;letter-spacing:.5px}
+.cta-page{min-height:210mm;background:linear-gradient(135deg,#1a1a2e 0%,#16213e 40%,#0f3460 100%);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;position:relative}
+.cta-page h2{font-size:36px;font-weight:900;color:#fff;line-height:1.4;letter-spacing:-1px}
+.cta-page .cta-sub{font-size:16px;color:rgba(255,255,255,.4);margin-top:16px}
+.cta-page .cta-email{font-size:24px;font-weight:700;color:#e8b84b;margin-top:32px;letter-spacing:1px}
+.cta-page .cta-info{font-size:12px;color:rgba(255,255,255,.25);margin-top:24px;line-height:2}
 
-.divider{height:1px;background:#eee;margin:32px 0}
-.pf{position:absolute;bottom:32px;left:56px;right:56px;display:flex;justify-content:space-between;font-size:9px;color:#ccc;letter-spacing:.5px}
+/* COMMON */
+h2{font-size:28px;font-weight:900;letter-spacing:-1px;line-height:1.3;margin-bottom:6px}
+h2 em{font-style:normal;color:#e8b84b}
+.sub{font-size:14px;color:#999;margin-bottom:28px}
+.pf{position:absolute;bottom:16px;left:48px;right:48px;display:flex;justify-content:space-between;font-size:9px;color:#ccc}
 
 @media print{body{background:#fff}.page{box-shadow:none;margin:0}}
-@media(max-width:800px){.page{width:100%;min-height:auto}.pi{padding:28px 20px}.cover-hero h1{font-size:28px}.cover-num{font-size:72px}.cover-stats{flex-direction:column}.cover-stat{border-right:none;border-bottom:1px solid #eee;padding:16px 0}.cover-stat:last-child{border-bottom:none}.tg{grid-template-columns:1fr 1fr}.cg{grid-template-columns:1fr}.fstrip{grid-template-columns:1fr 1fr}.pr{flex-wrap:wrap;gap:16px}.flow{flex-direction:column}.fl-arrow{transform:rotate(90deg)}.partner-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:800px){.page{width:100%;min-height:auto}.pi{padding:24px 16px}.cover h1{font-size:24px}.cover-logo{height:200px}.case-page{flex-direction:column}.case-img{flex:none;height:200px}.cases-grid{grid-template-columns:1fr}.svc-grid{grid-template-columns:1fr 1fr}.compare{grid-template-columns:1fr}.partner-grid{grid-template-columns:1fr 1fr}.flow-6{flex-direction:column;align-items:center}.flow-connector{transform:rotate(90deg);padding:0}}
 </style>
 </head>
 <body>
 
 <!-- PAGE 1: COVER -->
 <div class="page cover">
-  <div class="cover-top">
-    <img src="img/instructor/logo_lg.jpg" class="cover-logo" alt="부업클래스"/>
-    <div class="cover-badge">INSTRUCTOR PARTNERSHIP 2026</div>
-  </div>
-  <div class="cover-hero">
-    <div class="cover-hero-inner">
-      <div class="cover-num">700</div>
-      <h1>당신의 경험이<br/><span>강의 매출</span>이 됩니다.</h1>
-      <div class="cover-desc">
-        기획, 촬영, 편집, 마케팅, 정산까지 전부 저희가 합니다.<br/>
-        강사님은 강의만 하세요.
-      </div>
-      <div class="cover-stats">
-        <div class="cover-stat">
-          <div class="n"><em>700</em>억+</div>
-          <div class="l">파트너 누적 매출</div>
-        </div>
-        <div class="cover-stat">
-          <div class="n">13팀</div>
-          <div class="l">유튜브 채널 네트워크</div>
-        </div>
-        <div class="cover-stat">
-          <div class="n">4주</div>
-          <div class="l">기획부터 런칭까지</div>
-        </div>
-      </div>
-    </div>
+  <img src="img/instructor/logo_lg.jpg" class="cover-logo" alt="부업클래스"/>
+  <h1>강사님의 경험을<br/><span>강의 매출</span>로 만들어드립니다.</h1>
+  <div class="cover-sub">기획, 촬영, 편집, 마케팅, 정산까지 전부 저희가 합니다.<br/>강사님은 강의만 하세요.</div>
+  <div class="cover-stats">
+    <div class="cover-stat"><div class="n">700억+</div><div class="l">파트너 누적 매출</div></div>
+    <div class="cover-stat"><div class="n">13팀</div><div class="l">유튜브 채널 네트워크</div></div>
+    <div class="cover-stat"><div class="n">4주</div><div class="l">기획부터 런칭까지</div></div>
   </div>
   <div class="cover-bottom">
-    <div class="cover-meta">주식회사 플로우머스<br/>부업클래스.com</div>
-    <div class="cover-meta" style="text-align:right">강사 협력 제안서<br/>Confidential</div>
+    <span>주식회사 플로우머스 | 부업클래스.com</span>
+    <span>강사 협력 제안서 2026 | Confidential</span>
   </div>
 </div>
 
-<!-- PAGE 2: TRACK RECORD -->
-<div class="page">
-  <div class="pi">
-    <span class="pnum">02 / 05</span>
-    <div class="sec-num">02</div>
-    <div class="stag">TRACK RECORD</div>
-    <h2>이미 <em>75억</em>이<br/>증명한 구조입니다.</h2>
-    <p class="sub">유튜브 영상 한 편이 강의 퍼널을 만들고, 실제 매출로 이어집니다.</p>
+<!-- PAGE 2: CONTENTS -->
+<div class="page contents">
+  <div class="contents-left">
+    <h2>Contents</h2>
+  </div>
+  <div class="contents-right">
+    <div class="toc-item"><div class="toc-num">01</div><div class="toc-text">플랫폼 소개<small>선순환 생태계 구축</small></div></div>
+    <div class="toc-item"><div class="toc-num">02</div><div class="toc-text">성공 사례<small>강의 퍼널 실제 매출 75억</small></div></div>
+    <div class="toc-item"><div class="toc-num">03</div><div class="toc-text">파트너 네트워크<small>누적 매출 700억 파트너사 + 13팀 채널</small></div></div>
+    <div class="toc-item"><div class="toc-num">04</div><div class="toc-text">차별화 포인트<small>기존 강의 플랫폼과의 차이</small></div></div>
+    <div class="toc-item"><div class="toc-num">05</div><div class="toc-text">제공 서비스<small>기획부터 출판까지 풀 서포트</small></div></div>
+    <div class="toc-item"><div class="toc-num">06</div><div class="toc-text">수익 구조<small>계약 조건 및 정산 방식</small></div></div>
+    <div class="toc-item"><div class="toc-num">07</div><div class="toc-text">협업 프로세스<small>6단계 협업 진행 절차</small></div></div>
+  </div>
+</div>
 
-    <div class="hero-case">
-      <img src="img/instructor/t_hero.jpg" alt="채널주인부재중"/>
-      <div class="overlay">
-        <div class="revenue">30억</div>
-        <div class="name">채널주인부재중</div>
-        <div class="desc">유튜브 공식 하나로 매달 7억 벌고있는 93년생</div>
+<!-- PAGE 3: 플랫폼 소개 -->
+<div class="page">
+  <div class="hbar">
+    <div><span class="sec">01</span> <span class="title">플랫폼 소개</span><span class="sub">선순환 생태계 구축</span></div>
+    <div class="hbar-right"><img src="img/instructor/logo_lg.jpg" class="logo-sm"/></div>
+  </div>
+  <div class="pi">
+    <h2>강사님의 전문성을 콘텐츠로 기획 · 제작하여<br/><em>팬덤을 구축</em>하고, 강의 판매로 연결합니다.</h2>
+    <p class="sub">부업클래스는 크리에이터의 고민은 덜고, 수강생의 성과에 집착하는 강의 플랫폼입니다.</p>
+
+    <div class="eco-wrap">
+      <div class="eco-circle creator">
+        <div class="ec-icon">&#9997;</div>
+        <div class="ec-label">강사</div>
+        <div class="ec-sub">전문성 + 경험</div>
+      </div>
+      <div class="eco-arrow">
+        콘텐츠/교육 IP 이전<br/><span class="arr">&rarr;</span><br/>수수료 지급
+      </div>
+      <div class="eco-circle platform">
+        <div class="ec-icon">&#9733;</div>
+        <div class="ec-label" style="color:#e8b84b;font-size:16px">부업클래스</div>
+        <div class="ec-sub">기획/제작/마케팅</div>
+      </div>
+      <div class="eco-arrow">
+        콘텐츠/교육 제공<br/><span class="arr">&rarr;</span><br/>교육 상품 결제
+      </div>
+      <div class="eco-circle student">
+        <div class="ec-icon">&#128101;</div>
+        <div class="ec-label">수강생</div>
+        <div class="ec-sub">성과 창출</div>
       </div>
     </div>
 
-    <div class="tg">
-      <div class="tc"><img src="img/instructor/t1.jpg" alt="알파남"/><div class="ov"><div class="rv">10억</div><div class="nm">알파남</div></div></div>
-      <div class="tc"><img src="img/instructor/t3.jpg" alt="이준원"/><div class="ov"><div class="rv">10억</div><div class="nm">이준원</div></div></div>
-      <div class="tc"><img src="img/instructor/t6.jpg" alt="알파남(이웃집)"/><div class="ov"><div class="rv">10억</div><div class="nm">알파남(이웃집)</div></div></div>
-      <div class="tc"><img src="img/instructor/t2.jpg" alt="사뚜"/><div class="ov"><div class="rv">6억</div><div class="nm">사뚜</div></div></div>
-      <div class="tc"><img src="img/instructor/t5.jpg" alt="로사장"/><div class="ov"><div class="rv">5억</div><div class="nm">로사장</div></div></div>
-      <div class="tc"><img src="img/instructor/t4.jpg" alt="하대표"/><div class="ov"><div class="rv">4억</div><div class="nm">하대표</div></div></div>
-    </div>
-
-    <div class="total-bar">
-      <div class="left">7개 사례 합산 강의 퍼널 매출</div>
-      <div class="right">75억원</div>
+    <div style="text-align:center;margin-top:32px;padding:20px;background:#f8f6f2;border-radius:12px;border:1px solid #e8e0d4">
+      <div style="font-size:11px;color:#b08d57;font-weight:700;letter-spacing:2px;margin-bottom:8px">MANAGEMENT SYSTEM</div>
+      <div style="font-size:16px;font-weight:800;color:#1a1a1a">강의 기획 PM / 콘텐츠 PD / 마케터 <span class="hl">유닛 구조</span>로 체계적인 매니지먼트</div>
     </div>
   </div>
-  <div class="pf"><span>부업클래스 | 주식회사 플로우머스</span><span>Confidential</span></div>
+  <div class="pf"><span>부업클래스 | 주식회사 플로우머스</span><span>01 / 10</span></div>
 </div>
 
-<!-- PAGE 3: PARTNERS + NETWORK -->
+<!-- PAGE 4: 성공사례 HERO -->
 <div class="page">
+  <div class="hbar">
+    <div><span class="sec">02</span> <span class="title">성공사례</span><span class="sub">강의 퍼널 실제 매출</span></div>
+    <div class="hbar-right"><img src="img/instructor/logo_lg.jpg" class="logo-sm"/></div>
+  </div>
+  <div class="case-page">
+    <div class="case-img">
+      <img src="img/instructor/t_hero.jpg" alt="채널주인부재중"/>
+      <div class="badge">TOP CASE</div>
+    </div>
+    <div class="case-info">
+      <div class="case-name">유튜브 공식 하나로 매달 7억 벌고있는 93년생</div>
+      <div class="case-revenue"><em>30</em>억</div>
+      <div style="font-size:14px;color:#b08d57;font-weight:700;margin-top:4px">채널주인부재중</div>
+      <div class="case-desc">
+        유튜브 콘텐츠 기획 → 무료 세미나 → 프리미엄 강의 런칭.<br/>
+        부업클래스의 <span class="hl">강의 퍼널 시스템</span>을 통해<br/>
+        단기간에 누적 매출 30억을 달성한 대표 사례입니다.
+      </div>
+      <div class="case-tags">
+        <span class="case-tag">강의 퍼널</span>
+        <span class="case-tag">유튜브 마케팅</span>
+        <span class="case-tag">프리미엄 강의</span>
+      </div>
+    </div>
+  </div>
+  <div class="pf"><span>부업클래스 | 주식회사 플로우머스</span><span>02 / 10</span></div>
+</div>
+
+<!-- PAGE 5: 성공사례 나머지 6건 -->
+<div class="page">
+  <div class="hbar">
+    <div><span class="sec">02</span> <span class="title">성공사례</span><span class="sub">추가 사례 6건</span></div>
+    <div class="hbar-right"><img src="img/instructor/logo_lg.jpg" class="logo-sm"/></div>
+  </div>
   <div class="pi">
-    <span class="pnum">03 / 05</span>
-    <div class="sec-num">03</div>
-    <div class="stag">PARTNERS & NETWORK</div>
-    <h2>누적 매출 <em>700억</em>을<br/>함께 만든 파트너</h2>
-    <p class="sub">검증된 강의 플랫폼과 유튜브 네트워크가 강사님의 매출을 만듭니다.</p>
+    <h2>유튜브 영상 한 편이 강의 퍼널을 만들고,<br/><em>실제 매출</em>로 이어집니다.</h2>
+    <p class="sub">7건의 성공 사례, 총 75억 누적 매출.</p>
+
+    <div class="cases-grid">
+      <div class="case-card">
+        <img src="img/instructor/t1.jpg" alt="알파남"/>
+        <div class="case-card-info">
+          <div class="cc-name">알파남</div>
+          <div class="cc-rev"><em>10</em>억</div>
+          <div class="cc-desc">프리미엄 강의 + VOD</div>
+        </div>
+      </div>
+      <div class="case-card">
+        <img src="img/instructor/t3.jpg" alt="이준원"/>
+        <div class="case-card-info">
+          <div class="cc-name">이준원</div>
+          <div class="cc-rev"><em>10</em>억</div>
+          <div class="cc-desc">프리미엄 강의 + VOD</div>
+        </div>
+      </div>
+      <div class="case-card">
+        <img src="img/instructor/t6.jpg" alt="알파남(이웃집)"/>
+        <div class="case-card-info">
+          <div class="cc-name">알파남(이웃집)</div>
+          <div class="cc-rev"><em>10</em>억</div>
+          <div class="cc-desc">프리미엄 강의 + VOD</div>
+        </div>
+      </div>
+      <div class="case-card">
+        <img src="img/instructor/t2.jpg" alt="사뚜"/>
+        <div class="case-card-info">
+          <div class="cc-name">사뚜</div>
+          <div class="cc-rev"><em>6</em>억</div>
+          <div class="cc-desc">프리미엄 강의 + VOD</div>
+        </div>
+      </div>
+      <div class="case-card">
+        <img src="img/instructor/t5.jpg" alt="로사장"/>
+        <div class="case-card-info">
+          <div class="cc-name">로사장</div>
+          <div class="cc-rev"><em>5</em>억</div>
+          <div class="cc-desc">프리미엄 강의 + VOD</div>
+        </div>
+      </div>
+      <div class="case-card">
+        <img src="img/instructor/t4.jpg" alt="하대표"/>
+        <div class="case-card-info">
+          <div class="cc-name">하대표</div>
+          <div class="cc-rev"><em>4</em>억</div>
+          <div class="cc-desc">프리미엄 강의 + VOD</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="sum-bar">
+      <div class="sb-left">7개 사례 합산 강의 퍼널 매출</div>
+      <div class="sb-right">75억원</div>
+    </div>
+  </div>
+  <div class="pf"><span>부업클래스 | 주식회사 플로우머스</span><span>03 / 10</span></div>
+</div>
+
+<!-- PAGE 6: 파트너 네트워크 -->
+<div class="page">
+  <div class="hbar">
+    <div><span class="sec">03</span> <span class="title">파트너 네트워크</span><span class="sub">누적 매출 700억 파트너사</span></div>
+    <div class="hbar-right"><img src="img/instructor/logo_lg.jpg" class="logo-sm"/></div>
+  </div>
+  <div class="pi">
+    <h2>강의 플랫폼 파트너사와<br/>누적 <em>700억</em>을 함께 만들었습니다.</h2>
+    <p class="sub">검증된 매출 구조 위에 강사님의 강의를 올립니다.</p>
 
     <div class="partner-grid">
       <div class="partner-chip"><div class="pc-name">타이탄클래스</div><div class="pc-sub">강의 플랫폼</div></div>
       <div class="partner-chip"><div class="pc-name">인베이더스쿨</div><div class="pc-sub">강의 플랫폼</div></div>
       <div class="partner-chip"><div class="pc-name">N잡연구소</div><div class="pc-sub">강의 플랫폼</div></div>
       <div class="partner-chip"><div class="pc-name">코주부스쿨</div><div class="pc-sub">강의 플랫폼</div></div>
-      <div class="partner-chip"><div class="pc-name">아이비스쿨</div><div class="pc-sub">강의 플랫폼</div></div>
-      <div class="partner-chip" style="border-color:#b08d57"><div class="pc-name" style="color:#b08d57">외 다수</div><div class="pc-sub">협력 파트너</div></div>
+      <div class="partner-chip accent"><div class="pc-name">아이비스쿨</div><div class="pc-sub">강의 플랫폼</div></div>
     </div>
 
-    <div class="hl-box">
-      <div class="big">강의 플랫폼 파트너사와 누적 <em>700억</em> 달성</div>
-      <div class="sm">검증된 매출 구조 위에 강사님의 강의를 올립니다.</div>
-    </div>
+    <div style="height:1px;background:#eee;margin:28px 0"></div>
 
-    <div class="divider"></div>
-
-    <div class="stag">YOUTUBE NETWORK</div>
-    <h3>13개 채널이 강사님을 노출합니다.</h3>
-
-    <div class="pr">
+    <h2 style="font-size:20px">유튜브 <em>13개 채널</em>이 강사님을 노출합니다.</h2>
+    <div class="pr" style="margin-top:20px">
       <div class="pi-item">
         <img src="img/instructor/p_sajjik_lg.jpg" alt="사장찍어주는남자"/>
         <div class="n">사장찍어주는남자</div>
-        <span class="badge" style="background:#b08d57;color:#fff">자체</span>
+        <span class="badge-tag badge-self">자체</span>
       </div>
       <div class="pi-item">
         <img src="img/instructor/p_money_lg.jpg" alt="머니로드"/>
         <div class="n">머니로드</div>
-        <span class="badge badge-collab">협력</span>
+        <span class="badge-tag badge-collab">협력</span>
       </div>
       <div class="pi-item">
         <img src="img/instructor/p_hyunjang_lg.jpg" alt="현장속으로"/>
         <div class="n">현장속으로</div>
-        <span class="badge badge-collab">협력</span>
+        <span class="badge-tag badge-collab">협력</span>
       </div>
       <div class="pi-item">
-        <div style="width:68px;height:68px;border-radius:50%;background:#faf8f5;border:2.5px solid #e8e0d4;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:18px;font-weight:900;color:#b08d57">+10</div>
+        <div style="width:80px;height:80px;border-radius:50%;background:#f5f0e5;border:3px solid #e8e0d4;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:20px;font-weight:900;color:#b08d57">+10</div>
         <div class="n" style="color:#999">외 10팀</div>
-        <span class="badge badge-collab">협력</span>
+        <span class="badge-tag badge-collab">협력</span>
       </div>
     </div>
 
-    <div class="stag" style="margin-top:16px">CATEGORIES</div>
-    <h3>모집 분야</h3>
-    <div class="pills">
+    <div style="text-align:center;margin-top:20px;font-size:11px;font-weight:700;color:#b08d57;letter-spacing:2px">CATEGORIES</div>
+    <div class="pills" style="justify-content:center;margin-top:8px">
       <span class="pill hot">AI 활용 부업</span>
       <span class="pill hot">스마트스토어</span>
       <span class="pill hot">블로그/SEO</span>
@@ -292,50 +404,140 @@ tbody td strong{color:#1a1a1a}
       <span class="pill">프리랜서</span>
     </div>
   </div>
-  <div class="pf"><span>부업클래스 | 주식회사 플로우머스</span><span>Confidential</span></div>
+  <div class="pf"><span>부업클래스 | 주식회사 플로우머스</span><span>04 / 10</span></div>
 </div>
 
-<!-- PAGE 4: BENEFITS -->
+<!-- PAGE 7: 차별화 포인트 -->
 <div class="page">
+  <div class="hbar">
+    <div><span class="sec">04</span> <span class="title">차별화 포인트</span><span class="sub">기존 강의 플랫폼과의 차이</span></div>
+    <div class="hbar-right"><img src="img/instructor/logo_lg.jpg" class="logo-sm"/></div>
+  </div>
   <div class="pi">
-    <span class="pnum">04 / 05</span>
-    <div class="sec-num">04</div>
-    <div class="stag">WHAT WE DO</div>
-    <h2>강사님은 <em>강의만</em> 하세요.<br/>나머지는 전부 저희가.</h2>
-    <p class="sub">강의 플랫폼 PM으로서 기획부터 출판까지 풀 서포트합니다.</p>
+    <h2>기존 강의 플랫폼 <em>vs</em> 부업클래스</h2>
+    <p class="sub">강사님이 모든 것을 혼자 해야 하는 시대는 끝났습니다.</p>
 
-    <div class="fstrip">
-      <div class="fs-item"><div class="num">01</div><div class="label">기획</div></div>
-      <div class="fs-item"><div class="num">02</div><div class="label">촬영/편집</div></div>
-      <div class="fs-item"><div class="num">03</div><div class="label">마케팅</div></div>
-      <div class="fs-item accent"><div class="num">04</div><div class="label">런칭!</div></div>
+    <div class="compare">
+      <div class="compare-col before">
+        <h4><span class="dot"></span> 기존 프로세스</h4>
+        <ul>
+          <li>&#10005;&nbsp; 강의 기획을 강사가 직접</li>
+          <li>&#10005;&nbsp; 촬영/편집 별도로 업체 섭외</li>
+          <li>&#10005;&nbsp; 마케팅/수강생 모집 직접 진행</li>
+          <li>&#10005;&nbsp; 랜딩페이지, 광고 직접 제작</li>
+          <li>&#10005;&nbsp; 수강생 관리, CS 직접 처리</li>
+          <li>&#10005;&nbsp; 브랜딩은 알아서</li>
+        </ul>
+      </div>
+      <div class="compare-col after">
+        <h4><span class="dot"></span> 부업클래스</h4>
+        <ul>
+          <li><span class="mark">&#10003;</span> 시장 조사 기반 <span class="hl" style="background:rgba(232,184,75,.2)">커리큘럼 공동 기획</span></li>
+          <li><span class="mark">&#10003;</span> 전문 PD팀이 촬영/편집 전담</li>
+          <li><span class="mark">&#10003;</span> 유튜브 13팀 + SNS 광고 <span class="hl" style="background:rgba(232,184,75,.2)">풀 마케팅</span></li>
+          <li><span class="mark">&#10003;</span> 무료 세미나 + 웨비나 운영</li>
+          <li><span class="mark">&#10003;</span> 수강생 관리 시스템 제공</li>
+          <li><span class="mark">&#10003;</span> <span class="hl" style="background:rgba(232,184,75,.2)">퍼스널 브랜딩 + 출판</span>까지</li>
+        </ul>
+      </div>
     </div>
 
-    <div class="cg">
-      <div class="cd">
-        <div class="cd-num">01</div>
+    <div style="text-align:center;margin-top:24px;padding:24px;background:#fef9ef;border:2px solid #e8b84b;border-radius:12px">
+      <div style="font-size:20px;font-weight:900;color:#1a1a1a">강사님은 <span class="hl">강의만</span> 하세요. 나머지는 <span class="hl">전부</span> 저희가 합니다.</div>
+      <div style="font-size:13px;color:#999;margin-top:6px">강의 플랫폼의 PM이 되어 기획부터 런칭, 성장까지 함께합니다.</div>
+    </div>
+  </div>
+  <div class="pf"><span>부업클래스 | 주식회사 플로우머스</span><span>05 / 10</span></div>
+</div>
+
+<!-- PAGE 8: 제공 서비스 -->
+<div class="page">
+  <div class="hbar">
+    <div><span class="sec">05</span> <span class="title">제공 서비스</span><span class="sub">기획부터 출판까지 풀 서포트</span></div>
+    <div class="hbar-right"><img src="img/instructor/logo_lg.jpg" class="logo-sm"/></div>
+  </div>
+  <div class="pi">
+    <h2>부업클래스가 제공하는<br/><em>4대 핵심 서비스</em></h2>
+    <p class="sub">강사님의 전문성에만 집중할 수 있는 환경을 만들어드립니다.</p>
+
+    <div class="svc-grid">
+      <div class="svc-card">
+        <div class="svc-num">01</div>
         <h4>강의 기획</h4>
-        <p>커리큘럼 구성, 차시별 구조 설계, 수강생 니즈 리서치까지. "무슨 내용을 넣지?"부터 함께합니다.</p>
+        <p>시장 조사, 경쟁 벤치마크,<br/>커리큘럼 구성,<br/>차시별 구조 설계,<br/>수강생 니즈 리서치</p>
       </div>
-      <div class="cd">
-        <div class="cd-num">02</div>
+      <div class="svc-card">
+        <div class="svc-num">02</div>
         <h4>촬영 & 편집</h4>
-        <p>장비, 스튜디오, 편집 모두 지원. 카메라 앞에서 이야기만 해주세요.</p>
+        <p>전문 장비 & 스튜디오,<br/>편집/자막/썸네일 제작,<br/>카메라 앞에서<br/>이야기만 하세요</p>
       </div>
-      <div class="cd">
-        <div class="cd-num">03</div>
+      <div class="svc-card">
+        <div class="svc-num">03</div>
         <h4>마케팅 & 런칭</h4>
-        <p>무료 세미나 + 무료 웨비나 운영. 랜딩페이지, SNS 광고, 유튜브 13팀 노출로 수강생을 모읍니다.</p>
+        <p>무료 세미나 + 웨비나,<br/>랜딩페이지 제작,<br/>SNS 광고 집행,<br/>유튜브 13팀 노출</p>
       </div>
-      <div class="cd">
-        <div class="cd-num">04</div>
-        <h4>퍼스널 브랜딩 & 출판</h4>
-        <p>강의를 넘어 <strong>퍼스널 브랜딩 + 출판</strong>까지. 강사님 이름의 브랜드를 만들어드립니다.</p>
+      <div class="svc-card">
+        <div class="svc-num">04</div>
+        <h4>브랜딩 & 출판</h4>
+        <p>퍼스널 브랜딩 구축,<br/>강사님 이름으로 출판,<br/>원소스 멀티유즈,<br/>장기 비즈니스 설계</p>
       </div>
     </div>
 
-    <div class="rev-section">
-      <h3>수익 구조</h3>
+    <div style="text-align:center;margin-top:8px;font-size:11px;font-weight:700;color:#b08d57;letter-spacing:2px;margin-bottom:12px">GROWTH MODEL</div>
+    <div style="display:flex;gap:0;border-radius:12px;overflow:hidden;border:1px solid #e8e0d4">
+      <div style="flex:1;padding:20px;text-align:center;background:#f8f6f2;border-right:1px solid #e8e0d4">
+        <div style="font-size:11px;color:#b08d57;font-weight:700">1단계</div>
+        <div style="font-size:15px;font-weight:800;margin-top:4px">퍼스널 브랜딩</div>
+        <div style="font-size:11px;color:#999;margin-top:4px">콘텐츠 방향성 수립<br/>시장 내 캐릭터 구축</div>
+      </div>
+      <div style="flex:1;padding:20px;text-align:center;background:#f8f6f2;border-right:1px solid #e8e0d4">
+        <div style="font-size:11px;color:#b08d57;font-weight:700">2단계</div>
+        <div style="font-size:15px;font-weight:800;margin-top:4px">원소스 멀티유즈</div>
+        <div style="font-size:11px;color:#999;margin-top:4px">유튜브/인스타/블로그<br/>데이터 기반 콘텐츠 운영</div>
+      </div>
+      <div style="flex:1;padding:20px;text-align:center;background:#1a1a2e">
+        <div style="font-size:11px;color:#e8b84b;font-weight:700">3단계</div>
+        <div style="font-size:15px;font-weight:800;margin-top:4px;color:#fff">세일즈 퍼널</div>
+        <div style="font-size:11px;color:rgba(255,255,255,.5);margin-top:4px">무료 콘텐츠 > 강의<br/>> 스터디 > 비즈니스 확장</div>
+      </div>
+    </div>
+  </div>
+  <div class="pf"><span>부업클래스 | 주식회사 플로우머스</span><span>06 / 10</span></div>
+</div>
+
+<!-- PAGE 9: 수익 구조 -->
+<div class="page">
+  <div class="hbar">
+    <div><span class="sec">06</span> <span class="title">수익 구조</span><span class="sub">계약 조건 및 정산 방식</span></div>
+    <div class="hbar-right"><img src="img/instructor/logo_lg.jpg" class="logo-sm"/></div>
+  </div>
+  <div class="pi">
+    <h2>강의 판매 유형은 <em>2가지</em>로 구분됩니다.</h2>
+    <p class="sub">강사님의 전문성과 시장 상황에 맞는 최적의 모델을 함께 설계합니다.</p>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0">
+      <div style="background:#f8f6f2;border:1px solid #e8e0d4;border-radius:12px;padding:28px">
+        <div style="font-size:11px;color:#b08d57;font-weight:700;letter-spacing:1px;margin-bottom:8px">MODEL A</div>
+        <h3 style="font-size:20px;margin:0 0 12px">프리미엄 모델</h3>
+        <ul style="padding-left:16px">
+          <li style="font-size:13px;color:#666;margin-bottom:8px">3개월 이내 수강생 성과를 보여줄 수 있는 <strong>컨설팅형 강의</strong></li>
+          <li style="font-size:13px;color:#666;margin-bottom:8px">수강생 케어가 많이 들어가는 만큼 <strong>단기간 매출 발생 가능</strong></li>
+          <li style="font-size:13px;color:#666">강의료 <span class="hl">200만원~500만원</span> 형성</li>
+        </ul>
+      </div>
+      <div style="background:#f8f6f2;border:1px solid #e8e0d4;border-radius:12px;padding:28px">
+        <div style="font-size:11px;color:#b08d57;font-weight:700;letter-spacing:1px;margin-bottom:8px">MODEL B</div>
+        <h3 style="font-size:20px;margin:0 0 12px">멤버십 모델</h3>
+        <ul style="padding-left:16px">
+          <li style="font-size:13px;color:#666;margin-bottom:8px">콘텐츠를 통해 크리에이터 결에 맞는 <strong>팬덤을 구축</strong></li>
+          <li style="font-size:13px;color:#666;margin-bottom:8px">기초반부터 심화반까지 <strong>세일즈 하는 모델</strong></li>
+          <li style="font-size:13px;color:#666">기초반 <span class="hl">30~60만원</span>, 심화반 <span class="hl">300만원</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rev-box">
+      <h3>계약 조건</h3>
       <table class="rev-table">
         <tbody>
           <tr><td>수익 배분</td><td>미팅 시 협의 후 <span class="accent">계약서로 진행</span></td></tr>
@@ -346,86 +548,98 @@ tbody td strong{color:#1a1a1a}
       </table>
     </div>
   </div>
-  <div class="pf"><span>부업클래스 | 주식회사 플로우머스</span><span>Confidential</span></div>
+  <div class="pf"><span>부업클래스 | 주식회사 플로우머스</span><span>07 / 10</span></div>
 </div>
 
-<!-- PAGE 5: PROCESS + APPLY -->
+<!-- PAGE 10: 협업 프로세스 -->
 <div class="page">
-  <div class="pi">
-    <span class="pnum">05 / 05</span>
-    <div class="sec-num">05</div>
-    <div class="stag">HOW IT WORKS</div>
-    <h2>미팅부터 런칭까지<br/><em>4주</em>면 충분합니다.</h2>
-    <p class="sub">빠르고 확실한 프로세스. 강사님의 시간을 아껴드립니다.</p>
-
-    <div class="flow">
-      <div class="fl-step"><div class="fw">WEEK 1</div><div class="ft">기획 미팅<br/>시장 조사</div></div>
-      <div class="fl-arrow">&rarr;</div>
-      <div class="fl-step"><div class="fw">WEEK 2</div><div class="ft">커리큘럼<br/>확정</div></div>
-      <div class="fl-arrow">&rarr;</div>
-      <div class="fl-step"><div class="fw">WEEK 3</div><div class="ft">촬영 &<br/>편집</div></div>
-      <div class="fl-arrow">&rarr;</div>
-      <div class="fl-step active"><div class="fw">WEEK 4</div><div class="ft">런칭 &<br/>마케팅</div></div>
-    </div>
-
-    <table>
-      <thead><tr><th style="width:14%">단계</th><th style="width:46%">플로우머스가 하는 일</th><th style="width:40%">강사님이 하는 일</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Week 1</strong></td><td>시장 조사, 경쟁 벤치마크, 커리큘럼 초안</td><td>전문 분야 + 경험 공유</td></tr>
-        <tr><td><strong>Week 2</strong></td><td>차시별 구조, 실습 과제, PDF/템플릿 제작</td><td>핵심 내용 정리</td></tr>
-        <tr><td><strong>Week 3</strong></td><td>촬영 세팅, 편집, 자막/썸네일 제작</td><td>촬영 참여 (1~2일)</td></tr>
-        <tr><td><strong>Week 4</strong></td><td>랜딩페이지, 무료 세미나+웨비나, 광고 집행</td><td>무료 세미나 출연 (1회)</td></tr>
-      </tbody>
-    </table>
-
-    <div class="divider"></div>
-
-    <div class="stag">APPLY</div>
-    <h3>이런 분을 찾습니다</h3>
-    <div class="cg">
-      <div class="cd" style="border-color:#b08d57;border-width:2px">
-        <h4>필수 조건</h4>
-        <ul>
-          <li><strong>실전 경험</strong> &#8212; 본인이 직접 해서 돈 벌어본 경험</li>
-          <li><strong>증명 가능한 실적</strong> &#8212; 매출, 후기, 포트폴리오</li>
-          <li><strong>전달력</strong> &#8212; 어려운 걸 쉽게 설명하는 능력</li>
-        </ul>
-      </div>
-      <div class="cd">
-        <h4>우대 조건</h4>
-        <ul>
-          <li>SNS 채널 보유 (인스타/유튜브/블로그)</li>
-          <li>기존 강의 경험 (클래스101, 탈잉 등)</li>
-          <li>팔로워 1만명 이상</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="flow" style="margin-top:20px">
-      <div class="fl-step"><div class="fw">STEP 1</div><div class="ft">지원서 제출</div></div>
-      <div class="fl-arrow">&rarr;</div>
-      <div class="fl-step"><div class="fw">STEP 2</div><div class="ft">1차 미팅<br/>(30분 화상)</div></div>
-      <div class="fl-arrow">&rarr;</div>
-      <div class="fl-step"><div class="fw">STEP 3</div><div class="ft">테스트 강의<br/>(10분 시강)</div></div>
-      <div class="fl-arrow">&rarr;</div>
-      <div class="fl-step active"><div class="fw">STEP 4</div><div class="ft">계약 &<br/>제작 시작</div></div>
-    </div>
-
-    <div class="cta-box">
-      <h3>당신의 경험이<br/>누군가의 첫 수입이 됩니다.</h3>
-      <p>부업클래스에서 함께할 강사님을 기다립니다.</p>
-      <div class="cta-email">ceo@flowmus.com</div>
-    </div>
-
-    <table style="margin-top:16px">
-      <tbody>
-        <tr><td style="width:25%;color:#999"><strong style="color:#333">법인명</strong></td><td>주식회사 플로우머스 (110-88-03675)</td></tr>
-        <tr><td style="color:#999"><strong style="color:#333">서비스</strong></td><td>부업클래스 (부업클래스.com)</td></tr>
-        <tr><td style="color:#999"><strong style="color:#333">대표</strong></td><td>오맷돌 / 권현우 (공동대표)</td></tr>
-      </tbody>
-    </table>
+  <div class="hbar">
+    <div><span class="sec">07</span> <span class="title">협업 프로세스</span><span class="sub">6단계 협업 진행 절차</span></div>
+    <div class="hbar-right"><img src="img/instructor/logo_lg.jpg" class="logo-sm"/></div>
   </div>
-  <div class="pf"><span>부업클래스 | 주식회사 플로우머스</span><span>Confidential</span></div>
+  <div class="pi">
+    <h2>브랜딩, 강의, 비즈니스 구축까지<br/>트렌드에 맞게 <em>프로젝트를 설계</em>합니다.</h2>
+    <p class="sub">미팅부터 런칭까지 4주, 그 이후도 함께합니다.</p>
+
+    <div class="flow-6">
+      <div class="flow-step">
+        <div class="fs-circle">01</div>
+        <div class="fs-num">STEP 01</div>
+        <div class="fs-title">제안서 전달</div>
+        <div class="fs-desc">사전 수요조사를 통해<br/>선별된 강사님께 제안</div>
+      </div>
+      <div class="flow-connector">&rarr;</div>
+      <div class="flow-step">
+        <div class="fs-circle">02</div>
+        <div class="fs-num">STEP 02</div>
+        <div class="fs-title">미팅 & 계약</div>
+        <div class="fs-desc">콘텐츠 형태, 커리큘럼,<br/>금액 등 세부사항 조율</div>
+      </div>
+      <div class="flow-connector">&rarr;</div>
+      <div class="flow-step">
+        <div class="fs-circle">03</div>
+        <div class="fs-num">STEP 03</div>
+        <div class="fs-title">콘텐츠 기획</div>
+        <div class="fs-desc">강사님 전문성 기반<br/>기획, 촬영, 편집 지원</div>
+      </div>
+      <div class="flow-connector">&rarr;</div>
+      <div class="flow-step">
+        <div class="fs-circle">04</div>
+        <div class="fs-num">STEP 04</div>
+        <div class="fs-title">홍보 & 모집</div>
+        <div class="fs-desc">최적의 마케팅 채널로<br/>강의 홍보 + 수강생 모집</div>
+      </div>
+      <div class="flow-connector">&rarr;</div>
+      <div class="flow-step">
+        <div class="fs-circle">05</div>
+        <div class="fs-num">STEP 05</div>
+        <div class="fs-title">강의 운영</div>
+        <div class="fs-desc">수강 기간 동안<br/>체계적 운영 관리</div>
+      </div>
+      <div class="flow-connector">&rarr;</div>
+      <div class="flow-step">
+        <div class="fs-circle">06</div>
+        <div class="fs-num">STEP 06</div>
+        <div class="fs-title">종강 피드백</div>
+        <div class="fs-desc">커리큘럼 피드백,<br/>비즈니스 고도화 논의</div>
+      </div>
+    </div>
+
+    <div style="height:1px;background:#eee;margin:24px 0"></div>
+
+    <h2 style="font-size:18px">이런 분을 찾습니다</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px">
+      <div style="background:#fef9ef;border:2px solid #e8b84b;border-radius:12px;padding:20px">
+        <h4 style="font-size:14px;margin-bottom:10px">필수 조건</h4>
+        <ul style="padding-left:16px">
+          <li style="font-size:12px;color:#666;margin-bottom:6px"><strong>실전 경험</strong> &#8212; 본인이 직접 해서 돈 벌어본 경험</li>
+          <li style="font-size:12px;color:#666;margin-bottom:6px"><strong>증명 가능한 실적</strong> &#8212; 매출, 후기, 포트폴리오</li>
+          <li style="font-size:12px;color:#666"><strong>전달력</strong> &#8212; 어려운 걸 쉽게 설명하는 능력</li>
+        </ul>
+      </div>
+      <div style="background:#f8f6f2;border:1px solid #e8e0d4;border-radius:12px;padding:20px">
+        <h4 style="font-size:14px;margin-bottom:10px">우대 조건</h4>
+        <ul style="padding-left:16px">
+          <li style="font-size:12px;color:#666;margin-bottom:6px">SNS 채널 보유 (인스타/유튜브/블로그)</li>
+          <li style="font-size:12px;color:#666;margin-bottom:6px">기존 강의 경험 (클래스101, 탈잉 등)</li>
+          <li style="font-size:12px;color:#666">팔로워 1만명 이상</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="pf"><span>부업클래스 | 주식회사 플로우머스</span><span>08 / 10</span></div>
+</div>
+
+<!-- PAGE 11: CTA -->
+<div class="page cta-page">
+  <h2>부업클래스는 단순한 플랫폼을 넘어,<br/>강사님의<br/>든든한 파트너가 되겠습니다.</h2>
+  <div class="cta-sub">전문성과 성과를 기반으로 함께 더 멀리 나아가겠습니다.</div>
+  <div class="cta-email">ceo@flowmus.com</div>
+  <div class="cta-info">
+    주식회사 플로우머스 (110-88-03675)<br/>
+    부업클래스.com<br/>
+    대표 오맷돌 / 권현우 (공동대표)
+  </div>
 </div>
 
 </body>
