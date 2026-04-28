@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coffee Chat — 이세령 대표 사업 구조 논의</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: #1a1a1a;
+    background: #f5f5f5;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 20px auto;
+    background: #fff;
+    padding: 50px 55px;
+    box-shadow: 0 2px 20px rgba(0,0,0,.08);
+    page-break-after: always;
+    position: relative;
+  }
+  .page:last-child { page-break-after: avoid; }
+
+  /* Cover */
+  .cover {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 297mm;
+    padding: 60px 65px;
+  }
+  .cover-badge {
+    display: inline-block;
+    background: #111;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    padding: 6px 16px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+  .cover h1 {
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1.3;
+    margin-bottom: 16px;
+    letter-spacing: -1px;
+  }
+  .cover h1 span { color: #7c3aed; }
+  .cover-sub {
+    font-size: 17px;
+    color: #555;
+    margin-bottom: 48px;
+    line-height: 1.8;
+  }
+  .cover-meta {
+    font-size: 13px;
+    color: #999;
+    line-height: 2;
+  }
+  .cover-line {
+    width: 60px;
+    height: 3px;
+    background: #7c3aed;
+    margin-bottom: 40px;
+  }
+
+  /* Common */
+  .page-num {
+    position: absolute;
+    top: 40px;
+    right: 55px;
+    font-size: 11px;
+    color: #bbb;
+    font-weight: 600;
+  }
+  .page-tag {
+    display: inline-block;
+    background: #f3f0ff;
+    color: #7c3aed;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 3px;
+    margin-bottom: 14px;
+    letter-spacing: 1px;
+  }
+  h2 {
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+  }
+  h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 28px 0 12px;
+    color: #1a1a1a;
+  }
+  h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 20px 0 8px;
+    color: #333;
+  }
+  .subtitle {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 32px;
+  }
+  p { font-size: 14px; margin-bottom: 12px; color: #333; }
+
+  /* Agenda */
+  .agenda-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 24px 0;
+  }
+  .agenda-item {
+    background: #faf8ff;
+    border: 1px solid #e9e3ff;
+    border-radius: 10px;
+    padding: 24px;
+  }
+  .agenda-item .time {
+    font-size: 11px;
+    font-weight: 700;
+    color: #7c3aed;
+    margin-bottom: 8px;
+  }
+  .agenda-item h4 {
+    margin: 0 0 10px;
+    font-size: 16px;
+  }
+  .agenda-item p {
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 4px;
+  }
+
+  /* Table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 13px;
+  }
+  thead th {
+    background: #111;
+    color: #fff;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+  }
+  thead th:first-child { border-radius: 6px 0 0 0; }
+  thead th:last-child { border-radius: 0 6px 0 0; }
+  tbody td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: #fafbfc; }
+
+  /* Cards */
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .card {
+    background: #f8f9fb;
+    border-radius: 10px;
+    padding: 22px;
+    border: 1px solid #eef0f4;
+  }
+  .card h4 { margin: 0 0 10px; font-size: 15px; }
+  .card p { font-size: 13px; color: #555; margin-bottom: 6px; }
+
+  /* Highlight */
+  .highlight {
+    background: #111;
+    color: #fff;
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin: 24px 0;
+    text-align: center;
+  }
+  .highlight p {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.6;
+  }
+  .highlight .sub {
+    font-size: 13px;
+    color: #aaa;
+    font-weight: 400;
+    margin-top: 8px;
+  }
+
+  ul { padding-left: 20px; margin: 10px 0; }
+  li {
+    font-size: 13px;
+    color: #444;
+    margin-bottom: 8px;
+    line-height: 1.6;
+  }
+  li strong { color: #1a1a1a; }
+
+  .checklist {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+  }
+  .checklist li {
+    padding: 10px 16px;
+    background: #f8f9fb;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    border-left: 3px solid #7c3aed;
+  }
+
+  .divider {
+    height: 1px;
+    background: #eee;
+    margin: 28px 0;
+  }
+
+  .flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 24px 0;
+  }
+  .flow-step {
+    background: #f3f0ff;
+    border: 1px solid #ddd6fe;
+    border-radius: 8px;
+    padding: 14px 16px;
+    text-align: center;
+    flex: 1;
+  }
+  .flow-step .label {
+    font-size: 11px;
+    color: #7c3aed;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .flow-step .desc {
+    font-size: 12px;
+    color: #555;
+  }
+  .flow-arrow {
+    font-size: 18px;
+    color: #ccc;
+    padding: 0 4px;
+    flex-shrink: 0;
+  }
+
+  .page-footer {
+    position: absolute;
+    bottom: 40px;
+    left: 55px;
+    right: 55px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #ccc;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .page { box-shadow: none; margin: 0; }
+  }
+  @media (max-width: 800px) {
+    .page { width: 100%; padding: 32px 24px; min-height: auto; }
+    .cover { padding: 40px 24px; min-height: 100vh; }
+    .cover h1 { font-size: 28px; }
+    .agenda-grid, .card-grid { grid-template-columns: 1fr; }
+    .flow { flex-direction: column; }
+    .flow-arrow { transform: rotate(90deg); }
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: COVER -->
+<div class="page cover">
+  <div class="cover-badge">Coffee Chat Agenda</div>
+  <h1>사업 구조 논의<br/><span>리지커넥트의 방향</span></h1>
+  <div class="cover-line"></div>
+  <div class="cover-sub">
+    현재 사업 점검 — 확장의 병목 진단 — 인플루언서 퍼널 설계<br/>
+    결정사 현황 공유 — 리지커넥트 다음 스텝
+  </div>
+  <div class="cover-meta">
+    이세령 대표 x Flowmus<br/>
+    2026. 04. 28
+  </div>
+</div>
+
+<!-- PAGE 2: 안건 개요 + 현황 점검 -->
+<div class="page">
+  <span class="page-num">02</span>
+  <div class="page-tag">OVERVIEW</div>
+  <h2>오늘의 논의 안건</h2>
+  <p class="subtitle">60분 | 5개 주제</p>
+
+  <div class="agenda-grid">
+    <div class="agenda-item">
+      <div class="time">10분</div>
+      <h4>1. 현재 사업 구조 점검</h4>
+      <p>지금 어떤 사업을 어떻게 꾸리고 있는지</p>
+      <p>수익 구조, 운영 방식, 인력 현황</p>
+    </div>
+    <div class="agenda-item">
+      <div class="time">15분</div>
+      <h4>2. 확장 병목 진단</h4>
+      <p>왜 확장이 안 되는지 — 구조적 원인 파악</p>
+      <p>시간, 인력, 시스템, 수익 중 어디가 막혀있는지</p>
+    </div>
+    <div class="agenda-item">
+      <div class="time">10분</div>
+      <h4>3. 인플루언서 활동 방향</h4>
+      <p>본인 계정을 어떻게 활용하고 싶은지</p>
+      <p>인플루언서 vs 사업가 — 정체성 정리</p>
+    </div>
+    <div class="agenda-item">
+      <div class="time">10분</div>
+      <h4>4. 결정사 현황</h4>
+      <p>아는언니리지 채널 현재 상태</p>
+      <p>콘텐츠 방향, 수익화, 다음 기획</p>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <p>5. 궁극적 방향 — 인플루언서 강의 퍼널 + 대행사 설계</p>
+    <p class="sub">15분 | 오늘 논의의 핵심 결론</p>
+  </div>
+
+  <div class="divider"></div>
+
+  <h3>안건 1 — 현재 사업 구조 점검</h3>
+  <p>세령 대표님의 현재 사업 전체를 한눈에 파악하기 위한 질문들:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:30%">점검 항목</th>
+        <th style="width:70%">확인할 것</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>수익원</strong></td>
+        <td>광고/협찬, 공구, 강의, 대행 — 각각 비중이 어느 정도인지?</td>
+      </tr>
+      <tr>
+        <td><strong>인플루언서 네트워크</strong></td>
+        <td>약 600명 규모 — 실제 활성 인원은? 관리 방식은?</td>
+      </tr>
+      <tr>
+        <td><strong>운영 인력</strong></td>
+        <td>혼자 vs 팀 — 누가 어떤 일을 하고 있는지?</td>
+      </tr>
+      <tr>
+        <td><strong>월 매출/순수익</strong></td>
+        <td>현재 규모감 확인 (법인전환 기준: 월 순수익 2,000만+)</td>
+      </tr>
+      <tr>
+        <td><strong>시간 배분</strong></td>
+        <td>콘텐츠 제작 vs 사업 운영 — 비율이 어떻게 되는지?</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>Flowmus x 리지커넥트</span>
+    <span>Confidential</span>
+  </div>
+</div>
+
+<!-- PAGE 3: 확장 병목 + 인플루언서 방향 -->
+<div class="page">
+  <span class="page-num">03</span>
+  <div class="page-tag">DIAGNOSIS</div>
+  <h2>확장이 안 되는 이유</h2>
+  <p class="subtitle">크리에이터 사업의 4대 병목</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h4>병목 1: 시간</h4>
+      <p><strong>"내가 안 하면 안 돌아간다"</strong></p>
+      <p>콘텐츠 제작 + 영업 + 관리를 모두 본인이 하고 있다면, 매출 천장 = 본인의 시간 한계</p>
+      <ul>
+        <li>위임 가능한 업무는 무엇인가?</li>
+        <li>본인만 할 수 있는 일은 무엇인가?</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>병목 2: 인력</h4>
+      <p><strong>"사람을 뽑아야 하는데 못 뽑겠다"</strong></p>
+      <p>첫 직원 채용의 두려움 — 인건비 부담, 관리 부담, 퀄리티 우려</p>
+      <ul>
+        <li>정규직이 아닌 파트타임/프리랜서로 시작</li>
+        <li>매출의 몇 %까지 인건비 가능한지?</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>병목 3: 시스템</h4>
+      <p><strong>"매번 처음부터 다시 한다"</strong></p>
+      <p>반복 업무의 매뉴얼/템플릿이 없어서 매번 에너지 소모</p>
+      <ul>
+        <li>공구 진행 프로세스가 정리되어 있는지?</li>
+        <li>인플루언서 매칭 기준이 있는지?</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>병목 4: 수익 구조</h4>
+      <p><strong>"바쁜데 남는 게 없다"</strong></p>
+      <p>건당 수익 모델 → 반복 매출(구독/커뮤니티)로 전환 필요</p>
+      <ul>
+        <li>일회성 vs 반복 매출 비중은?</li>
+        <li>고정 수입원이 있는지?</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h3>안건 3 — 인플루언서로서의 방향</h3>
+  <p>세령 대표님 본인의 인플루언서 정체성 정리:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:50%">인플루언서 모드</th>
+        <th style="width:50%">사업가 모드</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>@lizzyconnect 85K 운영</td>
+        <td>인플루언서 네트워크 600명 관리</td>
+      </tr>
+      <tr>
+        <td>다이어트/웰니스 콘텐츠 제작</td>
+        <td>브랜드-인플루언서 매칭 대행</td>
+      </tr>
+      <tr>
+        <td>본인 스토리(-30kg) 기반 신뢰 구축</td>
+        <td>공구/커머스 기획 및 운영</td>
+      </tr>
+      <tr>
+        <td>팔로워와 직접 소통</td>
+        <td>시스템화, 위임, 스케일업</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="highlight">
+    <p>두 가지를 동시에 하려다 둘 다 중간에 멈추는 것이<br/>확장의 가장 큰 병목일 수 있다.</p>
+    <p class="sub">오늘 이야기의 핵심: 어디에 비중을 둘 것인가?</p>
+  </div>
+
+  <div class="page-footer">
+    <span>Flowmus x 리지커넥트</span>
+    <span>Confidential</span>
+  </div>
+</div>
+
+<!-- PAGE 4: 결정사 + 강의 퍼널 + 대행사 -->
+<div class="page">
+  <span class="page-num">04</span>
+  <div class="page-tag">DIRECTION</div>
+  <h2>결정사 현황 + 궁극적 방향</h2>
+  <p class="subtitle">아는언니리지 채널 점검 → 두 가지 확장 경로</p>
+
+  <h3>안건 4 — 결정사 (아는언니리지) 현황</h3>
+  <ul class="checklist">
+    <li><strong>콘텐츠 현황</strong> — 최근 업로드 빈도, 조회수 추이, 구독자 변화는?</li>
+    <li><strong>수익화</strong> — 광고 수익, 협찬, 또는 결혼정보 연결 매출이 발생하고 있는지?</li>
+    <li><strong>다음 기획</strong> — Q01~Q10 이후 시즌2 계획이 있는지? 새로운 포맷?</li>
+    <li><strong>Flowmus 연계</strong> — 결혼정보회사 본업과 시너지가 나오고 있는지?</li>
+  </ul>
+
+  <div class="divider"></div>
+
+  <h3>안건 5 — 궁극적 방향: 두 가지 확장 경로</h3>
+
+  <div class="card-grid">
+    <div class="card" style="border-color: #ddd6fe;">
+      <h4>경로 A: 인플루언서 강의 퍼널</h4>
+      <p><strong>세령 대표님의 경험을 상품화</strong></p>
+      <ul>
+        <li>-30kg 다이어트 스토리</li>
+        <li>인플루언서 85K 성장기</li>
+        <li>600명 네트워크 구축 노하우</li>
+      </ul>
+      <p style="margin-top: 12px;"><strong>퍼널 구조:</strong></p>
+      <p>무료 콘텐츠 → 리드 수집 → 무료 세미나 → 유료 강의 → 커뮤니티</p>
+      <p style="margin-top: 8px; color: #7c3aed; font-weight: 600;">수익 기대: 기수당 1,000~3,000만</p>
+    </div>
+    <div class="card" style="border-color: #ddd6fe;">
+      <h4>경로 B: 인플루언서 대행사 (벤더)</h4>
+      <p><strong>네트워크를 사업 인프라로 전환</strong></p>
+      <ul>
+        <li>웰니스 특화 인플루언서 벤더</li>
+        <li>브랜드 ↔ 인플루언서 매칭</li>
+        <li>캠페인 기획 + 성과 관리</li>
+      </ul>
+      <p style="margin-top: 12px;"><strong>벤더 구조:</strong></p>
+      <p>브랜드 영업 → 인플루언서 매칭 → 콘텐츠 제작 → 성과 리포트</p>
+      <p style="margin-top: 8px; color: #7c3aed; font-weight: 600;">수익 기대: 캠페인당 수수료 20~30%</p>
+    </div>
+  </div>
+
+  <h3>두 경로의 시너지</h3>
+  <div class="flow">
+    <div class="flow-step">
+      <div class="label">강의 퍼널</div>
+      <div class="desc">인플루언서 양성</div>
+    </div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step">
+      <div class="label">네트워크 확대</div>
+      <div class="desc">수강생 → 인플루언서</div>
+    </div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step">
+      <div class="label">대행사 인벤토리</div>
+      <div class="desc">매칭 가능 풀 증가</div>
+    </div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step">
+      <div class="label">매출 성장</div>
+      <div class="desc">강의 + 대행 이중 수익</div>
+    </div>
+  </div>
+
+  <div class="highlight">
+    <p>강의로 인플루언서를 키우고,<br/>키운 인플루언서로 대행사를 굴린다.</p>
+    <p class="sub">"웰니스의 레페리" — 리지커넥트의 포지셔닝</p>
+  </div>
+
+  <div class="page-footer">
+    <span>Flowmus x 리지커넥트</span>
+    <span>Confidential</span>
+  </div>
+</div>
+
+<!-- PAGE 5: 오늘 정해야 할 것 -->
+<div class="page">
+  <span class="page-num">05</span>
+  <div class="page-tag">NEXT STEP</div>
+  <h2>오늘 정해야 할 것</h2>
+  <p class="subtitle">커피챗 이후 바로 움직이기 위한 결정 사항</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:5%">#</th>
+        <th style="width:35%">질문</th>
+        <th style="width:60%">선택지 / 논의 방향</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1</strong></td>
+        <td>본인 비중을 어디에 둘 것인가?</td>
+        <td>인플루언서(콘텐츠) 70% : 사업(운영) 30%<br/>or 반대?</td>
+      </tr>
+      <tr>
+        <td><strong>2</strong></td>
+        <td>강의 퍼널 vs 대행사, 먼저 시작할 것은?</td>
+        <td>A. 강의 먼저 (자산 확보) → 대행사<br/>B. 대행사 먼저 (매출 확보) → 강의<br/>C. 동시 진행</td>
+      </tr>
+      <tr>
+        <td><strong>3</strong></td>
+        <td>결정사 채널의 역할은?</td>
+        <td>A. 독립 콘텐츠로 계속 성장<br/>B. 리지커넥트 홍보 채널로 전환<br/>C. 축소/보류</td>
+      </tr>
+      <tr>
+        <td><strong>4</strong></td>
+        <td>5월 첫 액션은?</td>
+        <td>예: 다이어트 계정 개설, 건기식 공구 1회, 강의 기획안 작성 등</td>
+      </tr>
+      <tr>
+        <td><strong>5</strong></td>
+        <td>Flowmus와의 협업 범위는?</td>
+        <td>시스템/운영 지원 범위 합의<br/>권현우 대표 커머스 역할 확인</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="divider"></div>
+
+  <h3>리지커넥트 로드맵 (확인용)</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>시기</th>
+        <th>마일스톤</th>
+        <th>핵심 지표</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>5월</strong></td>
+        <td>다이어트 인스타 계정 + 건기식 공구 시작</td>
+        <td>첫 공구 매출</td>
+      </tr>
+      <tr>
+        <td><strong>6~7월</strong></td>
+        <td>강의 퍼널 or 대행사 MVP 런칭</td>
+        <td>첫 수강생 or 첫 캠페인</td>
+      </tr>
+      <tr>
+        <td><strong>8~9월</strong></td>
+        <td>반복 매출 구조 안정화</td>
+        <td>월 순수익 추이</td>
+      </tr>
+      <tr>
+        <td><strong>10월~</strong></td>
+        <td>법인전환 검토 (월 순수익 2,000만+)</td>
+        <td>월 매출 1억 달성 여부</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="highlight" style="margin-top: 32px;">
+    <p>600명의 네트워크는 이미 가지고 있다.<br/>이제 그 네트워크를 구조화할 차례.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>Flowmus x 리지커넥트</span>
+    <span>Confidential</span>
+  </div>
+</div>
+
+</body>
+</html>
