@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>부업클래스 강사 협력 제안서</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: #1a1a1a;
+    background: #f5f5f5;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 20px auto;
+    background: #fff;
+    padding: 50px 55px;
+    box-shadow: 0 2px 20px rgba(0,0,0,.08);
+    page-break-after: always;
+    position: relative;
+  }
+  .page:last-child { page-break-after: avoid; }
+
+  .cover {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 297mm;
+    padding: 60px 65px;
+  }
+  .cover-badge {
+    display: inline-block;
+    background: #111;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    padding: 6px 16px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+  }
+  .cover h1 {
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1.3;
+    margin-bottom: 16px;
+    letter-spacing: -1px;
+  }
+  .cover h1 span { color: #f59e0b; }
+  .cover-sub {
+    font-size: 17px;
+    color: #555;
+    margin-bottom: 48px;
+    line-height: 1.8;
+  }
+  .cover-meta {
+    font-size: 13px;
+    color: #999;
+    line-height: 2;
+  }
+  .cover-line {
+    width: 60px;
+    height: 3px;
+    background: #f59e0b;
+    margin-bottom: 40px;
+  }
+
+  .page-num {
+    position: absolute;
+    top: 40px;
+    right: 55px;
+    font-size: 11px;
+    color: #bbb;
+    font-weight: 600;
+  }
+  .page-tag {
+    display: inline-block;
+    background: #fffbeb;
+    color: #d97706;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 3px;
+    margin-bottom: 14px;
+    letter-spacing: 1px;
+  }
+  h2 {
+    font-size: 26px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+  }
+  h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 28px 0 12px;
+  }
+  h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin: 20px 0 8px;
+    color: #333;
+  }
+  .subtitle {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 32px;
+  }
+  p { font-size: 14px; margin-bottom: 12px; color: #333; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 13px;
+  }
+  thead th {
+    background: #111;
+    color: #fff;
+    padding: 12px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+  }
+  thead th:first-child { border-radius: 6px 0 0 0; }
+  thead th:last-child { border-radius: 0 6px 0 0; }
+  tbody td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #eee;
+    vertical-align: top;
+  }
+  tbody tr:nth-child(even) { background: #fafbfc; }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 20px 0;
+  }
+  .card-grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin: 20px 0;
+  }
+  .card {
+    background: #f8f9fb;
+    border-radius: 10px;
+    padding: 22px;
+    border: 1px solid #eef0f4;
+  }
+  .card h4 { margin: 0 0 10px; font-size: 15px; }
+  .card p { font-size: 13px; color: #555; margin-bottom: 6px; }
+  .card .num {
+    font-size: 28px;
+    font-weight: 800;
+    color: #f59e0b;
+    margin-bottom: 4px;
+  }
+
+  .highlight {
+    background: #111;
+    color: #fff;
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin: 24px 0;
+    text-align: center;
+  }
+  .highlight p {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.6;
+  }
+  .highlight .sub {
+    font-size: 13px;
+    color: #aaa;
+    font-weight: 400;
+    margin-top: 8px;
+  }
+
+  ul { padding-left: 20px; margin: 10px 0; }
+  li {
+    font-size: 13px;
+    color: #444;
+    margin-bottom: 8px;
+    line-height: 1.6;
+  }
+  li strong { color: #1a1a1a; }
+
+  .checklist {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+  }
+  .checklist li {
+    padding: 10px 16px;
+    background: #fffbeb;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    border-left: 3px solid #f59e0b;
+  }
+
+  .flow {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 24px 0;
+  }
+  .flow-step {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-radius: 8px;
+    padding: 14px 16px;
+    text-align: center;
+    flex: 1;
+  }
+  .flow-step .label {
+    font-size: 11px;
+    color: #d97706;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .flow-step .desc {
+    font-size: 12px;
+    color: #555;
+  }
+  .flow-arrow {
+    font-size: 18px;
+    color: #ccc;
+    padding: 0 4px;
+    flex-shrink: 0;
+  }
+
+  .divider {
+    height: 1px;
+    background: #eee;
+    margin: 28px 0;
+  }
+
+  .page-footer {
+    position: absolute;
+    bottom: 40px;
+    left: 55px;
+    right: 55px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #ccc;
+  }
+
+  @media print {
+    body { background: #fff; }
+    .page { box-shadow: none; margin: 0; }
+  }
+  @media (max-width: 800px) {
+    .page { width: 100%; padding: 32px 24px; min-height: auto; }
+    .cover { padding: 40px 24px; min-height: 100vh; }
+    .cover h1 { font-size: 28px; }
+    .card-grid, .card-grid-3 { grid-template-columns: 1fr; }
+    .flow { flex-direction: column; }
+    .flow-arrow { transform: rotate(90deg); }
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1: COVER -->
+<div class="page cover">
+  <div class="cover-badge">Instructor Partnership</div>
+  <h1>부업클래스<br/><span>강사 협력 제안서</span></h1>
+  <div class="cover-line"></div>
+  <div class="cover-sub">
+    당신의 전문성을 강의로 만들어드립니다.<br/>
+    기획, 촬영, 편집, 마케팅, 정산 — 우리가 합니다. 당신은 강의만 하세요.
+  </div>
+  <div class="cover-meta">
+    주식회사 플로우머스<br/>
+    부업클래스.com<br/>
+    2026
+  </div>
+</div>
+
+<!-- PAGE 2: 부업클래스 소개 -->
+<div class="page">
+  <span class="page-num">02</span>
+  <div class="page-tag">ABOUT</div>
+  <h2>부업클래스란?</h2>
+  <p class="subtitle">부업/사이드잡 전문 온라인 강의 플랫폼</p>
+
+  <p>부업클래스는 <strong>실전 경험이 있는 전문가</strong>와 <strong>부업을 시작하려는 사람</strong>을 연결하는 온라인 강의 플랫폼입니다. 클래스101, 탈잉과 달리 <strong>"부업"이라는 하나의 버티컬</strong>에 집중합니다.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <h4>우리의 타겟</h4>
+      <ul>
+        <li>월 100~500만원 추가 수입을 원하는 직장인</li>
+        <li>육아와 병행 가능한 재택 부업을 찾는 분</li>
+        <li>퇴사 후 프리랜서 전환을 준비하는 분</li>
+        <li>이미 부업 중이지만 매출을 키우고 싶은 분</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>우리의 차별점</h4>
+      <ul>
+        <li><strong>부업 특화</strong> — 취미/자기계발이 아닌 '돈 버는 법'</li>
+        <li><strong>실전 위주</strong> — 이론이 아닌 당장 따라할 수 있는 커리큘럼</li>
+        <li><strong>커뮤니티</strong> — 수강 후 실행을 돕는 그룹</li>
+        <li><strong>성과 보장</strong> — 수강생 매출 사례 중심 마케팅</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>모집 분야</h3>
+  <div class="card-grid-3">
+    <div class="card" style="padding: 14px 16px;">
+      <h4 style="font-size: 13px; margin: 0;">AI 활용 부업</h4>
+      <p style="font-size: 11px;">ChatGPT, 자동화 도구</p>
+    </div>
+    <div class="card" style="padding: 14px 16px;">
+      <h4 style="font-size: 13px; margin: 0;">스마트스토어</h4>
+      <p style="font-size: 11px;">이커머스, 위탁판매</p>
+    </div>
+    <div class="card" style="padding: 14px 16px;">
+      <h4 style="font-size: 13px; margin: 0;">블로그/SEO</h4>
+      <p style="font-size: 11px;">애드센스, 제휴마케팅</p>
+    </div>
+    <div class="card" style="padding: 14px 16px;">
+      <h4 style="font-size: 13px; margin: 0;">영상편집</h4>
+      <p style="font-size: 11px;">유튜브, 숏폼 편집</p>
+    </div>
+    <div class="card" style="padding: 14px 16px;">
+      <h4 style="font-size: 13px; margin: 0;">SNS 마케팅</h4>
+      <p style="font-size: 11px;">인스타, 틱톡 수익화</p>
+    </div>
+    <div class="card" style="padding: 14px 16px;">
+      <h4 style="font-size: 13px; margin: 0;">콘텐츠 크리에이터</h4>
+      <p style="font-size: 11px;">유튜브, 브이로그</p>
+    </div>
+    <div class="card" style="padding: 14px 16px;">
+      <h4 style="font-size: 13px; margin: 0;">재테크/투자</h4>
+      <p style="font-size: 11px;">주식, 코인, 부동산</p>
+    </div>
+    <div class="card" style="padding: 14px 16px;">
+      <h4 style="font-size: 13px; margin: 0;">디자인</h4>
+      <p style="font-size: 11px;">썸네일, 상세페이지</p>
+    </div>
+    <div class="card" style="padding: 14px 16px;">
+      <h4 style="font-size: 13px; margin: 0;">카피라이팅</h4>
+      <p style="font-size: 11px;">글쓰기, 뉴스레터</p>
+    </div>
+    <div class="card" style="padding: 14px 16px;">
+      <h4 style="font-size: 13px; margin: 0;">노코드/자동화</h4>
+      <p style="font-size: 11px;">Make, Zapier, N8N</p>
+    </div>
+    <div class="card" style="padding: 14px 16px;">
+      <h4 style="font-size: 13px; margin: 0;">해외구매대행</h4>
+      <p style="font-size: 11px;">알리, 타오바오</p>
+    </div>
+    <div class="card" style="padding: 14px 16px;">
+      <h4 style="font-size: 13px; margin: 0;">프리랜서</h4>
+      <p style="font-size: 11px;">번역, 개발, 디자인</p>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>부업클래스 | 주식회사 플로우머스</span>
+    <span>Confidential</span>
+  </div>
+</div>
+
+<!-- PAGE 3: 강사 혜택 -->
+<div class="page">
+  <span class="page-num">03</span>
+  <div class="page-tag">BENEFITS</div>
+  <h2>강사님이 얻는 것</h2>
+  <p class="subtitle">강의만 하세요. 나머지는 저희가 합니다.</p>
+
+  <div class="highlight">
+    <p>기획 / 촬영 / 편집 / 마케팅 / 런칭 / 정산<br/>전 과정을 플로우머스가 지원합니다.</p>
+  </div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="num">01</div>
+      <h4>강의 기획 지원</h4>
+      <p>커리큘럼 구성, 차시별 구조 설계, 수강생 니즈 리서치까지 함께 진행합니다. "무슨 내용을 넣어야 하지?"부터 도와드려요.</p>
+    </div>
+    <div class="card">
+      <div class="num">02</div>
+      <h4>촬영 & 편집</h4>
+      <p>촬영 장비, 스튜디오 세팅, 영상 편집 모두 지원합니다. 강사님은 카메라 앞에서 이야기만 해주세요.</p>
+    </div>
+    <div class="card">
+      <div class="num">03</div>
+      <h4>마케팅 & 런칭</h4>
+      <p>랜딩페이지, SNS 광고, 무료 세미나 퍼널까지 설계하고 실행합니다. 수강생 모집은 저희 몫입니다.</p>
+    </div>
+    <div class="card">
+      <div class="num">04</div>
+      <h4>브랜딩 강화</h4>
+      <p>강의를 통해 강사님의 개인 브랜드가 강화됩니다. 수강생 = 팬 = 미래 고객. 강사님의 본업 매출도 함께 성장합니다.</p>
+    </div>
+  </div>
+
+  <h3>수익 구조</h3>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:30%">항목</th>
+        <th style="width:70%">내용</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>수익 배분</strong></td>
+        <td>강의 매출의 <strong>50~70%</strong>를 강사님께 지급<br/>(분야, 콘텐츠 양, 마케팅 투자 규모에 따라 협의)</td>
+      </tr>
+      <tr>
+        <td><strong>정산 주기</strong></td>
+        <td>월 1회 정산 (익월 15일)</td>
+      </tr>
+      <tr>
+        <td><strong>추가 수익</strong></td>
+        <td>커뮤니티 운영, 1:1 코칭, 후속 강의 등 확장 가능</td>
+      </tr>
+      <tr>
+        <td><strong>계약 기간</strong></td>
+        <td>최소 6개월 (성과에 따라 연장)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="page-footer">
+    <span>부업클래스 | 주식회사 플로우머스</span>
+    <span>Confidential</span>
+  </div>
+</div>
+
+<!-- PAGE 4: 강의 제작 프로세스 -->
+<div class="page">
+  <span class="page-num">04</span>
+  <div class="page-tag">PROCESS</div>
+  <h2>강의 제작 프로세스</h2>
+  <p class="subtitle">미팅부터 런칭까지 4주</p>
+
+  <div class="flow">
+    <div class="flow-step">
+      <div class="label">WEEK 1</div>
+      <div class="desc">기획 미팅</div>
+    </div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step">
+      <div class="label">WEEK 2</div>
+      <div class="desc">커리큘럼 확정</div>
+    </div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step">
+      <div class="label">WEEK 3</div>
+      <div class="desc">촬영 & 편집</div>
+    </div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step">
+      <div class="label">WEEK 4</div>
+      <div class="desc">런칭 & 마케팅</div>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:15%">단계</th>
+        <th style="width:45%">플로우머스가 하는 일</th>
+        <th style="width:40%">강사님이 하는 일</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Week 1</strong><br/>기획</td>
+        <td>시장 조사, 수강생 페르소나 분석, 경쟁 강의 벤치마크, 커리큘럼 초안 작성</td>
+        <td>본인 전문 분야 + 경험 공유, 핵심 메시지 설정</td>
+      </tr>
+      <tr>
+        <td><strong>Week 2</strong><br/>구성</td>
+        <td>차시별 구조 설계, 실습 과제 기획, 보조 자료(PDF/템플릿) 제작</td>
+        <td>각 차시별 핵심 내용 정리, 강의 노트 작성</td>
+      </tr>
+      <tr>
+        <td><strong>Week 3</strong><br/>제작</td>
+        <td>촬영 일정 조율, 장비/스튜디오 세팅, 영상 편집, 자막/썸네일 제작</td>
+        <td>촬영 참여 (1~2일), 편집본 검수</td>
+      </tr>
+      <tr>
+        <td><strong>Week 4</strong><br/>런칭</td>
+        <td>랜딩페이지 제작, 마케팅 소재 제작, SNS 광고 집행, 무료 세미나 운영</td>
+        <td>무료 세미나 출연 (1회), SNS 홍보 협조</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="divider"></div>
+
+  <h3>강의 형태 (선택 가능)</h3>
+  <div class="card-grid">
+    <div class="card">
+      <h4>VOD (녹화 강의)</h4>
+      <p>한 번 촬영하면 계속 판매되는 구조. 강사님의 시간을 최소화하면서 지속적인 수익 발생.</p>
+      <p><strong>적합:</strong> 체계적인 커리큘럼, 기초~중급</p>
+    </div>
+    <div class="card">
+      <h4>코호트 (기수제)</h4>
+      <p>4~8주 과정, 실시간 Q&A + 과제 피드백. 높은 단가 설정 가능. 수강생 만족도 극대화.</p>
+      <p><strong>적합:</strong> 실전 적용, 중급~고급</p>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>부업클래스 | 주식회사 플로우머스</span>
+    <span>Confidential</span>
+  </div>
+</div>
+
+<!-- PAGE 5: 지원 조건 + CTA -->
+<div class="page">
+  <span class="page-num">05</span>
+  <div class="page-tag">APPLY</div>
+  <h2>이런 분을 찾습니다</h2>
+  <p class="subtitle">경력보다 실적, 학력보다 경험</p>
+
+  <div class="card-grid">
+    <div class="card" style="border-color: #f59e0b; border-width: 2px;">
+      <h4>필수 조건</h4>
+      <ul>
+        <li><strong>실전 경험</strong> — 본인이 직접 해서 돈을 벌어본 경험</li>
+        <li><strong>증명 가능한 실적</strong> — 매출, 수강생 후기, 포트폴리오 등</li>
+        <li><strong>전달력</strong> — 어려운 걸 쉽게 설명할 수 있는 능력</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>우대 조건</h4>
+      <ul>
+        <li>SNS 채널 보유 (인스타/유튜브/블로그)</li>
+        <li>기존 강의 경험 (클래스101, 탈잉, 인프런 등)</li>
+        <li>커뮤니티 운영 경험</li>
+        <li>팔로워 1만명 이상</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h3>협력 프로세스</h3>
+  <div class="flow">
+    <div class="flow-step">
+      <div class="label">STEP 1</div>
+      <div class="desc">지원서 제출</div>
+    </div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step">
+      <div class="label">STEP 2</div>
+      <div class="desc">1차 미팅<br/>(30분 화상)</div>
+    </div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step">
+      <div class="label">STEP 3</div>
+      <div class="desc">테스트 강의<br/>(10분 시강)</div>
+    </div>
+    <div class="flow-arrow">&rarr;</div>
+    <div class="flow-step">
+      <div class="label">STEP 4</div>
+      <div class="desc">계약 & 제작 시작</div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <h3>회사 소개</h3>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:30%">항목</th>
+        <th style="width:70%">내용</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>법인명</strong></td>
+        <td>주식회사 플로우머스 (110-88-03675)</td>
+      </tr>
+      <tr>
+        <td><strong>서비스</strong></td>
+        <td>부업클래스 (부업클래스.com)</td>
+      </tr>
+      <tr>
+        <td><strong>대표</strong></td>
+        <td>오맷돌 / 권현우 (공동대표)</td>
+      </tr>
+      <tr>
+        <td><strong>이메일</strong></td>
+        <td>ceo@flowmus.com</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="highlight" style="margin-top: 24px;">
+    <p>당신의 경험이 누군가의 첫 수입이 됩니다.</p>
+    <p class="sub">부업클래스에서 함께할 강사님을 기다립니다.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>부업클래스 | 주식회사 플로우머스</span>
+    <span>Confidential</span>
+  </div>
+</div>
+
+</body>
+</html>
