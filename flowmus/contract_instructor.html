@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>부업클래스 강사 제휴 계약서</title>
+<style>
+  @page { size: A4; margin: 18mm 18mm 20mm 18mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Apple SD Gothic Neo', '맑은 고딕', 'Malgun Gothic', sans-serif;
+    color: #222;
+    background: #fff;
+    font-size: 10pt;
+    line-height: 1.85;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @media screen {
+    body { background: #e8e8e8; padding: 20px 0; }
+    .page { box-shadow: 0 2px 12px rgba(0,0,0,0.1); margin-bottom: 24px; }
+  }
+  @media print {
+    .page { padding: 0; margin: 0; box-shadow: none; min-height: auto; }
+    .no-print { display: none !important; }
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    padding: 48px 52px;
+    position: relative;
+    background: #fff;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  /* 제목 */
+  .doc-title {
+    font-size: 20pt;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 4px;
+    padding: 28px 0 24px;
+    border-top: 2.5px solid #333;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 30px;
+    color: #111;
+  }
+
+  /* 전문 */
+  .preamble {
+    text-align: justify;
+    text-indent: 1em;
+    margin-bottom: 28px;
+    line-height: 2.0;
+    word-break: keep-all;
+    color: #333;
+  }
+
+  /* 정보 테이블 */
+  .info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 28px;
+    font-size: 9.5pt;
+    table-layout: fixed;
+  }
+  .info-table th,
+  .info-table td {
+    border: 1px solid #ddd;
+    padding: 11px 16px;
+    vertical-align: middle;
+    word-break: keep-all;
+  }
+  .info-table th {
+    background: #f8f8f8;
+    font-weight: 600;
+    text-align: center;
+    width: 100px;
+    color: #444;
+    letter-spacing: 0.5px;
+  }
+  .info-table td {
+    text-align: left;
+    line-height: 1.8;
+    color: #333;
+  }
+
+  /* 서명 테이블 */
+  .sign-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 32px;
+    font-size: 9.5pt;
+  }
+  .sign-table > tbody > tr > td {
+    padding: 0;
+    vertical-align: top;
+    width: 50%;
+  }
+  .sign-table > tbody > tr > td:first-child {
+    padding-right: 16px;
+  }
+  .sign-table > tbody > tr > td:last-child {
+    padding-left: 16px;
+  }
+  .sign-inner {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 18px 20px;
+  }
+  .sign-header {
+    font-weight: 600;
+    font-size: 10pt;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #333;
+  }
+  .sign-line {
+    display: flex;
+    line-height: 2.2;
+  }
+  .sl {
+    width: 96px;
+    flex-shrink: 0;
+    color: #666;
+    text-align: left;
+    font-size: 9pt;
+  }
+  .sv {
+    flex: 1;
+    color: #222;
+  }
+  .underline {
+    display: inline-block;
+    width: 120px;
+    border-bottom: 1px solid #bbb;
+  }
+  .seal { color: #c00; }
+
+  /* 조문 */
+  .article-title {
+    font-weight: 700;
+    font-size: 10.5pt;
+    margin-top: 24px;
+    margin-bottom: 8px;
+    color: #111;
+  }
+  .article-body {
+    text-align: justify;
+    margin-bottom: 6px;
+    text-indent: 1em;
+    word-break: keep-all;
+    color: #333;
+  }
+  .clause {
+    text-indent: -1.3em;
+    padding-left: 1.3em;
+    margin-bottom: 5px;
+    text-align: justify;
+    word-break: keep-all;
+    color: #333;
+  }
+  .sub {
+    text-indent: -1em;
+    padding-left: 2.8em;
+    margin-bottom: 4px;
+    text-align: justify;
+    word-break: keep-all;
+    color: #444;
+  }
+
+  /* 날짜 */
+  .date-line {
+    text-align: center;
+    margin: 24px 0;
+    font-size: 10pt;
+    letter-spacing: 1px;
+  }
+
+  /* 페이지 번호 */
+  .pn {
+    position: absolute;
+    bottom: 28px;
+    left: 0; right: 0;
+    text-align: center;
+    font-size: 8.5pt;
+    color: #aaa;
+    font-family: sans-serif;
+  }
+
+  .print-btn {
+    position: fixed; bottom: 20px; right: 20px; z-index: 100;
+    background: #333; color: #fff; border: none;
+    padding: 12px 24px; border-radius: 8px;
+    font-size: 10pt; font-weight: 600; cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    font-family: sans-serif;
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">PDF 저장</button>
+
+<!-- ══════════ PAGE 1 ══════════ -->
+<div class="page">
+
+  <div class="doc-title">강 사 제 휴 계 약 서</div>
+
+  <p class="preamble">
+    주식회사 플로우머스(이하 "회사"라 한다)와 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(이하 "강사"라 한다)는 온/오프라인 클래스 운영에 관한 제휴 계약을 체결하고, 상호존중의 입장에서 신의에 따라 성실히 계약상의 의무를 이행하고 완수할 것을 확약하며, 계약의 증거로서 본 계약서를 2부 작성하여 각각 서명 날인한 후 각 1부씩 보관한다.
+  </p>
+
+  <table class="info-table">
+    <tr>
+      <th>계약일</th>
+      <td colspan="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;년 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;월 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;일</td>
+    </tr>
+    <tr>
+      <th>계약기간</th>
+      <td colspan="3">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;년 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;월 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;일 ~ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;년 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;월 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;일 (1년)<br>
+        ※ 만료 30일 전 해지 통지 없을 시 동일 조건으로 1년씩 자동갱신
+      </td>
+    </tr>
+    <tr>
+      <th>강의주제</th>
+      <td colspan="3"></td>
+    </tr>
+    <tr>
+      <th>클래스 분량</th>
+      <td colspan="3">온/오프라인 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;회 및 필요시 추가 보충강의</td>
+    </tr>
+    <tr>
+      <th>정산비율</th>
+      <td colspan="3">클래스 매출의 <b>40%</b>를 강사에게 지급</td>
+    </tr>
+  </table>
+
+  <table class="sign-table">
+    <tr>
+      <td>
+        <div class="sign-inner">
+          <div class="sign-header">"회사"</div>
+          <div class="sign-line"><span class="sl">법인명</span><span class="sv">주식회사 플로우머스</span></div>
+          <div class="sign-line"><span class="sl">사업자번호</span><span class="sv">110-88-03675</span></div>
+          <div class="sign-line"><span class="sl">법인번호</span><span class="sv">110111-0949262</span></div>
+          <div class="sign-line"><span class="sl">주소</span><span class="sv">서울특별시 서초구 서초대로<br>398, 7층 709호(BNK디지털타워)</span></div>
+          <div class="sign-line" style="margin-top:10px;border-top:1px solid #ccc;padding-top:8px"><span class="sl">공동대표</span><span class="sv">권 현 우 &nbsp;<span class="seal">(인)</span></span></div>
+          <div class="sign-line"><span class="sl">공동대표</span><span class="sv">오 맷 돌 &nbsp;<span class="seal">(인)</span></span></div>
+        </div>
+      </td>
+      <td>
+        <div class="sign-inner">
+          <div class="sign-header">"강사"</div>
+          <div class="sign-line"><span class="sl">이름</span><span class="sv"><span class="underline">&nbsp;</span></span></div>
+          <div class="sign-line"><span class="sl">연락처</span><span class="sv"><span class="underline">&nbsp;</span></span></div>
+          <div class="sign-line"><span class="sl">주민번호</span><span class="sv"><span class="underline">&nbsp;</span></span></div>
+          <div class="sign-line"><span class="sl">주소</span><span class="sv"><span class="underline">&nbsp;</span></span></div>
+          <div class="sign-line" style="margin-top:10px;border-top:1px solid #ccc;padding-top:8px"><span class="sl">성함</span><span class="sv"><span class="underline">&nbsp;</span> &nbsp;<span class="seal">(인)</span></span></div>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <div class="pn">- 1 -</div>
+</div>
+
+<!-- ══════════ PAGE 2 ══════════ -->
+<div class="page">
+
+  <div class="article-title">제1조 (계약의 목적)</div>
+  <p class="article-body">"강사"는 "회사"와 온/오프라인 클래스 모객 관련 협업해 서로가 요청하는 바를 신의 성실의 원칙에 따라 협조한다.</p>
+
+  <div class="article-title">제2조 (계약기간)</div>
+  <p class="clause">① 계약기간은 1년으로 하며, 계약 만료 30일 전까지 어느 일방이 서면으로 해지 의사를 통지하지 않는 한 동일 조건으로 1년씩 자동 갱신된다.</p>
+  <p class="clause">② 교육훈련 시작일에 따라 종료일이 변동될 수 있으며, 명시된 기간보다 종료일이 늦은 때에는 해당 일정을 교육훈련 종료일로 한다.</p>
+  <p class="clause">③ 본 계약에 의한 강의 주제, 클래스 분량, 제작기한은 표지에 기재된 바에 따른다.</p>
+
+  <div class="article-title">제3조 (강사의 역할과 의무)</div>
+  <p class="article-body">"강사"는 강의 마케팅에 협조하고 충실한 강의 준비와 수강생 질문에 대한 성실한 답변, 미션과제에 대한 피드백 등의 역할을 수행한다.</p>
+  <p class="clause">① "강사"는 강의에 사용할 강의자료와 참고/실습자료를 강의시작일 최소 7일 전까지 "회사"에 전달해야 한다. 회사는 이를 활용한 교재를 제작해 수강생에 배포할 수 있다.</p>
+  <p class="clause">② "강사"는 "회사"에 제공한 콘텐츠가 본인 고유의 것이며 정확성과 신뢰성을 담보하고 이에 대한 이의제기에 법적 책임을 진다. "강사"가 자체 생산하지 않은 자료를 포함할 경우 반드시 출처를 표기한다. 타인의 고유한 저작물의 권리를 침해할 경우 "회사"는 "강사"에 책임을 물을 수 있다.</p>
+  <p class="clause">③ "강사"는 강의시작 최소 10분 전까지 지정 강의장에 도착해야 하며 "회사"와 사전 협의 없이 강의를 일방 취소할 수 없다. 부득이한 사정이 있을 경우 최소 3영업일 이전에 "회사"에 알리고 대안을 협의한다. 이를 지키지 않을 시 손해에 대한 책임을 물을 수 있다.</p>
+  <p class="clause">④ "회사"가 강의자료나 내용에 대해 개선을 요청할 경우 이에 성실하게 응해야 한다. 강의와 관련된 수강생의 질문에 답변 가능한 범위 내에서 성실하게 답변한다.</p>
+  <p class="clause">⑤ "강사"는 "회사"와 협의에 따라 본인의 소셜미디어 채널 기반 마케팅에 협조하고 필요할 시 수강생과의 소통을 활성화하기 위한 오픈채팅방 등 운영을 지원한다.</p>
+  <p class="clause">⑥ 강의 모집 기간(광고 집행, 강의 결제 ~ 1강 전까지) 중에는 타 플랫폼 및 개인적인 강의 모집이 불가능하다. 단, 이미 타 플랫폼에 등록되어 판매 중인 영상강의 및 전자책은 예외로 한다.</p>
+  <p class="sub">가. 기존에 등록된 영상강의 및 전자책의 경우 판매는 허용하되, 강의 모집 기간 동안 해당 콘텐츠에 대한 신규 광고 송출은 금지하여야 한다.</p>
+  <p class="sub">나. 가항을 위반 시 광고 송출 기간에 대한 광고 지출액을 강사가 부담한다. (정산 시 광고비 차감 후 대금 지급)</p>
+  <p class="clause">⑦ "회사"는 교육과정을 위해 선정, 강의에 임한 강사 중 다음 각호에 해당되어 부적격하다고 판단되는 자는 즉시 교체해야 한다.</p>
+  <p class="sub">1. 약정된 교육기간 동안 교육생들에게 성실히 임하지 않은 자</p>
+  <p class="sub">2. 강사의 자질부족이나 불성실한 교육진행으로 인해 소기의 목적을 달성하지 못한다고 판단되거나 교육생으로부터 불만이 제기된 자</p>
+  <p class="sub">3. 기타 "회사"가 강사로서의 자질이 부족하다고 판단한 자</p>
+
+  <div class="pn">- 2 -</div>
+</div>
+
+<!-- ══════════ PAGE 3 ══════════ -->
+<div class="page">
+
+  <div class="article-title">제4조 (회사의 역할과 의무)</div>
+  <p class="article-body">회사는 강의 기획, 촬영, 편집, 강의장소 제공, 수강생 관리, 홍보 및 마케팅, 수강료 정산 및 교육에 필요한 제반 환경을 책임지고 제공한다.</p>
+  <p class="clause">① 회사는 양질의 강의 진행을 위해 콘텐츠 기획 과정에서 강사와 긴밀히 협의하고 강의를 위한 장소 및 장비 일체를 제공하며 강의 진행을 위해 필요한 모든 제반사항을 책임진다.</p>
+  <p class="clause">② 회사는 강의 영상의 촬영, 편집, 썸네일 제작, 업로드를 전담하며 강사는 강의 출연에만 집중할 수 있도록 프로덕션 전 과정을 지원한다.</p>
+  <p class="clause">③ 회사는 사장찍어주는남자, 현장속으로, 머니로드 등 회사가 운영하는 유튜브 채널 네트워크(이하 "채널 네트워크")를 활용하여 강의 마케팅을 진행한다. 마케팅 채널의 선정과 운영 방식은 회사가 결정하되 강사와 사전 협의한다.</p>
+  <p class="clause">④ 회사는 강사의 역량을 강화하고 콘텐츠의 질을 높이기 위해 강의 만족도 조사, 강사 지원, 수강생 피드백 등을 성실히 제공한다.</p>
+  <p class="clause">⑤ 회사는 강사와 동반 성장을 위해 강의 런칭 이후 지속적인 온오프라인 콘텐츠 기획과 협업, 마케팅을 진행하고 협의를 통해 강사의 활동을 가능한 범위 내에서 적극 지원한다.</p>
+  <p class="clause">⑥ 회사는 강사의 콘텐츠를 보호하기 위해 수강생의 강의 도용, 복제, 무단배포 등이 발생하지 않도록 주의를 고지하고 문제 발생 시 해결을 위해 적극 협조한다.</p>
+
+  <div class="article-title">제5조 (지식재산권)</div>
+  <p class="clause">① 본 계약 체결 이전 회사와 강사가 보유하고 있었던 교재, 교육과정 관련 정보 등의 지식재산권은 각 당사자에게 있다. 단, 본 계약 수행을 위하여 추가 또는 수정 작성된 부분은 강사와 회사가 함께 가진다.</p>
+  <p class="clause">② 강사가 제공한 교재 및 강의자료 이외의 교육자료(외부자료, 실습소스 등)를 사용하는 경우, 강사는 그 자료가 제3자의 저작권 등 지식재산권을 침해하지 않음을 보증한다. 만약 제공한 콘텐츠가 제3자의 지적재산권을 침해하였다는 이유로 제3자가 "회사"를 상대로 클레임을 제기할 경우 "강사"는 "회사"를 방어하고 면책하여야 한다.</p>
+  <p class="clause">③ 전항에서 "회사"가 먼저 지식재산권 침해 클레임의 방어를 위해 조치를 취할 경우 "강사"는 "회사"가 지출한 제반 비용(변호사 비용 포함) 및 손해를 사전에 협의된 정산비율에 따라 배상하여야 한다.</p>
+  <p class="clause">④ 강의 영상 및 마케팅 영상에 대한 권리는 강사와 회사가 함께 가진다. 해당 영상을 강의 마케팅 용도를 제외하고는 사전 협의 없이 임의로 사용할 수 없다.</p>
+  <p class="clause">⑤ 회사와 강사가 사전에 협의한 기간 내에는 강사가 임의로 강의를 중지시킬 수 없다. 기간 조정이 필요할 경우 반드시 상호 협의를 거친다.</p>
+  <p class="clause">⑥ 회사는 판매 촉진을 목적으로 한 마케팅 활동의 일환으로 강사가 업로드한 소개글, 이미지, 강의 일부 미리보기 등을 강사의 별도 동의 없이 사용할 수 있다. 이에는 해당 콘텐츠를 채널 네트워크 및 제3의 플랫폼에 업로드하거나 2차 가공해 배포하는 것도 포함된다.</p>
+  <p class="clause">⑦ 강사는 계약기간 내 본 과정과 동일한 제목 및 커리큘럼으로 타 회사 혹은 플랫폼에서 교육할 경우(본인 플랫폼 제외) 사전에 고지하고 고객의 과정 문의에 효율적으로 응대할 수 있도록 협조한다.</p>
+
+  <div class="pn">- 3 -</div>
+</div>
+
+<!-- ══════════ PAGE 4 ══════════ -->
+<div class="page">
+
+  <div class="article-title">제6조 (부정이용 금지 및 위약벌)</div>
+  <p class="clause">① 회사는 다음 각호에 해당하는 경우 부정 이용 행위로 본다.</p>
+  <p class="sub">1. 광고 또는 홍보를 목적으로 완결성 없는 강의 콘텐츠를 제공하는 행위</p>
+  <p class="sub">2. 유사과학, 극단적 종교 및 정치사상, 혐오 등의 내용을 제공하는 행위</p>
+  <p class="sub">3. 회사 서비스에 대해 사실과 다른 내용을 유포, 적시하는 명예훼손 행위</p>
+  <p class="sub">4. 반사이익을 목적으로 회사 내 타 강의를 부정적으로 묘사하는 행위</p>
+  <p class="sub">5. 수강생의 계정과 비밀번호 등 개인정보를 물어보는 행위</p>
+  <p class="sub">6. 특정 고객에게 가격 차등이나 무료제공을 요청하는 행위</p>
+  <p class="sub">7. 강사의 잘못으로 이미지가 실추돼 회사 신뢰를 떨어뜨리는 행위</p>
+  <p class="clause">② 위에 언급된 부정행위를 회사가 확인한 경우, 1차 시정 권고하고 받아들여지지 않을 경우 2차로 지급 전 수익분배분을 회사가 즉시 징수할 수 있으며 강의를 임의로 폐쇄하고 계약을 파기, 이에 대한 책임을 물을 수 있다. 강의 폐쇄에 따른 수강료 배상에 대한 책임도 강사에게 귀속된다.</p>
+  <p class="clause">③ 위 모든 조치는 강사에 사전 통보 후 진행되며 이의가 있는 경우 강사는 법률대리인을 통해 이를 회사에 소명할 수 있다.</p>
+
+  <div class="article-title">제7조 (정산 방법)</div>
+  <p class="clause">① 강사료는 클래스 매출의 <b>40%</b>를 지급한다. 개별 강의 판매량과 매출 총액 등 정보는 매월 정산일에 강사에 고지하며, 정산은 해당 강의가 모두 종료된 달의 익월 10일에 진행한다.</p>
+  <p class="clause">② 매출은 고객이 해당 강의에 지불한 수업료의 총액을 의미한다. 단, 해당 매출은 광고비, 결제플랫폼 수수료, 카드수수료 및 프로모션 비용을 뺀 금액으로 산정한다.</p>
+  <p class="clause">③ 고객이 구매한 강의를 판매 약관에 따라 환불할 경우 정산금액에서 제외한다. 이미 정산이 완료된 후에 환불이 발생할 경우, 환불된 금액의 계약된 비율만큼 회사가 요청한 계좌로 반환한다. 반환 금액은 환불 확정일로부터 1주일 이내에 반환되어야 한다.</p>
+  <p class="clause">④ 아래 항목에 대해서는 별도 협의한 비율로 차감 후 정산한다.</p>
+  <p class="sub">가. "회사"가 운영하는 채널 네트워크(사장찍어주는남자, 현장속으로, 머니로드 등)를 통해 발생된 매출</p>
+  <p class="sub">나. "회사"가 협업하고 있는 인플루언서를 통해 발생된 매출</p>
+
+  <div class="article-title">제8조 (강사료 대금 지급 방식)</div>
+  <p class="article-body">강사료는 강사가 지정한 통장으로 지급한다.</p>
+  <p class="clause">① 개인일 경우 사업소득의 형태로 원천세 3.3%를 차감한다. 일회성 행사 출연의 경우 기타소득으로 원천세 8.8%를 차감한다.</p>
+  <p class="clause">② 사업자일 경우 제7조에서 산정한 금액을 세금계산서 총액 기준(부가세 포함)으로 지급한다.</p>
+  <p class="clause">③ 강사는 대금을(세금계산서 첨부) 회사에게 청구하며, 회사는 제7조에서 정한 일자에 지급한다. 단, 상호 간 별도 협의가 있는 경우 그 내용을 따른다.</p>
+
+  <div class="article-title">제9조 (비밀유지 의무)</div>
+  <p class="clause">① 회사와 강사는 본 계약의 체결과 이행 과정에서 알게 된 상대방에 대한 일체의 정보를 상대방의 사전 서면 동의 없이 제3자에게 공개, 유출, 제공하거나 본 계약 이외의 목적으로 사용할 수 없다. 계약의 종료 또는 해지 이후에도 본 조의 의무를 부담하며, 단 다음 각호의 경우에는 그러하지 아니한다.</p>
+  <p class="sub">1. 상대방에 의해 제공받은 시점에서 이미 공지되어 있는 정보</p>
+  <p class="sub">2. 제공받은 후 자기책임에 의하지 않고 공지된 정보</p>
+  <p class="sub">3. 제3자로부터 정당하게 제공받은 정보</p>
+  <p class="sub">4. 법령 또는 법원 등의 명령에 의해 공개가 의무인 정보</p>
+  <p class="clause">② 회사와 강사는 본 계약 관련 자료를 계약 종료 후 상대방에게 즉시 반환하거나 상대방의 요청에 따라 폐기한다.</p>
+
+  <div class="pn">- 4 -</div>
+</div>
+
+<!-- ══════════ PAGE 5 ══════════ -->
+<div class="page">
+
+  <div class="article-title">제10조 (손해배상책임)</div>
+  <p class="article-body">회사와 강사 중 어느 일방이 본 계약에 규정된 의무를 이행하지 않거나 본 계약을 위반하여 상대방에게 손해가 발생한 경우 그 행위를 야기한 당사자는 전적으로 책임을 지며, 그에 따른 손해를 배상함과 동시에 상대방의 손해를 최소화하기 위하여 합리적으로 요구되는 적절한 조치를 취해야 한다.</p>
+
+  <div class="article-title">제11조 (계약의 변경 또는 해지)</div>
+  <p class="clause">① 본 계약은 향후 계약내용 변경이 불가피한 사유 발생 시 어느 일방의 요청이 있을 경우 상호간 합의하여 전부 또는 일부를 변경할 수 있으며, 그 변경내용 및 시기는 상호 협의하여 결정한다.</p>
+  <p class="clause">② "회사" 또는 "강사"는 다음 각호에 해당하는 경우 상대방에 서면 통지하여 본 계약을 해지할 수 있다.</p>
+  <p class="sub">1. 당사자 일방이 정당한 사유 없이 본 계약상의 의무를 이행하지 아니한 경우</p>
+  <p class="sub">2. 당사자 일방의 고의 또는 과실로 상대방에게 손해가 발생한 경우</p>
+  <p class="sub">3. 당사자 일방이 본 계약을 위반하거나 불완전하게 이행하고 있는 경우</p>
+  <p class="sub">4. "강사"가 압류, 가압류, 가처분, 경매, 체납처분 등을 당하거나 파산, 회생, 해산, 청산, 부도 등의 신청을 당하거나 스스로 신청하는 경우</p>
+  <p class="sub">5. "회사"의 경영상 이유, 관련 법률의 개정 또는 감독기관의 지시 등으로 계약 이행이 불가할 경우</p>
+
+  <div class="article-title">제12조 (계약의 해석 및 보완)</div>
+  <p class="clause">① 양 당사자는 본 계약의 내용을 신의성실에 의거하여 준수하여야 한다.</p>
+  <p class="clause">② 본 계약서에서 명시되지 않은 부분이나 해석에 이견이 있을 시 사회 통념과 조리에 맞게 충분한 합의를 거쳐 해결한다.</p>
+
+  <div class="article-title">제13조 (분쟁의 해결)</div>
+  <p class="clause">① 본 계약과 관련하여 분쟁 발생 시 계약 당사자 쌍방의 합의에 의하여 해결한다.</p>
+  <p class="clause">② 전항의 합의가 성립하지 못한 때의 소송은 "회사" 소재지 관할법원으로 한다.</p>
+
+  <div style="text-align:center; margin-top:48px; font-size:9pt; color:#666;">- 이하 여백 -</div>
+
+  <div class="pn">- 5 -</div>
+</div>
+
+</body>
+</html>
