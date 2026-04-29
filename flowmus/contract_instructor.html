@@ -192,6 +192,33 @@
     font-family: sans-serif;
   }
 
+  /* 입력 필드 */
+  .field {
+    border: none;
+    border-bottom: 1px solid #bbb;
+    background: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    color: #0055cc;
+    padding: 0 2px;
+    outline: none;
+    text-align: center;
+  }
+  .field:focus {
+    border-bottom-color: #0055cc;
+    background: #f0f6ff;
+  }
+  .field-wide { width: 180px; text-align: left; }
+  .field-date { width: 42px; }
+  .field-num { width: 36px; }
+  .field-name { width: 140px; }
+  .field-full { width: 100%; text-align: left; }
+  .field-sign { width: 140px; text-align: left; }
+  @media print {
+    .field { border-bottom-color: #999; color: #000; background: transparent; }
+    .field:focus { background: transparent; }
+  }
+
   .print-btn {
     position: fixed; bottom: 20px; right: 20px; z-index: 100;
     background: #333; color: #fff; border: none;
@@ -212,28 +239,28 @@
   <div class="doc-title">강 사 제 휴 계 약 서</div>
 
   <p class="preamble">
-    주식회사 플로우머스(이하 "회사"라 한다)와 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(이하 "강사"라 한다)는 온/오프라인 클래스 운영에 관한 제휴 계약을 체결하고, 상호존중의 입장에서 신의에 따라 성실히 계약상의 의무를 이행하고 완수할 것을 확약하며, 계약의 증거로서 본 계약서를 2부 작성하여 각각 서명 날인한 후 각 1부씩 보관한다.
+    주식회사 플로우머스(이하 "회사"라 한다)와 <input type="text" class="field field-name" placeholder="강사 성명">(이하 "강사"라 한다)는 온/오프라인 클래스 운영에 관한 제휴 계약을 체결하고, 상호존중의 입장에서 신의에 따라 성실히 계약상의 의무를 이행하고 완수할 것을 확약하며, 계약의 증거로서 본 계약서를 2부 작성하여 각각 서명 날인한 후 각 1부씩 보관한다.
   </p>
 
   <table class="info-table">
     <tr>
       <th>계약일</th>
-      <td colspan="3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;년 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;월 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;일</td>
+      <td colspan="3"><input type="text" class="field field-date" placeholder="2026">년 <input type="text" class="field field-date" placeholder="">월 <input type="text" class="field field-date" placeholder="">일</td>
     </tr>
     <tr>
       <th>계약기간</th>
       <td colspan="3">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;년 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;월 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;일 ~ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;년 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;월 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;일 (1년)<br>
+        <input type="text" class="field field-date" placeholder="">년 <input type="text" class="field field-date" placeholder="">월 <input type="text" class="field field-date" placeholder="">일 ~ <input type="text" class="field field-date" placeholder="">년 <input type="text" class="field field-date" placeholder="">월 <input type="text" class="field field-date" placeholder="">일 (1년)<br>
         ※ 만료 30일 전 해지 통지 없을 시 동일 조건으로 1년씩 자동갱신
       </td>
     </tr>
     <tr>
       <th>강의주제</th>
-      <td colspan="3"></td>
+      <td colspan="3"><input type="text" class="field field-full" placeholder="강의 주제를 입력하세요"></td>
     </tr>
     <tr>
       <th>클래스 분량</th>
-      <td colspan="3">온/오프라인 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;회 및 필요시 추가 보충강의</td>
+      <td colspan="3">온/오프라인 <input type="text" class="field field-num" placeholder="">회 및 필요시 추가 보충강의</td>
     </tr>
     <tr>
       <th>정산비율</th>
@@ -257,11 +284,11 @@
       <td>
         <div class="sign-inner">
           <div class="sign-header">"강사"</div>
-          <div class="sign-line"><span class="sl">이름</span><span class="sv"><span class="underline">&nbsp;</span></span></div>
-          <div class="sign-line"><span class="sl">연락처</span><span class="sv"><span class="underline">&nbsp;</span></span></div>
-          <div class="sign-line"><span class="sl">주민번호</span><span class="sv"><span class="underline">&nbsp;</span></span></div>
-          <div class="sign-line"><span class="sl">주소</span><span class="sv"><span class="underline">&nbsp;</span></span></div>
-          <div class="sign-line" style="margin-top:10px;border-top:1px solid #ccc;padding-top:8px"><span class="sl">성함</span><span class="sv"><span class="underline">&nbsp;</span> &nbsp;<span class="seal">(인)</span></span></div>
+          <div class="sign-line"><span class="sl">이름</span><span class="sv"><input type="text" class="field field-sign" placeholder=""></span></div>
+          <div class="sign-line"><span class="sl">연락처</span><span class="sv"><input type="text" class="field field-sign" placeholder="010-"></span></div>
+          <div class="sign-line"><span class="sl">주민번호</span><span class="sv"><input type="text" class="field field-sign" placeholder=""></span></div>
+          <div class="sign-line"><span class="sl">주소</span><span class="sv"><input type="text" class="field field-sign" placeholder=""></span></div>
+          <div class="sign-line" style="margin-top:10px;border-top:1px solid #ccc;padding-top:8px"><span class="sl">성함</span><span class="sv"><input type="text" class="field field-sign" placeholder=""> &nbsp;<span class="seal">(인)</span></span></div>
         </div>
       </td>
     </tr>
