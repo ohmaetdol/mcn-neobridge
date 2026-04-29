@@ -3,247 +3,508 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>달려라 홍반장 — 주간 운영 가이드</title>
+<title>달려라 홍반장 — Creator Playbook</title>
 <style>
-  @page { size: A4; margin: 16mm 16mm 18mm 16mm; }
+  @page { size: A4; margin: 0; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     font-family: 'Apple SD Gothic Neo', '맑은 고딕', sans-serif;
     color: #222;
     background: #fff;
     font-size: 10pt;
-    line-height: 1.85;
+    line-height: 1.8;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }
   @media screen {
-    body { background: #e8e8e8; padding: 20px 0; }
-    .page { box-shadow: 0 2px 12px rgba(0,0,0,0.1); margin-bottom: 24px; }
+    body { background: #d4d4d4; padding: 20px 0; }
+    .page { box-shadow: 0 4px 20px rgba(0,0,0,0.12); margin-bottom: 24px; }
   }
   @media print {
-    .page { padding: 0; margin: 0; box-shadow: none; min-height: auto; }
+    .page { margin: 0; box-shadow: none; min-height: auto; }
     .no-print { display: none !important; }
   }
   .page {
     width: 210mm;
     min-height: 297mm;
     margin: 0 auto;
-    padding: 48px 52px;
     position: relative;
     background: #fff;
     page-break-after: always;
+    overflow: hidden;
   }
   .page:last-child { page-break-after: auto; }
+  .page-inner { padding: 44px 48px; }
 
-  /* 헤더 */
-  .header {
+  /* ── 커버 ── */
+  .cover {
+    background: #111;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0;
+  }
+  .cover-top {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 48px 0;
+  }
+  .cover-badge {
+    display: inline-block;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 6px 20px;
+    font-size: 8.5pt;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 40px;
+  }
+  .cover-title {
+    font-size: 36pt;
+    font-weight: 800;
+    letter-spacing: -1px;
+    text-align: center;
+    line-height: 1.25;
+    margin-bottom: 16px;
+  }
+  .cover-sub {
+    font-size: 13pt;
+    color: rgba(255,255,255,0.5);
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-align: center;
+  }
+  .cover-bottom {
+    padding: 48px;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
-    margin-bottom: 12px;
-    padding-bottom: 12px;
-    border-bottom: 2.5px solid #222;
+    border-top: 1px solid rgba(255,255,255,0.08);
   }
-  .header-left h1 {
-    font-size: 20pt;
+  .cover-info {
+    font-size: 9pt;
+    color: rgba(255,255,255,0.35);
+    line-height: 1.8;
+  }
+  .cover-info b { color: rgba(255,255,255,0.7); font-weight: 600; }
+  .cover-logo {
+    font-size: 11pt;
     font-weight: 700;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.4);
+  }
+
+  /* ── 공통 헤더 ── */
+  .pg-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #111;
+  }
+  .pg-header h2 {
+    font-size: 16pt;
+    font-weight: 800;
     color: #111;
     letter-spacing: -0.5px;
   }
-  .header-left .sub {
-    font-size: 10pt;
-    color: #888;
-    margin-top: 4px;
-  }
-  .header-right {
-    text-align: right;
+  .pg-num {
     font-size: 8.5pt;
-    color: #aaa;
-    line-height: 1.6;
+    color: #bbb;
+    font-weight: 600;
   }
 
-  /* 인트로 */
-  .intro {
-    background: #f8f9fa;
-    border-radius: 8px;
-    padding: 20px 24px;
-    margin: 24px 0;
-    word-break: keep-all;
-    color: #444;
-    line-height: 2.0;
-  }
-
-  /* 섹션 제목 */
-  .section-title {
-    font-size: 13pt;
+  /* ── 섹션 ── */
+  .sec-title {
+    font-size: 11pt;
     font-weight: 700;
     color: #111;
-    margin-top: 32px;
-    margin-bottom: 16px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #eee;
-  }
-
-  /* 요일 카드 */
-  .day-card {
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    overflow: hidden;
-  }
-  .day-header {
-    padding: 14px 22px;
-    font-weight: 700;
-    font-size: 11pt;
+    margin-top: 28px;
+    margin-bottom: 12px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
   }
-  .day-header .day-label {
-    display: inline-flex;
+  .sec-title::before {
+    content: '';
+    display: inline-block;
+    width: 3px;
+    height: 16px;
+    background: #111;
+    border-radius: 2px;
+  }
+
+  /* ── 파이프라인 ── */
+  .pipeline {
+    display: flex;
+    gap: 0;
+    margin: 20px 0;
+  }
+  .pipe-step {
+    flex: 1;
+    text-align: center;
+    position: relative;
+  }
+  .pipe-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
+    margin: 0 auto 10px;
+    font-size: 16pt;
+    font-weight: 800;
     color: #fff;
-    font-size: 10pt;
+  }
+  .pipe-step:nth-child(1) .pipe-circle { background: #3366cc; }
+  .pipe-step:nth-child(2) .pipe-circle { background: #e67e22; }
+  .pipe-step:nth-child(3) .pipe-circle { background: #8844bb; }
+  .pipe-step:nth-child(4) .pipe-circle { background: #2d9c5a; }
+  .pipe-step:nth-child(5) .pipe-circle { background: #cc3355; }
+  .pipe-label {
+    font-size: 9pt;
     font-weight: 700;
-    flex-shrink: 0;
+    color: #222;
+    margin-bottom: 4px;
   }
-  .mon .day-header { background: #f0f4ff; }
-  .mon .day-label { background: #3366cc; }
-  .wed .day-header { background: #f0faf4; }
-  .wed .day-label { background: #2d9c5a; }
-  .tue .day-header { background: #fff8f0; }
-  .tue .day-label { background: #e67e22; }
-  .thu .day-header { background: #fff8f0; }
-  .thu .day-label { background: #e67e22; }
-  .fri .day-header { background: #f8f0ff; }
-  .fri .day-label { background: #8844bb; }
+  .pipe-desc {
+    font-size: 7.5pt;
+    color: #888;
+    line-height: 1.5;
+  }
+  .pipe-arrow {
+    position: absolute;
+    right: -8px;
+    top: 22px;
+    font-size: 10pt;
+    color: #ccc;
+  }
 
-  .day-body {
-    padding: 16px 22px 18px;
+  /* ── 역할 카드 ── */
+  .role-grid {
+    display: flex;
+    gap: 16px;
+    margin: 16px 0;
   }
-  .day-body ul {
-    padding-left: 18px;
-    margin: 0;
+  .role-card {
+    flex: 1;
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
   }
-  .day-body li {
-    margin-bottom: 6px;
-    color: #444;
-    word-break: keep-all;
+  .role-card.company {
+    background: #f0f4ff;
+    border: 1px solid #d4ddff;
   }
-  .day-body li b { color: #222; }
-  .tag {
+  .role-card.creator {
+    background: #f0faf4;
+    border: 1px solid #c8ecd6;
+  }
+  .role-tag {
     display: inline-block;
     font-size: 7.5pt;
-    padding: 1px 8px;
-    border-radius: 10px;
-    font-weight: 600;
-    margin-left: 4px;
-    vertical-align: middle;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
   }
-  .tag-plan { background: #e8eeff; color: #3366cc; }
-  .tag-film { background: #fff0e0; color: #c66a00; }
-  .tag-exec { background: #e0f5ea; color: #1a7a3a; }
+  .company .role-tag { background: #3366cc; color: #fff; }
+  .creator .role-tag { background: #2d9c5a; color: #fff; }
+  .role-card ul {
+    padding-left: 16px;
+    margin: 0;
+  }
+  .role-card li {
+    font-size: 9pt;
+    color: #444;
+    margin-bottom: 5px;
+    word-break: keep-all;
+  }
 
-  /* 주간 타임라인 */
-  .timeline {
-    width: 100%;
-    border-collapse: collapse;
+  /* ── 주간 캘린더 ── */
+  .week-grid {
+    display: flex;
+    gap: 8px;
     margin: 16px 0;
+  }
+  .wday {
+    flex: 1;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #e8e8e8;
+  }
+  .wday-head {
+    padding: 10px 0;
+    text-align: center;
+    font-weight: 700;
+    font-size: 9pt;
+    color: #fff;
+  }
+  .wday:nth-child(1) .wday-head { background: #3366cc; }
+  .wday:nth-child(2) .wday-head { background: #e67e22; }
+  .wday:nth-child(3) .wday-head { background: #2d9c5a; }
+  .wday:nth-child(4) .wday-head { background: #e67e22; }
+  .wday:nth-child(5) .wday-head { background: #8844bb; }
+  .wday-body {
+    padding: 12px 10px;
+    font-size: 8pt;
+    color: #555;
+    line-height: 1.7;
+    min-height: 100px;
+  }
+  .wday-body b {
+    display: block;
+    color: #222;
+    font-size: 8.5pt;
+    margin-bottom: 4px;
+  }
+  .wday.active {
+    border-color: #3366cc;
+    box-shadow: 0 2px 8px rgba(51,102,204,0.12);
+  }
+  .wday.active-g {
+    border-color: #2d9c5a;
+    box-shadow: 0 2px 8px rgba(45,156,90,0.12);
+  }
+
+  /* ── 타임블록 ── */
+  .timeblock {
+    display: flex;
+    gap: 12px;
+    margin: 10px 0;
+    align-items: stretch;
+  }
+  .tb-time {
+    width: 56px;
+    flex-shrink: 0;
+    font-size: 8pt;
+    font-weight: 600;
+    color: #999;
+    padding-top: 10px;
+    text-align: right;
+    padding-right: 12px;
+    border-right: 2px solid #eee;
+  }
+  .tb-content {
+    flex: 1;
+    background: #fafafa;
+    border-radius: 8px;
+    padding: 12px 16px;
     font-size: 9pt;
   }
-  .timeline th {
-    background: #f8f8f8;
-    padding: 10px 8px;
+  .tb-content b { color: #111; }
+  .tb-content p { color: #666; margin-top: 2px; font-size: 8.5pt; }
+
+  /* ── 성장 로드맵 ── */
+  .roadmap {
+    display: flex;
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .rm-phase {
+    flex: 1;
+    border-radius: 10px;
+    padding: 20px;
+    position: relative;
+  }
+  .rm-phase:nth-child(1) { background: #f8f9fa; border: 1px solid #e0e0e0; }
+  .rm-phase:nth-child(2) { background: #f0f6ff; border: 1px solid #d0dfff; }
+  .rm-phase:nth-child(3) { background: #f0faf4; border: 1px solid #c0e8d0; }
+  .rm-num {
+    font-size: 24pt;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .rm-phase:nth-child(1) .rm-num { color: #ccc; }
+  .rm-phase:nth-child(2) .rm-num { color: #99b8ee; }
+  .rm-phase:nth-child(3) .rm-num { color: #88cc99; }
+  .rm-period {
+    font-size: 7.5pt;
     font-weight: 600;
-    text-align: center;
-    border: 1px solid #e8e8e8;
+    color: #999;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+  }
+  .rm-title {
+    font-size: 10pt;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 8px;
+  }
+  .rm-phase ul {
+    padding-left: 14px;
+    margin: 0;
+  }
+  .rm-phase li {
+    font-size: 8.5pt;
     color: #555;
-    width: 20%;
-  }
-  .timeline td {
-    padding: 10px 12px;
-    border: 1px solid #e8e8e8;
-    vertical-align: top;
-    color: #444;
-    line-height: 1.7;
-  }
-  .timeline .highlight-cell {
-    background: #f8faff;
+    margin-bottom: 3px;
+    word-break: keep-all;
   }
 
-  /* 주간보고 양식 */
-  .report-box {
-    border: 1px solid #ddd;
-    border-radius: 8px;
+  /* ── KPI 카드 ── */
+  .kpi-row {
+    display: flex;
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .kpi {
+    flex: 1;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+    padding: 18px;
+    text-align: center;
+  }
+  .kpi-value {
+    font-size: 20pt;
+    font-weight: 800;
+    color: #111;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .kpi-label {
+    font-size: 8pt;
+    color: #999;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .kpi-sub {
+    font-size: 7.5pt;
+    color: #bbb;
+    margin-top: 4px;
+  }
+
+  /* ── 주간보고 ── */
+  .report {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
     overflow: hidden;
     margin: 16px 0;
   }
-  .report-row {
+  .report-head {
+    background: #111;
+    color: #fff;
+    padding: 14px 20px;
+    font-weight: 700;
+    font-size: 10pt;
     display: flex;
-    border-bottom: 1px solid #eee;
+    justify-content: space-between;
+    align-items: center;
   }
-  .report-row:last-child { border-bottom: none; }
-  .report-label {
-    width: 140px;
+  .report-head span { font-size: 8pt; color: rgba(255,255,255,0.4); font-weight: 400; }
+  .rpt-row {
+    display: flex;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .rpt-row:last-child { border-bottom: none; }
+  .rpt-label {
+    width: 130px;
     flex-shrink: 0;
-    background: #f8f8f8;
-    padding: 12px 16px;
+    background: #fafafa;
+    padding: 13px 18px;
     font-weight: 600;
-    font-size: 9.5pt;
-    color: #444;
-    border-right: 1px solid #eee;
+    font-size: 9pt;
+    color: #555;
+    border-right: 1px solid #f0f0f0;
+    display: flex;
+    align-items: flex-start;
   }
-  .report-value {
+  .rpt-value {
     flex: 1;
-    padding: 12px 16px;
-    color: #666;
+    padding: 13px 18px;
+    color: #888;
     font-size: 9pt;
     min-height: 44px;
   }
 
-  /* 노트 */
-  .note {
+  /* ── 서포트 그리드 ── */
+  .support-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .sup-card {
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 18px;
+  }
+  .sup-card .sup-icon {
+    font-size: 14pt;
+    margin-bottom: 8px;
+  }
+  .sup-card h4 {
+    font-size: 9.5pt;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 4px;
+  }
+  .sup-card p {
+    font-size: 8pt;
+    color: #888;
+    line-height: 1.6;
+    word-break: keep-all;
+  }
+
+  /* ── 풋터 ── */
+  .pg-footer {
+    position: absolute;
+    bottom: 28px;
+    left: 48px;
+    right: 48px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 7.5pt;
+    color: #ccc;
+  }
+
+  /* ── 인용 박스 ── */
+  .quote-box {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 22px 28px;
+    margin: 20px 0;
+    text-align: center;
+    word-break: keep-all;
+  }
+  .quote-box .q {
+    font-size: 12pt;
+    font-weight: 700;
+    color: #222;
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+  .quote-box .qa {
+    font-size: 8.5pt;
+    color: #aaa;
+  }
+
+  .note-bar {
     background: #fffbf0;
     border-left: 3px solid #e6a800;
-    padding: 14px 18px;
+    padding: 12px 18px;
     border-radius: 0 8px 8px 0;
-    margin: 16px 0;
-    font-size: 9.5pt;
-    color: #555;
+    margin: 14px 0;
+    font-size: 8.5pt;
+    color: #666;
     word-break: keep-all;
-  }
-
-  .info-box {
-    background: #f0f6ff;
-    border-left: 3px solid #3366cc;
-    padding: 14px 18px;
-    border-radius: 0 8px 8px 0;
-    margin: 16px 0;
-    font-size: 9.5pt;
-    color: #333;
-    word-break: keep-all;
-  }
-
-  /* 페이지 번호 */
-  .pn {
-    position: absolute;
-    bottom: 24px;
-    left: 0; right: 0;
-    text-align: center;
-    font-size: 8pt;
-    color: #ccc;
   }
 
   .print-btn {
     position: fixed; bottom: 20px; right: 20px; z-index: 100;
-    background: #333; color: #fff; border: none;
-    padding: 12px 24px; border-radius: 8px;
+    background: #111; color: #fff; border: none;
+    padding: 12px 28px; border-radius: 8px;
     font-size: 10pt; font-weight: 600; cursor: pointer;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
     font-family: sans-serif;
   }
 </style>
@@ -252,206 +513,474 @@
 
 <button class="print-btn no-print" onclick="window.print()">PDF 저장</button>
 
-<!-- ══════════ PAGE 1 ══════════ -->
-<div class="page">
-
-  <div class="header">
-    <div class="header-left">
-      <h1>달려라 홍반장</h1>
-      <div class="sub">주간 운영 가이드</div>
-    </div>
-    <div class="header-right">
-      Flowmus<br>
-      2026. 05
-    </div>
+<!-- ══════════ COVER ══════════ -->
+<div class="page cover">
+  <div class="cover-top">
+    <div class="cover-badge">Creator Playbook</div>
+    <div class="cover-title">달려라<br>홍반장</div>
+    <div class="cover-sub">WEEKLY OPERATING GUIDE</div>
   </div>
-
-  <div class="intro">
-    본 문서는 <b>달려라 홍반장</b> 채널의 주간 운영 구조를 정리한 가이드입니다.<br>
-    홍아린 강사님은 <b>매주 월요일 / 수요일</b> 출근하며, 기획과 제작을 중심으로 채널을 함께 성장시켜 나갑니다.
-  </div>
-
-  <div class="section-title">주간 일정 한눈에 보기</div>
-
-  <table class="timeline">
-    <tr>
-      <th>월</th>
-      <th>화</th>
-      <th>수</th>
-      <th>목</th>
-      <th>금</th>
-    </tr>
-    <tr>
-      <td class="highlight-cell">
-        <b>기획의 날</b><br>
-        <span class="tag tag-plan">홍아린 출근</span><br><br>
-        주간 기획회의<br>
-        성과 리뷰<br>
-        콘텐츠 캘린더
-      </td>
-      <td>
-        <b>촬영일</b><br>
-        <span class="tag tag-film">촬영 중심</span><br><br>
-        현장 촬영<br>
-        인터뷰 촬영
-      </td>
-      <td class="highlight-cell">
-        <b>제작의 날</b><br>
-        <span class="tag tag-exec">홍아린 출근</span><br><br>
-        편집 피드백<br>
-        커뮤니티 관리<br>
-        주간보고
-      </td>
-      <td>
-        <b>촬영일</b><br>
-        <span class="tag tag-film">촬영 중심</span><br><br>
-        현장 촬영<br>
-        보충 촬영
-      </td>
-      <td>
-        <b>마무리</b><br>
-        <span class="tag" style="background:#f0e8ff;color:#7733aa;">사무실</span><br><br>
-        편집 확인<br>
-        업로드<br>
-        차주 준비
-      </td>
-    </tr>
-  </table>
-
-  <div class="section-title">요일별 상세 가이드</div>
-
-  <div class="day-card mon">
-    <div class="day-header">
-      <span class="day-label">월</span>
-      기획의 날 — 이번 주를 설계한다
+  <div class="cover-bottom">
+    <div class="cover-info">
+      <b>Prepared for</b> 홍아린<br>
+      <b>Date</b> 2026. 05<br>
+      <b>Version</b> 1.0
     </div>
-    <div class="day-body">
-      <ul>
-        <li><b>주간 기획회의</b> — 이번 주 콘텐츠 아이디어 논의, 촬영 계획 확정</li>
-        <li><b>지난주 성과 리뷰</b> — 조회수, 댓글, 구독자 변화 등 데이터 체크</li>
-        <li><b>콘텐츠 캘린더 확정</b> — 이번 주 업로드 일정과 주제 최종 결정</li>
-        <li><b>썸네일/제목 브레인스토밍</b> — 클릭을 부르는 제목과 썸네일 아이디어</li>
-        <li><b>촬영 준비</b> — 화/목 촬영에 필요한 자료, 장소, 섭외 정리</li>
-      </ul>
-    </div>
+    <div class="cover-logo">FLOWMUS</div>
   </div>
-
-  <div class="day-card wed">
-    <div class="day-header">
-      <span class="day-label">수</span>
-      제작의 날 — 만들고, 다듬고, 보고한다
-    </div>
-    <div class="day-body">
-      <ul>
-        <li><b>편집 방향 피드백</b> — 화요일 촬영분 편집 방향 확인 및 코멘트</li>
-        <li><b>커뮤니티 관리</b> — 댓글 답변, 오픈채팅방 소통, 시청자 반응 체크</li>
-        <li><b>콘텐츠 보완</b> — 추가 촬영 필요 사항 정리, 자막/자료 확인</li>
-        <li><b>주간보고 작성</b> — 이번 주 성과 + 다음 주 계획 정리 후 제출</li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="note">
-    핵심 원칙: <b>월요일에 머리를 쓰고, 수요일에 손을 쓴다.</b><br>
-    화/목 촬영일과 자연스럽게 맞물려서, 기획 → 촬영 → 피드백 → 보고의 사이클이 매주 반복됩니다.
-  </div>
-
-  <div class="pn">1 / 2</div>
 </div>
 
-<!-- ══════════ PAGE 2 ══════════ -->
+<!-- ══════════ PAGE 1 — 파트너십 & 프로덕션 ══════════ -->
 <div class="page">
+  <div class="page-inner">
 
-  <div class="section-title">주간보고 양식</div>
-  <p style="color:#666; margin-bottom:12px; font-size:9.5pt;">매주 수요일 제출 — 간결하게, 핵심만 적습니다.</p>
+    <div class="pg-header">
+      <h2>Our Partnership</h2>
+      <span class="pg-num">01</span>
+    </div>
 
-  <div class="report-box">
-    <div class="report-row">
-      <div class="report-label">보고 기간</div>
-      <div class="report-value">2026. __월 __주차 ( __. __. ~ __. __. )</div>
+    <div class="quote-box">
+      <div class="q">"크리에이터는 콘텐츠에만 집중하고,<br>나머지는 전부 우리가 합니다."</div>
+      <div class="qa">Flowmus Production Principle</div>
     </div>
-    <div class="report-row">
-      <div class="report-label">채널명</div>
-      <div class="report-value">달려라 홍반장</div>
-    </div>
-    <div class="report-row">
-      <div class="report-label">이번 주 성과</div>
-      <div class="report-value" style="min-height:72px;">
-        구독자: ____명 (+ __명)<br>
-        총 조회수: ____회<br>
-        가장 반응 좋았던 콘텐츠:
+
+    <div class="sec-title">프로덕션 파이프라인</div>
+
+    <div class="pipeline">
+      <div class="pipe-step">
+        <div class="pipe-circle">1</div>
+        <div class="pipe-label">기획</div>
+        <div class="pipe-desc">아이디어 발굴<br>기획서 작성</div>
+        <div class="pipe-arrow">&#8594;</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-circle">2</div>
+        <div class="pipe-label">촬영</div>
+        <div class="pipe-desc">장소 섭외<br>현장 촬영</div>
+        <div class="pipe-arrow">&#8594;</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-circle">3</div>
+        <div class="pipe-label">편집</div>
+        <div class="pipe-desc">편집 / 자막<br>썸네일 제작</div>
+        <div class="pipe-arrow">&#8594;</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-circle">4</div>
+        <div class="pipe-label">업로드</div>
+        <div class="pipe-desc">제목 최적화<br>태그 / 설명</div>
+        <div class="pipe-arrow">&#8594;</div>
+      </div>
+      <div class="pipe-step">
+        <div class="pipe-circle">5</div>
+        <div class="pipe-label">분석</div>
+        <div class="pipe-desc">성과 리뷰<br>다음 기획 반영</div>
       </div>
     </div>
-    <div class="report-row">
-      <div class="report-label">업로드 현황</div>
-      <div class="report-value" style="min-height:72px;">
-        업로드 ____건<br>
-        1.<br>
-        2.
+
+    <div class="sec-title">역할 분담</div>
+
+    <div class="role-grid">
+      <div class="role-card company">
+        <div class="role-tag">FLOWMUS</div>
+        <ul>
+          <li>콘텐츠 기획 및 전략 수립</li>
+          <li>촬영 장소 / 장비 / 스태프</li>
+          <li>영상 편집, 자막, 썸네일</li>
+          <li>채널 네트워크 마케팅</li>
+          <li>수강생 관리 및 정산</li>
+          <li>데이터 분석 및 성과 리포트</li>
+        </ul>
+      </div>
+      <div class="role-card creator">
+        <div class="role-tag">CREATOR</div>
+        <ul>
+          <li>콘텐츠 출연 및 강의</li>
+          <li>주간 기획회의 참여 (월)</li>
+          <li>편집 방향 피드백 (수)</li>
+          <li>커뮤니티 소통</li>
+          <li>주간보고 작성 (수)</li>
+          <li>본인 채널 마케팅 협조</li>
+        </ul>
       </div>
     </div>
-    <div class="report-row">
-      <div class="report-label">촬영 현황</div>
-      <div class="report-value" style="min-height:60px;">
-        촬영 ____건 / 편집 대기 ____건
-      </div>
+
+    <div class="note-bar">
+      촬영, 편집, 마케팅은 Flowmus가 전담합니다. 크리에이터는 기획 참여와 출연에 집중해 주세요.
     </div>
-    <div class="report-row">
-      <div class="report-label">시청자 반응</div>
-      <div class="report-value" style="min-height:60px;">
-        주요 댓글 반응, 요청 사항 등
-      </div>
-    </div>
-    <div class="report-row">
-      <div class="report-label">다음 주 계획</div>
-      <div class="report-value" style="min-height:72px;">
-        1.<br>
-        2.<br>
-        3.
-      </div>
-    </div>
-    <div class="report-row">
-      <div class="report-label">협의 필요 사항</div>
-      <div class="report-value" style="min-height:48px;">
-        촬영 장소, 섭외, 예산 등 논의 사항
-      </div>
-    </div>
+
   </div>
-
-  <div class="info-box">
-    주간보고는 <b>분량보다 꾸준함</b>이 중요합니다. 3줄이라도 매주 수요일에 보내는 습관이 채널 성장의 기반이 됩니다.
+  <div class="pg-footer">
+    <span>Flowmus Confidential</span>
+    <span>달려라 홍반장 — Creator Playbook</span>
   </div>
+</div>
 
-  <div class="section-title">협업 채널</div>
+<!-- ══════════ PAGE 2 — 주간 리듬 ══════════ -->
+<div class="page">
+  <div class="page-inner">
 
-  <div class="report-box">
-    <div class="report-row">
-      <div class="report-label">기획회의</div>
-      <div class="report-value">매주 월요일 오전 (대면)</div>
+    <div class="pg-header">
+      <h2>Weekly Rhythm</h2>
+      <span class="pg-num">02</span>
     </div>
-    <div class="report-row">
-      <div class="report-label">주간보고</div>
-      <div class="report-value">매주 수요일 오후 제출</div>
+
+    <div class="sec-title">주간 캘린더</div>
+
+    <div class="week-grid">
+      <div class="wday active">
+        <div class="wday-head">MON</div>
+        <div class="wday-body">
+          <b>기획의 날</b>
+          주간 기획회의<br>
+          성과 리뷰<br>
+          콘텐츠 캘린더<br>
+          촬영 준비
+        </div>
+      </div>
+      <div class="wday">
+        <div class="wday-head">TUE</div>
+        <div class="wday-body">
+          <b>촬영일</b>
+          현장 촬영<br>
+          인터뷰<br>
+          B-roll 촬영
+        </div>
+      </div>
+      <div class="wday active-g">
+        <div class="wday-head">WED</div>
+        <div class="wday-body">
+          <b>제작의 날</b>
+          편집 피드백<br>
+          커뮤니티 관리<br>
+          콘텐츠 보완<br>
+          주간보고
+        </div>
+      </div>
+      <div class="wday">
+        <div class="wday-head">THU</div>
+        <div class="wday-body">
+          <b>촬영일</b>
+          현장 촬영<br>
+          보충 촬영<br>
+          소재 수집
+        </div>
+      </div>
+      <div class="wday">
+        <div class="wday-head">FRI</div>
+        <div class="wday-body">
+          <b>마무리</b>
+          편집 최종확인<br>
+          업로드<br>
+          차주 준비
+        </div>
+      </div>
     </div>
-    <div class="report-row">
-      <div class="report-label">긴급 연락</div>
-      <div class="report-value">카카오톡 단체방</div>
+
+    <div class="sec-title">월요일 상세 타임블록</div>
+
+    <div class="timeblock">
+      <div class="tb-time">10:00</div>
+      <div class="tb-content" style="border-left:3px solid #3366cc;">
+        <b>주간 기획회의</b>
+        <p>지난주 데이터 리뷰 + 이번 주 콘텐츠 아이디어 논의 + 촬영 계획 확정</p>
+      </div>
     </div>
-    <div class="report-row">
-      <div class="report-label">자료 공유</div>
-      <div class="report-value">Google Drive 공유 폴더</div>
+    <div class="timeblock">
+      <div class="tb-time">11:30</div>
+      <div class="tb-content" style="border-left:3px solid #8844bb;">
+        <b>썸네일 / 제목 워크숍</b>
+        <p>업로드 예정 콘텐츠의 제목 후보와 썸네일 컨셉 브레인스토밍</p>
+      </div>
     </div>
-    <div class="report-row">
-      <div class="report-label">편집 피드백</div>
-      <div class="report-value">편집 시트 또는 수요일 대면</div>
+    <div class="timeblock">
+      <div class="tb-time">13:00</div>
+      <div class="tb-content" style="border-left:3px solid #2d9c5a;">
+        <b>촬영 준비</b>
+        <p>화/목 촬영에 필요한 자료 정리, 장소 확인, 섭외 연락</p>
+      </div>
     </div>
+    <div class="timeblock">
+      <div class="tb-time">14:30</div>
+      <div class="tb-content" style="border-left:3px solid #e67e22;">
+        <b>콘텐츠 캘린더 확정</b>
+        <p>이번 주 업로드 일정과 주제 최종 결정, 다음 주 방향 스케치</p>
+      </div>
+    </div>
+
+    <div class="sec-title">수요일 상세 타임블록</div>
+
+    <div class="timeblock">
+      <div class="tb-time">10:00</div>
+      <div class="tb-content" style="border-left:3px solid #2d9c5a;">
+        <b>편집 피드백</b>
+        <p>화요일 촬영분 편집 방향 확인, 수정 요청 사항 코멘트</p>
+      </div>
+    </div>
+    <div class="timeblock">
+      <div class="tb-time">11:30</div>
+      <div class="tb-content" style="border-left:3px solid #e67e22;">
+        <b>커뮤니티 관리</b>
+        <p>댓글 답변, 오픈채팅방 소통, 시청자 반응 체크, DM 응대</p>
+      </div>
+    </div>
+    <div class="timeblock">
+      <div class="tb-time">13:00</div>
+      <div class="tb-content" style="border-left:3px solid #8844bb;">
+        <b>콘텐츠 보완</b>
+        <p>추가 촬영 필요 사항 정리, 자막 확인, 보충 자료 준비</p>
+      </div>
+    </div>
+    <div class="timeblock">
+      <div class="tb-time">14:30</div>
+      <div class="tb-content" style="border-left:3px solid #cc3355;">
+        <b>주간보고 작성 / 제출</b>
+        <p>이번 주 성과 정리 + 다음 주 계획 수립 → 보고 제출</p>
+      </div>
+    </div>
+
   </div>
-
-  <div style="margin-top:40px; text-align:center; color:#ccc; font-size:8.5pt;">
-    Flowmus | 달려라 홍반장 운영 가이드 | 2026. 05
+  <div class="pg-footer">
+    <span>Flowmus Confidential</span>
+    <span>달려라 홍반장 — Creator Playbook</span>
   </div>
+</div>
 
-  <div class="pn">2 / 2</div>
+<!-- ══════════ PAGE 3 — 성장 로드맵 & KPI ══════════ -->
+<div class="page">
+  <div class="page-inner">
+
+    <div class="pg-header">
+      <h2>Growth Roadmap</h2>
+      <span class="pg-num">03</span>
+    </div>
+
+    <div class="roadmap">
+      <div class="rm-phase">
+        <div class="rm-num">01</div>
+        <div class="rm-period">MONTH 1 — 3</div>
+        <div class="rm-title">Foundation</div>
+        <ul>
+          <li>채널 정체성 확립</li>
+          <li>콘텐츠 포맷 테스트</li>
+          <li>주 2회 업로드 루틴</li>
+          <li>시청자 반응 데이터 수집</li>
+          <li>커뮤니티 기반 구축</li>
+        </ul>
+      </div>
+      <div class="rm-phase">
+        <div class="rm-num">02</div>
+        <div class="rm-period">MONTH 4 — 6</div>
+        <div class="rm-title">Growth</div>
+        <ul>
+          <li>히트 포맷 집중 확대</li>
+          <li>채널 네트워크 크로스 마케팅</li>
+          <li>쇼츠 / 클립 병행</li>
+          <li>협업 콘텐츠 제작</li>
+          <li>첫 클래스 런칭 준비</li>
+        </ul>
+      </div>
+      <div class="rm-phase">
+        <div class="rm-num">03</div>
+        <div class="rm-period">MONTH 7 — 12</div>
+        <div class="rm-title">Scale</div>
+        <ul>
+          <li>클래스 런칭 및 운영</li>
+          <li>광고 수익 본격화</li>
+          <li>브랜드 협찬 유치</li>
+          <li>멀티 플랫폼 확장</li>
+          <li>연간 전략 수립</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-title">핵심 성과 지표 (KPI)</div>
+
+    <div class="kpi-row">
+      <div class="kpi">
+        <div class="kpi-value">—</div>
+        <div class="kpi-label">구독자 수</div>
+        <div class="kpi-sub">주간 증감 추적</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-value">—</div>
+        <div class="kpi-label">주간 조회수</div>
+        <div class="kpi-sub">영상별 비교 분석</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-value">—</div>
+        <div class="kpi-label">평균 시청 지속시간</div>
+        <div class="kpi-sub">콘텐츠 품질 지표</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-value">—</div>
+        <div class="kpi-label">클릭률 (CTR)</div>
+        <div class="kpi-sub">썸네일/제목 효과</div>
+      </div>
+    </div>
+
+    <div class="kpi-row">
+      <div class="kpi">
+        <div class="kpi-value">—</div>
+        <div class="kpi-label">댓글 수</div>
+        <div class="kpi-sub">커뮤니티 활성도</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-value">—</div>
+        <div class="kpi-label">업로드 수</div>
+        <div class="kpi-sub">주간 목표 대비</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-value">—</div>
+        <div class="kpi-label">노출 클릭률</div>
+        <div class="kpi-sub">알고리즘 반응</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-value">—</div>
+        <div class="kpi-label">좋아요 비율</div>
+        <div class="kpi-sub">시청자 만족도</div>
+      </div>
+    </div>
+
+    <div class="note-bar">
+      KPI는 매주 월요일 기획회의에서 함께 리뷰합니다. 숫자 자체보다 <b>추세와 변화의 원인</b>을 파악하는 것이 핵심입니다.
+    </div>
+
+    <div class="sec-title">Flowmus 지원 시스템</div>
+
+    <div class="support-grid">
+      <div class="sup-card">
+        <div class="sup-icon">&#9654;</div>
+        <h4>프로덕션</h4>
+        <p>기획, 촬영, 편집, 썸네일, 자막 등 영상 제작 전 과정을 전담합니다.</p>
+      </div>
+      <div class="sup-card">
+        <div class="sup-icon">&#9733;</div>
+        <h4>채널 네트워크</h4>
+        <p>사장찍어주는남자, 현장속으로, 머니로드 등 기존 채널을 활용한 크로스 마케팅을 지원합니다.</p>
+      </div>
+      <div class="sup-card">
+        <div class="sup-icon">&#9670;</div>
+        <h4>데이터 분석</h4>
+        <p>유튜브 애널리틱스 기반 주간 성과 리포트를 제공하고, 다음 콘텐츠 전략에 반영합니다.</p>
+      </div>
+      <div class="sup-card">
+        <div class="sup-icon">&#9632;</div>
+        <h4>클래스 운영</h4>
+        <p>강의 기획, 모객, 광고, 수강생 관리, 정산까지 클래스 운영 전반을 책임집니다.</p>
+      </div>
+    </div>
+
+  </div>
+  <div class="pg-footer">
+    <span>Flowmus Confidential</span>
+    <span>달려라 홍반장 — Creator Playbook</span>
+  </div>
+</div>
+
+<!-- ══════════ PAGE 4 — 주간보고 & 연락처 ══════════ -->
+<div class="page">
+  <div class="page-inner">
+
+    <div class="pg-header">
+      <h2>Weekly Report</h2>
+      <span class="pg-num">04</span>
+    </div>
+
+    <div class="report">
+      <div class="report-head">
+        주간보고서
+        <span>매주 수요일 제출</span>
+      </div>
+      <div class="rpt-row">
+        <div class="rpt-label">보고 기간</div>
+        <div class="rpt-value">2026. __월 __주차 ( __/__  ~  __/__ )</div>
+      </div>
+      <div class="rpt-row">
+        <div class="rpt-label">채널</div>
+        <div class="rpt-value">달려라 홍반장</div>
+      </div>
+      <div class="rpt-row">
+        <div class="rpt-label">이번 주 성과</div>
+        <div class="rpt-value" style="min-height:60px;">
+          구독자 ____명 (+__) / 조회수 ____회 / 최고 성과 콘텐츠:
+        </div>
+      </div>
+      <div class="rpt-row">
+        <div class="rpt-label">업로드</div>
+        <div class="rpt-value" style="min-height:48px;">
+          ____건 — 1. &nbsp;&nbsp;&nbsp; 2.
+        </div>
+      </div>
+      <div class="rpt-row">
+        <div class="rpt-label">촬영 / 편집</div>
+        <div class="rpt-value">촬영 __건 / 편집중 __건 / 대기 __건</div>
+      </div>
+      <div class="rpt-row">
+        <div class="rpt-label">시청자 반응</div>
+        <div class="rpt-value" style="min-height:48px;"></div>
+      </div>
+      <div class="rpt-row">
+        <div class="rpt-label">다음 주 계획</div>
+        <div class="rpt-value" style="min-height:56px;">1. &nbsp;&nbsp;&nbsp; 2. &nbsp;&nbsp;&nbsp; 3.</div>
+      </div>
+      <div class="rpt-row">
+        <div class="rpt-label">협의 사항</div>
+        <div class="rpt-value" style="min-height:44px;"></div>
+      </div>
+    </div>
+
+    <div class="note-bar">
+      주간보고는 분량보다 <b>꾸준함</b>이 중요합니다. 3줄이라도 매주 수요일에 제출하는 것이 채널 성장의 기반입니다.
+    </div>
+
+    <div class="sec-title">커뮤니케이션 채널</div>
+
+    <div class="support-grid">
+      <div class="sup-card">
+        <h4>기획회의</h4>
+        <p>매주 월요일 오전 10시 / 대면</p>
+      </div>
+      <div class="sup-card">
+        <h4>주간보고</h4>
+        <p>매주 수요일 오후 / 서면 제출</p>
+      </div>
+      <div class="sup-card">
+        <h4>일상 소통</h4>
+        <p>카카오톡 단체방</p>
+      </div>
+      <div class="sup-card">
+        <h4>자료 공유</h4>
+        <p>Google Drive 공유 폴더</p>
+      </div>
+    </div>
+
+    <div style="margin-top:32px;">
+      <div class="sec-title">담당자 연락처</div>
+      <div style="display:flex; gap:16px; margin-top:12px;">
+        <div style="flex:1; border:1px solid #eee; border-radius:10px; padding:18px;">
+          <div style="font-weight:700; font-size:10pt; color:#222; margin-bottom:6px;">오맷돌</div>
+          <div style="font-size:8.5pt; color:#999; margin-bottom:8px;">공동대표 / 콘텐츠 총괄</div>
+          <div style="font-size:9pt; color:#555;">ceo@flowmus.com</div>
+        </div>
+        <div style="flex:1; border:1px solid #eee; border-radius:10px; padding:18px;">
+          <div style="font-weight:700; font-size:10pt; color:#222; margin-bottom:6px;">권현우</div>
+          <div style="font-size:8.5pt; color:#999; margin-bottom:8px;">공동대표 / 사업 총괄</div>
+          <div style="font-size:9pt; color:#555;">coo@flowmus.com</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quote-box" style="margin-top:32px;">
+      <div class="q">"함께 달리면 더 멀리 갑니다."</div>
+      <div class="qa">Flowmus Team</div>
+    </div>
+
+  </div>
+  <div class="pg-footer">
+    <span>Flowmus Confidential</span>
+    <span>달려라 홍반장 — Creator Playbook</span>
+  </div>
 </div>
 
 </body>
