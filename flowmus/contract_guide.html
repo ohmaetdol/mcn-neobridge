@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>부업클래스 강사 계약서 — 사용 설명서</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Apple SD Gothic Neo', '맑은 고딕', sans-serif;
+    color: #222;
+    background: #f5f5f5;
+    line-height: 1.8;
+    padding: 40px 20px;
+  }
+  .wrap {
+    max-width: 640px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 12px;
+    padding: 48px 40px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  }
+  h1 {
+    font-size: 20pt;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #111;
+  }
+  .subtitle {
+    font-size: 10pt;
+    color: #888;
+    margin-bottom: 36px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+  }
+  h2 {
+    font-size: 13pt;
+    font-weight: 700;
+    margin-top: 32px;
+    margin-bottom: 12px;
+    color: #111;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #222;
+    color: #fff;
+    font-size: 9pt;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  p {
+    margin-bottom: 10px;
+    color: #444;
+    word-break: keep-all;
+  }
+  .highlight {
+    background: #f0f6ff;
+    border-left: 3px solid #0055cc;
+    padding: 14px 18px;
+    border-radius: 0 8px 8px 0;
+    margin: 16px 0;
+    font-size: 9.5pt;
+    color: #333;
+  }
+  .link-box {
+    background: #fafafa;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 16px 0;
+    word-break: break-all;
+  }
+  .link-box a {
+    color: #0055cc;
+    text-decoration: none;
+    font-size: 9.5pt;
+    font-weight: 600;
+  }
+  .link-box a:hover { text-decoration: underline; }
+  .link-label {
+    font-size: 8.5pt;
+    color: #999;
+    margin-bottom: 4px;
+  }
+  ul {
+    padding-left: 20px;
+    margin-bottom: 10px;
+  }
+  li {
+    margin-bottom: 6px;
+    color: #444;
+  }
+  .field-example {
+    display: inline-block;
+    border-bottom: 1px solid #bbb;
+    color: #0055cc;
+    padding: 0 4px;
+    min-width: 60px;
+    font-size: 9.5pt;
+  }
+  .warn {
+    background: #fff8f0;
+    border-left: 3px solid #e67e22;
+    padding: 14px 18px;
+    border-radius: 0 8px 8px 0;
+    margin: 16px 0;
+    font-size: 9.5pt;
+    color: #444;
+  }
+  .footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    font-size: 8.5pt;
+    color: #aaa;
+    text-align: center;
+  }
+  @media print {
+    body { background: #fff; padding: 0; }
+    .wrap { box-shadow: none; padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <h1>부업클래스 강사 계약서</h1>
+  <div class="subtitle">사용 설명서 — 플로우머스 내부용</div>
+
+  <div class="link-box">
+    <div class="link-label">계약서 링크</div>
+    <a href="https://ohmaetdol.github.io/mcn-neobridge/flowmus/contract_instructor.html" target="_blank">https://ohmaetdol.github.io/mcn-neobridge/flowmus/contract_instructor.html</a>
+  </div>
+
+  <h2><span class="step-num">1</span>계약서 열기</h2>
+  <p>위 링크를 크롬 브라우저에서 엽니다.</p>
+  <p>1페이지에 빈칸이 <span class="field-example">파란 밑줄</span>로 표시되어 있습니다.</p>
+
+  <h2><span class="step-num">2</span>빈칸 채우기</h2>
+  <p>빈칸을 클릭하면 바로 입력할 수 있습니다.</p>
+
+  <p><b>채워야 할 항목:</b></p>
+  <ul>
+    <li><b>전문</b> — 강사 성명</li>
+    <li><b>계약일</b> — 년 / 월 / 일</li>
+    <li><b>계약기간</b> — 시작일 ~ 종료일</li>
+    <li><b>강의주제</b> — 강의 제목</li>
+    <li><b>클래스 분량</b> — 몇 회</li>
+    <li><b>강사 서명란</b> — 이름, 연락처, 주민번호, 주소, 성함</li>
+  </ul>
+
+  <div class="highlight">
+    회사 정보(플로우머스)는 이미 입력되어 있으니 건드리지 않아도 됩니다.
+  </div>
+
+  <h2><span class="step-num">3</span>PDF로 저장</h2>
+  <p>오른쪽 하단 <b>「PDF 저장」</b> 버튼을 클릭하거나, <b>Cmd + P</b> (맥) / <b>Ctrl + P</b> (윈도우)를 누릅니다.</p>
+  <ul>
+    <li>대상: <b>PDF로 저장</b> 선택</li>
+    <li>여백: <b>없음</b> 또는 <b>최소</b></li>
+    <li>배경 그래픽: <b>체크</b></li>
+  </ul>
+
+  <div class="warn">
+    PDF 저장 전에 입력한 내용을 한번 더 확인하세요. 저장 후에는 수정이 안 됩니다. (다시 링크에서 새로 작성하면 됩니다)
+  </div>
+
+  <h2><span class="step-num">4</span>모두사인으로 전송</h2>
+  <p>저장된 PDF를 모두사인에 업로드합니다.</p>
+  <ul>
+    <li>모두사인 접속 → 새 문서 → PDF 업로드</li>
+    <li>서명 위치 지정: 회사(인) / 강사(인) 위치에 서명 필드 배치</li>
+    <li>수신자 설정: 강사 이메일 입력 → 전송</li>
+  </ul>
+
+  <div class="highlight">
+    모두사인에서 전자서명이 완료되면 양측 모두 서명 완료된 PDF를 받게 됩니다.
+  </div>
+
+  <h2><span class="step-num">5</span>완료 후 보관</h2>
+  <p>서명 완료된 계약서 PDF를 아래 경로에 저장합니다.</p>
+  <ul>
+    <li>공유 드라이브 → <b>00_Management_Admin</b> → 계약서 폴더</li>
+    <li>파일명 예시: <b>부업클래스_강사계약서_홍길동_20260501.pdf</b></li>
+  </ul>
+
+  <div class="footer">
+    Flowmus 내부 문서 | 문의: ceo@flowmus.com
+  </div>
+
+</div>
+
+</body>
+</html>
