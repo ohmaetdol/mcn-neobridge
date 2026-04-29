@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>달려라 홍반장 — 주간 운영 가이드</title>
+<style>
+  @page { size: A4; margin: 16mm 16mm 18mm 16mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Apple SD Gothic Neo', '맑은 고딕', sans-serif;
+    color: #222;
+    background: #fff;
+    font-size: 10pt;
+    line-height: 1.85;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @media screen {
+    body { background: #e8e8e8; padding: 20px 0; }
+    .page { box-shadow: 0 2px 12px rgba(0,0,0,0.1); margin-bottom: 24px; }
+  }
+  @media print {
+    .page { padding: 0; margin: 0; box-shadow: none; min-height: auto; }
+    .no-print { display: none !important; }
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    padding: 48px 52px;
+    position: relative;
+    background: #fff;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  /* 헤더 */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 2.5px solid #222;
+  }
+  .header-left h1 {
+    font-size: 20pt;
+    font-weight: 700;
+    color: #111;
+    letter-spacing: -0.5px;
+  }
+  .header-left .sub {
+    font-size: 10pt;
+    color: #888;
+    margin-top: 4px;
+  }
+  .header-right {
+    text-align: right;
+    font-size: 8.5pt;
+    color: #aaa;
+    line-height: 1.6;
+  }
+
+  /* 인트로 */
+  .intro {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin: 24px 0;
+    word-break: keep-all;
+    color: #444;
+    line-height: 2.0;
+  }
+
+  /* 섹션 제목 */
+  .section-title {
+    font-size: 13pt;
+    font-weight: 700;
+    color: #111;
+    margin-top: 32px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+  }
+
+  /* 요일 카드 */
+  .day-card {
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .day-header {
+    padding: 14px 22px;
+    font-weight: 700;
+    font-size: 11pt;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .day-header .day-label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 10pt;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .mon .day-header { background: #f0f4ff; }
+  .mon .day-label { background: #3366cc; }
+  .wed .day-header { background: #f0faf4; }
+  .wed .day-label { background: #2d9c5a; }
+  .tue .day-header { background: #fff8f0; }
+  .tue .day-label { background: #e67e22; }
+  .thu .day-header { background: #fff8f0; }
+  .thu .day-label { background: #e67e22; }
+  .fri .day-header { background: #f8f0ff; }
+  .fri .day-label { background: #8844bb; }
+
+  .day-body {
+    padding: 16px 22px 18px;
+  }
+  .day-body ul {
+    padding-left: 18px;
+    margin: 0;
+  }
+  .day-body li {
+    margin-bottom: 6px;
+    color: #444;
+    word-break: keep-all;
+  }
+  .day-body li b { color: #222; }
+  .tag {
+    display: inline-block;
+    font-size: 7.5pt;
+    padding: 1px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+    margin-left: 4px;
+    vertical-align: middle;
+  }
+  .tag-plan { background: #e8eeff; color: #3366cc; }
+  .tag-film { background: #fff0e0; color: #c66a00; }
+  .tag-exec { background: #e0f5ea; color: #1a7a3a; }
+
+  /* 주간 타임라인 */
+  .timeline {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 9pt;
+  }
+  .timeline th {
+    background: #f8f8f8;
+    padding: 10px 8px;
+    font-weight: 600;
+    text-align: center;
+    border: 1px solid #e8e8e8;
+    color: #555;
+    width: 20%;
+  }
+  .timeline td {
+    padding: 10px 12px;
+    border: 1px solid #e8e8e8;
+    vertical-align: top;
+    color: #444;
+    line-height: 1.7;
+  }
+  .timeline .highlight-cell {
+    background: #f8faff;
+  }
+
+  /* 주간보고 양식 */
+  .report-box {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 16px 0;
+  }
+  .report-row {
+    display: flex;
+    border-bottom: 1px solid #eee;
+  }
+  .report-row:last-child { border-bottom: none; }
+  .report-label {
+    width: 140px;
+    flex-shrink: 0;
+    background: #f8f8f8;
+    padding: 12px 16px;
+    font-weight: 600;
+    font-size: 9.5pt;
+    color: #444;
+    border-right: 1px solid #eee;
+  }
+  .report-value {
+    flex: 1;
+    padding: 12px 16px;
+    color: #666;
+    font-size: 9pt;
+    min-height: 44px;
+  }
+
+  /* 노트 */
+  .note {
+    background: #fffbf0;
+    border-left: 3px solid #e6a800;
+    padding: 14px 18px;
+    border-radius: 0 8px 8px 0;
+    margin: 16px 0;
+    font-size: 9.5pt;
+    color: #555;
+    word-break: keep-all;
+  }
+
+  .info-box {
+    background: #f0f6ff;
+    border-left: 3px solid #3366cc;
+    padding: 14px 18px;
+    border-radius: 0 8px 8px 0;
+    margin: 16px 0;
+    font-size: 9.5pt;
+    color: #333;
+    word-break: keep-all;
+  }
+
+  /* 페이지 번호 */
+  .pn {
+    position: absolute;
+    bottom: 24px;
+    left: 0; right: 0;
+    text-align: center;
+    font-size: 8pt;
+    color: #ccc;
+  }
+
+  .print-btn {
+    position: fixed; bottom: 20px; right: 20px; z-index: 100;
+    background: #333; color: #fff; border: none;
+    padding: 12px 24px; border-radius: 8px;
+    font-size: 10pt; font-weight: 600; cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    font-family: sans-serif;
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">PDF 저장</button>
+
+<!-- ══════════ PAGE 1 ══════════ -->
+<div class="page">
+
+  <div class="header">
+    <div class="header-left">
+      <h1>달려라 홍반장</h1>
+      <div class="sub">주간 운영 가이드</div>
+    </div>
+    <div class="header-right">
+      Flowmus<br>
+      2026. 05
+    </div>
+  </div>
+
+  <div class="intro">
+    본 문서는 <b>달려라 홍반장</b> 채널의 주간 운영 구조를 정리한 가이드입니다.<br>
+    홍아린 강사님은 <b>매주 월요일 / 수요일</b> 출근하며, 기획과 제작을 중심으로 채널을 함께 성장시켜 나갑니다.
+  </div>
+
+  <div class="section-title">주간 일정 한눈에 보기</div>
+
+  <table class="timeline">
+    <tr>
+      <th>월</th>
+      <th>화</th>
+      <th>수</th>
+      <th>목</th>
+      <th>금</th>
+    </tr>
+    <tr>
+      <td class="highlight-cell">
+        <b>기획의 날</b><br>
+        <span class="tag tag-plan">홍아린 출근</span><br><br>
+        주간 기획회의<br>
+        성과 리뷰<br>
+        콘텐츠 캘린더
+      </td>
+      <td>
+        <b>촬영일</b><br>
+        <span class="tag tag-film">촬영 중심</span><br><br>
+        현장 촬영<br>
+        인터뷰 촬영
+      </td>
+      <td class="highlight-cell">
+        <b>제작의 날</b><br>
+        <span class="tag tag-exec">홍아린 출근</span><br><br>
+        편집 피드백<br>
+        커뮤니티 관리<br>
+        주간보고
+      </td>
+      <td>
+        <b>촬영일</b><br>
+        <span class="tag tag-film">촬영 중심</span><br><br>
+        현장 촬영<br>
+        보충 촬영
+      </td>
+      <td>
+        <b>마무리</b><br>
+        <span class="tag" style="background:#f0e8ff;color:#7733aa;">사무실</span><br><br>
+        편집 확인<br>
+        업로드<br>
+        차주 준비
+      </td>
+    </tr>
+  </table>
+
+  <div class="section-title">요일별 상세 가이드</div>
+
+  <div class="day-card mon">
+    <div class="day-header">
+      <span class="day-label">월</span>
+      기획의 날 — 이번 주를 설계한다
+    </div>
+    <div class="day-body">
+      <ul>
+        <li><b>주간 기획회의</b> — 이번 주 콘텐츠 아이디어 논의, 촬영 계획 확정</li>
+        <li><b>지난주 성과 리뷰</b> — 조회수, 댓글, 구독자 변화 등 데이터 체크</li>
+        <li><b>콘텐츠 캘린더 확정</b> — 이번 주 업로드 일정과 주제 최종 결정</li>
+        <li><b>썸네일/제목 브레인스토밍</b> — 클릭을 부르는 제목과 썸네일 아이디어</li>
+        <li><b>촬영 준비</b> — 화/목 촬영에 필요한 자료, 장소, 섭외 정리</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="day-card wed">
+    <div class="day-header">
+      <span class="day-label">수</span>
+      제작의 날 — 만들고, 다듬고, 보고한다
+    </div>
+    <div class="day-body">
+      <ul>
+        <li><b>편집 방향 피드백</b> — 화요일 촬영분 편집 방향 확인 및 코멘트</li>
+        <li><b>커뮤니티 관리</b> — 댓글 답변, 오픈채팅방 소통, 시청자 반응 체크</li>
+        <li><b>콘텐츠 보완</b> — 추가 촬영 필요 사항 정리, 자막/자료 확인</li>
+        <li><b>주간보고 작성</b> — 이번 주 성과 + 다음 주 계획 정리 후 제출</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="note">
+    핵심 원칙: <b>월요일에 머리를 쓰고, 수요일에 손을 쓴다.</b><br>
+    화/목 촬영일과 자연스럽게 맞물려서, 기획 → 촬영 → 피드백 → 보고의 사이클이 매주 반복됩니다.
+  </div>
+
+  <div class="pn">1 / 2</div>
+</div>
+
+<!-- ══════════ PAGE 2 ══════════ -->
+<div class="page">
+
+  <div class="section-title">주간보고 양식</div>
+  <p style="color:#666; margin-bottom:12px; font-size:9.5pt;">매주 수요일 제출 — 간결하게, 핵심만 적습니다.</p>
+
+  <div class="report-box">
+    <div class="report-row">
+      <div class="report-label">보고 기간</div>
+      <div class="report-value">2026. __월 __주차 ( __. __. ~ __. __. )</div>
+    </div>
+    <div class="report-row">
+      <div class="report-label">채널명</div>
+      <div class="report-value">달려라 홍반장</div>
+    </div>
+    <div class="report-row">
+      <div class="report-label">이번 주 성과</div>
+      <div class="report-value" style="min-height:72px;">
+        구독자: ____명 (+ __명)<br>
+        총 조회수: ____회<br>
+        가장 반응 좋았던 콘텐츠:
+      </div>
+    </div>
+    <div class="report-row">
+      <div class="report-label">업로드 현황</div>
+      <div class="report-value" style="min-height:72px;">
+        업로드 ____건<br>
+        1.<br>
+        2.
+      </div>
+    </div>
+    <div class="report-row">
+      <div class="report-label">촬영 현황</div>
+      <div class="report-value" style="min-height:60px;">
+        촬영 ____건 / 편집 대기 ____건
+      </div>
+    </div>
+    <div class="report-row">
+      <div class="report-label">시청자 반응</div>
+      <div class="report-value" style="min-height:60px;">
+        주요 댓글 반응, 요청 사항 등
+      </div>
+    </div>
+    <div class="report-row">
+      <div class="report-label">다음 주 계획</div>
+      <div class="report-value" style="min-height:72px;">
+        1.<br>
+        2.<br>
+        3.
+      </div>
+    </div>
+    <div class="report-row">
+      <div class="report-label">협의 필요 사항</div>
+      <div class="report-value" style="min-height:48px;">
+        촬영 장소, 섭외, 예산 등 논의 사항
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box">
+    주간보고는 <b>분량보다 꾸준함</b>이 중요합니다. 3줄이라도 매주 수요일에 보내는 습관이 채널 성장의 기반이 됩니다.
+  </div>
+
+  <div class="section-title">협업 채널</div>
+
+  <div class="report-box">
+    <div class="report-row">
+      <div class="report-label">기획회의</div>
+      <div class="report-value">매주 월요일 오전 (대면)</div>
+    </div>
+    <div class="report-row">
+      <div class="report-label">주간보고</div>
+      <div class="report-value">매주 수요일 오후 제출</div>
+    </div>
+    <div class="report-row">
+      <div class="report-label">긴급 연락</div>
+      <div class="report-value">카카오톡 단체방</div>
+    </div>
+    <div class="report-row">
+      <div class="report-label">자료 공유</div>
+      <div class="report-value">Google Drive 공유 폴더</div>
+    </div>
+    <div class="report-row">
+      <div class="report-label">편집 피드백</div>
+      <div class="report-value">편집 시트 또는 수요일 대면</div>
+    </div>
+  </div>
+
+  <div style="margin-top:40px; text-align:center; color:#ccc; font-size:8.5pt;">
+    Flowmus | 달려라 홍반장 운영 가이드 | 2026. 05
+  </div>
+
+  <div class="pn">2 / 2</div>
+</div>
+
+</body>
+</html>
