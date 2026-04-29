@@ -163,11 +163,11 @@
     font-weight: 800;
     color: #fff;
   }
-  .pipe-step:nth-child(1) .pipe-circle { background: #3366cc; }
-  .pipe-step:nth-child(2) .pipe-circle { background: #e67e22; }
-  .pipe-step:nth-child(3) .pipe-circle { background: #8844bb; }
-  .pipe-step:nth-child(4) .pipe-circle { background: #2d9c5a; }
-  .pipe-step:nth-child(5) .pipe-circle { background: #cc3355; }
+  .pipe-step:nth-child(1) .pipe-circle { background: #111; }
+  .pipe-step:nth-child(2) .pipe-circle { background: #333; }
+  .pipe-step:nth-child(3) .pipe-circle { background: #555; }
+  .pipe-step:nth-child(4) .pipe-circle { background: #777; }
+  .pipe-step:nth-child(5) .pipe-circle { background: #0066ff; }
   .pipe-label {
     font-size: 9pt;
     font-weight: 700;
@@ -200,12 +200,12 @@
     position: relative;
   }
   .role-card.company {
-    background: #f0f4ff;
-    border: 1px solid #d4ddff;
+    background: #f5f5f5;
+    border: 1px solid #ddd;
   }
   .role-card.creator {
-    background: #f0faf4;
-    border: 1px solid #c8ecd6;
+    background: #fafafa;
+    border: 1px solid #ddd;
   }
   .role-tag {
     display: inline-block;
@@ -216,8 +216,8 @@
     margin-bottom: 12px;
     letter-spacing: 0.5px;
   }
-  .company .role-tag { background: #3366cc; color: #fff; }
-  .creator .role-tag { background: #2d9c5a; color: #fff; }
+  .company .role-tag { background: #222; color: #fff; }
+  .creator .role-tag { background: #0066ff; color: #fff; }
   .role-card ul {
     padding-left: 16px;
     margin: 0;
@@ -248,11 +248,11 @@
     font-size: 9pt;
     color: #fff;
   }
-  .wday:nth-child(1) .wday-head { background: #3366cc; }
-  .wday:nth-child(2) .wday-head { background: #e67e22; }
-  .wday:nth-child(3) .wday-head { background: #2d9c5a; }
-  .wday:nth-child(4) .wday-head { background: #e67e22; }
-  .wday:nth-child(5) .wday-head { background: #8844bb; }
+  .wday:nth-child(1) .wday-head { background: #0066ff; }
+  .wday:nth-child(2) .wday-head { background: #888; }
+  .wday:nth-child(3) .wday-head { background: #0066ff; }
+  .wday:nth-child(4) .wday-head { background: #888; }
+  .wday:nth-child(5) .wday-head { background: #aaa; }
   .wday-body {
     padding: 12px 10px;
     font-size: 8pt;
@@ -266,13 +266,10 @@
     font-size: 8.5pt;
     margin-bottom: 4px;
   }
-  .wday.active {
-    border-color: #3366cc;
-    box-shadow: 0 2px 8px rgba(51,102,204,0.12);
-  }
+  .wday.active,
   .wday.active-g {
-    border-color: #2d9c5a;
-    box-shadow: 0 2px 8px rgba(45,156,90,0.12);
+    border-color: #0066ff;
+    box-shadow: 0 2px 8px rgba(0,102,255,0.12);
   }
 
   /* ── 타임블록 ── */
@@ -306,27 +303,29 @@
   /* ── 성장 로드맵 ── */
   .roadmap {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     margin: 16px 0;
   }
   .rm-phase {
     flex: 1;
     border-radius: 10px;
-    padding: 20px;
+    padding: 16px;
     position: relative;
   }
-  .rm-phase:nth-child(1) { background: #f8f9fa; border: 1px solid #e0e0e0; }
-  .rm-phase:nth-child(2) { background: #f0f6ff; border: 1px solid #d0dfff; }
-  .rm-phase:nth-child(3) { background: #f0faf4; border: 1px solid #c0e8d0; }
+  .rm-phase:nth-child(1) { background: #f0f5ff; border: 1px solid #d0dfff; }
+  .rm-phase:nth-child(2) { background: #f8f8f8; border: 1px solid #e0e0e0; }
+  .rm-phase:nth-child(3) { background: #fafafa; border: 1px solid #e0e0e0; }
+  .rm-phase:nth-child(4) { background: #f8f8f8; border: 1px solid #ddd; }
   .rm-num {
     font-size: 24pt;
     font-weight: 800;
     line-height: 1;
     margin-bottom: 4px;
   }
-  .rm-phase:nth-child(1) .rm-num { color: #ccc; }
-  .rm-phase:nth-child(2) .rm-num { color: #99b8ee; }
-  .rm-phase:nth-child(3) .rm-num { color: #88cc99; }
+  .rm-phase:nth-child(1) .rm-num { color: #0066ff; }
+  .rm-phase:nth-child(2) .rm-num { color: #bbb; }
+  .rm-phase:nth-child(3) .rm-num { color: #ccc; }
+  .rm-phase:nth-child(4) .rm-num { color: #ccc; }
   .rm-period {
     font-size: 7.5pt;
     font-weight: 600;
@@ -489,8 +488,8 @@
   }
 
   .note-bar {
-    background: #fffbf0;
-    border-left: 3px solid #e6a800;
+    background: #f5f8ff;
+    border-left: 3px solid #0066ff;
     padding: 12px 18px;
     border-radius: 0 8px 8px 0;
     margin: 14px 0;
@@ -681,28 +680,28 @@
 
     <div class="timeblock">
       <div class="tb-time">10:00</div>
-      <div class="tb-content" style="border-left:3px solid #3366cc;">
+      <div class="tb-content" style="border-left:3px solid #0066ff;">
         <b>주간 기획회의</b>
         <p>지난주 데이터 리뷰 + 이번 주 콘텐츠 아이디어 논의 + 촬영 계획 확정</p>
       </div>
     </div>
     <div class="timeblock">
       <div class="tb-time">11:30</div>
-      <div class="tb-content" style="border-left:3px solid #8844bb;">
+      <div class="tb-content" style="border-left:3px solid #555;">
         <b>썸네일 / 제목 워크숍</b>
         <p>업로드 예정 콘텐츠의 제목 후보와 썸네일 컨셉 브레인스토밍</p>
       </div>
     </div>
     <div class="timeblock">
       <div class="tb-time">13:00</div>
-      <div class="tb-content" style="border-left:3px solid #2d9c5a;">
+      <div class="tb-content" style="border-left:3px solid #444;">
         <b>촬영 준비</b>
         <p>화/목 촬영에 필요한 자료 정리, 장소 확인, 섭외 연락</p>
       </div>
     </div>
     <div class="timeblock">
       <div class="tb-time">14:30</div>
-      <div class="tb-content" style="border-left:3px solid #e67e22;">
+      <div class="tb-content" style="border-left:3px solid #777;">
         <b>콘텐츠 캘린더 확정</b>
         <p>이번 주 업로드 일정과 주제 최종 결정, 다음 주 방향 스케치</p>
       </div>
@@ -712,28 +711,28 @@
 
     <div class="timeblock">
       <div class="tb-time">10:00</div>
-      <div class="tb-content" style="border-left:3px solid #2d9c5a;">
+      <div class="tb-content" style="border-left:3px solid #444;">
         <b>편집 피드백</b>
         <p>화요일 촬영분 편집 방향 확인, 수정 요청 사항 코멘트</p>
       </div>
     </div>
     <div class="timeblock">
       <div class="tb-time">11:30</div>
-      <div class="tb-content" style="border-left:3px solid #e67e22;">
+      <div class="tb-content" style="border-left:3px solid #777;">
         <b>커뮤니티 관리</b>
         <p>댓글 답변, 오픈채팅방 소통, 시청자 반응 체크, DM 응대</p>
       </div>
     </div>
     <div class="timeblock">
       <div class="tb-time">13:00</div>
-      <div class="tb-content" style="border-left:3px solid #8844bb;">
+      <div class="tb-content" style="border-left:3px solid #555;">
         <b>콘텐츠 보완</b>
         <p>추가 촬영 필요 사항 정리, 자막 확인, 보충 자료 준비</p>
       </div>
     </div>
     <div class="timeblock">
       <div class="tb-time">14:30</div>
-      <div class="tb-content" style="border-left:3px solid #cc3355;">
+      <div class="tb-content" style="border-left:3px solid #0066ff;">
         <b>주간보고 작성 / 제출</b>
         <p>이번 주 성과 정리 + 다음 주 계획 수립 → 보고 제출</p>
       </div>
@@ -757,41 +756,54 @@
 
     <div class="roadmap">
       <div class="rm-phase">
+        <div class="rm-num">00</div>
+        <div class="rm-period">MONTH 1</div>
+        <div class="rm-title">AI Training</div>
+        <ul>
+          <li>Flowmus 데이터 수집 체계 학습</li>
+          <li>AI 도구 활용법 교육</li>
+          <li>유튜브 애널리틱스 분석법</li>
+          <li>콘텐츠 기획 프로세스 숙지</li>
+          <li>채널 전략 워크숍</li>
+        </ul>
+      </div>
+      <div class="rm-phase">
         <div class="rm-num">01</div>
-        <div class="rm-period">MONTH 1 — 3</div>
+        <div class="rm-period">MONTH 2 — 4</div>
         <div class="rm-title">Foundation</div>
         <ul>
           <li>채널 정체성 확립</li>
           <li>콘텐츠 포맷 테스트</li>
           <li>주 2회 업로드 루틴</li>
           <li>시청자 반응 데이터 수집</li>
-          <li>커뮤니티 기반 구축</li>
         </ul>
       </div>
       <div class="rm-phase">
         <div class="rm-num">02</div>
-        <div class="rm-period">MONTH 4 — 6</div>
+        <div class="rm-period">MONTH 5 — 7</div>
         <div class="rm-title">Growth</div>
         <ul>
           <li>히트 포맷 집중 확대</li>
           <li>채널 네트워크 크로스 마케팅</li>
           <li>쇼츠 / 클립 병행</li>
-          <li>협업 콘텐츠 제작</li>
           <li>첫 클래스 런칭 준비</li>
         </ul>
       </div>
       <div class="rm-phase">
         <div class="rm-num">03</div>
-        <div class="rm-period">MONTH 7 — 12</div>
+        <div class="rm-period">MONTH 8 — 12</div>
         <div class="rm-title">Scale</div>
         <ul>
           <li>클래스 런칭 및 운영</li>
           <li>광고 수익 본격화</li>
           <li>브랜드 협찬 유치</li>
           <li>멀티 플랫폼 확장</li>
-          <li>연간 전략 수립</li>
         </ul>
       </div>
+    </div>
+
+    <div class="note-bar">
+      첫 1개월은 <b>AI Training</b> 기간입니다. Flowmus가 데이터를 수집하고 분석하는 체계를 먼저 익힌 후, 본격적인 채널 운영에 들어갑니다.
     </div>
 
     <div class="sec-title">핵심 성과 지표 (KPI)</div>
