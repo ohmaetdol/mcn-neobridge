@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>부업클래스 강사 미팅 매뉴얼</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Apple SD Gothic Neo', '맑은 고딕', sans-serif;
+    color: #222;
+    background: #fff;
+    font-size: 10pt;
+    line-height: 1.8;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @media screen {
+    body { background: #d4d4d4; padding: 20px 0; }
+    .page { box-shadow: 0 4px 20px rgba(0,0,0,0.12); margin-bottom: 24px; }
+  }
+  @media print {
+    .page { margin: 0; box-shadow: none; min-height: auto; }
+    .no-print { display: none !important; }
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    position: relative;
+    background: #fff;
+    page-break-after: always;
+    overflow: hidden;
+  }
+  .page:last-child { page-break-after: auto; }
+  .pi { padding: 44px 48px; }
+
+  /* 커버 */
+  .cover {
+    background: #111;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .cover-top {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 48px 0;
+  }
+  .cover-badge {
+    display: inline-block;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 6px 20px;
+    font-size: 8.5pt;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 40px;
+  }
+  .cover-title {
+    font-size: 32pt;
+    font-weight: 800;
+    letter-spacing: -1px;
+    text-align: center;
+    line-height: 1.3;
+    margin-bottom: 16px;
+  }
+  .cover-sub {
+    font-size: 12pt;
+    color: rgba(255,255,255,0.5);
+    font-weight: 400;
+    letter-spacing: 3px;
+    text-align: center;
+  }
+  .cover-bottom {
+    padding: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .cover-info {
+    font-size: 9pt;
+    color: rgba(255,255,255,0.35);
+    line-height: 1.8;
+  }
+  .cover-info b { color: rgba(255,255,255,0.7); font-weight: 600; }
+  .cover-logo {
+    font-size: 11pt;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.4);
+  }
+
+  /* 헤더 */
+  .ph {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #111;
+  }
+  .ph h2 {
+    font-size: 16pt;
+    font-weight: 800;
+    color: #111;
+  }
+  .ph-n { font-size: 8.5pt; color: #bbb; font-weight: 600; }
+
+  /* 섹션 */
+  .st {
+    font-size: 11pt;
+    font-weight: 700;
+    color: #111;
+    margin-top: 24px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .st::before {
+    content: '';
+    display: inline-block;
+    width: 3px;
+    height: 16px;
+    background: #0066ff;
+    border-radius: 2px;
+  }
+
+  /* 타임블록 */
+  .tb {
+    display: flex;
+    gap: 12px;
+    margin: 8px 0;
+    align-items: stretch;
+  }
+  .tb-t {
+    width: 56px;
+    flex-shrink: 0;
+    font-size: 8pt;
+    font-weight: 700;
+    color: #999;
+    padding-top: 10px;
+    text-align: right;
+    padding-right: 12px;
+    border-right: 2px solid #eee;
+  }
+  .tb-c {
+    flex: 1;
+    background: #fafafa;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 9pt;
+    border-left: 3px solid #ddd;
+  }
+  .tb-c b { color: #111; }
+  .tb-c p { color: #666; margin-top: 2px; font-size: 8.5pt; }
+  .tb-c.accent { border-left-color: #0066ff; }
+  .tb-c.dark { border-left-color: #333; }
+
+  /* 질문 카드 */
+  .qcard {
+    border: 1px solid #e8e8e8;
+    border-radius: 8px;
+    margin: 8px 0;
+    overflow: hidden;
+  }
+  .qcard-head {
+    background: #fafafa;
+    padding: 10px 16px;
+    font-weight: 700;
+    font-size: 9pt;
+    color: #333;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .qcard-time {
+    font-size: 7.5pt;
+    color: #999;
+    font-weight: 600;
+  }
+  .qcard-body {
+    padding: 14px 16px;
+  }
+  .q-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: 9pt;
+    line-height: 1.7;
+    word-break: keep-all;
+  }
+  .q-item:last-child { margin-bottom: 0; }
+  .q-num {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #111;
+    color: #fff;
+    font-size: 7.5pt;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+  .q-num.blue { background: #0066ff; }
+  .q-text { flex: 1; color: #333; }
+  .q-text em { font-style: normal; color: #0066ff; font-weight: 600; }
+  .q-sub {
+    font-size: 8pt;
+    color: #999;
+    margin-top: 2px;
+    display: block;
+  }
+
+  /* 스코어카드 */
+  .sc-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 8.5pt;
+    margin: 12px 0;
+  }
+  .sc-table th {
+    background: #111;
+    color: #fff;
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+  }
+  .sc-table th:last-child {
+    width: 60px;
+    text-align: center;
+  }
+  .sc-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #f0f0f0;
+    vertical-align: top;
+    word-break: keep-all;
+  }
+  .sc-table td:last-child {
+    text-align: center;
+    font-weight: 700;
+    color: #0066ff;
+    font-size: 10pt;
+  }
+  .sc-table tr:nth-child(even) td { background: #fafafa; }
+  .sc-guide {
+    font-size: 7.5pt;
+    color: #999;
+    line-height: 1.5;
+    display: block;
+    margin-top: 3px;
+  }
+
+  /* 판정 */
+  .verdict {
+    display: flex;
+    gap: 10px;
+    margin: 12px 0;
+  }
+  .vd {
+    flex: 1;
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+  }
+  .vd-score {
+    font-size: 16pt;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .vd-label {
+    font-size: 8pt;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .vd-desc {
+    font-size: 7.5pt;
+    color: #888;
+    line-height: 1.4;
+  }
+  .vd.green { background: #f0faf4; border: 1px solid #c8ecd6; }
+  .vd.green .vd-score { color: #2d9c5a; }
+  .vd.green .vd-label { color: #2d9c5a; }
+  .vd.yellow { background: #fffbf0; border: 1px solid #f0e0b0; }
+  .vd.yellow .vd-score { color: #c68a00; }
+  .vd.yellow .vd-label { color: #c68a00; }
+  .vd.red { background: #fff5f5; border: 1px solid #f0d0d0; }
+  .vd.red .vd-score { color: #cc3333; }
+  .vd.red .vd-label { color: #cc3333; }
+
+  /* 체크리스트 */
+  .chk {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    margin-bottom: 6px;
+    font-size: 9pt;
+  }
+  .chk-box {
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid #ccc;
+    border-radius: 3px;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+  .chk span { color: #444; word-break: keep-all; }
+
+  /* 노트 */
+  .note {
+    background: #f5f8ff;
+    border-left: 3px solid #0066ff;
+    padding: 12px 18px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 8.5pt;
+    color: #555;
+    word-break: keep-all;
+  }
+  .note b { color: #222; }
+
+  .warn {
+    background: #fff8f0;
+    border-left: 3px solid #e6a800;
+    padding: 12px 18px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 8.5pt;
+    color: #555;
+    word-break: keep-all;
+  }
+
+  /* 풋터 */
+  .pf {
+    position: absolute;
+    bottom: 28px;
+    left: 48px;
+    right: 48px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 7.5pt;
+    color: #ccc;
+  }
+
+  .print-btn {
+    position: fixed; bottom: 20px; right: 20px; z-index: 100;
+    background: #111; color: #fff; border: none;
+    padding: 12px 28px; border-radius: 8px;
+    font-size: 10pt; font-weight: 600; cursor: pointer;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    font-family: sans-serif;
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">PDF 저장</button>
+
+<!-- ══════════ COVER ══════════ -->
+<div class="page cover">
+  <div class="cover-top">
+    <div class="cover-badge">Internal Manual</div>
+    <div class="cover-title">강사 미팅<br>매뉴얼</div>
+    <div class="cover-sub">INSTRUCTOR SCREENING GUIDE</div>
+  </div>
+  <div class="cover-bottom">
+    <div class="cover-info">
+      <b>부업클래스</b><br>
+      <b>Version</b> 1.0<br>
+      <b>Classification</b> 내부용
+    </div>
+    <div class="cover-logo">FLOWMUS</div>
+  </div>
+</div>
+
+<!-- ══════════ PAGE 1 — 미팅 구조 ══════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="ph">
+      <h2>Meeting Structure</h2>
+      <span class="ph-n">01</span>
+    </div>
+
+    <div class="note">
+      모든 강사 미팅은 <b>동일한 질문, 동일한 순서, 동일한 시간</b>으로 진행합니다.<br>
+      30분 안에 끝내는 것이 원칙이며, 추가 논의가 필요하면 2차 미팅을 잡습니다. 최대 1시간을 넘기지 않습니다.
+    </div>
+
+    <div class="st">30분 타임라인</div>
+
+    <div class="tb">
+      <div class="tb-t">0:00</div>
+      <div class="tb-c accent">
+        <b>오프닝</b> (2분)
+        <p>인사 + 미팅 목적 안내: "30분간 상호 평가를 위한 미팅입니다. 강의 주제의 상품성과 협업 가능성을 함께 확인하겠습니다."</p>
+      </div>
+    </div>
+    <div class="tb">
+      <div class="tb-t">2:00</div>
+      <div class="tb-c dark">
+        <b>BLOCK A. 전문성 검증</b> (7분)
+        <p>강사의 실전 경험, 차별점, 기존 활동 이력 확인</p>
+      </div>
+    </div>
+    <div class="tb">
+      <div class="tb-t">9:00</div>
+      <div class="tb-c dark">
+        <b>BLOCK B. 오디언스 검증</b> (5분)
+        <p>기존 팔로워, 판매 이력, 모객 가능성 확인</p>
+      </div>
+    </div>
+    <div class="tb">
+      <div class="tb-t">14:00</div>
+      <div class="tb-c accent">
+        <b>BLOCK C. 상품성 분석</b> (8분)
+        <p>강의 주제의 시장 수요, 경쟁 현황, 변화 약속(Before/After) 확인. 가장 중요한 블록</p>
+      </div>
+    </div>
+    <div class="tb">
+      <div class="tb-t">22:00</div>
+      <div class="tb-c dark">
+        <b>BLOCK D. 제작 & 의지</b> (5분)
+        <p>제작 가능 일정, 기존 콘텐츠 유무, 기대사항 확인</p>
+      </div>
+    </div>
+    <div class="tb">
+      <div class="tb-t">27:00</div>
+      <div class="tb-c accent">
+        <b>클로징</b> (3분)
+        <p>스코어카드 기반 판정 → 3가지 중 하나: 계약 제안 / 보완 후 재미팅 / 정중한 거절</p>
+      </div>
+    </div>
+
+    <div class="warn">
+      <b>30분 초과 시:</b> "오늘 말씀 감사합니다. 추가로 논의할 내용이 있어서 2차 미팅을 잡겠습니다."로 자연스럽게 마무리합니다. 절대 1시간을 넘기지 않습니다.
+    </div>
+
+    <div class="st">미팅 전 준비물</div>
+
+    <div class="chk"><div class="chk-box"></div><span>강사 소셜미디어 사전 조사 (팔로워 수, 콘텐츠 주제, 참여도)</span></div>
+    <div class="chk"><div class="chk-box"></div><span>해당 주제 경쟁 강의 3개 사전 조사 (클래스101, 인프런, 탈잉 등)</span></div>
+    <div class="chk"><div class="chk-box"></div><span>해당 주제 검색량 확인 (네이버 키워드, 구글 트렌드)</span></div>
+    <div class="chk"><div class="chk-box"></div><span>스코어카드 출력 (이 매뉴얼 4페이지)</span></div>
+    <div class="chk"><div class="chk-box"></div><span>강사 제휴 계약서 링크 준비</span></div>
+
+  </div>
+  <div class="pf">
+    <span>Flowmus Internal</span>
+    <span>강사 미팅 매뉴얼</span>
+  </div>
+</div>
+
+<!-- ══════════ PAGE 2 — 표준 질문 A/B ══════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="ph">
+      <h2>Standard Questions</h2>
+      <span class="ph-n">02</span>
+    </div>
+
+    <div class="qcard">
+      <div class="qcard-head">
+        BLOCK A. 전문성 검증
+        <span class="qcard-time">7분</span>
+      </div>
+      <div class="qcard-body">
+        <div class="q-item">
+          <div class="q-num">1</div>
+          <div class="q-text">이 분야에서 <em>가장 자랑스러운 성과</em> 하나만 말씀해 주세요.
+            <span class="q-sub">평가: 구체적 숫자/사례가 나오는지 (매출, 고객 수, 수강생 후기 등)</span>
+          </div>
+        </div>
+        <div class="q-item">
+          <div class="q-num">2</div>
+          <div class="q-text">이 일을 <em>몇 년</em> 하셨고, 가장 어려웠던 프로젝트는 무엇이었나요?
+            <span class="q-sub">평가: 실전 경험의 깊이. 3년 미만이면 추가 검증 필요</span>
+          </div>
+        </div>
+        <div class="q-item">
+          <div class="q-num">3</div>
+          <div class="q-text">이 분야에서 사람들이 가장 많이 하는 <em>실수</em>는 뭔가요? 본인만 아는 노하우가 있다면?
+            <span class="q-sub">평가: 차별화 포인트 = 강의 소구점. 뻔한 답이면 위험 신호</span>
+          </div>
+        </div>
+        <div class="q-item">
+          <div class="q-num">4</div>
+          <div class="q-text"><em>소득증명</em>이 가능한 자료가 있으신가요? (매출 내역, 포트폴리오, 고객 후기 등)
+            <span class="q-sub">평가: 증빙 가능한 실적이 있어야 강의 신뢰도 확보. 없으면 보완 필요</span>
+          </div>
+        </div>
+        <div class="q-item">
+          <div class="q-num">5</div>
+          <div class="q-text">이전에 <em>강의/교육</em> 경험이 있으신가요? (유튜브, 블로그, 워크숍, 코칭 등 모든 형태)
+            <span class="q-sub">평가: 교육 경험 유무. 없어도 OK이지만 제작 리스크 상승</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="qcard">
+      <div class="qcard-head">
+        BLOCK B. 오디언스 검증
+        <span class="qcard-time">5분</span>
+      </div>
+      <div class="qcard-body">
+        <div class="q-item">
+          <div class="q-num blue">6</div>
+          <div class="q-text">이 강의를 들을 사람은 <em>정확히 누구</em>인가요? (나이, 직업, 현재 겪는 문제)
+            <span class="q-sub">평가: 타겟이 명확할수록 마케팅 효율 높음. "누구나"는 위험 신호</span>
+          </div>
+        </div>
+        <div class="q-item">
+          <div class="q-num blue">7</div>
+          <div class="q-text">현재 이 주제로 <em>팔로잉하는 사람</em>이 있나요? (소셜, 이메일, 커뮤니티, 기존 고객)
+            <span class="q-sub">평가: 최소 500명 이상의 팔로워 = 런칭 부스터. 0명이면 마케팅 전액 회사 부담</span>
+          </div>
+        </div>
+        <div class="q-item">
+          <div class="q-num blue">8</div>
+          <div class="q-text">이 주제로 <em>돈을 받고 판매</em>해본 경험이 있나요? (제품, 서비스, 코칭, 전자책 등)
+            <span class="q-sub">평가: 유료 판매 경험 = 시장 검증 완료. 무료만 해봤다면 전환율 미검증</span>
+          </div>
+        </div>
+        <div class="q-item">
+          <div class="q-num blue">9</div>
+          <div class="q-text">지금 바로 강의 오픈한다면 <em>48시간 안에 몇 명</em>에게 알릴 수 있나요?
+            <span class="q-sub">평가: 즉시 도달 가능한 모수. 50명 이상이면 양호, 200명 이상이면 우수</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <b>핵심:</b> BLOCK A는 "이 사람이 진짜인가?", BLOCK B는 "이 사람이 모을 수 있는가?"를 검증합니다. 둘 다 약하면 계약을 보류합니다.
+    </div>
+
+  </div>
+  <div class="pf">
+    <span>Flowmus Internal</span>
+    <span>강사 미팅 매뉴얼</span>
+  </div>
+</div>
+
+<!-- ══════════ PAGE 3 — 표준 질문 C/D ══════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="ph">
+      <h2>Standard Questions</h2>
+      <span class="ph-n">03</span>
+    </div>
+
+    <div class="qcard">
+      <div class="qcard-head">
+        BLOCK C. 상품성 분석 (가장 중요)
+        <span class="qcard-time">8분</span>
+      </div>
+      <div class="qcard-body">
+        <div class="q-item">
+          <div class="q-num blue">10</div>
+          <div class="q-text">수강생이 이 강의를 검색한다면 <em>어떤 키워드</em>로 검색할까요?
+            <span class="q-sub">평가: 사전 조사한 검색량과 대조. 월 1,000회 미만이면 니치, 10,000회 이상이면 수요 확인</span>
+          </div>
+        </div>
+        <div class="q-item">
+          <div class="q-num blue">11</div>
+          <div class="q-text">이 주제로 <em>가장 잘 팔리는 강의</em>를 아시나요? 그 강의와 본인의 <em>차이점</em>은?
+            <span class="q-sub">평가: 경쟁사 인지 여부 + 차별화 포인트. 경쟁 강의가 0개면 수요 미검증 위험</span>
+          </div>
+        </div>
+        <div class="q-item">
+          <div class="q-num blue">12</div>
+          <div class="q-text">수강 전과 후를 한 문장으로 말씀해 주세요.<br>"수강 전에는 <em>___</em> 하지만, 수강 후에는 <em>___</em>일 안에 <em>___</em> 할 수 있다"
+            <span class="q-sub">평가: 변화가 구체적이고 측정 가능할수록 상품성 높음. "배운다"는 약함, "월 100만원 번다"는 강함</span>
+          </div>
+        </div>
+        <div class="q-item">
+          <div class="q-num blue">13</div>
+          <div class="q-text">이 변화를 <em>실제로 경험한 사람</em>(수강생, 고객, 제자)이 있나요? 증거가 있나요?
+            <span class="q-sub">평가: 후기/사례 3건 이상 = 상품 검증 완료. 본인 경험만 있으면 재현성 미검증</span>
+          </div>
+        </div>
+        <div class="q-item">
+          <div class="q-num blue">14</div>
+          <div class="q-text">수강생 입장에서 이 강의가 <em>본전을 뽑을 수 있는</em> 구조인가요? (수익, 이직, 비용 절감 등)
+            <span class="q-sub">평가: ROI가 명확한 강의는 가격 저항이 낮음. 취미형은 가격 천장이 낮음</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="qcard">
+      <div class="qcard-head">
+        BLOCK D. 제작 의지 & 실행력
+        <span class="qcard-time">5분</span>
+      </div>
+      <div class="qcard-body">
+        <div class="q-item">
+          <div class="q-num">15</div>
+          <div class="q-text">강의 형태는 어떻게 생각하시나요? (대면, 온라인, 녹화, 라이브, 하이브리드)
+            <span class="q-sub">평가: 우리 프로덕션 구조와 맞는지 확인</span>
+          </div>
+        </div>
+        <div class="q-item">
+          <div class="q-num">16</div>
+          <div class="q-text">현재 일정 기준, 강의 제작을 <em>언제까지</em> 완료할 수 있나요?
+            <span class="q-sub">평가: 비현실적 답변(1주일) 또는 너무 긴 답변(6개월+)은 위험 신호</span>
+          </div>
+        </div>
+        <div class="q-item">
+          <div class="q-num">17</div>
+          <div class="q-text">기존에 촬영한 <em>영상 콘텐츠</em>가 있나요? (유튜브, 릴스, 웨비나 등)
+            <span class="q-sub">평가: 기존 영상이 있으면 카메라 적응 완료 = 제작 리스크 낮음</span>
+          </div>
+        </div>
+        <div class="q-item">
+          <div class="q-num">18</div>
+          <div class="q-text">정산 구조, 마케팅 지원 등에 대한 <em>기대사항</em>이 있으시면 말씀해 주세요.
+            <span class="q-sub">평가: 기대치 정렬. 비현실적 기대(90:10 등)는 초기에 조율 필요</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="warn">
+      <b>절대 하지 않는 것:</b> 강사마다 다른 질문을 즉흥으로 하지 않습니다. 18개 질문은 모든 강사에게 동일하게 적용합니다. 추가 질문은 2차 미팅에서 합니다.
+    </div>
+
+  </div>
+  <div class="pf">
+    <span>Flowmus Internal</span>
+    <span>강사 미팅 매뉴얼</span>
+  </div>
+</div>
+
+<!-- ══════════ PAGE 4 — 스코어카드 ══════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="ph">
+      <h2>Scorecard</h2>
+      <span class="ph-n">04</span>
+    </div>
+
+    <div class="note">
+      미팅 직후 작성합니다. 각 항목 1~5점. <b>합산 점수로 Go/No-Go를 판정</b>합니다. 감이 아닌 데이터로 결정합니다.
+    </div>
+
+    <table class="sc-table">
+      <tr>
+        <th>평가 항목</th>
+        <th>점수</th>
+      </tr>
+      <tr>
+        <td>
+          <b>1. 검색 수요</b>
+          <span class="sc-guide">1점: 검색량 없음 / 3점: 월 1,000~10,000 / 5점: 월 10,000+ (네이버/구글)</span>
+        </td>
+        <td>/5</td>
+      </tr>
+      <tr>
+        <td>
+          <b>2. 경쟁 환경</b>
+          <span class="sc-guide">1점: 경쟁 강의 0개(수요 미검증) / 3점: 3~5개 존재 / 5점: 다수 존재 + 빈틈 확인</span>
+        </td>
+        <td>/5</td>
+      </tr>
+      <tr>
+        <td>
+          <b>3. 변화의 구체성</b>
+          <span class="sc-guide">1점: "배운다" 수준 / 3점: 구체적 스킬 / 5점: 측정 가능한 성과 + 기한 ("30일 내 월 100만원")</span>
+        </td>
+        <td>/5</td>
+      </tr>
+      <tr>
+        <td>
+          <b>4. 강사 권위</b>
+          <span class="sc-guide">1점: 경력 없음 / 2점: 500명 미만 / 3점: 500~5,000명 OR 자격증 / 4점: 5,000~20,000명 / 5점: 20,000명+ OR 유료 교육 이력</span>
+        </td>
+        <td>/5</td>
+      </tr>
+      <tr>
+        <td>
+          <b>5. 자체 오디언스</b>
+          <span class="sc-guide">1점: 0명 / 2점: 100~500명 / 3점: 500~2,000명 / 4점: 2,000~10,000명 / 5점: 10,000명+</span>
+        </td>
+        <td>/5</td>
+      </tr>
+      <tr>
+        <td>
+          <b>6. 가격 결정력</b>
+          <span class="sc-guide">1점: 무료로만 가능 / 3점: 3~10만원대 / 5점: 15만원+ 가능 (ROI 명확)</span>
+        </td>
+        <td>/5</td>
+      </tr>
+      <tr>
+        <td>
+          <b>7. 차별화</b>
+          <span class="sc-guide">1점: 기존과 동일 / 3점: 부분 차별화 (포맷, 난이도) / 5점: 시장 공백 확인</span>
+        </td>
+        <td>/5</td>
+      </tr>
+      <tr>
+        <td>
+          <b>8. 성과 재현성</b>
+          <span class="sc-guide">1점: 본인 경험만 / 3점: 5~20명 비공식 교육 / 5점: 20명+ 문서화된 성과</span>
+        </td>
+        <td>/5</td>
+      </tr>
+      <tr>
+        <td>
+          <b>9. 제작 준비도</b>
+          <span class="sc-guide">1점: 콘텐츠 0 / 3점: 유튜브/블로그 있음 / 5점: 커리큘럼 + 샘플 영상 준비 완료</span>
+        </td>
+        <td>/5</td>
+      </tr>
+      <tr>
+        <td>
+          <b>10. 실행 의지</b>
+          <span class="sc-guide">1점: 모호함 / 3점: 60~90일 타임라인 + 자체 홍보 의향 / 5점: 즉시 착수 가능 + 런칭 계획 구체적</span>
+        </td>
+        <td>/5</td>
+      </tr>
+    </table>
+
+    <div style="text-align:right; font-size:11pt; font-weight:800; color:#111; padding:8px 12px; border-top:2px solid #111; margin-top:4px;">
+      합계: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; / 50
+    </div>
+
+    <div class="st">판정 기준</div>
+
+    <div class="verdict">
+      <div class="vd green">
+        <div class="vd-score">40-50</div>
+        <div class="vd-label">즉시 계약</div>
+        <div class="vd-desc">계약서 발송<br>프로덕션 착수</div>
+      </div>
+      <div class="vd green">
+        <div class="vd-score">30-39</div>
+        <div class="vd-label">조건부 계약</div>
+        <div class="vd-desc">약점 2가지 보완 요청<br>7일 내 제출 후 계약</div>
+      </div>
+      <div class="vd yellow">
+        <div class="vd-score">20-29</div>
+        <div class="vd-label">보류</div>
+        <div class="vd-desc">구체적 보완사항 안내<br>2차 미팅 후 재평가</div>
+      </div>
+      <div class="vd red">
+        <div class="vd-score">~19</div>
+        <div class="vd-label">거절</div>
+        <div class="vd-desc">정중한 거절<br>"준비되시면 다시 연락 주세요"</div>
+      </div>
+    </div>
+
+    <div class="st">미팅 후 필수 수집 서류</div>
+
+    <div class="chk"><div class="chk-box"></div><span><b>소득증명 자료</b> — 매출 내역, 수익 스크린샷, 사업자 매출 증빙 등 (강의 신뢰도의 핵심)</span></div>
+    <div class="chk"><div class="chk-box"></div><span><b>포트폴리오</b> — 소셜미디어 프로필, 기존 콘텐츠, 고객 사례 링크</span></div>
+    <div class="chk"><div class="chk-box"></div><span><b>수강생/고객 후기</b> — 최소 3건 (DM 캡처, 리뷰, 후기 등)</span></div>
+    <div class="chk"><div class="chk-box"></div><span><b>커리큘럼 초안</b> — 최소 4개 모듈, 각 모듈별 학습 목표</span></div>
+    <div class="chk"><div class="chk-box"></div><span><b>샘플 영상</b> — 2~3분 분량, 기존 촬영분 가능 (카메라 적응도 평가용)</span></div>
+
+    <div class="note">
+      서류는 미팅 당일 또는 <b>7일 이내</b> 제출을 요청합니다. 7일 내 미제출 시 우선순위를 하향 조정합니다.
+    </div>
+
+  </div>
+  <div class="pf">
+    <span>Flowmus Internal</span>
+    <span>강사 미팅 매뉴얼</span>
+  </div>
+</div>
+
+<!-- ══════════ PAGE 5 — 미팅 후 프로세스 ══════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="ph">
+      <h2>Post-Meeting Process</h2>
+      <span class="ph-n">05</span>
+    </div>
+
+    <div class="st">미팅 후 48시간 내 처리</div>
+
+    <table class="sc-table">
+      <tr>
+        <th style="width:120px;">판정</th>
+        <th>액션</th>
+      </tr>
+      <tr>
+        <td><b style="color:#2d9c5a;">즉시 계약</b><br>(40~50점)</td>
+        <td>
+          1. 당일: 감사 메시지 + 계약서 링크 전송<br>
+          2. 3일 내: 모두사인 전자서명 진행<br>
+          3. 서명 완료 후: 단톡방 개설 + 플레이북 공유 + 주간 일정 확정
+        </td>
+      </tr>
+      <tr>
+        <td><b style="color:#2d9c5a;">조건부 계약</b><br>(30~39점)</td>
+        <td>
+          1. 당일: 감사 메시지 + 보완 요청사항 2가지 구체적으로 안내<br>
+          2. 7일 내: 보완 자료 수령<br>
+          3. 수령 후: 스코어카드 재채점 → 30점 이상이면 계약 진행
+        </td>
+      </tr>
+      <tr>
+        <td><b style="color:#c68a00;">보류</b><br>(20~29점)</td>
+        <td>
+          1. 당일: 감사 메시지 + "추가 준비 후 다시 뵙겠습니다"<br>
+          2. 구체적 보완사항 리스트 전달<br>
+          3. 1개월 후 팔로업 연락
+        </td>
+      </tr>
+      <tr>
+        <td><b style="color:#cc3333;">거절</b><br>(~19점)</td>
+        <td>
+          1. 당일: 정중한 감사 메시지<br>
+          2. "현재 시점에서는 어렵지만, 준비되시면 언제든 연락 주세요"<br>
+          3. 연락처 보관 (향후 재접촉 가능)
+        </td>
+      </tr>
+    </table>
+
+    <div class="st">강사 데이터 기록</div>
+
+    <div class="note">
+      모든 미팅 결과는 <b>동일한 양식</b>으로 기록합니다. 감에 의한 판단이 아닌, 축적된 데이터로 강사 선발 기준을 지속적으로 개선합니다.
+    </div>
+
+    <table class="sc-table">
+      <tr>
+        <th style="width:140px;">기록 항목</th>
+        <th>내용</th>
+      </tr>
+      <tr><td><b>미팅 일시</b></td><td></td></tr>
+      <tr><td><b>강사명</b></td><td></td></tr>
+      <tr><td><b>강의 주제</b></td><td></td></tr>
+      <tr><td><b>소셜 채널</b></td><td>팔로워 수: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/ 플랫폼:</td></tr>
+      <tr><td><b>스코어카드 합계</b></td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/ 50</td></tr>
+      <tr><td><b>판정</b></td><td>즉시 계약 / 조건부 / 보류 / 거절</td></tr>
+      <tr><td><b>핵심 소구점</b></td><td></td></tr>
+      <tr><td><b>약점 / 보완사항</b></td><td></td></tr>
+      <tr><td><b>특이사항</b></td><td></td></tr>
+    </table>
+
+    <div class="st">금지사항</div>
+
+    <div style="margin:8px 0;">
+      <div class="chk"><div class="chk-box" style="border-color:#cc3333;"></div><span>미팅 중 즉석에서 계약 조건 협상하지 않는다</span></div>
+      <div class="chk"><div class="chk-box" style="border-color:#cc3333;"></div><span>강사마다 다른 질문을 하지 않는다</span></div>
+      <div class="chk"><div class="chk-box" style="border-color:#cc3333;"></div><span>소득증명 없이 계약하지 않는다</span></div>
+      <div class="chk"><div class="chk-box" style="border-color:#cc3333;"></div><span>1시간을 초과하지 않는다</span></div>
+      <div class="chk"><div class="chk-box" style="border-color:#cc3333;"></div><span>스코어카드 없이 감으로 판정하지 않는다</span></div>
+    </div>
+
+    <div style="margin-top:28px; text-align:center; padding:24px; background:#f8f8f8; border-radius:10px;">
+      <div style="font-size:12pt; font-weight:700; color:#222; line-height:1.6; word-break:keep-all;">
+        "좋은 강사를 뽑는 것이 아니라,<br>팔리는 강의를 가진 강사를 뽑는다."
+      </div>
+      <div style="font-size:8.5pt; color:#aaa; margin-top:8px;">Flowmus Instructor Screening Principle</div>
+    </div>
+
+  </div>
+  <div class="pf">
+    <span>Flowmus Internal</span>
+    <span>강사 미팅 매뉴얼</span>
+  </div>
+</div>
+
+</body>
+</html>
