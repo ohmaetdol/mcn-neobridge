@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>CC Mode — 윤현재</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif;
+    color: #191f28;
+    background: #191f28;
+    font-size: 15px;
+    line-height: 1.6;
+    letter-spacing: -0.3px;
+    -webkit-text-size-adjust: 100%;
+    padding: 0 0 100px;
+  }
+
+  /* ── header ── */
+  .hdr {
+    background: #191f28;
+    color: #fff;
+    padding: 20px 20px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid #2d333b;
+  }
+  .hdr-top { display: flex; justify-content: space-between; align-items: center; }
+  .hdr-badge { font-size: 11px; font-weight: 700; color: #3182f6; letter-spacing: 1px; }
+  .hdr-time { font-size: 11px; color: #4e5968; }
+  .hdr-name { font-size: 22px; font-weight: 800; margin-top: 4px; letter-spacing: -1px; }
+  .hdr-sub { font-size: 12px; color: #6b7684; margin-top: 2px; }
+
+  /* ── sections ── */
+  .section {
+    background: #fff;
+    margin: 8px;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .s-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: #3182f6;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+
+  /* ── flow ── */
+  .flow-item {
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f2f4f6;
+    align-items: flex-start;
+  }
+  .flow-item:last-child { border-bottom: none; }
+  .flow-time {
+    font-size: 12px;
+    font-weight: 700;
+    color: #8b95a1;
+    min-width: 36px;
+    padding-top: 2px;
+  }
+  .flow-time.now { color: #3182f6; }
+  .flow-body { flex: 1; }
+  .flow-body b { font-size: 14px; color: #191f28; display: block; margin-bottom: 2px; }
+  .flow-body p { font-size: 12px; color: #6b7684; }
+  .flow-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    background: #3182f6;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  /* ── questions ── */
+  .q {
+    padding: 14px 0;
+    border-bottom: 1px solid #f2f4f6;
+  }
+  .q:last-child { border-bottom: none; }
+  .q-main {
+    font-size: 15px;
+    font-weight: 700;
+    color: #191f28;
+    line-height: 1.5;
+    word-break: keep-all;
+  }
+  .q-main em { font-style: normal; color: #3182f6; }
+  .q-sub {
+    font-size: 12px;
+    color: #8b95a1;
+    margin-top: 4px;
+    line-height: 1.5;
+  }
+  .q-num-badge {
+    display: inline-flex;
+    width: 22px;
+    height: 22px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    background: #191f28;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 800;
+    margin-right: 8px;
+    vertical-align: middle;
+  }
+  .q-num-badge.blue { background: #3182f6; }
+
+  /* ── killer lines ── */
+  .kl {
+    background: #f2f7ff;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin: 8px 0;
+    font-size: 14px;
+    color: #191f28;
+    word-break: keep-all;
+    line-height: 1.6;
+  }
+  .kl b { color: #3182f6; }
+
+  /* ── warning ── */
+  .caution {
+    background: #fff8eb;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin: 8px 0;
+    font-size: 13px;
+    color: #6b5900;
+    word-break: keep-all;
+    line-height: 1.6;
+  }
+
+  /* ── numbers ── */
+  .num-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .num-card {
+    background: #f9fafb;
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+  }
+  .num-card .val {
+    font-size: 18px;
+    font-weight: 800;
+    color: #3182f6;
+    letter-spacing: -1px;
+  }
+  .num-card .lbl {
+    font-size: 11px;
+    color: #8b95a1;
+    margin-top: 2px;
+  }
+
+  /* ── bottom bar ── */
+  .bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #191f28;
+    padding: 16px 20px;
+    z-index: 100;
+    border-top: 1px solid #2d333b;
+  }
+  .bottom-text {
+    font-size: 13px;
+    color: #6b7684;
+    text-align: center;
+  }
+  .bottom-text b { color: #3182f6; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-top">
+    <div class="hdr-badge">COFFEE CHAT MODE</div>
+    <div class="hdr-time">2026.04.30</div>
+  </div>
+  <div class="hdr-name">윤현재 대표</div>
+  <div class="hdr-sub">야놀자 전 대표 &middot; 퍼스널 브랜딩</div>
+</div>
+
+<!-- FLOW -->
+<div class="section">
+  <div class="s-title">FLOW &middot; 45분</div>
+
+  <div class="flow-item">
+    <div class="flow-time now">0'</div>
+    <div class="flow-body">
+      <b>아이스브레이킹</b>
+      <p>편하게 시작. 야놀자 이후 뭐 하시는지 자연스럽게.</p>
+    </div>
+  </div>
+  <div class="flow-item">
+    <div class="flow-time">5'</div>
+    <div class="flow-body">
+      <b>상황 파악</b>
+      <p>퇴사 시기, 현재 활동, 왜 퍼스널 브랜딩?</p>
+    </div>
+  </div>
+  <div class="flow-item">
+    <div class="flow-time">15'</div>
+    <div class="flow-body">
+      <b>콘텐츠 방향 <span class="flow-tag">핵심</span></b>
+      <p>카메라 OK? 어떤 분야? 누구한테 보일 건지?</p>
+    </div>
+  </div>
+  <div class="flow-item">
+    <div class="flow-time">25'</div>
+    <div class="flow-body">
+      <b>우리가 하는 방식 설명</b>
+      <p>벤치마크 보여주기 + 파이프라인 + 시간 투입</p>
+    </div>
+  </div>
+  <div class="flow-item">
+    <div class="flow-time">35'</div>
+    <div class="flow-body">
+      <b>넥스트 스텝</b>
+      <p>계약 아님. "기획서 보내드리겠습니다"로 마무리.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 핵심 질문 -->
+<div class="section">
+  <div class="s-title">MUST-ASK &middot; 이것만 꼭</div>
+
+  <div class="q">
+    <div class="q-main"><span class="q-num-badge blue">1</span><em>카메라 앞</em>에서 편하게 말할 수 있으세요?</div>
+    <div class="q-sub">YES = 토크형 / NO = 인터뷰형. 촬영 방식이 달라짐</div>
+  </div>
+  <div class="q">
+    <div class="q-main"><span class="q-num-badge blue">2</span>야놀자에서 <em>가장 치열했던 순간</em>이 언제였나요?</div>
+    <div class="q-sub">감정이 실린 이야기 = 론칭 영상 소재</div>
+  </div>
+  <div class="q">
+    <div class="q-main"><span class="q-num-badge blue">3</span><em>사람들이 모르는데</em> 대표님만 아는 게 있나요?</div>
+    <div class="q-sub">업계 내부자 인사이트 = 차별화 콘텐츠의 원천</div>
+  </div>
+  <div class="q">
+    <div class="q-main"><span class="q-num-badge">4</span>퍼스널 브랜딩의 <em>최종 목적</em>이 뭔가요?</div>
+    <div class="q-sub">강연 / 투자 / 새 사업 / 영향력 / 출판</div>
+  </div>
+  <div class="q">
+    <div class="q-main"><span class="q-num-badge">5</span>지금 <em>소셜 계정</em> 있으세요? 팔로워는?</div>
+    <div class="q-sub">기존 팔로워 = 론칭 부스터</div>
+  </div>
+  <div class="q">
+    <div class="q-main"><span class="q-num-badge">6</span><em>하면 안 되는 이야기</em>가 있나요?</div>
+    <div class="q-sub">NDA, 전직장 관계 — 경계선 미리 확인</div>
+  </div>
+</div>
+
+<!-- 설득 무기 -->
+<div class="section">
+  <div class="s-title">PITCH &middot; 말할 때 쓸 숫자</div>
+
+  <div class="num-grid">
+    <div class="num-card">
+      <div class="val">183만</div>
+      <div class="lbl">신사임당 구독자</div>
+    </div>
+    <div class="num-card">
+      <div class="val">월 3억</div>
+      <div class="lbl">신사임당 수익</div>
+    </div>
+    <div class="num-card">
+      <div class="val">1조원</div>
+      <div class="lbl">삼프로TV 기업가치</div>
+    </div>
+    <div class="num-card">
+      <div class="val">월 4시간</div>
+      <div class="lbl">대표님 투입 시간</div>
+    </div>
+  </div>
+</div>
+
+<!-- 킬러 라인 -->
+<div class="section">
+  <div class="s-title">KILLER LINES &middot; 이렇게 말하세요</div>
+
+  <div class="kl">
+    "저희가 MCN을 운영하면서 느낀 건데, <b>야놀자 전 대표라는 타이틀만으로도 영상 하나에 50만뷰는 나옵니다.</b> 문제는 그걸 꾸준히 만드는 시스템이에요."
+  </div>
+  <div class="kl">
+    "대표님은 <b>월 4시간만 투자</b>하시면 됩니다. 촬영 월 2번, 1번에 90분. 기획, 편집, 업로드, 운영 전부 저희가 합니다."
+  </div>
+  <div class="kl">
+    "유튜브 광고 수익은 사실 전체의 20%예요. <b>진짜 수익은 강연, 강의, 출판</b>에서 나옵니다. 구독자 10만 넘으면 출판사에서 먼저 연락 옵니다."
+  </div>
+  <div class="kl">
+    "신사임당 채널이 <b>20억에 매각</b>됐습니다. 채널 자체가 자산이에요. 1년 투자로 10년 쓸 수 있는 자산을 만드는 거죠."
+  </div>
+</div>
+
+<!-- 주의 -->
+<div class="section">
+  <div class="s-title">DO NOT &middot; 하지 마세요</div>
+
+  <div class="caution">
+    <b>가격 얘기 먼저 꺼내지 마세요.</b><br>
+    물어보면 "니즈에 맞춰 기획서와 함께 보내드리겠습니다"
+  </div>
+  <div class="caution">
+    <b>계약을 재촉하지 마세요.</b><br>
+    오늘 목표 = 방향 합의 + "기획서 보내드려도 될까요?"
+  </div>
+  <div class="caution">
+    <b>야놀자 험담하지 마세요.</b><br>
+    대표님이 먼저 꺼내도 동조 금지. 중립 유지.
+  </div>
+</div>
+
+<!-- 마무리 멘트 -->
+<div class="section">
+  <div class="s-title">CLOSING &middot; 마무리 멘트</div>
+
+  <div class="kl">
+    "오늘 말씀 감사합니다. 대표님 경험이 정말 콘텐츠 자산이 풍부하시네요. <b>저희가 3일 내로 채널 기획서와 견적을 보내드리겠습니다.</b> 그거 보시고 판단하시면 됩니다."
+  </div>
+</div>
+
+<!-- BOTTOM BAR -->
+<div class="bottom-bar">
+  <div class="bottom-text">
+    <b>목표:</b> 기획서 보낼 기회 만들기. 계약은 2차에서.
+  </div>
+</div>
+
+</body>
+</html>
