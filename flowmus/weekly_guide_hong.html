@@ -24,6 +24,48 @@
     .page { margin: 0; box-shadow: none; min-height: auto; }
     .no-print { display: none !important; }
   }
+  @media screen and (max-width: 800px) {
+    body { padding: 0; background: #fff; }
+    .page {
+      width: 100%;
+      min-height: auto;
+      box-shadow: none;
+      margin-bottom: 0;
+      border-bottom: 4px solid #eee;
+      overflow: visible;
+    }
+    .page-inner { padding: 24px 20px; }
+    .cover-top { padding: 40px 20px 0; }
+    .cover-title { font-size: 24pt; }
+    .cover-sub { font-size: 10pt; letter-spacing: 2px; }
+    .cover-bottom { padding: 24px 20px; }
+    .pg-header h2 { font-size: 13pt; }
+    .pipeline { flex-wrap: wrap; gap: 12px; }
+    .pipe-step { flex: 0 0 calc(50% - 6px); }
+    .pipe-step:last-child { flex: 0 0 100%; }
+    .pipe-arrow { display: none; }
+    .pipe-circle { width: 36px; height: 36px; font-size: 12pt; }
+    .role-grid { flex-direction: column; }
+    .week-grid { flex-direction: column; gap: 10px; }
+    .wday-body { min-height: auto; }
+    .timeblock { gap: 8px; }
+    .tb-time { width: 44px; font-size: 7.5pt; padding-right: 8px; }
+    .tb-content { padding: 10px 12px; }
+    .roadmap { flex-direction: column; gap: 12px; }
+    .kpi-row { flex-wrap: wrap; gap: 10px; }
+    .kpi { flex: 0 0 calc(50% - 5px); }
+    .support-grid { grid-template-columns: 1fr; }
+    .report { font-size: 8.5pt; }
+    .rpt-label { width: 90px; padding: 10px 12px; font-size: 8pt; }
+    .rpt-value { padding: 10px 12px; font-size: 8.5pt; }
+    .sign-table > tbody > tr { display: flex; flex-direction: column; gap: 12px; }
+    .sign-table > tbody > tr > td { width: 100%; padding: 0 !important; }
+    .pg-footer { position: static; padding: 16px 20px; margin-top: 20px; border-top: 1px solid #eee; }
+    .pn { position: static; padding: 12px 0; }
+    .quote-box .q { font-size: 11pt; }
+    .sec-title { font-size: 10pt; margin-top: 20px; }
+    .note-bar { font-size: 8pt; padding: 10px 14px; }
+  }
   .page {
     width: 210mm;
     min-height: 297mm;
