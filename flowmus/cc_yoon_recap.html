@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meeting Recap — 윤현재 대표 커피챗</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'Apple SD Gothic Neo', 'Pretendard', sans-serif;
+    color: #191f28;
+    background: #fff;
+    font-size: 10pt;
+    line-height: 1.7;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    letter-spacing: -0.3px;
+  }
+  @media screen {
+    body { background: #f2f4f6; padding: 24px 0; }
+    .page { box-shadow: 0 8px 30px rgba(0,0,0,0.08); margin-bottom: 24px; }
+  }
+  @media print {
+    .page { margin: 0; box-shadow: none; min-height: auto; }
+    .no-print { display: none !important; }
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    position: relative;
+    background: #fff;
+    page-break-after: always;
+    overflow: hidden;
+  }
+  .page:last-child { page-break-after: auto; }
+  .pi { padding: 44px 48px; }
+
+  .cover { background: #191f28; color: #fff; display: flex; flex-direction: column; }
+  .cover-top { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 56px; }
+  .cover-badge { display: inline-block; background: rgba(49,130,246,0.15); color: #3182f6; border-radius: 20px; padding: 6px 16px; font-size: 8pt; font-weight: 700; letter-spacing: 1px; margin-bottom: 32px; width: fit-content; }
+  .cover-title { font-size: 34pt; font-weight: 800; letter-spacing: -2px; line-height: 1.25; margin-bottom: 16px; }
+  .cover-desc { font-size: 11pt; color: #8b95a1; line-height: 1.8; max-width: 440px; }
+  .cover-bottom { padding: 40px 56px; display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid rgba(255,255,255,0.06); }
+  .cover-meta { font-size: 8.5pt; color: #4e5968; line-height: 2; }
+  .cover-meta b { color: #8b95a1; }
+  .cover-logo { font-size: 11pt; font-weight: 800; color: #4e5968; letter-spacing: 1px; }
+
+  .ph { margin-bottom: 24px; }
+  .ph-label { font-size: 8pt; font-weight: 700; color: #3182f6; letter-spacing: 1px; margin-bottom: 6px; }
+  .ph h2 { font-size: 20pt; font-weight: 800; color: #191f28; letter-spacing: -1px; }
+  .ph-sub { font-size: 9.5pt; color: #8b95a1; margin-top: 6px; }
+
+  .card { background: #f9fafb; border-radius: 16px; padding: 22px; margin: 12px 0; }
+  .card-dark { background: #191f28; color: #fff; border-radius: 16px; padding: 22px; margin: 12px 0; }
+  .card-blue { background: #f2f7ff; border-radius: 16px; padding: 22px; margin: 12px 0; }
+  .card-outline { background: #fff; border: 1.5px solid #e5e8eb; border-radius: 16px; padding: 22px; margin: 12px 0; }
+
+  .tag { display: inline-block; font-size: 7pt; font-weight: 700; padding: 3px 8px; border-radius: 6px; margin-right: 4px; letter-spacing: 0.3px; vertical-align: middle; }
+  .tag-blue { background: #3182f6; color: #fff; }
+  .tag-dark { background: #191f28; color: #fff; }
+  .tag-gray { background: #f2f4f6; color: #6b7684; }
+  .tag-green { background: #e8f7ee; color: #1b8a4a; }
+  .tag-yellow { background: #fff8eb; color: #c67a00; }
+
+  .item { padding: 12px 0; border-bottom: 1px solid #f2f4f6; }
+  .item:last-child { border-bottom: none; }
+  .item-title { font-size: 10pt; font-weight: 800; color: #191f28; margin-bottom: 4px; letter-spacing: -0.3px; }
+  .item-desc { font-size: 8.5pt; color: #4e5968; line-height: 1.7; word-break: keep-all; }
+  .item-desc b { color: #191f28; }
+
+  .note { background: #f2f7ff; border-radius: 12px; padding: 14px 18px; margin: 12px 0; font-size: 8.5pt; color: #4e5968; word-break: keep-all; line-height: 1.7; }
+  .note b { color: #191f28; }
+  .warn { background: #fff8eb; border-radius: 12px; padding: 14px 18px; margin: 12px 0; font-size: 8.5pt; color: #6b5900; word-break: keep-all; line-height: 1.7; }
+  .warn b { color: #191f28; }
+
+  .tb { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin: 12px 0; }
+  .tb thead th { background: #191f28; color: #fff; padding: 10px 14px; text-align: left; font-weight: 700; font-size: 8pt; }
+  .tb thead th:first-child { border-radius: 10px 0 0 0; }
+  .tb thead th:last-child { border-radius: 0 10px 0 0; }
+  .tb tbody td { padding: 10px 14px; border-bottom: 1px solid #f2f4f6; vertical-align: top; color: #4e5968; }
+  .tb b { color: #191f28; }
+  .tb .blue { color: #3182f6; font-weight: 700; }
+
+  .chk { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid #f2f4f6; }
+  .chk:last-child { border-bottom: none; }
+  .chk-box { width: 18px; height: 18px; border: 2px solid #d1d6db; border-radius: 5px; flex-shrink: 0; margin-top: 1px; }
+  .chk-text { flex: 1; font-size: 9pt; color: #333d4b; word-break: keep-all; }
+  .chk-text b { color: #191f28; }
+  .chk-text span { font-size: 7.5pt; color: #8b95a1; display: block; margin-top: 2px; }
+
+  .pf { position: absolute; bottom: 28px; left: 48px; right: 48px; display: flex; justify-content: space-between; font-size: 7.5pt; color: #d1d6db; }
+  .print-btn { position: fixed; bottom: 20px; right: 20px; z-index: 100; background: #3182f6; color: #fff; border: none; padding: 14px 28px; border-radius: 14px; font-size: 10pt; font-weight: 700; cursor: pointer; box-shadow: 0 4px 16px rgba(49,130,246,0.3); font-family: inherit; letter-spacing: -0.3px; }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">PDF 저장</button>
+
+<!-- ══════════ COVER ══════════ -->
+<div class="page cover">
+  <div class="cover-top">
+    <div class="cover-badge">MEETING RECAP</div>
+    <div class="cover-title">윤현재 대표<br>커피챗 정리</div>
+    <div class="cover-desc">
+      퍼스널 브랜딩을 넘어선 더 큰 그림.<br>
+      원화 스테이블코인 + 힙스터 슈퍼앱 + 브랜드 콜라보 생태계.
+    </div>
+  </div>
+  <div class="cover-bottom">
+    <div class="cover-meta">
+      <b>윤현재 대표</b> &middot; 야놀자 전 대표<br>
+      <b>Date</b> &middot; 2026. 04. 30
+    </div>
+    <div class="cover-logo">FLOWMUS</div>
+  </div>
+</div>
+
+<!-- ══════════ PAGE 1 — 핵심 구조 ══════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="ph">
+      <div class="ph-label">01</div>
+      <h2>윤현재 대표의 큰 그림</h2>
+      <div class="ph-sub">단순 퍼스널 브랜딩이 아닌, 스테이블코인 기반 생태계 프로젝트.</div>
+    </div>
+
+    <div class="card-dark" style="text-align:center;">
+      <div style="font-size:13pt; font-weight:800; line-height:1.6; letter-spacing:-0.5px;">
+        원화 스테이블코인 발행 (은행 주체)<br>
+        &darr;<br>
+        힙스터 슈퍼앱 (MZ 타겟 결제 플랫폼)<br>
+        &darr;<br>
+        브랜드 콜라보 생태계 (CEO 네트워크)
+      </div>
+      <div style="font-size:8pt; color:#4e5968; margin-top:10px;">세 개가 하나로 연결되는 구조</div>
+    </div>
+
+    <!-- 축 1 -->
+    <div class="item">
+      <div class="item-title"><span class="tag tag-blue">축 1</span> 원화 기반 스테이블코인</div>
+      <div class="item-desc">
+        <b>프로젝트 한강</b> — 한국은행이 논의 중인 원화 스테이블코인 프로젝트.<br>
+        발행 주체는 <b>은행</b>이어야 한다는 방향 (네이버/두나무는 리스크 큼).<br>
+        <b>하나금융</b>이 깊게 관여, 금융감독원과 협의 진행 중.<br>
+        관련 은행: <b>부산은행, OK저축은행, 전북은행</b>.<br>
+        <b>김성준 의원</b>이 제도적 고민을 가지고 있는 상황.<br>
+        <b>다이렉트 오더 김 팀장</b> — 금융감독원 라인.
+      </div>
+    </div>
+
+    <!-- 축 2 -->
+    <div class="item">
+      <div class="item-title"><span class="tag tag-dark">축 2</span> 힙스터 슈퍼앱 (결제 플랫폼)</div>
+      <div class="item-desc">
+        스테이블코인 기반 QR 결제 시스템.<br>
+        <b>젠틀몬스터</b>와 협업 — "힙한 MZ" 타겟.<br>
+        쿠팡/네이버에 파는 것이 아닌 <b>"우리한테 파는"</b> 독점 유통 구조.<br>
+        <b>현대카드</b> 연계 (단순 카드사가 아닌 마케팅 파트너).<br>
+        호텔 라인에서 스테이블코인 결제 적용.<br>
+        콘솔(샌드박스) 시험 진행 중.
+      </div>
+    </div>
+
+    <!-- 축 3 -->
+    <div class="item">
+      <div class="item-title"><span class="tag tag-green">축 3</span> 브랜드 콜라보 + CEO 네트워크</div>
+      <div class="item-desc">
+        브랜드 대표들을 모아서 콜라보 기획.<br>
+        <b>조조칼국수</b> (연매출 1,000억), <b>김묘정 헤어샵</b> 등 브랜드 참여.<br>
+        각 브랜드의 유저풀을 합쳐서 콘솔 시험에 볼륨 제공.<br>
+        기업 사장님들에게 젠틀몬스터 + 콘솔 시험 연계 제안.<br>
+        소기업 브랜딩 협업 → 영향력 확대 → 플랫폼 유입.
+      </div>
+    </div>
+
+    <div class="note">
+      <b>핵심 인사이트:</b> 윤현재 대표의 진짜 사업은 "스테이블코인 기반 결제 생태계"이고, 퍼스널 브랜딩은 이 생태계에 브랜드와 CEO를 끌어오기 위한 <b>영향력 엔진</b> 역할.
+    </div>
+
+  </div>
+  <div class="pf"><span>Flowmus Confidential</span><span>Meeting Recap</span></div>
+</div>
+
+<!-- ══════════ PAGE 2 — 상세 구조 ══════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="ph">
+      <div class="ph-label">02</div>
+      <h2>사업 구조 상세</h2>
+      <div class="ph-sub">미팅에서 나온 내용을 구조화합니다.</div>
+    </div>
+
+    <div style="font-size:10pt;font-weight:800;color:#191f28;margin-bottom:10px;letter-spacing:-0.5px;">스테이블코인 생태계 관계도</div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px;">
+      <div style="background:#191f28;border-radius:12px;padding:14px;text-align:center;">
+        <div style="color:#3182f6;font-size:7pt;font-weight:700;margin-bottom:4px;">발행</div>
+        <div style="color:#fff;font-size:9pt;font-weight:800;">은행</div>
+        <div style="color:#6b7684;font-size:7pt;margin-top:4px;">부산은행<br>OK저축은행<br>전북은행</div>
+      </div>
+      <div style="background:#f2f7ff;border-radius:12px;padding:14px;text-align:center;">
+        <div style="color:#3182f6;font-size:7pt;font-weight:700;margin-bottom:4px;">유통/결제</div>
+        <div style="color:#191f28;font-size:9pt;font-weight:800;">힙스터 앱</div>
+        <div style="color:#6b7684;font-size:7pt;margin-top:4px;">QR 결제<br>현대카드 연계<br>슈퍼앱</div>
+      </div>
+      <div style="background:#f9fafb;border-radius:12px;padding:14px;text-align:center;">
+        <div style="color:#3182f6;font-size:7pt;font-weight:700;margin-bottom:4px;">소비/브랜드</div>
+        <div style="color:#191f28;font-size:9pt;font-weight:800;">콜라보 생태계</div>
+        <div style="color:#6b7684;font-size:7pt;margin-top:4px;">젠틀몬스터<br>조조칼국수<br>김묘정 헤어샵</div>
+      </div>
+    </div>
+
+    <div style="font-size:10pt;font-weight:800;color:#191f28;margin:20px 0 10px;letter-spacing:-0.5px;">이해관계자 맵</div>
+
+    <table class="tb">
+      <thead>
+        <tr>
+          <th>구분</th>
+          <th>이름/조직</th>
+          <th>역할</th>
+          <th>상태</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>정책</b></td>
+          <td>한국은행</td>
+          <td>프로젝트 한강 — 원화 스테이블코인 정책</td>
+          <td class="blue">논의 중</td>
+        </tr>
+        <tr>
+          <td><b>정책</b></td>
+          <td>김성준 의원</td>
+          <td>제도적 활성화 방안 고민</td>
+          <td>관심</td>
+        </tr>
+        <tr>
+          <td><b>감독</b></td>
+          <td>금융감독원</td>
+          <td>콘솔(샌드박스) 시험 승인/감독</td>
+          <td class="blue">진행 중</td>
+        </tr>
+        <tr>
+          <td><b>발행</b></td>
+          <td>하나금융</td>
+          <td>콘솔 시험 깊게 관여</td>
+          <td class="blue">핵심 파트너</td>
+        </tr>
+        <tr>
+          <td><b>발행</b></td>
+          <td>부산은행 / OK저축 / 전북은행</td>
+          <td>스테이블코인 발행 참여</td>
+          <td>나열됨</td>
+        </tr>
+        <tr>
+          <td><b>결제</b></td>
+          <td>현대카드</td>
+          <td>PG 수수료 / 마케팅 파트너</td>
+          <td>"할 수 있을 거 같다"</td>
+        </tr>
+        <tr>
+          <td><b>실행</b></td>
+          <td>다이렉트 오더 김 팀장</td>
+          <td>금감원 라인 연결</td>
+          <td>관여 중</td>
+        </tr>
+        <tr>
+          <td><b>브랜드</b></td>
+          <td>젠틀몬스터</td>
+          <td>힙스터 브랜드 콜라보 핵심</td>
+          <td class="blue">협업 진행</td>
+        </tr>
+        <tr>
+          <td><b>브랜드</b></td>
+          <td>무신사</td>
+          <td>대형 플랫폼 차별화 상품</td>
+          <td>논의</td>
+        </tr>
+        <tr>
+          <td><b>브랜드</b></td>
+          <td>조조칼국수</td>
+          <td>연매출 1,000억 — F&B 대표 브랜드</td>
+          <td>제안 예정</td>
+        </tr>
+        <tr>
+          <td><b>브랜드</b></td>
+          <td>김묘정 헤어샵</td>
+          <td>뷰티/라이프 브랜드</td>
+          <td>나열됨</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="warn">
+      <b>리스크 언급:</b> 네이버, 두나무(업비트) 쪽은 스테이블코인 발행 주체로서 리스크가 크다고 판단. 은행 기반 발행이 안전하다는 방향.
+    </div>
+
+  </div>
+  <div class="pf"><span>Flowmus Confidential</span><span>Meeting Recap</span></div>
+</div>
+
+<!-- ══════════ PAGE 3 — 퍼스널 브랜딩의 역할 + Flowmus 기회 ══════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="ph">
+      <div class="ph-label">03</div>
+      <h2>퍼스널 브랜딩의 역할</h2>
+      <div class="ph-sub">콘텐츠가 단순 채널이 아니라, 이 생태계의 영향력 엔진이 됩니다.</div>
+    </div>
+
+    <div style="font-size:10pt;font-weight:800;color:#191f28;margin-bottom:10px;letter-spacing:-0.5px;">퍼스널 브랜딩이 사업에 연결되는 구조</div>
+
+    <div style="display:flex;align-items:center;gap:0;margin-bottom:18px;">
+      <div style="flex:1;background:#191f28;border-radius:10px;padding:14px 10px;text-align:center;">
+        <div style="color:#3182f6;font-size:7pt;font-weight:700;">STEP 1</div>
+        <div style="color:#fff;font-size:9pt;font-weight:700;margin-top:3px;">유튜브 채널</div>
+        <div style="color:#6b7684;font-size:7pt;margin-top:3px;">스테이블코인<br>업계 인사이트</div>
+      </div>
+      <div style="color:#d1d6db;padding:0 3px;font-size:14pt;">&rarr;</div>
+      <div style="flex:1;background:#f2f7ff;border-radius:10px;padding:14px 10px;text-align:center;">
+        <div style="color:#3182f6;font-size:7pt;font-weight:700;">STEP 2</div>
+        <div style="color:#191f28;font-size:9pt;font-weight:700;margin-top:3px;">CEO 네트워크</div>
+        <div style="color:#6b7684;font-size:7pt;margin-top:3px;">브랜드 대표<br>모임/강연</div>
+      </div>
+      <div style="color:#d1d6db;padding:0 3px;font-size:14pt;">&rarr;</div>
+      <div style="flex:1;background:#f9fafb;border-radius:10px;padding:14px 10px;text-align:center;">
+        <div style="color:#3182f6;font-size:7pt;font-weight:700;">STEP 3</div>
+        <div style="color:#191f28;font-size:9pt;font-weight:700;margin-top:3px;">힙스터 입점</div>
+        <div style="color:#6b7684;font-size:7pt;margin-top:3px;">브랜드 유입<br>유저풀 확보</div>
+      </div>
+      <div style="color:#d1d6db;padding:0 3px;font-size:14pt;">&rarr;</div>
+      <div style="flex:1;background:#f9fafb;border-radius:10px;padding:14px 10px;text-align:center;">
+        <div style="color:#3182f6;font-size:7pt;font-weight:700;">STEP 4</div>
+        <div style="color:#191f28;font-size:9pt;font-weight:700;margin-top:3px;">콘솔 시험</div>
+        <div style="color:#6b7684;font-size:7pt;margin-top:3px;">스테이블코인<br>결제 볼륨</div>
+      </div>
+    </div>
+
+    <div class="note">
+      <b>미팅에서 나온 핵심 발언:</b><br>
+      "영향력을 키워서 콜라보도 하고, 힙스터에서 강의를 해서, CEO들이 자신의 삶을 이야기하는 콘텐츠를 만들고, 이 프로젝트에 연결시키면 영향력을 일으킬 수 있다."
+    </div>
+
+    <div style="font-size:10pt;font-weight:800;color:#191f28;margin:20px 0 10px;letter-spacing:-0.5px;">윤현재 대표가 언급한 콘텐츠 방향</div>
+
+    <div class="card-outline">
+      <div class="item" style="padding-top:0;">
+        <div class="item-title"><span class="tag tag-blue">콘텐츠 1</span> CEO 강연 시리즈</div>
+        <div class="item-desc">브랜드 대표들이 힙스터 플랫폼에서 "자신의 삶"을 이야기하는 강연. 조조칼국수 대표, 김묘정 대표 등. <b>→ 유튜브 콘텐츠로 제작 가능.</b></div>
+      </div>
+      <div class="item">
+        <div class="item-title"><span class="tag tag-dark">콘텐츠 2</span> 브랜드 콜라보 기획</div>
+        <div class="item-desc">젠틀몬스터 x 소기업 브랜딩 협업 과정을 콘텐츠화. "힙한 브랜드가 만들어지는 과정"을 보여주는 시리즈. <b>→ 비하인드/다큐 포맷.</b></div>
+      </div>
+      <div class="item">
+        <div class="item-title"><span class="tag tag-green">콘텐츠 3</span> 스테이블코인 해설</div>
+        <div class="item-desc">프로젝트 한강, 원화 스테이블코인이 왜 중요한지, 은행이 왜 발행해야 하는지. <b>→ 업계 인사이더 관점의 교육 콘텐츠.</b></div>
+      </div>
+      <div class="item" style="border-bottom:none;">
+        <div class="item-title"><span class="tag tag-yellow">콘텐츠 4</span> 힙스터 굿즈/티켓</div>
+        <div class="item-desc">"힙스터 티켓에서 사면 굿즈를 살 수 있다" — 한정판 상품, 차별화 상품을 스테이블코인으로 구매. <b>→ 언박싱/리뷰 콘텐츠.</b></div>
+      </div>
+    </div>
+
+    <div style="font-size:10pt;font-weight:800;color:#191f28;margin:20px 0 10px;letter-spacing:-0.5px;">Flowmus가 할 수 있는 것</div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div class="card-blue" style="margin:0;">
+        <div style="font-size:9pt;font-weight:800;color:#191f28;margin-bottom:6px;">퍼스널 브랜딩 채널</div>
+        <div style="font-size:8pt;color:#4e5968;line-height:1.7;">
+          윤현재 대표 유튜브 채널 기획/촬영/편집/운영 전체. CEO 강연 시리즈 프로덕션. 스테이블코인 교육 콘텐츠.
+        </div>
+      </div>
+      <div class="card-blue" style="margin:0;">
+        <div style="font-size:9pt;font-weight:800;color:#191f28;margin-bottom:6px;">브랜드 콘텐츠 제작</div>
+        <div style="font-size:8pt;color:#4e5968;line-height:1.7;">
+          힙스터 플랫폼 입점 브랜드 콘텐츠. 젠틀몬스터 콜라보 영상. 소기업 브랜딩 비하인드 다큐.
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="pf"><span>Flowmus Confidential</span><span>Meeting Recap</span></div>
+</div>
+
+<!-- ══════════ PAGE 4 — 넥스트 스텝 ══════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="ph">
+      <div class="ph-label">04</div>
+      <h2>Next Step</h2>
+      <div class="ph-sub">커피챗 이후 액션 아이템.</div>
+    </div>
+
+    <div style="font-size:10pt;font-weight:800;color:#191f28;margin-bottom:10px;letter-spacing:-0.5px;">확인된 사항</div>
+
+    <div class="card-outline" style="padding:18px 22px;">
+      <div style="display:flex;border-bottom:1px solid #f2f4f6;padding:10px 0;">
+        <div style="width:110px;font-size:8.5pt;font-weight:700;color:#6b7684;">사업 본질</div>
+        <div style="flex:1;font-size:8.5pt;color:#191f28;font-weight:600;">원화 스테이블코인 기반 MZ 결제 생태계</div>
+      </div>
+      <div style="display:flex;border-bottom:1px solid #f2f4f6;padding:10px 0;">
+        <div style="width:110px;font-size:8.5pt;font-weight:700;color:#6b7684;">플랫폼명</div>
+        <div style="flex:1;font-size:8.5pt;color:#191f28;font-weight:600;">힙스터 (슈퍼앱)</div>
+      </div>
+      <div style="display:flex;border-bottom:1px solid #f2f4f6;padding:10px 0;">
+        <div style="width:110px;font-size:8.5pt;font-weight:700;color:#6b7684;">핵심 파트너</div>
+        <div style="flex:1;font-size:8.5pt;color:#191f28;">하나금융, 현대카드, 젠틀몬스터, 무신사</div>
+      </div>
+      <div style="display:flex;border-bottom:1px solid #f2f4f6;padding:10px 0;">
+        <div style="width:110px;font-size:8.5pt;font-weight:700;color:#6b7684;">정책 키맨</div>
+        <div style="flex:1;font-size:8.5pt;color:#191f28;">김성준 의원, 금감원, 한국은행</div>
+      </div>
+      <div style="display:flex;border-bottom:1px solid #f2f4f6;padding:10px 0;">
+        <div style="width:110px;font-size:8.5pt;font-weight:700;color:#6b7684;">브랜딩 요청</div>
+        <div style="flex:1;font-size:8.5pt;color:#191f28;">퍼스널 브랜딩 = CEO 네트워크 + 브랜드 유입 엔진</div>
+      </div>
+      <div style="display:flex;padding:10px 0;">
+        <div style="width:110px;font-size:8.5pt;font-weight:700;color:#6b7684;">브랜드 풀</div>
+        <div style="flex:1;font-size:8.5pt;color:#191f28;">조조칼국수(1,000억), 젠틀몬스터, 김묘정 헤어샵 등</div>
+      </div>
+    </div>
+
+    <div style="font-size:10pt;font-weight:800;color:#191f28;margin:20px 0 10px;letter-spacing:-0.5px;">추가 확인 필요</div>
+
+    <div class="warn">
+      <b>미팅에서 미확인된 것들:</b><br>
+      &middot; 윤현재 대표의 정확한 직함/법인 (힙스터 대표? 별도 법인?)<br>
+      &middot; 콘솔(샌드박스) 시험의 정확한 타임라인<br>
+      &middot; Flowmus에 요청하는 구체적 범위 (채널만? 브랜드 콘텐츠까지?)<br>
+      &middot; 예산/계약 조건<br>
+      &middot; "미리 제안을 하겠다"고 했는데 → 우리한테? 브랜드한테?
+    </div>
+
+    <div style="font-size:10pt;font-weight:800;color:#191f28;margin:20px 0 10px;letter-spacing:-0.5px;">액션 아이템</div>
+
+    <div class="chk"><div class="chk-box"></div><div class="chk-text"><b>당일: 감사 메시지 발송</b> <span>"오늘 말씀 감사합니다. 정리해서 기획서 보내드리겠습니다."</span></div></div>
+    <div class="chk"><div class="chk-box"></div><div class="chk-text"><b>당일: 공동대표(현우)에게 미팅 요약 공유</b> <span>이 문서 전달. 사업 규모가 크므로 함께 검토 필요.</span></div></div>
+    <div class="chk"><div class="chk-box"></div><div class="chk-text"><b>3일 내: 채널 기획서 + 견적서 작성</b> <span>퍼스널 브랜딩 + 브랜드 콘텐츠 패키지. 두 가지 옵션.</span></div></div>
+    <div class="chk"><div class="chk-box"></div><div class="chk-text"><b>리서치: 프로젝트 한강 + 스테이블코인 동향</b> <span>콘텐츠 기획 위해 업계 현황 파악 필수.</span></div></div>
+    <div class="chk"><div class="chk-box"></div><div class="chk-text"><b>리서치: 힙스터 앱/플랫폼 현황</b> <span>현재 서비스 상태, 유저 수, 브랜드 라인업 확인.</span></div></div>
+    <div class="chk"><div class="chk-box"></div><div class="chk-text"><b>1주 내: 2차 미팅 일정 제안</b> <span>기획서 기반 구체적 논의. 계약 조건 확정.</span></div></div>
+
+    <div class="card-dark" style="text-align:center; margin-top:20px;">
+      <div style="font-size:13pt; font-weight:800; line-height:1.5; letter-spacing:-0.5px;">
+        단순 유튜브 채널이 아니라,<br>스테이블코인 생태계의 콘텐츠 파트너.
+      </div>
+      <div style="font-size:8pt; color:#4e5968; margin-top:8px;">규모가 다른 프로젝트. 제대로 잡으면 큰 건.</div>
+    </div>
+
+  </div>
+  <div class="pf"><span>Flowmus Confidential</span><span>Meeting Recap</span></div>
+</div>
+
+</body>
+</html>
