@@ -37,365 +37,102 @@
   .page:last-child { page-break-after: auto; }
   .pi { padding: 44px 48px; }
 
-  /* ── 커버 ── */
+  /* ── cover ── */
   .cover { background: #191f28; color: #fff; display: flex; flex-direction: column; }
-  .cover-top {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 0 56px;
-  }
-  .cover-badge {
-    display: inline-block;
-    background: rgba(49,130,246,0.15);
-    color: #3182f6;
-    border-radius: 20px;
-    padding: 6px 16px;
-    font-size: 8pt;
-    font-weight: 700;
-    letter-spacing: 1px;
-    margin-bottom: 32px;
-    width: fit-content;
-  }
-  .cover-title {
-    font-size: 34pt;
-    font-weight: 800;
-    letter-spacing: -2px;
-    line-height: 1.25;
-    margin-bottom: 16px;
-  }
-  .cover-desc {
-    font-size: 11pt;
-    color: #8b95a1;
-    line-height: 1.8;
-    max-width: 420px;
-  }
-  .cover-bottom {
-    padding: 40px 56px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    border-top: 1px solid rgba(255,255,255,0.06);
-  }
+  .cover-top { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 56px; }
+  .cover-badge { display: inline-block; background: rgba(49,130,246,0.15); color: #3182f6; border-radius: 20px; padding: 6px 16px; font-size: 8pt; font-weight: 700; letter-spacing: 1px; margin-bottom: 32px; width: fit-content; }
+  .cover-title { font-size: 34pt; font-weight: 800; letter-spacing: -2px; line-height: 1.25; margin-bottom: 16px; }
+  .cover-desc { font-size: 11pt; color: #8b95a1; line-height: 1.8; max-width: 420px; }
+  .cover-bottom { padding: 40px 56px; display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid rgba(255,255,255,0.06); }
   .cover-meta { font-size: 8.5pt; color: #4e5968; line-height: 2; }
   .cover-meta b { color: #8b95a1; }
   .cover-logo { font-size: 11pt; font-weight: 800; color: #4e5968; letter-spacing: 1px; }
 
-  /* ── 헤더 ── */
-  .ph { margin-bottom: 28px; }
-  .ph-label {
-    font-size: 8pt;
-    font-weight: 700;
-    color: #3182f6;
-    letter-spacing: 1px;
-    margin-bottom: 6px;
-  }
-  .ph h2 {
-    font-size: 20pt;
-    font-weight: 800;
-    color: #191f28;
-    letter-spacing: -1px;
-  }
-  .ph-sub {
-    font-size: 9.5pt;
-    color: #8b95a1;
-    margin-top: 6px;
-  }
+  /* ── header ── */
+  .ph { margin-bottom: 24px; }
+  .ph-label { font-size: 8pt; font-weight: 700; color: #3182f6; letter-spacing: 1px; margin-bottom: 6px; }
+  .ph h2 { font-size: 20pt; font-weight: 800; color: #191f28; letter-spacing: -1px; }
+  .ph-sub { font-size: 9.5pt; color: #8b95a1; margin-top: 6px; }
 
-  /* ── 카드 ── */
-  .card {
-    background: #f9fafb;
-    border-radius: 16px;
-    padding: 24px;
-    margin: 14px 0;
-  }
-  .card-dark {
-    background: #191f28;
-    color: #fff;
-    border-radius: 16px;
-    padding: 24px;
-    margin: 14px 0;
-  }
-  .card-outline {
-    background: #fff;
-    border: 1.5px solid #e5e8eb;
-    border-radius: 16px;
-    padding: 24px;
-    margin: 14px 0;
-  }
-  .card-blue {
-    background: #f2f7ff;
-    border-radius: 16px;
-    padding: 24px;
-    margin: 14px 0;
-  }
+  /* ── cards ── */
+  .card { background: #f9fafb; border-radius: 16px; padding: 24px; margin: 12px 0; }
+  .card-dark { background: #191f28; color: #fff; border-radius: 16px; padding: 24px; margin: 12px 0; }
+  .card-outline { background: #fff; border: 1.5px solid #e5e8eb; border-radius: 16px; padding: 24px; margin: 12px 0; }
+  .card-blue { background: #f2f7ff; border-radius: 16px; padding: 24px; margin: 12px 0; }
 
-  /* ── 프로필 ── */
-  .profile-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin: 16px 0;
-  }
-  .profile-item {
-    display: flex;
-    gap: 12px;
-    padding: 14px 18px;
-    background: #f9fafb;
-    border-radius: 12px;
-  }
-  .profile-label {
-    font-size: 8.5pt;
-    font-weight: 700;
-    color: #8b95a1;
-    min-width: 64px;
-  }
-  .profile-value {
-    font-size: 9.5pt;
-    font-weight: 600;
-    color: #191f28;
-  }
+  /* ── table ── */
+  .tb { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin: 12px 0; }
+  .tb thead th { background: #191f28; color: #fff; padding: 10px 14px; text-align: left; font-weight: 700; font-size: 8pt; }
+  .tb thead th:first-child { border-radius: 10px 0 0 0; }
+  .tb thead th:last-child { border-radius: 0 10px 0 0; }
+  .tb tbody td { padding: 10px 14px; border-bottom: 1px solid #f2f4f6; vertical-align: top; color: #4e5968; }
+  .tb tbody tr:nth-child(even) { background: #f9fafb; }
+  .tb b { color: #191f28; }
+  .tb .blue { color: #3182f6; font-weight: 700; }
 
-  /* ── 아젠다 ── */
-  .agenda {
-    display: flex;
-    gap: 10px;
-    margin: 8px 0;
-    align-items: stretch;
-  }
-  .agenda-time {
-    width: 48px;
-    flex-shrink: 0;
-    font-size: 8pt;
-    font-weight: 700;
-    color: #8b95a1;
-    padding-top: 14px;
-    text-align: right;
-  }
-  .agenda-dot {
-    width: 20px;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 16px;
-  }
-  .agenda-dot::before {
-    content: '';
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #d1d6db;
-    flex-shrink: 0;
-  }
-  .agenda-dot::after {
-    content: '';
-    width: 2px;
-    flex: 1;
-    background: #e5e8eb;
-    margin-top: 6px;
-  }
-  .agenda-dot.blue::before { background: #3182f6; }
-  .agenda-body {
-    flex: 1;
-    background: #f9fafb;
-    border-radius: 12px;
-    padding: 14px 18px;
-  }
-  .agenda-body b { font-size: 9.5pt; color: #191f28; }
-  .agenda-body p { font-size: 8.5pt; color: #6b7684; margin-top: 3px; word-break: keep-all; }
-  .agenda-body.active { background: #f2f7ff; }
+  /* ── content card (영상 기획안) ── */
+  .vc { border: 1.5px solid #e5e8eb; border-radius: 14px; padding: 18px 20px; margin: 10px 0; }
+  .vc.hot { border-color: #3182f6; background: #f2f7ff; }
+  .vc-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .vc-tag { font-size: 7pt; font-weight: 700; padding: 3px 8px; border-radius: 6px; letter-spacing: 0.3px; }
+  .vc-tag.story { background: #191f28; color: #fff; }
+  .vc-tag.insight { background: #3182f6; color: #fff; }
+  .vc-tag.biz { background: #f2f4f6; color: #6b7684; }
+  .vc-tag.talk { background: #e8f7ee; color: #1b8a4a; }
+  .vc-view { font-size: 7.5pt; color: #8b95a1; }
+  .vc-title { font-size: 10pt; font-weight: 800; color: #191f28; letter-spacing: -0.5px; line-height: 1.4; margin-bottom: 6px; }
+  .vc-desc { font-size: 8pt; color: #6b7684; line-height: 1.6; }
+  .vc-thumb { font-size: 7.5pt; color: #3182f6; font-weight: 600; margin-top: 6px; }
 
-  /* ── 질문 ── */
-  .q-item {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 14px;
-    align-items: flex-start;
-  }
-  .q-item:last-child { margin-bottom: 0; }
-  .q-num {
-    width: 24px;
-    height: 24px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 8px;
-    background: #191f28;
-    color: #fff;
-    font-size: 8pt;
-    font-weight: 800;
-    margin-top: 1px;
-  }
+  /* ── timeline ── */
+  .tl { display: flex; gap: 10px; margin: 6px 0; align-items: stretch; }
+  .tl-week { width: 52px; flex-shrink: 0; font-size: 8pt; font-weight: 700; color: #8b95a1; padding-top: 12px; text-align: right; }
+  .tl-dot { width: 20px; flex-shrink: 0; display: flex; flex-direction: column; align-items: center; padding-top: 14px; }
+  .tl-dot::before { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #d1d6db; flex-shrink: 0; }
+  .tl-dot::after { content: ''; width: 2px; flex: 1; background: #e5e8eb; margin-top: 6px; }
+  .tl-dot.blue::before { background: #3182f6; }
+  .tl-body { flex: 1; background: #f9fafb; border-radius: 12px; padding: 12px 16px; }
+  .tl-body.active { background: #f2f7ff; }
+  .tl-body b { font-size: 9pt; color: #191f28; }
+  .tl-body p { font-size: 8pt; color: #6b7684; margin-top: 3px; word-break: keep-all; line-height: 1.6; }
+
+  /* ── stat ── */
+  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 14px 0; }
+  .stat { text-align: center; background: #f9fafb; border-radius: 12px; padding: 16px 10px; }
+  .stat-num { font-size: 16pt; font-weight: 800; color: #3182f6; letter-spacing: -1px; }
+  .stat-label { font-size: 7.5pt; color: #8b95a1; margin-top: 4px; }
+
+  /* ── question ── */
+  .q-item { display: flex; gap: 12px; margin-bottom: 12px; align-items: flex-start; }
+  .q-num { width: 24px; height: 24px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 8px; background: #191f28; color: #fff; font-size: 8pt; font-weight: 800; margin-top: 1px; }
   .q-num.blue { background: #3182f6; }
-  .q-text {
-    flex: 1;
-    font-size: 9.5pt;
-    color: #333d4b;
-    word-break: keep-all;
-    line-height: 1.65;
-  }
+  .q-text { flex: 1; font-size: 9pt; color: #333d4b; word-break: keep-all; line-height: 1.65; }
   .q-text em { font-style: normal; color: #3182f6; font-weight: 700; }
-  .q-hint {
-    font-size: 8pt;
-    color: #8b95a1;
-    margin-top: 4px;
-    display: block;
-    line-height: 1.5;
-  }
+  .q-hint { font-size: 7.5pt; color: #8b95a1; margin-top: 3px; display: block; line-height: 1.5; }
 
-  /* ── 서비스 ── */
-  .svc-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin: 16px 0;
-  }
-  .svc-card {
-    border: 1.5px solid #e5e8eb;
-    border-radius: 14px;
-    padding: 22px;
-  }
-  .svc-card.featured {
-    border-color: #3182f6;
-    background: #f2f7ff;
-  }
-  .svc-badge {
-    display: inline-block;
-    font-size: 7pt;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    padding: 3px 8px;
-    border-radius: 6px;
-    margin-bottom: 10px;
-  }
-  .svc-badge.basic { background: #f2f4f6; color: #6b7684; }
-  .svc-badge.pro { background: #3182f6; color: #fff; }
-  .svc-badge.full { background: #191f28; color: #fff; }
-  .svc-title {
-    font-size: 11pt;
-    font-weight: 800;
-    color: #191f28;
-    margin-bottom: 8px;
-    letter-spacing: -0.5px;
-  }
-  .svc-list {
-    list-style: none;
-    padding: 0;
-  }
-  .svc-list li {
-    font-size: 8.5pt;
-    color: #4e5968;
-    padding: 3px 0;
-    padding-left: 14px;
-    position: relative;
-    line-height: 1.6;
-  }
-  .svc-list li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 10px;
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: #d1d6db;
-  }
-  .svc-card.featured .svc-list li::before { background: #3182f6; }
-
-  /* ── 노트 ── */
-  .note {
-    background: #f2f7ff;
-    border-radius: 12px;
-    padding: 16px 20px;
-    margin: 14px 0;
-    font-size: 9pt;
-    color: #4e5968;
-    word-break: keep-all;
-    line-height: 1.7;
-  }
+  /* ── note / warn ── */
+  .note { background: #f2f7ff; border-radius: 12px; padding: 14px 18px; margin: 12px 0; font-size: 8.5pt; color: #4e5968; word-break: keep-all; line-height: 1.7; }
   .note b { color: #191f28; }
-  .warn {
-    background: #fff8eb;
-    border-radius: 12px;
-    padding: 16px 20px;
-    margin: 14px 0;
-    font-size: 9pt;
-    color: #6b5900;
-    word-break: keep-all;
-  }
+  .warn { background: #fff8eb; border-radius: 12px; padding: 14px 18px; margin: 12px 0; font-size: 8.5pt; color: #6b5900; word-break: keep-all; }
   .warn b { color: #191f28; }
 
-  /* ── 체크리스트 ── */
-  .chk {
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
-    padding: 10px 0;
-    border-bottom: 1px solid #f2f4f6;
-  }
+  /* ── checklist ── */
+  .chk { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid #f2f4f6; }
   .chk:last-child { border-bottom: none; }
-  .chk-box {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #d1d6db;
-    border-radius: 6px;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-  .chk-text {
-    flex: 1;
-    font-size: 9.5pt;
-    color: #333d4b;
-    word-break: keep-all;
-  }
+  .chk-box { width: 18px; height: 18px; border: 2px solid #d1d6db; border-radius: 5px; flex-shrink: 0; margin-top: 1px; }
+  .chk-text { flex: 1; font-size: 9pt; color: #333d4b; word-break: keep-all; }
   .chk-text b { color: #191f28; }
-  .chk-text span { font-size: 8pt; color: #8b95a1; display: block; margin-top: 2px; }
+  .chk-text span { font-size: 7.5pt; color: #8b95a1; display: block; margin-top: 2px; }
 
-  /* ── 기록 테이블 ── */
-  .rec-item {
-    display: flex;
-    border-bottom: 1px solid #f2f4f6;
-  }
+  /* ── record ── */
+  .rec-item { display: flex; border-bottom: 1px solid #f2f4f6; }
   .rec-item:last-child { border-bottom: none; }
-  .rec-label {
-    width: 120px;
-    flex-shrink: 0;
-    padding: 12px 0;
-    font-size: 9pt;
-    font-weight: 700;
-    color: #6b7684;
-  }
-  .rec-value {
-    flex: 1;
-    padding: 12px 0;
-    font-size: 9pt;
-    color: #8b95a1;
-  }
+  .rec-label { width: 110px; flex-shrink: 0; padding: 10px 0; font-size: 8.5pt; font-weight: 700; color: #6b7684; }
+  .rec-value { flex: 1; padding: 10px 0; font-size: 8.5pt; color: #8b95a1; }
 
-  /* ── 풋터 ── */
-  .pf {
-    position: absolute;
-    bottom: 28px;
-    left: 48px;
-    right: 48px;
-    display: flex;
-    justify-content: space-between;
-    font-size: 7.5pt;
-    color: #d1d6db;
-  }
-
-  .print-btn {
-    position: fixed; bottom: 20px; right: 20px; z-index: 100;
-    background: #3182f6; color: #fff; border: none;
-    padding: 14px 28px; border-radius: 14px;
-    font-size: 10pt; font-weight: 700; cursor: pointer;
-    box-shadow: 0 4px 16px rgba(49,130,246,0.3);
-    font-family: inherit;
-    letter-spacing: -0.3px;
-  }
+  /* ── footer ── */
+  .pf { position: absolute; bottom: 28px; left: 48px; right: 48px; display: flex; justify-content: space-between; font-size: 7.5pt; color: #d1d6db; }
+  .print-btn { position: fixed; bottom: 20px; right: 20px; z-index: 100; background: #3182f6; color: #fff; border: none; padding: 14px 28px; border-radius: 14px; font-size: 10pt; font-weight: 700; cursor: pointer; box-shadow: 0 4px 16px rgba(49,130,246,0.3); font-family: inherit; letter-spacing: -0.3px; }
 </style>
 </head>
 <body>
@@ -408,8 +145,8 @@
     <div class="cover-badge">COFFEE CHAT PREP</div>
     <div class="cover-title">윤현재 대표<br>퍼스널 브랜딩</div>
     <div class="cover-desc">
-      야놀자 전 대표의 퍼스널 브랜딩 프로젝트 논의.<br>
-      현재 상황 파악 — 브랜딩 방향 설정 — 서비스 범위 합의.
+      10조 기업 야놀자의 전 대표가 가진 콘텐츠 자산을<br>
+      채널로 만들고, 수익으로 연결하는 프로젝트.
     </div>
   </div>
   <div class="cover-bottom">
@@ -421,372 +158,488 @@
   </div>
 </div>
 
-<!-- ══════════ PAGE 1 — 미팅 아젠다 ══════════ -->
+<!-- ══════════ PAGE 1 — 시장 기회 + 벤치마크 ══════════ -->
 <div class="page">
   <div class="pi">
 
     <div class="ph">
       <div class="ph-label">01</div>
-      <h2>미팅 아젠다</h2>
-      <div class="ph-sub">45분 구성. 상황 파악 → 니즈 확인 → 서비스 제안.</div>
+      <h2>왜 지금 CEO 채널인가</h2>
+      <div class="ph-sub">전직 대표의 유튜브 채널은 이미 검증된 수익 모델입니다.</div>
     </div>
 
-    <div class="agenda">
-      <div class="agenda-time">0:00</div>
-      <div class="agenda-dot blue"></div>
-      <div class="agenda-body active">
-        <b>인사 & 아이스브레이킹</b> &middot; 5분
-        <p>편안한 분위기 조성. 야놀자 시절 이야기, 현재 활동 등 자연스러운 대화.</p>
+    <div class="stat-grid">
+      <div class="stat">
+        <div class="stat-num">183만</div>
+        <div class="stat-label">신사임당 구독자</div>
       </div>
-    </div>
-    <div class="agenda">
-      <div class="agenda-time">5:00</div>
-      <div class="agenda-dot"></div>
-      <div class="agenda-body">
-        <b>A. 현재 상황 파악</b> &middot; 10분
-        <p>야놀자 퇴사 이후 현재 활동, 앞으로의 방향, 퍼스널 브랜딩을 요청한 배경</p>
+      <div class="stat">
+        <div class="stat-num">월 3억</div>
+        <div class="stat-label">신사임당 월수익</div>
       </div>
-    </div>
-    <div class="agenda">
-      <div class="agenda-time">15:00</div>
-      <div class="agenda-dot blue"></div>
-      <div class="agenda-body active">
-        <b>B. 브랜딩 니즈 구체화</b> &middot; 10분 &nbsp;<span style="font-size:7.5pt;color:#3182f6;font-weight:700;">CORE</span>
-        <p>어떤 분야에서 어떤 이미지로 인식되고 싶은지. 목표 오디언스, 활용 채널.</p>
+      <div class="stat">
+        <div class="stat-num">20억</div>
+        <div class="stat-label">채널 매각가</div>
       </div>
-    </div>
-    <div class="agenda">
-      <div class="agenda-time">25:00</div>
-      <div class="agenda-dot"></div>
-      <div class="agenda-body">
-        <b>C. 벤치마크 & 방향 논의</b> &middot; 10분
-        <p>유사 사례 공유, 채널 전략, 콘텐츠 방향 1차 논의</p>
-      </div>
-    </div>
-    <div class="agenda">
-      <div class="agenda-time">35:00</div>
-      <div class="agenda-dot blue"></div>
-      <div class="agenda-body active">
-        <b>D. 서비스 범위 & 넥스트 스텝</b> &middot; 10분
-        <p>Flowmus가 제공할 수 있는 서비스 안내 + 협업 범위 합의</p>
+      <div class="stat">
+        <div class="stat-num">123만</div>
+        <div class="stat-label">김미경TV 구독자</div>
       </div>
     </div>
 
-    <div style="margin-top:28px;">
-      <div style="font-size:11pt;font-weight:800;color:#191f28;margin-bottom:12px;letter-spacing:-0.5px;">사전 확인 사항</div>
-      <div class="profile-grid">
-        <div class="profile-item">
-          <div class="profile-label">이름</div>
-          <div class="profile-value">윤현재</div>
-        </div>
-        <div class="profile-item">
-          <div class="profile-label">이전 직함</div>
-          <div class="profile-value">야놀자 전 대표</div>
-        </div>
-        <div class="profile-item">
-          <div class="profile-label">요청 사항</div>
-          <div class="profile-value">퍼스널 브랜딩</div>
-        </div>
-        <div class="profile-item">
-          <div class="profile-label">미팅 형태</div>
-          <div class="profile-value">커피챗 (대면)</div>
-        </div>
+    <div style="font-size:10pt;font-weight:800;color:#191f28;margin:20px 0 10px;letter-spacing:-0.5px;">벤치마크 채널 비교</div>
+
+    <table class="tb">
+      <thead>
+        <tr>
+          <th>채널</th>
+          <th>구독자</th>
+          <th>포지셔닝</th>
+          <th>수익 구조</th>
+          <th>참고</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>신사임당</b></td>
+          <td>183만</td>
+          <td>사업/재테크 인사이트</td>
+          <td>광고 + 강의 + 커뮤니티</td>
+          <td class="blue">월 1.5~3억</td>
+        </tr>
+        <tr>
+          <td><b>김미경TV</b></td>
+          <td>123만</td>
+          <td>동기부여 + 트렌드</td>
+          <td>강연 + MKYU 대학</td>
+          <td>강사 → CEO 전환</td>
+        </tr>
+        <tr>
+          <td><b>삼프로TV</b></td>
+          <td>300만+</td>
+          <td>경제/투자 전문</td>
+          <td>광고 + 유료 구독</td>
+          <td class="blue">기업가치 1조원</td>
+        </tr>
+        <tr>
+          <td><b>자청</b></td>
+          <td>62만</td>
+          <td>독서/사업 인사이트</td>
+          <td>강의 + 독서모임</td>
+          <td>강의 매출 수십억</td>
+        </tr>
+        <tr>
+          <td><b>월급쟁이부자들</b></td>
+          <td>85만</td>
+          <td>부동산/재테크</td>
+          <td>강의 + 커뮤니티</td>
+          <td>커뮤니티 연 수백억</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="card-dark" style="text-align:center;">
+      <div style="font-size:12pt; font-weight:800; line-height:1.5; letter-spacing:-0.5px;">
+        이 채널들의 공통점?<br>
+        "업계 경험자가 인사이트를 풀어놓는 채널"
+      </div>
+      <div style="font-size:8pt; color:#4e5968; margin-top:8px;">
+        야놀자 전 대표 = 콘텐츠 자산이 이미 풍부한 포지션
       </div>
     </div>
 
     <div class="note">
-      <b>야놀자 참고:</b> 2005년 이수진 대표 창업, 숙박 O2O → 글로벌 여행 테크 기업. 기업가치 약 10조원. 놀유니버스(B2C), 야놀자클라우드(B2B) 2축 구조. 2025년 계열사 리더십 전면 개편.
+      <b>핵심 인사이트:</b> 위 채널들은 모두 "경험 기반 인사이트"로 시작했고, 유튜브 광고 수익은 전체 매출의 20~30%에 불과합니다. 진짜 돈은 강연(회당 300~1,000만원), 유료 강의(기수당 1,000~5,000만원), 커뮤니티(월 구독)에서 나옵니다.
     </div>
 
   </div>
   <div class="pf"><span>Flowmus Confidential</span><span>Coffee Chat Prep</span></div>
 </div>
 
-<!-- ══════════ PAGE 2 — 파악할 것 ══════════ -->
+<!-- ══════════ PAGE 2 — 콘텐츠 전략 ══════════ -->
 <div class="page">
   <div class="pi">
 
     <div class="ph">
       <div class="ph-label">02</div>
-      <h2>파악할 질문</h2>
-      <div class="ph-sub">퍼스널 브랜딩의 방향을 잡기 위해 반드시 확인해야 하는 것들.</div>
+      <h2>콘텐츠 전략</h2>
+      <div class="ph-sub">야놀자 전 대표만 할 수 있는 이야기 3가지 축 + 구체적 영상 기획안.</div>
     </div>
 
-    <div style="font-size:10pt;font-weight:800;color:#191f28;margin-bottom:14px;letter-spacing:-0.5px;">A. 현재 상황</div>
-
-    <div class="q-item">
-      <div class="q-num blue">1</div>
-      <div class="q-text">야놀자를 나오신 지 <em>얼마나</em> 되셨고, 이후 어떤 활동을 하고 계신가요?
-        <span class="q-hint">퇴사 시기, 현재 법인 유무, 투자/자문/창업 등</span></div>
-    </div>
-    <div class="q-item">
-      <div class="q-num blue">2</div>
-      <div class="q-text">퍼스널 브랜딩을 하려는 <em>계기</em>가 있으신가요?
-        <span class="q-hint">강연 요청? 투자 활동? 새로운 사업? 미디어 노출? → 브랜딩 목적 파악</span></div>
-    </div>
-    <div class="q-item">
-      <div class="q-num">3</div>
-      <div class="q-text">현재 운영 중인 <em>소셜 채널</em>이 있으신가요?
-        <span class="q-hint">인스타, 유튜브, 링크드인, 블로그 — 팔로워 규모, 활동 빈도 확인</span></div>
-    </div>
-    <div class="q-item">
-      <div class="q-num">4</div>
-      <div class="q-text">본인을 <em>한 문장</em>으로 소개한다면?
-        <span class="q-hint">현재 정체성 인식. "야놀자 전 대표"만 있는지 vs 새로운 포지셔닝이 있는지</span></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:18px;">
+      <div style="background:#191f28;border-radius:12px;padding:16px;text-align:center;">
+        <div style="color:#3182f6;font-size:8pt;font-weight:700;margin-bottom:4px;">PILLAR 1</div>
+        <div style="color:#fff;font-size:10pt;font-weight:800;">내부자 인사이트</div>
+        <div style="color:#6b7684;font-size:7.5pt;margin-top:4px;">"야놀자 안에서 본 진짜 이야기"</div>
+      </div>
+      <div style="background:#f2f7ff;border-radius:12px;padding:16px;text-align:center;">
+        <div style="color:#3182f6;font-size:8pt;font-weight:700;margin-bottom:4px;">PILLAR 2</div>
+        <div style="color:#191f28;font-size:10pt;font-weight:800;">경영 실전 노하우</div>
+        <div style="color:#6b7684;font-size:7.5pt;margin-top:4px;">"10조 기업에서 배운 것들"</div>
+      </div>
+      <div style="background:#f9fafb;border-radius:12px;padding:16px;text-align:center;">
+        <div style="color:#3182f6;font-size:8pt;font-weight:700;margin-bottom:4px;">PILLAR 3</div>
+        <div style="color:#191f28;font-size:10pt;font-weight:800;">업계 해부</div>
+        <div style="color:#6b7684;font-size:7.5pt;margin-top:4px;">"숙박/여행/플랫폼의 민낯"</div>
+      </div>
     </div>
 
-    <div style="height:20px;"></div>
-    <div style="font-size:10pt;font-weight:800;color:#191f28;margin-bottom:14px;letter-spacing:-0.5px;">B. 브랜딩 니즈</div>
+    <div style="font-size:10pt;font-weight:800;color:#191f28;margin-bottom:10px;letter-spacing:-0.5px;">영상 기획안 예시 — 론칭 초기 5편</div>
 
-    <div class="q-item">
-      <div class="q-num blue">5</div>
-      <div class="q-text">어떤 분야에서 <em>전문가</em>로 인식되고 싶으신가요?
-        <span class="q-hint">스타트업? 플랫폼? 숙박/여행? 경영? 투자? → 포지셔닝의 핵심</span></div>
-    </div>
-    <div class="q-item">
-      <div class="q-num blue">6</div>
-      <div class="q-text"><em>누구에게</em> 보이고 싶으신가요? 타겟 오디언스는?
-        <span class="q-hint">예비 창업자 / 기업 임원 / 투자자 / 일반 대중 — 채널 전략이 달라짐</span></div>
-    </div>
-    <div class="q-item">
-      <div class="q-num">7</div>
-      <div class="q-text">벤치마크하고 싶은 <em>인물이나 채널</em>이 있으신가요?
-        <span class="q-hint">예: 김봉진(배민), 이승건(비바리퍼블리카), 김슬아(컬리) 등</span></div>
-    </div>
-    <div class="q-item">
-      <div class="q-num">8</div>
-      <div class="q-text">브랜딩의 <em>최종 목표</em>는 무엇인가요?
-        <span class="q-hint">강연 수입? 신규 사업 홍보? 인맥 구축? 사회적 영향력? 출판?</span></div>
+    <div class="vc hot">
+      <div class="vc-top">
+        <span class="vc-tag story">STORY</span>
+        <span class="vc-view">예상 조회수 50만+</span>
+      </div>
+      <div class="vc-title">"10조 기업 야놀자, 나는 왜 떠났는가"</div>
+      <div class="vc-desc">론칭 영상. 야놀자 입사부터 퇴사까지, 성장과 갈등, 떠난 이유. 인간적 솔직함이 핵심. 첫 영상은 무조건 "나는 누구인가"로 시작해야 다음 영상이 먹힘.</div>
+      <div class="vc-thumb">썸네일: 야놀자 로고 + 대표 사진 반반 구도 / "퇴사합니다"</div>
     </div>
 
-    <div style="height:20px;"></div>
-    <div style="font-size:10pt;font-weight:800;color:#191f28;margin-bottom:14px;letter-spacing:-0.5px;">C. 실행 환경</div>
-
-    <div class="q-item">
-      <div class="q-num">9</div>
-      <div class="q-text">콘텐츠 제작에 <em>직접 참여</em>하실 의향은 어느 정도인가요?
-        <span class="q-hint">직접 출연 / 글만 쓰기 / 기획만 참여 / 전부 위임 — 운영 모델 결정</span></div>
-    </div>
-    <div class="q-item">
-      <div class="q-num">10</div>
-      <div class="q-text"><em>예산</em>과 <em>일정</em>에 대한 기대치가 있으신가요?
-        <span class="q-hint">월 얼마, 몇 개월 계약 — 서비스 패키지 맞춤 설계 기반</span></div>
+    <div class="vc">
+      <div class="vc-top">
+        <span class="vc-tag insight">INSIGHT</span>
+        <span class="vc-view">예상 30만+</span>
+      </div>
+      <div class="vc-title">"야놀자가 10조가 된 진짜 이유 (내부에서 본 3가지)"</div>
+      <div class="vc-desc">외부에서는 모르는 내부 성장 전략. 모텔앱 → 슈퍼앱 전환 과정, 소프트뱅크 투자 유치 비하인드. 데이터와 스토리 조합.</div>
+      <div class="vc-thumb">썸네일: "10조" 큰 글씨 + 야놀자 성장 그래프</div>
     </div>
 
-    <div class="warn">
-      <b>유의:</b> 야놀자급 대기업 전 대표는 이미 네트워크와 인지도가 있음. "제로에서 시작"이 아니라 "기존 자산을 체계화"하는 관점으로 접근.
+    <div class="vc">
+      <div class="vc-top">
+        <span class="vc-tag biz">BIZ</span>
+        <span class="vc-view">예상 20만+</span>
+      </div>
+      <div class="vc-title">"대표가 되면 아무도 안 알려주는 것들"</div>
+      <div class="vc-desc">경영자의 고독, 의사결정 압박, 직원과의 거리감. 예비 창업자와 직장인 모두 공감하는 콘텐츠. 댓글 유도력 높음.</div>
+      <div class="vc-thumb">썸네일: 빈 회의실 혼자 앉아있는 뒷모습</div>
+    </div>
+
+    <div class="vc">
+      <div class="vc-top">
+        <span class="vc-tag talk">TALK</span>
+        <span class="vc-view">예상 15만+</span>
+      </div>
+      <div class="vc-title">"야놀자 vs 여기어때, 진짜 차이가 뭔지 알려드립니다"</div>
+      <div class="vc-desc">업계 경쟁 비하인드. 표면적 차이가 아닌 전략/문화/기술 관점의 분석. 검색 유입 극대화 키워드.</div>
+      <div class="vc-thumb">썸네일: 두 로고 VS 구도 + 대표 표정</div>
+    </div>
+
+    <div class="vc">
+      <div class="vc-top">
+        <span class="vc-tag insight">SHORTS</span>
+        <span class="vc-view">Shorts 100만+ 가능</span>
+      </div>
+      <div class="vc-title">"야놀자 대표가 직원 면접 볼 때 딱 하나만 봅니다" (60초)</div>
+      <div class="vc-desc">숏폼. 강한 한줄 메시지 → 구독 유도. 채널 성장 초기에 Shorts는 구독자 획득 엔진.</div>
     </div>
 
   </div>
   <div class="pf"><span>Flowmus Confidential</span><span>Coffee Chat Prep</span></div>
 </div>
 
-<!-- ══════════ PAGE 3 — 퍼스널 브랜딩 프레임워크 ══════════ -->
+<!-- ══════════ PAGE 3 — 제작 파이프라인 + 채널 운영 ══════════ -->
 <div class="page">
   <div class="pi">
 
     <div class="ph">
       <div class="ph-label">03</div>
-      <h2>퍼스널 브랜딩 프레임워크</h2>
-      <div class="ph-sub">CEO/대표급 퍼스널 브랜딩의 4단계 구조.</div>
+      <h2>프로덕션 & 채널 운영</h2>
+      <div class="ph-sub">MCN 실전 운영 기반. 기획부터 업로드까지 전 과정을 Flowmus가 담당.</div>
     </div>
 
-    <div class="card-dark" style="text-align:center; margin-bottom:20px;">
-      <div style="font-size:12pt; font-weight:800; line-height:1.5; letter-spacing:-0.5px;">
-        스토리를 정리하고 → 채널을 세우고 →<br>콘텐츠를 쌓고 → 영향력을 확장한다.
-      </div>
-      <div style="font-size:8pt; color:#4e5968; margin-top:8px;">Personal Branding Pipeline</div>
-    </div>
+    <div style="font-size:10pt;font-weight:800;color:#191f28;margin-bottom:10px;letter-spacing:-0.5px;">제작 파이프라인</div>
 
-    <div class="svc-grid">
-      <div class="svc-card">
-        <div class="svc-badge basic">PHASE 1</div>
-        <div class="svc-title">스토리 설계</div>
-        <ul class="svc-list">
-          <li>핵심 내러티브 정리 (야놀자 경험 → 인사이트)</li>
-          <li>"왜 이 사람 이야기를 들어야 하는가?"</li>
-          <li>포지셔닝 키워드 3개 확정</li>
-          <li>프로필/바이오 라인 작성</li>
-          <li>엘리베이터 피치 1분 완성</li>
-        </ul>
+    <div style="display:flex;align-items:center;gap:0;margin-bottom:18px;">
+      <div style="flex:1;background:#191f28;border-radius:10px;padding:12px 10px;text-align:center;">
+        <div style="color:#3182f6;font-size:7pt;font-weight:700;">STEP 1</div>
+        <div style="color:#fff;font-size:8.5pt;font-weight:700;margin-top:2px;">기획</div>
+        <div style="color:#6b7684;font-size:7pt;margin-top:2px;">주제 선정<br>대본 구성</div>
       </div>
-      <div class="svc-card">
-        <div class="svc-badge basic">PHASE 2</div>
-        <div class="svc-title">채널 구축</div>
-        <ul class="svc-list">
-          <li>주력 채널 선정 (링크드인 / 유튜브 / 인스타)</li>
-          <li>보조 채널 연동 (뉴스레터, 블로그 등)</li>
-          <li>프로필 디자인 & 톤앤매너 확정</li>
-          <li>채널별 콘텐츠 포맷 정의</li>
-          <li>론칭 콘텐츠 5개 사전 제작</li>
-        </ul>
+      <div style="color:#d1d6db;padding:0 2px;font-size:14pt;">&rarr;</div>
+      <div style="flex:1;background:#f9fafb;border-radius:10px;padding:12px 10px;text-align:center;">
+        <div style="color:#3182f6;font-size:7pt;font-weight:700;">STEP 2</div>
+        <div style="color:#191f28;font-size:8.5pt;font-weight:700;margin-top:2px;">촬영</div>
+        <div style="color:#6b7684;font-size:7pt;margin-top:2px;">60~90분<br>1회 방문</div>
       </div>
-      <div class="svc-card featured">
-        <div class="svc-badge pro">PHASE 3</div>
-        <div class="svc-title">콘텐츠 운영</div>
-        <ul class="svc-list">
-          <li>월간 콘텐츠 캘린더 운영</li>
-          <li>인터뷰/칼럼/영상 기획 & 제작</li>
-          <li>트렌드 연계 콘텐츠 (시의성)</li>
-          <li>댓글/DM 관리 & 커뮤니티 운영</li>
-          <li>월간 성과 리포트</li>
-        </ul>
+      <div style="color:#d1d6db;padding:0 2px;font-size:14pt;">&rarr;</div>
+      <div style="flex:1;background:#f9fafb;border-radius:10px;padding:12px 10px;text-align:center;">
+        <div style="color:#3182f6;font-size:7pt;font-weight:700;">STEP 3</div>
+        <div style="color:#191f28;font-size:8.5pt;font-weight:700;margin-top:2px;">편집</div>
+        <div style="color:#6b7684;font-size:7pt;margin-top:2px;">자막+효과<br>3~5일</div>
       </div>
-      <div class="svc-card">
-        <div class="svc-badge full">PHASE 4</div>
-        <div class="svc-title">영향력 확장</div>
-        <ul class="svc-list">
-          <li>미디어 노출 (인터뷰, 기고, 팟캐스트)</li>
-          <li>강연/패널 섭외 연결</li>
-          <li>출판 기획 (전자책 → 단행본)</li>
-          <li>네트워킹 이벤트 기획</li>
-          <li>수익화 모델 설계</li>
-        </ul>
+      <div style="color:#d1d6db;padding:0 2px;font-size:14pt;">&rarr;</div>
+      <div style="flex:1;background:#f9fafb;border-radius:10px;padding:12px 10px;text-align:center;">
+        <div style="color:#3182f6;font-size:7pt;font-weight:700;">STEP 4</div>
+        <div style="color:#191f28;font-size:8.5pt;font-weight:700;margin-top:2px;">썸네일</div>
+        <div style="color:#6b7684;font-size:7pt;margin-top:2px;">A/B 테스트<br>제목 최적화</div>
+      </div>
+      <div style="color:#d1d6db;padding:0 2px;font-size:14pt;">&rarr;</div>
+      <div style="flex:1;background:#f2f7ff;border-radius:10px;padding:12px 10px;text-align:center;">
+        <div style="color:#3182f6;font-size:7pt;font-weight:700;">STEP 5</div>
+        <div style="color:#3182f6;font-size:8.5pt;font-weight:700;margin-top:2px;">업로드</div>
+        <div style="color:#6b7684;font-size:7pt;margin-top:2px;">SEO 최적화<br>성과 모니터링</div>
       </div>
     </div>
 
-    <div class="note">
-      <b>CEO급 퍼스널 브랜딩 핵심:</b> "자랑"이 아닌 "인사이트 공유" 관점. 야놀자에서의 경험을 본인의 자랑이 아닌 업계에 도움이 되는 지식으로 포장해야 팔로워가 모인다. "내가 이걸 했다"가 아니라 "이걸 하면서 이것을 배웠다"의 톤.
+    <div style="font-size:10pt;font-weight:800;color:#191f28;margin-bottom:10px;letter-spacing:-0.5px;">대표님의 시간 투입</div>
+
+    <table class="tb">
+      <thead>
+        <tr>
+          <th>항목</th>
+          <th>대표님 역할</th>
+          <th>시간</th>
+          <th>Flowmus 역할</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>기획</b></td>
+          <td>주제 방향 확인 (카톡 1분)</td>
+          <td class="blue">1분</td>
+          <td>주제 선정, 대본 작성, 구성안</td>
+        </tr>
+        <tr>
+          <td><b>촬영</b></td>
+          <td>카메라 앞 토크 (월 2회)</td>
+          <td class="blue">월 3시간</td>
+          <td>촬영 세팅, 디렉팅, 큐시트</td>
+        </tr>
+        <tr>
+          <td><b>편집</b></td>
+          <td>최종 확인 (영상 보고 OK)</td>
+          <td class="blue">30분</td>
+          <td>풀 편집, 자막, 효과, 색보정</td>
+        </tr>
+        <tr>
+          <td><b>업로드</b></td>
+          <td>없음</td>
+          <td class="blue">0분</td>
+          <td>제목, 썸네일, 태그, 예약 업로드</td>
+        </tr>
+        <tr>
+          <td><b>운영</b></td>
+          <td>없음</td>
+          <td class="blue">0분</td>
+          <td>댓글 관리, 커뮤니티, 분석 리포트</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="card-blue" style="text-align:center;">
+      <div style="font-size:11pt;font-weight:800;color:#191f28;letter-spacing:-0.5px;">
+        대표님 월 투입 시간: <span style="color:#3182f6;">약 4시간</span>
+      </div>
+      <div style="font-size:8pt;color:#4e5968;margin-top:4px;">촬영 월 2회 (1회 90분) + 확인 30분. 나머지는 전부 Flowmus.</div>
+    </div>
+
+    <div style="font-size:10pt;font-weight:800;color:#191f28;margin:20px 0 10px;letter-spacing:-0.5px;">채널 운영 전략</div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <div class="card-outline" style="margin:0;padding:16px 18px;">
+        <div style="font-size:9pt;font-weight:700;color:#191f28;margin-bottom:6px;">업로드 빈도</div>
+        <div style="font-size:8pt;color:#4e5968;line-height:1.7;">
+          롱폼: <b style="color:#3182f6;">주 1회</b> (매주 수요일 오후 6시)<br>
+          Shorts: <b style="color:#3182f6;">주 3회</b> (월/수/금 오전 8시)<br>
+          롱폼 1개에서 Shorts 3~4개 추출
+        </div>
+      </div>
+      <div class="card-outline" style="margin:0;padding:16px 18px;">
+        <div style="font-size:9pt;font-weight:700;color:#191f28;margin-bottom:6px;">알고리즘 전략</div>
+        <div style="font-size:8pt;color:#4e5968;line-height:1.7;">
+          첫 48시간 CTR(클릭률) <b style="color:#3182f6;">8%+</b> 목표<br>
+          시청 지속률 <b style="color:#3182f6;">50%+</b> (10분 영상 = 5분)<br>
+          썸네일 A/B 테스트 필수 (3시간 후 교체)
+        </div>
+      </div>
     </div>
 
   </div>
   <div class="pf"><span>Flowmus Confidential</span><span>Coffee Chat Prep</span></div>
 </div>
 
-<!-- ══════════ PAGE 4 — 서비스 제안 ══════════ -->
+<!-- ══════════ PAGE 4 — 90일 로드맵 + 수익 ══════════ -->
 <div class="page">
   <div class="pi">
 
     <div class="ph">
       <div class="ph-label">04</div>
-      <h2>서비스 패키지</h2>
-      <div class="ph-sub">니즈에 따라 3가지 패키지 중 제안. 커피챗에서 방향 확인 후 맞춤 설계.</div>
+      <h2>90일 런칭 로드맵</h2>
+      <div class="ph-sub">구독자 0에서 시작 → 90일 후 1만 구독자 + 첫 수익화 기반 완성.</div>
     </div>
 
-    <div class="card-outline" style="padding:0; overflow:hidden; margin-bottom:16px;">
-      <div style="background:#191f28; padding:14px 24px; display:flex; justify-content:space-between; align-items:center;">
-        <span style="color:#fff; font-weight:700; font-size:9.5pt;">A. 브랜드 셋업 (1회성)</span>
-        <span style="color:#3182f6; font-size:8pt; font-weight:700;">PHASE 1~2</span>
+    <div class="tl">
+      <div class="tl-week">1~2주</div>
+      <div class="tl-dot blue"></div>
+      <div class="tl-body active">
+        <b>채널 셋업 + 스토리 설계</b>
+        <p>포지셔닝 확정 / 채널명+로고+배너 디자인 / 대표 인터뷰 (콘텐츠 소재 발굴) / 론칭 영상 5개 대본 작성</p>
       </div>
-      <div style="padding:18px 24px;">
-        <div style="font-size:8.5pt; color:#4e5968; line-height:1.8;">
-          <b style="color:#191f28;">포함:</b> 스토리 설계 + 포지셔닝 + 채널 구축 + 론칭 콘텐츠 5개 제작<br>
-          <b style="color:#191f28;">기간:</b> 4~6주<br>
-          <b style="color:#191f28;">적합:</b> 채널과 방향만 잡아주면 본인이 직접 운영할 수 있는 경우
-        </div>
+    </div>
+    <div class="tl">
+      <div class="tl-week">3~4주</div>
+      <div class="tl-dot blue"></div>
+      <div class="tl-body active">
+        <b>촬영 + 론칭 콘텐츠 제작</b>
+        <p>촬영 2회 (1회 90분, 영상 2~3개 분량 일괄 촬영) / 편집 5편 완성 / 썸네일 제작 / 예약 업로드 세팅</p>
+      </div>
+    </div>
+    <div class="tl">
+      <div class="tl-week">5주</div>
+      <div class="tl-dot blue"></div>
+      <div class="tl-body active">
+        <b>론칭 &mdash; 3일 연속 업로드</b>
+        <p>월/수/금 연속 3편 공개 (알고리즘 부스트) / 동시에 Shorts 5편 배포 / 커뮤니티 탭 활성화</p>
+      </div>
+    </div>
+    <div class="tl">
+      <div class="tl-week">6~8주</div>
+      <div class="tl-dot"></div>
+      <div class="tl-body">
+        <b>주 1회 업로드 정착 + Shorts 공세</b>
+        <p>롱폼 주 1회 + Shorts 주 3회 / 데이터 분석 (CTR, 시청지속률, 유입 경로) / 잘 터진 주제 시리즈화</p>
+      </div>
+    </div>
+    <div class="tl">
+      <div class="tl-week">9~12주</div>
+      <div class="tl-dot"></div>
+      <div class="tl-body">
+        <b>구독자 1만 돌파 + 수익화 시작</b>
+        <p>유튜브 파트너 프로그램 가입 (구독 1,000+시청 4,000시간) / 첫 브랜디드 콘텐츠 협상 / 강연 섭외 시작</p>
       </div>
     </div>
 
-    <div class="card-outline" style="padding:0; overflow:hidden; border-color:#3182f6; margin-bottom:16px;">
-      <div style="background:#3182f6; padding:14px 24px; display:flex; justify-content:space-between; align-items:center;">
-        <span style="color:#fff; font-weight:700; font-size:9.5pt;">B. 브랜드 운영 (월정액)</span>
-        <span style="color:#fff; font-size:8pt; font-weight:700; opacity:0.7;">PHASE 1~3 &middot; RECOMMENDED</span>
-      </div>
-      <div style="padding:18px 24px; background:#f2f7ff;">
-        <div style="font-size:8.5pt; color:#4e5968; line-height:1.8;">
-          <b style="color:#191f28;">포함:</b> 셋업 전체 + 월간 콘텐츠 기획/제작 (8~12개) + 채널 운영 + 월간 리포트<br>
-          <b style="color:#191f28;">기간:</b> 최소 3개월 계약<br>
-          <b style="color:#191f28;">적합:</b> 콘텐츠 제작을 위임하고 본인은 소재만 제공하고 싶은 경우
-        </div>
-      </div>
+    <div style="height:16px;"></div>
+    <div style="font-size:10pt;font-weight:800;color:#191f28;margin-bottom:10px;letter-spacing:-0.5px;">수익 프로젝션 (보수적 기준)</div>
+
+    <table class="tb">
+      <thead>
+        <tr>
+          <th>시점</th>
+          <th>구독자</th>
+          <th>광고 수익</th>
+          <th>강연/출연</th>
+          <th>강의/커뮤니티</th>
+          <th style="color:#3182f6;">월 합계</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>3개월</b></td>
+          <td>1만</td>
+          <td>30~50만</td>
+          <td>300만 (1회)</td>
+          <td>-</td>
+          <td class="blue">300~350만</td>
+        </tr>
+        <tr>
+          <td><b>6개월</b></td>
+          <td>5만</td>
+          <td>150~300만</td>
+          <td>600만 (2회)</td>
+          <td>-</td>
+          <td class="blue">750~900만</td>
+        </tr>
+        <tr>
+          <td><b>12개월</b></td>
+          <td>20만</td>
+          <td>500~800만</td>
+          <td>1,000만 (2회)</td>
+          <td>2,000만 (1기)</td>
+          <td class="blue">3,500~3,800만</td>
+        </tr>
+        <tr>
+          <td><b>24개월</b></td>
+          <td>50만+</td>
+          <td>1,500~2,000만</td>
+          <td>2,000만 (2회)</td>
+          <td>5,000만 (2기)</td>
+          <td class="blue">8,500만~1억</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="note">
+      <b>수익의 핵심은 유튜브 광고가 아닙니다.</b> 유튜브는 "영향력 엔진"이고, 진짜 수익은 강연(회당 300~1,000만), 유료 강의(기수당 2,000~5,000만), 기업 자문/컨설팅, 출판에서 나옵니다. 구독자 10만 넘으면 출판사에서 먼저 연락 옵니다.
     </div>
 
-    <div class="card-outline" style="padding:0; overflow:hidden; margin-bottom:16px;">
-      <div style="background:#191f28; padding:14px 24px; display:flex; justify-content:space-between; align-items:center;">
-        <span style="color:#fff; font-weight:700; font-size:9.5pt;">C. 풀 매니지먼트</span>
-        <span style="color:#4e5968; font-size:8pt; font-weight:700;">PHASE 1~4</span>
-      </div>
-      <div style="padding:18px 24px;">
-        <div style="font-size:8.5pt; color:#4e5968; line-height:1.8;">
-          <b style="color:#191f28;">포함:</b> 전체 운영 + 미디어 연결 + 강연 섭외 + 출판 기획 + 수익화 설계<br>
-          <b style="color:#191f28;">기간:</b> 6개월+ 파트너십<br>
-          <b style="color:#191f28;">적합:</b> 퍼스널 브랜딩을 하나의 사업으로 만들고 싶은 경우
-        </div>
-      </div>
-    </div>
-
-    <div style="margin-top:24px;">
-      <div style="font-size:11pt;font-weight:800;color:#191f28;margin-bottom:12px;letter-spacing:-0.5px;">CEO급 퍼스널 브랜딩 — 채널별 전략</div>
-      <div class="card" style="padding:0; overflow:hidden;">
-        <table style="width:100%; border-collapse:collapse; font-size:8.5pt;">
-          <thead>
-            <tr>
-              <th style="background:#191f28;color:#fff;padding:10px 16px;text-align:left;font-weight:700;font-size:8pt;">채널</th>
-              <th style="background:#191f28;color:#fff;padding:10px 16px;text-align:left;font-weight:700;font-size:8pt;">적합도</th>
-              <th style="background:#191f28;color:#fff;padding:10px 16px;text-align:left;font-weight:700;font-size:8pt;">콘텐츠 포맷</th>
-              <th style="background:#191f28;color:#fff;padding:10px 16px;text-align:left;font-weight:700;font-size:8pt;">타겟</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="padding:10px 16px;border-bottom:1px solid #f2f4f6;font-weight:700;color:#3182f6;">LinkedIn</td>
-              <td style="padding:10px 16px;border-bottom:1px solid #f2f4f6;">최우선</td>
-              <td style="padding:10px 16px;border-bottom:1px solid #f2f4f6;">인사이트 글, 업계 분석, 칼럼</td>
-              <td style="padding:10px 16px;border-bottom:1px solid #f2f4f6;">투자자, 경영진, 창업가</td>
-            </tr>
-            <tr style="background:#f9fafb;">
-              <td style="padding:10px 16px;border-bottom:1px solid #f2f4f6;font-weight:700;">YouTube</td>
-              <td style="padding:10px 16px;border-bottom:1px solid #f2f4f6;">높음</td>
-              <td style="padding:10px 16px;border-bottom:1px solid #f2f4f6;">인터뷰, 대담, 브이로그</td>
-              <td style="padding:10px 16px;border-bottom:1px solid #f2f4f6;">예비 창업자, 일반 대중</td>
-            </tr>
-            <tr>
-              <td style="padding:10px 16px;border-bottom:1px solid #f2f4f6;font-weight:700;">Instagram</td>
-              <td style="padding:10px 16px;border-bottom:1px solid #f2f4f6;">보조</td>
-              <td style="padding:10px 16px;border-bottom:1px solid #f2f4f6;">카드뉴스, 일상, 릴스</td>
-              <td style="padding:10px 16px;border-bottom:1px solid #f2f4f6;">MZ 팔로워, 라이프스타일</td>
-            </tr>
-            <tr style="background:#f9fafb;">
-              <td style="padding:10px 16px;font-weight:700;">Newsletter</td>
-              <td style="padding:10px 16px;">추천</td>
-              <td style="padding:10px 16px;">주간/격주 업계 인사이트</td>
-              <td style="padding:10px 16px;">충성 팬, 깊은 관계 구축</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="warn">
+      <b>솔직한 이야기:</b> 구독자 10만까지 최소 6~9개월. 3개월 안에 100만은 불가능합니다. 하지만 "야놀자 전 대표"라는 타이틀은 초기 성장 속도를 3~5배 가속시킬 수 있는 강력한 자산입니다.
     </div>
 
   </div>
   <div class="pf"><span>Flowmus Confidential</span><span>Coffee Chat Prep</span></div>
 </div>
 
-<!-- ══════════ PAGE 5 — 오늘 정해야 할 것 ══════════ -->
+<!-- ══════════ PAGE 5 — 커피챗 질문 + 결정사항 ══════════ -->
 <div class="page">
   <div class="pi">
 
     <div class="ph">
       <div class="ph-label">05</div>
-      <h2>오늘 정해야 할 것</h2>
-      <div class="ph-sub">커피챗 이후 바로 움직이기 위한 결정 사항.</div>
+      <h2>커피챗 핵심 질문</h2>
+      <div class="ph-sub">채널 PD 관점에서 반드시 확인해야 하는 것들. 이게 채널의 방향을 결정합니다.</div>
     </div>
 
-    <div class="card-outline" style="padding:20px 24px;">
-      <div class="rec-item"><div class="rec-label">1. 브랜딩 목적</div><div class="rec-value" style="color:#191f28;">강연 / 투자 활동 / 신규 사업 / 미디어 / 기타: _______</div></div>
-      <div class="rec-item"><div class="rec-label">2. 포지셔닝</div><div class="rec-value" style="color:#191f28;">"_____ 전문가" — 어떤 키워드로 불리고 싶은지</div></div>
-      <div class="rec-item"><div class="rec-label">3. 주력 채널</div><div class="rec-value" style="color:#191f28;">LinkedIn / YouTube / Instagram / Newsletter</div></div>
-      <div class="rec-item"><div class="rec-label">4. 참여 수준</div><div class="rec-value" style="color:#191f28;">직접 출연 / 글만 제공 / 기획만 참여 / 전부 위임</div></div>
-      <div class="rec-item"><div class="rec-label">5. 서비스 범위</div><div class="rec-value" style="color:#191f28;">A. 셋업 / B. 월정액 운영 / C. 풀 매니지먼트</div></div>
-      <div class="rec-item"><div class="rec-label">6. 예산</div><div class="rec-value" style="color:#191f28;">월 _______만원 / 일시불 _______만원</div></div>
-      <div class="rec-item"><div class="rec-label">7. 시작 시기</div><div class="rec-value" style="color:#191f28;">즉시 / 5월 / 6월 / 미정</div></div>
+    <div class="q-item">
+      <div class="q-num blue">1</div>
+      <div class="q-text"><em>카메라 앞에서 편하게 말할 수 있으신가요?</em>
+        <span class="q-hint">YES = 토크형 채널 / NO = 인터뷰형 or 나레이션형. 촬영 방식이 완전히 달라짐</span></div>
+    </div>
+    <div class="q-item">
+      <div class="q-num blue">2</div>
+      <div class="q-text">야놀자에서 <em>가장 치열했던 순간</em>이 언제였나요?
+        <span class="q-hint">이게 론칭 영상의 핵심 소재. 감정이 실린 진짜 이야기 = 조회수</span></div>
+    </div>
+    <div class="q-item">
+      <div class="q-num blue">3</div>
+      <div class="q-text">숙박/여행 업계에서 <em>사람들이 모르지만 대표님은 아는 것</em>이 있나요?
+        <span class="q-hint">업계 내부자만 아는 정보 = 차별화 콘텐츠의 원천. 최소 10개 리스트업</span></div>
+    </div>
+    <div class="q-item">
+      <div class="q-num">4</div>
+      <div class="q-text">퍼스널 브랜딩의 <em>최종 목적</em>이 뭔가요?
+        <span class="q-hint">강연/투자/새 사업/영향력/출판 → 목적에 따라 채널 톤이 완전히 달라짐</span></div>
+    </div>
+    <div class="q-item">
+      <div class="q-num">5</div>
+      <div class="q-text">지금 <em>소셜 계정</em>이 있으신가요? 팔로워 규모는?
+        <span class="q-hint">기존 팔로워 = 론칭 부스터. 0명이면 Shorts 공세로 초기 구독자 확보</span></div>
+    </div>
+    <div class="q-item">
+      <div class="q-num">6</div>
+      <div class="q-text"><em>하면 안 되는 이야기</em>가 있나요?
+        <span class="q-hint">NDA, 전직장 관계, 법적 이슈 — 경계선을 미리 확인해야 사고 방지</span></div>
+    </div>
+    <div class="q-item">
+      <div class="q-num">7</div>
+      <div class="q-text">벤치마크 채널이 있나요? <em>"이런 느낌"</em> 하는 채널은?
+        <span class="q-hint">신사임당 스타일 vs 삼프로TV 스타일 vs 자청 스타일 — 톤앤매너 결정</span></div>
     </div>
 
-    <div style="margin-top:24px;">
-      <div style="font-size:11pt;font-weight:800;color:#191f28;margin-bottom:12px;letter-spacing:-0.5px;">커피챗 후 액션</div>
-      <div class="chk"><div class="chk-box"></div><div class="chk-text"><b>커피챗 내용 정리 & 공동대표 공유</b> <span>당일 내 정리, 권현우 대표에게 전달</span></div></div>
-      <div class="chk"><div class="chk-box"></div><div class="chk-text"><b>감사 메시지 발송</b> <span>커피챗 당일, 논의 내용 요약 포함</span></div></div>
-      <div class="chk"><div class="chk-box"></div><div class="chk-text"><b>서비스 제안서 작성</b> <span>3일 내, 커피챗에서 확인된 니즈 기반 맞춤 제안</span></div></div>
-      <div class="chk"><div class="chk-box"></div><div class="chk-text"><b>견적서 발송</b> <span>제안서와 함께, 패키지별 가격 포함</span></div></div>
-      <div class="chk"><div class="chk-box"></div><div class="chk-text"><b>2차 미팅 일정 확정</b> <span>1주일 내, 구체적 실행 계획 논의</span></div></div>
+    <div style="height:16px;"></div>
+    <div style="font-size:10pt;font-weight:800;color:#191f28;margin-bottom:10px;letter-spacing:-0.5px;">오늘 정해야 할 것</div>
+
+    <div class="card-outline" style="padding:16px 20px;">
+      <div class="rec-item"><div class="rec-label">채널 방향</div><div class="rec-value" style="color:#191f28;">경영 인사이트 / 업계 해부 / 라이프스타일 / 복합</div></div>
+      <div class="rec-item"><div class="rec-label">출연 스타일</div><div class="rec-value" style="color:#191f28;">단독 토크 / 대담 / 인터뷰 / 나레이션 + 화면</div></div>
+      <div class="rec-item"><div class="rec-label">업로드 빈도</div><div class="rec-value" style="color:#191f28;">주 1회 / 주 2회 / 격주</div></div>
+      <div class="rec-item"><div class="rec-label">촬영 가능일</div><div class="rec-value" style="color:#191f28;">요일: _____ / 장소: 사무실 / 스튜디오 / 카페</div></div>
+      <div class="rec-item"><div class="rec-label">시작 시기</div><div class="rec-value" style="color:#191f28;">즉시 / 5월 / 6월 / 미정</div></div>
     </div>
 
-    <div class="warn" style="margin-top:24px;">
-      <b>주의:</b> 첫 미팅에서 가격을 확정하지 않는다. 니즈를 정확히 파악한 후 맞춤 견적을 보내는 것이 전문적. "확인 후 정식 제안서를 보내드리겠습니다"로 마무리.
+    <div style="margin-top:16px;">
+      <div style="font-size:10pt;font-weight:800;color:#191f28;margin-bottom:8px;letter-spacing:-0.5px;">커피챗 후 액션</div>
+      <div class="chk"><div class="chk-box"></div><div class="chk-text"><b>당일: 감사 메시지 + 미팅 요약 전달</b></div></div>
+      <div class="chk"><div class="chk-box"></div><div class="chk-text"><b>3일 내: 채널 기획서 + 견적서 발송</b> <span>오늘 논의 기반 맞춤 제안</span></div></div>
+      <div class="chk"><div class="chk-box"></div><div class="chk-text"><b>1주 내: 2차 미팅 (계약 + 촬영 일정)</b></div></div>
     </div>
 
-    <div class="card-dark" style="text-align:center; margin-top:24px;">
+    <div class="card-dark" style="text-align:center; margin-top:16px;">
       <div style="font-size:13pt; font-weight:800; line-height:1.5; letter-spacing:-0.5px;">
-        야놀자의 경험은 이미 콘텐츠다.<br>그것을 체계적으로 세상에 꺼내는 일.
+        야놀자의 경험은 이미 수백 편의 콘텐츠다.<br>우리가 할 일은 그것을 꺼내는 것.
       </div>
       <div style="font-size:8pt; color:#4e5968; margin-top:8px;">Flowmus Personal Branding</div>
     </div>
