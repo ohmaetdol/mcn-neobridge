@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>내부 보고 — 임수빈 1차 미팅</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif;
+    color: #191f28;
+    background: #191f28;
+    font-size: 15px;
+    line-height: 1.6;
+    letter-spacing: -0.3px;
+    -webkit-text-size-adjust: 100%;
+    padding: 0 0 100px;
+  }
+  .hdr {
+    background: #191f28;
+    color: #fff;
+    padding: 20px 20px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid #2d333b;
+  }
+  .hdr-top { display: flex; justify-content: space-between; align-items: center; }
+  .hdr-badge { font-size: 11px; font-weight: 700; color: #f04452; letter-spacing: 1px; }
+  .hdr-time { font-size: 11px; color: #4e5968; }
+  .hdr-name { font-size: 22px; font-weight: 800; margin-top: 4px; letter-spacing: -1px; }
+  .hdr-sub { font-size: 12px; color: #6b7684; margin-top: 2px; }
+  .section {
+    background: #fff;
+    margin: 8px;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .s-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: #3182f6;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+  .s-title.red { color: #f04452; }
+  .kl {
+    background: #f2f7ff;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin: 8px 0;
+    font-size: 14px;
+    color: #191f28;
+    word-break: keep-all;
+    line-height: 1.6;
+  }
+  .kl b { color: #3182f6; }
+  .caution {
+    background: #fff8eb;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin: 8px 0;
+    font-size: 13px;
+    color: #6b5900;
+    word-break: keep-all;
+    line-height: 1.6;
+  }
+  .danger {
+    background: #ffebee;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin: 8px 0;
+    font-size: 13px;
+    color: #b71c1c;
+    word-break: keep-all;
+    line-height: 1.6;
+  }
+  .num-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+  }
+  .num-card {
+    background: #f9fafb;
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+  }
+  .num-card .val {
+    font-size: 18px;
+    font-weight: 800;
+    color: #3182f6;
+    letter-spacing: -1px;
+  }
+  .num-card .lbl {
+    font-size: 10px;
+    color: #8b95a1;
+    margin-top: 2px;
+  }
+  .prof-table { width: 100%; border-collapse: collapse; }
+  .prof-table td {
+    padding: 8px 0;
+    border-bottom: 1px solid #f2f4f6;
+    font-size: 13px;
+    vertical-align: top;
+  }
+  .prof-table td:first-child {
+    font-weight: 700;
+    color: #4e5968;
+    width: 80px;
+    white-space: nowrap;
+  }
+  .prof-table tr:last-child td { border-bottom: none; }
+  .go-nogo {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 0;
+    font-size: 14px;
+  }
+  .go-nogo .row {
+    display: contents;
+  }
+  .go-nogo .row > div {
+    padding: 10px 12px;
+    border-bottom: 1px solid #f2f4f6;
+    display: flex;
+    align-items: center;
+  }
+  .go-nogo .label { font-weight: 700; color: #191f28; }
+  .go-nogo .desc { color: #6b7684; font-size: 12px; }
+  .go-nogo .status { font-weight: 800; font-size: 13px; justify-content: center; }
+  .go-nogo .status.pass { color: #00b894; }
+  .go-nogo .status.fail { color: #f04452; }
+  .go-nogo .status.warn { color: #f7971e; }
+  .timeline {
+    border-left: 2px solid #e5e8eb;
+    margin-left: 8px;
+    padding-left: 16px;
+  }
+  .tl-item {
+    position: relative;
+    padding: 8px 0;
+    font-size: 13px;
+    color: #4e5968;
+  }
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -21px;
+    top: 14px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #e5e8eb;
+  }
+  .tl-item.now::before { background: #3182f6; }
+  .tl-item b { color: #191f28; display: block; }
+  .verdict-box {
+    background: #191f28;
+    border-radius: 12px;
+    padding: 16px;
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.6;
+    word-break: keep-all;
+  }
+  .verdict-box b { color: #3182f6; }
+  .bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #191f28;
+    padding: 16px 20px;
+    z-index: 100;
+    border-top: 1px solid #2d333b;
+  }
+  .bottom-text {
+    font-size: 13px;
+    color: #6b7684;
+    text-align: center;
+  }
+  .bottom-text b { color: #3182f6; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-top">
+    <div class="hdr-badge">INTERNAL ONLY</div>
+    <div class="hdr-time">2026.04.30</div>
+  </div>
+  <div class="hdr-name">임수빈 1차 미팅 내부 보고</div>
+  <div class="hdr-sub">@suit_tt_ &middot; 단기임대/호스텔/숙박공유 &middot; 55분</div>
+</div>
+
+<!-- 한 줄 요약 -->
+<div class="section">
+  <div class="s-title">SUMMARY</div>
+  <div class="verdict-box">
+    <b>계약 진행 가능. 단, 론칭 전 선결 조건 3개 통과 필수.</b><br>
+    스토리/실적/팔로워/콘텐츠 자체 생산력 모두 확보. 불법 이력 정리 + 셀링 연습 + 세무 정리 완료 후 론칭.
+  </div>
+</div>
+
+<!-- 확인된 수치 -->
+<div class="section">
+  <div class="s-title">REAL NUMBERS &middot; 미팅에서 직접 확인</div>
+  <div class="num-grid" style="margin-bottom: 12px;">
+    <div class="num-card">
+      <div class="val">~2,000만</div>
+      <div class="lbl">월 총매출</div>
+    </div>
+    <div class="num-card">
+      <div class="val">~1,000만</div>
+      <div class="lbl">월 순수익</div>
+    </div>
+    <div class="num-card">
+      <div class="val">12.3만</div>
+      <div class="lbl">인스타 팔로워</div>
+    </div>
+  </div>
+  <table class="prof-table">
+    <tr><td>단기임대</td><td>3개 (보증금 500 x 3) &mdash; 매출 월 450~500만 / 합법 전환 후 순수익 150~200만</td></tr>
+    <tr><td>숙박공유</td><td>반산역 통금물 (내 돈 0원 투입) &mdash; 매출 월 1,000만+</td></tr>
+    <tr><td>호스텔</td><td>부산 서면 37평 (투자금 1.35억) &mdash; 매출 월 800만+ / 비수기 순수익 500~600만</td></tr>
+    <tr><td>강의 지출</td><td>1,000만원+ (당근자판기 850만 + 숙사장 등)</td></tr>
+    <tr><td>특강 이력</td><td>4~5회 / 2.5~3시간 / PPT 200장 / 30~40명 (인스타 DM 모객)</td></tr>
+  </table>
+</div>
+
+<!-- GO / NO-GO -->
+<div class="section">
+  <div class="s-title">GO / NO-GO 체크리스트</div>
+  <div class="go-nogo">
+    <div class="row">
+      <div class="label">스토리</div>
+      <div class="desc">기초수급자 &rarr; 월 1,000만 순수익</div>
+      <div class="status pass">GO</div>
+    </div>
+    <div class="row">
+      <div class="label">실적</div>
+      <div class="desc">단기임대 3 + 숙박공유 + 호스텔 실운영</div>
+      <div class="status pass">GO</div>
+    </div>
+    <div class="row">
+      <div class="label">시장성</div>
+      <div class="desc">'단기임대' 5년 3.1배 성장 / 경쟁 강의 빈자리</div>
+      <div class="status pass">GO</div>
+    </div>
+    <div class="row">
+      <div class="label">팔로워</div>
+      <div class="desc">인스타 12.3만 &mdash; 론칭 부스터 확보</div>
+      <div class="status pass">GO</div>
+    </div>
+    <div class="row">
+      <div class="label">콘텐츠력</div>
+      <div class="desc">사진/PPT/디자인/홈페이지 직접 제작</div>
+      <div class="status pass">GO</div>
+    </div>
+    <div class="row">
+      <div class="label">단가 설계</div>
+      <div class="desc">단기임대(저) &rarr; 에어비앤비(중) &rarr; 호스텔 VIP(고)</div>
+      <div class="status pass">GO</div>
+    </div>
+    <div class="row">
+      <div class="label">합법성</div>
+      <div class="desc">단기임대 3개 미등록 + 에어비앤비 불법 이력</div>
+      <div class="status fail">STOP</div>
+    </div>
+    <div class="row">
+      <div class="label">셀링 능력</div>
+      <div class="desc">웨비나/라이브 경험 0. "처음 해봤다" 직접 발언</div>
+      <div class="status fail">STOP</div>
+    </div>
+    <div class="row">
+      <div class="label">세무 상태</div>
+      <div class="desc">세금 신고 미완, 동생과 사업자 다툼, 폐업 처리 건</div>
+      <div class="status fail">STOP</div>
+    </div>
+  </div>
+</div>
+
+<!-- 리스크 상세 -->
+<div class="section">
+  <div class="s-title red">RISK &middot; 상세</div>
+  <div class="danger">
+    <b>1. 불법 운영 이력 (최대 리스크)</b><br>
+    본인 발언: "솔직히 에어비앤비에 올리는 건 불법이에요. 저는 그때 같이 올렸거든요."<br>
+    단기임대 3개 사업자 미등록. 론칭 후 누군가 파면 "불법으로 돈 벌어놓고 강의 파는 사람" 프레이밍 가능.<br>
+    <b>&rarr; 론칭 전 합법 전환 + 증빙 확보. 강의에서 "과거 실수 &rarr; 합법 전환" 스토리로 재구성.</b>
+  </div>
+  <div class="danger">
+    <b>2. 웨비나 셀링 경험 제로</b><br>
+    오프라인 특강 경험은 있으나, 온라인 전환/클로징 경험 없음. 본인도 "쭈뼛쭈뼛" 인정.<br>
+    <b>&rarr; 무료 특강 2~3회 리허설 필수. 셀링 스크립트 제공하고 연습시키기.</b>
+  </div>
+  <div class="caution">
+    <b>3. 세무/사업자 미정리</b><br>
+    동생과 사업자 다툼 &rarr; 일부 폐업 처리. 세금 신고 미완. 수강생이 사업자 조회하면 바로 드러남.<br>
+    <b>&rarr; 론칭 전 세무사 통해 전수 정리.</b>
+  </div>
+  <div class="caution">
+    <b>4. 인스타 타겟 불명확</b><br>
+    본인 발언: "짬뽕이라서 타겟이 없다." 현재 여행/부동산/일상 혼재.<br>
+    <b>&rarr; 부업 채널로 리포지셔닝. 론칭 전 피드 정리 필요.</b>
+  </div>
+</div>
+
+<!-- 경쟁 강사 인사이더 -->
+<div class="section">
+  <div class="s-title">INSIDER &middot; 경쟁 강사 (수빈 직접 수강 후 평가)</div>
+  <div class="kl">
+    <b>당근자판기</b> &mdash; 850만원 수강. "사기급. 배운 거 없음." 프리미엄반 150만원 추가도 빌딩뷰와 겹침. 3개월 40곳 방문한 수강생들 다 실망. 단, 머리 좋고 말 잘하고 인테리어 감각 있음.
+  </div>
+  <div class="kl">
+    <b>숙사장</b> &mdash; "찐이다. 호스텔 전문. 근데 출력이 어려움." 수강생들 '무슨 말인지 모르겠다'. 수빈에게 강의하지 말라고 함 &rarr; 경쟁자 견제. 그림판으로 강의.
+  </div>
+  <div class="kl">
+    <b>부자금틀</b> &mdash; 대치동 수학강사 출신. 가르치는 거 최강. 매입 잘함. 전환율 좋음. 30억 벌었는데 계속 강의. 단기임대 분야 1위.
+  </div>
+  <div style="margin-top: 8px; font-size: 12px; color: #8b95a1;">
+    * 이 정보는 수빈이 직접 수강/교류 후 전달한 것. 대외 공유 금지.
+  </div>
+</div>
+
+<!-- 차별화 무기 -->
+<div class="section">
+  <div class="s-title">WEAPONS &middot; 우리가 활용할 수 있는 것</div>
+  <div class="kl">
+    <b>내 돈 0원 투입 사례</b> &mdash; 신용보증재단 대출로 숙박공유역 오픈. 비포/애프터 콘텐츠로 활용.
+  </div>
+  <div class="kl">
+    <b>병원 앞 입지 전략</b> &mdash; "암 환자, 보호자, 레지던트 수요. 3개월이면 무조건 찬다." 킬러 콘텐츠.
+  </div>
+  <div class="kl">
+    <b>채널 매니저 시스템</b> &mdash; AI 도어락 자동 비번, 이벤트 연동 가격 조절, 오버부킹 방지. 실무 노하우.
+  </div>
+  <div class="kl">
+    <b>오맷돌 대표 본인 6개 운영</b> &mdash; 삼삼엠투 사용, 공실 0. 사례 제공 + 신뢰도 보강 가능.
+  </div>
+  <div class="kl">
+    <b>유튜브 다채널 전략</b> &mdash; 수빈 발언: "8개를 쪼개서 여러 채널에 뿌리면 터질 것 같다." 사찍남 등 채널에서 호스텔까지 보여주고, 부업 채널에서는 단기임대만.
+  </div>
+</div>
+
+<!-- 합의 사항 -->
+<div class="section">
+  <div class="s-title">AGREED &middot; 미팅에서 합의된 내용</div>
+  <div class="kl">
+    <b>강의 3단계 구조</b><br>
+    1단계 단기임대 (직장인 부업, 투자금 600~700만, 기대수익 월 50~75만)<br>
+    2단계 에어비앤비 (합법 운영, 외도민 전환 진행 중)<br>
+    3단계 호스텔 (고액 오프라인 VIP, 초반 비공개)
+  </div>
+  <div class="kl">
+    <b>론칭 구조</b><br>
+    무료 특강/웨비나 &rarr; 유료 강의 전환<br>
+    인스타 리포지셔닝 + 유튜브 채널 출연으로 빌드업
+  </div>
+  <div class="kl">
+    <b>계약 &rarr; 모두의사인 전자 계약</b><br>
+    준비 기간 약 2개월 (PPT + 촬영 + 웨비나 연습)
+  </div>
+</div>
+
+<!-- 넥스트 스텝 -->
+<div class="section">
+  <div class="s-title">NEXT STEPS</div>
+  <table class="prof-table">
+    <tr><td>즉시</td><td>모두의사인 계약 발송</td></tr>
+    <tr><td>1주 내</td><td>수빈에게 벤치마크 영상 전달 + 준비 자료 요청 (소득 증빙, 비포/애프터, 수강 후기, 예약 현황, 기존 PPT)</td></tr>
+    <tr><td>2주 내</td><td>합법 전환 상태 확인 (사업자 등록, 세무 정리)</td></tr>
+    <tr><td>1개월</td><td>PPT 제작 + 촬영 스케줄 확정 + 유튜버 섭외</td></tr>
+    <tr><td>2개월</td><td>웨비나 리허설 2~3회 &rarr; 무료 특강 &rarr; 유료 론칭</td></tr>
+  </table>
+</div>
+
+<!-- BOTTOM BAR -->
+<div class="bottom-bar">
+  <div class="bottom-text">
+    <b>INTERNAL ONLY</b> &mdash; 대외 공유 금지
+  </div>
+</div>
+
+</body>
+</html>
