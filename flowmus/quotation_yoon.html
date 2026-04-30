@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>견적서 — 윤현재 대표님</title>
+<style>
+  @page { size: A4; margin: 18mm 18mm 20mm 18mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Apple SD Gothic Neo', '맑은 고딕', 'Malgun Gothic', sans-serif;
+    color: #222;
+    background: #fff;
+    font-size: 10pt;
+    line-height: 1.85;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @media screen {
+    body { background: #e8e8e8; padding: 20px 0; }
+    .page { box-shadow: 0 2px 12px rgba(0,0,0,0.1); margin-bottom: 24px; }
+  }
+  @media print {
+    .page { padding: 0 52px; margin: 0; box-shadow: none; min-height: auto; }
+    .no-print { display: none !important; }
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    padding: 48px 52px;
+    position: relative;
+    background: #fff;
+  }
+  .doc-title {
+    font-size: 20pt;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 6px;
+    padding: 28px 0 24px;
+    border-top: 2.5px solid #333;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 30px;
+    color: #111;
+  }
+  .doc-sub {
+    text-align: center;
+    font-size: 10pt;
+    color: #666;
+    margin-bottom: 28px;
+  }
+  .info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 24px;
+    font-size: 9.5pt;
+  }
+  .info-table th,
+  .info-table td {
+    border: 1px solid #ddd;
+    padding: 11px 16px;
+    vertical-align: middle;
+    word-break: keep-all;
+  }
+  .info-table th {
+    background: #f8f8f8;
+    font-weight: 600;
+    text-align: center;
+    width: 100px;
+    color: #444;
+  }
+  .info-table td {
+    text-align: left;
+    color: #333;
+  }
+  .info-table td.right { text-align: right; }
+  .info-table td.center { text-align: center; }
+  .service-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 24px;
+    font-size: 9.5pt;
+  }
+  .service-table th,
+  .service-table td {
+    border: 1px solid #ddd;
+    padding: 10px 14px;
+    vertical-align: middle;
+    word-break: keep-all;
+  }
+  .service-table th {
+    background: #333;
+    color: #fff;
+    font-weight: 600;
+    text-align: center;
+    font-size: 9pt;
+  }
+  .service-table td { color: #333; }
+  .service-table td.center { text-align: center; }
+  .service-table td.right { text-align: right; font-variant-numeric: tabular-nums; }
+  .service-table tr.total td {
+    background: #f8f8f8;
+    font-weight: 700;
+    border-top: 2px solid #333;
+  }
+  .service-table tr.discount td {
+    color: #0055cc;
+    font-weight: 600;
+  }
+  .service-table tr.final td {
+    background: #333;
+    color: #fff;
+    font-weight: 700;
+    font-size: 10pt;
+    border-top: 2px solid #333;
+  }
+  .note {
+    font-size: 9pt;
+    color: #666;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    word-break: keep-all;
+  }
+  .note b { color: #333; }
+  .section-title {
+    font-size: 11pt;
+    font-weight: 700;
+    color: #111;
+    margin: 28px 0 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #eee;
+  }
+  .detail-list {
+    font-size: 9.5pt;
+    color: #333;
+    line-height: 2.0;
+    padding-left: 1.2em;
+  }
+  .detail-list li { margin-bottom: 2px; }
+  .sign-area {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+  }
+  .sign-block {
+    width: 45%;
+  }
+  .sign-block .label {
+    font-size: 9pt;
+    color: #888;
+    margin-bottom: 4px;
+  }
+  .sign-block .value {
+    font-size: 10pt;
+    font-weight: 600;
+    color: #222;
+    line-height: 1.8;
+  }
+  .pn {
+    position: absolute;
+    bottom: 28px;
+    left: 0; right: 0;
+    text-align: center;
+    font-size: 8.5pt;
+    color: #aaa;
+  }
+  .print-btn {
+    position: fixed; bottom: 20px; right: 20px; z-index: 100;
+    background: #333; color: #fff; border: none;
+    padding: 12px 24px; border-radius: 8px;
+    font-size: 10pt; font-weight: 600; cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    font-family: sans-serif;
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">PDF 저장</button>
+
+<div class="page">
+
+  <div class="doc-title">견 적 서</div>
+  <div class="doc-sub">퍼스널 브랜딩 채널 운영 서비스</div>
+
+  <!-- 수신/발신 정보 -->
+  <table class="info-table">
+    <tr>
+      <th>수 신</th>
+      <td>윤현재 대표님</td>
+      <th>발행일</th>
+      <td>2026년 04월 30일</td>
+    </tr>
+    <tr>
+      <th>발 신</th>
+      <td>주식회사 플로우머스</td>
+      <th>유효기간</th>
+      <td>발행일로부터 14일</td>
+    </tr>
+    <tr>
+      <th>담당자</th>
+      <td>권현우 공동대표</td>
+      <th>연락처</th>
+      <td>coo@flowmus.com</td>
+    </tr>
+  </table>
+
+  <!-- 서비스 항목 -->
+  <div class="section-title">서비스 내역</div>
+
+  <table class="service-table">
+    <thead>
+      <tr>
+        <th style="width:40%">항목</th>
+        <th style="width:20%">수량</th>
+        <th style="width:20%">단가 (월)</th>
+        <th style="width:20%">금액 (월)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><b>채널 기획 및 운영</b><br><span style="font-size:8.5pt;color:#888;">콘텐츠 전략 수립, 채널 세팅, 일정 관리, 성과 리포트</span></td>
+        <td class="center">1식</td>
+        <td class="right">포함</td>
+        <td class="right">포함</td>
+      </tr>
+      <tr>
+        <td><b>영상 촬영</b><br><span style="font-size:8.5pt;color:#888;">기본 월 3회 + 특수 이벤트 시 1회 추가</span></td>
+        <td class="center">월 3~4회</td>
+        <td class="right">포함</td>
+        <td class="right">포함</td>
+      </tr>
+      <tr>
+        <td><b>롱폼 영상 편집 + 업로드</b><br><span style="font-size:8.5pt;color:#888;">10~15분 기준, 썸네일/자막/BGM 포함</span></td>
+        <td class="center">월 3~4편</td>
+        <td class="right">포함</td>
+        <td class="right">포함</td>
+      </tr>
+      <tr>
+        <td><b>쇼츠 제작 + 업로드</b><br><span style="font-size:8.5pt;color:#888;">롱폼 영상 기반 숏폼 추출</span></td>
+        <td class="center">월 9~16편</td>
+        <td class="right">포함</td>
+        <td class="right">포함</td>
+      </tr>
+      <tr class="total">
+        <td colspan="3"><b>월 운영비 (정가)</b></td>
+        <td class="right">5,590,000원</td>
+      </tr>
+      <tr class="discount">
+        <td colspan="3">3개월 약정 할인 (10%)</td>
+        <td class="right">- 559,000원</td>
+      </tr>
+      <tr class="final">
+        <td colspan="3">월 운영비 (3개월 약정가)</td>
+        <td class="right">5,031,000원</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- 총 계약 금액 -->
+  <table class="info-table">
+    <tr>
+      <th>계약 기간</th>
+      <td>3개월</td>
+      <th>결제 방식</th>
+      <td>월별 선결제</td>
+    </tr>
+    <tr>
+      <th style="background:#333;color:#fff;font-size:10pt;">총 계약 금액</th>
+      <td colspan="3" style="font-size:13pt;font-weight:800;text-align:center;color:#111;">15,093,000원 <span style="font-size:9pt;font-weight:400;color:#888;">(VAT 별도)</span></td>
+    </tr>
+  </table>
+
+  <!-- 포함 서비스 상세 -->
+  <div class="section-title">포함 서비스 상세</div>
+  <ol class="detail-list">
+    <li><b>채널 전략 수립</b> &mdash; 포지셔닝, 타겟 설정, 콘텐츠 방향 기획</li>
+    <li><b>콘텐츠 기획</b> &mdash; 주제 선정, 스크립트/큐시트 작성, 촬영 준비</li>
+    <li><b>촬영</b> &mdash; 월 3~4회 (1회당 60~90분), 장비/스태프 전담</li>
+    <li><b>편집</b> &mdash; 롱폼(10~15분) + 쇼츠(영상당 3~4개), 썸네일/자막/BGM</li>
+    <li><b>업로드 및 운영</b> &mdash; 제목/설명/태그 최적화, 업로드 스케줄 관리</li>
+    <li><b>월간 성과 리포트</b> &mdash; 조회수, 구독자, 시청지속시간, 채널 성장 분석</li>
+  </ol>
+
+  <!-- 비고 -->
+  <div class="section-title">비고</div>
+  <div class="note">
+    <b>1.</b> 1개월 단독 계약은 운영하지 않으며, 최소 3개월 약정입니다.<br>
+    <b>2.</b> 3개월 계약 종료 후 Revenue Share(수익 배분) 계약으로 전환 가능하며, 별도 협의를 진행합니다.<br>
+    <b>3.</b> RS 계약 시 채널 수익의 30%부터 시작하여 순차적으로 확대, 최대 40%까지 적용됩니다.<br>
+    <b>4.</b> 채널 소유권은 윤현재 대표님께 귀속됩니다.<br>
+    <b>5.</b> 본 견적서의 유효기간은 발행일로부터 14일입니다.<br>
+    <b>6.</b> 상기 금액은 부가가치세(VAT) 별도입니다.
+  </div>
+
+  <!-- 서명 -->
+  <div class="sign-area">
+    <div class="sign-block">
+      <div class="label">발신</div>
+      <div class="value">
+        주식회사 플로우머스<br>
+        사업자번호 110-88-03675<br>
+        서울특별시 서초구 서초대로 398, 7층 709호<br>
+        공동대표 권현우 / 오맷돌
+      </div>
+    </div>
+    <div class="sign-block" style="text-align: right;">
+      <div class="label">문의</div>
+      <div class="value">
+        권현우 공동대표<br>
+        coo@flowmus.com
+      </div>
+    </div>
+  </div>
+
+  <div class="pn">- 1 -</div>
+</div>
+
+</body>
+</html>

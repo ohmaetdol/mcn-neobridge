@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>채널 운영 대행 계약서 — 윤현재</title>
+<style>
+  @page { size: A4; margin: 18mm 18mm 20mm 18mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Apple SD Gothic Neo', '맑은 고딕', 'Malgun Gothic', sans-serif;
+    color: #222;
+    background: #fff;
+    font-size: 10pt;
+    line-height: 1.85;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @media screen {
+    body { background: #e8e8e8; padding: 20px 0; }
+    .page { box-shadow: 0 2px 12px rgba(0,0,0,0.1); margin-bottom: 24px; }
+  }
+  @media print {
+    .page { padding: 0 52px; margin: 0; box-shadow: none; min-height: auto; }
+    .no-print { display: none !important; }
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    padding: 48px 52px;
+    position: relative;
+    background: #fff;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+  .doc-title {
+    font-size: 20pt;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 4px;
+    padding: 28px 0 24px;
+    border-top: 2.5px solid #333;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 30px;
+    color: #111;
+  }
+  .preamble {
+    text-align: justify;
+    text-indent: 1em;
+    margin-bottom: 28px;
+    line-height: 2.0;
+    word-break: keep-all;
+    color: #333;
+  }
+  .info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 28px;
+    font-size: 9.5pt;
+    table-layout: fixed;
+  }
+  .info-table th,
+  .info-table td {
+    border: 1px solid #ddd;
+    padding: 11px 16px;
+    vertical-align: middle;
+    word-break: keep-all;
+  }
+  .info-table th {
+    background: #f8f8f8;
+    font-weight: 600;
+    text-align: center;
+    width: 100px;
+    color: #444;
+    letter-spacing: 0.5px;
+  }
+  .info-table td {
+    text-align: left;
+    line-height: 1.8;
+    color: #333;
+  }
+  .sign-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 32px;
+    font-size: 9.5pt;
+  }
+  .sign-table > tbody > tr > td {
+    padding: 0;
+    vertical-align: top;
+    width: 50%;
+  }
+  .sign-table > tbody > tr > td:first-child { padding-right: 16px; }
+  .sign-table > tbody > tr > td:last-child { padding-left: 16px; }
+  .sign-inner {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 18px 20px;
+  }
+  .sign-header {
+    font-weight: 600;
+    font-size: 10pt;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #333;
+  }
+  .sign-line {
+    display: flex;
+    line-height: 2.2;
+  }
+  .sl {
+    width: 96px;
+    flex-shrink: 0;
+    color: #666;
+    text-align: left;
+    font-size: 9pt;
+  }
+  .sv {
+    flex: 1;
+    color: #222;
+  }
+  .underline {
+    display: inline-block;
+    width: 120px;
+    border-bottom: 1px solid #bbb;
+  }
+  .seal { color: #c00; }
+  .article-title {
+    font-weight: 700;
+    font-size: 10.5pt;
+    margin-top: 24px;
+    margin-bottom: 8px;
+    color: #111;
+  }
+  .article-body {
+    text-align: justify;
+    margin-bottom: 6px;
+    text-indent: 1em;
+    word-break: keep-all;
+    color: #333;
+  }
+  .clause {
+    text-indent: -1.3em;
+    padding-left: 1.3em;
+    margin-bottom: 5px;
+    text-align: justify;
+    word-break: keep-all;
+    color: #333;
+  }
+  .sub {
+    text-indent: -1em;
+    padding-left: 2.8em;
+    margin-bottom: 4px;
+    text-align: justify;
+    word-break: keep-all;
+    color: #444;
+  }
+  .date-line {
+    text-align: center;
+    margin: 24px 0;
+    font-size: 10pt;
+    letter-spacing: 1px;
+  }
+  .pn {
+    position: absolute;
+    bottom: 28px;
+    left: 0; right: 0;
+    text-align: center;
+    font-size: 8.5pt;
+    color: #aaa;
+  }
+  .field {
+    border: none;
+    border-bottom: 1px solid #bbb;
+    background: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    color: #0055cc;
+    padding: 0 2px;
+    outline: none;
+    text-align: center;
+  }
+  .field:focus { border-bottom-color: #0055cc; background: #f0f6ff; }
+  .field-wide { width: 180px; text-align: left; }
+  .field-date { width: 42px; }
+  .field-num { width: 36px; }
+  .field-name { width: 140px; }
+  .field-full { width: 100%; text-align: left; }
+  .field-sign { width: 140px; text-align: left; }
+  @media print {
+    .field { border-bottom-color: #999; color: #000; background: transparent; }
+  }
+  .print-btn {
+    position: fixed; bottom: 20px; right: 20px; z-index: 100;
+    background: #333; color: #fff; border: none;
+    padding: 12px 24px; border-radius: 8px;
+    font-size: 10pt; font-weight: 600; cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    font-family: sans-serif;
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">PDF 저장</button>
+
+<!-- ══════════ PAGE 1: 표지 ══════════ -->
+<div class="page">
+
+  <div class="doc-title">채널 운영 대행 계약서</div>
+
+  <p class="preamble">
+    <input type="text" class="field field-name" placeholder="위탁자 성명">(이하 "갑"이라 한다)과 주식회사 플로우머스(이하 "을"이라 한다)는 갑의 퍼스널 브랜딩을 위한 유튜브 채널 기획, 제작 및 운영 대행에 관한 계약을 체결하고, 상호존중의 입장에서 신의에 따라 성실히 계약상의 의무를 이행하고 완수할 것을 확약하며, 계약의 증거로서 본 계약서를 2부 작성하여 각각 서명 날인한 후 각 1부씩 보관한다.
+  </p>
+
+  <table class="info-table">
+    <tr>
+      <th>계약일</th>
+      <td colspan="3"><input type="text" class="field field-date" placeholder="2026">년 <input type="text" class="field field-date" placeholder="">월 <input type="text" class="field field-date" placeholder="">일</td>
+    </tr>
+    <tr>
+      <th>계약기간</th>
+      <td colspan="3">
+        <input type="text" class="field field-date" placeholder="">년 <input type="text" class="field field-date" placeholder="">월 <input type="text" class="field field-date" placeholder="">일 ~ <input type="text" class="field field-date" placeholder="">년 <input type="text" class="field field-date" placeholder="">월 <input type="text" class="field field-date" placeholder="">일 (3개월)
+      </td>
+    </tr>
+    <tr>
+      <th>채널 유형</th>
+      <td colspan="3">유튜브 퍼스널 브랜딩 채널 (비즈니스 채널)</td>
+    </tr>
+    <tr>
+      <th>서비스 범위</th>
+      <td colspan="3">콘텐츠 기획, 촬영, 편집, 업로드, 채널 운영 전반</td>
+    </tr>
+    <tr>
+      <th>월 운영비</th>
+      <td colspan="3"><b>5,031,000원</b> (정가 5,590,000원, 3개월 약정 10% 할인 적용 / VAT 별도)</td>
+    </tr>
+    <tr>
+      <th>촬영 횟수</th>
+      <td colspan="3">월 3~4회 (기본 3회 + 특수 이벤트 시 1회 추가)</td>
+    </tr>
+    <tr>
+      <th>제작 분량</th>
+      <td colspan="3">롱폼 영상 월 3~4편 (10~15분) + 쇼츠 영상당 3~4편</td>
+    </tr>
+  </table>
+
+  <table class="sign-table">
+    <tr>
+      <td>
+        <div class="sign-inner">
+          <div class="sign-header">"갑" (위탁자)</div>
+          <div class="sign-line"><span class="sl">이름</span><span class="sv"><input type="text" class="field field-sign" placeholder=""></span></div>
+          <div class="sign-line"><span class="sl">연락처</span><span class="sv"><input type="text" class="field field-sign" placeholder="010-"></span></div>
+          <div class="sign-line"><span class="sl">주민번호</span><span class="sv"><input type="text" class="field field-sign" placeholder=""></span></div>
+          <div class="sign-line"><span class="sl">주소</span><span class="sv"><input type="text" class="field field-sign" placeholder=""></span></div>
+          <div class="sign-line" style="margin-top:10px;border-top:1px solid #ccc;padding-top:8px"><span class="sl">성함</span><span class="sv"><input type="text" class="field field-sign" placeholder=""> &nbsp;<span class="seal">(인)</span></span></div>
+        </div>
+      </td>
+      <td>
+        <div class="sign-inner">
+          <div class="sign-header">"을" (수탁자)</div>
+          <div class="sign-line"><span class="sl">법인명</span><span class="sv">주식회사 플로우머스</span></div>
+          <div class="sign-line"><span class="sl">사업자번호</span><span class="sv">110-88-03675</span></div>
+          <div class="sign-line"><span class="sl">법인번호</span><span class="sv">110111-0949262</span></div>
+          <div class="sign-line"><span class="sl">주소</span><span class="sv">서울특별시 서초구 서초대로<br>398, 7층 709호(BNK디지털타워)</span></div>
+          <div class="sign-line" style="margin-top:10px;border-top:1px solid #ccc;padding-top:8px"><span class="sl">공동대표</span><span class="sv">권 현 우 &nbsp;<span class="seal">(인)</span></span></div>
+          <div class="sign-line"><span class="sl">공동대표</span><span class="sv">오 맷 돌 &nbsp;<span class="seal">(인)</span></span></div>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <div class="pn">- 1 -</div>
+</div>
+
+<!-- ══════════ PAGE 2 ══════════ -->
+<div class="page">
+
+  <div class="article-title">제1조 (계약의 목적)</div>
+  <p class="article-body">본 계약은 "갑"의 퍼스널 브랜딩을 위한 유튜브 채널(이하 "채널")의 기획, 제작, 운영 대행에 관하여 "갑"과 "을" 간의 권리와 의무를 정함을 목적으로 한다.</p>
+
+  <div class="article-title">제2조 (계약기간)</div>
+  <p class="clause">① 계약기간은 표지에 기재된 시작일부터 3개월로 한다.</p>
+  <p class="clause">② 계약 만료 14일 전까지 어느 일방이 서면으로 종료 의사를 통지하지 않는 경우, 양 당사자는 계약 종료 후 수익 배분(Revenue Share) 방식으로의 전환 또는 기존 조건의 연장을 별도 협의한다.</p>
+  <p class="clause">③ 계약기간 중 상호 합의에 의하여 계약 조건을 변경할 수 있으며, 변경 시 서면으로 확인한다.</p>
+
+  <div class="article-title">제3조 (을의 역할과 의무)</div>
+  <p class="article-body">"을"은 다음 각호의 서비스를 "갑"에게 제공한다.</p>
+  <p class="clause">① <b>콘텐츠 기획:</b> 채널 포지셔닝, 타겟 설정, 콘텐츠 전략 수립, 주제 선정, 스크립트 및 큐시트 작성</p>
+  <p class="clause">② <b>촬영:</b> 월 3~4회 (기본 3회, 특수 이벤트 시 1회 추가). 1회당 60~90분 기준. 촬영 장비 및 스태프 일체를 "을"이 제공한다.</p>
+  <p class="clause">③ <b>편집:</b> 롱폼 영상 (10~15분) 월 3~4편, 쇼츠 영상당 3~4편 제작. 썸네일, 자막, BGM 포함.</p>
+  <p class="clause">④ <b>업로드 및 운영:</b> 제목, 설명, 태그 최적화, 업로드 스케줄 관리, 댓글 관리, 커뮤니티 운영</p>
+  <p class="clause">⑤ <b>성과 보고:</b> 월간 성과 리포트 제공 (조회수, 구독자, 시청지속시간, 채널 성장 분석)</p>
+  <p class="clause">⑥ "을"은 촬영 일정을 최소 5영업일 전에 "갑"과 협의하여 확정한다.</p>
+  <p class="clause">⑦ "을"은 영상 업로드 전 "갑"의 최종 확인을 받는다. "갑"이 3영업일 내에 별도 의견을 제시하지 않을 경우 승인된 것으로 본다.</p>
+
+  <div class="article-title">제4조 (갑의 역할과 의무)</div>
+  <p class="clause">① "갑"은 촬영 일정에 맞추어 출연하며, 부득이한 사정이 있을 경우 최소 3영업일 이전에 "을"에 통보하고 대안 일정을 협의한다.</p>
+  <p class="clause">② "갑"은 콘텐츠 기획에 필요한 자료, 경험, 인사이트를 성실히 제공한다.</p>
+  <p class="clause">③ "갑"은 "을"이 제출한 기획안, 스크립트, 편집본에 대하여 합리적인 범위 내에서 수정을 요청할 수 있으며, 수정 요청은 제출일로부터 3영업일 이내에 한다.</p>
+  <p class="clause">④ "갑"이 정당한 사유 없이 촬영 일정을 2회 이상 연속 취소하는 경우, "을"은 해당 월의 미촬영 분량에 대한 서비스 제공 의무가 면제되며, 운영비는 감액되지 않는다.</p>
+
+  <div class="pn">- 2 -</div>
+</div>
+
+<!-- ══════════ PAGE 3 ══════════ -->
+<div class="page">
+
+  <div class="article-title">제5조 (대금 및 결제)</div>
+  <p class="clause">① 월 운영비는 금 오백삼만일천원(5,031,000원, VAT 별도)으로 한다. 이는 정가 금 오백오십구만원(5,590,000원)에서 3개월 약정 할인 10%를 적용한 금액이다.</p>
+  <p class="clause">② 대금은 매월 서비스 시작일 전 선결제로 하며, "을"이 지정한 계좌로 입금한다.</p>
+  <p class="clause">③ "갑"이 사업자인 경우 "을"은 세금계산서를 발행한다. 개인인 경우 원천징수 후 지급 관련 사항은 별도 협의한다.</p>
+  <p class="clause">④ 대금 지급이 7일 이상 지연될 경우 "을"은 서비스 제공을 일시 중단할 수 있으며, 이로 인한 콘텐츠 일정 변동에 대하여 "을"은 책임을 지지 않는다.</p>
+
+  <div class="article-title">제6조 (수익 배분 — Revenue Share)</div>
+  <p class="clause">① 본 계약 기간(3개월) 중 채널에서 발생하는 광고 수익, 협찬, 판매 등 일체의 수익(이하 "채널 수익")은 전액 "갑"에게 귀속된다.</p>
+  <p class="clause">② 본 계약 종료 후 양 당사자가 합의하는 경우, 운영비 기반 계약에서 수익 배분(Revenue Share) 방식으로 전환할 수 있다.</p>
+  <p class="clause">③ RS 전환 시 "을"의 수익 배분 비율은 채널 수익의 <b>30%</b>부터 시작하여 채널 성장에 따라 순차적으로 확대하되, 최대 <b>40%</b>를 초과하지 않는다.</p>
+  <p class="clause">④ RS 계약의 구체적인 조건(배분 비율, 정산 주기, 비용 처리 등)은 별도의 수익 배분 계약서로 정한다.</p>
+  <p class="clause">⑤ RS 전환 협의는 본 계약 만료 14일 전부터 개시하며, 만료일까지 합의에 이르지 못한 경우 본 계약은 종료된다.</p>
+
+  <div class="article-title">제7조 (채널 소유권 및 저작권)</div>
+  <p class="clause">① 채널의 소유권은 "갑"에게 귀속된다. "을"은 채널 운영을 위하여 필요한 범위 내에서 채널 관리 권한을 위임받아 사용하며, 계약 종료 시 즉시 반환한다.</p>
+  <p class="clause">② 본 계약에 따라 제작된 영상의 저작재산권은 "갑"에게 귀속된다. 단, "을"은 포트폴리오, 마케팅 목적으로 영상의 일부(60초 이내 클립, 썸네일, 스크린샷 등)를 사용할 수 있다.</p>
+  <p class="clause">③ "을"이 보유한 편집 기술, 템플릿, 촬영 기법 등 "을"의 고유한 지식재산은 "을"에게 귀속된다.</p>
+  <p class="clause">④ "갑"은 영상에 포함된 제3자의 저작물(음악, 이미지, 영상 등)에 대하여 "을"이 적법하게 라이선스를 확보한 범위 내에서 사용함을 이해하며, 계약 종료 후 해당 라이선스 유지에 대한 비용은 "갑"이 부담한다.</p>
+
+  <div class="article-title">제8조 (초상권 및 퍼블리시티권)</div>
+  <p class="clause">① "갑"은 본 계약에 따라 촬영된 영상, 사진, 음성 등을 "을"이 채널 운영 및 마케팅 목적으로 이용하는 것에 동의한다.</p>
+  <p class="clause">② "을"이 "갑"의 초상, 성명, 음성 등을 채널 운영 목적 외의 용도(제3자 광고, 타 채널 등)로 사용하고자 할 경우 "갑"의 사전 서면 동의를 받아야 한다.</p>
+  <p class="clause">③ 계약 종료 후 채널에 이미 업로드된 영상에 포함된 "갑"의 초상 등은 "갑"이 해당 영상의 삭제를 요청하지 않는 한 계속 게시될 수 있다.</p>
+
+  <div class="pn">- 3 -</div>
+</div>
+
+<!-- ══════════ PAGE 4 ══════════ -->
+<div class="page">
+
+  <div class="article-title">제9조 (비밀유지 의무)</div>
+  <p class="clause">① "갑"과 "을"은 본 계약의 체결과 이행 과정에서 알게 된 상대방에 대한 일체의 정보를 상대방의 사전 서면 동의 없이 제3자에게 공개, 유출, 제공하거나 본 계약 이외의 목적으로 사용할 수 없다.</p>
+  <p class="clause">② 본 조의 의무는 계약의 종료 또는 해지 이후에도 2년간 지속된다. 단, 다음 각호의 경우에는 그러하지 아니한다.</p>
+  <p class="sub">1. 상대방에 의해 제공받은 시점에서 이미 공지되어 있는 정보</p>
+  <p class="sub">2. 제공받은 후 자기책임에 의하지 않고 공지된 정보</p>
+  <p class="sub">3. 제3자로부터 정당하게 제공받은 정보</p>
+  <p class="sub">4. 법령 또는 법원 등의 명령에 의해 공개가 의무인 정보</p>
+  <p class="clause">③ "을"은 "갑"의 사업 전략, 미공개 정보, 내부 경영 관련 정보를 콘텐츠에 포함하지 않으며, 콘텐츠 내용은 "갑"의 사전 확인을 거친다.</p>
+
+  <div class="article-title">제10조 (계약의 해지)</div>
+  <p class="clause">① "갑" 또는 "을"은 다음 각호에 해당하는 경우 상대방에 서면 통지하여 본 계약을 해지할 수 있다.</p>
+  <p class="sub">1. 당사자 일방이 정당한 사유 없이 본 계약상의 의무를 이행하지 아니하고, 시정 요구 후 7일 이내에 시정하지 않은 경우</p>
+  <p class="sub">2. 당사자 일방의 고의 또는 중대한 과실로 상대방에게 손해가 발생한 경우</p>
+  <p class="sub">3. "을"이 연속 2개월 이상 약정된 서비스를 제공하지 못한 경우</p>
+  <p class="sub">4. "갑"이 2개월 이상 대금을 미지급한 경우</p>
+  <p class="clause">② "갑"이 계약기간 중 중도 해지를 요청하는 경우, 잔여 계약기간에 해당하는 운영비의 30%를 위약금으로 지급한다. 단, "을"의 귀책사유에 의한 해지의 경우 위약금은 발생하지 않으며, "을"은 미제공 서비스에 해당하는 운영비를 환급한다.</p>
+  <p class="clause">③ 계약 해지 시 "을"은 7영업일 이내에 채널 관리 권한을 "갑"에게 반환하고, 제작 중인 콘텐츠의 원본 파일을 "갑"에게 인도한다.</p>
+
+  <div class="article-title">제11조 (손해배상)</div>
+  <p class="article-body">"갑"과 "을" 중 어느 일방이 본 계약에 규정된 의무를 이행하지 않거나 본 계약을 위반하여 상대방에게 손해가 발생한 경우 그 행위를 야기한 당사자는 전적으로 책임을 지며, 그에 따른 손해를 배상한다.</p>
+
+  <div class="article-title">제12조 (불가항력)</div>
+  <p class="article-body">천재지변, 전쟁, 감염병, 정부의 규제 등 당사자의 합리적인 통제 범위를 벗어난 사유로 인하여 계약 이행이 불가능하거나 현저히 곤란한 경우, 해당 기간 동안 이행 의무는 면제되며, 양 당사자는 그 처리 방안을 성실히 협의한다.</p>
+
+  <div class="article-title">제13조 (계약의 해석 및 보완)</div>
+  <p class="clause">① 양 당사자는 본 계약의 내용을 신의성실에 의거하여 준수하여야 한다.</p>
+  <p class="clause">② 본 계약서에서 명시되지 않은 부분이나 해석에 이견이 있을 시 사회 통념과 조리에 맞게 충분한 합의를 거쳐 해결한다.</p>
+
+  <div class="article-title">제14조 (분쟁의 해결)</div>
+  <p class="clause">① 본 계약과 관련하여 분쟁 발생 시 계약 당사자 쌍방의 합의에 의하여 해결한다.</p>
+  <p class="clause">② 전항의 합의가 성립하지 못한 때의 소송은 "을"의 소재지 관할법원으로 한다.</p>
+
+  <div style="text-align:center; margin-top:48px; font-size:9pt; color:#666;">- 이하 여백 -</div>
+
+  <div class="pn">- 4 -</div>
+</div>
+
+</body>
+</html>
