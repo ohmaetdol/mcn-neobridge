@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>머니몬스터 — 부업클래스 커피챗</title>
+<style>
+@page { size: A4; margin: 0; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, 'Pretendard', sans-serif; background: #f5f5f5; color: #222; }
+.page {
+  width: 210mm; min-height: 297mm; margin: 0 auto; background: #fff;
+  padding: 48px 44px; position: relative;
+}
+@media print { body { background: #fff; } .page { padding: 40px 38px; margin: 0; } }
+@media screen and (max-width: 800px) { .page { width: 100%; min-height: auto; padding: 28px 20px; } }
+
+.logo { font-size: 10pt; color: #999; letter-spacing: 2px; margin-bottom: 8px; }
+.title { font-size: 22pt; font-weight: 800; color: #111; margin-bottom: 4px; }
+.subtitle { font-size: 11pt; color: #666; margin-bottom: 32px; }
+.date { font-size: 9pt; color: #aaa; margin-bottom: 28px; }
+
+.sec-title {
+  font-size: 11pt; font-weight: 700; color: #111;
+  border-bottom: 2px solid #111; padding-bottom: 6px;
+  margin: 28px 0 16px;
+}
+
+.agenda-item {
+  display: flex; gap: 14px; margin-bottom: 16px;
+  padding: 16px; background: #fafafa; border-radius: 10px;
+  border-left: 3px solid #111;
+}
+.agenda-num {
+  font-size: 18pt; font-weight: 800; color: #ddd;
+  min-width: 36px; line-height: 1;
+}
+.agenda-body h4 { font-size: 10.5pt; font-weight: 700; margin-bottom: 4px; }
+.agenda-body p { font-size: 9pt; color: #666; line-height: 1.6; }
+
+.card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media screen and (max-width: 800px) { .card-grid { grid-template-columns: 1fr; } }
+.card {
+  padding: 18px; border-radius: 10px; background: #f8f8f8;
+  border: 1px solid #eee;
+}
+.card h4 { font-size: 10.5pt; font-weight: 700; margin-bottom: 6px; }
+.card p { font-size: 9pt; color: #555; line-height: 1.6; }
+.card .tag {
+  display: inline-block; font-size: 8pt; color: #fff; background: #111;
+  padding: 2px 8px; border-radius: 4px; margin-bottom: 8px;
+}
+
+.highlight-box {
+  background: #111; color: #fff; border-radius: 12px;
+  padding: 24px; margin: 20px 0;
+}
+.highlight-box h3 { font-size: 12pt; margin-bottom: 10px; }
+.highlight-box p { font-size: 9.5pt; color: #ccc; line-height: 1.7; }
+.highlight-box ul { list-style: none; padding: 0; }
+.highlight-box li { font-size: 9.5pt; color: #ddd; padding: 4px 0; }
+.highlight-box li::before { content: "— "; color: #666; }
+
+.note {
+  font-size: 9pt; color: #999; background: #fafafa;
+  padding: 14px 18px; border-radius: 8px; margin-top: 16px;
+  line-height: 1.6; border-left: 3px solid #ddd;
+}
+
+.footer {
+  position: absolute; bottom: 28px; left: 44px; right: 44px;
+  display: flex; justify-content: space-between;
+  font-size: 8pt; color: #bbb;
+}
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <div class="logo">FLOWMUS</div>
+  <div class="title">머니몬스터 x 부업클래스</div>
+  <div class="subtitle">1차 커피챗 — 강의 런칭 가능성 체크</div>
+  <div class="date">2026. 05. 01</div>
+
+  <div class="sec-title">Today's Agenda</div>
+
+  <div class="agenda-item">
+    <div class="agenda-num">01</div>
+    <div class="agenda-body">
+      <h4>현재 채널 상황 공유</h4>
+      <p>시니어 콘텐츠 → AI 전환 이후 채널 현황, 기존 강의 매출 경험, 현재 고민 포인트</p>
+    </div>
+  </div>
+
+  <div class="agenda-item">
+    <div class="agenda-num">02</div>
+    <div class="agenda-body">
+      <h4>강의 컨셉 — "현실 부업"</h4>
+      <p>성공팔이 X, 실제 돈 버는 부업 스킬. 크몽/당근/편집몬/숏폼 대행 등 바로 실행 가능한 것들</p>
+    </div>
+  </div>
+
+  <div class="agenda-item">
+    <div class="agenda-num">03</div>
+    <div class="agenda-body">
+      <h4>수익 구조 및 분배</h4>
+      <p>부업클래스 플랫폼 운영, 수익 분배 구조(6:4), 모객은 Flowmus 채널 네트워크 활용</p>
+    </div>
+  </div>
+
+  <div class="agenda-item">
+    <div class="agenda-num">04</div>
+    <div class="agenda-body">
+      <h4>다음 단계 확인</h4>
+      <p>관심도 체크, 커리큘럼 초안 일정, 무료 특강 테스트 가능 여부</p>
+    </div>
+  </div>
+
+  <div class="sec-title">강의 컨셉 — 현실 부업 스킬</div>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="tag">크몽 대행</div>
+      <h4>크몽 프리랜서 시작법</h4>
+      <p>프로필 세팅부터 첫 수주까지. 숏폼 편집, 썸네일, SNS 운영 등 진입장벽 낮은 카테고리 집중</p>
+    </div>
+    <div class="card">
+      <div class="tag">당근 대행</div>
+      <h4>당근마켓 대행 수익화</h4>
+      <p>소상공인 대상 당근 광고/게시글 대행. 월 30~50만원 소액 부업으로 시작 가능</p>
+    </div>
+    <div class="card">
+      <div class="tag">편집몬 대행</div>
+      <h4>편집몬 영상 편집 알바</h4>
+      <p>건당 15만원 영상 편집 외주. 캡컷/프리미어 기초만으로 시작, 실전 포트폴리오 구축</p>
+    </div>
+    <div class="card">
+      <div class="tag">숏폼 대행</div>
+      <h4>숏폼 제작 대행</h4>
+      <p>릴스/쇼츠/틱톡 숏폼 제작 대행. 소상공인·인플루언서 대상, 건당 5~10만원</p>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <h3>왜 "현실 부업"인가?</h3>
+    <ul>
+      <li>성공팔이/자동수익 강의는 시장 포화 + 신뢰도 하락</li>
+      <li>"오늘 배워서 이번 주에 첫 수익" — 즉시 실행 가능한 스킬</li>
+      <li>머니몬스터 채널의 기존 시청자층과 정확히 매칭</li>
+      <li>수강생 실제 수익 인증 → 자연스러운 2기 모객</li>
+    </ul>
+  </div>
+
+  <div class="sec-title">Flowmus 역할</div>
+
+  <div class="card-grid">
+    <div class="card">
+      <h4>강의 기획 + 커리큘럼</h4>
+      <p>컨셉 설계, 커리큘럼 구성, 무료 특강 시나리오</p>
+    </div>
+    <div class="card">
+      <h4>모객 (채널 네트워크)</h4>
+      <p>사찍남/머니로드/현장속으로 등 자체 채널 DB 활용</p>
+    </div>
+    <div class="card">
+      <h4>촬영 + 편집 + 운영</h4>
+      <p>강의 영상 제작, 플랫폼 운영, 수강생 관리, 정산</p>
+    </div>
+    <div class="card">
+      <h4>강사는 강의만 집중</h4>
+      <p>기획~정산까지 전부 담당. 강사는 출연과 노하우 제공에 집중</p>
+    </div>
+  </div>
+
+  <div class="note">
+    본 미팅은 1차 가능성 체크입니다. 구체적인 계약 조건은 양측 관심 확인 후 별도 협의합니다.
+  </div>
+
+  <div class="footer">
+    <span>Flowmus Confidential</span>
+    <span>머니몬스터 x 부업클래스 — Coffee Chat</span>
+  </div>
+
+</div>
+
+</body>
+</html>
