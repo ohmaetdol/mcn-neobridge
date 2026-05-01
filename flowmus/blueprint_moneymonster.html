@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>머니몬스터 x Flowmus — 사업 블루프린트</title>
+<style>
+@page { size: A4; margin: 0; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, 'Pretendard', sans-serif; background: #f5f5f5; color: #222; }
+
+.page {
+  width: 210mm; min-height: 297mm; margin: 0 auto; background: #fff;
+  position: relative; overflow: hidden;
+}
+@media print { body { background: #fff; } .page { margin: 0; page-break-after: always; } }
+@media screen and (max-width: 800px) {
+  .page { width: 100%; min-height: auto; }
+  .hero-grid { grid-template-columns: 1fr !important; }
+  .triple-grid { grid-template-columns: 1fr !important; }
+  .dual-grid { grid-template-columns: 1fr !important; }
+  .flow-line { flex-direction: column !important; }
+  .flow-arrow { transform: rotate(90deg); }
+  .pg-inner { padding: 28px 20px !important; }
+  .cover-inner { padding: 60px 24px !important; }
+}
+
+/* ── COVER ── */
+.cover {
+  background: #0a0a0a; color: #fff; display: flex;
+  align-items: center; justify-content: center; text-align: center;
+}
+.cover-inner { padding: 60px 48px; }
+.cover-badge {
+  display: inline-block; font-size: 8pt; letter-spacing: 3px;
+  color: #666; border: 1px solid #333; padding: 6px 16px;
+  border-radius: 20px; margin-bottom: 28px; text-transform: uppercase;
+}
+.cover-title {
+  font-size: 28pt; font-weight: 900; line-height: 1.25;
+  margin-bottom: 12px; letter-spacing: -1px;
+}
+.cover-title span { color: #4a9eff; }
+.cover-sub {
+  font-size: 12pt; color: #888; line-height: 1.6; margin-bottom: 40px;
+}
+.cover-stats { display: flex; gap: 32px; justify-content: center; }
+.cover-stat { text-align: center; }
+.cover-stat .num { font-size: 22pt; font-weight: 800; color: #fff; }
+.cover-stat .label { font-size: 8pt; color: #666; margin-top: 4px; letter-spacing: 1px; }
+.cover-footer {
+  position: absolute; bottom: 32px; left: 0; right: 0;
+  text-align: center; font-size: 8pt; color: #444;
+}
+
+/* ── PAGE INNER ── */
+.pg-inner { padding: 44px 44px 60px; }
+.pg-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 28px;
+}
+.pg-header h2 { font-size: 10pt; letter-spacing: 2px; color: #999; text-transform: uppercase; }
+.pg-num { font-size: 28pt; font-weight: 900; color: #eee; }
+
+.sec-title {
+  font-size: 12pt; font-weight: 800; color: #111;
+  margin: 28px 0 14px; padding-bottom: 6px;
+  border-bottom: 2px solid #111;
+}
+.sec-title:first-of-type { margin-top: 0; }
+
+/* ── GRIDS ── */
+.hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.triple-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+.dual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* ── CARDS ── */
+.card {
+  padding: 20px; border-radius: 12px; background: #fafafa;
+  border: 1px solid #eee;
+}
+.card h4 { font-size: 10.5pt; font-weight: 700; margin-bottom: 6px; }
+.card p { font-size: 9pt; color: #555; line-height: 1.65; }
+.card .tag {
+  display: inline-block; font-size: 7.5pt; color: #fff; background: #111;
+  padding: 3px 10px; border-radius: 4px; margin-bottom: 10px;
+  letter-spacing: 0.5px;
+}
+.card-dark {
+  background: #111; color: #fff; border: none;
+}
+.card-dark p { color: #aaa; }
+.card-blue { border-left: 4px solid #4a9eff; }
+.card-accent { border-left: 4px solid #111; }
+
+/* ── FLOW ── */
+.flow-line {
+  display: flex; align-items: center; justify-content: center;
+  gap: 8px; margin: 20px 0;
+}
+.flow-box {
+  background: #111; color: #fff; padding: 12px 18px;
+  border-radius: 10px; font-size: 9pt; font-weight: 700;
+  text-align: center; min-width: 100px;
+}
+.flow-box.blue { background: #4a9eff; }
+.flow-box.outline {
+  background: #fff; color: #111; border: 2px solid #111;
+}
+.flow-arrow { color: #ccc; font-size: 14pt; font-weight: 300; }
+
+/* ── HIGHLIGHT ── */
+.highlight-box {
+  background: #0a0a0a; color: #fff; border-radius: 14px;
+  padding: 26px; margin: 18px 0;
+}
+.highlight-box h3 { font-size: 12pt; margin-bottom: 12px; font-weight: 800; }
+.highlight-box p { font-size: 9.5pt; color: #bbb; line-height: 1.7; }
+.highlight-box ul { list-style: none; padding: 0; }
+.highlight-box li {
+  font-size: 9.5pt; color: #ddd; padding: 5px 0;
+  border-bottom: 1px solid #222;
+}
+.highlight-box li:last-child { border: none; }
+.highlight-box li b { color: #4a9eff; }
+
+/* ── ROADMAP ── */
+.rm-phase {
+  display: flex; gap: 16px; margin-bottom: 16px;
+  padding: 18px; background: #fafafa; border-radius: 12px;
+  border-left: 4px solid #111;
+}
+.rm-num {
+  font-size: 24pt; font-weight: 900; color: #ddd;
+  min-width: 44px; line-height: 1;
+}
+.rm-body { flex: 1; }
+.rm-body h4 { font-size: 10.5pt; font-weight: 700; margin-bottom: 2px; }
+.rm-body .period { font-size: 8pt; color: #999; margin-bottom: 6px; }
+.rm-body ul { list-style: none; padding: 0; }
+.rm-body li { font-size: 9pt; color: #555; padding: 2px 0; }
+.rm-body li::before { content: "— "; color: #ccc; }
+.rm-active { border-left-color: #4a9eff; background: #f0f7ff; }
+
+/* ── QUOTE ── */
+.quote-box {
+  text-align: center; padding: 32px 20px; margin: 20px 0;
+  background: #0a0a0a; border-radius: 14px;
+}
+.quote-box .q {
+  font-size: 15pt; font-weight: 800; color: #fff;
+  line-height: 1.4; margin-bottom: 8px;
+}
+.quote-box .qa { font-size: 9pt; color: #666; }
+
+/* ── FOOTER ── */
+.pg-footer {
+  position: absolute; bottom: 24px; left: 44px; right: 44px;
+  display: flex; justify-content: space-between;
+  font-size: 7.5pt; color: #ccc;
+}
+
+/* ── TABLE ── */
+.sim-table {
+  width: 100%; border-collapse: collapse; margin: 12px 0;
+  font-size: 9pt;
+}
+.sim-table th {
+  background: #111; color: #fff; padding: 10px 12px;
+  text-align: center; font-weight: 600; font-size: 8.5pt;
+}
+.sim-table td {
+  padding: 10px 12px; border-bottom: 1px solid #eee;
+  text-align: center;
+}
+.sim-table td.left { text-align: left; }
+.sim-table tr.total { background: #f5f5f5; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<!-- ══════════ COVER ══════════ -->
+<div class="page cover">
+  <div class="cover-inner">
+    <div class="cover-badge">Business Blueprint 2026</div>
+    <div class="cover-title">
+      유튜브 편집 시장<br><span>1등</span>을 잡는 구조
+    </div>
+    <div class="cover-sub">
+      강의 → 편집자 수급 → 대행 매출 → 레퍼런스 독점<br>
+      머니몬스터 x Flowmus 사업 설계도
+    </div>
+    <div class="cover-stats">
+      <div class="cover-stat">
+        <div class="num">52조</div>
+        <div class="label">숏폼 시장 규모</div>
+      </div>
+      <div class="cover-stat">
+        <div class="num">60%</div>
+        <div class="label">연간 성장률</div>
+      </div>
+      <div class="cover-stat">
+        <div class="num">1등</div>
+        <div class="label">목표 포지션</div>
+      </div>
+    </div>
+  </div>
+  <div class="cover-footer">FLOWMUS — Confidential</div>
+</div>
+
+<!-- ══════════ PAGE 1 — 핵심 구조 ══════════ -->
+<div class="page">
+  <div class="pg-inner">
+
+    <div class="pg-header">
+      <h2>Core Structure</h2>
+      <span class="pg-num">01</span>
+    </div>
+
+    <div class="sec-title">비즈니스 엔진 — 3개의 축</div>
+
+    <div class="triple-grid">
+      <div class="card card-accent">
+        <div class="tag">ENGINE 1</div>
+        <h4>부업클래스 강의</h4>
+        <p>숏폼/롱폼 편집 스킬을 가르치는 강의. 수강생이 곧 편집자 인력풀이 된다.</p>
+      </div>
+      <div class="card card-accent">
+        <div class="tag">ENGINE 2</div>
+        <h4>편집 대행 사업</h4>
+        <p>수강생 + 크몽/편집몬 편집자를 흡수. 숏폼·롱폼 편집 대행 라인 구축.</p>
+      </div>
+      <div class="card card-accent">
+        <div class="tag">ENGINE 3</div>
+        <h4>대행사 레버리지</h4>
+        <p>기존 숏폼 대행사와 제휴. 레퍼런스를 가져오고, 매출을 나누는 구조.</p>
+      </div>
+    </div>
+
+    <div class="sec-title">순환 구조 — 왜 이게 되는가</div>
+
+    <div class="flow-line">
+      <div class="flow-box">강의<br><small>부업클래스</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box outline">편집자 수급<br><small>수강생 풀</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box blue">대행 매출<br><small>숏폼·롱폼</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">레퍼런스<br><small>독점 확보</small></div>
+    </div>
+
+    <div class="highlight-box">
+      <h3>핵심 — 강의가 인력 파이프라인이고, 대행이 매출 엔진이다</h3>
+      <ul>
+        <li>강의 수강생이 바로 편집자 인력풀 → <b>채용 비용 0원</b></li>
+        <li>편집자가 실전 수주하면 수강생 실제 수익 발생 → <b>강의 신뢰도 상승</b></li>
+        <li>대행 레퍼런스가 쌓이면 더 큰 클라이언트 유입 → <b>매출 자동 확장</b></li>
+        <li>이 사이클이 돌면 → <b>유튜브 편집 시장 1등</b></li>
+      </ul>
+    </div>
+
+    <div class="sec-title">머니몬스터 포지션</div>
+
+    <div class="hero-grid">
+      <div class="card card-blue">
+        <h4>얼굴 마담 + 강사</h4>
+        <p>유튜브 수익화/편집 분야의 대표 얼굴. 부업클래스 메인 강사. 대행사 미팅에서 레퍼런스 확보의 핵심 인물.</p>
+      </div>
+      <div class="card card-blue">
+        <h4>현재 자산</h4>
+        <p>월 매출 2,000만원 강의 경험. 유튜브 수익화 실전 노하우. 5/25 사이클클래스 강의 확정. 강사로서의 검증된 트랙레코드.</p>
+      </div>
+    </div>
+
+  </div>
+  <div class="pg-footer">
+    <span>Flowmus Confidential</span>
+    <span>머니몬스터 x Flowmus — Business Blueprint</span>
+  </div>
+</div>
+
+<!-- ══════════ PAGE 2 — 대행 사업 구조 ══════════ -->
+<div class="page">
+  <div class="pg-inner">
+
+    <div class="pg-header">
+      <h2>Agency Model</h2>
+      <span class="pg-num">02</span>
+    </div>
+
+    <div class="sec-title">편집 대행 — 4개 라인</div>
+
+    <div class="hero-grid">
+      <div class="card card-accent">
+        <div class="tag">LINE 1</div>
+        <h4>숏폼 제작 대행</h4>
+        <p>릴스/쇼츠/틱톡 숏폼 대량 제작. 소상공인·인플루언서 대상. 건당 5~15만원.</p>
+      </div>
+      <div class="card card-accent">
+        <div class="tag">LINE 2</div>
+        <h4>롱폼 편집 대행</h4>
+        <p>유튜브 본편 영상 편집. 유튜버·기업 대상. 편당 15~40만원.</p>
+      </div>
+      <div class="card card-accent">
+        <div class="tag">LINE 3</div>
+        <h4>크몽 대행</h4>
+        <p>크몽 플랫폼 내 편집 서비스 운영. 수강생을 크몽 전문가로 세팅, 수주 지원.</p>
+      </div>
+      <div class="card card-accent">
+        <div class="tag">LINE 4</div>
+        <h4>당근 대행</h4>
+        <p>당근마켓 소상공인 대상 숏폼 광고/콘텐츠 제작 대행. 지역 밀착형 영업.</p>
+      </div>
+    </div>
+
+    <div class="sec-title">편집자 수급 전략</div>
+
+    <div class="triple-grid">
+      <div class="card">
+        <h4>부업클래스 수강생</h4>
+        <p>강의 수료 → 실전 편집 테스트 → 합격 시 대행 풀 투입. 비용 0원으로 인력 확보.</p>
+      </div>
+      <div class="card">
+        <h4>크몽/편집몬 편집자</h4>
+        <p>기존 프리랜서에게 출연 제안 + 안정적 일거리 제공 조건으로 계약. 즉시 투입 가능.</p>
+      </div>
+      <div class="card">
+        <h4>대행사 제휴</h4>
+        <p>기존 숏폼 대행사와 매출 쉐어. 머니몬스터/사찍남이 얼굴 마담, 레퍼런스 독점 확보.</p>
+      </div>
+    </div>
+
+    <div class="sec-title">매출 시뮬레이션</div>
+
+    <table class="sim-table">
+      <thead>
+        <tr>
+          <th>수익 라인</th>
+          <th>단가</th>
+          <th>월 건수</th>
+          <th>월 매출</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="left">부업클래스 강의</td>
+          <td>285만원</td>
+          <td>35~70명/기</td>
+          <td><b>1~2억/기</b></td>
+        </tr>
+        <tr>
+          <td class="left">숏폼 대행</td>
+          <td>10만원</td>
+          <td>100건</td>
+          <td><b>1,000만원</b></td>
+        </tr>
+        <tr>
+          <td class="left">롱폼 편집 대행</td>
+          <td>25만원</td>
+          <td>40건</td>
+          <td><b>1,000만원</b></td>
+        </tr>
+        <tr>
+          <td class="left">크몽/당근 대행</td>
+          <td>10만원</td>
+          <td>50건</td>
+          <td><b>500만원</b></td>
+        </tr>
+        <tr class="total">
+          <td class="left" colspan="3"><b>월 대행 매출 (강의 제외)</b></td>
+          <td><b>2,500만원</b></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="pg-footer">
+    <span>Flowmus Confidential</span>
+    <span>머니몬스터 x Flowmus — Business Blueprint</span>
+  </div>
+</div>
+
+<!-- ══════════ PAGE 3 — 역할 분담 + 출판 ══════════ -->
+<div class="page">
+  <div class="pg-inner">
+
+    <div class="pg-header">
+      <h2>Role & Publishing</h2>
+      <span class="pg-num">03</span>
+    </div>
+
+    <div class="sec-title">역할 분담</div>
+
+    <div class="hero-grid">
+      <div class="card card-dark">
+        <div class="tag" style="background:#4a9eff;">머니몬스터</div>
+        <h4 style="color:#fff;">강사 + 얼굴 마담</h4>
+        <p>부업클래스 메인 강사 출연<br>
+        대행사 미팅 시 대표 얼굴<br>
+        유튜브 수익화 실전 노하우 제공<br>
+        편집자 퀄리티 감수<br>
+        출판 공동 저자</p>
+      </div>
+      <div class="card card-dark">
+        <div class="tag" style="background:#4a9eff;">FLOWMUS</div>
+        <h4 style="color:#fff;">시스템 + 운영 전체</h4>
+        <p>강의 기획/촬영/편집/플랫폼 운영<br>
+        채널 네트워크 모객 (사찍남/머니로드 등)<br>
+        편집자 풀 관리 + 대행 영업<br>
+        정산/CS/수강생 관리<br>
+        출판 기획 (플로우북스)</p>
+      </div>
+    </div>
+
+    <div class="sec-title">대행사 레버리지 구조</div>
+
+    <div class="flow-line">
+      <div class="flow-box">숏폼 대행사</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box outline">레퍼런스<br>공유</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box blue">머니몬스터<br>얼굴 마담</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">매출 쉐어</div>
+    </div>
+
+    <div class="card" style="margin-top:12px;">
+      <p>기존 숏폼 대행사들의 레퍼런스와 클라이언트 라인을 가져오되, 머니몬스터/사찍남이 대표 얼굴이 되어 신뢰를 확보. 대행사에게는 안정적 매출 분배, 우리는 브랜드와 레퍼런스를 독점하는 구조.</p>
+    </div>
+
+    <div class="sec-title">출판 — 플로우북스</div>
+
+    <div class="card" style="border-left:4px solid #4a9eff; margin-bottom:14px;">
+      <h4>유튜브 편집으로 월 500만원 버는 현실 부업</h4>
+      <p>강의 1기 수강생 실제 수익 사례 + 머니몬스터 노하우를 책으로. "이 강사는 책도 낸 사람이다" → 강의 전환율 상승. 대행 사업의 신뢰 자산.</p>
+    </div>
+
+    <div class="dual-grid">
+      <div class="card">
+        <h4>출판 시너지</h4>
+        <p>책 → 강의 모객 퍼널의 신뢰 자산<br>
+        수강생 성공 사례 수록<br>
+        대행 사업 브랜딩 강화</p>
+      </div>
+      <div class="card">
+        <h4>출판 일정</h4>
+        <p>강의 1기 이후 기획 착수<br>
+        수강생 실제 수익 데이터 수집<br>
+        플로우북스 브랜드로 출간</p>
+      </div>
+    </div>
+
+    <div class="highlight-box" style="margin-top:18px;">
+      <h3>강의 → 대행 → 출판 = 하나의 IP</h3>
+      <p>강의에서 편집자를 키우고, 대행에서 매출을 만들고, 출판으로 브랜드를 잡는다. 세 바퀴가 동시에 굴러가면 유튜브 편집 시장에서 1등을 먹는 구조가 완성된다.</p>
+    </div>
+
+  </div>
+  <div class="pg-footer">
+    <span>Flowmus Confidential</span>
+    <span>머니몬스터 x Flowmus — Business Blueprint</span>
+  </div>
+</div>
+
+<!-- ══════════ PAGE 4 — 로드맵 + 비전 ══════════ -->
+<div class="page">
+  <div class="pg-inner">
+
+    <div class="pg-header">
+      <h2>Roadmap & Vision</h2>
+      <span class="pg-num">04</span>
+    </div>
+
+    <div class="sec-title">실행 로드맵</div>
+
+    <div class="rm-phase rm-active">
+      <div class="rm-num">01</div>
+      <div class="rm-body">
+        <h4>즉시 실행</h4>
+        <div class="period">2026 Q2 (지금)</div>
+        <ul>
+          <li>부업클래스 강의 커리큘럼 확정</li>
+          <li>5/25 사이클클래스 강의 → 부업클래스 사전 홍보</li>
+          <li>크몽/편집몬 편집자 출연 제안 시작</li>
+          <li>숏폼 대행사 2~3곳 미팅 + 제휴 논의</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rm-phase">
+      <div class="rm-num">02</div>
+      <div class="rm-body">
+        <h4>부업클래스 1기 + 대행 런칭</h4>
+        <div class="period">2026 Q3</div>
+        <ul>
+          <li>무료 특강 → 유료 전환 → 1기 35명+ 모객</li>
+          <li>수강생 실전 수주 시작 (크몽/편집몬/당근)</li>
+          <li>숏폼 대행 라인 정식 가동</li>
+          <li>대행사 레퍼런스 1차 확보</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rm-phase">
+      <div class="rm-num">03</div>
+      <div class="rm-body">
+        <h4>대행 스케일업 + 출판</h4>
+        <div class="period">2026 Q4</div>
+        <ul>
+          <li>편집자 풀 50명+ 확보</li>
+          <li>대행 월 매출 2,500만원+ 달성</li>
+          <li>수강생 성공 사례 → 2기 모객</li>
+          <li>플로우북스 출판 기획 착수</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rm-phase">
+      <div class="rm-num">04</div>
+      <div class="rm-body">
+        <h4>시장 1등</h4>
+        <div class="period">2027</div>
+        <ul>
+          <li>유튜브 편집 대행 시장 점유율 1위</li>
+          <li>편집자 풀 200명+ / 월 대행 500건+</li>
+          <li>연 강의 매출 4~8억 + 대행 매출 3억+ = 연 7~11억</li>
+          <li>출판 완료 → IP 브랜드 확립</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-title">최종 비전</div>
+
+    <div class="quote-box">
+      <div class="q">"유튜브 편집이 필요하면<br>머니몬스터를 찾는다"</div>
+      <div class="qa">강의 x 대행 x 출판 — 유튜브 편집 시장 1등 브랜드</div>
+    </div>
+
+    <div class="triple-grid" style="margin-top:18px;">
+      <div class="card card-dark" style="text-align:center;">
+        <h4 style="color:#4a9eff; font-size:18pt;">강의</h4>
+        <p>편집자를 키운다</p>
+      </div>
+      <div class="card card-dark" style="text-align:center;">
+        <h4 style="color:#4a9eff; font-size:18pt;">대행</h4>
+        <p>매출을 만든다</p>
+      </div>
+      <div class="card card-dark" style="text-align:center;">
+        <h4 style="color:#4a9eff; font-size:18pt;">출판</h4>
+        <p>브랜드를 잡는다</p>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:28px;">
+      <div style="font-size:9pt; color:#999; margin-bottom:8px;">CONTACT</div>
+      <div style="font-size:10pt; font-weight:700;">오맷돌 — ceo@flowmus.com</div>
+    </div>
+
+  </div>
+  <div class="pg-footer">
+    <span>Flowmus Confidential</span>
+    <span>머니몬스터 x Flowmus — Business Blueprint</span>
+  </div>
+</div>
+
+</body>
+</html>
