@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IP 파트너십 제안서 — 이세령 대표님</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Apple SD Gothic Neo', '맑은 고딕', sans-serif;
+    color: #222;
+    background: #fff;
+    font-size: 10pt;
+    line-height: 1.8;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @media screen and (min-width: 801px) {
+    body { background: #d4d4d4; padding: 20px 0; }
+    .page { box-shadow: 0 4px 20px rgba(0,0,0,0.12); margin-bottom: 24px; }
+  }
+  @media print {
+    .page { margin: 0; box-shadow: none; min-height: auto; }
+    .no-print { display: none !important; }
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    position: relative;
+    background: #fff;
+    page-break-after: always;
+    overflow: hidden;
+  }
+  .page:last-child { page-break-after: auto; }
+  .page-inner { padding: 44px 48px; }
+
+  /* ── 커버 ── */
+  .cover {
+    background: #111;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0;
+  }
+  .cover-top {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 48px 0;
+  }
+  .cover-badge {
+    display: inline-block;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 20px;
+    padding: 6px 20px;
+    font-size: 8.5pt;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 40px;
+  }
+  .cover-title {
+    font-size: 30pt;
+    font-weight: 800;
+    letter-spacing: -1px;
+    text-align: center;
+    line-height: 1.3;
+    margin-bottom: 16px;
+  }
+  .cover-sub {
+    font-size: 12pt;
+    color: rgba(255,255,255,0.5);
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-align: center;
+    line-height: 1.6;
+  }
+  .cover-bottom {
+    padding: 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .cover-info {
+    font-size: 9pt;
+    color: rgba(255,255,255,0.35);
+    line-height: 1.8;
+  }
+  .cover-info b { color: rgba(255,255,255,0.7); font-weight: 600; }
+  .cover-logo {
+    font-size: 11pt;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.4);
+  }
+
+  /* ── 공통 ── */
+  .pg-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #111;
+  }
+  .pg-header h2 {
+    font-size: 16pt;
+    font-weight: 800;
+    color: #111;
+    letter-spacing: -0.5px;
+  }
+  .pg-num {
+    font-size: 8.5pt;
+    color: #bbb;
+    font-weight: 600;
+  }
+  .sec-title {
+    font-size: 11pt;
+    font-weight: 700;
+    color: #111;
+    margin-top: 28px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .sec-title::before {
+    content: '';
+    display: inline-block;
+    width: 3px;
+    height: 16px;
+    background: #111;
+    border-radius: 2px;
+  }
+  .note-bar {
+    background: #f5f8ff;
+    border-left: 3px solid #0066ff;
+    padding: 12px 18px;
+    border-radius: 0 8px 8px 0;
+    margin: 14px 0;
+    font-size: 8.5pt;
+    color: #666;
+    word-break: keep-all;
+  }
+  .quote-box {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 22px 28px;
+    margin: 20px 0;
+    text-align: center;
+    word-break: keep-all;
+  }
+  .quote-box .q {
+    font-size: 12pt;
+    font-weight: 700;
+    color: #222;
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+  .quote-box .qa {
+    font-size: 8.5pt;
+    color: #aaa;
+  }
+  .pg-footer {
+    position: absolute;
+    bottom: 28px;
+    left: 48px;
+    right: 48px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 7.5pt;
+    color: #ccc;
+  }
+
+  /* ── 프로필 카드 ── */
+  .profile-card {
+    display: flex;
+    gap: 24px;
+    background: #fafafa;
+    border-radius: 12px;
+    padding: 24px;
+    margin: 16px 0;
+    border: 1px solid #eee;
+  }
+  .profile-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+  }
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 9.5pt;
+    padding: 6px 0;
+    border-bottom: 1px solid #eee;
+  }
+  .stat-row:last-child { border-bottom: none; }
+  .stat-label { color: #888; }
+  .stat-value { font-weight: 700; color: #222; }
+
+  /* ── KPI ── */
+  .kpi-row {
+    display: flex;
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .kpi {
+    flex: 1;
+    border: 1px solid #e8e8e8;
+    border-radius: 10px;
+    padding: 18px;
+    text-align: center;
+  }
+  .kpi-value {
+    font-size: 20pt;
+    font-weight: 800;
+    color: #111;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .kpi-label {
+    font-size: 8pt;
+    color: #999;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .kpi-sub {
+    font-size: 7.5pt;
+    color: #bbb;
+    margin-top: 4px;
+  }
+  .kpi.highlight {
+    background: #111;
+    border-color: #111;
+  }
+  .kpi.highlight .kpi-value { color: #fff; }
+  .kpi.highlight .kpi-label { color: rgba(255,255,255,0.6); }
+  .kpi.highlight .kpi-sub { color: rgba(255,255,255,0.35); }
+
+  /* ── 로드맵 ── */
+  .roadmap {
+    display: flex;
+    gap: 10px;
+    margin: 16px 0;
+  }
+  .rm-phase {
+    flex: 1;
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .rm-phase:nth-child(1) { background: #f0f5ff; border: 1px solid #d0dfff; }
+  .rm-phase:nth-child(2) { background: #f8f8f8; border: 1px solid #e0e0e0; }
+  .rm-phase:nth-child(3) { background: #fafafa; border: 1px solid #e0e0e0; }
+  .rm-phase:nth-child(4) { background: #f0faf0; border: 1px solid #d0e8d0; }
+  .rm-num {
+    font-size: 24pt;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .rm-phase:nth-child(1) .rm-num { color: #0066ff; }
+  .rm-phase:nth-child(2) .rm-num { color: #333; }
+  .rm-phase:nth-child(3) .rm-num { color: #666; }
+  .rm-phase:nth-child(4) .rm-num { color: #2a9d2a; }
+  .rm-period {
+    font-size: 7.5pt;
+    font-weight: 600;
+    color: #999;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+  }
+  .rm-title {
+    font-size: 10pt;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 8px;
+  }
+  .rm-phase ul {
+    padding-left: 14px;
+    margin: 0;
+  }
+  .rm-phase li {
+    font-size: 8.5pt;
+    color: #555;
+    margin-bottom: 3px;
+    word-break: keep-all;
+  }
+
+  /* ── 테이블 ── */
+  .sim-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 9.5pt;
+  }
+  .sim-table th,
+  .sim-table td {
+    border: 1px solid #e0e0e0;
+    padding: 10px 14px;
+    vertical-align: middle;
+    word-break: keep-all;
+  }
+  .sim-table th {
+    background: #222;
+    color: #fff;
+    font-weight: 600;
+    text-align: center;
+    font-size: 8.5pt;
+  }
+  .sim-table td { text-align: center; color: #333; }
+  .sim-table td.left { text-align: left; }
+  .sim-table tr.total td {
+    background: #f8f8f8;
+    font-weight: 700;
+    border-top: 2px solid #333;
+  }
+  .sim-table tr.highlight td {
+    background: #111;
+    color: #fff;
+    font-weight: 700;
+    font-size: 10pt;
+  }
+
+  /* ── 서포트 그리드 ── */
+  .support-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .sup-card {
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 18px;
+  }
+  .sup-card h4 {
+    font-size: 9.5pt;
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 4px;
+  }
+  .sup-card p {
+    font-size: 8pt;
+    color: #888;
+    line-height: 1.6;
+    word-break: keep-all;
+  }
+
+  /* ── 파이프라인 ── */
+  .funnel {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin: 20px 0;
+  }
+  .funnel-step {
+    flex: 1;
+    text-align: center;
+    padding: 16px 8px;
+    position: relative;
+  }
+  .funnel-step:nth-child(1) { background: #f0f5ff; border-radius: 10px 0 0 10px; }
+  .funnel-step:nth-child(2) { background: #e8eeff; }
+  .funnel-step:nth-child(3) { background: #dde4ff; }
+  .funnel-step:nth-child(4) { background: #d0daff; }
+  .funnel-step:nth-child(5) { background: #111; color: #fff; border-radius: 0 10px 10px 0; }
+  .funnel-num {
+    font-size: 7pt;
+    font-weight: 700;
+    color: #0066ff;
+    margin-bottom: 4px;
+  }
+  .funnel-step:nth-child(5) .funnel-num { color: rgba(255,255,255,0.5); }
+  .funnel-title {
+    font-size: 9pt;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+  .funnel-desc {
+    font-size: 7pt;
+    color: #888;
+  }
+  .funnel-step:nth-child(5) .funnel-desc { color: rgba(255,255,255,0.4); }
+  .funnel-arrow {
+    position: absolute;
+    right: -6px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 10pt;
+    color: #bbb;
+    z-index: 1;
+  }
+
+  .print-btn {
+    position: fixed; bottom: 20px; right: 20px; z-index: 100;
+    background: #111; color: #fff; border: none;
+    padding: 12px 28px; border-radius: 8px;
+    font-size: 10pt; font-weight: 600; cursor: pointer;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    font-family: sans-serif;
+  }
+
+  /* ── 모바일 ── */
+  @media screen and (max-width: 800px) {
+    body { padding: 0; background: #fff; }
+    .page {
+      width: 100%;
+      min-height: auto;
+      box-shadow: none;
+      margin-bottom: 0;
+      border-bottom: 4px solid #eee;
+      overflow: visible;
+    }
+    .page-inner { padding: 24px 20px; }
+    .cover-top { padding: 40px 20px 0; }
+    .cover-title { font-size: 22pt; }
+    .cover-sub { font-size: 9pt; }
+    .cover-bottom { padding: 24px 20px; }
+    .pg-header h2 { font-size: 13pt; }
+    .profile-card { flex-direction: column; gap: 16px; }
+    .kpi-row { flex-wrap: wrap; }
+    .kpi { flex: 0 0 calc(50% - 6px); }
+    .roadmap { flex-direction: column; gap: 12px; }
+    .support-grid { grid-template-columns: 1fr; }
+    .funnel { flex-direction: column; gap: 0; }
+    .funnel-step { border-radius: 0 !important; width: 100%; }
+    .funnel-step:first-child { border-radius: 10px 10px 0 0 !important; }
+    .funnel-step:last-child { border-radius: 0 0 10px 10px !important; }
+    .funnel-arrow { display: none; }
+    .sim-table { font-size: 8.5pt; }
+    .sim-table th, .sim-table td { padding: 8px 6px; }
+    .pg-footer { position: static; padding: 16px 20px; margin-top: 20px; border-top: 1px solid #eee; }
+    .sec-title { font-size: 10pt; margin-top: 20px; }
+    .note-bar { font-size: 8pt; padding: 10px 14px; }
+    .quote-box .q { font-size: 11pt; }
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">PDF 저장</button>
+
+<!-- ══════════ COVER ══════════ -->
+<div class="page cover">
+  <div class="cover-top">
+    <div class="cover-badge">IP Partnership Proposal</div>
+    <div class="cover-title">인스타 수익화<br>강의 사업 제안서</div>
+    <div class="cover-sub">30초 영상 하나로 매출 1억 찍는<br>인스타그램 수익화 마스터클래스</div>
+  </div>
+  <div class="cover-bottom">
+    <div class="cover-info">
+      <b>Prepared for</b> 이세령 대표님<br>
+      <b>Date</b> 2026. 05. 01<br>
+      <b>Confidential</b>
+    </div>
+    <div class="cover-logo">FLOWMUS</div>
+  </div>
+</div>
+
+<!-- ══════════ PAGE 1 — Why 이세령 ══════════ -->
+<div class="page">
+  <div class="page-inner">
+
+    <div class="pg-header">
+      <h2>Why 이세령</h2>
+      <span class="pg-num">01</span>
+    </div>
+
+    <div class="quote-box">
+      <div class="q">"실제로 -30kg 감량하고,<br>그 과정을 콘텐츠로 만들어 85K를 키웠다."</div>
+      <div class="qa">진짜 경험 기반의 IP</div>
+    </div>
+
+    <div class="sec-title">이세령 대표 프로필</div>
+
+    <div class="profile-card">
+      <div class="profile-stats" style="flex:1;">
+        <div class="stat-row"><span class="stat-label">인스타그램</span><span class="stat-value">@lizzyconnect / 85K</span></div>
+        <div class="stat-row"><span class="stat-label">다이어트 스토리</span><span class="stat-value">실제 -30kg 감량</span></div>
+        <div class="stat-row"><span class="stat-label">인플루언서 네트워크</span><span class="stat-value">약 600명</span></div>
+        <div class="stat-row"><span class="stat-label">포지션</span><span class="stat-value">리지커넥트 CEO</span></div>
+        <div class="stat-row"><span class="stat-label">핵심 역량</span><span class="stat-value">다이어트 + 인스타 수익화</span></div>
+      </div>
+    </div>
+
+    <div class="sec-title">강의가 팔리는 3가지 이유</div>
+
+    <div class="kpi-row">
+      <div class="kpi">
+        <div class="kpi-value" style="font-size:16pt;">Real</div>
+        <div class="kpi-label">진짜 경험</div>
+        <div class="kpi-sub">-30kg 실제 감량 스토리<br>이론이 아닌 체험</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-value" style="font-size:16pt;">Proof</div>
+        <div class="kpi-label">검증된 수익</div>
+        <div class="kpi-sub">인스타 85K 직접 성장<br>수익화 퍼널 운영 중</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-value" style="font-size:16pt;">Scale</div>
+        <div class="kpi-label">확장 가능성</div>
+        <div class="kpi-sub">600명 인플루언서 네트워크<br>커뮤니티 기반 모객</div>
+      </div>
+    </div>
+
+    <div class="note-bar">
+      수강생이 원하는 강사는 "이론을 가르치는 사람"이 아니라 <b>"실제로 해본 사람"</b>입니다. 이세령 대표님은 다이어트, 인스타 성장, 수익화를 직접 경험한 유일한 포지션입니다.
+    </div>
+
+  </div>
+  <div class="pg-footer">
+    <span>Flowmus Confidential</span>
+    <span>IP Partnership Proposal — 이세령</span>
+  </div>
+</div>
+
+<!-- ══════════ PAGE 2 — 강의 설계 ══════════ -->
+<div class="page">
+  <div class="page-inner">
+
+    <div class="pg-header">
+      <h2>Class Design</h2>
+      <span class="pg-num">02</span>
+    </div>
+
+    <div class="sec-title">강의 컨셉</div>
+
+    <div class="quote-box">
+      <div class="q">"30초 영상 하나로 매출 1억 찍는<br>인스타그램 수익화 마스터클래스"</div>
+      <div class="qa">다이어트 계정으로 시작해서 수익화까지, A to Z</div>
+    </div>
+
+    <div class="sec-title">수강생 퍼널</div>
+
+    <div class="funnel">
+      <div class="funnel-step">
+        <div class="funnel-num">STEP 1</div>
+        <div class="funnel-title">인스타 릴스</div>
+        <div class="funnel-desc">30초 영상으로<br>팔로워 유입</div>
+        <div class="funnel-arrow">&#8594;</div>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-num">STEP 2</div>
+        <div class="funnel-title">무료 특강</div>
+        <div class="funnel-desc">맛보기 강의<br>신뢰 구축</div>
+        <div class="funnel-arrow">&#8594;</div>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-num">STEP 3</div>
+        <div class="funnel-title">유료 강의</div>
+        <div class="funnel-desc">285만원<br>마스터클래스</div>
+        <div class="funnel-arrow">&#8594;</div>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-num">STEP 4</div>
+        <div class="funnel-title">커뮤니티</div>
+        <div class="funnel-desc">수강생 네트워크<br>리텐션</div>
+        <div class="funnel-arrow">&#8594;</div>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-num">STEP 5</div>
+        <div class="funnel-title">재구매</div>
+        <div class="funnel-desc">고급 과정<br>컨설팅</div>
+      </div>
+    </div>
+
+    <div class="sec-title">매출 시뮬레이션</div>
+
+    <table class="sim-table">
+      <thead>
+        <tr>
+          <th>구분</th>
+          <th>수강료</th>
+          <th>수강생</th>
+          <th>매출</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="left">1회 (보수적)</td>
+          <td>285만원</td>
+          <td>35명</td>
+          <td><b>약 1억원</b></td>
+        </tr>
+        <tr>
+          <td class="left">1회 (목표)</td>
+          <td>285만원</td>
+          <td>70명</td>
+          <td><b>약 2억원</b></td>
+        </tr>
+        <tr class="total">
+          <td class="left" colspan="2"><b>연간 (4회 운영)</b></td>
+          <td>140~280명</td>
+          <td><b>4~8억원</b></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="sec-title">연간 강의 스케줄</div>
+
+    <div class="kpi-row">
+      <div class="kpi">
+        <div class="kpi-value">Q1</div>
+        <div class="kpi-label">1기 (신년 다이어트)</div>
+        <div class="kpi-sub">1~2월 모객 / 3월 개강</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-value">Q2</div>
+        <div class="kpi-label">2기 (여름 바디)</div>
+        <div class="kpi-sub">4~5월 모객 / 6월 개강</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-value">Q3</div>
+        <div class="kpi-label">3기 (가을 리셋)</div>
+        <div class="kpi-sub">8월 모객 / 9월 개강</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-value">Q4</div>
+        <div class="kpi-label">4기 (연말 결산)</div>
+        <div class="kpi-sub">10~11월 모객 / 12월 개강</div>
+      </div>
+    </div>
+
+    <div class="note-bar">
+      다이어트 시즌(신년, 여름 전, 연말)과 강의 일정을 맞추면 모객 효율이 극대화됩니다.
+    </div>
+
+  </div>
+  <div class="pg-footer">
+    <span>Flowmus Confidential</span>
+    <span>IP Partnership Proposal — 이세령</span>
+  </div>
+</div>
+
+<!-- ══════════ PAGE 3 — Flowmus 역할 ══════════ -->
+<div class="page">
+  <div class="page-inner">
+
+    <div class="pg-header">
+      <h2>Flowmus Role</h2>
+      <span class="pg-num">03</span>
+    </div>
+
+    <div class="sec-title">역할 분담</div>
+
+    <div class="support-grid">
+      <div class="sup-card" style="border-left: 3px solid #111;">
+        <h4>강의 기획</h4>
+        <p>커리큘럼 설계, 콘텐츠 구성, 수강생 여정 설계, 무료 특강 시나리오 작성</p>
+      </div>
+      <div class="sup-card" style="border-left: 3px solid #111;">
+        <h4>모객 + 광고</h4>
+        <p>인스타/유튜브 광고 집행, 랜딩페이지 제작, 무료 특강 퍼널 운영, 전환율 최적화</p>
+      </div>
+      <div class="sup-card" style="border-left: 3px solid #111;">
+        <h4>촬영 + 제작</h4>
+        <p>강의 영상 촬영, 편집, 자막, 강의 자료(PPT/PDF) 디자인, 플랫폼 업로드</p>
+      </div>
+      <div class="sup-card" style="border-left: 3px solid #111;">
+        <h4>운영 + 정산</h4>
+        <p>수강생 관리, 커뮤니티 운영 지원, 정산, CS 대응, 수료증 발급</p>
+      </div>
+    </div>
+
+    <div class="sec-title">이세령 대표 역할</div>
+
+    <div class="support-grid">
+      <div class="sup-card" style="border-left: 3px solid #0066ff;">
+        <h4>강의 출연</h4>
+        <p>마스터클래스 강의, 무료 특강 출연, 수강생 Q&A 세션</p>
+      </div>
+      <div class="sup-card" style="border-left: 3px solid #0066ff;">
+        <h4>콘텐츠 소재</h4>
+        <p>본인 경험/노하우 제공, 인스타 수익화 사례, 다이어트 스토리</p>
+      </div>
+      <div class="sup-card" style="border-left: 3px solid #0066ff;">
+        <h4>인스타 홍보</h4>
+        <p>본인 인스타 계정(@lizzyconnect)을 통한 자연 유입, 스토리/릴스 홍보</p>
+      </div>
+      <div class="sup-card" style="border-left: 3px solid #0066ff;">
+        <h4>네트워크 활용</h4>
+        <p>600명 인플루언서 네트워크를 통한 바이럴 확산, 수강생 소개</p>
+      </div>
+    </div>
+
+    <div class="note-bar">
+      <b>이세령 대표님은 강의와 홍보에 집중</b>하시면 됩니다. 기획, 모객, 광고, 촬영, 편집, 운영, 정산까지 전부 Flowmus가 담당합니다.
+    </div>
+
+    <div class="sec-title">출판 — 플로우북스</div>
+
+    <div class="profile-card">
+      <div class="profile-stats">
+        <div class="stat-row"><span class="stat-label">출판 브랜드</span><span class="stat-value">플로우북스 (Flowmus Publishing)</span></div>
+        <div class="stat-row"><span class="stat-label">도서 컨셉</span><span class="stat-value">다이어트 + 인스타 수익화 (협의)</span></div>
+        <div class="stat-row"><span class="stat-label">출판 시너지</span><span class="stat-value">강의 모객 퍼널의 신뢰 자산</span></div>
+        <div class="stat-row"><span class="stat-label">일정</span><span class="stat-value">강의 1기 이후 출판 기획 착수</span></div>
+      </div>
+    </div>
+
+    <div class="note-bar">
+      책은 강의의 <b>신뢰 자산</b>입니다. "이 강사는 책도 낸 사람이다" → 수강 전환율 상승. 강의와 출판을 하나의 IP로 묶어서 운영합니다.
+    </div>
+
+  </div>
+  <div class="pg-footer">
+    <span>Flowmus Confidential</span>
+    <span>IP Partnership Proposal — 이세령</span>
+  </div>
+</div>
+
+<!-- ══════════ PAGE 4 — Vision & Next ══════════ -->
+<div class="page">
+  <div class="page-inner">
+
+    <div class="pg-header">
+      <h2>Growth Vision</h2>
+      <span class="pg-num">04</span>
+    </div>
+
+    <div class="sec-title">IP 성장 로드맵</div>
+
+    <div class="roadmap">
+      <div class="rm-phase">
+        <div class="rm-num">01</div>
+        <div class="rm-period">2026 Q2 — Q3</div>
+        <div class="rm-title">강의 1기 런칭</div>
+        <ul>
+          <li>무료 특강 → 유료 전환 퍼널</li>
+          <li>목표 매출 1~2억</li>
+          <li>수강생 커뮤니티 구축</li>
+          <li>강의 콘텐츠 촬영/제작</li>
+        </ul>
+      </div>
+      <div class="rm-phase">
+        <div class="rm-num">02</div>
+        <div class="rm-period">2026 Q3 — Q4</div>
+        <div class="rm-title">출판 + 2기</div>
+        <ul>
+          <li>플로우북스 도서 출판</li>
+          <li>강의 2기 (개선 버전)</li>
+          <li>1기 수강생 후기 마케팅</li>
+          <li>유튜브 채널 개설 검토</li>
+        </ul>
+      </div>
+      <div class="rm-phase">
+        <div class="rm-num">03</div>
+        <div class="rm-period">2027</div>
+        <div class="rm-title">IP 확장</div>
+        <ul>
+          <li>연 4회 정기 강의 안정화</li>
+          <li>고급 과정 / 1:1 컨설팅</li>
+          <li>기업 대상 워크숍</li>
+          <li>멀티 플랫폼 확장</li>
+        </ul>
+      </div>
+      <div class="rm-phase">
+        <div class="rm-num">04</div>
+        <div class="rm-period">2027+</div>
+        <div class="rm-title">브랜드</div>
+        <ul>
+          <li>"이세령" 퍼스널 브랜드 확립</li>
+          <li>웰니스 브랜드 론칭</li>
+          <li>인플루언서 벤더 사업 확장</li>
+          <li>연 매출 10억+ 목표</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-title">이 제안의 핵심</div>
+
+    <div class="kpi-row">
+      <div class="kpi highlight">
+        <div class="kpi-value" style="font-size:14pt;">IP 파트너십</div>
+        <div class="kpi-label">단순 외주가 아닌 사업 파트너</div>
+      </div>
+      <div class="kpi highlight">
+        <div class="kpi-value" style="font-size:14pt;">원스톱</div>
+        <div class="kpi-label">기획~정산까지 전부 담당</div>
+      </div>
+      <div class="kpi highlight">
+        <div class="kpi-value" style="font-size:14pt;">강의 + 출판</div>
+        <div class="kpi-label">하나의 IP, 두 가지 수익</div>
+      </div>
+    </div>
+
+    <div class="quote-box" style="margin-top:24px;">
+      <div class="q">"이세령이라는 IP를<br>함께 만들어갑니다."</div>
+      <div class="qa">Flowmus Team</div>
+    </div>
+
+    <div style="margin-top:32px;">
+      <div class="sec-title">담당자</div>
+      <div style="display:flex; gap:16px; margin-top:12px;">
+        <div style="flex:1; border:1px solid #eee; border-radius:10px; padding:18px;">
+          <div style="font-weight:700; font-size:10pt; color:#222; margin-bottom:6px;">오맷돌</div>
+          <div style="font-size:8.5pt; color:#999; margin-bottom:8px;">공동대표 / 콘텐츠 총괄</div>
+          <div style="font-size:9pt; color:#555;">ceo@flowmus.com</div>
+        </div>
+        <div style="flex:1; border:1px solid #eee; border-radius:10px; padding:18px;">
+          <div style="font-weight:700; font-size:10pt; color:#222; margin-bottom:6px;">권현우</div>
+          <div style="font-size:8.5pt; color:#999; margin-bottom:8px;">공동대표 / 사업 총괄</div>
+          <div style="font-size:9pt; color:#555;">coo@flowmus.com</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="pg-footer">
+    <span>Flowmus Confidential</span>
+    <span>IP Partnership Proposal — 이세령</span>
+  </div>
+</div>
+
+</body>
+</html>
