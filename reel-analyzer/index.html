@@ -291,40 +291,8 @@ h1 {
   object-fit: cover;
 }
 
-/* API Key */
-.api-key-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: #f8f9fa;
-  border-bottom: 1px solid #e5e8eb;
-  padding: 8px 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  z-index: 100;
-}
-.api-key-bar input {
-  width: 280px;
-  padding: 6px 12px;
-  border: 1px solid #e5e8eb;
-  border-radius: 8px;
-  font-size: 12px;
-  font-family: monospace;
-}
-.api-key-bar label {
-  font-size: 12px;
-  color: #8b95a1;
-}
-.api-key-status {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #e5e8eb;
-}
-.api-key-status.connected { background: #20c997; }
+/* API key bar - hidden (hardcoded) */
+.api-key-bar { display: none; }
 
 /* Video Preview */
 .video-preview {
@@ -345,12 +313,10 @@ h1 {
 <body>
 
 <div class="api-key-bar">
-  <label>Gemini API Key</label>
-  <input type="password" id="apiKey" placeholder="AIza..." value="">
-  <div class="api-key-status" id="apiStatus"></div>
+  <input type="hidden" id="apiKey" value="AIzaSyBjATr1K0AT5pfkp-wJK7HofGI8_SPH4qk">
 </div>
 
-<div class="container" style="margin-top: 20px;">
+<div class="container">
   <h1>릴스 기획서 생성기</h1>
   <p class="subtitle">레퍼런스 영상을 넣으면 촬영 기획서가 나옵니다</p>
 
@@ -420,27 +386,10 @@ const progressFill = document.getElementById('progressFill');
 const progressText = document.getElementById('progressText');
 const result = document.getElementById('result');
 const apiKeyInput = document.getElementById('apiKey');
-const apiStatus = document.getElementById('apiStatus');
 const videoPreview = document.getElementById('videoPreview');
 const previewVideo = document.getElementById('previewVideo');
 
-// Load saved API key
-const savedKey = localStorage.getItem('gemini_api_key');
-if (savedKey) {
-  apiKeyInput.value = savedKey;
-  apiStatus.classList.add('connected');
-}
-
-apiKeyInput.addEventListener('change', () => {
-  const key = apiKeyInput.value.trim();
-  if (key) {
-    localStorage.setItem('gemini_api_key', key);
-    apiStatus.classList.add('connected');
-  } else {
-    apiStatus.classList.remove('connected');
-  }
-  checkReady();
-});
+// API key is hardcoded
 
 // Upload handlers
 uploadArea.addEventListener('click', () => fileInput.click());
@@ -471,8 +420,7 @@ function handleFile(file) {
 topicInput.addEventListener('input', checkReady);
 
 function checkReady() {
-  const ready = videoFile && topicInput.value.trim() && apiKeyInput.value.trim();
-  btnGenerate.disabled = !ready;
+  btnGenerate.disabled = !(videoFile && topicInput.value.trim());
 }
 
 // Frame extraction from video
