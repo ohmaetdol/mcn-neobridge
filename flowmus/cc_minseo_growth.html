@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>민서 — 숏폼 기획자 성장 설계</title>
+<style>
+@page { size: A4; margin: 0; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, 'Pretendard', sans-serif; background: #f5f5f5; color: #222; }
+
+.page {
+  width: 210mm; min-height: 297mm; margin: 0 auto; background: #fff;
+  position: relative; overflow: hidden;
+}
+@media print { body { background: #fff; } .page { margin: 0; page-break-after: always; } }
+@media screen and (max-width: 800px) {
+  .page { width: 100%; min-height: auto; }
+  .pg-inner { padding: 28px 20px !important; }
+  .cover-inner { padding: 60px 24px !important; }
+  .dual-grid { grid-template-columns: 1fr !important; }
+  .flow-line { flex-direction: column !important; }
+  .flow-arrow { transform: rotate(90deg); }
+}
+
+/* ── COVER ── */
+.cover { background: #0a0a0a; color: #fff; display: flex; align-items: center; justify-content: center; text-align: center; }
+.cover-inner { padding: 60px 48px; }
+.cover-badge { display: inline-block; font-size: 8pt; letter-spacing: 3px; color: #666; border: 1px solid #333; padding: 6px 16px; border-radius: 20px; margin-bottom: 28px; }
+.cover-title { font-size: 24pt; font-weight: 900; line-height: 1.35; margin-bottom: 14px; }
+.cover-title span { color: #6bb5ff; }
+.cover-sub { font-size: 11pt; color: #888; line-height: 1.7; margin-bottom: 40px; }
+.cover-kv { display: flex; gap: 28px; justify-content: center; margin-top: 10px; }
+.cover-kv-item { text-align: center; }
+.cover-kv-item .val { font-size: 18pt; font-weight: 800; }
+.cover-kv-item .lbl { font-size: 8pt; color: #666; margin-top: 4px; letter-spacing: 1px; }
+.cover-footer { position: absolute; bottom: 32px; left: 0; right: 0; text-align: center; font-size: 8pt; color: #444; }
+
+/* ── PAGE ── */
+.pg-inner { padding: 44px 44px 60px; }
+.pg-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+.pg-header h2 { font-size: 10pt; letter-spacing: 2px; color: #999; text-transform: uppercase; }
+.pg-num { font-size: 28pt; font-weight: 900; color: #eee; }
+
+.sec-title { font-size: 12pt; font-weight: 800; color: #111; margin: 26px 0 14px; padding-bottom: 6px; border-bottom: 2px solid #111; }
+.sec-title:first-of-type { margin-top: 0; }
+
+.dual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.card { padding: 18px; border-radius: 12px; background: #fafafa; border: 1px solid #eee; }
+.card h4 { font-size: 10.5pt; font-weight: 700; margin-bottom: 6px; }
+.card p { font-size: 9pt; color: #555; line-height: 1.7; }
+.card .tag { display: inline-block; font-size: 7.5pt; color: #fff; background: #111; padding: 3px 10px; border-radius: 4px; margin-bottom: 10px; }
+.card-dark { background: #111; color: #fff; border: none; }
+.card-dark p { color: #aaa; }
+.card-blue { border-left: 4px solid #6bb5ff; }
+.card-warn { border-left: 4px solid #ffb86b; }
+.card-green { border-left: 4px solid #6bffb8; }
+
+.flow-line { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 18px 0; }
+.flow-box { background: #111; color: #fff; padding: 10px 14px; border-radius: 10px; font-size: 8.5pt; font-weight: 700; text-align: center; min-width: 80px; line-height: 1.4; }
+.flow-box.blue { background: #6bb5ff; color: #111; }
+.flow-box.outline { background: #fff; color: #111; border: 2px solid #111; }
+.flow-box.red { background: #ff6b6b; }
+.flow-arrow { color: #ccc; font-size: 14pt; font-weight: 300; }
+
+.highlight-box { background: #0a0a0a; color: #fff; border-radius: 14px; padding: 24px; margin: 18px 0; }
+.highlight-box h3 { font-size: 12pt; margin-bottom: 10px; font-weight: 800; }
+.highlight-box ul { list-style: none; padding: 0; }
+.highlight-box li { font-size: 9.5pt; color: #ddd; padding: 5px 0; border-bottom: 1px solid #222; }
+.highlight-box li:last-child { border: none; }
+.highlight-box li b { color: #6bb5ff; }
+
+.gap-item { display: flex; gap: 14px; margin-bottom: 12px; padding: 16px; background: #fff5f0; border-radius: 12px; border-left: 4px solid #ffb86b; }
+.gap-num { font-size: 18pt; font-weight: 900; color: #ffe0c0; min-width: 36px; line-height: 1; }
+.gap-body h4 { font-size: 10.5pt; font-weight: 700; margin-bottom: 3px; }
+.gap-body p { font-size: 9pt; color: #666; line-height: 1.6; }
+
+.step-item { display: flex; gap: 14px; margin-bottom: 12px; padding: 16px; background: #f0f8ff; border-radius: 12px; border-left: 4px solid #6bb5ff; }
+.step-item.done { background: #f0fff5; border-left-color: #6bffb8; }
+.step-num { font-size: 18pt; font-weight: 900; color: #c0e0ff; min-width: 36px; line-height: 1; }
+.step-item.done .step-num { color: #a0ffd0; }
+.step-body h4 { font-size: 10.5pt; font-weight: 700; margin-bottom: 3px; }
+.step-body p { font-size: 9pt; color: #666; line-height: 1.6; }
+
+.quote-box { text-align: center; padding: 24px 20px; margin: 18px 0; background: #0a0a0a; border-radius: 14px; }
+.quote-box .q { font-size: 13pt; font-weight: 800; color: #fff; line-height: 1.4; margin-bottom: 8px; }
+.quote-box .qa { font-size: 9pt; color: #666; }
+
+.pg-footer { position: absolute; bottom: 24px; left: 44px; right: 44px; display: flex; justify-content: space-between; font-size: 7.5pt; color: #ccc; }
+</style>
+</head>
+<body>
+
+<!-- ══════════ COVER ══════════ -->
+<div class="page cover">
+  <div class="cover-inner">
+    <div class="cover-badge">GROWTH BLUEPRINT</div>
+    <div class="cover-title">
+      디자인에서 <span>콘텐츠 기획자</span>로<br>민서 성장 설계
+    </div>
+    <div class="cover-sub">
+      "확신은 없다. 해보자!"<br>
+      숏폼 기획 8개월 → 매출을 만드는 콘텐츠 기획자로
+    </div>
+    <div class="cover-kv">
+      <div class="cover-kv-item">
+        <div class="val">8개월</div>
+        <div class="lbl">숏폼 경험</div>
+      </div>
+      <div class="cover-kv-item">
+        <div class="val">디자인 → 기획</div>
+        <div class="lbl">커리어 전환</div>
+      </div>
+      <div class="cover-kv-item">
+        <div class="val">베스트클래스</div>
+        <div class="lbl">현 직장</div>
+      </div>
+    </div>
+  </div>
+  <div class="cover-footer">FLOWMUS — Confidential</div>
+</div>
+
+<!-- ══════════ PAGE 1 — 현재 위치 ══════════ -->
+<div class="page">
+  <div class="pg-inner">
+
+    <div class="pg-header">
+      <h2>Where She Is</h2>
+      <span class="pg-num">01</span>
+    </div>
+
+    <div class="sec-title">민서의 현재 위치</div>
+
+    <div class="dual-grid">
+      <div class="card card-dark">
+        <div class="tag" style="background:#6bb5ff; color:#111;">현 직장</div>
+        <h4 style="color:#fff;">베스트클래스 — 숏폼 기획자</h4>
+        <p>디자인으로 입사 → 숏폼 기획자로 전환<br>
+        매출에 직접 관여하지 않음<br>
+        콘텐츠 기획/편집/업로드/CS 전 과정 수행<br>
+        숏폼 경력 8개월</p>
+      </div>
+      <div class="card card-dark">
+        <div class="tag" style="background:#6bb5ff; color:#111;">커리어 방향</div>
+        <h4 style="color:#fff;">콘텐츠 기획자가 되고 싶다</h4>
+        <p>디자인을 하고 싶었는데<br>
+        레퍼런스를 찾다 보니 → 돈을 벌려면 기획<br>
+        기획이 돈이 된다는 걸 깨달음<br>
+        디자인에서 기획자로 방향을 틀었다</p>
+      </div>
+    </div>
+
+    <div class="sec-title">현재 업무 플로우</div>
+
+    <div class="flow-line">
+      <div class="flow-box outline">방향성<br><small>업무 지시</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">소구점 발굴</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">콘티/대본</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box blue">인플루언서<br><small>촬영 진행</small></div>
+    </div>
+
+    <div class="flow-line" style="margin-top:8px;">
+      <div class="flow-box">기획</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">컨펌</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">편집</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">업로드</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box outline">CS</div>
+    </div>
+
+    <div class="sec-title">현재의 벽</div>
+
+    <div class="gap-item">
+      <div class="gap-num">01</div>
+      <div class="gap-body">
+        <h4>소재 발굴 — 창작에서 막힌다</h4>
+        <p>방향성이 주어지면 콘티/대본은 짤 수 있다. 그런데 "뭘 만들지?"를 스스로 찾는 게 가장 어렵다. 트렌드를 따라가는 숏폼이라 유행이 빠르고, 8개월 해봤지만 소재 창작에서 계속 막힌다.</p>
+      </div>
+    </div>
+    <div class="gap-item">
+      <div class="gap-num">02</div>
+      <div class="gap-body">
+        <h4>성과 판단 — 잘 갔는지 어떻게 아는가?</h4>
+        <p>콘텐츠를 기획하고 편집하고 업로드까지 했다. 그런데 "이게 잘 간 건지, 못 간 건지"를 어떻게 판단하는지 모른다. 데이터를 보는 눈이 없다.</p>
+      </div>
+    </div>
+    <div class="gap-item">
+      <div class="gap-num">03</div>
+      <div class="gap-body">
+        <h4>매출 연결 — 기획이 돈이 되는 구조를 모른다</h4>
+        <p>현재 매출에 관여하지 않는다. 콘텐츠를 만드는 사람이지, 콘텐츠로 돈을 만드는 사람이 아니다. 기획자가 되려면 이 연결고리를 배워야 한다.</p>
+      </div>
+    </div>
+
+    <div class="quote-box">
+      <div class="q">"확신은 없다. 해보자!"</div>
+      <div class="qa">확신이 없는 게 정상이다. 해봐야 생긴다.</div>
+    </div>
+
+  </div>
+  <div class="pg-footer">
+    <span>Flowmus Confidential</span>
+    <span>민서 — Growth Blueprint</span>
+  </div>
+</div>
+
+<!-- ══════════ PAGE 2 — 성장 설계 ══════════ -->
+<div class="page">
+  <div class="pg-inner">
+
+    <div class="pg-header">
+      <h2>Growth Plan</h2>
+      <span class="pg-num">02</span>
+    </div>
+
+    <div class="sec-title">벽을 넘는 3단계</div>
+
+    <div class="step-item">
+      <div class="step-num">01</div>
+      <div class="step-body">
+        <h4>소재 발굴 시스템 만들기</h4>
+        <p>"창작"이 아니라 "시스템"으로 바꾼다. 매일 경쟁 계정 3개 분석 → 바이럴 공식 추출 → 우리 컨셉에 맞게 변형. 소재는 만드는 게 아니라 발견하는 것. Flowmus 리서치 시스템 활용.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">02</div>
+      <div class="step-body">
+        <h4>데이터로 콘텐츠 판단하기</h4>
+        <p>업로드 후 24시간/48시간/7일 데이터 체크 루틴. 도달률, 저장률, 공유율 — 이 3개 지표만 보면 된다. "잘 갔는지"는 감이 아니라 숫자로 판단. 주간 리포트 작성으로 눈을 키운다.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">03</div>
+      <div class="step-body">
+        <h4>콘텐츠 → 매출 연결 경험</h4>
+        <p>이세령 다이어트 채널에서 "이 릴스가 공구 매출 OO만원을 만들었다"를 직접 경험. 기획 → 콘텐츠 → 유입 → 구매 전환. 이 퍼널을 한 번 돌려보면 기획자로서 차원이 달라진다.</p>
+      </div>
+    </div>
+
+    <div class="sec-title">민서의 성장 로드맵</div>
+
+    <div class="flow-line">
+      <div class="flow-box">M1<br><small>양 = 실력</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box outline">M2<br><small>데이터 판단</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box blue">M3<br><small>매출 연결</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box red">M4+<br><small>독립 기획</small></div>
+    </div>
+
+    <div class="dual-grid">
+      <div class="card card-blue">
+        <div class="tag" style="background:#6bb5ff; color:#111;">Month 1~2</div>
+        <h4>실전 양산 단계</h4>
+        <p>매일 릴스 1개 이상 기획<br>
+        소재 발굴 루틴 정착<br>
+        경쟁 계정 분석 일지 작성<br>
+        이세령 콘텐츠 기획 → 촬영 → 편집<br>
+        <b>목표: "소재가 안 나와요" → "소재가 넘쳐요"</b></p>
+      </div>
+      <div class="card card-blue">
+        <div class="tag" style="background:#6bb5ff; color:#111;">Month 3~4</div>
+        <h4>데이터 + 매출 연결</h4>
+        <p>주간 콘텐츠 성과 리포트 작성<br>
+        "이 릴스 → 공구 매출 OO만원" 추적<br>
+        A/B 테스트 (후킹/썸네일/CTA)<br>
+        공구 연결 콘텐츠 독립 기획<br>
+        <b>목표: "매출을 만드는 기획자" 포트폴리오</b></p>
+      </div>
+    </div>
+
+    <div class="highlight-box" style="margin-top:14px;">
+      <h3>디자인 출신이 가진 무기</h3>
+      <ul>
+        <li><b>비주얼 감각</b> — 숏폼은 결국 시각 콘텐츠. 디자인 감각이 곧 경쟁력</li>
+        <li><b>레퍼런스 수집력</b> — 레퍼런스 찾다가 기획으로 왔다 = 이미 리서치 근육이 있다</li>
+        <li><b>편집 가능</b> — 기획 + 편집을 혼자 할 수 있으면 생산성 2배</li>
+        <li><b>콘티 감각</b> — 디자인 → 콘티 → 스토리보드. 자연스러운 확장</li>
+      </ul>
+    </div>
+
+    <div class="sec-title">Flowmus가 채워주는 것</div>
+
+    <div class="dual-grid">
+      <div class="card card-green">
+        <h4>소재 발굴 시스템</h4>
+        <p>Flowmus 리서치 시스템 (4채널 병렬 조사) → 매일 트렌드/소재 피드 제공. "뭘 만들지?"를 혼자 고민하지 않아도 됨.</p>
+      </div>
+      <div class="card card-green">
+        <h4>데이터 분석 프레임</h4>
+        <p>콘텐츠 성과 대시보드 + 주간 리포트 템플릿 제공. 숫자를 보는 눈을 체계적으로 키운다.</p>
+      </div>
+      <div class="card card-green">
+        <h4>매출 연결 구조</h4>
+        <p>공구/강의/벤더 3개 매출 라인 운영 경험. "콘텐츠가 매출이 되는 순간"을 직접 체험.</p>
+      </div>
+      <div class="card card-green">
+        <h4>성장 피드백 루프</h4>
+        <p>기획 → 제작 → 성과 → 피드백 사이클. 혼자 돌리면 3년, 시스템 안에서 돌리면 3개월.</p>
+      </div>
+    </div>
+
+  </div>
+  <div class="pg-footer">
+    <span>Flowmus Confidential</span>
+    <span>민서 — Growth Blueprint</span>
+  </div>
+</div>
+
+<!-- ══════════ PAGE 3 — 기획자 레벨업 ══════════ -->
+<div class="page">
+  <div class="pg-inner">
+
+    <div class="pg-header">
+      <h2>Level Up</h2>
+      <span class="pg-num">03</span>
+    </div>
+
+    <div class="sec-title">숏폼 기획자 vs 콘텐츠 기획자</div>
+
+    <div class="dual-grid">
+      <div class="card" style="border-left: 4px solid #ddd;">
+        <div class="tag">지금 — 숏폼 기획자</div>
+        <h4>주어진 방향에서 콘텐츠 제작</h4>
+        <p>방향성을 받는다<br>
+        소구점을 찾는다<br>
+        콘티/대본을 짠다<br>
+        촬영을 진행한다<br>
+        업로드 + CS<br><br>
+        <b style="color:#999;">"잘 갔는지 모른다"</b></p>
+      </div>
+      <div class="card card-dark">
+        <div class="tag" style="background:#6bb5ff; color:#111;">목표 — 콘텐츠 기획자</div>
+        <h4 style="color:#fff;">방향을 설계하고 매출을 만든다</h4>
+        <p>방향성을 직접 설계한다<br>
+        소재를 시스템으로 발굴한다<br>
+        콘텐츠 → 매출 퍼널을 설계한다<br>
+        데이터로 성과를 판단한다<br>
+        다음 콘텐츠 전략을 결정한다<br><br>
+        <b style="color:#6bb5ff;">"이 릴스가 OO만원을 만들었다"</b></p>
+      </div>
+    </div>
+
+    <div class="sec-title">이 프로젝트에서 얻는 포트폴리오</div>
+
+    <div class="dual-grid">
+      <div class="card card-blue">
+        <h4>정량 성과</h4>
+        <p>인스타 0 → N만 팔로워 성장<br>
+        릴스 OO개 기획/제작<br>
+        공구 매출 OO만원 기여<br>
+        강의 모객 콘텐츠 전환율<br>
+        <b>이력서에 쓸 수 있는 숫자</b></p>
+      </div>
+      <div class="card card-blue">
+        <h4>기획 역량</h4>
+        <p>소재 발굴 시스템 운영 경험<br>
+        매출 연결 콘텐츠 설계 실전<br>
+        데이터 기반 콘텐츠 분석<br>
+        A/B 테스트 + 최적화<br>
+        <b>포트폴리오에 담을 프로세스</b></p>
+      </div>
+    </div>
+
+    <div class="sec-title">민서에게 이 프로젝트란</div>
+
+    <div class="highlight-box">
+      <h3>베스트클래스에서 배운 것 vs 여기서 배울 것</h3>
+      <ul>
+        <li><b>베스트클래스</b> — 콘텐츠 제작 프로세스 (기획→편집→업로드→CS)</li>
+        <li><b>여기서</b> — 콘텐츠가 돈이 되는 구조 (기획→매출→데이터→최적화)</li>
+        <li><b>베스트클래스</b> — 주어진 방향에서 실행</li>
+        <li><b>여기서</b> — 방향을 직접 설계하고 결과를 책임</li>
+        <li><b>베스트클래스</b> — 매출 비관여</li>
+        <li><b>여기서</b> — "내가 만든 릴스가 공구 매출 OO만원을 만들었다"</li>
+      </ul>
+    </div>
+
+    <div class="quote-box">
+      <div class="q">"돈을 벌려면 기획도 해야 한다"<br>그걸 이미 알고 있다면, 절반은 된 거다</div>
+      <div class="qa">나머지 절반은 직접 해보는 것</div>
+    </div>
+
+  </div>
+  <div class="pg-footer">
+    <span>Flowmus Confidential</span>
+    <span>민서 — Growth Blueprint</span>
+  </div>
+</div>
+
+</body>
+</html>
