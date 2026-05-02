@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이세령 x 민서 — 다이어트 인플루언서 설계</title>
+<style>
+@page { size: A4; margin: 0; }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, 'Pretendard', sans-serif; background: #f5f5f5; color: #222; }
+
+.page {
+  width: 210mm; min-height: 297mm; margin: 0 auto; background: #fff;
+  position: relative; overflow: hidden;
+}
+@media print { body { background: #fff; } .page { margin: 0; page-break-after: always; } }
+@media screen and (max-width: 800px) {
+  .page { width: 100%; min-height: auto; }
+  .pg-inner { padding: 28px 20px !important; }
+  .cover-inner { padding: 60px 24px !important; }
+  .dual-grid { grid-template-columns: 1fr !important; }
+  .triple-grid { grid-template-columns: 1fr !important; }
+  .flow-line { flex-direction: column !important; }
+  .flow-arrow { transform: rotate(90deg); }
+}
+
+/* ── COVER ── */
+.cover { background: #0a0a0a; color: #fff; display: flex; align-items: center; justify-content: center; text-align: center; }
+.cover-inner { padding: 60px 48px; }
+.cover-badge { display: inline-block; font-size: 8pt; letter-spacing: 3px; color: #666; border: 1px solid #333; padding: 6px 16px; border-radius: 20px; margin-bottom: 28px; }
+.cover-title { font-size: 26pt; font-weight: 900; line-height: 1.3; margin-bottom: 12px; }
+.cover-title span { color: #ff6b6b; }
+.cover-sub { font-size: 11pt; color: #888; line-height: 1.6; margin-bottom: 40px; }
+.cover-stats { display: flex; gap: 32px; justify-content: center; }
+.cover-stat { text-align: center; }
+.cover-stat .num { font-size: 22pt; font-weight: 800; }
+.cover-stat .label { font-size: 8pt; color: #666; margin-top: 4px; letter-spacing: 1px; }
+.cover-footer { position: absolute; bottom: 32px; left: 0; right: 0; text-align: center; font-size: 8pt; color: #444; }
+
+/* ── PAGE ── */
+.pg-inner { padding: 44px 44px 60px; }
+.pg-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; }
+.pg-header h2 { font-size: 10pt; letter-spacing: 2px; color: #999; text-transform: uppercase; }
+.pg-num { font-size: 28pt; font-weight: 900; color: #eee; }
+
+.sec-title { font-size: 12pt; font-weight: 800; color: #111; margin: 28px 0 14px; padding-bottom: 6px; border-bottom: 2px solid #111; }
+.sec-title:first-of-type { margin-top: 0; }
+
+.dual-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.triple-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+
+.card { padding: 18px; border-radius: 12px; background: #fafafa; border: 1px solid #eee; }
+.card h4 { font-size: 10.5pt; font-weight: 700; margin-bottom: 6px; }
+.card p { font-size: 9pt; color: #555; line-height: 1.65; }
+.card .tag { display: inline-block; font-size: 7.5pt; color: #fff; background: #111; padding: 3px 10px; border-radius: 4px; margin-bottom: 10px; }
+.card-dark { background: #111; color: #fff; border: none; }
+.card-dark p { color: #aaa; }
+.card-accent { border-left: 4px solid #ff6b6b; }
+.card-blue { border-left: 4px solid #111; }
+
+.flow-line { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 20px 0; }
+.flow-box { background: #111; color: #fff; padding: 12px 16px; border-radius: 10px; font-size: 9pt; font-weight: 700; text-align: center; min-width: 90px; }
+.flow-box.red { background: #ff6b6b; }
+.flow-box.outline { background: #fff; color: #111; border: 2px solid #111; }
+.flow-arrow { color: #ccc; font-size: 14pt; font-weight: 300; }
+
+.highlight-box { background: #0a0a0a; color: #fff; border-radius: 14px; padding: 26px; margin: 18px 0; }
+.highlight-box h3 { font-size: 12pt; margin-bottom: 12px; font-weight: 800; }
+.highlight-box ul { list-style: none; padding: 0; }
+.highlight-box li { font-size: 9.5pt; color: #ddd; padding: 5px 0; border-bottom: 1px solid #222; }
+.highlight-box li:last-child { border: none; }
+.highlight-box li b { color: #ff6b6b; }
+
+.timeline { margin: 16px 0; }
+.tl-item { display: flex; gap: 14px; margin-bottom: 14px; padding: 16px; background: #fafafa; border-radius: 12px; border-left: 4px solid #ddd; }
+.tl-item.active { border-left-color: #ff6b6b; background: #fff5f5; }
+.tl-week { font-size: 20pt; font-weight: 900; color: #ddd; min-width: 50px; line-height: 1; }
+.tl-item.active .tl-week { color: #ff6b6b; }
+.tl-body h4 { font-size: 10.5pt; font-weight: 700; margin-bottom: 4px; }
+.tl-body p { font-size: 9pt; color: #666; line-height: 1.5; }
+
+.sim-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 9pt; }
+.sim-table th { background: #111; color: #fff; padding: 10px 12px; text-align: center; font-weight: 600; font-size: 8.5pt; }
+.sim-table td { padding: 10px 12px; border-bottom: 1px solid #eee; text-align: center; }
+.sim-table td.left { text-align: left; }
+.sim-table tr.total { background: #f5f5f5; font-weight: 700; }
+
+.quote-box { text-align: center; padding: 28px 20px; margin: 20px 0; background: #0a0a0a; border-radius: 14px; }
+.quote-box .q { font-size: 14pt; font-weight: 800; color: #fff; line-height: 1.4; margin-bottom: 8px; }
+.quote-box .qa { font-size: 9pt; color: #666; }
+
+.pg-footer { position: absolute; bottom: 24px; left: 44px; right: 44px; display: flex; justify-content: space-between; font-size: 7.5pt; color: #ccc; }
+</style>
+</head>
+<body>
+
+<!-- ══════════ COVER ══════════ -->
+<div class="page cover">
+  <div class="cover-inner">
+    <div class="cover-badge">COFFEE CHAT BLUEPRINT</div>
+    <div class="cover-title">
+      다이어트 인플루언서<br><span>2달 만에 매출 1억</span>
+    </div>
+    <div class="cover-sub">
+      이세령 x 민서 — 인스타 다이어트 채널 설계<br>
+      숏폼 기획 + 공구 매출 + 강의 퍼널
+    </div>
+    <div class="cover-stats">
+      <div class="cover-stat">
+        <div class="num">2달</div>
+        <div class="label">매출 목표 기한</div>
+      </div>
+      <div class="cover-stat">
+        <div class="num">1억</div>
+        <div class="label">목표 매출</div>
+      </div>
+      <div class="cover-stat">
+        <div class="num">0 → ?</div>
+        <div class="label">새 계정 시작</div>
+      </div>
+    </div>
+  </div>
+  <div class="cover-footer">FLOWMUS — Confidential</div>
+</div>
+
+<!-- ══════════ PAGE 1 — 구조 설계 ══════════ -->
+<div class="page">
+  <div class="pg-inner">
+
+    <div class="pg-header">
+      <h2>Structure</h2>
+      <span class="pg-num">01</span>
+    </div>
+
+    <div class="sec-title">역할 분담</div>
+
+    <div class="dual-grid">
+      <div class="card card-dark">
+        <div class="tag" style="background:#ff6b6b;">이세령 대표</div>
+        <h4 style="color:#fff;">얼굴 + IP + 네트워크</h4>
+        <p>다이어트 스토리 (실제 -30kg)<br>
+        인스타 콘텐츠 출연<br>
+        600명 인플루언서 네트워크<br>
+        공구 상품 소싱 + 판매<br>
+        강의 출연 (부업클래스)</p>
+      </div>
+      <div class="card card-dark">
+        <div class="tag" style="background:#ff6b6b;">민서 기획자</div>
+        <h4 style="color:#fff;">숏폼 기획 + 콘텐츠 설계</h4>
+        <p>릴스/숏폼 기획 + 트렌드 분석<br>
+        콘텐츠 캘린더 운영<br>
+        해시태그/SEO 전략<br>
+        바이럴 콘텐츠 설계<br>
+        숏폼 기획자로서 포트폴리오 구축</p>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:12px; border-left:4px solid #111;">
+      <h4>Flowmus 역할</h4>
+      <p>데이터 분석 + 채널 전략 설계 + 강의 기획/모객 + 공구 정산 시스템 + 출판(플로우북스)</p>
+    </div>
+
+    <div class="sec-title">매출 1억 구조 — 3개 엔진</div>
+
+    <div class="triple-grid">
+      <div class="card card-accent">
+        <div class="tag" style="background:#ff6b6b;">ENGINE 1</div>
+        <h4>공구 매출</h4>
+        <p>건기식/다이어트 제품 공구. 인스타 새 계정으로 다이어트 콘텐츠 → 팔로워 모으고 → 공구 오픈. 2달 내 핵심 매출.</p>
+      </div>
+      <div class="card card-accent">
+        <div class="tag" style="background:#ff6b6b;">ENGINE 2</div>
+        <h4>강의 매출</h4>
+        <p>"인스타 수익화" 부업클래스. 285만원 x 35명 = 1억. 인스타 0에서 키운 과정 자체가 커리큘럼.</p>
+      </div>
+      <div class="card card-accent">
+        <div class="tag" style="background:#ff6b6b;">ENGINE 3</div>
+        <h4>인플루언서 벤더</h4>
+        <p>600명 네트워크 활용. 다른 브랜드 공구 중개 수수료. 장기 수익 라인.</p>
+      </div>
+    </div>
+
+    <div class="sec-title">매출 시뮬레이션 (2달)</div>
+
+    <table class="sim-table">
+      <thead>
+        <tr>
+          <th>수익 라인</th>
+          <th>단가</th>
+          <th>수량</th>
+          <th>매출</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="left">공구 (건기식/다이어트)</td>
+          <td>3~5만원</td>
+          <td>1,000~2,000건</td>
+          <td><b>3,000~5,000만</b></td>
+        </tr>
+        <tr>
+          <td class="left">부업클래스 강의 1기</td>
+          <td>285만원</td>
+          <td>20~35명</td>
+          <td><b>5,700만~1억</b></td>
+        </tr>
+        <tr>
+          <td class="left">벤더 수수료 (공구 중개)</td>
+          <td>20~30%</td>
+          <td>브랜드 2~3건</td>
+          <td><b>500~1,000만</b></td>
+        </tr>
+        <tr class="total">
+          <td class="left" colspan="3"><b>2달 목표 매출</b></td>
+          <td><b>1억+</b></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+  <div class="pg-footer">
+    <span>Flowmus Confidential</span>
+    <span>이세령 x 민서 — Diet Influencer Blueprint</span>
+  </div>
+</div>
+
+<!-- ══════════ PAGE 2 — 실행 타임라인 ══════════ -->
+<div class="page">
+  <div class="pg-inner">
+
+    <div class="pg-header">
+      <h2>Timeline</h2>
+      <span class="pg-num">02</span>
+    </div>
+
+    <div class="sec-title">8주 스프린트 — 2달 만에 1억</div>
+
+    <div class="timeline">
+      <div class="tl-item active">
+        <div class="tl-week">W1</div>
+        <div class="tl-body">
+          <h4>계정 세팅 + 콘텐츠 폭격</h4>
+          <p>새 인스타 계정 생성 / 프로필 설계 / 릴스 매일 1개 이상 / 다이어트 비포/애프터 스토리 / 해시태그 전략 세팅</p>
+        </div>
+      </div>
+      <div class="tl-item active">
+        <div class="tl-week">W2</div>
+        <div class="tl-body">
+          <h4>바이럴 콘텐츠 + 팔로워 확보</h4>
+          <p>릴스 매일 업로드 유지 / 바이럴 후킹 콘텐츠 집중 / 600명 네트워크 맞팔/태그 / 1,000 팔로워 돌파 목표</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-week">W3</div>
+        <div class="tl-body">
+          <h4>공구 상품 소싱 + 사전 홍보</h4>
+          <p>건기식/다이어트 제품 확정 / "곧 공구 오픈" 티저 콘텐츠 / 스토리 투표로 수요 확인 / 관심자 DM 리스트 구축</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-week">W4</div>
+        <div class="tl-body">
+          <h4>첫 공구 오픈</h4>
+          <p>공구 오픈 릴스 + 스토리 / 실시간 판매 현황 공유 / 구매 후기 리포스트 / 목표: 첫 공구 1,000만원+</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-week">W5</div>
+        <div class="tl-body">
+          <h4>강의 퍼널 세팅</h4>
+          <p>"인스타 0에서 키운 과정" 콘텐츠 / 부업클래스 무료 특강 촬영 / 공구 매출 인증 → 강의 신뢰 자산</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-week">W6</div>
+        <div class="tl-body">
+          <h4>무료 특강 + 2차 공구</h4>
+          <p>무료 특강 오픈 → 유료 전환 유도 / 2차 공구 (다른 상품 or 리오더) / 벤더 수수료 건 착수</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-week">W7</div>
+        <div class="tl-body">
+          <h4>강의 모객 + 3차 공구</h4>
+          <p>부업클래스 1기 본격 모객 / 채널 네트워크(사찍남/머니로드) DB 활용 / 3차 공구 오픈</p>
+        </div>
+      </div>
+      <div class="tl-item active">
+        <div class="tl-week">W8</div>
+        <div class="tl-body">
+          <h4>매출 1억 달성</h4>
+          <p>강의 1기 마감 / 공구 누적 매출 정산 / 벤더 수수료 정산 / 2달 성과 리포트</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="pg-footer">
+    <span>Flowmus Confidential</span>
+    <span>이세령 x 민서 — Diet Influencer Blueprint</span>
+  </div>
+</div>
+
+<!-- ══════════ PAGE 3 — 민서 성장 + 콘텐츠 전략 ══════════ -->
+<div class="page">
+  <div class="pg-inner">
+
+    <div class="pg-header">
+      <h2>Content & Growth</h2>
+      <span class="pg-num">03</span>
+    </div>
+
+    <div class="sec-title">민서 — 숏폼 기획자 성장 로드맵</div>
+
+    <div class="flow-line">
+      <div class="flow-box">W1~2<br><small>릴스 양산</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box outline">W3~4<br><small>바이럴 학습</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box red">W5~6<br><small>퍼널 설계</small></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">W7~8<br><small>포트폴리오 완성</small></div>
+    </div>
+
+    <div class="dual-grid">
+      <div class="card card-blue">
+        <h4>배우는 것</h4>
+        <p>릴스 기획/편집 실전<br>
+        바이럴 콘텐츠 공식<br>
+        공구 매출 연결 콘텐츠 설계<br>
+        강의 모객 퍼널 기획<br>
+        데이터 기반 콘텐츠 분석</p>
+      </div>
+      <div class="card card-blue">
+        <h4>얻는 것</h4>
+        <p>"0에서 1억 만든 채널" 포트폴리오<br>
+        숏폼 기획자로서 실전 경력<br>
+        매출 기여 실적 (이력서에 쓸 수 있는 숫자)<br>
+        Flowmus 네트워크 접근<br>
+        다음 채널 독립 기획 기회</p>
+      </div>
+    </div>
+
+    <div class="sec-title">숏폼 콘텐츠 전략</div>
+
+    <div class="dual-grid">
+      <div class="card card-accent">
+        <div class="tag" style="background:#ff6b6b;">바이럴용</div>
+        <h4>후킹 콘텐츠</h4>
+        <p>"-30kg 비포/애프터 타임랩스"<br>
+        "다이어트 식단 하루 브이로그"<br>
+        "이것만 끊으면 5kg 빠짐"<br>
+        "운동 없이 뺀 방법 (진짜임)"</p>
+      </div>
+      <div class="card card-accent">
+        <div class="tag" style="background:#ff6b6b;">매출용</div>
+        <h4>공구 연결 콘텐츠</h4>
+        <p>"내가 매일 먹는 건기식 3가지"<br>
+        "이거 먹고 진짜 달라졌어"<br>
+        "공구 오픈 전 솔직 후기"<br>
+        "1주일 체험 리얼 후기"</p>
+      </div>
+    </div>
+
+    <div class="dual-grid" style="margin-top:12px;">
+      <div class="card card-accent">
+        <div class="tag" style="background:#ff6b6b;">신뢰용</div>
+        <h4>스토리 콘텐츠</h4>
+        <p>"다이어트 Q&A 라이브"<br>
+        "팔로워 변화 인증 리포스트"<br>
+        "공구 실시간 판매 현황"<br>
+        "일상 속 다이어트 루틴"</p>
+      </div>
+      <div class="card card-accent">
+        <div class="tag" style="background:#ff6b6b;">강의용</div>
+        <h4>퍼널 콘텐츠</h4>
+        <p>"인스타 0에서 시작한 지 N주째"<br>
+        "이 계정으로 벌써 OO만원 벌었음"<br>
+        "나도 할 수 있다 → 강의 안내"<br>
+        "무료 특강 신청 링크 스토리"</p>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <h3>콘텐츠 운영 원칙</h3>
+      <ul>
+        <li><b>매일 릴스 1개 이상</b> — 초기 2주는 양으로 승부</li>
+        <li><b>바이럴 70% + 매출 30%</b> — 처음부터 팔면 안 됨</li>
+        <li><b>비포/애프터가 최고의 무기</b> — 이세령의 -30kg 스토리 반복 활용</li>
+        <li><b>공구는 W4부터</b> — 최소 팔로워 2,000+ 확보 후 오픈</li>
+      </ul>
+    </div>
+
+  </div>
+  <div class="pg-footer">
+    <span>Flowmus Confidential</span>
+    <span>이세령 x 민서 — Diet Influencer Blueprint</span>
+  </div>
+</div>
+
+<!-- ══════════ PAGE 4 — 아젠다 + 비전 ══════════ -->
+<div class="page">
+  <div class="pg-inner">
+
+    <div class="pg-header">
+      <h2>Today's Agenda</h2>
+      <span class="pg-num">04</span>
+    </div>
+
+    <div class="sec-title">오늘 논의할 것</div>
+
+    <div class="timeline">
+      <div class="tl-item active">
+        <div class="tl-week">01</div>
+        <div class="tl-body">
+          <h4>역할 분담 확정</h4>
+          <p>이세령: 출연 + 공구 소싱 / 민서: 숏폼 기획 + 콘텐츠 제작 / Flowmus: 전략 + 강의 + 시스템</p>
+        </div>
+      </div>
+      <div class="tl-item active">
+        <div class="tl-week">02</div>
+        <div class="tl-body">
+          <h4>공구 상품 논의</h4>
+          <p>첫 공구 상품 후보? 건기식/다이어트 보조제? 마진 구조? 재고/배송 누가?</p>
+        </div>
+      </div>
+      <div class="tl-item active">
+        <div class="tl-week">03</div>
+        <div class="tl-body">
+          <h4>콘텐츠 방향</h4>
+          <p>릴스 톤앤매너 / 이세령 출연 빈도 / 민서 촬영/편집 역할 범위 / 첫 주 콘텐츠 아이디어</p>
+        </div>
+      </div>
+      <div class="tl-item active">
+        <div class="tl-week">04</div>
+        <div class="tl-body">
+          <h4>수익 분배</h4>
+          <p>공구 매출 / 강의 매출 / 벤더 수수료 — 각각 어떻게 나눌 건지</p>
+        </div>
+      </div>
+      <div class="tl-item active">
+        <div class="tl-week">05</div>
+        <div class="tl-body">
+          <h4>민서 성장 계획</h4>
+          <p>숏폼 기획자로서 이 프로젝트에서 뭘 배우고 싶은지 / 독립 기획 목표</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="sec-title">장기 비전</div>
+
+    <div class="quote-box">
+      <div class="q">"2달 만에 1억 만든 다이어트 계정"<br>이게 곧 강의 커리큘럼이다</div>
+      <div class="qa">인스타 0 → 매출 1억 = 최강의 수강생 모객 스토리</div>
+    </div>
+
+    <div class="triple-grid" style="margin-top:18px;">
+      <div class="card card-dark" style="text-align:center;">
+        <h4 style="color:#ff6b6b; font-size:16pt;">공구</h4>
+        <p>즉시 매출</p>
+      </div>
+      <div class="card card-dark" style="text-align:center;">
+        <h4 style="color:#ff6b6b; font-size:16pt;">강의</h4>
+        <p>스케일업</p>
+      </div>
+      <div class="card card-dark" style="text-align:center;">
+        <h4 style="color:#ff6b6b; font-size:16pt;">출판</h4>
+        <p>브랜드 자산</p>
+      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:28px;">
+      <div style="font-size:9pt; color:#999; margin-bottom:8px;">CONTACT</div>
+      <div style="font-size:10pt; font-weight:700;">오맷돌 — ceo@flowmus.com</div>
+    </div>
+
+  </div>
+  <div class="pg-footer">
+    <span>Flowmus Confidential</span>
+    <span>이세령 x 민서 — Diet Influencer Blueprint</span>
+  </div>
+</div>
+
+</body>
+</html>
