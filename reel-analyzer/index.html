@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>다이어트 릴스 촬영 가이드</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #ffffff;
+            --bg-secondary: #f7f8fa;
+            --bg-card: #ffffff;
+            --text-primary: #191f28;
+            --text-secondary: #4e5968;
+            --text-muted: #8b95a1;
+            --border: #e5e8eb;
+            --accent: #3182f6;
+            --accent-light: #e8f3ff;
+            --success: #00c471;
+            --warning: #f59f00;
+            --danger: #f04452;
+            --radius: 16px;
+            --shadow: 0 2px 8px rgba(0,0,0,0.04);
+            --shadow-lg: 0 8px 24px rgba(0,0,0,0.08);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Noto Sans KR', sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Header */
+        .header {
+            background: var(--bg);
+            padding: 32px 24px 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-inner {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--text-primary);
+        }
+
+        .header p {
+            font-size: 15px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* Navigation */
+        .nav {
+            background: var(--bg);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-inner {
+            max-width: 960px;
+            margin: 0 auto;
+            display: flex;
+            gap: 4px;
+            padding: 12px 24px;
+        }
+
+        .nav-tab {
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-muted);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .nav-tab:hover { color: var(--text-primary); background: var(--bg-secondary); }
+        .nav-tab.active { color: var(--accent); background: var(--accent-light); font-weight: 600; }
+
+        /* Main */
+        .main {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        .section { display: none; }
+        .section.active { display: block; }
+
+        /* Cards */
+        .card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .card-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            letter-spacing: -0.3px;
+        }
+
+        /* Section 1: Formula */
+        .formula-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+
+        .formula-item {
+            display: flex;
+            gap: 12px;
+            padding: 14px 16px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            align-items: flex-start;
+        }
+
+        .formula-num {
+            width: 24px;
+            height: 24px;
+            background: var(--accent);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .formula-content { flex: 1; }
+
+        .formula-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+
+        .formula-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* Timeline */
+        .timeline { margin-top: 8px; }
+
+        .timeline-item {
+            display: flex;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .timeline-item:last-child { border-bottom: none; }
+
+        .timeline-badge {
+            padding: 4px 10px;
+            background: var(--accent-light);
+            color: var(--accent);
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            height: fit-content;
+        }
+
+        .timeline-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Data highlight */
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 16px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            margin-bottom: 8px;
+        }
+
+        .data-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .data-value {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .data-value.highlight { color: var(--accent); }
+        .data-value.danger { color: var(--danger); }
+
+        /* Ratio bar */
+        .ratio-bar {
+            display: flex;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 16px 0 12px;
+        }
+
+        .ratio-segment { transition: all 0.3s; }
+
+        .ratio-legend {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .ratio-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .ratio-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        /* Dont list */
+        .dont-list {
+            list-style: none;
+            margin-top: 12px;
+        }
+
+        .dont-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            padding: 8px 0;
+            font-size: 14px;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .dont-list li:last-child { border-bottom: none; }
+
+        .dont-list li::before {
+            content: "X";
+            color: var(--danger);
+            font-weight: 700;
+            font-size: 12px;
+            width: 20px;
+            height: 20px;
+            background: #fef0f0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        /* Section 2: Video Grid */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 16px;
+        }
+
+        .video-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: var(--shadow);
+        }
+
+        .video-card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .video-card .thumb {
+            width: 100%;
+            height: 160px;
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .video-card .thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+        .video-card .thumb .placeholder {
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .video-card .body { padding: 16px; }
+
+        .video-card .account {
+            font-size: 12px;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .video-card .title {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.4;
+        }
+
+        .video-card .meta {
+            display: flex;
+            gap: 12px;
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .video-card .views { color: var(--success); font-weight: 600; }
+
+        /* Guide Overlay */
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 24px;
+        }
+
+        .overlay.active { display: flex; justify-content: center; align-items: flex-start; }
+
+        .panel {
+            width: 100%;
+            max-width: 800px;
+            background: var(--bg);
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            margin: 40px auto;
+            overflow: hidden;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .panel-header h2 {
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .close-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+        }
+
+        .close-btn:hover { background: var(--border); }
+
+        .panel-body { padding: 24px; }
+
+        /* Storyboard */
+        .storyboard {
+            overflow-x: auto;
+            margin-bottom: 24px;
+            padding-bottom: 8px;
+        }
+
+        .storyboard-track {
+            display: flex;
+            gap: 12px;
+            min-width: max-content;
+        }
+
+        .frame-card {
+            flex-shrink: 0;
+            width: 180px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: var(--bg);
+        }
+
+        .frame-card img { width: 100%; height: 100px; object-fit: cover; display: block; }
+
+        .frame-card .frame-info { padding: 10px; }
+
+        .frame-card .ts {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .frame-card .angle {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 2px;
+        }
+
+        .frame-card .desc {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 4px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Scene rows */
+        .scene-row {
+            display: grid;
+            grid-template-columns: 48px 1fr;
+            gap: 12px;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            margin-bottom: 8px;
+        }
+
+        .scene-time {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--accent);
+            text-align: center;
+            padding-top: 2px;
+        }
+
+        .scene-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+
+        .field-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            margin-bottom: 2px;
+        }
+
+        .field-value {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.4;
+        }
+
+        .field-value.tip { color: var(--success); }
+
+        .formula-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            background: var(--accent-light);
+            color: var(--accent);
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* Checklist */
+        .checklist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 12px;
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .check-item::before {
+            content: '';
+            width: 16px;
+            height: 16px;
+            border: 2px solid var(--border);
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        /* Section 3: Templates */
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .template-option {
+            background: var(--bg-card);
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.15s;
+            text-align: center;
+        }
+
+        .template-option:hover { border-color: var(--accent); }
+
+        .template-option.selected {
+            border-color: var(--accent);
+            background: var(--accent-light);
+        }
+
+        .template-option .name {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .template-option .desc {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* Template scenes */
+        .tpl-scene {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            margin-bottom: 12px;
+            position: relative;
+            box-shadow: var(--shadow);
+        }
+
+        .tpl-scene .scene-badge {
+            position: absolute;
+            top: -8px;
+            left: 16px;
+            background: var(--accent);
+            color: white;
+            padding: 2px 10px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .tpl-scene .scene-label {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            margin-top: 4px;
+        }
+
+        .tpl-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        .tpl-field {
+            padding: 12px;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+        }
+
+        .tpl-field .tfl { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; margin-bottom: 4px; }
+        .tpl-field .tfv { font-size: 13px; color: var(--text-secondary); line-height: 1.4; }
+
+        .tpl-tip {
+            margin-top: 12px;
+            padding: 12px 14px;
+            background: #f0faf5;
+            border-radius: 10px;
+            font-size: 13px;
+            color: var(--success);
+            line-height: 1.5;
+        }
+
+        /* Loading/Empty */
+        .state-msg {
+            text-align: center;
+            padding: 48px 24px;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .spinner {
+            width: 32px;
+            height: 32px;
+            border: 3px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            margin: 0 auto 12px;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Summary badge */
+        .summary-box {
+            padding: 14px 16px;
+            background: var(--accent-light);
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+
+        .summary-box .label { font-size: 12px; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+        .summary-box .value { font-size: 14px; color: var(--text-primary); font-weight: 500; }
+
+        /* Total time */
+        .total-time {
+            text-align: center;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            margin-top: 16px;
+        }
+
+        .total-time .num { font-size: 24px; font-weight: 700; color: var(--accent); }
+        .total-time .unit { font-size: 14px; color: var(--text-muted); margin-left: 4px; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main { padding: 16px; }
+            .video-grid { grid-template-columns: 1fr; }
+            .scene-grid { grid-template-columns: 1fr; }
+            .template-grid { grid-template-columns: repeat(2, 1fr); }
+            .overlay { padding: 8px; }
+            .panel { margin: 16px auto; border-radius: 16px; }
+            .nav-inner { padding: 8px 16px; overflow-x: auto; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="header-inner">
+        <h1>다이어트 릴스 촬영 가이드</h1>
+        <p>142개 릴스 데이터 분석 기반 촬영 템플릿</p>
+    </div>
+</div>
+
+<nav class="nav">
+    <div class="nav-inner">
+        <button class="nav-tab active" data-tab="formula">떡상 공식</button>
+        <button class="nav-tab" data-tab="analysis">레퍼런스 분석</button>
+        <button class="nav-tab" data-tab="template">촬영 템플릿</button>
+    </div>
+</nav>
+
+<div class="main">
+
+    <!-- SECTION 1: Formula -->
+    <div class="section active" id="section-formula">
+
+        <div class="card">
+            <div class="card-title">첫 3초 후킹 공식 TOP 5</div>
+            <div class="formula-grid">
+                <div class="formula-item">
+                    <div class="formula-num">1</div>
+                    <div class="formula-content">
+                        <div class="formula-label">숫자+결과 충격 반전</div>
+                        <div class="formula-desc">"75kg 감량한 다이어터의 식단" - 구체적 숫자로 시선 고정</div>
+                    </div>
+                </div>
+                <div class="formula-item">
+                    <div class="formula-num">2</div>
+                    <div class="formula-content">
+                        <div class="formula-label">비포/애프터 드라마틱 변화</div>
+                        <div class="formula-desc">"이거 딱 하나 바꿨더니 몸매 확 달라짐" - 시각적 변화 강조</div>
+                    </div>
+                </div>
+                <div class="formula-item">
+                    <div class="formula-num">3</div>
+                    <div class="formula-content">
+                        <div class="formula-label">충격/반전 고정관념 파괴</div>
+                        <div class="formula-desc">"설마 이걸 먹고 살이 빠질 줄이야..." - 예상 깨기</div>
+                    </div>
+                </div>
+                <div class="formula-item">
+                    <div class="formula-num">4</div>
+                    <div class="formula-content">
+                        <div class="formula-label">문제점 공감 + 즉각 해결</div>
+                        <div class="formula-desc">"맨날 요요 오는 사람 필독!" - 고민 건드리고 답 제시</div>
+                    </div>
+                </div>
+                <div class="formula-item">
+                    <div class="formula-num">5</div>
+                    <div class="formula-content">
+                        <div class="formula-label">권위/비밀 레시피 공개</div>
+                        <div class="formula-desc">"연예인 전문 PT쌤 비법" - 전문가 권위 차용</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">시간대별 구조</div>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-badge">0-3초</div>
+                    <div class="timeline-text">강렬한 비주얼 + 짧은 텍스트 20-27자. 시청자를 멈추게 하는 순간.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-badge">3-10초</div>
+                    <div class="timeline-text">후킹 내용 확장, 공감대 형성. 시청자가 겪는 다이어트 고충 언급.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-badge">10-30초</div>
+                    <div class="timeline-text">짧은 컷 편집, 자막 강조. 식단/운동/제품 등 구체적 방법 제시.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-badge">30초+</div>
+                    <div class="timeline-text">추가 팁, 비하인드 스토리. 저장/댓글/태그 유도 CTA.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">BGM vs 나레이션 데이터</div>
+            <div class="data-row">
+                <div class="data-label">BGM+텍스트 영상 (중앙값)</div>
+                <div class="data-value highlight">503,281회</div>
+            </div>
+            <div class="data-row">
+                <div class="data-label">나레이션 영상 (중앙값)</div>
+                <div class="data-value">76,698회</div>
+            </div>
+            <div class="data-row">
+                <div class="data-label">차이</div>
+                <div class="data-value highlight">BGM이 6.5배 더 터짐</div>
+            </div>
+            <div style="margin-top: 12px; font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+                기본 = BGM+텍스트. 나레이션은 스토리텔링/리뷰 때만. 사용해도 첫 10초는 BGM 위주.
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">주간 콘텐츠 믹스</div>
+            <div class="ratio-bar">
+                <div class="ratio-segment" style="width: 65%; background: var(--accent);"></div>
+                <div class="ratio-segment" style="width: 25%; background: #6c63ff;"></div>
+                <div class="ratio-segment" style="width: 10%; background: var(--success);"></div>
+            </div>
+            <div class="ratio-legend">
+                <div class="ratio-legend-item">
+                    <div class="ratio-dot" style="background: var(--accent);"></div>
+                    릴스 65% (주 3-4회)
+                </div>
+                <div class="ratio-legend-item">
+                    <div class="ratio-dot" style="background: #6c63ff;"></div>
+                    카드뉴스 25% (주 1-2회)
+                </div>
+                <div class="ratio-legend-item">
+                    <div class="ratio-dot" style="background: var(--success);"></div>
+                    이미지 10% (주 1회)
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">절대 하면 안 되는 것</div>
+            <ul class="dont-list">
+                <li>첫 3초에 텍스트 과다 (27자 초과). 50만+ 영상 평균 27자 vs 저조 영상 52자.</li>
+                <li>릴스에서 나레이션 과용. BGM+텍스트가 6.5배 높은 도달.</li>
+                <li>후킹 없는 일상 브이로그 형태로 시작. "취준생 하루" 패턴은 1만뷰 이하.</li>
+                <li>근거 없는 일반 정보 나열. 개인 경험과 수치 기반만 신뢰받음.</li>
+                <li>CTA 미포함. 저장/댓글/태그 유도가 없으면 알고리즘 불리.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- SECTION 2: Analysis -->
+    <div class="section" id="section-analysis">
+
+        <div id="analysis-loading" class="state-msg">
+            <div class="spinner"></div>
+            <p>촬영 가이드 데이터를 불러오는 중...</p>
+        </div>
+
+        <div id="analysis-empty" class="state-msg" style="display:none;">
+            <p style="font-size: 15px; font-weight: 600; margin-bottom: 8px;">아직 분석된 영상이 없습니다</p>
+            <p>터미널에서 <code style="background: var(--bg-secondary); padding: 4px 8px; border-radius: 6px; font-size: 13px;">python3 shooting_guide.py --top 5</code> 를 실행하세요.</p>
+        </div>
+
+        <div id="video-grid" class="video-grid"></div>
+    </div>
+
+    <!-- SECTION 3: Templates -->
+    <div class="section" id="section-template">
+
+        <p style="color: var(--text-muted); margin-bottom: 20px; font-size: 14px;">
+            공식 유형을 선택하면 장면별 촬영 가이드가 생성됩니다.
+        </p>
+
+        <div class="template-grid">
+            <div class="template-option" data-type="before_after">
+                <div class="name">비포/애프터 변신</div>
+                <div class="desc">드라마틱한 변화 강조</div>
+            </div>
+            <div class="template-option" data-type="number_result">
+                <div class="name">숫자+결과 정보형</div>
+                <div class="desc">구체적 수치로 신뢰 확보</div>
+            </div>
+            <div class="template-option" data-type="recipe_routine">
+                <div class="name">레시피/루틴 공유</div>
+                <div class="desc">단계별 과정 시연</div>
+            </div>
+            <div class="template-option" data-type="storytelling">
+                <div class="name">스토리텔링 공감형</div>
+                <div class="desc">개인 경험 기반 공감</div>
+            </div>
+        </div>
+
+        <div id="template-output"></div>
+    </div>
+</div>
+
+<!-- Guide Overlay -->
+<div class="overlay" id="guide-overlay">
+    <div class="panel">
+        <div class="panel-header">
+            <h2 id="guide-title">촬영 가이드</h2>
+            <button class="close-btn" onclick="closeGuide()">&times;</button>
+        </div>
+        <div class="panel-body" id="guide-body"></div>
+    </div>
+</div>
+
+<script>
+// Navigation
+document.querySelectorAll('.nav-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+        document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('section-' + tab.dataset.tab).classList.add('active');
+    });
+});
+
+// Section 2: Load guides
+let guidesData = [];
+
+async function loadGuides() {
+    const loadingEl = document.getElementById('analysis-loading');
+    const emptyEl = document.getElementById('analysis-empty');
+    const gridEl = document.getElementById('video-grid');
+
+    try {
+        const indexUrl = 'data/shooting_guides/_index.json';
+        let files = [];
+
+        try {
+            const resp = await fetch(indexUrl);
+            if (resp.ok) files = await resp.json();
+        } catch(e) {}
+
+        if (files.length > 0) {
+            for (const file of files) {
+                try {
+                    const resp = await fetch('data/shooting_guides/' + file);
+                    if (resp.ok) guidesData.push(await resp.json());
+                } catch(e) {}
+            }
+        }
+
+        loadingEl.style.display = 'none';
+        if (guidesData.length === 0) { emptyEl.style.display = 'block'; return; }
+        renderVideoGrid(guidesData);
+    } catch(e) {
+        loadingEl.style.display = 'none';
+        emptyEl.style.display = 'block';
+    }
+}
+
+function renderVideoGrid(guides) {
+    const gridEl = document.getElementById('video-grid');
+    gridEl.innerHTML = '';
+    guides.sort((a, b) => (b.views || 0) - (a.views || 0));
+
+    guides.forEach((guide, idx) => {
+        const card = document.createElement('div');
+        card.className = 'video-card';
+        card.onclick = () => openGuide(idx);
+
+        let thumbHtml = '<div class="placeholder">영상 프레임</div>';
+        if (guide.scenes && guide.scenes.length > 0 && guide.scenes[0].frame_base64) {
+            thumbHtml = `<img src="data:image/jpeg;base64,${guide.scenes[0].frame_base64}" alt="thumb">`;
+        }
+
+        const views = guide.views ? guide.views.toLocaleString() : '-';
+        const title = guide.filename ? guide.filename.replace('.mp4', '').substring(0, 50) : '';
+
+        card.innerHTML = `
+            <div class="thumb">${thumbHtml}</div>
+            <div class="body">
+                <div class="account">@${guide.account || ''}</div>
+                <div class="title">${esc(title)}</div>
+                <div class="meta">
+                    <span class="views">${views} views</span>
+                    <span>${guide.duration || '-'}초</span>
+                    <span>${esc(guide.content_type || '')}</span>
+                </div>
+            </div>
+        `;
+        gridEl.appendChild(card);
+    });
+}
+
+function openGuide(idx) {
+    const guide = guidesData[idx];
+    if (!guide) return;
+
+    document.getElementById('guide-title').textContent = `${guide.account} - ${(guide.filename||'').substring(0,40)}`;
+
+    let html = '';
+
+    if (guide.formula_summary) {
+        html += `<div class="summary-box">
+            <div class="label">바이럴 공식</div>
+            <div class="value">${esc(guide.formula_summary)}</div>
+        </div>`;
+    }
+
+    if (guide.scenes && guide.scenes.length > 0) {
+        html += `<div style="font-size:15px;font-weight:700;margin-bottom:12px;">스토리보드</div>`;
+        html += `<div class="storyboard"><div class="storyboard-track">`;
+        guide.scenes.forEach((s, i) => {
+            let img = `<div style="width:100%;height:100px;background:var(--bg-secondary);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--text-muted);">Frame ${i+1}</div>`;
+            if (s.frame_base64) img = `<img src="data:image/jpeg;base64,${s.frame_base64}">`;
+            html += `<div class="frame-card">${img}<div class="frame-info">
+                <div class="ts">${s.timestamp?s.timestamp.toFixed(1):'0.0'}초 (${s.duration||3}초간)</div>
+                <div class="angle">${esc(s.camera_angle||'-')}</div>
+                <div class="desc">${esc(s.visual_description||'')}</div>
+            </div></div>`;
+        });
+        html += `</div></div>`;
+
+        html += `<div style="font-size:15px;font-weight:700;margin:20px 0 12px;">장면별 촬영 가이드</div>`;
+        guide.scenes.forEach(s => {
+            html += `<div class="scene-row">
+                <div class="scene-time">${s.timestamp?s.timestamp.toFixed(1):'0.0'}초</div>
+                <div class="scene-grid">
+                    <div><div class="field-label">비주얼</div><div class="field-value">${esc(s.visual_description||'-')}</div></div>
+                    <div><div class="field-label">카메라 / 환경</div><div class="field-value">${esc(s.camera_angle||'-')} / ${esc(s.environment||'-')}</div></div>
+                    <div><div class="field-label">대본 / 텍스트</div><div class="field-value">${esc(s.script||s.text_overlay||'-')}</div></div>
+                    <div><div class="field-label">공식 적용</div><div class="field-value"><span class="formula-tag">${esc(s.formula_applied||'-')}</span></div></div>
+                    ${s.shooting_tip?`<div style="grid-column:span 2;"><div class="field-label">촬영 팁</div><div class="field-value tip">${esc(s.shooting_tip)}</div></div>`:''}
+                </div>
+            </div>`;
+        });
+    }
+
+    if (guide.shooting_checklist && guide.shooting_checklist.length > 0) {
+        html += `<div style="font-size:15px;font-weight:700;margin:20px 0 12px;">촬영 체크리스트</div>`;
+        html += `<div class="checklist-grid">${guide.shooting_checklist.map(i => `<div class="check-item">${esc(i)}</div>`).join('')}</div>`;
+    }
+
+    document.getElementById('guide-body').innerHTML = html;
+    document.getElementById('guide-overlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeGuide() {
+    document.getElementById('guide-overlay').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeGuide(); });
+document.getElementById('guide-overlay').addEventListener('click', e => { if (e.target === document.getElementById('guide-overlay')) closeGuide(); });
+
+// Section 3: Templates
+const TEMPLATES = {
+    before_after: {
+        name: "비포/애프터 변신",
+        scenes: [
+            { label: "후킹 (0-3초)", time: "3", camera: "클로즈업 / 셀카 정면", script: "\"이게 진짜 같은 사람이야?\" 또는 숫자 강조", example: "비포 사진 플래시 -> 애프터 전환 (0.5초 빠른 컷)", tip: "동일한 옷/장소/포즈로 비포 촬영 필수. 첫 프레임에서 변화의 크기가 보여야 함." },
+            { label: "비포 상태 공감 (3-8초)", time: "5", camera: "와이드샷 (전신) / 사이드뷰", script: "\"저도 이때 XX kg이었어요\" 또는 텍스트 오버레이", example: "비포 시절 영상 or 사진 + 자막으로 체중 표시", tip: "자연광보다 약간 어둡게, 무표정으로. 공감 극대화." },
+            { label: "변화 과정 하이라이트 (8-20초)", time: "12", camera: "삼각대 정면 / 탑뷰 (식단)", script: "핵심 방법 3가지를 빠른 컷으로", example: "운동 2초 + 식단 2초 + 생활습관 2초 (빠른 전환)", tip: "각 컷 2-3초씩 리듬감 있게. BGM 비트에 맞춰 전환." },
+            { label: "애프터 결과 (20-30초)", time: "10", camera: "와이드샷 -> 클로즈업 전환", script: "변화된 모습 + \"XX개월 만에 -XXkg\" 텍스트", example: "밝은 조명, 자신감 있는 포즈, 예쁜 옷", tip: "밝은 자연광, 당당한 포즈. 비포와 동일한 옷/장소면 임팩트 극대화." },
+            { label: "CTA (30-35초)", time: "5", camera: "셀카 정면", script: "\"방법이 궁금하면 저장하고 팔로우\"", example: "밝은 표정으로 카메라 향해 + CTA 텍스트", tip: "짧고 명확하게. 저장/댓글 키워드 반드시 포함." }
+        ]
+    },
+    number_result: {
+        name: "숫자+결과 정보형",
+        scenes: [
+            { label: "숫자 후킹 (0-3초)", time: "3", camera: "정면 클로즈업 / 텍스트 중심", script: "\"하루 100번! 1달만 해보세요\" 또는 \"5분 투자로 -5kg\"", example: "큰 숫자 텍스트 오버레이 + 결과 증거", tip: "숫자는 크고 굵게 텍스트 오버레이. 구체적일수록 클릭률 상승." },
+            { label: "문제 제시 (3-8초)", time: "5", camera: "삼각대 정면 (상반신)", script: "\"다이어트 정체기 오신 분?\" 또는 공감 질문", example: "고민하는 표정 또는 실패 경험 언급", tip: "시청자가 '이거 나야' 하고 느끼는 순간 만들기." },
+            { label: "방법 1-2-3 (8-25초)", time: "17", camera: "시연: 삼각대 와이드 / 식단: 탑뷰", script: "\"첫번째 OO, 두번째 OO, 세번째 OO\"", example: "각 방법마다 번호 텍스트 + 시연 3-5초씩", tip: "번호 텍스트 크게. 시연 영상이 있으면 신뢰도 UP." },
+            { label: "결과 증명 (25-35초)", time: "10", camera: "클로즈업 (결과물 강조)", script: "\"실제로 XX 결과를 얻었습니다\" + 증거", example: "체중계, 체형 변화, 수치 비교", tip: "날짜가 보이는 증거일수록 좋음. 스크린샷 활용." },
+            { label: "CTA + 저장 유도 (35-40초)", time: "5", camera: "셀카 / 텍스트 카드", script: "\"이 3가지 꼭 저장해두세요\"", example: "텍스트 요약 카드 + 저장 강조", tip: "'저장하고 나중에 따라하세요' 문구가 저장률 높임." }
+        ]
+    },
+    recipe_routine: {
+        name: "레시피/루틴 공유",
+        scenes: [
+            { label: "결과물 후킹 (0-3초)", time: "3", camera: "탑뷰 / 45도 (음식) 또는 전신 (운동)", script: "\"이거 진짜 맛있는데 200kcal\"", example: "완성된 음식 or 운동 결과 먼저 보여주기", tip: "결과물을 먼저. 예쁘게 완성된 상태 -> 방법은 뒤에." },
+            { label: "재료/준비물 (3-8초)", time: "5", camera: "탑뷰 (재료 배치)", script: "재료 또는 준비물 나열 텍스트", example: "깔끔하게 배치된 재료들 + 각 이름 텍스트", tip: "배경은 깔끔한 단색. 재료는 줄 맞춰 배치." },
+            { label: "과정 Step 1-3 (8-25초)", time: "17", camera: "탑뷰 + 측면 교차", script: "\"Step 1: OO를 OO하고...\" 단계 자막", example: "각 스텝 3-5초, 빠른 컷. 배속 활용 가능.", tip: "2배속 활용 OK. 지루한 대기는 과감히 컷." },
+            { label: "완성/시연 (25-35초)", time: "10", camera: "45도 클로즈업 / 전신", script: "\"완성! 이 맛에 다이어트 하는거죠\"", example: "맛있게 먹는 장면 / 운동 완료 후 표정", tip: "먹는 장면은 소리 강조. 운동은 숨 고르는 리얼 모습." },
+            { label: "팁 + CTA (35-40초)", time: "5", camera: "셀카 또는 텍스트 카드", script: "\"다음에 OO 레시피도 올릴게요! 저장\"", example: "추가 팁 1줄 + 저장/팔로우 유도", tip: "다음 콘텐츠 예고하면 팔로우율 상승." }
+        ]
+    },
+    storytelling: {
+        name: "스토리텔링 공감형",
+        scenes: [
+            { label: "충격/공감 후킹 (0-3초)", time: "3", camera: "셀카 정면 / 텍스트 중심", script: "\"130kg에서 55kg... 75kg을 뺐습니다\"", example: "감정적 표정 + 충격적 사실 텍스트", tip: "가장 임팩트 있는 결과를 첫 3초에. 과정은 뒤에." },
+            { label: "과거 상황 (3-10초)", time: "7", camera: "셀카 / 과거 사진 슬라이드", script: "\"저는 어렸을 때부터...\" 과거 상황 설명", example: "과거 사진들 + 감성 BGM + 텍스트 설명", tip: "나레이션 가능 구간. 진솔한 톤. BGM 잔잔하게." },
+            { label: "전환점/깨달음 (10-20초)", time: "10", camera: "셀카 정면 / B-roll", script: "\"그때 깨달았어요...\" 변화의 계기", example: "감정적 전환 순간 + 공감 포인트 강조", tip: "'나도 그런 경험 있어' 공감 극대화. 댓글 유도 키포인트." },
+            { label: "변화 과정 + 현재 (20-35초)", time: "15", camera: "다양한 앵글 (일상 B-roll)", script: "노력 과정 + 현재 달라진 모습", example: "운동/식단 클립 모음 + 현재 밝고 건강한 모습", tip: "현재는 밝은 조명, 자신감 포즈. 과거와 대비." },
+            { label: "메시지 + CTA (35-45초)", time: "10", camera: "셀카 정면 (진심)", script: "\"여러분도 할 수 있어요\" + CTA", example: "진심 어린 응원 + 댓글/저장/팔로우 유도", tip: "감성적으로 마무리. 부드러운 CTA." }
+        ]
+    }
+};
+
+document.querySelectorAll('.template-option').forEach(opt => {
+    opt.addEventListener('click', () => {
+        document.querySelectorAll('.template-option').forEach(o => o.classList.remove('selected'));
+        opt.classList.add('selected');
+        renderTemplate(opt.dataset.type);
+    });
+});
+
+function renderTemplate(type) {
+    const t = TEMPLATES[type];
+    if (!t) return;
+    const out = document.getElementById('template-output');
+    let html = `<div style="font-size:16px;font-weight:700;margin-bottom:16px;">${esc(t.name)} - 촬영 가이드</div>`;
+
+    t.scenes.forEach((s, i) => {
+        html += `<div class="tpl-scene">
+            <div class="scene-badge">Scene ${i+1}</div>
+            <div class="scene-label">${esc(s.label)}</div>
+            <div class="tpl-grid">
+                <div class="tpl-field"><div class="tfl">시간</div><div class="tfv">${s.time}초</div></div>
+                <div class="tpl-field"><div class="tfl">카메라</div><div class="tfv">${esc(s.camera)}</div></div>
+                <div class="tpl-field"><div class="tfl">대본 예시</div><div class="tfv">${esc(s.script)}</div></div>
+                <div class="tpl-field"><div class="tfl">연출 참고</div><div class="tfv">${esc(s.example)}</div></div>
+            </div>
+            <div class="tpl-tip">${esc(s.tip)}</div>
+        </div>`;
+    });
+
+    const total = t.scenes.reduce((sum, s) => sum + parseInt(s.time), 0);
+    html += `<div class="total-time"><span class="num">${total}</span><span class="unit">초 (편집 후 단축 가능)</span></div>`;
+
+    html += `<div class="card" style="margin-top:16px;"><div class="card-title">촬영 전 체크리스트</div>
+        <div class="checklist-grid">
+            <div class="check-item">조명 확인 (자연광 or 링라이트)</div>
+            <div class="check-item">카메라 각도 / 삼각대 세팅</div>
+            <div class="check-item">배경 정리 (깔끔한 단색)</div>
+            <div class="check-item">의상 준비 (핏이 보이는 옷)</div>
+            <div class="check-item">텍스트 오버레이 내용 메모</div>
+            <div class="check-item">BGM 선정 (트렌드 음악)</div>
+            <div class="check-item">테스트 촬영 1회</div>
+            <div class="check-item">CTA 문구 확정</div>
+        </div>
+    </div>`;
+
+    out.innerHTML = html;
+}
+
+// Utility
+function esc(str) {
+    if (!str) return '';
+    const d = document.createElement('div');
+    d.textContent = str;
+    return d.innerHTML;
+}
+
+// Init
+loadGuides();
+</script>
+</body>
+</html>
