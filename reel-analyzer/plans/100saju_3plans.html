@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>100원사주 — 통합 릴스 기획서</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Segoe UI', sans-serif; background: #f8f9fa; color: #333; padding: 12px; font-size: 15px; -webkit-text-size-adjust: 100%; }
+.container { max-width: 100%; margin: 0 auto; }
+h1 { text-align: center; margin-bottom: 6px; font-size: 1.4em; color: #1a1a2e; }
+.subtitle { text-align: center; color: #666; margin-bottom: 20px; font-size: 0.8em; line-height: 1.5; }
+
+.plan-card { background: white; border-radius: 16px; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+.plan-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 6px; }
+.plan-number { background: #1a1a2e; color: white; padding: 4px 10px; border-radius: 20px; font-size: 0.75em; font-weight: 600; }
+.plan-formula { background: #fffbeb; color: #92400e; padding: 4px 10px; border-radius: 20px; font-size: 0.75em; border: 1px solid #fde68a; }
+.plan-duration { color: #999; font-size: 0.8em; }
+.plan-title { font-size: 1.15em; font-weight: 700; margin-bottom: 10px; line-height: 1.4; color: #1a1a2e; }
+
+.target-box { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 14px; margin-bottom: 16px; }
+.target-box h4 { color: #166534; margin-bottom: 6px; font-size: 0.85em; }
+.target-box p { font-size: 0.8em; color: #555; line-height: 1.5; }
+.target-accounts { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 8px; }
+.target-accounts span { background: #dcfce7; color: #166534; padding: 2px 8px; border-radius: 12px; font-size: 0.7em; }
+
+.hook-section { background: #fff3cd; border-radius: 12px; padding: 14px; margin-bottom: 14px; }
+.hook-section h4 { color: #856404; margin-bottom: 6px; font-size: 0.85em; }
+.hook-main { font-size: 1.05em; font-weight: 600; margin-bottom: 6px; }
+.hook-alts { font-size: 0.8em; color: #666; }
+.hook-alts span { display: block; margin-top: 4px; }
+
+.script-section { margin-bottom: 16px; }
+.script-section h4 { margin-bottom: 10px; color: #333; font-size: 0.9em; }
+.script-item { display: grid; grid-template-columns: 65px 1fr; gap: 8px; padding: 10px; border-left: 3px solid #1a1a2e; margin-bottom: 6px; background: #fafbfc; border-radius: 0 8px 8px 0; }
+.script-time { font-size: 0.7em; color: #1a1a2e; font-weight: 600; white-space: nowrap; }
+.script-content .line { font-weight: 500; margin-bottom: 4px; font-size: 0.9em; line-height: 1.4; }
+.script-content .direction { font-size: 0.75em; color: #888; margin-bottom: 4px; line-height: 1.4; }
+.script-content .overlay { font-size: 0.75em; color: #92400e; background: #fffbeb; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-top: 4px; }
+
+.caption-section { background: #e8f4fd; border-radius: 12px; padding: 14px; margin-bottom: 14px; }
+.caption-section h4 { color: #0c5460; margin-bottom: 6px; font-size: 0.85em; }
+.caption-section pre { font-size: 0.8em; white-space: pre-wrap; font-family: inherit; line-height: 1.5; word-break: break-word; }
+
+.tone-note { background: #faf5ff; border: 1px solid #e9d5ff; border-radius: 12px; padding: 14px; margin-bottom: 14px; }
+.tone-note h4 { color: #7c3aed; margin-bottom: 6px; font-size: 0.85em; }
+.tone-note p { font-size: 0.8em; color: #555; line-height: 1.6; }
+
+.checklist-section { margin-bottom: 16px; }
+.checklist-section h4 { margin-bottom: 8px; font-size: 0.85em; }
+.checklist-section ul { list-style: none; padding: 0; }
+.checklist-section li { padding: 6px 0; font-size: 0.85em; border-bottom: 1px solid #f0f0f0; }
+.checklist-section li::before { content: "\2610 "; color: #1a1a2e; }
+
+.service-info { background: #1a1a2e; color: white; border-radius: 16px; padding: 20px; margin-bottom: 20px; }
+.service-info h3 { color: #f59e0b; font-size: 0.9em; margin-bottom: 10px; }
+.service-info p { font-size: 0.8em; line-height: 1.7; color: rgba(255,255,255,0.85); }
+.service-info .key-point { color: #f59e0b; font-weight: 600; }
+
+.footer { text-align: center; color: #999; font-size: 0.75em; margin-top: 30px; padding: 16px; }
+
+@media (max-width: 480px) {
+  body { padding: 8px; }
+  .plan-card { padding: 14px; border-radius: 12px; }
+  .plan-title { font-size: 1.05em; }
+  .script-item { grid-template-columns: 55px 1fr; gap: 6px; padding: 8px; }
+  .script-time { font-size: 0.65em; }
+  .script-content .line { font-size: 0.85em; }
+  .hook-main { font-size: 0.95em; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>100원사주 릴스 기획서</h1>
+<p class="subtitle">크리에이터님 채널 톤에 맞게 자유롭게 수정하실 수 있습니다<br>아래 3가지 앵글 중 가장 잘 맞는 것을 선택하거나 믹스해주세요</p>
+
+<!-- Service Info Box -->
+<div class="service-info">
+  <h3>100원사주 핵심 포인트</h3>
+  <p>
+    <span class="key-point">100원</span>으로 사주 텍스트 풀이 시작 →
+    <span class="key-point">AI 전화 상담</span>으로 이어지는 구조<br><br>
+    실제 전화 통화처럼 AI가 사주를 풀어주는데, 퀄리티가 진짜 사람 상담 수준<br>
+    단순 텍스트가 아니라 <span class="key-point">음성으로 대화</span>하며 상담받는 경험<br><br>
+    링크: 100saju.com
+  </p>
+</div>
+
+<!-- ========== PLAN 1: 체험형 ========== -->
+<div class="plan-card">
+  <div class="plan-header">
+    <span class="plan-number">Plan 1</span>
+    <span class="plan-formula">체험 리액션형</span>
+    <span class="plan-duration">30-45초</span>
+  </div>
+  <div class="plan-title">"100원으로 사주 봤는데 AI가 전화 걸어옴"</div>
+
+  <div class="target-box">
+    <h4>추천 채널 유형</h4>
+    <p>일상/라이프스타일/부부 계정 — 본인이 직접 체험하며 리액션하는 형태</p>
+    <div class="target-accounts">
+      <span>@healthy.hyeni</span>
+      <span>@ifour_i4</span>
+      <span>@heyseoyoon</span>
+      <span>@2wins_bubu</span>
+      <span>@chill_move_</span>
+      <span>@dab_inzzang</span>
+      <span>@shoohee_</span>
+    </div>
+  </div>
+
+  <div class="hook-section">
+    <h4>HOOK (첫 3초)</h4>
+    <div class="hook-main">"100원짜리 사주 앱 깔았는데 AI가 전화를 걸어옴"</div>
+    <div class="hook-alts">
+      <span>ALT A: "100원 넣었을 뿐인데 갑자기 전화가 옴"</span>
+      <span>ALT B: "사주 앱인데 진짜 전화 상담이 됨 뭐야 이거"</span>
+      <span>ALT C: "남편/친구한테 전화사주 시켜봤더니 반응이..."</span>
+    </div>
+  </div>
+
+  <div class="script-section">
+    <h4>타임라인 스크립트</h4>
+
+    <div class="script-item">
+      <div class="script-time">0:00-0:03</div>
+      <div class="script-content">
+        <div class="line">(핸드폰 화면 보여주며) "100원짜리 사주 앱 깔았는데..."</div>
+        <div class="direction">화면 녹화 or 핸드폰 들고 셀카 모드</div>
+      </div>
+    </div>
+
+    <div class="script-item">
+      <div class="script-time">0:03-0:08</div>
+      <div class="script-content">
+        <div class="line">"생년월일 넣으니까 바로 텍스트로 사주 풀이가 나오는데 이것도 꽤 잘 맞음"</div>
+        <div class="direction">100원 결제 화면 → 텍스트 풀이 결과 빠르게 스크롤</div>
+        <div class="overlay">자막: 100원 결제 → 사주 풀이</div>
+      </div>
+    </div>
+
+    <div class="script-item">
+      <div class="script-time">0:08-0:12</div>
+      <div class="script-content">
+        <div class="line">"근데 여기서 전화 상담도 된다길래 눌러봤거든?"</div>
+        <div class="direction">전화 상담 버튼 탭하는 모습</div>
+      </div>
+    </div>
+
+    <div class="script-item">
+      <div class="script-time">0:12-0:25</div>
+      <div class="script-content">
+        <div class="line">(AI 상담 통화 중 리액션) "어... 진짜 사람이랑 통화하는 거 같은데?"</div>
+        <div class="direction">핸드폰 귀에 대고 듣다가 놀라는 표정 / 웃는 표정 / 끄덕이는 모습</div>
+        <div class="overlay">자막: 실제 AI 통화 음성 (일부만 들려주기)</div>
+      </div>
+    </div>
+
+    <div class="script-item">
+      <div class="script-time">0:25-0:35</div>
+      <div class="script-content">
+        <div class="line">"아니 이거 AI 맞아? 진짜 상담사한테 전화 온 줄..."</div>
+        <div class="direction">통화 끝난 후 카메라 보며 솔직 리뷰</div>
+      </div>
+    </div>
+
+    <div class="script-item">
+      <div class="script-time">0:35-0:40</div>
+      <div class="script-content">
+        <div class="line">"100원으로 시작하는 거니까 한번 해봐 진짜 신기해"</div>
+        <div class="direction">앱 링크 화면 보여주기</div>
+        <div class="overlay">자막: 프로필 링크</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="caption-section">
+    <h4>캡션 (참고용)</h4>
+    <pre>100원으로 사주 보는 앱 있길래 해봤는데
+AI가 진짜 전화로 상담해줌...
+목소리도 자연스럽고 내 사주 실시간으로 풀어주는데
+이거 진짜 사람 아님?? 소름
+
+궁금하면 프로필 링크에서 해봐
+100원이라 부담도 없음
+
+#사주 #AI상담 #100원사주 #운세 #신년운세</pre>
+  </div>
+
+  <div class="tone-note">
+    <h4>톤 가이드</h4>
+    <p>
+      이 기획서는 <strong>참고용 뼈대</strong>입니다. 크리에이터님이 평소 쓰시는 말투와 편집 스타일 그대로 가셔도 됩니다.<br><br>
+      핵심만 지켜주세요:<br>
+      1) 100원 → 텍스트 사주 → AI 전화 상담으로 이어지는 흐름<br>
+      2) "진짜 사람 같다"는 놀라움 포인트<br>
+      3) 프로필 링크 유도
+    </p>
+  </div>
+
+  <div class="checklist-section">
+    <h4>체크리스트</h4>
+    <ul>
+      <li>100원 결제 화면 캡처 or 화면 녹화</li>
+      <li>AI 통화 중 자연스러운 리액션 (과하지 않게)</li>
+      <li>"사람 같다" 또는 "이게 AI?" 리액션 1회 이상</li>
+      <li>프로필 링크 or 댓글 고정으로 URL 안내</li>
+      <li>광고 표시 (유료광고 포함)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ========== PLAN 2: 참여형 ========== -->
+<div class="plan-card">
+  <div class="plan-header">
+    <span class="plan-number">Plan 2</span>
+    <span class="plan-formula">댓글 참여형 (Pick a Card)</span>
+    <span class="plan-duration">15-30초</span>
+  </div>
+  <div class="plan-title">"이번 달 연애운, 댓글에 생일 남기면 AI가 전화로 풀어줌"</div>
+
+  <div class="target-box">
+    <h4>추천 채널 유형</h4>
+    <p>타로/운세/사주 계정 — 기존 Pick a Card 형식에 100원사주를 자연스럽게 연결</p>
+    <div class="target-accounts">
+      <span>@tarotrrri</span>
+      <span>@desertstar_tarot</span>
+      <span>@zzwido_official</span>
+      <span>@imyeahrim</span>
+      <span>@zinga173</span>
+    </div>
+  </div>
+
+  <div class="hook-section">
+    <h4>HOOK (첫 3초)</h4>
+    <div class="hook-main">"5월에 새로운 인연이 들어올 사람, 손!"</div>
+    <div class="hook-alts">
+      <span>ALT A: "이번 달 연애운 궁금한 사람? 100원이면 AI가 전화로 풀어줌"</span>
+      <span>ALT B: "댓글에 생일 남기면 운명이 바뀌는 달이 옴"</span>
+      <span>ALT C: "지금 짝사랑 중인 사람? 그 사람 마음 AI가 읽어줌"</span>
+    </div>
+  </div>
+
+  <div class="script-section">
+    <h4>타임라인 스크립트</h4>
+
+    <div class="script-item">
+      <div class="script-time">0:00-0:03</div>
+      <div class="script-content">
+        <div class="line">"5월에 새로운 인연이 들어올 사람, 손!"</div>
+        <div class="direction">타로카드 배경 or 별자리 감성 배경 + 텍스트 오버레이</div>
+      </div>
+    </div>
+
+    <div class="script-item">
+      <div class="script-time">0:03-0:10</div>
+      <div class="script-content">
+        <div class="line">"요즘 100원으로 사주 보는 앱이 있는데, 이게 그냥 텍스트가 아니라 진짜 전화로 상담해줌"</div>
+        <div class="direction">앱 화면 or 카드 뽑는 모션 + 보이스오버</div>
+        <div class="overlay">자막: 100원 → AI 전화 상담</div>
+      </div>
+    </div>
+
+    <div class="script-item">
+      <div class="script-time">0:10-0:18</div>
+      <div class="script-content">
+        <div class="line">"나도 해봤는데 진짜 사람이랑 통화하는 줄 알았어. 내 사주로 연애운 실시간으로 풀어주는데 소름"</div>
+        <div class="direction">통화 화면 or 리액션 표정</div>
+      </div>
+    </div>
+
+    <div class="script-item">
+      <div class="script-time">0:18-0:25</div>
+      <div class="script-content">
+        <div class="line">"궁금하면 프로필 링크에서 해봐. 100원이니까 부담 없음"</div>
+        <div class="direction">프로필 링크 가리키기 or 텍스트 오버레이</div>
+      </div>
+    </div>
+
+    <div class="script-item">
+      <div class="script-time">0:25-0:30</div>
+      <div class="script-content">
+        <div class="line">"댓글에 생일 남기면 한 줄 운세도 봐줄게!"</div>
+        <div class="direction">댓글 유도 — 참여율 + 알고리즘 부스팅</div>
+        <div class="overlay">댓글 참여 유도 (기존 운영 방식과 동일)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="caption-section">
+    <h4>캡션 (참고용)</h4>
+    <pre>5월 연애운 궁금한 사람!
+댓글에 생일 남겨주면 한 줄 운세 봐드려요
+
+근데 진짜 제대로 보고 싶으면
+100원사주 해봐... AI가 진짜 전화로 풀어주는데
+목소리가 너무 자연스러워서 사람인 줄 알았음
+
+프로필 링크 100saju.com
+
+#사주 #연애운 #타로 #AI사주 #운세 #100원사주</pre>
+  </div>
+
+  <div class="tone-note">
+    <h4>톤 가이드</h4>
+    <p>
+      기존에 운영하시는 <strong>Pick a Card / 댓글 참여</strong> 방식 그대로 가시면 됩니다.<br><br>
+      핵심만 추가해주세요:<br>
+      1) "100원" + "AI 전화 상담"이라는 키워드 노출<br>
+      2) "진짜 사람 같다"는 체험 한마디<br>
+      3) 기존 댓글 참여(생일/번호) + 링크 유도 병행<br><br>
+      평소 콘텐츠처럼 자연스럽게 녹여주시면 가장 좋습니다.
+    </p>
+  </div>
+
+  <div class="checklist-section">
+    <h4>체크리스트</h4>
+    <ul>
+      <li>기존 타로/운세 콘텐츠 톤 유지</li>
+      <li>댓글 참여 유도 (생일, 번호 등)</li>
+      <li>100원사주 체험 포인트 1회 언급</li>
+      <li>프로필 링크 안내</li>
+      <li>광고 표시 (유료광고 포함)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ========== PLAN 3: 스토리텔링형 ========== -->
+<div class="plan-card">
+  <div class="plan-header">
+    <span class="plan-number">Plan 3</span>
+    <span class="plan-formula">연애 스토리텔링형</span>
+    <span class="plan-duration">30-60초</span>
+  </div>
+  <div class="plan-title">"헤어진 남자 때문에 사주 봤는데 AI가 한 마디 했음"</div>
+
+  <div class="target-box">
+    <h4>추천 채널 유형</h4>
+    <p>연애/이별/관계 계정 — 감정 스토리 + 사주 연결로 공감 유도</p>
+    <div class="target-accounts">
+      <span>@its.hangyul</span>
+      <span>@kang.riverr</span>
+      <span>@yuni.charm</span>
+      <span>@you_warm2</span>
+      <span>@nadaejimayo</span>
+    </div>
+  </div>
+
+  <div class="hook-section">
+    <h4>HOOK (첫 3초)</h4>
+    <div class="hook-main">"이별 후에 사주 봤는데 AI가 이렇게 말함"</div>
+    <div class="hook-alts">
+      <span>ALT A: "재회할지 말지 고민될 때, AI한테 전화 사주 받아봄"</span>
+      <span>ALT B: "연애 안 풀릴 때 100원짜리 사주가 해준 말"</span>
+      <span>ALT C: "3년 사귄 남자친구랑 헤어지고 사주 봤더니..."</span>
+    </div>
+  </div>
+
+  <div class="script-section">
+    <h4>타임라인 스크립트</h4>
+
+    <div class="script-item">
+      <div class="script-time">0:00-0:05</div>
+      <div class="script-content">
+        <div class="line">"솔직히 이별 후에 제일 먼저 하는 거... 사주 보는 거잖아"</div>
+        <div class="direction">감성 배경 + 본인 얼굴 or 텍스트 기반</div>
+      </div>
+    </div>
+
+    <div class="script-item">
+      <div class="script-time">0:05-0:12</div>
+      <div class="script-content">
+        <div class="line">"근데 전화로 사주 상담받을 수 있는 앱이 있더라. 100원으로 시작하는데, 진짜 전화로 AI가 풀어줌"</div>
+        <div class="direction">앱 화면 간단히 보여주기</div>
+        <div class="overlay">자막: 전화 통화로 AI 사주 상담</div>
+      </div>
+    </div>
+
+    <div class="script-item">
+      <div class="script-time">0:12-0:25</div>
+      <div class="script-content">
+        <div class="line">"나한테 '지금은 혼자 있는 시간이 필요한 시기'라고 하더라. 그리고 '다음 인연은 올해 하반기에 자연스럽게 온다'고..."</div>
+        <div class="direction">상담 내용 요약 (감정적 톤으로). 직접 들은 것처럼 전달</div>
+      </div>
+    </div>
+
+    <div class="script-item">
+      <div class="script-time">0:25-0:40</div>
+      <div class="script-content">
+        <div class="line">"솔직히 위로가 됐어. 사람한테 말하기 어려운 것도 AI니까 편하게 다 물어볼 수 있었고. 목소리가 진짜 자연스러워서 상담사한테 전화한 느낌"</div>
+        <div class="direction">감정 정리 + 솔직한 후기</div>
+      </div>
+    </div>
+
+    <div class="script-item">
+      <div class="script-time">0:40-0:50</div>
+      <div class="script-content">
+        <div class="line">"연애 고민 있는 사람, 한번 해봐. 100원이니까 부담도 없고, 전화 상담 퀄리티 진짜 놀랄 거야"</div>
+        <div class="direction">프로필 링크 안내</div>
+        <div class="overlay">자막: 프로필 링크 → 100saju.com</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="caption-section">
+    <h4>캡션 (참고용)</h4>
+    <pre>이별 후에 항상 사주부터 보는 사람 나야 나...
+근데 이번엔 좀 달랐어
+
+AI가 진짜 전화로 상담해주는 앱인데
+100원으로 시작하고
+이후 전화 상담까지 이어지는 구조
+
+목소리가 너무 자연스러워서 진짜 상담사인 줄
+사람한테 말 못 하는 것도 AI니까 편하게 물어볼 수 있었음
+
+연애 고민 있으면 한번 해봐
+프로필 링크에 있어
+
+#이별 #연애고민 #사주 #AI상담 #100원사주 #재회</pre>
+  </div>
+
+  <div class="tone-note">
+    <h4>톤 가이드</h4>
+    <p>
+      크리에이터님의 <strong>감성 톤/스토리텔링 방식</strong> 그대로 가셔도 됩니다.<br><br>
+      핵심 포인트:<br>
+      1) 연애 고민 상황 설정 → 사주로 위로받는 흐름<br>
+      2) "AI인데 사람 같다" + "편하게 물어볼 수 있다"<br>
+      3) 감정적 공감 > 기능 설명 (위로/공감 먼저, 서비스 소개는 자연스럽게)<br><br>
+      실제로 본인이 사용해보시고 느낀 감정을 솔직하게 담아주시면 가장 좋습니다.
+    </p>
+  </div>
+
+  <div class="checklist-section">
+    <h4>체크리스트</h4>
+    <ul>
+      <li>감정 스토리 (이별/재회/짝사랑 등) 설정</li>
+      <li>100원사주 체험 후기 형태로 자연스럽게</li>
+      <li>"전화 상담" + "사람 같은 AI" 포인트</li>
+      <li>프로필 링크 유도</li>
+      <li>광고 표시 (유료광고 포함)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="footer">
+  <p>100원사주 x 크리에이터 협업 기획서</p>
+  <p style="margin-top: 4px;">모든 스크립트는 참고용이며, 크리에이터님의 톤과 스타일에 맞게 자유롭게 수정 가능합니다</p>
+</div>
+
+</div>
+</body>
+</html>
