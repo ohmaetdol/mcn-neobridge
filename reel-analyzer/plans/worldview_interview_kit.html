@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>인플루언서 세계관 인터뷰 키트</title>
+<style>
+:root {
+  --bg: #f6f7f9;
+  --card: #ffffff;
+  --text: #191f28;
+  --sub: #6b7684;
+  --border: #e5e8eb;
+  --blue: #3182f6;
+  --blue-bg: #e8f3ff;
+  --blue-dark: #1b64da;
+  --purple: #8b5cf6;
+  --purple-bg: #f3e8ff;
+  --red: #f04452;
+  --red-bg: #fff0f0;
+  --green: #00c471;
+  --green-bg: #e8fff3;
+  --orange: #f59e0b;
+  --orange-bg: #fffbeb;
+  --gray-50: #f9fafb;
+  --gray-100: #f2f4f6;
+  --gray-200: #e5e8eb;
+  --gray-800: #333d4b;
+  --radius: 16px;
+  --radius-sm: 12px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Pretendard', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  padding: 0;
+  font-size: 15px;
+  -webkit-text-size-adjust: 100%;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Toss-style header */
+.top-header {
+  background: var(--card);
+  padding: 48px 20px 32px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.top-header h1 { font-size: 1.5em; font-weight: 700; color: var(--text); margin-bottom: 6px; letter-spacing: -0.5px; }
+.top-header p { font-size: 0.82em; color: var(--sub); line-height: 1.5; }
+.version-badge { display: inline-block; background: var(--blue-bg); color: var(--blue); padding: 3px 10px; border-radius: 20px; font-size: 0.7em; font-weight: 600; margin-top: 10px; }
+
+/* Container */
+.container { max-width: 100%; padding: 16px; }
+
+/* Data cards (research-backed) */
+.data-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+}
+.data-card h3 { font-size: 0.9em; font-weight: 700; margin-bottom: 12px; color: var(--text); letter-spacing: -0.3px; }
+.data-card .stat-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--gray-100); }
+.data-card .stat-row:last-child { border-bottom: none; }
+.data-card .stat-label { font-size: 0.8em; color: var(--sub); }
+.data-card .stat-value { font-size: 0.85em; font-weight: 600; color: var(--text); }
+.data-card .stat-value.blue { color: var(--blue); }
+.data-card .stat-value.green { color: var(--green); }
+.data-card .source { font-size: 0.65em; color: var(--sub); margin-top: 8px; opacity: 0.7; }
+
+/* Framework box */
+.framework-box {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+}
+.framework-box .fw-title { font-size: 0.85em; font-weight: 700; color: var(--blue); margin-bottom: 4px; }
+.framework-box .fw-source { font-size: 0.65em; color: var(--sub); margin-bottom: 12px; }
+.framework-box .fw-item { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px solid var(--gray-100); align-items: flex-start; }
+.framework-box .fw-item:last-child { border-bottom: none; }
+.framework-box .fw-num { width: 22px; height: 22px; background: var(--blue-bg); color: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.65em; font-weight: 700; flex-shrink: 0; }
+.framework-box .fw-text { font-size: 0.8em; color: var(--gray-800); line-height: 1.5; }
+.framework-box .fw-text strong { color: var(--text); }
+
+/* Section dividers */
+.section-divider {
+  padding: 24px 20px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-divider .divider-icon { width: 28px; height: 28px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 0.8em; }
+.section-divider h2 { font-size: 1em; font-weight: 700; color: var(--text); letter-spacing: -0.3px; }
+.section-divider .divider-meta { margin-left: auto; font-size: 0.7em; color: var(--sub); }
+
+/* Phase accordion */
+.phase {
+  background: var(--card);
+  border-radius: var(--radius);
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+.phase-header {
+  padding: 18px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s;
+}
+.phase-header:active { background: var(--gray-50); }
+.phase-header .ph-left { display: flex; align-items: center; gap: 12px; }
+.phase-header .ph-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.1em; }
+.phase-header .ph-title { font-size: 0.9em; font-weight: 600; color: var(--text); }
+.phase-header .ph-sub { font-size: 0.7em; color: var(--sub); margin-top: 2px; }
+.phase-header .ph-right { display: flex; align-items: center; gap: 8px; }
+.phase-header .ph-time { font-size: 0.65em; color: var(--sub); background: var(--gray-100); padding: 3px 8px; border-radius: 10px; }
+.phase-header .ph-arrow { color: var(--sub); font-size: 0.8em; transition: transform 0.2s; }
+.phase.open .ph-arrow { transform: rotate(180deg); }
+
+.phase-body { display: none; padding: 0 20px 20px; }
+.phase.open .phase-body { display: block; }
+
+/* Question cards */
+.q-card {
+  background: var(--gray-50);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  margin-bottom: 10px;
+}
+.q-card .q-top { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.q-card .q-badge { font-size: 0.6em; font-weight: 700; color: var(--blue); background: var(--blue-bg); padding: 2px 8px; border-radius: 6px; }
+.q-card .q-badge.key { color: var(--red); background: var(--red-bg); }
+.q-card .q-badge.data { color: var(--green); background: var(--green-bg); }
+.q-card .q-main { font-size: 0.88em; font-weight: 500; color: var(--text); line-height: 1.55; margin-bottom: 8px; }
+.q-card .q-why { font-size: 0.72em; color: var(--sub); padding-left: 12px; border-left: 2px solid var(--gray-200); margin-bottom: 6px; line-height: 1.5; }
+.q-card .q-follow { font-size: 0.72em; color: var(--purple); margin-top: 6px; line-height: 1.5; }
+.q-card .q-follow::before { content: "→ "; font-weight: 600; }
+
+/* Tip inline */
+.tip-inline {
+  background: var(--blue-bg);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  margin-bottom: 12px;
+}
+.tip-inline .tip-label { font-size: 0.65em; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+.tip-inline p { font-size: 0.78em; color: var(--blue-dark); line-height: 1.5; }
+
+/* Bridge ment */
+.bridge {
+  background: var(--orange-bg);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  margin-bottom: 12px;
+  border-left: 3px solid var(--orange);
+}
+.bridge .bridge-label { font-size: 0.65em; font-weight: 700; color: var(--orange); margin-bottom: 4px; }
+.bridge p { font-size: 0.8em; color: var(--gray-800); line-height: 1.5; font-style: italic; }
+
+/* Output tag */
+.output-box {
+  background: var(--green-bg);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin-top: 12px;
+}
+.output-box .out-label { font-size: 0.65em; font-weight: 700; color: var(--green); margin-bottom: 4px; }
+.output-box p { font-size: 0.75em; color: #065f46; line-height: 1.5; }
+
+/* Bottom info */
+.bottom-info {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 12px;
+  border: 1px solid var(--border);
+}
+.bottom-info h3 { font-size: 0.9em; font-weight: 700; margin-bottom: 12px; }
+.bottom-info li { font-size: 0.8em; color: var(--gray-800); padding: 6px 0; border-bottom: 1px solid var(--gray-100); line-height: 1.5; }
+.bottom-info li:last-child { border-bottom: none; }
+
+.footer { text-align: center; padding: 24px; font-size: 0.7em; color: var(--sub); }
+
+@media (max-width: 480px) {
+  .top-header { padding: 40px 16px 24px; }
+  .container { padding: 12px; }
+  .phase-header { padding: 16px; }
+  .q-card { padding: 14px; }
+}
+</style>
+</head>
+<body>
+
+<div class="top-header">
+  <h1>세계관 인터뷰 키트</h1>
+  <p>인플루언서 브랜드 유니버스 구축을 위한<br>구조화된 인터뷰 프로토콜</p>
+  <span class="version-badge">v2.0 Universal Template</span>
+</div>
+
+<div class="container">
+
+<!-- Research-backed data section -->
+<div class="section-divider">
+  <div class="divider-icon" style="background:var(--blue-bg);">D</div>
+  <h2>왜 세계관인가? (데이터)</h2>
+</div>
+
+<div class="data-card">
+  <h3>세계관이 있는 브랜드 vs 없는 브랜드</h3>
+  <div class="stat-row">
+    <span class="stat-label">브랜드 가치 상승률 차이 (6년간)</span>
+    <span class="stat-value blue">+97% 더 상승</span>
+  </div>
+  <div class="stat-row">
+    <span class="stat-label">구매 결정의 무의식 비율</span>
+    <span class="stat-value">95%</span>
+  </div>
+  <div class="stat-row">
+    <span class="stat-label">빙그레우스: 포스팅 3주 신규 팔로워</span>
+    <span class="stat-value green">+17,000명 (광고 0원)</span>
+  </div>
+  <div class="stat-row">
+    <span class="stat-label">MrBeast: AVD 1분38초 증가 시 조회수</span>
+    <span class="stat-value blue">3배 증가</span>
+  </div>
+  <div class="source">출처: Harvard (Zaltman), Iconic Fox Archetype Study, 제일기획, MrBeast Production Guide</div>
+</div>
+
+<!-- Framework references -->
+<div class="section-divider">
+  <div class="divider-icon" style="background:var(--purple-bg);">F</div>
+  <h2>적용 프레임워크 5개</h2>
+</div>
+
+<div class="framework-box">
+  <div class="fw-title">1. MrBeast Production Guide (36p 내부문서)</div>
+  <div class="fw-source">Night Media / Reed Duchscher</div>
+  <div class="fw-item"><div class="fw-num">1</div><div class="fw-text"><strong>제목/썸네일에서 시작</strong> — 모든 기획이 "첫인상"에서 역산됨</div></div>
+  <div class="fw-item"><div class="fw-num">2</div><div class="fw-text"><strong>Wow Factor</strong> — "이 사람만 할 수 있는 것"이 세계관의 핵심</div></div>
+  <div class="fw-item"><div class="fw-num">3</div><div class="fw-text"><strong>No Dull Moments</strong> — 필러 = 이탈. 모든 초에 존재 이유 필요</div></div>
+  <div class="fw-item"><div class="fw-num">4</div><div class="fw-text"><strong>A-Player 기준</strong> — "최고가 아니면 독이다" 마인드셋</div></div>
+</div>
+
+<div class="framework-box">
+  <div class="fw-title">2. StoryBrand SB7 (Donald Miller)</div>
+  <div class="fw-source">시청자 = 영웅 / 크리에이터 = 가이드</div>
+  <div class="fw-item"><div class="fw-num">1</div><div class="fw-text"><strong>영웅(시청자)</strong>이 원하는 것 → <strong>문제</strong>(외적/내적/철학적) → <strong>가이드</strong>(공감+권위)</div></div>
+  <div class="fw-item"><div class="fw-num">2</div><div class="fw-text"><strong>계획</strong>(3단계) → <strong>행동촉구</strong> → <strong>성공</strong>(변화된 미래) → <strong>실패 회피</strong></div></div>
+  <div class="fw-item"><div class="fw-num">!</div><div class="fw-text">핵심: 크리에이터는 영웅이 아니라 <strong>멘토</strong>. 팔로워의 여정을 돕는 존재</div></div>
+</div>
+
+<div class="framework-box">
+  <div class="fw-title">3. 브랜드 아키타입 (Jung 12 Archetypes)</div>
+  <div class="fw-source">70/30 법칙: 코어 70% + 차별화 30%</div>
+  <div class="fw-item"><div class="fw-num">C</div><div class="fw-text"><strong>Caregiver</strong> (돌봄) — "당신을 위해" 웰니스/육아/건강 크리에이터</div></div>
+  <div class="fw-item"><div class="fw-num">H</div><div class="fw-text"><strong>Hero</strong> (영웅) — "나도 해냈으니 너도" 변신/도전형</div></div>
+  <div class="fw-item"><div class="fw-num">M</div><div class="fw-text"><strong>Magician</strong> (마법사) — "변화를 만든다" 트랜스포메이션형</div></div>
+  <div class="fw-item"><div class="fw-num">S</div><div class="fw-text"><strong>Sage</strong> (현자) — "진짜를 알려준다" 정보/교육형</div></div>
+</div>
+
+<div class="framework-box">
+  <div class="fw-title">4. 할리우드 캐릭터 바이블</div>
+  <div class="fw-source">TV 시리즈 작가실 방법론</div>
+  <div class="fw-item"><div class="fw-num">1</div><div class="fw-text"><strong>Want</strong> — 이 사람이 원하는 것 (표면적 욕구)</div></div>
+  <div class="fw-item"><div class="fw-num">2</div><div class="fw-text"><strong>Fear</strong> — 가장 두려워하는 것 (취약점 = 공감 포인트)</div></div>
+  <div class="fw-item"><div class="fw-num">3</div><div class="fw-text"><strong>Fatal Flaw</strong> — 치명적 결점 (콘텐츠 갈등의 원천)</div></div>
+  <div class="fw-item"><div class="fw-num">4</div><div class="fw-text"><strong>Specific Detail</strong> — "성실하다"가 아닌 구체적 습관/버릇</div></div>
+  <div class="fw-item"><div class="fw-num">5</div><div class="fw-text"><strong>Arc</strong> — 시즌 1에서 어디→어디로 변화하는가</div></div>
+</div>
+
+<div class="framework-box">
+  <div class="fw-title">5. 세계관 마케팅 3요소 (제일기획)</div>
+  <div class="fw-source">한국형 세계관 구축 프레임</div>
+  <div class="fw-item"><div class="fw-num">C</div><div class="fw-text"><strong>캐릭터</strong> — 브랜드 철학이 투영된 페르소나. "본캐가 단단해야 부캐도 산다"</div></div>
+  <div class="fw-item"><div class="fw-num">S</div><div class="fw-text"><strong>스토리</strong> — 컨셉이 아닌 서사. "서사 없으면 소재 고갈에 허덕인다"</div></div>
+  <div class="fw-item"><div class="fw-num">W</div><div class="fw-text"><strong>세계(환경)</strong> — 캐릭터가 뛰어노는 비주얼/톤/분위기</div></div>
+</div>
+
+<!-- Interview Protocol -->
+<div class="section-divider">
+  <div class="divider-icon" style="background:var(--orange-bg);">!</div>
+  <h2>인터뷰 시작 전</h2>
+</div>
+
+<div class="data-card">
+  <h3>준비사항 체크리스트</h3>
+  <div class="stat-row"><span class="stat-label">소요시간</span><span class="stat-value">40~60분</span></div>
+  <div class="stat-row"><span class="stat-label">녹음</span><span class="stat-value">줌 녹화 or 핸드폰</span></div>
+  <div class="stat-row"><span class="stat-label">분위기</span><span class="stat-value">카페 수다 톤</span></div>
+  <div class="stat-row"><span class="stat-label">핵심 원칙</span><span class="stat-value">"그때 기분이 어땠어요?" 반복</span></div>
+  <div class="stat-row"><span class="stat-label">금지</span><span class="stat-value">정리된 답 유도 X (날것 그대로)</span></div>
+</div>
+
+<div class="bridge">
+  <div class="bridge-label">시작 멘트 (그대로 읽기)</div>
+  <p>"오늘은 콘텐츠 세계관을 잡으려고 하는 건데요. 어렵게 생각하지 마시고 편하게 얘기해주시면 돼요. 정답 없고, 떠오르는 대로 말씀해주시면 제가 정리할게요. 좀 개인적인 질문도 있는데 불편하시면 패스하셔도 되고요!"</p>
+</div>
+
+<!-- PHASE 1 -->
+<div class="phase open">
+  <div class="phase-header" onclick="togglePhase(this)">
+    <div class="ph-left">
+      <div class="ph-icon" style="background:var(--orange-bg);">1</div>
+      <div>
+        <div class="ph-title">워밍업 & 자기인식</div>
+        <div class="ph-sub">Ice Breaking + Self-Perception</div>
+      </div>
+    </div>
+    <div class="ph-right">
+      <span class="ph-time">5분</span>
+      <span class="ph-arrow">v</span>
+    </div>
+  </div>
+  <div class="phase-body">
+    <div class="tip-inline">
+      <div class="tip-label">인터뷰어 팁</div>
+      <p>긴장 풀어주면서도 아키타입 단서를 수집하는 구간. 여기서 나오는 단어들이 나중에 톤앤매너의 실마리가 됩니다.</p>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge">Q1-1</span></div>
+      <div class="q-main">요즘 하루가 어떻게 흘러가세요? 아침에 눈 떠서 잠들기까지. 안 빠뜨리고 하는 루틴 같은 게 있으면요.</div>
+      <div class="q-why">콘텐츠 소재 풀 파악 + 라이프스타일 아키타입 힌트</div>
+      <div class="q-follow">그 루틴 중에 "이건 나만 하는 것 같다" 싶은 게 있어요?</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge">Q1-2</span></div>
+      <div class="q-main">인스타/유튜브에서 "이 사람 진짜 잘한다" 싶은 계정 3개만 말해주세요. 그리고 왜 좋아요?</div>
+      <div class="q-why">벤치마크 + 본인이 무의식적으로 원하는 방향 파악</div>
+      <div class="q-follow">그 계정에서 "이건 나도 할 수 있겠다" vs "이건 나랑 안 맞다" 구분된다면?</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge">Q1-3</span></div>
+      <div class="q-main">주변에서 대표님을 뭐라고 소개해요? "내 친구 OO인데" 할 때 뒤에 뭐가 붙어요?</div>
+      <div class="q-why">타인 시선의 페르소나 = 가장 자연스러운 포지셔닝</div>
+      <div class="q-follow">그 표현이 맞아요? 아니면 "아닌데" 싶은 부분도 있어요?</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge">Q1-4</span></div>
+      <div class="q-main">본인의 성격을 솔직하게 말한다면? 장점 2개, 단점 2개로요.</div>
+      <div class="q-why">Fatal Flaw 탐색 (단점 = 콘텐츠 갈등의 원천이자 공감 포인트)</div>
+      <div class="q-follow">그 단점 때문에 손해 본 적 있어요? 구체적으로?</div>
+    </div>
+
+    <div class="output-box">
+      <div class="out-label">AI 추출 항목</div>
+      <p>일상 루틴, 벤치마크 3개, 타인 인식 키워드, Fatal Flaw 후보</p>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 2 -->
+<div class="phase">
+  <div class="phase-header" onclick="togglePhase(this)">
+    <div class="ph-left">
+      <div class="ph-icon" style="background:var(--red-bg);">2</div>
+      <div>
+        <div class="ph-title">기원 서사 (Origin Story)</div>
+        <div class="ph-sub">Hero's Journey + Character Bible</div>
+      </div>
+    </div>
+    <div class="ph-right">
+      <span class="ph-time">15분</span>
+      <span class="ph-arrow">v</span>
+    </div>
+  </div>
+  <div class="phase-body">
+    <div class="tip-inline">
+      <div class="tip-label">핵심 구간 — 세계관의 70%가 여기서 결정됨</div>
+      <p>감정을 파고드세요. 답변이 짧으면 "좀 더 자세히 들려주세요", "그때 뭐가 보였어요?", "그 순간 몸이 어땠어요?" 반복. 울어도 괜찮다고 말해주세요.</p>
+    </div>
+
+    <div class="bridge">
+      <div class="bridge-label">브릿지 멘트</div>
+      <p>"이제 과거 이야기를 좀 여쭤볼게요. 대표님을 지금의 대표님으로 만든 경험들이요. 편하게 기억나는 대로 말씀해주세요."</p>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge key">핵심</span><span class="q-badge">Q2-1 바닥의 순간</span></div>
+      <div class="q-main">변화를 시작하기 전, 인생에서 가장 밑바닥이었던 순간을 하나만 떠올려주세요. 언제, 어디서, 뭘 하고 있었고, 눈에 뭐가 보였고, 어떤 감정이었는지요.</div>
+      <div class="q-why">기원 서사의 "0화". 이 장면 하나가 모든 콘텐츠의 감정 앵커가 됨. MrBeast 가이드의 "Title/Thumbnail"에 해당 — 모든 기획이 여기서 역산됨</div>
+      <div class="q-follow">그때 거울 본 적 있어요? 뭐가 느껴졌어요? / 누가 옆에 있었어요? / 그 감정을 한 단어로 하면?</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge key">핵심</span><span class="q-badge">Q2-2 결심의 트리거</span></div>
+      <div class="q-main">"이제 진짜 바꿔야겠다" — 그 결심이 서서히 온 건지, 아니면 딱 어느 날 스위치가 켜진 건지. 결정적 계기가 뭐였어요?</div>
+      <div class="q-why">영웅의 여정 "소명 수락". StoryBrand에서 "Guide를 만나는 순간" = 첫 콘텐츠의 후킹 포인트</div>
+      <div class="q-follow">"이번에도 실패하면?" 같은 두려움은 없었어요? / 주변 반응은? / 혼자 결심? 누가 도와줬어요?</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge">Q2-3 시련과 좌절</span></div>
+      <div class="q-main">변화 과정에서 "아 나는 안 되나보다" 싶었던 순간. 포기 직전까지 갔던 때가 있었을 것 같은데요.</div>
+      <div class="q-why">팔로워 공감 포인트. "나도 그래!" = 팔로우 이유. 제일기획 프레임의 "스토리 플롯" 갈등 구간</div>
+      <div class="q-follow">얼마나 오래 갔어요? / 어떻게 버텼어요? / 지금 돌아보면 그때의 나한테 뭐라고 해주고 싶어요?</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge">Q2-4 전환점</span></div>
+      <div class="q-main">"아 이게 되는구나!" 처음 느꼈던 순간이요. 변화가 눈에 보이기 시작한 때. 구체적인 장면으로요.</div>
+      <div class="q-why">스토리의 클라이맥스. MrBeast "Wow Factor" — 이 사람만의 결정적 장면</div>
+      <div class="q-follow">그때 기분을 뭐에 비유하면? / 주변 반응 기억나요? / 거울 보고 놀란 적?</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge">Q2-5 변화의 진짜 가치</span></div>
+      <div class="q-main">과거의 나 vs 지금의 나. 외모 말고, 삶의 태도나 기회 측면에서 가장 달라진 점은 뭐예요?</div>
+      <div class="q-why">StoryBrand "Success" — 팔로워에게 보여줄 변화의 실체. 단순 비포/애프터를 넘는 가치</div>
+      <div class="q-follow">자신감? 관계? 기회? / 과거의 나한테 편지 쓴다면 뭐라고?</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge">Q2-6 상징적 에피소드</span></div>
+      <div class="q-main">"와 나 진짜 달라졌다" 실감한 구체적 에피소드요. 옷 쇼핑, 누가 못 알아봄, 새로운 기회가 옴... 뭐든요.</div>
+      <div class="q-why">비주얼 콘텐츠 소재 + 팔로워가 꿈꾸는 "도착지" 장면</div>
+      <div class="q-follow">그 순간 주변 사람들 반응? / 사진이나 영상으로 남아있는 거 있어요?</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge">Q2-7 비포 캐릭터</span></div>
+      <div class="q-main">변화 전의 나를 타인한테 설명한다면? 성격, 습관, 입버릇, 자주 하던 행동, 스트레스 푸는 법까지요.</div>
+      <div class="q-why">캐릭터 바이블 "비포 설정". 팔로워가 현재 자신을 투영할 거울</div>
+      <div class="q-follow">그때 SNS는 어떻게 썼어요? / 자존감은? / 회피하던 상황이 있었어요?</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge data">소재 발굴</span><span class="q-badge">Q2-8 미공개 서사</span></div>
+      <div class="q-main">이 변화 과정에서 아직 누구한테도 안 한 이야기가 있어요? 공개하기 좀 망설여지는 것. (안 하셔도 돼요)</div>
+      <div class="q-why">"처음 공개합니다" = 최고의 바이럴 소재. 있으면 첫 콘텐츠 후킹으로 활용</div>
+      <div class="q-follow">그걸 공개하면 어떤 반응이 올 것 같아요? / 왜 지금까지 안 했어요?</div>
+    </div>
+
+    <div class="output-box">
+      <div class="out-label">AI 추출 항목</div>
+      <p>기원 서사 타임라인 (바닥→결심→시련→전환→현재), 감정 앵커 3-5개, 비포/애프터 캐릭터 설정, 상징적 장면 리스트</p>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 3 -->
+<div class="phase">
+  <div class="phase-header" onclick="togglePhase(this)">
+    <div class="ph-left">
+      <div class="ph-icon" style="background:var(--purple-bg);">3</div>
+      <div>
+        <div class="ph-title">적과 금기 (Enemy & Boundaries)</div>
+        <div class="ph-sub">Villain Setup + Brand Guardrails</div>
+      </div>
+    </div>
+    <div class="ph-right">
+      <span class="ph-time">10분</span>
+      <span class="ph-arrow">v</span>
+    </div>
+  </div>
+  <div class="phase-body">
+    <div class="tip-inline">
+      <div class="tip-label">왜 "적"이 필요한가</div>
+      <p>StoryBrand: "모든 위대한 스토리에는 빌런이 있다." 적이 명확할수록 팬이 생김. MrBeast도 "평범한 콘텐츠"와 싸움. 여기서 화나거나 목소리 높아지면 좋은 신호 — 진심이 나오는 중입니다.</p>
+    </div>
+
+    <div class="bridge">
+      <div class="bridge-label">브릿지 멘트</div>
+      <p>"이번엔 좀 다른 질문인데요. 대표님이 짜증나거나 화나는 것들에 대해 여쭤볼게요. 편하게 욕해도 돼요."</p>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge key">핵심</span><span class="q-badge">Q3-1 업계의 빌런</span></div>
+      <div class="q-main">이 업계(다이어트/웰니스/인플루언서)에서 볼 때마다 "이건 진짜 아닌데!" 하고 화나는 게 뭐예요? 가짜 정보든, 어떤 행태든.</div>
+      <div class="q-why">StoryBrand "Villain" 설정. 이 적과 싸우는 것 = 콘텐츠의 존재 이유. 모든 포스팅이 이 적에 대한 안티테제가 됨</div>
+      <div class="q-follow">왜 그게 문제예요? / 누가 피해를 봐요? / 대표님이 직접 피해 본 적?</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge">Q3-2 개인적 분노</span></div>
+      <div class="q-main">변화 과정에서 누군가한테 들은 말, 겪은 일 중 "이건 두고두고 분하다" 하는 게 있어요?</div>
+      <div class="q-why">원초적 감정 연료. 이게 콘텐츠의 진정성과 에너지를 만듦</div>
+      <div class="q-follow">그 경험이 오히려 원동력이 됐어요? / 지금도 그 사람/상황 생각하면 화나요?</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge">Q3-3 팔로워의 함정</span></div>
+      <div class="q-main">대표님 타겟 팔로워가 빠지기 쉬운 "함정"이 뭐라고 생각해요? 다이어트든 마인드든.</div>
+      <div class="q-why">반복 경고 메시지 = 신뢰 구축. "이 사람은 항상 이걸 말해줘"</div>
+      <div class="q-follow">본인도 그 함정에 빠졌던 적? / 빠져나온 계기가 뭐였어요?</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge key">핵심</span><span class="q-badge">Q3-4 절대 금기</span></div>
+      <div class="q-main">"이건 아무리 돈을 줘도, 아무리 조회수가 터져도 절대 안 한다" — 콘텐츠든 행동이든.</div>
+      <div class="q-why">브랜드 절대 경계선. 팔로워 신뢰의 기반. 이것 어기면 세계관 붕괴</div>
+      <div class="q-follow">실제로 그런 제안 받은 적? / 거절했을 때 어땠어요?</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge">Q3-5 안 보여줄 모습</span></div>
+      <div class="q-main">"콘텐츠에서 이런 이미지는 절대 안 된다" 하는 게 있어요? 비주얼이든 언행이든.</div>
+      <div class="q-why">톤앤매너 하한선. "이것 아래로는 절대 안 내려감"</div>
+      <div class="q-follow">그 반대편에 있는 게 대표님이 보여주고 싶은 이미지인 거죠?</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge data">차별화</span><span class="q-badge">Q3-6 논쟁적 의견</span></div>
+      <div class="q-main">업계에서 다수와 의견이 다른 게 있어요? "다들 이렇게 말하지만 나는 반대다" 하는 거요.</div>
+      <div class="q-why">MrBeast "Wow Factor" 원리 — "이 사람만의 시각"이 팬을 만듦. 70/30 아키타입의 30% 차별화</div>
+      <div class="q-follow">왜 그렇게 생각해요? / 근거가 뭐예요? / 그 의견으로 부딪힌 적?</div>
+    </div>
+
+    <div class="output-box">
+      <div class="out-label">AI 추출 항목</div>
+      <p>빌런(적) 1-3개, 금기사항 리스트, 반복 경고 메시지, 차별화 관점(논쟁적 의견)</p>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 4 -->
+<div class="phase">
+  <div class="phase-header" onclick="togglePhase(this)">
+    <div class="ph-left">
+      <div class="ph-icon" style="background:var(--green-bg);">4</div>
+      <div>
+        <div class="ph-title">세계의 규칙 (Universe Rules)</div>
+        <div class="ph-sub">Core Beliefs + Brand Laws</div>
+      </div>
+    </div>
+    <div class="ph-right">
+      <span class="ph-time">10분</span>
+      <span class="ph-arrow">v</span>
+    </div>
+  </div>
+  <div class="phase-body">
+    <div class="tip-inline">
+      <div class="tip-label">세계의 규칙이란</div>
+      <p>"이 계정 안에서는 이것이 진실이다"라는 법칙들. 매 콘텐츠마다 직간접적으로 반복됨. 빙그레우스도 "빙그레 왕국"이라는 규칙이 있어서 어떤 제품이든 그 세계 안에서 자연스럽게 소개됨. 5개 이내로 뽑는 게 목표.</p>
+    </div>
+
+    <div class="bridge">
+      <div class="bridge-label">브릿지 멘트</div>
+      <p>"이번엔 대표님의 철학에 대해 여쭤볼게요. 살면서 '이건 진짜다'라고 확신하게 된 것들이요."</p>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge key">핵심</span><span class="q-badge">Q4-1 제1법칙</span></div>
+      <div class="q-main">본인 경험을 통해 "이건 100% 진짜다, 확신한다"고 말할 수 있는 게 뭐예요? 건강/다이어트/삶/사업 뭐든요.</div>
+      <div class="q-why">세계관의 제1법칙. 모든 콘텐츠가 이 믿음을 증명하는 구조가 됨. 아키타입의 Core Desire와 연결</div>
+      <div class="q-follow">왜 확신해요? / 한 문장으로 말한다면? / 반대하는 사람한테 뭐라고 해요?</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge">Q4-2 핵심 방법론</span></div>
+      <div class="q-main">"결국 이것만 하면 된다" — 변화의 핵심을 하나로 줄인다면? 가장 중요했던 한 가지요.</div>
+      <div class="q-why">StoryBrand "Plan" — 팔로워에게 제시할 3단계 로드맵의 핵심 축</div>
+      <div class="q-follow">그걸 다른 사람한테 가르쳐봤어요? 결과는? / 왜 사람들이 이걸 안 해요?</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge">Q4-3 가치 순위</span></div>
+      <div class="q-main">건강, 외모, 돈, 가족, 자유, 성장, 인정 — 대표님 인생에서 순위를 매긴다면? 솔직하게요.</div>
+      <div class="q-why">콘텐츠 우선순위 결정. "1순위=메인 필라, 2순위=서브 필라" 구조화</div>
+      <div class="q-follow">이 순서가 과거엔 달랐어요? 언제 바뀌었어요?</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge data">캐치프레이즈</span><span class="q-badge">Q4-4 반복 메시지</span></div>
+      <div class="q-main">입버릇처럼 주변한테 하는 말이 있어요? "나는 항상 이렇게 말한다" 하는 거요.</div>
+      <div class="q-why">시그니처 캐치프레이즈 후보. 콘텐츠 엔딩마다 반복할 멘트</div>
+      <div class="q-follow">왜 그 말을 자주 해요? / 그 말 듣고 행동 바뀐 사람 있어요?</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge">Q4-5 성공의 정의</span></div>
+      <div class="q-main">대표님에게 "잘 살고 있다"는 구체적으로 어떤 모습이에요? 아침에 눈 떴을 때 뭐가 보이면 "이거다" 느끼는지.</div>
+      <div class="q-why">팔로워에게 보여줄 "도착지" 비전. StoryBrand "Success" 이미지</div>
+      <div class="q-follow">지금 그 상태에 얼마나 가까워요? / 과거의 성공 정의와 달라졌어요?</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge">Q4-6 웰니스/분야 재정의</span></div>
+      <div class="q-main">[웰니스/다이어트/뷰티 등 해당 분야]가 대표님한테 어떤 의미예요? 남들이 말하는 거 말고, 본인만의 정의로요.</div>
+      <div class="q-why">카테고리 재정의 = 독보적 포지셔닝. "이 사람이 말하는 OO은 다르다"</div>
+      <div class="q-follow">일반적 정의와 다른 점? / 한 마디로 줄인다면?</div>
+    </div>
+
+    <div class="output-box">
+      <div class="out-label">AI 추출 항목</div>
+      <p>세계 규칙 3-5개, 핵심 방법론(3단계 Plan), 캐치프레이즈 후보 2-3개, 가치 위계, 분야 재정의 한 줄</p>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 5 -->
+<div class="phase">
+  <div class="phase-header" onclick="togglePhase(this)">
+    <div class="ph-left">
+      <div class="ph-icon" style="background:var(--blue-bg);">5</div>
+      <div>
+        <div class="ph-title">말투 DNA & 캐릭터</div>
+        <div class="ph-sub">Voice, Tone, Archetype</div>
+      </div>
+    </div>
+    <div class="ph-right">
+      <span class="ph-time">10분</span>
+      <span class="ph-arrow">v</span>
+    </div>
+  </div>
+  <div class="phase-body">
+    <div class="tip-inline">
+      <div class="tip-label">이 구간의 목적</div>
+      <p>"뭘 말하는가"보다 "어떻게 말하는가"를 캡처합니다. 아키타입 70/30 비율을 여기서 확정. 답변 내용보다 말투, 에너지, 리액션, 제스처를 관찰하세요. AI가 전사본에서 패턴을 자동 분석합니다.</p>
+    </div>
+
+    <div class="bridge">
+      <div class="bridge-label">브릿지 멘트</div>
+      <p>"이번엔 재미있는 질문들이에요! 대표님 캐릭터와 말투에 대한 거예요. 연기 같은 것도 해볼 거니까 편하게요!"</p>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge">Q5-1 에너지 레벨</span></div>
+      <div class="q-main">카메라 앞에서 어떤 에너지로 말하고 싶어요? (A) 텐션 높고 빠르게 (B) 차분하고 깊게 (C) 유머러스하게 (D) 따뜻하고 언니처럼</div>
+      <div class="q-why">아키타입 에너지: Hero=A, Sage=B, Jester=C, Caregiver=D. 복합도 가능</div>
+      <div class="q-follow">평소 친구들이랑은 어떤 톤이에요? / "이건 나랑 안 맞다" 하는 톤은?</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge key">핵심</span><span class="q-badge">Q5-2 관계 설정</span></div>
+      <div class="q-main">팔로워한테 어떤 존재이고 싶어요? (A) 같이 하는 동료 "우리 같이 해요" (B) 언니/오빠 "내가 먼저 해봤으니까" (C) 코치 "이렇게 하세요" (D) 친구 "야 나도 그래"</div>
+      <div class="q-why">호칭, 말투 높낮이, 거리감 전부 이걸로 결정. StoryBrand Guide 포지셔닝</div>
+      <div class="q-follow">댓글 답할 때 어떤 느낌? / "여러분" vs "너희" vs "우리" 중 어떤 게 자연스러워요?</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge">Q5-3 유머 수위</span></div>
+      <div class="q-main">콘텐츠에서 웃기고 싶어요? 있다면 어떤 스타일? (A) 자기비하 (B) 위트/말장난 (C) 상황극 (D) 안 웃김, 진지하게</div>
+      <div class="q-why">유머 유/무와 스타일이 캐릭터 전체를 좌우함. Jester 30% 여부 결정</div>
+      <div class="q-follow">과거의 나를 소재로 웃기는 건 OK? / TMI 수위는 어디까지?</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge">Q5-4 감정 표현 범위</span></div>
+      <div class="q-main">콘텐츠에서 울어도 돼요? 화내도 돼요? 좌절해도 돼요? 감정을 어디까지 보여줄 수 있어요?</div>
+      <div class="q-why">감정 범위 = 콘텐츠 깊이의 범위. "바닥까지 보여준다" vs "항상 밝게"</div>
+      <div class="q-follow">눈물/분노/좌절 중 보여줄 수 있는 건? 절대 안 보여줄 건?</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge key">핵심</span><span class="q-badge data">말투 캡처</span><span class="q-badge">Q5-5 즉석 시뮬레이션</span></div>
+      <div class="q-main">지금 카메라 앞이라고 생각하고 — "다이어트 시작하려는 사람한테 한마디"를 즉석으로 해보세요. 3초 생각하고 바로!</div>
+      <div class="q-why">실제 카메라 앞 화법 캡처. 이 녹음이 AI 톤 분석의 핵심 raw data. 준비된 말 아닌 즉흥이 진짜 톤</div>
+      <div class="q-follow">한 번 더! 이번엔 좀 더 친근하게? / 반대로 진지하게 한 번 더? / "이 사람 사기꾼 아닌가" 의심하는 사람한테 한마디?</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge">Q5-6 시그니처 표현</span></div>
+      <div class="q-main">평소에 자주 쓰는 말, 감탄사, 말버릇이 있어요? (예: "진짜?!", "아 대박", "이게 핵심인데", "근데 사실...")</div>
+      <div class="q-why">시그니처 표현. 이게 팔로워들 사이에서 밈이 되면 브랜딩 성공</div>
+      <div class="q-follow">그 말투가 콘텐츠에서도 자연스러워요? / 고쳐야 할 말버릇은?</div>
+    </div>
+
+    <div class="output-box">
+      <div class="out-label">AI 추출 항목</div>
+      <p>아키타입 70/30 확정, 에너지 레벨, 관계 포지션, 유머 수위, 감정 경계, 시그니처 표현 3-5개, 즉석 시뮬레이션 톤 분석</p>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 6 -->
+<div class="phase">
+  <div class="phase-header" onclick="togglePhase(this)">
+    <div class="ph-left">
+      <div class="ph-icon" style="background:var(--green-bg);">6</div>
+      <div>
+        <div class="ph-title">미래 비전 & 사업 연결</div>
+        <div class="ph-sub">Vision + Commerce + Character Arc</div>
+      </div>
+    </div>
+    <div class="ph-right">
+      <span class="ph-time">5분</span>
+      <span class="ph-arrow">v</span>
+    </div>
+  </div>
+  <div class="phase-body">
+    <div class="tip-inline">
+      <div class="tip-label">마무리 구간</div>
+      <p>Night Media 모델: "크리에이터를 연예인이 아닌 창업자+운영자로 만든다." 콘텐츠→커뮤니티→커머스→IP 확장까지 설계하는 구간.</p>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge">Q6-1 1년 후 이상형</span></div>
+      <div class="q-main">1년 뒤 이 계정이 어떤 상태면 좋겠어요? 팔로워 수보다 "어떤 댓글이 달리면 뿌듯할 것 같다" 같은 거요.</div>
+      <div class="q-why">캐릭터 Arc 시즌1 종착점. 정성적 비전이 콘텐츠 방향을 결정</div>
+      <div class="q-follow">그런 댓글이 달리려면 어떤 콘텐츠를 해야 할까요?</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge">Q6-2 세상에 미칠 영향</span></div>
+      <div class="q-main">이 콘텐츠를 통해 세상에 어떤 변화를 만들고 싶어요? 거창해도 되고 소박해도 돼요.</div>
+      <div class="q-why">미션 스테이트먼트. 계정 존재 이유 한 줄. StoryBrand "Philosophical Problem" 해결</div>
+      <div class="q-follow">그게 이루어지면 어떤 기분일 것 같아요?</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge data">사업</span><span class="q-badge">Q6-3 커머스 연결</span></div>
+      <div class="q-main">이 계정이 향후 상품/서비스/브랜드와 어떻게 자연스럽게 연결되면 좋겠어요?</div>
+      <div class="q-why">Night Media Value Chain: content→community→commerce→IP. 세계관 안에서 사업이 자연스러운 구조 설계</div>
+      <div class="q-follow">"이 사람이 만든 거니까 산다"가 되려면 뭐가 필요? / 어떤 제품을 만든다면?</div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-top"><span class="q-badge">Q6-4 마지막 한마디</span></div>
+      <div class="q-main">오늘 인터뷰하면서 새롭게 깨달은 게 있어요? 아니면 "이것만은 꼭" 하는 게 있으면 자유롭게요.</div>
+      <div class="q-why">놓친 핵심 보완 + 인터뷰이가 가장 하고 싶었던 말 캡처</div>
+    </div>
+
+    <div class="output-box">
+      <div class="out-label">AI 추출 항목</div>
+      <p>미션 스테이트먼트 1줄, 시즌1 Arc(시작→종착), 커머스 연결 전략, 장기 비전</p>
+    </div>
+  </div>
+</div>
+
+<!-- Post-interview -->
+<div class="section-divider">
+  <div class="divider-icon" style="background:var(--green-bg);">OK</div>
+  <h2>인터뷰 완료 후</h2>
+</div>
+
+<div class="bottom-info">
+  <h3>녹음 파일 → 세계관 문서 변환 프로세스</h3>
+  <ul>
+    <li><strong>Step 1.</strong> 녹음 파일 전달 (.m4a / .mp4 / .wav)</li>
+    <li><strong>Step 2.</strong> Whisper 전사 (자동 텍스트 변환)</li>
+    <li><strong>Step 3.</strong> AI가 6개 Phase별 핵심 추출</li>
+    <li><strong>Step 4.</strong> 세계관 1-Pager 문서 자동 생성</li>
+    <li><strong>Step 5.</strong> 콘텐츠 필라 5개 + 첫 달 기획안 연동</li>
+  </ul>
+</div>
+
+<div class="bottom-info">
+  <h3>AI가 자동 생성하는 최종 산출물</h3>
+  <ul>
+    <li><strong>기원 서사</strong> — 영웅의 여정 타임라인 (기-승-전-결)</li>
+    <li><strong>캐릭터 바이블</strong> — Want / Fear / Fatal Flaw / 구체적 디테일</li>
+    <li><strong>아키타입</strong> — 코어 70% + 차별화 30% 확정</li>
+    <li><strong>빌런(적)</strong> — 1-3개 + 대응 메시지</li>
+    <li><strong>세계 규칙</strong> — 3-5개 핵심 법칙</li>
+    <li><strong>금기사항</strong> — 절대 안 하는 것 리스트</li>
+    <li><strong>말투 DNA</strong> — 톤, 속도, 관계, 유머수위, 시그니처 표현</li>
+    <li><strong>캐치프레이즈</strong> — 콘텐츠 엔딩 반복 멘트 2-3개</li>
+    <li><strong>미션 한 줄</strong> — 계정 존재 이유</li>
+    <li><strong>콘텐츠 필라 5개</strong> — 세계관 기반 카테고리</li>
+    <li><strong>StoryBrand 구조</strong> — 영웅/문제/가이드/계획/성공/실패</li>
+    <li><strong>시즌1 Arc</strong> — 첫 3개월 서사 설계</li>
+  </ul>
+</div>
+
+<div class="footer">
+  Flowmus | Influencer Worldview Interview Kit v2.0<br>
+  Frameworks: MrBeast Production Guide + StoryBrand SB7 + Jung 12 Archetypes + Hollywood Character Bible + 제일기획 세계관 3요소
+</div>
+
+</div>
+
+<script>
+function togglePhase(header) {
+  const phase = header.parentElement;
+  phase.classList.toggle('open');
+}
+</script>
+</body>
+</html>
