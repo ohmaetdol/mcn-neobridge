@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>이세령 대표 세계관 (기초)</title>
+<style>
+:root {
+  --bg: #f6f7f9;
+  --card: #ffffff;
+  --text: #191f28;
+  --sub: #6b7684;
+  --border: #e5e8eb;
+  --blue: #3182f6;
+  --blue-bg: #e8f3ff;
+  --purple: #8b5cf6;
+  --purple-bg: #f3e8ff;
+  --red: #f04452;
+  --red-bg: #fff0f0;
+  --green: #00c471;
+  --green-bg: #e8fff3;
+  --orange: #f59e0b;
+  --orange-bg: #fffbeb;
+  --gray-50: #f9fafb;
+  --gray-100: #f2f4f6;
+  --gray-200: #e5e8eb;
+  --gray-800: #333d4b;
+  --radius: 16px;
+  --radius-sm: 12px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', sans-serif; background: var(--bg); color: var(--text); padding: 0; font-size: 15px; -webkit-text-size-adjust: 100%; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+.top-header { background: var(--card); padding: 48px 20px 28px; text-align: center; border-bottom: 1px solid var(--border); }
+.top-header h1 { font-size: 1.4em; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 4px; }
+.top-header p { font-size: 0.8em; color: var(--sub); }
+.top-header .badges { margin-top: 10px; display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; }
+.top-header .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.65em; font-weight: 600; }
+.badge-blue { background: var(--blue-bg); color: var(--blue); }
+.badge-purple { background: var(--purple-bg); color: var(--purple); }
+.badge-orange { background: var(--orange-bg); color: var(--orange); }
+
+.container { max-width: 100%; padding: 16px; }
+
+.section-label { padding: 20px 4px 8px; display: flex; align-items: center; gap: 8px; }
+.section-label h2 { font-size: 0.95em; font-weight: 700; letter-spacing: -0.3px; }
+.section-label .sl-icon { width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.7em; font-weight: 700; }
+
+.card { background: var(--card); border-radius: var(--radius); padding: 20px; margin-bottom: 12px; border: 1px solid var(--border); }
+.card h3 { font-size: 0.88em; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.3px; }
+.card h4 { font-size: 0.8em; font-weight: 600; color: var(--blue); margin-bottom: 6px; margin-top: 14px; }
+.card h4:first-of-type { margin-top: 0; }
+.card p { font-size: 0.82em; color: var(--gray-800); line-height: 1.6; margin-bottom: 8px; }
+.card .highlight { background: var(--orange-bg); padding: 12px 14px; border-radius: var(--radius-sm); margin: 10px 0; border-left: 3px solid var(--orange); }
+.card .highlight p { font-size: 0.82em; color: var(--gray-800); margin: 0; font-weight: 500; }
+
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+.stat-item { background: var(--gray-50); border-radius: var(--radius-sm); padding: 12px; text-align: center; }
+.stat-item .stat-num { font-size: 1.3em; font-weight: 700; color: var(--blue); }
+.stat-item .stat-label { font-size: 0.65em; color: var(--sub); margin-top: 2px; }
+
+.timeline { margin: 12px 0; }
+.tl-item { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--gray-100); }
+.tl-item:last-child { border-bottom: none; }
+.tl-year { font-size: 0.7em; font-weight: 700; color: var(--blue); min-width: 45px; padding-top: 2px; }
+.tl-content { font-size: 0.8em; color: var(--gray-800); line-height: 1.5; }
+
+.quote-box { background: var(--purple-bg); border-radius: var(--radius-sm); padding: 14px 16px; margin: 10px 0; }
+.quote-box p { font-size: 0.82em; color: #4c1d95; font-style: italic; margin: 0; line-height: 1.6; }
+.quote-box .quote-src { font-size: 0.65em; color: var(--purple); font-style: normal; margin-top: 6px; display: block; }
+
+.rule-item { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--gray-100); align-items: flex-start; }
+.rule-item:last-child { border-bottom: none; }
+.rule-num { width: 24px; height: 24px; background: var(--blue-bg); color: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.65em; font-weight: 700; flex-shrink: 0; }
+.rule-text { font-size: 0.82em; color: var(--gray-800); line-height: 1.5; }
+.rule-text strong { color: var(--text); }
+
+.tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+.tag { display: inline-block; padding: 4px 10px; border-radius: 8px; font-size: 0.7em; font-weight: 500; }
+.tag-blue { background: var(--blue-bg); color: var(--blue); }
+.tag-purple { background: var(--purple-bg); color: var(--purple); }
+.tag-red { background: var(--red-bg); color: var(--red); }
+.tag-green { background: var(--green-bg); color: var(--green); }
+
+.enemy-box { background: var(--red-bg); border-radius: var(--radius-sm); padding: 14px 16px; margin: 10px 0; border-left: 3px solid var(--red); }
+.enemy-box p { font-size: 0.82em; color: #7f1d1d; margin: 0; line-height: 1.5; }
+
+.need-box { background: var(--orange-bg); border-radius: var(--radius-sm); padding: 14px 16px; margin: 10px 0; }
+.need-box .need-label { font-size: 0.65em; font-weight: 700; color: var(--orange); margin-bottom: 4px; }
+.need-box p { font-size: 0.78em; color: #78350f; margin: 0; line-height: 1.5; }
+
+.footer { text-align: center; padding: 24px; font-size: 0.7em; color: var(--sub); }
+
+@media (max-width: 480px) {
+  .top-header { padding: 40px 16px 24px; }
+  .container { padding: 12px; }
+  .stat-grid { gap: 6px; }
+}
+</style>
+</head>
+<body>
+
+<div class="top-header">
+  <h1>이세령 대표 세계관</h1>
+  <p>공개 정보 기반 기초 세계관 (인터뷰 전 버전)</p>
+  <div class="badges">
+    <span class="badge badge-blue">공개정보 기반</span>
+    <span class="badge badge-purple">인터뷰 후 확정 필요</span>
+    <span class="badge badge-orange">2026.05.03</span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- Profile -->
+<div class="section-label">
+  <div class="sl-icon" style="background:var(--blue-bg); color:var(--blue);">P</div>
+  <h2>프로필 팩트</h2>
+</div>
+
+<div class="card">
+  <div class="stat-grid">
+    <div class="stat-item"><div class="stat-num">-30kg</div><div class="stat-label">90kg → 56kg 감량</div></div>
+    <div class="stat-item"><div class="stat-num">172cm</div><div class="stat-label">키</div></div>
+    <div class="stat-item"><div class="stat-num">85K</div><div class="stat-label">인스타 팔로워</div></div>
+    <div class="stat-item"><div class="stat-num">622만</div><div class="stat-label">워터밤 영상 조회수</div></div>
+  </div>
+
+  <h4>기본 정보</h4>
+  <p><strong>본명:</strong> 이지현 → 이세령 (개명)<br>
+  <strong>생년:</strong> 1995.09.22 (대구)<br>
+  <strong>학력:</strong> 연세대학교 스포츠레저학과 (영남대 영문학 → 편입)<br>
+  <strong>MBTI:</strong> ESTP<br>
+  <strong>신체:</strong> 172cm / 56kg / 혈액형 AB<br>
+  <strong>종교:</strong> 불교</p>
+
+  <h4>사업</h4>
+  <p><strong>리지커넥트:</strong> 종합 광고마케팅 대행사 CEO<br>
+  <strong>Best Class Japan:</strong> 한일 프리미엄 매칭 서비스 (2차 사업)<br>
+  <strong>인스타:</strong> @lizzyconnect (메인) / @lizzyinsports (스포츠)</p>
+</div>
+
+<!-- Timeline -->
+<div class="section-label">
+  <div class="sl-icon" style="background:var(--green-bg); color:var(--green);">T</div>
+  <h2>타임라인 (영웅의 여정)</h2>
+</div>
+
+<div class="card">
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">고교</div><div class="tl-content"><strong>바닥:</strong> 대구여고, 80-90kg. 공부만 하던 시절. 친구들이 "너는 긁지 않은 복권이야"라고 놀림</div></div>
+    <div class="tl-item"><div class="tl-year">대학</div><div class="tl-content"><strong>전환점:</strong> 연세대 편입 → 역도부 가입이 인생 전환. 영문학 → 스포츠레저학 전과. 30kg 감량 시작</div></div>
+    <div class="tl-item"><div class="tl-year">2017</div><div class="tl-content">한국전력공사 아나운서 데뷔</div></div>
+    <div class="tl-item"><div class="tl-year">2018</div><div class="tl-content">U-17 월드컵 한국 대표팀 해외 특파원</div></div>
+    <div class="tl-item"><div class="tl-year">2019</div><div class="tl-content">SPOTV 스포츠 리포터</div></div>
+    <div class="tl-item"><div class="tl-year">2020</div><div class="tl-content">골프다이제스트 아나운서 / 미스코리아 경기인천 출전 / 채널A 나는몸신이다 출연</div></div>
+    <div class="tl-item"><div class="tl-year">2023.8</div><div class="tl-content"><strong>폭발:</strong> 워터밤 서울 바이럴 → 622만 조회수 → "워터밤 여신" 등극. 패션쇼, BNT 인터뷰 연속</div></div>
+    <div class="tl-item"><div class="tl-year">2024</div><div class="tl-content">태그호이어xMalbon MC / 유안타증권 아나운서 / 리지커넥트 사업 확장</div></div>
+    <div class="tl-item"><div class="tl-year">2025.4</div><div class="tl-content">tvN "이젠 사랑할 수 있을까" 출연 (천정명 소개팅) → 대중 인지도 + 30kg 감량 스토리 전국 공개</div></div>
+  </div>
+</div>
+
+<!-- Character Bible -->
+<div class="section-label">
+  <div class="sl-icon" style="background:var(--purple-bg); color:var(--purple);">C</div>
+  <h2>캐릭터 바이블</h2>
+</div>
+
+<div class="card">
+  <h3>한 줄 로그라인</h3>
+  <div class="highlight">
+    <p>"긁지 않은 복권"에서 스스로를 긁어 나온 여자. 90kg 공부벌레 → 30kg 감량 → 아나운서 → CEO → 워터밤 여신. 이제는 타인도 긁어주려 한다.</p>
+  </div>
+
+  <h4>Want (표면적 욕구)</h4>
+  <p>"나 자체가 브랜드가 되고, 내 아이덴티티로 세상에 영향력을 펼치는 사람"</p>
+
+  <h4>Fear (두려움)</h4>
+  <p>"예전으로 돌아가지 말자는 강박" — 다시 90kg로, 다시 투명인간으로 돌아가는 것</p>
+
+  <h4>Fatal Flaw (치명적 결점)</h4>
+  <p>본인이 인정한 "게으름" — 혼자서는 지속이 안 됨. PT, 역도부, 환경 조성 등 외부 강제력이 없으면 무너짐. 이 약점이 오히려 콘텐츠가 됨: "나도 의지박약인데 이렇게 했다"</p>
+
+  <h4>Specific Detail (구체적 습관)</h4>
+  <p>마지노선 체중을 정해두고 절대 넘지 않게 관리. "지속 가능 여부가 가장 중요하다"는 원칙을 삶 전반에 적용. 환경을 먼저 만들어놓는 사람 (운동할 수밖에 없는 환경 조성)</p>
+</div>
+
+<div class="card">
+  <h3>아키타입 (70/30 법칙)</h3>
+
+  <h4>코어 70%: Hero (영웅) + Magician (마법사)</h4>
+  <p>자기 변신을 완수한 사람. "나도 해냈으니 너도 할 수 있다." 90kg에서 워터밤 여신까지의 변신 자체가 콘텐츠의 핵심 자산.</p>
+
+  <h4>차별화 30%: Caregiver (돌봄) + Jester (유머)</h4>
+  <p>걸크러시 + 위트 ("날아가면 제가 잡아드릴게요"). 자기비하 유머 가능 ("긁지 않은 복권" 스토리를 웃으며 풀어냄). 다정하면서도 활기찬 톤.</p>
+
+  <div class="tag-row">
+    <span class="tag tag-blue">Hero 변신형</span>
+    <span class="tag tag-purple">Magician 변화의 마법</span>
+    <span class="tag tag-green">Caregiver 돌봄</span>
+    <span class="tag tag-blue">Jester 위트</span>
+  </div>
+</div>
+
+<!-- Origin Story -->
+<div class="section-label">
+  <div class="sl-icon" style="background:var(--red-bg); color:var(--red);">O</div>
+  <h2>기원 서사 (확인된 것만)</h2>
+</div>
+
+<div class="card">
+  <h3>"긁지 않은 복권" 스토리</h3>
+
+  <div class="quote-box">
+    <p>"고3까지는 공부만 했다. 그때 애들이 '너는 긁지 않은 복권이다'라고 했다. 놀린다고 생각했는데, 계속 긁다 보니 뭐가 나오더라."</p>
+    <span class="quote-src">— BNT News 인터뷰, 2023.09</span>
+  </div>
+
+  <h4>1막: 바닥 (고교~대학 초)</h4>
+  <p>대구여고, 80-90kg. 공부만 하던 투명한 존재. "긁지 않은 복권" = 놀림으로 인식. 자존감 바닥.</p>
+
+  <h4>2막: 전환 (연세대 편입)</h4>
+  <p>연세대 역도부 가입 → 운동의 세계 발견. 영문학에서 스포츠레저학으로 전과. 30kg 감량 시작. "성인이 돼서 20-30kg를 감량." 전공 지식 + 실천으로 과학적 감량.</p>
+
+  <h4>3막: 폭발 (2023 워터밤)</h4>
+  <p>6년간 묵묵히 아나운서/리포터 커리어. 그러던 중 워터밤 한 번으로 622만 조회. "워터밤 여신" 타이틀. 순수한 얼굴 + 건강미 바디의 갭이 바이럴 요인.</p>
+
+  <h4>4막: 현재 (CEO + 인플루언서)</h4>
+  <p>리지커넥트 CEO. "나 자체가 브랜드"라는 비전. tvN 이젠 사랑할 수 있을까 출연으로 대중 인지도 확보. 다음 챕터: 웰니스 인플루언서 계정 론칭.</p>
+
+  <div class="need-box">
+    <div class="need-label">인터뷰에서 확인 필요</div>
+    <p>바닥의 구체적 장면 (그때 뭐가 보였는지), 결심의 정확한 트리거, 정체기의 길이와 극복 방법, 워터밤 당시 감정</p>
+  </div>
+</div>
+
+<!-- StoryBrand -->
+<div class="section-label">
+  <div class="sl-icon" style="background:var(--blue-bg); color:var(--blue);">S</div>
+  <h2>StoryBrand 구조</h2>
+</div>
+
+<div class="card">
+  <h4>영웅 (시청자 = 타겟)</h4>
+  <p>다이어트 실패를 반복하는 2030 여성. 의지박약이라 자책하는 사람. 워킹맘. "나는 안 돼"라고 믿는 사람.</p>
+
+  <h4>빌런 (External Problem)</h4>
+  <p>거짓 다이어트 정보, 굶기 강요, "의지력 부족 = 인간 실격" 프레임</p>
+
+  <h4>내적 문제 (Internal Problem)</h4>
+  <p>"나는 게으르니까 안 될 거야" — 자기 불신</p>
+
+  <h4>철학적 문제 (Philosophical Problem)</h4>
+  <p>"아름다움과 건강은 의지력이 강한 사람만의 특권이어야 하는가?" → 아니다.</p>
+
+  <h4>가이드 = 이세령 (공감 + 권위)</h4>
+  <p><strong>공감:</strong> "나도 90kg이었고, 나도 게을러서 혼자서는 못 했다"<br>
+  <strong>권위:</strong> 연세대 스포츠레저학 전공 + 아나운서 커리어 + 실제 30kg 감량 증명 + 워터밤 건강미</p>
+
+  <h4>계획 (3단계)</h4>
+  <div class="rule-item"><div class="rule-num">1</div><div class="rule-text"><strong>환경을 먼저 만들어라</strong> — 의지력에 기대지 말고, 운동할 수밖에 없는 환경 조성</div></div>
+  <div class="rule-item"><div class="rule-num">2</div><div class="rule-text"><strong>지속 가능한 것만 해라</strong> — 극단적 식단 X, 내가 평생 할 수 있는 것만</div></div>
+  <div class="rule-item"><div class="rule-num">3</div><div class="rule-text"><strong>마지노선을 정해라</strong> — 체중/습관의 절대 하한선을 만들고 지켜라</div></div>
+
+  <h4>성공 (변화된 미래)</h4>
+  <p>"긁지 않은 복권"이 긁힌 상태. 자기 자신이 브랜드가 되는 삶. 건강한 에너지로 일/가족/자아 모두 살아나는 상태.</p>
+
+  <h4>실패 회피 (안 하면 어떻게 되는가)</h4>
+  <p>영원히 "다음 주부터" 반복. 다이어트 유목민. 자존감 바닥에서 벗어나지 못함.</p>
+</div>
+
+<!-- World Rules -->
+<div class="section-label">
+  <div class="sl-icon" style="background:var(--green-bg); color:var(--green);">R</div>
+  <h2>세계의 규칙 (추정)</h2>
+</div>
+
+<div class="card">
+  <h3>이세령 유니버스의 5가지 법칙</h3>
+
+  <div class="rule-item"><div class="rule-num">1</div><div class="rule-text"><strong>"지속 가능 여부가 가장 중요하다"</strong><br>극단적인 건 다 실패한다. 평생 할 수 있는 것만 한다.</div></div>
+  <div class="rule-item"><div class="rule-num">2</div><div class="rule-text"><strong>"환경이 의지를 이긴다"</strong><br>의지력에 기대지 마라. 운동할 수밖에 없는 환경을 만들어라.</div></div>
+  <div class="rule-item"><div class="rule-num">3</div><div class="rule-text"><strong>"누구나 긁지 않은 복권이다"</strong><br>지금 못났다고 영원히 못나는 게 아니다. 긁어야 나온다.</div></div>
+  <div class="rule-item"><div class="rule-num">4</div><div class="rule-text"><strong>"마지노선을 정해라"</strong><br>최저선이 있으면 무너져도 바닥까지 안 간다.</div></div>
+  <div class="rule-item"><div class="rule-num">5</div><div class="rule-text"><strong>"나 자체가 브랜드"</strong><br>타인의 기준이 아닌, 내 아이덴티티로 세상에 영향력을 펼친다.</div></div>
+
+  <div class="need-box">
+    <div class="need-label">인터뷰에서 확인 필요</div>
+    <p>본인이 직접 "이건 100% 진짜다"라고 확신하는 것. 실제로 주변에 반복하는 말.</p>
+  </div>
+</div>
+
+<!-- Enemy -->
+<div class="section-label">
+  <div class="sl-icon" style="background:var(--red-bg); color:var(--red);">E</div>
+  <h2>적 (Enemy)</h2>
+</div>
+
+<div class="card">
+  <h3>이세령이 싸우는 대상</h3>
+
+  <div class="enemy-box">
+    <p><strong>적 1: "굶어야 빠진다" 신화</strong><br>극단적 다이어트, 원푸드, 단식... 본인이 다 해보고 실패한 것들. "지속 불가능한 방법은 방법이 아니다."</p>
+  </div>
+
+  <div class="enemy-box">
+    <p><strong>적 2: "의지력 부족 = 실패자" 프레임</strong><br>"나도 게을러서 혼자 못 했다"고 인정하는 사람. 의지력 탓이 아닌 환경 설계의 문제로 재정의.</p>
+  </div>
+
+  <div class="enemy-box">
+    <p><strong>적 3: "긁지 않은 복권은 가치 없다" 시선</strong><br>현재 모습만으로 사람을 판단하는 세상. "긁기 전에도 당첨번호는 이미 있었다."</p>
+  </div>
+
+  <div class="need-box">
+    <div class="need-label">인터뷰에서 확인 필요</div>
+    <p>업계에서 진짜 화나는 것, 본인이 직접 겪은 부당한 경험 (여적여 경험 언급 있음)</p>
+  </div>
+</div>
+
+<!-- Voice DNA -->
+<div class="section-label">
+  <div class="sl-icon" style="background:var(--blue-bg); color:var(--blue);">V</div>
+  <h2>말투 DNA (추정)</h2>
+</div>
+
+<div class="card">
+  <h3>톤 & 캐릭터</h3>
+
+  <h4>에너지 레벨</h4>
+  <p>활동적+외향적 (ESTP). 텐션 높되 과하지 않은, "걸크러시+다정" 밸런스. 아나운서 출신답게 발음/전달력 좋음.</p>
+
+  <h4>관계 포지션 (추정)</h4>
+  <p>"같이 하는 언니" — 멘토이되 위에서 가르치는 느낌 X. "나도 게으른데 이렇게 했어" = 동료감 + 약간의 선배감.</p>
+
+  <h4>유머 스타일</h4>
+  <p>자기비하 + 위트. "긁지 않은 복권" 소재를 웃기게 풀어냄. 걸크러시 한마디 ("날아가면 내가 잡아줄게"). 과하지 않은 유머.</p>
+
+  <h4>확인된 표현/태도</h4>
+  <div class="quote-box">
+    <p>"나는 자유로운 영혼이다"</p>
+    <span class="quote-src">— BNT 인터뷰</span>
+  </div>
+  <div class="quote-box">
+    <p>"최초의 이세령이 되고 싶다" (롤모델 없음 — 본인이 기준)</p>
+    <span class="quote-src">— BNT 인터뷰</span>
+  </div>
+  <div class="quote-box">
+    <p>"진짜 관계를 하려면 상처받을 용기가 필요하다"</p>
+    <span class="quote-src">— tvN 이젠 사랑할 수 있을까</span>
+  </div>
+
+  <div class="need-box">
+    <div class="need-label">인터뷰에서 확인 필요</div>
+    <p>실제 입버릇, 카메라 앞 즉석 톤, "여러분" vs "우리" 호칭, 감정 표현 범위</p>
+  </div>
+</div>
+
+<!-- Content Pillars -->
+<div class="section-label">
+  <div class="sl-icon" style="background:var(--orange-bg); color:var(--orange);">CP</div>
+  <h2>콘텐츠 필라 5개 (제안)</h2>
+</div>
+
+<div class="card">
+  <div class="rule-item"><div class="rule-num">1</div><div class="rule-text"><strong>긁지 않은 복권 시리즈</strong><br>변신 스토리 (비포/애프터, 정체기, 멘탈). 기원 서사를 분할해서 연재.</div></div>
+  <div class="rule-item"><div class="rule-num">2</div><div class="rule-text"><strong>환경 설계 꿀팁</strong><br>"의지력 말고 환경으로 해결" — 실제 루틴, 운동환경 셋업, 냉장고 정리법 등.</div></div>
+  <div class="rule-item"><div class="rule-num">3</div><div class="rule-text"><strong>CEO의 몸 관리</strong><br>바쁜 일상 속 틈새 운동, 출장/미팅 중 식단, 워킹맘의 현실적 웰니스.</div></div>
+  <div class="rule-item"><div class="rule-num">4</div><div class="rule-text"><strong>스포츠 전문가의 팩트체크</strong><br>연세대 전공 지식 기반 — "이건 진짜, 이건 가짜" 정보 콘텐츠.</div></div>
+  <div class="rule-item"><div class="rule-num">5</div><div class="rule-text"><strong>세령의 일상 (라이프스타일)</strong><br>건강미 패션, 운동 브이로그, 식단, 가끔 비즈니스 비하인드.</div></div>
+</div>
+
+<!-- Positioning -->
+<div class="section-label">
+  <div class="sl-icon" style="background:var(--green-bg); color:var(--green);">VS</div>
+  <h2>차별점 (vs 경쟁 계정)</h2>
+</div>
+
+<div class="card">
+  <h3>왜 이세령인가?</h3>
+  <p>일반 다이어트 계정과의 결정적 차이:</p>
+
+  <div class="rule-item"><div class="rule-num">1</div><div class="rule-text"><strong>30kg 감량 + 172cm + 워터밤 바이럴</strong> = 비주얼 증거가 강력함</div></div>
+  <div class="rule-item"><div class="rule-num">2</div><div class="rule-text"><strong>연세대 스포츠레저학 전공</strong> = "예쁜 언니"가 아닌 "전문가"</div></div>
+  <div class="rule-item"><div class="rule-num">3</div><div class="rule-text"><strong>아나운서/리포터 화술</strong> = 전달력 + 정보 밀도가 남다름</div></div>
+  <div class="rule-item"><div class="rule-num">4</div><div class="rule-text"><strong>CEO (사업가)</strong> = 단순 인플루언서가 아닌 비즈니스 리더 포지셔닝</div></div>
+  <div class="rule-item"><div class="rule-num">5</div><div class="rule-text"><strong>"게으른 나도 했다" 솔직함</strong> = 슈퍼우먼이 아닌 공감형 멘토</div></div>
+  <div class="rule-item"><div class="rule-num">6</div><div class="rule-text"><strong>TV 출연 인지도</strong> = 이미 얼굴 알려진 상태에서 시작 (콜드스타트 X)</div></div>
+</div>
+
+<!-- Mission -->
+<div class="section-label">
+  <div class="sl-icon" style="background:var(--purple-bg); color:var(--purple);">M</div>
+  <h2>미션 (1줄)</h2>
+</div>
+
+<div class="card">
+  <div class="highlight">
+    <p>"긁지 않은 복권들이 스스로를 긁을 수 있도록, 환경을 만들어주는 사람."</p>
+  </div>
+  <p style="font-size:0.75em; color:var(--sub); margin-top:8px;">*인터뷰 후 본인 확인/수정 필요</p>
+</div>
+
+<!-- Gap Analysis -->
+<div class="section-label">
+  <div class="sl-icon" style="background:var(--orange-bg); color:var(--orange);">!</div>
+  <h2>인터뷰로 채워야 할 것</h2>
+</div>
+
+<div class="card">
+  <h3>기초 세계관에서 빠진 것들</h3>
+  <div class="rule-item"><div class="rule-num">!</div><div class="rule-text"><strong>바닥의 구체적 장면</strong> — 그때 뭐가 보였는지, 감정의 실체</div></div>
+  <div class="rule-item"><div class="rule-num">!</div><div class="rule-text"><strong>결심의 정확한 트리거</strong> — 역도부 가입이 전환점인데, 왜 갔는지</div></div>
+  <div class="rule-item"><div class="rule-num">!</div><div class="rule-text"><strong>실제 말투/입버릇</strong> — 카메라 앞 톤 캡처 필요</div></div>
+  <div class="rule-item"><div class="rule-num">!</div><div class="rule-text"><strong>금기사항 확정</strong> — 본인이 직접 말한 "절대 안 하는 것"</div></div>
+  <div class="rule-item"><div class="rule-num">!</div><div class="rule-text"><strong>육아/가족 이야기</strong> — 공개 범위와 활용 방식</div></div>
+  <div class="rule-item"><div class="rule-num">!</div><div class="rule-text"><strong>사업 비전과 콘텐츠 연결</strong> — 커머스 전환 설계</div></div>
+  <div class="rule-item"><div class="rule-num">!</div><div class="rule-text"><strong>팔로워 관계 설정</strong> — 언니/동료/코치 중 어디</div></div>
+</div>
+
+<div class="footer">
+  Flowmus | 이세령 대표 기초 세계관 v2.0<br>
+  공개 정보 기반 | 인터뷰 후 확정 버전으로 업그레이드 예정<br>
+  Sources: BNT News, tvN, 나무위키, News1, 헤럴드팝
+</div>
+
+</div>
+</body>
+</html>
