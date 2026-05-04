@@ -1,0 +1,16 @@
+# Video files (too large for git)
+*.mp4
+*.mov
+*.avi
+
+# Python
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
+
+# Credentials
+token.json
+oauth_credentials.json
+*.m4a

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>홍사부 세계관 기획서</title>
+<style>
+:root {
+  --bg: #f6f7f9;
+  --card: #ffffff;
+  --text: #191f28;
+  --sub: #6b7684;
+  --border: #e5e8eb;
+  --blue: #3182f6;
+  --blue-bg: #e8f3ff;
+  --purple: #8b5cf6;
+  --purple-bg: #f3e8ff;
+  --red: #f04452;
+  --red-bg: #fff0f0;
+  --green: #00c471;
+  --green-bg: #e8fff3;
+  --orange: #f59e0b;
+  --orange-bg: #fffbeb;
+  --gray-50: #f9fafb;
+  --gray-100: #f2f4f6;
+  --gray-200: #e5e8eb;
+  --gray-800: #333d4b;
+  --radius: 16px;
+  --radius-sm: 12px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', sans-serif; background: var(--bg); color: var(--text); padding: 0; font-size: 15px; -webkit-text-size-adjust: 100%; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+.top-header { background: var(--card); padding: 48px 20px 28px; text-align: center; border-bottom: 1px solid var(--border); }
+.top-header h1 { font-size: 1.4em; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 4px; }
+.top-header p { font-size: 0.8em; color: var(--sub); }
+.top-header .badges { margin-top: 10px; display: flex; justify-content: center; gap: 6px; flex-wrap: wrap; }
+.top-header .badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 0.65em; font-weight: 600; }
+.badge-blue { background: var(--blue-bg); color: var(--blue); }
+.badge-purple { background: var(--purple-bg); color: var(--purple); }
+.badge-orange { background: var(--orange-bg); color: var(--orange); }
+
+.container { max-width: 100%; padding: 16px; }
+
+.section-label { padding: 20px 4px 8px; display: flex; align-items: center; gap: 8px; }
+.section-label h2 { font-size: 0.95em; font-weight: 700; letter-spacing: -0.3px; }
+.section-label .sl-icon { width: 24px; height: 24px; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 0.7em; font-weight: 700; }
+
+.card { background: var(--card); border-radius: var(--radius); padding: 20px; margin-bottom: 12px; border: 1px solid var(--border); }
+.card h3 { font-size: 0.88em; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.3px; }
+.card h4 { font-size: 0.8em; font-weight: 600; color: var(--blue); margin-bottom: 6px; margin-top: 14px; }
+.card h4:first-of-type { margin-top: 0; }
+.card p { font-size: 0.82em; color: var(--gray-800); line-height: 1.6; margin-bottom: 8px; }
+.card .highlight { background: var(--orange-bg); padding: 12px 14px; border-radius: var(--radius-sm); margin: 10px 0; border-left: 3px solid var(--orange); }
+.card .highlight p { font-size: 0.82em; color: var(--gray-800); margin: 0; font-weight: 500; }
+
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+.stat-item { background: var(--gray-50); border-radius: var(--radius-sm); padding: 12px; text-align: center; }
+.stat-item .stat-num { font-size: 1.3em; font-weight: 700; color: var(--blue); }
+.stat-item .stat-label { font-size: 0.65em; color: var(--sub); margin-top: 2px; }
+
+.timeline { margin: 12px 0; }
+.tl-item { display: flex; gap: 12px; padding: 10px 0; border-bottom: 1px solid var(--gray-100); }
+.tl-item:last-child { border-bottom: none; }
+.tl-year { font-size: 0.7em; font-weight: 700; color: var(--blue); min-width: 45px; padding-top: 2px; }
+.tl-content { font-size: 0.8em; color: var(--gray-800); line-height: 1.5; }
+
+.quote-box { background: var(--purple-bg); border-radius: var(--radius-sm); padding: 14px 16px; margin: 10px 0; }
+.quote-box p { font-size: 0.82em; color: #4c1d95; font-style: italic; margin: 0; line-height: 1.6; }
+.quote-box .quote-src { font-size: 0.65em; color: var(--purple); font-style: normal; margin-top: 6px; display: block; }
+
+.rule-item { display: flex; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--gray-100); align-items: flex-start; }
+.rule-item:last-child { border-bottom: none; }
+.rule-num { width: 24px; height: 24px; background: var(--blue-bg); color: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.65em; font-weight: 700; flex-shrink: 0; }
+.rule-text { font-size: 0.82em; color: var(--gray-800); line-height: 1.5; }
+.rule-text strong { color: var(--text); }
+
+.tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+.tag { display: inline-block; padding: 4px 10px; border-radius: 8px; font-size: 0.7em; font-weight: 500; }
+.tag-blue { background: var(--blue-bg); color: var(--blue); }
+.tag-purple { background: var(--purple-bg); color: var(--purple); }
+.tag-red { background: var(--red-bg); color: var(--red); }
+.tag-green { background: var(--green-bg); color: var(--green); }
+
+.enemy-box { background: var(--red-bg); border-radius: var(--radius-sm); padding: 14px 16px; margin: 10px 0; border-left: 3px solid var(--red); }
+.enemy-box p { font-size: 0.82em; color: #7f1d1d; margin: 0; line-height: 1.5; }
+
+.need-box { background: var(--orange-bg); border-radius: var(--radius-sm); padding: 14px 16px; margin: 10px 0; }
+.need-box .need-label { font-size: 0.65em; font-weight: 700; color: var(--orange); margin-bottom: 4px; }
+.need-box p { font-size: 0.78em; color: #78350f; margin: 0; line-height: 1.5; }
+
+.footer { text-align: center; padding: 24px; font-size: 0.7em; color: var(--sub); }
+
+@media (max-width: 480px) {
+  .top-header { padding: 40px 16px 24px; }
+  .container { padding: 12px; }
+  .stat-grid { gap: 6px; }
+}
+</style>
+</head>
+<body>
+
+<div class="top-header">
+  <h1>홍사부 세계관</h1>
+  <p>인터뷰 기반 세계관 기획서</p>
+  <div class="badges">
+    <span class="badge badge-blue">인터뷰 완료</span>
+    <span class="badge badge-purple">1차 확정</span>
+    <span class="badge badge-orange">2026.05.04</span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ===== Profile ===== -->
+<div class="section-label">
+  <div class="sl-icon" style="background:var(--blue-bg); color:var(--blue);">P</div>
+  <h2>프로필 팩트</h2>
+</div>
+
+<div class="card">
+  <div class="stat-grid">
+    <div class="stat-item"><div class="stat-num">월 2,500만+</div><div class="stat-label">현재 수입</div></div>
+    <div class="stat-item"><div class="stat-num">20대</div><div class="stat-label">나이</div></div>
+    <div class="stat-item"><div class="stat-num">0 → 시스템</div><div class="stat-label">프리랜서 → 사업가</div></div>
+    <div class="stat-item"><div class="stat-num">AI + 디자인</div><div class="stat-label">핵심 영역</div></div>
+  </div>
+
+  <h4>기본 정보</h4>
+  <p><strong>활동명:</strong> 홍사부<br>
+  <strong>본명:</strong> 민지<br>
+  <strong>포지션:</strong> AI 활용 + 상세페이지/디자인 사업 운영<br>
+  <strong>시작:</strong> 20살 때 집에서 나와 외주 시작 → 시스템화 → 월 2,500만+</p>
+
+  <h4>사업 영역</h4>
+  <p><strong>메인:</strong> 상세페이지 디자인 대행 (기획 + AI 활용 + 디자이너 매칭)<br>
+  <strong>콘텐츠:</strong> 인스타그램/유튜브 — AI 활용, SNS 수익화 교육<br>
+  <strong>수강생:</strong> 40~60대 은퇴 예정자 / 부업 관심 직장인</p>
+</div>
+
+<!-- ===== Timeline ===== -->
+<div class="section-label">
+  <div class="sl-icon" style="background:var(--green-bg); color:var(--green);">T</div>
+  <h2>타임라인 (영웅의 여정)</h2>
+</div>
+
+<div class="card">
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">대학</div><div class="tl-content"><strong>결핍 생성:</strong> 책/유튜브 보며 "직장인 되면 한계가 있다" 확신. 부모님과 갈등. "왜 이렇게까지 해?" 주변의 만류.</div></div>
+    <div class="tl-item"><div class="tl-year">20살</div><div class="tl-content"><strong>탈출:</strong> 집에서 나옴. 고시원/옥탑방. "안락한 곳에서 벗어나는 것"이 첫 행동. 카드뉴스/디자인 외주 시작. 건당 15만원, 작업 30시간.</div></div>
+    <div class="tl-item"><div class="tl-year">초반</div><div class="tl-content"><strong>바닥:</strong> 커머스(재고) 사업 실패 → 500만원 손실. 아침마다 "오늘도 해낼 수 있을까?" 두려움. 매일 외주 수행에 쫓김.</div></div>
+    <div class="tl-item"><div class="tl-year">전환</div><div class="tl-content"><strong>시스템 발견:</strong> "내가 다 할 필요 없다." 디자이너 고용 → 합 맞는 파트너 찾기 → 고객사 확장. 시급 5천원 → 수백만원 프로젝트.</div></div>
+    <div class="tl-item"><div class="tl-year">현재</div><div class="tl-content"><strong>사부:</strong> 월 2,500만+ 수입. AI 활용 콘텐츠 제작. "계속 보고 싶은 사람"이 목표. 3년 내 서울 건물 사업장 비전.</div></div>
+  </div>
+</div>
+
+<!-- ===== Character Bible ===== -->
+<div class="section-label">
+  <div class="sl-icon" style="background:var(--purple-bg); color:var(--purple);">C</div>
+  <h2>캐릭터 바이블</h2>
+</div>
+
+<div class="card">
+  <h3>한 줄 로그라인</h3>
+  <div class="highlight">
+    <p>안락한 곳을 스스로 박차고 나와, 15만원짜리 외주부터 시작해 월 2,500만 시스템을 만든 20대. 이제는 "사부"로서 남들도 같은 길을 걷게 만든다.</p>
+  </div>
+
+  <h4>Want (표면적 욕구)</h4>
+  <p>"계속 보고 싶은 사람" — 사람들이 찾아오고, 배우고, 성장하는 공간을 만드는 것</p>
+
+  <h4>Need (진짜 욕구)</h4>
+  <p>스스로 만든 결핍을 증명하는 것. "내가 선택한 길이 맞았다"는 것을 결과로 보여주는 것. 부모님/주변에게 "봐라, 됐잖아"를 보여주는 것.</p>
+
+  <h4>Fear (두려움)</h4>
+  <p>"주어진 값"에 갇히는 것. 회사에서 "이만큼만 받아"라고 정해지는 삶. 더 열심히 해도 한계가 정해진 구조.</p>
+
+  <h4>Fatal Flaw (치명적 결점)</h4>
+  <p>스스로 결핍을 만들어내는 성격 — 가족이 어려운 것도 아닌데 집을 나옴, 대학도 내려놓음. 주변이 "왜 이렇게까지 해?"라고 할 정도의 극단적 자기 몰아붙이기. 이게 오히려 콘텐츠가 됨: "안락함을 버려야 성장한다."</p>
+
+  <h4>Specific Detail (구체적 습관)</h4>
+  <p>리스크 큰 것은 절대 안 함 (재고 실패 이후 학습). "보증금 돌려받을지 모르는 건 안 한다." 수작업 많은 것도 안 함 — 시스템으로 풀 수 있는 길만 선택.</p>
+</div>
+
+<div class="card">
+  <h3>아키타입 (70/30 법칙)</h3>
+
+  <h4>코어 70%: Sage (현자) + Creator (창조자)</h4>
+  <p>"사부" 포지션. 큰 틀을 제시하고 그 안에서 스스로 선택하게 만드는 사람. 직접 하지 않고 시스템을 만들어서 결과를 내는 사람.</p>
+
+  <h4>차별화 30%: Explorer (탐험가) + Outlaw (반항아)</h4>
+  <p>안정된 길을 스스로 박차고 나오는 행동력. "직장인 되면 한계" 프레임을 부수는 반항. 20대에 건물 사겠다는 큰 그림.</p>
+
+  <div class="tag-row">
+    <span class="tag tag-blue">Sage 현자/사부</span>
+    <span class="tag tag-purple">Creator 시스템 빌더</span>
+    <span class="tag tag-green">Explorer 탐험가</span>
+    <span class="tag tag-red">Outlaw 반항아</span>
+  </div>
+</div>
+
+<!-- ===== Origin Story ===== -->
+<div class="section-label">
+  <div class="sl-icon" style="background:var(--red-bg); color:var(--red);">O</div>
+  <h2>기원 서사</h2>
+</div>
+
+<div class="card">
+  <h3>"안락한 곳에서 벗어나라" 스토리</h3>
+
+  <div class="quote-box">
+    <p>"알바는 시급을 올릴 수 없잖아요. 근데 6개월 버티면 내가 올릴 수 있는 시급은 훨씬 많을 거라는 믿음이 있었어요."</p>
+    <span class="quote-src">-- 세계관 인터뷰, 2026.05.04</span>
+  </div>
+
+  <h4>1막: 바닥 — 스스로 만든 결핍</h4>
+  <p>가족이 어려운 것도 아님. 대학 다니면 밥 해주고, 편하게 살 수 있음. 근데 그게 싫었음. "안락한 곳은 달콤하지만, 거기 있으면 주어진 값에 갇힌다." 집을 나옴. 고시원. 아침마다 "오늘도 해낼 수 있을까?"</p>
+
+  <h4>2막: 전환 — 15만원의 시작</h4>
+  <p>카드뉴스 외주. 건당 15만원, 작업 30시간. 시급 5천원. 알바가 나을 수 있음. 근데 "이 시급은 내가 올릴 수 있다"는 믿음. 6개월 버팀. 커머스 실패(500만원 손실)도 겪음. 그래도 외주 계속.</p>
+
+  <h4>3막: 폭발 — 시스템의 발견</h4>
+  <p>"내가 다 할 필요 없다." 디자이너를 고용. 합 맞는 파트너를 찾음. 기획만 하고 디자인은 맡김. 고객사 확장. 30시간 = 15만원이던 것이 → 수백만원 프로젝트로. "이 길은 되겠다"는 짜릿함.</p>
+
+  <h4>4막: 현재 — 사부</h4>
+  <p>월 2,500만+ 수입. 이제는 직접 안 해도 돌아가는 구조. AI로 더 확장. "나도 이렇게 했으니 너도 해봐." 40~60대 수강생들에게 "은퇴 공포" 대신 "해보자"를 가르침.</p>
+</div>
+
+<!-- ===== StoryBrand ===== -->
+<div class="section-label">
+  <div class="sl-icon" style="background:var(--blue-bg); color:var(--blue);">S</div>
+  <h2>StoryBrand 구조</h2>
+</div>
+
+<div class="card">
+  <h4>영웅 (시청자 = 타겟)</h4>
+  <p>40~60대 은퇴 고민하는 직장인/자영업자. "나도 뭔가 해보고 싶은데 뭘 해야 할지 모르겠다." 호기심은 있지만 실행을 못 하는 사람. 또는 20~30대 직장인 중 "이대로 살면 안 되는데" 느끼는 사람.</p>
+
+  <h4>빌런 (External Problem)</h4>
+  <p>"노력하면 된다"는 거짓말. 실제로는 노력의 방향과 시스템이 중요한데, 그냥 열심히만 하라고 하는 세상.</p>
+
+  <h4>내적 문제 (Internal Problem)</h4>
+  <p>"나는 이 나이에 새로운 걸 시작하기엔 늦었어." / "실패하면 어떡하지." / "기술을 모르는데."</p>
+
+  <h4>철학적 문제 (Philosophical Problem)</h4>
+  <p>"성장과 수익은 젊은 사람만의 특권인가?" → 아니다. AI가 그 장벽을 없앴다.</p>
+
+  <h4>가이드 = 홍사부 (공감 + 권위)</h4>
+  <p><strong>공감:</strong> "저도 15만원짜리 외주부터 시작했고, 500만원 날린 적도 있어요."<br>
+  <strong>권위:</strong> 20대에 월 2,500만+ 시스템 구축. 실제 수강생 변화 증명. AI 활용 실전 경험.</p>
+
+  <h4>계획 (3단계)</h4>
+  <div class="rule-item"><div class="rule-num">1</div><div class="rule-text"><strong>안락한 곳에서 벗어나라</strong> — 생각만 하지 말고 일단 한 발 내딛기. 리스크 없는 것부터.</div></div>
+  <div class="rule-item"><div class="rule-num">2</div><div class="rule-text"><strong>시급을 스스로 올려라</strong> — 남이 정해준 값이 아닌, 내가 만든 시스템으로 벌어라.</div></div>
+  <div class="rule-item"><div class="rule-num">3</div><div class="rule-text"><strong>AI로 시스템을 만들어라</strong> — 수작업 X. 기획하고 맡기고 확장하라.</div></div>
+
+  <h4>성공 (변화된 미래)</h4>
+  <p>"나도 할 수 있네!" 은퇴 공포가 사라지고, AI로 수익을 만들고, 새로운 도전이 즐거운 상태. 주어진 값에 갇히지 않는 삶.</p>
+
+  <h4>실패 회피 (안 하면?)</h4>
+  <p>영원히 "다음에 해봐야지" 반복. 은퇴 후 할 줄 아는 게 없는 상태. 안락함에 갇혀서 후회하는 삶.</p>
+</div>
+
+<!-- ===== World Rules ===== -->
+<div class="section-label">
+  <div class="sl-icon" style="background:var(--green-bg); color:var(--green);">R</div>
+  <h2>세계의 규칙</h2>
+</div>
+
+<div class="card">
+  <h3>홍사부 유니버스의 5가지 법칙</h3>
+
+  <div class="rule-item"><div class="rule-num">1</div><div class="rule-text"><strong>"하고 싶은 거 하는 게 맞다"</strong><br>도전해도 손해볼 게 크지 않다. 안 하면 아무 일도 안 일어난다.</div></div>
+  <div class="rule-item"><div class="rule-num">2</div><div class="rule-text"><strong>"안락한 곳에서 벗어나라"</strong><br>안락함은 달콤하지만 성장을 죽인다. 첫 행동은 '벗어나는 것'이다.</div></div>
+  <div class="rule-item"><div class="rule-num">3</div><div class="rule-text"><strong>"시급은 내가 올릴 수 있다"</strong><br>남이 정해준 값(월급)에 갇히지 마라. 6개월 버티면 완전히 다른 세계가 열린다.</div></div>
+  <div class="rule-item"><div class="rule-num">4</div><div class="rule-text"><strong>"내가 다 할 필요 없다"</strong><br>기획하고 맡기고 시스템을 만들어라. 수작업은 성장의 적이다.</div></div>
+  <div class="rule-item"><div class="rule-num">5</div><div class="rule-text"><strong>"리스크 없이 할 수 있는 게 생각보다 많다"</strong><br>재고 쌓지 마라, 보증금 걸지 마라. AI로 리스크 0에 가까운 도전이 가능하다.</div></div>
+</div>
+
+<!-- ===== Enemy ===== -->
+<div class="section-label">
+  <div class="sl-icon" style="background:var(--red-bg); color:var(--red);">E</div>
+  <h2>적 (Enemy)</h2>
+</div>
+
+<div class="card">
+  <h3>홍사부가 싸우는 대상</h3>
+
+  <div class="enemy-box">
+    <p><strong>적 1: "노력하면 된다" 거짓말</strong><br>노력은 누구나 한다. 그건 진짜가 아님. 진짜는 방향과 시스템을 찾는 것. 무작정 열심히만 하라는 조언은 사기다.</p>
+  </div>
+
+  <div class="enemy-box">
+    <p><strong>적 2: "주어진 값"에 갇히는 삶</strong><br>회사가 정해준 월급. 알바 시급. "이만큼 하면 이만큼 받아." 더 열심히 해도 값이 안 변하는 구조. 이걸 깨야 한다.</p>
+  </div>
+
+  <div class="enemy-box">
+    <p><strong>적 3: "안락함의 유혹"</strong><br>부모님 밑에서 밥 먹고, 시키는 것만 하고, 편하게 사는 것. 달콤하지만 성장을 멈추게 하는 환경. 가장 위험한 적.</p>
+  </div>
+</div>
+
+<!-- ===== Voice DNA ===== -->
+<div class="section-label">
+  <div class="sl-icon" style="background:var(--blue-bg); color:var(--blue);">V</div>
+  <h2>말투 DNA</h2>
+</div>
+
+<div class="card">
+  <h3>톤 & 캐릭터</h3>
+
+  <h4>에너지 레벨</h4>
+  <p>중간~높음. 차분하게 설명하다가 핵심 포인트에서 텐션 올라감. 흥분하면 빨라지는 말투. 기본은 안정감 있는 톤.</p>
+
+  <h4>관계 포지션: "사부"</h4>
+  <p>택시기사처럼 길을 알려주고 태워주는 사람. 가르치되 위에서 내려다보지 않음. 큰 틀을 제시하고 그 안에서 본인이 선택하게 만듦. 코치보다는 사부.</p>
+
+  <h4>유머 스타일</h4>
+  <p>유머 적음. 진지하고 실행 중심. 간간이 자기 실패담을 웃으며 풀어냄 (500만원 날린 이야기 등). 과한 유머 X.</p>
+
+  <h4>호칭</h4>
+  <p>존댓말 사용. "해보세요", "해봐도 손해 없거든요." 시청자를 존중하되 방향을 확실히 제시.</p>
+
+  <h4>핵심 전략: 칭찬 → 실행 유도</h4>
+  <p>"잘하고 계시네요" → "이것만 더 해보세요" → 실행하게 만듦. 꾸중 X. 칭찬으로 자신감 주고, 작은 행동 하나를 시킴.</p>
+
+  <div class="quote-box">
+    <p>"그냥 해봐. 해봐도 손해보는 게 없거든요."</p>
+    <span class="quote-src">-- 미션 1줄 / 세계관 인터뷰</span>
+  </div>
+  <div class="quote-box">
+    <p>"알바는 시급을 못 올리잖아요. 근데 내 일은 올릴 수 있어요."</p>
+    <span class="quote-src">-- 핵심 철학 / 세계관 인터뷰</span>
+  </div>
+  <div class="quote-box">
+    <p>"안락한 곳은 달콤하거든요. 근데 거기서 벗어나야 시작이에요."</p>
+    <span class="quote-src">-- 기원 서사 / 세계관 인터뷰</span>
+  </div>
+
+  <h4>절대 안 쓰는 것</h4>
+  <p>과한 유머/밈. 남 비하. 리스크 부추기기. "쉽다"는 과대광고 (본인이 힘들었음을 인정하는 사람이므로).</p>
+</div>
+
+<!-- ===== Content Pillars ===== -->
+<div class="section-label">
+  <div class="sl-icon" style="background:var(--orange-bg); color:var(--orange);">CP</div>
+  <h2>콘텐츠 필라 5개</h2>
+</div>
+
+<div class="card">
+  <div class="rule-item"><div class="rule-num">1</div><div class="rule-text"><strong>AI 실전 활용법</strong><br>"이거 AI로 이렇게 하면 됩니다." 상세페이지, 디자인, 콘텐츠 제작 등 실무 튜토리얼. (35%)</div></div>
+  <div class="rule-item"><div class="rule-num">2</div><div class="rule-text"><strong>시스템 빌딩</strong><br>"내가 다 할 필요 없다." 외주 구조, 디자이너 매칭, 자동화 셋업 등 사업 구조 콘텐츠. (25%)</div></div>
+  <div class="rule-item"><div class="rule-num">3</div><div class="rule-text"><strong>바닥 스토리</strong><br>15만원 외주 시절, 500만원 실패, 고시원 생활. 공감형 과거 이야기를 분할 연재. (15%)</div></div>
+  <div class="rule-item"><div class="rule-num">4</div><div class="rule-text"><strong>수강생 변화 다큐</strong><br>40~60대 수강생들의 Before/After. "이 분도 했습니다" 증명 콘텐츠. (15%)</div></div>
+  <div class="rule-item"><div class="rule-num">5</div><div class="rule-text"><strong>마인드셋/동기부여</strong><br>"안락함에서 벗어나라", "해봐도 손해 없다" 등 철학 콘텐츠. 짧고 강렬하게. (10%)</div></div>
+</div>
+
+<!-- ===== Positioning ===== -->
+<div class="section-label">
+  <div class="sl-icon" style="background:var(--green-bg); color:var(--green);">VS</div>
+  <h2>차별점 (vs 경쟁 계정)</h2>
+</div>
+
+<div class="card">
+  <h3>왜 홍사부인가?</h3>
+  <p>같은 "AI/부업/SNS" 카테고리 경쟁 계정과의 결정적 차이:</p>
+
+  <div class="rule-item"><div class="rule-num">1</div><div class="rule-text"><strong>실제 사업 수익 증명</strong> — 월 2,500만+을 만드는 시스템을 직접 운영 중. 이론이 아닌 실전.</div></div>
+  <div class="rule-item"><div class="rule-num">2</div><div class="rule-text"><strong>"사부" 포지션</strong> — 20대인데 40~60대를 타겟으로 잡음. 나이 불문 "큰 틀을 제시하는 사람" 포지션이 독특.</div></div>
+  <div class="rule-item"><div class="rule-num">3</div><div class="rule-text"><strong>바닥 서사의 힘</strong> — 15만원/30시간 외주부터 시작. "나도 이랬다"가 진짜임. 은수저 아님을 증명 가능.</div></div>
+  <div class="rule-item"><div class="rule-num">4</div><div class="rule-text"><strong>리스크 제로 철학</strong> — "재고 쌓지 마, 보증금 걸지 마." 실패 경험에서 나온 구체적 원칙. 안전한 도전을 설계해줌.</div></div>
+  <div class="rule-item"><div class="rule-num">5</div><div class="rule-text"><strong>칭찬 → 실행 루프</strong> — 꾸중형 코치가 아닌, 칭찬으로 자신감 → 작은 실행 → 결과 확인 → 자신감 루프. 40~60대에게 최적화된 교육법.</div></div>
+</div>
+
+<!-- ===== Mission ===== -->
+<div class="section-label">
+  <div class="sl-icon" style="background:var(--purple-bg); color:var(--purple);">M</div>
+  <h2>미션 (1줄)</h2>
+</div>
+
+<div class="card">
+  <div class="highlight">
+    <p>"주어진 값에 갇힌 사람들이 스스로 시급을 올릴 수 있도록, 리스크 없는 첫 발을 내딛게 하는 사부."</p>
+  </div>
+</div>
+
+<!-- ===== Gap ===== -->
+<div class="section-label">
+  <div class="sl-icon" style="background:var(--orange-bg); color:var(--orange);">!</div>
+  <h2>추가 확인 필요</h2>
+</div>
+
+<div class="card">
+  <h3>2차 인터뷰 or 후속 확인</h3>
+  <div class="rule-item"><div class="rule-num">!</div><div class="rule-text"><strong>구체적 수강생 사례</strong> — 가장 변화가 컸던 사람 1명의 Before/After 스토리</div></div>
+  <div class="rule-item"><div class="rule-num">!</div><div class="rule-text"><strong>부모님과의 현재 관계</strong> — 갈등 이후 화해? 인정? 콘텐츠 공개 범위</div></div>
+  <div class="rule-item"><div class="rule-num">!</div><div class="rule-text"><strong>AI 활용 구체 파이프라인</strong> — 실제로 어떤 AI 툴을 어떻게 쓰는지 (콘텐츠 소재)</div></div>
+  <div class="rule-item"><div class="rule-num">!</div><div class="rule-text"><strong>"홍사부" 브랜드명 확정</strong> — 본인이 이 이름으로 갈 건지, 다른 이름도 고려하는지</div></div>
+  <div class="rule-item"><div class="rule-num">!</div><div class="rule-text"><strong>얼굴 공개 여부</strong> — 콘텐츠에서 얼굴 노출 범위</div></div>
+</div>
+
+<div class="footer">
+  Flowmus MCN | 홍사부 세계관 기획서 v1.0<br>
+  인터뷰 기반 | 2026.05.04
+</div>
+
+</div>
+</body>
+</html>
