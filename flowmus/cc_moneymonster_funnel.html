@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>부업클래스 x 머니몬스터 — 강의 퍼널 설계</title>
+<style>
+  :root {
+    --blue: #3182f6;
+    --blue-light: #f2f7ff;
+    --green: #1b8a4a;
+    --green-light: #edf8f0;
+    --orange: #c67a00;
+    --orange-light: #fff8eb;
+    --gray-50: #f9fafb;
+    --gray-100: #f2f4f6;
+    --gray-200: #e5e8eb;
+    --gray-500: #8b95a1;
+    --gray-600: #6b7684;
+    --gray-700: #4e5968;
+    --gray-900: #191f28;
+  }
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'Apple SD Gothic Neo', 'Pretendard', sans-serif;
+    color: var(--gray-900);
+    background: #fff;
+    font-size: 10pt;
+    line-height: 1.7;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    letter-spacing: -0.3px;
+  }
+  @media screen {
+    body { background: #f2f4f6; padding: 24px 0; }
+    .page { box-shadow: 0 8px 30px rgba(0,0,0,0.08); margin-bottom: 24px; }
+  }
+  @media print {
+    .page { margin: 0; box-shadow: none; min-height: auto; }
+    .no-print { display: none !important; }
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    position: relative;
+    background: #fff;
+    page-break-after: always;
+    overflow: hidden;
+  }
+  .page:last-child { page-break-after: auto; }
+  .pi { padding: 44px 48px; }
+
+  .cover { background: var(--gray-900); color: #fff; display: flex; flex-direction: column; }
+  .cover-top { flex: 1; display: flex; flex-direction: column; justify-content: center; padding: 0 56px; }
+  .cover-badge { display: inline-block; background: rgba(49,130,246,0.15); color: var(--blue); border-radius: 20px; padding: 6px 16px; font-size: 8pt; font-weight: 700; letter-spacing: 1px; margin-bottom: 32px; width: fit-content; }
+  .cover-title { font-size: 30pt; font-weight: 800; letter-spacing: -2px; line-height: 1.25; margin-bottom: 16px; }
+  .cover-desc { font-size: 11pt; color: var(--gray-500); line-height: 1.8; }
+  .cover-bottom { padding: 40px 56px; display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid rgba(255,255,255,0.06); }
+  .cover-meta { font-size: 8.5pt; color: var(--gray-600); line-height: 2; }
+  .cover-meta b { color: var(--gray-500); }
+  .cover-logo { font-size: 11pt; font-weight: 800; color: var(--gray-600); letter-spacing: 1px; }
+
+  .ph { margin-bottom: 24px; }
+  .ph-label { font-size: 8pt; font-weight: 700; color: var(--blue); letter-spacing: 1px; margin-bottom: 6px; }
+  .ph h2 { font-size: 20pt; font-weight: 800; color: var(--gray-900); letter-spacing: -1px; }
+  .ph-sub { font-size: 9.5pt; color: var(--gray-500); margin-top: 6px; }
+
+  .card { background: var(--gray-50); border-radius: 16px; padding: 24px; margin: 14px 0; }
+  .card-blue { background: var(--blue-light); border-radius: 16px; padding: 20px 24px; margin: 14px 0; }
+  .card-green { background: var(--green-light); border-radius: 16px; padding: 20px 24px; margin: 14px 0; }
+  .card-orange { background: var(--orange-light); border-radius: 16px; padding: 20px 24px; margin: 14px 0; }
+
+  .funnel { display: flex; flex-direction: column; gap: 0; margin: 16px 0; }
+  .funnel-step { display: flex; align-items: stretch; gap: 16px; }
+  .funnel-line { width: 40px; display: flex; flex-direction: column; align-items: center; }
+  .funnel-dot { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12pt; font-weight: 800; color: #fff; flex-shrink: 0; }
+  .funnel-bar { flex: 1; width: 3px; background: var(--gray-200); margin: 4px 0; }
+  .funnel-content { flex: 1; padding: 8px 0 20px; }
+  .funnel-title { font-size: 10.5pt; font-weight: 800; color: var(--gray-900); margin-bottom: 4px; }
+  .funnel-desc { font-size: 8.5pt; color: var(--gray-600); line-height: 1.6; }
+  .funnel-step:last-child .funnel-bar { display: none; }
+
+  .tbl { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 9pt; }
+  .tbl th { background: var(--gray-100); padding: 10px 14px; text-align: left; font-weight: 700; color: var(--gray-700); font-size: 8.5pt; }
+  .tbl td { padding: 10px 14px; border-bottom: 1px solid var(--gray-100); color: #333d4b; }
+  .tbl .em { color: var(--blue); font-weight: 700; }
+
+  .sec { font-size: 11pt; font-weight: 800; color: var(--gray-900); letter-spacing: -0.5px; margin: 20px 0 10px; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0; }
+  .grid-item { padding: 18px 20px; border-radius: 14px; background: var(--gray-50); }
+  .grid-item .gi-label { font-size: 8pt; font-weight: 700; color: var(--gray-500); margin-bottom: 6px; }
+  .grid-item .gi-value { font-size: 12pt; font-weight: 800; color: var(--gray-900); }
+  .grid-item .gi-desc { font-size: 8pt; color: var(--gray-600); margin-top: 4px; }
+
+  .note { background: var(--blue-light); border-radius: 12px; padding: 16px 20px; margin: 12px 0; font-size: 9pt; color: var(--gray-700); line-height: 1.7; }
+  .note b { color: var(--gray-900); }
+
+  .highlight-box { border-left: 4px solid var(--blue); padding: 16px 20px; background: var(--blue-light); border-radius: 0 12px 12px 0; margin: 14px 0; }
+  .highlight-box .hb-title { font-size: 10pt; font-weight: 800; color: var(--gray-900); margin-bottom: 4px; }
+  .highlight-box .hb-desc { font-size: 9pt; color: var(--gray-700); line-height: 1.7; }
+
+  .pf { position: absolute; bottom: 28px; left: 48px; right: 48px; display: flex; justify-content: space-between; font-size: 7.5pt; color: #d1d6db; }
+  .print-btn { position: fixed; bottom: 20px; right: 20px; z-index: 100; background: var(--blue); color: #fff; border: none; padding: 14px 28px; border-radius: 14px; font-size: 10pt; font-weight: 700; cursor: pointer; box-shadow: 0 4px 16px rgba(49,130,246,0.3); font-family: inherit; }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">PDF 저장</button>
+
+<!-- ══════════ COVER ══════════ -->
+<div class="page cover">
+  <div class="cover-top">
+    <div class="cover-badge">FUNNEL DESIGN SESSION</div>
+    <div class="cover-title">강의 퍼널 설계<br>부업클래스 x 머니몬스터</div>
+    <div class="cover-desc">
+      "이 강의 들으면 바로 일거리 연결해줄게"<br>
+      강의 → 인력 → 대행사 → 매출의 순환 구조 설계
+    </div>
+  </div>
+  <div class="cover-bottom">
+    <div class="cover-meta">
+      <b>미팅일</b> &middot; 2026. 05. 04<br>
+      <b>참석</b> &middot; 오맷돌 x 머니몬스터<br>
+      <b>목적</b> &middot; 강의 퍼널 + 대행사 레버리지 구조 확정
+    </div>
+    <div class="cover-logo">FLOWMUS</div>
+  </div>
+</div>
+
+<!-- ══════════ PAGE 1 — 퍼널 구조 ══════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="ph">
+      <div class="ph-label">THE FUNNEL</div>
+      <h2>강의 퍼널 전체 구조</h2>
+      <div class="ph-sub">영상 하나가 돈이 되는 파이프라인</div>
+    </div>
+
+    <div class="funnel">
+      <div class="funnel-step">
+        <div class="funnel-line">
+          <div class="funnel-dot" style="background:var(--blue);">1</div>
+          <div class="funnel-bar"></div>
+        </div>
+        <div class="funnel-content">
+          <div class="funnel-title">머니몬스터 채널 (14만 구독자)</div>
+          <div class="funnel-desc">후킹 영상으로 유입. "숏폼 편집으로 월 200 버는 법" 같은 콘텐츠.<br>영상 설명란 / 고정댓글 / 스토리에서 강의 연결.</div>
+        </div>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-line">
+          <div class="funnel-dot" style="background:#333d4b;">2</div>
+          <div class="funnel-bar"></div>
+        </div>
+        <div class="funnel-content">
+          <div class="funnel-title">부업클래스 강의 수강</div>
+          <div class="funnel-desc">숏폼 편집 실전 강의. 수강 완료하면 포트폴리오 1개 이상 완성.<br>"졸업하면 바로 일거리 연결" — 이게 차별점이자 후킹.</div>
+        </div>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-line">
+          <div class="funnel-dot" style="background:var(--green);">3</div>
+          <div class="funnel-bar"></div>
+        </div>
+        <div class="funnel-content">
+          <div class="funnel-title">수강생 = 숏폼 편집 인력</div>
+          <div class="funnel-desc">강의 졸업생이 대행사 편집 인력풀에 합류.<br>실력 검증된 인력을 대행사에 공급.</div>
+        </div>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-line">
+          <div class="funnel-dot" style="background:var(--orange);">4</div>
+          <div class="funnel-bar"></div>
+        </div>
+        <div class="funnel-content">
+          <div class="funnel-title">우리가 일거리 수급 → 대행사에 전달</div>
+          <div class="funnel-desc">부업클래스 강사 채널 (제이하다, 홍반장 등) + 외부 클라이언트.<br>대행사 핵심 페인포인트 = 일거리. 우리가 해결.</div>
+        </div>
+      </div>
+      <div class="funnel-step">
+        <div class="funnel-line">
+          <div class="funnel-dot" style="background:#e02020;">5</div>
+        </div>
+        <div class="funnel-content">
+          <div class="funnel-title">수강생이 실제로 돈 벌기 → 후기 → 다시 강의 판매</div>
+          <div class="funnel-desc">"수강 후 첫 달에 50만원 벌었습니다" — 이 후기가 다음 광고 소재.<br>선순환 플라이휠 완성.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <div class="hb-title">퍼널의 핵심 한 줄</div>
+      <div class="hb-desc">"강의 들으면 바로 일거리 연결해줄게" — 다른 강의는 배우고 끝. 우리는 배우고 바로 돈 번다. 이게 광고 카피이자 퍼널의 전부.</div>
+    </div>
+
+    <div class="sec">왜 이 구조가 되는가</div>
+    <div class="grid-2">
+      <div class="grid-item">
+        <div class="gi-label">머니몬스터</div>
+        <div class="gi-value">14만 채널</div>
+        <div class="gi-desc">무료 트래픽 소스. 광고비 없이 모객.</div>
+      </div>
+      <div class="grid-item">
+        <div class="gi-label">부업클래스</div>
+        <div class="gi-value">강의 플랫폼</div>
+        <div class="gi-desc">단일영상 30억 퍼널 설계 경험.</div>
+      </div>
+      <div class="grid-item">
+        <div class="gi-label">대행사</div>
+        <div class="gi-value">일거리 수급</div>
+        <div class="gi-desc">편집자보다 일거리가 부족. 우리가 해결.</div>
+      </div>
+      <div class="grid-item">
+        <div class="gi-label">수강생</div>
+        <div class="gi-value">즉시 수익화</div>
+        <div class="gi-desc">배우자마자 돈 번다 = 최강 후기.</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="pf"><span>Flowmus Confidential</span><span>강의 퍼널 설계 — 부업클래스 x 머니몬스터</span></div>
+</div>
+
+<!-- ══════════ PAGE 2 — 논의 안건 ══════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="ph">
+      <div class="ph-label">AGENDA</div>
+      <h2>오늘 결정할 것들</h2>
+      <div class="ph-sub">숫자까지 잡아야 퍼널이 돌아갑니다</div>
+    </div>
+
+    <div class="sec">1. 강의 콘텐츠</div>
+    <table class="tbl">
+      <tr><th style="width:160px;">질문</th><th>논의</th></tr>
+      <tr><td>뭘 가르칠 건지?</td><td class="em">숏폼 편집? 기획? 촬영까지? 범위 확정</td></tr>
+      <tr><td>몇 시간 분량?</td><td>VOD 기준 — 3시간? 5시간? 10시간?</td></tr>
+      <tr><td>수강생 레벨</td><td>완전 초보? 기초는 아는 사람?</td></tr>
+      <tr><td>졸업 기준</td><td>포트폴리오 몇 개 완성하면 "졸업"인지</td></tr>
+    </table>
+
+    <div class="sec">2. 가격 + 수익 구조</div>
+    <table class="tbl">
+      <tr><th style="width:160px;">항목</th><th>논의</th></tr>
+      <tr><td>강의 가격</td><td class="em">얼마로 잡을 건지? (19만? 29만? 49만?)</td></tr>
+      <tr><td>매출 쉐어</td><td>머니몬스터 : 부업클래스 = ? : ?</td></tr>
+      <tr><td>대행사 RS</td><td>수강생 매칭 시 수수료 구조</td></tr>
+      <tr><td>제작비</td><td>누가 부담? 0원(파트너)? 절반?</td></tr>
+    </table>
+
+    <div class="sec">3. 머니몬스터 채널 프로모션</div>
+    <table class="tbl">
+      <tr><th style="width:160px;">항목</th><th>논의</th></tr>
+      <tr><td>프로모션 영상</td><td class="em">론칭 시 본인 채널에서 영상 몇 개?</td></tr>
+      <tr><td>숏폼 클립</td><td>강의 맛보기 숏폼 몇 개?</td></tr>
+      <tr><td>커뮤니티탭</td><td>론칭 공지 + 할인 코드</td></tr>
+      <tr><td>지속 프로모션</td><td>월 1회? 분기 1회? 자연스러운 멘션?</td></tr>
+    </table>
+
+    <div class="sec">4. 수강생 → 대행사 연결</div>
+    <table class="tbl">
+      <tr><th style="width:160px;">질문</th><th>논의</th></tr>
+      <tr><td>졸업 후 첫 일거리</td><td class="em">뭘로 줄 건지? 어떤 채널의 숏폼?</td></tr>
+      <tr><td>편당 단가</td><td>수강생한테 편당 얼마 줄 건지?</td></tr>
+      <tr><td>품질 관리</td><td>누가 QC? 대행사? 우리?</td></tr>
+      <tr><td>일거리 소스</td><td>부업클래스 강사 채널 + 외부 클라이언트</td></tr>
+    </table>
+
+    <div class="sec">5. 일정</div>
+    <table class="tbl">
+      <tr><th style="width:160px;">마일스톤</th><th>논의</th></tr>
+      <tr><td>커리큘럼 확정</td><td>언제까지?</td></tr>
+      <tr><td>촬영</td><td>며칠 걸리는지? 장소?</td></tr>
+      <tr><td>론칭 목표일</td><td class="em">첫 기수 언제 오픈?</td></tr>
+      <tr><td>첫 기수 규모</td><td>몇 명으로 테스트? 20명? 50명?</td></tr>
+    </table>
+
+    <div class="card-orange" style="margin-top:16px;">
+      <div style="font-size:9pt;font-weight:800;color:var(--orange);margin-bottom:4px;">오늘 반드시 숫자로 잡을 것</div>
+      <div style="font-size:8.5pt;color:var(--gray-700);line-height:1.8;">
+        1. 강의 가격 ___만원<br>
+        2. 매출 쉐어 비율 ___:___<br>
+        3. 수강생 편당 단가 ___만원<br>
+        4. 론칭 목표일 ___월<br>
+        5. 첫 기수 ___명
+      </div>
+    </div>
+
+  </div>
+  <div class="pf"><span>Flowmus Confidential</span><span>강의 퍼널 설계 — 부업클래스 x 머니몬스터</span></div>
+</div>
+
+<!-- ══════════ PAGE 3 — 매출 시뮬레이션 ══════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="ph">
+      <div class="ph-label">SIMULATION</div>
+      <h2>매출 시뮬레이션</h2>
+      <div class="ph-sub">숫자가 맞아야 구조가 돈다</div>
+    </div>
+
+    <div class="sec">강의 매출 (월 기준)</div>
+    <div class="card">
+      <table class="tbl" style="margin:0;">
+        <tr><th>시나리오</th><th>가격</th><th>월 수강생</th><th>월 매출</th></tr>
+        <tr><td>보수적</td><td>29만원</td><td>20명</td><td class="em">580만원</td></tr>
+        <tr><td>기본</td><td>29만원</td><td>50명</td><td class="em">1,450만원</td></tr>
+        <tr><td>공격적</td><td>29만원</td><td>100명</td><td class="em">2,900만원</td></tr>
+      </table>
+    </div>
+
+    <div class="sec">대행사 매출 (수강생 편집 수익)</div>
+    <div class="card">
+      <table class="tbl" style="margin:0;">
+        <tr><th>항목</th><th>단가</th><th>물량</th><th>월 매출</th></tr>
+        <tr><td>숏폼 편집 (수강생)</td><td>편당 5만원</td><td>월 100건</td><td class="em">500만원</td></tr>
+        <tr><td>우리 수수료 (20%)</td><td>편당 1만원</td><td>월 100건</td><td class="em">100만원</td></tr>
+      </table>
+    </div>
+
+    <div class="sec">수강생 수익 (강의 후킹 포인트)</div>
+    <div class="grid-2">
+      <div class="grid-item" style="border-left:4px solid var(--green);">
+        <div class="gi-label">수강생 월 예상 수익</div>
+        <div class="gi-value" style="color:var(--green);">월 50~150만원</div>
+        <div class="gi-desc">편당 5만원 x 월 10~30건 (부업 기준)</div>
+      </div>
+      <div class="grid-item" style="border-left:4px solid var(--blue);">
+        <div class="gi-label">본전 회수 시점</div>
+        <div class="gi-value" style="color:var(--blue);">1~2개월</div>
+        <div class="gi-desc">29만원 강의 → 편집 6건이면 회수</div>
+      </div>
+    </div>
+
+    <div class="note">
+      <b>광고 카피:</b> "29만원 강의 듣고, 첫 달에 6건만 하면 본전. 나머지는 전부 순수익."<br>
+      본전 회수가 빠를수록 강의 전환율이 올라감. 이 숫자가 광고의 핵심.
+    </div>
+
+    <div class="sec">일거리 소스 (대행사에 공급할 물량)</div>
+    <table class="tbl">
+      <tr><th>소스</th><th>예상 물량 (월)</th><th>비고</th></tr>
+      <tr><td>부업클래스 강사 채널</td><td class="em">월 20~40건</td><td>제이하다, 홍반장, 향후 강사 추가</td></tr>
+      <tr><td>머니몬스터 채널</td><td>월 8~12건</td><td>본인 채널 숏폼</td></tr>
+      <tr><td>강의 프로모션 숏폼</td><td>월 10~20건</td><td>강의 광고용 클립</td></tr>
+      <tr><td>외부 클라이언트 (확장)</td><td>월 30~50건</td><td>3개월 후부터</td></tr>
+      <tr style="background:var(--blue-light);"><td><b>합계</b></td><td class="em"><b>월 70~120건</b></td><td>수강생 10~20명 배정 가능</td></tr>
+    </table>
+
+    <div class="highlight-box" style="margin-top:16px;">
+      <div class="hb-title">플라이휠 핵심</div>
+      <div class="hb-desc">
+        강의 수강생 늘어남 → 편집 인력 늘어남 → 더 많은 일거리 소화 가능 → 대행사 매출 증가 → 수강생 후기 "진짜 돈 벌었다" → 다시 강의 판매 증가. 한 바퀴 돌면 멈출 수가 없는 구조.
+      </div>
+    </div>
+
+    <div class="card-green" style="margin-top:12px;">
+      <div style="font-size:9.5pt;font-weight:800;color:var(--green);margin-bottom:4px;">다음 스텝</div>
+      <div style="font-size:8.5pt;color:var(--gray-700);line-height:1.8;">
+        1. 오늘 숫자 확정 → 2. 커리큘럼 1주 내 완성 → 3. 촬영 → 4. 론칭 → 5. 첫 기수 졸업 → 6. 대행사 연결 → 7. 후기 수집 → 8. 스케일
+      </div>
+    </div>
+
+  </div>
+  <div class="pf"><span>Flowmus Confidential</span><span>강의 퍼널 설계 — 부업클래스 x 머니몬스터</span></div>
+</div>
+
+</body>
+</html>
