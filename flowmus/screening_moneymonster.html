@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>부업클래스 강사 스크리닝 — 머니몬스터</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'Apple SD Gothic Neo', 'Pretendard', sans-serif;
+    color: #191f28;
+    background: #fff;
+    font-size: 10pt;
+    line-height: 1.7;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    letter-spacing: -0.3px;
+  }
+  @media screen {
+    body { background: #f2f4f6; padding: 24px 0; }
+    .page { box-shadow: 0 8px 30px rgba(0,0,0,0.08); margin-bottom: 24px; }
+  }
+  @media print {
+    .page { margin: 0; box-shadow: none; min-height: auto; }
+    .no-print { display: none !important; }
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    position: relative;
+    background: #fff;
+    page-break-after: always;
+    overflow: hidden;
+  }
+  .page:last-child { page-break-after: auto; }
+  .pi { padding: 44px 48px; }
+
+  /* ── 커버 ── */
+  .cover { background: #191f28; color: #fff; display: flex; flex-direction: column; }
+  .cover-top {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 56px;
+  }
+  .cover-badge {
+    display: inline-block;
+    background: rgba(49,130,246,0.15);
+    color: #3182f6;
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 8pt;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 32px;
+    width: fit-content;
+  }
+  .cover-title {
+    font-size: 32pt;
+    font-weight: 800;
+    letter-spacing: -2px;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .cover-desc {
+    font-size: 11pt;
+    color: #8b95a1;
+    line-height: 1.8;
+    max-width: 420px;
+  }
+  .cover-bottom {
+    padding: 40px 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .cover-meta { font-size: 8.5pt; color: #4e5968; line-height: 2; }
+  .cover-meta b { color: #8b95a1; }
+  .cover-logo { font-size: 11pt; font-weight: 800; color: #4e5968; letter-spacing: 1px; }
+
+  /* ── 헤더 ── */
+  .ph { margin-bottom: 24px; }
+  .ph-label { font-size: 8pt; font-weight: 700; color: #3182f6; letter-spacing: 1px; margin-bottom: 6px; }
+  .ph h2 { font-size: 20pt; font-weight: 800; color: #191f28; letter-spacing: -1px; }
+  .ph-sub { font-size: 9.5pt; color: #8b95a1; margin-top: 6px; }
+
+  /* ── 카드 ── */
+  .card { background: #f9fafb; border-radius: 16px; padding: 24px; margin: 14px 0; }
+  .card-outline { background: #fff; border: 1.5px solid #e5e8eb; border-radius: 16px; padding: 24px; margin: 14px 0; }
+  .card-blue { background: #f2f7ff; border-radius: 16px; padding: 20px 24px; margin: 14px 0; }
+  .card-green { background: #edf8f0; border-radius: 16px; padding: 20px 24px; margin: 14px 0; }
+  .card-orange { background: #fff8eb; border-radius: 16px; padding: 20px 24px; margin: 14px 0; }
+  .card-red { background: #fef2f2; border-radius: 16px; padding: 20px 24px; margin: 14px 0; }
+
+  /* ── 프로필 ── */
+  .profile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 14px 0; }
+  .profile-item { padding: 16px 20px; background: #f9fafb; border-radius: 14px; }
+  .profile-item .label { font-size: 8pt; font-weight: 700; color: #8b95a1; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .profile-item .value { font-size: 10.5pt; font-weight: 700; color: #191f28; }
+
+  /* ── 시장 데이터 ── */
+  .data-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 14px 0; }
+  .data-item { padding: 16px; background: #f9fafb; border-radius: 14px; text-align: center; }
+  .data-item .num { font-size: 18pt; font-weight: 800; color: #3182f6; letter-spacing: -1px; }
+  .data-item .desc { font-size: 7.5pt; color: #6b7684; margin-top: 4px; line-height: 1.4; }
+
+  .revenue-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 12px 0; }
+  .rev-item { padding: 14px 18px; border-radius: 12px; background: #f9fafb; }
+  .rev-item .rev-name { font-size: 9pt; font-weight: 700; color: #191f28; }
+  .rev-item .rev-desc { font-size: 7.5pt; color: #6b7684; margin-top: 3px; line-height: 1.5; }
+  .rev-item .rev-est { font-size: 8pt; font-weight: 700; color: #3182f6; margin-top: 4px; }
+
+  /* ── 질문 ── */
+  .q-block { margin: 14px 0; }
+  .q-block-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+  .q-block-title { font-size: 11pt; font-weight: 800; color: #191f28; letter-spacing: -0.5px; }
+  .q-block-time { font-size: 8pt; font-weight: 700; color: #3182f6; background: #f2f7ff; padding: 4px 12px; border-radius: 12px; }
+  .q-item { display: flex; gap: 12px; margin-bottom: 14px; align-items: flex-start; }
+  .q-item:last-child { margin-bottom: 0; }
+  .q-num { width: 24px; height: 24px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 8px; background: #191f28; color: #fff; font-size: 8pt; font-weight: 800; margin-top: 1px; }
+  .q-num.blue { background: #3182f6; }
+  .q-num.green { background: #1b8a4a; }
+  .q-num.orange { background: #c67a00; }
+  .q-text { flex: 1; font-size: 9.5pt; color: #333d4b; word-break: keep-all; line-height: 1.65; }
+  .q-text em { font-style: normal; color: #3182f6; font-weight: 700; }
+  .q-text .em-green { color: #1b8a4a; font-weight: 700; }
+  .q-hint { font-size: 8pt; color: #8b95a1; margin-top: 4px; display: block; line-height: 1.5; }
+  .q-answer { margin-top: 8px; padding: 10px 14px; background: #f9fafb; border: 1px solid #e5e8eb; border-radius: 10px; min-height: 32px; font-size: 9pt; color: #8b95a1; }
+
+  /* ── 스코어카드 ── */
+  .sc-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #f2f4f6; }
+  .sc-item:last-child { border-bottom: none; }
+  .sc-left { flex: 1; }
+  .sc-name { font-size: 9.5pt; font-weight: 700; color: #191f28; }
+  .sc-desc { font-size: 7.5pt; color: #8b95a1; margin-top: 2px; line-height: 1.5; }
+  .sc-score { width: 48px; height: 36px; border: 1.5px solid #e5e8eb; border-radius: 10px; text-align: center; font-size: 10pt; font-weight: 800; color: #3182f6; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-left: 16px; }
+  .sc-total { display: flex; justify-content: space-between; align-items: center; padding: 16px 0; border-top: 2px solid #191f28; margin-top: 8px; }
+  .sc-total-label { font-size: 11pt; font-weight: 800; color: #191f28; }
+  .sc-total-score { font-size: 16pt; font-weight: 800; color: #3182f6; }
+
+  /* ── 판정 ── */
+  .verdict-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; margin: 14px 0; }
+  .vd { border-radius: 14px; padding: 14px; }
+  .vd-score { font-size: 16pt; font-weight: 800; letter-spacing: -1px; }
+  .vd-label { font-size: 8.5pt; font-weight: 700; margin-top: 4px; }
+  .vd-desc { font-size: 7pt; color: #6b7684; margin-top: 4px; line-height: 1.5; }
+  .vd.go { background: #e8f7ee; } .vd.go .vd-score, .vd.go .vd-label { color: #1b8a4a; }
+  .vd.cond { background: #e8f3ff; } .vd.cond .vd-score, .vd.cond .vd-label { color: #3182f6; }
+  .vd.hold { background: #fff5e6; } .vd.hold .vd-score, .vd.hold .vd-label { color: #c67a00; }
+  .vd.no { background: #fce8e8; } .vd.no .vd-score, .vd.no .vd-label { color: #e02020; }
+
+  /* ── 기록 ── */
+  .rec-item { display: flex; border-bottom: 1px solid #f2f4f6; }
+  .rec-item:last-child { border-bottom: none; }
+  .rec-label { width: 110px; flex-shrink: 0; padding: 10px 0; font-size: 9pt; font-weight: 700; color: #6b7684; }
+  .rec-value { flex: 1; padding: 10px 0; font-size: 9pt; color: #191f28; font-weight: 500; }
+  .rec-value.empty { color: #d1d6db; border-bottom: 1px dashed #e5e8eb; }
+
+  .note { background: #f2f7ff; border-radius: 12px; padding: 14px 20px; margin: 12px 0; font-size: 9pt; color: #4e5968; word-break: keep-all; line-height: 1.7; }
+  .note b { color: #191f28; }
+
+  .sec-title { font-size: 11pt; font-weight: 800; color: #191f28; letter-spacing: -0.5px; margin-bottom: 10px; margin-top: 20px; }
+  .sec-title:first-child { margin-top: 0; }
+
+  .comp-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 8.5pt; }
+  .comp-table th { background: #f2f4f6; padding: 8px 12px; text-align: left; font-weight: 700; color: #4e5968; font-size: 8pt; }
+  .comp-table td { padding: 8px 12px; border-bottom: 1px solid #f2f4f6; color: #333d4b; }
+  .comp-table .highlight { color: #3182f6; font-weight: 700; }
+  .comp-table .risk { color: #e02020; font-weight: 700; }
+
+  .pf { position: absolute; bottom: 28px; left: 48px; right: 48px; display: flex; justify-content: space-between; font-size: 7.5pt; color: #d1d6db; }
+
+  .print-btn { position: fixed; bottom: 20px; right: 20px; z-index: 100; background: #3182f6; color: #fff; border: none; padding: 14px 28px; border-radius: 14px; font-size: 10pt; font-weight: 700; cursor: pointer; box-shadow: 0 4px 16px rgba(49,130,246,0.3); font-family: inherit; letter-spacing: -0.3px; }
+
+  .tag { display: inline-block; padding: 3px 10px; border-radius: 8px; font-size: 7.5pt; font-weight: 700; margin-right: 4px; }
+  .tag-blue { background: #f2f7ff; color: #3182f6; }
+  .tag-green { background: #edf8f0; color: #1b8a4a; }
+  .tag-red { background: #fce8e8; color: #e02020; }
+  .tag-orange { background: #fff5e6; color: #c67a00; }
+
+  .stat-row { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; margin: 14px 0; }
+  .stat-box { padding: 14px; border-radius: 14px; background: #f9fafb; text-align: center; }
+  .stat-box .stat-num { font-size: 16pt; font-weight: 800; color: #191f28; letter-spacing: -1px; }
+  .stat-box .stat-label { font-size: 7.5pt; color: #6b7684; margin-top: 3px; }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">PDF 저장</button>
+
+<!-- ══════════ COVER ══════════ -->
+<div class="page cover">
+  <div class="cover-top">
+    <div class="cover-badge">SCREENING SHEET</div>
+    <div class="cover-title">강사 스크리닝<br>머니몬스터</div>
+    <div class="cover-desc">
+      moneymonsterTV &middot; 구독자 35만<br>
+      AI 활용 부업 교육 &middot; 현실 부업 스킬<br>
+      부업클래스 강사 미팅
+    </div>
+  </div>
+  <div class="cover-bottom">
+    <div class="cover-meta">
+      <b>미팅일</b> &middot; 2026. 05. 04<br>
+      <b>유형</b> &middot; 강사 스크리닝<br>
+      <b>키워드</b> &middot; AI 부업 / 숏폼 편집 대행 / 유튜브 수익화
+    </div>
+    <div class="cover-logo">FLOWMUS</div>
+  </div>
+</div>
+
+<!-- ══════════ PAGE 1 — 채널 분석 + 시장 데이터 ══════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="ph">
+      <div class="ph-label">CHANNEL ANALYSIS</div>
+      <h2>채널 분석 + 시장 데이터</h2>
+      <div class="ph-sub">머니몬스터 채널 현황과 부업 교육 시장 분석</div>
+    </div>
+
+    <div class="stat-row">
+      <div class="stat-box">
+        <div class="stat-num">35만</div>
+        <div class="stat-label">유튜브 구독자</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num" style="color:#1b8a4a;">~1,000</div>
+        <div class="stat-label">기존 수강생</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num" style="color:#3182f6;">3,000만</div>
+        <div class="stat-label">월 수익 (추정)</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num" style="color:#c67a00;">2.8억</div>
+        <div class="stat-label">'24 상반기 매출</div>
+      </div>
+    </div>
+
+    <div class="profile-grid">
+      <div class="profile-item">
+        <div class="label">채널</div>
+        <div class="value">@머니몬스터 (moneymonsterTV)</div>
+      </div>
+      <div class="profile-item">
+        <div class="label">법인</div>
+        <div class="value">머니몬스터(주) / 팀 5인+</div>
+      </div>
+      <div class="profile-item">
+        <div class="label">기존 강의</div>
+        <div class="value">AI유튜브 수익화 (인베이더스쿨)</div>
+      </div>
+      <div class="profile-item">
+        <div class="label">성장 속도</div>
+        <div class="value">2년 만에 35만 구독자</div>
+      </div>
+    </div>
+
+    <div class="sec-title">콘텐츠 카테고리</div>
+    <div class="revenue-grid">
+      <div class="rev-item">
+        <div class="rev-name">AI 유튜브 수익화</div>
+        <div class="rev-desc">ChatGPT/Grok 대본 + 타입캐스트 음성 + Vrew 편집</div>
+        <div class="rev-est">메인 콘텐츠</div>
+      </div>
+      <div class="rev-item">
+        <div class="rev-name">부업 / N잡 전략</div>
+        <div class="rev-desc">영상 편집 대행, 전자책, 크몽 프리랜서</div>
+        <div class="rev-est">서브 콘텐츠</div>
+      </div>
+      <div class="rev-item">
+        <div class="rev-name">다채널 운영</div>
+        <div class="rev-desc">시니어 정보, 건강 쇼츠, 엔터 패러디 채널</div>
+        <div class="rev-est">AI 자동화</div>
+      </div>
+      <div class="rev-item">
+        <div class="rev-name">트렌드 데이터 소재</div>
+        <div class="rev-desc">플레이보드 차트 기반 수요 검증 콘텐츠</div>
+        <div class="rev-est">차별화 요소</div>
+      </div>
+    </div>
+
+    <div class="card-red">
+      <div style="font-size:9.5pt;font-weight:800;color:#e02020;margin-bottom:6px;">핵심 리스크: 유튜브 AI 정책 변화</div>
+      <div style="font-size:8.5pt;color:#4e5968;line-height:1.7;">
+        2024년 7월 유튜브가 양산형 AI 콘텐츠를 수익 창출 대상에서 제외. 기존 "AI로 유튜브 자동화" 강의 커리큘럼의 <b>핵심 가치가 훼손</b>됨. 이 때문에 "현실 부업" 방향으로의 피벗이 필요한 상황. <b>부업클래스와의 협업 동기가 여기서 출발.</b>
+      </div>
+    </div>
+
+    <div class="sec-title">경쟁 환경 (부업 교육 시장)</div>
+    <table class="comp-table">
+      <tr><th>채널/플랫폼</th><th>구독자</th><th>포지셔닝</th><th>차이점</th></tr>
+      <tr><td>신사임당 (주언규)</td><td>~166만</td><td>유튜브 성장 전반</td><td>범용적, AI 특화 X</td></tr>
+      <tr><td>AI부업왕</td><td>성장중</td><td>AI 부업</td><td class="risk">직접 경쟁</td></tr>
+      <tr><td>부업매니아</td><td>수만</td><td>투잡/N잡 종합</td><td>AI 특화 X</td></tr>
+      <tr><td>머니몬스터</td><td class="highlight">35만</td><td>AI + 현실 부업</td><td class="highlight">카테고리 1위급</td></tr>
+    </table>
+
+    <div class="sec-title">우리 비용 구조</div>
+    <div class="card" style="padding:18px 22px;border-left:4px solid #3182f6;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <div>
+          <div style="font-size:8pt;font-weight:700;color:#8b95a1;">부업클래스 제작비</div>
+          <div style="font-size:20pt;font-weight:800;color:#191f28;letter-spacing:-1px;margin-top:4px;">350만원</div>
+          <div style="font-size:8pt;color:#6b7684;margin-top:4px;">기획 / 촬영 / 편집 / 광고 세팅 / 퍼널 구축 포함</div>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:8pt;font-weight:700;color:#8b95a1;">BEP (295만원 / 6:4)</div>
+          <div style="font-size:14pt;font-weight:800;color:#3182f6;margin-top:4px;">3명</div>
+          <div style="font-size:8pt;color:#6b7684;margin-top:4px;">Flowmus 몫 118만원 x 3 = 354만원</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-green">
+      <div style="font-size:9.5pt;font-weight:800;color:#1b8a4a;margin-bottom:6px;">판단: 즉시 진행 가치 높음</div>
+      <div style="font-size:8.5pt;color:#4e5968;line-height:1.7;">
+        구독자 35만 + 기존 수강생 1,000명 = <b>자체 모객력이 이미 검증됨.</b> BEP 3명은 리스크 거의 없음. 핵심은 "AI 유튜브"에서 "현실 부업"으로 <b>커리큘럼 전환이 얼마나 자연스러운지</b> 확인하는 것.
+      </div>
+    </div>
+
+  </div>
+  <div class="pf"><span>Flowmus Internal</span><span>머니몬스터 — 강사 스크리닝</span></div>
+</div>
+
+<!-- ══════════ PAGE 2 — 수익 구조 + 인터뷰 질문 ══════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="ph">
+      <div class="ph-label">INTERVIEW</div>
+      <h2>강사 미팅 질문</h2>
+      <div class="ph-sub">기존 채널 + 현실 부업 전환 + 퍼널 구조 중심</div>
+    </div>
+
+    <div class="profile-grid">
+      <div class="profile-item">
+        <div class="label">강사명</div>
+        <div class="value">머니몬스터 (moneymonsterTV)</div>
+      </div>
+      <div class="profile-item">
+        <div class="label">유튜브</div>
+        <div class="value">@머니몬스터 / 35만 구독자</div>
+      </div>
+      <div class="profile-item">
+        <div class="label">새 강의 주제</div>
+        <div class="value">현실 부업 (숏폼 편집/크몽/당근 대행)</div>
+      </div>
+      <div class="profile-item">
+        <div class="label">강의 가격</div>
+        <div class="value">295만원 (확정)</div>
+      </div>
+    </div>
+
+    <!-- A. 기존 강의 실적 -->
+    <div class="q-block">
+      <div class="q-block-head">
+        <div class="q-block-title">A. 기존 강의 실적</div>
+        <div class="q-block-time">7분</div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-num">1</div>
+        <div class="q-text">인베이더스쿨 강의 <em>수강생이 정확히 몇 명</em>이고, 기수별 규모는 어떻게 되나요?
+          <span class="q-hint">1,000명이면 기당 50~100명 x 10~20기 추정. 규모감 확인</span>
+          <div class="q-answer">&nbsp;</div></div>
+      </div>
+      <div class="q-item">
+        <div class="q-num">2</div>
+        <div class="q-text">기존 수강료는 <em>얼마</em>였고, <em>완주율</em>과 <em>만족도</em>는?
+          <span class="q-hint">가격대 + 완주율이 다음 강의 전환율 예측의 핵심</span>
+          <div class="q-answer">&nbsp;</div></div>
+      </div>
+      <div class="q-item">
+        <div class="q-num">3</div>
+        <div class="q-text">수강생 중 <em>실제로 수익을 낸 비율</em>은? 최고 수익 사례는?
+          <span class="q-hint">"수강생 출신 PD"가 있다는 것 자체가 큰 강점. 구체 수치 확인</span>
+          <div class="q-answer">&nbsp;</div></div>
+      </div>
+    </div>
+
+    <div style="height:6px;"></div>
+
+    <!-- B. AI 정책 리스크 + 피벗 -->
+    <div class="q-block">
+      <div class="q-block-head">
+        <div class="q-block-title">B. AI 정책 리스크 + 피벗</div>
+        <div class="q-block-time">5분 &middot; 핵심</div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-num orange">4</div>
+        <div class="q-text">유튜브 AI 콘텐츠 삭제 정책 이후, 기존 수강생들 <em>반응</em>은 어땠나요?
+          <span class="q-hint">환불 요청? 불만? 아니면 이미 다른 방향으로 전환한 수강생?</span>
+          <div class="q-answer">&nbsp;</div></div>
+      </div>
+      <div class="q-item">
+        <div class="q-num orange">5</div>
+        <div class="q-text">"현실 부업"으로 피벗하면, 기존 시청자층이 <em>따라올 거라고 보시나요?</em>
+          <span class="q-hint">기존 시청자 = "쉽게 돈 벌기" 기대. 현실 부업은 노동 필요. 갭 확인</span>
+          <div class="q-answer">&nbsp;</div></div>
+      </div>
+      <div class="q-item">
+        <div class="q-num orange">6</div>
+        <div class="q-text">숏폼 편집/크몽/당근 대행을 <em>본인이 직접 해보셨나요?</em> 실제 수익은?
+          <span class="q-hint">가르치려면 본인이 해봤어야 함. "대행사 운영" 경험 여부 핵심</span>
+          <div class="q-answer">&nbsp;</div></div>
+      </div>
+    </div>
+
+    <div style="height:6px;"></div>
+
+    <!-- C. 퍼널 + 대행사 구조 -->
+    <div class="q-block">
+      <div class="q-block-head">
+        <div class="q-block-title">C. 퍼널 + 대행사 레버리지</div>
+        <div class="q-block-time">8분 &middot; 핵심</div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-num green">7</div>
+        <div class="q-text">"강의 듣고 바로 일거리 연결" 구조에 대해 <em>어떻게 생각</em>하시나요?
+          <span class="q-hint">이 퍼널이 경쟁사와의 결정적 차별점. 강사가 이 구조에 공감해야 함</span>
+          <div class="q-answer">&nbsp;</div></div>
+      </div>
+      <div class="q-item">
+        <div class="q-num green">8</div>
+        <div class="q-text">본인 채널에서 <em>월 몇 건의 숏폼/편집 물량</em>이 나올 수 있나요?
+          <span class="q-hint">머니몬스터 채널 자체가 일거리 소스. 월 8~12건 예상했는데 실제는?</span>
+          <div class="q-answer">&nbsp;</div></div>
+      </div>
+      <div class="q-item">
+        <div class="q-num green">9</div>
+        <div class="q-text">수강생이 만든 결과물의 <em>품질 관리</em>는 어떻게 하실 건가요?
+          <span class="q-hint">대행사 구조의 최대 리스크 = 품질. 검수 프로세스 있는지 확인</span>
+          <div class="q-answer">&nbsp;</div></div>
+      </div>
+      <div class="q-item">
+        <div class="q-num green">10</div>
+        <div class="q-text">기존 수강생 중 <em>대행사/프리랜서로 전환</em>한 사례가 있나요?
+          <span class="q-hint">이미 전환 사례 있으면 = 퍼널 검증 완료. 없으면 = 처음 시도</span>
+          <div class="q-answer">&nbsp;</div></div>
+      </div>
+    </div>
+
+    <div style="height:6px;"></div>
+
+    <!-- D. 수익 분배 + 일정 -->
+    <div class="q-block">
+      <div class="q-block-head">
+        <div class="q-block-title">D. 수익 분배 + 일정</div>
+        <div class="q-block-time">5분</div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-num blue">11</div>
+        <div class="q-text">수익 분배 <em>6:4 (강사:Flowmus)</em> 구조에 대해 어떻게 보시나요?
+          <span class="q-hint">기획/촬영/편집/모객/운영 전부 우리 담당. 강사는 출연+노하우만</span>
+          <div class="q-answer">&nbsp;</div></div>
+      </div>
+      <div class="q-item">
+        <div class="q-num blue">12</div>
+        <div class="q-text"><em>무료 특강</em> 또는 <em>유튜브 라이브</em>로 1차 테스트 가능하신가요?
+          <span class="q-hint">무료 특강 → 전환율 측정 → 본 강의 런칭. 가장 안전한 검증 루트</span>
+          <div class="q-answer">&nbsp;</div></div>
+      </div>
+      <div class="q-item">
+        <div class="q-num blue">13</div>
+        <div class="q-text">런칭 <em>목표 시점</em>은? 커리큘럼 초안은 언제까지 가능한가요?
+          <span class="q-hint">1개월 내 초안 → 2개월 내 런칭이 이상적</span>
+          <div class="q-answer">&nbsp;</div></div>
+      </div>
+    </div>
+
+    <div class="card-orange" style="margin-top:10px;">
+      <div style="font-size:8.5pt;color:#6b5900;line-height:1.7;">
+        <b>미팅 핵심 확인 3가지:</b><br>
+        1. 본인이 숏폼 편집/대행을 <b>직접 해본 경험</b>이 있는지<br>
+        2. 기존 수강생의 <b>실제 수익 사례</b>가 있는지<br>
+        3. "강의 → 일거리 연결" 퍼널에 <b>진심으로 공감</b>하는지
+      </div>
+    </div>
+
+  </div>
+  <div class="pf"><span>Flowmus Internal</span><span>머니몬스터 — 강사 스크리닝</span></div>
+</div>
+
+<!-- ══════════ PAGE 3 — 스코어카드 + 판정 ══════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="ph">
+      <div class="ph-label">SCORECARD</div>
+      <h2>스코어카드 + 판정</h2>
+    </div>
+
+    <div class="sec-title" style="margin-top:0;">스코어카드 <span style="font-size:8pt;font-weight:500;color:#8b95a1;margin-left:8px;">미팅 직후 작성 / 11항목 / 55점 만점</span></div>
+
+    <div class="card-outline" style="padding:18px 22px;">
+      <div class="sc-item">
+        <div class="sc-left">
+          <div class="sc-name">1. 오디언스 규모</div>
+          <div class="sc-desc">1: 1K 미만 / 3: 10K~100K / 5: 100K+ <span class="tag tag-green">35만 = 5점 예상</span></div>
+        </div>
+        <div class="sc-score">/5</div>
+      </div>
+      <div class="sc-item">
+        <div class="sc-left">
+          <div class="sc-name">2. 강의 경험</div>
+          <div class="sc-desc">1: 없음 / 3: 100명 미만 / 5: 100명+ 기수 운영 <span class="tag tag-green">1,000명 = 5점 예상</span></div>
+        </div>
+        <div class="sc-score">/5</div>
+      </div>
+      <div class="sc-item">
+        <div class="sc-left">
+          <div class="sc-name">3. 수강생 수익 사례</div>
+          <div class="sc-desc">1: 없음 / 3: 1~3명 / 5: 5명+ 증빙 있음</div>
+        </div>
+        <div class="sc-score">/5</div>
+      </div>
+      <div class="sc-item">
+        <div class="sc-left">
+          <div class="sc-name">4. 본인 실전 경험</div>
+          <div class="sc-desc">1: 이론만 / 3: 경험 있음 / 5: 현재 수익 발생 중</div>
+        </div>
+        <div class="sc-score">/5</div>
+      </div>
+      <div class="sc-item">
+        <div class="sc-left">
+          <div class="sc-name">5. 커리큘럼 전환 자연스러움</div>
+          <div class="sc-desc">1: AI 유튜브와 동떨어짐 / 3: 연결 가능 / 5: 자연스러운 확장 <span class="tag tag-orange">핵심 확인</span></div>
+        </div>
+        <div class="sc-score">/5</div>
+      </div>
+      <div class="sc-item">
+        <div class="sc-left">
+          <div class="sc-name">6. 퍼널 구조 공감도</div>
+          <div class="sc-desc">1: 무관심 / 3: 이해함 / 5: 적극 참여 의지</div>
+        </div>
+        <div class="sc-score">/5</div>
+      </div>
+      <div class="sc-item">
+        <div class="sc-left">
+          <div class="sc-name">7. 일거리 공급 가능성</div>
+          <div class="sc-desc">1: 물량 없음 / 3: 월 5~10건 / 5: 월 10건+</div>
+        </div>
+        <div class="sc-score">/5</div>
+      </div>
+      <div class="sc-item">
+        <div class="sc-left">
+          <div class="sc-name">8. 품질 관리 의지</div>
+          <div class="sc-desc">1: 관심 없음 / 3: 필요성 인지 / 5: 검수 프로세스 제안</div>
+        </div>
+        <div class="sc-score">/5</div>
+      </div>
+      <div class="sc-item">
+        <div class="sc-left">
+          <div class="sc-name">9. 광고 소재력</div>
+          <div class="sc-desc">1: 소재 없음 / 3: 사진/영상 있음 / 5: 수익 인증+후기+비포애프터</div>
+        </div>
+        <div class="sc-score">/5</div>
+      </div>
+      <div class="sc-item">
+        <div class="sc-left">
+          <div class="sc-name">10. 제작 준비도</div>
+          <div class="sc-desc">1: 구상 없음 / 3: 커리큘럼 있음 / 5: 즉시 촬영 가능</div>
+        </div>
+        <div class="sc-score">/5</div>
+      </div>
+      <div class="sc-item">
+        <div class="sc-left">
+          <div class="sc-name">11. "성공팔이" 리스크</div>
+          <div class="sc-desc">1: 높음 (과장 많음) / 3: 보통 / 5: 낮음 (팩트 기반) <span class="tag tag-red">확인 필수</span></div>
+        </div>
+        <div class="sc-score">/5</div>
+      </div>
+      <div class="sc-total">
+        <div class="sc-total-label">합계</div>
+        <div class="sc-total-score">__ / 55</div>
+      </div>
+    </div>
+
+    <div class="verdict-grid">
+      <div class="vd go">
+        <div class="vd-score">44+</div>
+        <div class="vd-label">즉시 계약</div>
+        <div class="vd-desc">계약서 발송</div>
+      </div>
+      <div class="vd cond">
+        <div class="vd-score">33-43</div>
+        <div class="vd-label">조건부</div>
+        <div class="vd-desc">약점 보완 후 계약</div>
+      </div>
+      <div class="vd hold">
+        <div class="vd-score">22-32</div>
+        <div class="vd-label">보류</div>
+        <div class="vd-desc">2차 미팅</div>
+      </div>
+      <div class="vd no">
+        <div class="vd-score">~21</div>
+        <div class="vd-label">거절</div>
+        <div class="vd-desc">다음에</div>
+      </div>
+    </div>
+
+    <div style="margin-top:12px;">
+      <div class="sec-title" style="margin-top:0;">미팅 기록</div>
+      <div class="card-outline" style="padding:18px 22px;">
+        <div class="rec-item"><div class="rec-label">미팅 일시</div><div class="rec-value">2026. 05. 04</div></div>
+        <div class="rec-item"><div class="rec-label">강사명</div><div class="rec-value">머니몬스터 (moneymonsterTV)</div></div>
+        <div class="rec-item"><div class="rec-label">강의 주제</div><div class="rec-value">현실 부업 (숏폼 편집/크몽/당근 대행)</div></div>
+        <div class="rec-item"><div class="rec-label">유튜브 구독자</div><div class="rec-value">35만</div></div>
+        <div class="rec-item"><div class="rec-label">기존 수강생 수</div><div class="rec-value empty">&nbsp;</div></div>
+        <div class="rec-item"><div class="rec-label">기존 수강료</div><div class="rec-value empty">&nbsp;</div></div>
+        <div class="rec-item"><div class="rec-label">수익 분배</div><div class="rec-value">6:4 (강사:Flowmus)</div></div>
+        <div class="rec-item"><div class="rec-label">스코어 합계</div><div class="rec-value empty">______ / 55</div></div>
+        <div class="rec-item"><div class="rec-label">판정</div><div class="rec-value empty">즉시 / 조건부 / 보류 / 거절</div></div>
+        <div class="rec-item"><div class="rec-label">핵심 리스크</div><div class="rec-value empty">&nbsp;</div></div>
+        <div class="rec-item"><div class="rec-label">다음 액션</div><div class="rec-value empty">&nbsp;</div></div>
+      </div>
+    </div>
+
+  </div>
+  <div class="pf"><span>Flowmus Internal</span><span>머니몬스터 — 강사 스크리닝</span></div>
+</div>
+
+</body>
+</html>
