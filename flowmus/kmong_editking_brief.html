@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>편집왕 — 크몽 상세페이지 카피 브리프</title>
+<title>편집왕 — 크몽 상세페이지 카피 브리프 v2</title>
 <style>
   :root {
     --blue: #3182f6; --blue-light: #f2f7ff;
     --green: #1b8a4a; --green-light: #edf8f0;
     --orange: #c67a00; --orange-light: #fff8eb;
     --red: #e02020; --red-light: #fff0f0;
+    --purple: #7c3aed; --purple-light: #f3f0ff;
     --gray-50: #f9fafb; --gray-100: #f2f4f6; --gray-200: #e5e8eb;
     --gray-500: #8b95a1; --gray-600: #6b7684; --gray-700: #4e5968; --gray-900: #191f28;
   }
@@ -62,6 +63,7 @@
   .card-green { background: var(--green-light); border-radius: 16px; padding: 20px 24px; margin: 14px 0; }
   .card-orange { background: var(--orange-light); border-radius: 16px; padding: 20px 24px; margin: 14px 0; }
   .card-red { background: var(--red-light); border-radius: 16px; padding: 20px 24px; margin: 14px 0; }
+  .card-purple { background: var(--purple-light); border-radius: 16px; padding: 20px 24px; margin: 14px 0; }
   .card-dark { background: var(--gray-900); color: #fff; border-radius: 16px; padding: 24px; margin: 14px 0; }
 
   h3 { font-size: 12pt; font-weight: 800; margin-bottom: 10px; letter-spacing: -0.5px; }
@@ -72,6 +74,13 @@
   .em-green { color: var(--green); font-weight: 700; }
   .em-orange { color: var(--orange); font-weight: 700; }
   .em-red { color: var(--red); font-weight: 700; }
+  .em-purple { color: var(--purple); font-weight: 700; }
+
+  .big-quote {
+    font-size: 16pt; font-weight: 800; letter-spacing: -1px; line-height: 1.4;
+    color: var(--gray-900); margin: 16px 0;
+  }
+  .big-quote.white { color: #fff; }
 
   .tag {
     display: inline-block; font-size: 7.5pt; font-weight: 700; padding: 3px 10px;
@@ -80,13 +89,14 @@
   .tag-blue { background: var(--blue); color: #fff; }
   .tag-green { background: var(--green); color: #fff; }
   .tag-orange { background: var(--orange); color: #fff; }
+  .tag-red { background: var(--red); color: #fff; }
   .tag-gray { background: var(--gray-200); color: var(--gray-700); }
 
   table { width: 100%; border-collapse: collapse; font-size: 9pt; margin: 12px 0; }
   th { background: var(--gray-100); padding: 10px 12px; text-align: left; font-weight: 700; font-size: 8pt; color: var(--gray-600); }
   td { padding: 10px 12px; border-bottom: 1px solid var(--gray-100); }
 
-  .process-step { display: flex; gap: 14px; margin: 12px 0; align-items: flex-start; }
+  .process-step { display: flex; gap: 14px; margin: 10px 0; align-items: flex-start; }
   .step-num {
     width: 32px; height: 32px; border-radius: 50%; background: var(--blue);
     color: #fff; display: flex; align-items: center; justify-content: center;
@@ -98,12 +108,22 @@
 
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 12px 0; }
   .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 12px 0; }
+  .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; margin: 12px 0; }
 
   .stat-box { text-align: center; padding: 20px 16px; background: var(--gray-50); border-radius: 14px; }
+  .stat-box-dark { text-align: center; padding: 20px 16px; background: rgba(255,255,255,0.08); border-radius: 14px; }
   .stat-num { font-size: 22pt; font-weight: 800; color: var(--blue); letter-spacing: -1px; }
+  .stat-num.white { color: #fff; }
   .stat-label { font-size: 8pt; color: var(--gray-600); margin-top: 4px; }
+  .stat-label.white { color: var(--gray-500); }
 
-  .faq-item { margin: 12px 0; }
+  .before-after { display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; align-items: center; margin: 14px 0; }
+  .ba-box { padding: 20px; border-radius: 14px; }
+  .ba-before { background: var(--red-light); }
+  .ba-after { background: var(--green-light); }
+  .ba-arrow { font-size: 20pt; color: var(--gray-500); font-weight: 800; }
+
+  .faq-item { margin: 10px 0; }
   .faq-q { font-size: 10pt; font-weight: 700; color: var(--gray-900); margin-bottom: 4px; }
   .faq-a { font-size: 9pt; color: var(--gray-600); line-height: 1.7; padding-left: 16px; border-left: 3px solid var(--blue-light); }
 
@@ -112,12 +132,17 @@
   .note { font-size: 8pt; color: var(--gray-500); background: var(--gray-50); padding: 12px 16px; border-radius: 10px; margin-top: 14px; line-height: 1.6; }
   .divider { height: 1px; background: var(--gray-200); margin: 20px 0; }
 
+  .flow-section { text-align: center; padding: 12px 0; }
+  .flow-arrow { font-size: 14pt; color: var(--gray-200); }
+
   @media screen and (max-width: 800px) {
     .page { width: 100%; min-height: auto; }
     .pi { padding: 28px 20px; }
     .cover-top { padding: 0 28px; }
     .cover-bottom { padding: 28px; }
-    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    .before-after { grid-template-columns: 1fr; }
+    .ba-arrow { transform: rotate(90deg); text-align: center; }
   }
 </style>
 </head>
@@ -126,11 +151,11 @@
 <!-- ==================== PAGE 1: COVER ==================== -->
 <div class="page cover">
   <div class="cover-top">
-    <div class="cover-badge">KMONG SERVICE BRIEF</div>
+    <div class="cover-badge">KMONG SERVICE BRIEF v2</div>
     <div class="cover-title">편집왕<br>크몽 상세페이지 카피</div>
     <div class="cover-desc">
-      외주 디자이너에게 전달할 상세페이지 전체 카피.<br>
-      서비스 제목 / 후킹 / 소개글 / 패키지 / 프로세스 / FAQ 포함.
+      상세페이지 구조: 후킹 → 공포 → 증거 → 해결 → 구매 유도<br>
+      고가 세일즈 랜딩페이지 흐름으로 설계한 디자이너 전달용 브리프.
     </div>
   </div>
   <div class="cover-bottom">
@@ -144,163 +169,313 @@
   </div>
 </div>
 
-<!-- ==================== PAGE 2: 서비스 제목 + 후킹 ==================== -->
+<!-- ==================== PAGE 2: HOOK + FEAR ==================== -->
 <div class="page">
   <div class="pi">
 
     <div class="ph">
-      <div class="ph-label">SECTION 01</div>
-      <h2>서비스 제목 + 후킹</h2>
-      <div class="ph-sub">크몽 검색 결과에서 클릭을 유도하는 첫 인상</div>
+      <div class="ph-label">STEP 01 — HOOK</div>
+      <h2>첫 화면에서 스크롤을 멈춰라</h2>
+      <div class="ph-sub">상세페이지 진입 후 3초 안에 "이건 나한테 필요하다"를 느끼게 하는 구간</div>
     </div>
 
+    <!-- 메인 후킹 -->
     <div class="card-dark">
-      <div class="small" style="color:#8b95a1; margin-bottom:8px;">크몽 서비스 제목</div>
-      <h3 style="font-size:14pt; color:#fff; margin-bottom:0;">영상 1개로 5,000만원 만든 팀이 숏폼 기획/촬영/편집 해드립니다</h3>
+      <div class="small" style="color:#8b95a1; margin-bottom:12px;">크몽 서비스 제목</div>
+      <h3 style="font-size:15pt; color:#fff; margin-bottom:0;">영상 1개로 5,000만원 만든 팀이 숏폼 기획/촬영/편집 해드립니다</h3>
     </div>
 
-    <div class="card">
-      <div class="tag tag-blue">서브 키워드 (검색 노출용)</div>
-      <p>SNS 숏폼 / 릴스 / 쇼츠 / 틱톡 / 소상공인 영상 / 매장 홍보 / 숏폼 대행 / 영상 제작</p>
-    </div>
-
-    <div class="divider"></div>
-
-    <h3>상세페이지 첫 화면 — 후킹 섹션</h3>
-
+    <!-- 서브 후킹 — 도발형 질문 -->
     <div class="card-red">
-      <div class="tag tag-orange">문제 제기</div>
-      <h4>"영상 만들었는데 왜 손님이 안 올까요?"</h4>
-      <p style="color:var(--gray-700);">
-        예쁘기만 한 영상은 조회수도, 매출도 만들지 못합니다.<br>
-        대부분의 영상이 실패하는 이유는 단 하나 — <b>구조가 없기 때문</b>입니다.
-      </p>
-    </div>
-
-    <div class="card-blue">
-      <div class="tag tag-blue">해결 제시</div>
-      <h4>편집왕은 "매출이 나오는 구조"를 만듭니다</h4>
+      <div class="tag tag-red">HOOK: 도발형 질문</div>
+      <div class="big-quote">"100만원 주고 만든 영상,<br>조회수 200이면 어떤 기분이세요?"</div>
       <p>
-        유튜브 채널 총 50만 구독자를 직접 운영하며,<br>
-        <span class="em">단일 영상 1개로 매출 5,000만원</span>을 만든 팀입니다.<br><br>
-        그 구조 그대로 대표님 가게 영상에 설계해드립니다.
+        실제로 대부분의 소상공인 영상이 이렇습니다.<br>
+        예쁘게 찍었고, 편집도 깔끔한데 — <span class="em-red">손님이 안 옵니다.</span>
       </p>
     </div>
 
     <div class="divider"></div>
 
-    <h3>신뢰 지표 — 숫자 섹션</h3>
-    <div class="small" style="margin-bottom:8px;">디자이너 참고: 아이콘 + 큰 숫자로 시각화</div>
+    <div class="ph">
+      <div class="ph-label">STEP 02 — FEAR</div>
+      <h2>영상이 실패하는 진짜 이유 3가지</h2>
+      <div class="ph-sub">문제를 정확히 짚어서 "맞아, 나도 그랬어"를 끌어내는 구간</div>
+    </div>
 
     <div class="grid-3">
+      <div class="card" style="margin:0; border-left: 3px solid var(--red);">
+        <div class="tag tag-red">실패 원인 1</div>
+        <h4>후킹이 없다</h4>
+        <p>첫 2초에 스크롤을 멈출 장치가 없으면<br><b>아무도 안 봅니다.</b><br>예쁜 영상도, 비싼 영상도 마찬가지입니다.</p>
+      </div>
+      <div class="card" style="margin:0; border-left: 3px solid var(--red);">
+        <div class="tag tag-red">실패 원인 2</div>
+        <h4>구조가 없다</h4>
+        <p>보는 사람이 행동하게 만드는 흐름이 없으면<br><b>그냥 스쳐 지나갑니다.</b><br>예쁜 영상 ≠ 매출 나는 영상.</p>
+      </div>
+      <div class="card" style="margin:0; border-left: 3px solid var(--red);">
+        <div class="tag tag-red">실패 원인 3</div>
+        <h4>타겟이 없다</h4>
+        <p>"모두에게" 만든 영상은<br><b>아무에게도 도달하지 못합니다.</b><br>내 가게 손님이 누군지부터 정해야 합니다.</p>
+      </div>
+    </div>
+
+    <div class="card-orange" style="margin-top:16px;">
+      <p style="text-align:center; font-size:10pt;">
+        <span class="em-orange">결론:</span> 영상이 문제가 아닙니다. <b>"매출이 나는 구조"</b>가 없는 게 문제입니다.
+      </p>
+    </div>
+
+    <div class="footer">
+      <span>편집왕 — 크몽 상세페이지 카피 브리프 v2</span>
+      <span>2 / 6</span>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PAGE 3: PROOF — 우리는 누구인가 ==================== -->
+<div class="page">
+  <div class="pi">
+
+    <div class="ph">
+      <div class="ph-label">STEP 03 — PROOF</div>
+      <h2>그래서 누가 만드는데?</h2>
+      <div class="ph-sub">"이 팀은 진짜다"를 숫자와 실적으로 증명하는 구간</div>
+    </div>
+
+    <!-- 정체 공개 -->
+    <div class="card-dark">
+      <div class="small" style="color:#8b95a1; margin-bottom:8px;">디자이너 참고: 유튜브 채널 캡처 이미지 배치</div>
+      <div class="big-quote white">유튜브 '사장찍어주는남자'<br>직접 운영하는 팀입니다.</div>
+      <p style="color:#8b95a1;">
+        영상 제작사가 아닙니다.<br>
+        유튜브 채널을 직접 기획/촬영/편집/운영하면서<br>
+        어떤 영상이 터지고, 어떤 영상이 죽는지 매일 데이터로 봅니다.
+      </p>
+    </div>
+
+    <!-- 숫자 섹션 -->
+    <div class="small" style="margin:16px 0 8px;">디자이너 참고: 큰 숫자 + 아이콘으로 강렬하게</div>
+
+    <div class="grid-4">
       <div class="stat-box">
         <div class="stat-num">50만+</div>
         <div class="stat-label">유튜브 총 구독자</div>
       </div>
       <div class="stat-box">
         <div class="stat-num">5,000만</div>
-        <div class="stat-label">단일 영상 최고 매출</div>
+        <div class="stat-label">단일 영상 매출</div>
       </div>
       <div class="stat-box">
         <div class="stat-num">300+</div>
-        <div class="stat-label">누적 영상 제작 수</div>
+        <div class="stat-label">누적 영상 제작</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">수백 건</div>
+        <div class="stat-label">소상공인 촬영</div>
       </div>
     </div>
 
+    <div class="divider"></div>
+
+    <!-- Before / After -->
+    <h3>실제 결과 — Before vs After</h3>
+    <div class="small" style="margin-bottom:8px;">디자이너 참고: 실제 사례 이미지로 교체 (포트폴리오 확보 후)</div>
+
+    <div class="before-after">
+      <div class="ba-box ba-before">
+        <div class="tag tag-red">BEFORE</div>
+        <h4>그냥 찍은 매장 영상</h4>
+        <p>
+          조회수 200~500<br>
+          문의 0건<br>
+          "예쁘긴 한데..." 반응
+        </p>
+      </div>
+      <div class="ba-arrow">→</div>
+      <div class="ba-box ba-after">
+        <div class="tag tag-green">AFTER</div>
+        <h4>편집왕이 구조를 잡은 영상</h4>
+        <p>
+          조회수 5만~50만+<br>
+          문의 폭주<br>
+          "이 가게 어디예요?" 댓글
+        </p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 차별점 3가지 -->
+    <h3>일반 영상 제작사 vs 편집왕</h3>
+
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th style="text-align:center; color:var(--gray-500);">일반 제작사</th>
+          <th style="text-align:center; color:var(--blue); background:var(--blue-light);">편집왕</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><b>기획</b></td>
+          <td style="text-align:center;">클라이언트가 알려준 대로</td>
+          <td style="text-align:center; color:var(--blue); font-weight:700;">데이터 기반 후킹 구조 설계</td>
+        </tr>
+        <tr>
+          <td><b>목표</b></td>
+          <td style="text-align:center;">예쁜 영상 납품</td>
+          <td style="text-align:center; color:var(--blue); font-weight:700;">매출이 나는 영상 납품</td>
+        </tr>
+        <tr>
+          <td><b>경험</b></td>
+          <td style="text-align:center;">편집 기술 중심</td>
+          <td style="text-align:center; color:var(--blue); font-weight:700;">50만 채널 직접 운영 경험</td>
+        </tr>
+        <tr>
+          <td><b>소통</b></td>
+          <td style="text-align:center;">촬영팀/편집팀 따로</td>
+          <td style="text-align:center; color:var(--blue); font-weight:700;">기획~납품 한 팀 원스톱</td>
+        </tr>
+        <tr>
+          <td><b>알고리즘</b></td>
+          <td style="text-align:center;">모름</td>
+          <td style="text-align:center; color:var(--blue); font-weight:700;">매일 데이터로 분석</td>
+        </tr>
+      </tbody>
+    </table>
+
     <div class="footer">
-      <span>편집왕 — 크몽 상세페이지 카피 브리프</span>
-      <span>2 / 5</span>
+      <span>편집왕 — 크몽 상세페이지 카피 브리프 v2</span>
+      <span>3 / 6</span>
     </div>
   </div>
 </div>
 
-<!-- ==================== PAGE 3: 소개글 본문 + 이런 분들 ==================== -->
+<!-- ==================== PAGE 4: SOLUTION — 이렇게 만듭니다 ==================== -->
 <div class="page">
   <div class="pi">
 
     <div class="ph">
-      <div class="ph-label">SECTION 02</div>
-      <h2>소개글 본문</h2>
-      <div class="ph-sub">서비스 설명 영역 — 문제 → 해결 → 증거 → CTA 구조</div>
+      <div class="ph-label">STEP 04 — SOLUTION</div>
+      <h2>이렇게 만들어드립니다</h2>
+      <div class="ph-sub">구체적인 작업 프로세스와 "내가 할 일은 없다"를 느끼게 하는 구간</div>
     </div>
 
-    <div class="card">
-      <h4>소상공인 영상, 왜 효과가 없었을까?</h4>
-      <p style="margin-top:8px;">
-        <b>1. 후킹이 없다</b> — 첫 2초에 스크롤을 멈출 장치가 없으면 아무도 안 봅니다<br>
-        <b>2. 구조가 없다</b> — 예쁜 영상 ≠ 매출 나는 영상. 보는 사람이 행동하게 만드는 흐름이 필요합니다<br>
-        <b>3. 타겟이 없다</b> — "모두에게" 만든 영상은 아무에게도 도달하지 못합니다
-      </p>
+    <!-- 프로세스 -->
+    <h3>작업 프로세스 5단계</h3>
+
+    <div class="process-step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h4>상담 — 대표님 가게를 파악합니다</h4>
+        <p>업종, 타겟 고객, 경쟁 매장 분석. "어떤 영상을 만들지"를 저희가 먼저 제안합니다.</p>
+      </div>
     </div>
 
-    <div class="card-green">
-      <h4>편집왕이 다른 점</h4>
-      <p style="color:var(--gray-700);">
-        저희는 영상 제작사가 아닙니다.<br>
-        <span class="em-green">유튜브 50만 채널을 직접 운영하는 콘텐츠 팀</span>입니다.<br><br>
-        어떤 썸네일이 클릭되는지, 어떤 구조가 끝까지 보게 하는지,<br>
-        어떤 CTA가 실제 방문/구매로 이어지는지 — 데이터로 압니다.<br><br>
-        기획부터 촬영, 편집까지 한 팀이 원스톱으로 진행합니다.<br>
-        대표님은 가게 운영에만 집중하세요.
+    <div class="process-step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h4>기획 — 매출이 나는 구조를 설계합니다</h4>
+        <p>후킹 포인트, 콘티(스토리보드), 자막 흐름까지. 대표님은 컨펌만 해주시면 됩니다.</p>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h4>촬영 — 장비 들고 찾아갑니다</h4>
+        <p>카메라/조명/마이크 전부 지참. 대표님은 평소처럼 가게 운영만 하시면 됩니다.</p>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h4>편집 — 알고리즘이 좋아하는 구조로 편집합니다</h4>
+        <p>자막/BGM/효과 포함. 1차 시안 확인 후 수정 반영해서 최종본 완성.</p>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <h4>납품 — 바로 올릴 수 있게 드립니다</h4>
+        <p>인스타 릴스 / 유튜브 쇼츠 / 틱톡 — 플랫폼별 맞춤 사이즈로 납품.</p>
+      </div>
+    </div>
+
+    <div class="card-blue">
+      <p style="text-align:center; font-size:10pt;">
+        <span class="em">대표님이 하실 일:</span> 상담 때 가게 이야기 해주시기 + 콘티 컨펌 + 촬영 날 문 열어주시기<br>
+        <b>나머지는 전부 저희가 합니다.</b>
       </p>
     </div>
 
     <div class="divider"></div>
 
-    <h3>이런 대표님께 추천합니다</h3>
-    <div class="small" style="margin-bottom:8px;">디자이너 참고: 체크 아이콘 + 리스트 형태</div>
-
-    <div class="card">
-      <p>
-        &#10003; 인스타/쇼츠 올리고 싶은데 뭘 찍어야 할지 모르겠는 분<br>
-        &#10003; 촬영팀 따로, 편집팀 따로 맡기기 번거로운 분<br>
-        &#10003; 영상 만들었는데 조회수도 문의도 없었던 분<br>
-        &#10003; "우리 가게도 숏폼 하면 손님 올까?" 고민 중인 분<br>
-        &#10003; 직접 찍기엔 시간이 없고, 퀄리티도 걱정인 분
-      </p>
-    </div>
-
-    <div class="divider"></div>
-
-    <h3>이런 업종에서 효과적입니다</h3>
+    <!-- 이런 분들 -->
+    <h3>이런 대표님, 지금 연락하세요</h3>
 
     <div class="grid-2">
-      <div class="card" style="margin:0;">
-        <div class="tag tag-gray">요식업</div>
-        <p>카페 / 음식점 / 베이커리 / 디저트</p>
+      <div class="card" style="margin:0; border-left:3px solid var(--blue);">
+        <h4>"뭘 찍어야 할지 모르겠어요"</h4>
+        <p>컨셉부터 기획까지 저희가 제안합니다</p>
       </div>
-      <div class="card" style="margin:0;">
-        <div class="tag tag-gray">뷰티</div>
-        <p>네일샵 / 피부과 / 헤어살롱 / 에스테틱</p>
+      <div class="card" style="margin:0; border-left:3px solid var(--blue);">
+        <h4>"영상 만들었는데 효과가 없었어요"</h4>
+        <p>구조가 없었을 가능성이 높습니다</p>
       </div>
-      <div class="card" style="margin:0;">
-        <div class="tag tag-gray">헬스/웰니스</div>
-        <p>헬스장 / 필라테스 / 요가 / PT</p>
+      <div class="card" style="margin:0; border-left:3px solid var(--blue);">
+        <h4>"촬영팀/편집팀 따로 소통이 힘들어요"</h4>
+        <p>한 팀이 처음부터 끝까지 합니다</p>
       </div>
-      <div class="card" style="margin:0;">
-        <div class="tag tag-gray">기타</div>
-        <p>꽃집 / 인테리어 / 학원 / 동물병원</p>
+      <div class="card" style="margin:0; border-left:3px solid var(--blue);">
+        <h4>"직접 찍기엔 시간이 없어요"</h4>
+        <p>장비 들고 찾아갑니다. 준비할 거 없습니다</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h3>이런 업종에서 효과가 검증됐습니다</h3>
+    <div class="grid-4">
+      <div class="card" style="margin:0; text-align:center; padding:14px;">
+        <h4>요식업</h4>
+        <p style="font-size:8pt;">카페/음식점/베이커리</p>
+      </div>
+      <div class="card" style="margin:0; text-align:center; padding:14px;">
+        <h4>뷰티</h4>
+        <p style="font-size:8pt;">네일/피부과/헤어</p>
+      </div>
+      <div class="card" style="margin:0; text-align:center; padding:14px;">
+        <h4>헬스</h4>
+        <p style="font-size:8pt;">PT/필라테스/요가</p>
+      </div>
+      <div class="card" style="margin:0; text-align:center; padding:14px;">
+        <h4>기타</h4>
+        <p style="font-size:8pt;">꽃집/학원/동물병원</p>
       </div>
     </div>
 
     <div class="footer">
-      <span>편집왕 — 크몽 상세페이지 카피 브리프</span>
-      <span>3 / 5</span>
+      <span>편집왕 — 크몽 상세페이지 카피 브리프 v2</span>
+      <span>4 / 6</span>
     </div>
   </div>
 </div>
 
-<!-- ==================== PAGE 4: 패키지 + 프로세스 ==================== -->
+<!-- ==================== PAGE 5: PACKAGE ==================== -->
 <div class="page">
   <div class="pi">
 
     <div class="ph">
-      <div class="ph-label">SECTION 03</div>
-      <h2>패키지 구성 + 작업 프로세스</h2>
-      <div class="ph-sub">크몽 패키지 3단 구성 및 진행 흐름</div>
+      <div class="ph-label">STEP 05 — PACKAGE</div>
+      <h2>패키지 구성</h2>
+      <div class="ph-sub">선택지를 명확히 주고, DELUXE로 자연스럽게 유도</div>
     </div>
-
-    <h3>패키지 구성</h3>
 
     <table>
       <thead>
@@ -315,18 +490,18 @@
         <tr>
           <td><b>가격</b></td>
           <td style="text-align:center; font-weight:700;">350,000원</td>
-          <td style="text-align:center; font-weight:800; color:var(--blue);">500,000원</td>
+          <td style="text-align:center; font-weight:800; color:var(--blue); font-size:11pt;">500,000원</td>
           <td style="text-align:center; font-weight:700;">1,200,000원</td>
         </tr>
         <tr>
           <td><b>포함</b></td>
           <td style="text-align:center;">기획 + 편집</td>
-          <td style="text-align:center;">기획 + 촬영 + 편집</td>
+          <td style="text-align:center; font-weight:700;">기획 + 촬영 + 편집</td>
           <td style="text-align:center;">기획 + 촬영 + 편집 (3건)</td>
         </tr>
         <tr>
           <td><b>촬영</b></td>
-          <td style="text-align:center;">X (소스 제공 시)</td>
+          <td style="text-align:center;">X (소스 제공)</td>
           <td style="text-align:center;">현장 방문 60분</td>
           <td style="text-align:center;">현장 방문 180분</td>
         </tr>
@@ -340,7 +515,7 @@
           <td><b>러닝타임</b></td>
           <td style="text-align:center;">60초 이내</td>
           <td style="text-align:center;">60초 이내</td>
-          <td style="text-align:center;">60초 이내 x 3</td>
+          <td style="text-align:center;">60초 이내 x3</td>
         </tr>
         <tr>
           <td><b>수정</b></td>
@@ -361,7 +536,7 @@
           <td style="text-align:center;">14일</td>
         </tr>
         <tr>
-          <td><b>납품 사이즈</b></td>
+          <td><b>납품</b></td>
           <td style="text-align:center;">릴스/쇼츠/틱톡</td>
           <td style="text-align:center;">릴스/쇼츠/틱톡</td>
           <td style="text-align:center;">릴스/쇼츠/틱톡</td>
@@ -369,132 +544,116 @@
       </tbody>
     </table>
 
+    <div class="card-purple">
+      <p style="text-align:center; font-size:10pt;">
+        <span class="em-purple">어떤 패키지가 맞는지 모르겠다면?</span><br>
+        메시지 주시면 업종에 맞는 패키지를 추천드립니다.
+      </p>
+    </div>
+
     <div class="note">
       * 서울 외 지역 촬영 시 교통비 별도 협의<br>
       * 모델 캐스팅, 소품, 장소 대관 등 추가 비용은 사전 안내 후 진행<br>
-      * 월 정기 계약 시 할인 별도 상담
+      * 월 정기 계약 시 별도 할인 (메시지로 문의)
     </div>
 
     <div class="divider"></div>
-
-    <h3>작업 프로세스</h3>
-    <div class="small" style="margin-bottom:12px;">디자이너 참고: 타임라인/스텝 형태로 시각화</div>
-
-    <div class="process-step">
-      <div class="step-num">1</div>
-      <div class="step-body">
-        <h4>상담 및 브리핑</h4>
-        <p>가게/브랜드 파악, 타겟 고객 분석, 영상 방향 협의</p>
-      </div>
-    </div>
-
-    <div class="process-step">
-      <div class="step-num">2</div>
-      <div class="step-body">
-        <h4>기획 및 콘티</h4>
-        <p>후킹 포인트 설계, 콘티(스토리보드) 작성, 대표님 컨펌</p>
-      </div>
-    </div>
-
-    <div class="process-step">
-      <div class="step-num">3</div>
-      <div class="step-body">
-        <h4>현장 촬영</h4>
-        <p>장비 전부 지참, 현장 방문 촬영 (DELUXE/PREMIUM)</p>
-      </div>
-    </div>
-
-    <div class="process-step">
-      <div class="step-num">4</div>
-      <div class="step-body">
-        <h4>편집 및 수정</h4>
-        <p>자막/BGM/효과 포함 편집, 1차 시안 → 수정 반영 → 최종본</p>
-      </div>
-    </div>
-
-    <div class="process-step">
-      <div class="step-num">5</div>
-      <div class="step-body">
-        <h4>납품</h4>
-        <p>인스타 릴스 / 유튜브 쇼츠 / 틱톡 맞춤 사이즈로 납품</p>
-      </div>
-    </div>
-
-    <div class="footer">
-      <span>편집왕 — 크몽 상세페이지 카피 브리프</span>
-      <span>4 / 5</span>
-    </div>
-  </div>
-</div>
-
-<!-- ==================== PAGE 5: FAQ + 주의사항 + CTA ==================== -->
-<div class="page">
-  <div class="pi">
-
-    <div class="ph">
-      <div class="ph-label">SECTION 04</div>
-      <h2>FAQ + 주의사항 + CTA</h2>
-      <div class="ph-sub">구매 전 궁금한 점과 마무리 전환 유도</div>
-    </div>
 
     <h3>자주 묻는 질문</h3>
 
     <div class="faq-item">
       <div class="faq-q">Q. 촬영 장비는 가져오시나요?</div>
-      <div class="faq-a">네, 카메라/조명/마이크 등 모든 장비를 지참합니다. 대표님은 아무것도 준비하실 필요 없습니다.</div>
+      <div class="faq-a">네, 카메라/조명/마이크 전부 지참합니다. 준비하실 거 없습니다.</div>
     </div>
-
     <div class="faq-item">
-      <div class="faq-q">Q. 서울 외 지역도 촬영 가능한가요?</div>
-      <div class="faq-a">가능합니다. 서울 외 지역은 교통비가 별도로 발생하며, 상담 시 안내드립니다.</div>
+      <div class="faq-q">Q. 서울 외 지역도 가능한가요?</div>
+      <div class="faq-a">가능합니다. 교통비 별도, 상담 시 안내드립니다.</div>
     </div>
-
     <div class="faq-item">
       <div class="faq-q">Q. 영상 컨셉을 제가 정해야 하나요?</div>
-      <div class="faq-a">아닙니다. 가게/브랜드 특성에 맞는 컨셉을 저희가 기획해서 제안드립니다. 대표님은 컨펌만 해주시면 됩니다.</div>
+      <div class="faq-a">아닙니다. 저희가 기획해서 제안드립니다. 컨펌만 해주세요.</div>
     </div>
-
     <div class="faq-item">
-      <div class="faq-q">Q. 숏폼 말고 롱폼(유튜브 10분+)도 되나요?</div>
-      <div class="faq-a">별도 상담 부탁드립니다. 숏폼(60초 이내) 기준 패키지이며, 롱폼은 맞춤 견적으로 진행합니다.</div>
+      <div class="faq-q">Q. 롱폼(10분+)도 되나요?</div>
+      <div class="faq-a">별도 상담 부탁드립니다. 숏폼(60초) 기준 패키지이며, 롱폼은 맞춤 견적으로 진행합니다.</div>
     </div>
-
     <div class="faq-item">
-      <div class="faq-q">Q. 월 정기 계약도 가능한가요?</div>
-      <div class="faq-a">네, 월 4건 이상 정기 계약 시 별도 할인이 적용됩니다. 메시지로 문의해주세요.</div>
+      <div class="faq-q">Q. 월 정기 계약 가능한가요?</div>
+      <div class="faq-a">네, 월 4건 이상 정기 계약 시 할인 적용됩니다.</div>
     </div>
 
-    <div class="faq-item">
-      <div class="faq-q">Q. 납품 후 수정은 몇 번까지 가능한가요?</div>
-      <div class="faq-a">패키지별 2~3회 수정이 포함되어 있으며, 추가 수정은 건당 별도 비용이 발생합니다.</div>
+    <div class="footer">
+      <span>편집왕 — 크몽 상세페이지 카피 브리프 v2</span>
+      <span>5 / 6</span>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PAGE 6: CTA + DESIGNER MEMO ==================== -->
+<div class="page">
+  <div class="pi">
+
+    <div class="ph">
+      <div class="ph-label">STEP 06 — CTA</div>
+      <h2>마무리 전환 유도</h2>
+      <div class="ph-sub">마지막 한 줄에서 "메시지 보내야겠다"를 결심하게 하는 구간</div>
     </div>
 
-    <div class="divider"></div>
-
-    <h3>주의사항</h3>
-
+    <!-- 주의사항 -->
     <div class="card-orange">
+      <h4>구매 전 확인해주세요</h4>
       <p>
-        &#8226; <b>구매 전 반드시 메시지로 상담</b> 부탁드립니다. 업종/위치/일정 확인 후 진행합니다.<br>
-        &#8226; 촬영 일정은 상담 후 <b>최소 3일 전</b> 확정해주세요.<br>
-        &#8226; 촬영 당일 <b>노쇼(연락 없는 취소)</b> 시 촬영비가 차감됩니다.<br>
-        &#8226; 소스 영상 제공 시 <b>해상도 1080p 이상</b>을 권장합니다.<br>
-        &#8226; 완성본 납품 후 7일 이내 수정 요청을 부탁드립니다.
+        &#8226; <b>구매 전 반드시 메시지로 상담</b> 부탁드립니다<br>
+        &#8226; 촬영 일정은 <b>최소 3일 전</b> 확정<br>
+        &#8226; 촬영 당일 노쇼 시 촬영비 차감<br>
+        &#8226; 소스 영상 제공 시 <b>1080p 이상</b> 권장<br>
+        &#8226; 납품 후 <b>7일 이내</b> 수정 요청
       </p>
     </div>
 
     <div class="divider"></div>
 
-    <h3>마무리 CTA</h3>
-    <div class="small" style="margin-bottom:8px;">디자이너 참고: 큰 CTA 버튼 형태로 시각화</div>
+    <!-- 최종 CTA -->
+    <div class="card-dark" style="padding:32px; margin:20px 0;">
+      <div class="big-quote white" style="text-align:center; font-size:18pt; margin-bottom:12px;">
+        영상 1개가<br>가게의 매출을 바꿉니다.
+      </div>
+      <p style="text-align:center; color:#8b95a1; font-size:10pt; margin-bottom:16px;">
+        50만 유튜브 채널을 만든 그 구조,<br>
+        대표님 가게에 그대로 설계해드리겠습니다.
+      </p>
+      <div style="text-align:center; margin-top:16px;">
+        <div style="display:inline-block; background:var(--blue); color:#fff; padding:12px 40px; border-radius:12px; font-size:11pt; font-weight:800;">
+          지금 메시지 보내기
+        </div>
+      </div>
+      <p style="text-align:center; color:#6b7684; font-size:8.5pt; margin-top:10px;">
+        업종과 원하시는 방향만 알려주세요. 24시간 내 맞춤 제안서를 보내드립니다.
+      </p>
+    </div>
 
-    <div class="card-dark">
-      <h3 style="color:#fff; font-size:14pt; text-align:center; margin-bottom:8px;">
-        영상이 매출이 되는 경험,<br>편집왕이 만들어드리겠습니다.
-      </h3>
-      <p style="text-align:center; color:#8b95a1;">
-        지금 메시지로 업종과 원하시는 방향을 알려주세요.<br>
-        24시간 내 맞춤 제안서를 보내드립니다.
+    <!-- 마지막 한 마디 -->
+    <div class="card-green">
+      <p style="text-align:center; font-size:10pt;">
+        <span class="em-green">"영상 만들어야 하는 건 아는데, 뭘 어떻게 해야 할지 모르겠다"</span><br>
+        그 고민, 메시지 한 통이면 끝납니다.
+      </p>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- 상세페이지 흐름 요약 -->
+    <h3>상세페이지 전체 흐름 요약</h3>
+    <div class="small" style="margin-bottom:8px;">디자이너 참고: 이 순서대로 세로 스크롤 설계</div>
+
+    <div class="card">
+      <p>
+        <b>1. HOOK</b> — 도발형 질문으로 스크롤 멈춤<br>
+        <b>2. FEAR</b> — 실패 원인 3가지로 "맞아 나도..." 공감<br>
+        <b>3. PROOF</b> — 사찍남 + 숫자 + Before/After로 증명<br>
+        <b>4. SOLUTION</b> — 프로세스 + "대표님은 할 일 없음" 안심<br>
+        <b>5. PACKAGE</b> — 3단 패키지 + FAQ로 의사결정 도움<br>
+        <b>6. CTA</b> — "메시지 보내기" 전환 유도
       </p>
     </div>
 
@@ -502,16 +661,17 @@
 
     <h3>디자이너 전달 메모</h3>
     <div class="note">
-      <b>1. 전체 톤앤매너</b>: 깔끔 + 신뢰감. 블랙/화이트 베이스에 포인트 블루<br>
-      <b>2. 포트폴리오 영역</b>: 실제 작업물 이미지/영상 썸네일 4~6개 배치 필요 (별도 전달 예정)<br>
-      <b>3. 숫자 강조</b>: 50만 / 5,000만원 / 300+ 등 큰 숫자는 임팩트 있게<br>
-      <b>4. 모바일 최적화</b>: 크몽은 모바일 비중이 70%+ → 세로 스크롤 기준으로 설계<br>
-      <b>5. 이미지 가이드</b>: 촬영 현장컷, Before/After, 실제 매장 영상 캡처 등 활용
+      <b>1. 톤앤매너</b>: 블랙/화이트 베이스 + 포인트 블루. 신뢰감 + 임팩트<br>
+      <b>2. 포트폴리오</b>: Before/After 비교 이미지 4~6세트 필요 (별도 전달)<br>
+      <b>3. 숫자 강조</b>: 50만 / 5,000만원 / 300+ / 수백 건 — 크게, 강렬하게<br>
+      <b>4. 모바일 우선</b>: 크몽 모바일 70%+ → 세로 스크롤, 한 화면 한 메시지<br>
+      <b>5. 이미지</b>: 촬영 현장컷, 사찍남 채널 캡처, 매장 영상 썸네일 활용<br>
+      <b>6. CTA 버튼</b>: "지금 메시지 보내기" 버튼을 최소 2번 배치 (중간 + 마지막)
     </div>
 
     <div class="footer">
-      <span>편집왕 — 크몽 상세페이지 카피 브리프</span>
-      <span>5 / 5</span>
+      <span>편집왕 — 크몽 상세페이지 카피 브리프 v2</span>
+      <span>6 / 6</span>
     </div>
   </div>
 </div>
