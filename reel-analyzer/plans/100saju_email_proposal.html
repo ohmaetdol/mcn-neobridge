@@ -2,8 +2,8 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>100원사주 — 크리에이터 협업 제안 메일</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>100원사주 — 제안 메일 발송</title>
   <style>
     :root {
       --bg: #f5f5f7;
@@ -16,6 +16,8 @@
       --border: #e5e7eb;
       --radius: 14px;
       --shadow: 0 1px 8px rgba(0,0,0,0.05);
+      --green: #059669;
+      --green-bg: #ecfdf5;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -24,461 +26,433 @@
       font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'SF Pro Display', sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.75;
+      line-height: 1.7;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* 상단 안내 바 */
-    .toolbar {
+    /* ─── 헤더 ─── */
+    .header {
       background: var(--navy);
       color: #fff;
-      padding: 14px 24px;
-      font-size: 13px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+      padding: 20px 24px;
+      text-align: center;
     }
-    .toolbar-title {
+    .header h1 {
+      font-size: 17px;
       font-weight: 600;
+      letter-spacing: -0.3px;
     }
-    .toolbar-actions {
-      display: flex;
-      gap: 10px;
-    }
-    .toolbar-btn {
-      background: rgba(255,255,255,0.12);
-      color: #fff;
-      border: none;
-      padding: 6px 14px;
-      border-radius: 8px;
+    .header p {
       font-size: 12px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .toolbar-btn:hover { background: rgba(255,255,255,0.2); }
-    .toolbar-btn.active {
-      background: var(--accent);
-      color: var(--navy);
+      color: rgba(255,255,255,0.5);
+      margin-top: 4px;
     }
 
-    /* 카테고리 탭 */
-    .tab-bar {
+    /* ─── 레이아웃 ─── */
+    .layout {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 24px 20px 100px;
+    }
+
+    /* ─── 입력 폼 ─── */
+    .form-section {
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    .form-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 16px;
+      letter-spacing: -0.2px;
+    }
+    .form-row {
+      margin-bottom: 14px;
+    }
+    .form-row:last-child { margin-bottom: 0; }
+    .form-row label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-sub);
+      margin-bottom: 6px;
+    }
+    .form-row input,
+    .form-row textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 14px;
+      font-family: inherit;
+      color: var(--text);
+      background: #fafafa;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .form-row input:focus,
+    .form-row textarea:focus {
+      border-color: var(--navy);
+      background: #fff;
+    }
+    .form-row textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+    .form-row input::placeholder,
+    .form-row textarea::placeholder {
+      color: #c4c4c4;
+    }
+
+    /* 카테고리 선택 */
+    .cat-group {
       display: flex;
       gap: 8px;
-      padding: 16px 24px;
-      background: #fff;
-      border-bottom: 1px solid var(--border);
-      overflow-x: auto;
     }
-    .tab {
-      padding: 8px 18px;
-      border-radius: 20px;
+    .cat-btn {
+      flex: 1;
+      padding: 9px 0;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #fff;
       font-size: 13px;
       font-weight: 500;
-      cursor: pointer;
-      border: 1px solid var(--border);
-      background: #fff;
       color: var(--text-sub);
-      white-space: nowrap;
-      transition: all 0.2s;
+      cursor: pointer;
+      transition: all 0.15s;
+      text-align: center;
     }
-    .tab:hover { border-color: var(--navy); color: var(--navy); }
-    .tab.active {
+    .cat-btn:hover { border-color: var(--navy); color: var(--navy); }
+    .cat-btn.active {
       background: var(--navy);
       color: #fff;
       border-color: var(--navy);
     }
 
-    /* 메인 컨테이너 */
-    .main {
-      max-width: 720px;
-      margin: 32px auto;
-      padding: 0 24px;
-    }
-
-    /* 플레이스홀더 안내 */
-    .placeholder-guide {
-      background: var(--accent-bg);
-      border: 1px solid #fde68a;
-      border-radius: var(--radius);
-      padding: 20px 24px;
-      margin-bottom: 24px;
-      font-size: 13px;
-      color: #92400e;
-      line-height: 1.8;
-    }
-    .placeholder-guide strong { color: #78350f; }
-    .ph {
-      background: #fef3c7;
-      padding: 1px 6px;
-      border-radius: 4px;
-      font-family: monospace;
+    /* ─── 미리보기 ─── */
+    .preview-label {
       font-size: 12px;
+      font-weight: 600;
+      color: var(--text-sub);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .preview-label span {
+      font-size: 11px;
+      font-weight: 400;
+      color: #9ca3af;
     }
 
-    /* 이메일 프리뷰 */
     .email-frame {
       background: var(--card);
       border-radius: var(--radius);
-      box-shadow: var(--shadow);
       border: 1px solid var(--border);
+      box-shadow: var(--shadow);
       overflow: hidden;
     }
-    .email-header {
-      padding: 24px 32px;
+    .email-meta {
+      padding: 16px 24px;
       border-bottom: 1px solid var(--border);
       font-size: 13px;
+      line-height: 1.8;
+      background: #fafafa;
+    }
+    .email-meta .row {
+      display: flex;
+      gap: 8px;
+    }
+    .email-meta .label {
       color: var(--text-sub);
-      line-height: 2;
-    }
-    .email-header .field-label {
-      display: inline-block;
-      width: 50px;
-      font-weight: 600;
-      color: var(--text);
-    }
-    .email-header .editable {
-      color: var(--text);
-    }
-    .email-body {
-      padding: 32px;
-      font-size: 14.5px;
-      line-height: 2;
-      color: var(--text);
-    }
-    .email-body p {
-      margin-bottom: 20px;
-    }
-    .email-body p:last-child {
-      margin-bottom: 0;
-    }
-    .email-body .greeting {
-      font-size: 15px;
       font-weight: 500;
-      margin-bottom: 24px;
+      min-width: 32px;
     }
-    .email-body .highlight-box {
-      background: #f8f9fa;
-      border-left: 3px solid var(--accent);
-      padding: 20px 24px;
-      border-radius: 0 10px 10px 0;
-      margin: 24px 0;
-      font-size: 14px;
-    }
-    .email-body .highlight-box strong {
-      display: block;
-      margin-bottom: 8px;
-      font-size: 14px;
-      color: var(--navy);
-    }
-    .email-body .highlight-box ul {
-      list-style: none;
-      padding: 0;
-    }
-    .email-body .highlight-box li {
-      padding: 3px 0;
-      padding-left: 16px;
-      position: relative;
-      font-size: 13.5px;
+    .email-meta .value {
       color: var(--text);
+      font-weight: 500;
     }
-    .email-body .highlight-box li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 12px;
-      width: 6px;
-      height: 6px;
-      background: var(--accent);
-      border-radius: 50%;
-    }
-    .email-body .link-btn {
-      display: inline-block;
-      background: var(--navy);
-      color: #fff;
-      padding: 12px 24px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 600;
-      margin: 8px 0;
-    }
-    .email-body .sign-off {
-      margin-top: 32px;
+    .email-content {
+      padding: 28px 24px;
       font-size: 14px;
       line-height: 1.9;
-    }
-    .email-body .sign-off .company {
-      font-weight: 600;
-      color: var(--navy);
+      color: var(--text);
+      white-space: pre-wrap;
     }
 
-    /* 복사 버튼 */
-    .copy-area {
-      margin-top: 24px;
-      text-align: center;
+    /* ─── 하단 액션 바 ─── */
+    .action-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border-top: 1px solid var(--border);
+      padding: 14px 20px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      z-index: 100;
     }
-    .copy-btn {
-      background: var(--navy);
-      color: #fff;
-      border: none;
-      padding: 14px 40px;
+    .action-btn {
+      flex: 1;
+      max-width: 300px;
+      padding: 13px 0;
       border-radius: 12px;
       font-size: 14px;
       font-weight: 600;
       cursor: pointer;
-      transition: opacity 0.2s;
+      border: none;
+      text-align: center;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
     }
-    .copy-btn:hover { opacity: 0.85; }
-    .copy-btn.copied {
-      background: #059669;
-    }
-
-    /* 하단 팁 */
-    .tips {
-      margin-top: 32px;
-      padding: 24px;
-      background: var(--card);
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-    }
-    .tips h3 {
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 12px;
+    .btn-copy {
+      background: #f3f4f6;
       color: var(--navy);
     }
-    .tips ul {
-      list-style: none;
-      padding: 0;
+    .btn-copy:hover { background: #e5e7eb; }
+    .btn-copy.copied { background: var(--green-bg); color: var(--green); }
+    .btn-gmail {
+      background: var(--navy);
+      color: #fff;
     }
-    .tips li {
+    .btn-gmail:hover { opacity: 0.9; }
+
+    /* ─── 상태 메시지 ─── */
+    .toast {
+      position: fixed;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-20px);
+      background: var(--navy);
+      color: #fff;
+      padding: 10px 24px;
+      border-radius: 10px;
       font-size: 13px;
-      color: var(--text-sub);
-      padding: 4px 0;
-      padding-left: 20px;
-      position: relative;
+      font-weight: 500;
+      opacity: 0;
+      transition: all 0.3s;
+      pointer-events: none;
+      z-index: 200;
     }
-    .tips li::before {
-      content: '';
-      position: absolute;
-      left: 4px;
-      top: 11px;
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--accent);
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
     }
 
     @media (max-width: 480px) {
-      .main { padding: 0 16px; margin: 20px auto; }
-      .email-header { padding: 20px 24px; }
-      .email-body { padding: 24px; }
-      .toolbar { padding: 12px 16px; }
-      .tab-bar { padding: 12px 16px; }
+      .layout { padding: 16px 16px 100px; }
+      .form-section { padding: 20px; }
+      .email-content { padding: 24px 20px; }
+      .cat-btn { font-size: 12px; padding: 8px 0; }
     }
   </style>
 </head>
 <body>
 
-  <!-- 상단 툴바 -->
-  <div class="toolbar">
-    <div class="toolbar-title">100원사주 제안 메일 템플릿</div>
-    <div class="toolbar-actions">
-      <button class="toolbar-btn" onclick="copySubject()">제목 복사</button>
-      <button class="toolbar-btn active" onclick="copyBody()">본문 복사</button>
-    </div>
+  <div class="header">
+    <h1>100원사주 제안 메일</h1>
+    <p>입력하고 바로 보내기</p>
   </div>
 
-  <!-- 카테고리 탭 -->
-  <div class="tab-bar">
-    <div class="tab active" onclick="switchTemplate('tarot')">타로/운세</div>
-    <div class="tab" onclick="switchTemplate('love')">연애/이별</div>
-    <div class="tab" onclick="switchTemplate('lifestyle')">라이프스타일</div>
-  </div>
+  <div class="layout">
 
-  <div class="main">
-
-    <!-- 플레이스홀더 안내 -->
-    <div class="placeholder-guide">
-      <strong>사용법</strong><br>
-      <span class="ph">{크리에이터명}</span> = 인플루언서 활동명 /
-      <span class="ph">{채널명}</span> = 인스타 계정명 /
-      <span class="ph">{맞춤문장}</span> = 계정별 첫 문장<br>
-      카테고리 탭을 선택하면 해당 카테고리에 맞는 톤으로 자동 변경됩니다.
+    <!-- 입력 폼 -->
+    <div class="form-section">
+      <div class="form-title">크리에이터 정보</div>
+      <div class="form-row">
+        <label>크리에이터명</label>
+        <input type="text" id="inp-name" placeholder="예: 타로언니" oninput="render()">
+      </div>
+      <div class="form-row">
+        <label>인스타 계정 (@)</label>
+        <input type="text" id="inp-channel" placeholder="예: @taro_unni" oninput="render()">
+      </div>
+      <div class="form-row">
+        <label>이메일 주소</label>
+        <input type="email" id="inp-email" placeholder="예: hello@creator.com" oninput="render()">
+      </div>
+      <div class="form-row">
+        <label>카테고리</label>
+        <div class="cat-group">
+          <div class="cat-btn active" onclick="selectCat(this,'tarot')">타로/운세</div>
+          <div class="cat-btn" onclick="selectCat(this,'love')">연애/이별</div>
+          <div class="cat-btn" onclick="selectCat(this,'lifestyle')">라이프스타일</div>
+        </div>
+      </div>
+      <div class="form-row">
+        <label>맞춤 첫 문장 (선택)</label>
+        <textarea id="inp-opener" placeholder="예: 최근 올려주신 타로 리딩 콘텐츠 잘 봤습니다." oninput="render()"></textarea>
+      </div>
     </div>
 
-    <!-- 이메일 프리뷰 -->
+    <!-- 미리보기 -->
+    <div class="preview-label">
+      미리보기
+      <span>아래 내용이 메일로 발송됩니다</span>
+    </div>
+
     <div class="email-frame">
-      <div class="email-header">
-        <div><span class="field-label">받는이</span> <span class="editable">{크리에이터명}</span></div>
-        <div><span class="field-label">제목</span> <span class="editable" id="email-subject">[100원사주] {크리에이터명}님, 콘텐츠 협업 제안드립니다</span></div>
+      <div class="email-meta">
+        <div class="row"><span class="label">To</span> <span class="value" id="preview-to">—</span></div>
+        <div class="row"><span class="label">제목</span> <span class="value" id="preview-subject">—</span></div>
       </div>
-
-      <div class="email-body" id="email-body">
-        <p class="greeting" id="greeting">안녕하세요, {크리에이터명}님.</p>
-
-        <p id="opener">{맞춤문장}</p>
-
-        <p id="intro">저희는 AI 기반 사주 상담 서비스 <strong>'100원사주'</strong>를 운영하고 있는 플로머스입니다.<br>
-        {채널명} 채널의 콘텐츠를 보고 협업을 제안드리고 싶어 연락드립니다.</p>
-
-        <div class="highlight-box" id="service-box">
-          <strong>100원사주 서비스 소개</strong>
-          <ul>
-            <li>단 100원으로 시작하는 텍스트 사주 (진입장벽 제로)</li>
-            <li>AI 전화사주 — 실제 통화처럼 AI가 사주를 풀어주는 신규 서비스</li>
-            <li>누적 이용자 12,000명+, 평균 평점 4.9</li>
-            <li>100saju.com 에서 바로 체험 가능</li>
-          </ul>
-        </div>
-
-        <p id="collab-intro">크리에이터님 채널의 톤에 맞춰 <strong>맞춤 콘텐츠 기획안과 스크립트 초안</strong>을 제작해 드리고 있습니다.<br>릴스, 스토리, 피드 등 형식은 자유롭게 선택하실 수 있습니다.</p>
-
-        <div class="highlight-box" id="collab-box">
-          <strong>협업 방식</strong>
-          <ul>
-            <li>광고비: 크리에이터님 단가 기준으로 협의</li>
-            <li>맞춤 기획안 + 스크립트 초안 제공</li>
-            <li>게시 후 성과 리포트 공유</li>
-            <li>정산: 게시 확인 후 3영업일 내</li>
-          </ul>
-        </div>
-
-        <p id="proposal-link">아래 링크에서 상세 제안서와 참고 기획안을 확인하실 수 있습니다.</p>
-
-        <a href="https://ohmaetdol.github.io/mcn-neobridge/reel-analyzer/plans/100saju_proposal.html" class="link-btn" target="_blank">상세 제안서 보기</a>
-
-        <p id="closing" style="margin-top: 24px;">혹시 관심 있으시다면, 편하신 단가와 선호하시는 협업 형태를 알려주시면<br>
-        그에 맞춰 기획안을 준비해 드리겠습니다.</p>
-
-        <p>궁금한 점이 있으시면 편하게 회신 주세요.</p>
-
-        <div class="sign-off">
-          감사합니다.<br><br>
-          <span class="company">플로머스 (Flowmus)</span><br>
-          100원사주 마케팅팀<br>
-          ceo@flowmus.com<br>
-          100saju.com
-        </div>
-      </div>
-    </div>
-
-    <!-- 복사 -->
-    <div class="copy-area">
-      <button class="copy-btn" id="copyBtn" onclick="copyBody()">본문 텍스트 복사</button>
-    </div>
-
-    <!-- 팁 -->
-    <div class="tips">
-      <h3>메일 발송 팁</h3>
-      <ul>
-        <li>{맞춤문장}에 해당 크리에이터의 최근 콘텐츠를 언급하면 회신율이 높아집니다</li>
-        <li>DM으로 먼저 간단히 인사 후 메일을 보내면 오픈율이 올라갑니다</li>
-        <li>단가를 먼저 물어보는 것이 협업 성사 확률을 높입니다</li>
-        <li>팔로워 수 대비 릴스 평균 조회수, 댓글 반응을 확인하고 시딩 대상을 선별하세요</li>
-        <li>타로/운세 카테고리는 서비스 자체에 관심이 높아 전환율이 가장 높습니다</li>
-      </ul>
+      <div class="email-content" id="preview-body"></div>
     </div>
 
   </div>
+
+  <!-- 하단 액션 -->
+  <div class="action-bar">
+    <button class="action-btn btn-copy" id="btnCopy" onclick="copyAll()">본문 복사</button>
+    <a class="action-btn btn-gmail" id="btnGmail" href="#" onclick="openGmail(event)">Gmail에서 보내기</a>
+  </div>
+
+  <!-- 토스트 -->
+  <div class="toast" id="toast"></div>
 
   <script>
-    const templates = {
+    let currentCat = 'tarot';
+
+    const catData = {
       tarot: {
-        subject: '[100원사주] {크리에이터명}님, AI 사주 콘텐츠 협업 제안드립니다',
-        greeting: '안녕하세요, {크리에이터명}님.',
-        opener: '{맞춤문장}',
-        intro: '저희는 AI 기반 사주 상담 서비스 <strong>\'100원사주\'</strong>를 운영하고 있는 플로머스입니다.<br>{채널명} 채널에서 운세/타로 콘텐츠를 흥미롭게 보고 있었는데, 저희 서비스와 자연스럽게 어울릴 것 같아 연락드립니다.',
-        serviceBox: `<strong>100원사주 서비스 소개</strong>
-          <ul>
-            <li>단 100원으로 시작하는 텍스트 사주 (진입장벽 제로)</li>
-            <li>AI 전화사주 — 실제 사람처럼 통화하며 사주를 풀어주는 신규 서비스</li>
-            <li>만세력 기반 정확한 분석 + AI의 자연스러운 해설</li>
-            <li>누적 이용자 12,000명+, 평균 평점 4.9</li>
-          </ul>`,
-        collabIntro: '크리에이터님의 타로/운세 콘텐츠 톤에 맞춰 <strong>체험형 콘텐츠 기획안</strong>을 준비해 드릴 수 있습니다.<br>직접 100원사주를 체험하시고, 리얼 후기 형태로 제작하시면 가장 자연스럽습니다.',
-        closing: '혹시 관심 있으시다면, 편하신 단가와 선호하시는 콘텐츠 형태를 알려주시면<br>그에 맞춰 기획안을 준비해 드리겠습니다.',
+        subjectTpl: '[100원사주] {name}님, AI 사주 콘텐츠 협업 제안드립니다',
+        defaultOpener: '평소 {channel} 채널에서 운세/타로 콘텐츠를 흥미롭게 보고 있었습니다.',
+        intro: '저희는 AI 기반 사주 상담 서비스 \'100원사주\'를 운영하고 있는 플로머스입니다.\n{channel} 채널과 저희 서비스가 자연스럽게 어울릴 것 같아 연락드립니다.',
+        service: '[ 100원사주 서비스 소개 ]\n\n가볍게 시작할 수 있는 \'체험형 사주\'이며,\n이후 더 궁금한 부분은 AI 전화 상담으로 이어지는 구조입니다.\n\n1) 사주 정보 입력 - 간단한 정보만으로 시작\n2) 텍스트 결과 확인 - 100원으로 기본 사주 결과를 바로 확인\n3) 프리미엄 전화 상담 - 안내된 번호로 직접 전화를 걸어 AI와 실제 통화처럼 상담\n\n- 별도 앱 설치 없이 일반 전화처럼 연결\n- 단순 음성 재생이 아닌, 질문과 답변이 이어지는 대화형 상담\n- 누적 이용자 12,000명+, 평균 평점 4.9\n- 100saju.com 에서 바로 체험 가능',
+        collab: '크리에이터님의 타로/운세 콘텐츠 톤에 맞춰 체험형 콘텐츠 기획안을 준비해 드릴 수 있습니다.\n직접 100원사주를 체험하시고, 리얼 후기 형태로 제작하시면 가장 자연스럽습니다.',
       },
       love: {
-        subject: '[100원사주] {크리에이터명}님, 연애 콘텐츠 협업 제안드립니다',
-        greeting: '안녕하세요, {크리에이터명}님.',
-        opener: '{맞춤문장}',
-        intro: '저희는 AI 기반 사주 상담 서비스 <strong>\'100원사주\'</strong>를 운영하고 있는 플로머스입니다.<br>{채널명} 채널의 연애/관계 콘텐츠를 보고, 팔로워분들이 좋아하실 만한 협업을 제안드리고 싶어 연락드립니다.',
-        serviceBox: `<strong>100원사주 서비스 소개</strong>
-          <ul>
-            <li>100원으로 나의 연애운/궁합을 바로 확인 (진입장벽 제로)</li>
-            <li>AI 전화사주 — 연애 고민을 실제 통화처럼 AI와 깊이 상담</li>
-            <li>"이 사람이 맞을까?" 같은 질문에 사주 기반 분석 제공</li>
-            <li>누적 이용자 12,000명+, 평균 평점 4.9</li>
-          </ul>`,
-        collabIntro: '연애/이별 콘텐츠를 보시는 팔로워분들이 <strong>"내 연애운은?"</strong> 하고 자연스럽게 넘어올 수 있는 구조입니다.<br>체험 후기, 궁합 테스트, 연애운 확인 등 크리에이터님 스타일에 맞는 기획안을 제작해 드립니다.',
-        closing: '혹시 관심 있으시다면, 편하신 단가와 선호하시는 콘텐츠 형태를 알려주시면<br>그에 맞춰 기획안을 준비해 드리겠습니다.',
+        subjectTpl: '[100원사주] {name}님, 연애 콘텐츠 협업 제안드립니다',
+        defaultOpener: '{channel} 채널의 연애/관계 콘텐츠를 보고 팔로워분들이 좋아하실 만한 협업이 떠올랐습니다.',
+        intro: '저희는 AI 기반 사주 상담 서비스 \'100원사주\'를 운영하고 있는 플로머스입니다.\n{channel} 채널의 팔로워분들에게 자연스럽게 어필할 수 있을 것 같아 연락드립니다.',
+        service: '[ 100원사주 서비스 소개 ]\n\n100원으로 가볍게 시작하는 체험형 사주이며,\n더 궁금한 부분은 AI 전화 상담으로 깊이 있게 이어집니다.\n\n1) 사주 정보 입력 - 간단한 정보만으로 시작\n2) 텍스트 결과 확인 - 100원으로 연애운/궁합 등 바로 확인\n3) 프리미엄 전화 상담 - 직접 전화를 걸어 AI와 연애 고민을 실제 통화처럼 상담\n\n- 별도 앱 설치 없이 일반 전화처럼 연결\n- 질문과 답변이 이어지는 대화형 상담 (음성 재생 아님)\n- 누적 이용자 12,000명+, 평균 평점 4.9\n- 100saju.com 에서 바로 체험 가능',
+        collab: '연애/이별 콘텐츠를 보시는 팔로워분들이 "내 연애운은?" 하고 자연스럽게 넘어올 수 있는 구조입니다.\n체험 후기, 궁합 테스트, 연애운 확인 등 크리에이터님 스타일에 맞는 기획안을 제작해 드립니다.',
       },
       lifestyle: {
-        subject: '[100원사주] {크리에이터명}님, 재미있는 콘텐츠 협업 제안드립니다',
-        greeting: '안녕하세요, {크리에이터명}님.',
-        opener: '{맞춤문장}',
-        intro: '저희는 AI 기반 사주 상담 서비스 <strong>\'100원사주\'</strong>를 운영하고 있는 플로머스입니다.<br>{채널명} 채널의 분위기가 저희 서비스와 잘 맞을 것 같아 연락드립니다.',
-        serviceBox: `<strong>100원사주 서비스 소개</strong>
-          <ul>
-            <li>단 100원으로 시작하는 사주 체험 — 가벼운 재미에서 시작</li>
-            <li>AI 전화사주 — 실제 전화 통화처럼 AI가 사주를 풀어주는 새로운 경험</li>
-            <li>"100원짜리인데 이 정도?" 하는 반응이 콘텐츠 소재로 좋습니다</li>
-            <li>누적 이용자 12,000명+, 평균 평점 4.9</li>
-          </ul>`,
-        collabIntro: '사주/운세를 전문적으로 다루지 않아도, <strong>"100원짜리 사주 해봤는데"</strong> 같은 가벼운 체험 콘텐츠로 자연스럽게 풀어내실 수 있습니다.<br>릴스, 스토리, 브이로그 등 크리에이터님이 편한 형식으로 진행 가능합니다.',
-        closing: '혹시 관심 있으시다면, 편하신 단가와 선호하시는 콘텐츠 형태를 알려주시면<br>그에 맞춰 기획안을 준비해 드리겠습니다.',
+        subjectTpl: '[100원사주] {name}님, 재미있는 콘텐츠 협업 제안드립니다',
+        defaultOpener: '{channel} 채널의 분위기가 저희 서비스와 잘 맞을 것 같아 연락드립니다.',
+        intro: '저희는 AI 기반 사주 상담 서비스 \'100원사주\'를 운영하고 있는 플로머스입니다.\n{channel} 채널과 함께하면 재미있는 콘텐츠가 나올 것 같아 연락드립니다.',
+        service: '[ 100원사주 서비스 소개 ]\n\n100원으로 가볍게 시작하는 체험형 사주이며,\n이후 AI 전화 상담으로 이어지는 새로운 형태의 서비스입니다.\n\n1) 사주 정보 입력 - 간단한 정보만으로 시작\n2) 텍스트 결과 확인 - 100원으로 기본 사주 결과를 바로 확인\n3) 프리미엄 전화 상담 - 직접 전화를 걸어 AI와 실제 통화처럼 상담\n\n- 별도 앱 설치 없이 일반 전화처럼 연결\n- "100원짜리인데 이 정도?" 하는 반응이 콘텐츠 소재로 좋습니다\n- 누적 이용자 12,000명+, 평균 평점 4.9\n- 100saju.com 에서 바로 체험 가능',
+        collab: '사주/운세를 전문적으로 다루지 않아도, "100원짜리 사주 해봤는데" 같은 가벼운 체험 콘텐츠로 자연스럽게 풀어내실 수 있습니다.\n릴스, 스토리, 브이로그 등 크리에이터님이 편한 형식으로 진행 가능합니다.',
       }
     };
 
-    let currentCategory = 'tarot';
+    const collabBox = '[ 협업 방식 ]\n- 광고비: 크리에이터님 단가 기준으로 협의\n- 맞춤 기획안 + 스크립트 초안 제공\n- 게시 후 성과 리포트 공유\n- 정산: 게시 확인 후 3영업일 내';
 
-    function switchTemplate(category) {
-      currentCategory = category;
-      const t = templates[category];
+    const proposalLink = '상세 제안서: https://ohmaetdol.github.io/mcn-neobridge/reel-analyzer/plans/100saju_proposal.html';
 
-      // 탭 활성화
-      document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
-      event.target.classList.add('active');
+    const closing = '혹시 관심 있으시다면, 편하신 단가와 선호하시는 콘텐츠 형태를 알려주시면\n그에 맞춰 기획안을 준비해 드리겠습니다.\n\n궁금한 점이 있으시면 편하게 회신 주세요.';
 
-      // 내용 교체
-      document.getElementById('email-subject').textContent = t.subject;
-      document.getElementById('greeting').innerHTML = t.greeting;
-      document.getElementById('opener').innerHTML = t.opener;
-      document.getElementById('intro').innerHTML = t.intro;
-      document.getElementById('service-box').innerHTML = t.serviceBox;
-      document.getElementById('collab-intro').innerHTML = t.collabIntro;
-      document.getElementById('closing').innerHTML = t.closing;
+    const signOff = '감사합니다.\n\n플로머스 (Flowmus)\n100원사주 마케팅팀\nceo@flowmus.com\n100saju.com';
+
+    function val(id) { return document.getElementById(id).value.trim(); }
+
+    function selectCat(el, cat) {
+      currentCat = cat;
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      el.classList.add('active');
+      render();
     }
 
-    function copySubject() {
-      const subject = document.getElementById('email-subject').textContent;
-      navigator.clipboard.writeText(subject).then(() => {
-        const btns = document.querySelectorAll('.toolbar-btn');
-        btns[0].textContent = '복사됨';
-        setTimeout(() => { btns[0].textContent = '제목 복사'; }, 1500);
-      });
+    function buildBody() {
+      const name = val('inp-name') || '크리에이터';
+      const channel = val('inp-channel') || '@채널명';
+      const customOpener = val('inp-opener');
+      const d = catData[currentCat];
+
+      const opener = customOpener || d.defaultOpener.replace(/\{channel\}/g, channel);
+      const intro = d.intro.replace(/\{channel\}/g, channel);
+
+      const parts = [
+        `안녕하세요, ${name}님.`,
+        '',
+        opener,
+        '',
+        intro,
+        '',
+        d.service,
+        '',
+        d.collab,
+        '',
+        collabBox,
+        '',
+        proposalLink,
+        '',
+        closing,
+        '',
+        signOff
+      ];
+
+      return parts.join('\n');
     }
 
-    function copyBody() {
-      const body = document.getElementById('email-body');
-      // 텍스트만 추출 (HTML 태그 제거)
-      const text = body.innerText;
-      navigator.clipboard.writeText(text).then(() => {
-        const btn = document.getElementById('copyBtn');
+    function buildSubject() {
+      const name = val('inp-name') || '크리에이터';
+      return catData[currentCat].subjectTpl.replace(/\{name\}/g, name);
+    }
+
+    function render() {
+      const email = val('inp-email');
+      const subject = buildSubject();
+      const body = buildBody();
+
+      document.getElementById('preview-to').textContent = email || '—';
+      document.getElementById('preview-subject').textContent = subject;
+      document.getElementById('preview-body').textContent = body;
+
+      // Gmail 링크 업데이트
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&to=${encodeURIComponent(email)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      document.getElementById('btnGmail').href = gmailUrl;
+    }
+
+    function copyAll() {
+      const subject = buildSubject();
+      const body = buildBody();
+      const full = `제목: ${subject}\n\n${body}`;
+
+      navigator.clipboard.writeText(full).then(() => {
+        const btn = document.getElementById('btnCopy');
         btn.textContent = '복사 완료';
         btn.classList.add('copied');
+        showToast('클립보드에 복사되었습니다');
         setTimeout(() => {
-          btn.textContent = '본문 텍스트 복사';
+          btn.textContent = '본문 복사';
           btn.classList.remove('copied');
-        }, 1500);
+        }, 2000);
       });
     }
+
+    function openGmail(e) {
+      const email = val('inp-email');
+      if (!email) {
+        e.preventDefault();
+        showToast('이메일 주소를 입력해 주세요');
+        document.getElementById('inp-email').focus();
+        return;
+      }
+      // href는 이미 render()에서 설정됨 — 새 탭으로 열기
+      document.getElementById('btnGmail').target = '_blank';
+    }
+
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(() => t.classList.remove('show'), 2000);
+    }
+
+    // 초기 렌더
+    render();
   </script>
 
 </body>
