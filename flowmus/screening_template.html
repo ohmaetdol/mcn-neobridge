@@ -43,7 +43,7 @@
   .cover-meta { font-size: 8.5pt; color: #4e5968; line-height: 2; }
   .cover-meta b { color: #8b95a1; }
   .cover-logo { font-size: 11pt; font-weight: 800; color: #4e5968; letter-spacing: 1px; }
-  .cover-blank { border-bottom: 1px dashed #4e5968; display: inline-block; min-width: 120px; color: #8b95a1; }
+  .cover-blank { border-bottom: 1px dashed #4e5968; display: inline-block; min-width: 140px; color: #8b95a1; }
 
   .ph { margin-bottom: 24px; }
   .ph-label { font-size: 8pt; font-weight: 700; color: #3182f6; letter-spacing: 1px; margin-bottom: 6px; }
@@ -83,6 +83,7 @@
   .q-num { width: 24px; height: 24px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border-radius: 8px; background: #191f28; color: #fff; font-size: 8pt; font-weight: 800; margin-top: 1px; }
   .q-num.blue { background: #3182f6; }
   .q-num.green { background: #1b8a4a; }
+  .q-num.orange { background: #c67a00; }
   .q-text { flex: 1; font-size: 9.5pt; color: #333d4b; word-break: keep-all; line-height: 1.65; }
   .q-text em { font-style: normal; color: #3182f6; font-weight: 700; }
   .q-hint { font-size: 8pt; color: #8b95a1; margin-top: 4px; display: block; line-height: 1.5; }
@@ -132,6 +133,12 @@
   .tag { display: inline-block; padding: 3px 10px; border-radius: 8px; font-size: 7.5pt; font-weight: 700; margin-right: 4px; }
   .tag-blue { background: #f2f7ff; color: #3182f6; }
   .tag-green { background: #edf8f0; color: #1b8a4a; }
+  .tag-red { background: #fce8e8; color: #e02020; }
+
+  .checklist { list-style: none; padding: 0; margin: 8px 0; }
+  .checklist li { font-size: 9pt; color: #333d4b; padding: 6px 0; border-bottom: 1px solid #f2f4f6; display: flex; gap: 10px; align-items: flex-start; }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist .ck { width: 18px; height: 18px; border: 1.5px solid #d1d6db; border-radius: 5px; flex-shrink: 0; margin-top: 2px; }
 </style>
 </head>
 <body>
@@ -144,7 +151,7 @@
     <div class="cover-badge">SCREENING SHEET</div>
     <div class="cover-title">강사 스크리닝<br><span class="cover-blank">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span></div>
     <div class="cover-desc">
-      <span class="cover-blank">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><br>
+      채널: <span class="cover-blank">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><br>
       강의 주제: <span class="cover-blank">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><br>
       부업클래스 강사 1차 미팅
     </div>
@@ -153,7 +160,7 @@
     <div class="cover-meta">
       <b>미팅일</b> &middot; 20__. __. __<br>
       <b>유형</b> &middot; 1차 강사 스크리닝<br>
-      <b>키워드</b> &middot; _______ / _______ / _______
+      <b>키워��</b> &middot; _______ / _______ / _______
     </div>
     <div class="cover-logo">FLOWMUS</div>
   </div>
@@ -164,8 +171,8 @@
   <div class="pi">
 
     <div class="ph">
-      <div class="ph-label">MARKET INTEL</div>
-      <h2>시장 조사 + 강사 프로필</h2>
+      <div class="ph-label">PROFILE + MARKET</div>
+      <h2>강사 프로필 + 시장 조사</h2>
       <div class="ph-sub">미팅 전 숙지 사항. 이 데이터를 기반으로 질문하세요.</div>
     </div>
 
@@ -175,15 +182,11 @@
         <div class="value blank">&nbsp;</div>
       </div>
       <div class="profile-item">
-        <div class="label">소셜 채널</div>
+        <div class="label">본명</div>
         <div class="value blank">&nbsp;</div>
       </div>
       <div class="profile-item">
-        <div class="label">강의 주제</div>
-        <div class="value blank">&nbsp;</div>
-      </div>
-      <div class="profile-item">
-        <div class="label">광고 포지셔닝</div>
+        <div class="label">메인 소셜 채널</div>
         <div class="value blank">&nbsp;</div>
       </div>
       <div class="profile-item">
@@ -191,7 +194,19 @@
         <div class="value blank">&nbsp;</div>
       </div>
       <div class="profile-item">
-        <div class="label">기존 수강생 수</div>
+        <div class="label">강의 주제</div>
+        <div class="value blank">&nbsp;</div>
+      </div>
+      <div class="profile-item">
+        <div class="label">광고 포지셔닝 (한 줄)</div>
+        <div class="value blank">&nbsp;</div>
+      </div>
+      <div class="profile-item">
+        <div class="label">기존 교육 경험</div>
+        <div class="value blank">&nbsp;</div>
+      </div>
+      <div class="profile-item">
+        <div class="label">기존 수강생 ���</div>
         <div class="value blank">&nbsp;</div>
       </div>
     </div>
@@ -200,7 +215,7 @@
     <div class="data-grid">
       <div class="data-item">
         <div class="num blank">___</div>
-        <div class="desc">시장 규모<br>(출처: )</div>
+        <div class="desc">시장 규모<br>(출처: ___________)</div>
       </div>
       <div class="data-item">
         <div class="num blank">___</div>
@@ -208,87 +223,132 @@
       </div>
       <div class="data-item">
         <div class="num blank">___</div>
-        <div class="desc">검색 수요<br>(네이버/유튜브 월간)</div>
+        <div class="desc">월간 검색량<br>(네이버/유튜브)</div>
       </div>
     </div>
 
     <div class="card-blue">
       <div style="font-size:9.5pt;font-weight:800;color:#191f28;margin-bottom:6px;">시장 판단</div>
       <div style="font-size:8.5pt;color:#4e5968;line-height:1.7;">
-        (미팅 전 조사 결과를 여기에 정리. 블루오션인지, 레드오션인지, 차별화 포인트는 무엇인지)
+        블루오션 / 경쟁 있지만 차별화 가능 / 레드오션 (택1)<br><br>
+        판단 근거:<br>
+        <span style="color:#d1d6db;">______________________________________________________________<br>
+        ______________________________________________________________</span>
       </div>
     </div>
 
-    <div class="sec-title">경쟁 환경</div>
+    <div class="sec-title">경쟁 환��</div>
     <table class="comp-table">
-      <tr><th>플랫폼</th><th>강의명</th><th>가격</th><th>비고</th></tr>
-      <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-      <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-      <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
-      <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+      <tr><th>플랫폼</th><th>강의명</th><th>가격</th><th>수강생/리뷰</th><th>비고</th></tr>
+      <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+      <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+      <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+      <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+      <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
     </table>
 
     <div class="sec-title">타겟 고객</div>
     <div class="card" style="padding:18px 22px;">
-      <div style="font-size:9pt;line-height:1.8;color:#333d4b;">
-        <b>핵심 타겟:</b> <span style="color:#d1d6db;">________________</span><br>
-        <b>구매 심리:</b> <span style="color:#d1d6db;">________________</span><br>
-        <b>부업 동기:</b> <span style="color:#d1d6db;">________________</span><br>
-        <b>시장 트렌드:</b> <span style="color:#d1d6db;">________________</span>
+      <div style="font-size:9pt;line-height:2.2;color:#333d4b;">
+        <b>핵심 타겟:</b> <span style="color:#d1d6db;">________________________________</span><br>
+        <b>나이/성별:</b> <span style="color:#d1d6db;">________________________________</span><br>
+        <b>구매 심리:</b> <span style="color:#d1d6db;">________________________________</span><br>
+        <b>부업 동기:</b> <span style="color:#d1d6db;">________________________________</span><br>
+        <b>시장 트렌드:</b> <span style="color:#d1d6db;">________________________________</span>
       </div>
     </div>
 
-    <div class="sec-title">우리 비용 구조</div>
-    <div class="card" style="padding:18px 22px;border-left:4px solid #3182f6;">
+  </div>
+  <div class="pf"><span>Flowmus Internal</span><span>강사 스크리닝 — 템플릿 (1/5)</span></div>
+</div>
+
+<!-- ═��════════ PAGE 2 — 비용 + 수익 구조 ══════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="ph">
+      <div class="ph-label">REVENUE MODEL</div>
+      <h2>비용 구조 + 수익화 설계</h2>
+      <div class="ph-sub">미팅 전에 BEP와 수익 라인을 미리 계산해두세요</div>
+    </div>
+
+    <div class="sec-title" style="margin-top:0;">우리 비용 구조</div>
+    <div class="card" style="padding:20px 24px;border-left:4px solid #3182f6;">
       <div style="display:flex;justify-content:space-between;align-items:center;">
         <div>
           <div style="font-size:8pt;font-weight:700;color:#8b95a1;">부업클래스 제작비</div>
-          <div style="font-size:20pt;font-weight:800;color:#191f28;letter-spacing:-1px;margin-top:4px;">350만원</div>
+          <div style="font-size:22pt;font-weight:800;color:#191f28;letter-spacing:-1px;margin-top:4px;">350만원</div>
           <div style="font-size:8pt;color:#6b7684;margin-top:4px;">기획 / 촬영 / 편집 / 광고 세팅 / 퍼널 구축 포함</div>
         </div>
         <div style="text-align:right;">
-          <div style="font-size:8pt;font-weight:700;color:#8b95a1;">BEP (___만원 기준)</div>
-          <div style="font-size:14pt;font-weight:800;color:#3182f6;margin-top:4px;">__명</div>
-          <div style="font-size:8pt;color:#6b7684;margin-top:4px;">___만원 기준 __명</div>
+          <div style="font-size:8pt;font-weight:700;color:#8b95a1;">BEP</div>
+          <div style="font-size:18pt;font-weight:800;color:#3182f6;margin-top:4px;">__명</div>
+          <div style="font-size:8pt;color:#6b7684;margin-top:4px;">___만원 x Flowmus 몫 __% = ___만원/건</div>
         </div>
       </div>
     </div>
 
-    <div class="sec-title">강사 수익화 구조 (6개 라인)</div>
+    <div class="note">
+      <b>BEP 계산법:</b> 350만원 (제작비) &divide; (수강료 &times; Flowmus 비율) = BEP 수강생 수<br>
+      예) 19만원 강의 &times; 40% = 7.6만원/건 &rarr; BEP 46명<br>
+      예) 29만원 강의 &times; 40% = 11.6만원/건 &rarr; BEP 30명<br>
+      예) 295만원 강의 &times; 40% = 118만원/건 &rarr; BEP 3명
+    </div>
+
+    <div class="sec-title">수익 분배 구조</div>
+    <div class="card-outline" style="padding:20px 24px;">
+      <div style="font-size:9pt;line-height:2.2;color:#333d4b;">
+        <b>수강료:</b> <span style="color:#d1d6db;">_______________만원</span><br>
+        <b>수익 배분:</b> 강사 ___% : Flowmus ___%<br>
+        <b>강사 1건당 수익:</b> <span style="color:#d1d6db;">_______________만원</span><br>
+        <b>Flowmus 1건당 수익:</b> <span style="color:#d1d6db;">_______________만원</span><br>
+        <b>추가 RS (대행 등):</b> <span style="color:#d1d6db;">_______________</span>
+      </div>
+    </div>
+
+    <div class="sec-title">강사 수익화 구조 (6개 라��)</div>
     <div class="revenue-grid">
       <div class="rev-item">
-        <div class="rev-name">1. 강의 판매</div>
-        <div class="rev-desc">부업클래스 VOD 메인 상품</div>
+        <div class="rev-name">1. 강의 판매 (메인)</div>
+        <div class="rev-desc">부업클래스 VOD 메인 상품. 가격 = 시장 + 경쟁 + 타겟 여력 고려</div>
         <div class="rev-est">___만원대</div>
       </div>
       <div class="rev-item">
-        <div class="rev-name">2. 디지털 상품</div>
-        <div class="rev-desc">PDF/템플릿/가이드북 등 수동수입</div>
+        <div class="rev-name">2. 디지털 상품 (PDF/템플릿)</div>
+        <div class="rev-desc">가이드북, 체크리스트, 패턴, 레시피 등. 제작 1번 → 반복 판매</div>
         <div class="rev-est">월 ___만원</div>
       </div>
       <div class="rev-item">
-        <div class="rev-name">3. 키트/재료</div>
-        <div class="rev-desc">강의와 세트 패키지 업셀</div>
-        <div class="rev-est">+___만원</div>
+        <div class="rev-name">3. 키트 / 재료 패키지</div>
+        <div class="rev-desc">강의와 세트 패키지. 수강 진입장벽 낮추면서 객단가 올림</div>
+        <div class="rev-est">+___만원 업셀</div>
       </div>
       <div class="rev-item">
         <div class="rev-name">4. 수강생 결과물 판매</div>
-        <div class="rev-desc">수강생 작품/서비스를 채널에서 판매</div>
-        <div class="rev-est">수수료 모델</div>
+        <div class="rev-desc">수강생 작품/서비스를 채널에서 판매 대행. 수수료 모델</div>
+        <div class="rev-est">수수료 ___%</div>
       </div>
       <div class="rev-item">
-        <div class="rev-name">5. 커뮤니티/멤버십</div>
-        <div class="rev-desc">월정액 구독 + 피드백</div>
-        <div class="rev-est">월 ___만원</div>
+        <div class="rev-name">5. 커뮤니티 / 멤버십</div>
+        <div class="rev-desc">월정액 구독. 지속적 피드백 + 네트워킹 + 업데이트</div>
+        <div class="rev-est">월 2~5만원/인</div>
       </div>
       <div class="rev-item">
-        <div class="rev-name">6. 오프라인/원데이</div>
-        <div class="rev-desc">소수정예 프리미엄 클래스</div>
+        <div class="rev-name">6. 오프라인 / 원데이</div>
+        <div class="rev-desc">소수정예 프리미엄 클래스. 직접 만남 = 높은 만족도</div>
         <div class="rev-est">회당 ___만원</div>
       </div>
     </div>
 
-    <div class="card-orange" style="margin-top:10px;">
+    <div class="sec-title">매출 시뮬레이션</div>
+    <table class="comp-table">
+      <tr><th>시나��오</th><th>수강료</th><th>월 수강생</th><th>월 매출</th><th>강사 몫</th><th>Flowmus 몫</th></tr>
+      <tr><td>보수적</td><td>___만원</td><td>__명</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+      <tr><td>기본</td><td>___만원</td><td>__명</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+      <tr><td>공격적</td><td>___만원</td><td>__명</td><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    </table>
+
+    <div class="card-orange" style="margin-top:14px;">
       <div style="font-size:8.5pt;color:#6b5900;line-height:1.7;">
         <b>미팅 핵심 확인:</b> 기존 수강생 수 / 수강료 / 재수강률 — 이 세 숫자가 강의 상품성 판단의 전부.
         수강생이 실제로 결과를 내고 돈을 벌어본 사례가 있는지 반드시 확인.
@@ -296,17 +356,17 @@
     </div>
 
   </div>
-  <div class="pf"><span>Flowmus Internal</span><span>강사 스크리닝 — 템플릿</span></div>
+  <div class="pf"><span>Flowmus Internal</span><span>강사 스크리닝 — 템플릿 (2/5)</span></div>
 </div>
 
-<!-- ══════════ PAGE 2 — 인터뷰 질문 ══════════ -->
+<!-- ══════════ PAGE 3 — 기본 인터뷰 질문 ══════════ -->
 <div class="page">
   <div class="pi">
 
     <div class="ph">
-      <div class="ph-label">INTERVIEW</div>
-      <h2>강사 미팅 질문</h2>
-      <div class="ph-sub">총 14문항 + 3분 미니 강의. 녹음 필수.</div>
+      <div class="ph-label">INTERVIEW — BASIC</div>
+      <h2>기본 강사 미팅 질문</h2>
+      <div class="ph-sub">모든 강사 공통 질문. 빠짐없이 확인하세요. 녹음 필수.</div>
     </div>
 
     <!-- A. 전문성 + 실적 -->
@@ -330,37 +390,37 @@
       </div>
       <div class="q-item">
         <div class="q-num">3</div>
-        <div class="q-text"><em>교육 경험</em>이 있으시죠? 지금까지 수강생이 <em>총 몇 명</em>?
+        <div class="q-text"><em>교육 경험</em>이 있으시죠? 지금까지 수강생이 <em>총 ��� 명</em>?
           <span class="q-hint">오프라인/온라인 불문. 수강생 수 + 수강료 + 재수강률 확인</span>
           <div class="q-answer">&nbsp;</div></div>
       </div>
       <div class="q-item">
         <div class="q-num">4</div>
         <div class="q-text">수강생 중에 <em>실제로 결과를 내고 수익화</em>한 사례가 있나요?
-          <span class="q-hint">핵심 질문. 수강생 수익화 사례 = 강의의 진짜 가치</span>
+          <span class="q-hint">핵심 질문. 수강생 수익화 사례 = 강의의 진짜 가치. 증빙 있으면 최고</span>
           <div class="q-answer">&nbsp;</div></div>
       </div>
     </div>
 
-    <div style="height:8px;"></div>
+    <div style="height:6px;"></div>
 
     <!-- B. 오디언스 + 채널 -->
     <div class="q-block">
       <div class="q-block-head">
         <div class="q-block-title">B. 오디언스 + 채널</div>
-        <div class="q-block-time">5분</div>
+        <div class="q-block-time">7분</div>
       </div>
 
       <div class="q-item">
         <div class="q-num blue">5</div>
-        <div class="q-text">팔로워/구독자가 <em>몇 명</em>이고, 주로 어떤 분들이 따르시나요?
-          <span class="q-hint">규모 + 인구통계. 부업클래스 타겟과 매칭되는지</span>
+        <div class="q-text">팔로워/구독자가 <em>몇 명</em>이고, 주로 어떤 분들이 따르��나요?
+          <span class="q-hint">규모 + 인구통계 (나이, 성별, 관심사). 부업클래스 타겟과 매칭 여부</span>
           <div class="q-answer">&nbsp;</div></div>
       </div>
       <div class="q-item">
         <div class="q-num blue">6</div>
         <div class="q-text">DM이나 댓글로 <em>"이거 어떻게 하는 거예요?"</em> 같은 질문이 얼마나 오나요?
-          <span class="q-hint">교육 수요 신호. 자주 오면 = 강의 수요 검증됨</span>
+          <span class="q-hint">교육 수요 신호. 자주 오면 = 강의 수요가 이미 검증된 것</span>
           <div class="q-answer">&nbsp;</div></div>
       </div>
       <div class="q-item">
@@ -369,9 +429,15 @@
           <span class="q-hint">50명+ 양호 / 200명+ 우수 / 1,000명+ 최상급</span>
           <div class="q-answer">&nbsp;</div></div>
       </div>
+      <div class="q-item">
+        <div class="q-num blue">8</div>
+        <div class="q-text">유튜브/인스타/블로그/카카오 중 <em>가장 반응이 좋은 채널</em>은? 그 이유는?
+          <span class="q-hint">강의 프로모션 채널 우선순위 결정에 활용</span>
+          <div class="q-answer">&nbsp;</div></div>
+      </div>
     </div>
 
-    <div style="height:8px;"></div>
+    <div style="height:6px;"></div>
 
     <!-- C. 상품성 + 수익화 구조 -->
     <div class="q-block">
@@ -381,74 +447,165 @@
       </div>
 
       <div class="q-item">
-        <div class="q-num green">8</div>
-        <div class="q-text">"수강 전에는 <em>___</em> 했지만, 수강 후에는 <em>___</em>일 안에 <em>___</em> 할 수 있다"
+        <div class="q-num green">9</div>
+        <div class="q-text">"수강 전에는 <em>___</em> 했지만, 수강 후���는 <em>___</em>일 안에 <em>___</em> 할 수 있다"
           <span class="q-hint">변화의 구체성. 측정 가능 + 기한이 있어야 광고 소재가 됨</span>
           <div class="q-answer">&nbsp;</div></div>
       </div>
       <div class="q-item">
-        <div class="q-num green">9</div>
+        <div class="q-num green">10</div>
         <div class="q-text">수강생이 <em>본전을 뽑을 수 있는</em> 구조인가요? 구체적으로 어떻게?
           <span class="q-hint">"배우고 끝"이면 환불 리스크. "배워서 돈 번다"가 되어야 판매 가능</span>
           <div class="q-answer">&nbsp;</div></div>
       </div>
       <div class="q-item">
-        <div class="q-num green">10</div>
+        <div class="q-num green">11</div>
         <div class="q-text">강의 외에 <em>추가 수익화 라인</em>은 뭐가 가능한가요?
           <span class="q-hint">PDF/키트/멤버십/오프라인/공구 등. 라인이 많을수록 LTV 높음</span>
           <div class="q-answer">&nbsp;</div></div>
       </div>
       <div class="q-item">
-        <div class="q-num green">11</div>
+        <div class="q-num green">12</div>
         <div class="q-text">수강생들이 만든 결과물을 <em>채널에서 판매/연결</em>하는 구조는 어떻게 생각하세요?
           <span class="q-hint">수강생 결과물 판매 = 수강생 수익화 + 강사 수수료 + 콘텐츠 소스</span>
+          <div class="q-answer">&nbsp;</div></div>
+      </div>
+      <div class="q-item">
+        <div class="q-num green">13</div>
+        <div class="q-text"><em>환불율</em>은 보통 몇 %? 고가라면 환불 민감도가 높을 텐데?
+          <span class="q-hint">환불율 5% 이하 양호 / 10%+ 이면 리스크. 고가일수록 중요</span>
+          <div class="q-answer">&nbsp;</div></div>
+      </div>
+    </div>
+
+  </div>
+  <div class="pf"><span>Flowmus Internal</span><span>강사 스크리닝 — 템플릿 (3/5)</span></div>
+</div>
+
+<!-- ════���═════ PAGE 4 — 딥다이브 + 시연 ══════════ -->
+<div class="page">
+  <div class="pi">
+
+    <div class="ph">
+      <div class="ph-label">INTERVIEW — DEEP DIVE</div>
+      <h2>심화 질문 + 시연</h2>
+      <div class="ph-sub">제작 의지, 퍼널 구조 이해도, 실제 전달력 확인</div>
+    </div>
+
+    <!-- D. 퍼널 + 일거리 연결 -->
+    <div class="q-block">
+      <div class="q-block-head">
+        <div class="q-block-title">D. 퍼��� + 일거리 연결</div>
+        <div class="q-block-time">7분 &middot; 핵심</div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-num orange">14</div>
+        <div class="q-text">"강의 듣고 바로 일거리 연결" 구조에 대해 <em>어떻게 생각</em>하시나요?
+          <span class="q-hint">이 퍼널이 경쟁사와의 결정적 차별점. 강사가 이 구조에 공감해야 함</span>
+          <div class="q-answer">&nbsp;</div></div>
+      </div>
+      <div class="q-item">
+        <div class="q-num orange">15</div>
+        <div class="q-text">본인 채널/네트워크에서 <em>수강생에게 줄 수 있는 일거리</em>가 있나요?
+          <span class="q-hint">강사 채널 자체가 일거리 소스가 되면 퍼널이 훨씬 강력해짐</span>
+          <div class="q-answer">&nbsp;</div></div>
+      </div>
+      <div class="q-item">
+        <div class="q-num orange">16</div>
+        <div class="q-text">수강생이 만든 결과물의 <em>품질 관리</em>는 어떻게 하실 건가요?
+          <span class="q-hint">일거리 연결의 최대 리스크 = 품질. 검수 프로세스 필요</span>
+          <div class="q-answer">&nbsp;</div></div>
+      </div>
+    </div>
+
+    <div style="height:6px;"></div>
+
+    <!-- E. 제작 의지 + 일정 -->
+    <div class="q-block">
+      <div class="q-block-head">
+        <div class="q-block-title">E. 제작 의지 + 일정</div>
+        <div class="q-block-time">5분</div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-num">17</div>
+        <div class="q-text">강의 <em>커리큘럼</em>을 대략적으로 구상해 보셨나요? 몇 강 ��도?
+          <span class="q-hint">이미 구체적이면 = 실행 의지 높음. "아직요" = 추가 지원 필���</span>
+          <div class="q-answer">&nbsp;</div></div>
+      </div>
+      <div class="q-item">
+        <div class="q-num">18</div>
+        <div class="q-text">현재 일정 기준 <em>언제까지</em> 강의 제작을 완료할 수 있나요?
+          <span class="q-hint">1~3개월이 이상적. 6개월 이상이면 위험</span>
+          <div class="q-answer">&nbsp;</div></div>
+      </div>
+      <div class="q-item">
+        <div class="q-num">19</div>
+        <div class="q-text"><em>무료 특강</em> 또는 <em>라이브</em>로 먼저 테스트해볼 수 있나요?
+          <span class="q-hint">무료 특강 → 전환율 측정 → 본 강의 런칭. 가장 안전한 검증 루트</span>
+          <div class="q-answer">&nbsp;</div></div>
+      </div>
+      <div class="q-item">
+        <div class="q-num">20</div>
+        <div class="q-text">수익 분배는 <em>6:4 (강사:Flowmus)</em> 구조인데, 어떻게 보시나요?
+          <span class="q-hint">기획/촬영/편집/��객/운영 전부 우리 담당. 강사는 출연+노하우만</span>
+          <div class="q-answer">&nbsp;</div></div>
+      </div>
+    </div>
+
+    <div style="height:6px;"></div>
+
+    <!-- F. 리스크 체크 -->
+    <div class="q-block">
+      <div class="q-block-head">
+        <div class="q-block-title">F. 리스크 체크</div>
+        <div class="q-block-time">3분</div>
+      </div>
+
+      <div class="q-item">
+        <div class="q-num" style="background:#e02020;">21</div>
+        <div class="q-text">혹시 다른 플랫폼과 <em>독점 계약</em>이 있으신가요?
+          <span class="q-hint">클래스101/콜로소 등 기존 계약이 있으면 충돌 가능</span>
+          <div class="q-answer">&nbsp;</div></div>
+      </div>
+      <div class="q-item">
+        <div class="q-num" style="background:#e02020;">22</div>
+        <div class="q-text">강의 관련 <em>논란이나 환불 이슈</em>가 있었나요?
+          <span class="q-hint">정직한 답변이 중요. 숨기면 나중에 더 큰 리스크</span>
           <div class="q-answer">&nbsp;</div></div>
       </div>
     </div>
 
     <div style="height:8px;"></div>
 
-    <!-- D. 제작 의지 + 시연 -->
-    <div class="q-block">
-      <div class="q-block-head">
-        <div class="q-block-title">D. 제작 의지 + 시연</div>
-        <div class="q-block-time">5분</div>
-      </div>
-
-      <div class="q-item">
-        <div class="q-num">12</div>
-        <div class="q-text">강의 <em>커리큘럼</em>을 대략적으로 구상해 보셨나요?
-          <span class="q-hint">이미 구체적이면 = 실행 의지 높음. "아직요" = 추가 지원 필요</span>
-          <div class="q-answer">&nbsp;</div></div>
-      </div>
-      <div class="q-item">
-        <div class="q-num">13</div>
-        <div class="q-text">현재 일정 기준 <em>언제까지</em> 강의 제작을 완료할 수 있나요?
-          <span class="q-hint">1~3개월이 이상적. 6개월 이상이면 위험</span>
-          <div class="q-answer">&nbsp;</div></div>
-      </div>
-      <div class="q-item">
-        <div class="q-num">14</div>
-        <div class="q-text">수익 분배는 <em>6:4 (강사:Flowmus)</em> 구조인데, 어떻게 보시나요?
-          <span class="q-hint">기획/촬영/편집/모객/운영 전부 우리 담당. 강사는 출연+노하우만</span>
-          <div class="q-answer">&nbsp;</div></div>
-      </div>
-    </div>
-
-    <div class="card-blue" style="margin-top:12px;">
+    <div class="card-blue">
       <div style="font-size:9.5pt;font-weight:700;color:#191f28;margin-bottom:6px;">3분 미니 강의</div>
       <div style="font-size:8.5pt;color:#4e5968;line-height:1.7;">
-        "지금 3분간, 수강생이 앞에 있다고 생각하고 핵심 내용 하나만 가르쳐 주세요."<br>
+        "지금 3분간, 수강생이 앞에 있다고 생각하고 핵심 내용 하나만 가르쳐 주��요."<br>
         <b>평가:</b> 전달력 / 구조(도입-본론-정리) / 자신감 / 실제로 따라할 수 있는 수준
       </div>
       <div class="q-answer" style="margin-top:8px;">&nbsp;</div>
     </div>
 
+    <div class="card-orange" style="margin-top:10px;">
+      <div style="font-size:9pt;font-weight:800;color:#6b5900;margin-bottom:4px;">미팅 핵심 확인 체크리스트</div>
+      <ul class="checklist">
+        <li><div class="ck"></div>기존 수강생 수 + 수강료 + 재수강률 확인했나?</li>
+        <li><div class="ck"></div>수강생이 실제로 돈 번 사례 + 증빙 확인했나?</li>
+        <li><div class="ck"></div>"강의 → 일거리 연결" 퍼널에 공감하는가?</li>
+        <li><div class="ck"></div>커리큘럼 구상이 있고 일정이 현실적인가?</li>
+        <li><div class="ck"></div>3분 미니 강의 — 전달력이 있는가?</li>
+        <li><div class="ck"></div>독점 계약 / 논란 / 환불 리스크는 없는가?</li>
+        <li><div class="ck"></div>6:4 수익 분배에 동��하는가?</li>
+      </ul>
+    </div>
+
   </div>
-  <div class="pf"><span>Flowmus Internal</span><span>강사 스크리닝 — 템플릿</span></div>
+  <div class="pf"><span>Flowmus Internal</span><span>강사 스크리닝 — 템플릿 (4/5)</span></div>
 </div>
 
-<!-- ══════════ PAGE 3 — 광고 전략 + 스코어카드 ══════════ -->
+<!-- ═══════���══ PAGE 5 — 광고 전략 + 스코어카드 + 판정 ═════════�� -->
 <div class="page">
   <div class="pi">
 
@@ -459,20 +616,19 @@
 
     <div class="card-green">
       <div style="font-size:9.5pt;font-weight:800;color:#1b8a4a;margin-bottom:6px;">광고 방향</div>
-      <div style="font-size:8.5pt;color:#4e5968;line-height:1.8;">
-        <b>타겟:</b> <span style="color:#d1d6db;">________________</span><br>
+      <div style="font-size:8.5pt;color:#4e5968;line-height:2;">
+        <b>타겟:</b> <span style="color:#d1d6db;">________________________________</span><br>
+        <b>메타 광고 세그먼트:</b> <span style="color:#d1d6db;">________________________________</span><br>
         <b>금지 단어:</b> <span style="color:#d1d6db;">________________ (전문 용어 = 진입장벽)</span><br>
         <b>사용 단어:</b> <span style="color:#d1d6db;">________________ (일상 용어 = 접근성)</span><br>
-        <b>후킹:</b> <span style="color:#d1d6db;">________________</span><br>
-        <b>감성:</b> <span style="color:#d1d6db;">________________</span>
+        <b>후킹 카피:</b> <span style="color:#d1d6db;">________________________________</span><br>
+        <b>감성 카피:</b> <span style="color:#d1d6db;">________________________________</span>
       </div>
     </div>
 
-    <div style="height:8px;"></div>
-
     <div class="sec-title">스코어카드 <span style="font-size:8pt;font-weight:500;color:#8b95a1;margin-left:8px;">미팅 직후 작성 / 11항목 / 55점 만점</span></div>
 
-    <div class="card-outline" style="padding:18px 22px;">
+    <div class="card-outline" style="padding:16px 20px;">
       <div class="sc-item">
         <div class="sc-left">
           <div class="sc-name">1. 검색 수요</div>
@@ -483,7 +639,7 @@
       <div class="sc-item">
         <div class="sc-left">
           <div class="sc-name">2. 경쟁 환경</div>
-          <div class="sc-desc">1: 과포화 / 3: 3~5개 / 5: 블루오션</div>
+          <div class="sc-desc">1: 과포화 / 3: 3~5개 / 5: 블루오��</div>
         </div>
         <div class="sc-score">/5</div>
       </div>
@@ -579,28 +735,26 @@
       </div>
     </div>
 
-    <div style="margin-top:12px;">
-      <div class="sec-title" style="margin-top:0;">미팅 기록</div>
-      <div class="card-outline" style="padding:18px 22px;">
-        <div class="rec-item"><div class="rec-label">미팅 일시</div><div class="rec-value empty">&nbsp;</div></div>
-        <div class="rec-item"><div class="rec-label">강사명</div><div class="rec-value empty">&nbsp;</div></div>
-        <div class="rec-item"><div class="rec-label">강의 주제</div><div class="rec-value empty">&nbsp;</div></div>
-        <div class="rec-item"><div class="rec-label">소셜 채널</div><div class="rec-value empty">&nbsp;</div></div>
-        <div class="rec-item"><div class="rec-label">팔로워/구독자</div><div class="rec-value empty">&nbsp;</div></div>
-        <div class="rec-item"><div class="rec-label">기존 수강생 수</div><div class="rec-value empty">&nbsp;</div></div>
-        <div class="rec-item"><div class="rec-label">기존 수강료</div><div class="rec-value empty">&nbsp;</div></div>
-        <div class="rec-item"><div class="rec-label">재수강률</div><div class="rec-value empty">&nbsp;</div></div>
-        <div class="rec-item"><div class="rec-label">수익 분배</div><div class="rec-value empty">___:___ (강사:Flowmus)</div></div>
-        <div class="rec-item"><div class="rec-label">스코어 합계</div><div class="rec-value empty">______ / 55</div></div>
-        <div class="rec-item"><div class="rec-label">판정</div><div class="rec-value empty">즉시 / 조건부 / 보류 / 거절</div></div>
-        <div class="rec-item"><div class="rec-label">핵심 소구점</div><div class="rec-value empty">&nbsp;</div></div>
-        <div class="rec-item"><div class="rec-label">수익화 라인</div><div class="rec-value empty">강의 / PDF / 키트 / 공구 / 멤버십 / 오프라인</div></div>
-        <div class="rec-item"><div class="rec-label">다음 액션</div><div class="rec-value empty">&nbsp;</div></div>
-      </div>
+    <div class="sec-title" style="margin-top:10px;">미팅 기록</div>
+    <div class="card-outline" style="padding:16px 20px;">
+      <div class="rec-item"><div class="rec-label">미��� 일시</div><div class="rec-value empty">&nbsp;</div></div>
+      <div class="rec-item"><div class="rec-label">강사명</div><div class="rec-value empty">&nbsp;</div></div>
+      <div class="rec-item"><div class="rec-label">강의 주제</div><div class="rec-value empty">&nbsp;</div></div>
+      <div class="rec-item"><div class="rec-label">소셜 채널</div><div class="rec-value empty">&nbsp;</div></div>
+      <div class="rec-item"><div class="rec-label">팔로워/��독자</div><div class="rec-value empty">&nbsp;</div></div>
+      <div class="rec-item"><div class="rec-label">기존 수강생 수</div><div class="rec-value empty">&nbsp;</div></div>
+      <div class="rec-item"><div class="rec-label">기존 수강료</div><div class="rec-value empty">&nbsp;</div></div>
+      <div class="rec-item"><div class="rec-label">재수강률</div><div class="rec-value empty">&nbsp;</div></div>
+      <div class="rec-item"><div class="rec-label">수익 분배</div><div class="rec-value empty">___:___ (강사:Flowmus)</div></div>
+      <div class="rec-item"><div class="rec-label">스코어 합계</div><div class="rec-value empty">______ / 55</div></div>
+      <div class="rec-item"><div class="rec-label">판정</div><div class="rec-value empty">즉시 / 조건부 / 보류 / 거절</div></div>
+      <div class="rec-item"><div class="rec-label">핵심 소구점</div><div class="rec-value empty">&nbsp;</div></div>
+      <div class="rec-item"><div class="rec-label">수익화 라인</div><div class="rec-value empty">강의 / PDF / 키트 / 공구 / 멤버십 / 오프라인</div></div>
+      <div class="rec-item"><div class="rec-label">다음 액션</div><div class="rec-value empty">&nbsp;</div></div>
     </div>
 
   </div>
-  <div class="pf"><span>Flowmus Internal</span><span>강사 스크리닝 — 템플릿</span></div>
+  <div class="pf"><span>Flowmus Internal</span><span>강사 스크리닝 — 템플릿 (5/5)</span></div>
 </div>
 
 </body>
