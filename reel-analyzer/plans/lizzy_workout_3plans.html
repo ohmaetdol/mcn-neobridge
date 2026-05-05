@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>이세령 대표 릴스 기획서 — 운동 시연 3종</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f8f9fa; color: #333; padding: 12px; font-size: 15px; -webkit-text-size-adjust: 100%; }
+.container { max-width: 100%; margin: 0 auto; }
+h1 { text-align: center; margin-bottom: 6px; font-size: 1.4em; }
+.subtitle { text-align: center; color: #666; margin-bottom: 20px; font-size: 0.8em; }
+.plan-card { background: white; border-radius: 16px; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+.plan-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 6px; }
+.plan-number { background: #667eea; color: white; padding: 4px 10px; border-radius: 20px; font-size: 0.75em; font-weight: 600; }
+.plan-formula { background: #f0f0f0; padding: 4px 10px; border-radius: 20px; font-size: 0.75em; color: #555; }
+.plan-duration { color: #999; font-size: 0.8em; }
+.plan-title { font-size: 1.15em; font-weight: 700; margin-bottom: 10px; line-height: 1.4; }
+
+.ref-box { background: #f8f4ff; border: 1px solid #e8d5ff; border-radius: 12px; padding: 14px; margin-bottom: 16px; }
+.ref-box h4 { color: #7c3aed; margin-bottom: 6px; font-size: 0.85em; }
+.ref-box p { font-size: 0.8em; color: #555; line-height: 1.5; }
+.ref-box .ref-note { font-style: italic; color: #7c3aed; margin-top: 6px; font-size: 0.75em; }
+.ref-link { display: inline-block; margin-top: 8px; background: #7c3aed; color: white; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-size: 0.8em; }
+
+.data-box { background: #fef3c7; border: 1px solid #fcd34d; border-radius: 12px; padding: 14px; margin-bottom: 16px; }
+.data-box h4 { color: #92400e; margin-bottom: 8px; font-size: 0.85em; }
+.data-box .stat { display: flex; justify-content: space-between; padding: 4px 0; font-size: 0.8em; border-bottom: 1px solid #fde68a; }
+.data-box .stat:last-child { border-bottom: none; }
+.data-box .stat-label { color: #78350f; }
+.data-box .stat-value { font-weight: 700; color: #92400e; }
+
+.hook-section { background: #fff3cd; border-radius: 12px; padding: 14px; margin-bottom: 14px; }
+.hook-section h4 { color: #856404; margin-bottom: 6px; font-size: 0.85em; }
+.hook-main { font-size: 1.05em; font-weight: 600; margin-bottom: 6px; }
+
+.script-section { margin-bottom: 16px; }
+.script-section h4 { margin-bottom: 10px; color: #333; font-size: 0.9em; }
+.script-item { display: grid; grid-template-columns: 65px 1fr; gap: 8px; padding: 10px; border-left: 3px solid #667eea; margin-bottom: 6px; background: #fafbfc; border-radius: 0 8px 8px 0; }
+.script-time { font-size: 0.7em; color: #667eea; font-weight: 600; white-space: nowrap; }
+.script-content .direction { font-size: 0.85em; color: #333; margin-bottom: 4px; line-height: 1.5; font-weight: 500; }
+.script-content .detail { font-size: 0.78em; color: #666; line-height: 1.5; margin-bottom: 4px; }
+.script-content .overlay { font-size: 0.75em; color: #7c3aed; background: #f3e8ff; padding: 4px 8px; border-radius: 4px; display: inline-block; margin-top: 4px; line-height: 1.4; }
+
+.caption-section { background: #e8f4fd; border-radius: 12px; padding: 14px; margin-bottom: 14px; }
+.caption-section h4 { color: #0c5460; margin-bottom: 6px; font-size: 0.85em; }
+.caption-section pre { font-size: 0.8em; white-space: pre-wrap; font-family: inherit; line-height: 1.5; word-break: break-word; }
+
+.checklist-section { margin-bottom: 16px; }
+.checklist-section h4 { margin-bottom: 8px; font-size: 0.85em; }
+.checklist-section ul { list-style: none; padding: 0; }
+.checklist-section li { padding: 6px 0; font-size: 0.85em; border-bottom: 1px solid #f0f0f0; }
+.checklist-section li::before { content: "\2610 "; color: #667eea; }
+
+.key-formula { background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 12px; padding: 14px; margin-bottom: 16px; }
+.key-formula h4 { color: #065f46; margin-bottom: 8px; font-size: 0.85em; }
+.key-formula p { font-size: 0.82em; color: #064e3b; line-height: 1.6; }
+.key-formula .formula-highlight { font-weight: 700; color: #047857; font-size: 0.9em; margin-bottom: 6px; }
+
+.footer { text-align: center; color: #999; font-size: 0.75em; margin-top: 30px; padding: 16px; }
+
+@media (max-width: 480px) {
+  body { padding: 8px; }
+  .plan-card { padding: 14px; border-radius: 12px; }
+  .plan-title { font-size: 1.05em; }
+  .script-item { grid-template-columns: 55px 1fr; gap: 6px; padding: 8px; }
+  .script-time { font-size: 0.65em; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>이세령 대표 릴스 기획서</h1>
+<p class="subtitle">운동 시연 3종 — @chaelee_fit 바이럴 공식 기반</p>
+
+<!-- ============================================ -->
+<!-- PLAN 1 -->
+<!-- ============================================ -->
+<div class="plan-card">
+  <div class="plan-header">
+    <span class="plan-number">Plan 1</span>
+    <span class="plan-formula">채리언니 '1분 복부+팔뚝살' 공식</span>
+    <span class="plan-duration">25-35초</span>
+  </div>
+  <div class="plan-title">하루 1분! 복부+팔뚝살 동시에 잡는 동작</div>
+
+  <div class="ref-box">
+    <h4>레퍼런스: @chaelee_fit — "1분으로 복부, 팔뚝살 타파" (244만뷰)</h4>
+    <p class="ref-note">핵심 구조: 음성 없음 + 짧은 시간 강조(1분) + 두 부위 동시 타겟 + BGM만 + 캡션으로 정보 전달. 이세령 대표의 "30kg 감량" 스토리를 캡션에 녹여 차별화.</p>
+    <a href="https://www.instagram.com/p/DFZPefETmOC/" target="_blank" class="ref-link">원본 영상 보기 (244만뷰)</a>
+  </div>
+
+  <div class="data-box">
+    <h4>레퍼런스 성과 데이터</h4>
+    <div class="stat"><span class="stat-label">조회수</span><span class="stat-value">2,444,932</span></div>
+    <div class="stat"><span class="stat-label">좋아요</span><span class="stat-value">9,673</span></div>
+    <div class="stat"><span class="stat-label">참여율</span><span class="stat-value">0.40%</span></div>
+    <div class="stat"><span class="stat-label">게시일</span><span class="stat-value">2025.01.29</span></div>
+  </div>
+
+  <div class="key-formula">
+    <h4>이 영상이 터진 이유</h4>
+    <p class="formula-highlight">"1분" + "두 부위 동시" + "음성 없이 시연만"</p>
+    <p>- 시간이 짧아서 "나도 할 수 있겠다" → 저장<br>
+    - 복부+팔뚝 두 마리 토끼 → "이거 하나면 되네" 심리<br>
+    - 음성 없이 동작만 보여주니 누구든 따라할 수 있음<br>
+    - 신나는 BGM → 마지막까지 시청 → 알고리즘 추천</p>
+  </div>
+
+  <div class="hook-section">
+    <h4>텍스트 오버레이 (첫 화면)</h4>
+    <div class="hook-main">하루 1분! 복부+팔뚝 동시에</div>
+  </div>
+
+  <div class="script-section">
+    <h4>촬영 시퀀스</h4>
+    <div class="script-item">
+      <div class="script-time">0-3초</div>
+      <div class="script-content">
+        <div class="direction">오프닝: 운동 준비 자세</div>
+        <div class="detail">운동복 차림, 요가매트 위에 서있는 전신 샷. 밝은 표정으로 시작.</div>
+        <div class="overlay">텍스트: "하루 1분! 복부+팔뚝 동시에"</div>
+      </div>
+    </div>
+    <div class="script-item">
+      <div class="script-time">3-10초</div>
+      <div class="script-content">
+        <div class="direction">동작 1: 플랭크 숄더탭</div>
+        <div class="detail">플랭크 자세에서 한 손씩 반대쪽 어깨 터치. 복부+팔뚝 동시 자극. 8-10회 반복하는 모습.</div>
+        <div class="overlay">텍스트: "동작 1 — 플랭크 숄더탭 x 10회"</div>
+      </div>
+    </div>
+    <div class="script-item">
+      <div class="script-time">10-18초</div>
+      <div class="script-content">
+        <div class="direction">동작 2: 마운틴 클라이머</div>
+        <div class="detail">플랭크 자세에서 무릎을 가슴 쪽으로 번갈아 당기기. 빠른 템포로 8-10회.</div>
+        <div class="overlay">텍스트: "동작 2 — 마운틴 클라이머 x 10회"</div>
+      </div>
+    </div>
+    <div class="script-item">
+      <div class="script-time">18-25초</div>
+      <div class="script-content">
+        <div class="direction">동작 3: 트라이셉 딥 + 레그레이즈</div>
+        <div class="detail">바닥에 손 짚고 뒤로 앉아 팔굽혀펴기 + 다리 올리기 결합. 복부+팔뚝 동시 자극.</div>
+        <div class="overlay">텍스트: "동작 3 — 딥+레그레이즈 x 10회"</div>
+      </div>
+    </div>
+    <div class="script-item">
+      <div class="script-time">25-30초</div>
+      <div class="script-content">
+        <div class="direction">마무리: 완료 포즈</div>
+        <div class="detail">운동 끝난 후 가볍게 숨 고르며 카메라 보고 미소. "해냈다!" 느낌.</div>
+        <div class="overlay">텍스트: "하루 1분이면 충분! 저장하고 따라해보세요"</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="caption-section">
+    <h4>인스타 캡션</h4>
+    <pre>하루 1분! 복부+팔뚝살 동시에 잡는 3가지 동작
+
+30kg 뺀 뒤에도 매일 하는 루틴이에요
+진짜 1분이면 끝나서 안 할 핑계가 없음...
+
+1. 플랭크 숄더탭 x 10회
+2. 마운틴 클라이머 x 10회
+3. 딥+레그레이즈 x 10회
+
+따라해볼 분들 저장해두세요!
+
+#홈트 #1분운동 #복부운동 #팔뚝살 #다이어트 #홈트추천 #운동루틴 #다이어터소통</pre>
+  </div>
+
+  <div class="checklist-section">
+    <h4>촬영 준비 체크리스트</h4>
+    <ul>
+      <li>운동복 (핏이 보이는 레깅스 + 크롭탑 or 반팔)</li>
+      <li>요가매트 (밝은 색 추천)</li>
+      <li>깔끔한 배경 (거실 or 방, 심플한 벽)</li>
+      <li>자연광 or 링라이트 (얼굴+몸 전체 밝게)</li>
+      <li>휴대폰 삼각대 (전신이 나오게 세로 촬영)</li>
+      <li>BGM: 신나는 비트 (에디츠에서 트렌딩 음악 사용)</li>
+      <li>동작 3개 미리 연습해두기</li>
+      <li>촬영 전 가볍게 워밍업 (땀 살짝 나는 정도)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- PLAN 2 -->
+<!-- ============================================ -->
+<div class="plan-card">
+  <div class="plan-header">
+    <span class="plan-number">Plan 2</span>
+    <span class="plan-formula">채리언니 '코어 홈트 432만뷰' 공식</span>
+    <span class="plan-duration">15-20초</span>
+  </div>
+  <div class="plan-title">하루 100번! 뱃살 잡는 최고의 동작</div>
+
+  <div class="ref-box">
+    <h4>레퍼런스: @chaelee_fit — "200만뷰 코어 홈트" (432만뷰)</h4>
+    <p class="ref-note">핵심 구조: "하루 100번씩 1달만" 이라는 강력한 숫자 공식 + 동작 1-2개만 집중 시연 + 극도로 짧은 영상(10-15초). 시연이 짧을수록 "이 정도면 나도" 심리 작동 → 저장 폭발.</p>
+    <a href="https://www.instagram.com/p/DGstlf7zstX/" target="_blank" class="ref-link">원본 영상 보기 (432만뷰)</a>
+  </div>
+
+  <div class="data-box">
+    <h4>레퍼런스 성과 데이터</h4>
+    <div class="stat"><span class="stat-label">조회수</span><span class="stat-value">4,326,480</span></div>
+    <div class="stat"><span class="stat-label">좋아요</span><span class="stat-value">26,058</span></div>
+    <div class="stat"><span class="stat-label">참여율</span><span class="stat-value">0.61%</span></div>
+    <div class="stat"><span class="stat-label">게시일</span><span class="stat-value">2025.03.02</span></div>
+  </div>
+
+  <div class="key-formula">
+    <h4>이 영상이 터진 이유 (채리언니 1위 영상)</h4>
+    <p class="formula-highlight">"100번" + "1달만" + "극단적으로 짧은 영상"</p>
+    <p>- "100번"이라는 구체적 숫자 → 행동 기준이 명확<br>
+    - "1달만"이라는 기한 → "나도 1달은 할 수 있지" 심리<br>
+    - 영상이 10-15초로 초짧음 → 끝까지 시청 → 완주율 100%<br>
+    - 완주율이 높으면 알고리즘이 추천 피드에 밀어줌 → 바이럴</p>
+  </div>
+
+  <div class="hook-section">
+    <h4>텍스트 오버레이 (첫 화면)</h4>
+    <div class="hook-main">하루 100번씩 1달만 해보세요</div>
+  </div>
+
+  <div class="script-section">
+    <h4>촬영 시퀀스</h4>
+    <div class="script-item">
+      <div class="script-time">0-2초</div>
+      <div class="script-content">
+        <div class="direction">오프닝: 시작 자세</div>
+        <div class="detail">요가매트 위에 누운 상태 또는 플랭크 준비 자세. 바로 동작 시작.</div>
+        <div class="overlay">텍스트: "하루 100번씩 1달만 해보세요"</div>
+      </div>
+    </div>
+    <div class="script-item">
+      <div class="script-time">2-8초</div>
+      <div class="script-content">
+        <div class="direction">동작: 바이시클 크런치</div>
+        <div class="detail">누워서 자전거 타듯 다리 교차 + 상체 비틀기. 빠른 속도로 반복. 코어 전체 자극되는 모습.</div>
+        <div class="overlay">텍스트: "바이시클 크런치 x 100회"</div>
+      </div>
+    </div>
+    <div class="script-item">
+      <div class="script-time">8-12초</div>
+      <div class="script-content">
+        <div class="direction">동작 계속 (앵글 변경)</div>
+        <div class="detail">같은 동작을 다른 각도에서. 측면 or 위에서 촬영. 복근에 힘 들어가는 게 보이도록.</div>
+      </div>
+    </div>
+    <div class="script-item">
+      <div class="script-time">12-15초</div>
+      <div class="script-content">
+        <div class="direction">마무리</div>
+        <div class="detail">동작 끝나고 가볍게 숨 고르기. 카메라 보고 미소.</div>
+        <div class="overlay">텍스트: "1달 뒤 달라진 복부 느껴보세요"</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="caption-section">
+    <h4>인스타 캡션</h4>
+    <pre>하루 100번씩 1달만 해보세요!
+
+코어 잡히면서 뱃살이 진짜 쏙 빠져요
+이 동작 하나로 복부 전체 다 자극됩니다
+
+30kg 빼고 나서 이 동작만큼은 매일 해요
+안 하면 하루가 찝찝할 정도...
+
+나중에 따라할 분들 저장!
+
+#코어운동 #뱃살운동 #홈트 #하루100번 #다이어트 #복부운동 #크런치 #홈트추천 #다이어터소통</pre>
+  </div>
+
+  <div class="checklist-section">
+    <h4>촬영 준비 체크리스트</h4>
+    <ul>
+      <li>운동복 (복부가 보이는 크롭탑 추천)</li>
+      <li>요가매트</li>
+      <li>깔끔한 배경 (군더더기 없이)</li>
+      <li>휴대폰 삼각대 (2가지 각도 촬영: 정면 + 측면)</li>
+      <li>BGM: 템포 빠른 비트</li>
+      <li>핵심: 영상 15초 이내로 짧게! (짧을수록 좋음)</li>
+      <li>편집 시 속도 살짝 올려도 OK (동작이 빨라 보이는 효과)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- PLAN 3 -->
+<!-- ============================================ -->
+<div class="plan-card">
+  <div class="plan-header">
+    <span class="plan-number">Plan 3</span>
+    <span class="plan-formula">채리언니 '내전근 175만뷰' 공식</span>
+    <span class="plan-duration">20-30초</span>
+  </div>
+  <div class="plan-title">허벅지 안쪽살 빠지는 스트레칭</div>
+
+  <div class="ref-box">
+    <h4>레퍼런스: @chaelee_fit — "내전근 쫙-! 풀리는 동작" (175만뷰)</h4>
+    <p class="ref-note">핵심 구조: 특정 부위 타겟팅(내전근/허벅지 안쪽) + "쫙" 같은 체감 단어 + 스트레칭이라 진입장벽 극히 낮음. 운동 아닌 "스트레칭"이라 운동 싫어하는 사람도 저장 → 도달 범위 넓음.</p>
+    <a href="https://www.instagram.com/p/DHU8CycTzGL/" target="_blank" class="ref-link">원본 영상 보기 (175만뷰)</a>
+  </div>
+
+  <div class="data-box">
+    <h4>레퍼런스 성과 데이터</h4>
+    <div class="stat"><span class="stat-label">조회수</span><span class="stat-value">1,753,678</span></div>
+    <div class="stat"><span class="stat-label">좋아요</span><span class="stat-value">4,242</span></div>
+    <div class="stat"><span class="stat-label">댓글</span><span class="stat-value">102</span></div>
+    <div class="stat"><span class="stat-label">참여율</span><span class="stat-value">0.25%</span></div>
+    <div class="stat"><span class="stat-label">게시일</span><span class="stat-value">2025.03.18</span></div>
+  </div>
+
+  <div class="key-formula">
+    <h4>이 영상이 터진 이유</h4>
+    <p class="formula-highlight">"특정 부위" + "스트레칭" + "저진입장벽"</p>
+    <p>- "허벅지 안쪽살"이라는 구체적 고민 → 나한테 해당되면 무조건 저장<br>
+    - 스트레칭이라 땀 안 나도 됨 → "나도 할 수 있겠다" 심리 극대화<br>
+    - 운동 싫어하는 사람까지 타겟이 넓어짐<br>
+    - "쫙 풀리는"이라는 표현 → 시원한 체감 기대 → 클릭</p>
+  </div>
+
+  <div class="hook-section">
+    <h4>텍스트 오버레이 (첫 화면)</h4>
+    <div class="hook-main">허벅지 안쪽살 빠지는 스트레칭</div>
+  </div>
+
+  <div class="script-section">
+    <h4>촬영 시퀀스</h4>
+    <div class="script-item">
+      <div class="script-time">0-3초</div>
+      <div class="script-content">
+        <div class="direction">오프닝: 앉은 준비 자세</div>
+        <div class="detail">요가매트 위에 앉은 상태. 다리를 자연스럽게 앞으로 뻗고 있는 모습.</div>
+        <div class="overlay">텍스트: "허벅지 안쪽살 빠지는 스트레칭"</div>
+      </div>
+    </div>
+    <div class="script-item">
+      <div class="script-time">3-10초</div>
+      <div class="script-content">
+        <div class="direction">동작 1: 나비 스트레칭</div>
+        <div class="detail">발바닥 맞대고 앉아서 무릎을 아래로 부드럽게 누르기. 상체를 앞으로 살짝 숙이며 내전근 늘리기. 천천히 5회.</div>
+        <div class="overlay">텍스트: "동작 1 — 나비 스트레칭"</div>
+      </div>
+    </div>
+    <div class="script-item">
+      <div class="script-time">10-18초</div>
+      <div class="script-content">
+        <div class="direction">동작 2: 와이드 스쿼트 스트레칭</div>
+        <div class="detail">다리를 넓게 벌리고 서서 천천히 앉았다 일어나기. 내전근이 당기는 느낌이 보이도록 표정 연기.</div>
+        <div class="overlay">텍스트: "동작 2 — 와이드 스쿼트 스트레칭"</div>
+      </div>
+    </div>
+    <div class="script-item">
+      <div class="script-time">18-25초</div>
+      <div class="script-content">
+        <div class="direction">동작 3: 사이드 런지 스트레칭</div>
+        <div class="detail">한쪽 다리를 옆으로 뻗고 반대쪽 무릎 구부리며 내전근 스트레칭. 좌우 각 3회.</div>
+        <div class="overlay">텍스트: "동작 3 — 사이드 런지 스트레칭"</div>
+      </div>
+    </div>
+    <div class="script-item">
+      <div class="script-time">25-30초</div>
+      <div class="script-content">
+        <div class="direction">마무리</div>
+        <div class="detail">스트레칭 끝나고 다리 가볍게 털기. 시원한 표정으로 카메라 보고 미소.</div>
+        <div class="overlay">텍스트: "매일 하면 허벅지 라인 달라져요! 저장"</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="caption-section">
+    <h4>인스타 캡션</h4>
+    <pre>허벅지 안쪽살 고민이면 이 스트레칭 해보세요
+
+내전근 쫙-! 풀리면서 허벅지 라인이 달라져요
+운동 아니고 스트레칭이라 진짜 누구나 가능
+
+저도 30kg 뺄 때 매일 자기 전에 이거 했거든요
+하체 부종도 빠지고 다리 라인이 확 달라졌어요
+
+저장해두고 오늘 밤부터 따라해보세요!
+
+#내전근스트레칭 #허벅지살 #스트레칭 #하체운동 #다이어트 #홈트 #다이어터소통 #허벅지안쪽살 #하체부종</pre>
+  </div>
+
+  <div class="checklist-section">
+    <h4>촬영 준비 체크리스트</h4>
+    <ul>
+      <li>운동복 (하체 라인이 보이는 레깅스)</li>
+      <li>요가매트</li>
+      <li>깔끔한 배경</li>
+      <li>삼각대 (하체 전체가 잘 보이는 각도)</li>
+      <li>BGM: 차분하고 편안한 음악 (스트레칭 분위기)</li>
+      <li>표정: 시원하게 풀리는 느낌 연기</li>
+      <li>핵심: 동작이 천천히, 정확하게 보이도록 (운동 시연과 다른 템포)</li>
+      <li>조명: 다리 라인이 잘 보이는 각도</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- 공통 촬영 가이드 -->
+<!-- ============================================ -->
+<div class="plan-card">
+  <div class="plan-header">
+    <span class="plan-number" style="background:#10b981;">공통</span>
+    <span class="plan-formula">3개 영상 한 번에 촬영하는 법</span>
+  </div>
+
+  <div class="key-formula">
+    <h4>촬영 순서 추천</h4>
+    <p>1. Plan 3 (스트레칭) 먼저 — 워밍업 겸 촬영<br>
+    2. Plan 1 (복부+팔뚝) — 몸 풀린 상태에서<br>
+    3. Plan 2 (코어 100번) — 마지막에 강도 높은 것<br><br>
+    총 촬영 시간: 30-40분이면 3개 완성</p>
+  </div>
+
+  <div class="key-formula">
+    <h4>바이럴 공식 (채리언니 데이터 기반)</h4>
+    <p class="formula-highlight">숫자(1분/100번/3분) + 부위(복부/코어/허벅지) + "해보세요"</p>
+    <p>- 음성 대사 없음 → 동작만 보여주기<br>
+    - 텍스트 오버레이로 정보 전달<br>
+    - 영상 짧을수록 좋음 (15-30초)<br>
+    - 캡션에 "30kg 감량" 스토리 녹이기<br>
+    - 마지막에 반드시 "저장" 유도</p>
+  </div>
+
+  <div class="key-formula">
+    <h4>편집 포인트</h4>
+    <p>- 트렌딩 BGM 필수 (에디츠/캡컷에서 인기 음악)<br>
+    - 동작 전환 시 컷 편집 (부드럽게)<br>
+    - 텍스트: 큰 글씨 + 흰색 or 노란색 + 그림자<br>
+    - 속도: 원본 or 1.2배속 (동작이 빨라 보이는 효과)<br>
+    - 첫 프레임이 썸네일 → 첫 장면부터 동작 중인 모습</p>
+  </div>
+
+  <div class="checklist-section">
+    <h4>공통 준비물</h4>
+    <ul>
+      <li>운동복 2-3벌 (영상마다 다른 옷 추천)</li>
+      <li>요가매트</li>
+      <li>휴대폰 삼각대 (세로 촬영)</li>
+      <li>링라이트 or 자연광 (창가)</li>
+      <li>물병 (촬영 사이 수분 보충)</li>
+      <li>거울 (동작 확인용)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="footer">
+  이세령 대표 릴스 기획서 — 운동 시연 3종<br>
+  @chaelee_fit 데이터 분석 기반 | Neobridge MCN
+</div>
+
+</div>
+</body>
+</html>
