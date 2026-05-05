@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>미팅 정리 — 제이하다 대표님</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif;
+    color: #191f28;
+    background: #191f28;
+    font-size: 15px;
+    line-height: 1.6;
+    letter-spacing: -0.3px;
+    -webkit-text-size-adjust: 100%;
+    padding: 0 0 100px;
+  }
+  .hdr {
+    background: #191f28;
+    color: #fff;
+    padding: 20px 20px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid #2d333b;
+  }
+  .hdr-top { display: flex; justify-content: space-between; align-items: center; }
+  .hdr-badge { font-size: 11px; font-weight: 700; color: #3182f6; letter-spacing: 1px; }
+  .hdr-time { font-size: 11px; color: #4e5968; }
+  .hdr-name { font-size: 22px; font-weight: 800; margin-top: 4px; letter-spacing: -1px; }
+  .hdr-sub { font-size: 12px; color: #6b7684; margin-top: 2px; }
+  .section {
+    background: #fff;
+    margin: 8px;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .s-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: #3182f6;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+  .kl {
+    background: #f2f7ff;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin: 8px 0;
+    font-size: 14px;
+    color: #191f28;
+    word-break: keep-all;
+    line-height: 1.6;
+  }
+  .kl b { color: #3182f6; }
+  .caution {
+    background: #fff8eb;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin: 8px 0;
+    font-size: 13px;
+    color: #6b5900;
+    word-break: keep-all;
+    line-height: 1.6;
+  }
+  .step-list {
+    counter-reset: step;
+  }
+  .step-item {
+    display: flex;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid #f2f4f6;
+    align-items: flex-start;
+  }
+  .step-item:last-child { border-bottom: none; }
+  .step-num {
+    display: inline-flex;
+    width: 28px;
+    height: 28px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: #3182f6;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .step-body { flex: 1; }
+  .step-body b { font-size: 14px; color: #191f28; display: block; margin-bottom: 2px; }
+  .step-body p { font-size: 12px; color: #6b7684; }
+  .chk-list { list-style: none; }
+  .chk-list li {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f2f4f6;
+    font-size: 14px;
+    align-items: flex-start;
+  }
+  .chk-list li:last-child { border-bottom: none; }
+  .chk-box {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #d1d6db;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #191f28;
+    padding: 16px 20px;
+    z-index: 100;
+    border-top: 1px solid #2d333b;
+  }
+  .bottom-text {
+    font-size: 13px;
+    color: #6b7684;
+    text-align: center;
+  }
+  .bottom-text b { color: #3182f6; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-top">
+    <div class="hdr-badge">MEETING RECAP</div>
+    <div class="hdr-time">2026.05.03</div>
+  </div>
+  <div class="hdr-name">제이하다 대표님 1차 미팅 정리</div>
+  <div class="hdr-sub">Flowmus 부업클래스팀</div>
+</div>
+
+<!-- 미팅 요약 -->
+<div class="section">
+  <div class="s-title">OVERVIEW</div>
+  <div class="kl">
+    토요일 저녁 늦은 시간에도 미팅 참여해 주셔서 감사합니다.<br>
+    말씀해 주신 내용 정리해서 보내드립니다.<br>
+    아래 내용 확인해 주시고, 수정할 부분 있으시면 편하게 말씀해 주세요.
+  </div>
+</div>
+
+<!-- 합의된 방향 -->
+<div class="section">
+  <div class="s-title">DIRECTION &middot; 합의된 강의 방향</div>
+
+  <div class="step-list">
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <b>온라인 VOD + 오프라인 혼합</b>
+        <p>원단 이론, 봉제 이론, 촬영 교육, 사이트 등록 등은 VOD로 제작.<br>원단 시장 동행, 디자인 수업 등 현장이 필요한 건 오프라인 유지.<br>약 40~50편 VOD 예상.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <b>기수제 전환</b>
+        <p>현재 상시 모집 &rarr; 기수제로 변경.<br>겨울 시즌 테스트 론칭, 본격 론칭은 내년 봄.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <b>유튜브 채널 출연</b>
+        <p>저희 네트워크 채널 2~3개에 출연. 공장 현장 + 제작 과정 영상.<br>DB 모객용으로 활용. 채널은 저희가 기획해서 선택지 드리겠습니다.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <b>마케팅 지원</b>
+        <p>맘카페 바이럴 침투 (저희 리스트 보유).<br>전자책 제작 지원. 인스타/메타 광고 추가 지원 가능.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 강사님 강점 -->
+<div class="section">
+  <div class="s-title">STRENGTHS &middot; 대표님만의 강점</div>
+  <div class="kl">
+    <b>자체 공장 = MOQ 0</b> &mdash; 일반 공장은 300~500장 최소 주문. 대표님 공장은 1장부터 제작 가능. 수강생 진입 장벽이 극적으로 낮아짐.
+  </div>
+  <div class="kl">
+    <b>100만원으로 자기 브랜드</b> &mdash; 샘플 5개 기준 100만원이면 시작 가능. 어떤 창업 강의보다 진입 비용이 낮음.
+  </div>
+  <div class="kl">
+    <b>토미토 매출 증명</b> &mdash; 광고비 없이 하루 1,000만원+. "사진이 이쁘면 어머님들이 알아서 해준다"는 걸 직접 증명.
+  </div>
+  <div class="kl">
+    <b>12년 경력 + 6년 교육</b> &mdash; 원단 수배부터 판매까지 전 과정을 한 분이 가르칠 수 있는 건 시장에 거의 없음.
+  </div>
+  <div class="kl">
+    <b>아동복 = 틈새 시장</b> &mdash; 성인복 대비 경쟁이 1/10. "제이하다가 가장 유명하다"는 수강생들의 직접 평가.
+  </div>
+</div>
+
+<!-- 론칭 로드맵 -->
+<div class="section">
+  <div class="s-title">ROADMAP &middot; 론칭 스케줄</div>
+  <div class="kl" style="font-size: 13px;">
+    <b>겨울 시즌 테스트 론칭 &rarr; 내년 봄 본격 론칭.</b> 가을 시즌은 이미 진행 중이시라 시간이 부족하고, 겨울 시즌으로 먼저 테스트한 뒤 봄(1월 모객, 성수기)에 본격 론칭하는 구조입니다.
+  </div>
+
+  <div class="step-list">
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <b>5월 &mdash; 계약 + 자료 수집</b>
+        <p>모두의싸인 전자 계약 체결<br>
+        매출 증빙, 수강생 사례 등 자료 수집<br>
+        커리큘럼 설계 시작 (VOD 구조 짜기)</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <b>5~6월 &mdash; 유튜브 채널 출연 + DB 모객</b>
+        <p>채널 출연 기획서 작성 &rarr; 촬영<br>
+        공장 현장 + 제작 과정 + 인터뷰 영상<br>
+        랜딩페이지 &rarr; 오픈채팅방 DB 수집 시작</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <b>7~8월 &mdash; VOD 촬영 + 전자책</b>
+        <p>스튜디오 + 현장 촬영 (주말/평일 저녁)<br>
+        전자책 제작 + 맘카페 침투 시작<br>
+        인스타 리포지셔닝</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <b>9~10월 &mdash; 겨울 시즌 테스트 론칭</b>
+        <p>무료 특강 리허설 + 실행<br>
+        겨울 시즌 1기 모집 (소규모 테스트)<br>
+        피드백 수집 &rarr; 개선</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">5</div>
+      <div class="step-body">
+        <b>12~1월 &mdash; 봄 시즌 본격 론칭</b>
+        <p>1월 성수기 공략 (새해 결심 효과)<br>
+        2기 본격 모집 + 광고 집행<br>
+        <b style="color:#3182f6;">본격 유료 강의 론칭</b></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 준비 자료 -->
+<div class="section">
+  <div class="s-title">REQUEST &middot; 준비해 주실 자료</div>
+  <div class="kl" style="font-size: 13px;">
+    <b>갖고 계신 자료는 최대한 많이 보내주시는 게 좋습니다.</b> 증빙 자료가 많을수록 강의 신뢰도가 올라가고, 마케팅 소재로 활용할 수 있는 것도 많아집니다.
+  </div>
+
+  <ul class="chk-list">
+    <li>
+      <div class="chk-box"></div>
+      <div><b>토미토 매출 데이터</b><br><span style="font-size: 12px; color: #8b95a1;">카페24 관리자 매출 대시보드 캡처. 일별/주별. 하루 1,000만원+ 확인용. 외부 공개 X, 내부 검증용.</span></div>
+    </li>
+    <li>
+      <div class="chk-box"></div>
+      <div><b>교육 입금내역 (최근 3개월)</b><br><span style="font-size: 12px; color: #8b95a1;">통장 사본 or 모바일뱅킹 캡처. 교육비 수취 확인용. 계좌번호 가려주셔도 됩니다.</span></div>
+    </li>
+    <li>
+      <div class="chk-box"></div>
+      <div><b>수강생 성공 사례 (최소 5건)</b><br><span style="font-size: 12px; color: #8b95a1;">매출 캡처 + 제작 비포/애프터 + 텍스트 후기. 카톡 캡처도 OK. "일주일 4,000만원" 같은 사례 포함.</span></div>
+    </li>
+    <li>
+      <div class="chk-box"></div>
+      <div><b>공장 사진/영상</b><br><span style="font-size: 12px; color: #8b95a1;">제이하다 공장 현장. 봉제 과정, 재단 과정, 완제품 등. 촬영 때 추가로 찍겠지만 기존 자료도 보내주세요.</span></div>
+    </li>
+    <li>
+      <div class="chk-box"></div>
+      <div><b>토미토 제작 과정 사진/영상</b><br><span style="font-size: 12px; color: #8b95a1;">원단 &rarr; 디자인 &rarr; 샘플 &rarr; 완제품 &rarr; 촬영 &rarr; 판매. 비포/애프터. 컨셉 기획 과정 포함.</span></div>
+    </li>
+    <li>
+      <div class="chk-box"></div>
+      <div><b>기존 교육 자료 전체</b><br><span style="font-size: 12px; color: #8b95a1;">원단 이론 수업 자료, 봉제 이론 자료, 디자인 구성 예시, 도시카 샘플 등. 있는 대로 다 보내주세요.</span></div>
+    </li>
+    <li>
+      <div class="chk-box"></div>
+      <div><b>교육생 제작 포트폴리오</b><br><span style="font-size: 12px; color: #8b95a1;">교육생분들이 만든 옷 사진. 다양한 디자인/스타일. 강의 결과물 보여주기용.</span></div>
+    </li>
+    <li>
+      <div class="chk-box"></div>
+      <div><b>사업자등록증 사본</b><br><span style="font-size: 12px; color: #8b95a1;">제이하다 사업자등록증. 공장 사업자 포함.</span></div>
+    </li>
+  </ul>
+
+  <div class="kl" style="margin-top: 12px; font-size: 13px;">
+    위 리스트 외에도 <b>교육하시면서 쌓인 자료가 있다면 뭐든 보내주세요.</b> 카톡 대화, 수강생 작업 과정 사진, 원단 시장 사진, 완제품 사진 등 &mdash; 많을수록 좋습니다.
+  </div>
+</div>
+
+<!-- 저희가 해드릴 것 -->
+<div class="section">
+  <div class="s-title">WE DO &middot; 저희가 준비할 것</div>
+  <div class="kl">
+    <b>유튜브 채널 출연 기획</b> &mdash; 2~3개 채널 기획서 작성 후 선택지 드리겠습니다. 공장 현장 촬영 포함.
+  </div>
+  <div class="kl">
+    <b>전자책 제작</b> &mdash; 무료 리드 마그넷용. "아동복 브랜드 만들기 가이드" 등. 대표님 교육 내용 기반으로 저희가 만들어드립니다.
+  </div>
+  <div class="kl">
+    <b>맘카페 바이럴</b> &mdash; 전국 맘카페 리스트 보유. 자연스러운 바이럴 콘텐츠 침투.
+  </div>
+  <div class="kl">
+    <b>커리큘럼 설계 지원</b> &mdash; 현재 1:1 프로세스를 VOD + 오프라인 혼합으로 재구성하는 구조를 같이 짜겠습니다.
+  </div>
+  <div class="kl">
+    <b>결제/CS 시스템</b> &mdash; 결제 시스템, 웨비나, CS 안내 등은 현우 대표님이 세팅해 드립니다.
+  </div>
+</div>
+
+<!-- 마무리 -->
+<div class="section">
+  <div class="s-title">CLOSING</div>
+  <div class="kl" style="background: #191f28; color: #fff;">
+    대표님의 12년 경력과 자체 공장, 그리고 토미토의 매출 증명까지 &mdash; <b>아동복 제작 교육에서 이만한 분은 시장에 없습니다.</b><br><br>
+    지금까지 1:1로 400명을 가르치신 노하우를 온라인으로 전환하면, 체력 소모 없이 훨씬 더 많은 분들에게 전달할 수 있습니다.<br><br>
+    우선 <b>갖고 계신 자료</b>부터 보내주시면 바로 시작하겠습니다.<br>
+    계약서는 별도로 보내드리겠습니다. 궁금하신 점 있으시면 언제든 편하게 연락주세요.
+  </div>
+</div>
+
+<!-- BOTTOM BAR -->
+<div class="bottom-bar">
+  <div class="bottom-text">
+    <b>Flowmus</b> 부업클래스팀
+  </div>
+</div>
+
+</body>
+</html>
