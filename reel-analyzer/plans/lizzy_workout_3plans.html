@@ -77,20 +77,65 @@ h1 { text-align: center; margin-bottom: 6px; font-size: 1.4em; }
 }
 
 
-/* Camera Overlay */
-.camera-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; z-index:99999; background:#000; }
-.camera-overlay.active { display:block; }
-.camera-overlay video { width:100%; height:100%; object-fit:cover; }
-.guide-svg { position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; }
-.camera-ui { position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; justify-content:space-between; pointer-events:none; }
-.camera-top-bar { display:flex; justify-content:space-between; align-items:center; padding:16px; pointer-events:auto; }
-.camera-close-btn { width:40px; height:40px; border-radius:50%; border:none; background:rgba(0,0,0,0.5); color:white; font-size:18px; cursor:pointer; backdrop-filter:blur(4px); }
-.guide-title-text { color:white; font-size:14px; font-weight:600; background:rgba(0,0,0,0.4); padding:6px 14px; border-radius:20px; backdrop-filter:blur(4px); }
-.camera-bottom-bar { display:flex; justify-content:center; align-items:center; gap:24px; padding:30px 16px 50px; pointer-events:auto; }
-.camera-nav-btn { width:48px; height:48px; border-radius:50%; border:2px solid rgba(255,255,255,0.6); background:rgba(0,0,0,0.3); color:white; font-size:20px; cursor:pointer; backdrop-filter:blur(4px); }
-.guide-step-text { color:white; font-size:14px; font-weight:500; min-width:60px; text-align:center; }
-.shooting-guide-btn { display:block; width:100%; padding:14px; margin:12px 0; border:2px dashed #667eea; border-radius:12px; background:#f8f9ff; color:#667eea; font-size:0.9em; font-weight:600; cursor:pointer; text-align:center; transition:all 0.2s; }
-.shooting-guide-btn:active { background:#667eea; color:white; }
+/* Shooting Guide - Premium */
+.guide-launch-btn { display:flex; align-items:center; justify-content:center; gap:10px; width:100%; padding:16px 20px; margin:14px 0; border:none; border-radius:14px; background:linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); color:white; font-size:0.95em; font-weight:600; cursor:pointer; transition:all 0.3s; box-shadow:0 4px 15px rgba(26,26,46,0.3); }
+.guide-launch-btn:active { transform:scale(0.97); box-shadow:0 2px 8px rgba(26,26,46,0.4); }
+.guide-launch-btn .btn-icon { font-size:1.2em; }
+.guide-launch-btn .btn-sub { font-size:0.7em; font-weight:400; opacity:0.7; margin-top:2px; }
+
+.sg-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; z-index:99999; background:#000; overflow:hidden; }
+.sg-overlay.active { display:flex; flex-direction:column; }
+.sg-video { position:absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; }
+.sg-guide-layer { position:absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; transition:opacity 0.4s ease; }
+.sg-guide-layer.fading { opacity:0; }
+
+/* Glass morphism UI */
+.sg-ui { position:absolute; top:0; left:0; width:100%; height:100%; display:flex; flex-direction:column; justify-content:space-between; pointer-events:none; z-index:2; }
+.sg-top { pointer-events:auto; padding:env(safe-area-inset-top, 12px) 16px 0; }
+.sg-top-bar { display:flex; justify-content:space-between; align-items:center; padding:10px 4px; }
+.sg-close { width:36px; height:36px; border-radius:50%; border:none; background:rgba(255,255,255,0.15); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); color:white; font-size:16px; cursor:pointer; display:flex; align-items:center; justify-content:center; }
+.sg-rec { display:flex; align-items:center; gap:6px; background:rgba(0,0,0,0.4); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); padding:6px 12px; border-radius:20px; }
+.sg-rec-dot { width:8px; height:8px; border-radius:50%; background:#ef4444; animation:sg-pulse 1.5s infinite; }
+@keyframes sg-pulse { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+.sg-rec-text { color:white; font-size:11px; font-weight:600; letter-spacing:0.5px; font-variant-numeric:tabular-nums; }
+.sg-plan-badge { background:rgba(255,255,255,0.15); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); padding:6px 12px; border-radius:20px; color:white; font-size:11px; font-weight:500; }
+
+/* Progress dots */
+.sg-progress { display:flex; justify-content:center; gap:6px; padding:12px 0; }
+.sg-dot { width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,0.3); transition:all 0.3s; }
+.sg-dot.active { width:20px; border-radius:3px; background:white; }
+
+/* Middle info card */
+.sg-mid { pointer-events:none; display:flex; justify-content:center; align-items:center; flex:1; }
+.sg-scene-card { background:rgba(0,0,0,0.5); backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px); border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:14px 20px; max-width:85%; text-align:center; opacity:0; transform:translateY(10px); transition:all 0.5s cubic-bezier(0.16,1,0.3,1); pointer-events:auto; }
+.sg-scene-card.visible { opacity:1; transform:translateY(0); }
+.sg-scene-label { color:rgba(255,255,255,0.6); font-size:10px; font-weight:500; text-transform:uppercase; letter-spacing:1px; margin-bottom:4px; }
+.sg-scene-title { color:white; font-size:15px; font-weight:600; margin-bottom:6px; }
+.sg-scene-script { color:rgba(255,255,255,0.8); font-size:12px; line-height:1.5; font-weight:400; }
+.sg-scene-duration { display:inline-block; margin-top:8px; background:rgba(255,255,255,0.1); padding:3px 10px; border-radius:10px; color:rgba(255,255,255,0.7); font-size:10px; font-weight:500; }
+
+/* Bottom controls */
+.sg-bottom { pointer-events:auto; padding:0 16px env(safe-area-inset-bottom, 30px); }
+.sg-controls { display:flex; justify-content:center; align-items:center; gap:20px; padding:16px 0; }
+.sg-nav { width:44px; height:44px; border-radius:50%; border:1.5px solid rgba(255,255,255,0.4); background:rgba(255,255,255,0.08); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); color:white; font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.2s; }
+.sg-nav:active { background:rgba(255,255,255,0.25); transform:scale(0.9); }
+.sg-center-btn { width:64px; height:64px; border-radius:50%; border:3px solid white; background:transparent; cursor:pointer; display:flex; align-items:center; justify-content:center; position:relative; transition:all 0.2s; }
+.sg-center-btn:active { transform:scale(0.9); }
+.sg-center-btn::after { content:""; width:52px; height:52px; border-radius:50%; background:rgba(255,255,255,0.15); }
+.sg-center-btn.recording::after { background:#ef4444; border-radius:8px; width:28px; height:28px; }
+.sg-step-label { color:rgba(255,255,255,0.5); font-size:10px; text-align:center; padding-bottom:4px; letter-spacing:0.5px; }
+
+/* Gradient overlays for readability */
+.sg-gradient-top { position:absolute; top:0; left:0; width:100%; height:120px; background:linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, transparent 100%); pointer-events:none; z-index:1; }
+.sg-gradient-bottom { position:absolute; bottom:0; left:0; width:100%; height:200px; background:linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%); pointer-events:none; z-index:1; }
+
+/* Touch hint */
+.sg-hint { position:absolute; bottom:220px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,0.6); backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); padding:8px 16px; border-radius:20px; color:rgba(255,255,255,0.7); font-size:11px; opacity:1; transition:opacity 1s; pointer-events:none; z-index:3; white-space:nowrap; }
+.sg-hint.hidden { opacity:0; }
+
+/* Guide line animations */
+@keyframes sg-breathe { 0%,100%{opacity:0.7;} 50%{opacity:1;} }
+.sg-guide-layer line, .sg-guide-layer ellipse, .sg-guide-layer rect, .sg-guide-layer path { animation: sg-breathe 3s ease-in-out infinite; }
 
 /* Lightbox */
 .lightbox-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.92); z-index:9999; justify-content:center; align-items:center; cursor:zoom-out; -webkit-tap-highlight-color:transparent; }
@@ -102,22 +147,39 @@ h1 { text-align: center; margin-bottom: 6px; font-size: 1.4em; }
 </head>
 <body>
 
-<!-- Camera Composition Guide Overlay -->
-<div id="camera-overlay" class="camera-overlay">
-  <video id="camera-feed" autoplay playsinline muted></video>
-  <svg id="guide-svg" class="guide-svg" viewBox="0 0 1080 1920" preserveAspectRatio="xMidYMid slice"></svg>
-  <div class="camera-ui">
-    <div class="camera-top-bar">
-      <button class="camera-close-btn" onclick="closeCamera()">&#x2715;</button>
-      <div id="guide-title" class="guide-title-text">구도 가이드</div>
-      <div style="width:40px"></div>
+<!-- Premium Shooting Guide Overlay -->
+<div id="sg-overlay" class="sg-overlay">
+  <video id="sg-video" class="sg-video" autoplay playsinline muted></video>
+  <div class="sg-gradient-top"></div>
+  <div class="sg-gradient-bottom"></div>
+  <svg id="sg-guide" class="sg-guide-layer" viewBox="0 0 1080 1920" preserveAspectRatio="xMidYMid slice"></svg>
+  <div class="sg-ui">
+    <div class="sg-top">
+      <div class="sg-top-bar">
+        <button class="sg-close" onclick="sgClose()">&#x2715;</button>
+        <div class="sg-rec"><div class="sg-rec-dot"></div><span class="sg-rec-text" id="sg-timer">00:00</span></div>
+        <span class="sg-plan-badge" id="sg-plan-badge">Plan 1</span>
+      </div>
+      <div class="sg-progress" id="sg-progress"></div>
     </div>
-    <div class="camera-bottom-bar">
-      <button class="camera-nav-btn" onclick="prevGuide()">&#x276E;</button>
-      <div id="guide-step" class="guide-step-text">1 / 4</div>
-      <button class="camera-nav-btn" onclick="nextGuide()">&#x276F;</button>
+    <div class="sg-mid">
+      <div class="sg-scene-card" id="sg-card">
+        <div class="sg-scene-label" id="sg-label">SCENE 1</div>
+        <div class="sg-scene-title" id="sg-title">인트로</div>
+        <div class="sg-scene-script" id="sg-script">대사 내용</div>
+        <div class="sg-scene-duration" id="sg-duration">3초</div>
+      </div>
+    </div>
+    <div class="sg-bottom">
+      <div class="sg-step-label" id="sg-step-label">좌우로 씬 전환</div>
+      <div class="sg-controls">
+        <button class="sg-nav" onclick="sgPrev()">&#x276E;</button>
+        <button class="sg-center-btn" id="sg-center" onclick="sgToggleCard()"></button>
+        <button class="sg-nav" onclick="sgNext()">&#x276F;</button>
+      </div>
     </div>
   </div>
+  <div class="sg-hint" id="sg-hint">좌우 버튼으로 씬 전환 &middot; 가운데 탭하면 대본 표시</div>
 </div>
 
 <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
@@ -256,7 +318,10 @@ document.addEventListener('DOMContentLoaded',function(){document.querySelectorAl
   </div>
 
   
-  <button class="shooting-guide-btn" onclick="openCamera(1)">촬영 구도 가이드 열기</button>
+  <button class="guide-launch-btn" onclick="sgOpen(1)">
+    <span class="btn-icon">&#x1F3AC;</span>
+    <span><span>촬영 구도 가이드</span><br><span class="btn-sub">카메라 + 실시간 가이드라인</span></span>
+  </button>
 
 <div class="caption-section">
     <h4>인스타 캡션</h4>
@@ -402,7 +467,10 @@ document.addEventListener('DOMContentLoaded',function(){document.querySelectorAl
   </div>
 
   
-  <button class="shooting-guide-btn" onclick="openCamera(2)">촬영 구도 가이드 열기</button>
+  <button class="guide-launch-btn" onclick="sgOpen(2)">
+    <span class="btn-icon">&#x1F3AC;</span>
+    <span><span>촬영 구도 가이드</span><br><span class="btn-sub">카메라 + 실시간 가이드라인</span></span>
+  </button>
 
 <div class="caption-section">
     <h4>인스타 캡션</h4>
@@ -548,7 +616,10 @@ document.addEventListener('DOMContentLoaded',function(){document.querySelectorAl
   </div>
 
 
-  <button class="shooting-guide-btn" onclick="openCamera(3)">촬영 구도 가이드 열기</button>
+  <button class="guide-launch-btn" onclick="sgOpen(3)">
+    <span class="btn-icon">&#x1F3AC;</span>
+    <span><span>촬영 구도 가이드</span><br><span class="btn-sub">카메라 + 실시간 가이드라인</span></span>
+  </button>
 
 <div class="caption-section">
     <h4>인스타 캡션</h4>
@@ -854,6 +925,159 @@ function prevGuide() {
   currentGuideIdx = (currentGuideIdx - 1 + currentGuides.length) % currentGuides.length;
   renderGuide();
 }
+</script>
+
+<script>
+(function(){
+var stream=null, idx=0, guides=[], timer=null, seconds=0, cardVisible=true, hintTimer=null;
+
+var DATA = {
+  1: {
+    name:"Plan 1",
+    scenes:[
+      {label:"SCENE 1", title:"인트로 — 전신 풀샷", time:"0-2초", script:"전신이 보이도록. 동작 시작 직전 포즈.",
+       svg:'<ellipse cx="540" cy="420" rx="90" ry="100" fill="none" stroke="white" stroke-width="3" stroke-dasharray="16,10"/><line x1="540" y1="520" x2="540" y2="1050" stroke="white" stroke-width="3" stroke-dasharray="16,10"/><line x1="540" y1="700" x2="380" y2="870" stroke="white" stroke-width="2.5" stroke-dasharray="14,10" opacity="0.7"/><line x1="540" y1="700" x2="700" y2="870" stroke="white" stroke-width="2.5" stroke-dasharray="14,10" opacity="0.7"/><line x1="540" y1="1050" x2="430" y2="1450" stroke="white" stroke-width="2.5" stroke-dasharray="14,10" opacity="0.7"/><line x1="540" y1="1050" x2="650" y2="1450" stroke="white" stroke-width="2.5" stroke-dasharray="14,10" opacity="0.7"/><line x1="250" y1="220" x2="830" y2="220" stroke="#4ade80" stroke-width="2.5" stroke-dasharray="10,6"/><text x="540" y="190" text-anchor="middle" fill="#4ade80" font-size="34" font-weight="500">HEAD ROOM</text><line x1="250" y1="1520" x2="830" y2="1520" stroke="#4ade80" stroke-width="2.5" stroke-dasharray="10,6"/><rect x="140" y="70" width="800" height="110" fill="none" stroke="rgba(167,139,250,0.8)" stroke-width="2.5" stroke-dasharray="12,8" rx="16"/><text x="540" y="140" text-anchor="middle" fill="rgba(167,139,250,0.9)" font-size="30">TEXT ZONE</text>'},
+      {label:"SCENE 2", title:"동작 시연 — 서서", time:"2-6초", script:"전신 프레임 유지. 운동 동작 반복.",
+       svg:'<ellipse cx="540" cy="380" rx="85" ry="95" fill="none" stroke="white" stroke-width="3" stroke-dasharray="16,10"/><line x1="540" y1="475" x2="540" y2="980" stroke="white" stroke-width="3" stroke-dasharray="16,10"/><line x1="540" y1="660" x2="360" y2="840" stroke="white" stroke-width="2.5" stroke-dasharray="14,10" opacity="0.7"/><line x1="540" y1="660" x2="720" y2="840" stroke="white" stroke-width="2.5" stroke-dasharray="14,10" opacity="0.7"/><line x1="540" y1="980" x2="420" y2="1400" stroke="white" stroke-width="2.5" stroke-dasharray="14,10" opacity="0.7"/><line x1="540" y1="980" x2="660" y2="1400" stroke="white" stroke-width="2.5" stroke-dasharray="14,10" opacity="0.7"/><line x1="540" y1="100" x2="540" y2="1800" stroke="rgba(255,255,255,0.15)" stroke-width="1.5"/><rect x="140" y="70" width="800" height="100" fill="none" stroke="rgba(167,139,250,0.8)" stroke-width="2.5" stroke-dasharray="12,8" rx="16"/><text x="540" y="135" text-anchor="middle" fill="rgba(167,139,250,0.9)" font-size="28">운동명 텍스트</text>'},
+      {label:"SCENE 3", title:"바닥 동작 — 매트", time:"중반", script:"매트 위 동작. 전신 or 상체 프레임.",
+       svg:'<rect x="180" y="380" width="720" height="1100" fill="none" stroke="rgba(167,139,250,0.6)" stroke-width="3" stroke-dasharray="16,10" rx="20"/><text x="540" y="350" text-anchor="middle" fill="rgba(167,139,250,0.9)" font-size="34" font-weight="500">MAT AREA</text><ellipse cx="540" cy="600" rx="80" ry="90" fill="none" stroke="white" stroke-width="3" stroke-dasharray="16,10"/><line x1="540" y1="690" x2="540" y2="1150" stroke="white" stroke-width="3" stroke-dasharray="16,10"/><line x1="540" y1="1150" x2="430" y2="1380" stroke="white" stroke-width="2.5" stroke-dasharray="14,10" opacity="0.7"/><line x1="540" y1="1150" x2="650" y2="1380" stroke="white" stroke-width="2.5" stroke-dasharray="14,10" opacity="0.7"/><rect x="680" y="1560" width="280" height="80" fill="none" stroke="rgba(251,191,36,0.8)" stroke-width="2.5" stroke-dasharray="10,6" rx="12"/><text x="820" y="1610" text-anchor="middle" fill="rgba(251,191,36,0.9)" font-size="28">세트/횟수</text>'},
+      {label:"SCENE 4", title:"마무리 — 풀샷", time:"마지막 2초", script:"깔끔한 마무리 포즈. 중앙 정렬.",
+       svg:'<ellipse cx="540" cy="420" rx="90" ry="100" fill="none" stroke="white" stroke-width="3" stroke-dasharray="16,10"/><line x1="540" y1="520" x2="540" y2="1050" stroke="white" stroke-width="3" stroke-dasharray="16,10"/><line x1="540" y1="700" x2="350" y2="900" stroke="white" stroke-width="2.5" stroke-dasharray="14,10" opacity="0.7"/><line x1="540" y1="700" x2="730" y2="900" stroke="white" stroke-width="2.5" stroke-dasharray="14,10" opacity="0.7"/><line x1="540" y1="1050" x2="430" y2="1450" stroke="white" stroke-width="2.5" stroke-dasharray="14,10" opacity="0.7"/><line x1="540" y1="1050" x2="650" y2="1450" stroke="white" stroke-width="2.5" stroke-dasharray="14,10" opacity="0.7"/><line x1="540" y1="100" x2="540" y2="1800" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>'}
+    ]
+  },
+  2: {
+    name:"Plan 2",
+    scenes:[
+      {label:"SCENE 1", title:"후킹 — 상반신 토킹", time:"0-2초", script:"\"뱃살 빼겠다고 윗몸일으키기요? 제발 그만\"",
+       svg:'<ellipse cx="540" cy="500" rx="115" ry="130" fill="none" stroke="white" stroke-width="3" stroke-dasharray="16,10"/><line x1="540" y1="630" x2="540" y2="1300" stroke="white" stroke-width="3" stroke-dasharray="16,10"/><line x1="540" y1="830" x2="340" y2="1080" stroke="white" stroke-width="2.5" stroke-dasharray="14,10" opacity="0.7"/><line x1="540" y1="830" x2="740" y2="1080" stroke="white" stroke-width="2.5" stroke-dasharray="14,10" opacity="0.7"/><line x1="100" y1="1420" x2="980" y2="1420" stroke="rgba(248,113,113,0.9)" stroke-width="3" stroke-dasharray="14,8"/><text x="540" y="1480" text-anchor="middle" fill="rgba(248,113,113,0.9)" font-size="34" font-weight="500">FRAME CUT</text><line x1="200" y1="480" x2="880" y2="480" stroke="rgba(96,165,250,0.8)" stroke-width="2.5" stroke-dasharray="8,6"/><text x="540" y="450" text-anchor="middle" fill="rgba(96,165,250,0.9)" font-size="28">EYE LINE = 1/3</text><rect x="140" y="80" width="800" height="110" fill="none" stroke="rgba(251,191,36,0.8)" stroke-width="2.5" stroke-dasharray="12,8" rx="16"/><text x="540" y="150" text-anchor="middle" fill="rgba(251,191,36,0.9)" font-size="28">도발 텍스트</text>'},
+      {label:"SCENE 2", title:"동작 시연 — 서서", time:"3-15초", script:"코어 운동 동작. 전신 보이게.",
+       svg:'<ellipse cx="540" cy="380" rx="85" ry="95" fill="none" stroke="white" stroke-width="3" stroke-dasharray="16,10"/><line x1="540" y1="475" x2="540" y2="980" stroke="white" stroke-width="3" stroke-dasharray="16,10"/><line x1="540" y1="660" x2="360" y2="840" stroke="white" stroke-width="2.5" stroke-dasharray="14,10" opacity="0.7"/><line x1="540" y1="660" x2="720" y2="840" stroke="white" stroke-width="2.5" stroke-dasharray="14,10" opacity="0.7"/><line x1="540" y1="980" x2="420" y2="1400" stroke="white" stroke-width="2.5" stroke-dasharray="14,10" opacity="0.7"/><line x1="540" y1="980" x2="660" y2="1400" stroke="white" stroke-width="2.5" stroke-dasharray="14,10" opacity="0.7"/><rect x="140" y="70" width="800" height="100" fill="none" stroke="rgba(167,139,250,0.8)" stroke-width="2.5" stroke-dasharray="12,8" rx="16"/><text x="540" y="135" text-anchor="middle" fill="rgba(167,139,250,0.9)" font-size="28">운동명</text>'},
+      {label:"SCENE 3", title:"바닥 동작", time:"15-25초", script:"매트 위 코어 동작. 횟수 카운트 표시.",
+       svg:'<rect x="180" y="380" width="720" height="1100" fill="none" stroke="rgba(167,139,250,0.6)" stroke-width="3" stroke-dasharray="16,10" rx="20"/><text x="540" y="350" text-anchor="middle" fill="rgba(167,139,250,0.9)" font-size="34" font-weight="500">MAT AREA</text><ellipse cx="540" cy="600" rx="80" ry="90" fill="none" stroke="white" stroke-width="3" stroke-dasharray="16,10"/><line x1="540" y1="690" x2="540" y2="1150" stroke="white" stroke-width="3" stroke-dasharray="16,10"/><line x1="540" y1="1150" x2="430" y2="1380" stroke="white" stroke-width="2.5" stroke-dasharray="14,10" opacity="0.7"/><line x1="540" y1="1150" x2="650" y2="1380" stroke="white" stroke-width="2.5" stroke-dasharray="14,10" opacity="0.7"/><rect x="680" y="1560" width="280" height="80" fill="none" stroke="rgba(251,191,36,0.8)" stroke-width="2.5" stroke-dasharray="10,6" rx="12"/><text x="820" y="1610" text-anchor="middle" fill="rgba(251,191,36,0.9)" font-size="28">COUNT</text>'},
+      {label:"SCENE 4", title:"마무리 포즈", time:"마지막 2초", script:"완료 포즈. 자신감 있게.",
+       svg:'<ellipse cx="540" cy="420" rx="90" ry="100" fill="none" stroke="white" stroke-width="3" stroke-dasharray="16,10"/><line x1="540" y1="520" x2="540" y2="1050" stroke="white" stroke-width="3" stroke-dasharray="16,10"/><line x1="540" y1="700" x2="350" y2="900" stroke="white" stroke-width="2.5" stroke-dasharray="14,10" opacity="0.7"/><line x1="540" y1="700" x2="730" y2="900" stroke="white" stroke-width="2.5" stroke-dasharray="14,10" opacity="0.7"/><line x1="540" y1="1050" x2="430" y2="1450" stroke="white" stroke-width="2.5" stroke-dasharray="14,10" opacity="0.7"/><line x1="540" y1="1050" x2="650" y2="1450" stroke="white" stroke-width="2.5" stroke-dasharray="14,10" opacity="0.7"/><line x1="540" y1="100" x2="540" y2="1800" stroke="rgba(255,255,255,0.12)" stroke-width="1.5"/>'}
+    ]
+  },
+  3: {
+    name:"Plan 3",
+    scenes:[
+      {label:"SCENE 1", title:"비포/애프터 충격", time:"0-3초", script:"90kg 사진 → 현재 모습 전환",
+       svg:'<line x1="540" y1="200" x2="540" y2="1700" stroke="rgba(255,255,255,0.5)" stroke-width="3" stroke-dasharray="16,10"/><ellipse cx="300" cy="700" rx="90" ry="100" fill="none" stroke="rgba(248,113,113,0.8)" stroke-width="3" stroke-dasharray="14,10"/><line x1="300" y1="800" x2="300" y2="1200" stroke="rgba(248,113,113,0.7)" stroke-width="2.5" stroke-dasharray="14,10"/><text x="300" y="1320" text-anchor="middle" fill="rgba(248,113,113,0.9)" font-size="42" font-weight="600">BEFORE</text><ellipse cx="780" cy="700" rx="90" ry="100" fill="none" stroke="rgba(74,222,128,0.8)" stroke-width="3" stroke-dasharray="14,10"/><line x1="780" y1="800" x2="780" y2="1200" stroke="rgba(74,222,128,0.7)" stroke-width="2.5" stroke-dasharray="14,10"/><text x="780" y="1320" text-anchor="middle" fill="rgba(74,222,128,0.9)" font-size="42" font-weight="600">AFTER</text><rect x="200" y="100" width="680" height="120" fill="none" stroke="rgba(251,191,36,0.8)" stroke-width="2.5" stroke-dasharray="12,8" rx="16"/><text x="540" y="175" text-anchor="middle" fill="rgba(251,191,36,0.9)" font-size="34">90kg → 60kg</text>'},
+      {label:"SCENE 2", title:"상반신 토킹", time:"3-14초", script:"\"다이어트 몇 번이나 했는지 저도 모를 정도예요\"",
+       svg:'<ellipse cx="540" cy="480" rx="120" ry="135" fill="none" stroke="white" stroke-width="3" stroke-dasharray="16,10"/><line x1="540" y1="615" x2="540" y2="1350" stroke="white" stroke-width="3" stroke-dasharray="16,10"/><line x1="540" y1="820" x2="340" y2="1080" stroke="white" stroke-width="2.5" stroke-dasharray="14,10" opacity="0.7"/><line x1="540" y1="820" x2="740" y2="1080" stroke="white" stroke-width="2.5" stroke-dasharray="14,10" opacity="0.7"/><line x1="200" y1="460" x2="880" y2="460" stroke="rgba(96,165,250,0.8)" stroke-width="2.5" stroke-dasharray="8,6"/><text x="540" y="430" text-anchor="middle" fill="rgba(96,165,250,0.9)" font-size="28">EYE LINE</text><line x1="100" y1="1450" x2="980" y2="1450" stroke="rgba(248,113,113,0.9)" stroke-width="3" stroke-dasharray="14,8"/><text x="540" y="1510" text-anchor="middle" fill="rgba(248,113,113,0.9)" font-size="30">FRAME CUT</text>'},
+      {label:"SCENE 3", title:"클로즈업 토킹", time:"14-22초", script:"\"의지로 버티는 걸 그만두고 환경을 바꿨어요\"",
+       svg:'<ellipse cx="540" cy="680" rx="200" ry="230" fill="none" stroke="white" stroke-width="3" stroke-dasharray="16,10"/><path d="M 240 1050 Q 540 950 840 1050 L 900 1500 L 180 1500 Z" fill="none" stroke="white" stroke-width="2.5" stroke-dasharray="14,10" opacity="0.6"/><line x1="150" y1="640" x2="930" y2="640" stroke="rgba(96,165,250,0.8)" stroke-width="2.5" stroke-dasharray="8,6"/><text x="540" y="600" text-anchor="middle" fill="rgba(96,165,250,0.9)" font-size="30">EYE LINE = 1/3</text><line x1="100" y1="1500" x2="980" y2="1500" stroke="rgba(248,113,113,0.8)" stroke-width="2.5" stroke-dasharray="14,8"/><text x="540" y="1560" text-anchor="middle" fill="rgba(248,113,113,0.9)" font-size="30">CHEST CUT</text>'},
+      {label:"SCENE 4", title:"CTA 마무리", time:"26-30초", script:"\"댓글에 루틴 남겨주세요. DM으로 보내드릴게요!\"",
+       svg:'<ellipse cx="540" cy="500" rx="110" ry="125" fill="none" stroke="white" stroke-width="3" stroke-dasharray="16,10"/><line x1="540" y1="625" x2="540" y2="1300" stroke="white" stroke-width="3" stroke-dasharray="16,10"/><line x1="540" y1="820" x2="340" y2="1060" stroke="white" stroke-width="2.5" stroke-dasharray="14,10" opacity="0.7"/><line x1="540" y1="820" x2="740" y2="1060" stroke="white" stroke-width="2.5" stroke-dasharray="14,10" opacity="0.7"/><line x1="200" y1="480" x2="880" y2="480" stroke="rgba(96,165,250,0.7)" stroke-width="2" stroke-dasharray="8,6"/><rect x="200" y="1560" width="680" height="110" fill="none" stroke="rgba(251,191,36,0.9)" stroke-width="3" stroke-dasharray="12,8" rx="16"/><text x="540" y="1630" text-anchor="middle" fill="rgba(251,191,36,0.95)" font-size="32" font-weight="500">댓글에 \'루틴\'</text>'}
+    ]
+  }
+};
+
+window.sgOpen = function(planNum) {
+  guides = DATA[planNum].scenes;
+  idx = 0;
+  var ov = document.getElementById('sg-overlay');
+  var vid = document.getElementById('sg-video');
+  document.getElementById('sg-plan-badge').textContent = DATA[planNum].name;
+
+  navigator.mediaDevices.getUserMedia({
+    video:{facingMode:'environment', width:{ideal:1080}, height:{ideal:1920}},
+    audio:false
+  }).then(function(s){
+    stream = s;
+    vid.srcObject = s;
+    ov.classList.add('active');
+    sgRender();
+    sgStartTimer();
+    // Hide hint after 3s
+    hintTimer = setTimeout(function(){ document.getElementById('sg-hint').classList.add('hidden'); }, 3000);
+    if(screen.orientation&&screen.orientation.lock) screen.orientation.lock('portrait').catch(function(){});
+  }).catch(function(){
+    alert('카메라 접근을 허용해주세요');
+  });
+};
+
+window.sgClose = function() {
+  document.getElementById('sg-overlay').classList.remove('active');
+  if(stream){stream.getTracks().forEach(function(t){t.stop();}); stream=null;}
+  sgStopTimer();
+  if(hintTimer) clearTimeout(hintTimer);
+};
+
+window.sgNext = function() {
+  var svg = document.getElementById('sg-guide');
+  svg.classList.add('fading');
+  setTimeout(function(){
+    idx = (idx+1) % guides.length;
+    sgRender();
+    svg.classList.remove('fading');
+  }, 200);
+};
+
+window.sgPrev = function() {
+  var svg = document.getElementById('sg-guide');
+  svg.classList.add('fading');
+  setTimeout(function(){
+    idx = (idx-1+guides.length) % guides.length;
+    sgRender();
+    svg.classList.remove('fading');
+  }, 200);
+};
+
+window.sgToggleCard = function() {
+  var card = document.getElementById('sg-card');
+  cardVisible = !cardVisible;
+  if(cardVisible) card.classList.add('visible');
+  else card.classList.remove('visible');
+};
+
+function sgRender() {
+  var g = guides[idx];
+  document.getElementById('sg-guide').innerHTML = g.svg;
+  document.getElementById('sg-label').textContent = g.label;
+  document.getElementById('sg-title').textContent = g.title;
+  document.getElementById('sg-script').textContent = g.script;
+  document.getElementById('sg-duration').textContent = g.time;
+  document.getElementById('sg-step-label').textContent = (idx+1)+' / '+guides.length;
+  // Card animation
+  var card = document.getElementById('sg-card');
+  card.classList.remove('visible');
+  if(cardVisible) setTimeout(function(){card.classList.add('visible');},50);
+  // Progress dots
+  var dots = document.getElementById('sg-progress');
+  dots.innerHTML = '';
+  for(var i=0;i<guides.length;i++){
+    var d = document.createElement('div');
+    d.className = 'sg-dot' + (i===idx?' active':'');
+    dots.appendChild(d);
+  }
+}
+
+function sgStartTimer() {
+  seconds = 0;
+  timer = setInterval(function(){
+    seconds++;
+    var m = Math.floor(seconds/60);
+    var s = seconds%60;
+    document.getElementById('sg-timer').textContent = 
+      (m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+  }, 1000);
+}
+function sgStopTimer() { if(timer){clearInterval(timer);timer=null;} seconds=0; }
+
+// Swipe support
+var touchStartX=0;
+document.addEventListener('DOMContentLoaded',function(){
+  var ov=document.getElementById('sg-overlay');
+  ov.addEventListener('touchstart',function(e){touchStartX=e.touches[0].clientX;},{passive:true});
+  ov.addEventListener('touchend',function(e){
+    var dx=e.changedTouches[0].clientX-touchStartX;
+    if(Math.abs(dx)>60){
+      if(dx<0) sgNext(); else sgPrev();
+    }
+  },{passive:true});
+});
+})();
 </script>
 
 </body>
