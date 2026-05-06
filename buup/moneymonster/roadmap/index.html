@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>런칭 로드맵 — 머니몬스터</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif;
+    color: #191f28;
+    background: #191f28;
+    font-size: 15px;
+    line-height: 1.6;
+    letter-spacing: -0.3px;
+    -webkit-text-size-adjust: 100%;
+    padding: 0 0 80px;
+    min-height: 100vh;
+  }
+
+  /* Header */
+  .hdr {
+    background: #191f28;
+    color: #fff;
+    padding: 20px 20px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid #2d333b;
+  }
+  .hdr-top { display: flex; justify-content: space-between; align-items: center; }
+  .hdr-badge { font-size: 11px; font-weight: 700; color: #3182f6; letter-spacing: 1px; }
+  .hdr-sync { font-size: 11px; color: #4e5968; cursor: pointer; }
+  .hdr-sync:active { color: #3182f6; }
+  .hdr-name { font-size: 22px; font-weight: 800; margin-top: 4px; letter-spacing: -1px; }
+  .hdr-sub { font-size: 12px; color: #6b7684; margin-top: 2px; }
+
+  /* Progress */
+  .progress-bar {
+    background: #2d333b;
+    height: 4px;
+    border-radius: 2px;
+    margin-top: 12px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: #3182f6;
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+  .progress-text {
+    font-size: 11px;
+    color: #6b7684;
+    margin-top: 4px;
+    text-align: right;
+  }
+
+  /* Filter */
+  .filter-bar {
+    display: flex;
+    gap: 6px;
+    padding: 12px 8px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .filter-btn {
+    flex-shrink: 0;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid #2d333b;
+    background: transparent;
+    color: #8b95a1;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .filter-btn.active {
+    background: #3182f6;
+    border-color: #3182f6;
+    color: #fff;
+  }
+
+  /* Section */
+  .sec {
+    margin: 4px 8px 16px;
+  }
+  .sec-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: #fff;
+    border-radius: 16px 16px 0 0;
+    border-bottom: 1px solid #f2f4f6;
+  }
+  .sec-title {
+    font-size: 15px;
+    font-weight: 800;
+    color: #191f28;
+    letter-spacing: -0.5px;
+  }
+  .sec-count {
+    font-size: 12px;
+    font-weight: 700;
+    color: #3182f6;
+    background: #f2f7ff;
+    padding: 2px 10px;
+    border-radius: 12px;
+  }
+
+  /* Card */
+  .card {
+    background: #fff;
+    padding: 16px;
+    border-bottom: 1px solid #f2f4f6;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    transition: background 0.15s;
+  }
+  .card:last-child {
+    border-bottom: none;
+    border-radius: 0 0 16px 16px;
+  }
+  .card.only-child {
+    border-radius: 0 0 16px 16px;
+  }
+  .card.done { opacity: 0.5; }
+
+  /* Status Toggle */
+  .status-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    border: 2px solid #d1d6db;
+    background: #fff;
+    flex-shrink: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    transition: all 0.2s;
+    margin-top: 1px;
+  }
+  .status-btn.progress {
+    border-color: #f7971e;
+    background: #fff8eb;
+    color: #f7971e;
+  }
+  .status-btn.complete {
+    border-color: #00b894;
+    background: #00b894;
+    color: #fff;
+  }
+
+  /* Card Content */
+  .card-body { flex: 1; min-width: 0; }
+  .card-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #191f28;
+    word-break: keep-all;
+  }
+  .card-meta {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
+    flex-wrap: wrap;
+  }
+  .tag {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  .tag-date { background: #f2f4f6; color: #4e5968; }
+  .tag-who { background: #f2f7ff; color: #3182f6; }
+  .tag-cat { background: #edf8f0; color: #1b8a4a; }
+
+  /* Note */
+  .card-note {
+    margin-top: 6px;
+    font-size: 12px;
+    color: #8b95a1;
+    line-height: 1.5;
+    word-break: keep-all;
+  }
+  .note-input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px dashed #d1d6db;
+    font-size: 12px;
+    color: #4e5968;
+    font-family: inherit;
+    padding: 4px 0;
+    background: transparent;
+    outline: none;
+    resize: none;
+  }
+  .note-input:focus {
+    border-color: #3182f6;
+    color: #191f28;
+  }
+
+  /* Loading / Error */
+  .state-msg {
+    text-align: center;
+    padding: 60px 20px;
+    color: #6b7684;
+    font-size: 14px;
+  }
+  .state-msg b { color: #3182f6; }
+
+  /* Setup */
+  .setup {
+    max-width: 400px;
+    margin: 60px auto;
+    padding: 0 20px;
+    text-align: center;
+  }
+  .setup h2 {
+    color: #fff;
+    font-size: 20px;
+    margin-bottom: 12px;
+  }
+  .setup p {
+    color: #6b7684;
+    font-size: 13px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  .setup input {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid #2d333b;
+    background: #0d1117;
+    color: #fff;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    margin-bottom: 12px;
+  }
+  .setup input:focus { border-color: #3182f6; }
+  .setup button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    background: #3182f6;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  /* Bottom */
+  .bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #191f28;
+    padding: 12px 20px;
+    z-index: 100;
+    border-top: 1px solid #2d333b;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .bottom-text { font-size: 12px; color: #4e5968; }
+  .bottom-text b { color: #3182f6; }
+  .reset-btn {
+    font-size: 11px;
+    color: #6b7684;
+    background: none;
+    border: 1px solid #2d333b;
+    padding: 4px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+</style>
+</head>
+<body>
+
+<div id="app"></div>
+
+<script>
+const APP_KEY = 'mm_roadmap_api';
+let API_URL = localStorage.getItem(APP_KEY) || '';
+let DATA = [];
+let FILTER = '전체';
+
+function init() {
+  if (!API_URL) {
+    renderSetup();
+  } else {
+    renderLoading();
+    fetchData();
+  }
+}
+
+// === SETUP ===
+function renderSetup() {
+  document.getElementById('app').innerHTML = `
+    <div class="setup">
+      <h2>API 연결</h2>
+      <p>구글 시트의 Apps Script 배포 URL을 입력해주세요.</p>
+      <input id="apiInput" placeholder="https://script.google.com/macros/s/..." />
+      <button onclick="saveApi()">연결</button>
+    </div>
+  `;
+}
+
+function saveApi() {
+  const url = document.getElementById('apiInput').value.trim();
+  if (!url.startsWith('https://script.google.com/')) {
+    alert('올바른 Apps Script URL을 입력해주세요.');
+    return;
+  }
+  API_URL = url;
+  localStorage.setItem(APP_KEY, url);
+  renderLoading();
+  fetchData();
+}
+
+function resetApi() {
+  localStorage.removeItem(APP_KEY);
+  API_URL = '';
+  renderSetup();
+}
+
+// === DATA ===
+function fetchData() {
+  fetch(API_URL)
+    .then(r => r.json())
+    .then(json => {
+      if (json.error) {
+        renderError(json.error);
+        return;
+      }
+      DATA = json.rows || [];
+      render();
+    })
+    .catch(err => {
+      renderError('데이터를 불러올 수 없습니다. URL을 확인해주세요.');
+    });
+}
+
+function updateStatus(row, currentStatus) {
+  const cycle = { '': '진행중', '대기': '진행중', '진행중': '완료', '완료': '' };
+  const next = cycle[currentStatus] || '진행중';
+
+  // Optimistic update
+  const item = DATA.find(d => d._row === row);
+  if (item) item['상태'] = next;
+  render();
+
+  fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: 'updateStatus', row, value: next }),
+    mode: 'no-cors'
+  }).catch(() => {});
+}
+
+function updateNote(row, value) {
+  const item = DATA.find(d => d._row === row);
+  if (item) item['비고'] = value;
+
+  fetch(API_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: 'updateNote', row, value }),
+    mode: 'no-cors'
+  }).catch(() => {});
+}
+
+// === RENDER ===
+function renderLoading() {
+  document.getElementById('app').innerHTML = `<div class="state-msg">불러오는 중...</div>`;
+}
+
+function renderError(msg) {
+  document.getElementById('app').innerHTML = `<div class="state-msg">${msg}<br><br><button class="reset-btn" onclick="resetApi()">URL 재설정</button></div>`;
+}
+
+function render() {
+  const sections = {};
+  const sectionOrder = [];
+
+  DATA.forEach(item => {
+    const sec = item['구간'] || '기타';
+    if (!sections[sec]) {
+      sections[sec] = [];
+      sectionOrder.push(sec);
+    }
+    sections[sec].push(item);
+  });
+
+  const totalItems = DATA.length;
+  const doneItems = DATA.filter(d => d['상태'] === '완료').length;
+  const pct = totalItems > 0 ? Math.round((doneItems / totalItems) * 100) : 0;
+
+  const filtered = FILTER === '전체' ? sectionOrder : sectionOrder.filter(s => s === FILTER);
+
+  let html = `
+    <div class="hdr">
+      <div class="hdr-top">
+        <div class="hdr-badge">LAUNCH ROADMAP</div>
+        <div class="hdr-sync" onclick="fetchData()">새로고침</div>
+      </div>
+      <div class="hdr-name">머니몬스터 런칭 로드맵</div>
+      <div class="hdr-sub">웨비나 6/22 확정 | 시트 실시간 연동</div>
+      <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+      <div class="progress-text">${doneItems}/${totalItems} 완료 (${pct}%)</div>
+    </div>
+    <div class="filter-bar">
+      <button class="filter-btn ${FILTER === '전체' ? 'active' : ''}" onclick="setFilter('전체')">전체</button>
+      ${sectionOrder.map(s => `
+        <button class="filter-btn ${FILTER === s ? 'active' : ''}" onclick="setFilter('${s}')">${s}</button>
+      `).join('')}
+    </div>
+  `;
+
+  filtered.forEach(sec => {
+    const items = sections[sec];
+    const secDone = items.filter(d => d['상태'] === '완료').length;
+
+    html += `
+      <div class="sec">
+        <div class="sec-header">
+          <div class="sec-title">${sec}</div>
+          <div class="sec-count">${secDone}/${items.length}</div>
+        </div>
+    `;
+
+    items.forEach((item, idx) => {
+      const status = item['상태'] || '';
+      let btnClass = '';
+      let btnIcon = '';
+      if (status === '진행중') { btnClass = 'progress'; btnIcon = '~'; }
+      else if (status === '완료') { btnClass = 'complete'; btnIcon = '\u2713'; }
+
+      const isDone = status === '완료';
+      const isLast = idx === items.length - 1;
+
+      html += `
+        <div class="card ${isDone ? 'done' : ''} ${isLast ? 'only-child' : ''}">
+          <div class="status-btn ${btnClass}" onclick="updateStatus(${item._row}, '${status}')">${btnIcon}</div>
+          <div class="card-body">
+            <div class="card-title">${item['할일'] || item['할 일'] || ''}</div>
+            <div class="card-meta">
+              ${item['날짜'] ? `<span class="tag tag-date">${item['날짜']}</span>` : ''}
+              ${item['담당'] ? `<span class="tag tag-who">${item['담당']}</span>` : ''}
+              ${item['카테고리'] ? `<span class="tag tag-cat">${item['카테고리']}</span>` : ''}
+            </div>
+            <div class="card-note">
+              <textarea class="note-input" rows="1"
+                placeholder="메모 추가..."
+                onblur="updateNote(${item._row}, this.value)"
+                onfocus="this.rows=2"
+              >${item['비고'] || ''}</textarea>
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    html += `</div>`;
+  });
+
+  html += `
+    <div class="bottom-bar">
+      <div class="bottom-text"><b>Flowmus</b> 부업클래스</div>
+      <button class="reset-btn" onclick="resetApi()">재설정</button>
+    </div>
+  `;
+
+  document.getElementById('app').innerHTML = html;
+}
+
+function setFilter(f) {
+  FILTER = f;
+  render();
+}
+
+// === INIT ===
+init();
+</script>
+</body>
+</html>
