@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>인플루언서 광고 계약서 — 플로우머스</title>
+<style>
+  @page { size: A4; margin: 18mm 18mm 20mm 18mm; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Apple SD Gothic Neo', '맑은 고딕', 'Malgun Gothic', sans-serif;
+    color: #222;
+    background: #fff;
+    font-size: 10pt;
+    line-height: 1.85;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @media screen {
+    body { background: #e8e8e8; padding: 20px 0; }
+    .page { box-shadow: 0 2px 12px rgba(0,0,0,0.1); margin-bottom: 24px; }
+  }
+  @media print {
+    .page { padding: 0; margin: 0; box-shadow: none; min-height: auto; }
+    .no-print { display: none !important; }
+  }
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    padding: 48px 52px;
+    position: relative;
+    background: #fff;
+    page-break-after: always;
+  }
+  .page:last-child { page-break-after: auto; }
+  .doc-title {
+    font-size: 20pt;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: 4px;
+    padding: 28px 0 24px;
+    border-top: 2.5px solid #333;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 30px;
+    color: #111;
+  }
+  .preamble {
+    text-align: justify;
+    text-indent: 1em;
+    margin-bottom: 28px;
+    line-height: 2.0;
+    word-break: keep-all;
+    color: #333;
+  }
+  .info-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 28px;
+    font-size: 9.5pt;
+    table-layout: fixed;
+  }
+  .info-table th,
+  .info-table td {
+    border: 1px solid #ddd;
+    padding: 11px 16px;
+    vertical-align: middle;
+    word-break: keep-all;
+  }
+  .info-table th {
+    background: #f8f8f8;
+    font-weight: 600;
+    text-align: center;
+    width: 100px;
+    color: #444;
+    letter-spacing: 0.5px;
+  }
+  .info-table td {
+    text-align: left;
+    line-height: 1.8;
+    color: #333;
+  }
+  .sign-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 32px;
+    font-size: 9.5pt;
+  }
+  .sign-table > tbody > tr > td {
+    padding: 0;
+    vertical-align: top;
+    width: 50%;
+  }
+  .sign-table > tbody > tr > td:first-child { padding-right: 16px; }
+  .sign-table > tbody > tr > td:last-child { padding-left: 16px; }
+  .sign-inner {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 18px 20px;
+  }
+  .sign-header {
+    font-weight: 600;
+    font-size: 10pt;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #333;
+  }
+  .sign-line {
+    display: flex;
+    line-height: 2.2;
+  }
+  .sl {
+    width: 96px;
+    flex-shrink: 0;
+    color: #666;
+    text-align: left;
+    font-size: 9pt;
+  }
+  .sv {
+    flex: 1;
+    color: #222;
+  }
+  .seal { color: #c00; }
+  .article-title {
+    font-weight: 700;
+    font-size: 10.5pt;
+    margin-top: 24px;
+    margin-bottom: 8px;
+    color: #111;
+  }
+  .article-body {
+    text-align: justify;
+    margin-bottom: 6px;
+    text-indent: 1em;
+    word-break: keep-all;
+    color: #333;
+  }
+  .clause {
+    text-indent: -1.3em;
+    padding-left: 1.3em;
+    margin-bottom: 5px;
+    text-align: justify;
+    word-break: keep-all;
+    color: #333;
+  }
+  .sub {
+    text-indent: -1em;
+    padding-left: 2.8em;
+    margin-bottom: 4px;
+    text-align: justify;
+    word-break: keep-all;
+    color: #444;
+  }
+  .pn {
+    position: absolute;
+    bottom: 28px;
+    left: 0; right: 0;
+    text-align: center;
+    font-size: 8.5pt;
+    color: #aaa;
+  }
+  .field {
+    border: none;
+    border-bottom: 1px solid #bbb;
+    background: transparent;
+    font-family: inherit;
+    font-size: inherit;
+    color: #0055cc;
+    padding: 0 2px;
+    outline: none;
+    text-align: center;
+  }
+  .field:focus { border-bottom-color: #0055cc; background: #f0f6ff; }
+  .field-wide { width: 180px; text-align: left; }
+  .field-date { width: 42px; }
+  .field-num { width: 36px; }
+  .field-name { width: 140px; }
+  .field-full { width: 100%; text-align: left; }
+  .field-sign { width: 140px; text-align: left; }
+  .field-amount { width: 100px; text-align: right; }
+  .field-account { width: 200px; text-align: left; }
+  @media print {
+    .field { border-bottom-color: #999; color: #000; background: transparent; }
+  }
+  .print-btn {
+    position: fixed; bottom: 20px; right: 20px; z-index: 100;
+    background: #333; color: #fff; border: none;
+    padding: 12px 24px; border-radius: 8px;
+    font-size: 10pt; font-weight: 600; cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    font-family: sans-serif;
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">PDF 저장</button>
+
+<!-- PAGE 1: 표지 -->
+<div class="page">
+
+  <div class="doc-title">인플루언서 광고 계약서</div>
+
+  <p class="preamble">
+    주식회사 플로우머스(이하 "갑"이라 한다)와 <input type="text" class="field field-name" placeholder="인플루언서 성명">(이하 "을"이라 한다)는 갑이 운영하는 서비스의 광고 콘텐츠 제작 및 게시에 관하여 아래와 같이 계약을 체결하고, 신의에 따라 성실히 이행할 것을 확약한다.
+  </p>
+
+  <table class="info-table">
+    <tr>
+      <th>계약일</th>
+      <td colspan="3"><input type="text" class="field field-date" placeholder="2026">년 <input type="text" class="field field-date" placeholder="">월 <input type="text" class="field field-date" placeholder="">일</td>
+    </tr>
+    <tr>
+      <th>광고 서비스</th>
+      <td colspan="3"><input type="text" class="field field-full" placeholder="예: 100원사주 (100saju.com)"></td>
+    </tr>
+    <tr>
+      <th>을의 계정</th>
+      <td colspan="3">Instagram @<input type="text" class="field field-wide" placeholder="계정명"> (팔로워 <input type="text" class="field field-num" placeholder="">만명)</td>
+    </tr>
+    <tr>
+      <th>콘텐츠 유형</th>
+      <td colspan="3">인스타그램 릴스</td>
+    </tr>
+    <tr>
+      <th>제작 수량</th>
+      <td colspan="3">릴스 <input type="text" class="field field-num" placeholder="">건</td>
+    </tr>
+    <tr>
+      <th>건당 단가</th>
+      <td colspan="3"><input type="text" class="field field-amount" placeholder="">원 (VAT 포함)</td>
+    </tr>
+    <tr>
+      <th>총 광고비</th>
+      <td colspan="3"><b><input type="text" class="field field-amount" placeholder="">원</b> (VAT 포함)</td>
+    </tr>
+    <tr>
+      <th>게시 마감일</th>
+      <td colspan="3"><input type="text" class="field field-date" placeholder="">년 <input type="text" class="field field-date" placeholder="">월 <input type="text" class="field field-date" placeholder="">일까지</td>
+    </tr>
+    <tr>
+      <th>최소 유지기간</th>
+      <td colspan="3">게시일로부터 <input type="text" class="field field-num" placeholder="90">일</td>
+    </tr>
+  </table>
+
+  <table class="sign-table">
+    <tr>
+      <td>
+        <div class="sign-inner">
+          <div class="sign-header">"갑" (광고주)</div>
+          <div class="sign-line"><span class="sl">법인명</span><span class="sv">주식회사 플로우머스</span></div>
+          <div class="sign-line"><span class="sl">사업자번호</span><span class="sv">110-88-03675</span></div>
+          <div class="sign-line"><span class="sl">주소</span><span class="sv">서울특별시 서초구 서초대로<br>398, 7층 709호(BNK디지털타워)</span></div>
+          <div class="sign-line" style="margin-top:10px;border-top:1px solid #ccc;padding-top:8px"><span class="sl">공동대표</span><span class="sv">권 현 우 &nbsp;<span class="seal">(인)</span></span></div>
+          <div class="sign-line"><span class="sl">공동대표</span><span class="sv">오 맷 돌 &nbsp;<span class="seal">(인)</span></span></div>
+        </div>
+      </td>
+      <td>
+        <div class="sign-inner">
+          <div class="sign-header">"을" (인플루언서)</div>
+          <div class="sign-line"><span class="sl">이름</span><span class="sv"><input type="text" class="field field-sign" placeholder=""></span></div>
+          <div class="sign-line"><span class="sl">계정</span><span class="sv">@<input type="text" class="field field-sign" placeholder=""></span></div>
+          <div class="sign-line"><span class="sl">연락처</span><span class="sv"><input type="text" class="field field-sign" placeholder="010-"></span></div>
+          <div class="sign-line"><span class="sl">입금계좌</span><span class="sv"><input type="text" class="field field-account" placeholder="은행 / 계좌번호 / 예금주"></span></div>
+          <div class="sign-line" style="margin-top:10px;border-top:1px solid #ccc;padding-top:8px"><span class="sl">성함</span><span class="sv"><input type="text" class="field field-sign" placeholder=""> &nbsp;<span class="seal">(인)</span></span></div>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <div class="pn">- 1 -</div>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page">
+
+  <div class="article-title">제1조 (계약의 목적)</div>
+  <p class="article-body">본 계약은 "갑"이 운영하는 서비스(이하 "광고 서비스")의 홍보를 위하여 "을"이 본인의 인스타그램 계정에 광고 콘텐츠를 제작·게시하는 것에 관한 권리와 의무를 정함을 목적으로 한다.</p>
+
+  <div class="article-title">제2조 (콘텐츠 제작 및 게시)</div>
+  <p class="clause">① "을"은 표지에 기재된 수량의 인스타그램 릴스를 제작하여 게시 마감일까지 본인의 계정에 게시한다.</p>
+  <p class="clause">② "을"은 콘텐츠 게시 전 "갑"에게 초안(영상, 캡션)을 공유하고, "갑"의 확인을 받은 후 게시한다. "갑"은 초안 수령일로부터 2영업일 이내에 확인 또는 수정 의견을 전달한다.</p>
+  <p class="clause">③ "갑"의 수정 요청은 2회를 초과하지 않는 것을 원칙으로 하며, 콘텐츠의 본질적 방향 변경이 아닌 문구, 태그, 링크 등 경미한 수정에 한한다.</p>
+  <p class="clause">④ "을"은 콘텐츠에 "갑"이 제공하는 서비스 정보(서비스명, URL, 프로모션 내용 등)를 정확하게 반영한다.</p>
+
+  <div class="article-title">제3조 (광고 표시 의무)</div>
+  <p class="clause">① "을"은 공정거래위원회 「추천·보증 등에 관한 표시·광고 심사지침」에 따라, 게시되는 콘텐츠에 경제적 대가를 받은 광고임을 명확히 표시하여야 한다.</p>
+  <p class="clause">② 광고 표시는 릴스 영상 내 자막 또는 캡션 첫 줄에 "#광고", "#유료광고" 등의 문구를 포함하고, 인스타그램의 "유료 파트너십" 라벨을 활성화하는 방식으로 한다.</p>
+  <p class="clause">③ "을"이 광고 표시 의무를 이행하지 않아 "갑"에게 과태료, 행정처분 등 손해가 발생한 경우, "을"은 이를 배상한다.</p>
+
+  <div class="article-title">제4조 (보수 및 지급)</div>
+  <p class="clause">① 광고비는 표지에 기재된 총 광고비로 한다.</p>
+  <p class="clause">② 광고비는 콘텐츠 게시 확인 후 5영업일 이내에 "을"이 지정한 계좌로 입금한다.</p>
+  <p class="clause">③ "을"이 개인인 경우 기타소득으로 원천세 8.8%를 차감하고 지급한다. 사업자인 경우 세금계산서를 수취한 후 지급한다.</p>
+  <p class="clause">④ 복수 건의 콘텐츠를 제작하는 경우, 각 건의 게시 확인 후 건별로 정산하거나 전체 게시 완료 후 일괄 정산할 수 있으며, 구체적인 지급 방식은 양 당사자가 협의하여 정한다.</p>
+
+  <div class="article-title">제5조 (게시 유지 및 삭제)</div>
+  <p class="clause">① "을"은 콘텐츠를 표지에 기재된 최소 유지기간 동안 삭제, 비공개 전환, 보관처리하지 않는다.</p>
+  <p class="clause">② 최소 유지기간 내에 "을"이 콘텐츠를 삭제하거나 비공개로 전환한 경우, "갑"은 해당 건의 광고비 반환을 요구할 수 있다.</p>
+  <p class="clause">③ 최소 유지기간 경과 후 "을"은 콘텐츠를 자유롭게 관리할 수 있다. 단, 삭제 전 "갑"에게 사전 통지한다.</p>
+
+  <div class="article-title">제6조 (2차 활용권)</div>
+  <p class="clause">① "갑"은 "을"이 제작한 콘텐츠를 "갑"의 공식 채널(인스타그램, 유튜브, 웹사이트 등) 및 유료 광고 소재로 2차 활용할 수 있다.</p>
+  <p class="clause">② 제1항에 따른 2차 활용권은 콘텐츠 게시일로부터 <input type="text" class="field field-num" placeholder="12">개월간 유효하다.</p>
+  <p class="clause">③ "갑"은 2차 활용 시 "을"의 계정명을 출처로 표기한다.</p>
+  <p class="clause">④ 2차 활용 기간 연장이 필요한 경우 양 당사자가 별도 협의한다.</p>
+
+  <div class="pn">- 2 -</div>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page">
+
+  <div class="article-title">제7조 (금지 사항)</div>
+  <p class="clause">① "을"은 콘텐츠에 다음 각호의 내용을 포함할 수 없다.</p>
+  <p class="sub">1. 허위 또는 과장된 서비스 효과</p>
+  <p class="sub">2. 타 경쟁 서비스에 대한 비방</p>
+  <p class="sub">3. 혐오, 차별, 선정적 표현</p>
+  <p class="sub">4. "갑"의 서비스와 무관한 타 광고의 동시 게재</p>
+  <p class="clause">② "을"은 동일 카테고리(사주, 운세, 타로 등) 경쟁 서비스의 광고를 콘텐츠 게시일로부터 <input type="text" class="field field-num" placeholder="30">일간 수락하지 않는다.</p>
+
+  <div class="article-title">제8조 (초상권 및 저작권)</div>
+  <p class="clause">① 콘텐츠에 포함된 "을"의 초상, 음성, 성명 등은 본 계약 및 제6조에서 정한 2차 활용 범위 내에서 "갑"이 이용할 수 있다.</p>
+  <p class="clause">② 콘텐츠의 저작권은 "을"에게 귀속되며, "갑"은 제6조에서 정한 범위 내에서 이용 허락을 받은 것으로 한다.</p>
+  <p class="clause">③ "을"은 콘텐츠에 제3자의 저작물(음악, 이미지 등)을 사용하는 경우 적법한 라이선스를 확보하여야 하며, 이를 위반하여 발생한 분쟁에 대해 "을"이 책임진다.</p>
+
+  <div class="article-title">제9조 (비밀유지)</div>
+  <p class="clause">① 양 당사자는 본 계약의 조건(광고비 금액 등)을 상대방의 동의 없이 제3자에게 공개하지 않는다.</p>
+  <p class="clause">② "을"은 "갑"이 제공한 미공개 서비스 정보, 마케팅 전략 등을 본 계약 목적 외에 사용하지 않는다.</p>
+
+  <div class="article-title">제10조 (계약의 해지)</div>
+  <p class="clause">① 다음 각호의 경우 어느 일방이 본 계약을 해지할 수 있다.</p>
+  <p class="sub">1. 상대방이 본 계약상의 의무를 이행하지 않고, 시정 요구 후 3일 이내에 시정하지 않은 경우</p>
+  <p class="sub">2. "을"이 게시 마감일까지 콘텐츠를 게시하지 않은 경우</p>
+  <p class="sub">3. "을"의 계정이 정지, 삭제되어 콘텐츠 게시가 불가능한 경우</p>
+  <p class="clause">② "갑"의 사유로 콘텐츠 게시 전 계약이 해지되는 경우, "을"이 이미 제작에 착수하였다면 "갑"은 건당 단가의 50%를 지급한다.</p>
+  <p class="clause">③ "을"의 사유로 계약이 해지되는 경우, 기지급된 광고비가 있으면 "을"은 미게시 건에 해당하는 금액을 반환한다.</p>
+
+  <div class="article-title">제11조 (분쟁의 해결)</div>
+  <p class="clause">① 본 계약과 관련한 분쟁은 양 당사자의 합의에 의하여 해결한다.</p>
+  <p class="clause">② 합의가 성립하지 못한 경우 "갑"의 소재지 관할법원을 제1심 관할법원으로 한다.</p>
+
+  <div style="text-align:center; margin-top:48px; font-size:9pt; color:#666;">- 이하 여백 -</div>
+
+  <div class="pn">- 3 -</div>
+</div>
+
+</body>
+</html>
