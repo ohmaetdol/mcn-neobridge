@@ -71,8 +71,10 @@
   .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; padding: 12px 16px; z-index: 100; border-top: 1px solid #e5e8eb; display: flex; gap: 10px; align-items: center; box-shadow: 0 -2px 12px rgba(0,0,0,0.06); }
   .bottom-text { font-size: 12px; color: #4e5968; font-weight: 600; flex: 1; }
   .bottom-text b { color: #3182f6; }
-  .copy-btn { padding: 10px 20px; border-radius: 10px; border: none; background: #3182f6; color: #fff; font-size: 14px; font-weight: 700; font-family: inherit; cursor: pointer; white-space: nowrap; }
+  .btn-group { display: flex; gap: 8px; }
+  .copy-btn { padding: 10px 16px; border-radius: 10px; border: none; background: #3182f6; color: #fff; font-size: 13px; font-weight: 700; font-family: inherit; cursor: pointer; white-space: nowrap; }
   .copy-btn.copied { background: #00b894; }
+  .dl-btn { padding: 10px 16px; border-radius: 10px; border: 1px solid #3182f6; background: #fff; color: #3182f6; font-size: 13px; font-weight: 700; font-family: inherit; cursor: pointer; white-space: nowrap; }
 
   .toast { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); background: #191f28; color: #fff; padding: 10px 24px; border-radius: 12px; font-size: 13px; font-weight: 600; z-index: 200; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
   .toast.show { opacity: 1; }
@@ -134,10 +136,17 @@ function toast(msg) {
 }
 
 function copyAll() {
-  const all = getAllItems();
+  const text = buildExport();
+  navigator.clipboard.writeText(text).then(() => {
+    toast('전체 내용이 클립보드에 복사되었습니다');
+    const btn = document.getElementById('copyBtn');
+    if (btn) { btn.classList.add('copied'); btn.textContent = '복사 완료'; setTimeout(() => { btn.classList.remove('copied'); btn.textContent = '전체 복사'; }, 2000); }
+  });
+}
+
+function buildExport() {
   let text = '[ ' + INSTRUCTOR + ' ] 강의 준비 자료\n';
   text += '='.repeat(40) + '\n\n';
-
   PHASES.forEach(ph => {
     text += '## ' + ph.label + ' (' + ph.when + ')\n\n';
     ph.sections.forEach(sec => {
@@ -146,23 +155,28 @@ function copyAll() {
         const d = get(item.key);
         const status = isDone(item.key) ? '[v]' : '[ ]';
         text += status + ' ' + item.title + '\n';
-        if (d.text && d.text.trim()) {
-          text += '   > ' + d.text.trim().replace(/\n/g, '\n   > ') + '\n';
-        }
-        if (d.fileOk) {
-          text += '   (파일 준비 완료)\n';
-        }
+        if (d.text && d.text.trim()) text += '   > ' + d.text.trim().replace(/\n/g, '\n   > ') + '\n';
+        if (d.fileOk) text += '   (파일 준비 완료)\n';
         text += '\n';
       });
     });
     text += '\n';
   });
+  return text;
+}
 
-  navigator.clipboard.writeText(text).then(() => {
-    toast('전체 내용이 클립보드에 복사되었습니다');
-    const btn = document.getElementById('copyBtn');
-    if (btn) { btn.classList.add('copied'); btn.textContent = '복사 완료'; setTimeout(() => { btn.classList.remove('copied'); btn.textContent = '전체 복사'; }, 2000); }
-  });
+function downloadAll() {
+  const text = buildExport();
+  const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = INSTRUCTOR + '_강의준비자료.txt';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  toast('파일이 다운로드되었습니다');
 }
 
 // === DATA ===
@@ -344,7 +358,10 @@ function render() {
 
   h += `<div class="bottom-bar">
     <div class="bottom-text"><b>${done}</b>/${all.length} 완료</div>
-    <button id="copyBtn" class="copy-btn" onclick="copyAll()">전체 복사</button>
+    <div class="btn-group">
+      <button class="dl-btn" onclick="downloadAll()">다운로드</button>
+      <button id="copyBtn" class="copy-btn" onclick="copyAll()">전체 복사</button>
+    </div>
   </div>`;
 
   document.getElementById('app').innerHTML = h;
