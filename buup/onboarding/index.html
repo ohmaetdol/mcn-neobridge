@@ -154,7 +154,6 @@
     border-radius: 16px 16px 0 0;
     border-bottom: 1px solid #f2f4f6;
   }
-  .sec-icon { font-size: 16px; margin-right: 8px; }
   .sec-title {
     font-size: 15px;
     font-weight: 800;
@@ -312,7 +311,7 @@ const PHASES = [
     sections: [
       {
         title: '프로필',
-        icon: '\u{1F464}',
+        icon: '',
         items: [
           { key: 'p1', title: '활동명 / 본명', desc: '랜딩페이지 크리에이터 소개에 표기됩니다', must: true, format: '텍스트' },
           { key: 'p2', title: '한 줄 소개 (20자 이내)', desc: '썸네일, 배너, 광고 소재에 활용됩니다', must: true, format: '텍스트' },
@@ -326,7 +325,7 @@ const PHASES = [
       },
       {
         title: '신뢰 증빙',
-        icon: '\u{1F4CA}',
+        icon: '',
         items: [
           { key: 't1', title: '소득/매출 증빙 캡처 3장 이상', desc: '정산내역, 매출 대시보드, 통장 입금 내역 등. 민감한 부분은 가려도 됩니다', must: true, format: '이미지/캡처' },
           { key: 't2', title: '증빙 기간 (최근 몇 개월치인지)', desc: '1~2개월이 아닌 지속적 수익임을 보여주는 것이 중요합니다', must: true, format: '텍스트' },
@@ -337,7 +336,7 @@ const PHASES = [
       },
       {
         title: '수강생 사례',
-        icon: '\u{1F4AC}',
+        icon: '',
         items: [
           { key: 's1', title: '수강생 성과 사례 3건 이상', desc: 'Before \u2192 After 형태, 구체적 숫자 포함. "월 0원 \u2192 월 150만원" 식으로', must: true, format: '텍스트/캡처' },
           { key: 's2', title: '수강생 후기 캡처 5장 이상', desc: '카톡, DM, 커뮤니티 후기 등. 실명/닉네임 노출 가능한 것', must: true, format: '이미지/캡처' },
@@ -355,7 +354,7 @@ const PHASES = [
     sections: [
       {
         title: '강의 구조',
-        icon: '\u{1F4DA}',
+        icon: '',
         items: [
           { key: 'c1', title: '총 강의 기간 (몇 주)', desc: '예: 4주, 6주, 8주 등', must: true, format: '텍스트' },
           { key: 'c2', title: 'VOD / 라이브 / 혼합 여부', desc: '어떤 형태로 진행하실지, 혼합이면 비율도 알려주세요', must: true, format: '텍스트' },
@@ -370,7 +369,7 @@ const PHASES = [
       },
       {
         title: '타겟 & 포지셔닝',
-        icon: '\u{1F3AF}',
+        icon: '',
         items: [
           { key: 'g1', title: '타겟 페르소나 3개', desc: '각각 나이/직업/상황/고민을 포함해주세요. "이런 분께 추천" 섹션에 들어갑니다', must: true, format: '텍스트' },
           { key: 'g2', title: '이런 사람은 듣지 마세요 (역타겟 3개)', desc: '오히려 신뢰도를 올려주고 환불율을 낮춰줍니다', must: true, format: '텍스트' },
@@ -389,7 +388,7 @@ const PHASES = [
     sections: [
       {
         title: '비주얼/영상 소재',
-        icon: '\u{1F3AC}',
+        icon: '',
         items: [
           { key: 'v1', title: '강의 미리보기 영상 (1~2분)', desc: '실제 강의 일부를 보여주는 맛보기 영상. 전환율에 가장 큰 영향을 줍니다', must: true, format: '영상 1080p+' },
           { key: 'v2', title: '강사 인트로 영상 (30초)', desc: '"안녕하세요 OO입니다" 자기소개. 세로형 촬영 가능', must: true, format: '영상' },
@@ -400,7 +399,7 @@ const PHASES = [
       },
       {
         title: '카피 소재',
-        icon: '\u{270D}\u{FE0F}',
+        icon: '',
         items: [
           { key: 'w1', title: '강의 한 줄 요약 (강사님이 생각하는)', desc: '히어로 카피 초안으로 활용됩니다', must: true, format: '텍스트' },
           { key: 'w2', title: '"왜 이 강의를 만들었는가" (3줄)', desc: '스토리 섹션에서 진정성을 보여주는 파트입니다', must: true, format: '텍스트' },
@@ -411,7 +410,7 @@ const PHASES = [
       },
       {
         title: '운영/계약',
-        icon: '\u{1F4CB}',
+        icon: '',
         items: [
           { key: 'o1', title: '희망 가격대', desc: '가격 설계 참고용', must: true, format: '숫자' },
           { key: 'o2', title: '얼리버드/할인 구조 의견', desc: '런칭 프로모션 긴급성 설계에 참고합니다', must: true, format: '텍스트' },
@@ -512,7 +511,7 @@ function render() {
       html += `
         <div class="section">
           <div class="sec-header">
-            <div><span class="sec-icon">${sec.icon}</span><span class="sec-title">${sec.title}</span></div>
+            <div class="sec-title">${sec.title}</div>
             <div class="sec-count">${secChecked}/${sec.items.length}</div>
           </div>
       `;
