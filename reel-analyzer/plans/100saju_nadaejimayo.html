@@ -3,331 +3,298 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>100원사주 x @nadaejimayo — 개인 맞춤 기획서</title>
+<title>100원사주 x @nadaejimayo 콘텐츠 기획서</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Segoe UI', sans-serif; background: #f8f9fa; color: #333; padding: 12px; font-size: 15px; -webkit-text-size-adjust: 100%; }
-.container { max-width: 520px; margin: 0 auto; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f8f9fa; color: #333; padding: 12px; font-size: 15px; -webkit-text-size-adjust: 100%; }
+.container { max-width: 100%; margin: 0 auto; }
+h1 { text-align: center; margin-bottom: 6px; font-size: 1.4em; }
+.subtitle { text-align: center; color: #666; margin-bottom: 20px; font-size: 0.8em; }
+.plan-card { background: white; border-radius: 16px; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+.plan-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 6px; }
+.plan-number { background: #667eea; color: white; padding: 4px 10px; border-radius: 20px; font-size: 0.75em; font-weight: 600; }
+.plan-formula { background: #f0f0f0; padding: 4px 10px; border-radius: 20px; font-size: 0.75em; color: #555; }
+.plan-duration { color: #999; font-size: 0.8em; }
+.plan-title { font-size: 1.15em; font-weight: 700; margin-bottom: 10px; line-height: 1.4; }
 
-/* Hero */
-.hero { background: linear-gradient(135deg, #e91e8c, #9b59b6); border-radius: 20px; padding: 28px 20px; margin-bottom: 20px; color: white; text-align: center; }
-.hero h1 { font-size: 1.5em; margin-bottom: 6px; font-weight: 800; }
-.hero .subtitle { color: rgba(255,255,255,0.9); font-size: 0.8em; line-height: 1.5; }
-.hero .badge { display: inline-block; background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); padding: 4px 12px; border-radius: 20px; font-size: 0.7em; margin-top: 10px; }
+.ref-box { background: #f8f4ff; border: 1px solid #e8d5ff; border-radius: 12px; padding: 14px; margin-bottom: 16px; }
+.ref-box h4 { color: #7c3aed; margin-bottom: 6px; font-size: 0.85em; }
+.ref-box p { font-size: 0.8em; color: #555; line-height: 1.5; }
+.ref-box .ref-note { font-style: italic; color: #7c3aed; margin-top: 6px; font-size: 0.75em; }
+.ref-link { display: inline-block; margin-top: 8px; background: #7c3aed; color: white; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-size: 0.8em; }
 
-/* Section Cards */
-.card { background: white; border-radius: 16px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-.card h2 { font-size: 1.05em; margin-bottom: 12px; color: #1a1a2e; }
-.card h3 { font-size: 0.9em; margin-bottom: 10px; color: #333; }
+.data-box { background: #fef3c7; border: 1px solid #fcd34d; border-radius: 12px; padding: 14px; margin-bottom: 16px; }
+.data-box h4 { color: #92400e; margin-bottom: 8px; font-size: 0.85em; }
+.data-box .stat { display: flex; justify-content: space-between; padding: 4px 0; font-size: 0.8em; border-bottom: 1px solid #fde68a; }
+.data-box .stat:last-child { border-bottom: none; }
+.data-box .stat-label { color: #78350f; }
+.data-box .stat-value { font-weight: 700; color: #92400e; }
 
-/* Tags */
-.tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
-.tag { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 0.7em; font-weight: 600; }
-.tag-pink { background: #fce4f3; color: #c2185b; }
-.tag-purple { background: #f3e8ff; color: #7c3aed; }
-.tag-blue { background: #e0f2fe; color: #0369a1; }
+.hook-section { background: #fff3cd; border-radius: 12px; padding: 14px; margin-bottom: 14px; }
+.hook-section h4 { color: #856404; margin-bottom: 6px; font-size: 0.85em; }
+.hook-main { font-size: 1.05em; font-weight: 600; margin-bottom: 6px; }
 
-/* Profile Analysis */
-.profile-stat { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
-.stat-item { background: #f8f9fa; border-radius: 10px; padding: 10px; text-align: center; }
-.stat-item .label { font-size: 0.65em; color: #888; margin-bottom: 2px; }
-.stat-item .value { font-size: 0.9em; font-weight: 700; color: #e91e8c; }
-
-.analysis-text { font-size: 0.82em; color: #555; line-height: 1.7; }
-.analysis-text strong { color: #333; }
-
-/* Why Section */
-.why-list { list-style: none; padding: 0; }
-.why-list li { padding: 10px 0; border-bottom: 1px solid #f0f0f0; font-size: 0.82em; line-height: 1.6; color: #444; display: flex; gap: 10px; align-items: flex-start; }
-.why-list li:last-child { border-bottom: none; }
-.why-num { flex-shrink: 0; width: 22px; height: 22px; background: linear-gradient(135deg, #e91e8c, #9b59b6); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.65em; font-weight: 700; }
-
-/* Hook */
-.hook-box { background: linear-gradient(135deg, #fff5fb, #faf5ff); border: 1px solid #f5c6e8; border-radius: 14px; padding: 16px; margin-bottom: 14px; }
-.hook-box h4 { color: #c2185b; margin-bottom: 8px; font-size: 0.8em; }
-.hook-main { font-size: 1.05em; font-weight: 700; color: #1a1a2e; line-height: 1.5; }
-.hook-alts { margin-top: 8px; font-size: 0.78em; color: #666; }
-.hook-alts span { display: block; margin-top: 4px; }
-
-/* Script */
 .script-section { margin-bottom: 16px; }
-.script-item { display: grid; grid-template-columns: 60px 1fr; gap: 8px; padding: 10px; border-left: 3px solid #e91e8c; margin-bottom: 6px; background: #fafbfc; border-radius: 0 10px 10px 0; }
-.script-time { font-size: 0.68em; color: #e91e8c; font-weight: 700; white-space: nowrap; }
-.script-content .line { font-weight: 500; margin-bottom: 4px; font-size: 0.88em; line-height: 1.5; color: #222; }
-.script-content .direction { font-size: 0.72em; color: #999; margin-bottom: 4px; line-height: 1.4; font-style: italic; }
-.script-content .overlay { font-size: 0.72em; color: #7c3aed; background: #f3e8ff; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-top: 4px; }
+.script-section h4 { margin-bottom: 10px; color: #333; font-size: 0.9em; }
+.script-item { display: grid; grid-template-columns: 65px 1fr; gap: 8px; padding: 10px; border-left: 3px solid #667eea; margin-bottom: 6px; background: #fafbfc; border-radius: 0 8px 8px 0; }
+.script-time { font-size: 0.7em; color: #667eea; font-weight: 600; white-space: nowrap; }
+.script-content .direction { font-size: 0.85em; color: #333; margin-bottom: 4px; line-height: 1.5; font-weight: 500; }
+.script-content .detail { font-size: 0.78em; color: #666; line-height: 1.5; margin-bottom: 4px; }
+.script-content .overlay { font-size: 0.75em; color: #7c3aed; background: #f3e8ff; padding: 4px 8px; border-radius: 4px; display: inline-block; margin-top: 4px; line-height: 1.4; }
 
-/* Caption */
-.caption-box { background: #f8f9fa; border: 1px solid #e5e7eb; border-radius: 12px; padding: 14px; margin-bottom: 14px; }
-.caption-box h4 { color: #555; margin-bottom: 8px; font-size: 0.8em; }
-.caption-box pre { font-size: 0.8em; white-space: pre-wrap; font-family: inherit; line-height: 1.6; word-break: break-word; color: #333; }
+.caption-section { background: #e8f4fd; border-radius: 12px; padding: 14px; margin-bottom: 14px; }
+.caption-section h4 { color: #0c5460; margin-bottom: 6px; font-size: 0.85em; }
+.caption-section pre { font-size: 0.8em; white-space: pre-wrap; font-family: inherit; line-height: 1.5; word-break: break-word; }
 
-/* Tone Note */
-.tone-note { background: #faf5ff; border: 1px solid #e9d5ff; border-radius: 12px; padding: 16px; margin-bottom: 14px; }
-.tone-note h4 { color: #7c3aed; margin-bottom: 8px; font-size: 0.8em; }
-.tone-note p { font-size: 0.8em; color: #555; line-height: 1.7; }
+.checklist-section { margin-bottom: 16px; }
+.checklist-section h4 { margin-bottom: 8px; font-size: 0.85em; }
+.checklist-section ul { list-style: none; padding: 0; }
+.checklist-section li { padding: 6px 0; font-size: 0.85em; border-bottom: 1px solid #f0f0f0; }
+.checklist-section li::before { content: "\2610 "; color: #667eea; }
 
-/* Service Info */
-.service-box { background: #1a1a2e; border-radius: 16px; padding: 20px; color: white; margin-bottom: 16px; }
-.service-box h2 { color: #e91e8c; font-size: 0.9em; margin-bottom: 12px; }
-.service-box .flow { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
-.service-box .flow-step { background: rgba(233,30,140,0.15); border: 1px solid rgba(233,30,140,0.3); padding: 6px 12px; border-radius: 8px; font-size: 0.72em; color: rgba(255,255,255,0.9); }
-.service-box .flow-arrow { color: #e91e8c; font-size: 0.8em; }
-.service-box .info-grid { display: grid; gap: 8px; }
-.service-box .info-item { font-size: 0.78em; color: rgba(255,255,255,0.8); line-height: 1.6; }
-.service-box .info-item strong { color: #e91e8c; }
-.service-box .warning { margin-top: 12px; padding: 10px; background: rgba(233,30,140,0.1); border: 1px solid rgba(233,30,140,0.3); border-radius: 8px; font-size: 0.72em; color: #f8a4d0; }
+.key-formula { background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 12px; padding: 14px; margin-bottom: 16px; }
+.key-formula h4 { color: #065f46; margin-bottom: 8px; font-size: 0.85em; }
+.key-formula p { font-size: 0.82em; color: #064e3b; line-height: 1.6; }
+.key-formula .formula-highlight { font-weight: 700; color: #047857; font-size: 0.9em; margin-bottom: 6px; }
 
-/* Process */
-.process-list { list-style: none; padding: 0; }
-.process-list li { display: flex; gap: 12px; padding: 12px 0; border-bottom: 1px solid #f0f0f0; font-size: 0.82em; line-height: 1.5; }
-.process-list li:last-child { border-bottom: none; }
-.step-num { flex-shrink: 0; width: 24px; height: 24px; background: #f3e8ff; color: #7c3aed; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7em; font-weight: 700; }
+.quote-box { background: #faf5ff; border-left: 4px solid #7c3aed; padding: 12px 14px; margin-bottom: 14px; border-radius: 0 8px 8px 0; }
+.quote-box p { font-size: 0.85em; color: #4c1d95; line-height: 1.6; font-style: italic; }
+.quote-box .quote-source { font-size: 0.7em; color: #7c3aed; margin-top: 6px; font-style: normal; }
 
-/* CTA */
-.cta-box { background: linear-gradient(135deg, #e91e8c, #9b59b6); border-radius: 16px; padding: 20px; text-align: center; color: white; }
-.cta-box h3 { font-size: 0.95em; margin-bottom: 8px; }
-.cta-box p { font-size: 0.78em; color: rgba(255,255,255,0.85); line-height: 1.6; }
-.cta-box .contact { margin-top: 12px; font-size: 0.72em; color: rgba(255,255,255,0.7); }
+.warning-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: 12px; padding: 14px; margin-bottom: 14px; }
+.warning-box h4 { color: #991b1b; margin-bottom: 6px; font-size: 0.85em; }
+.warning-box p { font-size: 0.8em; color: #7f1d1d; line-height: 1.5; }
 
-/* Footer */
-.footer { text-align: center; color: #bbb; font-size: 0.68em; margin-top: 24px; padding: 16px; }
+.service-box { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 12px; padding: 14px; margin-bottom: 14px; }
+.service-box h4 { color: #075985; margin-bottom: 8px; font-size: 0.85em; }
+.service-box p { font-size: 0.8em; color: #0c4a6e; line-height: 1.6; }
+.service-step { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+.service-step-num { background: #667eea; color: white; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7em; font-weight: 700; flex-shrink: 0; }
+.service-step-text { font-size: 0.82em; color: #333; line-height: 1.5; }
+
+.footer { text-align: center; color: #999; font-size: 0.75em; margin-top: 30px; padding: 16px; }
 
 @media (max-width: 480px) {
   body { padding: 8px; }
-  .hero { padding: 22px 16px; border-radius: 16px; }
-  .hero h1 { font-size: 1.3em; }
-  .card { padding: 16px; border-radius: 12px; }
-  .profile-stat { grid-template-columns: 1fr 1fr; gap: 8px; }
-  .script-item { grid-template-columns: 50px 1fr; gap: 6px; padding: 8px; }
-  .script-time { font-size: 0.62em; }
-  .script-content .line { font-size: 0.82em; }
+  .plan-card { padding: 14px; border-radius: 12px; }
+  .plan-title { font-size: 1.05em; }
+  .script-item { grid-template-columns: 55px 1fr; gap: 6px; padding: 8px; }
+  .script-time { font-size: 0.65em; }
 }
 </style>
 </head>
 <body>
 <div class="container">
 
-<!-- Hero -->
-<div class="hero">
-  <h1>@nadaejimayo x 100원사주</h1>
-  <div class="subtitle">미로다님 맞춤 콘텐츠 기획서<br>연애운/궁합 각도 릴스 시딩 제안</div>
-  <span class="badge">개인 맞춤 기획 | 2026.05</span>
-</div>
+<h1>100원사주 x @nadaejimayo</h1>
+<p class="subtitle">미로다님 맞춤 콘텐츠 기획서</p>
 
+<!-- ============================================ -->
 <!-- 채널 분석 -->
-<div class="card">
-  <h2>채널 분석</h2>
-  <div class="tag-row">
-    <span class="tag tag-pink">20대 여성</span>
-    <span class="tag tag-pink">연애/커플</span>
-    <span class="tag tag-purple">하이텐션</span>
-    <span class="tag tag-purple">스토리텔링</span>
-    <span class="tag tag-blue">짧은 릴스</span>
+<!-- ============================================ -->
+<div class="plan-card">
+  <div class="plan-header">
+    <span class="plan-number">채널 분석</span>
+    <span class="plan-formula">@nadaejimayo</span>
   </div>
-  <div class="profile-stat">
-    <div class="stat-item">
-      <div class="label">콘텐츠 카테고리</div>
-      <div class="value">연애/커플</div>
-    </div>
-    <div class="stat-item">
-      <div class="label">평균 길이</div>
-      <div class="value">20-30초</div>
-    </div>
-    <div class="stat-item">
-      <div class="label">톤앤매너</div>
-      <div class="value">하이텐션</div>
-    </div>
-    <div class="stat-item">
-      <div class="label">타겟층</div>
-      <div class="value">20대 여성</div>
-    </div>
+  <div class="plan-title">20대 연애/커플 — 하이텐션 스토리텔링</div>
+
+  <div class="data-box">
+    <h4>채널 핵심 데이터</h4>
+    <div class="stat"><span class="stat-label">타겟</span><span class="stat-value">20대 여성 (연애 관심)</span></div>
+    <div class="stat"><span class="stat-label">콘텐츠 톤</span><span class="stat-value">하이텐션, 빠른 전개, 감탄사</span></div>
+    <div class="stat"><span class="stat-label">주요 소재</span><span class="stat-value">남친 자랑 + 연애 팁 + 친구 에피소드</span></div>
+    <div class="stat"><span class="stat-label">영상 길이</span><span class="stat-value">20-50초 (짧고 임팩트)</span></div>
   </div>
-  <div class="analysis-text">
-    <strong>콘텐츠 DNA:</strong> 남친 자랑 + 연애 꿀팁 + 커플 일상을 빠른 전개와 과장된 리액션으로 풀어내는 스토리텔링형 크리에이터. 짧은 문장, 감탄사("아 진짜!", "소름"), 빠른 호흡이 특징. 팔로워는 대부분 연애에 관심 많은 20대 여성으로, 사주/궁합 콘텐츠와의 적합도가 매우 높습니다.
-    <br><br>
-    <strong>대표 콘텐츠 패턴:</strong> 궁금증 유발 오프닝 → 에피소드 전개 → 반전/꿀팁 공개 → 감탄으로 마무리. 시청자가 "나도 해봐야지"라는 행동 동기를 느끼게 만드는 구조.
+
+  <div class="key-formula">
+    <h4>미로다님 콘텐츠 패턴</h4>
+    <p class="formula-highlight">후킹 제목 > 스토리 전개 > 반전/놀람 > 감탄 마무리</p>
+    <p>짧은 문장, 빠른 전개가 특징. "아 진짜!", "소름", "꽝!" 같은 감탄사로 텐션 유지.<br>
+    "남자친구한테 친구 만난다고 해야 하는 이유" → 27만원 파인다이닝 남친 자랑 에피소드 등 스토리텔링 구조.</p>
   </div>
 </div>
 
+<!-- ============================================ -->
 <!-- 왜 미로다님인가 -->
-<div class="card">
-  <h2>왜 미로다님인가</h2>
-  <ul class="why-list">
-    <li>
-      <span class="why-num">1</span>
-      <span><strong>카테고리 완벽 일치:</strong> 연애 콘텐츠 크리에이터가 "남친이랑 궁합 봤다"고 하면, 팔로워 입장에서 '광고'가 아니라 '궁금한 에피소드'로 인식됩니다. 시딩으로서 이상적인 구조.</span>
-    </li>
-    <li>
-      <span class="why-num">2</span>
-      <span><strong>기존 콘텐츠와 동일한 흐름:</strong> "남자친구한테 ~ 해봤는데" 패턴을 이미 반복 사용하고 계시기 때문에, 사주 콘텐츠가 피드에서 이질감 없이 자연스럽게 소화됩니다.</span>
-    </li>
-    <li>
-      <span class="why-num">3</span>
-      <span><strong>타겟 오디언스 정밀 매칭:</strong> 20대 여성 + 연애 관심층 = 궁합/연애운 사주의 핵심 소비자. 전환율이 가장 높은 시딩 조합.</span>
-    </li>
-    <li>
-      <span class="why-num">4</span>
-      <span><strong>하이텐션 스타일의 설득력:</strong> 미로다님의 과장된 리액션과 감탄사가 "진짜 신기했다"는 메시지를 광고 멘트 없이도 강력하게 전달합니다.</span>
-    </li>
-  </ul>
+<!-- ============================================ -->
+<div class="plan-card">
+  <div class="plan-header">
+    <span class="plan-number">왜 미로다님인가</span>
+  </div>
+  <div class="plan-title">연애 콘텐츠 + 궁합/연애운 = 자연스러운 연결</div>
+
+  <div class="ref-box">
+    <h4>미로다님이 적합한 4가지 이유</h4>
+    <p>1. 연애 콘텐츠 = 궁합/연애운 사주와 카테고리 일치<br>
+    2. "남친이랑 궁합 봤는데" — 기존 콘텐츠 흐름 그대로<br>
+    3. 20대 여성 팔로워 = 연애운/궁합에 가장 관심 많은 층<br>
+    4. 하이텐션 스토리텔링 → "소름" 반응 전달력 매우 높음</p>
+  </div>
+
+  <div class="quote-box">
+    <p>"남자친구한테 친구 만난다고 해야 하는 이유... 27만원짜리 파인다이닝을 예약하심! 어떻게 이 남자가 내 남자란 말이야"</p>
+    <div class="quote-source">미로다님 실제 릴스 스타일 — 이 텐션 그대로 사주 콘텐츠에 적용</div>
+  </div>
 </div>
 
+<!-- ============================================ -->
 <!-- 콘텐츠 기획안 -->
-<div class="card">
-  <h2>콘텐츠 기획안</h2>
-  <div class="tag-row">
-    <span class="tag tag-pink">연애운/궁합</span>
-    <span class="tag tag-purple">20-30초</span>
-    <span class="tag tag-blue">체험 후기형</span>
+<!-- ============================================ -->
+<div class="plan-card">
+  <div class="plan-header">
+    <span class="plan-number">콘텐츠 기획</span>
+    <span class="plan-formula">연애운/궁합형</span>
+    <span class="plan-duration">20-25초</span>
   </div>
+  <div class="plan-title">"남친이랑 궁합 봤는데 소름 돋았다"</div>
 
-  <!-- Hook -->
-  <div class="hook-box">
-    <h4>HOOK (첫 3초) -- 평소 오프닝 톤 그대로</h4>
+  <div class="hook-section">
+    <h4>첫 3초 후킹</h4>
     <div class="hook-main">"아 여러분 나 남친이랑 궁합 봤거든?"</div>
-    <div class="hook-alts">
-      <span>ALT 1: "남자친구 몰래 우리 궁합 봤는데 소름"</span>
-      <span>ALT 2: "2025년 연애운 봤더니 진짜 미쳤어"</span>
-    </div>
   </div>
 
-  <!-- Script -->
   <div class="script-section">
-    <h3>대본 (25초)</h3>
+    <h4>대본 (미로다님 톤)</h4>
     <div class="script-item">
-      <div class="script-time">0:00-0:03</div>
+      <div class="script-time">0-3초</div>
       <div class="script-content">
-        <div class="line">"아 여러분 나 남친이랑 궁합 봤거든?"</div>
-        <div class="direction">카메라 정면. 평소 인트로 톤 그대로. 인사 X.</div>
+        <div class="direction" style="color:#333;font-weight:600;">"아 여러분 나 남친이랑 궁합 봤거든?"</div>
+        <div class="detail">카메라 보고 바로 시작. 텐션 높게.</div>
       </div>
     </div>
     <div class="script-item">
-      <div class="script-time">0:03-0:08</div>
+      <div class="script-time">3-7초</div>
       <div class="script-content">
-        <div class="line">"100원에 사주 결과 먼저 보는데 이것만으로도 소름이었어."</div>
-        <div class="direction">폰 화면 or 결과 캡처 자막. 놀란 표정.</div>
-        <div class="overlay">자막: 100원 텍스트 사주 결과 화면</div>
+        <div class="direction" style="color:#333;font-weight:600;">"100원에 사주 결과 먼저 보는데 이것만으로도 소름이었어. 근데 진짜는 그다음이야."</div>
+        <div class="detail">기대감 조성. 살짝 뜸 들이며.</div>
       </div>
     </div>
     <div class="script-item">
-      <div class="script-time">0:08-0:12</div>
+      <div class="script-time">7-15초</div>
       <div class="script-content">
-        <div class="line">"근데 진짜는 그 다음이야. 박명화 선생님한테 전화로 직접 상담받는 건데,"</div>
-        <div class="direction">톤 전환. 진지하게, 살짝 낮은 목소리로.</div>
+        <div class="direction" style="color:#333;font-weight:600;">"박명화 선생님한테 전화로 직접 상담받는 건데, 내가 말 안 한 것까지 다 맞추시는 거야! '남자친구분이 표현을 잘 안 하는 스타일인데 속으로는 되게 깊은 분이시네요' 아니 이거 어떻게 아시는 거야 진짜!"</div>
+        <div class="detail">놀란 표정 + 감탄. 목소리 톤 올라가며.</div>
       </div>
     </div>
     <div class="script-item">
-      <div class="script-time">0:12-0:18</div>
+      <div class="script-time">15-20초</div>
       <div class="script-content">
-        <div class="line">"내가 말 안 한 것까지 다 맞추시는 거야!"</div>
-        <div class="line">"'남자친구분이 표현을 잘 안 하는 스타일인데 속으로는 되게 깊은 분이시네요'"</div>
-        <div class="direction">선생님 말투 재현. 놀라면서 손으로 입 가리는 리액션.</div>
-        <div class="overlay">자막: 박명화 선생님 실제 상담 내용</div>
-      </div>
-    </div>
-    <div class="script-item">
-      <div class="script-time">0:18-0:23</div>
-      <div class="script-content">
-        <div class="line">"아니 이거 어떻게 아시는 거야 진짜!"</div>
-        <div class="line">"꽝! 소름 돋았어 진짜로."</div>
-        <div class="direction">하이텐션 리액션. 소름 돋는 표정. 과장 OK.</div>
-      </div>
-    </div>
-    <div class="script-item">
-      <div class="script-time">0:23-0:27</div>
-      <div class="script-content">
-        <div class="line">"궁금한 사람 댓글 달아, 링크 보내줄게!"</div>
-        <div class="direction">밝은 톤으로 마무리. 자연스러운 CTA.</div>
-        <div class="overlay">자막: 100saju.com</div>
+        <div class="direction" style="color:#333;font-weight:600;">"결혼 시기까지 말해주시는데 나 진짜 심장 뛰었어. 궁금한 사람 댓글 달아, 링크 보내줄게!"</div>
+        <div class="detail">흥분된 마무리. 빠르게 CTA.</div>
+        <div class="overlay">텍스트: "댓글 달면 링크 전달"</div>
       </div>
     </div>
   </div>
 
-  <!-- Caption -->
-  <div class="caption-box">
-    <h4>캡션 (참고용)</h4>
-    <pre>남친이랑 궁합 봤는데 소름
-내가 말 안 한 것까지 다 맞추심...
-전화로 직접 상담해주시는 건데 진짜 신기해
+  <div class="caption-section">
+    <h4>인스타 캡션</h4>
+    <pre>남친이랑 궁합 봤는데 소름 돋았다
 
-궁금한 사람 댓글!!
+100원에 사주 결과 먼저 봤는데
+이것만으로도 소름이었거든?
 
-100saju.com
+근데 진짜는 그다음이야
+박명화 선생님한테 전화로 직접 상담받는 건데
 
-#사주 #궁합 #연애운 #남자친구 #커플 #박명화사주</pre>
+내가 말 안 한 것까지 다 맞추시는 거야
+"남자친구분이 표현을 잘 안 하는 스타일인데
+속으로는 되게 깊은 분이시네요"
+
+아니 이거 어떻게 아시는 거야 진짜!
+결혼 시기까지 말해주시는데 심장 뛰었어
+
+궁금한 사람 댓글 달아
+링크 보내줄게!
+
+#궁합 #연애운 #사주 #커플 #남친 #전화사주 #박명화 #연애</pre>
   </div>
 
-  <!-- Tone Note -->
-  <div class="tone-note">
-    <h4>왜 이 포맷인가</h4>
-    <p>
-      미로다님의 콘텐츠 핵심 공식은 <strong>"남친 관련 에피소드 + 과장 리액션 + 빠른 전개"</strong>입니다. 평소 "남자친구한테 ~해봤는데"로 시작해서 에피소드를 풀고, "소름", "진짜!"로 감탄하며 마무리하는 구조를 그대로 유지했습니다.
-      <br><br>
-      사주 결과를 '리뷰'하는 게 아니라, <strong>본인이 진짜 놀란 경험을 공유</strong>하는 톤이 핵심입니다. "내가 말 안 한 것까지 맞추신다"는 한 문장이 전화 상담의 가치를 증명합니다. 미로다님 특유의 짧은 문장 + 감탄사 리듬을 살려 광고 느낌을 완전히 제거했습니다.
-      <br><br>
-      기존 영상("남자친구한테 친구 만난다고 해야 하는 이유", "남자친구의 전 여자친구들이 궁금하다")과 동일한 <strong>궁금증 유발 → 경험 공유 → 반전/놀라움</strong> 구조이기 때문에, 피드에서 광고가 아닌 일상 콘텐츠로 인식됩니다.
-    </p>
+  <div class="checklist-section">
+    <h4>촬영 가이드</h4>
+    <ul>
+      <li>촬영 장소: 집 or 카페 (평소 촬영 장소)</li>
+      <li>톤: 평소처럼 텐션 높게, 감탄사 자유롭게</li>
+      <li>핵심 강조: "전화로 직접 상담" + "내가 말 안 한 것까지 맞춤"</li>
+      <li>반드시 포함: 100원 텍스트 먼저 > 전화 상담 순서</li>
+      <li>남친 관련 구체적 에피소드 하나 넣기 (궁합 결과)</li>
+      <li>빠른 전개 — 20초 안에 끝내는 게 포인트</li>
+    </ul>
   </div>
 </div>
 
-<!-- 서비스 소개 -->
-<div class="service-box">
-  <h2>100원사주 서비스 안내</h2>
-  <div class="flow">
-    <span class="flow-step">100원 텍스트 사주</span>
-    <span class="flow-arrow">→</span>
-    <span class="flow-step">박명화 선생님 전화 상담</span>
+<!-- ============================================ -->
+<!-- 서비스 안내 -->
+<!-- ============================================ -->
+<div class="plan-card">
+  <div class="plan-header">
+    <span class="plan-number">서비스 안내</span>
   </div>
-  <div class="info-grid">
-    <div class="info-item"><strong>서비스:</strong> 100saju.com — 생년월일 입력 후 100원으로 텍스트 사주 결과 즉시 확인</div>
-    <div class="info-item"><strong>전화 상담:</strong> 텍스트 결과 이후 안내 번호로 전화하면 박명화 선생님이 직접 대화로 상담 (78,000원)</div>
-    <div class="info-item"><strong>상담 형태:</strong> 녹음 재생이 아닌, 내가 질문하면 바로 대답해주는 실시간 대화 방식</div>
-    <div class="info-item"><strong>사주 종류:</strong> 인생사주 / 연애사주 / 재물사주</div>
+  <div class="plan-title">100원사주 서비스 구조</div>
+
+  <div class="service-box">
+    <h4>이용 플로우</h4>
+    <div class="service-step">
+      <div class="service-step-num">1</div>
+      <div class="service-step-text"><strong>100원 텍스트 사주</strong> — 생년월일시 입력, 즉시 결과 확인</div>
+    </div>
+    <div class="service-step">
+      <div class="service-step-num">2</div>
+      <div class="service-step-text"><strong>전화 상담 신청</strong> — 텍스트 결과가 마음에 들면 전화 상담 연결</div>
+    </div>
+    <div class="service-step">
+      <div class="service-step-num">3</div>
+      <div class="service-step-text"><strong>박명화 선생님과 통화</strong> — 실제 전화로 1:1 상담. 궁합, 연애운, 결혼 시기 등</div>
+    </div>
   </div>
-  <div class="warning">
-    포지셔닝 주의: "박명화 선생님"으로만 언급. AI, 챗봇, 자동응답 등의 표현 절대 사용 금지. 일반 전화 상담으로 자연스럽게 소개.
+
+  <div class="warning-box">
+    <h4>필수 포지셔닝</h4>
+    <p>- "박명화 선생님"으로만 언급 (AI 절대 언급 금지)<br>
+    - "전화로 직접 상담받는다"가 핵심 셀링포인트<br>
+    - 100원은 텍스트 사주 가격, 전화 상담은 별도<br>
+    - 자연스러운 표현: "전화로 직접 풀어주신다", "통화하면서 상담받는다"</p>
   </div>
 </div>
 
+<!-- ============================================ -->
 <!-- 진행 안내 -->
-<div class="card">
-  <h2>진행 안내</h2>
-  <ul class="process-list">
-    <li>
-      <span class="step-num">1</span>
-      <span>본 기획서 확인 후 진행 의사 회신</span>
-    </li>
-    <li>
-      <span class="step-num">2</span>
-      <span>100saju.com에서 직접 체험 (연애사주 추천) — 실제 경험 기반으로 촬영하시면 더 자연스럽습니다</span>
-    </li>
-    <li>
-      <span class="step-num">3</span>
-      <span>전화 상담까지 체험 후, 위 대본을 참고하여 본인 스타일로 자유롭게 촬영</span>
-    </li>
-    <li>
-      <span class="step-num">4</span>
-      <span>촬영본 공유 → 피드백 후 업로드</span>
-    </li>
-    <li>
-      <span class="step-num">5</span>
-      <span>캡션에 100saju.com 링크 포함, 프로필 링크 설정</span>
-    </li>
-  </ul>
+<!-- ============================================ -->
+<div class="plan-card">
+  <div class="plan-header">
+    <span class="plan-number">진행 안내</span>
+  </div>
+  <div class="plan-title">진행 프로세스</div>
+
+  <div class="service-box">
+    <h4>4단계 프로세스</h4>
+    <div class="service-step">
+      <div class="service-step-num">1</div>
+      <div class="service-step-text"><strong>제안 수락</strong> — 단가 협의 후 확정</div>
+    </div>
+    <div class="service-step">
+      <div class="service-step-num">2</div>
+      <div class="service-step-text"><strong>서비스 체험</strong> — 100원사주 + 전화 상담 직접 체험 (무료 제공)</div>
+    </div>
+    <div class="service-step">
+      <div class="service-step-num">3</div>
+      <div class="service-step-text"><strong>촬영 및 업로드</strong> — 위 대본 참고, 자유롭게 수정 가능</div>
+    </div>
+    <div class="service-step">
+      <div class="service-step-num">4</div>
+      <div class="service-step-text"><strong>정산</strong> — 게시 확인 후 3영업일 내</div>
+    </div>
+  </div>
+
+  <div class="ref-box">
+    <h4>참고사항</h4>
+    <p>- 대본은 참고용이며 미로다님 스타일에 맞게 자유롭게 수정 가능합니다<br>
+    - 마음에 안 드시면 삭제 가능합니다<br>
+    - 서비스 체험 후 진심으로 괜찮다고 느끼실 때만 진행해주세요</p>
+  </div>
 </div>
 
-<!-- CTA -->
-<div class="cta-box">
-  <h3>미로다님과 함께하고 싶습니다</h3>
-  <p>미로다님의 연애 콘텐츠 스타일과 100원사주의 궁합/연애운 상담은<br>가장 자연스러운 조합이라고 판단했습니다.<br>대본은 참고용이며, 평소 촬영하시는 그대로 자유롭게 만들어주세요.</p>
-  <div class="contact">Flowmus | ceo@flowmus.com</div>
-</div>
-
-<div class="footer">
-  Flowmus — 100원사주 인플루언서 시딩 캠페인<br>
-  본 기획서는 미로다님(@nadaejimayo) 전용으로 작성되었습니다.
-</div>
+<div class="footer">100원사주 x @nadaejimayo 콘텐츠 제안서<br>100saju.com</div>
 
 </div>
 </body>

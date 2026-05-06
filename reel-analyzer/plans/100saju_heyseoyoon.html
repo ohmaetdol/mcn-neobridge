@@ -3,678 +3,298 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>100원사주 x @heyseoyoon — 개인 제안서</title>
+<title>100원사주 x @heyseoyoon 콘텐츠 기획서</title>
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Segoe UI', sans-serif;
-  background: #0f0a1e;
-  color: #e8e0f0;
-  padding: 0;
-  font-size: 15px;
-  -webkit-text-size-adjust: 100%;
-  line-height: 1.6;
-}
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f8f9fa; color: #333; padding: 12px; font-size: 15px; -webkit-text-size-adjust: 100%; }
+.container { max-width: 100%; margin: 0 auto; }
+h1 { text-align: center; margin-bottom: 6px; font-size: 1.4em; }
+.subtitle { text-align: center; color: #666; margin-bottom: 20px; font-size: 0.8em; }
+.plan-card { background: white; border-radius: 16px; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); }
+.plan-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 6px; }
+.plan-number { background: #667eea; color: white; padding: 4px 10px; border-radius: 20px; font-size: 0.75em; font-weight: 600; }
+.plan-formula { background: #f0f0f0; padding: 4px 10px; border-radius: 20px; font-size: 0.75em; color: #555; }
+.plan-duration { color: #999; font-size: 0.8em; }
+.plan-title { font-size: 1.15em; font-weight: 700; margin-bottom: 10px; line-height: 1.4; }
 
-/* Hero */
-.hero {
-  background: linear-gradient(135deg, #1a0f30 0%, #2d1b69 50%, #1a0f30 100%);
-  padding: 48px 20px 36px;
-  text-align: center;
-  border-bottom: 1px solid rgba(245,166,35,0.2);
-}
-.hero-badge {
-  display: inline-block;
-  background: rgba(245,166,35,0.15);
-  color: #f5a623;
-  padding: 6px 16px;
-  border-radius: 20px;
-  font-size: 0.7em;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  margin-bottom: 16px;
-  border: 1px solid rgba(245,166,35,0.3);
-}
-.hero h1 {
-  font-size: 1.6em;
-  font-weight: 800;
-  color: #fff;
-  margin-bottom: 8px;
-  line-height: 1.3;
-}
-.hero .subtitle {
-  color: rgba(255,255,255,0.6);
-  font-size: 0.82em;
-  line-height: 1.5;
-}
+.ref-box { background: #f8f4ff; border: 1px solid #e8d5ff; border-radius: 12px; padding: 14px; margin-bottom: 16px; }
+.ref-box h4 { color: #7c3aed; margin-bottom: 6px; font-size: 0.85em; }
+.ref-box p { font-size: 0.8em; color: #555; line-height: 1.5; }
+.ref-box .ref-note { font-style: italic; color: #7c3aed; margin-top: 6px; font-size: 0.75em; }
+.ref-link { display: inline-block; margin-top: 8px; background: #7c3aed; color: white; padding: 8px 16px; border-radius: 8px; text-decoration: none; font-size: 0.8em; }
 
-/* Container */
-.container {
-  max-width: 640px;
-  margin: 0 auto;
-  padding: 0 16px;
-}
+.data-box { background: #fef3c7; border: 1px solid #fcd34d; border-radius: 12px; padding: 14px; margin-bottom: 16px; }
+.data-box h4 { color: #92400e; margin-bottom: 8px; font-size: 0.85em; }
+.data-box .stat { display: flex; justify-content: space-between; padding: 4px 0; font-size: 0.8em; border-bottom: 1px solid #fde68a; }
+.data-box .stat:last-child { border-bottom: none; }
+.data-box .stat-label { color: #78350f; }
+.data-box .stat-value { font-weight: 700; color: #92400e; }
 
-/* Section */
-.section {
-  padding: 32px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-.section:last-child { border-bottom: none; }
-.section-label {
-  display: inline-block;
-  background: rgba(108,63,181,0.2);
-  color: #b794f4;
-  padding: 4px 12px;
-  border-radius: 12px;
-  font-size: 0.65em;
-  font-weight: 600;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-bottom: 14px;
-}
-.section h2 {
-  font-size: 1.25em;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 16px;
-  line-height: 1.4;
-}
-.section h3 {
-  font-size: 1.05em;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 12px;
-}
+.hook-section { background: #fff3cd; border-radius: 12px; padding: 14px; margin-bottom: 14px; }
+.hook-section h4 { color: #856404; margin-bottom: 6px; font-size: 0.85em; }
+.hook-main { font-size: 1.05em; font-weight: 600; margin-bottom: 6px; }
 
-/* Cards */
-.card {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 16px;
-  padding: 20px;
-  margin-bottom: 16px;
-}
-.card-highlight {
-  background: rgba(108,63,181,0.12);
-  border-color: rgba(108,63,181,0.3);
-}
-.card-gold {
-  background: rgba(245,166,35,0.08);
-  border-color: rgba(245,166,35,0.25);
-}
+.script-section { margin-bottom: 16px; }
+.script-section h4 { margin-bottom: 10px; color: #333; font-size: 0.9em; }
+.script-item { display: grid; grid-template-columns: 65px 1fr; gap: 8px; padding: 10px; border-left: 3px solid #667eea; margin-bottom: 6px; background: #fafbfc; border-radius: 0 8px 8px 0; }
+.script-time { font-size: 0.7em; color: #667eea; font-weight: 600; white-space: nowrap; }
+.script-content .direction { font-size: 0.85em; color: #333; margin-bottom: 4px; line-height: 1.5; font-weight: 500; }
+.script-content .detail { font-size: 0.78em; color: #666; line-height: 1.5; margin-bottom: 4px; }
+.script-content .overlay { font-size: 0.75em; color: #7c3aed; background: #f3e8ff; padding: 4px 8px; border-radius: 4px; display: inline-block; margin-top: 4px; line-height: 1.4; }
 
-/* Stats */
-.stats-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  margin-bottom: 16px;
-}
-.stat-item {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.06);
-  border-radius: 12px;
-  padding: 14px;
-  text-align: center;
-}
-.stat-value {
-  font-size: 1.3em;
-  font-weight: 800;
-  color: #f5a623;
-  margin-bottom: 4px;
-}
-.stat-label {
-  font-size: 0.7em;
-  color: rgba(255,255,255,0.5);
-}
+.caption-section { background: #e8f4fd; border-radius: 12px; padding: 14px; margin-bottom: 14px; }
+.caption-section h4 { color: #0c5460; margin-bottom: 6px; font-size: 0.85em; }
+.caption-section pre { font-size: 0.8em; white-space: pre-wrap; font-family: inherit; line-height: 1.5; word-break: break-word; }
 
-/* Tags */
-.tag-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 12px;
-}
-.tag {
-  display: inline-block;
-  background: rgba(108,63,181,0.15);
-  color: #c4a8e8;
-  padding: 4px 10px;
-  border-radius: 8px;
-  font-size: 0.7em;
-  font-weight: 500;
-}
+.checklist-section { margin-bottom: 16px; }
+.checklist-section h4 { margin-bottom: 8px; font-size: 0.85em; }
+.checklist-section ul { list-style: none; padding: 0; }
+.checklist-section li { padding: 6px 0; font-size: 0.85em; border-bottom: 1px solid #f0f0f0; }
+.checklist-section li::before { content: "\2610 "; color: #667eea; }
 
-/* Quote */
-.quote-box {
-  background: rgba(245,166,35,0.06);
-  border-left: 3px solid #f5a623;
-  border-radius: 0 12px 12px 0;
-  padding: 16px 18px;
-  margin: 16px 0;
-}
-.quote-box p {
-  font-size: 0.9em;
-  color: rgba(255,255,255,0.85);
-  font-style: italic;
-  line-height: 1.6;
-}
-.quote-box .source {
-  font-size: 0.72em;
-  color: rgba(255,255,255,0.4);
-  font-style: normal;
-  margin-top: 8px;
-}
+.key-formula { background: #ecfdf5; border: 1px solid #a7f3d0; border-radius: 12px; padding: 14px; margin-bottom: 16px; }
+.key-formula h4 { color: #065f46; margin-bottom: 8px; font-size: 0.85em; }
+.key-formula p { font-size: 0.82em; color: #064e3b; line-height: 1.6; }
+.key-formula .formula-highlight { font-weight: 700; color: #047857; font-size: 0.9em; margin-bottom: 6px; }
 
-/* Reason list */
-.reason-list {
-  list-style: none;
-  padding: 0;
-}
-.reason-list li {
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-}
-.reason-list li:last-child { border-bottom: none; }
-.reason-num {
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
-  background: rgba(108,63,181,0.3);
-  color: #b794f4;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.7em;
-  font-weight: 700;
-}
-.reason-text {
-  font-size: 0.88em;
-  color: rgba(255,255,255,0.8);
-  line-height: 1.5;
-}
-.reason-text strong {
-  color: #fff;
-}
+.quote-box { background: #faf5ff; border-left: 4px solid #7c3aed; padding: 12px 14px; margin-bottom: 14px; border-radius: 0 8px 8px 0; }
+.quote-box p { font-size: 0.85em; color: #4c1d95; line-height: 1.6; font-style: italic; }
+.quote-box .quote-source { font-size: 0.7em; color: #7c3aed; margin-top: 6px; font-style: normal; }
 
-/* Script */
-.script-container {
-  background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 16px;
-  overflow: hidden;
-  margin: 16px 0;
-}
-.script-header {
-  background: rgba(108,63,181,0.15);
-  padding: 14px 18px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-.script-header h4 {
-  font-size: 0.82em;
-  color: #b794f4;
-  font-weight: 600;
-}
-.script-duration {
-  font-size: 0.7em;
-  color: rgba(255,255,255,0.5);
-  background: rgba(0,0,0,0.2);
-  padding: 3px 10px;
-  border-radius: 10px;
-}
-.script-body {
-  padding: 18px;
-}
-.script-line {
-  display: grid;
-  grid-template-columns: 60px 1fr;
-  gap: 12px;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-}
-.script-line:last-child { border-bottom: none; }
-.script-time {
-  font-size: 0.7em;
-  color: #6c3fb5;
-  font-weight: 600;
-  padding-top: 2px;
-  font-family: 'SF Mono', 'Menlo', monospace;
-}
-.script-text {
-  font-size: 0.9em;
-  color: rgba(255,255,255,0.9);
-  line-height: 1.6;
-}
-.script-direction {
-  font-size: 0.75em;
-  color: rgba(255,255,255,0.4);
-  margin-top: 6px;
-  line-height: 1.4;
-}
+.warning-box { background: #fef2f2; border: 1px solid #fecaca; border-radius: 12px; padding: 14px; margin-bottom: 14px; }
+.warning-box h4 { color: #991b1b; margin-bottom: 6px; font-size: 0.85em; }
+.warning-box p { font-size: 0.8em; color: #7f1d1d; line-height: 1.5; }
 
-/* Caption */
-.caption-box {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 12px;
-  padding: 16px 18px;
-  margin: 16px 0;
-}
-.caption-box h4 {
-  font-size: 0.75em;
-  color: rgba(255,255,255,0.4);
-  margin-bottom: 10px;
-  font-weight: 600;
-}
-.caption-box pre {
-  font-size: 0.85em;
-  white-space: pre-wrap;
-  font-family: inherit;
-  line-height: 1.7;
-  color: rgba(255,255,255,0.75);
-  word-break: break-word;
-}
+.service-box { background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 12px; padding: 14px; margin-bottom: 14px; }
+.service-box h4 { color: #075985; margin-bottom: 8px; font-size: 0.85em; }
+.service-box p { font-size: 0.8em; color: #0c4a6e; line-height: 1.6; }
+.service-step { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+.service-step-num { background: #667eea; color: white; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7em; font-weight: 700; flex-shrink: 0; }
+.service-step-text { font-size: 0.82em; color: #333; line-height: 1.5; }
 
-/* Service info */
-.service-card {
-  background: linear-gradient(135deg, rgba(108,63,181,0.15), rgba(245,166,35,0.08));
-  border: 1px solid rgba(108,63,181,0.25);
-  border-radius: 16px;
-  padding: 24px 20px;
-  margin: 16px 0;
-}
-.service-card h4 {
-  color: #f5a623;
-  font-size: 0.85em;
-  margin-bottom: 12px;
-  font-weight: 700;
-}
-.service-flow {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 16px 0;
-  flex-wrap: wrap;
-}
-.flow-step {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 10px;
-  padding: 8px 12px;
-  font-size: 0.75em;
-  color: rgba(255,255,255,0.8);
-  text-align: center;
-}
-.flow-step strong {
-  display: block;
-  color: #f5a623;
-  font-size: 0.85em;
-  margin-bottom: 2px;
-}
-.flow-arrow {
-  color: rgba(255,255,255,0.3);
-  font-size: 0.8em;
-}
-.service-note {
-  font-size: 0.78em;
-  color: rgba(255,255,255,0.5);
-  line-height: 1.6;
-  margin-top: 12px;
-  padding-top: 12px;
-  border-top: 1px solid rgba(255,255,255,0.06);
-}
-.service-note strong {
-  color: #f5a623;
-}
+.footer { text-align: center; color: #999; font-size: 0.75em; margin-top: 30px; padding: 16px; }
 
-/* Process */
-.process-list {
-  list-style: none;
-  padding: 0;
-}
-.process-list li {
-  display: flex;
-  gap: 14px;
-  padding: 14px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-}
-.process-list li:last-child { border-bottom: none; }
-.process-step {
-  flex-shrink: 0;
-  width: 28px;
-  height: 28px;
-  background: linear-gradient(135deg, #6c3fb5, #8b5cf6);
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.7em;
-  font-weight: 700;
-}
-.process-content h5 {
-  font-size: 0.85em;
-  color: #fff;
-  margin-bottom: 4px;
-}
-.process-content p {
-  font-size: 0.78em;
-  color: rgba(255,255,255,0.55);
-  line-height: 1.4;
-}
-
-/* Footer */
-.footer {
-  text-align: center;
-  padding: 32px 20px;
-  border-top: 1px solid rgba(255,255,255,0.06);
-}
-.footer p {
-  font-size: 0.72em;
-  color: rgba(255,255,255,0.3);
-  line-height: 1.6;
-}
-.footer .brand {
-  font-size: 0.85em;
-  color: #f5a623;
-  font-weight: 700;
-  margin-bottom: 6px;
-}
-
-/* Responsive */
 @media (max-width: 480px) {
-  .hero { padding: 36px 16px 28px; }
-  .hero h1 { font-size: 1.35em; }
-  .stats-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
-  .script-line { grid-template-columns: 50px 1fr; gap: 8px; }
-  .service-flow { flex-direction: column; align-items: stretch; }
-  .flow-arrow { transform: rotate(90deg); text-align: center; }
+  body { padding: 8px; }
+  .plan-card { padding: 14px; border-radius: 12px; }
+  .plan-title { font-size: 1.05em; }
+  .script-item { grid-template-columns: 55px 1fr; gap: 6px; padding: 8px; }
+  .script-time { font-size: 0.65em; }
 }
 </style>
 </head>
 <body>
-
-<!-- Hero Section -->
-<div class="hero">
-  <div class="hero-badge">INDIVIDUAL PROPOSAL</div>
-  <h1>@heyseoyoon 서윤님<br>맞춤 협업 제안서</h1>
-  <p class="subtitle">서윤님 채널 데이터를 분석하여 작성된 개인 맞춤 기획입니다<br>100원사주 x 박명화 전화상담</p>
-</div>
-
 <div class="container">
 
-  <!-- Section 1: Channel Analysis -->
-  <div class="section">
-    <span class="section-label">CHANNEL ANALYSIS</span>
-    <h2>서윤님 채널은 왜 특별한가</h2>
+<h1>100원사주 x @heyseoyoon</h1>
+<p class="subtitle">서윤님 맞춤 콘텐츠 기획서</p>
 
-    <div class="stats-grid">
-      <div class="stat-item">
-        <div class="stat-value">10만+</div>
-        <div class="stat-label">팔로워</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-value">40대</div>
-        <div class="stat-label">핵심 타겟 연령</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-value">25-35초</div>
-        <div class="stat-label">평균 릴스 길이</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-value">높음</div>
-        <div class="stat-label">광고 전환율</div>
+<!-- ============================================ -->
+<!-- 채널 분석 -->
+<!-- ============================================ -->
+<div class="plan-card">
+  <div class="plan-header">
+    <span class="plan-number">채널 분석</span>
+    <span class="plan-formula">@heyseoyoon</span>
+  </div>
+  <div class="plan-title">40대 엄마의 솔직한 일상 + 뷰티/건강 후기</div>
+
+  <div class="data-box">
+    <h4>채널 핵심 데이터</h4>
+    <div class="stat"><span class="stat-label">타겟</span><span class="stat-value">30-40대 엄마</span></div>
+    <div class="stat"><span class="stat-label">콘텐츠 톤</span><span class="stat-value">솔직 후기 + 육아 일상</span></div>
+    <div class="stat"><span class="stat-label">광고 패턴</span><span class="stat-value">경험담 기반 자연스러운 추천</span></div>
+    <div class="stat"><span class="stat-label">CTA 방식</span><span class="stat-value">"댓글 남겨주시면 링크 보내드릴게요"</span></div>
+  </div>
+
+  <div class="key-formula">
+    <h4>서윤님 콘텐츠 패턴</h4>
+    <p class="formula-highlight">문제 인식 > 본인 경험 > 결과/효과 > 댓글 CTA</p>
+    <p>대부분의 광고 콘텐츠가 이 구조를 따르며, 시청자가 "광고 같지 않다"고 느끼는 게 강점.<br>
+    쿠션, 아이크림, 흑염소, 시술 등 다양한 PPL 경험이 있어 자연스러운 전환이 매우 능숙.</p>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- 왜 서윤님인가 -->
+<!-- ============================================ -->
+<div class="plan-card">
+  <div class="plan-header">
+    <span class="plan-number">왜 서윤님인가</span>
+  </div>
+  <div class="plan-title">이미 사주 콘텐츠를 올린 적 있는 분</div>
+
+  <div class="quote-box">
+    <p>"나 사주 보는 거 진짜 좋아해서 진짜 유명한 것만 30만원씩 쓰면서 보러 다니거든요. 근데 재미나이로 사주 봤는데 웬만한 유명한 것보다 더 디테일하게 나와서 진짜 놀랐어요"</p>
+    <div class="quote-source">서윤님 실제 릴스 발화 (reel #26)</div>
+  </div>
+
+  <div class="ref-box">
+    <h4>서윤님이 적합한 4가지 이유</h4>
+    <p>1. 이미 사주 콘텐츠 업로드 경험 — 팔로워가 거부감 없음<br>
+    2. 평소 광고 패턴과 100% 일치 — "써봤는데 진짜 좋더라" 구조<br>
+    3. 30-40대 여성 = 사주/운세 핵심 결제 타겟<br>
+    4. "30만원 vs 전화 한 통" 비교 구도가 자연스러움</p>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- 콘텐츠 기획안 -->
+<!-- ============================================ -->
+<div class="plan-card">
+  <div class="plan-header">
+    <span class="plan-number">콘텐츠 기획</span>
+    <span class="plan-formula">솔직 후기형</span>
+    <span class="plan-duration">25-35초</span>
+  </div>
+  <div class="plan-title">"30만원씩 쓰며 사주 보러 다니던 내가 다 끊은 이유"</div>
+
+  <div class="hook-section">
+    <h4>첫 3초 후킹</h4>
+    <div class="hook-main">"여러분 나 사주 보는 거 좋아하는 거 다 알잖아요"</div>
+  </div>
+
+  <div class="script-section">
+    <h4>대본 (서윤님 톤)</h4>
+    <div class="script-item">
+      <div class="script-time">0-5초</div>
+      <div class="script-content">
+        <div class="direction" style="color:#333;font-weight:600;">"여러분 나 사주 보는 거 좋아하는 거 다 알잖아요. 유명한 데만 30만원씩 쓰면서 다녔는데..."</div>
+        <div class="detail">카메라 보고 자연스럽게. 평소처럼 소파나 식탁에서.</div>
       </div>
     </div>
-
-    <div class="tag-row">
-      <span class="tag">40대 엄마</span>
-      <span class="tag">아들맘</span>
-      <span class="tag">뷰티/시술</span>
-      <span class="tag">솔직 후기</span>
-      <span class="tag">댓글 CTA</span>
-      <span class="tag">사주 관심</span>
+    <div class="script-item">
+      <div class="script-time">5-10초</div>
+      <div class="script-content">
+        <div class="direction" style="color:#333;font-weight:600;">"요즘 이거 하나 때문에 다 끊었어요. 100원에 사주 결과 먼저 보고, 마음에 들면 박명화 선생님한테 전화로 직접 상담을 받거든요."</div>
+        <div class="detail">폰 화면 살짝 보여주며. 자연스러운 설명 톤.</div>
+      </div>
     </div>
-
-    <div class="card">
-      <p style="font-size: 0.85em; color: rgba(255,255,255,0.7); line-height: 1.7;">
-        서윤님 채널의 핵심 강점은 <strong style="color: #fff;">솔직한 체험 후기</strong>입니다. 쿠션, 시술, 건강식품 등 다양한 PPL을 소화하시는데, 모두 "내가 직접 써보고 좋았다"는 1인칭 경험담 구조로 풀어냅니다. 팔로워 입장에서는 "서윤 언니가 또 좋은 거 찾았나 보다" 정도의 자연스러운 인지로 시청합니다.
-      </p>
-      <p style="font-size: 0.85em; color: rgba(255,255,255,0.7); line-height: 1.7; margin-top: 12px;">
-        광고 영상의 패턴이 매우 일관적입니다: <strong style="color: #fff;">문제 인식 → 본인 경험 → 구체적 결과 → "댓글 남겨주세요" CTA</strong>. 이 구조를 그대로 활용합니다.
-      </p>
+    <div class="script-item">
+      <div class="script-time">10-20초</div>
+      <div class="script-content">
+        <div class="direction" style="color:#333;font-weight:600;">"전화 상담이 진짜 소름인 게, 내가 말 안 한 것까지 다 아시더라고요. 올해 건강 조심해야 하는 시기, 아이 교육 방향, 재물운까지... 30만원짜리에서도 못 들은 얘기를 여기서 들었어."</div>
+        <div class="detail">표정 변화 — 진심으로 놀란 얼굴. 디테일하게 풀어줌.</div>
+      </div>
+    </div>
+    <div class="script-item">
+      <div class="script-time">20-25초</div>
+      <div class="script-content">
+        <div class="direction" style="color:#333;font-weight:600;">"나처럼 사주 좋아하는 분들 진짜 한번 해보세요. 궁금한 사람 댓글 남겨줘요, 링크 보내드릴게!"</div>
+        <div class="detail">밝은 미소. 평소 CTA 패턴 그대로.</div>
+        <div class="overlay">텍스트: "댓글 남기면 링크 전달"</div>
+      </div>
     </div>
   </div>
 
-  <!-- Section 2: Why Seoyoon -->
-  <div class="section">
-    <span class="section-label">WHY YOU</span>
-    <h2>서윤님이어야 하는 이유</h2>
+  <div class="caption-section">
+    <h4>인스타 캡션</h4>
+    <pre>사주 보는 거 진짜 좋아해서
+유명한 곳만 골라 30만원씩 쓰면서 다녔는데
 
-    <div class="quote-box">
-      <p>"아니 여러분 저 사주 보는 거 진짜 좋아해서 진짜 유명한 것만 이 30만 원씩 쓰면서 보러 다니거든요. 근데 제가 재미나이로 사주 봤는데 웬만한 유명한 것보다 더 디테일하게 나와서 저 진짜 놀랐어요"</p>
-      <div class="source">-- 서윤님 실제 릴스 (reel_26) 중 발화 내용</div>
-    </div>
+요즘 이거 하나 때문에 다 끊었어요
 
-    <ul class="reason-list">
-      <li>
-        <span class="reason-num">1</span>
-        <div class="reason-text"><strong>이미 사주 콘텐츠 업로드 경험이 있습니다.</strong> 서윤님은 본인이 사주를 좋아한다고 직접 밝히셨고, "30만원씩 쓰며 유명한 곳 다닌다"는 실제 발화가 존재합니다. 가장 자연스러운 광고가 가능한 분입니다.</div>
-      </li>
-      <li>
-        <span class="reason-num">2</span>
-        <div class="reason-text"><strong>평소 광고 패턴과 100% 동일한 구조로 제작 가능합니다.</strong> "나 이거 써봤는데 진짜 좋더라 → 댓글 남겨줘" 패턴은 서윤님의 시그니처입니다. 사주 서비스에 그대로 적용하면 팔로워가 광고라고 인지하기 어렵습니다.</div>
-      </li>
-      <li>
-        <span class="reason-num">3</span>
-        <div class="reason-text"><strong>40대 여성 = 사주/운세 서비스의 핵심 타겟 그 자체입니다.</strong> 자녀 교육, 부동산, 건강 등 인생의 중요한 결정이 몰리는 시기. "내 인생 어떻게 풀릴지 궁금하시죠?"라는 서윤님의 실제 멘트가 이를 증명합니다.</div>
-      </li>
-      <li>
-        <span class="reason-num">4</span>
-        <div class="reason-text"><strong>"30만원 vs 100원" 비교 구도가 서윤님 입에서 자연스럽게 나옵니다.</strong> 이미 "30만원씩 쓰며 다녔다"고 하셨기 때문에, 100원사주의 가성비 포인트가 작위적이지 않고 본인의 실제 경험으로 연결됩니다.</div>
-      </li>
-    </ul>
-  </div>
-
-  <!-- Section 3: Content Plan -->
-  <div class="section">
-    <span class="section-label">CONTENT PLAN</span>
-    <h2>콘텐츠 기획안</h2>
-
-    <div class="card card-highlight">
-      <h3>컨셉: "30만원짜리 다닌 내가 끊은 이유"</h3>
-      <p style="font-size: 0.83em; color: rgba(255,255,255,0.65); line-height: 1.6; margin-top: 8px;">
-        서윤님의 사주 히스토리를 그대로 활용합니다. "유명한 곳 30만원씩 쓰며 다녔는데, 이거 하나 때문에 다 끊었다"는 구조. 핵심은 텍스트 결과가 아니라 <strong style="color: #fff;">박명화 선생님과의 전화 상담</strong>에서의 놀라움을 전달하는 것입니다.
-      </p>
-      <div class="tag-row" style="margin-top: 12px;">
-        <span class="tag">후기형</span>
-        <span class="tag">비교구도</span>
-        <span class="tag">25-35초</span>
-        <span class="tag">댓글 CTA</span>
-      </div>
-    </div>
-
-    <!-- Script -->
-    <div class="script-container">
-      <div class="script-header">
-        <h4>대본 (서윤님 톤)</h4>
-        <span class="script-duration">약 30초</span>
-      </div>
-      <div class="script-body">
-        <div class="script-line">
-          <div class="script-time">0:00</div>
-          <div>
-            <div class="script-text">"여러분 나 사주 보는 거 좋아하는 거 다 알잖아요. 유명한 데만 30만원씩 쓰면서 다녔는데... 요즘 이거 하나 때문에 다 끊었어요."</div>
-            <div class="script-direction">평소 인트로 그대로. 카메라 보며 솔직하게. 본인의 실제 사주 경험에서 출발</div>
-          </div>
-        </div>
-        <div class="script-line">
-          <div class="script-time">0:08</div>
-          <div>
-            <div class="script-text">"100원에 사주 결과 먼저 보고, 마음에 들면 박명화 선생님한테 전화로 직접 상담을 받거든요."</div>
-            <div class="script-direction">폰 화면 보여주면서. "전화로 직접" 강조. 서비스 구조를 한 문장으로 설명</div>
-          </div>
-        </div>
-        <div class="script-line">
-          <div class="script-time">0:15</div>
-          <div>
-            <div class="script-text">"전화 상담이 진짜 소름인 게, 내가 말 안 한 것까지 다 아시더라고요. 돈 벌어지는 시기, 건강 조심할 때, 애들 진로까지."</div>
-            <div class="script-direction">놀란 표정. 구체적 항목 나열로 디테일 전달. "진짜 신기한 게" 톤</div>
-          </div>
-        </div>
-        <div class="script-line">
-          <div class="script-time">0:23</div>
-          <div>
-            <div class="script-text">"30만원짜리에서도 못 들은 얘기를 여기서 들었어... 궁금한 사람 댓글 남겨줘요, 링크 보내줄게!"</div>
-            <div class="script-direction">감정 피크. "30만원 vs 여기" 비교로 임팩트. 평소 CTA 패턴 동일하게 마무리</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Alt Hook -->
-    <div class="card" style="margin-top: 16px;">
-      <h4 style="font-size: 0.8em; color: #b794f4; margin-bottom: 10px;">대체 훅 (Hook) 옵션</h4>
-      <p style="font-size: 0.83em; color: rgba(255,255,255,0.7); line-height: 1.8;">
-        A. "40대 되니까 사주가 진짜 다르게 보여요. 20대 때는 재미였는데 지금은 진짜 인생 설계거든요."<br>
-        B. "사주 보는 거 좋아하는 분들 손? 나 유명한 곳만 30만원씩 쓰면서 다닌 사람인데."<br>
-        C. "아니 여러분 저 이거 말할까 말까 했는데. 사주 30만원짜리보다 더 잘 맞는 거 찾았어요."
-      </p>
-    </div>
-
-    <!-- Caption -->
-    <div class="caption-box">
-      <h4>캡션 (참고용)</h4>
-      <pre>30만원씩 쓰면서 유명한 곳 다닌 내가
-전부 끊은 이유가 있어요
-
+100원에 텍스트 사주 먼저 보고
+마음에 들면 박명화 선생님한테
 전화로 직접 상담받는 건데
-30만원짜리보다 더 디테일해서 진짜 놀람...
 
-궁금한 분 댓글 남겨주세요!
+전화 상담이 진짜 소름이에요
+내가 말 안 한 것까지 다 아시더라고요
 
-#사주 #40대일상 #운세 #전화상담 #박명화사주</pre>
-    </div>
+30만원짜리에서 못 들은 얘기를 여기서 들었어
 
-    <!-- Tone Note -->
-    <div class="card card-gold">
-      <h4 style="font-size: 0.8em; color: #f5a623; margin-bottom: 10px;">촬영 톤 가이드</h4>
-      <p style="font-size: 0.83em; color: rgba(255,255,255,0.7); line-height: 1.7;">
-        대본은 참고용입니다. 서윤님 평소 말투 그대로 촬영해주시면 됩니다. 핵심 포인트만 지켜주세요:
-      </p>
-      <ul style="font-size: 0.83em; color: rgba(255,255,255,0.7); line-height: 1.8; padding-left: 18px; margin-top: 8px;">
-        <li>본인이 사주 좋아해서 비싼 곳 다녔다는 배경</li>
-        <li>100원으로 먼저 보고, 전화로 직접 상담받는 구조 설명</li>
-        <li>"박명화 선생님"이라는 이름 1회 이상 언급</li>
-        <li>30만원짜리보다 낫다는 비교 포인트</li>
-        <li>댓글 CTA로 마무리</li>
-      </ul>
-    </div>
+궁금하신 분 댓글 남겨주시면
+링크 바로 보내드릴게요!
+
+#사주 #운세 #사주상담 #박명화 #전화사주 #신년운세 #40대엄마</pre>
   </div>
 
-  <!-- Section 4: Service Info -->
-  <div class="section">
-    <span class="section-label">SERVICE INFO</span>
-    <h2>100원사주 서비스 안내</h2>
-
-    <div class="service-card">
-      <h4>서비스 구조</h4>
-      <div class="service-flow">
-        <div class="flow-step">
-          <strong>STEP 1</strong>
-          100saju.com 접속<br>생년월일 입력
-        </div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-step">
-          <strong>STEP 2</strong>
-          100원 결제<br>텍스트 사주 결과 확인
-        </div>
-        <span class="flow-arrow">→</span>
-        <div class="flow-step">
-          <strong>STEP 3</strong>
-          안내된 번호로 전화<br>박명화 선생님 직접 상담
-        </div>
-      </div>
-      <div class="service-note">
-        <strong>필수 포지셔닝:</strong> "박명화 선생님"으로만 언급. AI/앱/기술 관련 용어 절대 사용 금지.<br>
-        실제 전화통화로 대화하며 상담받는 형식. 내가 질문하면 바로 대답해주는 구조.<br>
-        녹음 재생이 아닌, 실시간 대화형 상담.
-      </div>
-    </div>
-
-    <div class="card">
-      <h4 style="font-size: 0.8em; color: rgba(255,255,255,0.5); margin-bottom: 10px;">콘텐츠 내 자연스러운 표현 예시</h4>
-      <ul style="font-size: 0.83em; color: rgba(255,255,255,0.7); line-height: 1.9; padding-left: 18px;">
-        <li>"박명화 선생님한테 전화로 직접 상담받는 건데"</li>
-        <li>"전화했더니 진짜 사주 선생한테 전화한 줄"</li>
-        <li>"내가 질문하면 바로 대화로 답해주셔요"</li>
-        <li>"말 안 한 것까지 다 아시더라고요"</li>
-      </ul>
-      <p style="font-size: 0.75em; color: rgba(255,255,255,0.4); margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.06);">
-        사용 금지 표현: AI, 인공지능, 앱, 봇, 자동, 프로그램, 알고리즘
-      </p>
-    </div>
-  </div>
-
-  <!-- Section 5: Process -->
-  <div class="section">
-    <span class="section-label">NEXT STEPS</span>
-    <h2>진행 안내</h2>
-
-    <ul class="process-list">
-      <li>
-        <span class="process-step">1</span>
-        <div class="process-content">
-          <h5>제안 수락 회신</h5>
-          <p>본 제안서 확인 후 진행 의사를 알려주세요</p>
-        </div>
-      </li>
-      <li>
-        <span class="process-step">2</span>
-        <div class="process-content">
-          <h5>서비스 체험</h5>
-          <p>100saju.com에서 직접 체험 (텍스트 + 전화상담). 실제로 사용해보신 후 본인 느낌 그대로 촬영하시면 됩니다</p>
-        </div>
-      </li>
-      <li>
-        <span class="process-step">3</span>
-        <div class="process-content">
-          <h5>콘텐츠 촬영</h5>
-          <p>25-35초 릴스. 대본은 참고용이며 평소 톤 그대로 자유롭게 촬영해주세요</p>
-        </div>
-      </li>
-      <li>
-        <span class="process-step">4</span>
-        <div class="process-content">
-          <h5>검수 및 업로드</h5>
-          <p>촬영본 전달 → 간단 확인 → 서윤님 계정에 업로드</p>
-        </div>
-      </li>
+  <div class="checklist-section">
+    <h4>촬영 가이드</h4>
+    <ul>
+      <li>촬영 장소: 집 (소파, 식탁 등 평소 촬영 장소)</li>
+      <li>복장: 평소 그대로 (편안한 홈웨어)</li>
+      <li>톤: 친구한테 추천하듯 자연스럽게</li>
+      <li>핵심 강조: "전화로 직접 상담" + "내가 말 안 한 것까지"</li>
+      <li>반드시 포함: 100원 텍스트 먼저 > 전화 상담 순서</li>
+      <li>폰 화면 보여주기 (선택사항)</li>
     </ul>
+  </div>
+</div>
 
-    <div class="card" style="margin-top: 20px;">
-      <p style="font-size: 0.83em; color: rgba(255,255,255,0.65); line-height: 1.7; text-align: center;">
-        단가 및 세부 조건은 별도 협의드리겠습니다.<br>
-        궁금한 점은 편하게 DM 주세요.
-      </p>
+<!-- ============================================ -->
+<!-- 서비스 안내 -->
+<!-- ============================================ -->
+<div class="plan-card">
+  <div class="plan-header">
+    <span class="plan-number">서비스 안내</span>
+  </div>
+  <div class="plan-title">100원사주 서비스 구조</div>
+
+  <div class="service-box">
+    <h4>이용 플로우</h4>
+    <div class="service-step">
+      <div class="service-step-num">1</div>
+      <div class="service-step-text"><strong>100원 텍스트 사주</strong> — 생년월일시 입력, 즉시 결과 확인</div>
+    </div>
+    <div class="service-step">
+      <div class="service-step-num">2</div>
+      <div class="service-step-text"><strong>전화 상담 신청</strong> — 텍스트 결과가 마음에 들면 전화 상담 연결</div>
+    </div>
+    <div class="service-step">
+      <div class="service-step-num">3</div>
+      <div class="service-step-text"><strong>박명화 선생님과 통화</strong> — 실제 전화로 1:1 상담. 궁금한 거 다 물어보기 가능</div>
     </div>
   </div>
 
+  <div class="warning-box">
+    <h4>필수 포지셔닝</h4>
+    <p>- "박명화 선생님"으로만 언급 (AI 절대 언급 금지)<br>
+    - "전화로 직접 상담받는다"가 핵심 셀링포인트<br>
+    - 100원은 텍스트 사주 가격, 전화 상담은 별도<br>
+    - 자연스러운 표현: "전화로 직접 풀어주신다", "통화하면서 상담받는다"</p>
+  </div>
 </div>
 
-<!-- Footer -->
-<div class="footer">
-  <p class="brand">100원사주 x Neobridge</p>
-  <p>본 제안서는 @heyseoyoon 채널의 실제 콘텐츠 데이터를 분석하여 작성되었습니다<br>서윤님만을 위한 개인 맞춤 기획입니다</p>
+<!-- ============================================ -->
+<!-- 진행 안내 -->
+<!-- ============================================ -->
+<div class="plan-card">
+  <div class="plan-header">
+    <span class="plan-number">진행 안내</span>
+  </div>
+  <div class="plan-title">진행 프로세스</div>
+
+  <div class="service-box">
+    <h4>4단계 프로세스</h4>
+    <div class="service-step">
+      <div class="service-step-num">1</div>
+      <div class="service-step-text"><strong>제안 수락</strong> — 단가 협의 후 확정</div>
+    </div>
+    <div class="service-step">
+      <div class="service-step-num">2</div>
+      <div class="service-step-text"><strong>서비스 체험</strong> — 100원사주 + 전화 상담 직접 체험 (무료 제공)</div>
+    </div>
+    <div class="service-step">
+      <div class="service-step-num">3</div>
+      <div class="service-step-text"><strong>촬영 및 업로드</strong> — 위 대본 참고, 자유롭게 수정 가능</div>
+    </div>
+    <div class="service-step">
+      <div class="service-step-num">4</div>
+      <div class="service-step-text"><strong>정산</strong> — 게시 확인 후 3영업일 내</div>
+    </div>
+  </div>
+
+  <div class="ref-box">
+    <h4>참고사항</h4>
+    <p>- 대본은 참고용이며 서윤님 스타일에 맞게 자유롭게 수정 가능합니다<br>
+    - 마음에 안 드시면 삭제 가능합니다<br>
+    - 서비스 체험 후 진심으로 괜찮다고 느끼실 때만 진행해주세요</p>
+  </div>
 </div>
 
+<div class="footer">100원사주 x @heyseoyoon 콘텐츠 제안서<br>100saju.com</div>
+
+</div>
 </body>
 </html>
