@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>미팅 정리 — 머니몬스터 강사님</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif;
+    color: #191f28;
+    background: #191f28;
+    font-size: 15px;
+    line-height: 1.6;
+    letter-spacing: -0.3px;
+    -webkit-text-size-adjust: 100%;
+    padding: 0 0 100px;
+  }
+  .hdr {
+    background: #191f28;
+    color: #fff;
+    padding: 20px 20px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid #2d333b;
+  }
+  .hdr-top { display: flex; justify-content: space-between; align-items: center; }
+  .hdr-badge { font-size: 11px; font-weight: 700; color: #3182f6; letter-spacing: 1px; }
+  .hdr-time { font-size: 11px; color: #4e5968; }
+  .hdr-name { font-size: 22px; font-weight: 800; margin-top: 4px; letter-spacing: -1px; }
+  .hdr-sub { font-size: 12px; color: #6b7684; margin-top: 2px; }
+  .section {
+    background: #fff;
+    margin: 8px;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .s-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: #3182f6;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+  }
+  .kl {
+    background: #f2f7ff;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin: 8px 0;
+    font-size: 14px;
+    color: #191f28;
+    word-break: keep-all;
+    line-height: 1.6;
+  }
+  .kl b { color: #3182f6; }
+  .kl-dark {
+    background: #191f28;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin: 8px 0;
+    font-size: 14px;
+    color: #fff;
+    word-break: keep-all;
+    line-height: 1.6;
+  }
+  .kl-dark b { color: #3182f6; }
+  .caution {
+    background: #fff8eb;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin: 8px 0;
+    font-size: 13px;
+    color: #6b5900;
+    word-break: keep-all;
+    line-height: 1.6;
+  }
+  .urgent {
+    background: #ffebee;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin: 8px 0;
+    font-size: 13px;
+    color: #b71c1c;
+    word-break: keep-all;
+    line-height: 1.6;
+  }
+  .step-list { counter-reset: step; }
+  .step-item {
+    display: flex;
+    gap: 12px;
+    padding: 14px 0;
+    border-bottom: 1px solid #f2f4f6;
+    align-items: flex-start;
+  }
+  .step-item:last-child { border-bottom: none; }
+  .step-num {
+    display: inline-flex;
+    width: 28px;
+    height: 28px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: #3182f6;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+  .step-body { flex: 1; }
+  .step-body b { font-size: 14px; color: #191f28; display: block; margin-bottom: 2px; }
+  .step-body p { font-size: 12px; color: #6b7684; }
+  .chk-list { list-style: none; }
+  .chk-list li {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f2f4f6;
+    font-size: 14px;
+    align-items: flex-start;
+  }
+  .chk-list li:last-child { border-bottom: none; }
+  .chk-box {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #d1d6db;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .tl-item {
+    display: flex;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f2f4f6;
+    align-items: flex-start;
+  }
+  .tl-item:last-child { border-bottom: none; }
+  .tl-date {
+    width: 48px;
+    flex-shrink: 0;
+    text-align: center;
+  }
+  .tl-day {
+    font-size: 18px;
+    font-weight: 800;
+    color: #3182f6;
+    line-height: 1;
+  }
+  .tl-dow {
+    font-size: 9px;
+    color: #8b95a1;
+    font-weight: 600;
+  }
+  .tl-body { flex: 1; }
+  .tl-body b { font-size: 14px; color: #191f28; display: block; margin-bottom: 2px; }
+  .tl-body p { font-size: 12px; color: #6b7684; line-height: 1.5; }
+  .bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #191f28;
+    padding: 16px 20px;
+    z-index: 100;
+    border-top: 1px solid #2d333b;
+  }
+  .bottom-text {
+    font-size: 13px;
+    color: #6b7684;
+    text-align: center;
+  }
+  .bottom-text b { color: #3182f6; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-top">
+    <div class="hdr-badge">MEETING RECAP</div>
+    <div class="hdr-time">2026.05.06</div>
+  </div>
+  <div class="hdr-name">머니몬스터 강사님 1차 미팅 정리</div>
+  <div class="hdr-sub">Flowmus 부업클래스팀</div>
+</div>
+
+<!-- 미팅 요약 -->
+<div class="section">
+  <div class="s-title">OVERVIEW</div>
+  <div class="kl">
+    오늘 미팅 감사합니다. 말씀해주신 내용 정리해서 보내드립니다.<br>
+    아래 내용 확인해주시고, 수정할 부분 있으시면 편하게 말씀해주세요.
+  </div>
+</div>
+
+<!-- 합의된 방향 -->
+<div class="section">
+  <div class="s-title">DIRECTION &middot; 합의된 강의 방향</div>
+
+  <div class="step-list">
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <b>편집 부업 강의 (메인)</b>
+        <p>편집으로 안정적인 수입을 만드는 강의. 완전 초보도 가능.<br>
+        수강 후 실제 일거리 연결까지 포함. "수강생에게 일을 주는 강의."</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <b>일거리 연결 구조</b>
+        <p>크몽/당근 세팅 + 대표님 클라이언트 + 민재님 대행사 물량.<br>
+        수강생이 미션 통과하면 바로 실전 투입.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <b>장기 확장</b>
+        <p>편집자 전문 채널 공동 운영 + VOD 자동 판매 + AI 영상 업셀링.<br>
+        1기 안착 후 자연스럽게 확장.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 핵심 컨셉 -->
+<div class="section">
+  <div class="s-title">CONCEPT &middot; 핵심 포지셔닝</div>
+  <div class="kl">
+    <b>"소극적이고 안정적인 수익"</b> &mdash; 이 키워드가 타겟 시청자에게 가장 강력합니다. AI 영상은 상방이 있지만 변동성이 크고, 편집은 공무원처럼 따박따박 들어오는 구조.
+  </div>
+  <div class="kl">
+    <b>"있는 그대로 보여주는 게 최고"</b> &mdash; 연출 없이 실제 입금 내역, 실제 케이스, 실제 데이터만 활용. 5~10개 사례만으로 충분합니다.
+  </div>
+</div>
+
+<!-- 강사님 보유 소재 -->
+<div class="section">
+  <div class="s-title">ASSETS &middot; 강사님 보유 소재</div>
+  <div class="kl" style="font-size: 13px;">
+    미팅에서 확인된 소재들입니다. 강의 + 광고 + 세미나에 전부 활용됩니다.<br>
+    <b>있으신 자료는 최대한 많이 보내주시는 게 좋습니다.</b>
+  </div>
+  <div class="step-list">
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <b>편집자 지급 내역 (캡처 다량)</b>
+        <p>프리랜서들에게 지급한 내역. 월 단위 캡처. 이게 곧 "후기"입니다.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <b>편집 포트폴리오 메일 영업 사례</b>
+        <p>포트폴리오 만들어서 메일 보내고 5만원~건당 수주한 1년간의 사례.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <b>직원/주변 편집자 케이스</b>
+        <p>방송국 커리어 성장 스토리, 아줌마 편집자, 민재님 월 2,000만 대행사 등.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <b>광고주 메일 의뢰 내역</b>
+        <p>편집 의뢰가 줄 서있다는 "수급 불균형" 증거.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 런칭 타임라인 -->
+<div class="section">
+  <div class="s-title">TIMELINE &middot; 런칭 일정</div>
+  <div class="caution">
+    <b>FIFA 월드컵 피해야 할 날짜:</b> 6/12(목), 6/19(목), 6/25(수), 6/29(일)<br>
+    한국 조별리그 경기일은 모든 일정에서 제외합니다.
+  </div>
+
+  <div style="margin-top: 12px;">
+    <div class="tl-item">
+      <div class="tl-date">
+        <div class="tl-day">5월</div>
+        <div class="tl-dow">전체</div>
+      </div>
+      <div class="tl-body">
+        <b>촬영 + 소재 제작 + 세팅 완료</b>
+        <p>광고 소재, 출연자 촬영, 크몽/당근 세팅 전부 5월에 끝냅니다. 실행만 안 한 상태로 대기.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">
+        <div class="tl-day">6/1</div>
+        <div class="tl-dow">일</div>
+      </div>
+      <div class="tl-body">
+        <b>퍼포먼스 광고 집행 시작</b>
+        <p>타겟팅 학습 기간 최소 3주. 초반 효율 낮아도 데이터 축적이 핵심.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">
+        <div class="tl-day">6/21</div>
+        <div class="tl-dow">일</div>
+      </div>
+      <div class="tl-body">
+        <b>오프라인 세미나 (1차 세일즈)</b>
+        <p>현장 촬영 필수. 세미나 or 원데이 클래스 형태 &mdash; 강사님 결정.<br>"일거리 바로 연결" 현장 후킹 &rarr; 결제 전환.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">
+        <div class="tl-day">6/22</div>
+        <div class="tl-dow">월</div>
+      </div>
+      <div class="tl-body">
+        <b>세미나 녹화본 판매 (2차)</b>
+        <p>세미나 영상 편집 &rarr; 동일 가격 판매.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">
+        <div class="tl-day">6/24</div>
+        <div class="tl-dow">수</div>
+      </div>
+      <div class="tl-body">
+        <b>웨비나 (3차 세일즈)</b>
+        <p>온라인 라이브. 오프라인 못 온 사람 + 녹화본 본 사람 대상.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">
+        <div class="tl-day">6/26</div>
+        <div class="tl-dow">금</div>
+      </div>
+      <div class="tl-body">
+        <b>앵콜 웨비나 (마지막 기회)</b>
+        <p>상황 봐서 오전/오후 결정. 앵콜은 선택 사항.</p>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-date">
+        <div class="tl-day">6/28~</div>
+        <div class="tl-dow">일</div>
+      </div>
+      <div class="tl-body">
+        <b>정규 강의 1기 시작</b>
+        <p>같은 주 내 시작. 결제 후 바로 강의 진입이 핵심입니다.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 출연 계획 -->
+<div class="section">
+  <div class="s-title">CASTING &middot; 촬영/출연 계획</div>
+  <div class="kl" style="font-size: 13px;">
+    강사님 본인뿐 아니라 주변 케이스를 최대한 많이 촬영합니다.<br>
+    <b>5월 내 소재 전부 촬영 완료</b>가 목표입니다.
+  </div>
+
+  <div class="step-list">
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <b>강사님 (메인)</b>
+        <p>초반 얼굴. 편집 테크트리 스토리 (5만원 &rarr; 1,000만원). 편집자 채널 무료 출연.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <b>직원 (후기용)</b>
+        <p>편집 시작 &rarr; 방송국 커리어. 마스크 착용 OK.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <b>민재님</b>
+        <p>월 2,000만 쇼폼 대행. 일거리 수급 창구 역할. 출연료 지급.</p>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <b>주변 편집자들</b>
+        <p>크몽/편집으로 돈 번 사람들. 후기 촬영. 출연료 지급.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 강사님 할 일 -->
+<div class="section">
+  <div class="s-title" style="color: #f04452;">URGENT &middot; 이번 주 바로 시작할 것</div>
+  <div class="urgent">
+    아래 항목들은 5월 세팅 완료를 위해 <b>이번 주부터 바로 시작</b>해야 합니다.<br>
+    진행하시면서 궁금한 점 있으시면 편하게 연락주세요.
+  </div>
+
+  <ul class="chk-list">
+    <li>
+      <div class="chk-box"></div>
+      <div><b>크몽 세팅</b><br><span style="font-size: 12px; color: #8b95a1;">레퍼런스 넣고 랜딩 제작. 35만원 책정. 편집 클립 다량 업로드.</span></div>
+    </li>
+    <li>
+      <div class="chk-box"></div>
+      <div><b>당근마켓 세팅</b><br><span style="font-size: 12px; color: #8b95a1;">편집 서비스 등록. 로컬 의뢰 유입 채널.</span></div>
+    </li>
+    <li>
+      <div class="chk-box"></div>
+      <div><b>출연 가능 인력 리스트업</b><br><span style="font-size: 12px; color: #8b95a1;">본인 + 직원(마스크) + 주변 편집자 + 아줌마 등. 누가 어디 채널에 나갈 수 있는지 정리.</span></div>
+    </li>
+    <li>
+      <div class="chk-box"></div>
+      <div><b>편집자 채널 섭외 시작</b><br><span style="font-size: 12px; color: #8b95a1;">비디오클래스 등 편집 전문 채널에 무료 출연 제안. 링크만 달아달라고 요청.</span></div>
+    </li>
+    <li>
+      <div class="chk-box"></div>
+      <div><b>세미나 형태 결정</b><br><span style="font-size: 12px; color: #8b95a1;">세미나 vs 원데이 클래스. 돈 받고 하는 방식인지, 무료로 모집하는 방식인지.</span></div>
+    </li>
+  </ul>
+</div>
+
+<!-- 준비 자료 -->
+<div class="section">
+  <div class="s-title">REQUEST &middot; 준비해주실 자료</div>
+  <div class="kl" style="font-size: 13px;">
+    <b>있으시는 자료는 최대한 많이 보내주시는 게 좋습니다.</b> 증빙 자료가 많을수록 광고 소재로 활용할 수 있는 것도 많아집니다.
+  </div>
+
+  <ul class="chk-list">
+    <li>
+      <div class="chk-box"></div>
+      <div><b>편집자 지급 내역 캡처</b><br><span style="font-size: 12px; color: #8b95a1;">프리랜서들에게 보낸 입금 내역. 월별 캡처. 계좌번호 등 개인정보는 가려주셔도 됩니다.</span></div>
+    </li>
+    <li>
+      <div class="chk-box"></div>
+      <div><b>기획자 지급 내역</b><br><span style="font-size: 12px; color: #8b95a1;">기획자에게 2,000만원 지급한 내역. 캡처 or 이체 확인서.</span></div>
+    </li>
+    <li>
+      <div class="chk-box"></div>
+      <div><b>포트폴리오 메일 영업 사례</b><br><span style="font-size: 12px; color: #8b95a1;">메일 보내서 수주한 사례. 메일 캡처, 수주 금액 캡처 등.</span></div>
+    </li>
+    <li>
+      <div class="chk-box"></div>
+      <div><b>광고주 의뢰 메일/DM</b><br><span style="font-size: 12px; color: #8b95a1;">편집 의뢰가 줄 서있다는 증거. 메일함/DM 캡처.</span></div>
+    </li>
+    <li>
+      <div class="chk-box"></div>
+      <div><b>편집한 클립 모음</b><br><span style="font-size: 12px; color: #8b95a1;">크몽 랜딩/포트폴리오용. 편집 실력 보여줄 수 있는 영상 클립들.</span></div>
+    </li>
+    <li>
+      <div class="chk-box"></div>
+      <div><b>직원/주변 편집자 후기</b><br><span style="font-size: 12px; color: #8b95a1;">텍스트 후기 + 카톡 캡처도 OK. 촬영 동의 여부도 확인해주세요.</span></div>
+    </li>
+    <li>
+      <div class="chk-box"></div>
+      <div><b>본 강의 커리큘럼 초안</b><br><span style="font-size: 12px; color: #8b95a1;">포트폴리오 제작법 + 메일 영업법 + 크몽 세팅법 등 강의에 포함될 내용.</span></div>
+    </li>
+  </ul>
+</div>
+
+<!-- 유통 채널 -->
+<div class="section">
+  <div class="s-title">CHANNEL &middot; DB 모집 채널 (참고)</div>
+  <div class="kl">
+    <b>강사님 유튜브</b> &mdash; DB 80% 부업클래스에 투입 합의. 편집 테크트리 콘텐츠 발행.
+  </div>
+  <div class="kl">
+    <b>편집자 전문 채널</b> &mdash; 비디오클래스 등에 무료 출연. "부산까지 가서 무료로 촬영" 스토리 활용.
+  </div>
+  <div class="kl">
+    <b>편집자 카페</b> &mdash; "이 강의만 들으면 일거리 연결" 포지셔닝. 카페 가입 후 글 침투.
+  </div>
+  <div class="kl">
+    <b>퍼포먼스 광고</b> &mdash; 6/1부터 집행. 저희가 세팅합니다.
+  </div>
+</div>
+
+<!-- 마무리 -->
+<div class="section">
+  <div class="s-title">CLOSING</div>
+  <div class="kl-dark">
+    "수강생에게 일거리를 주는 강의" &mdash; 이 컨셉이 다른 편집 강의와 완전히 다릅니다. <b>실제 데이터가 이미 충분히 있기 때문에 연출 없이 있는 그대로만 보여줘도 됩니다.</b><br><br>
+    우선 <b>크몽 세팅</b>과 <b>출연 가능 인력 리스트</b>부터 시작해주시면 저희도 바로 움직이겠습니다.<br><br>
+    채널별 출연 기획은 두 분이 큰 그림 짜주시면, 디테일이 필요한 부분은 다음 주 오프라인 미팅에서 잡겠습니다.
+  </div>
+</div>
+
+<!-- BOTTOM BAR -->
+<div class="bottom-bar">
+  <div class="bottom-text">
+    <b>Flowmus</b> 부업클래스팀
+  </div>
+</div>
+
+</body>
+</html>
