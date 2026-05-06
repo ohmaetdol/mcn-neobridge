@@ -130,28 +130,26 @@
   }
   .card.done { opacity: 0.5; }
 
-  /* Status Toggle */
-  .status-btn {
+  /* Status Icon */
+  .status-icon {
     width: 28px;
     height: 28px;
     border-radius: 8px;
     border: 2px solid #d1d6db;
     background: #fff;
     flex-shrink: 0;
-    cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 14px;
-    transition: all 0.2s;
     margin-top: 1px;
   }
-  .status-btn.progress {
+  .status-icon.progress {
     border-color: #f7971e;
     background: #fff8eb;
     color: #f7971e;
   }
-  .status-btn.complete {
+  .status-icon.complete {
     border-color: #00b894;
     background: #00b894;
     color: #fff;
@@ -189,22 +187,6 @@
     color: #8b95a1;
     line-height: 1.5;
     word-break: keep-all;
-  }
-  .note-input {
-    width: 100%;
-    border: none;
-    border-bottom: 1px dashed #d1d6db;
-    font-size: 12px;
-    color: #4e5968;
-    font-family: inherit;
-    padding: 4px 0;
-    background: transparent;
-    outline: none;
-    resize: none;
-  }
-  .note-input:focus {
-    border-color: #3182f6;
-    color: #191f28;
   }
 
   /* Loading / Error */
@@ -354,35 +336,6 @@ function fetchData() {
     });
 }
 
-function updateStatus(row, currentStatus) {
-  const cycle = { '': '진행중', '대기': '진행중', '진행중': '완료', '완료': '' };
-  const next = cycle[currentStatus] || '진행중';
-
-  // Optimistic update
-  const item = DATA.find(d => d._row === row);
-  if (item) item['상태'] = next;
-  render();
-
-  fetch(API_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ action: 'updateStatus', row, value: next }),
-    mode: 'no-cors'
-  }).catch(() => {});
-}
-
-function updateNote(row, value) {
-  const item = DATA.find(d => d._row === row);
-  if (item) item['비고'] = value;
-
-  fetch(API_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ action: 'updateNote', row, value }),
-    mode: 'no-cors'
-  }).catch(() => {});
-}
-
 // === RENDER ===
 function renderLoading() {
   document.getElementById('app').innerHTML = `<div class="state-msg">불러오는 중...</div>`;
@@ -454,7 +407,7 @@ function render() {
 
       html += `
         <div class="card ${isDone ? 'done' : ''} ${isLast ? 'only-child' : ''}">
-          <div class="status-btn ${btnClass}" onclick="updateStatus(${item._row}, '${status}')">${btnIcon}</div>
+          <div class="status-icon ${btnClass}">${btnIcon}</div>
           <div class="card-body">
             <div class="card-title">${item['할일'] || item['할 일'] || ''}</div>
             <div class="card-meta">
@@ -462,13 +415,7 @@ function render() {
               ${item['담당'] ? `<span class="tag tag-who">${item['담당']}</span>` : ''}
               ${item['카테고리'] ? `<span class="tag tag-cat">${item['카테고리']}</span>` : ''}
             </div>
-            <div class="card-note">
-              <textarea class="note-input" rows="1"
-                placeholder="메모 추가..."
-                onblur="updateNote(${item._row}, this.value)"
-                onfocus="this.rows=2"
-              >${item['비고'] || ''}</textarea>
-            </div>
+            ${item['비고'] ? `<div class="card-note">${item['비고']}</div>` : ''}
           </div>
         </div>
       `;

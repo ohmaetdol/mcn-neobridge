@@ -47,41 +47,6 @@ function doGet(e) {
   }
 }
 
-function doPost(e) {
-  try {
-    const payload = JSON.parse(e.postData.contents);
-    const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(SHEET_NAME);
-    if (!sheet) {
-      return respond({ error: '시트를 찾을 수 없습니다.' });
-    }
-
-    const headers = sheet.getRange(1, 1, 1, sheet.getLastColumn()).getValues()[0]
-      .map(h => String(h).trim());
-
-    if (payload.action === 'updateStatus') {
-      const col = headers.indexOf('상태') + 1;
-      if (col > 0 && payload.row > 1) {
-        sheet.getRange(payload.row, col).setValue(payload.value);
-        return respond({ success: true });
-      }
-      return respond({ error: '상태 열을 찾을 수 없습니다.' });
-    }
-
-    if (payload.action === 'updateNote') {
-      const col = headers.indexOf('비고') + 1;
-      if (col > 0 && payload.row > 1) {
-        sheet.getRange(payload.row, col).setValue(payload.value);
-        return respond({ success: true });
-      }
-      return respond({ error: '비고 열을 찾을 수 없습니다.' });
-    }
-
-    return respond({ error: '알 수 없는 액션: ' + payload.action });
-  } catch (err) {
-    return respond({ error: err.message });
-  }
-}
-
 function respond(data) {
   return ContentService.createTextOutput(JSON.stringify(data))
     .setMimeType(ContentService.MimeType.JSON);
