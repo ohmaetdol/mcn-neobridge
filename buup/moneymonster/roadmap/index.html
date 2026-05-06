@@ -198,50 +198,6 @@
   }
   .state-msg b { color: #3182f6; }
 
-  /* Setup */
-  .setup {
-    max-width: 400px;
-    margin: 60px auto;
-    padding: 0 20px;
-    text-align: center;
-  }
-  .setup h2 {
-    color: #fff;
-    font-size: 20px;
-    margin-bottom: 12px;
-  }
-  .setup p {
-    color: #6b7684;
-    font-size: 13px;
-    margin-bottom: 20px;
-    line-height: 1.6;
-  }
-  .setup input {
-    width: 100%;
-    padding: 14px 16px;
-    border-radius: 12px;
-    border: 1px solid #2d333b;
-    background: #0d1117;
-    color: #fff;
-    font-size: 14px;
-    font-family: inherit;
-    outline: none;
-    margin-bottom: 12px;
-  }
-  .setup input:focus { border-color: #3182f6; }
-  .setup button {
-    width: 100%;
-    padding: 14px;
-    border-radius: 12px;
-    border: none;
-    background: #3182f6;
-    color: #fff;
-    font-size: 15px;
-    font-weight: 700;
-    font-family: inherit;
-    cursor: pointer;
-  }
-
   /* Bottom */
   .bottom-bar {
     position: fixed;
@@ -258,16 +214,6 @@
   }
   .bottom-text { font-size: 12px; color: #4e5968; }
   .bottom-text b { color: #3182f6; }
-  .reset-btn {
-    font-size: 11px;
-    color: #6b7684;
-    background: none;
-    border: 1px solid #2d333b;
-    padding: 4px 12px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-family: inherit;
-  }
 </style>
 </head>
 <body>
@@ -275,48 +221,13 @@
 <div id="app"></div>
 
 <script>
-const APP_KEY = 'mm_roadmap_api';
-let API_URL = localStorage.getItem(APP_KEY) || '';
+const API_URL = 'https://script.google.com/a/macros/flowmus.com/s/AKfycbz3KOvJBS7jzek5vzTgQKxvlDKvTj27WDXZer37M82z27q9Sr4Lh2OvdXNiwIuHVCTM2w/exec';
 let DATA = [];
 let FILTER = '전체';
 
 function init() {
-  if (!API_URL) {
-    renderSetup();
-  } else {
-    renderLoading();
-    fetchData();
-  }
-}
-
-// === SETUP ===
-function renderSetup() {
-  document.getElementById('app').innerHTML = `
-    <div class="setup">
-      <h2>API 연결</h2>
-      <p>구글 시트의 Apps Script 배포 URL을 입력해주세요.</p>
-      <input id="apiInput" placeholder="https://script.google.com/macros/s/..." />
-      <button onclick="saveApi()">연결</button>
-    </div>
-  `;
-}
-
-function saveApi() {
-  const url = document.getElementById('apiInput').value.trim();
-  if (!url.startsWith('https://script.google.com/')) {
-    alert('올바른 Apps Script URL을 입력해주세요.');
-    return;
-  }
-  API_URL = url;
-  localStorage.setItem(APP_KEY, url);
   renderLoading();
   fetchData();
-}
-
-function resetApi() {
-  localStorage.removeItem(APP_KEY);
-  API_URL = '';
-  renderSetup();
 }
 
 // === DATA ===
@@ -342,7 +253,7 @@ function renderLoading() {
 }
 
 function renderError(msg) {
-  document.getElementById('app').innerHTML = `<div class="state-msg">${msg}<br><br><button class="reset-btn" onclick="resetApi()">URL 재설정</button></div>`;
+  document.getElementById('app').innerHTML = `<div class="state-msg">${msg}<br><br><span style="font-size:12px;color:#4e5968;">잠시 후 다시 시도해주세요.</span></div>`;
 }
 
 function render() {
@@ -427,7 +338,6 @@ function render() {
   html += `
     <div class="bottom-bar">
       <div class="bottom-text"><b>Flowmus</b> 부업클래스</div>
-      <button class="reset-btn" onclick="resetApi()">재설정</button>
     </div>
   `;
 
