@@ -27,296 +27,175 @@
     top: 0;
     z-index: 100;
   }
-  .hdr-badge {
-    font-size: 11px;
-    font-weight: 700;
-    color: #3182f6;
-    letter-spacing: 1px;
-    margin-bottom: 4px;
-  }
-  .hdr-name {
-    font-size: 20px;
-    font-weight: 800;
-    letter-spacing: -1px;
-    line-height: 1.3;
-  }
-  .hdr-sub {
-    font-size: 13px;
-    color: #8b95a1;
-    margin-top: 6px;
-    line-height: 1.5;
-  }
+  .hdr-badge { font-size: 11px; font-weight: 700; color: #3182f6; letter-spacing: 1px; margin-bottom: 4px; }
+  .hdr-name { font-size: 20px; font-weight: 800; letter-spacing: -1px; line-height: 1.3; }
+  .hdr-sub { font-size: 13px; color: #8b95a1; margin-top: 6px; line-height: 1.5; }
   .hdr-instructor {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 4px 12px;
-    background: #2d333b;
-    border-radius: 8px;
-    font-size: 13px;
-    font-weight: 700;
-    color: #3182f6;
+    display: inline-block; margin-top: 10px; padding: 4px 12px;
+    background: #2d333b; border-radius: 8px; font-size: 13px; font-weight: 700; color: #3182f6;
   }
 
   /* Progress */
-  .progress-wrap {
-    background: #191f28;
-    padding: 0 20px 16px;
-    border-bottom: 1px solid #2d333b;
-  }
-  .progress-bar {
-    background: #2d333b;
-    height: 6px;
-    border-radius: 3px;
-    overflow: hidden;
-  }
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #3182f6, #00b894);
-    border-radius: 3px;
-    transition: width 0.4s ease;
-  }
-  .progress-text {
-    font-size: 12px;
-    color: #6b7684;
-    margin-top: 6px;
-    text-align: right;
-  }
+  .progress-wrap { background: #191f28; padding: 0 20px 16px; border-bottom: 1px solid #2d333b; }
+  .progress-bar { background: #2d333b; height: 6px; border-radius: 3px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, #3182f6, #00b894); border-radius: 3px; transition: width 0.4s ease; }
+  .progress-text { font-size: 12px; color: #6b7684; margin-top: 6px; text-align: right; }
   .progress-text b { color: #3182f6; }
 
-  /* Intro */
-  .intro {
-    margin: 16px 12px;
-    padding: 20px;
-    background: #fff;
-    border-radius: 16px;
-    border-left: 4px solid #3182f6;
-  }
-  .intro-title {
-    font-size: 15px;
-    font-weight: 800;
-    color: #191f28;
-    margin-bottom: 8px;
-  }
-  .intro-text {
-    font-size: 13px;
-    color: #4e5968;
-    line-height: 1.7;
-  }
-
   /* Phase Tab */
-  .phase-tabs {
-    display: flex;
-    gap: 6px;
-    padding: 12px 12px 4px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
+  .phase-tabs { display: flex; gap: 6px; padding: 12px 12px 4px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .phase-tab {
-    flex-shrink: 0;
-    padding: 8px 16px;
-    border-radius: 20px;
-    border: 1px solid #d1d6db;
-    background: #fff;
-    color: #6b7684;
-    font-size: 13px;
-    font-weight: 700;
-    font-family: inherit;
-    cursor: pointer;
-    transition: all 0.2s;
+    flex-shrink: 0; padding: 8px 16px; border-radius: 20px; border: 1px solid #d1d6db;
+    background: #fff; color: #6b7684; font-size: 13px; font-weight: 700;
+    font-family: inherit; cursor: pointer; transition: all 0.2s;
   }
-  .phase-tab.active {
-    background: #3182f6;
-    border-color: #3182f6;
-    color: #fff;
-  }
-  .phase-tab .tab-count {
-    display: inline-block;
-    margin-left: 4px;
-    padding: 1px 6px;
-    border-radius: 8px;
-    font-size: 10px;
-    background: rgba(0,0,0,0.08);
-  }
-  .phase-tab.active .tab-count {
-    background: rgba(255,255,255,0.25);
-  }
+  .phase-tab.active { background: #3182f6; border-color: #3182f6; color: #fff; }
+  .phase-tab .tab-count { display: inline-block; margin-left: 4px; padding: 1px 6px; border-radius: 8px; font-size: 10px; background: rgba(0,0,0,0.08); }
+  .phase-tab.active .tab-count { background: rgba(255,255,255,0.25); }
 
   /* Section */
-  .section {
-    margin: 12px 12px 0;
-  }
+  .section { margin: 12px 12px 0; }
   .sec-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 14px 16px;
-    background: #fff;
-    border-radius: 16px 16px 0 0;
-    border-bottom: 1px solid #f2f4f6;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 14px 16px; background: #fff; border-radius: 16px 16px 0 0; border-bottom: 1px solid #f2f4f6;
   }
-  .sec-title {
-    font-size: 15px;
-    font-weight: 800;
-    color: #191f28;
-    letter-spacing: -0.5px;
-  }
-  .sec-count {
-    font-size: 12px;
-    font-weight: 700;
-    color: #3182f6;
-    background: #f2f7ff;
-    padding: 2px 10px;
-    border-radius: 12px;
-  }
+  .sec-title { font-size: 15px; font-weight: 800; color: #191f28; letter-spacing: -0.5px; }
+  .sec-count { font-size: 12px; font-weight: 700; color: #3182f6; background: #f2f7ff; padding: 2px 10px; border-radius: 12px; }
 
   /* Item */
   .item {
-    background: #fff;
-    padding: 14px 16px;
-    border-bottom: 1px solid #f2f4f6;
-    display: flex;
-    gap: 12px;
-    align-items: flex-start;
+    background: #fff; padding: 14px 16px; border-bottom: 1px solid #f2f4f6;
+    display: flex; gap: 12px; align-items: flex-start;
   }
-  .item:last-child {
-    border-bottom: none;
-    border-radius: 0 0 16px 16px;
-  }
-  .item.checked { opacity: 0.5; }
+  .item:last-child { border-bottom: none; border-radius: 0 0 16px 16px; }
 
-  /* Checkbox */
-  .chk {
-    width: 24px;
-    height: 24px;
-    border-radius: 7px;
-    border: 2px solid #d1d6db;
-    background: #fff;
-    flex-shrink: 0;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 13px;
-    transition: all 0.2s;
-    margin-top: 1px;
-    color: transparent;
+  /* Status Icon */
+  .status-icon {
+    width: 24px; height: 24px; border-radius: 7px; border: 2px solid #d1d6db;
+    background: #fff; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+    font-size: 13px; margin-top: 1px; color: transparent; transition: all 0.2s;
   }
-  .chk.on {
-    border-color: #00b894;
-    background: #00b894;
-    color: #fff;
-  }
+  .status-icon.done { border-color: #00b894; background: #00b894; color: #fff; }
 
   .item-body { flex: 1; min-width: 0; }
-  .item-title {
-    font-size: 14px;
-    font-weight: 700;
-    color: #191f28;
-    word-break: keep-all;
-    line-height: 1.4;
-  }
-  .item-desc {
-    font-size: 12px;
-    color: #8b95a1;
-    margin-top: 3px;
-    line-height: 1.5;
-    word-break: keep-all;
-  }
-  .item-tags {
-    display: flex;
-    gap: 6px;
-    margin-top: 6px;
-    flex-wrap: wrap;
-  }
-  .tag {
-    font-size: 10px;
-    font-weight: 700;
-    padding: 2px 8px;
-    border-radius: 6px;
-    white-space: nowrap;
-  }
+  .item-title { font-size: 14px; font-weight: 700; color: #191f28; word-break: keep-all; line-height: 1.4; }
+  .item-desc { font-size: 12px; color: #8b95a1; margin-top: 3px; line-height: 1.5; word-break: keep-all; }
+  .item-tags { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
+  .tag { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 6px; white-space: nowrap; }
   .tag-must { background: #fff0f0; color: #e8344e; }
   .tag-nice { background: #f2f4f6; color: #8b95a1; }
   .tag-format { background: #f2f7ff; color: #3182f6; }
+  .tag-done { background: #edf8f0; color: #1b8a4a; }
+
+  /* Input Area */
+  .input-area { margin-top: 10px; }
+  .text-input {
+    width: 100%; padding: 10px 12px; border: 1px solid #e5e8eb; border-radius: 10px;
+    font-size: 13px; font-family: inherit; color: #191f28; background: #fafbfc;
+    resize: vertical; min-height: 40px; outline: none; line-height: 1.5;
+  }
+  .text-input:focus { border-color: #3182f6; background: #fff; }
+  .text-input::placeholder { color: #b0b8c1; }
+
+  .input-row { display: flex; gap: 8px; margin-top: 8px; align-items: center; }
+
+  .save-btn {
+    padding: 6px 14px; border-radius: 8px; border: none; background: #3182f6;
+    color: #fff; font-size: 12px; font-weight: 700; font-family: inherit; cursor: pointer;
+    white-space: nowrap; transition: opacity 0.2s;
+  }
+  .save-btn:disabled { opacity: 0.4; cursor: default; }
+  .save-btn.saved { background: #00b894; }
+
+  /* File Upload */
+  .file-label {
+    display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px;
+    border-radius: 8px; border: 1px dashed #d1d6db; background: #fafbfc;
+    color: #4e5968; font-size: 12px; font-weight: 600; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .file-label:hover { border-color: #3182f6; color: #3182f6; }
+  .file-hidden { display: none; }
+
+  .file-list { margin-top: 8px; }
+  .file-item {
+    display: flex; align-items: center; gap: 8px; padding: 6px 10px;
+    background: #f2f7ff; border-radius: 8px; margin-top: 4px; font-size: 12px;
+  }
+  .file-item a { color: #3182f6; text-decoration: none; font-weight: 600; word-break: break-all; }
+  .file-item .file-date { color: #8b95a1; font-size: 10px; margin-left: auto; white-space: nowrap; }
+
+  .uploading {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; color: #8b95a1; margin-top: 8px;
+  }
+  .spinner {
+    width: 14px; height: 14px; border: 2px solid #e5e8eb; border-top-color: #3182f6;
+    border-radius: 50%; animation: spin 0.6s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .saved-text { font-size: 11px; color: #00b894; font-weight: 600; }
 
   /* Phase Description */
   .phase-desc {
-    margin: 12px 12px 0;
-    padding: 16px;
-    background: #fff;
-    border-radius: 16px;
-    border-left: 4px solid #f7971e;
+    margin: 12px 12px 0; padding: 16px; background: #fff; border-radius: 16px; border-left: 4px solid #f7971e;
   }
-  .phase-desc-title {
-    font-size: 14px;
-    font-weight: 800;
-    color: #191f28;
-    margin-bottom: 4px;
+  .phase-desc-title { font-size: 14px; font-weight: 800; color: #191f28; margin-bottom: 4px; }
+  .phase-desc-text { font-size: 12px; color: #6b7684; line-height: 1.6; }
+
+  /* Setup */
+  .setup { max-width: 400px; margin: 60px auto; padding: 0 20px; text-align: center; }
+  .setup h2 { color: #191f28; font-size: 20px; margin-bottom: 12px; }
+  .setup p { color: #6b7684; font-size: 13px; margin-bottom: 20px; line-height: 1.6; }
+  .setup input {
+    width: 100%; padding: 14px 16px; border-radius: 12px; border: 1px solid #d1d6db;
+    background: #fff; color: #191f28; font-size: 14px; font-family: inherit; outline: none; margin-bottom: 12px;
   }
-  .phase-desc-text {
-    font-size: 12px;
-    color: #6b7684;
-    line-height: 1.6;
+  .setup input:focus { border-color: #3182f6; }
+  .setup button {
+    width: 100%; padding: 14px; border-radius: 12px; border: none; background: #3182f6;
+    color: #fff; font-size: 15px; font-weight: 700; font-family: inherit; cursor: pointer;
   }
 
   /* Bottom */
   .bottom-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: #fff;
-    padding: 12px 20px;
-    z-index: 100;
-    border-top: 1px solid #e5e8eb;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    position: fixed; bottom: 0; left: 0; right: 0; background: #fff;
+    padding: 12px 20px; z-index: 100; border-top: 1px solid #e5e8eb;
+    display: flex; justify-content: space-between; align-items: center;
     box-shadow: 0 -2px 12px rgba(0,0,0,0.06);
   }
   .bottom-text { font-size: 13px; color: #4e5968; font-weight: 600; }
   .bottom-text b { color: #3182f6; }
-  .bottom-btn {
-    font-size: 12px;
-    color: #fff;
-    background: #3182f6;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 10px;
-    font-weight: 700;
-    font-family: inherit;
-    cursor: pointer;
-  }
 
-  /* Hidden */
-  .hidden { display: none; }
+  /* State */
+  .state-msg { text-align: center; padding: 60px 20px; color: #6b7684; font-size: 14px; }
 </style>
 </head>
 <body>
-
 <div id="app"></div>
 
 <script>
 // === CONFIG ===
-const INSTRUCTOR = new URLSearchParams(location.search).get('name') || '강사님';
-const STORE_KEY = 'buup_onboard_' + encodeURIComponent(INSTRUCTOR);
+const INSTRUCTOR = new URLSearchParams(location.search).get('name') || '';
+const API_STORE_KEY = 'buup_onboard_api';
+let API_URL = localStorage.getItem(API_STORE_KEY) || '';
+let submitted = {}; // key -> { text, fileUrl, fileName, date }
+let currentPhase = 0;
+let saving = {}; // key -> true if saving
 
-// === DATA ===
+// === PHASES DATA ===
 const PHASES = [
   {
-    id: 1,
-    label: '1차 요청',
-    when: '미팅 직후',
+    id: 1, label: '1차 요청', when: '미팅 직후',
     desc: '강사님의 기본 프로필과 신뢰 증빙 자료입니다. 랜딩페이지의 핵심 소구점이 됩니다.',
     sections: [
       {
-        title: '프로필',
-        icon: '',
-        items: [
+        title: '프로필', items: [
           { key: 'p1', title: '활동명 / 본명', desc: '랜딩페이지 크리에이터 소개에 표기됩니다', must: true, format: '텍스트' },
           { key: 'p2', title: '한 줄 소개 (20자 이내)', desc: '썸네일, 배너, 광고 소재에 활용됩니다', must: true, format: '텍스트' },
           { key: 'p3', title: '경력 요약 (3~5줄)', desc: '본업 경력, 핵심 성과 위주로 작성해주세요', must: true, format: '텍스트' },
-          { key: 'p4', title: '나의 스토리 (시작 계기 \u2192 전환점 \u2192 현재)', desc: '랜딩페이지 스토리 섹션에 활용됩니다. 수강생이 공감할 수 있는 이야기가 좋습니다', must: true, format: '텍스트 300자+' },
+          { key: 'p4', title: '나의 스토리 (시작 계기 > 전환점 > 현재)', desc: '랜딩페이지 스토리 섹션에 활용됩니다. 수강생이 공감할 수 있는 이야기가 좋습니다', must: true, format: '텍스트 300자+' },
           { key: 'p5', title: '프로필 사진 (정면, 고화질)', desc: '밝은 조명, 깔끔한 배경 권장. 랜딩/광고 전 소재에 사용됩니다', must: true, format: '이미지 (1MB+)' },
           { key: 'p6', title: '작업 환경/일상 사진 3장 이상', desc: '실제 작업하는 모습, 장비, 공간 등 리얼한 사진이 신뢰감을 줍니다', must: true, format: '이미지' },
           { key: 'p7', title: 'SNS/유튜브 채널 링크 전체', desc: '팔로워 수와 함께 랜딩페이지에 연결됩니다', must: true, format: '링크' },
@@ -324,9 +203,7 @@ const PHASES = [
         ]
       },
       {
-        title: '신뢰 증빙',
-        icon: '',
-        items: [
+        title: '신뢰 증빙', items: [
           { key: 't1', title: '소득/매출 증빙 캡처 3장 이상', desc: '정산내역, 매출 대시보드, 통장 입금 내역 등. 민감한 부분은 가려도 됩니다', must: true, format: '이미지/캡처' },
           { key: 't2', title: '증빙 기간 (최근 몇 개월치인지)', desc: '1~2개월이 아닌 지속적 수익임을 보여주는 것이 중요합니다', must: true, format: '텍스트' },
           { key: 't3', title: '대표 숫자 3개', desc: '예: 월수익 OO만원 / 경력 OO년 / 수강생 OO명. 랜딩 상단 핵심 뱃지에 들어갑니다', must: true, format: '텍스트' },
@@ -335,9 +212,7 @@ const PHASES = [
         ]
       },
       {
-        title: '수강생 사례',
-        icon: '',
-        items: [
+        title: '수강생 사례', items: [
           { key: 's1', title: '수강생 성과 사례 5건 이상 (Before/After)', desc: '"월 0원에서 월 150만원" 같은 구체적 숫자 포함. 초보자/경험자/회의적이었던 분 등 유형별로 있으면 좋습니다', must: true, format: '텍스트/캡처' },
           { key: 's2', title: '수강생 후기 캡처 10장 이상', desc: '카톡, DM, 커뮤니티, 네이버카페 후기 등. 많을수록 전환율이 올라갑니다. 최소 10장, 가능하면 20장+', must: true, format: '이미지/캡처' },
           { key: 's3', title: '수강생 인터뷰 가능자 1~2명', desc: '영상 후기 촬영에 협조 가능한 분. 실제 얼굴이 나오는 후기는 전환율이 크게 올라갑니다', must: true, format: '연락처' },
@@ -350,31 +225,25 @@ const PHASES = [
     ]
   },
   {
-    id: 2,
-    label: '2차 요청',
-    when: '기획 확정 후',
+    id: 2, label: '2차 요청', when: '기획 확정 후',
     desc: '강의의 구체적인 설계와 타겟팅 자료입니다. 커리큘럼 섹션과 광고 타겟에 활용됩니다.',
     sections: [
       {
-        title: '강의 구조',
-        icon: '',
-        items: [
+        title: '강의 구조', items: [
           { key: 'c1', title: '총 강의 기간 (몇 주)', desc: '예: 4주, 6주, 8주 등', must: true, format: '텍스트' },
           { key: 'c2', title: 'VOD / 라이브 / 혼합 여부', desc: '어떤 형태로 진행하실지, 혼합이면 비율도 알려주세요', must: true, format: '텍스트' },
           { key: 'c3', title: '커리큘럼 (주차별 강의 제목 + 1줄 설명 + 중요도)', desc: '주차별로 묶어서 작성해주세요. 각 강의마다 중요도(상/중/하)도 표기해주시면 랜딩에서 강조 포인트로 활용합니다', must: true, format: '텍스트/문서' },
           { key: 'c4', title: '강의당 예상 시간', desc: '총 학습시간을 계산해서 "총 OO시간 분량"으로 표기합니다', must: true, format: '숫자' },
           { key: 'c5', title: '수강 후 결과물 (뭘 만들 수 있는지)', desc: '랜딩 히어로 섹션의 핵심 카피가 됩니다. 가장 중요한 항목입니다', must: true, format: '텍스트' },
           { key: 'c10', title: '맛보기 강의 1개 (통째로 공개 가능한 것)', desc: '가장 임팩트 있는 강의 1개를 무료 공개용으로 선정해주세요. 결제 전 신뢰를 만드는 핵심 장치입니다', must: true, format: '영상' },
-          { key: 'c6', title: '제공 부교재 목록', desc: '템플릿, 엑셀, PDF, 노션 등 제공하는 자료가 있으면 혜택 섹션에 넣습니다', must: true, format: '목록' },
+          { key: 'c6', title: '제공 부교재 목록', desc: '템플릿, 엑셀, PDF, 노션 등 제공하는 자료가 있으면 혜택 섹션에 넣습니다', must: true, format: '텍스트' },
           { key: 'c7', title: '과제/미션 구조', desc: '실습 과제가 있으면 "실전형 강의" 소구에 활용됩니다', must: false, format: '텍스트' },
           { key: 'c8', title: '커뮤니티/QnA 운영 방식', desc: '오픈채팅방, 슬랙, 디스코드 등 사후관리 방식을 알려주세요', must: true, format: '텍스트' },
-          { key: 'c9', title: '수료증 발급 여부', desc: '발급 시 부가 혜택으로 표기합니다', must: false, format: '예/아니오' },
+          { key: 'c9', title: '수료증 발급 여부', desc: '발급 시 부가 혜택으로 표기합니다', must: false, format: '텍스트' },
         ]
       },
       {
-        title: '타겟 & 포지셔닝',
-        icon: '',
-        items: [
+        title: '타겟 & 포지셔닝', items: [
           { key: 'g1', title: '타겟 페르소나 3개', desc: '각각 나이/직업/상황/고민을 포함해주세요. "이런 분께 추천" 섹션에 들어갑니다', must: true, format: '텍스트' },
           { key: 'g2', title: '이런 사람은 듣지 마세요 (역타겟 3개)', desc: '오히려 신뢰도를 올려주고 환불율을 낮춰줍니다', must: true, format: '텍스트' },
           { key: 'g3', title: '경쟁 강의 대비 차별점', desc: '"왜 이 강의여야 하는가"에 대한 답변. 비교 테이블에 활용됩니다', must: true, format: '텍스트' },
@@ -385,29 +254,23 @@ const PHASES = [
     ]
   },
   {
-    id: 3,
-    label: '3차 요청',
-    when: '프로덕션 진입 시',
+    id: 3, label: '3차 요청', when: '프로덕션 진입 시',
     desc: '마케팅 소재와 운영에 필요한 자료입니다. 광고/영상 제작 시 활용됩니다.',
     sections: [
       {
-        title: '비주얼/영상 소재',
-        icon: '',
-        items: [
+        title: '비주얼/영상 소재', items: [
           { key: 'v1', title: '유튜브 출연 동의 및 희망 횟수', desc: '부업남/사찍남 채널 출연 동의 여부와 몇 회 출연 가능한지 알려주세요', must: true, format: '텍스트' },
-          { key: 'v2', title: '광고 영상 촬영 동의', desc: '퍼포먼스 광고용 영상 촬영 참여 가능 여부. 얼굴/이름/성과 노출 포함', must: true, format: '동의/미동의' },
+          { key: 'v2', title: '광고 영상 촬영 동의', desc: '퍼포먼스 광고용 영상 촬영 참여 가능 여부. 얼굴/이름/성과 노출 포함', must: true, format: '텍스트' },
           { key: 'v3', title: 'Before/After 극적인 사진', desc: '시작 전과 현재를 비교할 수 있는 사진. 통장잔고, 작업환경, 생활 변화 등 차이가 확실할수록 좋습니다', must: true, format: '이미지' },
           { key: 'v4', title: '과정 기록 사진/영상', desc: '성장 과정에서 찍어둔 사진이나 영상. 초기 작업물, 첫 수익 캡처, 성장 그래프 등', must: true, format: '이미지/영상' },
-          { key: 'v5', title: '소득/매출 화면 캡처 (고화질)', desc: '정산 대시보드, 수익 화면 등. 랜딩페이지 및 광고 소재에 직접 사용됩니다', must: true, format: '이미지 PNG' },
+          { key: 'v5', title: '소득/매출 화면 캡처 (고화질)', desc: '정산 대시보드, 수익 화면 등. 랜딩페이지 및 광고 소재에 직접 사용됩니다', must: true, format: '이미지' },
           { key: 'v6', title: '작업 환경/일상 촬영용 사진', desc: '실제 작업하는 모습, 장비, 공간. 리얼함이 신뢰를 만듭니다', must: true, format: '이미지' },
-          { key: 'v7', title: '강의 썸네일용 포즈 사진 (표정 다양하게 3장+)', desc: '배경 제거 가능한 사진. 강의 썸네일/광고 배너에 활용됩니다', must: true, format: '이미지 (배경 단순)' },
-          { key: 'v8', title: '강의 미리보기 영상 (1~2분)', desc: '실제 강의 일부를 보여주는 맛보기 영상. 랜딩페이지 전환율에 가장 큰 영향', must: true, format: '영상 1080p+' },
+          { key: 'v7', title: '강의 썸네일용 포즈 사진 (표정 다양하게 3장+)', desc: '배경 제거 가능한 사진. 강의 썸네일/광고 배너에 활용됩니다', must: true, format: '이미지' },
+          { key: 'v8', title: '강의 미리보기 영상 (1~2분)', desc: '실제 강의 일부를 보여주는 맛보기 영상. 랜딩페이지 전환율에 가장 큰 영향', must: true, format: '영상' },
         ]
       },
       {
-        title: '카피 소재',
-        icon: '',
-        items: [
+        title: '카피 소재', items: [
           { key: 'w1', title: '강의 한 줄 요약 (강사님이 생각하는)', desc: '히어로 카피 초안으로 활용됩니다', must: true, format: '텍스트' },
           { key: 'w2', title: '"왜 이 강의를 만들었는가" (3줄)', desc: '스토리 섹션에서 진정성을 보여주는 파트입니다', must: true, format: '텍스트' },
           { key: 'w3', title: '수강생이 가장 많이 하는 칭찬', desc: '강사님이 직접 느끼시는 강점. 리뷰 하이라이트에 활용', must: true, format: '텍스트' },
@@ -418,19 +281,17 @@ const PHASES = [
         ]
       },
       {
-        title: '운영/계약',
-        icon: '',
-        items: [
-          { key: 'o1', title: '희망 가격대', desc: '가격 설계 참고용. 원가와 할인가를 함께 알려주시면 할인율 소구에 활용합니다', must: true, format: '숫자' },
+        title: '운영/계약', items: [
+          { key: 'o1', title: '희망 가격대', desc: '가격 설계 참고용. 원가와 할인가를 함께 알려주시면 할인율 소구에 활용합니다', must: true, format: '텍스트' },
           { key: 'o10', title: '할부 옵션 협의', desc: '고가 강의의 경우 "월 OO만원 (N개월)" 표기가 전환율에 큰 영향을 줍니다. 희망하는 할부 구조가 있으면 알려주세요', must: true, format: '텍스트' },
           { key: 'o2', title: '얼리버드/할인 구조 의견', desc: '런칭 프로모션 긴급성 설계에 참고합니다', must: true, format: '텍스트' },
           { key: 'o11', title: '성과 보증/환급 제도 의향', desc: '"OO 달성 못하면 환불" 같은 보증 제도는 전환율을 크게 올립니다. 가능한 범위가 있으면 알려주세요', must: false, format: '텍스트' },
           { key: 'o3', title: '환불 조건 (며칠 이내, 수강률 등)', desc: '랜딩페이지 보증/환불 섹션에 명시됩니다', must: true, format: '텍스트' },
-          { key: 'o4', title: '웨비나/설명회 진행 가능 여부', desc: '런칭 퍼널 설계에 활용됩니다', must: true, format: '예/아니오' },
-          { key: 'o5', title: '광고 출연 동의 (얼굴/이름/성과 노출)', desc: '퍼포먼스 마케팅 집행에 필요합니다', must: true, format: '동의/미동의' },
-          { key: 'o6', title: '기존 DB 규모 (이메일/오픈채팅방 등)', desc: '런칭 초기 모수 확보에 중요합니다', must: true, format: '숫자' },
-          { key: 'o7', title: '타 플랫폼 독점 계약 유무', desc: '법적 리스크 확인용', must: true, format: '예/아니오' },
-          { key: 'o8', title: '희망 오픈 일정', desc: '런칭 로드맵 설계에 반영됩니다', must: true, format: '날짜' },
+          { key: 'o4', title: '웨비나/설명회 진행 가능 여부', desc: '런칭 퍼널 설계에 활용됩니다', must: true, format: '텍스트' },
+          { key: 'o5', title: '광고 출연 동의 (얼굴/이름/성과 노출)', desc: '퍼포먼스 마케팅 집행에 필요합니다', must: true, format: '텍스트' },
+          { key: 'o6', title: '기존 DB 규모 (이메일/오픈채팅방 등)', desc: '런칭 초기 모수 확보에 중요합니다', must: true, format: '텍스트' },
+          { key: 'o7', title: '타 플랫폼 독점 계약 유무', desc: '법적 리스크 확인용', must: true, format: '텍스트' },
+          { key: 'o8', title: '희망 오픈 일정', desc: '런칭 로드맵 설계에 반영됩니다', must: true, format: '텍스트' },
           { key: 'o9', title: '2기/3기 반복 운영 의향', desc: '장기 수익 설계 참고용', must: false, format: '텍스트' },
         ]
       }
@@ -438,72 +299,199 @@ const PHASES = [
   }
 ];
 
-// === STATE ===
-let checked = JSON.parse(localStorage.getItem(STORE_KEY) || '{}');
-let currentPhase = 0; // 0 = all, 1/2/3 = phase
-
-function save() {
-  localStorage.setItem(STORE_KEY, JSON.stringify(checked));
-}
-
-function toggle(key) {
-  checked[key] = !checked[key];
-  save();
-  render();
-}
-
-function setPhase(p) {
-  currentPhase = p;
-  render();
-}
-
+// === HELPERS ===
 function getAllItems() {
   const items = [];
   PHASES.forEach(ph => ph.sections.forEach(sec => sec.items.forEach(it => items.push(it))));
   return items;
 }
-
 function getPhaseItems(phaseId) {
   const items = [];
   const ph = PHASES.find(p => p.id === phaseId);
   if (ph) ph.sections.forEach(sec => sec.items.forEach(it => items.push(it)));
   return items;
 }
+function isSubmitted(key) {
+  const s = submitted[key];
+  return s && (s.text || s.fileUrl);
+}
+function countDone(items) {
+  return items.filter(it => isSubmitted(it.key)).length;
+}
+function needsFile(format) {
+  return /이미지|캡처|영상|PNG/.test(format);
+}
+function needsText(format) {
+  return /텍스트|링크|숫자|목록|연락처|문서|예|동의|날짜/.test(format) || !needsFile(format);
+}
 
-function countChecked(items) {
-  return items.filter(it => checked[it.key]).length;
+// === SETUP ===
+function renderSetup() {
+  const nameField = INSTRUCTOR ? '' : `<input id="nameInput" placeholder="강사명 (예: 머니몬스터)" />`;
+  document.getElementById('app').innerHTML = `
+    <div class="setup">
+      <h2>API 연결</h2>
+      <p>구글 시트의 Apps Script 배포 URL을 입력해주세요.</p>
+      ${nameField}
+      <input id="apiInput" placeholder="https://script.google.com/macros/s/..." />
+      <button onclick="saveSetup()">연결</button>
+    </div>
+  `;
+}
+function saveSetup() {
+  const url = document.getElementById('apiInput').value.trim();
+  if (!url.startsWith('https://script.google.com/')) {
+    alert('올바른 Apps Script URL을 입력해주세요.');
+    return;
+  }
+  const nameInput = document.getElementById('nameInput');
+  if (nameInput && !nameInput.value.trim()) {
+    alert('강사명을 입력해주세요.');
+    return;
+  }
+  if (nameInput) {
+    const name = nameInput.value.trim();
+    const newUrl = new URL(location.href);
+    newUrl.searchParams.set('name', name);
+    history.replaceState(null, '', newUrl);
+    location.reload();
+    return;
+  }
+  API_URL = url;
+  localStorage.setItem(API_STORE_KEY, url);
+  loadData();
+}
+
+// === API ===
+function loadData() {
+  document.getElementById('app').innerHTML = '<div class="state-msg">불러오는 중...</div>';
+  fetch(API_URL + '?name=' + encodeURIComponent(INSTRUCTOR))
+    .then(r => r.json())
+    .then(json => {
+      if (json.error) {
+        document.getElementById('app').innerHTML = '<div class="state-msg">' + json.error + '</div>';
+        return;
+      }
+      submitted = json.items || {};
+      render();
+    })
+    .catch(() => {
+      // API 없어도 오프라인 모드로 동작
+      submitted = {};
+      render();
+    });
+}
+
+function saveText(key, title) {
+  const el = document.getElementById('input_' + key);
+  if (!el) return;
+  const text = el.value.trim();
+  if (!text) return;
+
+  saving[key] = true;
+  renderItemStatus(key);
+
+  fetch(API_URL, {
+    method: 'POST',
+    body: JSON.stringify({ action: 'saveText', instructor: INSTRUCTOR, key: key, title: title, text: text }),
+    mode: 'no-cors'
+  }).then(() => {
+    submitted[key] = submitted[key] || {};
+    submitted[key].text = text;
+    submitted[key].date = '방금';
+    saving[key] = false;
+    render();
+  }).catch(() => {
+    submitted[key] = submitted[key] || {};
+    submitted[key].text = text;
+    saving[key] = false;
+    render();
+  });
+}
+
+function uploadFile(key, title, input) {
+  const files = input.files;
+  if (!files.length) return;
+
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+    if (file.size > 50 * 1024 * 1024) {
+      alert('파일 크기가 50MB를 초과합니다: ' + file.name);
+      continue;
+    }
+
+    saving[key] = true;
+    renderItemStatus(key);
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const base64 = e.target.result.split(',')[1];
+      fetch(API_URL, {
+        method: 'POST',
+        body: JSON.stringify({
+          action: 'uploadFile',
+          instructor: INSTRUCTOR,
+          key: key,
+          title: title,
+          fileData: base64,
+          fileName: file.name,
+          mimeType: file.type
+        }),
+        mode: 'no-cors'
+      }).then(() => {
+        submitted[key] = submitted[key] || {};
+        submitted[key].fileName = file.name;
+        submitted[key].date = '방금';
+        saving[key] = false;
+        render();
+      }).catch(() => {
+        submitted[key] = submitted[key] || {};
+        submitted[key].fileName = file.name;
+        saving[key] = false;
+        render();
+      });
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+function renderItemStatus(key) {
+  const statusEl = document.getElementById('status_' + key);
+  if (statusEl && saving[key]) {
+    statusEl.innerHTML = '<span class="uploading"><span class="spinner"></span> 저장 중...</span>';
+  }
 }
 
 // === RENDER ===
+function setPhase(p) { currentPhase = p; render(); }
+
 function render() {
   const all = getAllItems();
-  const totalChecked = countChecked(all);
+  const totalDone = countDone(all);
   const totalItems = all.length;
-  const pct = totalItems > 0 ? Math.round((totalChecked / totalItems) * 100) : 0;
-
+  const pct = totalItems > 0 ? Math.round((totalDone / totalItems) * 100) : 0;
   const phases = currentPhase === 0 ? PHASES : PHASES.filter(p => p.id === currentPhase);
 
   let html = `
     <div class="hdr">
       <div class="hdr-badge">ONBOARDING CHECKLIST</div>
       <div class="hdr-name">강의 준비 자료 체크리스트</div>
-      <div class="hdr-sub">랜딩페이지 제작에 필요한 자료 목록입니다.<br>단계별로 준비해주시면 됩니다.</div>
+      <div class="hdr-sub">각 항목에 텍스트를 입력하거나 파일을 업로드해주세요.<br>저장 버튼을 누르면 자동으로 전달됩니다.</div>
       <div class="hdr-instructor">${INSTRUCTOR}</div>
     </div>
     <div class="progress-wrap">
       <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
-      <div class="progress-text"><b>${totalChecked}</b> / ${totalItems} 완료 (${pct}%)</div>
+      <div class="progress-text"><b>${totalDone}</b> / ${totalItems} 제출 완료 (${pct}%)</div>
     </div>
-
     <div class="phase-tabs">
       <button class="phase-tab ${currentPhase === 0 ? 'active' : ''}" onclick="setPhase(0)">
-        전체<span class="tab-count">${totalChecked}/${totalItems}</span>
+        전체<span class="tab-count">${totalDone}/${totalItems}</span>
       </button>
       ${PHASES.map(ph => {
         const phItems = getPhaseItems(ph.id);
-        const phChecked = countChecked(phItems);
+        const phDone = countDone(phItems);
         return `<button class="phase-tab ${currentPhase === ph.id ? 'active' : ''}" onclick="setPhase(${ph.id})">
-          ${ph.label}<span class="tab-count">${phChecked}/${phItems.length}</span>
+          ${ph.label}<span class="tab-count">${phDone}/${phItems.length}</span>
         </button>`;
       }).join('')}
     </div>
@@ -512,38 +500,87 @@ function render() {
   phases.forEach(ph => {
     html += `
       <div class="phase-desc">
-        <div class="phase-desc-title">${ph.label} \u2014 ${ph.when}</div>
+        <div class="phase-desc-title">${ph.label} - ${ph.when}</div>
         <div class="phase-desc-text">${ph.desc}</div>
       </div>
     `;
-
     ph.sections.forEach(sec => {
-      const secChecked = countChecked(sec.items);
+      const secDone = countDone(sec.items);
       html += `
         <div class="section">
           <div class="sec-header">
             <div class="sec-title">${sec.title}</div>
-            <div class="sec-count">${secChecked}/${sec.items.length}</div>
+            <div class="sec-count">${secDone}/${sec.items.length}</div>
           </div>
       `;
-
       sec.items.forEach(item => {
-        const isChecked = !!checked[item.key];
+        const done = isSubmitted(item.key);
+        const s = submitted[item.key] || {};
+        const hasFile = needsFile(item.format);
+        const hasText = needsText(item.format);
+        const fileAccept = /영상/.test(item.format) ? 'video/*,image/*' : 'image/*,.pdf,.doc,.docx,.xls,.xlsx,.hwp';
+
         html += `
-          <div class="item ${isChecked ? 'checked' : ''}">
-            <div class="chk ${isChecked ? 'on' : ''}" onclick="toggle('${item.key}')">\u2713</div>
+          <div class="item">
+            <div class="status-icon ${done ? 'done' : ''}">\u2713</div>
             <div class="item-body">
               <div class="item-title">${item.title}</div>
               <div class="item-desc">${item.desc}</div>
               <div class="item-tags">
                 ${item.must ? '<span class="tag tag-must">필수</span>' : '<span class="tag tag-nice">선택</span>'}
-                <span class="tag tag-format">${item.format}</span>
+                ${done ? '<span class="tag tag-done">제출완료</span>' : ''}
+              </div>
+              <div class="input-area">
+        `;
+
+        // Text input
+        if (hasText) {
+          const rows = item.format.includes('300') || item.key === 'c3' || item.key === 'g5' ? 5 : 2;
+          html += `
+            <textarea id="input_${item.key}" class="text-input" rows="${rows}"
+              placeholder="여기에 입력해주세요...">${s.text || ''}</textarea>
+            <div class="input-row">
+              <button class="save-btn ${s.text ? 'saved' : ''}" onclick="saveText('${item.key}','${item.title.replace(/'/g, "\\'")}')">
+                ${s.text ? '수정 저장' : '저장'}
+              </button>
+              ${s.date && s.text ? '<span class="saved-text">저장됨 (' + s.date + ')</span>' : ''}
+              <span id="status_${item.key}"></span>
+            </div>
+          `;
+        }
+
+        // File upload
+        if (hasFile) {
+          html += `
+            <div style="margin-top:${hasText ? '10' : '0'}px">
+              <label class="file-label">
+                파일 선택 (여러 장 가능)
+                <input type="file" class="file-hidden" accept="${fileAccept}" multiple
+                  onchange="uploadFile('${item.key}','${item.title.replace(/'/g, "\\'")}',this)" />
+              </label>
+            </div>
+          `;
+          if (s.fileName) {
+            html += `
+              <div class="file-list">
+                <div class="file-item">
+                  ${s.fileUrl ? '<a href="' + s.fileUrl + '" target="_blank">' + s.fileName + '</a>' : '<span>' + s.fileName + '</span>'}
+                  <span class="file-date">${s.date || ''}</span>
+                </div>
+              </div>
+            `;
+          }
+          if (!hasText) {
+            html += `<span id="status_${item.key}"></span>`;
+          }
+        }
+
+        html += `
               </div>
             </div>
           </div>
         `;
       });
-
       html += `</div>`;
     });
   });
@@ -551,7 +588,7 @@ function render() {
   html += `
     <div class="bottom-bar">
       <div class="bottom-text"><b>Flowmus</b> 부업클래스</div>
-      <div class="bottom-text">${totalChecked}/${totalItems}</div>
+      <div class="bottom-text">${totalDone}/${totalItems}</div>
     </div>
   `;
 
@@ -559,7 +596,18 @@ function render() {
 }
 
 // === INIT ===
-render();
+function init() {
+  if (!INSTRUCTOR) {
+    renderSetup();
+    return;
+  }
+  if (!API_URL) {
+    renderSetup();
+    return;
+  }
+  loadData();
+}
+init();
 </script>
 </body>
 </html>
