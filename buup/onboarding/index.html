@@ -338,10 +338,11 @@ const PHASES = [
         title: '수강생 사례',
         icon: '',
         items: [
-          { key: 's1', title: '수강생 성과 사례 3건 이상', desc: 'Before \u2192 After 형태, 구체적 숫자 포함. "월 0원 \u2192 월 150만원" 식으로', must: true, format: '텍스트/캡처' },
-          { key: 's2', title: '수강생 후기 캡처 5장 이상', desc: '카톡, DM, 커뮤니티 후기 등. 실명/닉네임 노출 가능한 것', must: true, format: '이미지/캡처' },
-          { key: 's3', title: '수강생 인터뷰 가능자 1~2명', desc: '영상 후기 촬영에 협조 가능한 분이 있으면 전환율이 크게 올라갑니다', must: false, format: '연락처' },
-          { key: 's4', title: '기존 강의 수강생 수', desc: '이전에 강의 경험이 있으시면 수강생 규모를 알려주세요', must: false, format: '숫자' },
+          { key: 's1', title: '수강생 성과 사례 5건 이상 (Before/After)', desc: '"월 0원에서 월 150만원" 같은 구체적 숫자 포함. 초보자/경험자/회의적이었던 분 등 유형별로 있으면 좋습니다', must: true, format: '텍스트/캡처' },
+          { key: 's2', title: '수강생 후기 캡처 10장 이상', desc: '카톡, DM, 커뮤니티, 네이버카페 후기 등. 많을수록 전환율이 올라갑니다. 최소 10장, 가능하면 20장+', must: true, format: '이미지/캡처' },
+          { key: 's3', title: '수강생 인터뷰 가능자 1~2명', desc: '영상 후기 촬영에 협조 가능한 분. 실제 얼굴이 나오는 후기는 전환율이 크게 올라갑니다', must: true, format: '연락처' },
+          { key: 's4', title: '기존 강의 수강생 수', desc: '이전에 강의 경험이 있으시면 수강생 규모를 알려주세요. "누적 OOO명 수강" 뱃지에 활용됩니다', must: false, format: '숫자' },
+          { key: 's5', title: '커뮤니티/오픈채팅방 활성화 캡처', desc: '운영 중인 커뮤니티가 있다면 활발한 대화 캡처. 사후관리가 되는 강의임을 증명합니다', must: false, format: '이미지/캡처' },
         ]
       }
     ]
@@ -358,9 +359,10 @@ const PHASES = [
         items: [
           { key: 'c1', title: '총 강의 기간 (몇 주)', desc: '예: 4주, 6주, 8주 등', must: true, format: '텍스트' },
           { key: 'c2', title: 'VOD / 라이브 / 혼합 여부', desc: '어떤 형태로 진행하실지, 혼합이면 비율도 알려주세요', must: true, format: '텍스트' },
-          { key: 'c3', title: '커리큘럼 (챕터별 강의 제목 + 1줄 설명)', desc: '랜딩페이지 커리큘럼 아코디언에 그대로 들어갑니다', must: true, format: '텍스트/문서' },
+          { key: 'c3', title: '커리큘럼 (주차별 강의 제목 + 1줄 설명 + 중요도)', desc: '주차별로 묶어서 작성해주세요. 각 강의마다 중요도(상/중/하)도 표기해주시면 랜딩에서 강조 포인트로 활용합니다', must: true, format: '텍스트/문서' },
           { key: 'c4', title: '강의당 예상 시간', desc: '총 학습시간을 계산해서 "총 OO시간 분량"으로 표기합니다', must: true, format: '숫자' },
           { key: 'c5', title: '수강 후 결과물 (뭘 만들 수 있는지)', desc: '랜딩 히어로 섹션의 핵심 카피가 됩니다. 가장 중요한 항목입니다', must: true, format: '텍스트' },
+          { key: 'c10', title: '맛보기 강의 1개 (통째로 공개 가능한 것)', desc: '가장 임팩트 있는 강의 1개를 무료 공개용으로 선정해주세요. 결제 전 신뢰를 만드는 핵심 장치입니다', must: true, format: '영상' },
           { key: 'c6', title: '제공 부교재 목록', desc: '템플릿, 엑셀, PDF, 노션 등 제공하는 자료가 있으면 혜택 섹션에 넣습니다', must: true, format: '목록' },
           { key: 'c7', title: '과제/미션 구조', desc: '실습 과제가 있으면 "실전형 강의" 소구에 활용됩니다', must: false, format: '텍스트' },
           { key: 'c8', title: '커뮤니티/QnA 운영 방식', desc: '오픈채팅방, 슬랙, 디스코드 등 사후관리 방식을 알려주세요', must: true, format: '텍스트' },
@@ -408,6 +410,8 @@ const PHASES = [
           { key: 'w2', title: '"왜 이 강의를 만들었는가" (3줄)', desc: '스토리 섹션에서 진정성을 보여주는 파트입니다', must: true, format: '텍스트' },
           { key: 'w3', title: '수강생이 가장 많이 하는 칭찬', desc: '강사님이 직접 느끼시는 강점. 리뷰 하이라이트에 활용', must: true, format: '텍스트' },
           { key: 'w4', title: '수강 전 가장 큰 걱정 3가지 + 답변', desc: '반론 처리 섹션. 망설이는 수강생의 결정을 도와줍니다', must: true, format: '텍스트' },
+          { key: 'w6', title: '"다른 강의와 뭐가 다른가요?" 답변', desc: '경쟁 강의를 직접 언급하지 않아도 됩니다. 이 강의만의 고유한 강점을 적어주세요', must: true, format: '텍스트' },
+          { key: 'w7', title: '강의를 안 들으면 생기는 문제 (공포 소구)', desc: '"혼자 하면 OO개월 허비합니다" 같은 현실적인 경고. 광고 카피에 활용됩니다', must: false, format: '텍스트' },
           { key: 'w5', title: '수강생에게 하고 싶은 말', desc: '랜딩페이지 클로징 감성 섹션에 활용됩니다', must: false, format: '텍스트' },
         ]
       },
@@ -415,8 +419,10 @@ const PHASES = [
         title: '운영/계약',
         icon: '',
         items: [
-          { key: 'o1', title: '희망 가격대', desc: '가격 설계 참고용', must: true, format: '숫자' },
+          { key: 'o1', title: '희망 가격대', desc: '가격 설계 참고용. 원가와 할인가를 함께 알려주시면 할인율 소구에 활용합니다', must: true, format: '숫자' },
+          { key: 'o10', title: '할부 옵션 협의', desc: '고가 강의의 경우 "월 OO만원 (N개월)" 표기가 전환율에 큰 영향을 줍니다. 희망하는 할부 구조가 있으면 알려주세요', must: true, format: '텍스트' },
           { key: 'o2', title: '얼리버드/할인 구조 의견', desc: '런칭 프로모션 긴급성 설계에 참고합니다', must: true, format: '텍스트' },
+          { key: 'o11', title: '성과 보증/환급 제도 의향', desc: '"OO 달성 못하면 환불" 같은 보증 제도는 전환율을 크게 올립니다. 가능한 범위가 있으면 알려주세요', must: false, format: '텍스트' },
           { key: 'o3', title: '환불 조건 (며칠 이내, 수강률 등)', desc: '랜딩페이지 보증/환불 섹션에 명시됩니다', must: true, format: '텍스트' },
           { key: 'o4', title: '웨비나/설명회 진행 가능 여부', desc: '런칭 퍼널 설계에 활용됩니다', must: true, format: '예/아니오' },
           { key: 'o5', title: '광고 출연 동의 (얼굴/이름/성과 노출)', desc: '퍼포먼스 마케팅 집행에 필요합니다', must: true, format: '동의/미동의' },
