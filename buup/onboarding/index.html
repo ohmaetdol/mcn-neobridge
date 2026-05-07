@@ -85,15 +85,48 @@
 <div id="toast" class="toast"></div>
 
 <script>
+const API_URL = 'https://script.google.com/macros/s/AKfycby_lqwuKp2lxXfOb-gGx3lUK8xIutMDmVxsp8OcqbXFrWnBUo7rGTIZAGKMRQwHk_Z-LQ/exec';
 const INSTRUCTOR = new URLSearchParams(location.search).get('name') || '강사님';
 const SK = 'buup_ob_' + encodeURIComponent(INSTRUCTOR);
-let data = JSON.parse(localStorage.getItem(SK) || '{}'); // { key: { text, fileOk } }
+let data = JSON.parse(localStorage.getItem(SK) || '{}');
 let phase = 0;
+let synced = false;
 
 function save() { localStorage.setItem(SK, JSON.stringify(data)); }
 function get(key) { return data[key] || {}; }
 function isDone(key) { const d = get(key); return !!(d.text && d.text.trim()) || !!d.fileOk; }
 
+// 시트에서 기존 데이터 불러오기
+function loadFromSheet() {
+  fetch(API_URL + '?name=' + encodeURIComponent(INSTRUCTOR))
+    .then(r => r.json())
+    .then(json => {
+      if (json.items) {
+        Object.keys(json.items).forEach(key => {
+          const item = json.items[key];
+          if (item.text && item.text.trim()) {
+            if (!data[key]) data[key] = {};
+            data[key].text = item.text;
+          }
+        });
+        save();
+        synced = true;
+        render();
+      }
+    })
+    .catch(() => {});
+}
+
+// 시트에 텍스트 저장
+function syncToSheet(key, title, text) {
+  fetch(API_URL, {
+    method: 'POST',
+    body: JSON.stringify({ action: 'saveText', instructor: INSTRUCTOR, key: key, title: title, text: text }),
+    mode: 'no-cors'
+  }).catch(() => {});
+}
+
+let saveTimers = {};
 function onInput(key) {
   const el = document.getElementById('t_' + key);
   if (!el) return;
@@ -102,6 +135,17 @@ function onInput(key) {
   save();
   updateStatus(key);
   updateProgress();
+  // 1.5초 후 시트에 자동 저장 (타이핑 중에는 안 보냄)
+  clearTimeout(saveTimers[key]);
+  saveTimers[key] = setTimeout(() => {
+    const item = findItem(key);
+    if (item) syncToSheet(key, item.title, el.value);
+  }, 1500);
+}
+
+function findItem(key) {
+  for (const ph of PHASES) for (const sec of ph.sections) for (const it of sec.items) if (it.key === key) return it;
+  return null;
 }
 
 function toggleFile(key) {
@@ -370,6 +414,7 @@ function render() {
 }
 
 render();
+loadFromSheet();
 </script>
 </body>
 </html>
