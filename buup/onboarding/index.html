@@ -87,7 +87,7 @@
 <script>
 const API_URL = 'https://script.google.com/macros/s/AKfycby_lqwuKp2lxXfOb-gGx3lUK8xIutMDmVxsp8OcqbXFrWnBUo7rGTIZAGKMRQwHk_Z-LQ/exec';
 const INSTRUCTOR = new URLSearchParams(location.search).get('name') || '강사님';
-const SK = 'buup_ob2_' + encodeURIComponent(INSTRUCTOR);
+const SK = 'buup_ob3_' + encodeURIComponent(INSTRUCTOR);
 let data = JSON.parse(localStorage.getItem(SK) || '{}');
 let phase = 0;
 let synced = false;
