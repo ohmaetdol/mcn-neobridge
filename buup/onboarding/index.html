@@ -143,7 +143,16 @@ function saveToSheet(key) {
   const btn = event.target;
   btn.textContent = '저장 중...';
   btn.disabled = true;
-  syncToSheet(key, item.title, text);
+  if (text.trim()) {
+    syncToSheet(key, item.title, text);
+  } else {
+    // 텍스트 비었으면 시트에서 삭제
+    fetch(API_URL, {
+      method: 'POST',
+      body: JSON.stringify({ action: 'deleteItem', instructor: INSTRUCTOR, key: key }),
+      mode: 'no-cors'
+    }).catch(function(){});
+  }
   // no-cors라 응답 확인 불가 — 0.5초 후 완료 표시
   setTimeout(function() {
     btn.textContent = '저장 완료';
