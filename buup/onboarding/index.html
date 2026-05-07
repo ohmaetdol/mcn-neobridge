@@ -59,10 +59,10 @@
   .text-input:focus { border-color: #3182f6; background: #fff; }
   .text-input::placeholder { color: #b0b8c1; }
 
-  .file-check { margin-top: 10px; display: flex; align-items: center; gap: 8px; }
-  .fc-btn { width: 20px; height: 20px; border-radius: 6px; border: 2px solid #d1d6db; background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 11px; color: transparent; transition: all 0.2s; }
+  .file-check { margin-top: 10px; display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 8px 0; }
+  .fc-btn { width: 24px; height: 24px; border-radius: 7px; border: 2px solid #d1d6db; background: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 13px; color: transparent; transition: all 0.2s; flex-shrink: 0; }
   .fc-btn.on { border-color: #3182f6; background: #3182f6; color: #fff; }
-  .fc-label { font-size: 12px; color: #6b7684; }
+  .fc-label { font-size: 13px; color: #6b7684; cursor: pointer; }
 
   .phase-desc { margin: 12px 12px 0; padding: 16px; background: #fff; border-radius: 16px; border-left: 4px solid #f7971e; }
   .phase-desc-title { font-size: 14px; font-weight: 800; color: #191f28; margin-bottom: 4px; }
@@ -98,23 +98,24 @@ function isDone(key) { const d = get(key); return !!(d.text && d.text.trim()) ||
 
 // 시트에서 기존 데이터 불러오기
 function loadFromSheet() {
-  fetch(API_URL + '?name=' + encodeURIComponent(INSTRUCTOR))
-    .then(r => r.json())
-    .then(json => {
-      if (json.items) {
-        Object.keys(json.items).forEach(key => {
-          const item = json.items[key];
-          if (item.text && item.text.trim()) {
-            if (!data[key]) data[key] = {};
-            data[key].text = item.text;
-          }
-        });
-        save();
-        synced = true;
-        render();
-      }
-    })
-    .catch(() => {});
+  try {
+    fetch(API_URL + '?name=' + encodeURIComponent(INSTRUCTOR))
+      .then(function(r) { return r.json(); })
+      .then(function(json) {
+        if (json && json.items) {
+          Object.keys(json.items).forEach(function(key) {
+            var item = json.items[key];
+            if (item.text && item.text.trim()) {
+              if (!data[key]) data[key] = {};
+              data[key].text = item.text;
+            }
+          });
+          save();
+          render();
+        }
+      })
+      .catch(function() {});
+  } catch(e) {}
 }
 
 // 시트에 텍스트 저장
@@ -389,8 +390,8 @@ function render() {
           h += `<textarea id="t_${item.key}" class="text-input" rows="${rows}" placeholder="여기에 입력해주세요..." oninput="onInput('${item.key}')">${d.text||''}</textarea>`;
         }
         if (showFile) {
-          h += `<div class="file-check">
-            <div class="fc-btn ${d.fileOk?'on':''}" onclick="toggleFile('${item.key}')">\u2713</div>
+          h += `<div class="file-check" onclick="toggleFile('${item.key}')">
+            <div class="fc-btn ${d.fileOk?'on':''}">\u2713</div>
             <span class="fc-label">${d.fileOk ? '파일 준비 완료' : '파일 준비되면 체크해주세요'}</span>
           </div>`;
         }
