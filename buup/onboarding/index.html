@@ -152,8 +152,7 @@ function toggleFile(key) {
   if (!data[key]) data[key] = {};
   data[key].fileOk = !data[key].fileOk;
   save();
-  updateStatus(key);
-  updateProgress();
+  render();
 }
 
 function updateStatus(key) {
