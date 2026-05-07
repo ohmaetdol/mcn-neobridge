@@ -187,6 +187,7 @@ const PHASES = [
     sections: [
       { title: '프로필', items: [
         { key: 'p1', title: '활동명 / 본명', desc: '랜딩페이지 크리에이터 소개에 표기됩니다', must: true, type: 'text' },
+        { key: 'p9', title: '이메일 주소', desc: '계약서 발송 및 주요 안내에 사용됩니다', must: true, type: 'text' },
         { key: 'p2', title: '한 줄 소개 (20자 이내)', desc: '썸네일, 배너, 광고 소재에 활용됩니다', must: true, type: 'text' },
         { key: 'p3', title: '경력 요약 (3~5줄)', desc: '본업 경력, 핵심 성과 위주로 작성해주세요', must: true, type: 'text', rows: 4 },
         { key: 'p4', title: '나의 스토리 (시작 계기 > 전환점 > 현재)', desc: '랜딩페이지 스토리 섹션에 활용됩니다. 수강생이 공감할 수 있는 이야기가 좋습니다', must: true, type: 'text', rows: 6 },
@@ -196,19 +197,20 @@ const PHASES = [
         { key: 'p8', title: '미디어 노출 이력 (기사/방송/인터뷰)', desc: '있으시면 권위 뱃지로 활용합니다', must: false, type: 'text' },
       ]},
       { title: '신뢰 증빙', items: [
-        { key: 't1', title: '소득/매출 증빙 캡처 3장 이상', desc: '정산내역, 매출 대시보드, 통장 입금 내역 등. 민감한 부분은 가려도 됩니다', must: true, type: 'file' },
+        { key: 't5', title: '공식 증빙서류 (부가세신고/종소세신고/소득금액증명원 중 1개)', desc: '외부 공개되지 않습니다. 내부 강사 검증 절차에만 사용됩니다. 3개 중 1개만 제출해주시면 됩니다', must: true, type: 'file' },
+        { key: 't6', title: '추가 증빙 (부동산 등기/차량 사진/입금내역 등)', desc: '소득을 뒷받침하는 추가 자료가 있으면 신뢰도가 크게 올라갑니다. 선택사항입니다', must: false, type: 'file' },
+        { key: 't1', title: '소득/매출 화면 캡처 3장 이상', desc: '정산내역, 매출 대시보드, 통장 입금 내역 등. 민감한 부분은 가려도 됩니다', must: true, type: 'file' },
         { key: 't2', title: '증빙 기간 (최근 몇 개월치인지)', desc: '1~2개월이 아닌 지속적 수익임을 보여주는 것이 중요합니다', must: true, type: 'text' },
         { key: 't3', title: '대표 숫자 3개', desc: '예: 월수익 OO만원 / 경력 OO년 / 수강생 OO명. 랜딩 상단 핵심 뱃지에 들어갑니다', must: true, type: 'text' },
         { key: 't4', title: '자격증/수상/인증 내역', desc: '공식 자격이나 수상 이력이 있으면 권위 보조 요소로 활용합니다', must: false, type: 'file' },
-        { key: 't5', title: '사업자등록증 / 세금신고서 (내부 검증용)', desc: '외부 공개되지 않습니다. 내부 강사 검증 절차에만 사용됩니다', must: true, type: 'file' },
       ]},
       { title: '수강생 사례', items: [
         { key: 's1', title: '수강생 성과 사례 5건 이상 (Before/After)', desc: '"월 0원에서 월 150만원" 같은 구체적 숫자 포함', must: true, type: 'both', rows: 5 },
         { key: 's2', title: '수강생 후기 캡처 10장 이상', desc: '카톡, DM, 커뮤니티, 네이버카페 후기 등. 많을수록 전환율이 올라갑니다', must: true, type: 'file' },
-        { key: 's3', title: '수강생 인터뷰 가능자 1~2명', desc: '영상 후기 촬영에 협조 가능한 분의 연락처', must: true, type: 'text' },
+        { key: 's3', title: '수강생 후기로 나와줄 수 있는 분 1~2명', desc: '영상/텍스트 후기에 출연 가능한 수강생이 있는지, 있으면 연락처도 함께 알려주세요', must: true, type: 'text' },
         { key: 's4', title: '기존 강의 수강생 수', desc: '"누적 OOO명 수강" 뱃지에 활용됩니다', must: false, type: 'text' },
         { key: 's5', title: '커뮤니티/오픈채팅방 활성화 캡처', desc: '운영 중인 커뮤니티가 있다면 활발한 대화 캡처', must: false, type: 'file' },
-        { key: 's6', title: '세미나/강연/워크숍 경험 여부', desc: '오프라인/온라인 세미나 진행 경험이 있으시면 알려주세요', must: true, type: 'text' },
+        { key: 's6', title: '세미나/강연/워크숍 경험 및 향후 일정', desc: '기존 경험이 있으시면 알려주세요. 유료강의나 세미나 예정 일정이 있다면 함께 적어주세요', must: true, type: 'text', rows: 3 },
         { key: 's7', title: '세미나/강연 현장 사진', desc: '진행했던 세미나, 강연, 워크숍 현장 사진', must: false, type: 'file' },
       ]}
     ]
