@@ -80,13 +80,13 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR','App
 const D=[
 {id:1,title:"킥",time:"0:00~0:30",stage:"패턴 인터럽트 → 숫자 충격 + 이혼 반전",
 memo:[
-{k:"설정",v:"스튜디오. 프로필 카드를 펼쳐놓고 하나 집어 들면서 시작. 인사 없이 바로."},
-{k:"촬영",v:"이세령 정면. 숫자마다 컷 전환 가능하도록 여유 있게. 프로필 카드 집어드는 동작 위주."},
+{k:"설정",v:"스튜디오. 인사 없이 바로 시작."},
+{k:"촬영",v:"이세령 정면. 숫자마다 컷 전환 가능하도록 여유 있게."},
 {k:"톤",v:"또박또박. 카메라 정면. 숫자 하나마다 끊어서. '이혼했습니다'에서 톤 살짝 낮추기."},
 {k:"주의",v:"인사 절대 금지. '연봉 1억 2천'이 첫 마디. '이혼했습니다' 편집 자막 빨간색."}
 ],
 qs:[
-{n:1,tag:"PEAK",q:"(프로필 카드 집어 들며) 연봉 1억 2천. 키 182. 서울대 졸업. 이 남자랑 결혼했습니다. (한 박자) 3년 후 이혼했습니다.",hint:"숫자 또박또박. '이혼했습니다'에서 톤 낮추기. 편집 자막으로 숫자 강조 + '3년 후 이혼' 빨간 자막."},
+{n:1,tag:"PEAK",q:"연봉 1억 2천. 키 182. 서울대 졸업. 이 남자랑 결혼했습니다. (한 박자) 3년 후 이혼했습니다.",hint:"숫자 또박또박. '이혼했습니다'에서 톤 낮추기. 편집 자막으로 숫자 강조 + '3년 후 이혼' 빨간 자막."},
 {n:2,tag:"PD",q:"진짜요? 조건 다 맞았는데 이혼이요?",hint:"'성혼 축하 문자는 보내는데, 이혼 위로 문자는 안 보냅니다.' 캐치프레이즈 나올 타이밍. '오늘 처음으로 이 이야기를 합니다.'"}
 ]},
 
@@ -201,7 +201,7 @@ D.forEach(loc=>{
 const extras=document.createElement('div');
 extras.innerHTML=`
 <div class="ban-box" style="margin-top:32px">
-<div class="memo-r"><div class="memo-k" style="min-width:60px">절대금지</div><div class="memo-v">"안녕하세요" 인사 — 프로필 카드 집어 들면서 바로 시작</div></div>
+<div class="memo-r"><div class="memo-k" style="min-width:60px">절대금지</div><div class="memo-v">"안녕하세요" 인사 — "연봉 1억 2천"으로 바로 시작</div></div>
 <div class="memo-r"><div class="memo-k" style="min-width:60px">절대금지</div><div class="memo-v">"구독/좋아요" 멘트 — 영상 내 0회</div></div>
 <div class="memo-r"><div class="memo-k" style="min-width:60px">절대금지</div><div class="memo-v">경쟁사 실명(듀오/가연/엔노블/제이노블) — "메이저 결정사"로만</div></div>
 <div class="memo-r"><div class="memo-k" style="min-width:60px">절대금지</div><div class="memo-v">특정 회원 실명/정보 — 가명 + 익명 처리</div></div>
