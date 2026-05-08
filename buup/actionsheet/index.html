@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>액션시트 — Flowmus 부업클래스</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif;
+    color: #191f28; background: #f2f4f6; font-size: 15px;
+    line-height: 1.6; letter-spacing: -0.3px;
+    -webkit-text-size-adjust: 100%; min-height: 100vh; padding-bottom: 80px;
+  }
+
+  .hdr { background: #191f28; color: #fff; padding: 20px 20px 16px; position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #2d333b; }
+  .hdr-top { display: flex; justify-content: space-between; align-items: center; }
+  .hdr-badge { font-size: 11px; font-weight: 700; color: #3182f6; letter-spacing: 1px; }
+  .hdr-sync { font-size: 12px; color: #8b95a1; cursor: pointer; padding: 4px 10px; border: 1px solid #2d333b; border-radius: 8px; }
+  .hdr-sync:active { color: #3182f6; border-color: #3182f6; }
+  .hdr-name { font-size: 22px; font-weight: 800; margin-top: 6px; letter-spacing: -1px; }
+  .hdr-sub { font-size: 12px; color: #6b7684; margin-top: 2px; }
+  .hdr-instructor { display: inline-block; margin-top: 8px; padding: 4px 12px; background: #2d333b; border-radius: 8px; font-size: 13px; font-weight: 700; color: #3182f6; }
+
+  .progress-wrap { background: #191f28; padding: 0 20px 16px; }
+  .progress-bar { background: #2d333b; height: 6px; border-radius: 3px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, #3182f6, #00b894); border-radius: 3px; transition: width 0.4s ease; }
+  .progress-text { font-size: 12px; color: #6b7684; margin-top: 6px; text-align: right; }
+  .progress-text b { color: #3182f6; }
+
+  .stats { display: flex; gap: 8px; padding: 12px 12px 4px; }
+  .stat-card { flex: 1; background: #fff; border-radius: 12px; padding: 12px; text-align: center; }
+  .stat-num { font-size: 22px; font-weight: 800; }
+  .stat-num.red { color: #e8344e; }
+  .stat-num.orange { color: #f7971e; }
+  .stat-num.green { color: #00b894; }
+  .stat-label { font-size: 11px; color: #8b95a1; margin-top: 2px; }
+
+  .sec { margin: 12px 12px 0; }
+  .sec-header { display: flex; justify-content: space-between; align-items: center; padding: 14px 16px; background: #fff; border-radius: 16px 16px 0 0; border-bottom: 1px solid #f2f4f6; }
+  .sec-title { font-size: 15px; font-weight: 800; color: #191f28; letter-spacing: -0.5px; }
+  .sec-count { font-size: 12px; font-weight: 700; color: #3182f6; background: #f2f7ff; padding: 2px 10px; border-radius: 12px; }
+
+  .card { background: #fff; padding: 14px 16px; border-bottom: 1px solid #f2f4f6; display: flex; gap: 12px; align-items: flex-start; }
+  .card:last-child { border-bottom: none; border-radius: 0 0 16px 16px; }
+  .card.done { opacity: 0.45; }
+
+  .chk { width: 28px; height: 28px; border-radius: 8px; border: 2px solid #d1d6db; background: #fff; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; margin-top: 1px; cursor: pointer; transition: all 0.2s; color: transparent; }
+  .chk.progress { border-color: #f7971e; background: #fff8eb; color: #f7971e; }
+  .chk.complete { border-color: #00b894; background: #00b894; color: #fff; cursor: pointer; }
+
+  .card-body { flex: 1; min-width: 0; }
+  .card-title { font-size: 14px; font-weight: 700; color: #191f28; word-break: keep-all; line-height: 1.4; }
+  .card-meta { display: flex; gap: 6px; margin-top: 5px; flex-wrap: wrap; align-items: center; }
+  .tag { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 6px; white-space: nowrap; }
+  .tag-date { background: #f2f4f6; color: #4e5968; }
+  .tag-dday { background: #fff0f0; color: #e8344e; font-weight: 800; }
+  .tag-dday.soon { background: #fff8eb; color: #f7971e; }
+  .tag-dday.safe { background: #edf8f0; color: #1b8a4a; }
+  .tag-dday.done { background: #f2f4f6; color: #8b95a1; }
+  .tag-status { background: #f2f7ff; color: #3182f6; }
+  .card-note { margin-top: 4px; font-size: 12px; color: #8b95a1; line-height: 1.5; word-break: keep-all; }
+
+  .state-msg { text-align: center; padding: 60px 20px; color: #6b7684; font-size: 14px; }
+
+  .bottom-bar { position: fixed; bottom: 0; left: 0; right: 0; background: #191f28; padding: 12px 20px; z-index: 100; border-top: 1px solid #2d333b; display: flex; justify-content: space-between; align-items: center; }
+  .bottom-text { font-size: 12px; color: #4e5968; }
+  .bottom-text b { color: #3182f6; }
+
+  .setup { max-width: 500px; margin: 60px auto; padding: 20px; text-align: center; }
+  .setup h2 { font-size: 18px; margin-bottom: 12px; }
+  .setup input { width: 100%; padding: 12px; border: 1px solid #d1d6db; border-radius: 10px; font-size: 14px; font-family: inherit; margin-bottom: 10px; }
+  .setup button { padding: 12px 24px; border-radius: 10px; border: none; background: #3182f6; color: #fff; font-size: 14px; font-weight: 700; font-family: inherit; cursor: pointer; }
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+var API_URL = '';
+var INSTRUCTOR = new URLSearchParams(location.search).get('name') || '';
+var DATA = [];
+
+function init() {
+  API_URL = localStorage.getItem('actionsheet_api') || '';
+  if (!API_URL) {
+    showSetup();
+    return;
+  }
+  if (!INSTRUCTOR) {
+    document.getElementById('app').innerHTML = '<div class="state-msg">URL에 ?name=강사명을 추가해주세요.</div>';
+    return;
+  }
+  renderLoading();
+  fetchData();
+}
+
+function showSetup() {
+  document.getElementById('app').innerHTML = '<div class="setup"><h2>Apps Script URL 설정</h2><p style="font-size:13px;color:#6b7684;margin-bottom:16px;">구글 시트에 배포한 Apps Script 웹앱 URL을 입력해주세요.</p><input id="apiInput" placeholder="https://script.google.com/macros/s/.../exec"><br><button onclick="saveApi()">저장</button></div>';
+}
+
+function saveApi() {
+  var url = document.getElementById('apiInput').value.trim();
+  if (!url) return;
+  localStorage.setItem('actionsheet_api', url);
+  API_URL = url;
+  if (!INSTRUCTOR) {
+    document.getElementById('app').innerHTML = '<div class="state-msg">URL에 ?name=강사명을 추가해주세요.</div>';
+    return;
+  }
+  fetchData();
+}
+
+function fetchData() {
+  renderLoading();
+  fetch(API_URL + '?name=' + encodeURIComponent(INSTRUCTOR))
+    .then(function(r) { return r.json(); })
+    .then(function(json) {
+      if (json.error) { renderError(json.error); return; }
+      DATA = json.rows || [];
+      render();
+    })
+    .catch(function() {
+      renderError('데이터를 불러올 수 없습니다.');
+    });
+}
+
+function renderLoading() {
+  document.getElementById('app').innerHTML = '<div class="state-msg">불러오는 중...</div>';
+}
+
+function renderError(msg) {
+  document.getElementById('app').innerHTML = '<div class="state-msg">' + msg + '</div>';
+}
+
+function getDday(dateStr) {
+  if (!dateStr) return null;
+  var d = new Date(dateStr);
+  if (isNaN(d.getTime())) return null;
+  var today = new Date();
+  today.setHours(0,0,0,0);
+  d.setHours(0,0,0,0);
+  return Math.ceil((d - today) / (1000 * 60 * 60 * 24));
+}
+
+function formatDate(dateStr) {
+  if (!dateStr) return '';
+  var d = new Date(dateStr);
+  if (isNaN(d.getTime())) return dateStr;
+  return (d.getMonth()+1) + '/' + d.getDate();
+}
+
+function toggleStatus(rowNum, currentStatus) {
+  var newStatus = '';
+  if (currentStatus === '' || currentStatus === '대기') newStatus = '진행중';
+  else if (currentStatus === '진행중') newStatus = '완료';
+  else if (currentStatus === '완료') newStatus = '';
+
+  // 로컬 즉시 반영
+  for (var i = 0; i < DATA.length; i++) {
+    if (DATA[i]._row === rowNum) {
+      DATA[i]['상태'] = newStatus;
+      break;
+    }
+  }
+  render();
+
+  // 시트에 저장
+  fetch(API_URL, {
+    method: 'POST',
+    body: JSON.stringify({ action: 'updateStatus', row: rowNum, status: newStatus }),
+    mode: 'no-cors'
+  }).catch(function(){});
+}
+
+function render() {
+  var sections = {};
+  var sectionOrder = [];
+
+  DATA.forEach(function(item) {
+    var sec = item['단계'] || '기타';
+    if (!sections[sec]) { sections[sec] = []; sectionOrder.push(sec); }
+    sections[sec].push(item);
+  });
+
+  var total = DATA.length;
+  var doneCount = DATA.filter(function(d) { return d['상태'] === '완료'; }).length;
+  var progressCount = DATA.filter(function(d) { return d['상태'] === '진행중'; }).length;
+  var overdueCount = DATA.filter(function(d) {
+    if (d['상태'] === '완료') return false;
+    var dd = getDday(d['마감일']);
+    return dd !== null && dd < 0;
+  }).length;
+  var pct = total > 0 ? Math.round((doneCount / total) * 100) : 0;
+
+  var h = '';
+  h += '<div class="hdr">';
+  h += '  <div class="hdr-top">';
+  h += '    <div class="hdr-badge">ACTION SHEET</div>';
+  h += '    <div class="hdr-sync" onclick="fetchData()">새로고침</div>';
+  h += '  </div>';
+  h += '  <div class="hdr-name">강사 액션시트</div>';
+  h += '  <div class="hdr-sub">할일을 클릭하면 상태가 변경됩니다 (대기 &gt; 진행중 &gt; 완료)</div>';
+  h += '  <div class="hdr-instructor">' + INSTRUCTOR + '</div>';
+  h += '</div>';
+
+  h += '<div class="progress-wrap">';
+  h += '  <div class="progress-bar"><div class="progress-fill" style="width:' + pct + '%"></div></div>';
+  h += '  <div class="progress-text"><b>' + doneCount + '</b> / ' + total + ' 완료 (' + pct + '%)</div>';
+  h += '</div>';
+
+  h += '<div class="stats">';
+  h += '  <div class="stat-card"><div class="stat-num red">' + overdueCount + '</div><div class="stat-label">마감 초과</div></div>';
+  h += '  <div class="stat-card"><div class="stat-num orange">' + progressCount + '</div><div class="stat-label">진행중</div></div>';
+  h += '  <div class="stat-card"><div class="stat-num green">' + doneCount + '</div><div class="stat-label">완료</div></div>';
+  h += '</div>';
+
+  sectionOrder.forEach(function(sec) {
+    var items = sections[sec];
+    var secDone = items.filter(function(d) { return d['상태'] === '완료'; }).length;
+
+    h += '<div class="sec">';
+    h += '  <div class="sec-header">';
+    h += '    <div class="sec-title">' + sec + '</div>';
+    h += '    <div class="sec-count">' + secDone + '/' + items.length + '</div>';
+    h += '  </div>';
+
+    items.forEach(function(item) {
+      var status = item['상태'] || '';
+      var isDone = status === '완료';
+      var isProgress = status === '진행중';
+      var chkClass = isDone ? 'complete' : (isProgress ? 'progress' : '');
+      var chkIcon = isDone ? '\u2713' : (isProgress ? '~' : '');
+      var dday = getDday(item['마감일']);
+      var ddayText = '';
+      var ddayClass = 'safe';
+
+      if (isDone) {
+        ddayClass = 'done';
+        ddayText = '완료';
+      } else if (dday !== null) {
+        if (dday < 0) { ddayText = 'D+' + Math.abs(dday); ddayClass = ''; }
+        else if (dday === 0) { ddayText = 'D-Day'; ddayClass = ''; }
+        else if (dday <= 3) { ddayText = 'D-' + dday; ddayClass = 'soon'; }
+        else { ddayText = 'D-' + dday; ddayClass = 'safe'; }
+      }
+
+      h += '<div class="card ' + (isDone ? 'done' : '') + '">';
+      h += '  <div class="chk ' + chkClass + '" onclick="toggleStatus(' + item._row + ', \'' + status + '\')">' + chkIcon + '</div>';
+      h += '  <div class="card-body">';
+      h += '    <div class="card-title">' + (item['할일'] || '') + '</div>';
+      h += '    <div class="card-meta">';
+      if (item['마감일']) h += '<span class="tag tag-date">' + formatDate(item['마감일']) + '</span>';
+      if (ddayText) h += '<span class="tag tag-dday ' + ddayClass + '">' + ddayText + '</span>';
+      if (isProgress) h += '<span class="tag tag-status">진행중</span>';
+      h += '    </div>';
+      if (item['비고']) h += '<div class="card-note">' + item['비고'] + '</div>';
+      h += '  </div>';
+      h += '</div>';
+    });
+
+    h += '</div>';
+  });
+
+  h += '<div class="bottom-bar">';
+  h += '  <div class="bottom-text"><b>' + doneCount + '</b>/' + total + ' 완료</div>';
+  h += '  <div class="bottom-text"><b>Flowmus</b> 부업클래스</div>';
+  h += '</div>';
+
+  document.getElementById('app').innerHTML = h;
+}
+
+init();
+</script>
+</body>
+</html>
