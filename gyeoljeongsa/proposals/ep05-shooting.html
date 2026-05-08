@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
 <meta name="theme-color" content="#0064ff">
-<title>EP.05 촬영 큐시트 — 조건 다 맞는 이상형이랑 결혼했습니다. 3년 후 이혼했습니다.</title>
+<title>EP.05 촬영 질문지 — 조건 다 맞는 이상형이랑 결혼했습니다. 3년 후 이혼했습니다.</title>
 <style>
 :root{--bg:#f5f6f9;--card:#fff;--border:#e4e6ec;--border2:#eef0f5;--text:#111827;--text2:#6b7280;--accent:#0064ff;--accent-l:#e8f1ff;--done:#16a34a;--done-bg:#dcfce7;--memo:#fffbeb;--memo-b:#f59e0b;--ban:#fef2f2;--ban-b:#ef4444;--hh:58px;--th:50px}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -29,7 +29,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR','App
 .sec-hd-l{flex:1;min-width:0}
 .sec-t{font-size:19px;font-weight:800;line-height:1.3;word-break:keep-all}
 .sec-time{display:inline-block;font-size:11px;font-weight:700;color:var(--accent);background:var(--accent-l);padding:3px 9px;border-radius:6px;margin-top:5px}
-.sec-loc{display:inline-block;font-size:11px;font-weight:700;color:#fff;background:var(--done);padding:3px 9px;border-radius:6px;margin-top:5px;margin-left:4px}
 .sec-stage{font-size:12px;color:var(--text2);margin-top:5px}
 .sec-cnt{font-size:11px;font-weight:700;color:var(--text2);background:var(--border2);padding:5px 10px;border-radius:20px;flex-shrink:0;white-space:nowrap}
 .sec-cnt.done{color:var(--done);background:var(--done-bg)}
@@ -55,9 +54,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR','App
 .q-n{font-size:11px;font-weight:800;color:var(--text2);background:var(--border2);padding:2px 8px;border-radius:6px;flex-shrink:0}
 .q-tag{font-size:10px;font-weight:700;padding:2px 8px;border-radius:5px;flex-shrink:0;letter-spacing:.3px;color:#fff}
 .tg-PEAK{background:#ef4444}
-.tg-TONE{background:#06b6d4}
-.tg-DATA{background:#7c3aed}
-.tg-HOLD{background:#f59e0b}
+.tg-PD{background:#06b6d4}
+.tg-TREND{background:#7c3aed}
 .q-q{font-size:15px;line-height:1.55;color:var(--text);word-break:keep-all}
 .q-hint{font-size:12px;color:var(--text2);margin-top:4px;line-height:1.5;word-break:keep-all;font-style:italic}
 @media(min-width:640px){body{font-size:16px}.hd{padding:0 24px}.hd-t{font-size:16px}.main{padding:28px 24px 64px}.sec-t{font-size:22px}.q{padding:16px 18px}.q-q{font-size:15.5px}}
@@ -68,7 +66,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR','App
 <body>
 <header class="hd">
 <div class="hd-l">
-<div class="hd-ep">EP.05 &middot; 촬영 큐시트 v1</div>
+<div class="hd-ep">EP.05 · 촬영 질문지 v2</div>
 <div class="hd-t">이상형이랑 결혼했습니다. 3년 후 이혼했습니다.</div>
 </div>
 <div class="hd-r">
@@ -80,88 +78,74 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR','App
 <main class="main" id="main"></main>
 <script>
 const D=[
-{id:1,title:"1막 킥",time:"0:00~2:30",loc:"스튜디오",stage:"숫자 나열 + '이혼했습니다' 반전",
+{id:1,title:"킥",time:"0:00~0:30",stage:"패턴 인터럽트 → 숫자 충격 + 이혼 반전",
 memo:[
-{k:"설정",v:"스튜디오 정면 좌석. 인사 없이 '연봉 1억 2천'부터 시작."},
-{k:"톤",v:"또박또박, 카메라 정면, 담담. 숫자 하나마다 끊어서. '이혼했습니다'에서 톤 살짝 낮추기."},
-{k:"촬영",v:"숫자마다 컷 전환 가능하도록 여유 있게. '한 박자 쉬기' 구간 편집 자막 삽입점."},
-{k:"주의",v:"인사 절대 금지. '연봉 1억 2천'이 첫 마디."}
+{k:"설정",v:"스튜디오. 프로필 카드를 펼쳐놓고 하나 집어 들면서 시작. 인사 없이 바로."},
+{k:"촬영",v:"이세령 정면. 숫자마다 컷 전환 가능하도록 여유 있게. 프로필 카드 집어드는 동작 위주."},
+{k:"톤",v:"또박또박. 카메라 정면. 숫자 하나마다 끊어서. '이혼했습니다'에서 톤 살짝 낮추기."},
+{k:"주의",v:"인사 절대 금지. '연봉 1억 2천'이 첫 마디. '이혼했습니다' 편집 자막 빨간색."}
 ],
 qs:[
-{n:1,tag:"PEAK",q:"\"연봉 1억 2천. 키 182. 서울대 졸업. 대기업 과장. 이 남자랑 결혼했습니다.\"",hint:"숫자 하나마다 끊어서. 편집 자막으로 각 숫자 강조. 마지막 '결혼했습니다'까지 시청자가 '완벽하다'고 느끼게."},
-{n:2,tag:"PEAK",q:"(한 박자 쉬고) \"3년 후 이혼했습니다.\"",hint:"반전. 톤 살짝 낮추기. 편집: 정적 1.5초 + 자막 '3년 후 이혼' 빨간색. 이 한 줄이 오프닝의 전부."},
-{n:3,tag:null,q:"\"성혼 축하 문자는 보내는데, 이혼 위로 문자는 안 보냅니다.\"",hint:"캐치프레이즈. 편집 자막 강조. 이 문장이 영상 전체의 프레이밍."},
-{n:4,tag:"TONE",q:"\"결정사 대표로서 이 이야기를 하는 게 맞는지 고민했어요. 그런데 안 하는 게 더 무책임하다고 생각했습니다.\"",hint:"진지하지만 무겁지 않게. '최초 공개' 느낌. 결의 표현."}
+{n:1,tag:"PEAK",q:"(프로필 카드 집어 들며) 연봉 1억 2천. 키 182. 서울대 졸업. 이 남자랑 결혼했습니다. (한 박자) 3년 후 이혼했습니다.",hint:"숫자 또박또박. '이혼했습니다'에서 톤 낮추기. 편집 자막으로 숫자 강조 + '3년 후 이혼' 빨간 자막."},
+{n:2,tag:"PD",q:"진짜요? 조건 다 맞았는데 이혼이요?",hint:"'성혼 축하 문자는 보내는데, 이혼 위로 문자는 안 보냅니다.' 캐치프레이즈 나올 타이밍. '오늘 처음으로 이 이야기를 합니다.'"}
 ]},
 
-{id:2,title:"2막 해부",time:"2:30~7:00",loc:"스튜디오",stage:"이혼 사유 vs 매칭 기준 비교 + 성혼율 + 이혼율 미추적",
+{id:2,title:"해부",time:"0:30~5:30",stage:"\"결정사 안에서 보면요\" — 이혼 사유 vs 매칭 기준 + 성혼율 + 금기 폭로",
 memo:[
-{k:"목표",v:"데이터 3연타: (1) 이혼 사유 vs 매칭 기준 비교표 (2) 성혼율 41.7% vs 5% (3) 이혼율 추적 0곳"},
-{k:"톤",v:"교수 톤. 데이터 읽을 때 또박또박. 핵심 숫자 앞 한 박자 쉬기."},
-{k:"촬영",v:"비교표는 편집 그래픽으로 삽입. 이세령 정면 위주. 숫자마다 컷."},
-{k:"편집",v:"'겹치는 게 하나도 없습니다' = 그래픽 비교표 풀스크린 2초. '5% 이하' = 빨간 숫자 자막."}
+{k:"목표",v:"데이터 3연타: (1) 이혼 사유 vs 매칭 기준 비교 (2) 성혼율 41.7% vs 5% (3) 이혼율 추적 0곳"},
+{k:"촬영",v:"이세령 정면 위주. 비교표는 편집 그래픽으로 삽입. 숫자마다 컷."},
+{k:"PD패턴",v:"\"진짜요?\" + \"그건 좀 불공평하지 않아요?\" (시청자 대리 반론)"},
+{k:"편집",v:"'겹치는 게 0개' = 비교표 풀스크린 2초. '5% 이하' = 빨간 숫자 자막."}
 ],
 qs:[
-{n:5,tag:"DATA",q:"\"이혼 사유 1위가 뭔지 아십니까? 통계청 데이터입니다. '성격차이.' 45.2%. 20년째 1위입니다.\"",hint:"'성격차이'와 '45.2%'에서 한 박자 쉬기. 편집 자막으로 통계청 출처 표시."},
-{n:6,tag:"DATA",q:"\"결정사가 매칭할 때 보는 항목: 학벌, 연봉, 키, 나이, 집안, 직업, 외모 등급.\"",hint:"항목 나열. 편집: 왼쪽에 '매칭 기준', 오른쪽에 '이혼 사유' 비교 그래픽."},
-{n:7,tag:"PEAK",q:"\"이 두 개를 나란히 놓으면요. (한 박자) 겹치는 게 하나도 없습니다.\"",hint:"위기장치 #1. 비교 그래픽 풀스크린. '0개' 강조. 이 장면이 2막의 핵심."},
-{n:8,tag:null,q:"\"프로필에 '성격: 온화' 이렇게 적혀 있죠. 본인이 적는 겁니다. 검증? 없습니다.\"",hint:"쓴웃음 가능. '검증? 없습니다'에서 정면 응시."},
-{n:9,tag:"DATA",q:"\"결정사 성혼율. 듀오 공식 발표: 41.7%. 블라인드 추산: 5% 이하.\"",hint:"'41.7%' vs '5%' 편집 자막으로 대비. 충격 효과."},
-{n:10,tag:"PEAK",q:"\"성혼 후 이혼율. 이 숫자를 추적하는 결정사는요. (한 박자) 단 한 곳도 없습니다.\"",hint:"위기장치 #2. '단 한 곳도 없습니다' = 핵심 반전. 정면 응시. 편집: 정적 2초."},
-{n:11,tag:"TONE",q:"\"왜냐면 추적하면 안 되거든요. 그 숫자가 나오면 이 사업을 못 합니다.\"",hint:"쓴웃음. 업계 금기 폭로 순간. 톤: 담담하지만 무게감."},
-{n:12,tag:null,q:"\"저도 추적 안 했어요. 솔직히. 그런데 연락이 옵니다. '대표님, 이혼합니다.'\"",hint:"'이혼합니다' 연락 받는 순간. 표정 -- 담담하지만 무거움. 리테이크 가능하나 첫 테이크 우선."}
+{n:3,tag:null,q:"이혼 사유 1위가 뭐예요? 왜 이혼하는 거예요?",hint:"'성격차이. 45.2%. 통계청 데이터인데, 20년째 1위입니다.' 편집 자막으로 통계청 출처 표시."},
+{n:4,tag:"TREND",q:"요즘 블라인드에서 '조건 보고 결혼했다가 후회' 글이 많던데, 결정사는 매칭할 때 뭘 보는 거예요?",hint:"'학벌, 연봉, 키, 나이, 집안, 직업, 외모 등급.' 나열. 편집: 왼쪽 '매칭 기준', 오른쪽 '이혼 사유' 비교 그래픽."},
+{n:5,tag:"PEAK",q:"그러면 이혼 사유랑 매칭 기준이 겹치는 게 있어요?",hint:"위기장치 #1. '겹치는 게 하나도 없습니다.' 비교표 풀스크린 2초. 이 장면이 해부 블록의 핵심."},
+{n:6,tag:"PD",q:"그건 좀 불공평하지 않아요? 결정사가 어떻게 성격까지 봐요?",hint:"PD = 시청자 대리 반론. '프로필에 성격: 온화. 본인이 적는 겁니다. 검증? 없습니다.' 반전."},
+{n:7,tag:null,q:"성혼율은 어떻게 되는 거예요? 실제로 결혼까지 가는 비율?",hint:"'듀오 공식 발표: 41.7%. 블라인드에서 실제 계산: 5% 이하.' 편집 자막으로 숫자 대비."},
+{n:8,tag:"PEAK",q:"그러면 성혼 후 이혼율은요? 결정사에서 맺어줬는데 이혼하는 비율?",hint:"위기장치 #2. '추적하는 결정사는 단 한 곳도 없습니다. 추적하면 이 사업을 못 합니다.' 업계 금기 폭로. '저도 추적 안 했어요. 그런데 연락이 옵니다.'"}
 ]},
 
-{id:3,title:"3막 실화",time:"7:00~10:00",loc:"스튜디오",stage:"민지/준혁 A등급 커플 이혼 사례",
+{id:3,title:"본인",time:"5:30~9:00",stage:"\"겪어봐야 아는 거예요\" — 민지/준혁 A등급 커플 이혼 실화",
 memo:[
 {k:"목표",v:"A등급 완벽 커플의 결혼 → 이혼 실화. 프로필 vs 실제 생활의 갭."},
-{k:"톤",v:"스토리텔링. 안타까운 표정. '혼자인 느낌'에서 목소리 낮추기."},
-{k:"촬영",v:"감정 구간 리테이크 최소화. 첫 테이크가 가장 진실. 클로즈업 위주."},
-{k:"주의",v:"실제 회원 사례 기반이면 가명 철저. 아니면 대본대로 진행. '민지/준혁'은 가명임을 명시."}
+{k:"촬영",v:"감정 구간 클로즈업 위주. 첫 테이크가 가장 진실. 리테이크 최소화."},
+{k:"PD패턴",v:"\"대표님은요?\" (해부 → 본인 전환 트리거)"},
+{k:"주의",v:"실제 회원 사례 기반이면 가명 철저. '민지/준혁'은 가명임을 명시."}
 ],
 qs:[
-{n:13,tag:null,q:"\"민지 씨, 33살. 준혁 씨, 36살. 둘 다 A등급이었어요.\"",hint:"프로필 소개. 편집: A등급 프로필 카드 그래픽 삽입."},
-{n:14,tag:null,q:"\"민지 씨 -- 약사, 외모 상위. 준혁 씨 -- 대기업, 연봉 1억 초반, 182, SKY. 프로필만 보면 완벽했어요.\"",hint:"조건 나열. 1막의 숫자 패턴 반복. '완벽했어요'에서 빌드업."},
-{n:15,tag:null,q:"\"첫 만남에서 서로 호감. 6개월 만에 결혼. 저는 '역시 A등급은 다르다'고 생각했어요.\"",hint:"'축하 문자 보냈죠' -- 1막 캐치프레이즈 콜백. 가벼운 톤."},
-{n:16,tag:"PEAK",q:"\"1년 반 후에 민지 씨한테 연락이 왔어요. '대표님, 이혼 절차 밟고 있어요.'\"",hint:"위기장치 #3. 반전. 편집: 정적 1.5초. 표정 클로즈업."},
-{n:17,tag:null,q:"\"외도? 아니요. 폭력? 아니요. 경제적 문제? 아니요. '성격차이요.'\"",hint:"3연속 부정 후 '성격차이' -- 2막 데이터와 연결되는 순간."},
-{n:18,tag:"TONE",q:"\"갈등이 생겼을 때 준혁 씨의 방식은 '침묵'. 하루, 이틀, 심하면 일주일. 말을 안 해요. 아예.\"",hint:"안타까운 표정. 천천히."},
-{n:19,tag:null,q:"\"프로필에 '성격: 차분함'. 맞아요. 차분했어요. 너무 차분해서 대화가 없었던 거예요.\"",hint:"인지부조화. '차분함 = 침묵'이라는 반전. 쓴웃음 가능."},
-{n:20,tag:"PEAK",q:"\"'프로필에 취미: 운동이라고 적혀 있었는데, 실제로는 매주 주말 혼자 골프장에 갔어요. 이 사람이 옆에 있는데 혼자인 느낌이었어요.'\"",hint:"민지 씨 인용. 캐치프레이즈. 목소리 낮추기. 편집: 자막 강조. 이 장면이 3막의 핵심."}
+{n:9,tag:"PD",q:"대표님은요? 대표님이 성혼시킨 분 중에 이혼하신 분이 있어요?",hint:"전환 순간. 해부 → 본인. '한 분 이야기를 할게요. 가명으로 말씀드립니다.' 민지(33)/준혁(36), 둘 다 A등급."},
+{n:10,tag:null,q:"어떤 케이스였어요? 조건이 어떻게 됐어요?",hint:"'민지 씨 — 약사, 외모 상위. 준혁 씨 — 대기업, 연봉 1억 초반, 182, SKY. 프로필만 보면 완벽. 6개월 만에 결혼.'"},
+{n:11,tag:"PEAK",q:"그런데 이혼했다고요? 왜요? 뭐가 문제였어요?",hint:"위기장치 #3. '1년 반 후에 연락. 이혼 절차 밟고 있어요.' 외도? X. 폭력? X. '성격차이요.' 침묵하는 남편. '차분함 = 대화 없음' 반전."},
+{n:12,tag:"TREND",q:"블라인드에서 '스펙이 결혼 호환성을 보장하지 않는다'는 글이 있었는데, 프로필이랑 실제가 많이 달랐어요?",hint:"'취미: 운동 → 매주 주말 혼자 골프장.' '이 사람이 옆에 있는데 혼자인 느낌이었어요.' 캐치프레이즈. 목소리 낮추기."}
 ]},
 
-{id:4,title:"4막 반전",time:"10:00~12:30",loc:"스튜디오",stage:"시스템 자기반성 + 하버드 연구",
+{id:4,title:"반전",time:"9:00~12:30",stage:"\"조건이 다가 아니에요\" — 시스템 자기반성 + 하버드 연구",
 memo:[
 {k:"목표",v:"가장 진지한 구간. '사람이 아니라 조건을 매칭했다' 자기반성 + 학술 근거."},
-{k:"톤",v:"4막 전체가 감정의 정점. '사람이 아니었습니다'에서 카메라 가까이, 목소리 낮추기."},
-{k:"촬영",v:"핵심 장면(#24) 리테이크 금지. 첫 반응이 가장 진실. 클로즈업."},
-{k:"편집",v:"Q01 등급표 장면 인서트 가능. '등급표에 없는 칸' 자막 그래픽."}
+{k:"촬영",v:"핵심 장면(Q15) 리테이크 금지. 첫 반응이 가장 진실. 카메라 가까이 클로즈업."},
+{k:"PD패턴",v:"\"그러면 어떡해요?\" (본인 → 반전 전환)"},
+{k:"편집",v:"Q01 등급표 장면 인서트 가능. '등급표에 없는 칸' 자막 그래픽. '사람이 아니었습니다' = 대형 자막 + BGM 드랍."}
 ],
 qs:[
-{n:21,tag:"DATA",q:"\"2030세대 설문: 배우자 선택 기준 1위 '성격 및 가치관' 67%. 결정사에서 검증하는 방법은? 없습니다.\"",hint:"데이터 + 단정. '없습니다'에서 정면 응시."},
-{n:22,tag:"DATA",q:"\"하버드 Eastwick 연구: 3년 반 추적. '이상형 조건을 높게 충족해도 이혼 확률은 낮아지지 않는다.'\"",hint:"학술 근거. 교수 톤. 편집: 논문 출처 자막."},
-{n:23,tag:null,q:"\"키 크고, 돈 많고, 학벌 좋은 사람을 원했고, 실제로 그런 사람을 만났어요. 그래도 이혼합니다.\"",hint:"1막 숫자 나열 콜백. '그래도 이혼합니다' 단호하게."},
-{n:24,tag:"PEAK",q:"\"우리가 매칭하는 건 조건이었지, 사람이 아니었습니다.\"",hint:"이 영상의 핵심 한 줄. 카메라 가까이. 목소리 낮추기. 리테이크 금지. 편집: 정적 2초 + 자막 풀스크린."},
-{n:25,tag:null,q:"\"등급표에 '갈등 해결 방식' 칸은 없어요. '주말을 어떻게 보내는지' 칸도 없어요. '화가 났을 때 어떻게 행동하는지' 칸도 없어요.\"",hint:"Q01 등급표 콜백. 3연속 '없어요'. 편집: 등급표 그래픽에 빈 칸 강조."},
-{n:26,tag:null,q:"\"'이 사람이 화가 났을 때 어떻게 하는 사람인지'는요. (한 박자) 같이 살아봐야 알아요. 그게 결정사의 한계입니다. 제가 인정합니다.\"",hint:"시스템 한계 인정. '제가 인정합니다' 정면 응시. 자조적이지만 진지하게."}
+{n:13,tag:"PD",q:"그러면 어떡해요? 결정사가 성격까지 볼 수는 없잖아요.",hint:"'2030세대 설문에서 배우자 선택 기준 1위가 성격 및 가치관 67%. 결정사에서 이걸 검증하는 방법은? 없습니다.'"},
+{n:14,tag:null,q:"연구 같은 게 있어요? 조건 좋은 사람 만나면 행복하다는 거 맞아요?",hint:"'하버드 Eastwick 연구. 3년 반 추적. 이상형 조건을 높게 충족해도 이혼 확률은 낮아지지 않는다.' 편집: 논문 출처 자막."},
+{n:15,tag:"PEAK",q:"결정사 대표로서 이걸 어떻게 받아들이세요?",hint:"감정 피크. '우리가 매칭하는 건 조건이었지, 사람이 아니었습니다.' Q01 등급표 콜백: '등급표에 갈등 해결 방식 칸은 없어요.' '결정사의 한계입니다. 제가 인정합니다.' 리테이크 금지."},
+{n:16,tag:null,q:"조건이 아예 중요하지 않다는 건 아니죠?",hint:"'조건은 문을 열어주는 겁니다. 그 문 안에서 같이 사는 건, 전혀 다른 문제입니다.' 살짝 미소."}
 ]},
 
-{id:5,title:"5막 아웃",time:"12:30~14:00",loc:"스튜디오",stage:"열린 결말 + '조건입니까, 사람입니까'",
+{id:5,title:"아웃",time:"12:30~14:00",stage:"여운 + \"조건입니까, 사람입니까\"",
 memo:[
-{k:"목표",v:"무거움에서 따뜻함으로 전환. 열린 질문으로 마무리. CTA 0회."},
-{k:"톤",v:"따뜻하게 전환. '문을 열어주는 겁니다'에서 살짝 미소. 마지막 정면 응시 3초."},
-{k:"촬영",v:"마지막 질문 후 3초 정면 응시 유지. PD가 '컷' 부르지 말고 5초 더 돌리기."},
-{k:"편집",v:"마지막 정면 응시 → 3초 정적 → 페이드아웃(5초). Q12 프리뷰 5초 삽입."}
+{k:"목표",v:"캐치프레이즈 + 여운 + 페이드아웃. CTA 0회."},
+{k:"촬영",v:"대본 X. 이세령 감정으로 자유롭게. PD 10초+ 침묵 버티기. 리테이크 금지."},
+{k:"편집",v:"마지막 정면 응시 → 3초 정적 → 페이드아웃(5초). EP.06 프리뷰 5초 삽입."}
 ],
 qs:[
-{n:27,tag:null,q:"\"브런치에서 한 분이 썼어요. '서울대, 대기업, 상위 10% 수입 남자와 결혼했다. 20년 동안 악몽같이 살았다.' '환경과 상황은 변하는데, 사람은 변하지 않는다.'\"",hint:"인용. 차분하게. 편집: 인용문 자막 그래픽."},
-{n:28,tag:"PEAK",q:"\"조건이 틀렸다는 게 아닙니다. 조건은 문을 열어주는 겁니다. 그런데 그 문 안에서 같이 사는 건, 전혀 다른 문제입니다.\"",hint:"핵심 메시지. '문을 열어주는 겁니다'에서 살짝 미소. 편집: 자막 풀스크린."},
-{n:29,tag:null,q:"\"결정사에 오시는 분들이 체크리스트를 주세요. 저는 이제 하나만 더 여쭤봅니다. '이 사람이 화가 났을 때, 당신은 어떤 반응을 원하세요?'\"",hint:"실질적 조언. 결정사 상담 가치를 자연스럽게 암시."},
-{n:30,tag:"HOLD",q:"\"지금 당신이 보고 있는 건, 조건입니까. 사람입니까.\" (정면 응시 3초 홀드)",hint:"마지막 컷. 정면 응시 3초 유지. PD가 '컷' 부르지 말것. 5초 더 돌린 후 자연스럽게 종료. 편집: 정적 → 페이드아웃."}
+{n:17,tag:null,q:"지금 조건만 보고 결혼하려는 사람한테 한마디?",hint:"'이 사람이 화가 났을 때, 당신은 어떤 반응을 원하세요?' 정면 응시 3초. 대본 X. 감정으로 자유롭게. PD 10초+ 침묵. 리테이크 금지."}
 ]}
 ];
 
-const SK='ep05_checks_v1';
+const SK='ep05_checks_v2';
 let checks=(()=>{try{return JSON.parse(localStorage.getItem(SK)||'{}')}catch(e){return {}}})();
 const save=()=>localStorage.setItem(SK,JSON.stringify(checks));
 const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -186,9 +170,7 @@ D.forEach(loc=>{
  const total=loc.qs.length;
  let h='<div class="sec-hd"><div class="sec-hd-l">'
   +'<div class="sec-t">['+esc(loc.title)+']</div>'
-  +'<div><span class="sec-time">'+esc(loc.time)+'</span>'
-  +(loc.loc?'<span class="sec-loc">'+esc(loc.loc)+'</span>':'')
-  +'</div>'
+  +'<div><span class="sec-time">'+esc(loc.time)+'</span></div>'
   +'<div class="sec-stage">'+esc(loc.stage)+'</div>'
   +'</div>'
   +'<div class="sec-cnt" data-loc="'+loc.id+'">0 / '+total+'</div>'
@@ -219,18 +201,18 @@ D.forEach(loc=>{
 const extras=document.createElement('div');
 extras.innerHTML=`
 <div class="ban-box" style="margin-top:32px">
-<div class="memo-r"><div class="memo-k" style="min-width:60px">절대금지</div><div class="memo-v">"안녕하세요" 인사 -- "연봉 1억 2천"으로 바로 시작</div></div>
-<div class="memo-r"><div class="memo-k" style="min-width:60px">절대금지</div><div class="memo-v">"구독/좋아요" 멘트 -- 영상 내 0회</div></div>
-<div class="memo-r"><div class="memo-k" style="min-width:60px">절대금지</div><div class="memo-v">경쟁사 실명(듀오/가연/엔노블/제이노블) -- "메이저 결정사" "업계"로만</div></div>
-<div class="memo-r"><div class="memo-k" style="min-width:60px">절대금지</div><div class="memo-v">특정 회원 실명/정보 -- 가명 + 익명 처리 철저</div></div>
-<div class="memo-r"><div class="memo-k" style="min-width:60px">절대금지</div><div class="memo-v">"결정사는 사기다" 류 표현 -- 한계 인정이지 전면 부정 아님</div></div>
+<div class="memo-r"><div class="memo-k" style="min-width:60px">절대금지</div><div class="memo-v">"안녕하세요" 인사 — 프로필 카드 집어 들면서 바로 시작</div></div>
+<div class="memo-r"><div class="memo-k" style="min-width:60px">절대금지</div><div class="memo-v">"구독/좋아요" 멘트 — 영상 내 0회</div></div>
+<div class="memo-r"><div class="memo-k" style="min-width:60px">절대금지</div><div class="memo-v">경쟁사 실명(듀오/가연/엔노블/제이노블) — "메이저 결정사"로만</div></div>
+<div class="memo-r"><div class="memo-k" style="min-width:60px">절대금지</div><div class="memo-v">특정 회원 실명/정보 — 가명 + 익명 처리</div></div>
+<div class="memo-r"><div class="memo-k" style="min-width:60px">절대금지</div><div class="memo-v">"결정사는 사기다" 류의 표현 — 한계 인정이지 전면 부정 아님</div></div>
 </div>
 <div class="memo" style="margin-top:12px">
-<div class="memo-r"><div class="memo-k" style="min-width:42px">주의</div><div class="memo-v">MCN/네오브릿지 관계 -- 순수 개인 채널</div></div>
-<div class="memo-r"><div class="memo-k" style="min-width:42px">주의</div><div class="memo-v">본인 결정사 가격 직접 공개 -- "업계 평균"으로만</div></div>
-<div class="memo-r"><div class="memo-k" style="min-width:42px">주의</div><div class="memo-v">특정 성별 비하 -- 중립. "남자가 나빠" "여자가 문제" X</div></div>
-<div class="memo-r"><div class="memo-k" style="min-width:42px">주의</div><div class="memo-v">이혼을 부정적으로만 프레이밍 -- "잘못된 결합을 끝내는 용기"도 존중</div></div>
-<div class="memo-r"><div class="memo-k" style="min-width:42px">주의</div><div class="memo-v">"우리 결정사는 다르다" 자기 홍보 -- 이 영상은 자기반성</div></div>
+<div class="memo-r"><div class="memo-k" style="min-width:42px">주의</div><div class="memo-v">MCN/네오브릿지 관계 → 순수 개인 채널</div></div>
+<div class="memo-r"><div class="memo-k" style="min-width:42px">주의</div><div class="memo-v">워터밤 / 황정우·이나영 사건 → 절대 금지</div></div>
+<div class="memo-r"><div class="memo-k" style="min-width:42px">주의</div><div class="memo-v">본인 결정사 가격 직접 공개 → "업계 평균"으로만</div></div>
+<div class="memo-r"><div class="memo-k" style="min-width:42px">주의</div><div class="memo-v">특정 성별 비하 → 중립. "남자가 나빠" "여자가 문제" X</div></div>
+<div class="memo-r"><div class="memo-k" style="min-width:42px">주의</div><div class="memo-v">이혼을 부정적으로만 프레이밍 → "잘못된 결합을 끝내는 용기"도 존중</div></div>
 </div>`;
 mainEl.appendChild(extras);
 
