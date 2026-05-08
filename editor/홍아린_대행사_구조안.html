@@ -3,18 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>편집 대행사 구조안 — 2026.05.08</title>
+<title>기획+편집 대행사 구조안 — 2026.05.08</title>
 <style>
   @page { size: A4; margin: 0; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     font-family: 'Apple SD Gothic Neo', '맑은 고딕', sans-serif;
-    color: #222;
-    background: #fff;
-    font-size: 10pt;
-    line-height: 1.8;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
+    color: #222; background: #fff; font-size: 10pt; line-height: 1.8;
+    -webkit-print-color-adjust: exact; print-color-adjust: exact;
   }
   @media screen {
     body { background: #d4d4d4; padding: 20px 0; }
@@ -26,174 +22,102 @@
   }
   @media screen and (max-width: 800px) {
     body { padding: 0; background: #fff; }
-    .page {
-      width: 100%; min-height: auto; box-shadow: none;
-      margin-bottom: 0; border-bottom: 4px solid #eee; overflow: visible;
-    }
+    .page { width: 100%; min-height: auto; box-shadow: none; margin-bottom: 0; border-bottom: 4px solid #eee; overflow: visible; }
     .page-inner { padding: 24px 20px; }
     .cover-top { padding: 40px 20px 0; }
     .cover-title { font-size: 22pt; }
-    .cover-sub { font-size: 9pt; letter-spacing: 2px; }
+    .cover-sub { font-size: 9pt; }
     .cover-bottom { padding: 24px 20px; }
     .pg-header h2 { font-size: 13pt; }
-    .two-col { flex-direction: column; }
-    .line-card { flex: 1 1 100%; }
+    .two-col, .role-grid { flex-direction: column; }
     .flow-steps { flex-direction: column; gap: 8px; }
     .flow-arrow { transform: rotate(90deg); }
     .checklist-grid { grid-template-columns: 1fr; }
     .pg-footer { position: static; padding: 16px 20px; margin-top: 20px; border-top: 1px solid #eee; }
+    .triple-col { flex-direction: column; }
   }
-  .page {
-    width: 210mm; min-height: 297mm; margin: 0 auto;
-    position: relative; background: #fff;
-    page-break-after: always; overflow: hidden;
-  }
+  .page { width: 210mm; min-height: 297mm; margin: 0 auto; position: relative; background: #fff; page-break-after: always; overflow: hidden; }
   .page:last-child { page-break-after: auto; }
   .page-inner { padding: 44px 48px; }
-
-  /* cover */
   .cover { background: #111; color: #fff; display: flex; flex-direction: column; justify-content: flex-end; padding: 0; }
   .cover-top { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 60px 48px 0; }
-  .cover-badge {
-    display: inline-block; border: 1px solid rgba(255,255,255,0.25);
-    border-radius: 20px; padding: 6px 20px; font-size: 8.5pt;
-    letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 40px;
-  }
+  .cover-badge { display: inline-block; border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 6px 20px; font-size: 8.5pt; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 40px; }
   .cover-title { font-size: 34pt; font-weight: 800; letter-spacing: -1px; text-align: center; line-height: 1.3; margin-bottom: 16px; }
   .cover-sub { font-size: 12pt; color: rgba(255,255,255,0.45); font-weight: 400; letter-spacing: 3px; text-align: center; }
-  .cover-bottom {
-    padding: 48px; display: flex; justify-content: space-between;
-    align-items: flex-end; border-top: 1px solid rgba(255,255,255,0.08);
-  }
+  .cover-bottom { padding: 48px; display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid rgba(255,255,255,0.08); }
   .cover-info { font-size: 9pt; color: rgba(255,255,255,0.35); line-height: 1.8; }
   .cover-info b { color: rgba(255,255,255,0.7); font-weight: 600; }
   .cover-logo { font-size: 11pt; font-weight: 700; letter-spacing: 2px; color: rgba(255,255,255,0.4); }
-
-  /* header */
-  .pg-header {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 28px; padding-bottom: 12px; border-bottom: 2px solid #111;
-  }
+  .pg-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 28px; padding-bottom: 12px; border-bottom: 2px solid #111; }
   .pg-header h2 { font-size: 16pt; font-weight: 800; color: #111; letter-spacing: -0.5px; }
   .pg-num { font-size: 8.5pt; color: #bbb; font-weight: 600; }
-
-  /* section */
-  .sec-title {
-    font-size: 11pt; font-weight: 700; color: #111;
-    margin-top: 24px; margin-bottom: 10px;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .sec-title::before {
-    content: ''; display: inline-block; width: 3px; height: 16px;
-    background: #111; border-radius: 2px;
-  }
-
-  /* table */
+  .sec-title { font-size: 11pt; font-weight: 700; color: #111; margin-top: 24px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .sec-title::before { content: ''; display: inline-block; width: 3px; height: 16px; background: #111; border-radius: 2px; }
   .info-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 9pt; }
-  .info-table th {
-    background: #f5f5f5; padding: 10px 14px; text-align: left;
-    font-weight: 600; color: #555; border: 1px solid #e8e8e8; width: 120px;
-  }
+  .info-table th { background: #f5f5f5; padding: 10px 14px; text-align: left; font-weight: 600; color: #555; border: 1px solid #e8e8e8; width: 120px; }
   .info-table td { padding: 10px 14px; border: 1px solid #e8e8e8; color: #333; }
-
-  /* two column cards */
   .two-col { display: flex; gap: 16px; margin: 14px 0; }
-  .line-card {
-    flex: 1; border-radius: 12px; padding: 22px; position: relative;
-    border: 1px solid #e0e0e0;
-  }
+  .line-card { flex: 1; border-radius: 12px; padding: 22px; border: 1px solid #e0e0e0; }
   .line-card.shortform { background: #f0f5ff; border-color: #c8d8ff; }
   .line-card.ai { background: #f5f5f5; border-color: #ddd; }
-  .line-tag {
-    display: inline-block; font-size: 7.5pt; font-weight: 700;
-    padding: 3px 12px; border-radius: 12px; margin-bottom: 10px; letter-spacing: 0.5px;
-  }
+  .line-tag { display: inline-block; font-size: 7.5pt; font-weight: 700; padding: 3px 12px; border-radius: 12px; margin-bottom: 10px; letter-spacing: 0.5px; }
   .shortform .line-tag { background: #0066ff; color: #fff; }
   .ai .line-tag { background: #222; color: #fff; }
   .line-card h3 { font-size: 11pt; font-weight: 700; color: #111; margin-bottom: 8px; }
   .line-card ul { padding-left: 16px; margin: 0; }
   .line-card li { font-size: 8.5pt; color: #444; margin-bottom: 4px; word-break: keep-all; }
-  .line-card .highlight { font-size: 9pt; font-weight: 700; color: #0066ff; margin-top: 10px; }
-  .line-card.ai .highlight { color: #222; }
-
-  /* flow */
+  .line-card .highlight { font-size: 9pt; font-weight: 700; margin-top: 10px; }
+  .shortform .highlight { color: #0066ff; }
+  .ai .highlight { color: #222; }
   .flow-steps { display: flex; align-items: center; gap: 0; margin: 14px 0; justify-content: center; }
-  .flow-step {
-    background: #fafafa; border: 1px solid #e8e8e8; border-radius: 10px;
-    padding: 12px 16px; text-align: center; flex: 1; max-width: 160px;
-  }
-  .flow-step b { display: block; font-size: 9pt; color: #111; margin-bottom: 2px; }
-  .flow-step span { font-size: 7.5pt; color: #888; }
+  .flow-step { background: #fafafa; border: 1px solid #e8e8e8; border-radius: 10px; padding: 12px 14px; text-align: center; flex: 1; max-width: 150px; }
+  .flow-step b { display: block; font-size: 8.5pt; color: #111; margin-bottom: 2px; }
+  .flow-step span { font-size: 7pt; color: #888; }
   .flow-step.accent { background: #0066ff; border-color: #0066ff; }
   .flow-step.accent b, .flow-step.accent span { color: #fff; }
-  .flow-arrow { color: #ccc; font-size: 14pt; padding: 0 4px; flex-shrink: 0; }
-
-  /* note */
-  .note-bar {
-    background: #f5f8ff; border-left: 3px solid #0066ff;
-    padding: 12px 18px; border-radius: 0 8px 8px 0;
-    margin: 14px 0; font-size: 8.5pt; color: #666; word-break: keep-all;
-  }
-  .note-bar.dark {
-    background: #f5f5f5; border-left-color: #222;
-  }
-
-  /* revenue table */
+  .flow-step.accent-dark { background: #222; border-color: #222; }
+  .flow-step.accent-dark b, .flow-step.accent-dark span { color: #fff; }
+  .flow-step.plan { background: #fff8e6; border-color: #f0d060; }
+  .flow-arrow { color: #ccc; font-size: 14pt; padding: 0 3px; flex-shrink: 0; }
+  .note-bar { background: #f5f8ff; border-left: 3px solid #0066ff; padding: 12px 18px; border-radius: 0 8px 8px 0; margin: 14px 0; font-size: 8.5pt; color: #666; word-break: keep-all; }
+  .note-bar.dark { background: #f5f5f5; border-left-color: #222; }
+  .note-bar.warn { background: #fff8e6; border-left-color: #f0a030; }
   .rev-table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 9pt; }
-  .rev-table thead th {
-    background: #111; color: #fff; padding: 10px 14px;
-    font-weight: 600; font-size: 8.5pt; text-align: center;
-  }
-  .rev-table tbody td {
-    padding: 10px 14px; border: 1px solid #e8e8e8;
-    text-align: center; color: #333;
-  }
+  .rev-table thead th { background: #111; color: #fff; padding: 10px 14px; font-weight: 600; font-size: 8.5pt; text-align: center; }
+  .rev-table tbody td { padding: 10px 14px; border: 1px solid #e8e8e8; text-align: center; color: #333; }
   .rev-table tbody tr:nth-child(even) { background: #fafafa; }
-
-  /* role card */
   .role-grid { display: flex; gap: 16px; margin: 14px 0; }
-  .role-card {
-    flex: 1; border-radius: 10px; padding: 20px;
-    border: 1px solid #ddd;
-  }
+  .role-card { flex: 1; border-radius: 10px; padding: 20px; border: 1px solid #ddd; }
   .role-card.hong { background: #f0f5ff; border-color: #c8d8ff; }
   .role-card.flow { background: #f5f5f5; }
-  .role-tag {
-    display: inline-block; font-size: 7.5pt; font-weight: 700;
-    padding: 3px 10px; border-radius: 12px; margin-bottom: 10px; letter-spacing: 0.5px;
-  }
+  .role-card.shared { background: #fff8e6; border-color: #f0d060; }
+  .role-tag { display: inline-block; font-size: 7.5pt; font-weight: 700; padding: 3px 10px; border-radius: 12px; margin-bottom: 10px; letter-spacing: 0.5px; }
   .hong .role-tag { background: #0066ff; color: #fff; }
   .flow .role-tag { background: #222; color: #fff; }
+  .shared .role-tag { background: #f0a030; color: #fff; }
   .role-card ul { padding-left: 16px; margin: 0; }
   .role-card li { font-size: 8.5pt; color: #444; margin-bottom: 4px; word-break: keep-all; }
-
-  /* checklist */
+  .triple-col { display: flex; gap: 12px; margin: 14px 0; }
+  .triple-col > div { flex: 1; }
   .checklist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 14px 0; }
-  .check-item {
-    border: 1px solid #e8e8e8; border-radius: 10px; padding: 14px 18px;
-    display: flex; align-items: flex-start; gap: 10px;
-  }
-  .check-box {
-    width: 18px; height: 18px; border: 2px solid #ccc; border-radius: 4px;
-    flex-shrink: 0; margin-top: 1px;
-  }
+  .check-item { border: 1px solid #e8e8e8; border-radius: 10px; padding: 14px 18px; display: flex; align-items: flex-start; gap: 10px; }
+  .check-box { width: 18px; height: 18px; border: 2px solid #ccc; border-radius: 4px; flex-shrink: 0; margin-top: 1px; }
   .check-item p { font-size: 9pt; color: #333; font-weight: 600; }
   .check-item span { font-size: 8pt; color: #999; display: block; margin-top: 2px; font-weight: 400; }
-
-  /* footer */
-  .pg-footer {
-    position: absolute; bottom: 28px; left: 48px; right: 48px;
-    display: flex; justify-content: space-between;
-    font-size: 7.5pt; color: #ccc;
-  }
-
-  .print-btn {
-    position: fixed; bottom: 20px; right: 20px; z-index: 100;
-    background: #111; color: #fff; border: none;
-    padding: 12px 28px; border-radius: 8px;
-    font-size: 10pt; font-weight: 600; cursor: pointer;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.25); font-family: sans-serif;
-  }
+  .pg-footer { position: absolute; bottom: 28px; left: 48px; right: 48px; display: flex; justify-content: space-between; font-size: 7.5pt; color: #ccc; }
+  .vs-box { display: flex; gap: 16px; margin: 14px 0; }
+  .vs-card { flex: 1; border-radius: 10px; padding: 18px; border: 1px solid #e0e0e0; }
+  .vs-card.old { background: #fff; }
+  .vs-card.new { background: #f0f5ff; border-color: #c8d8ff; }
+  .vs-card h4 { font-size: 10pt; font-weight: 700; margin-bottom: 8px; }
+  .vs-card.old h4 { color: #999; }
+  .vs-card.new h4 { color: #0066ff; }
+  .vs-card ul { padding-left: 16px; margin: 0; }
+  .vs-card li { font-size: 8.5pt; color: #444; margin-bottom: 4px; }
+  .vs-card .result { font-size: 9pt; font-weight: 700; margin-top: 10px; padding-top: 8px; border-top: 1px solid #eee; }
+  .vs-card.old .result { color: #c00; }
+  .vs-card.new .result { color: #0066ff; }
+  .print-btn { position: fixed; bottom: 20px; right: 20px; z-index: 100; background: #111; color: #fff; border: none; padding: 12px 28px; border-radius: 8px; font-size: 10pt; font-weight: 600; cursor: pointer; box-shadow: 0 2px 12px rgba(0,0,0,0.25); font-family: sans-serif; }
 </style>
 </head>
 <body>
@@ -203,191 +127,239 @@
 <!-- COVER -->
 <div class="page cover">
   <div class="cover-top">
-    <div class="cover-badge">Business Structure</div>
-    <div class="cover-title">편집 대행사<br>구조안</div>
-    <div class="cover-sub">AGENCY BLUEPRINT</div>
+    <div class="cover-badge">Agency Blueprint</div>
+    <div class="cover-title">기획 + 편집<br>대행사 구조안</div>
+    <div class="cover-sub">PLAN + EDIT + COMMERCE</div>
   </div>
   <div class="cover-bottom">
     <div class="cover-info">
       <b>Meeting</b> 2026. 05. 08<br>
       <b>Participants</b> Flowmus + 홍아린<br>
-      <b>Status</b> Draft v1.0
+      <b>Status</b> Draft v2.0
     </div>
     <div class="cover-logo">FLOWMUS</div>
   </div>
 </div>
 
-<!-- PAGE 1 — 사업 개요 + 서비스 라인 -->
+<!-- PAGE 1 — 핵심 구조 -->
 <div class="page">
   <div class="page-inner">
-
     <div class="pg-header">
-      <h2>Business Overview</h2>
+      <h2>Core Structure</h2>
       <span class="pg-num">01</span>
+    </div>
+
+    <div class="note-bar warn">
+      <b>편집만 하면 단가 경쟁. 기획이 붙어야 가치가 올라간다.</b><br>
+      기획 없는 편집 = 단순 노동, 단가 하락 / 기획 있는 편집 = 성과가 나오는 영상, RS가 가능한 구조
     </div>
 
     <div class="sec-title">사업 개요</div>
 
     <table class="info-table">
-      <tr><th>사업</th><td>영상 편집 대행사 (브랜드명 미정 -- 미팅에서 확정)</td></tr>
+      <tr><th>사업</th><td>기획 + 편집 대행사 (브랜드명 미정 -- 미팅에서 확정)</td></tr>
       <tr><th>운영 주체</th><td>Flowmus + 홍아린 공동 운영</td></tr>
-      <tr><th>홍아린 역할</th><td>대행사 대표/총괄 (편집팀 관리, 클라이언트 관리)</td></tr>
-      <tr><th>Flowmus 역할</th><td>시스템/인프라, 클라이언트 유입, 사업 전략</td></tr>
-      <tr><th>편집팀</th><td>홍아린 기존 보유 팀 활용 (건당 고정급)</td></tr>
+      <tr><th>홍아린</th><td>대행사 대표/총괄 (콘텐츠 디렉팅, 편집팀 관리, 클라이언트 관리)</td></tr>
+      <tr><th>Flowmus</th><td>데이터/AI 기반 기획, 커머스 설계, 시스템/인프라, 클라이언트 유입</td></tr>
+      <tr><th>편집팀</th><td>홍아린 기존 보유 팀 (건당 고정급)</td></tr>
     </table>
+
+    <div class="sec-title">전체 흐름: 기획 + 편집 + 커머스</div>
+
+    <div class="flow-steps">
+      <div class="flow-step plan">
+        <b>콘텐츠 기획</b>
+        <span>Flowmus + 홍아린</span>
+      </div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-step plan">
+        <b>커머스 기획</b>
+        <span>상품/동선 설계</span>
+      </div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-step">
+        <b>촬영 가이드</b>
+        <span>클라이언트 전달</span>
+      </div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-step">
+        <b>편집</b>
+        <span>홍아린 편집팀</span>
+      </div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-step accent">
+        <b>납품 + RS</b>
+        <span>매출 추적/정산</span>
+      </div>
+    </div>
 
     <div class="sec-title">서비스 라인 2개</div>
 
     <div class="two-col">
       <div class="line-card shortform">
         <div class="line-tag">LINE 1</div>
-        <h3>숏폼 편집 대행 + 커머스 RS</h3>
+        <h3>숏폼 기획 + 편집 + 커머스 RS</h3>
         <ul>
           <li><b>타겟:</b> 소상공인, 인플루언서</li>
-          <li><b>플랫폼:</b> 릴스, 숏츠, 틱톡</li>
-          <li><b>포맷:</b> 15~60초 세로형</li>
-          <li>편집비 저단가/무료로 진입장벽 낮춤</li>
-          <li>영상 통한 커머스 매출에서 RS 수취</li>
+          <li><b>기획:</b> 콘텐츠 기획 + 커머스 기획</li>
+          <li><b>편집:</b> 릴스/숏츠/틱톡 15~60초</li>
+          <li><b>수익:</b> 편집비 저단가 + 커머스 매출 RS</li>
         </ul>
-        <div class="highlight">편집은 미끼, 커머스 RS로 스케일</div>
+        <div class="highlight">기획이 붙으니까 영상이 "팔린다" = RS 가능</div>
       </div>
       <div class="line-card ai">
         <div class="line-tag">LINE 2</div>
-        <h3>AI 기업 광고 + 강의</h3>
+        <h3>AI 기업 광고 기획 + 제작 + 강의</h3>
         <ul>
           <li><b>타겟:</b> 기업 (중소기업, 스타트업, 브랜드)</li>
-          <li><b>광고:</b> SNS/유튜브/DA 광고 소재 대량 생산</li>
-          <li><b>강의:</b> 기업 출강, AI 마케팅 워크숍</li>
-          <li>AI로 원가 낮추고, 광고 단가로 청구</li>
-          <li>광고 대행 → 강의 업셀 이중 수익</li>
+          <li><b>기획:</b> 광고 콘셉트/타겟/메시지 설계</li>
+          <li><b>제작:</b> AI 소재 대량 생산</li>
+          <li><b>수익:</b> 광고 대행료 + 강의비</li>
         </ul>
-        <div class="highlight">광고 예산에서 집행, 마진 극대화</div>
+        <div class="highlight">광고 예산에서 집행 = 고단가 마진</div>
       </div>
-    </div>
-
-    <div class="note-bar">
-      <b>핵심 전략:</b> 숏폼은 볼륨(클라이언트 수) x 커머스 RS로 누적 수익, AI 광고는 고단가 x 장기계약으로 안정 수익. 두 라인이 서로 다른 방식으로 매출을 만든다.
     </div>
 
   </div>
   <div class="pg-footer">
     <span>Flowmus Confidential</span>
-    <span>편집 대행사 구조안</span>
+    <span>기획+편집 대행사 구조안</span>
   </div>
 </div>
 
-<!-- PAGE 2 — 숏폼 커머스 RS 상세 -->
+<!-- PAGE 2 — 숏폼 기획 + 편집 + 커머스 RS -->
 <div class="page">
   <div class="page-inner">
-
     <div class="pg-header">
-      <h2>LINE 1: 숏폼 + 커머스 RS</h2>
+      <h2>LINE 1: 숏폼 기획 + 커머스 RS</h2>
       <span class="pg-num">02</span>
     </div>
 
-    <div class="sec-title">수익 모델</div>
+    <div class="sec-title">왜 기획이 필요한가?</div>
 
-    <div class="note-bar">
-      숏폼 편집만으로는 단가가 낮다. 편집비를 낮추거나 무료로 가져가는 대신, 영상을 통해 발생하는 <b>커머스 매출의 RS</b>를 무조건 붙인다.
+    <div class="vs-box">
+      <div class="vs-card old">
+        <h4>편집만 대행</h4>
+        <ul>
+          <li>클라이언트가 보내는 대로 편집</li>
+          <li>영상 퀄리티 들쭉날쭉</li>
+          <li>조회수/매출 보장 불가</li>
+          <li>커머스 RS 붙일 명분 없음</li>
+        </ul>
+        <div class="result">단가 경쟁 → 바닥</div>
+      </div>
+      <div class="vs-card new">
+        <h4>기획 + 편집 + 커머스</h4>
+        <ul>
+          <li>뭘 찍을지/어떻게 팔지까지 설계</li>
+          <li>"팔리는 영상" 기획 → 성과 보장</li>
+          <li>성과가 나니까 RS 정당화</li>
+          <li>올인원 → 클라이언트 가치 높음</li>
+        </ul>
+        <div class="result">기획 = RS의 근거</div>
+      </div>
     </div>
 
-    <div class="sec-title">커머스 RS 흐름 (스마트스토어 / 자사몰)</div>
+    <div class="sec-title">기획 범위</div>
+
+    <div class="two-col">
+      <div class="line-card" style="background:#fff8e6; border-color:#f0d060;">
+        <div class="line-tag" style="background:#f0a030;">콘텐츠 기획</div>
+        <h3>뭘 찍을지, 어떻게 찍을지</h3>
+        <ul>
+          <li>트렌드 분석 → 뜨는 포맷/주제 선정</li>
+          <li>클라이언트 업종별 콘텐츠 전략</li>
+          <li>영상별 훅/구성/스크립트 방향</li>
+          <li>월간 콘텐츠 캘린더</li>
+        </ul>
+        <div class="highlight" style="color:#f0a030;">Flowmus 데이터 + 홍아린 디렉팅</div>
+      </div>
+      <div class="line-card" style="background:#fff8e6; border-color:#f0d060;">
+        <div class="line-tag" style="background:#f0a030;">커머스 기획</div>
+        <h3>어떤 상품을, 어떻게 팔지</h3>
+        <ul>
+          <li>클라이언트 상품 분석 → 주력 상품 선정</li>
+          <li>스마트스토어/자사몰 연동 설계</li>
+          <li>영상 → 구매 전환 동선 (CTA, 링크 배치)</li>
+          <li>UTM/전용 링크 세팅 → 매출 추적</li>
+        </ul>
+        <div class="highlight" style="color:#f0a030;">Flowmus 커머스 설계</div>
+      </div>
+    </div>
+
+    <div class="sec-title">숏폼 커머스 RS 전체 흐름</div>
 
     <div class="flow-steps">
-      <div class="flow-step">
-        <b>숏폼 편집 납품</b>
-        <span>원본 수령 → 편집</span>
+      <div class="flow-step plan">
+        <b>콘텐츠 기획</b>
+        <span>주제/훅/구성</span>
+      </div>
+      <div class="flow-arrow">&#8594;</div>
+      <div class="flow-step plan">
+        <b>커머스 기획</b>
+        <span>상품/동선/링크</span>
       </div>
       <div class="flow-arrow">&#8594;</div>
       <div class="flow-step">
-        <b>스토어 링크 삽입</b>
-        <span>스마트스토어 / 자사몰</span>
+        <b>촬영 가이드</b>
+        <span>클라이언트 촬영</span>
       </div>
       <div class="flow-arrow">&#8594;</div>
       <div class="flow-step">
-        <b>SNS 업로드</b>
-        <span>릴스/숏츠/틱톡</span>
-      </div>
-      <div class="flow-arrow">&#8594;</div>
-      <div class="flow-step">
-        <b>구매 발생</b>
-        <span>영상 → 스토어 유입</span>
+        <b>편집 + QC</b>
+        <span>홍아린 팀</span>
       </div>
       <div class="flow-arrow">&#8594;</div>
       <div class="flow-step accent">
         <b>RS 정산</b>
-        <span>매출 추적 (UTM)</span>
+        <span>스토어 매출 추적</span>
       </div>
     </div>
 
-    <div class="sec-title">왜 이 구조인가?</div>
-
-    <div class="two-col">
-      <div class="line-card" style="background:#fff;">
-        <h3 style="font-size:10pt;">기존 편집 대행</h3>
-        <ul>
-          <li>편집비 단가 경쟁 → 바닥</li>
-          <li>클라이언트 1명 = 고정 수익</li>
-          <li>편집자 수만큼만 스케일</li>
-          <li style="color:#c00; font-weight:700;">한계가 명확함</li>
-        </ul>
-      </div>
-      <div class="line-card shortform">
-        <h3 style="font-size:10pt;">편집 + 커머스 RS</h3>
-        <ul>
-          <li>편집비 부담 낮춤 → 진입장벽 제거</li>
-          <li>영상 잘 되면 RS가 편집비보다 큼</li>
-          <li>클라이언트 쌓일수록 RS 파이프라인 누적</li>
-          <li style="color:#0066ff; font-weight:700;">스케일이 가능한 구조</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="sec-title">패키지 예시 (미팅에서 확정)</div>
+    <div class="sec-title">패키지 (미팅에서 확정)</div>
 
     <table class="rev-table">
       <thead>
-        <tr><th>패키지</th><th>편집비</th><th>커머스 RS</th><th>비고</th></tr>
+        <tr><th>패키지</th><th>편집비</th><th>커머스 RS</th><th>포함 기획</th></tr>
       </thead>
       <tbody>
-        <tr><td><b>무료형</b></td><td>무료</td><td>커머스 매출 __%</td><td>편집비 0원, RS만 수취</td></tr>
-        <tr><td><b>저가형</b></td><td>만원대/월</td><td>커머스 매출 __%</td><td>낮은 월정액 + RS</td></tr>
-        <tr><td><b>혼합형</b></td><td>만원대/월</td><td>커머스 매출 __%</td><td>편집비 + 낮은 RS</td></tr>
+        <tr><td><b>무료형</b></td><td>무료</td><td>매출 __%</td><td>콘텐츠 + 커머스 기획</td></tr>
+        <tr><td><b>저가형</b></td><td>만원대/월</td><td>매출 __%</td><td>콘텐츠 + 커머스 기획</td></tr>
+        <tr><td><b>혼합형</b></td><td>만원대/월</td><td>매출 __%</td><td>콘텐츠 + 커머스 기획</td></tr>
       </tbody>
     </table>
 
     <div class="note-bar dark">
-      <b>편집자:</b> 건당 고정급 지급 &nbsp;|&nbsp; <b>커머스 RS:</b> Flowmus + 홍아린이 분배
+      <b>편집자:</b> 건당 고정급 &nbsp;|&nbsp; <b>커머스 RS:</b> Flowmus + 홍아린 분배 &nbsp;|&nbsp; <b>커머스:</b> 스마트스토어/자사몰 중심
     </div>
 
   </div>
   <div class="pg-footer">
     <span>Flowmus Confidential</span>
-    <span>편집 대행사 구조안</span>
+    <span>기획+편집 대행사 구조안</span>
   </div>
 </div>
 
 <!-- PAGE 3 — AI 기업 광고 + 강의 -->
 <div class="page">
   <div class="page-inner">
-
     <div class="pg-header">
       <h2>LINE 2: AI 기업 광고 + 강의</h2>
       <span class="pg-num">03</span>
     </div>
 
     <div class="note-bar dark">
-      편집 대행 = 인건비 경쟁, 단가 하락. <b>광고 = 광고 예산에서 집행</b> → 단가가 근본적으로 다르다. 기업은 "편집비"에는 인색하지만 "광고비"에는 예산이 있다.
+      기업은 "편집비"에는 인색하지만 <b>"광고비"에는 예산이 있다.</b> AI로 원가 낮추고, 광고 단가로 청구 = 마진 극대화.
     </div>
 
     <div class="sec-title">2-A. AI 광고 영상 제작 대행</div>
 
     <table class="info-table">
       <tr><th>타겟</th><td>기업 (중소기업, 스타트업, 브랜드)</td></tr>
-      <tr><th>작업 범위</th><td>광고 콘셉트 기획 → AI 소재 생성 → 편집 → 플랫폼별 리사이징 → 납품</td></tr>
+      <tr><th>기획</th><td>광고 콘셉트 기획 → 타겟/메시지/소재 방향 설계 (Flowmus AI + 홍아린)</td></tr>
+      <tr><th>제작</th><td>AI 소재 생성 → 편집 → 플랫폼별 리사이징 → 납품</td></tr>
       <tr><th>광고 유형</th><td>SNS 광고 (메타/인스타), 유튜브 광고, 네이버/카카오 DA, 숏폼 광고</td></tr>
       <tr><th>핵심 가치</th><td>1개 촬영본에서 AI로 10~20개 광고 소재 변형 생산</td></tr>
-      <tr><th>활용 도구</th><td>AI 영상 생성, AI 광고 카피, AI 이미지/모션, AI 더빙/나레이션</td></tr>
     </table>
 
     <table class="rev-table">
@@ -416,7 +388,7 @@
       </thead>
       <tbody>
         <tr><td><b>단발 특강</b></td><td>2~3시간</td><td>만원대</td><td>1회성 기업 출강</td></tr>
-        <tr><td><b>워크숍</b></td><td>반일~1일</td><td>만원대</td><td>실습 포함 심화 과정</td></tr>
+        <tr><td><b>워크숍</b></td><td>반일~1일</td><td>만원대</td><td>실습 포함 심화</td></tr>
         <tr><td><b>정기 교육</b></td><td>월 2~4회</td><td>월 만원대</td><td>사내 마케팅팀 양성</td></tr>
       </tbody>
     </table>
@@ -426,7 +398,7 @@
     <div class="flow-steps">
       <div class="flow-step">
         <b>AI 광고 대행 계약</b>
-        <span>기업 클라이언트 확보</span>
+        <span>기업 확보</span>
       </div>
       <div class="flow-arrow">&#8594;</div>
       <div class="flow-step">
@@ -439,23 +411,22 @@
         <span>"사내팀도 배워보세요"</span>
       </div>
       <div class="flow-arrow">&#8594;</div>
-      <div class="flow-step accent" style="background:#222; border-color:#222;">
+      <div class="flow-step accent-dark">
         <b>이중 수익</b>
-        <span>광고 대행 + 강의</span>
+        <span>광고 + 강의</span>
       </div>
     </div>
 
   </div>
   <div class="pg-footer">
     <span>Flowmus Confidential</span>
-    <span>편집 대행사 구조안</span>
+    <span>기획+편집 대행사 구조안</span>
   </div>
 </div>
 
-<!-- PAGE 4 — 역할 분담 + 운영 프로세스 -->
+<!-- PAGE 4 — 역할 분담 + 프로세스 -->
 <div class="page">
   <div class="page-inner">
-
     <div class="pg-header">
       <h2>역할 분담 & 프로세스</h2>
       <span class="pg-num">04</span>
@@ -463,62 +434,71 @@
 
     <div class="sec-title">역할 분담</div>
 
-    <div class="role-grid">
+    <div class="triple-col">
       <div class="role-card hong">
         <div class="role-tag">홍아린 (대표/총괄)</div>
         <ul>
-          <li><b>편집팀 관리</b> 및 작업 배분</li>
-          <li>편집 품질 <b>디렉팅 및 최종 QC</b></li>
-          <li>클라이언트 소통 및 피드백 관리</li>
+          <li><b>콘텐츠 디렉팅</b> (톤, 구성 감수)</li>
+          <li>편집팀 관리 및 작업 배분</li>
+          <li>편집 품질 최종 QC</li>
+          <li>클라이언트 소통/피드백</li>
           <li>편집 가이드/템플릿 제작</li>
-          <li>신규 편집자 교육</li>
-          <li><b>기업 AI 강의</b> 출강</li>
+          <li><b>기업 AI 강의 출강</b></li>
         </ul>
       </div>
       <div class="role-card flow">
         <div class="role-tag">FLOWMUS</div>
         <ul>
-          <li><b>클라이언트 유입</b> (마케팅, 영업 채널)</li>
-          <li>사업 구조 설계 및 전략</li>
-          <li><b>AI 도구/시스템 구축</b></li>
-          <li>정산 및 계약 관리</li>
-          <li>브랜딩 및 랜딩페이지</li>
-          <li><b>커머스 RS 추적/정산 시스템</b></li>
+          <li><b>데이터/AI 콘텐츠 기획</b></li>
+          <li><b>커머스 기획</b> (상품/동선/링크)</li>
+          <li>클라이언트 유입 (마케팅)</li>
+          <li>AI 도구/시스템 구축</li>
+          <li>RS 추적/정산 시스템</li>
+          <li>브랜딩/랜딩페이지</li>
+        </ul>
+      </div>
+      <div class="role-card shared">
+        <div class="role-tag">공동</div>
+        <ul>
+          <li><b>콘텐츠 기획 회의</b></li>
+          <li>Flowmus 데이터 + 홍아린 디렉팅</li>
+          <li>클라이언트별 월간 전략</li>
+          <li>신규 클라이언트 상담</li>
         </ul>
       </div>
     </div>
 
     <div class="sec-title">운영 프로세스</div>
 
-    <div class="flow-steps" style="flex-wrap: wrap; gap: 8px;">
-      <div class="flow-step" style="max-width:140px;">
+    <div class="flow-steps" style="flex-wrap: wrap; gap: 6px;">
+      <div class="flow-step" style="max-width:120px;">
         <b>클라이언트 유입</b>
         <span>Flowmus + 홍아린</span>
       </div>
       <div class="flow-arrow">&#8594;</div>
-      <div class="flow-step" style="max-width:140px;">
-        <b>상담 및 계약</b>
+      <div class="flow-step" style="max-width:120px;">
+        <b>상담/계약</b>
         <span>라인 배정</span>
       </div>
       <div class="flow-arrow">&#8594;</div>
-      <div class="flow-step" style="max-width:140px;">
-        <b>작업 배분</b>
-        <span>홍아린 → 편집팀</span>
+      <div class="flow-step plan" style="max-width:120px;">
+        <b>콘텐츠 기획</b>
+        <span>공동 기획</span>
       </div>
       <div class="flow-arrow">&#8594;</div>
-      <div class="flow-step" style="max-width:140px;">
-        <b>편집 완료</b>
-        <span>편집자 (고정급)</span>
+      <div class="flow-step plan" style="max-width:120px;">
+        <b>커머스 기획</b>
+        <span>Flowmus</span>
       </div>
       <div class="flow-arrow">&#8594;</div>
-      <div class="flow-step" style="max-width:140px;">
-        <b>QC 검수</b>
-        <span>홍아린 디렉팅</span>
+      <div class="flow-step" style="max-width:120px;">
+        <b>편집</b>
+        <span>홍아린 팀</span>
       </div>
       <div class="flow-arrow">&#8594;</div>
-      <div class="flow-step accent" style="max-width:140px;">
-        <b>납품 + 정산</b>
-        <span>RS 추적</span>
+      <div class="flow-step accent" style="max-width:120px;">
+        <b>납품 + RS</b>
+        <span>정산</span>
       </div>
     </div>
 
@@ -536,20 +516,19 @@
     </table>
 
     <div class="note-bar">
-      <b>논의 포인트:</b> 편집자 인건비 부담 주체 / Flowmus 유입 vs 홍아린 유입 차등 여부 / 초기 투자비용(랜딩페이지, 마케팅) 분담
+      <b>논의 포인트:</b> 편집자 인건비 부담 주체 / Flowmus 유입 vs 홍아린 유입 차등 여부 / 초기 투자비용 분담 / 기획 회의 주기
     </div>
 
   </div>
   <div class="pg-footer">
     <span>Flowmus Confidential</span>
-    <span>편집 대행사 구조안</span>
+    <span>기획+편집 대행사 구조안</span>
   </div>
 </div>
 
 <!-- PAGE 5 — 미팅 체크리스트 -->
 <div class="page">
   <div class="page-inner">
-
     <div class="pg-header">
       <h2>미팅 체크리스트</h2>
       <span class="pg-num">05</span>
@@ -564,7 +543,7 @@
       </div>
       <div class="check-item">
         <div class="check-box"></div>
-        <div><p>숏폼 패키지 가격</p><span>편집비 + 커머스 RS 비율</span></div>
+        <div><p>숏폼 패키지 가격 + RS 비율</p><span>편집비 + 커머스 매출 RS %</span></div>
       </div>
       <div class="check-item">
         <div class="check-box"></div>
@@ -580,7 +559,11 @@
       </div>
       <div class="check-item">
         <div class="check-box"></div>
-        <div><p>편집자 인건비 부담</p><span>누가 편집자 고정급을 지급하는가</span></div>
+        <div><p>편집자 인건비 부담</p><span>누가 편집자 고정급을 지급?</span></div>
+      </div>
+      <div class="check-item">
+        <div class="check-box"></div>
+        <div><p>기획 회의 주기</p><span>주간/월간, 대면/비대면</span></div>
       </div>
       <div class="check-item">
         <div class="check-box"></div>
@@ -592,7 +575,7 @@
       </div>
       <div class="check-item">
         <div class="check-box"></div>
-        <div><p>계약 형태</p><span>동업계약 / 업무위탁 / 파트너십</span></div>
+        <div><p>계약 형태</p><span>동업계약/업무위탁/파트너십</span></div>
       </div>
       <div class="check-item">
         <div class="check-box"></div>
@@ -600,17 +583,17 @@
       </div>
     </div>
 
-    <div style="margin-top: 30px; text-align: center; padding: 28px; background: #f8f9fa; border-radius: 12px;">
+    <div style="margin-top: 24px; text-align: center; padding: 28px; background: #f8f9fa; border-radius: 12px;">
       <div style="font-size: 13pt; font-weight: 700; color: #222; line-height: 1.6; word-break: keep-all;">
-        "편집은 미끼, 커머스로 스케일.<br>광고는 고단가, 강의로 업셀."
+        "기획이 붙어야 팔리는 영상이 된다.<br>팔려야 RS가 돌아간다."
       </div>
-      <div style="font-size: 8.5pt; color: #aaa; margin-top: 8px;">Agency Blueprint v1.0</div>
+      <div style="font-size: 8.5pt; color: #aaa; margin-top: 8px;">Agency Blueprint v2.0</div>
     </div>
 
   </div>
   <div class="pg-footer">
     <span>Flowmus Confidential</span>
-    <span>편집 대행사 구조안</span>
+    <span>기획+편집 대행사 구조안</span>
   </div>
 </div>
 
