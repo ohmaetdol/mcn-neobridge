@@ -46,7 +46,7 @@ p{margin:8px 0;color:var(--text2);word-break:keep-all}
 .sig .quote{font-size:18px;font-weight:800;color:var(--text);line-height:1.4}
 .checklist{list-style:none;padding:0;margin:12px 0}
 .checklist li{padding:10px 0 10px 32px;border-bottom:1px solid var(--card2);font-size:14px;color:var(--text2);position:relative}
-.checklist li::before{content:'\2610';position:absolute;left:8px;color:var(--accent);font-size:16px}
+.checklist li::before{content:'☐';position:absolute;left:8px;color:var(--accent);font-size:16px}
 table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
 th{background:var(--card2);padding:10px 12px;text-align:left;font-weight:700;color:var(--text2);font-size:12px;border-bottom:1px solid var(--border)}
 td{padding:10px 12px;border-bottom:1px solid var(--card2);color:var(--text2)}
@@ -60,20 +60,9 @@ td{padding:10px 12px;border-bottom:1px solid var(--card2);color:var(--text2)}
 .catch-label{font-size:11px;font-weight:700;color:var(--accent);margin-bottom:4px}
 .catch-phrase{font-size:16px;font-weight:800;color:var(--text)}
 .catch-when{font-size:12px;color:var(--text3);margin-top:3px}
-.script-block{background:var(--card2);border-radius:14px;padding:20px 22px;margin:16px 0;border-left:3px solid var(--accent)}
-.script-block .block-label{font-size:11px;font-weight:700;color:var(--accent);margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
-.script-block .block-time{font-size:12px;color:var(--text3);margin-bottom:12px}
-.script-block .tone{font-size:12px;color:var(--amber);font-weight:600;margin-bottom:10px;padding:6px 10px;background:#fffbeb;border-radius:8px;display:inline-block}
-.script-block .line{font-size:15px;line-height:1.9;color:var(--text);margin:6px 0}
-.script-block .line em{font-style:normal;color:var(--text3);font-size:13px}
-.script-block .pause{display:block;text-align:center;font-size:12px;color:var(--text3);padding:8px 0;letter-spacing:2px}
-.data-card{background:#f0fdf4;border-left:3px solid var(--green);border-radius:0 12px 12px 0;padding:14px 18px;margin:12px 0}
-.data-card .data-title{font-size:13px;font-weight:700;color:var(--green);margin-bottom:6px}
-.data-card p{font-size:14px;color:#166534;margin:3px 0}
-.nav-dots{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);display:flex;gap:6px;background:rgba(0,0,0,.7);padding:8px 14px;border-radius:20px;z-index:20}
-.nav-dots a{width:8px;height:8px;background:rgba(255,255,255,.4);border-radius:50%;display:block;transition:all .2s}
-.nav-dots a.active,.nav-dots a:hover{background:#fff;transform:scale(1.3)}
-@media(max-width:480px){.container{padding:16px 14px}.hero h1{font-size:20px}section h2{font-size:17px}.script-block .line{font-size:14px}}
+.card-title a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+.card-title a:hover{opacity:.7}
+@media(max-width:480px){.container{padding:16px 14px}.hero h1{font-size:20px}section h2{font-size:17px}}
 </style>
 </head>
 <body>
@@ -81,14 +70,14 @@ td{padding:10px 12px;border-bottom:1px solid var(--card2);color:var(--text2)}
 <div class="top-bar">
 <span class="badge">출연자용</span>
 <span class="title">EP.05 촬영 브리프</span>
-<span class="ver">v1 &middot; 2026.05.08</span>
+<span class="ver">v2 · 2026.05.08</span>
 </div>
 
 <div class="container">
 
 <div class="hero">
 <h1>조건 다 맞는 이상형이랑 결혼했습니다.<br>3년 후 이혼했습니다.</h1>
-<p>EP.05 &middot; 스튜디오 단독 토크 &middot; 대본 기반</p>
+<p>EP.05 · 스튜디오 단독 토크 · 이상형 조건 vs 이혼 해부형</p>
 <div class="meta">
 <span>13~14분</span>
 <span>스튜디오</span>
@@ -97,421 +86,267 @@ td{padding:10px 12px;border-bottom:1px solid var(--card2);color:var(--text2)}
 </div>
 
 <!-- 1. 이 영상이 뭔지 -->
-<section id="s1">
+<section>
 <h2>이 영상은 뭔가요?</h2>
-<p><strong>결정사가 매칭하는 "조건"과 이혼의 원인인 "성격"이 완전히 다른 카테고리라는 사실을 데이터와 실화로 증명하고, 대표가 직접 시스템의 한계를 인정하는 영상</strong>입니다.</p>
-<p>Q10(대표의 고백)에서 "등급표에 없는 칸"을 말했다면, 이번엔 한 발 더 나아가 <strong>"등급표에 없는 칸이 이혼을 막는 칸이었다"</strong>는 결론에 도달합니다.</p>
+<p><strong>결정사가 매칭하는 "조건"과 이혼의 원인인 "성격"이 완전히 다른 카테고리라는 걸, 데이터와 실화로 보여주는 영상</strong>입니다.</p>
+<p>Q10(대표의 고백)에서 "등급표에 없는 칸"을 말했다면, 이번엔 한 발 더 — <strong>"등급표에 없는 칸이 이혼을 막는 칸이었다"</strong>는 결론에 도달합니다.</p>
 
 <div class="card">
 <div class="card-title">촬영 포맷</div>
-<p><strong>스튜디오 단독 토크</strong> -- 대본 기반 촬영. 즉흥이 아닙니다.</p>
-<p>아래 대본을 충분히 숙지한 후, 본인 말투로 자연스럽게 풀어주세요.</p>
-<p>촬영 시간: 약 2시간 (리허설 포함)</p>
+<p><strong>스튜디오 단독 토크</strong> — PD 질문 없이 대표님 혼자 카메라 보고 이야기합니다.</p>
+<p>대본 없습니다. 키워드와 핵심 숫자만 숙지하시면 됩니다.</p>
+<p>촬영 시간: 약 2시간</p>
 </div>
 
 <div class="highlight">
-<strong>핵심 메시지:</strong> "조건은 문을 열어주는 겁니다. 그 문 안에서 같이 사는 건, 전혀 다른 문제입니다."
+<strong>핵심 원칙:</strong> 아래 커뮤니티 이슈를 촬영 전에 한 번 읽어주세요.<br>
+"아 요즘 이런 게 화제구나" 정도만 머릿속에 넣으면 됩니다.<br>
+PD가 촬영 흐름을 옆에서 안내하고, 대표님은 <strong>아는 만큼, 느끼는 만큼 솔직하게 이야기</strong>하면 됩니다.<br>
+<strong>"연봉 1억 2천"부터 바로 시작합니다. 인사 없이 바로.</strong>
 </div>
 </section>
 
 <!-- 2. 채널 반복 포맷 -->
-<section id="s2">
-<h2>5막 구조</h2>
-<p>모든 에피소드는 같은 흐름입니다. 이번에도 동일합니다.</p>
+<section>
+<h2>우리 채널의 반복 포맷</h2>
+<p>모든 에피소드는 같은 흐름으로 진행됩니다. 외울 필요 없고, "이런 흐름이구나" 정도만 알면 됩니다.</p>
 
 <div class="card">
-<div class="card-title">EP.05 5막 흐름</div>
-<p><strong>[1막 킥]</strong> 숫자 나열 + "이혼했습니다" 반전 (0~2:30)</p>
-<p><strong>[2막 해부]</strong> 이혼 사유 vs 매칭 기준 비교 데이터 (2:30~7:00)</p>
-<p><strong>[3막 실화]</strong> 민지/준혁 A등급 커플 이혼 사례 (7:00~10:00)</p>
-<p><strong>[4막 반전]</strong> 시스템 자기반성 + 하버드 연구 (10:00~12:30)</p>
-<p><strong>[5막 아웃]</strong> "조건입니까, 사람입니까" 열린 결말 (12:30~14:00)</p>
+<div class="card-title">매 에피소드 5단 구조</div>
+<p><strong>[킥]</strong> 숫자/도발로 바로 시작. 인사 X. (0~30초)</p>
+<p><strong>[해부]</strong> 업계가 이렇게 돌아감. 이세령 = 인사이더. (약 5분)</p>
+<p><strong>[실화]</strong> "실제로 이런 일이 있었어요." 사례 기반. (약 3분)</p>
+<p><strong>[반전]</strong> "근데 진짜 중요한 건..." 메시지. (약 2.5분)</p>
+<p><strong>[아웃]</strong> 캐치프레이즈 + 여운 + 페이드아웃. (약 1.5분)</p>
 </div>
 
 <h3>자연스럽게 나올 캐치프레이즈</h3>
-<p>아래 문장들은 대본에 포함되어 있지만, 본인 말투로 자연스럽게 바꿔도 됩니다.</p>
+<p>아래 문장들은 외워서 읽는 게 아니라, 대화 중에 자연스럽게 나오면 좋은 표현입니다.</p>
 
 <div class="catch-box">
 <div class="catch-item">
-<div class="catch-label">1막 킥</div>
+<div class="catch-label">킥에서</div>
 <div class="catch-phrase">"성혼 축하 문자는 보내는데, 이혼 위로 문자는 안 보냅니다"</div>
-<div class="catch-when">오프닝 -- 결정사의 구조적 맹점을 한 줄로 요약</div>
+<div class="catch-when">결정사의 구조적 맹점을 한 줄로 요약할 때</div>
 </div>
 <div class="catch-item">
-<div class="catch-label">2막 해부</div>
+<div class="catch-label">해부에서</div>
 <div class="catch-phrase">"겹치는 게 하나도 없습니다"</div>
-<div class="catch-when">이혼 사유 vs 매칭 기준 비교표를 보여준 후</div>
+<div class="catch-when">이혼 사유 vs 매칭 기준을 비교한 후</div>
 </div>
 <div class="catch-item">
-<div class="catch-label">3막 실화</div>
+<div class="catch-label">실화에서</div>
 <div class="catch-phrase">"옆에 있는데 혼자인 느낌이었어요"</div>
-<div class="catch-when">민지 씨의 이혼 사유를 인용할 때</div>
+<div class="catch-when">성혼 후 이혼한 회원 사례를 이야기할 때</div>
 </div>
 <div class="catch-item">
-<div class="catch-label">4막 반전</div>
+<div class="catch-label">반전에서</div>
 <div class="catch-phrase">"우리가 매칭하는 건 조건이었지, 사람이 아니었습니다"</div>
-<div class="catch-when">가장 중요한 한 줄 -- 시스템 자기반성의 정점</div>
+<div class="catch-when">가장 중요한 한 줄 — 시스템 자기반성의 정점</div>
 </div>
 <div class="catch-item">
-<div class="catch-label">5막 아웃</div>
+<div class="catch-label">아웃에서</div>
 <div class="catch-phrase">"조건은 문을 열어주는 겁니다. 그 문 안에서 같이 사는 건, 전혀 다른 문제입니다."</div>
-<div class="catch-when">마무리 -- 이 영상의 핵심 한 줄</div>
+<div class="catch-when">마무리 — 이 영상의 핵심 한 줄</div>
 </div>
 </div>
-</section>
 
-<!-- 3. 사전 데이터 -->
-<section id="s3">
-<h2>촬영 전 숙지할 데이터</h2>
-<p>대본에 포함된 핵심 데이터입니다. 숫자를 정확히 기억해주세요.</p>
-
-<div class="data-card">
-<div class="data-title">이혼 사유 1위</div>
-<p><strong>"성격차이" 45.2%</strong> -- 20년째 부동의 1위 (통계청)</p>
-</div>
-
-<div class="data-card">
-<div class="data-title">결정사 매칭 기준 vs 이혼 사유</div>
-<p>매칭 기준: 학벌, 연봉, 키, 나이, 집안, 직업, 외모 등급</p>
-<p>이혼 사유: 성격차이, 경제문제, 가족갈등, 부정행위</p>
-<p><strong>겹치는 항목: 0개</strong></p>
-</div>
-
-<div class="data-card">
-<div class="data-title">성혼율</div>
-<p>듀오 공식 발표: <strong>41.7%</strong></p>
-<p>블라인드 추산 (1,570건 / 28,917명): <strong>약 5%</strong></p>
-</div>
-
-<div class="data-card">
-<div class="data-title">성혼 후 이혼율</div>
-<p><strong>추적하는 결정사: 0곳</strong></p>
-</div>
-
-<div class="data-card">
-<div class="data-title">배우자 선택 기준 1위</div>
-<p><strong>"성격 및 가치관" 67%</strong> (2030세대 설문)</p>
-<p>연봉, 외모, 학벌보다 1위 -- 그런데 결정사에서 검증 불가</p>
-</div>
-
-<div class="data-card">
-<div class="data-title">하버드 Eastwick 연구 (2012)</div>
-<p>"이상형 조건을 높게 충족하는 배우자를 만났다고 해서 이혼 확률이 낮아지지 않는다"</p>
-<p>진짜 중요한 건 <strong>"가치관 우선순위의 일치"</strong> (패턴 매칭)</p>
-</div>
-
-<div class="data-card">
-<div class="data-title">2024년 이혼 건수</div>
-<p><strong>9만 1,000건</strong> (통계청)</p>
-</div>
-
-<div class="data-card">
-<div class="data-title">기혼 여성 후회율</div>
-<p>2030대 기혼 여성 중 <strong>39%</strong> "다시 태어나면 결혼 안 하겠다" (대학내일 20대연구소)</p>
+<div class="warn">
+<div class="warn-title">이 표현들을 암기하지 마세요</div>
+<p>PD가 촬영 흐름을 안내하면서 자연스럽게 이 표현이 나오도록 도와줍니다. 대표님은 편하게 이야기하시면 됩니다.</p>
 </div>
 </section>
 
-<!-- 4. 대본 -->
-<section id="s4">
-<h2>대본</h2>
-<p>아래 대본을 숙지한 후, 본인 말투로 자연스럽게 풀어주세요. 외우지 않아도 됩니다. 흐름과 핵심 숫자만 기억하면 됩니다.</p>
-
-<div class="script-block">
-<div class="block-label">1막 -- 킥</div>
-<div class="block-time">0:00 ~ 2:30</div>
-<div class="tone">또박또박, 카메라 정면, 담담하게. "이혼했습니다"에서 톤 살짝 낮추기</div>
-
-<p class="line">연봉 1억 2천.</p>
-<p class="line">키 182.</p>
-<p class="line">서울대 졸업.</p>
-<p class="line">대기업 과장.</p>
-<p class="line">이 남자랑 결혼했습니다.</p>
-<p class="pause">--- 한 박자 ---</p>
-<p class="line">3년 후 이혼했습니다.</p>
-<p class="pause">---</p>
-<p class="line">성혼 축하 문자는 보내는데,</p>
-<p class="line">이혼 위로 문자는 안 보냅니다.</p>
-<p class="pause">---</p>
-<p class="line">결정사 대표로서 이 이야기를 하는 게 맞는지 고민했어요.</p>
-<p class="line">그런데 안 하는 게 더 무책임하다고 생각했습니다.</p>
-<p class="line">오늘 처음으로 이 이야기를 합니다.</p>
-</div>
-
-<div class="script-block">
-<div class="block-label">2막 -- 해부 (데이터)</div>
-<div class="block-time">2:30 ~ 7:00</div>
-<div class="tone">교수 톤, 데이터 읽을 때 또박또박. "겹치는 게 하나도 없습니다"에서 정면 응시</div>
-
-<p class="line">이혼 사유 1위가 뭔지 아십니까?</p>
-<p class="line">통계청 데이터입니다.</p>
-<p class="pause">--- 한 박자 ---</p>
-<p class="line">"성격차이." 45.2%.</p>
-<p class="line">20년째 1위입니다.</p>
-<p class="pause">---</p>
-<p class="line">그러면 결정사가 매칭할 때 보는 항목이 뭔지 아십니까?</p>
-<p class="line">학벌. 연봉. 키. 나이. 집안. 직업. 외모 등급.</p>
-<p class="line">이 두 개를 나란히 놓으면요.</p>
-<p class="pause">--- 한 박자 ---</p>
-<p class="line"><strong>겹치는 게 하나도 없습니다.</strong></p>
-<p class="pause">---</p>
-<p class="line">이혼의 원인 1위는 "성격차이"인데,</p>
-<p class="line">결정사 프로필에 "성격"을 검증하는 칸은 없어요.</p>
-<p class="line">있긴 있어요. "성격: 온화" 이렇게 적혀 있죠.</p>
-<p class="line">본인이 적는 겁니다.</p>
-<p class="line">"저 온화합니다"라고 쓰면 온화한 거예요.</p>
-<p class="line">검증? 없습니다.</p>
-<p class="pause">---</p>
-<p class="line">숫자 하나 더 보여드릴게요.</p>
-<p class="line">결정사 성혼율.</p>
-<p class="line">듀오가 공식 발표하는 숫자: 41.7%.</p>
-<p class="line">그런데 블라인드에서 누군가가 계산했어요.</p>
-<p class="line">실제 성혼 건수를 총 회원 수로 나눈 거죠.</p>
-<p class="pause">--- 한 박자 ---</p>
-<p class="line">5% 이하.</p>
-<p class="pause">---</p>
-<p class="line">여기서 더 무서운 숫자 알려드릴까요?</p>
-<p class="line">성혼 후 이혼율.</p>
-<p class="line">이 숫자를 추적하는 결정사는요.</p>
-<p class="pause">--- 한 박자 ---</p>
-<p class="line"><strong>단 한 곳도 없습니다.</strong></p>
-<p class="line">왜냐면 추적하면 안 되거든요.</p>
-<p class="line">그 숫자가 나오면 이 사업을 못 합니다.</p>
-<p class="pause">---</p>
-<p class="line">저도 추적 안 했어요. 솔직히.</p>
-<p class="line">그런데 연락이 옵니다. 성혼시킨 회원한테서요.</p>
-<p class="line">"대표님, 이혼합니다."</p>
-</div>
-
-<div class="script-block">
-<div class="block-label">3막 -- 실화</div>
-<div class="block-time">7:00 ~ 10:00</div>
-<div class="tone">스토리텔링 톤. 안타까운 표정. "혼자인 느낌"에서 목소리 낮추기</div>
-
-<p class="line">한 분 이야기를 할게요. 가명으로 말씀드립니다.</p>
-<p class="line">민지 씨, 33살. 준혁 씨, 36살.</p>
-<p class="line">둘 다 A등급이었어요.</p>
-<p class="pause">---</p>
-<p class="line">민지 씨 -- 약사, 외모 상위, 서울 출신, 집안 좋음.</p>
-<p class="line">준혁 씨 -- 대기업, 연봉 1억 초반, 182, SKY 출신.</p>
-<p class="line">프로필만 보면 완벽했어요.</p>
-<p class="line">첫 만남에서 서로 호감. 2차 3차 자연스럽게.</p>
-<p class="line">6개월 만에 결혼했습니다.</p>
-<p class="pause">---</p>
-<p class="line">저는 "역시 A등급은 다르다"고 생각했어요.</p>
-<p class="line">축하 문자 보냈죠.</p>
-<p class="pause">---</p>
-<p class="line">1년 반 후에 민지 씨한테 연락이 왔어요.</p>
-<p class="line">"대표님, 이혼 절차 밟고 있어요."</p>
-<p class="pause">---</p>
-<p class="line">처음엔 뭐가 문제인지 몰랐어요.</p>
-<p class="line">물어봤죠. 외도? 아니요. 폭력? 아니요. 경제적 문제? 아니요.</p>
-<p class="line">"성격차이요."</p>
-<p class="pause">---</p>
-<p class="line">진짜 이유를 들었습니다.</p>
-<p class="line">갈등이 생겼을 때 준혁 씨의 방식은 "침묵"이었어요.</p>
-<p class="line">하루, 이틀, 심하면 일주일.</p>
-<p class="line">말을 안 해요. 아예.</p>
-<p class="pause">---</p>
-<p class="line">프로필에 "성격: 차분함"이라고 적혀 있었거든요.</p>
-<p class="line">맞아요. 차분했어요.</p>
-<p class="line">너무 차분해서 대화가 없었던 거예요.</p>
-<p class="pause">---</p>
-<p class="line">민지 씨가 말했어요.</p>
-<p class="line">"프로필에 '취미: 운동'이라고 적혀 있었는데,</p>
-<p class="line">실제로는 매주 주말 혼자 골프장에 갔어요.</p>
-<p class="line">저는 주말에 같이 시간 보내고 싶었는데.</p>
-<p class="line">그게 쌓이니까...</p>
-<p class="line"><strong>이 사람이 옆에 있는데 혼자인 느낌이었어요.</strong>"</p>
-</div>
-
-<div class="script-block">
-<div class="block-label">4막 -- 반전 (자기반성)</div>
-<div class="block-time">10:00 ~ 12:30</div>
-<div class="tone">가장 진지한 구간. "사람이 아니었습니다"에서 카메라 가까이, 목소리 낮추기. 하버드 연구는 교수 톤으로</div>
-
-<p class="line">여기서 하나만 더 말씀드릴게요.</p>
-<p class="line">2030세대 설문에서 배우자 선택 기준 1위가 뭔지 아십니까?</p>
-<p class="pause">--- 한 박자 ---</p>
-<p class="line">"성격 및 가치관." 67%.</p>
-<p class="line">67%가 성격과 가치관이 제일 중요하다고 답했어요.</p>
-<p class="line">그런데 결정사에서 성격과 가치관을 검증하는 방법은?</p>
-<p class="line"><strong>없습니다.</strong></p>
-<p class="pause">---</p>
-<p class="line">하버드 대학교에서 재미있는 연구를 했어요.</p>
-<p class="line">3년 반 동안 부부를 추적했습니다.</p>
-<p class="line">결론이 뭐냐면요.</p>
-<p class="pause">---</p>
-<p class="line">"이상형 조건을 높게 충족하는 배우자를 만났다고 해서</p>
-<p class="line">이혼 확률이 낮아지지 않는다."</p>
-<p class="pause">---</p>
-<p class="line">다시 말해서요.</p>
-<p class="line">키 크고, 돈 많고, 학벌 좋은 사람을 원했고,</p>
-<p class="line">실제로 그런 사람을 만났어요.</p>
-<p class="line"><strong>그래도 이혼합니다.</strong></p>
-<p class="pause">---</p>
-<p class="line">진짜 중요한 건 "내가 중요하게 여기는 것들의 우선순위"와</p>
-<p class="line">상대가 일치하느냐였어요.</p>
-<p class="line">나한테 "주말에 같이 시간 보내는 것"이 1순위인데,</p>
-<p class="line">상대한테는 그게 7순위면.</p>
-<p class="line">조건이 아무리 완벽해도 깨집니다.</p>
-<p class="pause">---</p>
-<p class="line">솔직하게 말씀드립니다.</p>
-<p class="line"><strong>우리가 매칭하는 건 조건이었지,</strong></p>
-<p class="line"><strong>사람이 아니었습니다.</strong></p>
-<p class="pause">---</p>
-<p class="line">Q01에서 등급표 이야기를 했었죠.</p>
-<p class="line">S등급, A등급, B등급, C등급.</p>
-<p class="line">그 등급표에 "갈등 해결 방식"이라는 칸은 없어요.</p>
-<p class="line">"주말을 어떻게 보내는지"라는 칸도 없어요.</p>
-<p class="line">"화가 났을 때 어떻게 행동하는지"라는 칸도 없어요.</p>
-<p class="pause">---</p>
-<p class="line">그런데 결혼 생활은 그게 전부예요.</p>
-<p class="line">연봉이 얼마인지는 첫 달에 확인 끝나요.</p>
-<p class="line">키가 몇인지는 첫 만남에 확인 끝나요.</p>
-<p class="line">"이 사람이 화가 났을 때 어떻게 하는 사람인지"는요.</p>
-<p class="pause">--- 한 박자 ---</p>
-<p class="line">같이 살아봐야 알아요.</p>
-<p class="line">그게 결정사의 한계입니다.</p>
-<p class="line">제가 인정합니다.</p>
-</div>
-
-<div class="script-block">
-<div class="block-label">5막 -- 아웃 (열린 결말)</div>
-<div class="block-time">12:30 ~ 14:00</div>
-<div class="tone">무거움에서 따뜻함으로 전환. "문을 열어주는 겁니다"에서 살짝 미소. 마지막 질문에서 정면 응시, 3초 홀드</div>
-
-<p class="line">브런치에서 한 분이 이런 글을 쓰셨어요.</p>
-<p class="line">"서울대 졸업, 대기업, 상위 10% 수입 남자와 결혼했다.</p>
-<p class="line">20년 동안 악몽같이 살았다."</p>
-<p class="line">그리고 이렇게 끝났어요.</p>
-<p class="line">"환경과 상황은 변하는데, 사람은 변하지 않는다."</p>
-<p class="pause">---</p>
-<p class="line">오해하지 마세요.</p>
-<p class="line">조건이 틀렸다는 게 아닙니다.</p>
-<p class="line"><strong>조건은 문을 열어주는 겁니다.</strong></p>
-<p class="line"><strong>그런데 그 문 안에서 같이 사는 건,</strong></p>
-<p class="line"><strong>전혀 다른 문제입니다.</strong></p>
-<p class="pause">---</p>
-<p class="line">결정사에 오시는 분들이 체크리스트를 주세요.</p>
-<p class="line">연봉 얼마 이상, 키 몇 이상, 학력 어디 이상.</p>
-<p class="line">저는 이제 하나만 더 여쭤봅니다.</p>
-<p class="pause">---</p>
-<p class="line">"이 사람이 화가 났을 때,</p>
-<p class="line">당신은 어떤 반응을 원하세요?"</p>
-<p class="pause">---</p>
-<p class="line">이 질문에 답할 수 있으면,</p>
-<p class="line">조건보다 중요한 걸 아는 사람입니다.</p>
-<p class="pause">--- 정면 응시 3초 ---</p>
-<p class="line">지금 당신이 보고 있는 건,</p>
-<p class="line">조건입니까.</p>
-<p class="line">사람입니까.</p>
-</div>
-</section>
-
-<!-- 5. 톤 가이드 요약 -->
-<section id="s5">
-<h2>톤 가이드</h2>
+<!-- 3. 사전 리서치 자료 -->
+<section>
+<h2>촬영 전 읽을 자료</h2>
+<p>아래는 요즘 결정사/이혼/이상형 관련 <strong>커뮤니티에서 화제가 되고 있는 내용</strong>입니다. 촬영 전에 한 번 읽고 "아 이런 게 있구나" 정도만 파악해두세요.</p>
 
 <div class="card">
-<div class="card-title">구간별 톤</div>
-<p><strong>1막 (숫자 나열)</strong> -- 또박또박, 무표정, 카메라 정면. 숫자마다 끊어서</p>
-<p><strong>2막 (데이터)</strong> -- 교수 톤. 비교표에서 "겹치는 게 없다" 강조. "추적 안 한다"에서 쓴웃음</p>
-<p><strong>3막 (실화)</strong> -- 스토리텔링, 안타까운 표정. "혼자인 느낌"에서 목소리 낮추기</p>
-<p><strong>4막 (자기반성)</strong> -- 가장 진지한 구간. "사람이 아니었습니다"에서 카메라 가까이</p>
-<p><strong>5막 (마무리)</strong> -- 따뜻하게 전환. 마지막 질문에서 정면 응시 3초 홀드</p>
+<div class="card-title"><a href="https://brunch.co.kr/@seulgilove/167" target="_blank">1. "조건만 보고 결혼한 여자의 20년" (브런치)</a></div>
+<p>"서울대 졸업, 대기업, 상위 10% 수입 남자와 결혼했다. 20년 동안 악몽같이 살았다." 환경과 상황은 변하는데, 사람은 변하지 않는다는 글이 화제.</p>
 </div>
 
 <div class="card">
-<div class="card-title">이렇게 말하지 마세요</div>
-<p>"결정사는 사기다" -- 시스템 한계 인정이지, 부정이 아닙니다</p>
-<p>"이혼하면 안 됩니다" -- 판단하지 않습니다</p>
-<p>"우리 결정사는 다릅니다" -- 자기 홍보 X</p>
-<p>"구독해주세요" -- CTA 0회</p>
+<div class="card-title"><a href="https://www.teamblind.com/kr/post/%EA%B2%B0%EC%A0%95%EC%82%AC-%EC%A1%B0%EA%B1%B4-%EB%B3%B4%EA%B3%A0-%EA%B2%B0%ED%98%BC-%ED%9B%84%ED%9A%8C-nKp3Xb9F" target="_blank">2. "조건 보고 결혼했다가 후회" (블라인드)</a></div>
+<p>"스펙은 완벽한데 대화가 안 된다" "결정사에서 조건 맞춰줬는데 성격이 안 맞아 이혼 준비 중" 류의 후기가 반복적으로 올라옴.</p>
+</div>
+
+<div class="card">
+<div class="card-title"><a href="https://pann.nate.com/talk/382917562" target="_blank">3. "결정사에서 20명 만난 후기" (네이트판)</a></div>
+<p>"조건 다 맞는 사람이 정작 만나면 재미가 없다" "스펙만 보고 만나니까 사람을 보는 눈이 오히려 퇴화" — 결정사 매칭 방식 자체에 대한 회의.</p>
+</div>
+
+<div class="card">
+<div class="card-title"><a href="https://www.82cook.com/entiz/read.php?num=3906412" target="_blank">4. "이혼숙려캠프 다녀온 후기" (82cook)</a></div>
+<p>"결혼 전에는 조건만 봤는데, 이혼할 때 돌아보니 성격이 전부였다." 이혼숙려캠프 참가자 후기 — 조건과 성격의 괴리를 체감한 실화.</p>
+</div>
+
+<div class="card">
+<div class="card-title"><a href="https://www.youtube.com/watch?v=bOaVJlEbTgQ" target="_blank">5. 한방언니 "결혼할 때 확인 안 하면 무조건 이혼하는 것들" (133만뷰)</a></div>
+<p>경쟁 채널에서도 "이혼 원인 = 조건이 아닌 성격"을 다뤘지만, "결정사 시스템의 책임"까지 간 영상은 없음. 우리가 처음.</p>
+</div>
+
+<div class="warn">
+<div class="warn-title">이 자료를 외울 필요는 없습니다</div>
+<p>"아 요즘 이런 게 화제구나" 정도만 머릿속에 넣으면 됩니다. PD가 촬영 때 흐름을 안내합니다. 모르는 건 "모르겠는데요?"로 OK.</p>
 </div>
 </section>
 
-<!-- 6. 촬영 전 준비 -->
-<section id="s6">
+<!-- 4. 촬영 흐름 -->
+<section>
+<h2>촬영 흐름</h2>
+<p>PD가 옆에서 흐름을 안내합니다. 대표님은 카메라 보고 자연스럽게 이야기하면 됩니다. 단독 토크이지만 <strong>외우지 않아도 됩니다.</strong></p>
+
+<ul class="timeline">
+<li>
+<div class="time">[킥] 0~2분 30초</div>
+<div class="desc">카메라 정면 보고 바로 시작.<br><strong>"연봉 1억 2천. 키 182. 서울대 졸업. 이 남자랑 결혼했습니다. 3년 후 이혼했습니다."</strong><br>인사 없이 바로. 숫자를 또박또박 나열하고, "이혼했습니다"에서 톤 낮추기.</div>
+</li>
+<li>
+<div class="time">[해부] 약 5분 — "결정사 안에서 보면요"</div>
+<div class="desc">이혼 사유 1위(성격차이 45.2%)를 알려주고, 결정사 매칭 기준과 비교.<br><strong>"겹치는 게 하나도 없습니다."</strong><br>성혼율 데이터(41.7% vs 5%)도 이 구간에서. 숫자를 정확하게.</div>
+</li>
+<li>
+<div class="time">[실화] 약 3분 — "겪어봐야 아는 거예요"</div>
+<div class="desc">성혼시킨 후 이혼 연락 받은 실화.<br><strong>"옆에 있는데 혼자인 느낌이었어요."</strong><br>가명(민지/준혁) 처리. A등급 커플인데 1년 반 만에 이혼한 이야기.</div>
+</li>
+<li>
+<div class="time">[반전] 약 2분 30초 — "사람이 아니었습니다"</div>
+<div class="desc">하버드 연구 + 2030세대 설문 67% → 시스템 자기반성.<br><strong>"우리가 매칭하는 건 조건이었지, 사람이 아니었습니다."</strong><br>이 영상에서 가장 중요한 장면.</div>
+</li>
+<li>
+<div class="time">[아웃] 약 1분 30초</div>
+<div class="desc">"조건은 문을 열어주는 겁니다. 그 문 안에서 같이 사는 건, 전혀 다른 문제입니다."<br>마지막 질문: <strong>"지금 당신이 보고 있는 건, 조건입니까. 사람입니까."</strong><br>대본 없이 마음에서 우러나오는 말. PD가 기다려줍니다.</div>
+</li>
+</ul>
+</section>
+
+<!-- 5. 촬영 전 준비 -->
+<section>
 <h2>촬영 전 준비할 것</h2>
 
 <div class="prep-item">
 <span class="prep-num">1</span>
-<div class="prep-text"><strong>대본 숙지</strong><br>위 대본을 2~3번 읽어주세요. 외울 필요 없습니다. 흐름과 핵심 숫자(45.2%, 41.7%, 5%, 67%)만 기억하면 됩니다.</div>
+<div class="prep-text"><strong>핵심 숫자 4개 기억하기</strong><br>이혼 사유 1위 "성격차이" <strong>45.2%</strong> / 듀오 공식 성혼율 <strong>41.7%</strong> / 블라인드 추산 성혼율 <strong>약 5%</strong> / 배우자 선택 기준 1위 "성격 및 가치관" <strong>67%</strong></div>
 </div>
 
 <div class="prep-item">
 <span class="prep-num">2</span>
-<div class="prep-text"><strong>실제 성혼 후 이혼 사례 떠올리기</strong><br>대본의 "민지/준혁"은 예시입니다. 실제로 성혼시킨 후 이혼 소식을 들은 회원이 있다면, 그 경험을 본인 말로 풀어주세요. 없다면 대본대로 진행합니다.</div>
+<div class="prep-text"><strong>성혼 후 이혼 사례 떠올리기</strong><br>실제로 성혼시킨 후 이혼 소식을 들은 회원이 있다면, 그 경험을 본인 말로 풀어주세요. (가명 처리) 없다면 PD가 가상 사례를 안내합니다.</div>
 </div>
 
 <div class="prep-item">
 <span class="prep-num">3</span>
-<div class="prep-text"><strong>"결정사의 한계"에 대한 본인 생각 정리</strong><br>4막에서 "사람이 아니라 조건을 매칭했다"고 인정하는 장면이 핵심입니다. 이 말이 본인에게 어떤 의미인지, 진심으로 느끼는 부분을 정리해두세요.</div>
+<div class="prep-text"><strong>"결정사의 한계"에 대한 본인 생각 정리</strong><br>"결정사가 매칭하는 건 조건이지, 사람이 아니었다" — 이 말이 본인에게 어떤 의미인지, 진심으로 느끼는 부분을 정리해두세요.</div>
 </div>
 
 <div class="prep-item">
 <span class="prep-num">4</span>
 <div class="prep-text"><strong>Q01 등급표 에피소드 복습</strong><br>"등급표에 없는 칸"을 콜백합니다. Q01에서 어떤 이야기를 했는지 간단히 떠올려주세요.</div>
 </div>
+
 </section>
 
-<!-- 7. Ban 리스트 -->
-<section id="s7">
+<!-- 6. PD 안내 방식 -->
+<section>
+<h2>PD 안내 방식</h2>
+
+<div class="highlight">
+이번 에피소드는 <strong>단독 토크</strong>입니다. PD가 질문하는 게 아니라, 옆에서 흐름을 안내합니다.<br><br>
+예를 들어 PD가 "여기서 성혼율 숫자 말씀해주세요" "다음은 실화 이야기로 넘어가볼게요" 식으로 가이드합니다.<br>
+대표님은 카메라 보고 <strong>본인 말투로 자연스럽게 풀어주시면 됩니다.</strong><br><br>
+<strong>외우지 않아도 됩니다. 흐름과 핵심 숫자만 기억하면 됩니다.</strong>
+</div>
+
+<div class="card">
+<div class="card-title">PD가 안내하는 포인트</div>
+<p><strong>"숫자 나열해주세요"</strong> — 킥 구간. 연봉/키/학벌을 또박또박.</p>
+<p><strong>"비교표 설명해주세요"</strong> — 해부 구간. 이혼 사유 vs 매칭 기준.</p>
+<p><strong>"실화 이야기해주세요"</strong> — 실화 구간. 성혼 후 이혼한 회원 사례.</p>
+<p><strong>"시스템 이야기해주세요"</strong> — 반전 구간. 결정사 한계 인정.</p>
+</div>
+</section>
+
+<!-- 7. 톤 가이드 -->
+<section>
+<h2>톤 가이드</h2>
+
+<div class="card">
+<div class="card-title">이렇게 말해주세요</div>
+<p><strong>업계 인사이더의 솔직함</strong> — "결정사 대표로서 이 이야기를 하는 게 맞는지 고민했어요"</p>
+<p><strong>자기반성 톤</strong> — "우리가 매칭하는 건 조건이었지, 사람이 아니었습니다"</p>
+<p><strong>구체적 데이터</strong> — "성격차이 45.2%, 20년째 1위입니다" 같은 숫자</p>
+<p><strong>분석은 OK, 판단은 NO</strong> — "이혼 사유"는 설명, "이혼하면 안 된다"는 X</p>
+</div>
+
+<div class="card">
+<div class="card-title">이렇게 말하지 마세요</div>
+<p>"결정사는 사기다" — 시스템 한계 인정이지, 전면 부정이 아닙니다</p>
+<p>"이혼하면 안 됩니다" — 판단하지 않습니다</p>
+<p>"우리 결정사는 다릅니다" — 자기 홍보 X</p>
+<p>"구독해주세요" — CTA 0회</p>
+</div>
+</section>
+
+<!-- 8. Ban 리스트 -->
+<section>
 <h2>절대 하지 말 것</h2>
 
 <div class="ban">
 <div class="ban-title">절대 금지</div>
-<p>1. <strong>"안녕하세요" 인사</strong> -- "연봉 1억 2천"으로 바로 시작</p>
-<p>2. <strong>"구독/좋아요" 멘트</strong> -- 영상 내 0회</p>
-<p>3. <strong>경쟁사 실명</strong> (듀오, 가연, 엔노블, 제이노블) -- "메이저 결정사" "업계"로만</p>
-<p>4. <strong>특정 회원 실명/정보</strong> -- 가명 + 익명 처리</p>
-<p>5. <strong>"결정사는 사기다" 류의 표현</strong> -- 한계 인정이지, 전면 부정이 아님</p>
+<p>1. <strong>"안녕하세요" 인사</strong> — "연봉 1억 2천"으로 바로 시작</p>
+<p>2. <strong>"구독/좋아요" 멘트</strong> — 영상 내 0회</p>
+<p>3. <strong>경쟁사 실명</strong> (듀오, 가연, 엔노블, 제이노블) — "메이저 결정사" "업계"로만</p>
+<p>4. <strong>특정 회원 실명/정보</strong> — 가명 + 익명 처리</p>
+<p>5. <strong>EP01~04 스토리 반복</strong> — 인생서사/등급/프로필/첫만남 다시 X (Q01 등급표 콜백만 OK)</p>
 </div>
 
 <div class="warn">
 <div class="warn-title">주의</div>
-<p>MCN/네오브릿지 언급 X -- 순수 개인 채널</p>
-<p>본인 결정사 가격 직접 공개 -- "업계 평균"으로만</p>
-<p>특정 성별 비하 -- 중립. "남자가 나빠" "여자가 문제" X</p>
-<p>이혼을 부정적으로만 프레이밍 -- "잘못된 결합을 끝내는 용기"도 존중</p>
-<p>"우리 결정사는 다르다" 식의 자기 홍보 -- 이 영상은 자기반성</p>
+<p>MCN/네오브릿지 언급 X — 순수 개인 채널</p>
+<p>워터밤 / 황정우·이나영 사건 — 절대 금지</p>
+<p>본인 결정사 가격 직접 공개 — "업계 평균"으로만</p>
+<p>특정 성별 비하 — 중립. "남자가 나빠" "여자가 문제" X</p>
+<p>이혼을 부정적으로만 프레이밍 — "잘못된 결합을 끝내는 용기"도 존중</p>
 </div>
 </section>
 
-<!-- 8. 촬영 당일 타임테이블 -->
-<section id="s8">
+<!-- 9. 촬영 당일 타임테이블 -->
+<section>
 <h2>촬영 당일 타임테이블</h2>
 
 <table>
-<tr><th>시간</th><th>내용</th><th>비고</th></tr>
-<tr><td>-30분</td><td>스튜디오 도착, 세팅 확인</td><td></td></tr>
-<tr><td>-15분</td><td>PD와 대본 흐름 최종 확인</td><td>질문 없음 (단독 토크)</td></tr>
-<tr><td>0분</td><td><strong>촬영 시작</strong> -- 1막 킥</td><td>"연봉 1억 2천"부터</td></tr>
-<tr><td>~20분</td><td>1막 + 2막 촬영</td><td>데이터 구간, 리테이크 가능</td></tr>
-<tr><td>~40분</td><td>3막 촬영 (실화)</td><td>감정 구간, 첫 테이크 중요</td></tr>
-<tr><td>~60분</td><td>4막 촬영 (자기반성)</td><td>핵심 구간, 첫 테이크 우선</td></tr>
-<tr><td>~75분</td><td>5막 촬영 (마무리)</td><td>마지막 정면 응시 3초 홀드</td></tr>
-<tr><td>~90분</td><td>보충 촬영 + B-roll</td><td>프로필 카드 넘기는 장면 등</td></tr>
+<tr><th>시간</th><th>내용</th></tr>
+<tr><td>-30분</td><td>스튜디오 도착, 세팅 확인</td></tr>
+<tr><td>-10분</td><td>PD와 간단 미팅 (흐름 확인, 핵심 숫자 복습)</td></tr>
+<tr><td>0분</td><td><strong>촬영 시작</strong> ("연봉 1억 2천"부터 바로)</td></tr>
+<tr><td>~25분</td><td>[킥]+[해부] 촬영 (숫자 나열 + 데이터 비교)</td></tr>
+<tr><td>~45분</td><td>[실화] 촬영 (성혼 후 이혼 사례)</td></tr>
+<tr><td>~65분</td><td>[반전] 촬영 (시스템 자기반성)</td></tr>
+<tr><td>~80분</td><td>[아웃] 촬영 (마무리 + "조건입니까, 사람입니까")</td></tr>
+<tr><td>~100분</td><td>보충 촬영 + B-roll (프로필 카드 넘기는 장면 등)</td></tr>
 </table>
 
 <div class="warn">
 <div class="warn-title">중요</div>
-<p><strong>4막 "사람이 아니었습니다" 장면은 리테이크하지 않습니다.</strong> 첫 반응이 가장 진실합니다.</p>
+<p><strong>감정이 나오는 순간(실화 이야기, "사람이 아니었습니다" 장면)은 리테이크하지 않습니다.</strong> 첫 반응이 가장 진실합니다.</p>
 </div>
 </section>
 
-<!-- 9. 동의 확인 -->
-<section id="s9">
+<!-- 10. 동의 확인 -->
+<section>
 <h2>동의 확인</h2>
+
 <p>아래 항목을 촬영 전에 확인해주세요.</p>
 
 <ul class="checklist">
-<li>성혼 후 이혼 사례 공개 -- 가명 처리 조건으로 결정사 성혼 후 이혼한 사례를 이야기하는 것에 동의</li>
-<li><strong>시스템 자기반성</strong> -- "조건을 매칭한 거지 사람을 매칭한 게 아니었다"는 발언에 동의</li>
-<li>성혼율 데이터 언급 -- 공식 성혼율(41.7%)과 커뮤니티 추산(5%)을 비교 언급하는 것에 동의</li>
-<li>이혼율 미추적 사실 공개 -- "성혼 후 이혼율을 추적하는 결정사는 0곳"이라는 사실을 말하는 것에 동의</li>
-<li>Q01 등급표 콜백 -- 이전 에피소드 내용을 연결하는 것에 동의</li>
-<li>열린 결말 -- 대본의 마지막 질문("조건입니까, 사람입니까")으로 마무리하는 것에 동의</li>
+<li>성혼 후 이혼 사례 공개 — 가명 처리 조건으로 결정사 성혼 후 이혼한 사례를 이야기하는 것에 동의</li>
+<li><strong>시스템 자기반성</strong> — "조건을 매칭한 거지 사람을 매칭한 게 아니었다"는 발언에 동의</li>
+<li>성혼율 데이터 언급 — 공식 성혼율(41.7%)과 커뮤니티 추산(5%)을 비교 언급하는 것에 동의</li>
+<li>이혼율 미추적 사실 공개 — "성혼 후 이혼율을 추적하는 결정사는 0곳"이라는 사실을 말하는 것에 동의</li>
+<li>Q01 등급표 콜백 — 이전 에피소드 내용을 연결하는 것에 동의</li>
+<li>열린 결말 — 마지막 질문("조건입니까, 사람입니까")으로 마무리하는 것에 동의</li>
 </ul>
 
 <div class="sig">
@@ -524,7 +359,7 @@ td{padding:10px 12px;border-bottom:1px solid var(--card2);color:var(--text2)}
 </section>
 
 <p style="text-align:center;font-size:12px;color:var(--text3);margin-top:40px">
-기획부 코디 &middot; v1 &middot; 2026.05.08 &middot; 아는언니 리지
+기획부 코디 · v2 · 2026.05.08 · 아는언니 리지
 </p>
 
 </div>
