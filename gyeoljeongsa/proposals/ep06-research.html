@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
+<meta name="theme-color" content="#ffffff">
+<title>[리서치] EP.06 주제 선정 — 커뮤니티 트렌드 종합</title>
+<style>
+:root{--bg:#ffffff;--card:#ffffff;--card2:#f4f6f8;--border:#e5e7eb;--text:#191f28;--text2:#4e5968;--text3:#8b95a1;--accent:#0064ff;--accent-l:#e8f1ff;--green:#15803d;--amber:#b45309;--red:#dc2626;--pink:#db2777;--purple:#7c3aed}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);line-height:1.8;font-size:16px;-webkit-font-smoothing:antialiased;padding:0 0 60px}
+.top-bar{position:sticky;top:0;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:14px 20px;z-index:10;display:flex;align-items:center;gap:10px}
+.top-bar .badge{font-size:11px;font-weight:700;color:#fff;background:var(--purple);padding:4px 10px;border-radius:6px}
+.top-bar .title{font-size:15px;font-weight:700;flex:1}
+.top-bar .ver{font-size:11px;color:var(--text3)}
+.container{max-width:680px;margin:0 auto;padding:24px 20px}
+.hero{text-align:center;padding:32px 0 28px;border-bottom:1px solid var(--border);margin-bottom:32px}
+.hero h1{font-size:24px;font-weight:800;line-height:1.3;margin-bottom:8px;word-break:keep-all}
+.hero p{font-size:14px;color:var(--text2);margin-bottom:16px}
+.hero .meta{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--text3)}
+.hero .meta span{background:var(--card2);padding:5px 10px;border-radius:8px}
+section{margin-bottom:40px}
+section h2{font-size:20px;font-weight:800;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border);color:var(--text)}
+section h3{font-size:16px;font-weight:700;margin:20px 0 10px;color:var(--text)}
+p{margin:8px 0;color:var(--text2);word-break:keep-all}
+.card{background:var(--card2);border-radius:14px;padding:18px 20px;margin:12px 0}
+.card-title{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
+.card p{margin:4px 0;font-size:14px}
+.highlight{background:var(--accent-l);border-left:3px solid var(--accent);padding:14px 18px;border-radius:0 12px 12px 0;margin:16px 0;font-size:15px;color:var(--text)}
+.highlight strong{color:var(--accent)}
+.hot{background:#fef2f2;border-left:3px solid var(--red);padding:14px 18px;border-radius:0 12px 12px 0;margin:12px 0}
+.hot-title{font-size:13px;font-weight:700;color:var(--red);margin-bottom:6px}
+.hot p{font-size:14px;color:#991b1b;margin:3px 0}
+.male{background:#eff6ff;border-left:3px solid #2563eb;padding:14px 18px;border-radius:0 12px 12px 0;margin:12px 0}
+.male-title{font-size:13px;font-weight:700;color:#2563eb;margin-bottom:6px}
+.male p{font-size:14px;color:#1e40af;margin:3px 0}
+.female{background:#fdf2f8;border-left:3px solid var(--pink);padding:14px 18px;border-radius:0 12px 12px 0;margin:12px 0}
+.female-title{font-size:13px;font-weight:700;color:var(--pink);margin-bottom:6px}
+.female p{font-size:14px;color:#9d174d;margin:3px 0}
+.vs{background:linear-gradient(135deg,#eff6ff,#fdf2f8);border-radius:14px;padding:18px 20px;margin:12px 0;border:1px solid var(--border)}
+.vs-title{font-size:13px;font-weight:700;color:var(--purple);margin-bottom:8px;text-align:center}
+.vs-grid{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:start}
+.vs-col{font-size:14px;line-height:1.7}
+.vs-col.left{color:#1e40af;text-align:right}
+.vs-col.right{color:#9d174d}
+.vs-mid{color:var(--text3);font-weight:800;font-size:16px;text-align:center;padding-top:2px}
+.source{font-size:12px;color:var(--text3);margin-top:6px;word-break:break-all}
+.source a{color:var(--text3);text-decoration:underline;text-underline-offset:2px}
+.source a:hover{color:var(--accent)}
+.num{color:var(--accent);font-weight:800}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+th{background:var(--card2);padding:10px 12px;text-align:left;font-weight:700;color:var(--text2);font-size:12px;border-bottom:1px solid var(--border)}
+td{padding:10px 12px;border-bottom:1px solid var(--card2);color:var(--text2)}
+.topic-card{background:linear-gradient(135deg,var(--accent-l),#f0f4ff);border-radius:14px;padding:20px;margin:16px 0;border:1px solid #c7d9ff}
+.topic-rank{font-size:12px;font-weight:800;color:var(--accent);margin-bottom:4px}
+.topic-name{font-size:20px;font-weight:800;color:var(--text);margin-bottom:6px}
+.topic-catch{font-size:15px;color:var(--purple);font-weight:700;margin-bottom:10px}
+.topic-desc{font-size:14px;color:var(--text2);line-height:1.7}
+.toc{background:var(--card2);border-radius:14px;padding:18px 20px;margin:0 0 32px}
+.toc-title{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:10px}
+.toc a{display:block;font-size:14px;color:var(--text2);text-decoration:none;padding:5px 0;border-bottom:1px solid var(--border)}
+.toc a:last-child{border-bottom:none}
+.toc a:hover{color:var(--accent)}
+.toc .num-badge{display:inline-block;width:22px;height:22px;background:var(--accent);color:#fff;border-radius:50%;font-size:11px;font-weight:700;text-align:center;line-height:22px;margin-right:6px}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:3px 8px;border-radius:6px;margin:2px 4px 2px 0}
+.tag-hot{background:#fef2f2;color:var(--red)}
+.tag-male{background:#eff6ff;color:#2563eb}
+.tag-female{background:#fdf2f8;color:var(--pink)}
+.tag-vs{background:#f3e8ff;color:var(--purple)}
+.tag-comm{background:#ecfdf5;color:var(--green)}
+@media(max-width:480px){.container{padding:16px 14px}.hero h1{font-size:20px}section h2{font-size:17px}.vs-grid{grid-template-columns:1fr;gap:4px}.vs-col.left{text-align:left}.vs-mid{padding:4px 0}}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+<span class="badge">리서치</span>
+<span class="title">EP.06 주제 선정 자료</span>
+<span class="ver">v1 · 2026.05.09</span>
+</div>
+
+<div class="container">
+
+<div class="hero">
+<h1>EP.06 주제 뭘로 할까?<br>커뮤니티 트렌드 종합</h1>
+<p>4채널 리서치 결과 · 남녀 이야기 중심 정리</p>
+<div class="meta">
+<span>조사일 2026.05.09</span>
+<span>블라인드·더쿠·에펨코리아·네이트판·인스티즈</span>
+<span>Reddit·유튜브·뉴스</span>
+</div>
+</div>
+
+<!-- 목차 -->
+<div class="toc">
+<div class="toc-title">목차</div>
+<a href="#hot"><span class="num-badge">1</span>지금 가장 뜨거운 이슈 TOP 3</a>
+<a href="#male"><span class="num-badge">2</span>남자 쪽에서 도는 이야기</a>
+<a href="#female"><span class="num-badge">3</span>여자 쪽에서 도는 이야기</a>
+<a href="#vs"><span class="num-badge">4</span>남녀 공통 논쟁</a>
+<a href="#insider"><span class="num-badge">5</span>내부자 폭로 모음</a>
+<a href="#overseas"><span class="num-badge">6</span>해외에서는? (Reddit/글로벌)</a>
+<a href="#youtube"><span class="num-badge">7</span>유튜브 경쟁 채널 분석</a>
+<a href="#topics"><span class="num-badge">8</span>EP.06 주제 후보 TOP 5</a>
+</div>
+
+<!-- ==================== 섹션 1: 핫이슈 ==================== -->
+<section id="hot">
+<h2>1. 지금 가장 뜨거운 이슈 TOP 3</h2>
+
+<div class="hot">
+<div class="hot-title">HOT 1 — 듀오 43만명 개인정보 유출</div>
+<p>주민번호, 키, 몸무게, 혈액형, 혼인경력, 가족관계, 학교, 직장 <strong>전부 유출</strong>. 과징금 <span class="num">12억원</span>, 피해자 46명 집단소송 진행 중.</p>
+<p>그런데 유출 이후에도 <strong>일주일간 100명 이상 신규 가입</strong> — "터져도 간다"</p>
+<div class="source">블라인드·에펨코리아·MBC뉴스·서울신문·인사이트</div>
+</div>
+
+<div class="hot">
+<div class="hot-title">HOT 2 — "결혼하고 튀면 3배" 위약금 4,752만원 (2026.05 판결)</div>
+<p>결정사에서 만나 결혼 성공 → 성혼 사실 안 알림 → 사례금 <span class="num">1,188만</span> + 위약금 3배 = <strong>총 4,752만원</strong> 배상 판결</p>
+<p>DC에서 "도축사실 안 알렸다가"로 패러디되며 바이럴</p>
+<div class="source">인사이트·헤럴드경제·세계일보·국민일보·DC인사이드</div>
+</div>
+
+<div class="hot">
+<div class="hot-title">HOT 3 — 피해구제 신청 56% 급증</div>
+<p>결혼서비스 피해예방주의보 발령 (2026.04.22). 피해구제 <span class="num">1,076건</span> (전년 대비 18.9%↑). 환불 분쟁이 <span class="num">88.1%</span></p>
+<p>환불 거부 27.1%, 과다 위약금 청구 15.3%가 가장 많은 불만</p>
+<div class="source">한국소비자원·공정거래위원회·아이뉴스24</div>
+</div>
+</section>
+
+<!-- ==================== 섹션 2: 남자 쪽 ==================== -->
+<section id="male">
+<h2>2. 남자 쪽에서 도는 이야기</h2>
+
+<div class="male">
+<div class="male-title">남자가 갑이라는 인식</div>
+<p>"결정사에서 <strong>남자가 절대 갑</strong>" — 돈을 내는 쪽이 선택권을 가진다는 논리. 에펨코리아/DC에서 반복적으로 등장하는 프레임</p>
+<div class="source"><a href="https://www.fmkorea.com/best/8780024351">에펨코리아 — 3040 노처녀들에게 팩트폭격한 결정사 대표 (포텐)</a></div>
+</div>
+
+<div class="male">
+<div class="male-title">연봉 1억 안 되면 소개 자체가 안 된다</div>
+<p>남성 가입 조건이 갈수록 높아지는 추세. <strong>연봉 1억 이상</strong>이 메이저 결정사의 기본 컷. 전문직(의사/변호사/대기업)이 아니면 "우선순위에서 밀린다"</p>
+<div class="source">블라인드·나무위키 — 결혼정보회사/회원</div>
+</div>
+
+<div class="male">
+<div class="male-title">전문직 남자는 가입비 11만원, 여자는 400만원</div>
+<p>내부 폭로: 매니저가 <strong>"11만원에 15회 소개, 여자들이 물으면 1,100만원 냈다고 말해야 해요"</strong>라고 교육받는 사례. 전문직 남성은 20~30만원에 권유받기도</p>
+<div class="source"><a href="https://www.fmkorea.com/best/7933535333">에펨코리아 — 결정사 성별 오피셜은 선동임 (포텐)</a></div>
+</div>
+
+<div class="male">
+<div class="male-title">100건 이상 프로필 받아봤는데 매칭이 안 된다</div>
+<p>블라인드 초장문 후기. 여러 업체를 돌며 <span class="num">100건 이상</span> 프로필을 받아봤지만 실제 만남으로 이어지는 건 극소수. "카드자판기처럼 프로필만 보내주고 끝"</p>
+<div class="source"><a href="https://www.teamblind.com/kr/post/%EA%B2%B0%EC%A0%95%EC%82%AC-%EA%B3%A0%EC%9D%B8%EB%AC%BC-%ED%9B%84%EA%B8%B0%EC%B4%88%EC%9E%A5%EB%AC%B8-eHc3WM38">블라인드 — 결정사 고인물 후기 (초장문)</a></div>
+</div>
+
+<div class="male">
+<div class="male-title">"연봉 3억 원장"이 실은 5천만원 직원</div>
+<p>결정사에서 "연 수입 3억 어린이집 원장"으로 소개받아 결혼 → 1개월 만에 <strong>실제 연봉 5,600만원 행정직원</strong>, 어린이집은 부모 소유였음</p>
+<div class="source"><a href="https://v.daum.net/v/20251103055621182">다음뉴스 — 결혼정보업체 믿었다가 연봉 3억이 5천만원 (2025.11)</a></div>
+</div>
+
+<div class="male">
+<div class="male-title">결혼 안 하는 이유 1위: "돈"</div>
+<p>남성이 결혼을 안 하는 이유 1위는 <strong>결혼 생활 비용 부담</strong>. 집값, 혼수, 양육비까지 계산하면 "차라리 혼자가 낫다"</p>
+<div class="source"><a href="https://www.nongmin.com/article/20250414500580">농민신문 — 결혼 안 하는 이유, 남성은 '돈'</a></div>
+</div>
+
+<div class="card">
+<div class="card-title">남자 쪽 커뮤니티 후기 모음</div>
+<p><a href="https://www.teamblind.com/kr/post/%EA%B2%B0%EC%A0%95%EC%82%AC-100%EA%B1%B4%EC%9D%B4%EC%83%81-%ED%94%84%EB%A1%9C%ED%95%84-%EB%B0%9B%EC%95%84%EB%B3%B8-%ED%9B%84%EA%B8%B0%EA%B7%B9%EC%A3%BC%EA%B4%80%EC%A0%81-n6S3NYeh">블라인드 — 100건 이상 프로필 받아본 후기 (극주관적)</a></p>
+<p><a href="https://www.teamblind.com/kr/post/2%EB%85%84%EA%B0%84-%EA%B2%B0%EC%A0%95%EC%82%AC-%EA%B0%80%EC%9E%85-3%EA%B0%9C-%ED%9B%84%EA%B8%B0-bUeKqDsr">블라인드 — 2년간 결정사 3개 가입 후기</a></p>
+<p><a href="https://pann.nate.com/talk/353318639">네이트판 — 30대 초반 남자의 결정사 후기</a></p>
+<p><a href="https://m.dcinside.com/board/dcbest/206876">DC인사이드 — 전문직 아재의 결정사 후기</a></p>
+<p><a href="https://theqoo.net/square/3637650674">더쿠 — 89남자 결정사 그만뒀습니다</a></p>
+</div>
+</section>
+
+<!-- ==================== 섹션 3: 여자 쪽 ==================== -->
+<section id="female">
+<h2>3. 여자 쪽에서 도는 이야기</h2>
+
+<div class="female">
+<div class="female-title">"여자는 등급 매겨지는 상품, 남자가 갑"</div>
+<p>더쿠 화제글. 결정사 경험자가 "여자는 외모로 등급이 매겨지고, 남자가 고르는 구조"라고 폭로. <strong>남자가 갑이라는 인식</strong>이 여성 커뮤니티에서도 공유됨</p>
+<div class="source"><a href="https://theqoo.net/review/1486412447">더쿠 — 나 결정사 하고 있지만 솔직히 비추인 후기</a></div>
+</div>
+
+<div class="female">
+<div class="female-title">29.9살 여자의 결정사 후기</div>
+<p>블라인드에서 화제. "내 수준의 남자와 매칭되는 현실"을 담담하게 서술. <strong>기대와 현실의 괴리</strong>가 핵심</p>
+<div class="source"><a href="https://www.teamblind.com/kr/post/%EC%97%B0%EB%A7%90%EC%9D%84-%EB%A7%9E%EC%9D%B4%ED%95%98%EC%97%AC-%EC%8D%A8%EB%B3%B4%EB%8A%94-299%EC%82%B4-%EC%97%AC%EC%9E%90%EC%9D%98-%EA%B2%B0%EC%A0%95%EC%82%AC-%ED%9B%84%EA%B8%B0-i4ngBx3t">블라인드 — 29.9살 여자의 결정사 후기</a></div>
+</div>
+
+<div class="female">
+<div class="female-title">20명 만나본 후기 — "결혼의 본질을 깨달았다"</div>
+<p>결정사에서 <span class="num">20명</span>을 만난 뒤 "결혼이란 뭔지" 깨닫게 된 경험담. 네이트판에서 높은 공감</p>
+<div class="source"><a href="https://pann.nate.com/talk/373659074">네이트판 — 결정사에서 20명 만난 후기 (결혼의 본질)</a></div>
+</div>
+
+<div class="female">
+<div class="female-title">35세 넘으면 소개가 줄어드는 현실</div>
+<p>여성 가입 조건: <strong>35세 이하 + 외모</strong>가 핵심 기준. 35세를 넘기면 매칭 빈도가 급격히 줄어든다는 현실</p>
+<div class="source">블라인드·나무위키 — 결혼정보회사/회원</div>
+</div>
+
+<div class="female">
+<div class="female-title">결혼 안 하는 이유 1위: "맞는 사람이 없어서"</div>
+<p>여성이 결혼을 안 하는 이유 1위는 <strong>"기대에 맞는 사람을 만나지 못해서"</strong>. 남성의 "돈" 이유와 대조적</p>
+<div class="source"><a href="https://www.nongmin.com/article/20250414500580">농민신문 — 결혼 안 하는 이유, 여성은 '이것' 없어서</a></div>
+</div>
+
+<div class="female">
+<div class="female-title">20대 여성 결정사 가입 17.2% 급증</div>
+<p>20대 결정사 이용 비중 2022년 <span class="num">6.6%</span> → 2025년 <span class="num">8.0%</span>. 특히 20대 여성 회원은 2025년 한 해만 <span class="num">17.2%</span> 증가. "연애가 아니라 효율적 만남을 위해" 가입</p>
+<div class="source"><a href="https://www.hankyung.com/article/2026041789761">한국경제 — 20대 초반도 결정사 찾는다 (2026.04)</a></div>
+</div>
+
+<div class="card">
+<div class="card-title">여자 쪽 커뮤니티 후기 모음</div>
+<p><a href="https://pann.nate.com/talk/372023694">네이트판 — 30대 미혼녀의 결혼정보회사 리얼 후기</a></p>
+<p><a href="https://m.pann.nate.com/feed/374963615">네이트판 — 20대 후반 여 노블 결정사 후기</a></p>
+<p><a href="https://theqoo.net/review/2864076284">더쿠 — 나도 써보는 결정사 후기 (절망편)</a></p>
+<p><a href="https://www.instiz.net/name/46235413">인스티즈 — 결혼정보회사 가입 한달 후기</a></p>
+</div>
+</section>
+
+<!-- ==================== 섹션 4: 남녀 공통 ==================== -->
+<section id="vs">
+<h2>4. 남녀 공통 논쟁</h2>
+
+<div class="vs">
+<div class="vs-title">결정사에서 남녀가 보는 세계가 다르다</div>
+<div class="vs-grid">
+<div class="vs-col left">
+<strong>남자 시각</strong><br>
+"나는 돈을 내는 갑이다"<br>
+가입비가 곧 선택권<br>
+연봉이 모든 것을 결정<br>
+"소개가 너무 적다"
+</div>
+<div class="vs-mid">VS</div>
+<div class="vs-col right">
+<strong>여자 시각</strong><br>
+"나는 상품처럼 평가당한다"<br>
+외모가 곧 등급<br>
+나이가 모든 것을 결정<br>
+"질이 너무 낮다"
+</div>
+</div>
+</div>
+
+<div class="highlight">
+<strong>1순위 조건의 변화:</strong> 과거 "직업·연봉" → 현재 <strong>"집안 자산"</strong>으로 쏠림. 연봉보다 부모 재력이 1순위가 되는 추세
+</div>
+
+<div class="vs">
+<div class="vs-title">매니저가 남녀에게 하는 말이 다르다</div>
+<div class="vs-grid">
+<div class="vs-col left">
+<strong>남자에게</strong><br>
+"좀 더 투자하세요"<br>
+"등급 올리시면 됩니다"<br>
+"프리미엄 가입하시면..."
+</div>
+<div class="vs-mid">VS</div>
+<div class="vs-col right">
+<strong>여자에게</strong><br>
+"눈 좀 낮추세요"<br>
+"현실적으로 보셔야 해요"<br>
+"이 정도면 좋은 분이에요"
+</div>
+</div>
+</div>
+
+<div class="vs">
+<div class="vs-title">소개팅 앱 vs 결정사 — 어디서든 남자가 더 많다</div>
+<div class="vs-grid">
+<div class="vs-col left">
+<strong>소개팅 앱</strong><br>
+남초 (압도적)<br>
+무료~연 20만원<br>
+셀카/기발한 사진<br>
+편의성·속도·다양성
+</div>
+<div class="vs-mid">VS</div>
+<div class="vs-col right">
+<strong>결정사</strong><br>
+남초 60~70%<br>
+200만~440만원+<br>
+증명사진급 객관적 사진<br>
+신원보장·진지도
+</div>
+</div>
+<div class="source"><a href="https://www.youtube.com/watch?v=hd4djS203y0">유튜브 토킹헤즈 — 결정사 실적 역대급 vs 소개팅 앱 죽상</a></div>
+</div>
+
+<div class="card">
+<div class="card-title">성혼율의 진실</div>
+<p>듀오 광고: "누적 성혼 <span class="num">47,000건</span>, 하루 6쌍 결혼"</p>
+<p>블라인드: "결정사 성혼율은 <span class="num">5% 미만</span>"</p>
+<p>실제 평균: 약 <span class="num">15%</span> 수준 분석</p>
+<p><strong>"성혼"의 정의 자체가 업체마다 다름</strong> — 3개월 교제 vs 혼인신고</p>
+<div class="source"><a href="https://www.teamblind.com/kr/post/%EA%B2%B0%EC%A0%95%EC%82%AC-%EC%84%B1%ED%98%BC%EC%9C%A8%EC%9D%80-5%ED%8D%BC%EC%84%BC%ED%8A%B8-%EB%AF%B8%EB%A7%8C%EC%9D%B4%EB%8B%A4-qDv5dfHh">블라인드 — 결정사 성혼율은 5퍼센트 미만이다</a></div>
+</div>
+</section>
+
+<!-- ==================== 섹션 5: 내부자 폭로 ==================== -->
+<section id="insider">
+<h2>5. 내부자 폭로 모음</h2>
+
+<div class="card">
+<div class="card-title">매니저 7년차 "이 시장 곧 끝난다"</div>
+<p>인스티즈에서 현직 매니저의 비관적 전망 글 화제. 업계 내부에서도 지속 가능성에 대한 의문</p>
+<div class="source"><a href="https://www.instiz.net/name/61699381">인스티즈 원문</a></div>
+</div>
+
+<div class="card">
+<div class="card-title">"알바(무료회원)" 동원 실태</div>
+<p>의대생 등 전문직에게 알바 권유 → <strong>"무료회원"으로 포장</strong>. 매칭이 어려운 회원에게 "의무등판 선수"로 투입하는 관행</p>
+<div class="source"><a href="https://www.teamblind.com/kr/post/%EA%B2%B0%EC%A0%95%EC%82%AC-%EC%95%8C%EB%B0%94-%EB%8B%A4%EB%85%80%EC%99%94%EC%96%B4-%EC%A0%95%EB%A7%90-%EC%98%A4%EB%8A%98-%ED%9E%98%EB%93%A4%EA%B2%8C-%EB%8F%88%EB%B2%8C%EC%97%88%EB%8B%A4%E3%85%9C-LigvFptM">블라인드 — 결정사 알바 다녀왔어</a></div>
+</div>
+
+<div class="card">
+<div class="card-title">직원의 위임장 도장 조작</div>
+<p>결정사 직원이 남성 이름으로 <strong>조립식 도장</strong>을 만들어 위임장에 찍고 민감한 증명서 4종을 무단 신청. 같은 형태 도장이 찍힌 위임장이 <span class="num">수백 장</span> 발견</p>
+<div class="source">브런치 — 결혼정보회사에 대한 진실과 거짓</div>
+</div>
+
+<div class="card">
+<div class="card-title">유튜브 여성 비판 콘텐츠의 진짜 이유</div>
+<p>결정사 유튜브/릴스에서 <strong>"여성 참교육" 콘텐츠가 많은 이유</strong>는 남성 회원이 60~70%로 더 많아서. <strong>남성 관심을 유도하기 위한 마케팅 전략</strong>이라는 내부 폭로</p>
+<div class="source">DC인사이드·네이트판·유튜브 트렌드 분석</div>
+</div>
+
+<div class="card">
+<div class="card-title">커뮤니티 내부자 폭로 글 모음</div>
+<p><a href="https://pann.nate.com/talk/371747484">네이트판 — 결정사에서 일해보고 느낀 30대 남녀 팩트들</a></p>
+<p><a href="https://pann.nate.com/talk/374405389">네이트판 — 결정사 1년 일했어요 현실 알려드림</a></p>
+<p><a href="https://pann.nate.com/talk/375102467">네이트판 — 결정사 현실 8년 재직 후 퇴사</a></p>
+<p><a href="https://m.dcinside.com/board/dcbest/106136">DC인사이드 — 결혼정보회사 직원이 폭로한 결혼시장</a></p>
+<p><a href="https://www.teamblind.com/kr/post/%EA%B2%B0%EC%A0%95%EC%82%AC-%E3%85%86%E3%84%B9%E3%84%B1-%EB%A7%A4%EB%8B%88%EC%A0%80-%EA%B1%B8%EB%A6%B0-%ED%9B%84%EA%B8%B0-etbYw2R2">블라인드 — 결정사 쓰레기 매니저 걸린 후기</a></p>
+</div>
+</section>
+
+<!-- ==================== 섹션 6: 해외 ==================== -->
+<section id="overseas">
+<h2>6. 해외에서는? (Reddit/글로벌)</h2>
+
+<div class="card">
+<div class="card-title">해외 결정사 가격 비교</div>
+<table>
+<tr><th>티어</th><th>가격 (USD)</th><th>한화 환산</th></tr>
+<tr><td>저가형</td><td>$500~$5,000</td><td>65만~660만</td></tr>
+<tr><td>중가형</td><td>$5,000~$25,000</td><td>660만~3,300만</td></tr>
+<tr><td>고가형</td><td>$25,000~$150,000</td><td>3,300만~2억</td></tr>
+<tr><td>최고급</td><td>$150,000~$500,000+</td><td>2억~6.6억+</td></tr>
+</table>
+<p>한국 결정사(200~500만)는 세계적으로 <strong>"저가형~중가형 하단"</strong>에 해당. 해외 대비 가성비가 좋은 편</p>
+</div>
+
+<div class="highlight">
+<strong>해외 핵심 트렌드:</strong> 매칭 비용이 인플레이션의 <span class="num">10배</span> 속도로 상승 중 (2025~2026 사이 26%↑). 시장 규모 $98.5억 → $107.7억 (CAGR 9.3%)
+</div>
+
+<div class="vs">
+<div class="vs-title">해외도 남녀 비대칭 모델이 존재한다</div>
+<div class="vs-grid">
+<div class="vs-col left">
+<strong>남성</strong><br>
+$25,000~$500,000/년<br>
+"고객"으로 대우<br>
+전담 매치메이커 배정
+</div>
+<div class="vs-mid">VS</div>
+<div class="vs-col right">
+<strong>여성</strong><br>
+무료 DB 등록<br>
+"후보"로 분류<br>
+매칭 요청 시 연락
+</div>
+</div>
+<p style="text-align:center;font-size:13px;color:var(--text3);margin-top:8px">한국은 양측 모두 비용을 내는 구조 — 해외와 게임 자체가 다름</p>
+</div>
+
+<div class="card">
+<div class="card-title">Reddit에서 도는 이야기</div>
+<p><strong>"Swipe fatigue(스와이프 피로감)"</strong> — 앱에 지쳐서 사람 매칭으로 이동하는 트렌드</p>
+<p>Tawkify(미국 최대): "totally waste of money" vs "인생 은인" <strong>양극단 평가</strong></p>
+<p>영국 여성: 12,000파운드(2,000만원) 쓰고 실패 → 다른 플랫폼에서 파트너 찾음</p>
+<p><strong>20년 경력 코치 고백:</strong> 수백 명 상담했지만 결정사 통해 결혼한 고객은 <span class="num">단 2명</span></p>
+</div>
+
+<div class="card">
+<div class="card-title">AI 매칭 트렌드 (2026)</div>
+<p>AI 데이팅 사용량 전년 대비 <span class="num">333%</span> 증가</p>
+<p>43%가 "rizz assistant(매력 코치 AI)" 사용 중</p>
+<p><strong>핵심:</strong> "원한다고 적은 것"과 "실제로 좋아요 누른 것"은 다르다. AI는 이미 당신의 진짜 취향을 안다</p>
+<p>그런데 <strong>엘리트층은 오히려 "사람 매칭"으로 회귀</strong> 중</p>
+</div>
+</section>
+
+<!-- ==================== 섹션 7: 유튜브 경쟁 ==================== -->
+<section id="youtube">
+<h2>7. 유튜브 경쟁 채널 분석</h2>
+
+<div class="card">
+<div class="card-title">핵심 경쟁 채널</div>
+<table>
+<tr><th>채널</th><th>포지션</th><th>특징</th></tr>
+<tr><td><strong>한방언니</strong></td><td>노블마리아주 대표</td><td>가장 강력한 경쟁자. 스펙 평가, 성혼 썰, 시리즈물</td></tr>
+<tr><td>결정사 대표</td><td>15년 경력</td><td>연애/결혼 꿀팁</td></tr>
+<tr><td>결혼하려면 김경애</td><td>결혼전문가</td><td>전문가 어드바이스</td></tr>
+<tr><td>리스토리TV</td><td>이현숙 박사</td><td>학술적 접근</td></tr>
+<tr><td>퍼플스TV</td><td>상위 0.1%</td><td>상류층 포지셔닝</td></tr>
+</table>
+</div>
+
+<div class="card">
+<div class="card-title">고조회수 콘텐츠 5대 패턴</div>
+<table>
+<tr><th>패턴</th><th>바이럴 요인</th></tr>
+<tr><td><strong>1. 자기객관화/참교육</strong></td><td>성별 갈등 자극, 쇼츠에 최적화</td></tr>
+<tr><td><strong>2. 가격/비용 폭로</strong></td><td>정보 비대칭 해소 욕구</td></tr>
+<tr><td><strong>3. 내부자 폭로</strong></td><td>호기심 충족, 인사이더 가치</td></tr>
+<tr><td><strong>4. 성별별 경험/후기</strong></td><td>본인 투영, 대리 경험</td></tr>
+<tr><td><strong>5. 비교 콘텐츠</strong></td><td>실용적 정보, 선택 가이드</td></tr>
+</table>
+</div>
+
+<div class="highlight">
+<strong>한방언니가 안 다루는 영역:</strong> 비용 구조 투명 공개, 환불 현실, 매니저 내부 폭로 — 가입 유도에 불리하기 때문. <strong>여기서 차별화 가능</strong>
+</div>
+</section>
+
+<!-- ==================== 섹션 8: 주제 후보 ==================== -->
+<section id="topics">
+<h2>8. EP.06 주제 후보 TOP 5</h2>
+<p>기존 에피소드와 중복 없음: <span class="tag tag-comm">EP02 등급</span> <span class="tag tag-comm">EP03 프로필</span> <span class="tag tag-comm">EP04 첫인상</span> <span class="tag tag-comm">EP05 조건/이혼</span></p>
+
+<div class="topic-card">
+<div class="topic-rank">4채널 만장일치 1순위</div>
+<div class="topic-name">1. 가격이 다가 아니에요</div>
+<div class="topic-catch">"결정사가 절대 안 알려주는 돈의 진실"</div>
+<div class="topic-desc">
+남녀 가격 10배 차이 / 성혼사례금 폭탄 4,752만원 / 환불의 현실 / 해외 비교(한국은 세계적으로 저렴한 편) / 숨겨진 비용(알바·무료회원 구조)
+<br><span class="tag tag-male">남자: 11만원</span> <span class="tag tag-female">여자: 400만원</span> <span class="tag tag-hot">2026.05 최신 판결</span>
+</div>
+</div>
+
+<div class="topic-card" style="background:linear-gradient(135deg,#eff6ff,#fdf2f8);border-color:#d4bfff">
+<div class="topic-rank">남녀 콘텐츠 최적</div>
+<div class="topic-name">2. 남자가 다가 아니에요</div>
+<div class="topic-catch">"결정사에서 남녀가 착각하는 것들"</div>
+<div class="topic-desc">
+남자가 갑이라는 착각 / 여자가 을이라는 착각 / 매니저가 남녀에게 다르게 말하는 것 / 남녀가 원하는 것 vs 실제 매칭 / 결혼 안 하는 이유도 다르다
+<br><span class="tag tag-male">남자: 돈이 선택권</span> <span class="tag tag-female">여자: 외모가 등급</span> <span class="tag tag-vs">성별 프레임 충돌</span>
+</div>
+</div>
+
+<div class="topic-card">
+<div class="topic-rank">내부자 각도</div>
+<div class="topic-name">3. 매니저가 다가 아니에요</div>
+<div class="topic-catch">"결정사 내부자가 말하는 매니저의 실체"</div>
+<div class="topic-desc">
+카드자판기 관행 / 가스라이팅 / 알바 동원 / 7년차 "시장 끝난다" / 유튜브 여성 참교육이 마케팅인 이유 / 남녀에게 다르게 말하는 화법
+<br><span class="tag tag-hot">내부자 폭로</span> <span class="tag tag-vs">남녀 다른 화법</span>
+</div>
+</div>
+
+<div class="topic-card">
+<div class="topic-rank">시의성 최고</div>
+<div class="topic-name">4. 개인정보가 다가 아니에요</div>
+<div class="topic-catch">"듀오 43만명 유출, 그래도 가입하는 이유"</div>
+<div class="topic-desc">
+2026년 최대 이슈 / 과징금 12억 / 집단소송 / 유출 후에도 가입 100명+ / 업체 간 정보 공유 관행 / 위임장 도장 조작
+<br><span class="tag tag-hot">2026 최대 이슈</span>
+</div>
+</div>
+
+<div class="topic-card">
+<div class="topic-rank">20대 타겟</div>
+<div class="topic-name">5. 소개팅 앱이 다가 아니에요</div>
+<div class="topic-catch">"앱 vs 결정사, 어디서든 돈은 내야 한다"</div>
+<div class="topic-desc">
+앱 피로감 → 결정사 이동 / 20대 가입 17.2% 급증 / AI 매칭 333% 증가 / 앱도 월 $30-50 시대 / 어디서든 남자가 더 많다
+<br><span class="tag tag-vs">앱 vs 결정사</span> <span class="tag tag-comm">20대 트렌드</span>
+</div>
+</div>
+
+</section>
+
+<div style="text-align:center;padding:32px 0;border-top:1px solid var(--border);margin-top:40px">
+<p style="font-size:13px;color:var(--text3)">아는언니 리지 · EP.06 리서치 자료 · 2026.05.09</p>
+<p style="font-size:12px;color:var(--text3);margin-top:4px">4채널 병렬 리서치 (한국 커뮤니티 · 한국 뉴스 · Reddit/해외 · 유튜브)</p>
+</div>
+
+</div>
+</body>
+</html>
