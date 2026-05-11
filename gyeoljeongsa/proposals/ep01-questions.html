@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EP.01 녹음용 질문지</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif;
+    background: #0a0a0a;
+    color: #e8e8e8;
+    min-height: 100vh;
+    padding: 0 0 60px 0;
+  }
+
+  .header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    padding: 36px 20px 28px;
+    text-align: center;
+    border-bottom: 3px solid #2ecc71;
+  }
+  .header .ep { font-size: 12px; color: #2ecc71; font-weight: 700; letter-spacing: 2px; margin-bottom: 6px; }
+  .header h1 { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+  .header .sub { font-size: 13px; color: #888; line-height: 1.6; margin-top: 10px; }
+
+  .content { max-width: 600px; margin: 0 auto; padding: 20px 20px; }
+
+  .card {
+    background: #141414;
+    border-radius: 16px;
+    padding: 24px 22px;
+    margin: 16px 0;
+    border-left: 4px solid #333;
+    transition: all 0.2s;
+  }
+  .card:nth-child(1) { border-left-color: #e94560; }
+  .card:nth-child(2) { border-left-color: #f39c12; }
+  .card:nth-child(3) { border-left-color: #9b59b6; }
+  .card:nth-child(4) { border-left-color: #e74c3c; }
+  .card:nth-child(5) { border-left-color: #3498db; }
+  .card:nth-child(6) { border-left-color: #2ecc71; }
+  .card:nth-child(7) { border-left-color: #1abc9c; }
+
+  .card-num {
+    display: inline-block;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: #222;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 28px;
+    margin-bottom: 12px;
+  }
+  .card:nth-child(1) .card-num { background: #e94560; }
+  .card:nth-child(2) .card-num { background: #f39c12; }
+  .card:nth-child(3) .card-num { background: #9b59b6; }
+  .card:nth-child(4) .card-num { background: #e74c3c; }
+  .card:nth-child(5) .card-num { background: #3498db; }
+  .card:nth-child(6) .card-num { background: #2ecc71; }
+  .card:nth-child(7) .card-num { background: #1abc9c; }
+
+  .card-topic {
+    font-size: 13px;
+    color: #888;
+    font-weight: 600;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+  }
+
+  .card-question {
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.7;
+  }
+
+  .tip {
+    background: rgba(46, 204, 113, 0.08);
+    border: 1px solid rgba(46, 204, 113, 0.2);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin: 24px 0 8px;
+    font-size: 14px;
+    color: #aaa;
+    line-height: 1.8;
+  }
+  .tip strong { color: #2ecc71; }
+
+  .done-check {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    border: 2px solid #333;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: transparent;
+  }
+  .done-check.checked {
+    background: #2ecc71;
+    border-color: #2ecc71;
+    color: #fff;
+  }
+  .card { position: relative; }
+  .card.is-done { opacity: 0.4; }
+
+  @media (max-width: 480px) {
+    .card-question { font-size: 18px; }
+    .header h1 { font-size: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="ep">퇴근 후 부자들 &middot; EP.01</div>
+  <h1>녹음용 질문지</h1>
+  <div class="sub">각 질문에 1~2분씩 편하게 답해주세요<br>4~5개만 해도 충분합니다</div>
+</div>
+
+<div class="content">
+
+  <div class="tip">
+    <strong>TIP</strong> &mdash; 정답 없어요. 생각나는 대로, 평소 말투 그대로 답하면 됩니다. 답한 질문은 체크 표시 눌러주세요.
+  </div>
+
+  <div class="card">
+    <button class="done-check" onclick="toggleDone(this)">&#10003;</button>
+    <div class="card-num">1</div>
+    <div class="card-topic">월급 시절 이야기</div>
+    <p class="card-question">직장 다닐 때 월급 받으면 어땠어요? 돈이 어디로 새는지 느꼈던 순간이 있었어요?</p>
+  </div>
+
+  <div class="card">
+    <button class="done-check" onclick="toggleDone(this)">&#10003;</button>
+    <div class="card-num">2</div>
+    <div class="card-topic">깨달음의 순간</div>
+    <p class="card-question">월급만으로는 안 되겠다고 처음 느꼈던 순간이 있어요? 뭘 보고, 뭘 겪고 그 생각이 들었어요?</p>
+  </div>
+
+  <div class="card">
+    <button class="done-check" onclick="toggleDone(this)">&#10003;</button>
+    <div class="card-num">3</div>
+    <div class="card-topic">주변 사람 반응</div>
+    <p class="card-question">부업이나 사업 시작한다고 했을 때 주변에서 뭐라고 했어요? 그때 기분이 어땠어요?</p>
+  </div>
+
+  <div class="card">
+    <button class="done-check" onclick="toggleDone(this)">&#10003;</button>
+    <div class="card-num">4</div>
+    <div class="card-topic">핑계에 대해</div>
+    <p class="card-question">퇴근하고 피곤해서 못 하겠다는 사람한테 뭐라고 말해주고 싶어요?</p>
+  </div>
+
+  <div class="card">
+    <button class="done-check" onclick="toggleDone(this)">&#10003;</button>
+    <div class="card-num">5</div>
+    <div class="card-topic">가난에 익숙해지는 것</div>
+    <p class="card-question">월급만 받으면서 '원래 이런 거지' 하고 살았던 시절이 있었어요? 거기서 어떻게 빠져나왔어요?</p>
+  </div>
+
+  <div class="card">
+    <button class="done-check" onclick="toggleDone(this)">&#10003;</button>
+    <div class="card-num">6</div>
+    <div class="card-topic">실행에 대해</div>
+    <p class="card-question">뭔가 시작하고 싶은데 못 하는 사람한테 딱 한마디 한다면?</p>
+  </div>
+
+  <div class="card">
+    <button class="done-check" onclick="toggleDone(this)">&#10003;</button>
+    <div class="card-num">7</div>
+    <div class="card-topic">이 채널로 뭘 보여주고 싶은지</div>
+    <p class="card-question">퇴근 후 부자들 채널에서 어떤 이야기를 하고 싶어요? 어떤 사람한테 도움이 됐으면 좋겠어요?</p>
+  </div>
+
+</div>
+
+<script>
+function toggleDone(btn) {
+  btn.classList.toggle('checked');
+  btn.closest('.card').classList.toggle('is-done');
+}
+</script>
+
+</body>
+</html>
