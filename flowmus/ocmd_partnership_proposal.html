@@ -8,17 +8,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-/* ─── CSS Variables ─── */
+/* --- CSS Variables --- */
 :root {
-  --flowmus-blue: #1a56db;
-  --flowmus-blue-dark: #0f3a8e;
-  --flowmus-blue-light: #e8f0fe;
-  --ocmd-purple: #8982d0;
-  --ocmd-purple-dark: #6b63b5;
-  --ocmd-purple-light: #ece9f7;
-  --gradient-main: linear-gradient(135deg, #1a56db 0%, #8982d0 100%);
-  --gradient-subtle: linear-gradient(135deg, #e8f0fe 0%, #ece9f7 100%);
-  --gradient-dark: linear-gradient(135deg, #0f3a8e 0%, #6b63b5 100%);
+  --navy-dark: #0f1d3a;
+  --navy: #1a2e5a;
+  --navy-light: #2a4070;
+  --accent-purple: #6b63b5;
+  --accent-purple-light: #ece9f7;
+  --gradient-main: linear-gradient(135deg, #1a2e5a 0%, #6b63b5 100%);
+  --gradient-subtle: linear-gradient(135deg, #eef1f8 0%, #ece9f7 100%);
+  --gradient-dark: linear-gradient(135deg, #0f1d3a 0%, #6b63b5 100%);
   --text-primary: #1a1a2e;
   --text-secondary: #4a4a6a;
   --text-muted: #7a7a9a;
@@ -26,11 +25,11 @@
   --bg-light: #f8f9fc;
   --border-light: #e2e6ef;
   --success: #10b981;
-  --warning: #f59e0b;
-  --danger: #ef4444;
+  --warning: #d97706;
+  --danger: #c0392b;
 }
 
-/* ─── Reset & Base ─── */
+/* --- Reset & Base --- */
 *, *::before, *::after {
   margin: 0;
   padding: 0;
@@ -51,7 +50,7 @@ body {
   letter-spacing: -0.02em;
 }
 
-/* ─── PDF Save Button ─── */
+/* --- PDF Save Button --- */
 .pdf-btn {
   position: fixed;
   bottom: 32px;
@@ -61,7 +60,7 @@ body {
   align-items: center;
   gap: 10px;
   padding: 16px 28px;
-  background: var(--gradient-main);
+  background: var(--navy);
   color: #fff;
   border: none;
   border-radius: 50px;
@@ -69,19 +68,19 @@ body {
   font-weight: 700;
   font-family: 'Noto Sans KR', sans-serif;
   cursor: pointer;
-  box-shadow: 0 8px 32px rgba(26, 86, 219, 0.35);
+  box-shadow: 0 8px 32px rgba(15, 29, 58, 0.35);
   transition: all 0.3s ease;
 }
 .pdf-btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(26, 86, 219, 0.45);
+  box-shadow: 0 12px 40px rgba(15, 29, 58, 0.45);
 }
 .pdf-btn svg {
   width: 20px;
   height: 20px;
 }
 
-/* ─── Document Container ─── */
+/* --- Document Container --- */
 .document {
   max-width: 210mm;
   margin: 0 auto;
@@ -89,7 +88,7 @@ body {
   box-shadow: 0 0 60px rgba(0,0,0,0.08);
 }
 
-/* ─── Page Structure ─── */
+/* --- Page Structure --- */
 .page {
   width: 210mm;
   min-height: 297mm;
@@ -108,18 +107,18 @@ body {
 }
 
 .page-number span {
-  color: var(--flowmus-blue);
+  color: var(--navy);
   font-weight: 700;
 }
 
-/* ─── Cover Page ─── */
+/* --- Cover Page --- */
 .cover {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: linear-gradient(160deg, #0a1628 0%, #1a2744 25%, #2a3860 50%, #3d2e6b 75%, #4a3578 100%);
+  background: linear-gradient(160deg, #0a1628 0%, #14243f 30%, #1a2e5a 60%, #2a3868 80%, #3d2e6b 100%);
   color: #fff;
   position: relative;
   padding: 0;
@@ -133,15 +132,8 @@ body {
   width: 200%;
   height: 200%;
   background:
-    radial-gradient(ellipse at 20% 50%, rgba(26, 86, 219, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 50%, rgba(137, 130, 208, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse at 50% 0%, rgba(26, 86, 219, 0.1) 0%, transparent 40%);
-  animation: coverShimmer 8s ease-in-out infinite;
-}
-
-@keyframes coverShimmer {
-  0%, 100% { opacity: 0.8; }
-  50% { opacity: 1; }
+    radial-gradient(ellipse at 20% 50%, rgba(26, 46, 90, 0.15) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 50%, rgba(107, 99, 181, 0.1) 0%, transparent 50%);
 }
 
 .cover-content {
@@ -161,16 +153,16 @@ body {
   align-items: center;
   gap: 8px;
   padding: 8px 22px;
-  border: 1px solid rgba(255,255,255,0.25);
+  border: 1px solid rgba(255,255,255,0.2);
   border-radius: 50px;
   font-size: 12px;
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.8);
+  color: rgba(255,255,255,0.7);
   margin-bottom: 48px;
   backdrop-filter: blur(10px);
-  background: rgba(255,255,255,0.05);
+  background: rgba(255,255,255,0.04);
 }
 
 .cover-badge::before {
@@ -178,8 +170,7 @@ body {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--ocmd-purple);
-  box-shadow: 0 0 8px var(--ocmd-purple);
+  background: var(--accent-purple);
 }
 
 .cover-divider {
@@ -208,7 +199,7 @@ body {
 .cover-subtitle {
   font-size: 17px;
   font-weight: 400;
-  color: rgba(255,255,255,0.7);
+  color: rgba(255,255,255,0.65);
   margin-top: 28px;
   line-height: 1.6;
 }
@@ -219,12 +210,12 @@ body {
   flex-direction: column;
   gap: 10px;
   font-size: 13px;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.45);
 }
 
 .cover-meta .label {
   font-weight: 600;
-  color: rgba(255,255,255,0.7);
+  color: rgba(255,255,255,0.65);
 }
 
 .cover-logos {
@@ -243,24 +234,24 @@ body {
 }
 
 .cover-logo.flowmus {
-  background: rgba(26, 86, 219, 0.2);
-  border: 1px solid rgba(26, 86, 219, 0.3);
-  color: #7eb3ff;
+  background: rgba(26, 46, 90, 0.3);
+  border: 1px solid rgba(26, 46, 90, 0.4);
+  color: #8eaddb;
 }
 
 .cover-logo.ocmd {
-  background: rgba(137, 130, 208, 0.2);
-  border: 1px solid rgba(137, 130, 208, 0.3);
+  background: rgba(107, 99, 181, 0.2);
+  border: 1px solid rgba(107, 99, 181, 0.3);
   color: #b8b3e8;
 }
 
 .cover-x {
   font-size: 20px;
-  color: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.25);
   font-weight: 300;
 }
 
-/* ─── Section Headers ─── */
+/* --- Section Headers --- */
 .section-header {
   margin-bottom: 32px;
 }
@@ -272,7 +263,7 @@ body {
   width: 36px;
   height: 36px;
   border-radius: 10px;
-  background: var(--gradient-main);
+  background: var(--navy);
   color: #fff;
   font-size: 14px;
   font-weight: 800;
@@ -294,7 +285,7 @@ body {
   font-weight: 400;
 }
 
-/* ─── Content Typography ─── */
+/* --- Content Typography --- */
 .content p {
   font-size: 14px;
   line-height: 1.8;
@@ -318,21 +309,21 @@ body {
 .content h4 {
   font-size: 15px;
   font-weight: 700;
-  color: var(--flowmus-blue);
+  color: var(--navy);
   margin: 20px 0 10px;
 }
 
-/* ─── Highlight Box ─── */
+/* --- Highlight Box --- */
 .highlight-box {
   background: var(--gradient-subtle);
-  border-left: 4px solid var(--flowmus-blue);
+  border-left: 4px solid var(--navy);
   padding: 20px 24px;
   border-radius: 0 12px 12px 0;
   margin: 20px 0;
 }
 
 .highlight-box.purple {
-  border-left-color: var(--ocmd-purple);
+  border-left-color: var(--accent-purple);
 }
 
 .highlight-box p {
@@ -341,17 +332,17 @@ body {
 }
 
 .highlight-box .big-number {
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 800;
-  color: var(--flowmus-blue);
+  color: var(--navy);
   line-height: 1.2;
 }
 
 .highlight-box.purple .big-number {
-  color: var(--ocmd-purple);
+  color: var(--accent-purple);
 }
 
-/* ─── Key Metric Cards ─── */
+/* --- Key Metric Cards --- */
 .metric-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -365,21 +356,12 @@ body {
   border-radius: 12px;
   padding: 18px 16px;
   text-align: center;
-  transition: all 0.2s ease;
-}
-
-.metric-card:hover {
-  border-color: var(--flowmus-blue);
-  box-shadow: 0 4px 16px rgba(26, 86, 219, 0.08);
 }
 
 .metric-value {
   font-size: 24px;
   font-weight: 800;
-  background: var(--gradient-main);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--navy);
   margin-bottom: 4px;
 }
 
@@ -389,7 +371,7 @@ body {
   font-weight: 500;
 }
 
-/* ─── Tables ─── */
+/* --- Tables --- */
 .data-table {
   width: 100%;
   border-collapse: separate;
@@ -402,7 +384,7 @@ body {
 }
 
 .data-table thead th {
-  background: var(--gradient-main);
+  background: var(--navy);
   color: #fff;
   padding: 13px 16px;
   font-weight: 600;
@@ -425,12 +407,8 @@ body {
   background: var(--bg-light);
 }
 
-.data-table tbody tr:hover {
-  background: var(--flowmus-blue-light);
-}
-
 .data-table .highlight-row {
-  background: #fef9e7 !important;
+  background: #f0f4fa !important;
   font-weight: 600;
 }
 
@@ -438,7 +416,7 @@ body {
   color: var(--text-primary);
 }
 
-/* ─── Status Badges ─── */
+/* --- Status Badges --- */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -464,16 +442,16 @@ body {
 }
 
 .badge.blue {
-  background: var(--flowmus-blue-light);
-  color: var(--flowmus-blue);
+  background: #eef1f8;
+  color: var(--navy);
 }
 
 .badge.purple {
-  background: var(--ocmd-purple-light);
-  color: var(--ocmd-purple-dark);
+  background: var(--accent-purple-light);
+  color: var(--accent-purple);
 }
 
-/* ─── Funnel Chart ─── */
+/* --- Funnel Chart --- */
 .funnel-chart {
   display: flex;
   flex-direction: column;
@@ -495,11 +473,11 @@ body {
   clip-path: polygon(5% 0%, 95% 0%, 100% 100%, 0% 100%);
 }
 
-.funnel-step:nth-child(1) { width: 100%; background: var(--flowmus-blue); }
-.funnel-step:nth-child(2) { width: 88%; background: #3b6fe0; }
-.funnel-step:nth-child(3) { width: 76%; background: #5c7de0; }
-.funnel-step:nth-child(4) { width: 64%; background: var(--ocmd-purple); }
-.funnel-step:nth-child(5) { width: 52%; background: var(--ocmd-purple-dark); }
+.funnel-step:nth-child(1) { width: 100%; background: var(--navy-dark); }
+.funnel-step:nth-child(2) { width: 88%; background: var(--navy); }
+.funnel-step:nth-child(3) { width: 76%; background: var(--navy-light); }
+.funnel-step:nth-child(4) { width: 64%; background: #4a5090; }
+.funnel-step:nth-child(5) { width: 52%; background: var(--accent-purple); }
 .funnel-step:nth-child(6) { width: 42%; background: #5a539e; }
 
 .funnel-arrow {
@@ -521,7 +499,7 @@ body {
   border-top: 6px solid var(--border-light);
 }
 
-/* ─── Horizontal Flow ─── */
+/* --- Horizontal Flow --- */
 .flow-horizontal {
   display: flex;
   align-items: center;
@@ -546,12 +524,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: 14px;
+  font-weight: 800;
   color: #fff;
 }
 
-.flow-step-icon.blue { background: var(--flowmus-blue); }
-.flow-step-icon.purple { background: var(--ocmd-purple); }
+.flow-step-icon.blue { background: var(--navy); }
+.flow-step-icon.purple { background: var(--accent-purple); }
 .flow-step-icon.green { background: var(--success); }
 
 .flow-step-label {
@@ -574,7 +553,7 @@ body {
   padding-bottom: 20px;
 }
 
-/* ─── Phase Card ─── */
+/* --- Phase Card --- */
 .phase-card {
   border: 1px solid var(--border-light);
   border-radius: 16px;
@@ -593,8 +572,8 @@ body {
   height: 4px;
 }
 
-.phase-card.phase1::before { background: var(--flowmus-blue); }
-.phase-card.phase2::before { background: var(--ocmd-purple); }
+.phase-card.phase1::before { background: var(--navy); }
+.phase-card.phase2::before { background: var(--accent-purple); }
 .phase-card.phase3::before { background: var(--gradient-main); }
 
 .phase-header {
@@ -618,18 +597,18 @@ body {
 }
 
 .phase1 .phase-period {
-  background: var(--flowmus-blue-light);
-  color: var(--flowmus-blue);
+  background: #eef1f8;
+  color: var(--navy);
 }
 
 .phase2 .phase-period {
-  background: var(--ocmd-purple-light);
-  color: var(--ocmd-purple-dark);
+  background: var(--accent-purple-light);
+  color: var(--accent-purple);
 }
 
 .phase3 .phase-period {
   background: var(--gradient-subtle);
-  color: var(--flowmus-blue-dark);
+  color: var(--navy-dark);
 }
 
 .phase-list {
@@ -654,7 +633,7 @@ body {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  border: 2px solid var(--flowmus-blue);
+  border: 2px solid var(--navy);
 }
 
 .phase-goal {
@@ -676,7 +655,7 @@ body {
 .phase-goal-value {
   font-size: 18px;
   font-weight: 800;
-  color: var(--flowmus-blue);
+  color: var(--navy);
 }
 
 .phase-goal-label {
@@ -685,64 +664,78 @@ body {
   margin-top: 2px;
 }
 
-/* ─── Revenue Simulation ─── */
-.revenue-bar {
+/* --- Growth Scenario --- */
+.growth-scenario {
   display: flex;
-  align-items: center;
-  margin: 12px 0;
-  gap: 12px;
+  align-items: stretch;
+  gap: 16px;
+  margin: 24px 0;
 }
 
-.revenue-label {
-  width: 80px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-primary);
-  flex-shrink: 0;
-}
-
-.revenue-track {
+.growth-stage {
   flex: 1;
-  height: 36px;
-  background: var(--bg-light);
-  border-radius: 8px;
-  overflow: hidden;
-  display: flex;
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  padding: 20px 16px;
+  text-align: center;
   position: relative;
 }
 
-.revenue-fill {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.growth-stage.current {
+  border-color: var(--text-muted);
+  background: var(--bg-light);
+}
+
+.growth-stage.phase1 {
+  border-color: var(--navy);
+  background: #eef1f8;
+}
+
+.growth-stage.phase2 {
+  border-color: var(--accent-purple);
+  background: var(--accent-purple-light);
+}
+
+.growth-stage.phase3 {
+  border-color: var(--navy-dark);
+  background: linear-gradient(135deg, #eef1f8, var(--accent-purple-light));
+}
+
+.growth-stage-label {
   font-size: 11px;
   font-weight: 700;
-  color: #fff;
-  transition: width 0.5s ease;
-  white-space: nowrap;
-  min-width: fit-content;
-  padding: 0 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 10px;
+  color: var(--text-muted);
 }
 
-.revenue-fill.ocmd {
-  background: var(--ocmd-purple);
-}
+.growth-stage.phase1 .growth-stage-label { color: var(--navy); }
+.growth-stage.phase2 .growth-stage-label { color: var(--accent-purple); }
+.growth-stage.phase3 .growth-stage-label { color: var(--navy-dark); }
 
-.revenue-fill.flowmus {
-  background: var(--flowmus-blue);
-}
-
-.revenue-total {
-  width: 90px;
-  text-align: right;
-  font-size: 14px;
+.growth-stage-title {
+  font-size: 15px;
   font-weight: 800;
   color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.growth-stage-desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.growth-arrow {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  color: var(--border-light);
   flex-shrink: 0;
 }
 
-/* ─── Service Grid ─── */
+/* --- Service Grid --- */
 .service-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -754,12 +747,6 @@ body {
   border: 1px solid var(--border-light);
   border-radius: 14px;
   padding: 20px;
-  transition: all 0.2s ease;
-}
-
-.service-card:hover {
-  border-color: var(--flowmus-blue);
-  box-shadow: 0 4px 20px rgba(26, 86, 219, 0.06);
 }
 
 .service-icon {
@@ -769,9 +756,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 14px;
+  font-weight: 800;
   margin-bottom: 12px;
   background: var(--gradient-subtle);
+  color: var(--navy);
 }
 
 .service-card h4 {
@@ -795,24 +784,25 @@ body {
 }
 
 .service-card ul li::before {
-  content: '\2713';
+  content: '\2022';
   position: absolute;
   left: 0;
-  color: var(--success);
-  font-size: 11px;
+  color: var(--navy);
+  font-size: 14px;
   font-weight: 700;
+  line-height: 1.4;
 }
 
-/* ─── Partnership Terms ─── */
-.terms-box {
-  border: 2px solid var(--flowmus-blue);
+/* --- Partnership Overview --- */
+.partnership-overview {
+  border: 2px solid var(--navy);
   border-radius: 16px;
   overflow: hidden;
   margin: 24px 0;
 }
 
-.terms-header {
-  background: var(--gradient-main);
+.partnership-header {
+  background: var(--navy);
   color: #fff;
   padding: 18px 24px;
   font-size: 16px;
@@ -820,37 +810,37 @@ body {
   text-align: center;
 }
 
-.terms-body {
+.partnership-body {
   padding: 24px;
 }
 
-.terms-item {
+.partnership-item {
   display: flex;
   align-items: flex-start;
   padding: 14px 0;
   border-bottom: 1px solid var(--border-light);
 }
 
-.terms-item:last-child {
+.partnership-item:last-child {
   border-bottom: none;
 }
 
-.terms-key {
+.partnership-key {
   width: 120px;
   font-size: 13px;
   font-weight: 700;
-  color: var(--flowmus-blue);
+  color: var(--navy);
   flex-shrink: 0;
 }
 
-.terms-value {
+.partnership-value {
   flex: 1;
   font-size: 13px;
   color: var(--text-secondary);
   line-height: 1.6;
 }
 
-/* ─── Company Info ─── */
+/* --- Company Info --- */
 .company-info-grid {
   display: grid;
   grid-template-columns: 120px 1fr;
@@ -875,14 +865,14 @@ body {
   color: var(--text-secondary);
 }
 
-/* ─── Closing Page ─── */
+/* --- Closing Page --- */
 .closing {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: linear-gradient(160deg, #0a1628 0%, #1a2744 25%, #2a3860 50%, #3d2e6b 75%, #4a3578 100%);
+  background: linear-gradient(160deg, #0a1628 0%, #14243f 30%, #1a2e5a 60%, #2a3868 80%, #3d2e6b 100%);
   color: #fff;
   position: relative;
 }
@@ -895,8 +885,8 @@ body {
   right: 0;
   bottom: 0;
   background:
-    radial-gradient(ellipse at 30% 50%, rgba(26, 86, 219, 0.12) 0%, transparent 50%),
-    radial-gradient(ellipse at 70% 50%, rgba(137, 130, 208, 0.12) 0%, transparent 50%);
+    radial-gradient(ellipse at 30% 50%, rgba(26, 46, 90, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 50%, rgba(107, 99, 181, 0.1) 0%, transparent 50%);
 }
 
 .closing-content {
@@ -942,7 +932,7 @@ body {
   background-clip: text;
 }
 
-/* ─── Comparison Visual ─── */
+/* --- Comparison Visual --- */
 .comparison-container {
   display: flex;
   gap: 20px;
@@ -957,13 +947,13 @@ body {
 }
 
 .comparison-box.before {
-  border-color: #fecaca;
-  background: #fef2f2;
+  border-color: #e0c8c8;
+  background: #faf5f5;
 }
 
 .comparison-box.after {
-  border-color: #bbf7d0;
-  background: #ecfdf5;
+  border-color: #b8d8cb;
+  background: #f3faf6;
 }
 
 .comparison-box h4 {
@@ -989,7 +979,7 @@ body {
 }
 
 .comparison-box.before ul li::before {
-  content: '\2717';
+  content: '\2014';
   position: absolute;
   left: 0;
   color: var(--danger);
@@ -997,14 +987,15 @@ body {
 }
 
 .comparison-box.after ul li::before {
-  content: '\2713';
+  content: '\2022';
   position: absolute;
-  left: 0;
+  left: 2px;
   color: var(--success);
   font-weight: 700;
+  font-size: 14px;
 }
 
-/* ─── Benchmark Card ─── */
+/* --- Benchmark Card --- */
 .benchmark-card {
   background: var(--bg-light);
   border-radius: 16px;
@@ -1024,11 +1015,12 @@ body {
   width: 56px;
   height: 56px;
   border-radius: 14px;
-  background: var(--gradient-main);
+  background: var(--navy);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 14px;
+  font-weight: 800;
   color: #fff;
   flex-shrink: 0;
 }
@@ -1062,10 +1054,7 @@ body {
 .benchmark-stat-value {
   font-size: 22px;
   font-weight: 800;
-  background: var(--gradient-main);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: var(--navy);
 }
 
 .benchmark-stat-label {
@@ -1074,81 +1063,41 @@ body {
   margin-top: 4px;
 }
 
-/* ─── Insight callout ─── */
+/* --- Insight callout --- */
 .insight-callout {
   display: flex;
   align-items: flex-start;
   gap: 14px;
   padding: 18px 22px;
-  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  background: var(--bg-light);
   border-radius: 12px;
-  border: 1px solid #fde68a;
+  border: 1px solid var(--border-light);
   margin: 20px 0;
 }
 
 .insight-icon {
-  font-size: 20px;
+  font-size: 14px;
+  font-weight: 800;
   flex-shrink: 0;
   margin-top: 2px;
+  color: var(--navy);
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eef1f8;
+  border-radius: 6px;
 }
 
 .insight-text {
   font-size: 13px;
-  color: #92400e;
+  color: var(--text-secondary);
   font-weight: 500;
   line-height: 1.6;
 }
 
-/* ─── RS Visual ─── */
-.rs-visual {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 24px;
-  margin: 28px 0;
-}
-
-.rs-circle {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-weight: 800;
-}
-
-.rs-circle.ocmd-c {
-  background: var(--ocmd-purple);
-  box-shadow: 0 8px 24px rgba(137, 130, 208, 0.3);
-}
-
-.rs-circle.flowmus-c {
-  background: var(--flowmus-blue);
-  box-shadow: 0 8px 24px rgba(26, 86, 219, 0.3);
-}
-
-.rs-percent {
-  font-size: 36px;
-  line-height: 1;
-}
-
-.rs-label {
-  font-size: 12px;
-  font-weight: 600;
-  margin-top: 4px;
-  opacity: 0.85;
-}
-
-.rs-vs {
-  font-size: 20px;
-  font-weight: 300;
-  color: var(--text-muted);
-}
-
-/* ─── Channel Role Cards ─── */
+/* --- Channel Role Cards --- */
 .channel-roles {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -1164,8 +1113,17 @@ body {
 }
 
 .channel-card .ch-icon {
-  font-size: 28px;
+  font-size: 14px;
+  font-weight: 800;
   margin-bottom: 10px;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: var(--gradient-subtle);
+  color: var(--navy);
 }
 
 .channel-card h4 {
@@ -1178,7 +1136,7 @@ body {
 .channel-card .ch-role {
   font-size: 11px;
   font-weight: 600;
-  color: var(--flowmus-blue);
+  color: var(--navy);
   margin-bottom: 10px;
 }
 
@@ -1188,7 +1146,7 @@ body {
   line-height: 1.6;
 }
 
-/* ─── Cafe Tier ─── */
+/* --- Cafe Tier --- */
 .tier-flow {
   display: flex;
   align-items: center;
@@ -1213,7 +1171,7 @@ body {
   margin: 0 4px;
 }
 
-/* ─── Partner Stats Bar ─── */
+/* --- Partner Stats Bar --- */
 .stat-bar-group {
   margin: 20px 0;
 }
@@ -1240,10 +1198,10 @@ body {
 .stat-bar-fill {
   height: 100%;
   border-radius: 5px;
-  background: var(--gradient-main);
+  background: var(--navy);
 }
 
-/* ─── Print Styles ─── */
+/* --- Print Styles --- */
 @media print {
   @page {
     size: A4;
@@ -1281,17 +1239,9 @@ body {
   .cover, .closing {
     height: 297mm;
   }
-
-  .metric-card:hover,
-  .service-card:hover,
-  .data-table tbody tr:hover {
-    border-color: var(--border-light);
-    box-shadow: none;
-    background: inherit;
-  }
 }
 
-/* ─── Mobile Responsive ─── */
+/* --- Mobile Responsive --- */
 @media screen and (max-width: 768px) {
   .document {
     max-width: 100%;
@@ -1332,14 +1282,13 @@ body {
     grid-template-columns: 1fr;
   }
 
-  .rs-visual {
+  .growth-scenario {
     flex-direction: column;
-    gap: 16px;
   }
 
-  .rs-circle {
-    width: 120px;
-    height: 120px;
+  .growth-arrow {
+    transform: rotate(90deg);
+    justify-content: center;
   }
 
   .flow-horizontal {
@@ -1358,25 +1307,6 @@ body {
 
   .tier-arrow {
     transform: rotate(90deg);
-  }
-
-  .revenue-bar {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-  }
-
-  .revenue-label {
-    width: auto;
-  }
-
-  .revenue-track {
-    width: 100%;
-  }
-
-  .revenue-total {
-    width: auto;
-    text-align: left;
   }
 
   .benchmark-stats {
@@ -1426,12 +1356,12 @@ body {
     gap: 12px;
   }
 
-  .terms-item {
+  .partnership-item {
     flex-direction: column;
     gap: 4px;
   }
 
-  .terms-key {
+  .partnership-key {
     width: auto;
   }
 }
@@ -1451,9 +1381,9 @@ body {
 
 <div class="document">
 
-  <!-- ═══════════════════════════════════════════════════════════════
-       COVER PAGE
-  ════════════════════════════════════════════════════════════════ -->
+  <!-- ===================================================================
+       PAGE 1: COVER
+  ==================================================================== -->
   <div class="page cover">
     <div class="cover-content">
       <div class="cover-badge">STRATEGIC PARTNERSHIP PROPOSAL</div>
@@ -1472,7 +1402,7 @@ body {
       <div class="cover-divider"></div>
 
       <p class="cover-subtitle">
-        퍼널 통합으로 월 순수익 1억 &rarr; 3억 성장 로드맵
+        퍼널 통합과 자체 채널 전환을 통한 지속 가능한 성장 전략
       </p>
 
       <div class="cover-meta">
@@ -1482,21 +1412,21 @@ body {
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════════════════
-       1. EXECUTIVE SUMMARY
-  ════════════════════════════════════════════════════════════════ -->
+  <!-- ===================================================================
+       PAGE 2: EXECUTIVE SUMMARY
+  ==================================================================== -->
   <div class="page">
     <div class="section-header">
       <div class="section-number">1</div>
       <h2 class="section-title">Executive Summary</h2>
-      <p class="section-subtitle">핵심 제안 요약</p>
+      <p class="section-subtitle">제안 요약</p>
     </div>
 
     <div class="content">
       <p>
         오은환 대표님은 콘텐츠 크리에이터로서 <strong>독보적인 자산</strong>을 보유하고 계십니다.
         SNS 팔로워 30만, 누적 수강생 25,000명, 결제 고객 630명, 월 순수익 1억원.
-        그러나 현재의 퍼널 구조는 <strong>분산과 수수료</strong>라는 두 가지 구조적 한계를 안고 있습니다.
+        그러나 현재의 퍼널 구조는 <strong>분산과 높은 수수료</strong>라는 두 가지 구조적 한계를 안고 있습니다.
       </p>
 
       <div class="metric-grid">
@@ -1523,7 +1453,7 @@ body {
           <h4>현재 문제</h4>
           <ul>
             <li>퍼널 분산 (5개 이상 플랫폼)</li>
-            <li>플랫폼 수수료 30~50%</li>
+            <li>외부 플랫폼의 높은 수수료 부담</li>
             <li>고객 데이터 분산</li>
             <li>업셀 동선 단절</li>
             <li>SEO 자산 부재</li>
@@ -1533,27 +1463,26 @@ body {
           <h4>플로우머스 제안</h4>
           <ul>
             <li>유튜브 &rarr; 카페 &rarr; 자체몰 퍼널 통합</li>
-            <li>수수료 0% (자체 채널)</li>
+            <li>자체 채널 전환으로 수수료 절감</li>
             <li>고객 데이터 일원화</li>
             <li>자연스러운 업셀 구조</li>
-            <li>UGC 기반 네이버 SEO 점령</li>
+            <li>UGC 기반 네이버 SEO 확보</li>
           </ul>
         </div>
       </div>
 
       <div class="highlight-box">
-        <p><strong>핵심 제안:</strong> R/S 40% 파트너십으로 플로우머스가 기획, 편집, 마케팅, 카페 운영, 시스템 전체를 대행합니다.</p>
-        <p style="margin-top: 10px;"><strong>기대 효과:</strong></p>
-        <p class="big-number" style="margin-top: 4px;">월 순수익 1억 &rarr; 3억 (보수적) &nbsp;|&nbsp; 연 10억+ 플로우머스 수익</p>
+        <p>전략적 파트너십을 통해 플로우머스가 기획, 편집, 마케팅, 카페 운영, 시스템 전체를 풀 대행합니다. 오은환 대표님은 콘텐츠 촬영에만 집중하시면 됩니다.</p>
+        <p style="margin-top: 10px; font-size: 15px; font-weight: 700; color: var(--text-primary);">퍼널 통합을 통해 동일한 고객 기반에서 매출을 단계적으로 성장시키는 것이 이 제안의 핵심입니다.</p>
       </div>
     </div>
 
     <div class="page-number"><span>01</span> / 12</div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════════════════
-       2. 현황 분석 (1/2)
-  ════════════════════════════════════════════════════════════════ -->
+  <!-- ===================================================================
+       PAGE 3: 현황 분석 (1/2)
+  ==================================================================== -->
   <div class="page">
     <div class="section-header">
       <div class="section-number">2</div>
@@ -1563,7 +1492,7 @@ body {
 
     <div class="content">
       <p>오은환 대표님의 가격 계단은 <strong>2만원부터 250만원까지</strong> 매우 잘 설계되어 있습니다.
-        문제는 이 계단이 <strong>5개 이상의 플랫폼에 흩어져 있어</strong> 업셀 동선이 끊기고, 각 플랫폼에 30~50%의 수수료를 지불하고 있다는 점입니다.</p>
+        문제는 이 계단이 <strong>5개 이상의 플랫폼에 흩어져 있어</strong> 업셀 동선이 끊기고, 각 플랫폼에 높은 수수료를 지불하고 있다는 점입니다.</p>
 
       <h3>채널별 현황 분석</h3>
 
@@ -1589,21 +1518,21 @@ body {
             <td><strong>클래스유</strong></td>
             <td>온라인 강의</td>
             <td>수강생 10,000명</td>
-            <td>30~40%</td>
+            <td>높음</td>
             <td><span class="badge red">고수수료</span></td>
           </tr>
           <tr>
             <td><strong>클래스101</strong></td>
             <td>온라인 강의</td>
             <td>운영 중</td>
-            <td>30~50%</td>
+            <td>높음</td>
             <td><span class="badge red">최고수수료</span></td>
           </tr>
           <tr>
             <td><strong>팬딩</strong></td>
             <td>멤버십</td>
             <td>운영 중</td>
-            <td>10~15%</td>
+            <td>중간</td>
             <td><span class="badge yellow">역할 제한</span></td>
           </tr>
           <tr>
@@ -1679,25 +1608,25 @@ body {
     <div class="page-number"><span>02</span> / 12</div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════════════════
-       2. 현황 분석 (2/2) - 문제 요약
-  ════════════════════════════════════════════════════════════════ -->
+  <!-- ===================================================================
+       PAGE 4: 현황 분석 (2/2) - 문제 요약
+  ==================================================================== -->
   <div class="page">
     <div class="section-header">
       <div class="section-number">2</div>
       <h2 class="section-title">현황 분석</h2>
-      <p class="section-subtitle">핵심 문제 요약 및 기회 비용</p>
+      <p class="section-subtitle">구조적 문제 요약 및 기회 비용</p>
     </div>
 
     <div class="content">
-      <h3>수수료로 인한 연간 손실 추정</h3>
-      <p>현재 플랫폼 수수료 구조로 인해 연간 <strong>약 3.6~6억원</strong>의 매출이 외부 플랫폼으로 유출되고 있습니다.</p>
+      <h3>외부 플랫폼 수수료로 인한 연간 손실</h3>
+      <p>현재 플랫폼 수수료 구조로 인해 연간 <strong>상당 규모의 매출이 외부 플랫폼으로 유출</strong>되고 있습니다. 자체 채널로 전환할 경우 이 비용을 대부분 절감할 수 있으며, 그 자체로 성장 재원이 됩니다.</p>
 
       <div class="stat-bar-group">
         <div class="stat-bar-item">
           <div class="stat-bar-label">
-            <span>클래스유 (수수료 30~40%)</span>
-            <span style="color: var(--danger);">연 약 2~3억 유출</span>
+            <span>클래스유 (높은 수수료)</span>
+            <span style="color: var(--danger);">가장 큰 유출</span>
           </div>
           <div class="stat-bar-track">
             <div class="stat-bar-fill" style="width: 70%;"></div>
@@ -1705,8 +1634,8 @@ body {
         </div>
         <div class="stat-bar-item">
           <div class="stat-bar-label">
-            <span>클래스101 (수수료 30~50%)</span>
-            <span style="color: var(--danger);">연 약 1~2억 유출</span>
+            <span>클래스101 (높은 수수료)</span>
+            <span style="color: var(--danger);">상당한 유출</span>
           </div>
           <div class="stat-bar-track">
             <div class="stat-bar-fill" style="width: 50%;"></div>
@@ -1714,8 +1643,8 @@ body {
         </div>
         <div class="stat-bar-item">
           <div class="stat-bar-label">
-            <span>팬딩 (수수료 10~15%)</span>
-            <span style="color: var(--warning);">연 약 0.6~1억 유출</span>
+            <span>팬딩 (중간 수수료)</span>
+            <span style="color: var(--warning);">일부 유출</span>
           </div>
           <div class="stat-bar-track">
             <div class="stat-bar-fill" style="width: 25%;"></div>
@@ -1723,12 +1652,8 @@ body {
         </div>
       </div>
 
-      <div class="highlight-box" style="background: #fef2f2; border-left-color: var(--danger);">
-        <p><strong>연간 플랫폼 수수료 유출 합계:</strong></p>
-        <p class="big-number" style="color: var(--danger);">약 3.6 ~ 6억원</p>
-        <p style="margin-top: 8px; font-size: 13px; color: var(--text-muted);">
-          이 비용은 자체 퍼널 전환 시 100% 절감 가능하며, 그 자체로 성장 재원이 됩니다.
-        </p>
+      <div class="highlight-box" style="background: #faf5f5; border-left-color: var(--danger);">
+        <p><strong>연간 플랫폼 수수료 유출:</strong> 외부 플랫폼에 지불하는 수수료 총합이 매출 대비 상당한 비중을 차지하고 있으며, 자체 퍼널 전환 시 이 비용을 절감하여 순수익을 크게 높일 수 있습니다.</p>
       </div>
 
       <h3>5대 구조적 문제</h3>
@@ -1752,7 +1677,7 @@ body {
           <tr>
             <td>2</td>
             <td><strong>수수료 과다</strong></td>
-            <td>매출의 30~50%가 플랫폼에 귀속</td>
+            <td>매출의 상당 부분이 플랫폼에 귀속</td>
             <td><span class="badge red">심각</span></td>
           </tr>
           <tr>
@@ -1764,7 +1689,7 @@ body {
           <tr>
             <td>4</td>
             <td><strong>SEO 자산 부재</strong></td>
-            <td>네이버 검색 유입 0에 가까움</td>
+            <td>네이버 검색 유입이 거의 없음</td>
             <td><span class="badge yellow">주의</span></td>
           </tr>
           <tr>
@@ -1777,11 +1702,11 @@ body {
       </table>
 
       <div class="insight-callout">
-        <div class="insight-icon">&#128161;</div>
+        <div class="insight-icon">i</div>
         <div class="insight-text">
-          <strong>핵심 인사이트:</strong> 오은환 대표님의 자산(콘텐츠 역량, 팬덤, 가격 계단)은 이미 최상급입니다.
-          부족한 것은 <strong>'시스템'</strong>입니다. 퍼널을 통합하고 자체 채널로 전환하면,
-          같은 고객 기반에서 매출을 2~3배 성장시킬 수 있습니다.
+          오은환 대표님의 자산 -- 콘텐츠 역량, 팬덤, 가격 계단 -- 은 이미 최상급입니다.
+          부족한 것은 <strong>시스템</strong>입니다. 퍼널을 통합하고 자체 채널로 전환하면,
+          같은 고객 기반에서 매출을 의미 있게 성장시킬 수 있습니다.
         </div>
       </div>
     </div>
@@ -1789,23 +1714,23 @@ body {
     <div class="page-number"><span>03</span> / 12</div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════════════════
-       3. 벤치마크: 월급쟁이부자들
-  ════════════════════════════════════════════════════════════════ -->
+  <!-- ===================================================================
+       PAGE 5: 벤치마크: 월급쟁이부자들
+  ==================================================================== -->
   <div class="page">
     <div class="section-header">
       <div class="section-number">3</div>
       <h2 class="section-title">벤치마크 분석</h2>
-      <p class="section-subtitle">월급쟁이부자들 - 동일 전략으로 508억 달성</p>
+      <p class="section-subtitle">월급쟁이부자들 -- 동일 전략으로 508억 달성</p>
     </div>
 
     <div class="content">
       <div class="benchmark-card">
         <div class="benchmark-header">
-          <div class="benchmark-icon">&#127942;</div>
+          <div class="benchmark-icon">BM</div>
           <div>
             <div class="benchmark-title">월급쟁이부자들 (월부)</div>
-            <div class="benchmark-sub">부동산 교육 &rarr; 5년 만에 매출 27배 성장</div>
+            <div class="benchmark-sub">부동산 교육에서 5년 만에 매출 27배 성장</div>
           </div>
         </div>
         <div class="benchmark-stats">
@@ -1824,23 +1749,23 @@ body {
         </div>
       </div>
 
-      <h3>월부의 핵심 전략 = 제안 전략과 동일</h3>
+      <h3>월부의 핵심 전략과 오콘목달 적용</h3>
 
       <div class="flow-horizontal">
         <div class="flow-step">
-          <div class="flow-step-icon blue">&#9654;</div>
+          <div class="flow-step-icon blue">YT</div>
           <div class="flow-step-label">유튜브</div>
           <div class="flow-step-sub">무료 콘텐츠</div>
         </div>
         <div class="flow-arrow-h">&rarr;</div>
         <div class="flow-step">
-          <div class="flow-step-icon purple">&#9733;</div>
+          <div class="flow-step-icon purple">NC</div>
           <div class="flow-step-label">네이버 카페</div>
           <div class="flow-step-sub">SEO + 커뮤니티</div>
         </div>
         <div class="flow-arrow-h">&rarr;</div>
         <div class="flow-step">
-          <div class="flow-step-icon green">&#10003;</div>
+          <div class="flow-step-icon green">$</div>
           <div class="flow-step-label">자체몰</div>
           <div class="flow-step-sub">결제 전환</div>
         </div>
@@ -1886,19 +1811,18 @@ body {
       </table>
 
       <div class="insight-callout">
-        <div class="insight-icon">&#128293;</div>
+        <div class="insight-icon">i</div>
         <div class="insight-text">
-          <strong>월부는 부동산이라는 비주얼 콘텐츠와 거리가 먼 영역에서도 508억을 달성했습니다.</strong>
-          오은환 대표님은 '콘텐츠 제작'이라는 비주얼 중심, 실습 중심 분야에서 활동하고 계십니다.
-          UGC 생산성과 SEO 잠재력이 월부보다 훨씬 높습니다.
+          월부는 부동산이라는 비주얼 콘텐츠와 거리가 먼 영역에서도 508억을 달성했습니다.
+          오은환 대표님은 '콘텐츠 제작'이라는 비주얼 중심, 실습 중심 분야에서 활동하고 계시기 때문에
+          UGC 생산성과 SEO 잠재력이 월부보다 높을 수 있습니다.
         </div>
       </div>
 
       <div class="highlight-box purple">
-        <p><strong>핵심 메시지:</strong></p>
-        <p style="font-size: 16px; margin-top: 6px; color: var(--text-primary); font-weight: 700;">
-          월부가 5년 만에 27배 성장한 전략을 오콘목달에 그대로 적용합니다.<br>
-          카페 회원 35만명 = 매출 508억. 이것이 플로우머스가 제안하는 로드맵의 근거입니다.
+        <p style="font-size: 15px; color: var(--text-primary); font-weight: 700;">
+          월부가 5년 만에 27배 성장한 전략을 오콘목달에 적용합니다.
+          카페 회원 35만명이 매출 508억으로 이어진 사례가 이 제안의 근거입니다.
         </p>
       </div>
     </div>
@@ -1906,9 +1830,9 @@ body {
     <div class="page-number"><span>04</span> / 12</div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════════════════
-       4. 전략 제안: 퍼널 통합 (1/2)
-  ════════════════════════════════════════════════════════════════ -->
+  <!-- ===================================================================
+       PAGE 6: 전략 제안 (1) - 퍼널 통합
+  ==================================================================== -->
   <div class="page">
     <div class="section-header">
       <div class="section-number">4</div>
@@ -1921,19 +1845,19 @@ body {
 
       <div class="channel-roles">
         <div class="channel-card">
-          <div class="ch-icon">&#9654;&#65039;</div>
+          <div class="ch-icon">YT</div>
           <h4>유튜브</h4>
           <div class="ch-role">퍼널 입구</div>
-          <p>오콘목달 오리지널 코드 &amp; 세계관으로 리브랜딩. 기획+편집 전담. 카페 유입 CTA 강화.</p>
+          <p>오콘목달 오리지널 코드와 세계관으로 리브랜딩. 기획+편집 전담. 카페 유입 CTA 강화.</p>
         </div>
         <div class="channel-card">
-          <div class="ch-icon">&#9749;</div>
+          <div class="ch-icon">NC</div>
           <h4>네이버 카페</h4>
           <div class="ch-role">퍼널 허브</div>
           <p>SEO 검색 노출, 커뮤니티 활성화, 등급제 CRM, UGC 생산. 모든 트래픽이 모이는 중심.</p>
         </div>
         <div class="channel-card">
-          <div class="ch-icon">&#128176;</div>
+          <div class="ch-icon">WEB</div>
           <h4>ocmd.me</h4>
           <div class="ch-role">결제 전환</div>
           <p>고가 상품 전용 (55만~250만원). 결제 동선 단순화. 불필요한 페이지 제거.</p>
@@ -1943,30 +1867,30 @@ body {
       <h3>통합 퍼널 플로우</h3>
 
       <div class="funnel-chart">
-        <div class="funnel-step">&#9654; 유튜브 (무료 콘텐츠) &mdash; 월 100만+ 노출</div>
+        <div class="funnel-step">유튜브 (무료 콘텐츠) -- 월 100만+ 노출</div>
         <div class="funnel-arrow"></div>
-        <div class="funnel-step">&#9733; 카페 가입 (무료) &mdash; 네이버 SEO 유입 병합</div>
+        <div class="funnel-step">카페 가입 (무료) -- 네이버 SEO 유입 병합</div>
         <div class="funnel-arrow"></div>
-        <div class="funnel-step">&#128172; 커뮤니티 활동 &mdash; 신뢰 구축 + UGC 생산</div>
+        <div class="funnel-step">커뮤니티 활동 -- 신뢰 구축 + UGC 생산</div>
         <div class="funnel-arrow"></div>
-        <div class="funnel-step">&#128178; ocmd.me 결제 &mdash; 고가 상품 전환</div>
+        <div class="funnel-step">ocmd.me 결제 -- 고가 상품 전환</div>
         <div class="funnel-arrow"></div>
-        <div class="funnel-step">&#11088; VIP 등급 승급 &mdash; 프리미엄 혜택</div>
+        <div class="funnel-step">VIP 등급 승급 -- 프리미엄 혜택</div>
         <div class="funnel-arrow"></div>
-        <div class="funnel-step">&#128260; 재구매 + 추천 &mdash; LTV 극대화</div>
+        <div class="funnel-step">재구매 + 추천 -- LTV 극대화</div>
       </div>
 
       <div class="highlight-box">
-        <p><strong>핵심 변화:</strong> 고객이 여러 플랫폼을 오가지 않고, <strong>하나의 동선(유튜브 &rarr; 카페 &rarr; 자체몰)</strong>에서 자연스럽게 상위 상품으로 올라갑니다. 업셀 전환율이 기존 대비 3~5배 개선될 것으로 예상합니다.</p>
+        <p>고객이 여러 플랫폼을 오가지 않고, <strong>하나의 동선(유튜브 &rarr; 카페 &rarr; 자체몰)</strong>에서 자연스럽게 상위 상품으로 이동합니다. 업셀 전환율이 기존 대비 크게 개선될 것으로 예상합니다.</p>
       </div>
     </div>
 
     <div class="page-number"><span>05</span> / 12</div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════════════════
-       4. 전략 제안: 퍼널 통합 (2/2) - 카페 설계
-  ════════════════════════════════════════════════════════════════ -->
+  <!-- ===================================================================
+       PAGE 7: 전략 제안 (2) - 카페 설계
+  ==================================================================== -->
   <div class="page">
     <div class="section-header">
       <div class="section-number">4</div>
@@ -1976,16 +1900,16 @@ body {
 
     <div class="content">
       <h3>카페 등급제 설계</h3>
-      <p>등급제는 단순한 커뮤니티 관리 도구가 아닙니다. <strong>자연스러운 업셀 엔진</strong>입니다. 회원이 활동할수록 등급이 올라가고, 높은 등급의 혜택을 누리기 위해 유료 상품에 대한 관심이 자연스럽게 발생합니다.</p>
+      <p>등급제는 단순한 커뮤니티 관리 도구가 아니라 <strong>자연스러운 업셀 엔진</strong>입니다. 회원이 활동할수록 등급이 올라가고, 높은 등급의 혜택을 경험하면서 유료 상품에 대한 관심이 자연스럽게 발생합니다.</p>
 
       <div class="tier-flow">
         <div class="tier-item" style="background: #94a3b8;">준회원</div>
         <div class="tier-arrow">&rarr;</div>
-        <div class="tier-item" style="background: var(--flowmus-blue);">정회원</div>
+        <div class="tier-item" style="background: var(--navy);">정회원</div>
         <div class="tier-arrow">&rarr;</div>
-        <div class="tier-item" style="background: var(--ocmd-purple);">프로</div>
+        <div class="tier-item" style="background: var(--accent-purple);">프로</div>
         <div class="tier-arrow">&rarr;</div>
-        <div class="tier-item" style="background: linear-gradient(135deg, #d97706, #f59e0b);">VIP</div>
+        <div class="tier-item" style="background: var(--navy-dark);">VIP</div>
       </div>
 
       <table class="data-table">
@@ -2017,7 +1941,7 @@ body {
             <td>심화 과정 안내</td>
           </tr>
           <tr class="highlight-row">
-            <td><span class="badge" style="background:#fef3c7;color:#d97706;">VIP</span></td>
+            <td><span class="badge" style="background:#eef1f8;color:var(--navy-dark);">VIP</span></td>
             <td>유료 상품 구매 고객</td>
             <td>1:1 피드백 + 오프라인 모임</td>
             <td>프리미엄/코칭 안내</td>
@@ -2059,9 +1983,9 @@ body {
       </table>
 
       <div class="insight-callout">
-        <div class="insight-icon">&#128269;</div>
+        <div class="insight-icon">i</div>
         <div class="insight-text">
-          <strong>SEO 효과:</strong> 회원들이 자발적으로 작성하는 글이 네이버 검색에 자동 상위 노출됩니다. 월부는 이 전략으로 UGC 224만개를 만들었고, 부동산 관련 키워드를 사실상 독점하고 있습니다. 오콘목달 카페도 '콘텐츠 제작' 관련 키워드를 점령할 수 있습니다.
+          회원들이 자발적으로 작성하는 글이 네이버 검색에 자동 상위 노출됩니다. 월부는 이 전략으로 UGC 224만개를 만들었고, 부동산 관련 키워드를 사실상 독점하고 있습니다. 오콘목달 카페도 '콘텐츠 제작' 관련 키워드를 점령할 수 있습니다.
         </div>
       </div>
     </div>
@@ -2069,9 +1993,9 @@ body {
     <div class="page-number"><span>06</span> / 12</div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════════════════
-       5. 실행 로드맵 (1/2)
-  ════════════════════════════════════════════════════════════════ -->
+  <!-- ===================================================================
+       PAGE 8: 실행 로드맵 Phase 1~2
+  ==================================================================== -->
   <div class="page">
     <div class="section-header">
       <div class="section-number">5</div>
@@ -2087,7 +2011,7 @@ body {
         </div>
         <ul class="phase-list">
           <li>네이버 카페 개설 + 등급제 설계 + 게시판 구조 설계</li>
-          <li>유튜브 리브랜딩: 오콘목달 오리지널 코드 &amp; 세계관 구축</li>
+          <li>유튜브 리브랜딩: 오콘목달 오리지널 코드와 세계관 구축</li>
           <li>기존 25,000명 수강생에게 카페 가입 유도 캠페인</li>
           <li>ocmd.me는 고가 상품만 정리, 결제 동선 단순화</li>
           <li>클래스유/클래스101 고객을 점진적으로 자체 채널로 유도</li>
@@ -2096,11 +2020,11 @@ body {
         <div class="phase-goal">
           <div class="phase-goal-item">
             <div class="phase-goal-value">5,000명</div>
-            <div class="phase-goal-label">카페 회원</div>
+            <div class="phase-goal-label">카페 회원 목표</div>
           </div>
           <div class="phase-goal-item">
-            <div class="phase-goal-value">1.5억/월</div>
-            <div class="phase-goal-label">월 순수익</div>
+            <div class="phase-goal-value">기반 구축</div>
+            <div class="phase-goal-label">퍼널 통합</div>
           </div>
           <div class="phase-goal-item">
             <div class="phase-goal-value">0원</div>
@@ -2115,7 +2039,7 @@ body {
           <div class="phase-period">6~12개월</div>
         </div>
         <ul class="phase-list">
-          <li>카페 UGC 폭발 &rarr; 네이버 SEO 상위 노출 달성</li>
+          <li>카페 UGC 활성화를 통한 네이버 SEO 상위 노출 달성</li>
           <li>챌린지 / 스터디 / 기수제 운영으로 커뮤니티 활성화</li>
           <li>클래스유 의존도 대폭 축소 (수수료 절감 본격화)</li>
           <li>고가 상품 전환율 최적화 (A/B 테스트)</li>
@@ -2124,15 +2048,15 @@ body {
         <div class="phase-goal">
           <div class="phase-goal-item">
             <div class="phase-goal-value">20,000명</div>
-            <div class="phase-goal-label">카페 회원</div>
+            <div class="phase-goal-label">카페 회원 목표</div>
           </div>
           <div class="phase-goal-item">
-            <div class="phase-goal-value">2~3억/월</div>
-            <div class="phase-goal-label">월 순수익</div>
+            <div class="phase-goal-value">본격 성장</div>
+            <div class="phase-goal-label">매출 성장</div>
           </div>
           <div class="phase-goal-item">
-            <div class="phase-goal-value">50%+</div>
-            <div class="phase-goal-label">수수료 절감</div>
+            <div class="phase-goal-value">대폭 절감</div>
+            <div class="phase-goal-label">외부 수수료</div>
           </div>
         </div>
       </div>
@@ -2141,9 +2065,9 @@ body {
     <div class="page-number"><span>07</span> / 12</div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════════════════
-       5. 실행 로드맵 (2/2)
-  ════════════════════════════════════════════════════════════════ -->
+  <!-- ===================================================================
+       PAGE 9: 실행 로드맵 Phase 3
+  ==================================================================== -->
   <div class="page">
     <div class="section-header">
       <div class="section-number">5</div>
@@ -2158,7 +2082,7 @@ body {
           <div class="phase-period">12개월~</div>
         </div>
         <ul class="phase-list">
-          <li>Phase 2 매출에서 개발비 충당 (3,000~5,000만원)</li>
+          <li>Phase 2 매출에서 개발비 충당</li>
           <li>MKYU(김미경) 벤치마크한 자체 LMS 구축</li>
           <li>카페 데이터 + 회원 이전 (끊김 없는 마이그레이션)</li>
           <li>계단식 가격 설정 완성: 무료 &rarr; 저가 &rarr; 중가 &rarr; 고가 &rarr; 프리미엄</li>
@@ -2167,15 +2091,15 @@ body {
         <div class="phase-goal">
           <div class="phase-goal-item">
             <div class="phase-goal-value">50,000+</div>
-            <div class="phase-goal-label">카페 회원</div>
+            <div class="phase-goal-label">카페 회원 목표</div>
           </div>
           <div class="phase-goal-item">
-            <div class="phase-goal-value">5억+/월</div>
-            <div class="phase-goal-label">월 순수익</div>
+            <div class="phase-goal-value">가속 성장</div>
+            <div class="phase-goal-label">매출 목표</div>
           </div>
           <div class="phase-goal-item">
-            <div class="phase-goal-value">100%</div>
-            <div class="phase-goal-label">플랫폼 독립</div>
+            <div class="phase-goal-value">완전 독립</div>
+            <div class="phase-goal-label">플랫폼</div>
           </div>
         </div>
       </div>
@@ -2199,10 +2123,10 @@ body {
             <td>50,000명+</td>
           </tr>
           <tr>
-            <td><strong>월 순수익</strong></td>
-            <td>1.5억</td>
-            <td>2~3억</td>
-            <td>5억+</td>
+            <td><strong>매출 방향</strong></td>
+            <td>기반 구축</td>
+            <td>본격 성장</td>
+            <td>가속 성장</td>
           </tr>
           <tr>
             <td><strong>플랫폼 의존</strong></td>
@@ -2226,120 +2150,115 @@ body {
       </table>
 
       <div class="highlight-box purple">
-        <p><strong>리스크 최소화 설계:</strong> Phase 1은 비용 0원(카페 무료)으로 시작합니다. Phase 3의 LMS 개발비(3,000~5,000만원)는 Phase 2에서 성장한 매출로 충당합니다. <strong>선투자 없이, 성과가 입증된 후에만 다음 단계로 진행하는 구조</strong>입니다.</p>
+        <p>Phase 1은 비용 0원(카페 무료)으로 시작합니다. Phase 3의 LMS 개발비는 Phase 2에서 성장한 매출로 충당합니다. <strong>선투자 없이, 성과가 입증된 후에만 다음 단계로 진행하는 구조</strong>입니다.</p>
       </div>
     </div>
 
     <div class="page-number"><span>08</span> / 12</div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════════════════
-       6. 수익 시뮬레이션
-  ════════════════════════════════════════════════════════════════ -->
+  <!-- ===================================================================
+       PAGE 10: 성장 시나리오
+  ==================================================================== -->
   <div class="page">
     <div class="section-header">
       <div class="section-number">6</div>
-      <h2 class="section-title">수익 시뮬레이션</h2>
-      <p class="section-subtitle">R/S 60:40 기준 보수적 추정</p>
+      <h2 class="section-title">성장 시나리오</h2>
+      <p class="section-subtitle">Phase별 성장 방향성</p>
     </div>
 
     <div class="content">
-      <h3>현재 vs Phase별 수익 비교</h3>
+      <p>퍼널 통합과 자체 채널 전환을 통해 오콘목달의 사업은 단계적으로 성장할 수 있습니다. 아래는 각 Phase에서 기대되는 성장 방향을 정리한 것입니다.</p>
 
-      <div class="revenue-bar">
-        <div class="revenue-label">현재</div>
-        <div class="revenue-track">
-          <div class="revenue-fill ocmd" style="width: 100%;">오은환 대표 100% (연 12억)</div>
+      <div class="growth-scenario">
+        <div class="growth-stage current">
+          <div class="growth-stage-label">현재</div>
+          <div class="growth-stage-title">퍼널 분산 상태</div>
+          <div class="growth-stage-desc">5개 이상 플랫폼에 고객과 상품이 흩어져 있으며, 외부 플랫폼에 높은 수수료를 지불하는 구조</div>
         </div>
-        <div class="revenue-total">연 12억</div>
+        <div class="growth-arrow">&rarr;</div>
+        <div class="growth-stage phase1">
+          <div class="growth-stage-label">Phase 1</div>
+          <div class="growth-stage-title">기반 구축</div>
+          <div class="growth-stage-desc">카페 개설 및 초기 회원 확보. 유튜브 리브랜딩과 퍼널 동선을 정비하는 단계</div>
+        </div>
       </div>
 
-      <div class="revenue-bar">
-        <div class="revenue-label">Phase 1</div>
-        <div class="revenue-track">
-          <div class="revenue-fill ocmd" style="width: 60%;">오은환 60% (10.8억)</div>
-          <div class="revenue-fill flowmus" style="width: 40%;">플로우머스 40% (7.2억)</div>
+      <div class="growth-scenario">
+        <div class="growth-stage phase2">
+          <div class="growth-stage-label">Phase 2</div>
+          <div class="growth-stage-title">본격 성장</div>
+          <div class="growth-stage-desc">카페 UGC 활성화로 SEO 유입 확보. 외부 플랫폼 의존도를 낮추고 자체 채널 매출 비중 확대</div>
         </div>
-        <div class="revenue-total">연 18억</div>
+        <div class="growth-arrow">&rarr;</div>
+        <div class="growth-stage phase3">
+          <div class="growth-stage-label">Phase 3</div>
+          <div class="growth-stage-title">가속 성장 + 독립</div>
+          <div class="growth-stage-desc">자체 LMS 구축으로 플랫폼 완전 독립. 키워드 독점과 재구매 구조를 통해 지속적으로 성장</div>
+        </div>
       </div>
 
-      <div class="revenue-bar">
-        <div class="revenue-label">Phase 2</div>
-        <div class="revenue-track">
-          <div class="revenue-fill ocmd" style="width: 60%;">오은환 60% (21.6억)</div>
-          <div class="revenue-fill flowmus" style="width: 40%;">플로우머스 40% (14.4억)</div>
-        </div>
-        <div class="revenue-total">연 36억</div>
-      </div>
-
-      <div class="revenue-bar">
-        <div class="revenue-label">Phase 3</div>
-        <div class="revenue-track">
-          <div class="revenue-fill ocmd" style="width: 60%;">오은환 60% (36억+)</div>
-          <div class="revenue-fill flowmus" style="width: 40%;">플로우머스 40% (24억+)</div>
-        </div>
-        <div class="revenue-total">연 60억+</div>
-      </div>
-
-      <div style="height: 12px;"></div>
+      <h3>Phase별 핵심 성장 지표</h3>
 
       <table class="data-table">
         <thead>
           <tr>
-            <th></th>
-            <th>월 순수익</th>
-            <th>연 매출</th>
-            <th>오은환 (60%)</th>
-            <th>플로우머스 (40%)</th>
+            <th>지표</th>
+            <th>현재</th>
+            <th>Phase 1</th>
+            <th>Phase 2</th>
+            <th>Phase 3</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><strong>현재</strong></td>
-            <td>1억</td>
-            <td>12억</td>
-            <td>12억 (100%)</td>
-            <td>-</td>
+            <td><strong>카페 회원</strong></td>
+            <td>없음</td>
+            <td>5,000명</td>
+            <td>20,000명</td>
+            <td>50,000명+</td>
           </tr>
           <tr>
-            <td><strong>Phase 1</strong></td>
-            <td>1.5억</td>
-            <td>18억</td>
-            <td style="color: var(--success); font-weight: 700;">10.8억</td>
-            <td>7.2억</td>
+            <td><strong>외부 수수료</strong></td>
+            <td>높음</td>
+            <td>점진 축소</td>
+            <td>대폭 절감</td>
+            <td>사실상 없음</td>
           </tr>
           <tr>
-            <td><strong>Phase 2</strong></td>
-            <td>3억</td>
-            <td>36억</td>
-            <td style="color: var(--success); font-weight: 700;">21.6억</td>
-            <td>14.4억</td>
+            <td><strong>SEO 유입</strong></td>
+            <td>거의 없음</td>
+            <td>기반 구축</td>
+            <td>상위 노출</td>
+            <td>키워드 독점</td>
           </tr>
-          <tr class="highlight-row">
-            <td><strong>Phase 3</strong></td>
-            <td>5억+</td>
-            <td>60억+</td>
-            <td style="color: var(--success); font-weight: 700;">36억+</td>
-            <td>24억+</td>
+          <tr>
+            <td><strong>업셀 전환율</strong></td>
+            <td>낮음 (동선 단절)</td>
+            <td>개선 시작</td>
+            <td>의미 있는 상승</td>
+            <td>최적화 완료</td>
+          </tr>
+          <tr>
+            <td><strong>고객 데이터</strong></td>
+            <td>분산</td>
+            <td>카페 중심 통합 시작</td>
+            <td>통합 완료</td>
+            <td>자체 CRM 완성</td>
           </tr>
         </tbody>
       </table>
 
-      <div class="highlight-box" style="background: linear-gradient(135deg, #ecfdf5, #d1fae5); border-left-color: var(--success);">
-        <p style="font-size: 16px; font-weight: 800; color: var(--success); margin-bottom: 8px;">
-          &#10003; 핵심: 40%를 떼어도, 지금(12억)보다 많이 번다
-        </p>
-        <p style="color: var(--text-secondary); font-size: 13px; margin-bottom: 0;">
-          Phase 1부터 오은환 대표 몫 10.8억으로, <strong>현재 12억과 거의 동일</strong>합니다.<br>
-          Phase 2부터 21.6억으로 <strong>현재 대비 80% 성장</strong>합니다.<br>
-          이 과정에서 오은환 대표님이 추가로 투자하는 비용은 <strong>0원</strong>입니다.
+      <div class="highlight-box" style="background: #f3faf6; border-left-color: var(--success);">
+        <p style="font-size: 14px; color: var(--text-secondary);">
+          이 시나리오의 핵심은 단순한 매출 증가가 아니라, <strong>외부 플랫폼 의존에서 벗어나 자체 채널 중심의 지속 가능한 사업 구조를 만드는 것</strong>입니다. 같은 고객 기반에서 퍼널을 통합하는 것만으로도 수수료 절감과 전환율 개선을 통해 순수익이 크게 향상됩니다.
         </p>
       </div>
 
       <div class="insight-callout">
-        <div class="insight-icon">&#128200;</div>
+        <div class="insight-icon">i</div>
         <div class="insight-text">
-          <strong>보수적 추정 기준:</strong> 위 시뮬레이션은 월부(508억) 대비 10% 수준의 보수적 시나리오입니다. 콘텐츠 제작 분야의 시장 규모와 오은환 대표님의 브랜드 파워를 감안하면 상회할 가능성이 높습니다.
+          월부(508억) 사례를 벤치마크로 삼되, 콘텐츠 제작 분야의 시장 규모와 오은환 대표님의 브랜드 파워를 감안하면 충분히 유의미한 성장이 가능합니다.
         </div>
       </div>
     </div>
@@ -2347,20 +2266,20 @@ body {
     <div class="page-number"><span>09</span> / 12</div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════════════════
-       7. 플로우머스 역할 및 제공 서비스
-  ════════════════════════════════════════════════════════════════ -->
+  <!-- ===================================================================
+       PAGE 11: 플로우머스 제공 서비스
+  ==================================================================== -->
   <div class="page">
     <div class="section-header">
       <div class="section-number">7</div>
-      <h2 class="section-title">플로우머스 역할 및 제공 서비스</h2>
-      <p class="section-subtitle">R/S 40%에 포함되는 풀 서비스</p>
+      <h2 class="section-title">플로우머스가 제공하는 서비스</h2>
+      <p class="section-subtitle">기획부터 시스템 구축까지 풀 대행</p>
     </div>
 
     <div class="content">
       <div class="service-grid">
         <div class="service-card">
-          <div class="service-icon">&#127916;</div>
+          <div class="service-icon">YT</div>
           <h4>유튜브</h4>
           <ul>
             <li>채널 리브랜딩 전략</li>
@@ -2372,7 +2291,7 @@ body {
           </ul>
         </div>
         <div class="service-card">
-          <div class="service-icon">&#9749;</div>
+          <div class="service-icon">NC</div>
           <h4>네이버 카페</h4>
           <ul>
             <li>카페 개설 + 초기 설계</li>
@@ -2384,7 +2303,7 @@ body {
           </ul>
         </div>
         <div class="service-card">
-          <div class="service-icon">&#127760;</div>
+          <div class="service-icon">WEB</div>
           <h4>홈페이지 (ocmd.me)</h4>
           <ul>
             <li>고가 상품 페이지 정리</li>
@@ -2394,7 +2313,7 @@ body {
           </ul>
         </div>
         <div class="service-card">
-          <div class="service-icon">&#128226;</div>
+          <div class="service-icon">MK</div>
           <h4>마케팅</h4>
           <ul>
             <li>유입 퍼널 설계</li>
@@ -2404,7 +2323,7 @@ body {
           </ul>
         </div>
         <div class="service-card">
-          <div class="service-icon">&#128202;</div>
+          <div class="service-icon">DA</div>
           <h4>데이터 분석</h4>
           <ul>
             <li>매출 추적 대시보드</li>
@@ -2414,7 +2333,7 @@ body {
           </ul>
         </div>
         <div class="service-card">
-          <div class="service-icon">&#128187;</div>
+          <div class="service-icon">LMS</div>
           <h4>Phase 3: LMS 개발</h4>
           <ul>
             <li>맑음소프트 요구사항 정의</li>
@@ -2426,81 +2345,69 @@ body {
       </div>
 
       <div class="highlight-box purple">
-        <p><strong>40% R/S의 의미:</strong> 위 서비스를 개별 외주할 경우 월 <strong>최소 3,000~5,000만원</strong>의 비용이 발생합니다. 플로우머스는 이를 R/S 구조로 제공하여, 오은환 대표님의 <strong>선투자 부담을 0원</strong>으로 만듭니다. 매출이 성장해야 플로우머스도 수익을 얻는, <strong>이해관계가 완전히 정렬된 구조</strong>입니다.</p>
+        <p>위 서비스를 개별 외주할 경우 상당한 월 비용이 발생합니다. 파트너십 구조를 통해 오은환 대표님의 선투자 부담을 없애고, 매출이 성장해야 플로우머스도 수익을 얻는 <strong>이해관계가 완전히 정렬된 구조</strong>로 제공합니다.</p>
       </div>
     </div>
 
     <div class="page-number"><span>10</span> / 12</div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════════════════
-       8. 파트너십 조건
-  ════════════════════════════════════════════════════════════════ -->
+  <!-- ===================================================================
+       PAGE 12: 파트너십 개요
+  ==================================================================== -->
   <div class="page">
     <div class="section-header">
       <div class="section-number">8</div>
-      <h2 class="section-title">파트너십 조건</h2>
-      <p class="section-subtitle">R/S 구조 및 계약 조건</p>
+      <h2 class="section-title">파트너십 개요</h2>
+      <p class="section-subtitle">협력 구조 및 역할 분담</p>
     </div>
 
     <div class="content">
-      <h3>R/S(Revenue Share) 비율</h3>
+      <p>플로우머스는 오은환 대표님의 콘텐츠 역량에 <strong>시스템, 기획, 마케팅 역량</strong>을 결합하여 함께 성장하는 전략적 파트너를 지향합니다. 세부적인 계약 조건과 수익 배분 구조는 미팅에서 양측의 상황과 기대치를 충분히 논의한 후 협의할 예정입니다.</p>
 
-      <div class="rs-visual">
-        <div class="rs-circle ocmd-c">
-          <div class="rs-percent">60%</div>
-          <div class="rs-label">오은환 대표</div>
-        </div>
-        <div class="rs-vs">:</div>
-        <div class="rs-circle flowmus-c">
-          <div class="rs-percent">40%</div>
-          <div class="rs-label">플로우머스</div>
-        </div>
-      </div>
-
-      <div class="terms-box">
-        <div class="terms-header">파트너십 주요 조건</div>
-        <div class="terms-body">
-          <div class="terms-item">
-            <div class="terms-key">R/S 비율</div>
-            <div class="terms-value">오은환 대표 <strong>60%</strong> : 플로우머스 <strong>40%</strong></div>
+      <div class="partnership-overview">
+        <div class="partnership-header">파트너십 협력 구조</div>
+        <div class="partnership-body">
+          <div class="partnership-item">
+            <div class="partnership-key">협력 방식</div>
+            <div class="partnership-value">Revenue Share 기반의 전략적 파트너십 (성과 연동형)</div>
           </div>
-          <div class="terms-item">
-            <div class="terms-key">대상 매출</div>
-            <div class="terms-value">유튜브 광고 수익 + 카페 연동 매출 + ocmd.me 매출 + 향후 자체 LMS 매출</div>
+          <div class="partnership-item">
+            <div class="partnership-key">오은환 대표</div>
+            <div class="partnership-value">콘텐츠 촬영, 브랜드 방향 결정, 교육 상품 기획에 집중</div>
           </div>
-          <div class="terms-item">
-            <div class="terms-key">정산 주기</div>
-            <div class="terms-value">월별 정산 (매월 10일)</div>
+          <div class="partnership-item">
+            <div class="partnership-key">플로우머스</div>
+            <div class="partnership-value">기획 + 편집 + 마케팅 + 카페 운영 + 홈페이지 + 데이터 분석 + 시스템 구축 <strong>풀 대행</strong></div>
           </div>
-          <div class="terms-item">
-            <div class="terms-key">계약 기간</div>
-            <div class="terms-value">1년 (최소 6개월 유지, 이후 자동 갱신)</div>
+          <div class="partnership-item">
+            <div class="partnership-key">대상 범위</div>
+            <div class="partnership-value">유튜브 광고 수익 + 카페 연동 매출 + ocmd.me 매출 + 향후 자체 LMS 매출</div>
           </div>
-          <div class="terms-item">
-            <div class="terms-key">40% 근거</div>
-            <div class="terms-value">기획 + 편집 + 마케팅 + 홈페이지 + 카페 + 데이터 + 시스템 <strong>풀 대행</strong></div>
+          <div class="partnership-item">
+            <div class="partnership-key">초기 비용</div>
+            <div class="partnership-value"><strong>0원</strong> -- 플로우머스가 선투자하고, 성과 기반으로 수익을 배분하는 구조</div>
           </div>
-          <div class="terms-item">
-            <div class="terms-key">초기 비용</div>
-            <div class="terms-value"><strong>0원</strong> (플로우머스 선투자, 성과 기반 정산)</div>
+          <div class="partnership-item">
+            <div class="partnership-key">세부 조건</div>
+            <div class="partnership-value">수익 배분 비율, 정산 주기, 계약 기간 등 세부 사항은 <strong>미팅에서 상호 협의하여 결정</strong>합니다</div>
           </div>
         </div>
       </div>
 
       <div class="insight-callout">
-        <div class="insight-icon">&#129309;</div>
+        <div class="insight-icon">i</div>
         <div class="insight-text">
-          <strong>이해관계 정렬:</strong> R/S 구조는 플로우머스가 성과를 내야만 수익을 얻는 구조입니다.
-          오은환 대표님의 매출이 성장하지 않으면 플로우머스도 수익이 없습니다.
-          이보다 <strong>강력한 인센티브 정렬</strong>은 없습니다.
+          Revenue Share 구조는 플로우머스가 성과를 내야만 수익을 얻는 구조입니다.
+          오은환 대표님의 매출이 성장하지 않으면 플로우머스도 수익이 없기 때문에,
+          양측의 이해관계가 완전히 정렬됩니다.
         </div>
       </div>
 
-      <div class="highlight-box" style="background: linear-gradient(135deg, #ecfdf5, #d1fae5); border-left-color: var(--success);">
-        <p style="font-size: 15px; font-weight: 700; color: var(--text-primary);">
-          &#10003; 오은환 대표님이 해야 할 일: <strong>콘텐츠 촬영</strong>에만 집중<br>
-          &#10003; 나머지 전부: 플로우머스가 담당
+      <div class="highlight-box" style="background: #f3faf6; border-left-color: var(--success);">
+        <p style="font-size: 14px; font-weight: 600; color: var(--text-primary);">
+          오은환 대표님은 <strong>콘텐츠 촬영에만 집중</strong>하시면 됩니다.<br>
+          나머지 기획, 편집, 마케팅, 카페, 시스템 전체는 플로우머스가 담당합니다.
         </p>
       </div>
     </div>
@@ -2508,9 +2415,9 @@ body {
     <div class="page-number"><span>11</span> / 12</div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════════════════
-       9. 플로우머스 소개
-  ════════════════════════════════════════════════════════════════ -->
+  <!-- ===================================================================
+       PAGE 13: 플로우머스 소개 + 클로징
+  ==================================================================== -->
   <div class="page">
     <div class="section-header">
       <div class="section-number">9</div>
@@ -2584,16 +2491,16 @@ body {
       </table>
 
       <div class="highlight-box">
-        <p><strong>플로우머스의 차별점:</strong> 단순 외주사가 아닌, <strong>R/S 파트너</strong>입니다. 크리에이터의 매출이 곧 플로우머스의 매출입니다. 이 구조가 만드는 인센티브 정렬이 플로우머스의 가장 강력한 무기입니다.</p>
+        <p>플로우머스는 단순 외주사가 아닌 <strong>성과 연동형 파트너</strong>입니다. 크리에이터의 매출이 곧 플로우머스의 매출이기 때문에, 최선의 결과를 만들기 위한 인센티브가 완전히 정렬되어 있습니다.</p>
       </div>
     </div>
 
     <div class="page-number"><span>12</span> / 12</div>
   </div>
 
-  <!-- ═══════════════════════════════════════════════════════════════
-       10. CLOSING PAGE
-  ════════════════════════════════════════════════════════════════ -->
+  <!-- ===================================================================
+       CLOSING PAGE
+  ==================================================================== -->
   <div class="page closing">
     <div class="closing-content">
       <div class="cover-badge" style="margin-bottom: 56px;">NEXT STEP</div>
@@ -2619,7 +2526,6 @@ body {
 </div>
 
 <script>
-  // Smooth scroll for any internal links
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
       e.preventDefault();
