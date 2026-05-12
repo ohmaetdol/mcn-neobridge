@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>윤현재 EP.00 촬영 가이드</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif;
+    background: #0a0a0a; color: #e8e8e8; min-height: 100vh; padding: 0 0 60px 0;
+  }
+
+  .header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    padding: 36px 20px 28px; text-align: center; border-bottom: 3px solid #f39c12;
+  }
+  .header .ep { font-size: 12px; color: #f39c12; font-weight: 700; letter-spacing: 2px; margin-bottom: 6px; }
+  .header h1 { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+  .header .sub { font-size: 13px; color: #888; line-height: 1.6; margin-top: 10px; }
+
+  .content { max-width: 600px; margin: 0 auto; padding: 20px; }
+
+  .profile {
+    background: #141414; border-radius: 12px; padding: 20px; margin: 16px 0;
+    border-left: 4px solid #f39c12;
+  }
+  .profile h3 { font-size: 16px; color: #f39c12; margin-bottom: 12px; }
+  .profile-row { display: flex; margin: 8px 0; font-size: 14px; }
+  .profile-label { color: #888; width: 80px; flex-shrink: 0; }
+  .profile-value { color: #ddd; }
+  .profile-value strong { color: #fff; }
+
+  .section-title {
+    font-size: 13px; color: #f39c12; font-weight: 700; letter-spacing: 1px;
+    margin: 28px 0 12px; padding-bottom: 8px; border-bottom: 1px solid #222;
+  }
+
+  .topic-card {
+    background: #141414; border-radius: 12px; padding: 20px; margin: 12px 0;
+    border-left: 4px solid #333;
+  }
+  .topic-card.warm { border-left-color: #2ecc71; }
+  .topic-card.life { border-left-color: #e94560; }
+  .topic-card.youtube { border-left-color: #f39c12; }
+  .topic-card.free { border-left-color: #9b59b6; }
+  .topic-card.end { border-left-color: #3498db; }
+
+  .topic-label {
+    font-size: 11px; color: #888; font-weight: 700; letter-spacing: 1px; margin-bottom: 10px;
+  }
+
+  .talk-item {
+    font-size: 17px; color: #fff; line-height: 1.8; margin: 12px 0;
+    padding-left: 16px; border-left: 2px solid #333;
+  }
+  .talk-item.key { border-left-color: #f39c12; }
+
+  .tip {
+    background: rgba(46, 204, 113, 0.08); border: 1px solid rgba(46, 204, 113, 0.2);
+    border-radius: 12px; padding: 16px 18px; margin: 20px 0;
+    font-size: 14px; color: #aaa; line-height: 1.8;
+  }
+  .tip strong { color: #2ecc71; }
+
+  .warn {
+    background: rgba(233, 69, 96, 0.08); border: 1px solid rgba(233, 69, 96, 0.2);
+    border-radius: 12px; padding: 16px 18px; margin: 20px 0;
+    font-size: 14px; color: #aaa; line-height: 1.8;
+  }
+  .warn strong { color: #e94560; }
+
+  .checklist { list-style: none; margin: 12px 0; }
+  .checklist li {
+    font-size: 15px; color: #ddd; padding: 10px 14px; margin: 6px 0;
+    background: #141414; border-radius: 8px; cursor: pointer; transition: all 0.2s;
+  }
+  .checklist li::before { content: "☐ "; color: #555; }
+  .checklist li.checked { opacity: 0.4; text-decoration: line-through; }
+  .checklist li.checked::before { content: "☑ "; color: #2ecc71; }
+
+  @media (max-width: 480px) {
+    .header h1 { font-size: 20px; }
+    .talk-item { font-size: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="ep">윤현재 채널 &middot; EP.00 워밍업</div>
+  <h1>식사 토크 촬영 가이드</h1>
+  <div class="sub">인터뷰 아님. 밥 먹으면서 수다.<br>레퍼런스: 에겐남 스윙스 워밍업</div>
+</div>
+
+<div class="content">
+
+  <!-- 프로필 -->
+  <div class="profile">
+    <h3>윤현재 대표</h3>
+    <div class="profile-row"><span class="profile-label">현재</span><span class="profile-value"><strong>제이트리 호텔그룹 대표</strong></span></div>
+    <div class="profile-row"><span class="profile-label">대표작</span><span class="profile-value">브라운도트, 넘버25, 하운드호텔</span></div>
+    <div class="profile-row"><span class="profile-label">규모</span><span class="profile-value">호텔 80개, 객실 700개+</span></div>
+    <div class="profile-row"><span class="profile-label">야놀자</span><span class="profile-value">WNH 매각 → 8년 → 파트너스 대표</span></div>
+    <div class="profile-row"><span class="profile-label">현재 호텔</span><span class="profile-value">오로시에 (잠실, 3성급, 점유율 80%)</span></div>
+  </div>
+
+  <!-- 촬영 체크리스트 -->
+  <div class="section-title">촬영 세팅</div>
+  <ul class="checklist">
+    <li onclick="this.classList.toggle('checked')">카메라 1~2대</li>
+    <li onclick="this.classList.toggle('checked')">핀마이크 or 테이블 마이크</li>
+    <li onclick="this.classList.toggle('checked')">음식 주문 장면부터 촬영 시작</li>
+    <li onclick="this.classList.toggle('checked')">편하게 — 대본 없이, 대화하기</li>
+  </ul>
+
+  <!-- 대화 소재 -->
+  <div class="section-title">대화 소재</div>
+
+  <div class="tip">
+    <strong>TIP</strong> &mdash; 질문 리스트가 아니라 대화 소재예요. 하나 던지고 → 이야기 나오면 따라가고 → 재밌으면 더 파고 → 아니면 다른 거로. 삼천포 환영.
+  </div>
+
+  <div class="topic-card warm">
+    <div class="topic-label">가볍게 시작</div>
+    <div class="talk-item">"형 뭐 드실 거예요?"</div>
+    <div class="talk-item">"요즘 어때요? 바빠요?"</div>
+    <div class="talk-item">"오로시에 요즘 잘 돼요?"</div>
+  </div>
+
+  <div class="topic-card life">
+    <div class="topic-label">인생 이야기 (감정 위주)</div>
+    <div class="talk-item">"호텔 80개 만들었다면서요. 근데 처음에 모텔 한다니까 주변에서 뭐라고 했어요?"</div>
+    <div class="talk-item key">"야놀자에 팔 때 기분이 어땠어요? 시원했어요? 아쉬웠어요?"</div>
+    <div class="talk-item">"8년 있다가 나왔잖아요. 내 회사였는데 남의 회사 된 느낌 어때요?"</div>
+    <div class="talk-item key">"다시 돌아간다면 안 팔겠다고 했잖아요 — 진심이에요?"</div>
+  </div>
+
+  <div class="topic-card youtube">
+    <div class="topic-label">왜 유튜브? (핵심)</div>
+    <div class="talk-item key">"근데 왜 유튜브를 해요? 호텔만 하면 되는 거 아니에요?"</div>
+    <div class="talk-item">"주변에서 뭐라고 해요?"</div>
+    <div class="talk-item">"어떤 이야기를 하고 싶어요?"</div>
+  </div>
+
+  <div class="topic-card free">
+    <div class="topic-label">삼천포 환영</div>
+    <div class="talk-item">돈 이야기, 실패 이야기, 숙박업 뒷이야기</div>
+    <div class="talk-item">웃긴 에피소드 나오면 파기</div>
+    <div class="talk-item">"그때 진짜요?" "아니 그게 말이 돼요?" 리액션</div>
+  </div>
+
+  <div class="topic-card end">
+    <div class="topic-label">마무리</div>
+    <div class="talk-item">"시청자한테 한마디?"</div>
+    <div class="talk-item">"앞으로 채널에서 뭘 보여줄 거예요?"</div>
+  </div>
+
+  <!-- 주의사항 -->
+  <div class="warn">
+    <strong>주의</strong> &mdash; 이미 나온 이야기 중복 주의<br>
+    &bull; "모텔 앞 줄 서는 거 봤다" → 빌사남, 머니비스트 둘 다 나옴<br>
+    &bull; "호텔 80개, 객실 700개" → 머니비스트에서 나옴<br>
+    &bull; "시공 안 한다, 브랜드 집중" → 머니비스트에서 나옴<br><br>
+    팩트보다 <strong>감정/속마음</strong>을 파기
+  </div>
+
+  <div class="tip">
+    <strong>끌어내고 싶은 것</strong><br>
+    &bull; <strong>킬러 한줄</strong> — "호텔을 왜 하냐고요? ___" 이런 거<br>
+    &bull; <strong>솔직한 감정</strong> — 매각 후회, 돈 이야기, 불안한 순간<br>
+    &bull; <strong>웃긴 에피소드</strong> — 호텔 만들면서 있었던 일<br>
+    &bull; <strong>"왜 유튜브"에 대한 진짜 대답</strong>
+  </div>
+
+</div>
+
+</body>
+</html>
