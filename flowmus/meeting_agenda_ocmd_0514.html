@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>미팅 아젠다 — 2026.05.14</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1a2e;
+  --ink-soft: #4a4a6a;
+  --ink-mute: #7a7a9a;
+  --navy: #1a2e5a;
+  --accent: #6b63b5;
+  --accent-light: #ece9f7;
+  --bg: #f8f9fc;
+  --paper: #ffffff;
+  --line: #e2e6ef;
+  --success: #10b981;
+  --warning: #d97706;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--bg); color: var(--ink);
+  line-height: 1.7; padding: 40px 20px 80px;
+}
+.container { max-width: 800px; margin: 0 auto; }
+
+/* Header */
+.header {
+  background: linear-gradient(135deg, #1a2e5a 0%, #6b63b5 100%);
+  color: #fff; border-radius: 16px; padding: 40px; margin-bottom: 32px;
+}
+.header-badge {
+  display: inline-block; padding: 5px 14px; background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2); border-radius: 20px;
+  font-size: 12px; font-weight: 500; letter-spacing: 0.05em; margin-bottom: 16px;
+}
+.header h1 { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+.header p { font-size: 14px; color: rgba(255,255,255,0.7); }
+.header-info {
+  display: flex; gap: 24px; margin-top: 20px; padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.15); font-size: 13px;
+}
+.header-info span { color: rgba(255,255,255,0.6); }
+.header-info strong { color: #fff; font-weight: 600; }
+
+/* Section */
+.section {
+  background: var(--paper); border-radius: 14px; padding: 32px;
+  margin-bottom: 16px; border: 1px solid var(--line);
+}
+.section-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; background: var(--navy); color: #fff;
+  border-radius: 8px; font-size: 14px; font-weight: 800; margin-right: 12px;
+}
+.section h2 {
+  display: flex; align-items: center; font-size: 20px; font-weight: 800;
+  color: var(--navy); margin-bottom: 20px;
+}
+h3 {
+  font-size: 15px; font-weight: 700; color: var(--ink);
+  margin: 20px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--line);
+}
+h3:first-of-type { margin-top: 0; }
+p, li { font-size: 14px; color: var(--ink-soft); }
+ul { padding-left: 20px; margin-bottom: 12px; }
+li { margin-bottom: 6px; line-height: 1.6; }
+li strong { color: var(--ink); }
+
+/* Table */
+table {
+  width: 100%; border-collapse: separate; border-spacing: 0;
+  border-radius: 10px; overflow: hidden; margin: 12px 0;
+  border: 1px solid var(--line);
+}
+thead th {
+  background: var(--navy); color: #fff; font-size: 12px; font-weight: 600;
+  padding: 10px 14px; text-align: left;
+}
+tbody td {
+  padding: 10px 14px; border-bottom: 1px solid var(--line);
+  font-size: 13px; color: var(--ink-soft);
+}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:nth-child(even) { background: var(--bg); }
+td strong { color: var(--ink); }
+
+/* Checklist */
+.checklist { list-style: none; padding: 0; }
+.checklist li {
+  padding: 8px 0 8px 28px; position: relative; border-bottom: 1px dashed var(--line);
+}
+.checklist li:last-child { border-bottom: none; }
+.checklist li::before {
+  content: ''; position: absolute; left: 0; top: 12px;
+  width: 16px; height: 16px; border: 2px solid var(--line); border-radius: 4px;
+}
+
+/* Timeline */
+.timeline { margin: 12px 0; }
+.timeline-item {
+  display: flex; gap: 16px; padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+.timeline-item:last-child { border-bottom: none; }
+.timeline-date {
+  min-width: 100px; font-size: 13px; font-weight: 700; color: var(--accent);
+}
+.timeline-action { font-size: 13px; color: var(--ink-soft); }
+
+/* Highlight */
+.highlight {
+  background: var(--accent-light); border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0; padding: 16px 20px; margin: 16px 0;
+  font-size: 14px; color: var(--navy); font-weight: 500;
+}
+
+@media (max-width: 600px) {
+  .header { padding: 28px 20px; }
+  .header h1 { font-size: 22px; }
+  .header-info { flex-direction: column; gap: 8px; }
+  .section { padding: 24px 18px; }
+  .section h2 { font-size: 17px; }
+  table { font-size: 12px; }
+  thead th, tbody td { padding: 8px 10px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <span class="header-badge">MEETING AGENDA</span>
+  <h1>오은환 대표 미팅 아젠다</h1>
+  <p>6/13 현장강의 캠페인 실행 조건 확정</p>
+  <div class="header-info">
+    <span>일시: <strong>2026.05.14 (수) 오후</strong></span>
+    <span>참석: <strong>오은환 대표 / 오연진 이사 / 맷돌</strong></span>
+  </div>
+</div>
+
+<!-- 1 -->
+<div class="section">
+  <h2><span class="section-num">1</span>실행 조건 확정</h2>
+
+  <h3>1-1. 수익 분배</h3>
+  <ul>
+    <li>이번 프로젝트 한정 <strong>배분 비율 확정</strong></li>
+    <li>광고비는 <strong>누가 선집행</strong>하는가?</li>
+    <li>정산 시점 및 방식 (강의 후 며칠 내?)</li>
+  </ul>
+
+  <h3>1-2. 광고 예산</h3>
+  <ul>
+    <li><strong>500만 vs 1,000만</strong> — 총 예산 확정</li>
+    <li>ROAS 기준선 (3배 미만 시 중단 등)</li>
+    <li>예산 증액 기준 (ROAS 좋으면 얼마까지?)</li>
+  </ul>
+
+  <h3>1-3. 랜딩페이지 / 결제</h3>
+  <ul>
+    <li>아임웹(ocmd.me) 그대로 쓸지, <strong>별도 랜딩 제작</strong>할지</li>
+    <li>별도 제작 시 결제 연동 방식</li>
+    <li>UTM / 전환 추적 세팅 범위</li>
+  </ul>
+</div>
+
+<!-- 2 -->
+<div class="section">
+  <h2><span class="section-num">2</span>상세페이지 & 광고 소재</h2>
+
+  <h3>2-1. 상세페이지</h3>
+  <ul>
+    <li>현재 상세페이지 확인 (68억, 33회 매진 등 <strong>오래된 정보</strong>)</li>
+    <li>수정 범위 — 전면 리뉴얼 vs 부분 수정</li>
+    <li>수정 담당 및 <strong>데드라인 (5/17 토)</strong></li>
+  </ul>
+
+  <h3>2-2. 광고 소재 확보</h3>
+  <ul>
+    <li><strong>4/29 북콘서트 영상</strong> — 활용 가능한 클립 확인</li>
+    <li>기존 광고용 영상 3편 (인사이트머니랩 때 제작) — 접근 가능한지</li>
+    <li>수강생 후기 영상/글 — <strong>광고 활용 동의 범위</strong></li>
+    <li>신규 촬영 필요 시 일정 (5/15~16 중)</li>
+  </ul>
+</div>
+
+<!-- 3 -->
+<div class="section">
+  <h2><span class="section-num">3</span>캠페인 운영</h2>
+
+  <h3>3-1. 재수강 오픈 (Phase 1: 5/18~25)</h3>
+  <ul>
+    <li>재수강 25명 리스트 — <strong>오은환 대표가 공유</strong></li>
+    <li>상위 10명 1:1 DM — 오은환 대표 직접 발송</li>
+    <li>나머지 단체 발송 — 이메일? 카톡? 순서</li>
+    <li>재수강 가격 확정 (45만원 유지?)</li>
+  </ul>
+
+  <h3>3-2. 티저 콘텐츠</h3>
+  <ul>
+    <li>티저 3개 방향 컨펌 (강사 메시지 / Why now / 커리큘럼)</li>
+    <li>인스타 피드 vs 릴스 vs 스토리 — 어디에 어떻게</li>
+    <li>오은환 대표 <strong>직접 촬영 가능 일정</strong></li>
+  </ul>
+
+  <h3>3-3. 채널별 역할</h3>
+  <table>
+    <thead><tr><th>채널</th><th>활용 방안</th><th>확인 필요</th></tr></thead>
+    <tbody>
+      <tr><td><strong>카톡 채널</strong> (5,500)</td><td>재수강 → 공식오픈 → 마감 푸시</td><td>발송 횟수 제한?</td></tr>
+      <tr><td><strong>인스타</strong> (6.6만)</td><td>티저, 후기, 카운트다운</td><td>게시물 일정</td></tr>
+      <tr><td><strong>유튜브</strong> (15만)</td><td>활용 여부 논의</td><td>현 상태에서 쓸지</td></tr>
+      <tr><td><strong>카페</strong> (9천)</td><td>공지 + 후기 노출</td><td>게시판 활용 범위</td></tr>
+      <tr><td><strong>펜딩</strong> (5천)</td><td>알림 발송</td><td>발송 가능 시점</td></tr>
+      <tr><td><strong>스레드</strong> (2.9만)</td><td>일상형 홍보</td><td>톤앤매너</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 4 -->
+<div class="section">
+  <h2><span class="section-num">4</span>역할 분담 최종 확인</h2>
+  <table>
+    <thead><tr><th>역할</th><th>담당</th><th>확인 사항</th></tr></thead>
+    <tbody>
+      <tr><td><strong>상세페이지 수정</strong></td><td>확정 필요</td><td>플로우머스 or 오연진 이사</td></tr>
+      <tr><td><strong>광고 기획/집행</strong></td><td>플로우머스</td><td>메타 광고 계정 접근 권한</td></tr>
+      <tr><td><strong>티저 촬영</strong></td><td>오은환 대표</td><td>촬영 가능 일정</td></tr>
+      <tr><td><strong>재수강 DM</strong></td><td>오은환 대표</td><td>5/18 발송 확정</td></tr>
+      <tr><td><strong>결제 응대/정산</strong></td><td>오연진 이사</td><td>기존 프로세스 확인</td></tr>
+      <tr><td><strong>일일 리포트</strong></td><td>플로우머스</td><td>공유 채널 (카톡방?)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 5 -->
+<div class="section">
+  <h2><span class="section-num">5</span>기타 확인 사항</h2>
+  <ul class="checklist">
+    <li>강의 장소 확정 여부</li>
+    <li>커리큘럼 변경 사항 있는지</li>
+    <li>AI 세션 일정 (현장강의 1주 후?)</li>
+    <li>좌석 확장 가능성 (65석 → 100석+)</li>
+    <li>메타 광고 계정 / 비즈니스 관리자 접근 권한</li>
+    <li>플로우머스 소개 방식 (단톡방 포지셔닝)</li>
+  </ul>
+</div>
+
+<!-- After -->
+<div class="section">
+  <h2><span class="section-num">6</span>미팅 후 즉시 실행</h2>
+
+  <div class="highlight">캠페인 발사까지 4일. 하루도 비면 안 된다.</div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-date">5/14 미팅 직후</div>
+      <div class="timeline-action">합의 내용 정리 → 단톡방 공유</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">5/15 (목)</div>
+      <div class="timeline-action">상세페이지 수정 착수 / 광고 소재 수령 / 결제링크 세팅</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">5/16 (금)</div>
+      <div class="timeline-action">티저 3개 제작 / DM 초안 완성 / UTM 세팅</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">5/17 (토)</div>
+      <div class="timeline-action">전체 점검 — 상세페이지, 결제링크, 티저, DM 최종 컨펌</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">5/18 (일)</div>
+      <div class="timeline-action"><strong>Phase 1 발사 — 상위 10명 1:1 DM</strong></div>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
