@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>오은환 유튜브 채널 리브랜딩 전략 제안서</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy-dark: #0f1d3a;
+  --navy: #1a2e5a;
+  --navy-light: #2a4070;
+  --accent: #6b63b5;
+  --accent-light: #ece9f7;
+  --text-primary: #1a1a2e;
+  --text-secondary: #4a4a6a;
+  --text-muted: #7a7a9a;
+  --bg-white: #ffffff;
+  --bg-light: #f8f9fc;
+  --border-light: #e2e6ef;
+  --success: #10b981;
+  --warning: #d97706;
+  --danger: #c0392b;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--text-primary);
+  background: #eef1f5;
+  line-height: 1.7;
+  letter-spacing: -0.02em;
+}
+
+/* PDF Button */
+.pdf-btn {
+  position: fixed; bottom: 32px; right: 32px; z-index: 9999;
+  display: flex; align-items: center; gap: 10px;
+  padding: 16px 28px; background: var(--navy); color: #fff;
+  border: none; border-radius: 50px; font-size: 15px; font-weight: 700;
+  font-family: 'Noto Sans KR', sans-serif; cursor: pointer;
+  box-shadow: 0 8px 32px rgba(15,29,58,0.35); transition: all 0.3s ease;
+}
+.pdf-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(15,29,58,0.45); }
+.pdf-btn svg { width: 20px; height: 20px; fill: currentColor; }
+
+/* Page System */
+.page {
+  width: 210mm; min-height: 297mm; margin: 20px auto;
+  background: var(--bg-white); box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  padding: 60px 55px; position: relative; page-break-after: always;
+}
+
+/* Cover Page */
+.cover {
+  display: flex; flex-direction: column; justify-content: center;
+  min-height: 297mm; padding: 60px 55px;
+  background: linear-gradient(160deg, #0f1d3a 0%, #1a2e5a 40%, #6b63b5 100%);
+  color: #fff;
+}
+.cover-badge {
+  display: inline-block; padding: 8px 20px; background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2); border-radius: 30px;
+  font-size: 13px; font-weight: 500; letter-spacing: 0.05em; margin-bottom: 40px;
+}
+.cover h1 {
+  font-size: 42px; font-weight: 900; line-height: 1.25; margin-bottom: 16px;
+  letter-spacing: -0.03em;
+}
+.cover-sub {
+  font-size: 20px; font-weight: 300; color: rgba(255,255,255,0.75);
+  margin-bottom: 60px; line-height: 1.6;
+}
+.cover-divider { width: 60px; height: 3px; background: rgba(255,255,255,0.3); margin-bottom: 40px; }
+.cover-info { display: flex; flex-direction: column; gap: 12px; }
+.cover-info-row {
+  display: flex; align-items: center; gap: 16px;
+  font-size: 14px; color: rgba(255,255,255,0.65);
+}
+.cover-info-label {
+  min-width: 80px; font-weight: 600; color: rgba(255,255,255,0.45);
+  font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em;
+}
+
+/* Section Titles */
+.section-number {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; background: var(--navy);
+  color: #fff; border-radius: 10px; font-size: 15px; font-weight: 800;
+  margin-right: 14px;
+}
+.section-title {
+  display: flex; align-items: center; font-size: 24px; font-weight: 800;
+  color: var(--navy-dark); margin-bottom: 8px;
+}
+.section-desc {
+  font-size: 14px; color: var(--text-muted); margin-bottom: 32px;
+  padding-left: 50px;
+}
+
+/* Content Elements */
+h3 {
+  font-size: 17px; font-weight: 700; color: var(--navy);
+  margin: 28px 0 14px; padding-bottom: 8px;
+  border-bottom: 2px solid var(--accent-light);
+}
+p { font-size: 14.5px; color: var(--text-secondary); margin-bottom: 14px; line-height: 1.8; }
+strong { color: var(--text-primary); font-weight: 700; }
+
+/* Diagnosis Card */
+.diagnosis-card {
+  background: #fef3f2; border: 1px solid #fecaca; border-radius: 14px;
+  padding: 28px 32px; margin: 20px 0;
+}
+.diagnosis-card .label {
+  font-size: 12px; font-weight: 700; color: var(--danger);
+  text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px;
+}
+.diagnosis-card .quote {
+  font-size: 20px; font-weight: 700; color: #991b1b;
+  line-height: 1.5; margin-bottom: 12px;
+}
+.diagnosis-card p { color: #7f1d1d; font-size: 14px; }
+
+/* Insight Box */
+.insight-box {
+  background: var(--accent-light); border-left: 4px solid var(--accent);
+  border-radius: 0 12px 12px 0; padding: 22px 28px; margin: 20px 0;
+}
+.insight-box p { color: var(--navy); font-size: 14.5px; margin: 0; }
+
+/* Comparison Table */
+.compare-table {
+  width: 100%; border-collapse: separate; border-spacing: 0;
+  border-radius: 12px; overflow: hidden; margin: 20px 0;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.compare-table thead th {
+  background: var(--navy); color: #fff; font-size: 13px; font-weight: 600;
+  padding: 14px 18px; text-align: left;
+}
+.compare-table thead th:first-child { width: 120px; }
+.compare-table tbody td {
+  padding: 14px 18px; border-bottom: 1px solid var(--border-light);
+  font-size: 13.5px; color: var(--text-secondary); vertical-align: top;
+}
+.compare-table tbody tr:last-child td { border-bottom: none; }
+.compare-table tbody tr:nth-child(even) { background: var(--bg-light); }
+.col-now { color: var(--danger) !important; font-weight: 500; }
+.col-goal { color: var(--success) !important; font-weight: 600; }
+
+/* Benchmark Card */
+.bench-card {
+  border: 1px solid var(--border-light); border-radius: 14px;
+  padding: 28px 32px; margin: 16px 0; background: var(--bg-white);
+  transition: box-shadow 0.2s;
+}
+.bench-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.06); }
+.bench-header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 16px;
+}
+.bench-name { font-size: 18px; font-weight: 800; color: var(--navy-dark); }
+.bench-tag {
+  padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 600;
+  background: var(--accent-light); color: var(--accent);
+}
+.bench-stats {
+  display: flex; gap: 24px; margin-bottom: 16px;
+}
+.bench-stat {
+  display: flex; flex-direction: column;
+}
+.bench-stat .num { font-size: 20px; font-weight: 800; color: var(--navy); }
+.bench-stat .label { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+.bench-point {
+  font-size: 13.5px; color: var(--text-secondary); line-height: 1.8;
+  padding-left: 16px; position: relative; margin-bottom: 6px;
+}
+.bench-point::before {
+  content: ''; position: absolute; left: 0; top: 9px;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+}
+
+/* Funnel Flow */
+.funnel-flow {
+  display: flex; flex-direction: column; gap: 0; margin: 24px 0;
+}
+.funnel-step {
+  display: flex; align-items: stretch; gap: 0;
+}
+.funnel-num {
+  width: 52px; min-height: 72px; display: flex; align-items: center;
+  justify-content: center; background: var(--navy); color: #fff;
+  font-size: 16px; font-weight: 800;
+}
+.funnel-step:first-child .funnel-num { border-radius: 12px 0 0 0; }
+.funnel-step:last-child .funnel-num { border-radius: 0 0 0 12px; }
+.funnel-content {
+  flex: 1; padding: 16px 24px; border: 1px solid var(--border-light);
+  border-left: none; background: var(--bg-white);
+}
+.funnel-step:first-child .funnel-content { border-radius: 0 12px 0 0; }
+.funnel-step:last-child .funnel-content { border-radius: 0 0 12px 0; }
+.funnel-label { font-size: 11px; font-weight: 600; color: var(--accent); margin-bottom: 3px; }
+.funnel-title { font-size: 15px; font-weight: 700; color: var(--navy-dark); margin-bottom: 4px; }
+.funnel-desc { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
+.funnel-arrow {
+  display: flex; align-items: center; justify-content: center;
+  padding: 0; margin-left: 24px;
+}
+.funnel-arrow svg { width: 16px; height: 16px; fill: var(--text-muted); }
+
+/* Content Pillar */
+.pillar-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0;
+}
+.pillar-card {
+  border: 1px solid var(--border-light); border-radius: 12px;
+  padding: 24px; background: var(--bg-white);
+}
+.pillar-card.highlight {
+  border-color: var(--accent); background: var(--accent-light);
+}
+.pillar-tag {
+  display: inline-block; padding: 4px 12px; border-radius: 6px;
+  font-size: 11px; font-weight: 700; margin-bottom: 10px;
+  background: var(--navy); color: #fff;
+}
+.pillar-card.highlight .pillar-tag { background: var(--accent); }
+.pillar-title { font-size: 16px; font-weight: 700; color: var(--navy-dark); margin-bottom: 8px; }
+.pillar-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.7; }
+.pillar-examples {
+  margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-light);
+}
+.pillar-card.highlight .pillar-examples { border-top-color: rgba(107,99,181,0.3); }
+.pillar-ex {
+  font-size: 12.5px; color: var(--text-muted); padding: 3px 0 3px 14px;
+  position: relative;
+}
+.pillar-ex::before {
+  content: ''; position: absolute; left: 0; top: 10px;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--accent);
+}
+
+/* Roadmap */
+.roadmap { margin: 20px 0; }
+.roadmap-phase {
+  display: flex; gap: 0; margin-bottom: 0;
+}
+.roadmap-timeline {
+  width: 60px; display: flex; flex-direction: column; align-items: center;
+  position: relative;
+}
+.roadmap-dot {
+  width: 14px; height: 14px; border-radius: 50%; background: var(--accent);
+  border: 3px solid var(--bg-white); box-shadow: 0 0 0 2px var(--accent);
+  z-index: 1; margin-top: 20px;
+}
+.roadmap-line {
+  width: 2px; flex: 1; background: var(--border-light); margin-top: 4px;
+}
+.roadmap-phase:last-child .roadmap-line { display: none; }
+.roadmap-body {
+  flex: 1; padding: 12px 24px 28px; margin-left: 0;
+}
+.roadmap-period {
+  font-size: 12px; font-weight: 700; color: var(--accent);
+  margin-bottom: 4px; letter-spacing: 0.02em;
+}
+.roadmap-title { font-size: 17px; font-weight: 800; color: var(--navy-dark); margin-bottom: 8px; }
+.roadmap-list { list-style: none; }
+.roadmap-list li {
+  font-size: 13.5px; color: var(--text-secondary); padding: 4px 0 4px 16px;
+  position: relative; line-height: 1.6;
+}
+.roadmap-list li::before {
+  content: ''; position: absolute; left: 0; top: 11px;
+  width: 5px; height: 5px; border-radius: 50%; background: var(--navy-light);
+}
+
+/* KPI Grid */
+.kpi-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 20px 0;
+}
+.kpi-card {
+  text-align: center; padding: 28px 20px; border-radius: 12px;
+  border: 1px solid var(--border-light); background: var(--bg-white);
+}
+.kpi-label { font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; }
+.kpi-now { font-size: 14px; color: var(--danger); font-weight: 600; margin-bottom: 4px; }
+.kpi-arrow { font-size: 18px; color: var(--text-muted); margin-bottom: 4px; }
+.kpi-target { font-size: 22px; font-weight: 800; color: var(--success); }
+.kpi-note { font-size: 11px; color: var(--text-muted); margin-top: 6px; }
+
+/* CTA Section */
+.cta-section {
+  background: linear-gradient(135deg, var(--navy-dark) 0%, var(--accent) 100%);
+  border-radius: 16px; padding: 40px; text-align: center; margin: 32px 0;
+  color: #fff;
+}
+.cta-section h3 {
+  color: #fff; border: none; font-size: 22px; margin: 0 0 12px;
+  padding: 0;
+}
+.cta-section p { color: rgba(255,255,255,0.8); font-size: 15px; }
+
+/* Footer */
+.page-footer {
+  position: absolute; bottom: 30px; left: 55px; right: 55px;
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 16px; border-top: 1px solid var(--border-light);
+}
+.page-footer span { font-size: 11px; color: var(--text-muted); }
+
+/* Print */
+@media print {
+  body { background: #fff; }
+  .page { box-shadow: none; margin: 0; page-break-after: always; }
+  .pdf-btn { display: none !important; }
+}
+
+/* Mobile */
+@media (max-width: 800px) {
+  .page, .cover { width: 100%; min-height: auto; padding: 36px 24px; margin: 10px auto; }
+  .cover h1 { font-size: 28px; }
+  .cover-sub { font-size: 16px; }
+  .section-title { font-size: 20px; }
+  .pillar-grid { grid-template-columns: 1fr; }
+  .kpi-grid { grid-template-columns: 1fr; }
+  .bench-stats { flex-wrap: wrap; gap: 16px; }
+  .compare-table { font-size: 12px; }
+  .compare-table thead th, .compare-table tbody td { padding: 10px 12px; }
+  .page-footer { position: relative; bottom: auto; margin-top: 40px; }
+  .pdf-btn { bottom: 16px; right: 16px; padding: 12px 20px; font-size: 13px; }
+}
+@media (max-width: 400px) {
+  .page, .cover { padding: 28px 18px; }
+  .cover h1 { font-size: 24px; }
+  .section-number { width: 30px; height: 30px; font-size: 13px; }
+  .section-title { font-size: 18px; }
+  h3 { font-size: 15px; }
+  .bench-stats { flex-direction: column; gap: 8px; }
+  .funnel-num { width: 40px; font-size: 14px; }
+  .funnel-content { padding: 12px 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- PDF Save Button -->
+<button class="pdf-btn" onclick="window.print()">
+  <svg viewBox="0 0 24 24"><path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/></svg>
+  PDF 저장
+</button>
+
+<!-- ==================== PAGE 1: COVER ==================== -->
+<div class="cover">
+  <span class="cover-badge">YOUTUBE REBRANDING STRATEGY</span>
+  <h1>오은환 유튜브 채널<br>리브랜딩 전략 제안서</h1>
+  <p class="cover-sub">
+    "정보 전달자"에서 "세계관 리더"로<br>
+    채널의 본질을 바꾸는 전략
+  </p>
+  <div class="cover-divider"></div>
+  <div class="cover-info">
+    <div class="cover-info-row">
+      <span class="cover-info-label">대상 채널</span>
+      <span>@omd_eunhwan "오은환의 하이라이트"</span>
+    </div>
+    <div class="cover-info-row">
+      <span class="cover-info-label">제안</span>
+      <span>Flowmus (플로우머스)</span>
+    </div>
+    <div class="cover-info-row">
+      <span class="cover-info-label">일자</span>
+      <span>2026. 05. 12</span>
+    </div>
+    <div class="cover-info-row">
+      <span class="cover-info-label">구분</span>
+      <span>Confidential</span>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== PAGE 2: 현황 진단 ==================== -->
+<div class="page">
+  <div class="section-title">
+    <span class="section-number">1</span>
+    현황 진단
+  </div>
+  <p class="section-desc">채널의 현재 상태와 핵심 문제를 정의합니다.</p>
+
+  <h3>채널 현황</h3>
+  <table class="compare-table">
+    <thead>
+      <tr><th>항목</th><th>현황</th><th>비고</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>채널명</strong></td><td>오은환의 하이라이트</td><td>브랜드 "오콘목달/OCMD" 미반영</td></tr>
+      <tr><td><strong>구독자</strong></td><td>약 9.9K</td><td>인스타 67K 대비 현저히 낮음</td></tr>
+      <tr><td><strong>콘텐츠 방향</strong></td><td>AI 툴 활용법, 정보 전달형</td><td>대체 가능한 콘텐츠</td></tr>
+      <tr><td><strong>전환율</strong></td><td>낮음</td><td>정보 소비 후 이탈 패턴</td></tr>
+      <tr><td><strong>채널 분산</strong></td><td>8개 채널에 30만 분산</td><td>집중도 부족</td></tr>
+    </tbody>
+  </table>
+
+  <div class="diagnosis-card">
+    <div class="label">핵심 문제</div>
+    <div class="quote">"AI 알려주는 정보에 갇힌 사람이 된 것 같다"</div>
+    <p>오은환 대표 본인의 진단. 콘텐츠가 본인답지 않고, 시청자는 정보만 소비한 후 이탈한다. 전환율 하락의 근본 원인.</p>
+  </div>
+
+  <h3>왜 전환율이 떨어지는가</h3>
+
+  <table class="compare-table">
+    <thead>
+      <tr><th>구분</th><th>정보 전달자 (현재)</th><th>세계관 리더 (지향점)</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>콘텐츠</strong></td>
+        <td class="col-now">"이 AI 툴 써보세요"</td>
+        <td class="col-goal">"나는 콘텐츠로 86억을 팔았다"</td>
+      </tr>
+      <tr>
+        <td><strong>대체 가능성</strong></td>
+        <td class="col-now">AI 정보는 누구나 전달 가능</td>
+        <td class="col-goal">오은환의 이야기는 오은환만 가능</td>
+      </tr>
+      <tr>
+        <td><strong>시청 이유</strong></td>
+        <td class="col-now">정보가 필요해서</td>
+        <td class="col-goal">이 사람이 궁금해서</td>
+      </tr>
+      <tr>
+        <td><strong>전환 동기</strong></td>
+        <td class="col-now">정보 취득 후 이탈</td>
+        <td class="col-goal">신뢰가 쌓여서 결제</td>
+      </tr>
+      <tr>
+        <td><strong>콘텐츠 수명</strong></td>
+        <td class="col-now">트렌드 바뀌면 소멸</td>
+        <td class="col-goal">사람의 이야기는 시간이 지나도 유효</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="insight-box">
+    <p><strong>정보는 무료로 넘치는 시대.</strong> 시청자가 돈을 내는 이유는 정보가 아니라 "이 사람의 관점과 세계관"에 대한 신뢰다. 지금 채널은 그 신뢰를 쌓는 구조가 아니라 정보를 소비시키는 구조로 되어 있다.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>오은환 유튜브 리브랜딩 전략 제안서</span>
+    <span>2 / 8</span>
+  </div>
+</div>
+
+<!-- ==================== PAGE 3: 벤치마크 ==================== -->
+<div class="page">
+  <div class="section-title">
+    <span class="section-number">2</span>
+    벤치마크 분석
+  </div>
+  <p class="section-desc">전환율이 높은 채널의 공통 원리를 분석합니다.</p>
+
+  <div class="bench-card">
+    <div class="bench-header">
+      <span class="bench-name">당근자판기 (김진옥)</span>
+      <span class="bench-tag">전환율 벤치마크</span>
+    </div>
+    <div class="bench-stats">
+      <div class="bench-stat">
+        <span class="num">14만</span>
+        <span class="label">유튜브 구독자</span>
+      </div>
+      <div class="bench-stat">
+        <span class="num">빚 1억 → 100억</span>
+        <span class="label">개인 스토리</span>
+      </div>
+      <div class="bench-stat">
+        <span class="num">높음</span>
+        <span class="label">강의 전환율</span>
+      </div>
+    </div>
+    <div class="bench-point">간호사 출신. 빚 1억을 가계부로 갚고, 경매/에어비앤비/모텔로 자산 100억 달성</div>
+    <div class="bench-point">콘텐츠의 핵심은 "정보"가 아니라 "나의 진짜 이야기". 실패담, 과정, 감정을 솔직하게 공유</div>
+    <div class="bench-point">시청자가 "이 사람 진짜다"라고 느낌 → 신뢰 → "이 사람 강의 들어볼까" → 결제</div>
+    <div class="bench-point"><strong>핵심 원리: 사람을 판다. 정보를 팔지 않는다.</strong></div>
+  </div>
+
+  <div class="bench-card">
+    <div class="bench-header">
+      <span class="bench-name">김미경TV / MKYU</span>
+      <span class="bench-tag">퍼널 벤치마크</span>
+    </div>
+    <div class="bench-stats">
+      <div class="bench-stat">
+        <span class="num">132만</span>
+        <span class="label">유튜브 구독자</span>
+      </div>
+      <div class="bench-stat">
+        <span class="num">30,000+</span>
+        <span class="label">MKYU 수강생</span>
+      </div>
+      <div class="bench-stat">
+        <span class="num">자체 LMS</span>
+        <span class="label">mkyu.co.kr</span>
+      </div>
+    </div>
+    <div class="bench-point">유튜브에서 "노션 사용법"이나 "툴 리뷰" 같은 정보 콘텐츠를 하지 않음</div>
+    <div class="bench-point">김미경이 세상을 읽는 시선, 시대를 해석하는 관점, 인생에 대한 메시지를 전달</div>
+    <div class="bench-point">시청자가 "김미경"이라는 사람에 빠짐 → MKYU 가입(무료) → 열정대학생(99,000원) → 자율전공(프리미엄)</div>
+    <div class="bench-point"><strong>핵심 원리: 세계관으로 빨아들인 후 가격 계단을 태운다.</strong></div>
+  </div>
+
+  <div class="insight-box">
+    <p><strong>두 채널의 공통점:</strong> 정보가 아니라 "사람"을 중심에 놓는다. 시청자는 정보를 얻으러 오는 게 아니라, 이 사람의 생각과 삶이 궁금해서 온다. 그래서 전환율이 높다.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>오은환 유튜브 리브랜딩 전략 제안서</span>
+    <span>3 / 8</span>
+  </div>
+</div>
+
+<!-- ==================== PAGE 4: 오은환에게 맞는 이유 ==================== -->
+<div class="page">
+  <div class="section-title">
+    <span class="section-number">3</span>
+    왜 이 모델이 오은환에게 맞는가
+  </div>
+  <p class="section-desc">오은환 대표가 이미 갖고 있지만 활용하지 못하는 자산을 분석합니다.</p>
+
+  <h3>활용되지 않는 자산</h3>
+
+  <p>오은환 대표는 "세계관 채널"을 만들기 위한 모든 재료를 이미 갖고 있다. 문제는 재료가 없는 것이 아니라, 유튜브에서 이걸 쓰지 않고 "AI 툴 리뷰"를 하고 있다는 것이다.</p>
+
+  <table class="compare-table">
+    <thead>
+      <tr><th>보유 자산</th><th>현재 활용</th><th>콘텐츠 가치</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>콘텐츠로 86억 판매 경험</strong></td>
+        <td class="col-now">유튜브에서 언급하지 않음</td>
+        <td class="col-goal">가장 강력한 스토리 소재</td>
+      </tr>
+      <tr>
+        <td><strong>누적 수강생 25,000명</strong></td>
+        <td class="col-now">숫자로만 소개</td>
+        <td class="col-goal">성공 사례/비포애프터 콘텐츠</td>
+      </tr>
+      <tr>
+        <td><strong>매달 전석 매진</strong></td>
+        <td class="col-now">홍보 문구로만 사용</td>
+        <td class="col-goal">비하인드/과정 콘텐츠</td>
+      </tr>
+      <tr>
+        <td><strong>고려대 심리학+경영학 석박사</strong></td>
+        <td class="col-now">프로필에만 기재</td>
+        <td class="col-goal">전문성 기반 인사이트 콘텐츠</td>
+      </tr>
+      <tr>
+        <td><strong>싱가포르 법인 운영</strong></td>
+        <td class="col-now">별도 언급 없음</td>
+        <td class="col-goal">글로벌 사업가로서의 서사</td>
+      </tr>
+      <tr>
+        <td><strong>베스트셀러 저자</strong></td>
+        <td class="col-now">프로필 소개용</td>
+        <td class="col-goal">저자의 사고방식/철학 콘텐츠</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="diagnosis-card" style="background: #f0fdf4; border-color: #86efac;">
+    <div class="label" style="color: var(--success);">핵심 포인트</div>
+    <div class="quote" style="color: #166534;">오은환의 유튜브에는 "오은환"이 없다.</div>
+    <p style="color: #14532d;">86억 판매 경험, 25,000명 수강생, 매달 매진되는 강의를 가진 사람이 유튜브에서는 "AI 노션 활용법"을 설명하고 있다. 가장 강력한 무기를 쓰지 않고 있는 상태.</p>
+  </div>
+
+  <h3>규모 비교: 김미경과의 유사점</h3>
+
+  <table class="compare-table">
+    <thead>
+      <tr><th>항목</th><th>김미경</th><th>오은환</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>기반</strong></td><td>교육/강사 → CEO</td><td>교육/강사 → CEO</td></tr>
+      <tr><td><strong>브랜드</strong></td><td>본인 이름 = 사업</td><td>본인 이름 = 사업</td></tr>
+      <tr><td><strong>수강생</strong></td><td>30,000+</td><td>25,000+</td></tr>
+      <tr><td><strong>저서</strong></td><td>다수 베스트셀러</td><td>베스트셀러 1권</td></tr>
+      <tr><td><strong>법인</strong></td><td>MK Universe</td><td>(주)오콘목달 + 싱가포르 법인</td></tr>
+      <tr><td><strong>유튜브</strong></td><td class="col-goal">132만 (세계관 중심)</td><td class="col-now">9.9K (정보 중심)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="insight-box">
+    <p>사업의 규모와 구조는 비슷한데 <strong>유튜브 격차가 130배</strong>다. 차이를 만든 건 콘텐츠의 방향. 김미경은 "자기 세계관"을 보여주고, 오은환은 "남의 도구"를 설명하고 있다.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>오은환 유튜브 리브랜딩 전략 제안서</span>
+    <span>4 / 8</span>
+  </div>
+</div>
+
+<!-- ==================== PAGE 5: 리브랜딩 방향 ==================== -->
+<div class="page">
+  <div class="section-title">
+    <span class="section-number">4</span>
+    리브랜딩 방향
+  </div>
+  <p class="section-desc">채널의 포지셔닝, 이름, 콘텐츠 방향을 재설계합니다.</p>
+
+  <h3>채널 포지셔닝 전환</h3>
+
+  <table class="compare-table">
+    <thead>
+      <tr><th>요소</th><th>현재</th><th>리브랜딩 후</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>채널명</strong></td>
+        <td class="col-now">오은환의 하이라이트</td>
+        <td class="col-goal">미팅에서 확정 (브랜드 연계 검토)</td>
+      </tr>
+      <tr>
+        <td><strong>포지셔닝</strong></td>
+        <td class="col-now">AI 정보 채널</td>
+        <td class="col-goal">콘텐츠 수익화 세계관 채널</td>
+      </tr>
+      <tr>
+        <td><strong>핵심 메시지</strong></td>
+        <td class="col-now">"이 툴 좋아요"</td>
+        <td class="col-goal">"콘텐츠로 인생을 바꾸는 법"</td>
+      </tr>
+      <tr>
+        <td><strong>주인공</strong></td>
+        <td class="col-now">AI 도구</td>
+        <td class="col-goal">오은환 + 수강생</td>
+      </tr>
+      <tr>
+        <td><strong>채널 역할</strong></td>
+        <td class="col-now">정보 소비처</td>
+        <td class="col-goal">신뢰 구축 → 결제 전환의 시작점</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>콘텐츠 4대 축</h3>
+
+  <div class="pillar-grid">
+    <div class="pillar-card highlight">
+      <span class="pillar-tag">축 1 — 핵심</span>
+      <div class="pillar-title">오은환의 이야기</div>
+      <div class="pillar-desc">본인의 경험, 실패담, 터닝포인트, 사업 철학. 오은환만 할 수 있는 콘텐츠.</div>
+      <div class="pillar-examples">
+        <div class="pillar-ex">"콘텐츠로 86억을 팔기까지 내가 겪은 3번의 실패"</div>
+        <div class="pillar-ex">"매달 전석 매진. 내가 마케팅에 쓰는 시간은 0이다"</div>
+        <div class="pillar-ex">"심리학 전공자가 콘텐츠를 만드는 방식"</div>
+      </div>
+    </div>
+    <div class="pillar-card highlight">
+      <span class="pillar-tag">축 2 — 전환 엔진</span>
+      <div class="pillar-title">수강생 변화 스토리</div>
+      <div class="pillar-desc">오콘목달 수강생의 비포/애프터. 실제 성과와 변화 과정을 다큐 형식으로.</div>
+      <div class="pillar-examples">
+        <div class="pillar-ex">"팔로워 0이었던 직장인, 6개월 만에 인스타 3만"</div>
+        <div class="pillar-ex">"전업주부에서 콘텐츠 수익 월 500만원까지"</div>
+        <div class="pillar-ex">"수강생 인터뷰: 내 인생을 바꾼 한 가지"</div>
+      </div>
+    </div>
+    <div class="pillar-card">
+      <span class="pillar-tag">축 3 — 관점</span>
+      <div class="pillar-title">오은환의 시선으로 읽는 트렌드</div>
+      <div class="pillar-desc">AI, SNS, 콘텐츠 시장을 "소개"하는 게 아니라 오은환의 관점으로 "해석"하는 콘텐츠.</div>
+      <div class="pillar-examples">
+        <div class="pillar-ex">"AI 시대, 콘텐츠 크리에이터는 사라질까? 내 대답"</div>
+        <div class="pillar-ex">"인스타 알고리즘이 바뀌었다. 나는 이렇게 대응한다"</div>
+      </div>
+    </div>
+    <div class="pillar-card">
+      <span class="pillar-tag">축 4 — 일상</span>
+      <div class="pillar-title">비하인드 / 리얼 라이프</div>
+      <div class="pillar-desc">강의 준비 과정, 사업 운영, 의사결정 순간. 꾸미지 않은 날것의 모습.</div>
+      <div class="pillar-examples">
+        <div class="pillar-ex">"오콘목달 강의 하루 전, 내가 하는 루틴"</div>
+        <div class="pillar-ex">"싱가포르 법인 만든 이유, 솔직하게 말한다"</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <p><strong>원칙:</strong> AI를 "소개"하지 않는다. "나는 이걸 이렇게 쓴다, 그래서 이런 결과가 났다"로 바꾼다. 정보는 오은환이라는 사람의 부산물이지, 주인공이 아니다.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>오은환 유튜브 리브랜딩 전략 제안서</span>
+    <span>5 / 8</span>
+  </div>
+</div>
+
+<!-- ==================== PAGE 6: 퍼널 재설계 ==================== -->
+<div class="page">
+  <div class="section-title">
+    <span class="section-number">5</span>
+    퍼널 재설계
+  </div>
+  <p class="section-desc">유튜브를 "발견 엔진"으로, 인스타를 "전환 엔진"으로 역할을 분리합니다.</p>
+
+  <h3>채널별 역할 정의</h3>
+
+  <table class="compare-table">
+    <thead>
+      <tr><th>채널</th><th>역할</th><th>핵심 지표</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>유튜브</strong></td>
+        <td>발견 / 신뢰 구축 — 검색으로 새로운 사람을 데려오고, 세계관으로 신뢰를 쌓는다</td>
+        <td>신규 유입, 구독 전환율, 시청 지속 시간</td>
+      </tr>
+      <tr>
+        <td><strong>인스타그램</strong></td>
+        <td>관계 / 전환 — 일상 공유, DM 소통, 스토리/라이브로 결제까지 연결한다</td>
+        <td>DM 전환율, 스토리 반응률, 결제 수</td>
+      </tr>
+      <tr>
+        <td><strong>네이버 카페</strong></td>
+        <td>SEO / 커뮤니티 — 검색 유입 + UGC로 자기강화 루프를 만든다</td>
+        <td>검색 유입, 회원 수, UGC 생산량</td>
+      </tr>
+      <tr>
+        <td><strong>ocmd.me</strong></td>
+        <td>결제 — 상품 진열과 결제만 담당한다</td>
+        <td>결제 전환율, 객단가</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>통합 퍼널 흐름</h3>
+
+  <div class="funnel-flow">
+    <div class="funnel-step">
+      <div class="funnel-num">1</div>
+      <div class="funnel-content">
+        <div class="funnel-label">발견</div>
+        <div class="funnel-title">유튜브 검색 / 추천 알고리즘</div>
+        <div class="funnel-desc">"콘텐츠 수익화", "인스타 성장" 등 키워드로 새로운 시청자가 유입된다. 세계관 콘텐츠로 "이 사람 누구지?" → 구독.</div>
+      </div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-num">2</div>
+      <div class="funnel-content">
+        <div class="funnel-label">관계 형성</div>
+        <div class="funnel-title">인스타그램 팔로우 + 일상 소통</div>
+        <div class="funnel-desc">유튜브에서 넘어온 시청자가 인스타를 팔로우한다. 스토리, 릴스, DM으로 일상적 관계가 형성된다.</div>
+      </div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-num">3</div>
+      <div class="funnel-content">
+        <div class="funnel-label">신뢰 강화</div>
+        <div class="funnel-title">수강생 성공 사례 + 카페 커뮤니티</div>
+        <div class="funnel-desc">수강생 비포/애프터를 보며 "나도 할 수 있겠다" 확신. 카페에서 UGC(수강 후기, 성과 인증)를 접하며 신뢰가 굳어진다.</div>
+      </div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-num">4</div>
+      <div class="funnel-content">
+        <div class="funnel-label">전환</div>
+        <div class="funnel-title">무료/저가 상품 → 가격 계단</div>
+        <div class="funnel-desc">무료 특강 → 저가 강의 → 오콘목달 정규 → 프리미엄 코칭. 신뢰가 쌓인 상태에서 자연스러운 계단 이동.</div>
+      </div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-num">5</div>
+      <div class="funnel-content">
+        <div class="funnel-label">바이럴 루프</div>
+        <div class="funnel-title">수강생 인스타 성과 인증 → 신규 유입</div>
+        <div class="funnel-desc">수강생이 인스타에서 성과를 공유하면, 그 팔로워가 "이거 뭐야?" → 오은환 발견 → 퍼널 진입. 자기강화 순환.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="insight-box">
+    <p><strong>핵심 변화:</strong> 지금은 인스타에서 발견 + 전환을 모두 하고 있고, 유튜브는 방치 상태다. 유튜브가 "새로운 사람을 데려오는 발견 엔진" 역할을 해야 인스타의 전환 효율도 함께 올라간다.</p>
+  </div>
+
+  <div class="page-footer">
+    <span>오은환 유튜브 리브랜딩 전략 제안서</span>
+    <span>6 / 8</span>
+  </div>
+</div>
+
+<!-- ==================== PAGE 7: 실행 로드맵 ==================== -->
+<div class="page">
+  <div class="section-title">
+    <span class="section-number">6</span>
+    실행 로드맵
+  </div>
+  <p class="section-desc">3단계로 나누어 리브랜딩을 실행합니다.</p>
+
+  <div class="roadmap">
+    <div class="roadmap-phase">
+      <div class="roadmap-timeline">
+        <div class="roadmap-dot"></div>
+        <div class="roadmap-line"></div>
+      </div>
+      <div class="roadmap-body">
+        <div class="roadmap-period">Phase 1 — 1~2개월</div>
+        <div class="roadmap-title">채널 리셋</div>
+        <ul class="roadmap-list">
+          <li>채널명 / 채널 아트 / 소개 문구 리브랜딩</li>
+          <li>기존 콘텐츠 중 세계관에 맞는 영상 선별, 나머지 비공개 처리 검토</li>
+          <li>콘텐츠 4대 축 확정 및 촬영 가이드 제작</li>
+          <li>첫 세계관 콘텐츠 3~5편 제작 및 업로드</li>
+          <li>유튜브 → 인스타 → 카페 → 결제 동선 세팅</li>
+        </ul>
+      </div>
+    </div>
+    <div class="roadmap-phase">
+      <div class="roadmap-timeline">
+        <div class="roadmap-dot"></div>
+        <div class="roadmap-line"></div>
+      </div>
+      <div class="roadmap-body">
+        <div class="roadmap-period">Phase 2 — 3~6개월</div>
+        <div class="roadmap-title">성장 가속</div>
+        <ul class="roadmap-list">
+          <li>주 2~3회 일관된 업로드 루틴 정착</li>
+          <li>수강생 비포/애프터 시리즈 본격 가동</li>
+          <li>유튜브 SEO 최적화 (제목, 태그, 썸네일 A/B 테스트)</li>
+          <li>유튜브 → 인스타 유입 데이터 추적 및 전환율 분석</li>
+          <li>카페 UGC 활성화 및 네이버 검색 노출 확대</li>
+          <li>콘텐츠 성과 데이터 기반 방향 조정</li>
+        </ul>
+      </div>
+    </div>
+    <div class="roadmap-phase">
+      <div class="roadmap-timeline">
+        <div class="roadmap-dot"></div>
+      </div>
+      <div class="roadmap-body">
+        <div class="roadmap-period">Phase 3 — 6개월 이후</div>
+        <div class="roadmap-title">플라이휠 구축</div>
+        <ul class="roadmap-list">
+          <li>유튜브 발견 → 인스타 전환 → 카페 커뮤니티 → 결제 → 수강생 바이럴 → 재유입 순환 구조 완성</li>
+          <li>구독자 5만+ 달성 후 유튜브 자체 수익(광고/멤버십) 추가</li>
+          <li>콘텐츠 자산화: 유튜브 영상 → 숏폼 재가공 → 인스타 릴스 → 카페 아카이브</li>
+          <li>자체 LMS 전환 시 유튜브가 최대 유입 채널로 기능</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <h3>기대 성과</h3>
+
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">유튜브 구독자</div>
+      <div class="kpi-now">현재 9.9K</div>
+      <div class="kpi-arrow">↓</div>
+      <div class="kpi-target">5만+</div>
+      <div class="kpi-note">12개월 목표</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">유튜브 → 인스타 유입</div>
+      <div class="kpi-now">현재 거의 없음</div>
+      <div class="kpi-arrow">↓</div>
+      <div class="kpi-target">월 2,000+</div>
+      <div class="kpi-note">신규 팔로워 유입</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">강의 전환율</div>
+      <div class="kpi-now">현재 낮음</div>
+      <div class="kpi-arrow">↓</div>
+      <div class="kpi-target">개선</div>
+      <div class="kpi-note">세계관 기반 신뢰 전환</div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>오은환 유튜브 리브랜딩 전략 제안서</span>
+    <span>7 / 8</span>
+  </div>
+</div>
+
+<!-- ==================== PAGE 8: 플로우머스 역할 ==================== -->
+<div class="page">
+  <div class="section-title">
+    <span class="section-number">7</span>
+    플로우머스의 역할
+  </div>
+  <p class="section-desc">리브랜딩 전 과정에서 플로우머스가 담당하는 영역입니다.</p>
+
+  <h3>플로우머스 제공 범위</h3>
+
+  <table class="compare-table">
+    <thead>
+      <tr><th>영역</th><th>상세 내용</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>채널 전략 수립</strong></td>
+        <td>포지셔닝 재설계, 채널명/아트 방향, 콘텐츠 축 설계, 타겟 시청자 정의</td>
+      </tr>
+      <tr>
+        <td><strong>콘텐츠 기획</strong></td>
+        <td>데이터 기반 주제 선정, 월간 콘텐츠 캘린더, 영상별 구성/스크립트 방향, 썸네일 전략</td>
+      </tr>
+      <tr>
+        <td><strong>퍼널 설계</strong></td>
+        <td>유튜브 → 인스타 → 카페 → 결제 동선 설계, CTA 배치, UTM 추적 세팅</td>
+      </tr>
+      <tr>
+        <td><strong>SEO 최적화</strong></td>
+        <td>유튜브 검색 키워드 분석, 제목/설명/태그 최적화, 네이버 카페 검색 노출 전략</td>
+      </tr>
+      <tr>
+        <td><strong>데이터 분석</strong></td>
+        <td>영상별 성과 분석, 전환율 추적, 시청자 행동 패턴 분석, 월간 리포트</td>
+      </tr>
+      <tr>
+        <td><strong>시스템 구축</strong></td>
+        <td>커뮤니티 세팅, 정산 시스템, 자체 LMS 전환 시 기술 지원</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>플로우머스 역량</h3>
+
+  <table class="compare-table">
+    <thead>
+      <tr><th>역량</th><th>내용</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>MCN 에이전시</strong></td>
+        <td>사찍남 등 13개 채널 네트워크 운영. 유튜브 채널 성장 전략, 콘텐츠 기획, 편집 디렉팅 실전 경험</td>
+      </tr>
+      <tr>
+        <td><strong>데이터/AI 기획</strong></td>
+        <td>트렌드 분석, 키워드 분석, 시청자 데이터 기반 콘텐츠 전략 수립</td>
+      </tr>
+      <tr>
+        <td><strong>커머스 설계</strong></td>
+        <td>콘텐츠 → 결제 전환 퍼널 설계, 가격 계단 구조 설계, RS 정산 시스템 구축</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="cta-section">
+    <h3>다음 단계</h3>
+    <p>구체적인 채널명, 콘텐츠 방향, 실행 일정은<br>미팅에서 함께 확정합니다.</p>
+    <p style="margin-top: 20px; font-size: 13px; color: rgba(255,255,255,0.6);">
+      Flowmus | ceo@flowmus.com
+    </p>
+  </div>
+
+  <div class="page-footer">
+    <span>오은환 유튜브 리브랜딩 전략 제안서</span>
+    <span>8 / 8</span>
+  </div>
+</div>
+
+</body>
+</html>
