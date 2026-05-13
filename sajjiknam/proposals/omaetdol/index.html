@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>사찍남 — 오맷돌 MC 특별편 촬영기획안</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F2F4F6;color:#191F28;font-family:'Pretendard',system-ui,sans-serif;min-height:100vh;font-size:15px}
+.gnb{background:#fff;border-bottom:1px solid #E5E8EB;padding:0 24px;height:56px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.gnb-logo{font-size:16px;font-weight:800;color:#D4A017}
+.gnb-badge{background:#FFFBEA;color:#8B6914;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:800;border:1px solid #D4A017}
+.gnb-date{font-size:11px;color:#8B95A1;font-weight:600}
+.wrap{max-width:820px;margin:0 auto;padding:28px 20px 80px}
+.hero{background:linear-gradient(135deg,#0A1628 0%,#132B4D 50%,#1F4680 100%);border-radius:20px;padding:36px 32px;margin-bottom:20px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-50%;right:-10%;width:300px;height:300px;background:radial-gradient(circle,rgba(255,184,0,.2),transparent);pointer-events:none}
+.hero-eyebrow{font-size:11px;font-weight:700;color:#FFB800;letter-spacing:2px;margin-bottom:10px}
+.hero-title{font-size:28px;font-weight:800;line-height:1.3;color:#fff;margin-bottom:8px}
+.hero-sub{color:#8B95A1;font-size:13px;line-height:1.7}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
+.hero-stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:12px;text-align:center}
+.hero-stat-v{font-size:20px;font-weight:800;color:#FFB800}
+.hero-stat-l{font-size:10px;color:#8B95A1;margin-top:3px}
+.tabs{display:flex;gap:6px;margin-bottom:18px;flex-wrap:wrap;position:sticky;top:56px;z-index:90;background:#F2F4F6;padding:10px 0}
+.tab-btn{padding:9px 16px;border-radius:10px;border:1.5px solid #E5E8EB;background:#fff;font-size:13px;font-weight:700;cursor:pointer;color:#6B7684;transition:.15s;font-family:inherit}
+.tab-btn.on{background:#0A1628;border-color:#0A1628;color:#FFB800}
+.tab-btn:hover:not(.on){background:#F8F9FA}
+.tab-btn.gold{border-color:#D4A017;color:#D4A017}
+.tab-btn.gold.on{background:#D4A017;border-color:#D4A017;color:#fff}
+.panel{display:none}.panel.on{display:block}
+.card{background:#fff;border-radius:16px;padding:22px;margin-bottom:14px;box-shadow:0 1px 6px rgba(0,0,0,.06);position:relative}
+.card.hot{border:2px solid #D4A017;background:#FFFBEA}
+.card.gold{border:2px solid #D4A017;background:#FFFBEA}
+.card.blue{border:2px solid #0A1628;background:#F8F9FA}
+.card.dark{background:#0A1628;color:#fff}
+.card.navy{background:#132B4D;color:#fff;border:1px solid #1F4680}
+.card-label{font-size:11px;font-weight:700;color:#D4A017;letter-spacing:1.5px;margin-bottom:14px}
+.section{margin-bottom:28px}
+.section-title{font-size:18px;font-weight:800;color:#191F28;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.section-title .num{background:#0A1628;color:#FFB800;border-radius:8px;padding:4px 10px;font-size:13px}
+.section-title .num.red{background:#D4A017;color:#fff}
+.section-title .num.gold{background:#D4A017;color:#fff}
+.tag{display:inline-block;padding:2px 7px;border-radius:4px;font-size:11px;font-weight:700;margin-right:5px;white-space:nowrap}
+.tag-y{background:#FFFBEA;color:#8B6914}
+.tag-r{background:#FFFBEA;color:#D4A017}
+.tag-b{background:#F8F9FA;color:#0A1628}
+.tag-d{background:#0A1628;color:#FFB800}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.stat{background:#FFFBEA;border-radius:12px;padding:14px;text-align:center}
+.stat-v{font-size:22px;font-weight:800;color:#8B6914}
+.stat-l{font-size:11px;color:#6B7684;margin-top:3px}
+.stat.dark{background:#0A1628}.stat.dark .stat-v{color:#FFB800}
+.note{background:#FFFBEA;border-left:3px solid #D4A017;border-radius:0 8px 8px 0;padding:14px 16px;margin:10px 0;font-size:13px;line-height:1.7;color:#3E4A5A}
+.note.blue{background:#F8F9FA;border-left-color:#0A1628}
+.tl-row{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid #E5E8EB}
+.tl-row:last-child{border-bottom:none}
+.tl-time{font-size:12px;font-weight:800;color:#D4A017;min-width:85px;padding-top:2px}
+.tl-time.b{color:#0A1628}
+.tl-body{flex:1}
+.tl-title{font-size:14px;font-weight:700;color:#191F28;margin-bottom:4px}
+.tl-text{font-size:13px;color:#3E4A5A;line-height:1.7}
+.tl-badge{display:inline-block;background:#D4A017;color:#fff;border-radius:4px;padding:1px 6px;font-size:10px;font-weight:800;margin-left:6px}
+.tl-badge.b{background:#0A1628}
+.q-card{background:#fff;border-radius:12px;padding:16px 18px;margin-bottom:10px;box-shadow:0 1px 4px rgba(0,0,0,.04);display:flex;gap:14px;align-items:flex-start}
+.q-num{background:#0A1628;color:#FFB800;border-radius:8px;min-width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;flex-shrink:0}
+.q-num.red{background:#D4A017;color:#fff}
+.q-body{flex:1}
+.q-text{font-size:14px;font-weight:700;color:#191F28;line-height:1.6;margin-bottom:4px}
+.q-sub{font-size:12px;color:#8B95A1;line-height:1.6}
+.q-tags{margin-top:6px;display:flex;flex-wrap:wrap;gap:4px}
+.check-item{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #F2F4F6}
+.check-item:last-child{border-bottom:none}
+.check-box{width:20px;height:20px;border:2px solid #E5E8EB;border-radius:4px;flex-shrink:0;margin-top:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.15s}
+.check-box.checked{background:#D4A017;border-color:#D4A017}
+.check-box.checked::after{content:'\2713';color:#fff;font-size:12px;font-weight:800}
+.check-text{font-size:13px;color:#3E4A5A;line-height:1.6}
+.divider{height:1px;background:#E5E8EB;margin:20px 0}
+.thumb-card{background:#fff;border-radius:16px;overflow:hidden;margin-bottom:14px;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+.thumb-preview{aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.thumb-preview.a{background:linear-gradient(135deg,#0A1628,#132B4D)}
+.thumb-preview.b{background:linear-gradient(135deg,#132B4D,#1F4680)}
+.thumb-preview.c{background:linear-gradient(135deg,#0A1628,#1F4680)}
+.thumb-preview.d{background:linear-gradient(135deg,#1a0a28,#4D132B)}
+.thumb-text{color:#fff;text-align:center;padding:20px;z-index:1}
+.thumb-main{font-size:32px;font-weight:800;line-height:1.3;text-shadow:2px 2px 8px rgba(0,0,0,.5)}
+.thumb-sub{font-size:14px;color:rgba(255,255,255,.7);margin-top:8px}
+.thumb-body{padding:18px}
+.rank{position:absolute;top:-8px;left:16px;border-radius:6px;padding:3px 10px;font-size:11px;font-weight:800;color:#fff}
+.rank.a{background:#D4A017}.rank.b{background:#0A1628}.rank.c{background:#D4A017}.rank.d{background:#8B6914}
+.copy-btn{background:#0A1628;color:#FFB800;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:700;cursor:pointer;transition:.15s;font-family:inherit}
+.copy-btn:hover{background:#132B4D}
+.copied{background:#D4A017!important;color:#fff!important}
+.desc-box{background:#F8F9FA;border:1px solid #E5E8EB;border-radius:10px;padding:18px;font-size:13px;color:#191F28;line-height:2;white-space:pre-wrap;font-family:'Pretendard',system-ui,sans-serif}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
+th{padding:10px;text-align:left;border-bottom:2px solid #E5E8EB;color:#8B6914;font-size:11px;background:#FFFBEA;font-weight:700}
+td{padding:10px;border-bottom:1px solid #F2F4F6;color:#3E4A5A;line-height:1.6}
+.fw-score{display:flex;align-items:center;gap:10px;margin:8px 0}
+.fw-bar{flex:1;height:10px;background:#E5E8EB;border-radius:5px;overflow:hidden}
+.fw-fill{height:100%;background:linear-gradient(90deg,#D4A017,#FFB800);border-radius:5px}
+.fw-v{font-size:13px;font-weight:800;color:#8B6914;min-width:50px;text-align:right}
+.special-badge{display:inline-block;background:linear-gradient(135deg,#D4A017,#FFB800);color:#fff;border-radius:20px;padding:4px 14px;font-size:11px;font-weight:800;letter-spacing:1px;margin-left:8px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.7}}
+@media(max-width:600px){.hero-stats{grid-template-columns:repeat(2,1fr)}.stat-row{grid-template-columns:1fr 1fr}.thumb-main{font-size:22px}}
+</style>
+</head>
+<body>
+<nav class="gnb">
+  <span class="gnb-logo">사찍남</span>
+  <span class="gnb-badge">MC 특별편 촬영기획안</span>
+  <span class="gnb-date">v2.0 · 25분 · 7장소</span>
+</nav>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-eyebrow">사찍남 MC 특별편 — MC가 직접 찍히는 날</div>
+    <div class="hero-title">6년간 조회수 2500만<br>번 돈 0원이었던 남자의 현재</div>
+    <div class="hero-sub">오맷돌 (90년생) · (주)플로우머스 공동대표 · 사찍남 MC · 네오브릿지 MCN<br>군산 시골뜨기 → 6년 유튜브 실패 → 편의점 알바 탈락 → 3000명 거절 → 사장 150명 무료 촬영 → 월 2~3천만원</div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-v">2500만</div><div class="hero-stat-l">6년 총조회수</div></div>
+      <div class="hero-stat"><div class="hero-stat-v">0원</div><div class="hero-stat-l">6년간 수익</div></div>
+      <div class="hero-stat"><div class="hero-stat-v">150명</div><div class="hero-stat-l">무료 촬영</div></div>
+      <div class="hero-stat"><div class="hero-stat-v">2~3천</div><div class="hero-stat-l">현재 월수익(만)</div></div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn on" onclick="go('dash',this)">대시보드</button>
+    <button class="tab-btn" onclick="go('profile',this)">출연자 분석</button>
+    <button class="tab-btn" onclick="go('tl1',this)">25분 타임라인</button>
+    <button class="tab-btn" onclick="go('questions',this)">핵심 질문</button>
+    <button class="tab-btn" onclick="go('scenes',this)">촬영 동선</button>
+    <button class="tab-btn" onclick="go('upload',this)">업로드 키트</button>
+    <button class="tab-btn gold" onclick="go('boost',this)">전환률 부스터</button>
+  </div>
+
+  <!-- TAB 1: 대시보드 -->
+  <div class="panel on" id="tab-dash">
+    <div class="card dark">
+      <div style="font-size:11px;font-weight:700;color:#FFB800;letter-spacing:1.5px;margin-bottom:10px">MC 특별편 — 사전 인터뷰 기반 기획</div>
+      <div style="font-size:16px;font-weight:800;color:#fff;line-height:1.5">150명의 사장을 찍어준 남자의 진짜 이야기<br><span style="font-size:13px;color:#8B95A1">게스트MC 김고딩이 사찍남을 역검증하는 구조</span></div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num red">1</span> 핵심 요약<span class="special-badge">MC 특별편</span></div>
+      <div class="card hot">
+        <div style="font-size:15px;font-weight:800;color:#191F28;margin-bottom:12px">차별점 3가지</div>
+        <div style="font-size:13px;line-height:2;color:#3E4A5A">
+          <strong>1. MC 본인이 출연자:</strong> 14만 구독자가 궁금했던 MC의 진짜 인생 — 팬서비스 + 화제성 극대화<br>
+          <strong>2. 등가교환 전략:</strong> 3000명 거절 → 150명 무료 촬영 → "가치와 가치가 만나서 몸값을 늘려나가는 것"<br>
+          <strong>3. 6년 유튜브 실패:</strong> 조회수 2500만, 200만뷰 영상도 있었는데 번 돈 0원 → 유튜브의 진짜 현실
+        </div>
+      </div>
+
+      <div class="card gold">
+        <div style="font-size:15px;font-weight:800;color:#191F28;margin-bottom:12px">위기장치 6개 (3분 간격)</div>
+        <div style="font-size:13px;line-height:2;color:#3E4A5A">
+          <strong>1.</strong> 6년 유튜브 조회수 200만인데 수익 0원 → "돈이 안 되는 콘텐츠" (3분)<br>
+          <strong>2.</strong> 28살 편의점 알바 면접 탈락 반복 → 주변 "이제 접어라" (6분)<br>
+          <strong>3.</strong> 김고딩 "형 왜 무료로 해줬어?" → 3000명 거절 스토리 (9분)<br>
+          <strong>4.</strong> 가치 계단 + 현재 수익 구조 공개 (12분)<br>
+          <strong>5.</strong> 직원 8명 → 사장놀이 실패 → 고소장 → 폐업신고증 (15분)<br>
+          <strong>6.</strong> 어머니 장례식 날 촬영 간 이유 = "무너질까 봐서" (18분)
+        </div>
+      </div>
+
+      <div class="card blue">
+        <div style="font-size:15px;font-weight:800;color:#191F28;margin-bottom:12px">선제 방어 3종</div>
+        <div style="font-size:13px;line-height:2;color:#3E4A5A">
+          <strong>"월 2~3천이면 대단한 건 아닌데?"</strong> → 유튜브 수익이 아닌 사업 생태계가 핵심 (MCN+임대+부업 포트폴리오)<br>
+          <strong>"무료 촬영이 등가교환이라니 억지 아님?"</strong> → 김고딩 제3자 검증 "이 형은 진짜 돈 안 받았어요"<br>
+          <strong>"MCN 광고 아님?"</strong> → 폐업신고증 공개로 실패도 투명하게 + "대단한 게 아니라 살아남은 거다" 톤
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">2</span> 기획 5대 원칙 체크</div>
+      <div class="card">
+        <table>
+          <tr><th>원칙</th><th>적용</th><th>체크</th></tr>
+          <tr><td><strong>1. 첫 5초 = 숫자 충격</strong></td><td>반지하 빌라촌 → "6년간 조회수 2500만. 번 돈? 0원."</td><td style="color:#D4A017;font-weight:700">OK</td></tr>
+          <tr><td><strong>2. 제목 =/= 썸네일</strong></td><td>제목=방법+숫자 / 썸네일=반지하+카메라+감정</td><td style="color:#D4A017;font-weight:700">OK</td></tr>
+          <tr><td><strong>3. 3분마다 위기장치</strong></td><td>6개 배치 (3/6/9/12/15/18분)</td><td style="color:#D4A017;font-weight:700">OK</td></tr>
+          <tr><td><strong>4. 감정 피크 = 후반 85%</strong></td><td>전반: 등가교환+숫자 / 후반: 고소장+어머니 장례식</td><td style="color:#D4A017;font-weight:700">OK</td></tr>
+          <tr><td><strong>5. MC 의심 = 시청자 신뢰</strong></td><td>김고딩이 역으로 사찍남을 검증</td><td style="color:#D4A017;font-weight:700">OK</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">3</span> 촬영 개요</div>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-v">사찍남</div><div class="stat-l">MC 특별편</div></div>
+        <div class="stat"><div class="stat-v">7장소</div><div class="stat-l">자택~빌라~한강</div></div>
+        <div class="stat dark"><div class="stat-v">25분</div><div class="stat-l">영상 길이</div></div>
+      </div>
+      <div class="note">
+        <strong>촬영일:</strong> TBD · <strong>업로드:</strong> TBD<br>
+        <strong>게스트MC:</strong> 김고딩 (고3 때 사업 시작, 사찍남 출연자) — 역검증 구조<br>
+        <strong>핵심 전략:</strong> MC 본인 서사 = 팬서비스 극대화 · 위기장치 6개 3분 간격 · 어머니 장례식 = 감정 피크
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 2: 출연자 분석 -->
+  <div class="panel" id="tab-profile">
+    <div class="section">
+      <div class="section-title"><span class="num">1</span> 프로필</div>
+      <div class="card">
+        <table>
+          <tr><td style="font-weight:700;width:120px">이름</td><td>오맷돌 (90년생)</td></tr>
+          <tr><td style="font-weight:700">출신</td><td>전북 군산</td></tr>
+          <tr><td style="font-weight:700">현재</td><td>(주)플로우머스 공동대표 · 사찍남 MC · 네오브릿지 MCN</td></tr>
+          <tr><td style="font-weight:700">SNS</td><td>유튜브 @사찍남 (14만 구독자, 최고 176만뷰)</td></tr>
+          <tr><td style="font-weight:700">월 순수익</td><td>2~3천만원 (PPL 350만/건 + 임대 500만/월 + 부업)</td></tr>
+          <tr><td style="font-weight:700">이전 직업</td><td>알바 전전 → 비영리 교육기관 (월급 210만원)</td></tr>
+          <tr><td style="font-weight:700">가족</td><td>아내: 토리와만들기 유튜브 45만 구독자, 책 5권 베스트셀러</td></tr>
+          <tr><td style="font-weight:700">촬영 기록</td><td>150편+ 촬영, 사장 800시간+ 동행</td></tr>
+          <tr><td style="font-weight:700">책 출판</td><td>"나는 100명의 젊은 사장을 만나고 인생을 다시 살기로 결심했다" (빌리어네어)</td></tr>
+          <tr><td style="font-weight:700">등가교환</td><td>"가치와 가치가 만나서 몸값을 늘려나가는 것"</td></tr>
+          <tr><td style="font-weight:700">CTA</td><td>네오브릿지 MCN 소속 문의 + 책 출판 예고</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num red">2</span> 하몬서클 8단계 (실제 인터뷰 기반)</div>
+      <div class="card">
+        <div class="tl-row"><div class="tl-time">1. 안정</div><div class="tl-body"><div class="tl-title">군산 시골뜨기, 24살에 무작정 상경</div><div class="tl-text">개그맨 되고 싶었고, 영상 만들고 싶었고, 유명해지고 싶었다. 집도 없이 올라옴</div></div></div>
+        <div class="tl-row"><div class="tl-time" style="color:#D4A017">2. 욕구</div><div class="tl-body"><div class="tl-title">6년간 유튜브 — 조회수 2500만, 수익 0원 <span class="tl-badge">충격</span></div><div class="tl-text">공감 드라마, 구독자 5만, 200만뷰 영상도 있었지만 재투자만 반복. 28살 편의점 알바 면접도 탈락</div></div></div>
+        <div class="tl-row"><div class="tl-time" style="color:#D4A017">3. 진입</div><div class="tl-body"><div class="tl-title">30살 결혼, 꿈 접고 취직 (월급 210만원) <span class="tl-badge">전환</span></div><div class="tl-text">아내가 힘들어하는 걸 보고 6년간의 꿈을 접음. 비영리 교육기관, 광흥창역. 10만원 인상 거절 → 투잡 7개 업체 500만원 → 퇴사</div></div></div>
+        <div class="tl-row"><div class="tl-time" style="color:#D4A017">4. 시련</div><div class="tl-body"><div class="tl-title">3000명 거절, 등가교환의 탄생 <span class="tl-badge">킬러</span></div><div class="tl-text">프랜차이즈 대표 PD → 같은 시간인데 40배 차이 → "리스크를 갖고 네 일을 해야 돈을 번다" → 30일간 매일 100명 DM, 3000명 거절, 1명 수락 → 사찍남 시작</div></div></div>
+        <div class="tl-row"><div class="tl-time">5. 성취</div><div class="tl-body"><div class="tl-title">사찍남 성장, 150명 · 800시간+</div><div class="tl-text">구독자 14만, 최고 176만뷰. 사장들의 공통점: "멋지지 않다. 잠도 못 자고, 가정 무너져도 아무한테 말 못 하고 출근한다"</div></div></div>
+        <div class="tl-row"><div class="tl-time" style="color:#D4A017">6. 대가</div><div class="tl-body"><div class="tl-title">직원 8명 → 사장놀이 → 고소장 <span class="tl-badge">위기장치</span></div><div class="tl-text">1년간 사장놀이 → 엔진 멈춤 → 직원 해고 → 고소장. "다 내 탓이었다. 게으름, 태도, 시스템"</div></div></div>
+        <div class="tl-row"><div class="tl-time" style="color:#D4A017">7. 복귀</div><div class="tl-body"><div class="tl-title">어머니 뇌경색, 장례식 날 촬영 <span class="tl-badge">감정 피크</span></div><div class="tl-text">4개월차 전성기 → 어머니 혼수상태 → 대전 간호 → 장례 → "무너질까 봐. 나를 놔버릴까 봐. 그래서 더 일을 했다"</div></div></div>
+        <div class="tl-row"><div class="tl-time">8. 변화</div><div class="tl-body"><div class="tl-title">월 2~3천만원, 등가교환의 완성</div><div class="tl-text">아내도 유튜버 45만(토리와만들기), 책 5권 베스트셀러. "꿈을 잃어버리지 말자"</div></div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">3</span> 섭외 평가</div>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-v">S+</div><div class="stat-l">MC 특별편</div></div>
+        <div class="stat"><div class="stat-v">MCN</div><div class="stat-l">사업 유형</div></div>
+        <div class="stat dark"><div class="stat-v">90년생</div><div class="stat-l">20~30대</div></div>
+      </div>
+      <div class="note">
+        MC 본인 출연 = 팬서비스 + 화제성 극대화<br>
+        감정 피크 3개 (편의점 탈락 / 고소장 / 어머니 장례식) — 기존 사찍남 최다<br>
+        <strong>예상 조회수: 100만+</strong> (MC 서사 + 등가교환 + 감정 폭발 조합)
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 3: 25분 타임라인 -->
+  <div class="panel" id="tab-tl1">
+    <div class="card dark">
+      <div style="font-size:11px;font-weight:700;color:#FFB800;margin-bottom:8px">사찍남 MC 특별편 — 등가교환 + 감정 피크</div>
+      <div style="font-size:16px;font-weight:800;color:#fff">6년간 돈 못 벌고 사장 150명 무료 촬영한 MC의 현재</div>
+      <div style="font-size:12px;color:#8B95A1;margin-top:6px">25분 · 7장소 · 위기장치 6개 3분 간격 · 감정 피크 18분</div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num red">1</span> 25분 타임라인</div>
+      <div class="card">
+        <div class="tl-row"><div class="tl-time" style="color:#D4A017">0~5초</div><div class="tl-body"><div class="tl-title">반지하 빌라촌 — 패턴 인터럽트</div><div class="tl-text"><strong>"6년간 유튜브 조회수 2500만. 근데 번 돈이 0원이었거든요."</strong><br><span class="tag tag-r">숫자 충격</span> <span class="tag tag-d">인사 없음</span></div></div></div>
+
+        <div class="tl-row"><div class="tl-time" style="color:#D4A017">5~30초</div><div class="tl-body"><div class="tl-title">썸네일 이행</div><div class="tl-text">"여기서 살면서 사장님들 찍으러 다녔어요. 저는 반지하, 찍어주는 분들은 억대."<br><span class="tag tag-r">갭 확인 → 시청 결정</span></div></div></div>
+
+        <div class="tl-row"><div class="tl-time b">30~60초</div><div class="tl-body"><div class="tl-title">오픈 루프</div><div class="tl-text">"근데 이분들을 찍으면서 하나를 발견했어요. 돈 버는 사람들은 전부 멋지지 않더라고요."<br><span class="tag tag-b">"뭔데?" → 지속 유도</span></div></div></div>
+
+        <div class="tl-row"><div class="tl-time" style="color:#D4A017">3분</div><div class="tl-body"><div class="tl-title">위기장치1 [반전] — 과거 유튜브 공개 <span class="tl-badge">위기장치</span></div><div class="tl-text">공감 드라마 영상 공개. "200만뷰 영상도 있었어요. 근데 그게 돈이 안 되는 콘텐츠였어요."<br><span class="tag tag-r">"200만뷰인데 돈이 0원?"</span></div></div></div>
+
+        <div class="tl-row"><div class="tl-time" style="color:#D4A017">6분</div><div class="tl-body"><div class="tl-title">위기장치2 [감정이입] — 편의점 알바 탈락 <span class="tl-badge">위기장치</span></div><div class="tl-text">"28살에 편의점 알바 면접을 계속 봤는데 다 탈락이에요. 편의점 알바도 안 뽑아주는 거야."<br>주변: "이제 접어라."<br><span class="tag tag-r">처량함, 공감 폭발</span></div></div></div>
+
+        <div class="tl-row"><div class="tl-time" style="color:#D4A017">9분</div><div class="tl-body"><div class="tl-title">위기장치3 [의심] — 3000명 거절 <span class="tl-badge">킬러</span></div><div class="tl-text">김고딩: "근데 형, 진짜 왜 무료로 해줬어요?"<br>→ "3000명한테 거절당했어. 30일 동안. 하루에 100명한테."<br><span class="tag tag-d">MC 의심 = 시청자 신뢰</span></div></div></div>
+
+        <div class="tl-row"><div class="tl-time" style="color:#D4A017">12분</div><div class="tl-body"><div class="tl-title">위기장치4 [수익공개] — 가치 계단 <span class="tl-badge">킬러</span></div><div class="tl-text">칠판에 가치 계단 (플랫폼 > 인플루언서 > AI > 노동자)<br>PPL 350만/건 + 임대 500만/월 + 부업<br><span class="tag tag-r">구체적 방법론</span></div></div></div>
+
+        <div class="tl-row"><div class="tl-time" style="color:#D4A017">15분</div><div class="tl-body"><div class="tl-title">위기장치5 [현실] — 고소장 <span class="tl-badge">위기장치</span></div><div class="tl-text">"직원 8명 고용했어. 1년간 사장놀이 했어. 근데 엔진이 멈춰버렸어."<br>폐업신고증 공개<br><span class="tag tag-r">쌩리얼, 찐실패</span></div></div></div>
+
+        <div class="tl-row"><div class="tl-time" style="color:#D4A017">18분</div><div class="tl-body"><div class="tl-title">감정 피크 — 어머니 장례식 날 촬영 <span class="tl-badge">감정 피크</span></div><div class="tl-text"><strong>"어머니가 뇌경색으로 혼수상태에 오셨어. 장례 치르고 그 날 바로 차 타고 올라가서 촬영 갔어. 왜? 무너질까 봐. 나를 놔버릴까 봐."</strong><br><span class="tag tag-r">감정 폭발. 눈물.</span></div></div></div>
+
+        <div class="tl-row"><div class="tl-time b">20분</div><div class="tl-body"><div class="tl-title">아내 이야기 [감정반전]</div><div class="tl-text">디자이너 → 쓰러짐 → 유튜브로 꿈 찾음 → 구독자 45만, 책 5권 베스트셀러<br>토리와만들기 화면<br><span class="tag tag-b">희망, 감동</span></div></div></div>
+
+        <div class="tl-row"><div class="tl-time b">22분</div><div class="tl-body"><div class="tl-title">클라이맥스 — CTA 준비</div><div class="tl-text">"나랑 같이 유튜버가 되고 싶은 대표님들, 연락해라" + 가치계단 짧게<br><span class="tag tag-d">MCN 소속 CTA</span></div></div></div>
+
+        <div class="tl-row"><div class="tl-time" style="color:#D4A017">마지막 2분</div><div class="tl-body"><div class="tl-title">엔딩 — "꿈을 잃어버리지 말자"</div><div class="tl-text"><strong>"6년이 걸려도. 편의점 알바에 떨어져도. 3000명한테 거절당해도. 꿈을 잃어버리지 마세요."</strong><br><span class="tag tag-r">동기부여 + 댓글 폭발</span></div></div></div>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>설계 의도:</strong> 전반부(등가교환+숫자+가치계단) / 후반부(고소장+어머니+꿈) = 방법 먼저, 감정 나중에<br>
+      감정 피크 18분 = 영상의 85% 지점. 첫 30초 목표 유지율 80%+
+    </div>
+  </div>
+
+  <!-- TAB 4: 핵심 질문 -->
+  <div class="panel" id="tab-questions">
+    <div class="section">
+      <div class="section-title"><span class="num red">1</span> 킬러 질문 13선 (스킵 금지)</div>
+
+      <div style="font-size:12px;color:#8B95A1;margin-bottom:14px;padding:8px 12px;background:#F8F9FA;border-radius:8px">게스트MC: 김고딩 (사찍남이 가장 기억에 남는 출연자) · 김고딩이 사찍남을 역으로 의심하고 검증</div>
+
+      <div class="q-card"><div class="q-num red">2</div><div class="q-body"><div class="q-text">"형, 여기가 어디예요?" → "여기서 살면서 사장들 찍으러 다녔다고요?"</div><div class="q-sub">반지하 빌라촌 앞 갭 극대화. 첫 후킹</div><div class="q-tags"><span class="tag tag-r">후킹</span><span class="tag tag-d">수원 빌라촌</span></div></div></div>
+
+      <div class="q-card"><div class="q-num red">5</div><div class="q-body"><div class="q-text">"28살에 편의점 알바 면접도 떨어졌다고요? 그게 진짜예요?"</div><div class="q-sub">가장 처량했던 순간. 위기장치2</div><div class="q-tags"><span class="tag tag-r">위기</span><span class="tag tag-d">빌라촌</span></div></div></div>
+
+      <div class="q-card"><div class="q-num red">6</div><div class="q-body"><div class="q-text">"6년간 유튜브 했다고요? 조회수는요?" → "근데 번 돈이 0원"</div><div class="q-sub">공감 드라마, 2500만뷰, 200만뷰 영상 → 수익 0원 반전</div><div class="q-tags"><span class="tag tag-r">반전</span><span class="tag tag-d">단골집</span></div></div></div>
+
+      <div class="q-card"><div class="q-num red">9</div><div class="q-body"><div class="q-text">"취직해서 월급이 얼마였어요?" → "210만원" → "10만원 올려달랬더니?"</div><div class="q-sub">"충분히 주고 있다" 거절 → 투잡 7개 업체 500만원 → 퇴사</div><div class="q-tags"><span class="tag tag-r">후킹</span><span class="tag tag-d">단골집</span></div></div></div>
+
+      <div class="q-card"><div class="q-num red">11</div><div class="q-body"><div class="q-text">"형, 왜 무료로 촬영해줬어요? 돈 안 받으면 뭘로 살아요?"</div><div class="q-sub">등가교환 핵심. 김고딩이 진심으로 의심 → 원칙5 역적용</div><div class="q-tags"><span class="tag tag-r">의심</span><span class="tag tag-d">택시</span></div></div></div>
+
+      <div class="q-card"><div class="q-num red">12</div><div class="q-body"><div class="q-text">"처음에 몇 명한테 거절당했어요?" → "3000명. 30일 동안. 하루 100명."</div><div class="q-sub">DM 100통/일 + 홍대 합정 문전박대. 6년 실패했는데 또 거절</div><div class="q-tags"><span class="tag tag-r">위기</span><span class="tag tag-d">택시</span></div></div></div>
+
+      <div class="q-card"><div class="q-num red">15</div><div class="q-body"><div class="q-text">김고딩: "형이 나를 찍으러 왔을 때, 진짜 돈 안 받았어요. 고3인 저를 10시간 쫓아다녔어요."</div><div class="q-sub">제3자 검증. "이 형은 진짜다"</div><div class="q-tags"><span class="tag tag-r">신뢰</span><span class="tag tag-d">김고딩 사업장</span></div></div></div>
+
+      <div class="q-card"><div class="q-num red">17</div><div class="q-body"><div class="q-text">"고딩이가 고3인데 클라이언트 통화하는 거 보면서 어떤 생각 들었어요?"</div><div class="q-sub">"나 자신이 초라해졌다. 더 배우고 싶다는 생각이 들었다"</div><div class="q-tags"><span class="tag tag-r">감정</span><span class="tag tag-d">김고딩 사업장</span></div></div></div>
+
+      <div class="q-card"><div class="q-num red">18</div><div class="q-body"><div class="q-text">"150명 찍으면서 돈 버는 사장들의 공통점이 뭔데요?"</div><div class="q-sub">1) 멋지지 않다 2) 포기한 것들이 많다 3) 외롭다</div><div class="q-tags"><span class="tag tag-r">전문성</span><span class="tag tag-d">김고딩 사업장</span></div></div></div>
+
+      <div class="q-card"><div class="q-num red">20</div><div class="q-body"><div class="q-text">"직원 8명 고용했었다면서요? 지금은 왜 혼자예요?"</div><div class="q-sub">사장놀이 1년 → 고소장 → 폐업신고증 공개</div><div class="q-tags"><span class="tag tag-r">현실</span><span class="tag tag-d">패스트파이브</span></div></div></div>
+
+      <div class="q-card"><div class="q-num red">22</div><div class="q-body"><div class="q-text">(칠판) "이 시대에 돈 버는 구조를 설명해줄 수 있어요?"</div><div class="q-sub">가치 계단: 플랫폼 > 인플루언서 > AI > 노동자</div><div class="q-tags"><span class="tag tag-r">전문성</span><span class="tag tag-d">패스트파이브</span></div></div></div>
+
+      <div class="q-card"><div class="q-num red">26</div><div class="q-body"><div class="q-text">"어머니 장례 치르고 그 날 바로 촬영 갔다고요? 왜요?"</div><div class="q-sub"><strong>"무너질까 봐. 나를 놔버릴까 봐."</strong> 감정 피크</div><div class="q-tags"><span class="tag tag-r">감정</span><span class="tag tag-d">한강</span></div></div></div>
+
+      <div class="q-card"><div class="q-num red">30</div><div class="q-body"><div class="q-text">"24살에 군산에서 올라온 그 시골뜨기한테 뭐라고 말해주고 싶어요?"</div><div class="q-sub">최종 감정 피크. 과거의 나에게. "꿈을 잃어버리지 말자"</div><div class="q-tags"><span class="tag tag-r">변화</span><span class="tag tag-d">한강 엔딩</span></div></div></div>
+    </div>
+
+    <div class="note">
+      <strong>전체 질문 30개:</strong> 7장소 × 킬러13 + 필수12 + 선택5<br>
+      위 13개는 절대 스킵 금지. 나머지는 흐름에 따라 백업 풀에서 선택.
+    </div>
+  </div>
+
+  <!-- TAB 5: 촬영 동선 -->
+  <div class="panel" id="tab-scenes">
+    <div class="section">
+      <div class="section-title"><span class="num">1</span> 7장소 촬영 동선</div>
+      <div class="card">
+        <table>
+          <tr><th>순서</th><th>장소</th><th>시간</th><th>용도</th><th>하몬서클</th></tr>
+          <tr><td><strong>L1</strong></td><td>오맷돌 자택</td><td>13:00</td><td>아이와 일상. 오프닝</td><td>1. 안정</td></tr>
+          <tr><td><strong>L2</strong></td><td>수원 반지하 빌라촌</td><td>13:30</td><td>과거 회고 + 유튜브 영상 공개</td><td>1~2. 일상+욕구</td></tr>
+          <tr><td><strong>L3</strong></td><td>예전 단골집/첫 촬영 장소</td><td>14:00</td><td>첫 촬영 이야기</td><td>3. 낯선 환경</td></tr>
+          <tr><td><strong>L4</strong></td><td>택시 이동</td><td>14:30</td><td>등가교환 발견 + 3000명 거절</td><td>4. 시련</td></tr>
+          <tr><td><strong>L5</strong></td><td>김고딩 사업장</td><td>15:00</td><td>역검증 + 사장 공통점</td><td>5. 성취</td></tr>
+          <tr><td><strong>L6</strong></td><td>강남 패스트파이브</td><td>16:00</td><td>가치계단 + 실패 + 수익공개</td><td>6~7. 대가+복귀</td></tr>
+          <tr><td><strong>L7</strong></td><td>한강</td><td>17:00</td><td>어머니 + 엔딩 감정피크</td><td>8. 변화</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num red">2</span> 장소별 핵심 장면</div>
+
+      <div class="card">
+        <div style="font-size:13px;font-weight:800;color:#0A1628;margin-bottom:8px">L1: 오맷돌 자택 (13:00)</div>
+        <div style="font-size:13px;line-height:2;color:#3E4A5A">
+          - 아이와 시간 보내는 자연스러운 장면 (인터뷰 아닌 일상 촬영)<br>
+          - "이 사람도 평범하다" 인식 심기<br>
+          <strong>준비물:</strong> 없음 (자연스러운 일상)
+        </div>
+      </div>
+
+      <div class="card hot">
+        <div style="font-size:13px;font-weight:800;color:#D4A017;margin-bottom:8px">L2: 수원 반지하 빌라촌 (13:30)</div>
+        <div style="font-size:13px;line-height:2;color:#3E4A5A">
+          - 김고딩: "오늘은 제가 형을 찍습니다"<br>
+          - "여기서 살면서 사장들 찍으러 다녔어요" (갭 극대화)<br>
+          - 과거 유튜브 공감 드라마 영상 공개<br>
+          - 편의점 알바 면접 탈락 이야기<br>
+          <strong>준비물:</strong> 과거 유튜브 영상 (비공개 해제)
+        </div>
+      </div>
+
+      <div class="card gold">
+        <div style="font-size:13px;font-weight:800;color:#D4A017;margin-bottom:8px">L5: 김고딩 사업장 (15:00)</div>
+        <div style="font-size:13px;line-height:2;color:#3E4A5A">
+          - 김고딩: "이 형 진짜 돈 안 받았어요. 10시간 쫓아다녔어요" (제3자 검증)<br>
+          - 사장 150명의 공통점 3가지 (멋지지 않다/포기 많다/외롭다)<br>
+          - "찍어준 사장 중 망한 분 있어요?" → "나지."<br>
+          <strong>준비물:</strong> 김고딩 사전 섭외 완료
+        </div>
+      </div>
+
+      <div class="card blue">
+        <div style="font-size:13px;font-weight:800;color:#0A1628;margin-bottom:8px">L6: 강남 패스트파이브 8번출구 3호점 (16:00)</div>
+        <div style="font-size:13px;line-height:2;color:#3E4A5A">
+          - 맥미니 3대 + 맥북 = 현재 작업 환경<br>
+          - 가치 계단 칠판 설명 (플랫폼 > 인플루언서 > AI > 노동자)<br>
+          - 직원 8명 → 사장놀이 → 고소장 → 폐업신고증 공개<br>
+          - 아내 성공사례: 토리와만들기 45만, 책 5권<br>
+          <strong>준비물:</strong> 칠판, 폐업신고증, 맥미니 3대
+        </div>
+      </div>
+
+      <div class="card hot">
+        <div style="font-size:13px;font-weight:800;color:#D4A017;margin-bottom:8px">L7: 한강 (17:00) — 감정 피크</div>
+        <div style="font-size:13px;line-height:2;color:#3E4A5A">
+          - 어머니 뇌경색 → 혼수상태 → 장례 → 그 날 바로 촬영<br>
+          - "무너질까 봐. 나를 놔버릴까 봐. 그래서 더 일을 했다"<br>
+          - "24살에 군산에서 올라온 그 시골뜨기한테 뭐라고?" → "꿈을 잃어버리지 말자"<br>
+          <strong>촬영 포인트:</strong> 석양 + 한강 배경. 감정 피크 타이밍
+        </div>
+      </div>
+
+      <div class="note">
+        <strong>촬영 총 4시간 (13:00~17:00):</strong> 7장소 이동. 장소당 평균 30분.<br>
+        한강 엔딩은 반드시 석양 시간대에 맞출 것.
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">3</span> 증빙 자료 체크리스트</div>
+      <div class="card">
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text">과거 유튜브 채널 (공감 드라마, 비공개 해제 일부 — 조회수 200만 영상 등)</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text">수원 반지하 빌라촌 (실제 촬영 가능 확인 완료)</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text">폐업신고증 (사장놀이 실패의 증거)</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text">유튜브 스튜디오 화면 (구독자 14만, 최고 176만뷰)</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text">사찍남 촬영 현장 B-roll 아카이브 (150명 몽타주용)</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text">가치 계단 칠판 (패스트파이브 준비)</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text">토리와만들기 채널 화면 (아내 성공사례)</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text">책 출판 기획안 (빌리어네어)</div></div>
+        <div class="check-item"><div class="check-box" onclick="tog(this)"></div><div class="check-text">맥미니 3대 + 맥북 작업 환경 (AI 전환 비주얼)</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 6: 업로드 키트 -->
+  <div class="panel" id="tab-upload">
+    <div class="section">
+      <div class="section-title"><span class="num red">1</span> 제목/썸네일</div>
+
+      <div class="note" style="margin-bottom:16px">
+        <strong>제목 검증 기준:</strong> 33자 이내 · 숫자 2개+ · 반전 구조 · 제목과 썸네일이 같은 말 하지 않을 것
+      </div>
+
+      <div class="thumb-card" style="position:relative">
+        <div class="rank a">A안 — 반전형 (1순위)</div>
+        <div class="thumb-preview a"><div class="thumb-text"><div class="thumb-main">6년간 유튜브 조회수 2500만인데<br>번 돈 0원이었던 남자의 현재</div><div class="thumb-sub">반지하 빌라촌 · 카메라 · 0원 → 월 2천만</div></div></div>
+        <div class="thumb-body">
+          <div style="font-size:13px;line-height:1.8;color:#3E4A5A">
+            <strong>제목:</strong> 6년간 유튜브 조회수 2500만인데 번 돈 0원이었던 남자의 현재 (31자)<br>
+            <strong>근거:</strong> "조회수 2500만 vs 0원" 극단적 대비 · 숫자 2개(2500만/0원) · "~의 현재" 궁금증<br>
+            <strong>썸네일:</strong> 반지하 빌라촌 + 카메라 들고 서 있는 모습 + "번 돈 0원"
+          </div>
+        </div>
+      </div>
+
+      <div class="thumb-card" style="position:relative">
+        <div class="rank b">B안 — 대조형</div>
+        <div class="thumb-preview b"><div class="thumb-text"><div class="thumb-main">사장 150명 무료 촬영해주고<br>월급 210만원이었던 남자가 지금은</div><div class="thumb-sub">무료 촬영 · 반지하 · 등가교환</div></div></div>
+        <div class="thumb-body">
+          <div style="font-size:13px;line-height:1.8;color:#3E4A5A">
+            <strong>제목:</strong> 사장 150명 무료 촬영해주고 월급 210만원이었던 남자가 지금은 (30자)<br>
+            <strong>근거:</strong> "150명 무료" 비상식적 행동 + "210만원" 구체적 숫자 + "지금은" 궁금증<br>
+            <strong>썸네일:</strong> 사무실에서 진지한 표정 + "월급 210만원"
+          </div>
+        </div>
+      </div>
+
+      <div class="thumb-card" style="position:relative">
+        <div class="rank c">C안 — 숫자 충격형</div>
+        <div class="thumb-preview c"><div class="thumb-text"><div class="thumb-main">하루 100명씩 30일간<br>3000명한테 거절당하고도 포기 안 한 결과</div><div class="thumb-sub">DM · 문전박대 · 등가교환</div></div></div>
+        <div class="thumb-body">
+          <div style="font-size:13px;line-height:1.8;color:#3E4A5A">
+            <strong>제목:</strong> 하루 100명씩 30일간 3000명한테 거절당하고도 포기 안 한 결과 (31자)<br>
+            <strong>근거:</strong> "100명/30일/3000명" 숫자 3개 연타 + "포기 안 한 결과" 궁금증<br>
+            <strong>썸네일:</strong> 핸드폰 DM 화면 + 지친 표정 + "3000명 거절"
+          </div>
+        </div>
+      </div>
+
+      <div class="thumb-card" style="position:relative">
+        <div class="rank d">D안 — 감정형</div>
+        <div class="thumb-preview d"><div class="thumb-text"><div class="thumb-main">어머니 장례식 날<br>촬영 갔습니다. 무너질까 봐서요.</div><div class="thumb-sub">한강 · 석양 · 눈물</div></div></div>
+        <div class="thumb-body">
+          <div style="font-size:13px;line-height:1.8;color:#3E4A5A">
+            <strong>제목:</strong> 어머니 장례식 날 촬영 갔습니다. 무너질까 봐서요. (25자)<br>
+            <strong>근거:</strong> 감정 한 방. 숫자 없지만 궁금증 극대화. 사찍남 기존 영상과 톤 다름 = 차별화<br>
+            <strong>썸네일:</strong> 한강 석양 + 뒷모습 + 카메라 = 감성
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">2</span> 설명란</div>
+      <div class="desc-box" id="desc-omaetdol">사찍남 MC 특별편 — MC가 직접 찍히는 날
+
+90년생, 전북 군산 시골뜨기
+24살에 집도 없이 무작정 상경
+6년간 유튜브 조회수 2500만 — 번 돈 0원
+
+30살에 꿈 접고 취직, 월급 210만원
+3000명한테 거절당하고 사찍남을 시작해
+지금까지 사장 150명을 무료로 촬영했습니다
+
+게스트MC 김고딩이 사찍남을 역으로 검증합니다
+"이 형은 진짜 돈 안 받았어요. 10시간 쫓아다녔어요"
+
+등가교환의 법칙 — "가치와 가치가 만나서 몸값을 늘려나가는 것"
+
+#사찍남 #유튜브실패 #등가교환 #MCN #유튜브창업 #직장인퇴사</div>
+      <button class="copy-btn" onclick="cp('desc-omaetdol',this)">복사</button>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">3</span> 엔딩 설계</div>
+      <div class="card hot">
+        <div style="font-size:13px;font-weight:800;color:#D4A017;margin-bottom:10px">사찍남 3줄 요약</div>
+        <div style="font-size:14px;line-height:2;color:#3E4A5A">
+          1. "군산 시골뜨기가 24살에 올라와서 6년간 유튜브 했는데 번 돈이 0원이었습니다."<br>
+          2. "편의점 알바에 떨어지고, 3000명한테 거절당하고, 어머니 장례식 날에도 촬영을 갔습니다."<br>
+          3. "150명의 사장과 800시간을 함께했습니다. 꿈을 잃어버리지 마세요."
+        </div>
+      </div>
+
+      <div class="card navy">
+        <div style="font-size:13px;font-weight:800;color:#FFB800;margin-bottom:10px">김고딩(게스트MC) 마지막 멘트</div>
+        <div style="font-size:14px;line-height:1.8;color:#fff">
+          "저는 고3 때 이 형한테 찍혔거든요. 그때 이 형이 10시간 동안 돈도 안 받고 쫓아다녔어요. 그게 이 사람이에요. 진짜입니다."
+        </div>
+      </div>
+
+      <div class="card dark">
+        <div style="font-size:13px;font-weight:800;color:#FFB800;margin-bottom:10px">오맷돌(출연자) 마지막 한마디</div>
+        <div style="font-size:14px;line-height:1.8;color:#fff">
+          "가치와 가치가 만나면 돈이 되는 게 아니라 몸값이 되는 거예요. 먼저 줘야 얻습니다. 이게 등가교환이에요."
+        </div>
+      </div>
+
+      <div class="card">
+        <div style="font-size:13px;font-weight:800;color:#191F28;margin-bottom:10px">CTA (Call to Action)</div>
+        <div style="font-size:13px;line-height:2;color:#3E4A5A">
+          <strong>댓글 유도:</strong> "6년간 포기 안 한 적 있는 분, 댓글에 한 줄 남겨주세요. 다 읽을게요."<br>
+          <strong>구독 유도:</strong> "이 채널에서 매주 진짜 사장님들의 찐 스토리를 보여드립니다"<br>
+          <strong>MCN 문의:</strong> "유튜버/인플루언서가 되고 싶은 대표님들, 설명란 링크로 연락주세요"<br>
+          <strong>책 예고:</strong> "150명의 사장 이야기, 책으로 나옵니다"
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TAB 7: 전환률 부스터 -->
+  <div class="panel" id="tab-boost">
+    <div class="section">
+      <div class="section-title"><span class="num gold">1</span> USP — 시청자 전환 설계</div>
+      <div class="card gold">
+        <table>
+          <tr><th>#</th><th>항목</th><th>내용</th></tr>
+          <tr><td>1</td><td><strong>타겟</strong></td><td>유튜브/인플루언서 되고 싶은 사장님 + 꿈과 현실 사이 20~30대</td></tr>
+          <tr><td>2</td><td><strong>목적</strong></td><td>"나도 SNS에서 전문가로 자리 잡을 수 있다" — 가치 계단 상승법</td></tr>
+          <tr><td>3</td><td><strong>해결</strong></td><td>"뭘 해야 할지 모르겠다" → 등가교환 전략 (먼저 가치를 주면 기회가 온다)</td></tr>
+          <tr><td>4</td><td><strong>대의</strong></td><td>"포장된 성공 팔이가 아닌 진짜 사장들의 찐 스토리를 기록한다"</td></tr>
+          <tr><td>5</td><td><strong>손해</strong></td><td>가치 계단: 시작 안 하면 노동자 계단에 남는다</td></tr>
+          <tr><td>6</td><td><strong>차별</strong></td><td>150명 실전 경험 + 아내(45만 유튜버) 성공사례 + AI+데이터 시스템</td></tr>
+          <tr><td>7</td><td><strong>B&A</strong></td><td>편의점 알바 탈락 → 월 2~3천만원 / 디자이너 쓰러짐 → 45만 유튜버 + 책 5권</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">2</span> 경쟁 분석</div>
+      <div class="card navy">
+        <table style="color:#fff">
+          <tr><th style="background:transparent;color:#FFB800">항목</th><th style="background:transparent;color:#FFB800">휴먼스토리</th><th style="background:transparent;color:#FFB800">돈탐생</th><th style="background:transparent;color:#FFB800">사찍남 (이번)</th></tr>
+          <tr><td style="color:#8B95A1">조회수</td><td style="color:#8B95A1">200만+</td><td style="color:#8B95A1">100만+</td><td style="color:#FFB800;font-weight:700">목표 100만+</td></tr>
+          <tr><td style="color:#8B95A1">MC 서사 깊이</td><td style="color:#8B95A1">얕음</td><td style="color:#8B95A1">없음</td><td style="color:#FFB800;font-weight:700">극강 (6년+어머니+고소장)</td></tr>
+          <tr><td style="color:#8B95A1">의심 구조</td><td style="color:#8B95A1">없음</td><td style="color:#8B95A1">없음</td><td style="color:#FFB800;font-weight:700">강함 (김고딩 역검증)</td></tr>
+          <tr><td style="color:#8B95A1">현장감</td><td style="color:#8B95A1">3~4장소</td><td style="color:#8B95A1">2~3장소</td><td style="color:#FFB800;font-weight:700">7장소</td></tr>
+          <tr><td style="color:#8B95A1">감정 피크</td><td style="color:#8B95A1">1개</td><td style="color:#8B95A1">0개</td><td style="color:#FFB800;font-weight:700">3개</td></tr>
+          <tr><td style="color:#8B95A1">팬서비스</td><td style="color:#8B95A1">보통</td><td style="color:#8B95A1">없음</td><td style="color:#FFB800;font-weight:700">극대화 (MC 본인 출연)</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num red">3</span> 노림수 — MCN + 책 + 가치 계단</div>
+      <div class="card hot">
+        <div style="font-size:12px;color:#8B95A1;margin-bottom:10px">원칙: 절대 광고처럼 보이면 안 됨. 자연스러운 맥락에서.</div>
+        <table>
+          <tr><th>장소</th><th>노림수 장면</th><th>자연스러운 멘트</th></tr>
+          <tr><td><strong>패스트파이브</strong></td><td>가치 계단 설명 중</td><td>"유튜브/인스타는 주민등록 같은 거다. 전문가는 천문학적인 돈을 벌 거다"</td></tr>
+          <tr><td><strong>패스트파이브</strong></td><td>아내 사례 후</td><td>"문의 오는 대표들이 많아요. 같이 키워나가고 싶은 분들은 연락해주세요"</td></tr>
+          <tr><td><strong>패스트파이브</strong></td><td>AI 시스템 보여주면서</td><td>"데이터를 모으고 있어요. 대표들의 찐 스토리를 더 좁혀서 다루려고요"</td></tr>
+          <tr><td><strong>한강 엔딩</strong></td><td>마무리 직전</td><td>"150명의 이야기를 책으로 남기려고 해요. 출간 소식은 채널에서 제일 먼저"</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">4</span> 퍼널 설계</div>
+      <div class="card">
+        <table>
+          <tr><th>항목</th><th>내용</th></tr>
+          <tr><td><strong>주 CTA</strong></td><td>네오브릿지 MCN 소속 문의 — 유튜버/인플루언서 되고 싶은 사장님들</td></tr>
+          <tr><td><strong>부 CTA</strong></td><td>책 출판 예고 (빌리어네어)</td></tr>
+          <tr><td><strong>핵심 메시지</strong></td><td>SNS에 얼굴 드러낸 사람만 살아남는다. 지금 시작해야 한다</td></tr>
+          <tr><td><strong>포모 형성</strong></td><td>"그 키워드에서 전문가 자리는 몇 명 남지 않았다"</td></tr>
+          <tr><td><strong>접근 경로</strong></td><td>영상 설명란 링크 + 댓글 고정</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title"><span class="num">5</span> 예상 댓글 반응</div>
+      <div class="card">
+        <div style="font-size:13px;line-height:2;color:#3E4A5A">
+          <strong>긍정:</strong> "어머니 장례식 날 촬영 갔다는 거... 울었다" · "6년간 2500만뷰인데 0원이라니 유튜브 현실" · "MC가 어떤 사람인지 궁금했는데 실화냐"<br>
+          <strong>의심:</strong> "월 2~3천이면 대단한 건 아닌데?" · "MCN 광고 아님?"<br>
+          <strong>방어:</strong> 폐업신고증 공개(실패 투명) + 김고딩 제3자 검증 + "대단한 게 아니라 살아남은 거다" 톤
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function go(id,el){document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('on'));el.classList.add('on');document.querySelectorAll('.panel').forEach(p=>p.classList.remove('on'));document.getElementById('tab-'+id).classList.add('on');window.scrollTo({top:0,behavior:'smooth'})}
+function cp(id,btn){var t=btn.textContent;navigator.clipboard.writeText(document.getElementById(id).innerText).then(()=>{btn.classList.add('copied');btn.textContent='복사 완료!';setTimeout(()=>{btn.classList.remove('copied');btn.textContent=t},1500)}).catch(()=>{var r=document.createRange();r.selectNodeContents(document.getElementById(id));var s=window.getSelection();s.removeAllRanges();s.addRange(r);document.execCommand('copy');s.removeAllRanges();btn.classList.add('copied');btn.textContent='복사 완료!';setTimeout(()=>{btn.classList.remove('copied');btn.textContent=t},1500)})}
+function tog(el){el.classList.toggle('checked')}
+</script>
+</body>
+</html>
