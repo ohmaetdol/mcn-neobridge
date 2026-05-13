@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>미팅 결과 — 2026.05.14</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1a1a2e;
+  --ink-soft: #4a4a6a;
+  --ink-mute: #7a7a9a;
+  --navy: #1a2e5a;
+  --accent: #6b63b5;
+  --accent-light: #ece9f7;
+  --bg: #f8f9fc;
+  --paper: #ffffff;
+  --line: #e2e6ef;
+  --success: #10b981;
+  --success-light: #ecfdf5;
+  --warning: #d97706;
+  --warning-light: #fffbeb;
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--bg); color: var(--ink);
+  line-height: 1.7; padding: 40px 20px 80px;
+}
+.container { max-width: 800px; margin: 0 auto; }
+
+/* Header */
+.header {
+  background: linear-gradient(135deg, #1a2e5a 0%, #6b63b5 100%);
+  color: #fff; border-radius: 16px; padding: 40px; margin-bottom: 32px;
+}
+.header-badge {
+  display: inline-block; padding: 5px 14px; background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2); border-radius: 20px;
+  font-size: 12px; font-weight: 500; letter-spacing: 0.05em; margin-bottom: 16px;
+}
+.status-badge {
+  display: inline-block; padding: 4px 12px; background: rgba(16,185,129,0.2);
+  border: 1px solid rgba(16,185,129,0.4); border-radius: 20px;
+  font-size: 11px; font-weight: 600; color: #6ee7b7; margin-left: 12px;
+}
+.header h1 { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+.header p { font-size: 14px; color: rgba(255,255,255,0.7); }
+.header-info {
+  display: flex; gap: 24px; margin-top: 20px; padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.15); font-size: 13px; flex-wrap: wrap;
+}
+.header-info span { color: rgba(255,255,255,0.6); }
+.header-info strong { color: #fff; font-weight: 600; }
+
+/* Section */
+.section {
+  background: var(--paper); border-radius: 14px; padding: 32px;
+  margin-bottom: 16px; border: 1px solid var(--line);
+}
+.section-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 30px; height: 30px; background: var(--navy); color: #fff;
+  border-radius: 8px; font-size: 14px; font-weight: 800; margin-right: 12px;
+}
+.section h2 {
+  display: flex; align-items: center; font-size: 20px; font-weight: 800;
+  color: var(--navy); margin-bottom: 20px;
+}
+h3 {
+  font-size: 15px; font-weight: 700; color: var(--ink);
+  margin: 20px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--line);
+}
+h3:first-of-type { margin-top: 0; }
+p, li { font-size: 14px; color: var(--ink-soft); }
+ul { padding-left: 20px; margin-bottom: 12px; }
+li { margin-bottom: 6px; line-height: 1.6; }
+li strong { color: var(--ink); }
+
+/* Table */
+table {
+  width: 100%; border-collapse: separate; border-spacing: 0;
+  border-radius: 10px; overflow: hidden; margin: 12px 0;
+  border: 1px solid var(--line);
+}
+thead th {
+  background: var(--navy); color: #fff; font-size: 12px; font-weight: 600;
+  padding: 10px 14px; text-align: left;
+}
+tbody td {
+  padding: 10px 14px; border-bottom: 1px solid var(--line);
+  font-size: 13px; color: var(--ink-soft);
+}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:nth-child(even) { background: var(--bg); }
+td strong { color: var(--ink); }
+
+/* Quote */
+.quote {
+  background: var(--accent-light); border-left: 4px solid var(--accent);
+  border-radius: 0 10px 10px 0; padding: 16px 20px; margin: 16px 0;
+  font-size: 14px; color: var(--navy); font-weight: 500;
+}
+.quote .author {
+  display: block; margin-top: 6px; font-size: 12px;
+  color: var(--ink-mute); font-weight: 400;
+}
+
+/* Highlight */
+.highlight {
+  background: var(--success-light); border-left: 4px solid var(--success);
+  border-radius: 0 10px 10px 0; padding: 16px 20px; margin: 16px 0;
+  font-size: 14px; color: #065f46; font-weight: 600;
+}
+
+/* Warning */
+.warning {
+  background: var(--warning-light); border-left: 4px solid var(--warning);
+  border-radius: 0 10px 10px 0; padding: 16px 20px; margin: 16px 0;
+  font-size: 14px; color: #92400e; font-weight: 500;
+}
+
+/* Flow */
+.flow {
+  background: var(--bg); border-radius: 10px; padding: 20px;
+  margin: 12px 0; font-size: 13px; color: var(--ink-soft);
+}
+.flow-step {
+  padding: 8px 0; display: flex; align-items: center; gap: 10px;
+}
+.flow-arrow {
+  text-align: center; color: var(--accent); font-size: 16px; padding: 2px 0;
+}
+.flow-label {
+  display: inline-block; background: var(--navy); color: #fff;
+  padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600;
+  min-width: 80px; text-align: center;
+}
+
+/* Timeline */
+.timeline { margin: 12px 0; }
+.timeline-item {
+  display: flex; gap: 16px; padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+.timeline-item:last-child { border-bottom: none; }
+.timeline-date {
+  min-width: 120px; font-size: 13px; font-weight: 700; color: var(--accent);
+}
+.timeline-action { font-size: 13px; color: var(--ink-soft); flex: 1; }
+.timeline-owner {
+  font-size: 12px; color: var(--ink-mute); min-width: 80px; text-align: right;
+}
+
+/* Insight number */
+.insight-num {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px; background: var(--accent); color: #fff;
+  border-radius: 50%; font-size: 12px; font-weight: 700; margin-right: 8px;
+  flex-shrink: 0;
+}
+.insight-item {
+  display: flex; align-items: flex-start; padding: 10px 0;
+  border-bottom: 1px solid var(--line); font-size: 14px; color: var(--ink-soft);
+}
+.insight-item:last-child { border-bottom: none; }
+
+@media (max-width: 600px) {
+  .header { padding: 28px 20px; }
+  .header h1 { font-size: 22px; }
+  .header-info { flex-direction: column; gap: 8px; }
+  .section { padding: 24px 18px; }
+  .section h2 { font-size: 17px; }
+  table { font-size: 12px; }
+  thead th, tbody td { padding: 8px 10px; }
+  .timeline-item { flex-direction: column; gap: 4px; }
+  .timeline-owner { text-align: left; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<div class="header">
+  <span class="header-badge">MEETING RESULT</span>
+  <h1>오은환 대표 미팅 결과<span class="status-badge">합의 완료</span></h1>
+  <p>6/13 현장강의 캠페인 실행 조건 확정</p>
+  <div class="header-info">
+    <span>일시: <strong>2026.05.14 (수) 오후</strong></span>
+    <span>참석: <strong>오은환 대표 / 오연진 이사 / 맷돌</strong></span>
+  </div>
+</div>
+
+<!-- 1 -->
+<div class="section">
+  <h2><span class="section-num">1</span>수익 분배 — 확정</h2>
+
+  <table>
+    <thead><tr><th>항목</th><th>합의 내용</th></tr></thead>
+    <tbody>
+      <tr><td><strong>배분 비율</strong></td><td>현장강의 매출의 <strong>40%</strong> → 플로우머스</td></tr>
+      <tr><td><strong>광고비 분담</strong></td><td><strong>50:50</strong> (양측 동일 부담)</td></tr>
+      <tr><td><strong>정산 시점</strong></td><td><strong>익월 10일</strong></td></tr>
+      <tr><td><strong>계약 주체</strong></td><td>이번 건 한정 <strong>(주)프로센스</strong>와 계약</td></tr>
+      <tr><td><strong>향후 계약</strong></td><td>장기 전체 계약 시 <strong>오콘목달</strong>과 직접 체결</td></tr>
+    </tbody>
+  </table>
+
+  <h3>배분 시뮬레이션</h3>
+  <table>
+    <thead><tr><th>매출</th><th>플로우머스 40%</th><th>광고비 50% 부담</th><th>순수익</th></tr></thead>
+    <tbody>
+      <tr><td>3,000만</td><td>1,200만</td><td>-375만</td><td><strong>825만</strong></td></tr>
+      <tr><td>4,500만</td><td>1,800만</td><td>-375만</td><td><strong>1,425만</strong></td></tr>
+      <tr><td>6,000만</td><td>2,400만</td><td>-375만</td><td><strong>2,025만</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h3>합의 배경</h3>
+  <div class="quote">"30%~50% 중간인 40%로 시작하자. 서로에게 행복한 숫자가 아닐 수 있으니 그때 다시 논의하자"<span class="author">— 오은환 대표</span></div>
+  <div class="quote">"광고비 반반이 리스크를 함께 지는 것이므로 가장 좋다"<span class="author">— 오연진 이사</span></div>
+  <ul>
+    <li>오은환 대표는 장기적으로 자사 브랜드 파워가 강해 보통 더 높은 비율을 받지만, <strong>이번은 시너지 확인용 단기 프로젝트</strong>이므로 40%로 시작</li>
+    <li>맷돌: "최소 40~30%는 가져가야 인건비 등 남는 것이 있다"</li>
+  </ul>
+</div>
+
+<!-- 2 -->
+<div class="section">
+  <h2><span class="section-num">2</span>정산 방식 — 확정</h2>
+
+  <table>
+    <thead><tr><th>항목</th><th>내용</th></tr></thead>
+    <tbody>
+      <tr><td><strong>결제 창구</strong></td><td>오콘목달 홈페이지 (아임웹 ocmd.me → 티처블로 권한 이양)</td></tr>
+      <tr><td><strong>결제 흐름</strong></td><td>고객 결제 → (주)프로센스 매출 → 플로우머스에 40% 정산</td></tr>
+      <tr><td><strong>정산 기준</strong></td><td>6/13 강의 매출 → 7/10 정산</td></tr>
+      <tr><td><strong>계약서</strong></td><td>오연진 이사가 공동대표와 논의 후 공유 예정</td></tr>
+    </tbody>
+  </table>
+
+  <h3>결제 흐름도</h3>
+  <div class="flow">
+    <div class="flow-step"><span class="flow-label">고객 결제</span> 아임웹 ocmd.me</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step"><span class="flow-label">매출 처리</span> (주)프로센스</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step"><span class="flow-label">법인 경유</span> 글로벌 법인 → 싱가포르 → 한국 입금</div>
+    <div class="flow-arrow">↓</div>
+    <div class="flow-step"><span class="flow-label">정산</span> 플로우머스에 40% 지급 (익월 10일)</div>
+  </div>
+</div>
+
+<!-- 3 -->
+<div class="section">
+  <h2><span class="section-num">3</span>상세페이지 & 광고 소재</h2>
+
+  <h3>상세페이지</h3>
+  <table>
+    <thead><tr><th>항목</th><th>결정</th></tr></thead>
+    <tbody>
+      <tr><td><strong>현재 상태</strong></td><td>오래된 정보 (68억, 33회 매진 등). 업데이트 필요</td></tr>
+      <tr><td><strong>최신 버전</strong></td><td>4월 펜딩 상세페이지가 가장 최근</td></tr>
+      <tr><td><strong>제작 방식</strong></td><td><strong>플로우머스가 제작 → 오은환 대표 피드백</strong></td></tr>
+      <tr><td><strong>데드라인</strong></td><td><strong>5/17 (토)</strong></td></tr>
+      <tr><td><strong>범위</strong></td><td>수치 부분 수정 중심. 전면 리뉴얼 아님</td></tr>
+    </tbody>
+  </table>
+
+  <div class="quote">"영상 노출도를 늘리는 것이 더 효과적. 상세페이지에 시간 들이기보다 다른 것에 집중하는 게 낫다"<span class="author">— 맷돌</span></div>
+  <div class="quote">"인사이트머니랩처럼 무료 라이브가 중요하고 상세페이지는 덜 중요할 수 있다"<span class="author">— 오은환 대표</span></div>
+
+  <div class="highlight">결론: 상세페이지 최소 수정 + 영상 중심 광고 전략으로 간다</div>
+
+  <h3>광고 소재 현황</h3>
+  <table>
+    <thead><tr><th>소재</th><th>상태</th><th>액션</th></tr></thead>
+    <tbody>
+      <tr><td><strong>과거 인터뷰 영상</strong></td><td>가장 반응 좋았던 소재</td><td>오연진 이사 정리 후 전달</td></tr>
+      <tr><td><strong>광고 라이브러리</strong></td><td>과거 제작분 보유</td><td>공유 요청</td></tr>
+      <tr><td><strong>인사이트머니랩 영상 3편</strong></td><td>싱가포르 촬영. ROAS 20x</td><td>접근 가능 여부 확인</td></tr>
+      <tr><td><strong>북콘서트 영상 클립</strong></td><td>4/29 촬영분</td><td>공유 요청</td></tr>
+      <tr><td><strong>신규 촬영</strong></td><td>줌 활용 가능</td><td>필요시 진행</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 4 -->
+<div class="section">
+  <h2><span class="section-num">4</span>캠페인 운영</h2>
+
+  <h3>오콘목달 팀 구성 (3명)</h3>
+  <table>
+    <thead><tr><th>역할</th><th>담당</th></tr></thead>
+    <tbody>
+      <tr><td><strong>총괄</strong></td><td>오연진 이사</td></tr>
+      <tr><td><strong>콘텐츠</strong></td><td>전담 직원 1명</td></tr>
+      <tr><td><strong>고객 응대</strong></td><td>전담 직원 1명</td></tr>
+    </tbody>
+  </table>
+
+  <div class="highlight">기존 DB만으로 광고 없이 30~50석 채울 수 있다 — 오연진 이사</div>
+
+  <h3>현장강의 특성</h3>
+  <table>
+    <thead><tr><th>항목</th><th>내용</th></tr></thead>
+    <tbody>
+      <tr><td><strong>온라인 송출</strong></td><td>실시간 송출 + 다시보기 제공</td></tr>
+      <tr><td><strong>재수강 동기</strong></td><td>복습, 에너지 충전, 오은환 대표 직접 만남</td></tr>
+      <tr><td><strong>신규 동기</strong></td><td>온라인 완강 불신 → 현장 집중도와 열기로 동기부여</td></tr>
+      <tr><td><strong>분위기</strong></td><td>서로 얼굴 아는 친밀한 분위기, 억대 인플루언서 선배 동석</td></tr>
+      <tr><td><strong>동반 참석</strong></td><td>기존 수강생이 친구/가족 데려오는 경우 많음</td></tr>
+      <tr><td><strong>신규 유입</strong></td><td>인스타그램 + 내부 DB 활용</td></tr>
+    </tbody>
+  </table>
+
+  <h3>오은환 대표의 역할 — 핵심</h3>
+  <div class="quote">"현재 매출보다 하고 싶은 다른 일들이 많다. 맷돌이 구체적인 요청(프롬프트)을 해주면 그에 맞춰 에너지를 쓰겠다"<span class="author">— 오은환 대표</span></div>
+  <div class="quote">"에너지를 안 쓰면 매출이 안 나올 수도 있다. 지난 현장강의 20명도 지쳐서 에너지를 덜 썼기 때문"<span class="author">— 오은환 대표</span></div>
+  <div class="warning">핵심: 플로우머스가 구체적으로 요청해야 오은환 대표가 움직인다. 모호한 요청 금지.</div>
+</div>
+
+<!-- 5 -->
+<div class="section">
+  <h2><span class="section-num">5</span>홈페이지 & 시스템</h2>
+
+  <h3>현재 구조의 문제점</h3>
+  <table>
+    <thead><tr><th>문제</th><th>상세</th></tr></thead>
+    <tbody>
+      <tr><td><strong>아임웹 한계</strong></td><td>영상 담는 기능 없음. 결제 창구로만 사용</td></tr>
+      <tr><td><strong>전환 추적 어려움</strong></td><td>전환값 수집이 안 되어 공격적 광고 진행에 허들</td></tr>
+      <tr><td><strong>검색 노출 안 됨</strong></td><td>아임웹은 SEO에 약함</td></tr>
+      <tr><td><strong>유튜브 연동 불가</strong></td><td>유튜브에서 바로 결제 붙이기 어려움</td></tr>
+    </tbody>
+  </table>
+
+  <h3>합의된 방향</h3>
+  <table>
+    <thead><tr><th>시기</th><th>방향</th></tr></thead>
+    <tbody>
+      <tr><td><strong>지금 (6/13)</strong></td><td>아임웹 그대로 사용. 급격한 변화 없이</td></tr>
+      <tr><td><strong>단기</strong></td><td>카페로 트래픽 올리고, 결제 라인만 조정</td></tr>
+      <tr><td><strong>중기</strong></td><td>유튜브 → 카페 → 결제 동선 설계</td></tr>
+      <tr><td><strong>장기</strong></td><td>홈페이지 신규 제작 (비용 효율적 설계 방법 공유 예정)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 6 -->
+<div class="section">
+  <h2><span class="section-num">6</span>역할 분담 — 최종 확정</h2>
+  <table>
+    <thead><tr><th>역할</th><th>담당</th><th>비고</th></tr></thead>
+    <tbody>
+      <tr><td><strong>상세페이지 수정</strong></td><td>플로우머스 제작 → 오은환 피드백</td><td>5/17까지</td></tr>
+      <tr><td><strong>광고 기획/집행</strong></td><td>플로우머스</td><td>메타 + 유튜브</td></tr>
+      <tr><td><strong>광고 소재 공유</strong></td><td>오연진 이사</td><td>과거 라이브러리 + 인터뷰 영상</td></tr>
+      <tr><td><strong>재수강 DM</strong></td><td>오은환 대표</td><td>구체적 요청 시 실행</td></tr>
+      <tr><td><strong>콘텐츠 방향성</strong></td><td>오은환 대표 직접</td><td>맷돌과 직접 소통</td></tr>
+      <tr><td><strong>데이터/자료 제공</strong></td><td>오연진 이사</td><td>요청 시 전달</td></tr>
+      <tr><td><strong>결제/정산</strong></td><td>오연진 이사</td><td>(주)프로센스</td></tr>
+      <tr><td><strong>캠페인 전체 관리</strong></td><td>플로우머스</td><td>시트화하여 공유</td></tr>
+      <tr><td><strong>계약서</strong></td><td>오연진 이사</td><td>공동대표 논의 후 공유</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 7 -->
+<div class="section">
+  <h2><span class="section-num">7</span>향후 협업 확장</h2>
+  <table>
+    <thead><tr><th>영역</th><th>내용</th><th>시기</th></tr></thead>
+    <tbody>
+      <tr><td><strong>홈페이지 대행</strong></td><td>아임웹 → 신규 홈페이지 제작/운영</td><td>첫 프로젝트 이후</td></tr>
+      <tr><td><strong>시스템 통합</strong></td><td>결제 + DB + CRM 일원화</td><td>장기</td></tr>
+      <tr><td><strong>유튜브 리브랜딩</strong></td><td>별도 제안서 공유 완료</td><td>Phase 1</td></tr>
+      <tr><td><strong>장기 계약</strong></td><td>(주)프로센스 → 오콘목달 직접 계약</td><td>시너지 확인 후</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 8 -->
+<div class="section">
+  <h2><span class="section-num">8</span>핵심 인사이트</h2>
+
+  <h3>오은환 대표의 본심</h3>
+  <div class="insight-item"><span class="insight-num">1</span><span><strong>"금광으로 바라보는 사람을 못 만났거나, 만났지만 실력이 없었다"</strong><br>→ 플로우머스가 실력을 증명해야 한다</span></div>
+  <div class="insight-item"><span class="insight-num">2</span><span><strong>"에너지를 안 쓰면 매출이 안 나온다"</strong><br>→ 오은환의 에너지를 끌어내는 것이 플로우머스의 핵심 역할</span></div>
+  <div class="insight-item"><span class="insight-num">3</span><span><strong>"구체적인 프롬프트를 주면 움직인다"</strong><br>→ 모호한 요청 금지. "이것을 이때까지 이렇게 해주세요" 식으로</span></div>
+  <div class="insight-item"><span class="insight-num">4</span><span><strong>"3천만원 규모에는 에너지를 덜 쓴다"</strong><br>→ 규모를 키워야 오은환이 본격적으로 움직인다</span></div>
+  <div class="insight-item"><span class="insight-num">5</span><span><strong>"10팀 중 3~4팀은 안 맞아서 헤어졌다"</strong><br>→ 첫 프로젝트에서 깔끔한 결과를 내야 한다</span></div>
+
+  <h3>오연진 이사의 역할</h3>
+  <ul>
+    <li><strong>실질적 운영 총괄</strong> — 데이터, 자료, 정산, 고객응대 모두 오연진 이사 라인</li>
+    <li><strong>콘텐츠 방향성만 오은환 대표와 직접</strong> — 나머지는 오연진 이사 통해서</li>
+    <li><strong>과거 광고 라이브러리 보유</strong> — 핵심 자산. 반드시 확보</li>
+  </ul>
+
+  <h3>플로우머스의 미션</h3>
+  <div class="highlight">"모든 것을 시트화하여 정리하고 공유하겠다" — 맷돌<br><br>체계적이고 투명한 운영이 오은환 대표가 원하는 것. 이것이 신뢰를 쌓는 첫 번째 방법.</div>
+</div>
+
+<!-- 9 -->
+<div class="section">
+  <h2><span class="section-num">9</span>미팅 후 즉시 실행</h2>
+
+  <div class="warning">캠페인 발사까지 4일. 하루도 비면 안 된다.</div>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-date">5/14 미팅 직후</div>
+      <div class="timeline-action">합의 내용 정리 → 단톡방 공유</div>
+      <div class="timeline-owner">맷돌</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">5/14~15</div>
+      <div class="timeline-action">계약서 초안 공유</div>
+      <div class="timeline-owner">오연진 이사</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">5/14~15</div>
+      <div class="timeline-action">광고 소재 라이브러리 + 인터뷰 영상 공유</div>
+      <div class="timeline-owner">오연진 이사</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">5/15 (목)</div>
+      <div class="timeline-action">상세페이지 수정 착수 / 결제링크 세팅</div>
+      <div class="timeline-owner">맷돌</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">5/16 (금)</div>
+      <div class="timeline-action">티저 3개 제작 / DM 초안 완성 / UTM 세팅</div>
+      <div class="timeline-owner">맷돌</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">5/17 (토)</div>
+      <div class="timeline-action">상세페이지 최종 컨펌</div>
+      <div class="timeline-owner">오은환 대표</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">5/18 (일)</div>
+      <div class="timeline-action"><strong>Phase 1 발사 — 상위 10명 1:1 DM</strong></div>
+      <div class="timeline-owner">오은환 대표</div>
+    </div>
+  </div>
+</div>
+
+</div>
+</body>
+</html>
