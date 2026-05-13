@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>질문지 — 오맷돌 MC 특별편</title>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:#F2F4F6;color:#191F28;font-family:'Pretendard',system-ui,sans-serif;min-height:100vh;font-size:15px}
+.gnb{background:#0A1628;border-bottom:1px solid #1A2744;padding:0 16px;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.gnb-logo{font-size:14px;font-weight:800;color:#D4A017}
+.gnb-right{display:flex;align-items:center;gap:6px}
+.gnb-count{font-size:10px;font-weight:700;border-radius:12px;padding:3px 8px}
+.cnt-must{background:#FFF0F0;color:#F04452}
+.cnt-all{background:#EFF3FF;color:#3182F6}
+.wrap{max-width:540px;margin:0 auto;padding:12px 12px 120px}
+.loc-tabs{display:flex;gap:0;position:sticky;top:52px;z-index:95;background:#F2F4F6;padding:8px 0 0}
+.loc-tab{flex:1;padding:10px 4px;text-align:center;font-size:11px;font-weight:800;border:none;background:#fff;cursor:pointer;border-bottom:3px solid transparent;transition:.15s;font-family:inherit;color:#8B95A1}
+.loc-tab.on{color:#D4A017;border-bottom-color:#D4A017}
+.loc-tab .loc-icon{font-size:13px;font-weight:800;display:block;margin-bottom:2px}
+.loc-tab .loc-time{font-size:9px;font-weight:600;color:#8B95A1;display:block;margin-top:1px}
+.loc-tab.on .loc-time{color:#D4A017}
+.loc-header{border-radius:14px;padding:18px;margin:8px 0 12px;color:#fff}
+.loc-header.l1{background:linear-gradient(135deg,#4A5568,#718096)}
+.loc-header.l2{background:linear-gradient(135deg,#C53030,#E53E3E)}
+.loc-header.l3{background:linear-gradient(135deg,#D4A017,#F6C342)}
+.loc-header.l4{background:linear-gradient(135deg,#D4A017,#B8860B)}
+.loc-header.l5{background:linear-gradient(135deg,#2B6CB0,#3182F6)}
+.loc-header.l6{background:linear-gradient(135deg,#0A1628,#1A2744)}
+.loc-header.l7{background:linear-gradient(135deg,#2D3748,#4A5568)}
+.loc-header-top{font-size:9px;font-weight:700;letter-spacing:1.5px;opacity:.8;margin-bottom:4px}
+.loc-header-title{font-size:18px;font-weight:800;line-height:1.3;margin-bottom:4px}
+.loc-header-sub{font-size:11px;opacity:.85;line-height:1.6}
+.loc-header-tip{background:rgba(255,255,255,.15);border-radius:8px;padding:8px 10px;margin-top:8px;font-size:10px;line-height:1.5}
+.sec{margin-bottom:4px}
+.sec-label{font-size:11px;font-weight:800;color:#fff;border-radius:8px;padding:6px 10px;margin:12px 0 4px;display:inline-block}
+.sec-label.a{background:#4A5568}.sec-label.b{background:#C53030}.sec-label.c{background:#D4A017}
+.sec-label.d{background:#D4A017}.sec-label.e{background:#2B6CB0}.sec-label.f{background:#0A1628}
+.sec-label.g{background:#2D3748}.sec-label.h{background:#718096}
+.sec-hint{font-size:10px;color:#8B95A1;margin:2px 0 6px 4px;line-height:1.5}
+.q{background:#fff;border-radius:12px;padding:11px 13px;margin-bottom:5px;box-shadow:0 1px 3px rgba(0,0,0,.03);display:flex;gap:10px;align-items:flex-start;transition:.15s;cursor:pointer;-webkit-tap-highlight-color:transparent;user-select:none}
+.q.done{opacity:.3}
+.q.done .q-text{text-decoration:line-through}
+.q-check{width:22px;height:22px;border:2px solid #E5E8EB;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.15s;margin-top:1px}
+.q.done .q-check{background:#05C072;border-color:#05C072}
+.q.done .q-check::after{content:'v';color:#fff;font-size:11px;font-weight:800}
+.q-body{flex:1;min-width:0}
+.q-top{display:flex;align-items:center;gap:5px;margin-bottom:2px;flex-wrap:wrap}
+.q-num{font-size:10px;font-weight:800;color:#D4A017}
+.q-num.red{color:#F04452}
+.q-text{font-size:12.5px;font-weight:700;color:#191F28;line-height:1.5}
+.q-sub{font-size:9.5px;color:#8B95A1;line-height:1.4;margin-top:2px}
+.tag{display:inline-block;padding:1px 5px;border-radius:3px;font-size:8px;font-weight:700}
+.tag-r{background:#FFF0F0;color:#F04452}
+.tag-y{background:#FFF7E6;color:#D4A017}
+.tag-b{background:#EFF3FF;color:#3182F6}
+.tag-g{background:#F0FFF4;color:#05C072}
+.q.must{border-left:3px solid #F04452}
+.q.must .q-check{border-color:#F04452}
+.data-ref{background:#0A1628;border-radius:10px;padding:10px 12px;margin:6px 0;font-size:9.5px;color:#8B95A1;line-height:1.6}
+.data-ref strong{color:#D4A017}
+.bottom-bar{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid #E5E8EB;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;z-index:100}
+.progress-wrap{flex:1;margin-right:12px}
+.progress-text{font-size:10px;font-weight:700;color:#6B7684;margin-bottom:3px}
+.progress-bar{height:5px;background:#E5E8EB;border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,#D4A017,#F04452);border-radius:3px;transition:.3s}
+.reset-btn{background:none;border:1.5px solid #E5E8EB;border-radius:8px;padding:6px 12px;font-size:11px;font-weight:700;color:#8B95A1;cursor:pointer;font-family:inherit}
+</style>
+</head>
+<body>
+<nav class="gnb">
+  <span class="gnb-logo">오맷돌 MC특별편 질문지</span>
+  <div class="gnb-right">
+    <span class="gnb-count cnt-must" id="must-count">필수 0/13</span>
+    <span class="gnb-count cnt-all" id="all-count">0/110</span>
+  </div>
+</nav>
+
+<div class="loc-tabs">
+  <button class="loc-tab on" onclick="switchLoc('l1',this)"><span class="loc-icon">L1</span>자택<span class="loc-time">13:00</span></button>
+  <button class="loc-tab" onclick="switchLoc('l2',this)"><span class="loc-icon">L2</span>빌라촌<span class="loc-time">13:30</span></button>
+  <button class="loc-tab" onclick="switchLoc('l3',this)"><span class="loc-icon">L3</span>단골집<span class="loc-time">14:00</span></button>
+  <button class="loc-tab" onclick="switchLoc('l4',this)"><span class="loc-icon">L4</span>택시<span class="loc-time">14:30</span></button>
+  <button class="loc-tab" onclick="switchLoc('l5',this)"><span class="loc-icon">L5</span>김고딩<span class="loc-time">15:00</span></button>
+  <button class="loc-tab" onclick="switchLoc('l6',this)"><span class="loc-icon">L6</span>사무실<span class="loc-time">16:00</span></button>
+  <button class="loc-tab" onclick="switchLoc('l7',this)"><span class="loc-icon">L7</span>한강<span class="loc-time">17:00</span></button>
+  <button class="loc-tab" onclick="switchLoc('all',this)"><span class="loc-icon">A</span>전체<span class="loc-time">110개</span></button>
+</div>
+
+<div class="wrap">
+
+<!-- ========== L1: 자택 (13:00) ========== -->
+<div class="loc-section" data-loc="l1">
+
+<div class="loc-header l1">
+  <div class="loc-header-top">LOCATION 1 — 시작</div>
+  <div class="loc-header-title">자택 — 일상 모습</div>
+  <div class="loc-header-sub">13:00 / 약 20분 / 10문항</div>
+  <div class="loc-header-tip"><b>PD 팁:</b> 자연스러운 일상 B-Roll. 커피 마시면서 편한 대화. "이 사람도 평범하다" 인식 심기.</div>
+</div>
+
+<div class="sec">
+<div class="sec-label a">A. 성장 배경 · 군산 (10)</div>
+<div class="sec-hint">편한 분위기에서 과거부터 열기. 서울 오기 전 이야기.</div>
+
+<div class="q" data-loc="l1" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">1</span></div><div class="q-text">군산 어디에서 자랐어요?</div><div class="q-sub">→ 고향 풍경, 동네 분위기 자연스럽게</div></div></div>
+
+<div class="q" data-loc="l1" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">2</span></div><div class="q-text">어렸을 때 뭐 되고 싶었어요?</div><div class="q-sub">→ 어린 시절 꿈. 지금과 대비</div></div></div>
+
+<div class="q" data-loc="l1" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">3</span></div><div class="q-text">부모님은 뭐 하셨어요?</div><div class="q-sub">→ 가정 환경. 사업가 DNA 여부</div></div></div>
+
+<div class="q" data-loc="l1" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">4</span></div><div class="q-text">학교 다닐 때 어떤 학생이었어요?</div><div class="q-sub">→ 성격, 포지션. "반에서 어떤 존재?"</div></div></div>
+
+<div class="q" data-loc="l1" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">5</span></div><div class="q-text">친구들 사이에서 어떤 포지션이었어요?</div><div class="q-sub">→ 리더형/관찰자형 등</div></div></div>
+
+<div class="q" data-loc="l1" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">6</span></div><div class="q-text">군산에서 가장 좋았던 기억은?</div><div class="q-sub">→ 따뜻한 기억 = 나중에 상경 고생과 대비</div></div></div>
+
+<div class="q" data-loc="l1" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">7</span></div><div class="q-text">그때 돈에 대한 생각이 있었어요?</div><div class="q-sub">→ 어린 시절 경제관념</div></div></div>
+
+<div class="q" data-loc="l1" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">8</span></div><div class="q-text">처음 카메라를 만진 게 언제예요?</div><div class="q-sub">→ 영상과의 인연 시작점</div></div></div>
+
+<div class="q" data-loc="l1" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">9</span></div><div class="q-text">영상에 관심 갖게 된 계기가 있어요?</div><div class="q-sub">→ "왜 카메라였는지" 본인이 설명</div></div></div>
+
+<div class="q" data-loc="l1" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">10</span></div><div class="q-text">서울 올라오겠다고 했을 때 주변 반응은?</div><div class="q-sub">→ 상경 결심. 다음 장소(빌라촌)로 넘어가는 브릿지</div></div></div>
+
+</div>
+</div><!-- /l1 -->
+
+
+<!-- ========== L2: 수원 반지하 빌라촌 (13:30) ========== -->
+<div class="loc-section" data-loc="l2" style="display:none">
+
+<div class="loc-header l2">
+  <div class="loc-header-top">LOCATION 2 — 밑바닥</div>
+  <div class="loc-header-title">수원 반지하 빌라촌</div>
+  <div class="loc-header-sub">13:30 / 약 25분 / 20문항 (필수 2개)</div>
+  <div class="loc-header-tip"><b>PD 팁:</b> 갭 극대화 핵심 장소. "여기서 살면서 사장 찍으러 다녔다"가 나와야 함. 골목 걸으면서 촬영.</div>
+</div>
+
+<div class="data-ref"><strong>촬영:</strong> 빌라 골목 워킹 + 과거 유튜브 영상 핸드폰으로 보여주기</div>
+
+<div class="sec">
+<div class="sec-label b">B. 상경 · 밑바닥 (10)</div>
+<div class="sec-hint">서울 와서 바닥 치기까지. 감정 건드리지 말고 팩트 위주로.</div>
+
+<div class="q must" data-loc="l2" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">11 / 필수</span><span class="tag tag-r">킬러Q1</span></div><div class="q-text">여기가 어디예요?</div><div class="q-sub">→ "여기서 살면서 사장들 찍으러 다녔다" 나올 때까지. 갭 극대화 첫 후킹</div></div></div>
+
+<div class="q" data-loc="l2" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">12</span></div><div class="q-text">처음 서울 와서 어디서 살았어요?</div><div class="q-sub">→ 고시원/원룸 등 첫 거처</div></div></div>
+
+<div class="q" data-loc="l2" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">13</span></div><div class="q-text">아는 사람이 있었어요?</div><div class="q-sub">→ 연고 없는 상경의 외로움</div></div></div>
+
+<div class="q" data-loc="l2" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">14</span></div><div class="q-text">돈은 얼마나 들고 왔어요?</div><div class="q-sub">→ 시작 자금. "그 돈이 얼마나 갔어요?" 후속</div></div></div>
+
+<div class="q" data-loc="l2" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">15</span></div><div class="q-text">처음 한 일이 뭐예요?</div><div class="q-sub">→ 첫 알바/직업</div></div></div>
+
+<div class="q" data-loc="l2" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">16</span></div><div class="q-text">어떤 알바를 했어요?</div><div class="q-sub">→ 알바 나열. "제일 힘들었던 건?" 후속</div></div></div>
+
+<div class="q" data-loc="l2" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">17</span></div><div class="q-text">통장에 진짜 얼마까지 내려가봤어요?</div><div class="q-sub">→ 가장 처참했던 잔고</div></div></div>
+
+<div class="q" data-loc="l2" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">18</span></div><div class="q-text">밥은 어떻게 해결했어요?</div><div class="q-sub">→ 생존의 디테일</div></div></div>
+
+<div class="q must" data-loc="l2" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">19 / 필수</span><span class="tag tag-r">킬러Q2</span></div><div class="q-text">그때 가장 힘들었던 게 뭐예요?</div><div class="q-sub">→ 28살 편의점 알바 면접 탈락, "이제 접어라" 나올 때까지 기다리기</div></div></div>
+
+<div class="q" data-loc="l2" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">20</span></div><div class="q-text">군산으로 돌아가고 싶었던 적 있어요?</div><div class="q-sub">→ 포기 충동</div></div></div>
+
+</div>
+
+<div class="sec">
+<div class="sec-label b">C. 유튜브 1기 · 공감 드라마 (10)</div>
+<div class="sec-hint">빌라촌에서 과거 유튜브 이야기. 핸드폰으로 옛날 영상 보여주면서.</div>
+
+<div class="q" data-loc="l2" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">21</span></div><div class="q-text">유튜브를 왜 시작했어요?</div><div class="q-sub">→ 계기. "뭘 만들었어요?" 후속</div></div></div>
+
+<div class="q" data-loc="l2" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">22</span></div><div class="q-text">첫 영상 기억나요?</div><div class="q-sub">→ 첫 영상 이야기. 장비, 촬영 환경</div></div></div>
+
+<div class="q" data-loc="l2" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">23</span></div><div class="q-text">그때 장비가 뭐였어요?</div><div class="q-sub">→ 초기 장비 = 열정의 증거</div></div></div>
+
+<div class="q" data-loc="l2" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">24</span></div><div class="q-text">혼자 다 했어요?</div><div class="q-sub">→ 원맨 크루 시절</div></div></div>
+
+<div class="q" data-loc="l2" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">25</span></div><div class="q-text">조회수가 처음에 어느 정도 나왔어요?</div><div class="q-sub">→ "200만뷰 영상도 있었다" → "근데 번 돈?" → "0원" 반전 유도</div></div></div>
+
+<div class="q" data-loc="l2" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">26</span></div><div class="q-text">그때 영상 다시 보면 어때요?</div><div class="q-sub">→ 핸드폰으로 실제 영상 보여주기. 리액션 촬영</div></div></div>
+
+<div class="q" data-loc="l2" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">27</span></div><div class="q-text">유튜브를 접겠다고 결심한 날이 있어요?</div><div class="q-sub">→ 포기의 순간</div></div></div>
+
+<div class="q" data-loc="l2" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">28</span></div><div class="q-text">부모님한테 연락은 했어요?</div><div class="q-sub">→ 가족과의 관계</div></div></div>
+
+<div class="q" data-loc="l2" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">29</span></div><div class="q-text">같이 고생한 사람이 있었어요?</div><div class="q-sub">→ 동료, 친구 유무</div></div></div>
+
+<div class="q" data-loc="l2" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">30</span></div><div class="q-text">"이러다 진짜 큰일 나겠다" 싶었던 순간?</div><div class="q-sub">→ 위기감의 정점. 단골집으로 넘어가는 브릿지</div></div></div>
+
+</div>
+</div><!-- /l2 -->
+
+
+<!-- ========== L3: 단골집 (14:00) ========== -->
+<div class="loc-section" data-loc="l3" style="display:none">
+
+<div class="loc-header l3">
+  <div class="loc-header-top">LOCATION 3 — 전환점</div>
+  <div class="loc-header-title">단골집 — 취직과 퇴사</div>
+  <div class="loc-header-sub">14:00 / 약 20분 / 15문항 (필수 2개)</div>
+  <div class="loc-header-tip"><b>PD 팁:</b> 밥 먹으면서 자연스러운 대화. 취직→퇴사→등가교환 발견 전환점.</div>
+</div>
+
+<div class="sec">
+<div class="sec-label c">D. 취직 · 퇴사 (8)</div>
+<div class="sec-hint">유튜브 접고 직장인 된 시절. 월급 숫자가 핵심.</div>
+
+<div class="q must" data-loc="l3" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">31 / 필수</span><span class="tag tag-r">킬러Q3</span></div><div class="q-text">사찍남 전에는 뭐 했어요?</div><div class="q-sub">→ 공감 드라마 유튜브 → 조회수 물어보기 → "근데 번 돈?" → "0원" 반전</div></div></div>
+
+<div class="q must" data-loc="l3" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">32 / 필수</span><span class="tag tag-r">킬러Q4</span></div><div class="q-text">그래서 취직했어요?</div><div class="q-sub">→ 월급 자연스럽게 → "210만원" → "인상은요?" → "충분히 주고 있다" 거절 → 퇴사</div></div></div>
+
+<div class="q" data-loc="l3" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">33</span></div><div class="q-text">어떤 회사에 들어갔어요?</div><div class="q-sub">→ 회사 종류, 업무 내용</div></div></div>
+
+<div class="q" data-loc="l3" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">34</span></div><div class="q-text">회사 생활은 어땠어요?</div><div class="q-sub">→ 적응 여부, 직장 내 관계</div></div></div>
+
+<div class="q" data-loc="l3" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">35</span></div><div class="q-text">직장 다니면서도 영상 만들었어요?</div><div class="q-sub">→ 투잡 생활. "7개 업체" 나오면 리액션</div></div></div>
+
+<div class="q" data-loc="l3" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">36</span></div><div class="q-text">퇴사하겠다고 했을 때 주변 반응은?</div><div class="q-sub">→ "미쳤냐" 등 주변 반응</div></div></div>
+
+<div class="q" data-loc="l3" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">37</span></div><div class="q-text">퇴사하고 나서 뭘 했어요?</div><div class="q-sub">→ 등가교환 전략으로 넘어가는 브릿지</div></div></div>
+
+<div class="q" data-loc="l3" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">38</span></div><div class="q-text">다시 직장 들어갈 생각은 없었어요?</div><div class="q-sub">→ 각오의 깊이</div></div></div>
+
+</div>
+
+<div class="sec">
+<div class="sec-label c">E. 등가교환 발견 (7)</div>
+<div class="sec-hint">"무료 촬영"을 시작하게 된 계기. 핵심 전략의 탄생.</div>
+
+<div class="q" data-loc="l3" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">39</span></div><div class="q-text">"무료로 찍어드릴게요"를 처음 말한 게 언제예요?</div><div class="q-sub">→ 등가교환 아이디어의 시작점</div></div></div>
+
+<div class="q" data-loc="l3" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">40</span></div><div class="q-text">왜 그런 생각을 했어요?</div><div class="q-sub">→ 발상의 전환 계기</div></div></div>
+
+<div class="q" data-loc="l3" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">41</span></div><div class="q-text">처음 찍은 사장님이 누구예요?</div><div class="q-sub">→ 첫 번째 출연자 이야기</div></div></div>
+
+<div class="q" data-loc="l3" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">42</span></div><div class="q-text">그때 어떻게 말을 꺼냈어요?</div><div class="q-sub">→ 첫 제안의 디테일</div></div></div>
+
+<div class="q" data-loc="l3" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">43</span></div><div class="q-text">상대방 반응이 어땠어요?</div><div class="q-sub">→ 첫 수락의 순간</div></div></div>
+
+<div class="q" data-loc="l3" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">44</span></div><div class="q-text">촬영이 보통 몇 시간이에요?</div><div class="q-sub">→ "7시간" → "그동안 뭘 해요?" 후속</div></div></div>
+
+<div class="q" data-loc="l3" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">45</span></div><div class="q-text">"등가교환"이라는 단어는 언제 떠올랐어요?</div><div class="q-sub">→ 브랜딩의 순간</div></div></div>
+
+</div>
+</div><!-- /l3 -->
+
+
+<!-- ========== L4: 택시 이동 (14:30) ========== -->
+<div class="loc-section" data-loc="l4" style="display:none">
+
+<div class="loc-header l4">
+  <div class="loc-header-top">LOCATION 4 — 이동</div>
+  <div class="loc-header-title">택시 — 거절과 도전</div>
+  <div class="loc-header-sub">14:30 / 약 20분 / 15문항 (필수 2개)</div>
+  <div class="loc-header-tip"><b>PD 팁:</b> 이동하면서 솔직한 대화. 조수석 촬영. 거절과 집요함 이야기.</div>
+</div>
+
+<div class="sec">
+<div class="sec-label d">F. 무료 촬영 · 거절 (15)</div>
+<div class="sec-hint">3000명 거절 스토리. 숫자는 본인이 말하게.</div>
+
+<div class="q must" data-loc="l4" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">46 / 필수</span><span class="tag tag-r">킬러Q5</span></div><div class="q-text">근데 왜 돈을 안 받아요?</div><div class="q-sub">→ 등가교환 핵심. "그럼 뭘로 살아요?" 후속</div></div></div>
+
+<div class="q must" data-loc="l4" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">47 / 필수</span><span class="tag tag-r">킬러Q6</span></div><div class="q-text">처음부터 잘 됐어요?</div><div class="q-sub">→ "3000명한테 거절당했다" 나올 때까지. "어떻게 연락했어요?" 후속</div></div></div>
+
+<div class="q" data-loc="l4" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">48</span></div><div class="q-text">거절당했을 때 어떤 기분이에요?</div><div class="q-sub">→ 감정 솔직하게</div></div></div>
+
+<div class="q" data-loc="l4" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">49</span></div><div class="q-text">하루에 몇 명한테 연락했어요?</div><div class="q-sub">→ "하루 100명" 나오면 리액션</div></div></div>
+
+<div class="q" data-loc="l4" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">50</span></div><div class="q-text">DM 보낼 때 뭐라고 보냈어요?</div><div class="q-sub">→ 실제 메시지 내용</div></div></div>
+
+<div class="q" data-loc="l4" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">51</span></div><div class="q-text">홍대 합정에서 직접 돌아다녔다고요?</div><div class="q-sub">→ 오프라인 영업의 디테일</div></div></div>
+
+<div class="q" data-loc="l4" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">52</span></div><div class="q-text">사장들이 왜 수락한다고 생각해요?</div><div class="q-sub">→ 본인 분석</div></div></div>
+
+<div class="q" data-loc="l4" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">53</span></div><div class="q-text">촬영해주고 나서 사장님들 반응은?</div><div class="q-sub">→ 감사/감동 에피소드</div></div></div>
+
+<div class="q" data-loc="l4" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">54</span></div><div class="q-text">7시간 동안 구체적으로 뭘 해요?</div><div class="q-sub">→ 촬영 프로세스 설명</div></div></div>
+
+<div class="q" data-loc="l4" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">55</span></div><div class="q-text">촬영하면서 울어본 적 있어요?</div><div class="q-sub">→ 감정적 순간</div></div></div>
+
+<div class="q" data-loc="l4" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">56</span></div><div class="q-text">사장님이 울어본 적은?</div><div class="q-sub">→ 출연자의 감정</div></div></div>
+
+<div class="q" data-loc="l4" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">57</span></div><div class="q-text">카메라 끄고 나서 한 이야기 중 기억나는 거?</div><div class="q-sub">→ 비하인드</div></div></div>
+
+<div class="q" data-loc="l4" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">58</span></div><div class="q-text">출연자랑 싸운 적 있어요?</div><div class="q-sub">→ 갈등 에피소드</div></div></div>
+
+<div class="q" data-loc="l4" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">59</span></div><div class="q-text">편집 때문에 불만 나온 적은?</div><div class="q-sub">→ 현실적 갈등</div></div></div>
+
+<div class="q" data-loc="l4" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">60</span></div><div class="q-text">사장들 찍으면서 부러웠던 적?</div><div class="q-sub">→ "나는 왜..." 솔직한 감정</div></div></div>
+
+</div>
+</div><!-- /l4 -->
+
+
+<!-- ========== L5: 김고딩 사업장 (15:00) ========== -->
+<div class="loc-section" data-loc="l5" style="display:none">
+
+<div class="loc-header l5">
+  <div class="loc-header-top">LOCATION 5 — 증언</div>
+  <div class="loc-header-title">김고딩 사업장 — 제3자 검증</div>
+  <div class="loc-header-sub">15:00 / 약 25분 / 15문항 (필수 3개)</div>
+  <div class="loc-header-tip"><b>PD 팁:</b> 김고딩 증언 + 150명 인사이트. 김고딩한테는 Q60 하나만 직접 질문. 나머지는 오맷돌한테.</div>
+</div>
+
+<div class="data-ref"><strong>핵심:</strong> 김고딩은 증언 게스트. "이 형은 진짜다"를 제3자가 말해야 신뢰도 폭발.</div>
+
+<div class="sec">
+<div class="sec-label e">G. 김고딩 증언 + 사장 인사이트 (15)</div>
+<div class="sec-hint">김고딩 증언 먼저 → 150명 인사이트로 넘어가기</div>
+
+<div class="q must" data-loc="l5" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">61 / 필수</span><span class="tag tag-r">킬러Q7</span><span class="tag tag-y">김고딩에게</span></div><div class="q-text">이 형이 촬영하러 왔을 때 어땠어요?</div><div class="q-sub">→ "진짜 돈 안 받았어요. 고3인 저를 10시간 쫓아다녔어요." 제3자 증언</div></div></div>
+
+<div class="q must" data-loc="l5" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">62 / 필수</span><span class="tag tag-r">킬러Q8</span></div><div class="q-text">여기서 뭘 보고 느꼈어요?</div><div class="q-sub">→ 고3이 클라이언트 통화하는 모습 보며 "초라해졌다" "더 배우고 싶었다"</div></div></div>
+
+<div class="q must" data-loc="l5" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">63 / 필수</span><span class="tag tag-r">킬러Q9</span></div><div class="q-text">150명 찍으면서 뭘 알게 됐어요?</div><div class="q-sub">→ 돈 버는 사장들의 공통점: 1) 멋지지 않다 2) 포기 많다 3) 외롭다</div></div></div>
+
+<div class="q" data-loc="l5" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">64</span></div><div class="q-text">150명 중 가장 기억에 남는 사장님은?</div><div class="q-sub">→ 구체적 에피소드</div></div></div>
+
+<div class="q" data-loc="l5" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">65</span></div><div class="q-text">가장 작은 가게는 어디였어요?</div><div class="q-sub">→ 스케일 다양성</div></div></div>
+
+<div class="q" data-loc="l5" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">66</span></div><div class="q-text">가장 큰 회사는?</div><div class="q-sub">→ 갭 대비</div></div></div>
+
+<div class="q" data-loc="l5" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">67</span></div><div class="q-text">찍어준 사장님 중 망한 분 있어요?</div><div class="q-sub">→ "나지." 본인 실패 연결</div></div></div>
+
+<div class="q" data-loc="l5" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">68</span></div><div class="q-text">반대로 찍고 나서 크게 성공한 분은?</div><div class="q-sub">→ 성공 사례</div></div></div>
+
+<div class="q" data-loc="l5" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">69</span></div><div class="q-text">사장님들이 공통적으로 하는 말이 있어요?</div><div class="q-sub">→ 패턴 발견</div></div></div>
+
+<div class="q" data-loc="l5" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">70</span></div><div class="q-text">촬영 거절하거나 후회한 사장님은?</div><div class="q-sub">→ 비하인드 스토리</div></div></div>
+
+<div class="q" data-loc="l5" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">71</span></div><div class="q-text">"나는 왜 이러고 있지?" 싶었던 적?</div><div class="q-sub">→ 사장들 보며 느낀 자괴감</div></div></div>
+
+<div class="q" data-loc="l5" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">72</span></div><div class="q-text">20~30대에 포기한 것들이 있어요?</div><div class="q-sub">→ 연애, 친구 모임, 여행 등</div></div></div>
+
+<div class="q" data-loc="l5" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">73</span></div><div class="q-text">연애는요?</div><div class="q-sub">→ 짧게 던져서 본인이 채우게</div></div></div>
+
+<div class="q" data-loc="l5" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">74</span></div><div class="q-text">외로웠어요?</div><div class="q-sub">→ 솔직한 감정</div></div></div>
+
+<div class="q" data-loc="l5" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">75</span></div><div class="q-text">진짜 그만두고 싶었던 날이 있어요?</div><div class="q-sub">→ 포기 충동. "왜 안 그만뒀어요?" 후속</div></div></div>
+
+</div>
+</div><!-- /l5 -->
+
+
+<!-- ========== L6: 패스트파이브 사무실 (16:00) ========== -->
+<div class="loc-section" data-loc="l6" style="display:none">
+
+<div class="loc-header l6">
+  <div class="loc-header-top">LOCATION 6 — 현실</div>
+  <div class="loc-header-title">패스트파이브 사무실 — 사업과 실패</div>
+  <div class="loc-header-sub">16:00 / 약 25분 / 20문항 (필수 2개)</div>
+  <div class="loc-header-tip"><b>PD 팁:</b> 사무실에서 비즈니스 이야기. 칠판/화이트보드 활용. 가치 계단 그리기.</div>
+</div>
+
+<div class="sec">
+<div class="sec-label f">H. 사업화 · 성장 · 실패 (20)</div>
+<div class="sec-hint">사업 이야기 + 실패(고소장/폐업) + 가치 계단 설명</div>
+
+<div class="q" data-loc="l6" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">76</span></div><div class="q-text">사찍남이 사업이 된 시점이 언제예요?</div><div class="q-sub">→ 채널에서 법인으로</div></div></div>
+
+<div class="q" data-loc="l6" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">77</span></div><div class="q-text">첫 수익이 뭐였어요?</div><div class="q-sub">→ 광고? 협찬? 사업?</div></div></div>
+
+<div class="q" data-loc="l6" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">78</span></div><div class="q-text">법인 세운 이유가 뭐예요?</div><div class="q-sub">→ 법인 설립 결심</div></div></div>
+
+<div class="q" data-loc="l6" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">79</span></div><div class="q-text">지금 사업이 몇 개예요?</div><div class="q-sub">→ 사업 포트폴리오</div></div></div>
+
+<div class="q" data-loc="l6" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">80</span></div><div class="q-text">제일 매출이 큰 건 뭐예요?</div><div class="q-sub">→ 수익 구조</div></div></div>
+
+<div class="q" data-loc="l6" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">81</span></div><div class="q-text">MCN은 어떻게 시작했어요?</div><div class="q-sub">→ MCN 사업 배경</div></div></div>
+
+<div class="q" data-loc="l6" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">82</span></div><div class="q-text">직원을 처음 뽑았을 때 기분이 어땠어요?</div><div class="q-sub">→ 사장이 되는 순간</div></div></div>
+
+<div class="q must" data-loc="l6" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">83 / 필수</span><span class="tag tag-r">킬러Q10</span></div><div class="q-text">지금은 혼자 일해요?</div><div class="q-sub">→ "원래 직원 8명이었다" → "왜요?" → 사장놀이 실패, 고소장, 폐업신고증 공개</div></div></div>
+
+<div class="q" data-loc="l6" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">84</span></div><div class="q-text">사장놀이했다고 했는데, 구체적으로 뭘 한 거예요?</div><div class="q-sub">→ 실패의 디테일</div></div></div>
+
+<div class="q" data-loc="l6" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">85</span></div><div class="q-text">고소당했다고요?</div><div class="q-sub">→ 말할 수 있는 범위에서</div></div></div>
+
+<div class="q" data-loc="l6" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">86</span></div><div class="q-text">폐업신고서를 쓸 때 기분이 어땠어요?</div><div class="q-sub">→ 실패 인정의 감정</div></div></div>
+
+<div class="q" data-loc="l6" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">87</span></div><div class="q-text">돈 때문에 사람을 잃은 적 있어요?</div><div class="q-sub">→ 인간관계 파괴</div></div></div>
+
+<div class="q" data-loc="l6" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">88</span></div><div class="q-text">사장이 되니까 뭐가 달라요?</div><div class="q-sub">→ 사장의 외로움</div></div></div>
+
+<div class="q must" data-loc="l6" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">89 / 필수</span><span class="tag tag-r">킬러Q11</span></div><div class="q-text">150명 찍으면서 깨달은 게 있다면서요?</div><div class="q-sub">→ 칠판 세팅. 가치 계단 그리며 설명: 플랫폼 > 인플루언서 > AI > 노동자</div></div></div>
+
+<div class="q" data-loc="l6" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">90</span></div><div class="q-text">그럼 지금의 나는 그 계단에서 어디쯤이에요?</div><div class="q-sub">→ 자기 포지셔닝</div></div></div>
+
+<div class="q" data-loc="l6" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">91</span></div><div class="q-text">앞으로 어디까지 올라가고 싶어요?</div><div class="q-sub">→ 미래 목표</div></div></div>
+
+<div class="q" data-loc="l6" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">92</span></div><div class="q-text">책 쓴다고요? 왜요?</div><div class="q-sub">→ 출판 동기: 돈? 기록? 사명감?</div></div></div>
+
+<div class="q" data-loc="l6" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">93</span></div><div class="q-text">돈이란 뭐예요?</div><div class="q-sub">→ 가치관</div></div></div>
+
+<div class="q" data-loc="l6" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">94</span></div><div class="q-text">성공이란 뭐예요?</div><div class="q-sub">→ 정의</div></div></div>
+
+<div class="q" data-loc="l6" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">95</span></div><div class="q-text">"등가교환"을 한 문장으로 설명하면?</div><div class="q-sub">→ 핵심 한 줄</div></div></div>
+
+</div>
+</div><!-- /l6 -->
+
+
+<!-- ========== L7: 한강 (17:00) ========== -->
+<div class="loc-section" data-loc="l7" style="display:none">
+
+<div class="loc-header l7">
+  <div class="loc-header-top">LOCATION 7 — 엔딩</div>
+  <div class="loc-header-title">한강 — 감정 피크 + 마무리</div>
+  <div class="loc-header-sub">17:00 / 약 25분 / 15문항 (필수 2개)</div>
+  <div class="loc-header-tip"><b>PD 팁:</b> 노을 한강 배경. 감정 피크 구간. 침묵도 기다릴 것. 감정 나오면 카메라 끄지 말 것.</div>
+</div>
+
+<div class="data-ref"><strong>감정 피크 구간.</strong> 어머니 장례식 이야기는 본인이 꺼내게. 절대 먼저 언급하지 않기.</div>
+
+<div class="sec">
+<div class="sec-label g">I. 가족 · 감정 (8)</div>
+<div class="sec-hint">어머니 이야기. 가장 조심스러운 구간. 침묵 OK.</div>
+
+<div class="q" data-loc="l7" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">96</span></div><div class="q-text">어머니는 어떤 분이셨어요?</div><div class="q-sub">→ 어머니 캐릭터. 따뜻한 기억부터</div></div></div>
+
+<div class="q" data-loc="l7" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">97</span></div><div class="q-text">어머니가 이 일을 어떻게 생각하셨어요?</div><div class="q-sub">→ 사찍남에 대한 어머니 반응</div></div></div>
+
+<div class="q" data-loc="l7" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">98</span></div><div class="q-text">어머니한테 못 해드린 게 있어요?</div><div class="q-sub">→ 후회. 감정 깊어질 수 있음</div></div></div>
+
+<div class="q must" data-loc="l7" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">99 / 필수</span><span class="tag tag-r">킬러Q12</span></div><div class="q-text">이 일 하면서 가장 힘들었던 날이 언제예요?</div><div class="q-sub">→ 어머니 장례식 나올 때까지 기다리기. "그날 촬영 갔어요?" → "무너질까 봐"</div></div></div>
+
+<div class="q" data-loc="l7" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">100</span></div><div class="q-text">지금 가족은 어때요?</div><div class="q-sub">→ 현재 가족 관계</div></div></div>
+
+<div class="q" data-loc="l7" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">101</span></div><div class="q-text">어머니가 지금 보고 계시면 뭐라고 할 것 같아요?</div><div class="q-sub">→ 감정 피크. 시간 충분히 주기</div></div></div>
+
+<div class="q" data-loc="l7" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">102</span></div><div class="q-text">지금이 행복해요?</div><div class="q-sub">→ 현재 행복 확인</div></div></div>
+
+<div class="q" data-loc="l7" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">103</span></div><div class="q-text">요즘 하루가 어때요?</div><div class="q-sub">→ 일상 루틴</div></div></div>
+
+</div>
+
+<div class="sec">
+<div class="sec-label h">J. 미래 · 엔딩 (7)</div>
+<div class="sec-hint">마무리. 과거의 나에게. 엔딩샷.</div>
+
+<div class="q" data-loc="l7" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">104</span></div><div class="q-text">사찍남을 얼마나 더 하고 싶어요?</div><div class="q-sub">→ 채널의 미래</div></div></div>
+
+<div class="q" data-loc="l7" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">105</span></div><div class="q-text">최종 목표가 뭐예요?</div><div class="q-sub">→ 인생 목표</div></div></div>
+
+<div class="q" data-loc="l7" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">106</span></div><div class="q-text">10년 후에 뭐 하고 있을 것 같아요?</div><div class="q-sub">→ 미래 비전</div></div></div>
+
+<div class="q" data-loc="l7" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">107</span></div><div class="q-text">지금 시작하는 사람한테 한마디?</div><div class="q-sub">→ 시청자 향 메시지</div></div></div>
+
+<div class="q" data-loc="l7" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">108</span></div><div class="q-text">앞으로 안 해본 건 뭐가 있어요?</div><div class="q-sub">→ 새로운 도전</div></div></div>
+
+<div class="q" data-loc="l7" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num">109</span></div><div class="q-text">마지막으로 하고 싶은 말이 있어요?</div><div class="q-sub">→ 자유 발언</div></div></div>
+
+<div class="q must" data-loc="l7" onclick="toggle(this)"><div class="q-check"></div><div class="q-body"><div class="q-top"><span class="q-num red">110 / 필수</span><span class="tag tag-r">킬러Q13</span><span class="tag tag-g">엔딩</span></div><div class="q-text">지금의 내가 그때의 나한테 한마디 한다면?</div><div class="q-sub">→ 과거의 자신에게. "꿈을 잃어버리지 말자" 감정 피크. 엔딩샷. 노을 배경.</div></div></div>
+
+</div>
+</div><!-- /l7 -->
+
+</div><!-- /wrap -->
+
+<div class="bottom-bar">
+  <div class="progress-wrap">
+    <div class="progress-text" id="progress-text">0 / 110</div>
+    <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+  </div>
+  <button class="reset-btn" onclick="resetAll()">초기화</button>
+</div>
+
+<script>
+const KEY='sq110_omaetdol_v1';
+let currentLoc='l1';
+function save(){const s={};document.querySelectorAll('.q').forEach((q,i)=>{s[i]=q.classList.contains('done')});localStorage.setItem(KEY,JSON.stringify(s))}
+function load(){const d=localStorage.getItem(KEY);if(!d)return;const s=JSON.parse(d);document.querySelectorAll('.q').forEach((q,i)=>{if(s[i])q.classList.add('done')})}
+function toggle(el){el.classList.toggle('done');save();update()}
+function update(){
+  const allQ=document.querySelectorAll('.q');
+  const done=document.querySelectorAll('.q.done');
+  const mustAll=document.querySelectorAll('.q.must');
+  const mustDone=document.querySelectorAll('.q.must.done');
+  const pct=Math.round(done.length/allQ.length*100);
+  document.getElementById('progress-fill').style.width=pct+'%';
+  document.getElementById('progress-text').textContent=done.length+' / '+allQ.length;
+  document.getElementById('must-count').textContent='필수 '+mustDone.length+'/'+mustAll.length;
+  document.getElementById('all-count').textContent=done.length+'/'+allQ.length;
+  const mc=document.getElementById('must-count');
+  if(mustDone.length===mustAll.length){mc.style.background='#F0FFF4';mc.style.color='#05C072'}
+  else{mc.style.background='#FFF0F0';mc.style.color='#F04452'}
+}
+function switchLoc(loc,btn){
+  currentLoc=loc;
+  document.querySelectorAll('.loc-tab').forEach(t=>t.classList.remove('on'));
+  btn.classList.add('on');
+  if(loc==='all'){document.querySelectorAll('.loc-section').forEach(s=>s.style.display='')}
+  else{document.querySelectorAll('.loc-section').forEach(s=>{s.dataset.loc===loc?s.style.display='':s.style.display='none'})}
+  update();
+}
+function resetAll(){if(!confirm('전부 초기화?'))return;document.querySelectorAll('.q').forEach(q=>q.classList.remove('done'));save();update()}
+load();update();
+</script>
+</body>
+</html>
