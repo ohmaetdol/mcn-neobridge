@@ -62,17 +62,17 @@
     color: #333;
   }
 
+  /* 테이블 공통 */
   .info-table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 28px;
+    margin-bottom: 24px;
     font-size: 9.5pt;
-    table-layout: fixed;
   }
   .info-table th,
   .info-table td {
-    border: 1px solid #ddd;
-    padding: 11px 16px;
+    border: 1px solid #ccc;
+    padding: 10px 14px;
     vertical-align: middle;
     word-break: keep-all;
   }
@@ -80,20 +80,45 @@
     background: #f8f8f8;
     font-weight: 600;
     text-align: center;
-    width: 110px;
+    width: 100px;
     color: #444;
     letter-spacing: 0.5px;
+    white-space: nowrap;
   }
   .info-table td {
     text-align: left;
     line-height: 1.8;
     color: #333;
   }
+  .info-table .section-header {
+    text-align: center;
+    background: #e8eef5;
+    font-size: 10pt;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: #333;
+    padding: 8px;
+  }
 
+  /* 빈칸 */
+  .blank {
+    display: inline-block;
+    min-width: 100px;
+    border-bottom: 1px solid #999;
+    text-align: center;
+    color: #333;
+    padding: 0 4px;
+  }
+  .blank-s { min-width: 40px; }
+  .blank-m { min-width: 80px; }
+  .blank-l { min-width: 160px; }
+  .blank-xl { min-width: 280px; }
+
+  /* 서명 */
   .sign-table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 32px;
+    margin-top: 28px;
     font-size: 9.5pt;
   }
   .sign-table > tbody > tr > td {
@@ -101,19 +126,19 @@
     vertical-align: top;
     width: 50%;
   }
-  .sign-table > tbody > tr > td:first-child { padding-right: 16px; }
-  .sign-table > tbody > tr > td:last-child { padding-left: 16px; }
+  .sign-table > tbody > tr > td:first-child { padding-right: 14px; }
+  .sign-table > tbody > tr > td:last-child { padding-left: 14px; }
   .sign-inner {
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
     border-radius: 6px;
-    padding: 18px 20px;
+    padding: 16px 18px;
   }
   .sign-header {
     font-weight: 600;
     font-size: 10pt;
-    padding-bottom: 10px;
+    padding-bottom: 8px;
     border-bottom: 1px solid #eee;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     text-align: center;
     color: #333;
   }
@@ -122,7 +147,7 @@
     line-height: 2.2;
   }
   .sl {
-    width: 96px;
+    width: 86px;
     flex-shrink: 0;
     color: #666;
     text-align: left;
@@ -131,11 +156,12 @@
   .sv { flex: 1; color: #222; }
   .seal { color: #c00; }
 
+  /* 조문 */
   .article-title {
     font-weight: 700;
     font-size: 10.5pt;
-    margin-top: 24px;
-    margin-bottom: 8px;
+    margin-top: 22px;
+    margin-bottom: 6px;
     color: #111;
   }
   .article-body {
@@ -148,7 +174,7 @@
   .clause {
     text-indent: -1.3em;
     padding-left: 1.3em;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
     text-align: justify;
     word-break: keep-all;
     color: #333;
@@ -156,7 +182,7 @@
   .sub {
     text-indent: -1em;
     padding-left: 2.8em;
-    margin-bottom: 4px;
+    margin-bottom: 3px;
     text-align: justify;
     word-break: keep-all;
     color: #444;
@@ -176,29 +202,6 @@
     text-align: center;
     font-size: 8.5pt;
     color: #aaa;
-  }
-
-  .field {
-    border: none;
-    border-bottom: 1px solid #bbb;
-    background: transparent;
-    font-family: inherit;
-    font-size: inherit;
-    color: #0055cc;
-    padding: 0 2px;
-    outline: none;
-    text-align: center;
-  }
-  .field:focus { border-bottom-color: #0055cc; background: #f0f6ff; }
-  .field-wide { width: 180px; text-align: left; }
-  .field-date { width: 42px; }
-  .field-num { width: 36px; }
-  .field-name { width: 140px; }
-  .field-full { width: 100%; text-align: left; }
-  .field-sign { width: 140px; text-align: left; }
-  .field-mid { width: 200px; text-align: left; }
-  @media print {
-    .field { border-bottom-color: #999; color: #000; background: transparent; }
   }
 
   .print-btn {
@@ -228,55 +231,36 @@
   <table class="info-table">
     <tr>
       <th>프로젝트명</th>
-      <td colspan="3"><input type="text" class="field field-full" value="콘텐츠코드 — 1개 영상으로 30억 매출을 만든 방법"></td>
+      <td colspan="3"><span class="blank blank-xl">&nbsp;</span></td>
     </tr>
     <tr>
       <th>강연 형태</th>
-      <td><input type="text" class="field field-mid" value="오프라인 현장 강의"></td>
-      <th style="width:80px">회차</th>
-      <td><input type="text" class="field field-num" value="1">회</td>
+      <td><span class="blank blank-l">&nbsp;</span></td>
+      <th>회차</th>
+      <td><span class="blank blank-s">&nbsp;</span>회</td>
     </tr>
     <tr>
       <th>강연 일시</th>
-      <td colspan="3">
-        <input type="text" class="field field-date" value="2026">년
-        <input type="text" class="field field-date" value="6">월
-        <input type="text" class="field field-date" value="13">일
-        (<input type="text" class="field field-date" value="금">)
-        <input type="text" class="field" style="width:50px" value="">시
-        <input type="text" class="field" style="width:50px" value="">분 ~
-        <input type="text" class="field" style="width:50px" value="">시
-        <input type="text" class="field" style="width:50px" value="">분
-      </td>
+      <td colspan="3"><span class="blank blank-s">&nbsp;</span>년 <span class="blank blank-s">&nbsp;</span>월 <span class="blank blank-s">&nbsp;</span>일 (<span class="blank blank-s">&nbsp;</span>) <span class="blank blank-s">&nbsp;</span>시 <span class="blank blank-s">&nbsp;</span>분 ~ <span class="blank blank-s">&nbsp;</span>시 <span class="blank blank-s">&nbsp;</span>분</td>
     </tr>
     <tr>
       <th>강연 장소</th>
-      <td colspan="3"><input type="text" class="field field-full" placeholder="장소를 입력하세요"></td>
+      <td colspan="3"><span class="blank blank-xl">&nbsp;</span></td>
     </tr>
     <tr>
       <th>계약 기간</th>
-      <td colspan="3">
-        <input type="text" class="field field-date" value="2026">년
-        <input type="text" class="field field-date" value="5">월
-        <input type="text" class="field field-date" value="">일 ~
-        <input type="text" class="field field-date" value="2026">년
-        <input type="text" class="field field-date" value="6">월
-        <input type="text" class="field field-date" value="30">일
-        &nbsp;(강연 종료 후 정산 완료 시 자동 종료)
-      </td>
+      <td colspan="3"><span class="blank blank-s">&nbsp;</span>년 <span class="blank blank-s">&nbsp;</span>월 <span class="blank blank-s">&nbsp;</span>일 ~ <span class="blank blank-s">&nbsp;</span>년 <span class="blank blank-s">&nbsp;</span>월 <span class="blank blank-s">&nbsp;</span>일 (강연 종료 후 정산 완료 시 자동 종료)</td>
     </tr>
   </table>
 
   <!-- 수익 구조 -->
   <table class="info-table">
-    <tr style="background:#f0f4f8">
-      <th colspan="4" style="text-align:center; background:#e8eef5; font-size:10pt; letter-spacing:2px">수 익 구 조</th>
-    </tr>
+    <tr><td colspan="4" class="section-header">수 익 구 조</td></tr>
     <tr>
       <th>수강료</th>
-      <td>1인당 <input type="text" class="field" style="width:80px" placeholder="금액">원</td>
-      <th style="width:80px">목표 인원</th>
-      <td><input type="text" class="field field-num" placeholder="">명</td>
+      <td>1인당 <span class="blank blank-m">&nbsp;</span>원</td>
+      <th>목표 인원</th>
+      <td><span class="blank blank-s">&nbsp;</span>명</td>
     </tr>
     <tr>
       <th>마케팅 비용</th>
@@ -284,42 +268,36 @@
     </tr>
     <tr>
       <th>정산 비율</th>
-      <td colspan="3">
-        순매출(총 수강료 - 마케팅 비용 - 결제수수료 - 환불)의
-        <b>갑 <input type="text" class="field field-num" placeholder="">%</b> :
-        <b>을 <input type="text" class="field field-num" placeholder="">%</b>
-      </td>
+      <td colspan="3">순매출(총 수강료 - 마케팅 비용 - 결제수수료 - 환불)의 <b>갑 <span class="blank blank-s">&nbsp;</span>%</b> : <b>을 <span class="blank blank-s">&nbsp;</span>%</b></td>
     </tr>
     <tr>
       <th>정산 시기</th>
-      <td colspan="3">강연 종료 후 <input type="text" class="field field-num" value="14">영업일 이내 갑이 지정한 계좌로 지급</td>
+      <td colspan="3">강연 종료 후 <span class="blank blank-s">&nbsp;</span>영업일 이내 갑이 지정한 계좌로 지급</td>
     </tr>
     <tr>
       <th>환불 정책</th>
-      <td colspan="3">강연일 <input type="text" class="field field-num" value="3">일 전까지 전액 환불 / 이후 환불 불가 (상호 협의 가능)</td>
+      <td colspan="3">강연일 <span class="blank blank-s">&nbsp;</span>일 전까지 전액 환불 / 이후 환불 불가 (상호 협의 가능)</td>
     </tr>
   </table>
 
   <!-- 갑의 정보 -->
   <table class="info-table">
-    <tr style="background:#f0f4f8">
-      <th colspan="4" style="text-align:center; background:#e8eef5; font-size:10pt; letter-spacing:2px">갑 의 정 보</th>
-    </tr>
+    <tr><td colspan="4" class="section-header">갑 의 정 보</td></tr>
     <tr>
       <th>상호</th>
       <td colspan="3">주식회사 프로센스</td>
     </tr>
     <tr>
       <th>대표자</th>
-      <td><input type="text" class="field field-mid" value="오현진"></td>
-      <th style="width:100px">사업자번호</th>
-      <td><input type="text" class="field field-mid" placeholder=""></td>
+      <td><span class="blank blank-l">&nbsp;</span></td>
+      <th>사업자번호</th>
+      <td><span class="blank blank-l">&nbsp;</span></td>
     </tr>
     <tr>
       <th>연락처</th>
-      <td><input type="text" class="field field-mid" placeholder="010-"></td>
-      <th style="width:100px">주소</th>
-      <td><input type="text" class="field field-mid" placeholder=""></td>
+      <td><span class="blank blank-l">&nbsp;</span></td>
+      <th>주소</th>
+      <td><span class="blank blank-l">&nbsp;</span></td>
     </tr>
   </table>
 
@@ -330,9 +308,9 @@
         <div class="sign-inner">
           <div class="sign-header">"갑" (강연자)</div>
           <div class="sign-line"><span class="sl">법인명</span><span class="sv">주식회사 프로센스</span></div>
-          <div class="sign-line"><span class="sl">사업자번호</span><span class="sv"><input type="text" class="field field-sign" placeholder=""></span></div>
-          <div class="sign-line" style="margin-top:10px;border-top:1px solid #ccc;padding-top:8px">
-            <span class="sl">대표</span><span class="sv">오 현 진 &nbsp;<span class="seal">(인)</span></span>
+          <div class="sign-line"><span class="sl">사업자번호</span><span class="sv"><span class="blank blank-l">&nbsp;</span></span></div>
+          <div class="sign-line" style="margin-top:10px;border-top:1px solid #eee;padding-top:8px">
+            <span class="sl">대표</span><span class="sv"><span class="blank blank-m">&nbsp;</span> <span class="seal">(인)</span></span>
           </div>
         </div>
       </td>
@@ -341,12 +319,12 @@
           <div class="sign-header">"을" (기획·운영)</div>
           <div class="sign-line"><span class="sl">법인명</span><span class="sv">주식회사 플로우머스</span></div>
           <div class="sign-line"><span class="sl">사업자번호</span><span class="sv">110-88-03675</span></div>
-          <div class="sign-line"><span class="sl">주소</span><span class="sv">서울특별시 서초구 서초대로<br>398, 7층 709호</span></div>
-          <div class="sign-line" style="margin-top:10px;border-top:1px solid #ccc;padding-top:8px">
-            <span class="sl">공동대표</span><span class="sv">권 현 우 &nbsp;<span class="seal">(인)</span></span>
+          <div class="sign-line"><span class="sl">주소</span><span class="sv">서울특별시 서초구 서초대로 398, 7층 709호</span></div>
+          <div class="sign-line" style="margin-top:10px;border-top:1px solid #eee;padding-top:8px">
+            <span class="sl">공동대표</span><span class="sv">권 현 우 <span class="seal">(인)</span></span>
           </div>
           <div class="sign-line">
-            <span class="sl">공동대표</span><span class="sv">오 맷 돌 &nbsp;<span class="seal">(인)</span></span>
+            <span class="sl">공동대표</span><span class="sv">오 맷 돌 <span class="seal">(인)</span></span>
           </div>
         </div>
       </td>
@@ -367,7 +345,7 @@
   <p class="clause">① 강연 커리큘럼 구성 및 강의자료 준비</p>
   <p class="clause">② 강연일 현장 출석 및 강의 진행</p>
   <p class="clause">③ 강연 홍보를 위한 마케팅 협조 (본인 채널 활용, 콘텐츠 소재 제공 등)</p>
-  <p class="clause">④ 강의자료는 강연일 최소 <input type="text" class="field field-num" value="5">일 전까지 "을"에게 전달</p>
+  <p class="clause">④ 강의자료는 강연일 최소 <span class="blank blank-s">&nbsp;</span>일 전까지 "을"에게 전달</p>
   <p class="clause">⑤ 수강생 질의에 대한 성실한 답변 (강연 당일 한정)</p>
 
   <div class="article-title">제3조 (을의 역할)</div>
@@ -411,7 +389,7 @@
   <div class="article-title">제7조 (지식재산권 및 촬영물)</div>
   <p class="clause">① "갑"이 기존에 보유한 강의 콘텐츠의 저작권은 "갑"에게 귀속된다.</p>
   <p class="clause">② "을"이 강연 당일 촬영한 영상·사진 등 기록물의 이용 범위는 다음과 같다.</p>
-  <p class="sub">가. 마케팅용 숏클립(3분 이내): 강연일로부터 <input type="text" class="field field-num" value="1">년간 "을"이 자유롭게 편집·게시 가능</p>
+  <p class="sub">가. 마케팅용 숏클립(3분 이내): 강연일로부터 <span class="blank blank-s">&nbsp;</span>년간 "을"이 자유롭게 편집·게시 가능</p>
   <p class="sub">나. 풀영상 VOD 판매: 별도 서면 합의 필요 (정산 비율 포함)</p>
   <p class="clause">③ "갑"은 강연 촬영물에 대한 초상권 사용에 동의하며, 본 조 제②항의 범위 내에서 "을"의 마케팅 활용을 허락한다.</p>
   <p class="clause">④ "을"은 촬영 사실을 강연 전 수강생에게 고지한다.</p>
@@ -439,9 +417,9 @@
   <p class="article-body">본 계약은 양 당사자가 서명 날인한 날로부터 효력이 발생하며, 강연 종료 후 정산이 완료되는 시점에 자동 종료된다. 단, 제7조(지식재산권)는 해당 조에 명시된 기간까지, 제8조(비밀유지)는 계약 종료 후 2년간 효력을 유지한다.</p>
 
   <div class="date-line" style="margin-top:36px">
-    <input type="text" class="field field-date" value="2026">년
-    <input type="text" class="field field-date" value="">월
-    <input type="text" class="field field-date" value="">일
+    <span class="blank blank-s">&nbsp;</span>년
+    <span class="blank blank-s">&nbsp;</span>월
+    <span class="blank blank-s">&nbsp;</span>일
   </div>
 
   <table class="sign-table">
@@ -450,8 +428,9 @@
         <div class="sign-inner">
           <div class="sign-header">"갑" (강연자)</div>
           <div class="sign-line"><span class="sl">법인명</span><span class="sv">주식회사 프로센스</span></div>
-          <div class="sign-line" style="margin-top:10px;border-top:1px solid #ccc;padding-top:8px">
-            <span class="sl">대표</span><span class="sv">오 현 진 &nbsp;<span class="seal">(인)</span></span>
+          <div class="sign-line"><span class="sl">사업자번호</span><span class="sv"><span class="blank blank-l">&nbsp;</span></span></div>
+          <div class="sign-line" style="margin-top:10px;border-top:1px solid #eee;padding-top:8px">
+            <span class="sl">대표</span><span class="sv"><span class="blank blank-m">&nbsp;</span> <span class="seal">(인)</span></span>
           </div>
         </div>
       </td>
@@ -460,11 +439,11 @@
           <div class="sign-header">"을" (기획·운영)</div>
           <div class="sign-line"><span class="sl">법인명</span><span class="sv">주식회사 플로우머스</span></div>
           <div class="sign-line"><span class="sl">사업자번호</span><span class="sv">110-88-03675</span></div>
-          <div class="sign-line" style="margin-top:10px;border-top:1px solid #ccc;padding-top:8px">
-            <span class="sl">공동대표</span><span class="sv">권 현 우 &nbsp;<span class="seal">(인)</span></span>
+          <div class="sign-line" style="margin-top:10px;border-top:1px solid #eee;padding-top:8px">
+            <span class="sl">공동대표</span><span class="sv">권 현 우 <span class="seal">(인)</span></span>
           </div>
           <div class="sign-line">
-            <span class="sl">공동대표</span><span class="sv">오 맷 돌 &nbsp;<span class="seal">(인)</span></span>
+            <span class="sl">공동대표</span><span class="sv">오 맷 돌 <span class="seal">(인)</span></span>
           </div>
         </div>
       </td>
