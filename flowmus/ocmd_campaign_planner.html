@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6/13 현장강의 캠페인 플래너</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fafaf7;
+    --paper: #ffffff;
+    --ink: #1a1a1a;
+    --ink-soft: #5a5a5a;
+    --ink-mute: #999999;
+    --line: #e8e6e0;
+    --line-strong: #d4d1c8;
+
+    --phase1: #2d4a3e;
+    --phase1-soft: #e8efe9;
+    --phase2: #b8541a;
+    --phase2-soft: #fbe9d8;
+    --phase3: #6b2737;
+    --phase3-soft: #f3e2e5;
+    --prep: #4a5568;
+    --prep-soft: #e9ecef;
+    --dday: #1a1a1a;
+    --dday-soft: #fff4a3;
+
+    --accent: #c4a26a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    font-weight: 400;
+    padding: 40px 20px 80px;
+  }
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    border-bottom: 1px solid var(--line-strong);
+    padding-bottom: 28px;
+    margin-bottom: 36px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: end;
+  }
+
+  .header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .meta-line {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+  }
+
+  h1 {
+    font-family: 'Gowun Batang', serif;
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+
+  .subtitle {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+
+  .target-badge {
+    border: 1px solid var(--line-strong);
+    padding: 14px 20px;
+    text-align: right;
+  }
+
+  .target-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .target-value {
+    font-family: 'Gowun Batang', serif;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  /* ===== KPI STRIP ===== */
+  .kpi-strip {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin-bottom: 36px;
+  }
+
+  .kpi {
+    background: var(--paper);
+    padding: 18px 20px;
+  }
+
+  .kpi-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .kpi-value {
+    font-family: 'Gowun Batang', serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .kpi-sub {
+    font-size: 11px;
+    color: var(--ink-soft);
+    margin-top: 2px;
+  }
+
+  /* ===== PHASE LEGEND ===== */
+  .legend {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+    font-size: 12px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--ink-soft);
+  }
+
+  .legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+  }
+
+  /* ===== CALENDAR ===== */
+  .calendar-section-title {
+    font-family: 'Gowun Batang', serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+  }
+
+  .section-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-mute);
+    letter-spacing: 0.1em;
+  }
+
+  .calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin-bottom: 36px;
+  }
+
+  .day-header {
+    background: var(--paper);
+    padding: 10px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+    text-align: center;
+    font-weight: 500;
+  }
+
+  .day-header.sun { color: #b8541a; }
+  .day-header.sat { color: #2d4a3e; }
+
+  .day-cell {
+    background: var(--paper);
+    padding: 10px 12px;
+    min-height: 130px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .day-cell.empty {
+    background: var(--bg);
+    min-height: 130px;
+  }
+
+  .day-cell.phase-prep { background: var(--prep-soft); }
+  .day-cell.phase-1 { background: var(--phase1-soft); }
+  .day-cell.phase-2 { background: var(--phase2-soft); }
+  .day-cell.phase-3 { background: var(--phase3-soft); }
+  .day-cell.dday {
+    background: var(--dday-soft);
+    border: 2px solid var(--dday);
+  }
+
+  .day-number {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+  }
+
+  .day-num {
+    font-family: 'Gowun Batang', serif;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .day-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 2px 6px;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+
+  .day-tag.prep { background: var(--prep); color: white; }
+  .day-tag.p1 { background: var(--phase1); color: white; }
+  .day-tag.p2 { background: var(--phase2); color: white; }
+  .day-tag.p3 { background: var(--phase3); color: white; }
+  .day-tag.dday { background: var(--dday); color: var(--dday-soft); }
+
+  .day-action {
+    font-size: 11.5px;
+    line-height: 1.5;
+    color: var(--ink);
+    flex-grow: 1;
+  }
+
+  .day-action strong {
+    font-weight: 600;
+  }
+
+  .day-meta {
+    margin-top: auto;
+    padding-top: 6px;
+    border-top: 1px dashed var(--line-strong);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--ink-soft);
+    letter-spacing: 0.05em;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .day-meta .ad {
+    color: var(--phase2);
+    font-weight: 500;
+  }
+
+  .day-meta .ad.zero {
+    color: var(--ink-mute);
+  }
+
+  .milestone-dot {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+  }
+
+  /* ===== PHASE SUMMARY ===== */
+  .phase-summary {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin-bottom: 36px;
+  }
+
+  .phase-card {
+    background: var(--paper);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .phase-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .phase-name {
+    font-family: 'Gowun Batang', serif;
+    font-size: 17px;
+    font-weight: 700;
+  }
+
+  .phase-dates {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-mute);
+    letter-spacing: 0.1em;
+  }
+
+  .phase-bar {
+    height: 4px;
+    margin-bottom: 6px;
+  }
+  .phase-bar.p1 { background: var(--phase1); }
+  .phase-bar.p2 { background: var(--phase2); }
+  .phase-bar.p3 { background: var(--phase3); }
+
+  .phase-metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  .phase-metric {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .pm-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    color: var(--ink-mute);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .pm-value {
+    font-family: 'Gowun Batang', serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  .phase-focus {
+    font-size: 12px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    padding-top: 8px;
+  }
+
+  .phase-focus strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* ===== CHECKPOINTS ===== */
+  .checkpoints {
+    border: 1px solid var(--line-strong);
+    padding: 24px 28px;
+    margin-bottom: 24px;
+  }
+
+  .checkpoints-title {
+    font-family: 'Gowun Batang', serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .checkpoints-title::before {
+    content: '◆';
+    color: var(--accent);
+    font-size: 12px;
+  }
+
+  .checkpoint-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .checkpoint {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .checkpoint-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--phase2);
+    letter-spacing: 0.08em;
+    min-width: 70px;
+    padding-top: 2px;
+  }
+
+  .checkpoint-body {
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+
+  .checkpoint-body strong {
+    color: var(--ink);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 2px;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    border-top: 1px solid var(--line);
+    padding-top: 18px;
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--ink-mute);
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 900px) {
+    body { padding: 24px 12px 60px; }
+    .container { max-width: 100%; }
+    header { grid-template-columns: 1fr; align-items: start; }
+    .target-badge { text-align: left; }
+    h1 { font-size: 28px; }
+    .kpi-strip { grid-template-columns: repeat(2, 1fr); }
+    .calendar {
+      grid-template-columns: repeat(7, minmax(110px, 1fr));
+      overflow-x: auto;
+      display: grid;
+    }
+    .phase-summary { grid-template-columns: 1fr; }
+    .checkpoint-grid { grid-template-columns: 1fr; }
+    .day-cell { min-height: 110px; padding: 8px 10px; }
+    .day-num { font-size: 16px; }
+    .day-action { font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="header-left">
+      <div class="meta-line">FLOWMUS × OCMD / Campaign Planner</div>
+      <h1>6/13 현장강의 캠페인</h1>
+      <div class="subtitle">5월 18일 — 6월 13일 · 27일 · 3 Phases · 4인 체제</div>
+    </div>
+    <div class="target-badge">
+      <div class="target-label">Revenue Target</div>
+      <div class="target-value">₩55,000,000</div>
+    </div>
+  </header>
+
+  <!-- KPI STRIP -->
+  <section class="kpi-strip">
+    <div class="kpi">
+      <div class="kpi-label">총 좌석</div>
+      <div class="kpi-value">100석</div>
+      <div class="kpi-sub">재수강 35~40 · 신규 60~65</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">가격 (3단계)</div>
+      <div class="kpi-value">55 / 45 / 35</div>
+      <div class="kpi-sub">정가 55 · 재수강 45 · 얼리버드 35</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">총 광고비</div>
+      <div class="kpi-value">750만</div>
+      <div class="kpi-sub">50:50 분담 · 예상 ROAS 7.3x</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">얼리버드 마감</div>
+      <div class="kpi-value">6/7 (토)</div>
+      <div class="kpi-sub">정가 마감 6/12 (목)</div>
+    </div>
+  </section>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div class="legend-item"><span class="legend-dot" style="background:var(--prep)"></span>Phase 0 사전준비</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--phase1)"></span>Phase 1 재수강 우선오픈</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--phase2)"></span>Phase 2 신규+얼리버드</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--phase3)"></span>Phase 3 정가 라스트콜</div>
+    <div class="legend-item"><span class="legend-dot" style="background:var(--accent)"></span>점검 포인트</div>
+  </div>
+
+  <!-- ============ MAY CALENDAR ============ -->
+  <div class="calendar-section-title">
+    5월 <span class="section-meta">MAY 2026</span>
+  </div>
+  <div class="calendar">
+    <div class="day-header sun">Sun</div>
+    <div class="day-header">Mon</div>
+    <div class="day-header">Tue</div>
+    <div class="day-header">Wed</div>
+    <div class="day-header">Thu</div>
+    <div class="day-header">Fri</div>
+    <div class="day-header sat">Sat</div>
+
+    <!-- Week 1: May 17 (Sun) -->
+    <div class="day-cell phase-prep">
+      <div class="day-number">
+        <div class="day-num">17</div>
+        <div class="day-tag prep">PREP</div>
+      </div>
+      <div class="day-action">
+        상세페이지 <strong>최종 완성</strong><br>
+        결제링크·UTM·티저3개 점검<br>
+        DM 초안 컨펌
+      </div>
+      <div class="day-meta"><span>D-27</span><span class="ad zero">광고 OFF</span></div>
+    </div>
+
+    <!-- May 18 Mon -->
+    <div class="day-cell phase-1">
+      <div class="milestone-dot"></div>
+      <div class="day-number">
+        <div class="day-num">18</div>
+        <div class="day-tag p1">P1·D1</div>
+      </div>
+      <div class="day-action">
+        <strong>🚀 캠페인 발사</strong><br>
+        상위 10명 1:1 DM (오은환 직접)<br>
+        재구매+기존수강생 CRM 문자
+      </div>
+      <div class="day-meta"><span>D-26</span><span class="ad zero">광고 OFF</span></div>
+    </div>
+
+    <!-- May 19 Tue -->
+    <div class="day-cell phase-1">
+      <div class="day-number">
+        <div class="day-num">19</div>
+        <div class="day-tag p1">P1·D2</div>
+      </div>
+      <div class="day-action">
+        기존 수강생 600명 CRM 문자<br>
+        프리미엄 멤버 750명 발송<br>
+        카페 공지 고정
+      </div>
+      <div class="day-meta"><span>D-25</span><span class="ad zero">광고 OFF</span></div>
+    </div>
+
+    <!-- May 20 Wed -->
+    <div class="day-cell phase-1">
+      <div class="day-number">
+        <div class="day-num">20</div>
+        <div class="day-tag p1">P1·D3</div>
+      </div>
+      <div class="day-action">
+        결제자 후기 1~2건 확보<br>
+        티저 #2 (Why now)
+      </div>
+      <div class="day-meta"><span>D-24</span><span class="ad zero">광고 OFF</span></div>
+    </div>
+
+    <!-- May 21 Thu -->
+    <div class="day-cell phase-1">
+      <div class="day-number">
+        <div class="day-num">21</div>
+        <div class="day-tag p1">P1·D4</div>
+      </div>
+      <div class="day-action">
+        미응답자 <strong>1차 리마인드</strong><br>
+        (다른 각도 메시지)
+      </div>
+      <div class="day-meta"><span>D-23</span><span class="ad zero">광고 OFF</span></div>
+    </div>
+
+    <!-- May 22 Fri -->
+    <div class="day-cell phase-1">
+      <div class="day-number">
+        <div class="day-num">22</div>
+        <div class="day-tag p1">P1·D5</div>
+      </div>
+      <div class="day-action">
+        티저 #3<br>
+        커리큘럼 큰 줄기 공개
+      </div>
+      <div class="day-meta"><span>D-22</span><span class="ad zero">광고 OFF</span></div>
+    </div>
+
+    <!-- May 23 Sat -->
+    <div class="day-cell phase-1">
+      <div class="day-number">
+        <div class="day-num">23</div>
+        <div class="day-tag p1">P1·D6</div>
+      </div>
+      <div class="day-action">
+        <strong>추천 캠페인 오픈</strong><br>
+        상위 결제자 5~7명 1:1 DM
+      </div>
+      <div class="day-meta"><span>D-21</span><span class="ad zero">광고 OFF</span></div>
+    </div>
+
+    <!-- May 24 Sun -->
+    <div class="day-cell phase-1">
+      <div class="day-number">
+        <div class="day-num">24</div>
+        <div class="day-tag p1">P1·D7</div>
+      </div>
+      <div class="day-action">
+        결제자 그룹채팅 개설<br>
+        사회적 증거 형성
+      </div>
+      <div class="day-meta"><span>D-20</span><span class="ad zero">광고 OFF</span></div>
+    </div>
+
+    <!-- May 25 Mon -->
+    <div class="day-cell phase-1">
+      <div class="milestone-dot"></div>
+      <div class="day-number">
+        <div class="day-num">25</div>
+        <div class="day-tag p1">P1·END</div>
+      </div>
+      <div class="day-action">
+        <strong>재수강 오픈 마감</strong><br>
+        마지막 푸시·미결제자 통화<br>
+        ▶ 35~40명 / 1,575~1,800만 점검
+      </div>
+      <div class="day-meta"><span>D-19</span><span class="ad zero">광고 OFF</span></div>
+    </div>
+
+    <!-- May 26 Tue -->
+    <div class="day-cell phase-2">
+      <div class="milestone-dot"></div>
+      <div class="day-number">
+        <div class="day-num">26</div>
+        <div class="day-tag p2">P2·D1</div>
+      </div>
+      <div class="day-action">
+        <strong>🔥 공식 오픈</strong><br>
+        피드+릴스 "왜 6/13"<br>
+        광고 워밍업 시작
+      </div>
+      <div class="day-meta"><span>D-18</span><span class="ad">광고 20만</span></div>
+    </div>
+
+    <!-- May 27 Wed -->
+    <div class="day-cell phase-2">
+      <div class="day-number">
+        <div class="day-num">27</div>
+        <div class="day-tag p2">P2·D2</div>
+      </div>
+      <div class="day-action">
+        1기 후기 릴스 #1<br>
+        스토리 카운트다운 시작
+      </div>
+      <div class="day-meta"><span>D-17</span><span class="ad">광고 20만</span></div>
+    </div>
+
+    <!-- May 28 Thu -->
+    <div class="day-cell phase-2">
+      <div class="day-number">
+        <div class="day-num">28</div>
+        <div class="day-tag p2">P2·D3</div>
+      </div>
+      <div class="day-action">
+        커리큘럼 미리보기 #1<br>
+        (1~2부)
+      </div>
+      <div class="day-meta"><span>D-16</span><span class="ad">광고 20만</span></div>
+    </div>
+
+    <!-- May 29 Fri -->
+    <div class="day-cell phase-2">
+      <div class="day-number">
+        <div class="day-num">29</div>
+        <div class="day-tag p2">P2·D4</div>
+      </div>
+      <div class="day-action">
+        강사 메시지 릴스<br>
+        (Why this · 차별점)
+      </div>
+      <div class="day-meta"><span>D-15</span><span class="ad">광고 20만</span></div>
+    </div>
+
+    <!-- May 30 Sat -->
+    <div class="day-cell phase-2">
+      <div class="milestone-dot"></div>
+      <div class="day-number">
+        <div class="day-num">30</div>
+        <div class="day-tag p2">P2·D5</div>
+      </div>
+      <div class="day-action">
+        <strong>"35명+ 신청" 카운트</strong><br>
+        피드+스토리 노출<br>
+        ▶ ROAS 1차 점검
+      </div>
+      <div class="day-meta"><span>D-14</span><span class="ad">광고 30만</span></div>
+    </div>
+
+    <!-- May 31 Sun -->
+    <div class="day-cell phase-2">
+      <div class="day-number">
+        <div class="day-num">31</div>
+        <div class="day-tag p2">P2·D6</div>
+      </div>
+      <div class="day-action">
+        1기 후기 릴스 #2<br>
+        주말 도달 푸시
+      </div>
+      <div class="day-meta"><span>D-13</span><span class="ad">광고 30만</span></div>
+    </div>
+  </div>
+
+  <!-- ============ JUNE CALENDAR ============ -->
+  <div class="calendar-section-title">
+    6월 <span class="section-meta">JUNE 2026</span>
+  </div>
+  <div class="calendar">
+    <div class="day-header sun">Sun</div>
+    <div class="day-header">Mon</div>
+    <div class="day-header">Tue</div>
+    <div class="day-header">Wed</div>
+    <div class="day-header">Thu</div>
+    <div class="day-header">Fri</div>
+    <div class="day-header sat">Sat</div>
+
+    <!-- empty cells for Mon-Sat (June 1 is Mon) -->
+    <div class="day-cell empty"></div>
+
+    <!-- June 1 Mon -->
+    <div class="day-cell phase-2">
+      <div class="milestone-dot"></div>
+      <div class="day-number">
+        <div class="day-num">1</div>
+        <div class="day-tag p2">P2·D7</div>
+      </div>
+      <div class="day-action">
+        가벼운 BTS 콘텐츠<br>
+        ▶ <strong>D-12 점검</strong><br>
+        누적 38명 미달 시 액션
+      </div>
+      <div class="day-meta"><span>D-12</span><span class="ad">광고 30만</span></div>
+    </div>
+
+    <!-- June 2 Tue -->
+    <div class="day-cell phase-2">
+      <div class="day-number">
+        <div class="day-num">2</div>
+        <div class="day-tag p2">P2·D8</div>
+      </div>
+      <div class="day-action">
+        커리큘럼 미리보기 #2<br>
+        (3~4부)
+      </div>
+      <div class="day-meta"><span>D-11</span><span class="ad">광고 35만</span></div>
+    </div>
+
+    <!-- June 3 Wed -->
+    <div class="day-cell phase-2">
+      <div class="day-number">
+        <div class="day-num">3</div>
+        <div class="day-tag p2">P2·D9</div>
+      </div>
+      <div class="day-action">
+        Q&A · FAQ 릴스<br>
+        결제 망설임 해소
+      </div>
+      <div class="day-meta"><span>D-10</span><span class="ad">광고 35만</span></div>
+    </div>
+
+    <!-- June 4 Thu -->
+    <div class="day-cell phase-2">
+      <div class="day-number">
+        <div class="day-num">4</div>
+        <div class="day-tag p2">P2·D10</div>
+      </div>
+      <div class="day-action">
+        1기 후기 릴스 #3<br>
+        변화 사례 (전환 핵심)
+      </div>
+      <div class="day-meta"><span>D-9</span><span class="ad">광고 35만</span></div>
+    </div>
+
+    <!-- June 5 Fri -->
+    <div class="day-cell phase-2">
+      <div class="day-number">
+        <div class="day-num">5</div>
+        <div class="day-tag p2">P2·D11</div>
+      </div>
+      <div class="day-action">
+        <strong>"얼리버드 D-3"</strong><br>
+        카운트다운 시작
+      </div>
+      <div class="day-meta"><span>D-8</span><span class="ad">광고 35만</span></div>
+    </div>
+
+    <!-- June 6 Sat -->
+    <div class="day-cell phase-2">
+      <div class="day-number">
+        <div class="day-num">6</div>
+        <div class="day-tag p2">P2·D12</div>
+      </div>
+      <div class="day-action">
+        강사 1:1 메시지 영상<br>
+        리타게팅 비중 70%
+      </div>
+      <div class="day-meta"><span>D-7</span><span class="ad">광고 40만</span></div>
+    </div>
+
+    <!-- June 7 Sun -->
+    <div class="day-cell phase-2">
+      <div class="milestone-dot"></div>
+      <div class="day-number">
+        <div class="day-num">7</div>
+        <div class="day-tag p2">P2·END</div>
+      </div>
+      <div class="day-action">
+        <strong>⏰ 얼리버드 마감 D-Day</strong><br>
+        스토리 시간대별 푸시<br>
+        ▶ 누적 75~80명 / 3,000만 점검
+      </div>
+      <div class="day-meta"><span>D-6</span><span class="ad">광고 40만</span></div>
+    </div>
+
+    <!-- June 8 Mon -->
+    <div class="day-cell phase-3">
+      <div class="milestone-dot"></div>
+      <div class="day-number">
+        <div class="day-num">8</div>
+        <div class="day-tag p3">P3·D1</div>
+      </div>
+      <div class="day-action">
+        <strong>정가 라스트콜 시작</strong><br>
+        "좌석 ○○석 남음" 공지<br>
+        얼리버드 미결제자 DM
+      </div>
+      <div class="day-meta"><span>D-5</span><span class="ad">광고 35만</span></div>
+    </div>
+
+    <!-- June 9 Tue -->
+    <div class="day-cell phase-3">
+      <div class="day-number">
+        <div class="day-num">9</div>
+        <div class="day-tag p3">P3·D2</div>
+      </div>
+      <div class="day-action">
+        라스트콜 릴스<br>
+        강사 직접 어필
+      </div>
+      <div class="day-meta"><span>D-4</span><span class="ad">광고 35만</span></div>
+    </div>
+
+    <!-- June 10 Wed -->
+    <div class="day-cell phase-3">
+      <div class="day-number">
+        <div class="day-num">10</div>
+        <div class="day-tag p3">P3·D3</div>
+      </div>
+      <div class="day-action">
+        <strong>"D-3 · 좌석 ○○석"</strong><br>
+        스토리 시간대별
+      </div>
+      <div class="day-meta"><span>D-3</span><span class="ad">광고 40만</span></div>
+    </div>
+
+    <!-- June 11 Thu -->
+    <div class="day-cell phase-3">
+      <div class="day-number">
+        <div class="day-num">11</div>
+        <div class="day-tag p3">P3·D4</div>
+      </div>
+      <div class="day-action">
+        결제자 BTS<br>
+        기대감 콘텐츠
+      </div>
+      <div class="day-meta"><span>D-2</span><span class="ad">광고 40만</span></div>
+    </div>
+
+    <!-- June 12 Fri -->
+    <div class="day-cell phase-3">
+      <div class="milestone-dot"></div>
+      <div class="day-number">
+        <div class="day-num">12</div>
+        <div class="day-tag p3">P3·END</div>
+      </div>
+      <div class="day-action">
+        <strong>🏁 판매 마감 D-Day</strong><br>
+        오전·점심·오후·저녁·마감4h<br>
+        ▶ 누적 100명 / 5,500만 목표
+      </div>
+      <div class="day-meta"><span>D-1</span><span class="ad">광고 50만</span></div>
+    </div>
+
+    <!-- June 13 Sat - D-DAY -->
+    <div class="day-cell dday">
+      <div class="day-number">
+        <div class="day-num">13</div>
+        <div class="day-tag dday">D-DAY</div>
+      </div>
+      <div class="day-action">
+        <strong>현장강의 진행</strong><br>
+        체크인 / 운영 / 만족도조사<br>
+        다음 기수 리드 확보
+      </div>
+      <div class="day-meta"><span>강의일</span><span>—</span></div>
+    </div>
+  </div>
+
+  <!-- ============ PHASE SUMMARY ============ -->
+  <div class="calendar-section-title">Phase Summary</div>
+  <div class="phase-summary">
+    <div class="phase-card">
+      <div class="phase-bar p1"></div>
+      <div class="phase-card-header">
+        <div class="phase-name">Phase 1 · 재수강 우선오픈</div>
+        <div class="phase-dates">5/18 – 5/25</div>
+      </div>
+      <div class="phase-metrics">
+        <div class="phase-metric">
+          <div class="pm-label">목표</div>
+          <div class="pm-value">35~40명</div>
+        </div>
+        <div class="phase-metric">
+          <div class="pm-label">매출</div>
+          <div class="pm-value">1,575~1,800만</div>
+        </div>
+        <div class="phase-metric">
+          <div class="pm-label">광고비</div>
+          <div class="pm-value">0원</div>
+        </div>
+      </div>
+      <div class="phase-focus">
+        <strong>초기 3일이 승부.</strong>
+        상위 10명 1:1 DM은 오은환 대표 직접. "할인"이 아닌 <strong>"1기 졸업생 우선 좌석"</strong>으로 포지셔닝. CRM 문자 세그먼트별 발송 (권현우). 광고 OFF.
+      </div>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-bar p2"></div>
+      <div class="phase-card-header">
+        <div class="phase-name">Phase 2 · 신규+얼리버드</div>
+        <div class="phase-dates">5/26 – 6/7</div>
+      </div>
+      <div class="phase-metrics">
+        <div class="phase-metric">
+          <div class="pm-label">목표</div>
+          <div class="pm-value">+40명</div>
+        </div>
+        <div class="phase-metric">
+          <div class="pm-label">매출</div>
+          <div class="pm-value">1,400만</div>
+        </div>
+        <div class="phase-metric">
+          <div class="pm-label">광고비</div>
+          <div class="pm-value">~450만</div>
+        </div>
+      </div>
+      <div class="phase-focus">
+        <strong>사회적 증거 활용 구간.</strong>
+        "이미 35명+ 신청" 카피로 신규 전환율 극대화. 메타+유튜브+당근 광고 풀가동 (오맷돌). 카톡채널·블로그·카페 동시 공지 (권현우).
+      </div>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-bar p3"></div>
+      <div class="phase-card-header">
+        <div class="phase-name">Phase 3 · 정가 라스트콜</div>
+        <div class="phase-dates">6/8 – 6/12</div>
+      </div>
+      <div class="phase-metrics">
+        <div class="phase-metric">
+          <div class="pm-label">목표</div>
+          <div class="pm-value">+20명</div>
+        </div>
+        <div class="phase-metric">
+          <div class="pm-label">매출</div>
+          <div class="pm-value">1,100만</div>
+        </div>
+        <div class="phase-metric">
+          <div class="pm-label">광고비</div>
+          <div class="pm-value">~300만</div>
+        </div>
+      </div>
+      <div class="phase-focus">
+        <strong>ROAS 최고 구간.</strong>
+        리타게팅 비중 80%, 좌석 카운트+마감 임박. 6/12 마감 4시간 전 집중 푸시가 단일 최대 매출 시간.
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ CHECKPOINTS ============ -->
+  <div class="checkpoints">
+    <div class="checkpoints-title">중간 점검 · Decision Triggers</div>
+    <div class="checkpoint-grid">
+      <div class="checkpoint">
+        <div class="checkpoint-date">5/25 일</div>
+        <div class="checkpoint-body">
+          <strong>Phase 1 결과 점검</strong>
+          재수강 결제 30명 미달 시 1:1 통화로 미결제 사유 파악 (일정·금액·콘텐츠 中)
+        </div>
+      </div>
+      <div class="checkpoint">
+        <div class="checkpoint-date">5/30 토</div>
+        <div class="checkpoint-body">
+          <strong>광고 1차 점검</strong>
+          ROAS 3배 미만 시 광고 끄고 콘텐츠 메시지부터 재점검 (특히 Why now)
+        </div>
+      </div>
+      <div class="checkpoint">
+        <div class="checkpoint-date">6/1 월</div>
+        <div class="checkpoint-body">
+          <strong>D-12 누적 점검</strong>
+          55명 미달 시 추천 인센티브 강화. 65명+ 시 광고 10% 증액 검토
+        </div>
+      </div>
+      <div class="checkpoint">
+        <div class="checkpoint-date">6/7 일</div>
+        <div class="checkpoint-body">
+          <strong>얼리버드 마감 점검</strong>
+          누적 75명 미달 시 라스트콜에 보너스 패키지 투입 (1:1 컨설팅 등)
+        </div>
+      </div>
+      <div class="checkpoint">
+        <div class="checkpoint-date">6/10 수</div>
+        <div class="checkpoint-body">
+          <strong>D-3 좌석 마감 임박</strong>
+          잔여 좌석 명확히 노출. 결제 미완료 카트 이탈자 리타게팅 집중
+        </div>
+      </div>
+      <div class="checkpoint">
+        <div class="checkpoint-date">6/12 금</div>
+        <div class="checkpoint-body">
+          <strong>마감 D-Day 운영</strong>
+          시간대별 5회 푸시 (오전/점심/오후/저녁/마감4h). 마감 4시간 전이 최대 매출 시간
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div>Flowmus × OCMD</div>
+    <div>v2.0 · 2026.05.14</div>
+  </footer>
+
+</div>
+</body>
+</html>
