@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>오콘목달 카페 운영 가이드</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f5f7; --card: #fff; --navy: #1a2e5a; --accent: #6b63b5;
+  --text: #1d1d1f; --text2: #6e6e73; --border: #e5e5ea;
+  --blue: #3b82f6; --yellow: #f59e0b; --purple: #8b5cf6; --pink: #ec4899; --green: #10b981; --red: #ef4444;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Pretendard Variable',-apple-system,sans-serif; background:var(--bg); color:var(--text); padding:24px 16px 80px; }
+.container { max-width:900px; margin:0 auto; }
+
+.header { background:linear-gradient(135deg,var(--navy),var(--accent)); border-radius:20px; padding:36px; color:#fff; margin-bottom:24px; }
+.header-badge { display:inline-block; padding:4px 12px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.2); border-radius:16px; font-size:11px; font-weight:600; letter-spacing:.08em; margin-bottom:10px; }
+.header h1 { font-size:24px; font-weight:800; margin-bottom:4px; }
+.header p { font-size:13px; color:rgba(255,255,255,.65); }
+.header-links { display:flex; gap:12px; margin-top:16px; flex-wrap:wrap; }
+.header-links a { display:inline-block; padding:6px 14px; background:rgba(255,255,255,.15); border:1px solid rgba(255,255,255,.25); border-radius:10px; color:#fff; text-decoration:none; font-size:12px; font-weight:600; transition:background .2s; }
+.header-links a:hover { background:rgba(255,255,255,.25); }
+
+.section-title { font-size:20px; font-weight:800; color:var(--navy); margin:32px 0 16px; }
+.section-sub { font-size:13px; color:var(--text2); margin-top:-10px; margin-bottom:16px; }
+
+/* Daily Checklist */
+.checklist { background:var(--card); border-radius:16px; border:1px solid var(--border); overflow:hidden; margin-bottom:24px; }
+.checklist-header { background:var(--green); color:#fff; padding:16px 20px; font-size:15px; font-weight:700; }
+.checklist-item { display:flex; align-items:center; gap:12px; padding:14px 20px; border-bottom:1px solid #f0f0f5; font-size:14px; }
+.checklist-item:last-child { border-bottom:none; }
+.checklist-item .num { width:28px; height:28px; background:#f0f0f5; border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px; color:var(--text2); flex-shrink:0; }
+.checklist-item .desc { flex:1; }
+.checklist-item .time { font-size:12px; color:var(--text2); flex-shrink:0; }
+
+/* Phase Cards */
+.phase-card { background:var(--card); border-radius:16px; border:1px solid var(--border); overflow:hidden; margin-bottom:20px; }
+.phase-header { padding:20px 24px; display:flex; align-items:center; justify-content:space-between; }
+.phase-header h3 { font-size:17px; font-weight:800; }
+.phase-header .period { font-size:12px; color:var(--text2); }
+.phase-badge { padding:4px 12px; border-radius:12px; font-size:11px; font-weight:700; color:#fff; }
+.phase-target { padding:8px 24px; font-size:13px; color:var(--text2); font-weight:600; background:#fafafa; border-top:1px solid #f0f0f5; }
+.phase-tasks { padding:0; }
+.phase-task { display:flex; gap:12px; padding:14px 24px; border-top:1px solid #f0f0f5; font-size:13px; align-items:flex-start; }
+.phase-task .task-action { flex:1; font-weight:500; line-height:1.5; }
+.phase-task .task-board { background:#f0f0f5; padding:2px 8px; border-radius:6px; font-size:11px; font-weight:600; color:var(--text2); white-space:nowrap; flex-shrink:0; }
+.phase-task .task-freq { font-size:11px; color:var(--text2); flex-shrink:0; min-width:50px; text-align:right; }
+.phase-task .task-who { font-size:11px; padding:2px 8px; border-radius:6px; font-weight:600; white-space:nowrap; flex-shrink:0; }
+.who-kwon { background:#dbeafe; color:#1d4ed8; }
+.who-oh { background:#fef3c7; color:#92400e; }
+
+.p0 .phase-header { background:#dbeafe; }
+.p0 .phase-badge { background:var(--blue); }
+.p1 .phase-header { background:#fef3c7; }
+.p1 .phase-badge { background:var(--yellow); }
+.p2 .phase-header { background:#ede9fe; }
+.p2 .phase-badge { background:var(--purple); }
+.p3 .phase-header { background:#fce7f3; }
+.p3 .phase-badge { background:var(--pink); }
+.pd .phase-header { background:#d1fae5; }
+.pd .phase-badge { background:var(--green); }
+
+/* Content Strategy */
+.content-types { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:24px; }
+.content-type { background:var(--card); border-radius:14px; border:1px solid var(--border); padding:20px; text-align:center; }
+.content-type .emoji { font-size:28px; margin-bottom:8px; }
+.content-type h4 { font-size:14px; font-weight:700; margin-bottom:4px; }
+.content-type .ratio { font-size:24px; font-weight:800; margin-bottom:6px; }
+.content-type p { font-size:12px; color:var(--text2); line-height:1.5; }
+.ct-hook .ratio { color:var(--blue); }
+.ct-nurture .ratio { color:var(--green); }
+.ct-convert .ratio { color:var(--red); }
+
+/* Weekly Schedule */
+.schedule { background:var(--card); border-radius:16px; border:1px solid var(--border); overflow:hidden; margin-bottom:24px; }
+.schedule table { width:100%; border-collapse:collapse; }
+.schedule th { background:#f8f9fc; font-size:11px; font-weight:600; color:var(--text2); text-align:left; padding:10px 14px; border-bottom:1px solid var(--border); text-transform:uppercase; letter-spacing:.04em; }
+.schedule td { font-size:13px; padding:10px 14px; border-bottom:1px solid #f0f0f5; }
+.schedule tr:last-child td { border-bottom:none; }
+.day-badge { display:inline-block; width:40px; text-align:center; padding:2px 0; border-radius:6px; font-size:12px; font-weight:700; }
+.day-mon { background:#dbeafe; color:#1d4ed8; }
+.day-tue { background:#fce7f3; color:#be185d; }
+.day-wed { background:#fef3c7; color:#92400e; }
+.day-thu { background:#ede9fe; color:#5b21b6; }
+.day-fri { background:#d1fae5; color:#065f46; }
+.day-sat { background:#f3f4f6; color:#6b7280; }
+
+/* Conversion Funnel */
+.funnel { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-bottom:24px; }
+.funnel-step { background:var(--card); border-radius:14px; border:1px solid var(--border); padding:16px; text-align:center; position:relative; }
+.funnel-step::after { content:'→'; position:absolute; right:-12px; top:50%; transform:translateY(-50%); font-size:16px; color:var(--text2); }
+.funnel-step:last-child::after { display:none; }
+.funnel-step .step-num { font-size:11px; font-weight:600; color:var(--text2); margin-bottom:4px; }
+.funnel-step h4 { font-size:13px; font-weight:700; margin-bottom:6px; }
+.funnel-step p { font-size:11px; color:var(--text2); line-height:1.4; }
+
+/* Title Formula */
+.formula-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-bottom:24px; }
+.formula-card { background:var(--card); border-radius:12px; border:1px solid var(--border); padding:16px; }
+.formula-card .formula-name { font-size:12px; font-weight:700; color:var(--accent); margin-bottom:6px; }
+.formula-card .formula-example { font-size:14px; font-weight:600; line-height:1.5; }
+
+.footer { text-align:center; padding:24px; font-size:11px; color:var(--text2); }
+
+@media (max-width:640px) {
+  .content-types { grid-template-columns:1fr; }
+  .funnel { grid-template-columns:repeat(2,1fr); }
+  .funnel-step::after { display:none; }
+  .formula-grid { grid-template-columns:1fr; }
+  .phase-task { flex-wrap:wrap; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<div class="header">
+  <span class="header-badge">CAFE OPERATION GUIDE</span>
+  <h1>오콘목달 카페 운영 가이드</h1>
+  <p>cafe.naver.com/dragonbool — 담당: 권현우 대표</p>
+  <div class="header-links">
+    <a href="https://cafe.naver.com/dragonbool" target="_blank">카페 바로가기</a>
+    <a href="https://docs.google.com/spreadsheets/d/1W95_4y6l8a4fECWq8A38eVQestxhhDq-x8PWlIvWzNc/edit" target="_blank">운영 시트</a>
+    <a href="https://docs.google.com/spreadsheets/d/1itqcl4YS8eSrvjFKQDx3XgRLiLKE8ADEoOdmARrjm7k/edit" target="_blank">캠페인 시트</a>
+  </div>
+</div>
+
+<!-- 매일 할 일 -->
+<h2 class="section-title">매일 할 일</h2>
+<p class="section-sub">아침 9시, 30분이면 끝납니다</p>
+
+<div class="checklist">
+  <div class="checklist-header">Daily Checklist</div>
+  <div class="checklist-item"><span class="num">1</span><span class="desc"><strong>가입 승인</strong> — 스팸/광고 거절, 정상 가입 승인</span><span class="time">3분</span></div>
+  <div class="checklist-item"><span class="num">2</span><span class="desc"><strong>환영 댓글</strong> — 가입인사 게시판에 환영 한 줄</span><span class="time">5분</span></div>
+  <div class="checklist-item"><span class="num">3</span><span class="desc"><strong>등업 처리</strong> — 등업신청 게시판 확인 → 승인</span><span class="time">3분</span></div>
+  <div class="checklist-item"><span class="num">4</span><span class="desc"><strong>불량 글 처리</strong> — 신고/스팸/도배 삭제</span><span class="time">2분</span></div>
+  <div class="checklist-item"><span class="num">5</span><span class="desc"><strong>핵심 댓글</strong> — 강의후기, From/To 은환씨에 답글</span><span class="time">7분</span></div>
+  <div class="checklist-item"><span class="num">6</span><span class="desc"><strong>콘텐츠 발행</strong> — 아래 주간 스케줄에 맞춰 오늘 글 올리기</span><span class="time">5분</span></div>
+  <div class="checklist-item"><span class="num">7</span><span class="desc"><strong>강의 전환 체크</strong> — 문의/신청 있는지 확인 → 시트 기록</span><span class="time">3분</span></div>
+</div>
+
+<!-- Phase별 운영 -->
+<h2 class="section-title">Phase별 운영 — 지금 Phase에 맞는 것만 하세요</h2>
+<p class="section-sub">6/13 현장강의 캠페인에 맞춘 카페 운영 전략입니다</p>
+
+<!-- Phase 0 -->
+<div class="phase-card p0">
+  <div class="phase-header">
+    <div><h3>Phase 0: 준비</h3><span class="period">5/17 ~ 20 (4일)</span></div>
+    <span class="phase-badge">세팅</span>
+  </div>
+  <div class="phase-tasks">
+    <div class="phase-task"><span class="task-action">강의 안내 첫 공지글 작성 + 상단 고정</span><span class="task-board">공지사항</span><span class="task-who who-kwon">권현우</span><span class="task-freq">1회</span></div>
+    <div class="phase-task"><span class="task-action">From.은환씨 — 이번 강의의 배경과 비전 글 요청</span><span class="task-board">From.은환씨</span><span class="task-who who-oh">오은환</span><span class="task-freq">1회</span></div>
+    <div class="phase-task"><span class="task-action">과거 수강생 후기 3~5개 리포스팅 (반응 좋았던 순)</span><span class="task-board">강의후기</span><span class="task-who who-kwon">권현우</span><span class="task-freq">1회</span></div>
+    <div class="phase-task"><span class="task-action">CC회원 전용 사전 안내 (재수강 혜택 강조)</span><span class="task-board">CC 공지</span><span class="task-who who-kwon">권현우</span><span class="task-freq">1회</span></div>
+    <div class="phase-task"><span class="task-action">이벤트 게시판 정리 (오래된 글 아카이브)</span><span class="task-board">이벤트</span><span class="task-who who-kwon">권현우</span><span class="task-freq">1회</span></div>
+  </div>
+</div>
+
+<!-- Phase 1 -->
+<div class="phase-card p1">
+  <div class="phase-header">
+    <div><h3>Phase 1: 재수강 클로즈드</h3><span class="period">5/21 ~ 28 (8일) — 광고 OFF</span></div>
+    <span class="phase-badge">기존 회원 대상</span>
+  </div>
+  <div class="phase-target">🎯 목표: 35~40명 / 1,600~1,800만</div>
+  <div class="phase-tasks">
+    <div class="phase-task"><span class="task-action">재수강 안내 공지 — 재수강생 전용 혜택(할인/특전) 강조</span><span class="task-board">공지사항</span><span class="task-who who-kwon">권현우</span><span class="task-freq">1회</span></div>
+    <div class="phase-task"><span class="task-action">From.은환씨 — "이번 강의에서만 다루는 새로운 내용" 티저</span><span class="task-board">From.은환씨</span><span class="task-who who-oh">오은환</span><span class="task-freq">주 2회</span></div>
+    <div class="phase-task"><span class="task-action">과거 수강생 성과 후기 매일 1개 리포스팅 (사회적 증거 축적)</span><span class="task-board">강의후기</span><span class="task-who who-kwon">권현우</span><span class="task-freq">매일</span></div>
+    <div class="phase-task"><span class="task-action">CC 미션 — "지금까지의 성과를 정리해보기" (참여 유도)</span><span class="task-board">CC 미션</span><span class="task-who who-kwon">권현우</span><span class="task-freq">주 1회</span></div>
+    <div class="phase-task"><span class="task-action">#성과인증 독려 — 후기가 곧 사회적 증거</span><span class="task-board">#성과인증</span><span class="task-who who-kwon">권현우</span><span class="task-freq">상시</span></div>
+    <div class="phase-task"><span class="task-action">재수강 의향 CC회원에게 DM 개별 발송</span><span class="task-board">DM</span><span class="task-who who-kwon">권현우</span><span class="task-freq">1회</span></div>
+    <div class="phase-task"><span class="task-action">중간 현황 — "벌써 ○명 등록!" (FOMO 자극)</span><span class="task-board">공지 댓글</span><span class="task-who who-kwon">권현우</span><span class="task-freq">D-2</span></div>
+  </div>
+</div>
+
+<!-- Phase 2 -->
+<div class="phase-card p2">
+  <div class="phase-header">
+    <div><h3>Phase 2: 신규 + 얼리버드</h3><span class="period">5/29 ~ 6/7 (10일) — 광고 ON</span></div>
+    <span class="phase-badge">외부 유입 시작</span>
+  </div>
+  <div class="phase-target">🎯 목표: +40명 / 누적 75~80명 — 얼리버드 마감 6/7</div>
+  <div class="phase-tasks">
+    <div class="phase-task"><span class="task-action">신규 강의 공지 — 얼리버드 가격 + 마감일(6/7) 명시</span><span class="task-board">공지사항</span><span class="task-who who-kwon">권현우</span><span class="task-freq">1회</span></div>
+    <div class="phase-task"><span class="task-action">From.은환씨 — 강의 핵심 내용 미리보기 (가치 어필)</span><span class="task-board">From.은환씨</span><span class="task-who who-oh">오은환</span><span class="task-freq">주 2회</span></div>
+    <div class="phase-task"><span class="task-action">수강생 후기 매일 리포스팅 — 최고 반응 순서대로</span><span class="task-board">강의후기</span><span class="task-who who-kwon">권현우</span><span class="task-freq">매일</span></div>
+    <div class="phase-task"><span class="task-action">신규 가입자 환영 댓글 강화 — 광고 유입 증가하므로 빠른 응대</span><span class="task-board">가입인사</span><span class="task-who who-kwon">권현우</span><span class="task-freq">매일</span></div>
+    <div class="phase-task"><span class="task-action">이벤트 — 강의 관련 무료 콘텐츠 맛보기 공개</span><span class="task-board">이벤트</span><span class="task-who who-kwon">권현우</span><span class="task-freq">주 1회</span></div>
+    <div class="phase-task"><span class="task-action">수다-ing — 트렌드 토론 던지기 (신규 회원 참여 유도)</span><span class="task-board">수다-ing</span><span class="task-who who-kwon">권현우</span><span class="task-freq">주 1회</span></div>
+    <div class="phase-task"><span class="task-action">레어케어 체험단/공구 연계 — 카페에 머물 이유 추가</span><span class="task-board">레어케어</span><span class="task-who who-kwon">권현우</span><span class="task-freq">기회 시</span></div>
+    <div class="phase-task"><span class="task-action">얼리버드 마감 D-3 카운트다운 — "6/7 자정 마감"</span><span class="task-board">공지사항</span><span class="task-who who-kwon">권현우</span><span class="task-freq">D-3</span></div>
+  </div>
+</div>
+
+<!-- Phase 3 -->
+<div class="phase-card p3">
+  <div class="phase-header">
+    <div><h3>Phase 3: 라스트콜</h3><span class="period">6/8 ~ 12 (5일) — 리타게팅 80%</span></div>
+    <span class="phase-badge">마감 압박</span>
+  </div>
+  <div class="phase-target">🎯 목표: +20명 / 누적 100명 / 총 매출 5,500만</div>
+  <div class="phase-tasks">
+    <div class="phase-task"><span class="task-action">"잔여 ○석" — 좌석 수 매일 업데이트 (긴급성)</span><span class="task-board">공지사항</span><span class="task-who who-kwon">권현우</span><span class="task-freq">매일</span></div>
+    <div class="phase-task"><span class="task-action">From.은환씨 — "마지막으로 전하고 싶은 말" (진정성)</span><span class="task-board">From.은환씨</span><span class="task-who who-oh">오은환</span><span class="task-freq">1회</span></div>
+    <div class="phase-task"><span class="task-action">가장 반응 좋았던 후기 TOP 3 재리포스팅</span><span class="task-board">강의후기</span><span class="task-who who-kwon">권현우</span><span class="task-freq">매일</span></div>
+    <div class="phase-task"><span class="task-action">CC 성과인증 베스트 모음 — "이 분들이 선택한 강의"</span><span class="task-board">#성과인증</span><span class="task-who who-kwon">권현우</span><span class="task-freq">1회</span></div>
+    <div class="phase-task"><span class="task-action">마감 D-1 카운트다운 — "내일 자정 마감"</span><span class="task-board">공지사항</span><span class="task-who who-kwon">권현우</span><span class="task-freq">D-1</span></div>
+    <div class="phase-task"><span class="task-action">관심 표명 but 미결제 회원에게 마지막 DM</span><span class="task-board">DM</span><span class="task-who who-kwon">권현우</span><span class="task-freq">D-2</span></div>
+  </div>
+</div>
+
+<!-- D-Day -->
+<div class="phase-card pd">
+  <div class="phase-header">
+    <div><h3>D-Day 이후</h3><span class="period">6/13 ~ </span></div>
+    <span class="phase-badge">실행 + 정산</span>
+  </div>
+  <div class="phase-tasks">
+    <div class="phase-task"><span class="task-action">현장 사진/영상 실시간 카페 업로드</span><span class="task-board">공지사항</span><span class="task-who who-kwon">권현우</span><span class="task-freq">당일</span></div>
+    <div class="phase-task"><span class="task-action">From.은환씨 — 강의 후기 + 감사 인사</span><span class="task-board">From.은환씨</span><span class="task-who who-oh">오은환</span><span class="task-freq">D+1</span></div>
+    <div class="phase-task"><span class="task-action">참석자 후기 작성 독려 — 다음 강의 사회적 증거 소스</span><span class="task-board">강의후기</span><span class="task-who who-kwon">권현우</span><span class="task-freq">D+1~3</span></div>
+    <div class="phase-task"><span class="task-action">정산 + 성과 리포트 정리</span><span class="task-board">—</span><span class="task-who who-kwon">권현우</span><span class="task-freq">D+7</span></div>
+  </div>
+</div>
+
+<!-- 콘텐츠 전략 -->
+<h2 class="section-title">콘텐츠 전략</h2>
+<p class="section-sub">모든 글에는 목적이 있습니다. 3가지 유형으로 나눠서 올리세요.</p>
+
+<div class="content-types">
+  <div class="content-type ct-hook">
+    <div class="emoji">🪝</div>
+    <h4>Hook (관심 끌기)</h4>
+    <div class="ratio">40%</div>
+    <p>스크롤 멈추게 하는 글<br>아침인사, 수다, From.은환씨<br><strong>"이 한마디로 조회수 3배"</strong></p>
+  </div>
+  <div class="content-type ct-nurture">
+    <div class="emoji">🌱</div>
+    <h4>Nurture (관계 쌓기)</h4>
+    <div class="ratio">40%</div>
+    <p>신뢰 만드는 글<br>CC미션, 후기, 성과인증<br><strong>"30일 미션 결과 — 월 200만"</strong></p>
+  </div>
+  <div class="content-type ct-convert">
+    <div class="emoji">🔥</div>
+    <h4>Convert (매출 만들기)</h4>
+    <div class="ratio">20%</div>
+    <p>결제 유도하는 글<br>공지, 이벤트, 공구<br><strong>"잔여 8석 — 오늘 마감"</strong></p>
+  </div>
+</div>
+
+<!-- 주간 스케줄 -->
+<div class="schedule">
+  <table>
+    <thead><tr><th>요일</th><th>게시판</th><th>콘텐츠</th><th>유형</th><th>담당</th></tr></thead>
+    <tbody>
+      <tr><td><span class="day-badge day-mon">월</span></td><td>CC 미션</td><td>이번 주 미션 공지</td><td>Nurture</td><td><span class="task-who who-kwon">권현우</span></td></tr>
+      <tr><td><span class="day-badge day-mon">월</span></td><td>From. 은환씨</td><td>주간 인사이트 / 동기부여</td><td>Hook</td><td><span class="task-who who-oh">오은환</span></td></tr>
+      <tr><td><span class="day-badge day-tue">화</span></td><td>이벤트/체험단</td><td>체험단·공구 모집 (해당 시)</td><td>Convert</td><td><span class="task-who who-kwon">권현우</span></td></tr>
+      <tr><td><span class="day-badge day-wed">수</span></td><td>강의 후기</td><td>수강생 성과 후기 리포스팅</td><td>Nurture</td><td><span class="task-who who-kwon">권현우</span></td></tr>
+      <tr><td><span class="day-badge day-thu">목</span></td><td>수다-ing</td><td>트렌드 토론 / 고민 나눔</td><td>Hook</td><td><span class="task-who who-kwon">권현우</span></td></tr>
+      <tr><td><span class="day-badge day-fri">금</span></td><td>From. 은환씨</td><td>주말 챌린지 / 과제</td><td>Hook</td><td><span class="task-who who-oh">오은환</span></td></tr>
+      <tr><td><span class="day-badge day-sat">토~일</span></td><td>#성과인증</td><td>주간 미션 결과 공유 독려</td><td>Nurture</td><td>자동</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- 제목 공식 -->
+<h2 class="section-title">글 제목 공식</h2>
+<p class="section-sub">이 공식대로만 쓰면 조회수가 다릅니다</p>
+
+<div class="formula-grid">
+  <div class="formula-card"><div class="formula-name">숫자 + 결과</div><div class="formula-example">"3개월 만에 월 500만 달성한 편집자의 비밀"</div></div>
+  <div class="formula-card"><div class="formula-name">Before → After</div><div class="formula-example">"건당 3만원 → 영상 1개에 350만원, 뭘 바꿨을까?"</div></div>
+  <div class="formula-card"><div class="formula-name">한정 + 긴급</div><div class="formula-example">"잔여 8석 — 오늘 자정 마감"</div></div>
+  <div class="formula-card"><div class="formula-name">질문형</div><div class="formula-example">"혹시 아직도 편집만 하고 계신가요?"</div></div>
+  <div class="formula-card"><div class="formula-name">사회적 증거</div><div class="formula-example">"수강생 127명이 선택한 이유"</div></div>
+  <div class="formula-card"><div class="formula-name">비하인드</div><div class="formula-example">"은환씨가 카페에서만 공개하는 이야기"</div></div>
+</div>
+
+<!-- 전환 퍼널 -->
+<h2 class="section-title">카페 → 강의 전환 구조</h2>
+<p class="section-sub">카페의 모든 활동은 이 흐름으로 연결됩니다</p>
+
+<div class="funnel">
+  <div class="funnel-step"><div class="step-num">STEP 1</div><h4>유입</h4><p>SNS·유튜브·광고에서<br>카페로 들어옴</p></div>
+  <div class="funnel-step"><div class="step-num">STEP 2</div><h4>관계</h4><p>후기·미션·소통으로<br>신뢰가 쌓임</p></div>
+  <div class="funnel-step"><div class="step-num">STEP 3</div><h4>관심</h4><p>강의 공지·후기 보고<br>"나도 해볼까?" 생각</p></div>
+  <div class="funnel-step"><div class="step-num">STEP 4</div><h4>결제</h4><p>한정석·마감·후기에<br>결제 버튼 클릭</p></div>
+</div>
+
+<div class="footer">
+  오콘목달 x 플로우머스 — 카페 운영 가이드 v1.0<br>
+  담당: 권현우 대표 | 시트: <a href="https://docs.google.com/spreadsheets/d/1W95_4y6l8a4fECWq8A38eVQestxhhDq-x8PWlIvWzNc/edit" target="_blank" style="color:var(--accent)">운영 시트 바로가기</a>
+</div>
+
+</div>
+</body>
+</html>
