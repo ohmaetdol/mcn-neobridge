@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>오콘목달 x 플로우머스 — 업무 타임라인</title>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f5f7;
+  --card: #ffffff;
+  --navy: #1a2e5a;
+  --accent: #6b63b5;
+  --text: #1d1d1f;
+  --text2: #6e6e73;
+  --border: #e5e5ea;
+  --green: #10b981;
+  --blue: #3b82f6;
+  --orange: #f59e0b;
+  --red: #ef4444;
+  --gray: #9ca3af;
+  --phase0: #dbeafe;
+  --phase0-bar: #3b82f6;
+  --phase1: #fef3c7;
+  --phase1-bar: #f59e0b;
+  --phase2: #ede9fe;
+  --phase2-bar: #8b5cf6;
+  --phase3: #fce7f3;
+  --phase3-bar: #ec4899;
+  --dday: #d1fae5;
+  --dday-bar: #10b981;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: 'Pretendard Variable', -apple-system, sans-serif;
+  background: var(--bg); color: var(--text);
+  padding: 32px 20px 80px;
+}
+.container { max-width: 960px; margin: 0 auto; }
+
+/* Header */
+.header {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--accent) 100%);
+  border-radius: 20px; padding: 40px; color: #fff;
+  margin-bottom: 24px;
+}
+.header-badge {
+  display: inline-block; padding: 4px 12px;
+  background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 16px; font-size: 11px; font-weight: 600;
+  letter-spacing: 0.08em; margin-bottom: 12px;
+}
+.header h1 { font-size: 26px; font-weight: 800; margin-bottom: 6px; }
+.header p { font-size: 13px; color: rgba(255,255,255,0.65); }
+.header-meta {
+  display: flex; gap: 20px; margin-top: 16px; padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.15); font-size: 12px;
+}
+.header-meta span { color: rgba(255,255,255,0.55); }
+.header-meta strong { color: #fff; }
+
+/* Progress */
+.progress-section {
+  background: var(--card); border-radius: 16px; padding: 28px;
+  margin-bottom: 16px; border: 1px solid var(--border);
+}
+.progress-section h3 {
+  font-size: 14px; font-weight: 700; color: var(--text2);
+  margin-bottom: 14px;
+}
+.progress-bar-wrap {
+  background: #f0f0f5; border-radius: 8px; height: 14px;
+  overflow: hidden; position: relative;
+}
+.progress-bar {
+  height: 100%; border-radius: 8px;
+  background: linear-gradient(90deg, var(--accent), var(--navy));
+  transition: width 0.6s ease;
+}
+.progress-text {
+  font-size: 32px; font-weight: 800; color: var(--navy);
+  margin-top: 10px;
+}
+.progress-text span { font-size: 14px; font-weight: 400; color: var(--text2); }
+
+/* Summary Cards */
+.summary-row {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 12px; margin-bottom: 16px;
+}
+.summary-card {
+  background: var(--card); border-radius: 14px; padding: 20px;
+  border: 1px solid var(--border); text-align: center;
+}
+.summary-card .num {
+  font-size: 28px; font-weight: 800; margin-bottom: 4px;
+}
+.summary-card .label {
+  font-size: 12px; color: var(--text2); font-weight: 500;
+}
+.sc-done .num { color: var(--green); }
+.sc-progress .num { color: var(--blue); }
+.sc-wait .num { color: var(--gray); }
+.sc-overdue .num { color: var(--red); }
+
+/* Phase Section */
+.phase {
+  background: var(--card); border-radius: 16px;
+  margin-bottom: 16px; border: 1px solid var(--border); overflow: hidden;
+}
+.phase-header {
+  padding: 20px 24px; display: flex; align-items: center;
+  justify-content: space-between; cursor: pointer;
+}
+.phase-header h2 { font-size: 17px; font-weight: 800; }
+.phase-header .phase-badge {
+  padding: 4px 12px; border-radius: 12px; font-size: 11px;
+  font-weight: 700; letter-spacing: 0.02em;
+}
+.phase-header .phase-progress {
+  font-size: 13px; font-weight: 600; color: var(--text2);
+}
+.phase-bar {
+  height: 4px; margin: 0 24px;
+}
+.phase-bar-inner {
+  height: 100%; border-radius: 2px; transition: width 0.5s ease;
+}
+
+/* Phase colors */
+.phase-0 .phase-header { background: var(--phase0); }
+.phase-0 .phase-badge { background: var(--phase0-bar); color: #fff; }
+.phase-0 .phase-bar { background: #dbeafe; }
+.phase-0 .phase-bar-inner { background: var(--phase0-bar); }
+
+.phase-1 .phase-header { background: var(--phase1); }
+.phase-1 .phase-badge { background: var(--phase1-bar); color: #fff; }
+.phase-1 .phase-bar { background: #fef3c7; }
+.phase-1 .phase-bar-inner { background: var(--phase1-bar); }
+
+.phase-2 .phase-header { background: var(--phase2); }
+.phase-2 .phase-badge { background: var(--phase2-bar); color: #fff; }
+.phase-2 .phase-bar { background: #ede9fe; }
+.phase-2 .phase-bar-inner { background: var(--phase2-bar); }
+
+.phase-3 .phase-header { background: var(--phase3); }
+.phase-3 .phase-badge { background: var(--phase3-bar); color: #fff; }
+.phase-3 .phase-bar { background: #fce7f3; }
+.phase-3 .phase-bar-inner { background: var(--phase3-bar); }
+
+.phase-d .phase-header { background: var(--dday); }
+.phase-d .phase-badge { background: var(--dday-bar); color: #fff; }
+.phase-d .phase-bar { background: #d1fae5; }
+.phase-d .phase-bar-inner { background: var(--dday-bar); }
+
+/* Task Table */
+.task-table {
+  width: 100%; border-collapse: collapse;
+}
+.task-table th {
+  background: #f8f9fc; font-size: 11px; font-weight: 600;
+  color: var(--text2); text-align: left; padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  text-transform: uppercase; letter-spacing: 0.04em;
+}
+.task-table td {
+  font-size: 13px; padding: 10px 14px;
+  border-bottom: 1px solid #f0f0f5; color: var(--text);
+}
+.task-table tr:last-child td { border-bottom: none; }
+.task-table tr:hover td { background: #fafafa; }
+.task-name { font-weight: 600; }
+.assignee {
+  display: inline-block; padding: 2px 8px; border-radius: 6px;
+  font-size: 11px; font-weight: 600; background: #f0f0f5; color: var(--text2);
+}
+.assignee-maetdol { background: #dbeafe; color: #1d4ed8; }
+.assignee-hyunwoo { background: #fce7f3; color: #be185d; }
+.assignee-eunhwan { background: #fef3c7; color: #92400e; }
+.assignee-hyunjin { background: #d1fae5; color: #065f46; }
+.assignee-all { background: #ede9fe; color: #5b21b6; }
+
+/* Status Tag */
+.status {
+  display: inline-block; padding: 3px 10px; border-radius: 10px;
+  font-size: 11px; font-weight: 700;
+}
+.status-done { background: #d1fae5; color: #065f46; }
+.status-progress { background: #dbeafe; color: #1d4ed8; }
+.status-wait { background: #f3f4f6; color: #6b7280; }
+.status-delay { background: #fee2e2; color: #991b1b; }
+.status-hold { background: #fef3c7; color: #92400e; }
+
+/* Footer */
+.footer {
+  text-align: center; padding: 24px; font-size: 11px; color: var(--text2);
+}
+
+@media (max-width: 640px) {
+  .summary-row { grid-template-columns: repeat(2, 1fr); }
+  .header h1 { font-size: 20px; }
+  .header-meta { flex-direction: column; gap: 6px; }
+  .task-table th:nth-child(4), .task-table td:nth-child(4) { display: none; }
+}
+</style>
+</head>
+<body>
+<div class="container" id="app">
+  <div class="header">
+    <span class="header-badge">OPERATION TIMELINE</span>
+    <h1>오콘목달 x 플로우머스</h1>
+    <p>6/13 현장강의 캠페인 — 업무 타임라인 대시보드</p>
+    <div class="header-meta">
+      <span>캠페인: <strong>2026.05.14 ~ 07.10</strong></span>
+      <span>D-Day: <strong>2026.06.13 (금)</strong></span>
+      <span>목표: <strong>100명 / 5,500만원</strong></span>
+    </div>
+  </div>
+  <div id="dashboard"></div>
+  <div class="footer">오콘목달 x 플로우머스 — Powered by Flowmus</div>
+</div>
+
+<script>
+// ============================================================
+//  데이터 — Google Sheets 연동 시 getData()로 교체
+// ============================================================
+function getData() {
+  return {
+    phases: [
+      {
+        id: 'phase-0', cls: 'phase-0',
+        title: 'Phase 0: 준비', period: '5/14 ~ 17', badge: '계약+세팅',
+        tasks: [
+          {date:'5/14', name:'합의 내용 정리 → 단톡방 공유', output:'미팅 결과 문서', assignee:'오맷돌', status:'완료'},
+          {date:'5/14', name:'단톡방 인원 소개', output:'카톡 메시지', assignee:'오맷돌', status:'완료'},
+          {date:'5/14~15', name:'계약서 초안 공유', output:'계약서 PDF', assignee:'오현진', status:'대기'},
+          {date:'5/14~15', name:'광고 소재 라이브러리 전달', output:'영상/이미지', assignee:'오현진', status:'대기'},
+          {date:'5/14~15', name:'DB 전달 (세그먼트별)', output:'Excel/CSV', assignee:'오현진', status:'대기'},
+          {date:'5/15', name:'상세페이지 수정 착수', output:'아임웹 수정본', assignee:'오맷돌', status:'대기'},
+          {date:'5/15', name:'블로그 SEO 포스팅 시작', output:'블로그 글 1~2편', assignee:'권현우', status:'대기'},
+          {date:'5/15', name:'메타/유튜브/당근 광고 계정 세팅', output:'광고 계정', assignee:'오맷돌', status:'대기'},
+          {date:'5/16', name:'티저 3개 제작', output:'티저 소재', assignee:'오맷돌', status:'대기'},
+          {date:'5/16', name:'DM 초안 완성', output:'DM 텍스트', assignee:'오맷돌', status:'대기'},
+          {date:'5/16', name:'UTM 세팅', output:'UTM 링크', assignee:'오맷돌', status:'대기'},
+          {date:'5/16', name:'CRM 문자 초안 작성', output:'문자 시안', assignee:'권현우', status:'대기'},
+          {date:'5/17', name:'상세페이지 최종 컨펌', output:'컨펌', assignee:'오은환', status:'대기'},
+          {date:'5/17', name:'전체 점검', output:'체크리스트', assignee:'전원', status:'대기'},
+        ]
+      },
+      {
+        id: 'phase-1', cls: 'phase-1',
+        title: 'Phase 1: 재수강 클로즈드', period: '5/18 ~ 25', badge: '광고 OFF',
+        target: '목표: 35~40명 / 1,600~1,800만',
+        tasks: [
+          {date:'5/18', name:'상위 10명 1:1 DM 발송', output:'DM 완료', assignee:'오은환', status:'대기'},
+          {date:'5/19', name:'재구매 수강생 CRM 문자', output:'문자 발송', assignee:'권현우', status:'대기'},
+          {date:'5/19', name:'기존 수강생 CRM 문자', output:'문자 발송', assignee:'권현우', status:'대기'},
+          {date:'5/20', name:'프리미엄 멤버 CRM 문자', output:'문자 발송', assignee:'권현우', status:'대기'},
+          {date:'5/20', name:'카페 공지 고정', output:'게시글', assignee:'권현우', status:'대기'},
+          {date:'5/21', name:'미응답자 리마인드 DM', output:'DM', assignee:'오은환', status:'대기'},
+          {date:'5/22', name:'커리큘럼 큰 줄기 공개', output:'인스타 피드', assignee:'오은환', status:'대기'},
+          {date:'5/23', name:'추천 캠페인 (그룹 할인)', output:'안내 메시지', assignee:'권현우', status:'대기'},
+          {date:'5/24', name:'결제자 단톡방 개설', output:'카톡방', assignee:'권현우', status:'대기'},
+          {date:'5/25', name:'재수강 마감', output:'마감 공지', assignee:'전원', status:'대기'},
+        ]
+      },
+      {
+        id: 'phase-2', cls: 'phase-2',
+        title: 'Phase 2: 신규 + 얼리버드', period: '5/26 ~ 6/7', badge: '광고 ON',
+        target: '목표: +40명 / 누적 75~80명',
+        tasks: [
+          {date:'5/26', name:'공식 오픈 전 채널 동시 공지', output:'공지', assignee:'전원', status:'대기'},
+          {date:'5/26', name:'카톡 채널 메시지 1차', output:'카톡', assignee:'권현우', status:'대기'},
+          {date:'5/26', name:'미결제 DB CRM 문자', output:'문자', assignee:'권현우', status:'대기'},
+          {date:'5/26', name:'메타 광고 시작 (일 20~30만)', output:'광고', assignee:'오맷돌', status:'대기'},
+          {date:'5/26', name:'유튜브 광고 시작', output:'광고', assignee:'오맷돌', status:'대기'},
+          {date:'5/26', name:'당근 광고 시작', output:'광고', assignee:'오맷돌', status:'대기'},
+          {date:'5/26', name:'펜딩 오픈 알림', output:'알림', assignee:'오현진', status:'대기'},
+          {date:'5/28~29', name:'무료 라이브 웨비나 (인스타)', output:'라이브', assignee:'오은환', status:'대기'},
+          {date:'5/29', name:'카톡 채널 메시지 2차 (수강생 사례)', output:'카톡', assignee:'권현우', status:'대기'},
+          {date:'5/26~31', name:'수강생 비포/애프터 릴스', output:'릴스 2~3편', assignee:'오은환', status:'대기'},
+          {date:'6/1~7', name:'광고 스케일 (일 30~40만)', output:'최적화', assignee:'오맷돌', status:'대기'},
+          {date:'6/2', name:'카톡 메시지 3차 (좌석 현황)', output:'카톡', assignee:'권현우', status:'대기'},
+          {date:'6/5', name:'카톡 메시지 4차 (얼리버드 D-3)', output:'카톡', assignee:'권현우', status:'대기'},
+          {date:'6/5', name:'CRM 문자 — 얼리버드 마감 임박', output:'문자', assignee:'권현우', status:'대기'},
+          {date:'6/7', name:'카톡 메시지 5차 (얼리버드 마감)', output:'카톡', assignee:'권현우', status:'대기'},
+          {date:'6/7', name:'펜딩 마감 알림', output:'알림', assignee:'오현진', status:'대기'},
+        ]
+      },
+      {
+        id: 'phase-3', cls: 'phase-3',
+        title: 'Phase 3: 정가 라스트콜', period: '6/8 ~ 12', badge: '리타게팅 80%',
+        target: '목표: +20명 / 누적 100명',
+        tasks: [
+          {date:'6/8', name:'"정가 시작. 좌석 ○○석 남음" 공지', output:'공지', assignee:'전원', status:'대기'},
+          {date:'6/9', name:'라스트콜 릴스', output:'릴스', assignee:'오은환', status:'대기'},
+          {date:'6/10', name:'카톡 메시지 6차 (좌석 현황)', output:'카톡', assignee:'권현우', status:'대기'},
+          {date:'6/10', name:'CRM 문자 최종 안내', output:'문자', assignee:'권현우', status:'대기'},
+          {date:'6/11', name:'결제자 BTS + 기대감 콘텐츠', output:'콘텐츠', assignee:'오은환', status:'대기'},
+          {date:'6/12', name:'마감 D-Day 카톡 7차 + 스토리', output:'카톡+스토리', assignee:'전원', status:'대기'},
+          {date:'6/12', name:'CRM "내일 강의. 오늘 마감"', output:'문자', assignee:'권현우', status:'대기'},
+        ]
+      },
+      {
+        id: 'phase-d', cls: 'phase-d',
+        title: 'D-Day & 이후', period: '6/13 ~ 7/10', badge: '실행+정산',
+        tasks: [
+          {date:'6/13', name:'현장 강의 진행', output:'강의 완료', assignee:'오은환', status:'대기'},
+          {date:'6/13', name:'현장 운영 (대관, 장비, 촬영)', output:'운영', assignee:'오현진', status:'대기'},
+          {date:'6/13', name:'만족도 조사 + 후기 요청', output:'설문', assignee:'권현우', status:'대기'},
+          {date:'6/13', name:'프리미엄 클래스 오퍼', output:'오퍼', assignee:'오은환', status:'대기'},
+          {date:'6/16', name:'다시보기 링크 발송', output:'이메일', assignee:'오현진', status:'대기'},
+          {date:'6/20', name:'AI 세션 진행', output:'세션', assignee:'오은환', status:'대기'},
+          {date:'6/27', name:'프리미엄 클래스 3기 안내', output:'안내 문서', assignee:'오맷돌', status:'대기'},
+          {date:'7/10', name:'정산일', output:'정산 완료', assignee:'오현진', status:'대기'},
+        ]
+      },
+    ]
+  };
+}
+
+// ============================================================
+//  렌더링
+// ============================================================
+function statusTag(s) {
+  const map = {
+    '완료': 'status-done',
+    '진행중': 'status-progress',
+    '대기': 'status-wait',
+    '지연': 'status-delay',
+    '보류': 'status-hold',
+  };
+  return `<span class="status ${map[s] || 'status-wait'}">${s}</span>`;
+}
+
+function assigneeTag(a) {
+  const map = {
+    '오맷돌': 'assignee-maetdol',
+    '권현우': 'assignee-hyunwoo',
+    '오은환': 'assignee-eunhwan',
+    '오현진': 'assignee-hyunjin',
+    '전원': 'assignee-all',
+  };
+  return `<span class="assignee ${map[a] || ''}">${a}</span>`;
+}
+
+function render() {
+  const data = getData();
+  const allTasks = data.phases.flatMap(p => p.tasks);
+  const total = allTasks.length;
+  const done = allTasks.filter(t => t.status === '완료').length;
+  const progress = allTasks.filter(t => t.status === '진행중').length;
+  const wait = allTasks.filter(t => t.status === '대기').length;
+  const delay = allTasks.filter(t => t.status === '지연').length;
+  const pct = total > 0 ? Math.round(done / total * 100) : 0;
+
+  let html = '';
+
+  // 전체 진행률
+  html += `
+  <div class="progress-section">
+    <h3>전체 진행률</h3>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar" style="width:${pct}%"></div>
+    </div>
+    <div class="progress-text">${pct}% <span>${done}/${total} 완료</span></div>
+  </div>`;
+
+  // 요약 카드
+  html += `
+  <div class="summary-row">
+    <div class="summary-card sc-done"><div class="num">${done}</div><div class="label">완료</div></div>
+    <div class="summary-card sc-progress"><div class="num">${progress}</div><div class="label">진행중</div></div>
+    <div class="summary-card sc-wait"><div class="num">${wait}</div><div class="label">대기</div></div>
+    <div class="summary-card sc-overdue"><div class="num">${delay}</div><div class="label">지연</div></div>
+  </div>`;
+
+  // Phase별 섹션
+  data.phases.forEach(phase => {
+    const pDone = phase.tasks.filter(t => t.status === '완료').length;
+    const pTotal = phase.tasks.length;
+    const pPct = pTotal > 0 ? Math.round(pDone / pTotal * 100) : 0;
+
+    html += `
+    <div class="phase ${phase.cls}">
+      <div class="phase-header">
+        <div>
+          <h2>${phase.title}</h2>
+          <span style="font-size:12px;color:var(--text2)">${phase.period}${phase.target ? ' — ' + phase.target : ''}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px">
+          <span class="phase-badge">${phase.badge}</span>
+          <span class="phase-progress">${pDone}/${pTotal}</span>
+        </div>
+      </div>
+      <div class="phase-bar">
+        <div class="phase-bar-inner" style="width:${pPct}%"></div>
+      </div>
+      <table class="task-table">
+        <thead>
+          <tr>
+            <th style="width:80px">일자</th>
+            <th>업무</th>
+            <th style="width:120px">산출물</th>
+            <th style="width:80px">담당</th>
+            <th style="width:70px">상태</th>
+          </tr>
+        </thead>
+        <tbody>`;
+
+    phase.tasks.forEach(t => {
+      html += `
+          <tr>
+            <td>${t.date}</td>
+            <td class="task-name">${t.name}</td>
+            <td>${t.output}</td>
+            <td>${assigneeTag(t.assignee)}</td>
+            <td>${statusTag(t.status)}</td>
+          </tr>`;
+    });
+
+    html += `
+        </tbody>
+      </table>
+    </div>`;
+  });
+
+  document.getElementById('dashboard').innerHTML = html;
+}
+
+render();
+</script>
+</body>
+</html>
