@@ -479,10 +479,13 @@ function renderFilters() {
   });
   html += '<div class="filter-sep"></div>';
   owners.forEach(o => {
-    html += `<button class="filter-btn ${currentOwnerFilter===o?'active':''}" onclick="setOwnerFilter('${o}')">${o}</button>`;
+    html += `<button class="filter-btn ${currentOwnerFilter===o?'active':''}" onclick="setOwnerFilter('${o}')">${withTitle(o)}</button>`;
   });
   document.getElementById('filters').innerHTML = html;
 }
+
+const TITLE_MAP = { '오맷돌': '오맷돌 대표', '권현우': '권현우 대표' };
+function withTitle(name) { return TITLE_MAP[name] || name; }
 
 function setFilter(f) { currentFilter = f; renderFilters(); renderTasks(); }
 function setOwnerFilter(o) { currentOwnerFilter = currentOwnerFilter === o ? 'all' : o; renderFilters(); renderTasks(); }
@@ -549,7 +552,7 @@ function renderTasks() {
           <div class="task-title ${isDone?'done':''}">${t.task}</div>
           <div class="task-meta">
             <span class="tag ${isToday ? 'tag-today' : 'tag-date'}">${isToday ? 'TODAY ' : ''}${t.date}</span>
-            <span class="tag tag-owner">${t.owner}</span>
+            <span class="tag tag-owner">${withTitle(t.owner)}</span>
             ${t.output ? `<span class="tag tag-output">${t.output}</span>` : ''}
           </div>
           ${t.note ? `<div class="task-note">${t.note}</div>` : ''}
