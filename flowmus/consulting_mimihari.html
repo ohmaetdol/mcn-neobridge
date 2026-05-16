@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>인스타 셀러 매출 구조 개선 컨설팅 — Flowmus</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Apple SD Gothic Neo', 'Pretendard', sans-serif;
+    color: #1c1c1e;
+    background: #fff;
+    font-size: 10pt;
+    line-height: 1.8;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  @media screen {
+    body { background: #e8e8e8; padding: 20px 0; }
+    .page { box-shadow: 0 2px 16px rgba(0,0,0,0.1); margin-bottom: 24px; }
+  }
+  @media print {
+    .page { margin: 0; box-shadow: none; }
+    .no-print { display: none !important; }
+  }
+  .page {
+    width: 210mm;
+    height: 297mm;
+    margin: 0 auto;
+    padding: 20mm 22mm;
+    position: relative;
+    background: #fff;
+    page-break-after: always;
+    overflow: hidden;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  /* Cover */
+  .cover-top {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .cover-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 20px;
+    background: #f0f0f5;
+    color: #8e8e93;
+    font-size: 10pt;
+    font-weight: 500;
+    margin-bottom: 32px;
+    letter-spacing: 1px;
+  }
+  .cover-title {
+    font-size: 26pt;
+    font-weight: 800;
+    line-height: 1.35;
+    color: #1c1c1e;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+  }
+  .cover-title em {
+    font-style: normal;
+    color: #007aff;
+  }
+  .cover-sub {
+    font-size: 12pt;
+    color: #8e8e93;
+    margin-bottom: 60px;
+    line-height: 1.6;
+  }
+  .cover-from {
+    font-size: 11pt;
+    color: #3a3a3c;
+  }
+  .cover-from strong {
+    font-size: 13pt;
+    color: #1c1c1e;
+  }
+  .cover-date {
+    margin-top: 12px;
+    font-size: 10pt;
+    color: #aeaeb2;
+  }
+  .cover-line {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #007aff, #af52de);
+    border-radius: 2px;
+    margin: 40px auto;
+  }
+
+  /* Content Pages */
+  .section-num {
+    font-size: 11pt;
+    font-weight: 700;
+    color: #007aff;
+    margin-bottom: 4px;
+  }
+  .section-title {
+    font-size: 16pt;
+    font-weight: 700;
+    color: #1c1c1e;
+    margin-bottom: 20px;
+    letter-spacing: -0.3px;
+  }
+  .content-p {
+    font-size: 10pt;
+    line-height: 1.9;
+    color: #3a3a3c;
+    margin-bottom: 14px;
+    text-align: justify;
+    word-break: keep-all;
+  }
+  .highlight-box {
+    background: #f8f8fc;
+    border-left: 3px solid #007aff;
+    padding: 14px 18px;
+    border-radius: 0 10px 10px 0;
+    margin: 16px 0;
+  }
+  .highlight-box p {
+    font-size: 10pt;
+    color: #3a3a3c;
+    line-height: 1.8;
+    margin: 0;
+  }
+  .highlight-box strong {
+    color: #1c1c1e;
+  }
+
+  /* Problem List */
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .problem-card {
+    background: #fff5f5;
+    border: 1px solid #ffe0e0;
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .problem-card .pc-icon {
+    font-size: 18pt;
+    margin-bottom: 6px;
+  }
+  .problem-card .pc-title {
+    font-size: 9.5pt;
+    font-weight: 700;
+    color: #c0392b;
+    margin-bottom: 3px;
+  }
+  .problem-card .pc-desc {
+    font-size: 8.5pt;
+    color: #666;
+    line-height: 1.5;
+  }
+
+  /* Solution Steps */
+  .step-list { margin: 16px 0; }
+  .step-item {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 16px;
+    align-items: flex-start;
+  }
+  .step-num {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #007aff, #5ac8fa);
+    color: #fff;
+    font-size: 13pt;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .step-content { flex: 1; }
+  .step-title {
+    font-size: 10.5pt;
+    font-weight: 700;
+    color: #1c1c1e;
+    margin-bottom: 3px;
+  }
+  .step-desc {
+    font-size: 9pt;
+    color: #636366;
+    line-height: 1.6;
+  }
+
+  /* Table */
+  .c-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 14px 0;
+    font-size: 9pt;
+  }
+  .c-table th {
+    background: #f2f2f7;
+    padding: 9px 12px;
+    text-align: left;
+    font-weight: 600;
+    color: #3a3a3c;
+    border-bottom: 1px solid #e5e5ea;
+  }
+  .c-table td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #f2f2f7;
+    color: #3a3a3c;
+    line-height: 1.6;
+    vertical-align: top;
+  }
+  .c-table tr:last-child td { border-bottom: none; }
+
+  /* Pricing */
+  .pricing-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .price-card {
+    border: 1px solid #e5e5ea;
+    border-radius: 12px;
+    padding: 18px 14px;
+    text-align: center;
+    position: relative;
+  }
+  .price-card.recommended {
+    border-color: #007aff;
+    background: #f0f7ff;
+  }
+  .price-card.recommended::after {
+    content: '추천';
+    position: absolute;
+    top: -10px;
+    right: 12px;
+    background: #007aff;
+    color: #fff;
+    font-size: 8pt;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  .price-card .pc-name {
+    font-size: 10pt;
+    font-weight: 700;
+    color: #1c1c1e;
+    margin-bottom: 8px;
+  }
+  .price-card .pc-price {
+    font-size: 14pt;
+    font-weight: 800;
+    color: #007aff;
+    margin-bottom: 4px;
+  }
+  .price-card .pc-period {
+    font-size: 8.5pt;
+    color: #8e8e93;
+    margin-bottom: 12px;
+  }
+  .price-card .pc-features {
+    text-align: left;
+    font-size: 8.5pt;
+    color: #3a3a3c;
+    line-height: 1.8;
+  }
+  .check { color: #34c759; font-weight: 700; }
+
+  /* CTA */
+  .cta-box {
+    background: linear-gradient(135deg, #f0f7ff, #f5f0ff);
+    border-radius: 14px;
+    padding: 24px;
+    text-align: center;
+    margin-top: 24px;
+  }
+  .cta-box .cta-title {
+    font-size: 12pt;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #1c1c1e;
+  }
+  .cta-box .cta-desc {
+    font-size: 9.5pt;
+    color: #636366;
+    margin-bottom: 14px;
+  }
+  .cta-box .cta-contact {
+    font-size: 10pt;
+    font-weight: 600;
+    color: #007aff;
+  }
+
+  /* Footer */
+  .pn {
+    position: absolute;
+    bottom: 18mm;
+    left: 0; right: 0;
+    text-align: center;
+    font-size: 8.5pt;
+    color: #c7c7cc;
+  }
+
+  .print-btn {
+    position: fixed; bottom: 20px; right: 20px; z-index: 100;
+    background: #1c1c1e; color: #fff; border: none;
+    padding: 12px 24px; border-radius: 10px;
+    font-size: 10pt; font-weight: 600; cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    font-family: inherit;
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">PDF 저장</button>
+
+<!-- ══════════ PAGE 1: 표지 ══════════ -->
+<div class="page">
+  <div class="cover-top">
+    <div class="cover-badge">CONSULTING PROPOSAL</div>
+    <div class="cover-title">
+      인스타 공구 매출,<br>
+      <em>구조</em>를 바꾸면<br>
+      다시 올라갑니다.
+    </div>
+    <p class="cover-sub">
+      알고리즘에 흔들리지 않는<br>
+      지속 가능한 매출 구조 설계 컨설팅
+    </p>
+    <div class="cover-line"></div>
+    <div class="cover-from">
+      <strong>Flowmus</strong><br>
+      매출 구조 개선 컨설팅
+    </div>
+    <div class="cover-date">2026년 5월</div>
+  </div>
+</div>
+
+<!-- ══════════ PAGE 2: 문제 진단 ══════════ -->
+<div class="page">
+  <div class="section-num">01</div>
+  <div class="section-title">지금 공구 매출이 떨어지는 진짜 이유</div>
+
+  <p class="content-p">
+    인스타 공구 시장이 어려워진 건 대표님 탓이 아닙니다. 시장 구조 자체가 바뀌고 있기 때문입니다.
+  </p>
+
+  <div class="problem-grid">
+    <div class="problem-card">
+      <div class="pc-icon">📉</div>
+      <div class="pc-title">도달률 급감</div>
+      <div class="pc-desc">릴스 우선 알고리즘으로 스토리/피드 노출 50% 이상 하락</div>
+    </div>
+    <div class="problem-card">
+      <div class="pc-icon">😵</div>
+      <div class="pc-title">공구 피로도</div>
+      <div class="pc-desc">매일 쏟아지는 공구에 팔로워들 반응률 감소</div>
+    </div>
+    <div class="problem-card">
+      <div class="pc-icon">🏪</div>
+      <div class="pc-title">경쟁 격화</div>
+      <div class="pc-desc">쿠팡/네이버/톡딜 등 가격 비교 채널 증가</div>
+    </div>
+    <div class="problem-card">
+      <div class="pc-icon">⚠️</div>
+      <div class="pc-title">플랫폼 의존</div>
+      <div class="pc-desc">인스타 정책 변경 한 번에 매출 흔들리는 구조</div>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>핵심 문제:</strong> 지금 구조는 "인스타가 보여줘야 팔리는" 구조입니다.<br>
+    내 고객인데, 인스타를 통해서만 연락할 수 있는 상태 — 이게 가장 큰 리스크입니다.</p>
+  </div>
+
+  <p class="content-p">
+    공구를 계속하되, <strong>인스타에 의존하지 않고도 매출을 만들 수 있는 채널</strong>을 만드는 것이 핵심입니다. 알고리즘이 아닌 "내 고객 리스트"로 직접 매출을 일으키는 구조로 전환해야 합니다.
+  </p>
+
+  <div class="section-num" style="margin-top:28px">02</div>
+  <div class="section-title">해결 방향: 3가지 전환</div>
+
+  <table class="c-table">
+    <tr>
+      <th style="width:30%">현재 (AS-IS)</th>
+      <th style="width:10%; text-align:center">→</th>
+      <th style="width:30%">전환 (TO-BE)</th>
+      <th>기대효과</th>
+    </tr>
+    <tr>
+      <td>인스타 알고리즘 의존</td>
+      <td style="text-align:center; color:#007aff; font-weight:700">→</td>
+      <td>CRM 직접 연락</td>
+      <td>도달률 100%</td>
+    </tr>
+    <tr>
+      <td>단일 채널 매출</td>
+      <td style="text-align:center; color:#007aff; font-weight:700">→</td>
+      <td>멀티 채널 매출</td>
+      <td>매출 소스 분산</td>
+    </tr>
+    <tr>
+      <td>일회성 구매</td>
+      <td style="text-align:center; color:#007aff; font-weight:700">→</td>
+      <td>반복 구매 구조</td>
+      <td>고객당 매출 3배↑</td>
+    </tr>
+  </table>
+
+  <div class="pn">- 2 -</div>
+</div>
+
+<!-- ══════════ PAGE 3: 솔루션 ══════════ -->
+<div class="page">
+  <div class="section-num">03</div>
+  <div class="section-title">실행 로드맵 (4단계)</div>
+
+  <div class="step-list">
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <div class="step-content">
+        <div class="step-title">고객 DB 구축 + 세그먼트 분류 (1~2주)</div>
+        <div class="step-desc">
+          기존 구매 고객 데이터를 추출하고, 구매 빈도/금액/카테고리별로 세그먼트를 나눕니다.<br>
+          → VIP / 재구매 / 1회 구매 / 이탈 고객으로 분류<br>
+          → 각 그룹에 맞는 맞춤 메시지 전략 설계
+        </div>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <div class="step-content">
+        <div class="step-title">CRM 채널 세팅 — 카톡 + 문자 (1주)</div>
+        <div class="step-desc">
+          카카오톡 채널 개설 + 알림톡/친구톡 세팅, 문자 발송 시스템 구축.<br>
+          → 공구 오픈 시 인스타 없이도 직접 알림 가능<br>
+          → 도달률 인스타 10~20% vs 카톡/문자 90%+
+        </div>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <div class="step-content">
+        <div class="step-title">결제 구조 최적화 — 전용 랜딩페이지 (2주)</div>
+        <div class="step-desc">
+          공구 전용 랜딩페이지 제작. 상품 설명 + 결제 + 후기가 한 페이지에.<br>
+          → DM 주문 → 원클릭 결제로 전환율 2~3배 개선<br>
+          → UTM 추적으로 어떤 채널에서 매출이 나오는지 정확히 파악
+        </div>
+      </div>
+    </div>
+    <div class="step-item">
+      <div class="step-num">4</div>
+      <div class="step-content">
+        <div class="step-title">신규 유입 채널 확장 (3~4주)</div>
+        <div class="step-desc">
+          블로그 SEO, 유튜브 쇼츠, 당근마켓 등으로 신규 고객 유입 경로 구축.<br>
+          → 인스타 팔로워 성장 정체해도 매출은 성장하는 구조<br>
+          → 검색으로 들어오는 "구매 의도 높은" 고객 확보
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>핵심 목표:</strong> 3개월 후, 인스타 도달률이 0이 되어도 매출의 50% 이상을 유지할 수 있는 구조를 만드는 것.</p>
+  </div>
+
+  <div class="pn">- 3 -</div>
+</div>
+
+<!-- ══════════ PAGE 4: 기대효과 + 가격 ══════════ -->
+<div class="page">
+  <div class="section-num">04</div>
+  <div class="section-title">기대 효과</div>
+
+  <table class="c-table">
+    <tr>
+      <th>항목</th>
+      <th>현재 예상</th>
+      <th>3개월 후 목표</th>
+    </tr>
+    <tr>
+      <td>공구 안내 도달률</td>
+      <td>10~20% (인스타 알고리즘)</td>
+      <td>80~95% (CRM 직접 발송)</td>
+    </tr>
+    <tr>
+      <td>재구매율</td>
+      <td>15~20%</td>
+      <td>35~45%</td>
+    </tr>
+    <tr>
+      <td>매출 채널</td>
+      <td>인스타 100%</td>
+      <td>인스타 50% + CRM 30% + 검색 20%</td>
+    </tr>
+    <tr>
+      <td>결제 전환율</td>
+      <td>DM 기반 (이탈 많음)</td>
+      <td>랜딩 결제 (전환율 2~3배↑)</td>
+    </tr>
+    <tr>
+      <td>고객 데이터</td>
+      <td>없음 (인스타에 종속)</td>
+      <td>내 DB 보유 (독립 자산)</td>
+    </tr>
+  </table>
+
+  <div class="section-num" style="margin-top:28px">05</div>
+  <div class="section-title">컨설팅 옵션</div>
+
+  <div class="pricing-cards">
+    <div class="price-card">
+      <div class="pc-name">라이트</div>
+      <div class="pc-price">150만</div>
+      <div class="pc-period">1개월 / 진단 + 설계</div>
+      <div class="pc-features">
+        <span class="check">&#x2713;</span> 현황 분석 리포트<br>
+        <span class="check">&#x2713;</span> 전환 전략 설계<br>
+        <span class="check">&#x2713;</span> 실행 가이드 제공<br>
+        <span class="check">&#x2713;</span> 미팅 2회
+      </div>
+    </div>
+    <div class="price-card recommended">
+      <div class="pc-name">스탠다드</div>
+      <div class="pc-price">350만</div>
+      <div class="pc-period">3개월 / 설계 + 실행</div>
+      <div class="pc-features">
+        <span class="check">&#x2713;</span> 라이트 전체 포함<br>
+        <span class="check">&#x2713;</span> CRM 세팅 대행<br>
+        <span class="check">&#x2713;</span> 랜딩페이지 제작<br>
+        <span class="check">&#x2713;</span> 월간 미팅 + 리포트<br>
+        <span class="check">&#x2713;</span> 카톡 채널 구축
+      </div>
+    </div>
+    <div class="price-card">
+      <div class="pc-name">프리미엄</div>
+      <div class="pc-price">600만</div>
+      <div class="pc-period">3개월 / 풀 대행</div>
+      <div class="pc-features">
+        <span class="check">&#x2713;</span> 스탠다드 전체 포함<br>
+        <span class="check">&#x2713;</span> 블로그 SEO 대행<br>
+        <span class="check">&#x2713;</span> 광고 운영 (메타)<br>
+        <span class="check">&#x2713;</span> 주간 리포트<br>
+        <span class="check">&#x2713;</span> 전담 매니저 배정
+      </div>
+    </div>
+  </div>
+
+  <p class="content-p" style="font-size:8.5pt; color:#8e8e93; margin-top:8px;">
+    * 상기 금액은 VAT 별도이며, 미미하리님 상황에 맞춰 커스텀 가능합니다.<br>
+    * 성과형 옵션(매출 증가분의 %): 별도 협의
+  </p>
+
+  <div class="cta-box">
+    <div class="cta-title">15분 무료 진단 통화</div>
+    <div class="cta-desc">미미하리님 채널 상황에 맞는 맞춤 진단을 무료로 제공합니다.<br>부담 없이 편하게 연락 주세요.</div>
+    <div class="cta-contact">ceo@flowmus.com</div>
+  </div>
+
+  <div class="pn">- 4 -</div>
+</div>
+
+</body>
+</html>
