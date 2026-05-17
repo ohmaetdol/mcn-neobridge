@@ -49,6 +49,10 @@ section h2{font-size:18px;font-weight:800;margin-bottom:14px;padding-bottom:8px;
 .tone-guide{background:var(--card);border-radius:12px;padding:14px 16px;margin:10px 0;border-left:3px solid var(--accent)}
 .tone-guide .label{font-size:11px;font-weight:700;color:var(--accent);margin-bottom:4px}
 .tone-guide p{font-size:13px;color:var(--text2);margin:2px 0}
+.prog-lbl{font-size:12px;font-weight:700;color:var(--green);margin-left:auto}
+.q-card{cursor:pointer;transition:opacity .2s,border-color .2s}
+.q-card.done{opacity:.45;border-left-color:var(--green)!important}
+.q-card.done .q-text::after{content:' ✓';color:var(--green)}
 @media(max-width:480px){.container{padding:16px 14px}.meta-grid{grid-template-columns:1fr}h1{font-size:18px}}
 </style>
 </head>
@@ -57,6 +61,7 @@ section h2{font-size:18px;font-weight:800;margin-bottom:14px;padding-bottom:8px;
 <div class="top-bar">
 <span class="badge">PD용</span>
 <span class="title">EP.06 런시트</span>
+<span class="prog-lbl">0 / 15</span>
 <span class="ver">v1 · 2026.05.17</span>
 </div>
 
@@ -246,5 +251,36 @@ section h2{font-size:18px;font-weight:800;margin-bottom:14px;padding-bottom:8px;
 </section>
 
 </div>
+
+<script>
+(function(){
+  const KEY='ep06_pd_runsheet_v1';
+  let done=JSON.parse(localStorage.getItem(KEY)||'[]');
+  const cards=document.querySelectorAll('.q-card');
+  const lbl=document.querySelector('.prog-lbl');
+  const total=cards.length;
+
+  function render(){
+    cards.forEach((c,i)=>{
+      c.dataset.n=i;
+      if(done.includes(i))c.classList.add('done');
+      else c.classList.remove('done');
+    });
+    lbl.textContent=done.length+' / '+total;
+  }
+
+  cards.forEach((c,i)=>{
+    c.addEventListener('click',()=>{
+      const idx=parseInt(c.dataset.n);
+      if(done.includes(idx))done=done.filter(x=>x!==idx);
+      else done.push(idx);
+      localStorage.setItem(KEY,JSON.stringify(done));
+      render();
+    });
+  });
+
+  render();
+})();
+</script>
 </body>
 </html>
