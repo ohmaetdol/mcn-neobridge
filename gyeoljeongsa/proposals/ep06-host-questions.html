@@ -3,188 +3,428 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
-<meta name="theme-color" content="#0064ff">
+<meta name="theme-color" content="#0f172a">
 <title>[출연자용] EP.06 질문지 — 의사랑 결혼하는 법</title>
 <style>
-:root{--bg:#f5f6f9;--card:#fff;--border:#e4e6ec;--border2:#eef0f5;--text:#111827;--text2:#6b7280;--accent:#0064ff;--accent-l:#e8f1ff;--done:#16a34a;--done-bg:#dcfce7;--hh:58px}
+:root{--bg:#f8fafc;--card:#fff;--border:#e2e8f0;--text:#0f172a;--text2:#64748b;--text3:#94a3b8;--accent:#2563eb;--accent-l:#eff6ff;--accent-d:#1d4ed8;--peak:#dc2626;--peak-bg:#fef2f2;--peak-border:#fecaca;--pd:#7c3aed;--pd-bg:#f5f3ff;--done:#059669;--done-bg:#ecfdf5;--hh:60px;--radius:14px}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR','Apple SD Gothic Neo',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;padding-bottom:80px;font-size:15px}
-.hd{position:fixed;top:0;left:0;right:0;height:var(--hh);background:var(--card);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 16px;gap:10px;z-index:100;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR','Apple SD Gothic Neo',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:15px}
+
+.hd{position:fixed;top:0;left:0;right:0;height:var(--hh);background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 16px;gap:10px;z-index:100}
 .hd-l{flex:1;min-width:0}
-.hd-ep{font-size:10px;font-weight:700;color:var(--accent);letter-spacing:.5px}
-.hd-t{font-size:14px;font-weight:700;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hd-ep{font-size:10px;font-weight:700;color:var(--accent);letter-spacing:.5px;text-transform:uppercase}
+.hd-t{font-size:13px;font-weight:700;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hd-r{display:flex;align-items:center;gap:8px;flex-shrink:0}
-.prog-lbl{font-size:11px;font-weight:700;color:var(--text2);padding:6px 10px;background:var(--accent-l);border-radius:8px;min-width:58px;text-align:center}
-.prog-lbl strong{color:var(--accent);font-size:13px}
-.main{margin-top:calc(var(--hh) + 12px);padding:12px 14px 64px;max-width:680px;margin-left:auto;margin-right:auto}
-.notice{background:var(--accent-l);border-radius:12px;padding:16px 18px;margin-bottom:24px;font-size:14px;color:var(--text);line-height:1.7}
+.prog-ring{position:relative;width:42px;height:42px}
+.prog-ring svg{transform:rotate(-90deg)}
+.prog-ring circle{fill:none;stroke-width:3.5}
+.prog-ring .bg{stroke:var(--border)}
+.prog-ring .fg{stroke:var(--accent);stroke-linecap:round;transition:stroke-dashoffset .4s ease}
+.prog-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--accent)}
+
+.main{margin-top:calc(var(--hh) + 8px);padding:12px 14px 100px;max-width:640px;margin-left:auto;margin-right:auto}
+
+.hero{text-align:center;padding:24px 16px 20px;margin-bottom:20px}
+.hero-title{font-size:22px;font-weight:900;line-height:1.3;margin-bottom:6px;background:linear-gradient(135deg,var(--text),var(--accent-d));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:13px;color:var(--text2);line-height:1.5}
+
+.notice{background:var(--accent-l);border:1px solid #bfdbfe;border-radius:var(--radius);padding:16px 18px;margin-bottom:24px;font-size:13.5px;color:var(--text);line-height:1.7}
 .notice strong{color:var(--accent)}
-.sec{margin-bottom:32px}
-.sec-t{font-size:17px;font-weight:800;margin-bottom:10px;color:var(--text)}
-.sec-sub{font-size:12px;color:var(--text2);font-weight:500;margin-left:6px}
-.q{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;background:var(--card);border:1px solid var(--border);border-radius:12px;margin-bottom:8px;cursor:pointer;transition:.15s;user-select:none}
-.q:active{transform:scale(.99)}
+
+.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:24px}
+.num-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 10px;text-align:center}
+.num-card .val{font-size:18px;font-weight:900;color:var(--accent);line-height:1.2}
+.num-card .lbl{font-size:10px;color:var(--text2);margin-top:3px;line-height:1.3}
+
+.sec{margin-bottom:28px}
+.sec-hd{display:flex;align-items:center;gap:8px;margin-bottom:12px;padding:10px 14px;background:var(--card);border:1px solid var(--border);border-radius:10px}
+.sec-icon{font-size:16px}
+.sec-t{font-size:15px;font-weight:800;flex:1}
+.sec-time{font-size:11px;color:var(--text3);font-weight:600}
+
+.q-wrap{margin-bottom:6px}
+.q{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:all .2s;user-select:none}
+.q:active{transform:scale(.985)}
 .q.on{background:var(--done-bg);border-color:var(--done)}
-.q.on .q-q{color:var(--text2)}
-.ck{width:24px;height:24px;border:2px solid var(--border);border-radius:7px;flex-shrink:0;position:relative;background:#fff;transition:.15s;margin-top:1px}
+.q.on .q-q{opacity:.6}
+.q.peak{border-left:3px solid var(--peak)}
+.q.pd{border-left:3px solid var(--pd)}
+
+.ck{width:22px;height:22px;border:2px solid var(--border);border-radius:6px;flex-shrink:0;position:relative;background:#fff;transition:.15s;margin-top:2px}
 .q.on .ck{background:var(--done);border-color:var(--done)}
-.q.on .ck::after{content:'';position:absolute;left:6px;top:3px;width:7px;height:12px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
+.q.on .ck::after{content:'';position:absolute;left:5px;top:2px;width:7px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
+
 .q-body{flex:1;min-width:0}
-.q-n{font-size:12px;font-weight:800;color:var(--accent);margin-bottom:2px}
-.q-q{font-size:15px;line-height:1.55;color:var(--text);word-break:keep-all}
-.ref{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:8px}
-.ref a{color:var(--accent);text-decoration:none;font-weight:700;font-size:14px;line-height:1.5;display:block;margin-bottom:4px}
-.ref a:hover{text-decoration:underline}
-.ref p{font-size:13px;color:var(--text2);line-height:1.55;margin:0}
-.ref-link{display:inline-block;font-size:11px;font-weight:700;color:var(--accent);background:var(--accent-l);border-radius:6px;padding:2px 8px;margin-top:8px;margin-right:4px}
-.ref-note{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin-top:12px;font-size:13px;color:#92400e;line-height:1.6}
-.q-ref{background:#f0f4ff;border-radius:8px;padding:10px 14px;margin-top:8px;font-size:13px;color:var(--text2);line-height:1.6;cursor:default}
-.q-ref strong{color:var(--text);font-weight:700}
-.q-ref .num{color:var(--accent);font-weight:800}
-.footer{text-align:center;font-size:12px;color:var(--text2);margin-top:40px;padding:20px 0}
-@media(min-width:640px){.main{padding:20px 24px 64px}.q{padding:16px 20px}.q-q{font-size:15.5px}}
-@media(max-width:400px){.hd{padding:0 12px}.hd-t{font-size:12px}.main{padding:10px 12px 48px}.sec-t{font-size:15px}.q{padding:12px 14px;gap:10px}.q-q{font-size:14px}}
-@media print{.hd{display:none!important}.main{margin:0;padding:20px;max-width:100%}.q{break-inside:avoid}.ck{display:none}}
+.q-meta{display:flex;align-items:center;gap:6px;margin-bottom:3px}
+.q-n{font-size:11px;font-weight:800;color:var(--accent)}
+.q-tag{font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;text-transform:uppercase;letter-spacing:.3px}
+.q-tag.peak{background:var(--peak-bg);color:var(--peak)}
+.q-tag.pd{background:var(--pd-bg);color:var(--pd)}
+.q-tag.data{background:#fef9c3;color:#a16207}
+.q-q{font-size:15px;line-height:1.5;color:var(--text);word-break:keep-all;font-weight:600}
+
+.q-hint{overflow:hidden;max-height:0;transition:max-height .3s ease;padding:0 16px}
+.q-hint.open{max-height:300px}
+.q-hint-inner{padding:10px 14px;margin:6px 0 8px;background:#f1f5f9;border-radius:10px;font-size:13px;color:var(--text2);line-height:1.65;border-left:3px solid var(--accent)}
+.q-hint-inner strong{color:var(--text);font-weight:700}
+.q-hint-inner .hl{color:var(--accent);font-weight:800}
+
+.ref-sec{margin-bottom:28px}
+.ref-title{font-size:14px;font-weight:700;margin-bottom:10px;color:var(--text)}
+.ref-sub{font-size:12px;color:var(--text2);margin-bottom:12px}
+.ref{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:8px;transition:all .2s}
+.ref:active{transform:scale(.99)}
+.ref-num{font-size:11px;font-weight:800;color:var(--accent);margin-bottom:4px}
+.ref a{color:var(--text);text-decoration:none;font-weight:700;font-size:13.5px;line-height:1.4;display:block;margin-bottom:4px}
+.ref p{font-size:12.5px;color:var(--text2);line-height:1.5;margin:0}
+.ref-tags{margin-top:8px;display:flex;flex-wrap:wrap;gap:4px}
+.ref-tag{font-size:10px;font-weight:700;color:var(--accent);background:var(--accent-l);border-radius:5px;padding:2px 7px}
+
+.ref-note{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin-top:12px;font-size:12.5px;color:#92400e;line-height:1.6}
+
+.toggle-btn{display:block;width:100%;padding:10px;background:none;border:1px dashed var(--border);border-radius:8px;font-size:12px;color:var(--text3);cursor:pointer;margin-top:4px;transition:.2s}
+.toggle-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+.footer{text-align:center;font-size:11px;color:var(--text3);margin-top:40px;padding:20px 0}
+
+@media(min-width:640px){.main{padding:20px 24px 80px}.q{padding:16px 20px}.hero-title{font-size:26px}}
+@media(max-width:400px){.nums{grid-template-columns:repeat(2,1fr)}.hero-title{font-size:19px}.q-q{font-size:14px}}
+@media print{.hd{display:none!important}.main{margin:0;padding:20px;max-width:100%}.q-hint{max-height:none!important}.ck{display:none}}
 </style>
 </head>
 <body>
+
 <header class="hd">
 <div class="hd-l">
 <div class="hd-ep">EP.06 · 출연자용 질문지</div>
 <div class="hd-t">의사랑 결혼하는 법 — 628만뷰 팩트체크</div>
 </div>
 <div class="hd-r">
-<div class="prog-lbl"><strong id="pn">0</strong> / 15</div>
+<div class="prog-ring">
+<svg width="42" height="42"><circle class="bg" cx="21" cy="21" r="17"/><circle class="fg" id="prog-circle" cx="21" cy="21" r="17" stroke-dasharray="106.8" stroke-dashoffset="106.8"/></svg>
+<div class="prog-num" id="pn">0/15</div>
+</div>
 </div>
 </header>
 
 <main class="main">
 
+<div class="hero">
+<div class="hero-title">"의사랑 결혼하는 법"<br>628만뷰 팩트체크</div>
+<div class="hero-sub">질문을 읽으면서 체크하세요. 답변 힌트는 질문을 탭하면 열립니다.</div>
+</div>
+
+<div class="nums">
+<div class="num-card"><div class="val">628만</div><div class="lbl">브이로그 조회수</div></div>
+<div class="num-card"><div class="val">63.1%</div><div class="lbl">배우자 선택 1위<br>= 성격</div></div>
+<div class="num-card"><div class="val">2.7%</div><div class="lbl">배우자 선택<br>외모 비중</div></div>
+<div class="num-card"><div class="val">50억</div><div class="lbl">치과의사<br>전원 퇴짜</div></div>
+<div class="num-card"><div class="val">10억</div><div class="lbl">투자 6개월<br>이혼 고려</div></div>
+<div class="num-card"><div class="val">4.9만</div><div class="lbl">유료강의<br>여론폭격 중단</div></div>
+</div>
+
 <div class="notice">
-<strong>외울 필요 없습니다.</strong><br>
-PD가 아래 순서로 질문합니다. "아 이런 걸 물어보는구나" 정도만 훑어보세요.<br>
-질문 순서나 표현은 현장에서 자연스럽게 바뀔 수 있습니다.<br>
-읽어본 질문은 체크하면서 넘기시면 됩니다.
+<strong>외울 필요 없습니다.</strong> PD가 아래 순서로 질문합니다.<br>
+"이런 걸 물어보는구나" 정도만 훑어보세요. 질문을 탭하면 답변 방향이 나옵니다.<br>
+<strong>읽어본 질문은 체크박스</strong>를 누르면서 넘기세요.
 </div>
 
-<div class="sec">
-<div class="sec-t">촬영 전 읽을 자료</div>
-<p style="font-size:13px;color:var(--text2);margin-bottom:12px;line-height:1.6">요즘 화제가 되고 있는 내용입니다. "아 이런 게 있구나" 정도만 파악해두세요.</p>
+<!-- 촬영 전 읽을 자료 -->
+<div class="ref-sec">
+<div class="ref-title">촬영 전 읽을 자료 (5개)</div>
+<div class="ref-sub">외울 필요 없어요. "아 요즘 이런 게 화제구나" 정도만.</div>
 
 <div class="ref">
-<a href="https://biz.heraldcorp.com/article/10719361" target="_blank">1. "연봉 25억 의사남편 브이로그" — 628만뷰 (헤럴드경제 2026.04.17)</a>
-<p>"현모양처 브이로그" 제목. 한강뷰 아파트, 명품 쇼핑, 연봉 25억. 동일 트렌드 "내 오빠는 의사인데 돈이 없다" 579만뷰. 실제 의사인지 확인 불가 — 병원 홍보/마케팅 목적 의혹도 제기.</p>
-<span class="ref-link">→ Q1 오프닝 숫자</span><span class="ref-link">→ Q9 브이로그 vs 현실</span>
-</div>
-
-<div class="ref">
-<a href="https://pann.nate.com/talk/338003249" target="_blank">2. "의사남편..하나도 안행복합니다.." (네이트판 · 조회 494,335 · 추천 1,820)</a>
-<p>결혼 6개월차 새댁. 남편 = 비명문 의대 봉직의. 시집에서 10억 투자(집 7억+혼수 2억). 혼전 약속 어기고 친정 돈 개원 압박. 시어머니 학력 무시. 댓글 346개 "변호사 선임하고 이혼하세요."</p>
-<span class="ref-link">→ Q10 네이트판 실화</span><span class="ref-link">→ Q11 결혼 후 현실</span>
+<div class="ref-num">자료 1</div>
+<a href="https://biz.heraldcorp.com/article/10719361" target="_blank">"연봉 25억 의사남편" 브이로그 — 628만뷰</a>
+<p>한강뷰, 명품, 고급식당. "현모양처 브이로그" 제목. 동일 트렌드 "내 오빠는 의사인데 돈이 없다" 579만뷰도 화제. 실제 의사인지 확인 불가 — 병원 마케팅 의혹.</p>
+<div class="ref-tags"><span class="ref-tag">Q1 오프닝</span><span class="ref-tag">Q9 브이로그 vs 현실</span></div>
 </div>
 
 <div class="ref">
-<a href="https://www.hankyung.com/article/2025031042047" target="_blank">3. "자산 50억 치과의사, 얼굴 공개 후 인기 급락" (한국경제 2025.03.12)</a>
-<p>Mnet 커플팰리스. 과학고→연세대 치의학→용산+반포 아파트. 프로필만 공개 시 줄 섬. 얼굴 공개 순간 "미안해요" 전원 철회. 전문가: "재력만으로는 부족, 외모가 반드시 따라와야 하는 시대."</p>
-<span class="ref-link">→ Q7 50억 치과의사</span><span class="ref-link">→ Q8 외모가 새로운 자산</span>
+<div class="ref-num">자료 2</div>
+<a href="https://pann.nate.com/talk/338003249" target="_blank">"의사남편..하나도 안행복합니다" — 조회 49만 · 추천 1,820</a>
+<p>결혼 6개월차. 남편=비명문 의대 봉직의. 시집 10억 투자(집 7억+혼수 2억). 개원 자금 친정에 압박. 시어머니 학력 무시. 댓글 346개 "이혼하세요."</p>
+<div class="ref-tags"><span class="ref-tag">Q8 네이트판 실화</span><span class="ref-tag">Q9 결혼 후 현실</span></div>
 </div>
 
 <div class="ref">
-<a href="https://www.mt.co.kr/society/2026/04/21/2026042110090720360" target="_blank">4. "의사와 결혼하는 법" 유료강의 4.9만원 → 중단 (머니투데이 2026.04.21)</a>
-<p>크라우드펀딩에서 판매. 목차: "의사 인생 사이클 분석", "의사 부모가 조건 따지는 이유". 여론 폭격 후 비공개 전환. 판사·변호사 등으로 소재 확대 중.</p>
-<span class="ref-link">→ Q1 배경 설명</span>
+<div class="ref-num">자료 3</div>
+<a href="https://www.hankyung.com/article/2025031042047" target="_blank">"자산 50억 치과의사" 얼굴 공개 후 전원 철회 — 커플팰리스</a>
+<p>과학고→연세대 치의학→용산+반포 아파트. 프로필만 공개 시 줄 섬. 얼굴 공개 순간 "미안해요." 전문가: "재력만으로 부족한 시대."</p>
+<div class="ref-tags"><span class="ref-tag">Q6 50억 치과의사</span></div>
 </div>
 
 <div class="ref">
-<a href="https://news.sbs.co.kr/news/endPage.do?news_id=N1008521773" target="_blank">5. 곽금주 교수 "관계의 상업화" (SBS 뉴스 2026.04.17)</a>
-<p>서울대 심리학과 명예교수: "직업과 결혼을 지나치게 돈과 연결하면 관계의 상업화." 반복 노출 시 결혼을 감정이 아닌 조건·소비 중심으로 인식하게 만든다.</p>
-<span class="ref-link">→ Q14 결혼의 본질</span><span class="ref-link">→ Q15 마무리</span>
+<div class="ref-num">자료 4</div>
+<a href="https://www.mt.co.kr/society/2026/04/21/2026042110090720360" target="_blank">"의사와 결혼하는 법" 유료강의 4.9만원 → 여론폭격 → 중단</a>
+<p>크라우드펀딩. 목차: "의사 인생 사이클 분석", "의사 부모가 조건 따지는 이유." 비공개 전환. 판사·변호사로 소재 확대 중.</p>
+<div class="ref-tags"><span class="ref-tag">Q2 배경</span></div>
 </div>
 
-<div class="ref-note">이 자료를 외울 필요는 없습니다. "아 요즘 이런 게 화제구나" 정도만 머릿속에 넣으면 됩니다.</div>
+<div class="ref">
+<div class="ref-num">자료 5</div>
+<a href="https://news.sbs.co.kr/news/endPage.do?news_id=N1008521773" target="_blank">곽금주 교수(서울대) "관계의 상업화" 경고 — SBS 뉴스</a>
+<p>"직업과 결혼을 돈과 연결하면 관계의 상업화." 반복 노출 시 결혼을 조건·소비 중심으로 인식하게 만든다.</p>
+<div class="ref-tags"><span class="ref-tag">Q12 결혼의 본질</span><span class="ref-tag">Q13 마무리</span></div>
 </div>
 
+<div class="ref-note">링크를 다 읽을 필요 없습니다. 위 요약만 훑으면 충분해요.</div>
+</div>
+
+<!-- [킥] 오프닝 -->
 <div class="sec">
-<div class="sec-t">[킥] 오프닝 <span class="sec-sub">0:00~0:30</span></div>
-<div class="q" data-n="1"><div class="ck"></div><div class="q-body"><div class="q-n">Q1</div><div class="q-q">628만뷰 숫자 오프닝 — 인사 없이 바로 시작합니다</div></div></div>
-<div class="q-ref">"<span class="num">628만명</span>이 봤습니다. 의사남편 브이로그." → 한강뷰, 명품, 연봉 25억 나열 → "오늘 결정사 대표인 제가 <strong>팩트체크</strong> 하겠습니다." 자신감 있게, 카메라 정면.</div>
-<div class="q" data-n="2"><div class="ck"></div><div class="q-body"><div class="q-n">Q2</div><div class="q-q">팩트체크요? 의사남편 브이로그를요?</div></div></div>
-<div class="q-ref">PD 질문. "가능한지 불가능한지, 그리고 결혼 '후' 이야기까지" 하면서 자연스럽게 시작.</div>
+<div class="sec-hd">
+<span class="sec-icon">⚡</span>
+<div class="sec-t">킥 — 오프닝</div>
+<div class="sec-time">0:00~0:30</div>
 </div>
 
-<div class="sec">
-<div class="sec-t">[해부] 방법론 + 업계 비밀 <span class="sec-sub">0:30~6:00</span></div>
-<div class="q" data-n="3"><div class="ck"></div><div class="q-body"><div class="q-n">Q3</div><div class="q-q">의사를 만나려면 어떻게 해야 해요? 현실적인 루트가 있어요?</div></div></div>
-<div class="q-ref">밝은 톤으로 3가지 루트 설명: <strong>① 결정사</strong> (전문직 회원 있는 곳) <strong>② 학회/세미나</strong> (뒷풀이 만남) <strong>③ 의대 동문 인맥</strong> (친구의 친구 소개). "만남 자체는 어렵지 않아요."</div>
-<div class="q" data-n="4"><div class="ck"></div><div class="q-body"><div class="q-n">Q4</div><div class="q-q">결정사에서는 의사 만나기 쉬워요?</div></div></div>
-<div class="q-ref">긍정적으로: "저희처럼 전문직 회원이 있는 곳에 가시면 만남 자체는 됩니다." 여기까지는 밝은 톤 유지.</div>
-<div class="q" data-n="5"><div class="ck"></div><div class="q-body"><div class="q-n">Q5</div><div class="q-q">근데 업계에서 의사 회원 가입비가 무료라면서요?</div></div></div>
-<div class="q-ref">핵심 폭로: <strong>"미끼거든요."</strong> 여성 회원을 유치하기 위한 상품. 업계 전체 관행. "의사라는 직업 자체가 결정사에서는 객을 끄는 미끼 상품이에요." 톤 전환 시작.</div>
-<div class="q" data-n="6"><div class="ck"></div><div class="q-body"><div class="q-n">Q6</div><div class="q-q">그러면 의사라고 다 인기 있는 거예요?</div></div></div>
-<div class="q-ref">"아닙니다." 여기서 완전히 톤 전환. 의사 타이틀이 만능이 아니라는 이야기로 넘어갑니다.</div>
-<div class="q" data-n="7"><div class="ck"></div><div class="q-body"><div class="q-n">Q7</div><div class="q-q">자산 50억 치과의사도 퇴짜 맞았다고요?</div></div></div>
-<div class="q-ref">커플팰리스 사례: 프로필 공개 → 줄 섬 → 얼굴 공개 → "미안하다"며 철회. <strong>"자산 50억이에요. 치과의사에요. 서울 부동산 있어요. 근데..."</strong> 약간 놀란 표정으로.</div>
-<div class="q" data-n="8"><div class="ck"></div><div class="q-body"><div class="q-n">Q8</div><div class="q-q">키 170 미만이면 수억 있어도 매칭 안 된다고요?</div></div></div>
-<div class="q-ref">"매칭이 쉽지 않아요." <strong>외모가 새로운 자산이 된 시대</strong>. 의사 타이틀만으로는 안 되는 현실.</div>
+<div class="q-wrap">
+<div class="q peak" data-n="1"><div class="ck"></div><div class="q-body">
+<div class="q-meta"><span class="q-n">Q1</span><span class="q-tag peak">NO 인사</span></div>
+<div class="q-q">"628만명이 이 영상을 봤습니다. 의사남편 브이로그. 한강뷰, 명품, 연봉 25억. — 오늘 제가 팩트체크합니다."</div>
+</div></div>
+<div class="q-hint"><div class="q-hint-inner">인사 없이 바로. 숫자부터 시작. 카메라 정면, 자신감 있게. <strong>"결정사 대표인 제가"</strong> 강조. 이 한 마디로 시청자가 "뭐지?" 하고 멈춰야 함.</div></div>
 </div>
 
-<div class="sec">
-<div class="sec-t">[실화] 브이로그에는 안 나오는 이야기 <span class="sec-sub">6:00~10:00</span></div>
-<div class="q" data-n="9"><div class="ck"></div><div class="q-body"><div class="q-n">Q9</div><div class="q-q">결혼 '후'는요? 브이로그처럼 좋은 거 아니에요?</div></div></div>
-<div class="q-ref">전환: "여기서부터 진짜 이야기입니다." 628만뷰 브이로그에는 절대 안 나오는 이야기. 톤 진지하게.</div>
-<div class="q" data-n="10"><div class="ck"></div><div class="q-body"><div class="q-n">Q10</div><div class="q-q">네이트판에 49만명이 본 글 있잖아요. 10억 투자했는데 6개월 만에...</div></div></div>
-<div class="q-ref">스토리텔링: 시집 <span class="num">10억</span> 투자 → 결혼 6개월 → 개원 자금 압박 → 시어머니 학력 무시 → 이혼 고려. 안타까운 톤, <strong>빠르게 말하지 않기</strong>.</div>
-<div class="q" data-n="11"><div class="ck"></div><div class="q-body"><div class="q-n">Q11</div><div class="q-q">의사 배우자들이 가장 힘든 게 뭐예요?</div></div></div>
-<div class="q-ref">4가지: <strong>① 당직</strong> (새벽 응급 콜, "결혼했는데 솔로 같다") <strong>② 시댁 기대치</strong> (며느리 요구사항 과다) <strong>③ 개원 대출</strong> (<span class="num">5~20억</span> 부부 공동) <strong>④ 외로움</strong> (항상 피곤, 대화 없음). 작은 목소리로 천천히.</div>
-<div class="q" data-n="12"><div class="ck"></div><div class="q-body"><div class="q-n">Q12</div><div class="q-q">대표님 회원 중에도 그런 분 있어요?</div></div></div>
-<div class="q-ref">실제 상담 경험. <strong>가명 처리 필수</strong>. "브이로그에 나오는 명품/한강뷰는 이 모든 걸 감수하고 남은 부분이에요. 아니면 아예 연출이거나."</div>
+<div class="q-wrap">
+<div class="q pd" data-n="2"><div class="ck"></div><div class="q-body">
+<div class="q-meta"><span class="q-n">Q2</span><span class="q-tag pd">PD</span></div>
+<div class="q-q">"잠깐요, 팩트체크요? 628만뷰 의사남편 브이로그를 결정사 대표가 검증한다고요?"</div>
+</div></div>
+<div class="q-hint"><div class="q-hint-inner">PD가 놀란 척 반문. 대표님은 여유 있게: <strong>"네. 만나는 법부터, 결혼 후 현실까지 다 이야기할 거예요."</strong> 시청자에게 영상 구조를 미리 알려주는 역할.</div></div>
+</div>
 </div>
 
+<!-- [해부] 만나는 법 + 업계 비밀 -->
 <div class="sec">
-<div class="sec-t">[반전] 결혼을 잘 하는 법 <span class="sec-sub">10:00~13:00</span></div>
-<div class="q" data-n="13"><div class="ck"></div><div class="q-body"><div class="q-n">Q13</div><div class="q-q">그러면 의사분들은 진짜 뭘 원해요? 어떤 배우자요?</div></div></div>
-<div class="q-ref">여기서 다시 밝아지기. 데이터 공개: 문체부 5,100명 조사 결과 1순위 <strong>성격 <span class="num">63.1%</span></strong> ("편하게 대화할 수 있는 사람", "퇴근하고 웃으면서 맞아주는 사람"). 외모? <strong><span class="num">2.7%</span></strong>. "의사 남성도 외모보다 전문직 여성 선호(45% vs 60%)." 그리고 전환: <strong>"이건 의사만의 이야기가 아니에요. 행복한 결혼을 한 사람들 전부 같은 말을 해요."</strong></div>
-<div class="q" data-n="14"><div class="ck"></div><div class="q-body"><div class="q-n">Q14</div><div class="q-q">그러면 결혼을 잘 하려면 뭘 봐야 해요?</div></div></div>
-<div class="q-ref">이 영상의 핵심 도달 지점. 의사든 회사원이든 — <strong>직업/조건이 아니라 그 사람의 성격, 가치관, 호환성을 봐야 한다.</strong> 캐치프레이즈: <strong>"의사가 다가 아닙니다. 직업을 보지 말고 사람을 보세요."</strong> 따뜻한 톤, 진심.</div>
+<div class="sec-hd">
+<span class="sec-icon">🔍</span>
+<div class="sec-t">해부 — 만나는 법 + 업계 비밀</div>
+<div class="sec-time">0:30~6:00</div>
 </div>
 
+<div class="q-wrap">
+<div class="q" data-n="3"><div class="ck"></div><div class="q-body">
+<div class="q-meta"><span class="q-n">Q3</span></div>
+<div class="q-q">"진짜 의사를 만나려면 어디로 가야 해요? 솔직하게 — 현실적인 루트 3개만 알려주세요."</div>
+</div></div>
+<div class="q-hint"><div class="q-hint-inner">밝은 톤으로:<br><strong class="hl">① 결정사</strong> — 전문직 회원이 있는 곳<br><strong class="hl">② 학회/세미나 뒷풀이</strong> — 의료진 모임<br><strong class="hl">③ 의대 동문 인맥</strong> — 친구의 친구 소개<br>"만남 자체는 어렵지 않아요. 문제는 그 다음이에요."</div></div>
+</div>
+
+<div class="q-wrap">
+<div class="q" data-n="4"><div class="ck"></div><div class="q-body">
+<div class="q-meta"><span class="q-n">Q4</span></div>
+<div class="q-q">"결정사에서 의사 남성은 인기가 많죠? 여성 회원들이 1순위로 찾는 거 아니에요?"</div>
+</div></div>
+<div class="q-hint"><div class="q-hint-inner">"맞아요. 1순위 맞습니다." 긍정. <strong>여기까지는 밝은 톤 유지.</strong> "근데 여기에 업계가 숨기는 비밀이 하나 있어요." — Q5로 전환 빌드업.</div></div>
+</div>
+
+<div class="q-wrap">
+<div class="q peak" data-n="5"><div class="ck"></div><div class="q-body">
+<div class="q-meta"><span class="q-n">Q5</span><span class="q-tag peak">PEAK</span></div>
+<div class="q-q">"근데 대표님, 결정사에서 의사 회원 가입비가 무료라는 거 사실이에요? 왜요?"</div>
+</div></div>
+<div class="q-hint"><div class="q-hint-inner"><strong class="hl">"미끼거든요."</strong><br>여성 회원을 유치하려면 전문직 남성이 있어야 함. 그래서 의사·변호사·판검사는 가입비 면제. 업계 전체 관행.<br><strong>"의사라는 직업 자체가 결정사에서는 여성 고객을 끌어오는 미끼 상품이에요."</strong><br>톤 전환 시작 — 약간 미안한 표정으로.</div></div>
+</div>
+
+<div class="q-wrap">
+<div class="q peak" data-n="6"><div class="ck"></div><div class="q-body">
+<div class="q-meta"><span class="q-n">Q6</span><span class="q-tag peak">PEAK</span></div>
+<div class="q-q">"자산 50억, 연세대 치의학과, 용산+반포 아파트. 이 정도면 무조건 인기 아니에요? 근데 퇴짜 맞았다고요?"</div>
+</div></div>
+<div class="q-hint"><div class="q-hint-inner">커플팰리스 사례. 프로필만 공개 → 여성 출연자 줄 섬 → <strong>얼굴 공개 순간 "미안해요" 전원 철회.</strong><br>"50억이에요. 치과의사에요. 서울 부동산 2채요. 근데 아무도 안 남았어요."<br><strong>약간 놀란 표정 + 잠깐 멈추기.</strong></div></div>
+</div>
+
+<div class="q-wrap">
+<div class="q pd" data-n="7"><div class="ck"></div><div class="q-body">
+<div class="q-meta"><span class="q-n">Q7</span><span class="q-tag pd">PD</span></div>
+<div class="q-q">"그러면 의사인데 키 170 미만이면요? 수억 있어도 매칭 안 되는 거예요?"</div>
+</div></div>
+<div class="q-hint"><div class="q-hint-inner">"솔직히 말씀드리면... 쉽지 않아요."<br>의사 타이틀 = 만능 아님. <strong>"외모가 새로운 자산이 된 시대예요."</strong><br>의사라는 직업이 예전처럼 모든 걸 커버해주지 않는다는 현실.</div></div>
+</div>
+</div>
+
+<!-- [실화] 결혼 후 현실 -->
 <div class="sec">
-<div class="sec-t">[아웃] 마무리 <span class="sec-sub">13:00~15:00</span></div>
-<div class="q" data-n="15"><div class="ck"></div><div class="q-body"><div class="q-n">Q15</div><div class="q-q">지금 결혼하고 싶은 분들한테 한마디 해주신다면?</div></div></div>
-<div class="q-ref">3가지 정리: ① 의사든 변호사든, 조건은 변할 수 있다 ② 결혼 후를 결정하는 건 직업이 아니라 그 사람의 성격 ③ 조건표 말고 사람을 보세요 — 그게 결혼을 잘 하는 유일한 방법. 다음 EP 예고: "의사 회원분이 직접 나오셔서..." <strong>정면 보고 천천히, 열린 결말.</strong></div>
+<div class="sec-hd">
+<span class="sec-icon">💔</span>
+<div class="sec-t">실화 — 브이로그에 절대 안 나오는 이야기</div>
+<div class="sec-time">6:00~10:00</div>
+</div>
+
+<div class="q-wrap">
+<div class="q pd" data-n="8"><div class="ck"></div><div class="q-body">
+<div class="q-meta"><span class="q-n">Q8</span><span class="q-tag pd">PD</span></div>
+<div class="q-q">"네이트판에 49만명이 본 글 있잖아요. 시집에서 10억 쏟아부었는데, 6개월 만에 이혼 고려한다는 그 글. 진짜예요?"</div>
+</div></div>
+<div class="q-hint"><div class="q-hint-inner">스토리텔링 모드. 천천히:<br>시집 <strong class="hl">10억</strong> 투자 (집 7억 + 혼수 2억) → 남편 = 봉직의(페이닥터) → 결혼 6개월 → "친정 돈으로 개원하자" 압박 → 시어머니 학력 무시 → <strong>"댓글 346개. 거의 다 '이혼하세요.'"</strong><br>안타까운 톤. <strong>빠르게 말하지 않기.</strong></div></div>
+</div>
+
+<div class="q-wrap">
+<div class="q peak" data-n="9"><div class="ck"></div><div class="q-body">
+<div class="q-meta"><span class="q-n">Q9</span><span class="q-tag peak">PEAK · 리테이크 금지</span></div>
+<div class="q-q">"의사 배우자들이 밤에 혼자 우는 이유가 뭐예요? 628만뷰 브이로그에는 왜 이런 게 안 나와요?"</div>
+</div></div>
+<div class="q-hint"><div class="q-hint-inner">여기가 감정 피크. 4가지 현실:<br><strong class="hl">① 당직</strong> — 새벽 3시 응급 콜. "결혼했는데 솔로 같다"<br><strong class="hl">② 시댁 기대치</strong> — 며느리에게 요구사항 끝이 없음<br><strong class="hl">③ 개원 대출</strong> — 5~20억 부부 공동 부담. 빚으로 시작하는 결혼<br><strong class="hl">④ 외로움</strong> — 항상 피곤한 남편. 대화 시간 제로<br><strong>작은 목소리로. 천천히. 첫 반응 그대로.</strong></div></div>
+</div>
+
+<div class="q-wrap">
+<div class="q" data-n="10"><div class="ck"></div><div class="q-body">
+<div class="q-meta"><span class="q-n">Q10</span></div>
+<div class="q-q">"대표님이 실제로 상담했던 의사 배우자분 중에, '나 왜 이 결혼 했지' 하신 분 있어요?"</div>
+</div></div>
+<div class="q-hint"><div class="q-hint-inner">실제 상담 경험. <strong>가명 처리 필수.</strong><br>"있죠. 많아요." — 구체적 에피소드 1개.<br>마무리: <strong>"브이로그에 나오는 명품이랑 한강뷰는요, 이 모든 걸 감수하고 남은 부분이에요. 아니면 아예 연출이거나."</strong></div></div>
+</div>
+</div>
+
+<!-- [반전] 진짜 하고 싶은 이야기 -->
+<div class="sec">
+<div class="sec-hd">
+<span class="sec-icon">✨</span>
+<div class="sec-t">반전 — 그러면 어떻게 해야 행복해요?</div>
+<div class="sec-time">10:00~13:00</div>
+</div>
+
+<div class="q-wrap">
+<div class="q peak" data-n="11"><div class="ck"></div><div class="q-body">
+<div class="q-meta"><span class="q-n">Q11</span><span class="q-tag peak">PEAK</span><span class="q-tag data">DATA</span></div>
+<div class="q-q">"그러면 의사분들은 대체 어떤 사람이랑 결혼하고 싶어 해요? 뭘 원해요 진짜로?"</div>
+</div></div>
+<div class="q-hint"><div class="q-hint-inner">여기서 톤 다시 밝아지기. 미소.<br>데이터: 문체부 5,100명 조사 — 배우자 선택 1순위 <strong class="hl">성격 63.1%</strong>. 외모? <strong class="hl">2.7%</strong>.<br>"편하게 대화할 수 있는 사람", "퇴근하고 웃으면서 맞아주는 사람."<br>의사 남성 설문(닥스클럽 200명): 외모 중시 45%(일반 남성 60%보다 낮음), 전문직 여성 선호 43%.<br><strong>"의사라서 특별한 게 아니에요. 다 같은 거예요."</strong></div></div>
+</div>
+
+<div class="q-wrap">
+<div class="q" data-n="12"><div class="ck"></div><div class="q-body">
+<div class="q-meta"><span class="q-n">Q12</span></div>
+<div class="q-q">"잠깐, 그러면 이건 '의사랑 결혼하는 법'이 아니라 — 그냥 '결혼을 잘 하는 법' 아니에요?"</div>
+</div></div>
+<div class="q-hint"><div class="q-hint-inner"><strong>이 영상의 진짜 메시지 도달 지점.</strong><br>"맞아요. 사실 제가 오늘 진짜 하고 싶었던 이야기가 이거예요."<br>의사든 회사원이든 변호사든 — <strong class="hl">직업/조건이 아니라 그 사람의 성격, 가치관, 나와의 호환성을 봐야 한다.</strong><br>따뜻한 톤, 진심.</div></div>
+</div>
+
+<div class="q-wrap">
+<div class="q peak" data-n="13"><div class="ck"></div><div class="q-body">
+<div class="q-meta"><span class="q-n">Q13</span><span class="q-tag peak">PEAK · 리테이크 금지</span></div>
+<div class="q-q">"대표님이 수백 명 매칭하면서 알게 된 거 — 결혼을 잘 하려면 결국 뭘 봐야 해요?"</div>
+</div></div>
+<div class="q-hint"><div class="q-hint-inner"><strong class="hl">"의사가 다가 아닙니다. 직업을 보지 말고 사람을 보세요."</strong><br>이게 캐치프레이즈. 자연스럽게 나오면 최고. 안 나오면 PD가 유도.<br><strong>정적 2초 → 카메라 정면 → 진심.</strong><br>곽금주 교수 멘트와 연결: "관계의 상업화"를 넘어서려면 사람을 봐야 한다.</div></div>
+</div>
+</div>
+
+<!-- [아웃] 마무리 -->
+<div class="sec">
+<div class="sec-hd">
+<span class="sec-icon">🎬</span>
+<div class="sec-t">아웃 — 마무리</div>
+<div class="sec-time">13:00~15:00</div>
+</div>
+
+<div class="q-wrap">
+<div class="q pd" data-n="14"><div class="ck"></div><div class="q-body">
+<div class="q-meta"><span class="q-n">Q14</span><span class="q-tag pd">PD</span></div>
+<div class="q-q">"그러면 지금 이 영상 보면서 '나도 의사랑 결혼하고 싶다' 생각하는 분한테 뭐라고 하실 거예요?"</div>
+</div></div>
+<div class="q-hint"><div class="q-hint-inner">3가지 정리:<br>① 의사든 변호사든, <strong>조건은 변할 수 있다</strong><br>② 결혼 후를 결정하는 건 직업이 아니라 <strong>그 사람의 성격</strong><br>③ <strong>"조건표 말고 사람을 보세요. 그게 결혼을 잘 하는 유일한 방법이에요."</strong></div></div>
+</div>
+
+<div class="q-wrap">
+<div class="q" data-n="15"><div class="ck"></div><div class="q-body">
+<div class="q-meta"><span class="q-n">Q15</span></div>
+<div class="q-q">"다음 편에서는 어떤 이야기 해주실 거예요?"</div>
+</div></div>
+<div class="q-hint"><div class="q-hint-inner">다음 EP 예고: <strong>"실제 의사 회원분이 직접 나오셔서 이야기해주실 예정이에요."</strong><br>궁금증 유발. 열린 결말. <strong>정면 보고 천천히, 미소.</strong></div></div>
+</div>
 </div>
 
 <div class="footer">
-아는언니 리지 · EP.06 출연자용 질문지 · v1
+아는언니 리지 · EP.06 출연자용 질문지 · v2<br>
+질문을 탭하면 답변 힌트가 열립니다
 </div>
 
 </main>
 
 <script>
-const SK='ep06_host_checks_v1';
+const SK='ep06_host_checks_v2';
 let checks=(()=>{try{return JSON.parse(localStorage.getItem(SK)||'{}')}catch(e){return {}}})();
 const save=()=>localStorage.setItem(SK,JSON.stringify(checks));
+const total=15;
+const circ=document.getElementById('prog-circle');
+const pn=document.getElementById('pn');
+const circumference=106.8;
+
+function updateProgress(){
+ const done=Object.keys(checks).length;
+ pn.textContent=done+'/'+total;
+ circ.style.strokeDashoffset=circumference-(circumference*done/total);
+}
 
 document.querySelectorAll('.q').forEach(q=>{
  if(checks[q.dataset.n]) q.classList.add('on');
 });
 
-function updateCount(){
- const done=Object.keys(checks).length;
- document.getElementById('pn').textContent=done;
-}
-
 document.querySelector('.main').addEventListener('click',e=>{
  const q=e.target.closest('.q');
  if(!q)return;
  const n=q.dataset.n;
- if(checks[n]){delete checks[n];q.classList.remove('on')}
- else{checks[n]=1;q.classList.add('on')}
- save();updateCount();
+
+ // Toggle check
+ const ck=e.target.closest('.ck');
+ if(ck){
+  if(checks[n]){delete checks[n];q.classList.remove('on')}
+  else{checks[n]=1;q.classList.add('on')}
+  save();updateProgress();
+  return;
+ }
+
+ // Toggle hint
+ const wrap=q.closest('.q-wrap');
+ if(wrap){
+  const hint=wrap.querySelector('.q-hint');
+  if(hint) hint.classList.toggle('open');
+ }
 });
 
-updateCount();
+// Also allow checking by tapping the whole q element on the checkbox side
+document.querySelectorAll('.q').forEach(q=>{
+ q.addEventListener('click',e=>{
+  if(e.target.closest('.ck')){
+   const n=q.dataset.n;
+   if(checks[n]){delete checks[n];q.classList.remove('on')}
+   else{checks[n]=1;q.classList.add('on')}
+   save();updateProgress();
+  } else {
+   const wrap=q.closest('.q-wrap');
+   if(wrap){
+    const hint=wrap.querySelector('.q-hint');
+    if(hint) hint.classList.toggle('open');
+   }
+  }
+ });
+});
+
+// Remove duplicate listener - use single delegated approach
+document.querySelector('.main').onclick=function(e){
+ const q=e.target.closest('.q');
+ if(!q)return;
+ const n=q.dataset.n;
+ const isCheck=e.target.closest('.ck');
+
+ if(isCheck){
+  if(checks[n]){delete checks[n];q.classList.remove('on')}
+  else{checks[n]=1;q.classList.add('on')}
+  save();updateProgress();
+ } else {
+  const wrap=q.closest('.q-wrap');
+  if(wrap){
+   const hint=wrap.querySelector('.q-hint');
+   if(hint) hint.classList.toggle('open');
+  }
+ }
+};
+
+updateProgress();
 </script>
 </body>
 </html>
