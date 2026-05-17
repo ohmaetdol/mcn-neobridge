@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
+<meta name="theme-color" content="#ffffff">
+<title>[출연자용] EP.06 — 의사랑 결혼하는 법</title>
+<style>
+:root{--bg:#ffffff;--card:#ffffff;--card2:#f4f6f8;--border:#e5e7eb;--text:#191f28;--text2:#4e5968;--text3:#8b95a1;--accent:#0064ff;--accent-l:#e8f1ff;--green:#15803d;--amber:#b45309;--red:#dc2626}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);line-height:1.8;font-size:16px;-webkit-font-smoothing:antialiased;padding:0 0 60px}
+.top-bar{position:sticky;top:0;background:rgba(255,255,255,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:14px 20px;z-index:10;display:flex;align-items:center;gap:10px}
+.top-bar .badge{font-size:11px;font-weight:700;color:#fff;background:var(--accent);padding:4px 10px;border-radius:6px}
+.top-bar .title{font-size:15px;font-weight:700;flex:1}
+.top-bar .ver{font-size:11px;color:var(--text3)}
+.container{max-width:680px;margin:0 auto;padding:24px 20px}
+.hero{text-align:center;padding:32px 0 28px;border-bottom:1px solid var(--border);margin-bottom:32px}
+.hero h1{font-size:24px;font-weight:800;line-height:1.3;margin-bottom:8px;word-break:keep-all}
+.hero p{font-size:14px;color:var(--text2);margin-bottom:16px}
+.hero .meta{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--text3)}
+.hero .meta span{background:var(--card2);padding:5px 10px;border-radius:8px}
+section{margin-bottom:40px}
+section h2{font-size:20px;font-weight:800;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border);color:var(--text)}
+section h3{font-size:16px;font-weight:700;margin:20px 0 10px;color:var(--text)}
+p{margin:8px 0;color:var(--text2);word-break:keep-all}
+.card{background:var(--card2);border-radius:14px;padding:18px 20px;margin:12px 0}
+.card-title{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
+.card p{margin:4px 0;font-size:14px}
+.highlight{background:var(--accent-l);border-left:3px solid var(--accent);padding:14px 18px;border-radius:0 12px 12px 0;margin:16px 0;font-size:15px;color:var(--text)}
+.highlight strong{color:var(--accent)}
+.ban{background:#fef2f2;border-left:3px solid var(--red);padding:14px 18px;border-radius:0 12px 12px 0;margin:12px 0}
+.ban-title{font-size:13px;font-weight:700;color:var(--red);margin-bottom:6px}
+.ban p{font-size:14px;color:#991b1b;margin:3px 0}
+.warn{background:#fffbeb;border-left:3px solid var(--amber);padding:14px 18px;border-radius:0 12px 12px 0;margin:12px 0}
+.warn-title{font-size:13px;font-weight:700;color:var(--amber);margin-bottom:6px}
+.warn p{font-size:14px;color:#92400e;margin:3px 0}
+.timeline{list-style:none;padding:0;margin:16px 0}
+.timeline li{position:relative;padding:12px 0 12px 24px;border-left:2px solid var(--border)}
+.timeline li::before{content:'';position:absolute;left:-5px;top:16px;width:8px;height:8px;background:var(--accent);border-radius:50%}
+.timeline li:last-child{border-left-color:transparent}
+.timeline .time{font-size:12px;font-weight:700;color:var(--accent)}
+.timeline .desc{font-size:14px;color:var(--text2);margin-top:2px}
+.sig{background:linear-gradient(135deg,var(--accent-l),#f0f4ff);border-radius:14px;padding:20px;margin:16px 0;text-align:center}
+.sig .label{font-size:11px;font-weight:700;color:var(--accent);margin-bottom:8px;text-transform:uppercase}
+.sig .quote{font-size:18px;font-weight:800;color:var(--text);line-height:1.4}
+.checklist{list-style:none;padding:0;margin:12px 0}
+.checklist li{padding:10px 0 10px 32px;border-bottom:1px solid var(--card2);font-size:14px;color:var(--text2);position:relative}
+.checklist li::before{content:'';position:absolute;left:8px;color:var(--accent);font-size:16px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+th{background:var(--card2);padding:10px 12px;text-align:left;font-weight:700;color:var(--text2);font-size:12px;border-bottom:1px solid var(--border)}
+td{padding:10px 12px;border-bottom:1px solid var(--card2);color:var(--text2)}
+.prep-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;background:var(--accent);color:#fff;border-radius:50%;font-size:13px;font-weight:700;margin-right:8px;flex-shrink:0}
+.prep-item{display:flex;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--card2)}
+.prep-item:last-child{border-bottom:none}
+.prep-text{font-size:14px;color:var(--text2)}
+.prep-text strong{color:var(--text)}
+.catch-box{display:grid;gap:10px;margin:14px 0}
+.catch-item{background:var(--card2);border-radius:12px;padding:14px 16px;border-left:3px solid var(--accent)}
+.catch-label{font-size:11px;font-weight:700;color:var(--accent);margin-bottom:4px}
+.catch-phrase{font-size:16px;font-weight:800;color:var(--text)}
+.catch-when{font-size:12px;color:var(--text3);margin-top:3px}
+.card-title a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+.card-title a:hover{opacity:.7}
+@media(max-width:480px){.container{padding:16px 14px}.hero h1{font-size:20px}section h2{font-size:17px}}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+<span class="badge">출연자용</span>
+<span class="title">EP.06 촬영 브리프</span>
+<span class="ver">v1 · 2026.05.17</span>
+</div>
+
+<div class="container">
+
+<div class="hero">
+<h1>의사랑 결혼하는 법</h1>
+<p>EP.06 · 스튜디오 PD 질문 토크 · 628만뷰 팩트체크 양면 제시형</p>
+<div class="meta">
+<span>13~15분</span>
+<span>스튜디오</span>
+<span>아는언니 리지</span>
+</div>
+</div>
+
+<section>
+<h2>이 영상은 뭔가요?</h2>
+<p><strong>628만뷰 의사남편 브이로그를 결정사 대표가 팩트체크하는 영상</strong>입니다.</p>
+<p>의사 만나는 방법은 알려주되, 업계 비밀과 결혼 후 현실도 함께 보여주는 양면 제시 구조입니다.</p>
+<p>Q11(이상형의 이혼)에 이어지는 이야기입니다.</p>
+
+<div class="card">
+<div class="card-title">촬영 포맷</div>
+<p><strong>스튜디오 PD 질문 토크</strong> — PD가 질문하면 대표님이 자연스럽게 답하는 형식입니다.</p>
+<p>대본 없습니다. 키워드와 핵심 숫자만 숙지하시면 됩니다.</p>
+<p>촬영 시간: 약 2시간</p>
+</div>
+
+<div class="highlight">
+<strong>핵심 원칙:</strong> 아래 커뮤니티 이슈를 촬영 전에 한 번 읽어주세요.<br>
+"아 요즘 이런 게 화제구나" 정도만 머릿속에 넣으면 됩니다.<br>
+PD가 질문으로 이끌어가고, 대표님은 <strong>아는 만큼, 느끼는 만큼 솔직하게 대답</strong>하면 됩니다.<br>
+<strong>인사 없이 바로 시작합니다.</strong>
+</div>
+</section>
+
+<section>
+<h2>우리 채널의 반복 포맷</h2>
+<p>모든 에피소드는 같은 흐름으로 진행됩니다. 외울 필요 없고, "이런 흐름이구나" 정도만 알면 됩니다.</p>
+
+<div class="card">
+<div class="card-title">매 에피소드 5단 구조</div>
+<p><strong>[킥]</strong> 숫자/도발로 바로 시작. 인사 X. (0~30초)</p>
+<p><strong>[해부]</strong> 방법론 + 업계가 이렇게 돌아감. (약 5.5분)</p>
+<p><strong>[실화]</strong> "브이로그에는 안 나오는 이야기." 결혼 후 현실. (약 4분)</p>
+<p><strong>[반전]</strong> "의사들이 진짜 원하는 건..." 메시지. (약 3분)</p>
+<p><strong>[아웃]</strong> 캐치프레이즈 + 여운 + 페이드아웃. (약 2분)</p>
+</div>
+
+<div class="warn">
+<div class="warn-title">캐치프레이즈는 촬영 당일 PD가 안내합니다</div>
+<p>외울 필요 없습니다. PD가 촬영 흐름을 안내하면서 자연스럽게 나오도록 도와줍니다.</p>
+</div>
+</section>
+
+<section>
+<h2>촬영 전 읽을 자료</h2>
+<p>아래는 요즘 의사남편/결정사 관련 <strong>화제가 되고 있는 내용</strong>입니다. 촬영 전에 한 번 읽고 "아 이런 게 있구나" 정도만 파악해두세요.</p>
+
+<div class="card">
+<div class="card-title">1. "연봉 25억 의사남편 브이로그" — 628만뷰 (인스타그램)</div>
+<p>한강뷰 아파트, 명품 쇼핑, 연봉 25억. 의사남편의 화려한 일상. 이 영상이 "의사=완벽한 남편" 환상을 만들고 있다.</p>
+</div>
+
+<div class="card">
+<div class="card-title"><a href="https://pann.nate.com/talk/338003249" target="_blank">2. "시집에서 10억 투자했는데 6개월 만에 이혼 고려" (네이트판 · 49만뷰)</a></div>
+<p>봉직의 남편과 결혼. 시집 10억 투자(집 7억+혼수 2억). 6개월 만에 개원 자금 압박. 시어머니 학력 무시. 댓글 346개 "당장 이혼하세요."</p>
+</div>
+
+<div class="card">
+<div class="card-title"><a href="https://www.hankyung.com/article/2025031042047" target="_blank">3. "자산 50억 치과의사, 얼굴 공개 후 인기 급락" (커플팰리스)</a></div>
+<p>Mnet 커플팰리스. 프로필만 공개 → 줄 섬 → 얼굴 공개 → "미안하다"며 철회. 의사 타이틀 ≠ 만능.</p>
+</div>
+
+<div class="card">
+<div class="card-title"><a href="https://www.mt.co.kr/society/2026/04/21/2026042110090720360" target="_blank">4. "의사와 결혼하는 법" 유료강의 논란 (머니투데이)</a></div>
+<p>4.9만원 유료 강의 판매 → 여론 폭격 → 중단. 이 주제에 대한 수요가 실제로 크다는 증거.</p>
+</div>
+
+<div class="card">
+<div class="card-title"><a href="https://news.sbs.co.kr/news/endPage.do?news_id=N1008521773" target="_blank">5. 서울대 곽금주 교수 "관계의 상업화" 경고 (SBS 뉴스)</a></div>
+<p>"직업으로 배우자를 고르는 풍조가 관계를 상품화하고 있다." 직업이 아닌 사람을 봐야 한다.</p>
+</div>
+
+<div class="warn">
+<div class="warn-title">이 자료를 외울 필요는 없습니다</div>
+<p>"아 요즘 이런 게 화제구나" 정도만 머릿속에 넣으면 됩니다. PD가 촬영 때 흐름을 안내합니다.</p>
+</div>
+</section>
+
+<section>
+<h2>촬영 흐름</h2>
+<p>PD가 질문하면 대표님이 자연스럽게 답합니다. <strong>외우지 않아도 됩니다.</strong></p>
+
+<ul class="timeline">
+<li>
+<div class="time">[킥] 0~30초</div>
+<div class="desc">"628만명이 봤습니다" — 자신감 있게, 카메라 정면. 인사 없이 바로.</div>
+</li>
+<li>
+<div class="time">[해부] 약 5분 30초</div>
+<div class="desc">의사 만나는 루트 3가지 (밝은 톤) → 업계 비밀: 미끼 상품 (솔직한 톤)</div>
+</li>
+<li>
+<div class="time">[실화] 약 4분</div>
+<div class="desc">결혼 후 현실. 네이트판 실화. 당직/대출/외로움. 안타까운 톤, 천천히.</div>
+</li>
+<li>
+<div class="time">[반전] 약 3분</div>
+<div class="desc">의사들의 진짜 본심. "성격 55% > 외모 3%". 여기서 다시 밝아지기.</div>
+</li>
+<li>
+<div class="time">[아웃] 약 2분</div>
+<div class="desc">대본 없이 마음에서 우러나오는 말. 다음 EP 예고. 열린 결말.</div>
+</li>
+</ul>
+</section>
+
+<section>
+<h2>촬영 전 준비할 것</h2>
+
+<div class="prep-item">
+<span class="prep-num">1</span>
+<div class="prep-text"><strong>핵심 숫자 기억하기</strong><br>628만뷰 / 성격 55% / 외모 3% / 10억 투자 / 50억 치과의사. 당일 PD가 정리해서 드립니다.</div>
+</div>
+
+<div class="prep-item">
+<span class="prep-num">2</span>
+<div class="prep-text"><strong>의사 회원 상담 경험 떠올리기</strong><br>의사 회원분들과의 상담 경험, 의사 배우자 관련 에피소드를 편하게 떠올려주세요. (가명 처리 가능한 것들)</div>
+</div>
+
+<div class="prep-item">
+<span class="prep-num">3</span>
+<div class="prep-text"><strong>Q11 "조건이 다가 아니에요" 복습</strong><br>이전 에피소드에서 어떤 이야기를 했는지 간단히 떠올려주세요. 연결됩니다.</div>
+</div>
+</section>
+
+<section>
+<h2>PD 질문 방식</h2>
+
+<div class="highlight">
+이번 에피소드는 <strong>PD 질문 토크</strong>입니다. PD가 질문하면 대표님이 자연스럽게 답하는 형식입니다.<br><br>
+PD 질문은 4가지 패턴만 반복합니다:<br>
+<strong>"진짜요?"</strong> / <strong>"그건 좀 불공평하지 않아요?"</strong> / <strong>"대표님은요?"</strong> / <strong>"그러면 어떡해요?"</strong><br><br>
+대표님은 <strong>아는 만큼, 느끼는 만큼 솔직하게 대답</strong>하시면 됩니다.
+</div>
+
+<div class="card">
+<div class="card-title">PD 질문 예시 (이런 느낌으로 진행됩니다)</div>
+<p><strong>"의사 회원 가입비가 무료라면서요?"</strong> — 해부 구간. 업계 비밀.</p>
+<p><strong>"브이로그처럼 좋은 거 아니에요?"</strong> — 실화 구간. 결혼 후 현실.</p>
+<p><strong>"의사가 다가 아니라는 거예요?"</strong> — 반전 구간. 캐치프레이즈.</p>
+<p><strong>"의사랑 결혼하고 싶은 분한테 한마디?"</strong> — 아웃 구간. 마무리.</p>
+</div>
+</section>
+
+<section>
+<h2>톤 가이드</h2>
+
+<div class="card">
+<div class="card-title">이번 에피소드 톤 전환 (4단계)</div>
+<p><strong>Q1~Q4: 밝은 톤</strong> — "가능해요!" 정보 전달, 긍정적</p>
+<p><strong>Q5~Q8: 솔직한 톤</strong> — "근데요..." 업계 비밀, 약간 미안한 듯</p>
+<p><strong>Q9~Q12: 진지한 톤</strong> — 안타까움, 작은 목소리, 천천히</p>
+<p><strong>Q13~Q15: 따뜻한 톤</strong> — 다시 밝아지기, 미소, 진심</p>
+</div>
+
+<div class="card">
+<div class="card-title">이렇게 말해주세요</div>
+<p><strong>양면 제시</strong> — "가능합니다. 근데 아시고 가세요"</p>
+<p><strong>업계 인사이더의 솔직함</strong> — 대표로서 솔직하게</p>
+<p><strong>구체적 데이터</strong> — 숫자는 정확하게</p>
+</div>
+
+<div class="card">
+<div class="card-title">이렇게 말하지 마세요</div>
+<p>"의사남편 브이로그 사기다" — 팩트체크이지, 비방이 아닙니다</p>
+<p>"의사는 다 나쁘다" — 일반화 X, 양면 제시</p>
+<p>"우리 결정사는 다르다" — 자사 홍보 X</p>
+<p>"구독해주세요" — CTA 없음</p>
+</div>
+</section>
+
+<section>
+<h2>절대 금지 사항</h2>
+
+<div class="ban">
+<div class="ban-title">이것만 지켜주세요 (5가지)</div>
+<p>1. 인사말 금지 — 인사 없이 바로 시작</p>
+<p>2. 구독/좋아요 멘트 — 영상 내 0회</p>
+<p>3. 경쟁사 실명 — "메이저 결정사" "업계"로만</p>
+<p>4. 특정 회원 실명/정보 — 가명 + 익명 처리</p>
+<p>5. 의사 브이로그 당사자 비하/조롱 — 현상 분석만</p>
+</div>
+
+<div class="warn">
+<div class="warn-title">주의 사항</div>
+<p>본인 결정사 가격 공개 금지 → "업계 평균"으로만</p>
+<p>특정 성별 비하 금지 → 중립 유지</p>
+<p>의사 직업 자체를 부정적으로만 프레이밍 금지</p>
+</div>
+</section>
+
+<section>
+<h2>촬영 당일 일정</h2>
+<table>
+<tr><th>시간</th><th>내용</th></tr>
+<tr><td>-30분</td><td>도착, 세팅 확인</td></tr>
+<tr><td>-10분</td><td>PD 미팅 (흐름/숫자 확인)</td></tr>
+<tr><td>0분</td><td>촬영 시작</td></tr>
+<tr><td>~25분</td><td>[킥]+[해부]</td></tr>
+<tr><td>~45분</td><td>[실화]</td></tr>
+<tr><td>~65분</td><td>[반전]</td></tr>
+<tr><td>~80분</td><td>[아웃]</td></tr>
+<tr><td>~100분</td><td>보충 촬영 + B-roll</td></tr>
+</table>
+
+<div class="highlight">
+<strong>중요:</strong> 감정이 나오는 순간은 리테이크 없습니다. 첫 반응이 최고의 진실입니다.
+</div>
+</section>
+
+<section>
+<h2>동의 확인</h2>
+<ul class="checklist">
+<li>촬영 주제 및 방향 사전 동의</li>
+<li>"의사 회원 = 미끼 상품" 발언 동의</li>
+<li>가명 처리 조건의 회원 사례 언급 동의</li>
+<li>업계 데이터 비교 언급 동의</li>
+<li>이전 에피소드 연결 동의</li>
+<li>열린 결말 + 다음 EP 예고 동의</li>
+</ul>
+
+<div class="sig">
+<div class="label">EP.06 캐치프레이즈</div>
+<div class="quote">"의사가 다가 아닙니다.<br>직업을 보지 말고 사람을 보세요."</div>
+</div>
+</section>
+
+</div>
+</body>
+</html>
