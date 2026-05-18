@@ -76,8 +76,8 @@
         .hero-profile .hp-subs { font-size: 11px; color: var(--text-med); }
 
         .stat-grid {
-            display: grid; grid-template-columns: repeat(4, 1fr);
-            gap: 16px; max-width: 720px; margin: 0 auto;
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 16px; max-width: 560px; margin: 0 auto;
         }
         .stat-card {
             background: #fff; border: 1px solid var(--border-line);
@@ -297,7 +297,7 @@
         }
 
         /* ── Channel Network ── */
-        .channel-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        .channel-grid { display: grid; grid-template-columns: 1fr; gap: 16px; max-width: 360px; margin: 0 auto; }
         .channel-card {
             background: var(--surface-primary); border: 1px solid var(--border-line);
             border-radius: 16px; padding: 28px 20px; text-align: center;
@@ -457,7 +457,7 @@
             .hero-profile .hp-subs { font-size: 10px; text-align: center; }
 
             /* Stat 카드 */
-            .stat-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .stat-grid { grid-template-columns: repeat(3, 1fr); gap: 10px; }
             .stat-card { padding: 16px 12px; text-align: center; }
             .stat-card .num { font-size: 24px; }
             .stat-card .label { font-size: 11px; }
