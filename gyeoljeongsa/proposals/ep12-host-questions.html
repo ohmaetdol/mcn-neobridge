@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=5.0">
+<meta name="theme-color" content="#0f172a">
+<title>[출연자용] EP.12 질문지 — 남자는 왜 결혼을 안 하는가</title>
+<style>
+:root{--bg:#f8fafc;--card:#fff;--border:#e2e8f0;--text:#0f172a;--text2:#64748b;--text3:#94a3b8;--accent:#2563eb;--accent-l:#eff6ff;--accent-d:#1d4ed8;--peak:#dc2626;--peak-bg:#fef2f2;--pd:#7c3aed;--pd-bg:#f5f3ff;--done:#059669;--done-bg:#ecfdf5;--hh:60px;--radius:14px}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR','Apple SD Gothic Neo',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-size:15px}
+
+.hd{position:fixed;top:0;left:0;right:0;height:var(--hh);background:rgba(255,255,255,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 16px;gap:10px;z-index:100}
+.hd-l{flex:1;min-width:0}
+.hd-ep{font-size:10px;font-weight:700;color:var(--accent);letter-spacing:.5px;text-transform:uppercase}
+.hd-t{font-size:13px;font-weight:700;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hd-r{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.prog-ring{position:relative;width:42px;height:42px}
+.prog-ring svg{transform:rotate(-90deg)}
+.prog-ring circle{fill:none;stroke-width:3.5}
+.prog-ring .bg{stroke:var(--border)}
+.prog-ring .fg{stroke:var(--accent);stroke-linecap:round;transition:stroke-dashoffset .4s ease}
+.prog-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:var(--accent)}
+
+.main{margin-top:calc(var(--hh) + 8px);padding:12px 14px 100px;max-width:640px;margin-left:auto;margin-right:auto}
+
+.hero{text-align:center;padding:24px 16px 20px;margin-bottom:20px}
+.hero-title{font-size:22px;font-weight:900;line-height:1.3;margin-bottom:6px;background:linear-gradient(135deg,var(--text),var(--accent-d));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:13px;color:var(--text2);line-height:1.5}
+
+.notice{background:var(--accent-l);border:1px solid #bfdbfe;border-radius:var(--radius);padding:16px 18px;margin-bottom:24px;font-size:13.5px;color:var(--text);line-height:1.7}
+.notice strong{color:var(--accent)}
+
+.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:24px}
+.num-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 10px;text-align:center}
+.num-card .val{font-size:18px;font-weight:900;color:var(--accent);line-height:1.2}
+.num-card .lbl{font-size:10px;color:var(--text2);margin-top:3px;line-height:1.3}
+
+.sec{margin-bottom:28px}
+.sec-hd{display:flex;align-items:center;gap:8px;margin-bottom:12px;padding:10px 14px;background:var(--card);border:1px solid var(--border);border-radius:10px}
+.sec-icon{font-size:16px}
+.sec-t{font-size:15px;font-weight:800;flex:1}
+.sec-time{font-size:11px;color:var(--text3);font-weight:600}
+
+.q-wrap{margin-bottom:6px}
+.q{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:all .2s;user-select:none}
+.q:active{transform:scale(.985)}
+.q.on{background:var(--done-bg);border-color:var(--done)}
+.q.on .q-q{opacity:.6}
+.q.peak{border-left:3px solid var(--peak)}
+.q.pd{border-left:3px solid var(--pd)}
+
+.ck{width:22px;height:22px;border:2px solid var(--border);border-radius:6px;flex-shrink:0;position:relative;background:#fff;transition:.15s;margin-top:2px}
+.q.on .ck{background:var(--done);border-color:var(--done)}
+.q.on .ck::after{content:'';position:absolute;left:5px;top:2px;width:7px;height:11px;border:solid #fff;border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
+
+.q-body{flex:1;min-width:0}
+.q-meta{display:flex;align-items:center;gap:6px;margin-bottom:3px}
+.q-n{font-size:11px;font-weight:800;color:var(--accent)}
+.q-tag{font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;text-transform:uppercase;letter-spacing:.3px}
+.q-tag.peak{background:var(--peak-bg);color:var(--peak)}
+.q-tag.pd{background:var(--pd-bg);color:var(--pd)}
+.q-tag.data{background:#fef9c3;color:#a16207}
+.q-q{font-size:15px;line-height:1.5;color:var(--text);word-break:keep-all;font-weight:600}
+
+.q-hint{overflow:hidden;max-height:0;transition:max-height .3s ease;padding:0 16px}
+.q-hint.open{max-height:500px}
+.q-hint-inner{padding:10px 14px;margin:6px 0 8px;background:#f1f5f9;border-radius:10px;font-size:13px;color:var(--text2);line-height:1.65;border-left:3px solid var(--accent)}
+.q-hint-inner strong{color:var(--text);font-weight:700}
+.q-hint-inner .hl{color:var(--accent);font-weight:800}
+
+.ref-sec{margin-bottom:28px}
+.ref-title{font-size:14px;font-weight:700;margin-bottom:10px;color:var(--text)}
+.ref-sub{font-size:12px;color:var(--text2);margin-bottom:12px}
+.ref{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:8px}
+.ref-num{font-size:11px;font-weight:800;color:var(--accent);margin-bottom:4px}
+.ref a{color:var(--text);text-decoration:none;font-weight:700;font-size:13.5px;line-height:1.4;display:block;margin-bottom:4px}
+.ref p{font-size:12.5px;color:var(--text2);line-height:1.5;margin:0}
+.ref-tags{margin-top:8px;display:flex;flex-wrap:wrap;gap:4px}
+.ref-tag{font-size:10px;font-weight:700;color:var(--accent);background:var(--accent-l);border-radius:5px;padding:2px 7px}
+
+.ref-note{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin-top:12px;font-size:12.5px;color:#92400e;line-height:1.6}
+
+.footer{text-align:center;font-size:11px;color:var(--text3);margin-top:40px;padding:20px 0}
+
+@media(min-width:640px){.main{padding:20px 24px 80px}.q{padding:16px 20px}.hero-title{font-size:26px}}
+@media(max-width:400px){.nums{grid-template-columns:repeat(2,1fr)}.hero-title{font-size:19px}.q-q{font-size:14px}}
+@media print{.hd{display:none!important}.main{margin:0;padding:20px;max-width:100%}.q-hint{max-height:none!important}.ck{display:none}}
+</style>
+</head>
+<body>
+
+<header class="hd">
+<div class="hd-l">
+<div class="hd-ep">EP.12 · 출연자용 질문지</div>
+<div class="hd-t">남자는 왜 결혼을 안 하는가 — 블라인드 9,201명</div>
+</div>
+<div class="hd-r">
+<div class="prog-ring">
+<svg width="42" height="42"><circle class="bg" cx="21" cy="21" r="17"/><circle class="fg" id="prog-circle" cx="21" cy="21" r="17" stroke-dasharray="106.8" stroke-dashoffset="106.8"/></svg>
+<div class="prog-num" id="pn">0/15</div>
+</div>
+</div>
+</header>
+
+<main class="main">
+
+<div class="hero">
+<div class="hero-title">"남자는 왜<br>결혼을 안 하는가"</div>
+<div class="hero-sub">질문을 탭하면 답변 힌트가 열립니다. 체크하면서 넘기세요.</div>
+</div>
+
+<div class="nums">
+<div class="num-card"><div class="val">9,201</div><div class="lbl">블라인드<br>결혼 글 (2025)</div></div>
+<div class="num-card"><div class="val">9.3%</div><div class="lbl">결혼 행복하다<br>고 쓴 비율</div></div>
+<div class="num-card"><div class="val">53.6%</div><div class="lbl">결혼 글 중<br>돈 이야기</div></div>
+<div class="num-card"><div class="val">11번</div><div class="lbl">34살 과장<br>매칭 취소</div></div>
+<div class="num-card"><div class="val">1위</div><div class="lbl">성혼 커플<br>"대화가 편했다"</div></div>
+<div class="num-card"><div class="val">33살</div><div class="lbl">진지하게<br>만나야 할 나이</div></div>
+</div>
+
+<div class="notice">
+<strong>외울 필요 없습니다.</strong> PD가 아래 순서로 질문합니다.<br>
+"이런 걸 물어보는구나" 정도만 훑어보세요. 질문을 탭하면 답변 방향이 나옵니다.<br>
+<strong>체크박스</strong>를 누르면서 읽은 질문을 표시하세요.
+</div>
+
+<!-- 촬영 전 읽을 자료 -->
+<div class="ref-sec">
+<div class="ref-title">촬영 전 읽을 자료 (4개)</div>
+<div class="ref-sub">외울 필요 없어요. "아 블라인드에 이런 데이터가 있구나" 정도만.</div>
+
+<div class="ref">
+<div class="ref-num">자료 1</div>
+<a>한미연 분석 보고서 — 블라인드 22,095건 전수 분석 (세계일보/경향신문 2026.05)</a>
+<p>결혼 글 3년 새 3배(9,201건). 감정 1위 = 두려움. 행복 9.3%. 부정 감정 매년 상승(46.3→53.6%).</p>
+<div class="ref-tags"><span class="ref-tag">Q1 오프닝</span><span class="ref-tag">Q6 숫자 충격</span></div>
+</div>
+
+<div class="ref">
+<div class="ref-num">자료 2</div>
+<a>블라인드 — "결혼적령기 남성들이 결혼 못하고 안 하는 이유"</a>
+<p>"사랑이 결혼의 필수 조건이 된 시대." 연봉은 숫자로 나오는데, 사랑은 확인이 안 된다.</p>
+<div class="ref-tags"><span class="ref-tag">Q5 감정 조건</span></div>
+</div>
+
+<div class="ref">
+<div class="ref-num">자료 3</div>
+<a>블라인드 — "남자가 결혼을 결심하는 순간들"</a>
+<p>결심 1위 = "편한 사람". 외모/돈/집안이 아니라 "긴장이 안 되는 사람."</p>
+<div class="ref-tags"><span class="ref-tag">Q13 반전</span><span class="ref-tag">Q14 크로스 검증</span></div>
+</div>
+
+<div class="ref">
+<div class="ref-num">자료 4</div>
+<a>블라인드 — "나이별 소개팅 전략" (추천 96, 댓글 161)</a>
+<p>"33살 안에 반드시 만나야 한다." "35세에 처음 만나는 것과 35세까지 사귀는 것은 본질적으로 다르다."</p>
+<div class="ref-tags"><span class="ref-tag">Q15 마무리</span></div>
+</div>
+
+<div class="ref-note">데이터를 다 외울 필요 없습니다. 위 요약만 훑으면 충분해요.</div>
+</div>
+
+<!-- [킥] 오프닝 -->
+<div class="sec">
+<div class="sec-hd">
+<span class="sec-icon">⚡</span>
+<div class="sec-t">킥 — 오프닝</div>
+<div class="sec-time">0:00~0:30</div>
+</div>
+
+<div class="q-wrap">
+<div class="q peak" data-n="1"><div class="ck"></div><div class="q-body">
+<div class="q-meta"><span class="q-n">Q1</span><span class="q-tag peak">NO 인사</span></div>
+<div class="q-q">"블라인드에 결혼 글이 올라옵니다. 3,073개. 4,267개. 9,201개. 3년 새 3배가 됐어요."</div>
+</div></div>
+<div class="q-hint"><div class="q-hint-inner">인사 없이 숫자부터. 숫자 하나마다 끊어서 또박또박. 카메라 정면, 톤 낮추기.</div></div>
+</div>
+
+<div class="q-wrap">
+<div class="q pd" data-n="2"><div class="ck"></div><div class="q-body">
+<div class="q-meta"><span class="q-n">Q2</span><span class="q-tag pd">PD</span></div>
+<div class="q-q">"9,201명이 결혼에 대해 가장 많이 느낀 감정이 뭐래요?"</div>
+</div></div>
+<div class="q-hint"><div class="q-hint-inner"><strong class="hl">"행복이 아닙니다. 두려움이에요."</strong><br>정적 2초. "한미연이라는 연구원이 22,095건을 전수 분석했어요."<br>"오늘 이 데이터로 남자들이 왜 결혼을 안 하는지 해부해보겠습니다. 근데 마지막에 반전이 있어요."</div></div>
+</div>
+</div>
+
+<!-- [해부] 왜 결혼을 안 하는가 -->
+<div class="sec">
+<div class="sec-hd">
+<span class="sec-icon">🔍</span>
+<div class="sec-t">해부 — 왜 결혼을 안 하는가</div>
+<div class="sec-time">0:30~5:30</div>
+</div>
+
+<div class="q-wrap">
+<div class="q" data-n="3"><div class="ck"></div><div class="q-body">
+<div class="q-meta"><span class="q-n">Q3</span><span class="q-tag data">DATA</span></div>
+<div class="q-q">"남자들이 결혼 안 하는 첫 번째 이유가 뭐예요?"</div>
+</div></div>
+<div class="q-hint"><div class="q-hint-inner"><strong class="hl">돈 = 53.6%</strong><br>"전체의 절반이 넘는 글이 연봉, 대출, 주거 이야기예요."<br>"결혼이 아니라 부동산 계약을 하는 느낌이래요."<br>"저희 결정사에서도 똑같아요. 남자 회원 첫 상담 때 제일 먼저 하는 말이 '제 연봉이 이 정도인데 괜찮을까요?'"</div></div>
+</div>
+
+<div class="q-wrap">
+<div class="q pd" data-n="4"><div class="ck"></div><div class="q-body">
+<div class="q-meta"><span class="q-n">Q4</span><span class="q-tag pd">PD</span></div>
+<div class="q-q">"결혼이 사랑이 아니라 자격시험이라고요?"</div>
+</div></div>
+<div class="q-hint"><div class="q-hint-inner">"결혼하고 싶은 마음보다 <strong>내 조건이 자격이 되는지를 먼저 물어보는 거예요.</strong>"<br>"이분들한테 결혼은 사랑의 시작이 아니라 자격시험이에요."<br>약간 씁쓸한 표정. 공감하되 동정은 금지.</div></div>
+</div>
+
+<div class="q-wrap">
+<div class="q" data-n="5"><div class="ck"></div><div class="q-body">
+<div class="q-meta"><span class="q-n">Q5</span></div>
+<div class="q-q">"블라인드에 '사랑이 결혼의 필수 조건이 된 시대'라는 글이 있더라고요"</div>
+</div></div>
+<div class="q-hint"><div class="q-hint-inner">두 번째 이유: <strong class="hl">감정 조건 상승</strong><br>"부모님 세대는 중매로 만나서 살다 보니 정이 든 거잖아요. 지금은 '이 사람을 사랑하는가?'가 전제 조건이 된 거예요."<br><strong>"연봉은 숫자로 나오고 키는 자로 재면 되는데, '이 사람을 충분히 사랑하는가?'는 아무도 답을 못 줘요."</strong><br>"그래서 결정을 못 하는 거예요. 싫은 게 아니라 확신이 안 서는 거예요."</div></div>
+</div>
+
+<div class="q-wrap">
+<div class="q peak" data-n="6"><div class="ck"></div><div class="q-body">
+<div class="q-meta"><span class="q-n">Q6</span><span class="q-tag peak">PEAK</span></div>
+<div class="q-q">"결혼 행복하다고 쓴 사람이 9.3%밖에 안 된다고요?"</div>
+</div></div>
+<div class="q-hint"><div class="q-hint-inner"><strong class="hl">"10명 중 1명도 안 돼요."</strong><br>부정 감정: 2023년 46.3% → 2024년 49.9% → 2025년 53.6%.<br>"매년 늘고 있어요."<br>살짝 놀란 듯. 카메라 정면 응시.</div></div>
+</div>
+
+<div class="q-wrap">
+<div class="q" data-n="7"><div class="ck"></div><div class="q-body">
+<div class="q-meta"><span class="q-n">Q7</span><span class="q-tag data">DATA</span></div>
+<div class="q-q">"그러면 남자들은 왜 결혼 글을 쓰는 거예요?"</div>
+</div></div>
+<div class="q-hint"><div class="q-hint-inner"><strong>"하고 싶어서 쓰는 게 아니라 두려워서 쓰는 거예요."</strong><br>세 가지 두려움:<br><strong class="hl">① "경제적으로 감당이 될까"</strong><br><strong class="hl">② "이 사람이 맞는 사람인지 어떻게 알지"</strong><br><strong class="hl">③ "결혼하고 나서 후회하면 어떡하지"</strong><br>"이 세 가지가 돌고 돌아요."</div></div>
+</div>
+
+<div class="q-wrap">
+<div class="q pd" data-n="8"><div class="ck"></div><div class="q-body">
+<div class="q-meta"><span class="q-n">Q8</span><span class="q-tag pd">PD</span></div>
+<div class="q-q">"그러면 남자들은 아예 결혼 안 하고 싶은 거예요?"</div>
+</div></div>
+<div class="q-hint"><div class="q-hint-inner">전환점:<br><strong>"안 하고 싶은 게 아니에요. 확신이 안 서는 거예요."</strong><br>"그래서 제가 15년간 직접 본 이야기를 해드릴게요."</div></div>
+</div>
+</div>
+
+<!-- [본인] 상담 경험 -->
+<div class="sec">
+<div class="sec-hd">
+<span class="sec-icon">💬</span>
+<div class="sec-t">본인 — 15년 상담 경험</div>
+<div class="sec-time">5:30~9:00</div>
+</div>
+
+<div class="q-wrap">
+<div class="q pd" data-n="9"><div class="ck"></div><div class="q-body">
+<div class="q-meta"><span class="q-n">Q9</span><span class="q-tag pd">PD</span></div>
+<div class="q-q">"대표님이 15년간 남자 회원 면담하면서 가장 많이 들은 말이 뭐예요?"</div>
+</div></div>
+<div class="q-hint"><div class="q-hint-inner"><strong class="hl">"하고 싶은데 모르겠어요."</strong><br>"이게 두려움의 정체예요. 결혼이 싫은 게 아니에요. 결혼이 뭔지 모르는 게 두려운 거예요."<br>목소리 부드럽게. 속도 늦추기.</div></div>
+</div>
+
+<div class="q-wrap">
+<div class="q peak" data-n="10"><div class="ck"></div><div class="q-body">
+<div class="q-meta"><span class="q-n">Q10</span><span class="q-tag peak">PEAK · 리테이크 금지</span></div>
+<div class="q-q">"실제 사례 하나만 말씀해주실 수 있어요?"</div>
+</div></div>
+<div class="q-hint"><div class="q-hint-inner"><strong>34살 대기업 과장.</strong> 연봉 7천, 키 178, A등급에 가까운 스펙.<br><strong class="hl">"1년 동안 매칭을 13번 잡았는데 본인이 11번 취소했어요."</strong><br>"왜 취소하세요?" → <strong>"막상 만나려니까 무섭다."</strong><br>"이 분이 무서운 건 상대 여성이 아니에요. 결혼이라는 결정 자체가 무서운 거예요."<br>스토리텔링 톤. 천천히. <strong>첫 반응 그대로.</strong></div></div>
+</div>
+
+<div class="q-wrap">
+<div class="q" data-n="11"><div class="ck"></div><div class="q-body">
+<div class="q-meta"><span class="q-n">Q11</span></div>
+<div class="q-q">"11번 취소한 그 분이 12번째는 갔어요?"</div>
+</div></div>
+<div class="q-hint"><div class="q-hint-inner">"제가 '결혼 생각 잠깐 내려놓으세요. <strong class="hl">그냥 밥 한번 먹으러 가세요</strong>'라고 했어요."<br>12번째 매칭. 첫 만남에 3시간 카페.<br>나오시면서 전화: <strong>"대표님, 이 사람이랑은 긴장이 안 되네요."</strong><br>이 문장이 전환점.</div></div>
+</div>
+
+<div class="q-wrap">
+<div class="q pd" data-n="12"><div class="ck"></div><div class="q-body">
+<div class="q-meta"><span class="q-n">Q12</span><span class="q-tag pd">PD</span></div>
+<div class="q-q">"그게 결심의 시작이었어요?"</div>
+</div></div>
+<div class="q-hint"><div class="q-hint-inner"><strong>"6개월 후에 성혼하셨어요."</strong><br>따뜻한 톤. 미소.<br>"무서운 건 상대가 아니에요. 결정 자체가 무서운 거예요. 근데 이분은 그냥 앉아본 거예요."</div></div>
+</div>
+</div>
+
+<!-- [반전] 편한 사람 -->
+<div class="sec">
+<div class="sec-hd">
+<span class="sec-icon">✨</span>
+<div class="sec-t">반전 — 편한 사람</div>
+<div class="sec-time">9:00~11:30</div>
+</div>
+
+<div class="q-wrap">
+<div class="q peak" data-n="13"><div class="ck"></div><div class="q-body">
+<div class="q-meta"><span class="q-n">Q13</span><span class="q-tag peak">PEAK</span></div>
+<div class="q-q">"블라인드에 '결혼 결심하는 순간' 1위가 뭐래요? 외모요? 돈이요?"</div>
+</div></div>
+<div class="q-hint"><div class="q-hint-inner">"외모가 아니에요. 돈이 아니에요. 집안이 아니에요."<br>단호하게 끊어 읽기. 톤 바꾸기. 미소.<br><strong class="hl">"'편한 사람'이에요."</strong><br>"이 사람 앞에서 나는 면접관이 아니라 나 자신이 될 수 있다."</div></div>
+</div>
+
+<div class="q-wrap">
+<div class="q peak" data-n="14"><div class="ck"></div><div class="q-body">
+<div class="q-meta"><span class="q-n">Q14</span><span class="q-tag peak">PEAK · 리테이크 금지</span></div>
+<div class="q-q">"결정사 데이터에서도 같은 결과가 나왔다고요?"</div>
+</div></div>
+<div class="q-hint"><div class="q-hint-inner"><strong>"소름이었어요."</strong><br>"저희가 매칭 후 3개월 내 성혼한 커플의 공통점을 분석했어요. '왜 이 사람이랑 결혼하기로 했어요?' 물어봤거든요."<br><strong class="hl">1위 = "대화가 편했어요."</strong><br>블라인드 데이터 × 결정사 데이터 = 같은 결론.<br><br>"편한 사람" 3가지:<br><strong class="hl">① 약한 모습 보여도 되는 사람</strong><br><strong class="hl">② 대화에 에너지가 안 드는 사람</strong><br><strong class="hl">③ 나를 바꾸려 하지 않는 사람</strong><br><br><strong>"결혼을 결심한 남자들의 공통점은 두려움이 사라져서가 아니에요. 두려운데도 앉아본 거예요."</strong></div></div>
+</div>
+</div>
+
+<!-- [아웃] 마무리 -->
+<div class="sec">
+<div class="sec-hd">
+<span class="sec-icon">🎬</span>
+<div class="sec-t">아웃 — 마무리</div>
+<div class="sec-time">11:30~13:00</div>
+</div>
+
+<div class="q-wrap">
+<div class="q" data-n="15"><div class="ck"></div><div class="q-body">
+<div class="q-meta"><span class="q-n">Q15</span></div>
+<div class="q-q">"33살이라는 숫자. 마지막 한마디 해주세요."</div>
+</div></div>
+<div class="q-hint"><div class="q-hint-inner">"블라인드에 '나이별 소개팅 전략'이란 글에서 가장 많이 나온 숫자가 33이에요."<br><strong>"33살 안에 만나야 한다는 건 급하라는 게 아닙니다. 진지하라는 거예요."</strong><br><br>마무리:<br><strong class="hl">① "두려우면 두려운 채로 만나세요"</strong><br><strong class="hl">② "확신이 없으면 없는 채로 앉아보세요"</strong><br><strong class="hl">③ "밥 한번 먹어보세요"</strong><br><br>다음 EP 예고: <strong>"끼리끼리 결혼한다는 말이 진짜인지, 실제 성혼 데이터로 보여드리겠습니다."</strong><br>미소, 정면, 열린 결말.</div></div>
+</div>
+</div>
+
+<div class="footer">
+아는언니 리지 · EP.12 출연자용 질문지 · v1
+</div>
+
+</main>
+
+<script>
+const SK='ep12_host_checks_v1';
+let checks=(()=>{try{return JSON.parse(localStorage.getItem(SK)||'{}')}catch(e){return {}}})();
+const save=()=>localStorage.setItem(SK,JSON.stringify(checks));
+const total=15;
+const circ=document.getElementById('prog-circle');
+const pn=document.getElementById('pn');
+const circumference=106.8;
+
+function updateProgress(){
+ const done=Object.keys(checks).length;
+ pn.textContent=done+'/'+total;
+ circ.style.strokeDashoffset=circumference-(circumference*done/total);
+}
+
+document.querySelectorAll('.q').forEach(q=>{
+ if(checks[q.dataset.n]) q.classList.add('on');
+});
+
+document.querySelector('.main').onclick=function(e){
+ const q=e.target.closest('.q');
+ if(!q)return;
+ const n=q.dataset.n;
+ const isCheck=e.target.closest('.ck');
+
+ if(isCheck){
+  if(checks[n]){delete checks[n];q.classList.remove('on')}
+  else{checks[n]=1;q.classList.add('on')}
+  save();updateProgress();
+ } else {
+  const wrap=q.closest('.q-wrap');
+  if(wrap){
+   const hint=wrap.querySelector('.q-hint');
+   if(hint) hint.classList.toggle('open');
+  }
+ }
+};
+
+updateProgress();
+</script>
+</body>
+</html>
