@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EP.01 [4050] — 20년 다녔습니다. 회사 밖에서 제 가치는 0원이었습니다.</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, 'Apple SD Gothic Neo', sans-serif;
+    background: #0a0a0a; color: #e8e8e8; line-height: 1.9; font-size: 18px; padding: 0 0 80px 0;
+  }
+  .header {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    padding: 40px 20px 30px; text-align: center; border-bottom: 3px solid #e94560;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header h1 { font-size: 22px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+  .header .ep { font-size: 13px; color: #e94560; font-weight: 700; letter-spacing: 2px; margin-bottom: 6px; }
+  .header .meta { font-size: 12px; color: #888; margin-top: 8px; }
+  .nav-bar {
+    display: flex; overflow-x: auto; gap: 8px; padding: 12px 16px;
+    background: #111; border-bottom: 1px solid #222; -webkit-overflow-scrolling: touch;
+  }
+  .nav-bar::-webkit-scrollbar { display: none; }
+  .nav-bar a {
+    flex-shrink: 0; padding: 6px 14px; background: #1a1a1a; border: 1px solid #333;
+    border-radius: 20px; color: #aaa; text-decoration: none; font-size: 12px; font-weight: 600;
+  }
+  .nav-bar a:hover, .nav-bar a:active { background: #e94560; color: #fff; border-color: #e94560; }
+  .content { max-width: 720px; margin: 0 auto; padding: 0 20px; }
+  .section { margin: 32px 0; padding: 24px 20px; background: #141414; border-radius: 12px; border-left: 4px solid #333; }
+  .section.intro { border-left-color: #e94560; }
+  .section.act1 { border-left-color: #f39c12; }
+  .section.act2 { border-left-color: #e74c3c; }
+  .section.act3 { border-left-color: #9b59b6; }
+  .section.act4 { border-left-color: #3498db; }
+  .section.act5 { border-left-color: #2ecc71; }
+  .section.act6 { border-left-color: #e67e22; }
+  .section.cta { border-left-color: #1abc9c; }
+  .section.ending { border-left-color: #e94560; }
+  .section-header {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
+    padding-bottom: 12px; border-bottom: 1px solid #222;
+  }
+  .section-header .timecode {
+    background: #e94560; color: #fff; font-size: 11px; font-weight: 700;
+    padding: 3px 10px; border-radius: 4px; font-family: 'SF Mono', monospace;
+  }
+  .section-header h2 { font-size: 18px; font-weight: 700; color: #fff; }
+  .line { margin: 16px 0; color: #ddd; font-size: 18px; line-height: 1.9; }
+  .line strong { color: #fff; font-weight: 700; }
+  .line em { color: #e94560; font-style: normal; font-weight: 700; }
+  .highlight-block {
+    background: rgba(233, 69, 96, 0.1); border: 1px solid rgba(233, 69, 96, 0.3);
+    border-radius: 8px; padding: 16px 20px; margin: 20px 0;
+    font-size: 19px; font-weight: 700; color: #fff; line-height: 1.8;
+  }
+  .edit-note {
+    background: rgba(52, 152, 219, 0.08); border: 1px dashed rgba(52, 152, 219, 0.3);
+    border-radius: 6px; padding: 10px 14px; margin: 12px 0; font-size: 13px; color: #3498db;
+  }
+  .edit-note::before { content: "편집 "; font-weight: 700; }
+  .pause { text-align: center; color: #444; margin: 20px 0; font-size: 14px; letter-spacing: 8px; }
+  .personal {
+    border-left: 3px solid #f39c12; padding-left: 14px; margin: 16px 0;
+    background: rgba(243, 156, 18, 0.04); border-radius: 0 6px 6px 0;
+  }
+  .data-block {
+    background: rgba(46, 204, 113, 0.06); border: 1px solid rgba(46, 204, 113, 0.2);
+    border-radius: 8px; padding: 16px 20px; margin: 20px 0;
+    font-size: 15px; color: #ccc; line-height: 1.8; font-family: 'SF Mono', -apple-system, monospace;
+  }
+  .data-block strong { color: #2ecc71; }
+  .data-block .label { color: #888; font-size: 13px; }
+  .compare-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+  .compare-table th {
+    background: rgba(233, 69, 96, 0.15); color: #e94560; font-size: 13px;
+    padding: 10px 14px; text-align: left; border-bottom: 1px solid #333;
+  }
+  .compare-table td {
+    padding: 10px 14px; border-bottom: 1px solid #222; color: #ccc; font-size: 14px;
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .mode-toggle { position: fixed; bottom: 20px; right: 20px; z-index: 200; display: flex; gap: 8px; }
+  .mode-btn {
+    padding: 10px 18px; border: none; border-radius: 25px; font-size: 14px;
+    font-weight: 700; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  }
+  .mode-btn.teleprompter { background: #e94560; color: #fff; }
+  .mode-btn.font-up { background: #333; color: #fff; }
+  body.teleprompter-mode .header, body.teleprompter-mode .nav-bar,
+  body.teleprompter-mode .edit-note, body.teleprompter-mode .section-header .timecode,
+  body.teleprompter-mode .data-block, body.teleprompter-mode .compare-table { display: none; }
+  body.teleprompter-mode .section { background: transparent; border-left: none; border-radius: 0; padding: 20px 10px; margin: 10px 0; }
+  body.teleprompter-mode .section-header { border-bottom: none; padding-bottom: 4px; }
+  body.teleprompter-mode .section-header h2 { font-size: 14px; color: #555; }
+  body.teleprompter-mode .line { font-size: 24px; line-height: 2.0; color: #fff; }
+  body.teleprompter-mode .highlight-block { font-size: 26px; }
+  body.teleprompter-mode .personal { border-left-color: #f39c12; }
+  body.large-font .line { font-size: 22px; }
+  body.large-font .highlight-block { font-size: 23px; }
+  body.large-font.teleprompter-mode .line { font-size: 28px; }
+  body.large-font.teleprompter-mode .highlight-block { font-size: 30px; }
+  html { scroll-behavior: smooth; }
+  @media (max-width: 480px) {
+    body { font-size: 16px; } .line { font-size: 16px; } .highlight-block { font-size: 17px; }
+    .header h1 { font-size: 19px; }
+    body.teleprompter-mode .line { font-size: 22px; }
+    body.large-font .line { font-size: 20px; }
+    body.large-font.teleprompter-mode .line { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="ep">퇴근 후 부자들 &middot; EP.01 [4050 ver.]</div>
+  <h1>20년 다녔습니다. 회사 밖에서 제 가치는 0원이었습니다.</h1>
+  <div class="meta">15~17분 | 범용 60% + 개인 40% | 존댓말 직설체 | 타겟: 40~50대</div>
+</div>
+
+<div class="nav-bar">
+  <a href="#intro">인트로 0:00</a>
+  <a href="#act1">1막 1:40</a>
+  <a href="#act2">2막 4:00</a>
+  <a href="#act3">3막 7:00</a>
+  <a href="#act4">4막 9:30</a>
+  <a href="#act5">5막 12:30</a>
+  <a href="#act6">6막 15:00</a>
+  <a href="#cta">CTA 16:30</a>
+  <a href="#ending">엔딩 17:00</a>
+</div>
+
+<div class="content">
+
+  <!-- 인트로 -->
+  <div class="section intro" id="intro">
+    <div class="section-header">
+      <span class="timecode">0:00~1:40</span>
+      <h2>인트로 — "부장님이라고 불러주던 사람들"</h2>
+    </div>
+    <div class="edit-note">빈 책상, 정리된 박스, 사원증 반납 장면</div>
+    <div class="personal">
+      <p class="line">저는 22년차 직장인이었습니다.</p>
+      <p class="line">부장.<br>팀원 8명.<br>연봉 7천.</p>
+      <p class="line">회의에서 제가 말하면 다들 고개를 끄덕였습니다.<br>거래처에서 제 전화를 받으면 바로 처리됐습니다.</p>
+      <div class="pause">· · ·</div>
+      <p class="line">그런데 회사를 나온 다음 날,</p>
+      <p class="line"><strong>아무도 전화를 안 합니다.</strong></p>
+      <p class="line">거래처 담당자한테 연락했더니<br>"아, 부장님 나오셨어요? 후임분이 누구죠?"</p>
+      <p class="line">22년 동안 쌓은 게<br>명함 한 장에 들어 있었던 겁니다.</p>
+      <div class="highlight-block">명함 없는 나는, 아무것도 아닌 사람이었습니다.</div>
+      <div class="edit-note">정적 2초 → 톤 전환</div>
+    </div>
+    <p class="line">근데 지금, 저는 월 800만원을 벌고 있습니다.<br>회사 다닐 때보다 적게 일하면서.<br>누구한테 보고하지도 않으면서.</p>
+    <p class="line">"어떻게?"</p>
+    <p class="line">오늘 그 얘기를 하겠습니다.</p>
+  </div>
+
+  <!-- 1막 -->
+  <div class="section act1" id="act1">
+    <div class="section-header">
+      <span class="timecode">1:40~4:00</span>
+      <h2>1막 — 숫자로 보는 4050의 현실</h2>
+    </div>
+    <div class="edit-note">통계 데이터 인포그래픽</div>
+    <p class="line">먼저 불편한 숫자부터 보겠습니다.</p>
+    <p class="line">한국 직장인이 주된 직장에서 퇴직하는 평균 나이.<br><em>50.5세.</em></p>
+    <p class="line">국민연금 받는 나이.<br><em>65세.</em></p>
+    <p class="line">그 사이 <strong>15년</strong>.<br>소득이 없습니다.</p>
+    <p class="line">전문가들은 이걸 <em>"소득 크레바스"</em>라고 부릅니다.<br>크레바스. 빙하 사이 깊은 틈. 빠지면 못 올라옵니다.</p>
+    <div class="data-block">
+      <div class="label">[소득 크레바스]</div>
+      50세 ─── 퇴직 ─── ? ─── ? ─── 65세 연금<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↑<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>이 15년을 어떻게 버틸 것인가</strong>
+    </div>
+    <p class="line">재취업하면 되지 않냐고요?</p>
+    <p class="line"><strong>재취업 성공률: 51.8%.</strong><br>절반은 일자리를 못 찾습니다.</p>
+    <p class="line">운 좋게 재취업해도<br><strong>소득은 이전 대비 21% 하락합니다.</strong></p>
+    <p class="line">연봉 7천 받던 사람이<br>4천~5천으로 떨어집니다.</p>
+    <div class="edit-note">수치 강조 텍스트 + 하락 그래프</div>
+    <p class="line">그럼 자영업?</p>
+    <p class="line"><em>자영업 5년 생존율: 20%.</em><br>5명 중 4명이 망합니다.</p>
+    <p class="line">치킨집. 카페. 편의점.</p>
+    <p class="line">퇴직금 1~2억 들고 시작해서<br>2년 안에 다 날린 사람.<br>제 주변에만 세 명입니다.</p>
+    <div class="data-block">
+      <div class="label">[세 갈래 갈림길]</div>
+      재취업 → 소득 21% 깎임<br>
+      자영업 → 80% 확률로 망함<br>
+      <strong>??? → 오늘 이 이야기</strong>
+    </div>
+    <p class="line">재취업하면 소득 21% 깎이고.<br>자영업하면 80% 확률로 망하고.</p>
+    <div class="highlight-block">그러면 뭘 해야 합니까?</div>
+  </div>
+
+  <!-- 2막 -->
+  <div class="section act2" id="act2">
+    <div class="section-header">
+      <span class="timecode">4:00~7:00</span>
+      <h2>2막 — 당신이 모르는 당신의 가치</h2>
+    </div>
+    <div class="edit-note">이력서, 경력 기술서, 그리고 X 표시</div>
+    <p class="line">여기서 하나만 질문하겠습니다.</p>
+    <div class="highlight-block">"당신이 20년 동안 한 일, 한 줄로 설명할 수 있습니까?"</div>
+    <p class="line">대부분 못 합니다.</p>
+    <p class="line">"영업했습니다."<br>"관리했습니다."<br>"기획했습니다."</p>
+    <p class="line">이게 끝입니다.</p>
+    <p class="line">그런데 진짜 물어봐야 할 건 이겁니다.</p>
+    <div class="highlight-block">"당신 때문에 해결된 문제가 뭡니까?"</div>
+    <div class="personal">
+      <p class="line">영업 22년 한 사람한테 물었더니 이렇게 대답하더군요.</p>
+      <p class="line">"저는... B2B 거래처 관리를 잘했습니다."</p>
+      <p class="line">그래서 제가 다시 물었습니다.</p>
+      <p class="line">"거래처가 화났을 때, 어떻게 해결하셨어요?"<br>"계약 끊기기 직전에 살린 적 있으세요?"<br>"신규 거래처 뚫을 때 첫 미팅에서 뭘 하셨어요?"</p>
+      <p class="line">그랬더니 <strong>30분을 쉬지 않고 이야기했습니다.</strong></p>
+      <p class="line">거래처 대표가 밤 11시에 전화해서 화를 냈을 때<br>다음 날 아침 직접 찾아가서 해결한 이야기.</p>
+      <p class="line">경쟁사에 빼앗길 뻔한 계약을<br>3개월 동안 매주 찾아가서 살린 이야기.</p>
+      <div class="highlight-block">이 사람은 "영업을 잘하는 사람"이 아니었습니다.<br>"관계를 살리는 전문가"였습니다.</div>
+    </div>
+    <p class="line">문제는,<br><strong>본인이 그걸 모릅니다.</strong></p>
+    <div class="data-block">
+      <div class="label">[당신이 모르는 당신의 가치]</div>
+      회사 안에서: "그냥 제 일 한 건데요"<br>
+      회사 밖에서: <strong>"그 노하우 돈 주고 배울 수 있나요?"</strong><br><br>
+      → 20년 경험 = 자산<br>
+      → 문제는 "포장"을 안 했을 뿐
+    </div>
+    <p class="line">회사에서는 당연했던 것들이<br>밖에서는 <em>돈이 됩니다.</em></p>
+    <p class="line">팀장으로서 팀원 관리한 경험?<br>→ "리더십 컨설팅"</p>
+    <p class="line">마케팅 기획서 200개 쓴 경험?<br>→ "마케팅 강의"</p>
+    <p class="line">20년간 거래처 관리한 경험?<br>→ "B2B 영업 코칭"</p>
+    <p class="line">공장 생산라인 최적화한 경험?<br>→ "제조업 컨설팅"</p>
+    <div class="highlight-block">당신의 20년은 쓸모없는 게 아닙니다.<br><em>포장을 안 했을 뿐입니다.</em></div>
+  </div>
+
+  <!-- 3막 -->
+  <div class="section act3" id="act3">
+    <div class="section-header">
+      <span class="timecode">7:00~9:30</span>
+      <h2>3막 — 치킨집 말고, 전문성을 파세요</h2>
+    </div>
+    <div class="edit-note">치킨집 vs 노트북 하나 — 분할 화면</div>
+    <p class="line">치킨집 창업비용.<br>보증금, 인테리어, 장비, 가맹비.<br><em>평균 1억 2천만원.</em></p>
+    <p class="line">월 매출 2천만원 찍어도<br>재료비, 인건비, 임대료 빼면<br><strong>사장님 손에 남는 돈: 월 200~300만원.</strong></p>
+    <p class="line">1억 2천 투자해서 월 200만원.<br>회수하는 데 <em>5년.</em><br>그 5년을 버틸 확률은 <em>20%.</em></p>
+    <p class="line">이게 자영업의 현실입니다.</p>
+    <div class="pause">· · ·</div>
+    <p class="line">그런데 다른 길이 있습니다.</p>
+    <table class="compare-table">
+      <tr><th></th><th>전문성 기반 1인 사업</th><th>자영업 (치킨집)</th></tr>
+      <tr><td>초기 비용</td><td><strong>0원</strong> (노트북 + AI 월 12만원)</td><td>1~2억</td></tr>
+      <tr><td>월 수익</td><td>200~800만원</td><td>200~300만원 (운 좋으면)</td></tr>
+      <tr><td>리스크</td><td>퇴직금 한 푼 안 까먹음</td><td>퇴직금 전액</td></tr>
+      <tr><td>준비 기간</td><td>2~3개월</td><td>6개월~1년</td></tr>
+    </table>
+    <p class="line">"전문성으로 뭘 팔라는 거야?"</p>
+    <p class="line">3가지입니다.</p>
+    <p class="line"><strong>1. 컨설팅</strong><br>당신 분야에서 고민하는 후배/기업에게 조언.<br>시간당 10~30만원. 주 3~4건이면 월 300~500만원.</p>
+    <p class="line"><strong>2. 강의</strong><br>온라인/오프라인 강의.<br>지자체, 기업, 대학, 소상공인 대상.<br>회당 50~200만원.</p>
+    <p class="line"><strong>3. 콘텐츠</strong><br>블로그, 유튜브, 브런치로 경험 기록.<br>처음엔 수익 0원. 3개월 쌓이면 상담 문의가 옴.<br>콘텐츠 = 24시간 일하는 영업사원.</p>
+    <div class="edit-note">3가지 아이콘 그래픽</div>
+    <p class="line">"근데 나는 강의 경험도 없고, 유튜브 할 줄도 모르는데?"</p>
+    <p class="line">맞습니다.<br>그래서 4막이 중요합니다.</p>
+  </div>
+
+  <!-- 4막 -->
+  <div class="section act4" id="act4">
+    <div class="section-header">
+      <span class="timecode">9:30~12:30</span>
+      <h2>4막 — 52세에 시작해서 월 800만원</h2>
+    </div>
+    <div class="edit-note">실제 사례 (비식별 처리)</div>
+    <p class="line">제가 아는 분 이야기입니다.</p>
+    <div class="personal">
+      <p class="line">K씨. 52세.<br>대기업 구매팀 25년.<br>권고사직.</p>
+      <p class="line">퇴직금 1억 8천.<br>아들 둘 대학생.<br>아파트 대출 1억 2천.</p>
+      <p class="line">처음에 편의점 알아봤습니다.<br>가맹비 보니까 7천만원.<br>"이걸로 월 200 번다고?"<br>포기했습니다.</p>
+      <p class="line">그 다음에 배달 알아봤습니다.<br>하루 12시간에 월 250만원.<br>허리가 버텨야 하는데, 이미 디스크.<br>포기했습니다.</p>
+      <div class="edit-note">편의점→배달→? 흐름 그래픽</div>
+      <div class="highlight-block">그때 깨달은 겁니다.</div>
+      <p class="line">"나는 25년 동안 수천 건의 계약을 검토했다.<br>납품 단가를 연 평균 12% 절감시켰다.<br>이걸 아는 사람이 세상에 몇 명이나 되나?"</p>
+    </div>
+    <p class="line">이 분이 한 일:</p>
+    <div class="data-block">
+      <div class="label">[K씨의 6개월]</div>
+      <strong>1개월차:</strong> 브런치에 글 쓰기 시작<br>
+      → "구매팀 25년이 알려주는 납품 단가 협상법"<br>
+      → 반응: 0. 아무도 안 읽음.<br><br>
+      <strong>2개월차:</strong> 글 20개 쌓임. 중소기업 대표 1명이 DM<br>
+      → "혹시 우리 회사 구매 프로세스 봐줄 수 있나요?"<br>
+      → 첫 컨설팅: 100만원 (3회 미팅)<br><br>
+      <strong>3개월차:</strong> 블로그에 "구매팀이 없는 중소기업을 위한 가이드" 연재<br>
+      → 네이버 검색 유입 시작<br>
+      → 소상공인진흥공단에서 강의 요청<br><br>
+      <strong>4개월차:</strong> 지자체 강의 2건 + 컨설팅 2건<br>
+      → 월 수입: 350만원<br><br>
+      <strong>6개월차:</strong> 입소문 + 콘텐츠 누적<br>
+      → 컨설팅 4건 + 강의 3건 + 온라인 코칭 2건<br>
+      → 월 수입: <strong>800만원</strong>
+    </div>
+    <p class="line">1억 8천 퇴직금?<br><em>한 푼도 안 썼습니다.</em></p>
+    <p class="line">노트북 하나.<br>AI 도구 월 12만원.<br>글 쓰는 시간 하루 1~2시간.</p>
+    <p class="line">이게 전부였습니다.</p>
+    <p class="line">"근데 나는 글을 못 쓰는데?"</p>
+    <p class="line">여기서 AI 이야기를 안 할 수가 없습니다.</p>
+  </div>
+
+  <!-- 5막 -->
+  <div class="section act5" id="act5">
+    <div class="section-header">
+      <span class="timecode">12:30~15:00</span>
+      <h2>5막 — AI가 기술 격차를 메워줍니다</h2>
+    </div>
+    <div class="edit-note">ChatGPT 화면, 실제 프롬프트 시연</div>
+    <p class="line">솔직히 말하겠습니다.</p>
+    <p class="line">K씨도 처음에 글을 못 썼습니다.<br>A4 한 장 쓰는 데 3시간 걸렸습니다.</p>
+    <p class="line">그런데 AI한테 이렇게 시켰습니다.</p>
+    <div class="data-block">
+      <div class="label">[실제 프롬프트 예시]</div>
+      "나는 구매팀 25년 경력의 전문가야.<br>
+      중소기업 대표가 납품 단가를 10% 줄이는 방법을<br>
+      블로그 글로 쓰고 싶어.<br><br>
+      구성:<br>
+      1. 제목 (클릭하고 싶게)<br>
+      2. 도입 (공감, 문제 제기)<br>
+      3. 본문 (방법 3가지, 구체적 사례 포함)<br>
+      4. 마무리 (실행 촉구)<br><br>
+      톤: 후배한테 커피 마시면서 알려주는 느낌."
+    </div>
+    <div class="highlight-block">3분 만에 초안이 나왔습니다.</div>
+    <p class="line">거기에 본인 경험만 20% 추가했습니다.<br>"내가 현대 다닐 때 이런 일이 있었는데..."</p>
+    <p class="line">AI가 80%의 구조를 잡아주고,<br>본인의 25년 경험 20%가 들어가면</p>
+    <div class="highlight-block">세상에 하나밖에 없는 콘텐츠가 됩니다.</div>
+    <p class="line">이건 20대는 절대 못 만듭니다.<br><em>경험이 없으니까.</em></p>
+    <div class="data-block">
+      <div class="label">[AI 시대, 4050의 진짜 무기]</div>
+      20대: AI 잘 씀 + 경험 없음 = 그럴듯하지만 얕은 콘텐츠<br>
+      4050: AI 못 씀 + 경험 많음 = 깊지만 세상에 안 나옴<br><br>
+      <strong>4050 + AI = 깊은 경험이 세상에 나옴 = "돈이 되는 콘텐츠"</strong>
+    </div>
+    <p class="line">중소벤처기업부 데이터입니다.<br>50대 이상 창업자 중 AI 도구를 활용한 사람의 수익이<br><em>비활용자 대비 1.7배 높았습니다.</em></p>
+    <p class="line">AI가 뭘 해주냐고요?</p>
+    <table class="compare-table">
+      <tr><th>작업</th><th>AI 없이</th><th>AI 쓰면</th></tr>
+      <tr><td>블로그 글 1개</td><td>3시간</td><td><strong>30분</strong></td></tr>
+      <tr><td>강의 기획안</td><td>이틀</td><td><strong>2시간</strong></td></tr>
+      <tr><td>제안서</td><td>하루</td><td><strong>1시간</strong></td></tr>
+      <tr><td>카드뉴스</td><td>반나절</td><td><strong>15분</strong></td></tr>
+      <tr><td>경쟁 분석</td><td>일주일</td><td><strong>30분</strong></td></tr>
+    </table>
+    <div class="highlight-block">AI는 당신의 경험을 세상에 꺼내주는 도구입니다.</div>
+    <p class="line">기술이 어렵다고요?<br>카카오톡 할 줄 알면 됩니다.<br>ChatGPT는 카톡처럼 대화하는 겁니다.</p>
+  </div>
+
+  <!-- 6막 -->
+  <div class="section act6" id="act6">
+    <div class="section-header">
+      <span class="timecode">15:00~16:30</span>
+      <h2>6막 — 오늘부터 이렇게 하세요</h2>
+    </div>
+    <div class="edit-note">단계별 실행 가이드 그래픽</div>
+    <p class="line">자, 지금부터 할 일입니다.<br>오늘. 이 영상 끝나고 바로.</p>
+    <div class="data-block">
+      <div class="label">[1주차] 나의 전문성 찾기</div>
+      → 종이 한 장에 쓰세요.<br>
+      → "20년 동안 내가 해결한 문제 10개"<br>
+      → 그중에 후배들이 자주 물어보는 거 3개 골라
+    </div>
+    <div class="data-block">
+      <div class="label">[2주차] AI 세팅 + 첫 글 쓰기</div>
+      → ChatGPT 가입 (무료도 됨)<br>
+      → 위에 알려드린 프롬프트 복붙<br>
+      → 본인 경험 20% 추가<br>
+      → 브런치 or 블로그에 첫 글 올리기
+    </div>
+    <div class="data-block">
+      <div class="label">[3주차~] 매일 1시간, 글 1개</div>
+      → 주 5개 × 4주 = 20개<br>
+      → <strong>20개 쌓이면 반드시 문의가 옵니다</strong>
+    </div>
+    <div class="data-block">
+      <div class="label">[3개월 뒤]</div>
+      → 글 60개 = 검색 유입 안정화<br>
+      → 컨설팅 문의 시작<br>
+      → 강의 요청 시작<br>
+      → <strong>월 200~300만원 가능</strong>
+    </div>
+    <p class="line">"겨우 월 200만원?"</p>
+    <p class="line">아닙니다.</p>
+    <p class="line"><em>퇴직금 한 푼 안 쓰고</em> 월 200만원입니다.<br>치킨집은 <em>1억 2천 쓰고</em> 월 200만원입니다.</p>
+    <p class="line">그리고 콘텐츠는 쌓입니다.<br>치킨은 튀기면 끝이지만,<br>글은 올려놓으면 <strong>24시간 영업합니다.</strong></p>
+    <p class="line">6개월 뒤? 월 500만원.<br>1년 뒤? 월 800~1,000만원.</p>
+    <div class="highlight-block">K씨가 증명했습니다.</div>
+  </div>
+
+  <!-- CTA -->
+  <div class="section cta" id="cta">
+    <div class="section-header">
+      <span class="timecode">16:30~17:00</span>
+      <h2>채널 소개 + CTA</h2>
+    </div>
+    <p class="line">이 채널은 <strong>40대, 50대를 위한 채널</strong>입니다.</p>
+    <p class="line">"퇴근 후" 시간으로 회사 밖 수입을 만드는 분.<br>이미 퇴사했는데 뭘 해야 할지 모르는 분.<br>퇴직금 까먹기 전에 구조를 만들고 싶은 분.</p>
+    <p class="line">여기서 답을 드리겠습니다.</p>
+    <p class="line">20대한테 하는 뜬구름 잡는 이야기 안 합니다.<br><em>당신의 경험이 돈이 되는 구체적인 방법</em>만 이야기합니다.</p>
+    <div class="edit-note">다음 영상 미리보기 카드</div>
+    <p class="line">다음 화에서는</p>
+    <p class="line"><em>"퇴사 후 월 300만원 만드는 3가지 현실적 방법"</em></p>
+    <p class="line">컨설팅, 강의, 콘텐츠.<br>각각 얼마 벌 수 있는지.<br>어떻게 시작하는지.<br>AI 도구 뭘 쓰면 되는지.</p>
+    <p class="line">숫자로 전부 공개합니다.</p>
+    <p class="line"><strong>구독 눌러두시면 놓치지 않습니다.</strong></p>
+  </div>
+
+  <!-- 엔딩 -->
+  <div class="section ending" id="ending">
+    <div class="section-header">
+      <span class="timecode">17:00~17:20</span>
+      <h2>엔딩 — 마지막 한마디</h2>
+    </div>
+    <div class="edit-note">배경 점점 어두워짐 → 검은 배경 + 텍스트</div>
+    <p class="line">20년 동안 회사에 바쳤습니다.<br>새벽까지 야근했습니다.<br>주말에도 노트북 열었습니다.</p>
+    <p class="line">그 시간이 헛된 게 아닙니다.</p>
+    <div class="highlight-block">그 20년이 당신의 자산입니다.</div>
+    <p class="line">명함이 없어도,<br>직함이 없어도,<br>회사 이름이 없어도.</p>
+    <p class="line"><strong>당신이 해결한 문제들은 사라지지 않습니다.</strong></p>
+    <p class="line">그걸 세상에 꺼내세요.</p>
+    <div class="edit-note">마지막 문장만 흰색 자막 — 5초 유지 → 페이드아웃</div>
+    <p class="line" style="font-size: 22px; text-align: center; margin-top: 30px;"><strong>"당신이 가난한 건 경험이 없어서가 아닙니다.<br>그 경험을 파는 법을 모를 뿐입니다."</strong></p>
+  </div>
+
+</div>
+
+<div class="mode-toggle">
+  <button class="mode-btn font-up" onclick="toggleFontSize()">가 크게</button>
+  <button class="mode-btn teleprompter" onclick="toggleTeleprompter()">촬영모드</button>
+</div>
+
+<script>
+function toggleTeleprompter() {
+  document.body.classList.toggle('teleprompter-mode');
+  document.querySelector('.mode-btn.teleprompter').textContent =
+    document.body.classList.contains('teleprompter-mode') ? '전체보기' : '촬영모드';
+}
+function toggleFontSize() {
+  document.body.classList.toggle('large-font');
+  document.querySelector('.mode-btn.font-up').textContent =
+    document.body.classList.contains('large-font') ? '가 작게' : '가 크게';
+}
+</script>
+
+</body>
+</html>
